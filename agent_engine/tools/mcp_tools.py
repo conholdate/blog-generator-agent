@@ -198,7 +198,7 @@ async def fetch_keywords_manual( product_name: str = "", brand: str = "") -> str
                     "brand": brand,
                     "product": product_name,
                     "locale": "en-US",
-                    "file_path": "../output/kra/samples/keywords.xlsx",
+                    "file_path": "../output/kra/samples/Keywords.xlsx",
                     "clustering_k": None,
                     "top_clusters": 12,
                     "max_rows": 10
