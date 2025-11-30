@@ -89,16 +89,12 @@ jobs:
 
     - name: Prepare keywords file
       run: |
-        # Create the target directory structure
-        mkdir -p /home/runner/work/blog-agent/blog-agent/output/kra/samples
+        mkdir -p output/kra/samples
+        # Note: Capital K in Keywords.xlsx
+        cp output/kra/samples/Keywords.xlsx output/kra/samples/keywords.xlsx
+        ls -la output/kra/samples/keywords.xlsx
+        echo "Keywords file prepared successfully"
         
-        # Copy the keywords file to the expected location
-        cp output/kra/samples/keywords.xlsx /home/runner/work/blog-agent/blog-agent/output/kra/samples/keywords.xlsx
-        
-        # Verify the file exists
-        ls -la /home/runner/work/blog-agent/blog-agent/output/kra/samples/keywords.xlsx
-        
-        echo " Keywords file prepared successfully"
 
     - name: Remove any .env files that could interfere
       run: |
