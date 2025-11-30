@@ -146,18 +146,18 @@ jobs:
         BLOG_FOLDER_NAME: ${{ steps.find_blog.outputs.blog_folder_name }}
         BLOG_FOLDER_PATH: ${{ steps.find_blog.outputs.blog_folder_path }}
         PRODUCT_FOLDER: ${{ steps.product_folder.outputs.product_folder }}
-        GH_TOKEN: ${{ secrets.GANJI_REPO_PAT }}
+        GH_TOKEN: ${{ secrets.REPO_PAT }}
       run: |
         git config --global user.email "action@github.com"
         git config --global user.name "GitHub Action"
 
-        if [ -z "${{ secrets.GANJI_REPO_PAT }}" ]; then
-          echo " GANJI_REPO_PAT is EMPTY! Fix your repo secret."
+        if [ -z "${{ secrets.REPO_PAT }}" ]; then
+          echo " REPO_PAT is EMPTY! Fix your repo secret."
           exit 1
         fi
 
         echo "Cloning blog.conholdate.cloud repo..."
-        git clone https://x-access-token:${{ secrets.GANJI_REPO_PAT }}@github.com/conholdate-cloud/blog.conholdate.cloud.git conholdate-blog || {
+        git clone https://x-access-token:${{ secrets.REPO_PAT }}@github.com/conholdate-cloud/blog.conholdate.cloud.git conholdate-blog || {
           echo " Failed to clone repo — invalid PAT or wrong GitHub account."
           exit 1
         }
