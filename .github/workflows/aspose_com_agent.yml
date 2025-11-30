@@ -86,7 +86,15 @@ jobs:
         key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
         restore-keys: |
           ${{ runner.os }}-pip-
-
+    - name: Debug - Find keywords file
+      run: |
+        echo "Current directory:"
+        pwd
+        echo "Directory contents:"
+        ls -la
+        echo "Searching for keywords.xlsx:"
+        find . -name "keywords.xlsx" -type f
+        
     - name: Prepare keywords file
       run: |
         # Create the target directory structure
