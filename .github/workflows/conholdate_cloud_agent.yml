@@ -151,13 +151,13 @@ jobs:
         git config --global user.email "action@github.com"
         git config --global user.name "GitHub Action"
 
-        if [ -z "${{ secrets.CONHOLDATE_BLOG_PAT }}" ]; then
-          echo " CONHOLDATE_BLOG_PAT is EMPTY! Fix your repo secret."
+        if [ -z "${{ secrets.GANJI_REPO_PAT }}" ]; then
+          echo " GANJI_REPO_PAT is EMPTY! Fix your repo secret."
           exit 1
         fi
 
         echo "Cloning blog.conholdate.cloud repo..."
-        git clone https://x-access-token:${{ secrets.CONHOLDATE_BLOG_PAT }}@github.com/conholdate-cloud/blog.conholdate.cloud.git conholdate-blog || {
+        git clone https://x-access-token:${{ secrets.GANJI_REPO_PAT }}@github.com/conholdate-cloud/blog.conholdate.cloud.git conholdate-blog || {
           echo " Failed to clone repo — invalid PAT or wrong GitHub account."
           exit 1
         }
