@@ -90,13 +90,13 @@ jobs:
     - name: Prepare keywords file
       run: |
         # Create the target directory structure
-        mkdir -p /home/runner/work/autonomous-blog-agent/output/kra/samples
+        mkdir -p /home/runner/work/blog-agent/output/kra/samples
         
         # Copy the keywords file to the expected location
-        cp output/kra/samples/keywords.xlsx /home/runner/work/autonomous-blog-agent/output/kra/samples/keywords.xlsx
+        cp output/kra/samples/keywords.xlsx /home/runner/work/blog-agent/output/kra/samples/keywords.xlsx
         
         # Verify the file exists
-        ls -la /home/runner/work/autonomous-blog-agent/output/kra/samples/keywords.xlsx
+        ls -la /home/runner/work/blog-agent/output/kra/samples/keywords.xlsx
         
         echo " Keywords file prepared successfully"
 

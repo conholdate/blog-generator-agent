@@ -1,14 +1,7 @@
 
 # Blog Agent Backend
 
-Autonomous blog creation engine using OpenAI Agents SDK and MCP servers.
-
-## Features
-
-- ✅ Keyword research via MCP
-- ✅ Title via MCP
-- ✅ Aspose LLM integration
-- ✅ Autonomous agent capabilities
+Blog post creation engine using OpenAI Agents SDK and MCP servers.
 
 ## Quick Start
 
@@ -102,8 +95,8 @@ docker-compose up
 |----------|-------------|---------|
 | `ASPOSE_LLM_BASE_URL` | Your LLM API endpoint | - |
 | `ASPOSE_LLM_API_KEY` | Your LLM API key | - |
-| `KEYWORD_SEARCH_URL` | Keyword MCP server URL | `http://localhost:3001` |
-| `SEO_TOOL` | FAQ MCP server URL | `http://localhost:3002` |
+| `ASPOSE_LLM_MODEL` | LLM Model | - |
+| SERPAPI_API_KEY | - | - |
 
 ## Troubleshooting
 
