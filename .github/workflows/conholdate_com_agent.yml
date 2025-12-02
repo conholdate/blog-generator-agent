@@ -22,6 +22,7 @@ on:
         type: choice
         options:
           - '.NET'
+          - 'Java'
         default: '.NET'
       author:
         description: 'Author name'
