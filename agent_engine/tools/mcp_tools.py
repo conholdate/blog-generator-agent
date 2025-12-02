@@ -139,7 +139,7 @@ async def enhance_blog_with_category_articles(
     return blog_content
 
 
-async def fetch_keywords_auto(topic: str, product_name: str = "") -> str:
+async def fetch_keywords_auto(topic: str, product_name: str = "", platform:str="") -> str:
     """Fetch high-ranking SEO keywords for a topic"""
 
     print(f" fetch_keywords TOOL CALLED! upper")
@@ -157,12 +157,13 @@ async def fetch_keywords_auto(topic: str, product_name: str = "") -> str:
                 await session.initialize()
                 result = await session.call_tool("fetch_keywords", {
                     "topic": topic,
-                    "product_name": product_name
+                    "product_name": product_name,
+                    "platform": platform
                 })
                 keywords_data = parse_keywords_response(result.content[0])
                 f_keywords = keywords_data.get('keywords', {}).get('primary', [topic])
                 f_keywords = sanitize_keywords(f_keywords)
-                print(f" raww - {f_keywords}")
+                print(f" keywords - {f_keywords}")
                 return f_keywords
                 
     except Exception as e:
@@ -305,10 +306,6 @@ async def generate_blog_outline(topic: str, keywords) -> str:
             return outline
         
 async def generate_seo_title(topic: str, keywords_json: str, product_name: str = "") -> str:
-  
-    # print(f" generate_seo_title TOOL CALLED! {keywords_json}", flush=True)
-    # keywords_data = json.loads(keywords_json)
-    # keywords = keywords_data.get('keywords', {}).get('primary', [topic])
     
     params = StdioServerParameters(
         command="python",

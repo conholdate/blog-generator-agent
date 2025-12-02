@@ -419,22 +419,35 @@ def build_outline_prompt(title: str, keywords: list[str]) -> str:
         Now create the outline for: **{title}**
         """
 
-def keyword_filter_prompt(PRODUCT_NAME, KEYWORDS) -> str:
- 
+def keyword_filter_prompt(PRODUCT_NAME, KEYWORDS, platform) -> str:
+    print(f"platform is----- {platform}", flush=True, file=sys.stderr)
     return f"""
     You are an expert in keyword filtering and refinement.
-    I have a product called {PRODUCT_NAME} and a list of candidate keywords: {KEYWORDS}.
+    I have a product called {PRODUCT_NAME} and a list of candidate keywords: {KEYWORDS} and platform: {platform}.
     
     1. Only return keywords that are relevant to the exact product.
     2. Exclude any keyword that refers to other products or cloud offerings if the product is on-premises.
-    3. If any keyword is incomplete, truncated, or has trailing ellipses (e.g., "..."), complete it sensibly while keeping it relevant.
-    4. Remove or replace any characters that break Hugo/Markdown rendering:
+    3. **PLATFORM-SPECIFIC FILTERING:**
+       - If platform is NOT 'cloud' (i.e., on-premises/desktop):
+         * EXCLUDE all keywords mentioning: REST API, REST APIs, Web API, Cloud API, cURL, HTTP requests, API endpoints, web services, cloud storage, cloud conversion
+         * EXCLUDE keywords with terms: "online", "web-based", "cloud", "SaaS", "API call", "REST", "endpoint"
+         * KEEP only keywords related to: desktop applications, local libraries, SDK, on-premise tools, offline conversion
+       - If platform IS 'cloud':
+         * INCLUDE keywords related to REST APIs, cloud services, web APIs, online tools
+    4. If any keyword is incomplete, truncated, or has trailing ellipses (e.g., "..."), complete it sensibly while keeping it relevant.
+    5. Remove or replace any characters that break Hugo/Markdown rendering:
        - Replace Unicode dashes (\\u2013, \\u2014, em dash, en dash) with standard hyphens (-)
        - Replace smart quotes (\\u201c, \\u201d, \\u2018, \\u2019) with straight quotes (' or ")
        - Replace ellipsis character (\\u2026) with three periods (...)
        - Remove any other Unicode characters that could break YAML frontmatter
        - Ensure all characters are safe for Hugo YAML frontmatter rendering
-    5. Return the filtered and refined keywords in the **exact structure as you received** (e.g., primary, secondary, long_tail).
+    6. **MINIMUM KEYWORD REQUIREMENT:**
+       - If after filtering, the total number of keywords (primary + secondary + long_tail) is less than 2:
+         * Generate 2-5 additional relevant keywords based on the product name and topic
+         * Add them to the appropriate category (primary for broad terms, long_tail for specific queries)
+         * Ensure generated keywords match the platform type (cloud vs on-premises)
+         * Generated keywords must be realistic search queries users would actually type
+    7. Return the filtered and refined keywords in the **exact structure as you received** (e.g., primary, secondary, long_tail).
     
     **Character Replacement Rules:**
     - \\u2013 (en dash) → - (hyphen)
@@ -449,8 +462,25 @@ def keyword_filter_prompt(PRODUCT_NAME, KEYWORDS) -> str:
     - Use DOUBLE QUOTES for all strings (not single quotes)
     - Do NOT return Python dict format with single quotes
     - Your response must be parseable by json.loads() without any modifications
-    - Example of CORRECT format: {{"primary": ["keyword1", "keyword2"]}}
+    - Example of CORRECT format: {{"primary": ["keyword1", "keyword2"], "secondary": [], "long_tail": ["how to keyword3"]}}
     - Example of INCORRECT format: {{'primary': ['keyword1', 'keyword2']}}
+    
+    **EXAMPLES OF PLATFORM-SPECIFIC FILTERING:**
+    
+    Example 1 - On-premises platform:
+    Input: platform="java", keywords=["Convert PDF using REST API", "PDF to Word Java", "Cloud PDF conversion"]
+    Output: {{"primary": ["PDF to Word Java"], "secondary": [], "long_tail": []}}
+    (Excluded: REST API and Cloud keywords)
+    
+    Example 2 - Cloud platform:
+    Input: platform="cloud", keywords=["Convert PDF REST API", "PDF to Word online", "Java PDF library"]
+    Output: {{"primary": ["Convert PDF REST API", "PDF to Word online"], "secondary": [], "long_tail": []}}
+    (Kept: REST API and online keywords, excluded Java library as it's not cloud-related)
+    
+    Example 3 - Minimum keywords requirement:
+    Input: After filtering, only 1 keyword remains
+    Output: {{"primary": ["original keyword", "generated relevant keyword 1"], "secondary": [], "long_tail": ["generated long-tail keyword"]}}
+    (Added keywords to meet minimum of 2)
     
     Return ONLY the JSON object with no additional text, explanation, or markdown formatting.
     Ensure all output keywords are Hugo/YAML-safe and will render correctly in frontmatter.
