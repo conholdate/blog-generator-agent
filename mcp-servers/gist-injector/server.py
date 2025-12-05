@@ -38,7 +38,7 @@ async def gist_injector(content: str, title: str) -> dict:
             gist_result = await upload_to_gist(
                 code_for_gist,
                 description=title,
-                token=settings.GITHUB_TOKEN,
+                token=settings.REPO_PAT,
                 gist_name=settings.GIST_NAME
             )
             
@@ -69,7 +69,7 @@ async def gist_injector(content: str, title: str) -> dict:
             gist_result = await upload_to_gist(
                 code_for_gist,
                 description=title,
-                token=settings.GITHUB_TOKEN,
+                token=settings.REPO_PAT,
                 gist_name=settings.GIST_NAME
             )
             
@@ -92,8 +92,7 @@ async def gist_injector(content: str, title: str) -> dict:
     
     except Exception as e:
         print(f"LLM error, using fallback: {e}", file=sys.stderr)
-
-    return {"jistified_content":content}
+        return {"jistified_content":content}
 
 if __name__ == "__main__":
     mcp.run()
