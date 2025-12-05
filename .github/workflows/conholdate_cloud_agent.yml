@@ -167,7 +167,7 @@ jobs:
         cd conholdate-blog
         
         # Create the target directory structure if it doesn't exist
-        TARGET_DIR="content/Conholdate.Total/total"
+        TARGET_DIR="content/Conholdate.Cloud/total"
         mkdir -p "$TARGET_DIR"
         echo " Target directory: $TARGET_DIR"
         
