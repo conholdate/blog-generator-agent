@@ -320,7 +320,7 @@ async def upload_to_gist(
             }
         }
     """
-    print(f"Uploading {len(files_dict)} file(s) to gist...", flush=True, file=sys.stderr)
+    print(f"Uploading {len(files_dict)} file(s) to gist... {token}", flush=True, file=sys.stderr)
     
     # --- Token Check ---
     if not token:

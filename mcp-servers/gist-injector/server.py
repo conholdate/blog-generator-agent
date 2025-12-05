@@ -33,7 +33,7 @@ async def gist_injector(content: str, title: str) -> dict:
                 data['filename']: data['code'] 
                 for data in snippets.values()
             }
-            
+            print(f"token is or not {settings.REPO_PAT}", flush=True, file=sys.stderr)
             # Step 3: Upload to gist
             gist_result = await upload_to_gist(
                 code_for_gist,
