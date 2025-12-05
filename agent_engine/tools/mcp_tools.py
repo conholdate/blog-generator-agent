@@ -1,7 +1,7 @@
 from mcp import ClientSession, StdioServerParameters
 from mcp.client.stdio import stdio_client
 from typing import Dict, Optional
-from utils.helpers import sanitize_keywords, parse_keywords_response
+from utils.helpers import sanitize_keywords, parse_keywords_response, extract_first_topic
 import json
 import os
 
@@ -211,7 +211,7 @@ async def fetch_keywords_manual( product_name: str = "", brand: str = "") -> str
     
                 raw = result.content[0].text
                 parsed = json.loads(raw)
-                print(f"kra response {parsed} ")
+                # print(f"kra response {parsed} ")
                 if parsed.get("status") == "error":
                     print("keywords tool returned an error:")
                     print(parsed.get("error"))
@@ -262,29 +262,6 @@ async def generate_markdown_file(title, content) -> dict:
                 "status": "success"
             }
 
-def extract_first_topic(response: dict) -> dict:
-    # Ensure 'topics' exists and has at least one item
-    topics = response.get("topics", [])
-    if not topics:
-        return {}
-    
-    first_topic = topics[0]
-    
-    # Extract data
-    topic_title = first_topic.get("title", "")
-    primary_keywords = [first_topic.get("primary_keyword", "")] if first_topic.get("primary_keyword") else []
-    secondary_keywords = first_topic.get("supporting_keywords", [])
-    topic_outline = first_topic.get("outline", [])
-    
-    return {
-        "topic": topic_title,
-        "keywords": {
-            "primary": primary_keywords,
-            "secondary": secondary_keywords
-        },
-        "outline": topic_outline
-    }
-
 
 async def generate_blog_outline(topic: str, keywords) -> str:
     print(f" In outline - {topic}")
@@ -323,3 +300,19 @@ async def generate_seo_title(topic: str, keywords_json: str, product_name: str =
             parsed = json.loads(result.content[0].text)
             title = parsed.get("title")
             return title
+        
+async def gist_injector(content: str, res_title: str) -> str:
+    
+    params = StdioServerParameters(
+        command="python",
+        args=["../mcp-servers/gist-injector/server.py"]
+    )
+    print(f" Connecting to MCP server gist-injector...")
+    async with stdio_client(params) as (read, write):
+        async with ClientSession(read, write) as session:
+            await session.initialize()
+            result = await session.call_tool("gist_injector", {
+                "content": content,
+                "title": res_title
+            })
+            return result

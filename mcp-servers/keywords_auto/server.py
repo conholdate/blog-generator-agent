@@ -148,5 +148,4 @@ def _merge_keywords( results: List[Dict]) -> Dict:
 # Run MCP Server
 # ---------------------------------------------
 if __name__ == "__main__":
-    print(" Starting Keywords MCP Server (Dynamic)...", file=sys.stderr, flush=True)
     mcp.run()

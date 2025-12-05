@@ -1,5 +1,5 @@
 
-# Blog Agent Backend
+# Blog Post Generator Agent Backend
 
 Blog post creation engine using OpenAI Agents SDK and MCP servers.
 
