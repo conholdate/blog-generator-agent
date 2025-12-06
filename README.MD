@@ -84,6 +84,7 @@ python3 main.py \
 
 ## Project Structure
 
+```
 blog-agent-backend/
 ├── agent_engine/
 │   ├── main.py                    # Main runner script
@@ -126,3 +127,4 @@ blog-agent-backend/
 │   └── blogs/                     # Generated Markdown blog posts
 │
 └── setup.sh                       # Initial installation script
+```
