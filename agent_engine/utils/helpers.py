@@ -215,16 +215,6 @@ def extract_all_complete_code_snippets(markdown_content: str) -> dict:
     """
     Extract ALL complete code snippets from Complete Code Example sections
     Stores the exact matched text for replacement later
-    Returns:
-        dict: {
-            "task1": {
-                "language": "java", 
-                "code": "...", 
-                "task_name": "...",
-                "matched_text": "<!--[CODE_SNIPPET_START_COMPLETE]-->...<!--[CODE_SNIPPET_END_COMPLETE]-->",
-                "filename": "convert_ppt_to_html.java"
-            }
-        }
     """
     import re
     
@@ -243,23 +233,31 @@ def extract_all_complete_code_snippets(markdown_content: str) -> dict:
         code = None
         
         # Try COMPLETE_CODE_SNIPPET tags first
-        code_pattern_complete = r'<!--\[CODE_SNIPPET_START_COMPLETE\]-->\s*```([\w#+-]*)\s*(.*?)\s*```\s*<!--\[CODE_SNIPPET_END_COMPLETE\]-->'
+        # FIXED: Pattern now correctly captures everything including closing ```
+        code_pattern_complete = r'<!--\[CODE_SNIPPET_START_COMPLETE\]-->\s*```[\w#+-]*\s*.*?\s*```\s*<!--\[CODE_SNIPPET_END_COMPLETE\]-->'
         match = re.search(code_pattern_complete, section_content, re.DOTALL)
         
         if match:
             matched_text = match.group(0)
-            language = match.group(1).strip() or 'text'
-            code = match.group(2).strip()
+            # Now extract language and code separately
+            inner_pattern = r'```([\w#+-]*)\s*(.*?)\s*```'
+            inner_match = re.search(inner_pattern, matched_text, re.DOTALL)
+            if inner_match:
+                language = inner_match.group(1).strip() or 'text'
+                code = inner_match.group(2).strip()
         
         # Fallback to regular CODE_SNIPPET tags
         if not match:
-            code_pattern_regular = r'<!--\[CODE_SNIPPET_START\]-->\s*```([\w#+-]*)\s*(.*?)\s*```\s*<!--\[CODE_SNIPPET_END\]-->'
+            code_pattern_regular = r'<!--\[CODE_SNIPPET_START\]-->\s*```[\w#+-]*\s*.*?\s*```\s*<!--\[CODE_SNIPPET_END\]-->'
             match = re.search(code_pattern_regular, section_content, re.DOTALL)
             
             if match:
                 matched_text = match.group(0)
-                language = match.group(1).strip() or 'text'
-                code = match.group(2).strip()
+                inner_pattern = r'```([\w#+-]*)\s*(.*?)\s*```'
+                inner_match = re.search(inner_pattern, matched_text, re.DOTALL)
+                if inner_match:
+                    language = inner_match.group(1).strip() or 'text'
+                    code = inner_match.group(2).strip()
         
         # Final fallback: just get first code block without tags
         if not match:
@@ -271,7 +269,7 @@ def extract_all_complete_code_snippets(markdown_content: str) -> dict:
                 language = match.group(1).strip() or 'text'
                 code = match.group(2).strip()
         
-        if match and matched_text:
+        if match and matched_text and code:
             # Create a clean, safe filename
             safe_task_name = re.sub(r'[^\w\s-]', '', task_name)
             safe_task_name = re.sub(r'[-\s]+', '_', safe_task_name)
@@ -285,12 +283,14 @@ def extract_all_complete_code_snippets(markdown_content: str) -> dict:
             
             snippets[key] = {
                 "language": language,
-                "extension": extension,  # Store extension separately
+                "extension": extension,
                 "code": code,
                 "task_name": task_name,
-                "matched_text": matched_text,
+                "matched_text": matched_text,  # This now includes EVERYTHING
                 "filename": filename
             }
+            
+            print(f"Extracted snippet {snippet_index}: {filename} (matched {len(matched_text)} chars)", flush=True, file=sys.stderr)
             snippet_index += 1
     
     return snippets
@@ -320,7 +320,7 @@ async def upload_to_gist(
             }
         }
     """
-    print(f"Uploading {len(files_dict)} file(s) to gist... {token}", flush=True, file=sys.stderr)
+    print(f"Uploading {len(files_dict)} file(s) to gist...", flush=True, file=sys.stderr)
     
     # --- Token Check ---
     if not token:
@@ -378,14 +378,6 @@ async def upload_to_gist(
 def replace_code_snippets_with_gists(markdown_content: str, snippets: dict, shortcodes_map: dict) -> str:
     """
     Replace all code snippets with their corresponding gist shortcodes
-    
-    Args:
-        markdown_content: Original markdown
-        snippets: Output from extract_all_complete_code_snippets()
-        shortcodes_map: {filename: gist_shortcode} from gist upload
-    
-    Returns:
-        Updated markdown with gist shortcodes
     """
     updated_content = markdown_content
     
@@ -397,10 +389,14 @@ def replace_code_snippets_with_gists(markdown_content: str, snippets: dict, shor
         if filename in shortcodes_map:
             gist_shortcode = shortcodes_map[filename]
             
-            # Replace the matched code block with gist shortcode
-            updated_content = updated_content.replace(matched_text, gist_shortcode, 1)
-            
-            print(f"✓ Replaced {filename} with gist", flush=True, file=sys.stderr)
+            # Verify the matched_text exists before replacing
+            if matched_text in updated_content:
+                # Replace ONLY the matched text with gist shortcode
+                updated_content = updated_content.replace(matched_text, gist_shortcode, 1)
+                print(f"✓ Replaced {filename} with gist (removed {len(matched_text)} chars)", flush=True, file=sys.stderr)
+            else:
+                print(f"⚠ Matched text not found in content for {filename}", flush=True, file=sys.stderr)
+                print(f"  Looking for: {matched_text[:100]}...", flush=True, file=sys.stderr)
         else:
             print(f"⚠ No gist found for {filename}", flush=True, file=sys.stderr)
     
