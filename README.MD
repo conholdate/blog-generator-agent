@@ -1,41 +1,81 @@
-
 # Blog Post Generator Agent Backend
 
-Blog post creation engine using OpenAI Agents SDK and MCP servers.
+An automated blog post creation engine powered by **OpenAI Agents SDK** and a network of **MCP servers**.  
+This backend system generates SEO-optimized technical blog posts for supported brands using SERP-based keyword research, content orchestration, and multi-step LLM workflows.
+
+---
 
 ## Quick Start
 
-### 1. Setup
+### 1. Clone & Setup
 
 ```bash
-# Clone the repository
 git clone <repo-url>
 cd blog-agent-backend
 
-# Run setup script
 chmod +x setup.sh
 ./setup.sh
 ```
 
-### 2. Configure
+## Configure Environment Variables
 
-Update `agent_engine/.env`:
+Update the .env file inside agent_engine/.env:
 
-### 3. Run
+### Aspose LLM
 
+ASPOSE_LLM_BASE_URL=https://llm.professionalize.com/v1
 
-```bash
-python3 main.py --topic "Create a Pie Chart" --product "Aspose.Slides" --platform "Java" --brand "aspose.com"  --keyword_source "auto (using SerpApi)" --author "Muhammad Mustafa"   
-```
+ASPOSE_LLM_API_KEY=
 
-or
+ASPOSE_LLM_MODEL=gpt-oss
 
-For Google Keyword Planner Sheet
-```bash
-python3 main.py --topic "Convert PPTX to PDF" --product "Aspose.Slides" --platform "Java" --brand "aspose.com"  --keyword_source "manual (using Google Keyword Planner Sheet)" --author "Muhammad Mustafa"
-```
+### SerpAPI
 
-**The following brands are currently supported:**
+SERPAPI_API_KEY=
+
+GIST_NAME=
+
+REPO_PAT=
+
+NUMBER_OF_BLOG_SECTIONS=6
+
+### Paths
+
+KRA_DATA_DIR=../output
+
+KRA_OUTPUT_DIR=../output/kra/output
+
+### Keyword extraction settings
+
+TOP_CLUSTERS=10
+
+MAX_ROWS=50000
+
+DEBUG=False
+
+## Run the Agent
+
+### Automatic Keyword Research (SERP API)
+
+python3 main.py \
+--topic "Create a Pie Chart" \
+--product "Aspose.Slides" \
+--platform "Java" \
+--brand "aspose.com" \
+--keyword_source "auto (using SerpApi)" \
+--author "Muhammad Mustafa"
+
+### Manual Keyword Research (Google Keyword Planner Sheet)
+
+python3 main.py \
+--topic "Convert PPTX to PDF" \
+--product "Aspose.Slides" \
+--platform "Java" \
+--brand "aspose.com" \
+--keyword_source "manual (using Google Keyword Planner Sheet)" \
+--author "Muhammad Mustafa"
+
+## Supported Brands
 
 - aspose.com
 - groupdocs.com
@@ -44,52 +84,45 @@ python3 main.py --topic "Convert PPTX to PDF" --product "Aspose.Slides" --platfo
 
 ## Project Structure
 
-```
 blog-agent-backend/
 ├── agent_engine/
-│   ├── main.py                 # Main file
-│   ├── config.py               # Configuration
+│   ├── main.py                    # Main runner script
+│   ├── config.py                  # Configuration loader
 │   ├── agent_logic/
-│   │   └── orchestrator.py     # Main orchestration layer
+│   │   └── orchestrator.py        # Core orchestration workflow
 │   ├── services/
-│   │   └── serpapi_keyword_service.py  # External service to fetch keywords from Google SERP       
+│   │   └── serpapi_keyword_service.py  # Google SERP keyword extraction
 │   ├── tools/
-│   │   └── mcp_tools.py        # Wrapper functions for MCP tools
+│   │   └── mcp_tools.py           # MCP tool wrapper functions
 │   ├── utils/
-│   │   └── helpers.py          # Contains helper functions
-│   │   └── prompts.py          # Returns prompts for LLM
+│   │   ├── helpers.py             # Helper utilities
+│   │   └── prompts.py             # Prompt builders for LLM
 │   ├── requirements.txt
 │   └── .env
 │
 ├── mcp-servers/
-│   ├── file-generator/   
-│   │   └── server.py           
+│   ├── file-generator/
+│   │   └── server.py              # Markdown file generator
+│   ├── keywords_auto/
+│   │   └── server.py              # Automated SERP keyword tool
+│   ├── keywords_manual/
+│   │   └── server.py              # Manual CSV/XLSX keyword tool
+│   ├── outline_generator/
+│   │   └── server.py              # Blog outline generator
+│   ├── related-topics/
+│   │   └── server.py              # Related content fetcher
+│   ├── title_generator/
+│   │   └── server.py              # SEO title generator
+│   ├── gist-injector/
+│   │   └── server.py              # Gist Creator & Injector
 │   └── requirements.txt
-│   ├── keywords_auto/          # Keyword research tool using SERPAPI
-│   │   └── server.py           # MD file generation tools
-│   ├── keywords_manual/.       # Keyword research tool using Keyword.csv file
-│   │   └── server.py  
-│   ├── outline_generator/      # Generates blog post outline
-│   │   └── server.py  
-│   ├── related-topics/         # Fetch relevant articles from the relevant category  
-│   │   └── server.py  
-│   ├── title_generator/        # Generates SEO-optimized title for blog post 
-│   │   └── server.py  
-│   └── requirements.txt
-│── data/
-│   │   └── aspose.json          # Contains source products data for aspose
-│   │   └── groupdocs.json       # Contains source products data for groupdocs
-│   │   └── conholdate.json      # Contains source products data for conholdate
-│── output/
-│   │   └── blogs               # Contains generated MD files of blog post
-└── setup.sh                    # Initial setup
-
-```
-
-## Deployment
-
-### Using Docker (Coming Soon)
-```bash
-docker-compose up
-```
-
+│
+├── data/
+│   ├── aspose.json
+│   ├── groupdocs.json
+│   └── conholdate.json
+│
+├── output/
+│   └── blogs/                     # Generated Markdown blog posts
+│
+└── setup.sh                       # Initial installation script
