@@ -1,4 +1,4 @@
-name: Generate Blog Post for conholdate.com
+name: Generate Blog Post for groupdocs.com
 
 on:
   workflow_dispatch:
@@ -12,9 +12,9 @@ on:
         description: 'Product name'
         required: true
         type: choice
-        default: 'Conholdate.Total'
+        default: 'GroupDocs.Conversion'
         options:
-          - 'Conholdate.Total'
+          - 'GroupDocs.Conversion'
       
       platform:
         description: 'Platform'
@@ -22,7 +22,6 @@ on:
         type: choice
         options:
           - '.NET'
-          - 'Java'
         default: '.NET'
       author:
         description: 'Author name'
@@ -88,15 +87,13 @@ jobs:
         ASPOSE_LLM_BASE_URL=${{ secrets.ASPOSE_LLM_BASE_URL }}
         ASPOSE_LLM_MODEL=${{ secrets.ASPOSE_LLM_MODEL }}
         SERPAPI_API_KEY=${{ secrets.SERPAPI_API_KEY }}
-        REPO_PAT=${{ secrets.CONHOLDATE_COM_GISTS_PAT }}
-        GIST_NAME=${{ vars.CONHOLDATE_COM_GIST }}
         EOF
         echo ".env file created"
 
     - name: Generate Blog
       run: |
         cd agent_engine
-        python main.py --topic "${{ inputs.topic }}" --product "${{ inputs.product }}" --platform "${{ inputs.platform }}" --keyword_source "${{ inputs.keyword_source }}" --brand "conholdate.com" --author "${{ inputs.author }}"
+        python main.py --topic "${{ inputs.topic }}" --product "${{ inputs.product }}" --platform "${{ inputs.platform }}" --keyword_source "${{ inputs.keyword_source }}" --brand "groupdocs.com" --author "${{ inputs.author }}"
 
     - name: Find generated blog folder
       id: find_blog
@@ -128,8 +125,8 @@ jobs:
     - name: Extract product folder name
       id: product_folder
       run: |
-        # Convert product name to lowercase and remove "Conholdate." prefix
-        product_folder=$(echo "${{ inputs.product }}" | sed 's/Conholdate\.//g' | tr '[:upper:]' '[:lower:]')
+        # Convert product name to lowercase and remove "GroupDocs." prefix
+        product_folder=$(echo "${{ inputs.product }}" | sed 's/GroupDocs\.//g' | tr '[:upper:]' '[:lower:]')
         echo "product_folder=$product_folder" >> $GITHUB_OUTPUT
         echo " Product folder name: $product_folder"
 
@@ -141,39 +138,39 @@ jobs:
         if-no-files-found: error
 
     ####################################################################
-    # Create Pull Request in blog-conholdate-com repo
+    # Create Pull Request in groupdocs-blog repo
     ####################################################################
-    - name: Create Pull Request in blog.conholdate.com repo
+    - name: Create Pull Request in blog.groupdocs.com repo
       if: success()
       env:
         BLOG_FOLDER_NAME: ${{ steps.find_blog.outputs.blog_folder_name }}
         BLOG_FOLDER_PATH: ${{ steps.find_blog.outputs.blog_folder_path }}
         PRODUCT_FOLDER: ${{ steps.product_folder.outputs.product_folder }}
-        GH_TOKEN: ${{ secrets.CONHOLDATE_COM_GISTS_PAT }}
+        GH_TOKEN: ${{ secrets.REPO_PAT }}
       run: |
         git config --global user.email "action@github.com"
         git config --global user.name "GitHub Action"
 
-        if [ -z "${{ secrets.CONHOLDATE_COM_GISTS_PAT }}" ]; then
-          echo " CONHOLDATE_COM_GISTS_PAT is EMPTY! Fix your repo secret."
+        if [ -z "${{ secrets.REPO_PAT }}" ]; then
+          echo "⚠️ REPO_PAT is EMPTY! Fix your repo secret."
           exit 1
         fi
 
-        echo "Cloning conholdate-blog repo..."
-        git clone https://x-access-token:${{ secrets.CONHOLDATE_COM_GISTS_PAT }}@github.com/conholdate/conholdate-blog.git conholdate-blog || {
-          echo " Failed to clone repo — invalid PAT or wrong GitHub account."
+        echo "Cloning groupdocs-blog repo..."
+        git clone https://x-access-token:${{ secrets.REPO_PAT }}@github.com/groupdocs/groupdocs-blog.git groupdocs-blog || {
+          echo "❌ Failed to clone repo — invalid PAT or wrong GitHub account."
           exit 1
         }
 
-        cd conholdate-blog
+        cd groupdocs-blog
         
         # Create the target directory structure if it doesn't exist
-        TARGET_DIR="content/Conholdate.Total/total"
+        TARGET_DIR="content/Groupdocs.Blog"
         mkdir -p "$TARGET_DIR"
-        echo " Target directory: $TARGET_DIR"
+        echo "✅ Target directory: $TARGET_DIR"
         
         # Create a new branch for this blog post
-        BRANCH_NAME="blog/total/$BLOG_FOLDER_NAME"
+        BRANCH_NAME="blog/$BLOG_FOLDER_NAME"
         
         # Check if branch exists remotely and delete it
         if git ls-remote --heads origin "$BRANCH_NAME" | grep -q "$BRANCH_NAME"; then
@@ -189,9 +186,9 @@ jobs:
         
         echo "Copying blog folder: $BLOG_FOLDER_NAME to $TARGET_DIR"
         
-        # Copy the blog folder to the correct product directory
+        # Copy the blog folder to the correct directory
         cp -r "../$BLOG_FOLDER_PATH" "$TARGET_DIR/" || {
-          echo " Failed to copy folder $BLOG_FOLDER_PATH"
+          echo "❌ Failed to copy folder $BLOG_FOLDER_PATH"
           exit 1
         }
         
@@ -203,7 +200,7 @@ jobs:
         git status --short
         
         if git diff --staged --quiet; then
-          echo " No new files to commit"
+          echo "ℹ️ No new files to commit"
           exit 0
         fi
         
@@ -212,22 +209,22 @@ jobs:
         
         # Push the branch (force push since we deleted and recreated)
         git push -u origin "$BRANCH_NAME" --force || {
-          echo " Failed to push branch."
+          echo "❌ Failed to push branch."
           exit 1
         }
         
-        echo " Branch $BRANCH_NAME pushed successfully"
+        echo "✅ Branch $BRANCH_NAME pushed successfully"
         
         # Check if PR already exists for this branch
-        EXISTING_PR=$(gh pr list --repo conholdate/conholdate-blog --head "$BRANCH_NAME" --json number --jq '.[0].number' 2>/dev/null || echo "")
+        EXISTING_PR=$(gh pr list --repo groupdocs/groupdocs-blog --head "$BRANCH_NAME" --json number --jq '.[0].number' 2>/dev/null || echo "")
         
         if [ -n "$EXISTING_PR" ]; then
           echo "ℹ️  PR #$EXISTING_PR already exists for this branch"
-          echo "PR URL: https://github.com/conholdate/conholdate-blog/pull/$EXISTING_PR"
+          echo "PR URL: https://github.com/groupdocs/groupdocs-blog/pull/$EXISTING_PR"
         else
           # Create Pull Request using GitHub CLI
           gh pr create \
-            --repo conholdate/conholdate-blog \
+            --repo groupdocs/groupdocs-blog \
             --base main \
             --head "$BRANCH_NAME" \
             --title "[${{ inputs.product }}] ${{ inputs.topic }}" \
@@ -237,7 +234,7 @@ jobs:
           **Topic:** ${{ inputs.topic }}
           **Platform:** ${{ inputs.platform }}
           **Keyword Source:** ${{ inputs.keyword_source }}
-          **Target Path:** \`content/Conholdate.Total/total/$BLOG_FOLDER_NAME\`
+          **Target Path:** \`content/Groupdocs.Blog/$BLOG_FOLDER_NAME\`
 
           **Generated by:** GitHub Actions (Run #${{ github.run_number }})
           **Workflow:** ${{ github.workflow }}
@@ -249,12 +246,12 @@ jobs:
           ### Contents:
           - Folder: \`$BLOG_FOLDER_NAME\`
           - File: \`index.md\`
-          - Location: \`content/Conholdate.Total/total/\`
+          - Location: \`content/Groupdocs.Blog/\`
 
           Please review and merge if the content looks good!" || {
-            echo " Failed to create pull request."
+            echo "❌ Failed to create pull request."
             exit 1
           }
           
-          echo " Pull request created successfully!"
+          echo "✅ Pull request created successfully!"
         fi
