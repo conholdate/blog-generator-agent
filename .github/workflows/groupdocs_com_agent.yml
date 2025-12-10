@@ -87,6 +87,8 @@ jobs:
         ASPOSE_LLM_BASE_URL=${{ secrets.ASPOSE_LLM_BASE_URL }}
         ASPOSE_LLM_MODEL=${{ secrets.ASPOSE_LLM_MODEL }}
         SERPAPI_API_KEY=${{ secrets.SERPAPI_API_KEY }}
+        REPO_PAT=${{ secrets.GISTS_PAT_GROUPDOCS_COM }}
+        GIST_NAME=${{ vars.GROUPDOCS_COM_GIST }}
         EOF
         echo ".env file created"
 
@@ -225,7 +227,7 @@ jobs:
           # Create Pull Request using GitHub CLI
           gh pr create \
             --repo groupdocs/groupdocs-blog \
-            --base main \
+            --base master \
             --head "$BRANCH_NAME" \
             --title "[${{ inputs.product }}] ${{ inputs.topic }}" \
             --body "## Generated Blog Post
