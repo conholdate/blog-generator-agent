@@ -119,6 +119,8 @@ jobs:
         ASPOSE_LLM_BASE_URL=${{ secrets.ASPOSE_LLM_BASE_URL }}
         ASPOSE_LLM_MODEL=${{ secrets.ASPOSE_LLM_MODEL }}
         SERPAPI_API_KEY=${{ secrets.SERPAPI_API_KEY }}
+        REPO_PAT=${{ secrets.GISTS_PAT_ASPOSE_COM }}
+        GIST_NAME=${{ vars.ASPOSE_COM_GIST }}
         EOF
         echo ".env file created"
 
