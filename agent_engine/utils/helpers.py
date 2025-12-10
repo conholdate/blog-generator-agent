@@ -214,7 +214,11 @@ def extract_first_topic(response: dict) -> dict:
 def extract_all_complete_code_snippets(markdown_content: str) -> dict:
     """
     Extract ALL complete code snippets from Complete Code Example sections
-    Stores the exact matched text for replacement later
+    Handles multiple tag formats:
+    - <!--[CODE_SNIPPET_START_COMPLETE]--> ... <!--[CODE_SNIPPET_END_COMPLETE]-->
+    - <!--[COMPLETE_CODE_SNIPPET_START]--> ... <!--[COMPLETE_CODE_SNIPPET_END]-->
+    - <!--[CODE_SNIPPET_START]--> ... <!--[CODE_SNIPPET_END]-->
+    - Plain code blocks without tags
     """
     import re
     
@@ -231,25 +235,24 @@ def extract_all_complete_code_snippets(markdown_content: str) -> dict:
         matched_text = None
         language = None
         code = None
+        match = None
         
-        # Try COMPLETE_CODE_SNIPPET tags first
-        # FIXED: Pattern now correctly captures everything including closing ```
-        code_pattern_complete = r'<!--\[CODE_SNIPPET_START_COMPLETE\]-->\s*```[\w#+-]*\s*.*?\s*```\s*<!--\[CODE_SNIPPET_END_COMPLETE\]-->'
-        match = re.search(code_pattern_complete, section_content, re.DOTALL)
+        # Pattern 1: Try CODE_SNIPPET_START_COMPLETE tags
+        code_pattern_1 = r'<!--\[CODE_SNIPPET_START_COMPLETE\]-->\s*```[\w#+-]*\s*.*?\s*```\s*<!--\[CODE_SNIPPET_END_COMPLETE\]-->'
+        match = re.search(code_pattern_1, section_content, re.DOTALL)
         
         if match:
             matched_text = match.group(0)
-            # Now extract language and code separately
             inner_pattern = r'```([\w#+-]*)\s*(.*?)\s*```'
             inner_match = re.search(inner_pattern, matched_text, re.DOTALL)
             if inner_match:
                 language = inner_match.group(1).strip() or 'text'
                 code = inner_match.group(2).strip()
         
-        # Fallback to regular CODE_SNIPPET tags
+        # Pattern 2: Try COMPLETE_CODE_SNIPPET_START tags (alternate format)
         if not match:
-            code_pattern_regular = r'<!--\[CODE_SNIPPET_START\]-->\s*```[\w#+-]*\s*.*?\s*```\s*<!--\[CODE_SNIPPET_END\]-->'
-            match = re.search(code_pattern_regular, section_content, re.DOTALL)
+            code_pattern_2 = r'<!--\[COMPLETE_CODE_SNIPPET_START\]-->\s*```[\w#+-]*\s*.*?\s*```\s*<!--\[COMPLETE_CODE_SNIPPET_END\]-->'
+            match = re.search(code_pattern_2, section_content, re.DOTALL)
             
             if match:
                 matched_text = match.group(0)
@@ -259,7 +262,20 @@ def extract_all_complete_code_snippets(markdown_content: str) -> dict:
                     language = inner_match.group(1).strip() or 'text'
                     code = inner_match.group(2).strip()
         
-        # Final fallback: just get first code block without tags
+        # Pattern 3: Fallback to regular CODE_SNIPPET tags
+        if not match:
+            code_pattern_3 = r'<!--\[CODE_SNIPPET_START\]-->\s*```[\w#+-]*\s*.*?\s*```\s*<!--\[CODE_SNIPPET_END\]-->'
+            match = re.search(code_pattern_3, section_content, re.DOTALL)
+            
+            if match:
+                matched_text = match.group(0)
+                inner_pattern = r'```([\w#+-]*)\s*(.*?)\s*```'
+                inner_match = re.search(inner_pattern, matched_text, re.DOTALL)
+                if inner_match:
+                    language = inner_match.group(1).strip() or 'text'
+                    code = inner_match.group(2).strip()
+        
+        # Pattern 4: Final fallback - just get first code block without tags
         if not match:
             code_pattern_plain = r'```([\w#+-]*)\s*(.*?)\s*```'
             match = re.search(code_pattern_plain, section_content, re.DOTALL)
@@ -290,7 +306,7 @@ def extract_all_complete_code_snippets(markdown_content: str) -> dict:
                 "filename": filename
             }
             
-            print(f"Extracted snippet {snippet_index}: {filename} (matched {len(matched_text)} chars)", flush=True, file=sys.stderr)
+            print(f"✓ Extracted snippet {snippet_index}: {filename} (matched {len(matched_text)} chars)", flush=True, file=sys.stderr)
             snippet_index += 1
     
     return snippets
