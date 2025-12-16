@@ -185,8 +185,8 @@ class MetricsRecorder:
             True if successful, False otherwise
         """
         payload = self.get_metrics_payload()
-        print(f"metrix for teams - {payload}")
-
+        print(f"metrix for teams - {payload} - env is {os.getenv('GITHUB_ACTIONS')}")
+        return 
         logger.debug(
             "Sending team metrics payload:\n%s",
             json.dumps(payload, indent=2)
