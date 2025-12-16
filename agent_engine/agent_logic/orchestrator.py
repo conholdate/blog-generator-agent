@@ -159,6 +159,7 @@ class BlogOrchestrator:
             file_res = await generate_markdown_file(
                 title=res_title,
                 content=final_content,
+                brand= self.brand
             )
             filepath = file_res.get("output", {}).get("filepath")
             
@@ -175,8 +176,8 @@ class BlogOrchestrator:
             # Print and send metrics
             self.metrics.print_summary()
             print("📊 Sending metrics to Google Script...")
-            metrics_sent_for_team = await self.metrics.send_metrics_to_team()
-            metrics_sent_for_pro = await self.metrics.send_metrics_to_prod()
+            # metrics_sent_for_team = await self.metrics.send_metrics_to_team()
+            # metrics_sent_for_pro = await self.metrics.send_metrics_to_prod()
             
             if metrics_sent_for_team and metrics_sent_for_pro:
                 print("Metrics sent successfully\n")
@@ -206,8 +207,8 @@ class BlogOrchestrator:
             # Print and send metrics even on failure
             self.metrics.print_summary()
             print(" Sending failure metrics...")
-            await self.metrics.send_metrics_to_team()
-            await self.metrics.send_metrics_to_prod()
+            # await self.metrics.send_metrics_to_team()
+            # await self.metrics.send_metrics_to_prod()
             
             return {
                 "status": "error", 

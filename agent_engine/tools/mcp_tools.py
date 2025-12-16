@@ -227,7 +227,7 @@ async def fetch_keywords_manual( product_name: str = "", brand: str = "") -> str
         return '{"error": "failed"}'
     
 
-async def generate_markdown_file(title, content) -> dict:
+async def generate_markdown_file(title, content, brand) -> dict:
     """
     Save blog content as a markdown file.
     """
@@ -245,6 +245,7 @@ async def generate_markdown_file(title, content) -> dict:
             result = await session.call_tool("generate_markdown_file", {
                 "title": title,
                 "content": content,
+                "brand": brand,
                 "output_dir": "../output/blogs"
             })
 
