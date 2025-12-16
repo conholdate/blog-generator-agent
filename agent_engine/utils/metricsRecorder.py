@@ -186,7 +186,7 @@ class MetricsRecorder:
         """
         payload = self.get_metrics_payload()
         print(f"metrix for teams - {payload}")
-        return 
+
         logger.debug(
             "Sending team metrics payload:\n%s",
             json.dumps(payload, indent=2)
