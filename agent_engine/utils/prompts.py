@@ -530,7 +530,7 @@ def build_outline_prompt(title: str, keywords: list[str]) -> str:
         """
 
 def keyword_filter_prompt(PRODUCT_NAME, KEYWORDS, platform) -> str:
-    print(f"platform is----- {platform}", flush=True, file=sys.stderr)
+  
     return f"""
     You are an expert in keyword filtering and refinement.
     I have a product called {PRODUCT_NAME} and a list of candidate keywords: {KEYWORDS} and platform: {platform}.

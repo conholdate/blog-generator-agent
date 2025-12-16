@@ -27,7 +27,7 @@ class Settings(BaseSettings):
     
     # Agent Settings
     NUMBER_OF_BLOG_SECTIONS: int = 5  # FIX: must be int, cannot be "5-7"
-
+    ENVIRONMENT: str = ""
     KRA_DATA_DIR: str = "./src/data/samples"
     KRA_OUTPUT_DIR: str = "./src/data/outputs"
     TOP_CLUSTERS: int = 10
