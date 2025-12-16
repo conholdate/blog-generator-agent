@@ -248,6 +248,7 @@ class MetricsRecorder:
         payload = self.get_metrics_payload()
         # Remove run_env for prod endpoint if needed
         payload.pop('run_env', None) 
+        print(f"metrix for prod - {payload} - env is {os.getenv('GITHUB_ACTIONS')}")
         return 
         logger.debug(
             "Sending prod metrics payload:\n%s",
