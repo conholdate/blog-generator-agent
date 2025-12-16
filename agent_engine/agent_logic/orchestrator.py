@@ -206,8 +206,8 @@ class BlogOrchestrator:
             # Print and send metrics even on failure
             self.metrics.print_summary()
             print(" Sending failure metrics...")
-            # await self.metrics.send_metrics_to_team()
-            # await self.metrics.send_metrics_to_prod()
+            await self.metrics.send_metrics_to_team()
+            await self.metrics.send_metrics_to_prod()
             
             return {
                 "status": "error", 
