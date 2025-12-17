@@ -94,7 +94,13 @@ jobs:
         cp output/kra/samples/Keywords.xlsx output/kra/samples/keywords.xlsx
         ls -la output/kra/samples/keywords.xlsx
         echo "Keywords file prepared successfully"
-        
+
+    - name: Clean up old blog folders
+      run: |
+        # Remove any existing blog folders to avoid confusion
+        echo "=== Cleaning up old blog folders ==="
+        find output/blogs -type d -name "20??-??-??-*" -exec rm -rf {} + 2>/dev/null || true
+        echo "✅ Cleanup completed"
 
     - name: Remove any .env files that could interfere
       run: |
@@ -125,35 +131,73 @@ jobs:
         echo ".env file created"
 
     - name: Generate Blog
+      id: generate_blog
       run: |
         cd agent_engine
-        python main.py --topic "${{ inputs.topic }}" --product "${{ inputs.product }}" --platform "${{ inputs.platform }}" --keyword_source "${{ inputs.keyword_source }}" --brand "aspose.com" --author "${{ inputs.author }}"
+        echo "=== Starting blog generation ==="
+        echo "Brand: aspose.com"
+        echo "Product: ${{ inputs.product }}"
+        echo "Platform: ${{ inputs.platform }}"
+        echo "Topic: ${{ inputs.topic }}"
+        
+        python main.py \
+          --topic "${{ inputs.topic }}" \
+          --product "${{ inputs.product }}" \
+          --platform "${{ inputs.platform }}" \
+          --keyword_source "${{ inputs.keyword_source }}" \
+          --brand "aspose.com" \
+          --author "${{ inputs.author }}"
+        
+        echo "✅ Blog generation completed"
 
     - name: Find generated blog folder
       id: find_blog
       run: |
         echo "=== Searching for generated blog folder ==="
         
-        # Search for folders matching the pattern YYYY-MM-DD-*
-        blog_folder=$(find . -type d -name "20??-??-??-*" -mmin -10 | head -1)
+        # Search specifically in brand directory
+        BRAND_DIR="output/blogs/aspose_com"
+        
+        if [ ! -d "$BRAND_DIR" ]; then
+          echo "❌ Brand directory not found: $BRAND_DIR"
+          exit 1
+        fi
+        
+        echo "Searching in: $BRAND_DIR"
+        
+        # Find the most recently created folder (within last 10 minutes)
+        blog_folder=$(find "$BRAND_DIR" -mindepth 1 -maxdepth 1 -type d -name "20??-??-??-*" -mmin -10 -printf '%T@ %p\n' | sort -nr | head -1 | cut -d' ' -f2-)
         
         if [ -z "$blog_folder" ]; then
-          echo " No blog folder found with pattern YYYY-MM-DD-*"
+          echo "❌ No blog folder found with pattern YYYY-MM-DD-* in $BRAND_DIR"
+          echo "Contents of $BRAND_DIR:"
+          ls -la "$BRAND_DIR" || echo "Directory is empty"
           exit 1
         fi
         
         echo "Found blog folder: $blog_folder"
+        
         blog_folder_name=$(basename "$blog_folder")
-        echo "blog_folder_name=$blog_folder_name" >> $GITHUB_OUTPUT
-        echo "blog_folder_path=$blog_folder" >> $GITHUB_OUTPUT
+        echo "Blog folder name: $blog_folder_name"
         
         # Verify index.md exists
         if [ ! -f "$blog_folder/index.md" ]; then
-          echo " index.md not found in $blog_folder"
+          echo "❌ index.md not found in $blog_folder"
           exit 1
         fi
         
+        # Optional: Verify the brand in frontmatter
+        if grep -q "aspose" "$blog_folder/index.md" 2>/dev/null; then
+          echo "✅ Verified: Blog is for aspose.com"
+        else
+          echo "⚠️  Warning: Could not verify brand in frontmatter"
+        fi
+        
+        echo "blog_folder_name=$blog_folder_name" >> $GITHUB_OUTPUT
+        echo "blog_folder_path=$blog_folder" >> $GITHUB_OUTPUT
+        
         echo "✅ Found: $blog_folder_name with index.md"
+        echo "=== Folder contents ==="
         ls -la "$blog_folder"
 
     - name: Extract product folder name
@@ -163,12 +207,27 @@ jobs:
         # Example: "Aspose.Slides" -> "slides"
         product_folder=$(echo "${{ inputs.product }}" | sed 's/Aspose\.//g' | tr '[:upper:]' '[:lower:]')
         echo "product_folder=$product_folder" >> $GITHUB_OUTPUT
-        echo " Product folder name: $product_folder"
+        echo "✅ Product folder name: $product_folder"
+
+    - name: Verify blog content before upload
+      run: |
+        echo "=== Verifying blog content ==="
+        BLOG_PATH="${{ steps.find_blog.outputs.blog_folder_path }}"
+        
+        echo "Blog folder: $BLOG_PATH"
+        echo "Expected brand: aspose.com"
+        
+        # Check frontmatter for brand indicators
+        if [ -f "$BLOG_PATH/index.md" ]; then
+          echo "--- Frontmatter excerpt ---"
+          head -20 "$BLOG_PATH/index.md"
+          echo "--- End excerpt ---"
+        fi
 
     - name: Upload Generated Blog as Artifact
       uses: actions/upload-artifact@v4
       with:
-        name: generated-blog-${{ github.run_number }}
+        name: generated-blog-aspose-${{ github.run_number }}
         path: ${{ steps.find_blog.outputs.blog_folder_path }}
         if-no-files-found: error
 
@@ -187,7 +246,7 @@ jobs:
         git config --global user.name "GitHub Action"
 
         if [ -z "${{ secrets.REPO_PAT }}" ]; then
-          echo "⚠️ REPO_PAT is EMPTY! Fix your repo secret."
+          echo "❌ REPO_PAT is EMPTY! Fix your repo secret."
           exit 1
         fi
 
@@ -225,19 +284,32 @@ jobs:
         
         echo "Copying blog folder: $BLOG_FOLDER_NAME to $TARGET_DIR"
         
+        # Get absolute path to blog folder
+        BLOG_ABS_PATH=$(cd .. && pwd)/"$BLOG_FOLDER_PATH"
+        echo "Source path: $BLOG_ABS_PATH"
+        
+        # Verify source exists before copying
+        if [ ! -d "$BLOG_ABS_PATH" ]; then
+          echo "❌ Source blog folder does not exist: $BLOG_ABS_PATH"
+          exit 1
+        fi
+        
         # Copy the blog folder to the correct directory
-        cp -r "../$BLOG_FOLDER_PATH" "$TARGET_DIR/" || {
-          echo "❌ Failed to copy folder $BLOG_FOLDER_PATH"
+        cp -r "$BLOG_ABS_PATH" "$TARGET_DIR/" || {
+          echo "❌ Failed to copy folder from $BLOG_ABS_PATH to $TARGET_DIR"
           exit 1
         }
         
-        # Verify files were copied
+        # Verify the copy was successful
         if [ ! -d "$TARGET_DIR/$BLOG_FOLDER_NAME" ]; then
           echo "❌ Blog folder was not copied successfully"
+          echo "Target contents:"
+          ls -la "$TARGET_DIR"
           exit 1
         fi
         
         echo "✅ Blog folder copied successfully"
+        echo "=== Target folder contents ==="
         ls -la "$TARGET_DIR/$BLOG_FOLDER_NAME"
         
         # Add only the new blog folder
@@ -301,6 +373,7 @@ jobs:
 
           **Generated by:** GitHub Actions (Run #${{ github.run_number }})
           **Workflow:** ${{ github.workflow }}
+          **Brand:** aspose.com
 
           ---
 
