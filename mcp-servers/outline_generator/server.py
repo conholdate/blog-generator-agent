@@ -7,13 +7,12 @@ import os, sys
 from dotenv import load_dotenv
 load_dotenv()
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-PARENT_PATH = os.path.abspath(os.path.join(BASE_DIR, "../.."))
-
+PARENT_PATH = os.path.abspath(os.path.join(BASE_DIR, "../../"))
 if PARENT_PATH not in sys.path:
     sys.path.append(PARENT_PATH)
 
-from agent_engine.config import settings
-from agent_engine.utils.prompts import build_outline_prompt
+from agent_engine.blog_generator.config import settings
+from agent_engine.blog_generator.utils.prompts import build_outline_prompt
 # Initialize client (OpenAI-compatible)
 client = OpenAI(
     base_url=settings.ASPOSE_LLM_BASE_URL,

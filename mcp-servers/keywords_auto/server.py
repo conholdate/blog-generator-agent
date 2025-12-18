@@ -10,14 +10,14 @@ from fastmcp import FastMCP
 from typing import Dict, List
 from openai import OpenAI
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-PARENT_PATH = os.path.abspath(os.path.join(BASE_DIR, "../.."))
+PARENT_PATH = os.path.abspath(os.path.join(BASE_DIR, "../../"))
 
 if PARENT_PATH not in sys.path:
     sys.path.append(PARENT_PATH)
     
-from agent_engine.services import SerpAPIKeywordService
-from agent_engine.utils.prompts import keyword_filter_prompt
-from agent_engine.config import settings
+from agent_engine.blog_generator.services import SerpAPIKeywordService
+from agent_engine.blog_generator.utils.prompts import keyword_filter_prompt
+from agent_engine.blog_generator.config import settings
 client = OpenAI(
     base_url=settings.ASPOSE_LLM_BASE_URL,
     api_key=settings.ASPOSE_LLM_API_KEY
@@ -27,11 +27,8 @@ client = OpenAI(
 # ---------------------------------------------
 print(" MCP Server starting...", file=sys.stderr, flush=True)
 
-# Load environment variables
-env_path = os.path.join(os.path.dirname(__file__), '../../agent_engine/.env')
-load_dotenv(env_path)
-print(f" Loaded .env from: {env_path}", file=sys.stderr, flush=True)
-print(f" SERPAPI_API_KEY present: {bool(os.getenv('SERPAPI_API_KEY'))}", file=sys.stderr, flush=True)
+
+print(f" SERPAPI_API_KEY present: {bool(settings.SERPAPI_API_KEY)}", file=sys.stderr, flush=True)
 
 # Add agent-engine to import path
 current_dir = os.path.dirname(os.path.abspath(__file__))
@@ -49,7 +46,7 @@ async def fetch_keywords(topic: str, product_name: str = None, platform:str=None
     
     try:
         all_results = []
-        serpapi = SerpAPIKeywordService()
+        serpapi = SerpAPIKeywordService(api_key=settings.SERPAPI_API_KEY)
         
         try:
             result = await serpapi.fetch_keywords(topic, product_name)

@@ -5,6 +5,7 @@ from utils.helpers import sanitize_keywords, parse_keywords_response, extract_fi
 import json
 import os
 
+
 async def fetch_category_related_articles(
     topic: str,
     product_name: str,
@@ -14,7 +15,7 @@ async def fetch_category_related_articles(
    
     server_params = StdioServerParameters(
         command="python",
-        args=["../mcp-servers/related-topics/server.py"]
+        args=["../../mcp-servers/related-topics/server.py"]
     )
 
     async with stdio_client(server_params) as (read, write):
@@ -147,7 +148,7 @@ async def fetch_keywords_auto(topic: str, product_name: str = "", platform:str="
     try:
         params = StdioServerParameters(
             command="python",
-            args=["../mcp-servers/keywords_auto/server.py"]
+            args=["../../mcp-servers/keywords_auto/server.py"]
         )
         
         print(f" Connecting to MCP server fetch_keywords...")
@@ -193,7 +194,7 @@ async def fetch_keywords_manual( product_name: str = "", brand: str = "") -> str
                 if os.getenv('GITHUB_ACTIONS'):
                     file_path= "output/kra/samples/Keywords.xlsx"
                 else:
-                    file_path= "../output/kra/samples/Keywords.xlsx"
+                    file_path= "../../output/kra/samples/Keywords.xlsx"
                 print(f"env is -- {os.getenv('GITHUB_ACTIONS')}")
                 # handshake
                 await session.initialize()
@@ -236,7 +237,7 @@ async def generate_markdown_file(title, content, brand) -> dict:
 
     params = StdioServerParameters(
         command="python",
-        args=["../mcp-servers/file-generator/server.py"]
+        args=["../../mcp-servers/file-generator/server.py"]
     )
 
     async with stdio_client(params) as (read, write):
@@ -246,7 +247,7 @@ async def generate_markdown_file(title, content, brand) -> dict:
                 "title": title,
                 "content": content,
                 "brand": brand,
-                "output_dir": "../output/blogs"
+                "output_dir": "../../content/blogPosts"
             })
 
             response_text = result.content[0].text
@@ -269,7 +270,7 @@ async def generate_blog_outline(topic: str, keywords) -> str:
     
     params = StdioServerParameters(
         command="python",
-        args=["../mcp-servers/outline_generator/server.py"]
+        args=["../../mcp-servers/outline_generator/server.py"]
     )
     print(f" Connecting to MCP server generate_blog_outline...")
     async with stdio_client(params) as (read, write):
@@ -287,7 +288,7 @@ async def generate_seo_title(topic: str, keywords_json: str, product_name: str =
     
     params = StdioServerParameters(
         command="python",
-        args=["../mcp-servers/title_generator/server.py"]
+        args=["../../mcp-servers/title_generator/server.py"]
     )
     print(f" Connecting to MCP server generate_seo_title...")
     async with stdio_client(params) as (read, write):
@@ -306,7 +307,7 @@ async def gist_injector(content: str, res_title: str) -> str:
     
     params = StdioServerParameters(
         command="python",
-        args=["../mcp-servers/gist-injector/server.py"]
+        args=["../../mcp-servers/gist-injector/server.py"]
     )
     print(f" Connecting to MCP server gist-injector...")
     async with stdio_client(params) as (read, write):

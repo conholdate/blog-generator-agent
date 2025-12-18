@@ -50,7 +50,7 @@ class BlogOrchestrator:
     def load_products(self):
         """Load products from correct JSON based on brand name"""
         base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-        data_dir = os.path.join(base_dir, "..", "data")
+        data_dir = os.path.join(base_dir, "../../", "content/productsData")
         
         if not os.path.exists(data_dir):
             raise FileNotFoundError(f"Data directory not found: {data_dir}")
@@ -176,13 +176,13 @@ class BlogOrchestrator:
             # Print and send metrics
             self.metrics.print_summary()
             print("📊 Sending metrics to Google Script...")
-            metrics_sent_for_team = await self.metrics.send_metrics_to_team()
-            metrics_sent_for_pro = await self.metrics.send_metrics_to_prod()
+            # metrics_sent_for_team = await self.metrics.send_metrics_to_team()
+            # metrics_sent_for_pro = await self.metrics.send_metrics_to_prod()
             
-            if metrics_sent_for_team and metrics_sent_for_pro:
-                print("Metrics sent successfully\n")
-            else:
-                print("Failed to send metrics (check logs)\n")
+            # if metrics_sent_for_team and metrics_sent_for_pro:
+            #     print("Metrics sent successfully\n")
+            # else:
+            #     print("Failed to send metrics (check logs)\n")
 
             return {
                 "agent_output": result.final_output,
@@ -207,8 +207,8 @@ class BlogOrchestrator:
             # Print and send metrics even on failure
             self.metrics.print_summary()
             print(" Sending failure metrics...")
-            await self.metrics.send_metrics_to_team()
-            await self.metrics.send_metrics_to_prod()
+            # await self.metrics.send_metrics_to_team()
+            # await self.metrics.send_metrics_to_prod()
             
             return {
                 "status": "error", 

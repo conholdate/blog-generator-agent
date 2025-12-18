@@ -1,16 +1,18 @@
 """
 Configuration for Blog Agent
 """
-
-import os
+import os, sys
+from pathlib import Path
 from typing import List
 from pydantic_settings import BaseSettings
 from pydantic import ConfigDict
 
+BASE_DIR = Path(__file__).resolve().parents[2]
+ENV_PATH = BASE_DIR / ".env"
 
 class Settings(BaseSettings):
     model_config = ConfigDict(
-        env_file=".env",
+        env_file=ENV_PATH,
         env_file_encoding="utf-8"
     )
 

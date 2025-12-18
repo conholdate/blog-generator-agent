@@ -22,6 +22,9 @@ on:
         type: choice
         options:
           - '.NET'
+          - 'Java'
+          - 'Python via .NET'
+          - 'Node.js'
         default: '.NET'
       author:
         description: 'Author name'

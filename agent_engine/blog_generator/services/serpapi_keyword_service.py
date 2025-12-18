@@ -4,7 +4,6 @@ Fetches keyword suggestions from Google search results
 """
 
 from typing import Dict, List
-import os
 import httpx
 
 class SerpAPIKeywordService:
@@ -13,8 +12,8 @@ class SerpAPIKeywordService:
     Free tier: 100 searches/month
     """
     
-    def __init__(self):
-        self.api_key = os.getenv("SERPAPI_API_KEY")
+    def __init__(self,api_key: str):
+        self.api_key = api_key
         self.base_url = "https://serpapi.com/search"
     
     def is_available(self) -> bool:

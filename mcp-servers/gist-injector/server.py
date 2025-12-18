@@ -4,12 +4,11 @@ Creates Gists for a given code snippet
 import sys, os
 from fastmcp import FastMCP
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-PARENT_PATH = os.path.abspath(os.path.join(BASE_DIR, "../.."))
-
+PARENT_PATH = os.path.abspath(os.path.join(BASE_DIR, "../../"))
 if PARENT_PATH not in sys.path:
     sys.path.append(PARENT_PATH)
-from agent_engine.config import settings
-from agent_engine.utils.helpers import extract_all_complete_code_snippets, upload_to_gist, replace_code_snippets_with_gists
+from agent_engine.blog_generator.config import settings
+from agent_engine.blog_generator.utils.helpers import extract_all_complete_code_snippets, upload_to_gist, replace_code_snippets_with_gists
 
 # Load your environment (optional if already set)
 from dotenv import load_dotenv

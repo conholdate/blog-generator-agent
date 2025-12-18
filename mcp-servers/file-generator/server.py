@@ -14,7 +14,7 @@ def generate_markdown_file(
     title: str,
     content: str,
     brand: str,
-    output_dir: str = "output/blogs"
+    output_dir: str = "content/blogPosts"
 ) -> dict:
     """
     Generate and save markdown file inside a brand-specific, timestamped folder

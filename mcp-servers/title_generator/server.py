@@ -7,13 +7,12 @@ import random
 from fastmcp import FastMCP
 from openai import OpenAI
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-PARENT_PATH = os.path.abspath(os.path.join(BASE_DIR, "../.."))
-
+PARENT_PATH = os.path.abspath(os.path.join(BASE_DIR, "../../"))
 if PARENT_PATH not in sys.path:
     sys.path.append(PARENT_PATH)
 
-from agent_engine.config import settings
-from agent_engine.utils.prompts import get_title_prompt
+from agent_engine.blog_generator.config import settings
+from agent_engine.blog_generator.utils.prompts import get_title_prompt
 
 # Load your environment (optional if already set)
 from dotenv import load_dotenv

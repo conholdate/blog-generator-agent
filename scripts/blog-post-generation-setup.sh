@@ -40,13 +40,15 @@ source venv/bin/activate
 python -m pip install --upgrade pip
 
 # Install agent_engine dependencies
-echo "📦 Installing Agent Engine dependencies..."
-cd agent_engine || { echo "❌ agent_engine folder not found"; exit 1; }
+echo " Installing Agent Engine dependencies..."
+cd agent_engine
+cd blog_generator || { echo "❌ agent_engine folder not found"; exit 1; }
 python -m pip install -r requirements.txt
 cd ..
 
 # Install MCP server dependencies
 echo "📦 Installing MCP Server dependencies..."
+cd ..
 cd mcp-servers || { echo "❌ mcp-servers folder not found"; exit 1; }
 python -m pip install -r requirements.txt
 cd ..
@@ -57,6 +59,6 @@ echo "✅ Setup complete!"
 echo "-----------------------------------------"
 echo "To start working:"
 echo "1. Activate virtual environment: source venv/bin/activate"
-echo "2. Navigate to agent_engine: cd agent_engine"
+echo "2. Navigate to agent_engine: cd agent_engine/blog_generator"
 echo "3. Run your scripts normally."
 echo "-----------------------------------------"
