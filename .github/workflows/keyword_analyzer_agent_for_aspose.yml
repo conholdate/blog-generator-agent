@@ -1,0 +1,197 @@
+name: Blog Keyword Analyzer for Aspose
+
+on:
+  workflow_dispatch:
+    inputs:
+      product:
+        description: "Product name (e.g., Aspose.Cells)."
+        type: string
+        required: true
+        default: "Aspose.Cells"
+
+      platform:
+        description: "Optional target platform (e.g., java, c#, python)."
+        type: string
+        required: false
+        default: "java"
+
+      keywords_file:
+        description: "Keywords file path (recommended: content/Aspose/keywords.csv)."
+        type: string
+        required: true
+        default: "content/Aspose/keywords.csv"
+
+      use_serp_api:
+        description: "If true, ingest keywords via SerpAPI instead of file."
+        type: boolean
+        required: false
+        default: false
+
+      serp_topic:
+        description: "SerpAPI topic seed (used only if use_serp_api=true)."
+        type: string
+        required: false
+        default: ""
+
+      top_clusters:
+        description: "How many top clusters to keep (number as text)."
+        type: string
+        required: false
+        default: "15"
+
+      use_content_index:
+        description: "If true, clone blog repo and dedupe topics against existing posts."
+        type: boolean
+        required: false
+        default: false
+
+permissions:
+  contents: write
+
+jobs:
+  run-kra:
+    runs-on: ubuntu-latest
+
+    env:
+      BRAND: "Aspose"
+      # Keep this consistent with your upload/commit steps
+      KRA_OUTPUT_DIR: "content/Aspose/output"
+      KRA_METRICS_DB_PATH: "content/kra_metrics_db.json"
+
+      CUSTOM_LLM_BASE_URL: "https://llm.professionalize.com/v1"
+      CUSTOM_LLM_API_KEY: ${{ secrets.CUSTOM_LLM_API_KEY }}
+      OPENAI_API_KEY: ${{ secrets.CUSTOM_LLM_API_KEY }}
+
+      BLOG_CONTENT_REPO: "Aspose/aspose-blog"
+      BLOG_CONTENT_ROOT: "blog_content/content/Aspose.Blog"
+
+    steps:
+      - name: Checkout this repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Checkout Aspose blog content repo (only if use_content_index=true)
+        if: ${{ inputs.use_content_index }}
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ env.BLOG_CONTENT_REPO }}
+          path: blog_content
+          token: ${{ secrets.ASPOSE_BLOG_TOKEN }}
+
+      - name: Export BLOG_CONTENT_ROOT (only if use_content_index=true)
+        if: ${{ inputs.use_content_index }}
+        run: |
+          echo "BLOG_CONTENT_ROOT=${BLOG_CONTENT_ROOT}" >> "$GITHUB_ENV"
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Build kra_run.generated.yaml
+        run: |
+          python - <<'PY'
+          from __future__ import annotations
+          import os
+          from pathlib import Path
+
+          def as_bool(v: str) -> bool:
+              return (v or "false").strip().lower() == "true"
+
+          def b(v: bool) -> str:
+              return "true" if v else "false"
+
+          brand = os.environ["BRAND"]
+
+          # Only values coming from workflow form
+          product = os.environ.get("INPUT_PRODUCT", "Aspose.Cells")
+          platform = os.environ.get("INPUT_PLATFORM", "java")  # <-- platform (not platform)
+          keywords_file = os.environ.get("INPUT_KEYWORDS_FILE", "content/Aspose/keywords.csv")
+          use_serp_api = as_bool(os.environ.get("INPUT_USE_SERP_API", "false"))
+          serp_topic = os.environ.get("INPUT_SERP_TOPIC", "")
+          top_clusters = int(os.environ.get("INPUT_TOP_CLUSTERS", "15"))
+          use_content_index = as_bool(os.environ.get("INPUT_USE_CONTENT_INDEX", "false"))
+
+          # Defaults (not exposed as workflow inputs)
+          locale = "en-US"
+          max_rows = 50000
+          debug = False
+
+          cfg_path = Path(os.environ["RUNNER_TEMP"]) / "kra_run.generated.yaml"
+
+          cfg_text = (
+              "meta:\n"
+              "  blog_name: \"\"\n"
+              f"  brand: \"{brand}\"\n"
+              "  created_at: \"\"\n"
+              "  owner: \"content-team\"\n"
+              "\n"
+              "engine:\n"
+              f"  input_file: \"{keywords_file}\"\n"
+              f"  use_serp_api: {b(use_serp_api)}\n"
+              f"  serp_topic: \"{serp_topic}\"\n"
+              "\n"
+              f"  brand: \"{brand}\"\n"
+              f"  product: \"{product}\"\n"
+              f"  platform: \"{platform}\"\n"
+              f"  locale: \"{locale}\"\n"
+              "\n"
+              f"  top_clusters: {top_clusters}\n"
+              f"  max_rows: {max_rows}\n"
+              f"  use_content_index: {b(use_content_index)}\n"
+              f"  debug: {b(debug)}\n"
+              "\n"
+              "content_index:\n"
+              "  index_file_name: \"index.md\"\n"
+              "  file_glob: \"**/index.md\"\n"
+          )
+
+          cfg_path.write_text(cfg_text, encoding="utf-8")
+          print("Generated config:", cfg_path)
+          print(cfg_text)
+          PY
+
+          echo "KRA_CFG_PATH=${RUNNER_TEMP}/kra_run.generated.yaml" >> "$GITHUB_ENV"
+        env:
+          INPUT_PRODUCT: ${{ inputs.product }}
+          INPUT_PLATFORM: ${{ inputs.platform }}
+          INPUT_KEYWORDS_FILE: ${{ inputs.keywords_file }}
+          INPUT_USE_SERP_API: ${{ inputs.use_serp_api }}
+          INPUT_SERP_TOPIC: ${{ inputs.serp_topic }}
+          INPUT_TOP_CLUSTERS: ${{ inputs.top_clusters }}
+          INPUT_USE_CONTENT_INDEX: ${{ inputs.use_content_index }}
+
+      - name: Run KRA
+        run: |
+          mkdir -p "${KRA_OUTPUT_DIR}"
+          python scripts/run_kra_from_config.py --config "${KRA_CFG_PATH}"
+
+      - name: Upload Aspose outputs
+        uses: actions/upload-artifact@v4
+        with:
+          name: kra-output-Aspose
+          path: |
+            content/Aspose/output/**
+            content/aspose/output/**
+          if-no-files-found: warn
+
+      # Optional: keep commit step but not exposed in workflow form (defaults to off)
+      - name: Commit Aspose outputs
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          # Stage all changes under content (case-proof)
+          git add -A content
+
+          git diff --cached --quiet && echo "No staged changes, skipping commit & push" && exit 0
+          git commit -m "Update Aspose KRA results [skip ci]"
+          git pull --rebase origin "${GITHUB_REF_NAME}"
+          git push origin HEAD:"${GITHUB_REF_NAME}"
+      
