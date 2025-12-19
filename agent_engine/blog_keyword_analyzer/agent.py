@@ -33,27 +33,27 @@ class KeywordResearchAgent:
 
         Priority:
           1. Explicit `model` argument
-          2. Settings.DEFAULT_LLM_MODEL
+          2. Settings.ASPOSE_LLM_MODEL
           3. Settings.DEFAULT_MODEL (if declared)
         """
         default_model = getattr(settings, "DEFAULT_MODEL", None)
-        self.model = model or settings.DEFAULT_LLM_MODEL or default_model
+        self.model = model or settings.ASPOSE_LLM_MODEL or default_model
 
         # Decide which backend to use: custom (self-hosted) or OpenAI
         if (
-            settings.DEFAULT_LLM_MODEL
-            and settings.CUSTOM_LLM_BASE_URL
-            and settings.CUSTOM_LLM_API_KEY
+            settings.ASPOSE_LLM_MODEL
+            and settings.ASPOSE_LLM_BASE_URL
+            and settings.ASPOSE_LLM_API_KEY
         ):
             # Your self-hosted LLM (OpenAI-compatible)
             logger.info(
                 "Initializing KeywordResearchAgent with custom LLM backend: base_url=%s model=%s",
-                settings.CUSTOM_LLM_BASE_URL,
+                settings.ASPOSE_LLM_BASE_URL,
                 self.model,
             )
             self.client = OpenAI(
-                base_url=settings.CUSTOM_LLM_BASE_URL,
-                api_key=settings.CUSTOM_LLM_API_KEY,
+                base_url=settings.ASPOSE_LLM_BASE_URL,
+                api_key=settings.ASPOSE_LLM_API_KEY,
             )
             # Many custom servers don't fully support response_format yet
             self._use_response_format = False

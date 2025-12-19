@@ -7,14 +7,14 @@ load_dotenv()  # loads .env from project root by default
 
 
 class Settings(BaseSettings):
-    CUSTOM_LLM_BASE_URL: str | None = None
-    CUSTOM_LLM_API_KEY: str | None = None
+    ASPOSE_LLM_BASE_URL: str | None = None
+    ASPOSE_LLM_API_KEY: str | None = None
 
     # Standard OpenAI key (used when no custom base URL is set)
     OPENAI_API_KEY: str | None = None
 
     # --- Model defaults ---
-    DEFAULT_LLM_MODEL: str = "gpt-oss"
+    ASPOSE_LLM_MODEL: str = "gpt-oss"
 
     # --- SerpAPI integration ---
     SERPAPI_API_KEY: str | None = None
