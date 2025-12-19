@@ -6,8 +6,7 @@ from typing import Any, Optional
 
 import requests
 
-from src.agent_engine.kra.config import platform_PATTERNS, platform_LABELS
-
+from .config import platform_PATTERNS, platform_LABELS
 
 def canonicalize_platform(value: Optional[str]) -> str:
     if not value:
@@ -38,9 +37,9 @@ def _post_json_best_effort(url: str, token: str, payload: dict[str, Any], debug:
     if not url or not token:
         return
     try:
-        # resp = requests.post(url, params={"token": token}, json=payload, timeout=5)
+        resp = requests.post(url, params={"token": token}, json=payload, timeout=5)
         if debug:
-            print("") # (f"[metrics:{payload.get('stage','')}] {resp.status_code} {resp.text[:200]!r}")
+            print(f"[metrics:{payload.get('stage','')}] {resp.status_code} {resp.text[:200]!r}")
     except Exception as exc:
         if debug:
             print(f"[metrics:{payload.get('stage','')}] Failed to send: {exc!r}")

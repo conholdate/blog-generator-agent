@@ -14,7 +14,7 @@ from statistics import mean
 from typing import Optional, List, Mapping, Any, Dict, Tuple
 import requests
 
-from src.agent_engine.kra.metrics_sender import send_stage_metrics
+from .metrics_sender import send_stage_metrics
 from .tools.content_index import get_existing_posts
 from .schemas import RunRequest, RunResult, Cluster, KeywordRecord
 from .agent import KeywordResearchAgent
@@ -585,9 +585,10 @@ def run_sync(
         # Send stage 1 metrics (best-effort)
         run_duration_ms = int((time.perf_counter() - start) * 1000)
         stage_duration_ms = int((time.perf_counter() - stage_start) * 1000)
+        topic_clustering_step_id: str = run_id + "kc"
         send_stage_metrics(
             settings=settings,
-            run_id=run_id,
+            run_id=topic_clustering_step_id,
             stage=current_stage,
             stage_status="success",
             req=req,
@@ -658,9 +659,10 @@ def run_sync(
         # Send stage 2 metrics (best-effort)
         run_duration_ms = int((time.perf_counter() - start) * 1000)
         stage_duration_ms = int((time.perf_counter() - stage_start) * 1000)
+        topic_generation_step_id = run_id + "tg"
         send_stage_metrics(
             settings=settings,
-            run_id=run_id,
+            run_id=topic_generation_step_id,
             stage=current_stage,
             stage_status="success",
             req=req,

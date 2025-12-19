@@ -23,7 +23,7 @@ def build_command(engine: Dict[str, Any]) -> list[str]:
     cmd: list[str] = [
         sys.executable,
         "-m",
-        "src.agent_engine.kra.runner",
+        "agent_engine.blog_keyword_analyzer.runner",
     ]
 
     # Support both snake_case and kebab-case keys in kra_run.yaml
