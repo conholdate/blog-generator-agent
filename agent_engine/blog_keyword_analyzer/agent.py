@@ -40,10 +40,12 @@ class KeywordResearchAgent:
         # self.model = model or settings.ASPOSE_LLM_MODEL or default_model
         self.model = settings.ASPOSE_LLM_MODEL
 
-        print(settings.ASPOSE_LLM_MODEL)
-        print(settings.DEFAULT_MODEL)
-        print(settings.ASPOSE_LLM_BASE_URL)
-        print(settings.ASPOSE_LLM_API_KEY)
+        logger.info(
+            "LLM Details: base_url=%s model=%s key=%s",
+            settings.ASPOSE_LLM_BASE_URL,
+            self.model,
+            settings.ASPOSE_LLM_API_KEY
+        )
 
         # Decide which backend to use: custom (self-hosted) or OpenAI
         if (
