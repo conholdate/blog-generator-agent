@@ -30,14 +30,7 @@ class KeywordResearchAgent:
     def __init__(self, model: str | None = None) -> None:
         """
         Initialize the agent and choose which model / backend to use.
-
-        Priority:
-          1. Explicit `model` argument
-          2. Settings.ASPOSE_LLM_MODEL
-          3. Settings.DEFAULT_MODEL (if declared)
         """
-        # default_model = getattr(settings, "DEFAULT_MODEL", None)
-        # self.model = model or settings.ASPOSE_LLM_MODEL or default_model
         self.model = settings.ASPOSE_LLM_MODEL
 
         # Decide which backend to use: custom (self-hosted) or OpenAI
@@ -47,10 +40,19 @@ class KeywordResearchAgent:
             settings.ASPOSE_LLM_BASE_URL,
             self.model,
         )
-        self.client = OpenAI(
-            base_url=settings.ASPOSE_LLM_BASE_URL,
-            api_key=settings.ASPOSE_LLM_API_KEY,
-        )
+
+        try:
+            # Client construction itself can throw (bad types, etc.)
+            self.client = OpenAI(
+                base_url=settings.ASPOSE_LLM_BASE_URL,
+                api_key=settings.ASPOSE_LLM_API_KEY,
+            )
+        except Exception as e:
+            logger.info(
+                "Failed to initialize OpenAI client: error=%s",
+                e,
+            )
+
         # Many custom servers don't fully support response_format yet
         self._use_response_format = False
 
