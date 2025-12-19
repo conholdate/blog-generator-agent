@@ -36,8 +36,14 @@ class KeywordResearchAgent:
           2. Settings.ASPOSE_LLM_MODEL
           3. Settings.DEFAULT_MODEL (if declared)
         """
-        default_model = getattr(settings, "DEFAULT_MODEL", None)
-        self.model = model or settings.ASPOSE_LLM_MODEL or default_model
+        # default_model = getattr(settings, "DEFAULT_MODEL", None)
+        # self.model = model or settings.ASPOSE_LLM_MODEL or default_model
+        self.model = settings.ASPOSE_LLM_MODEL
+
+        print(settings.ASPOSE_LLM_MODEL)
+        print(settings.DEFAULT_MODEL)
+        print(settings.ASPOSE_LLM_BASE_URL)
+        print(settings.ASPOSE_LLM_API_KEY)
 
         # Decide which backend to use: custom (self-hosted) or OpenAI
         if (
