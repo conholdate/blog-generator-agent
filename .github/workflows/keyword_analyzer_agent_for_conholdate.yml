@@ -58,8 +58,8 @@ jobs:
       KRA_METRICS_DB_PATH: "content/kra_metrics_db.json"
 
       CUSTOM_LLM_BASE_URL: "https://llm.professionalize.com/v1"
-      CUSTOM_LLM_API_KEY: ${{ secrets.CUSTOM_LLM_API_KEY }}
-      OPENAI_API_KEY: ${{ secrets.CUSTOM_LLM_API_KEY }}
+      ASPOSE_LLM_API_KEY: ${{ secrets.ASPOSE_LLM_API_KEY }}
+      OPENAI_API_KEY: ${{ secrets.ASPOSE_LLM_API_KEY }}
 
       BLOG_CONTENT_REPO: "conholdate/conholdate-blog"
       BLOG_CONTENT_ROOT: "blog_content/content/Conholdate.Blog"
