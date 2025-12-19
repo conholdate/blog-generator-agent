@@ -40,36 +40,19 @@ class KeywordResearchAgent:
         # self.model = model or settings.ASPOSE_LLM_MODEL or default_model
         self.model = settings.ASPOSE_LLM_MODEL
 
+        # Decide which backend to use: custom (self-hosted) or OpenAI
+        # Your self-hosted LLM (OpenAI-compatible)
         logger.info(
-            "LLM Details: base_url=%s model=%s key=%s",
+            "Initializing KeywordResearchAgent with custom LLM backend: base_url=%s model=%s",
             settings.ASPOSE_LLM_BASE_URL,
             self.model,
-            settings.ASPOSE_LLM_API_KEY
         )
-
-        # Decide which backend to use: custom (self-hosted) or OpenAI
-        if (
-            settings.ASPOSE_LLM_MODEL
-            and settings.ASPOSE_LLM_BASE_URL
-            and settings.ASPOSE_LLM_API_KEY
-        ):
-            # Your self-hosted LLM (OpenAI-compatible)
-            logger.info(
-                "Initializing KeywordResearchAgent with custom LLM backend: base_url=%s model=%s",
-                settings.ASPOSE_LLM_BASE_URL,
-                self.model,
-            )
-            self.client = OpenAI(
-                base_url=settings.ASPOSE_LLM_BASE_URL,
-                api_key=settings.ASPOSE_LLM_API_KEY,
-            )
-            # Many custom servers don't fully support response_format yet
-            self._use_response_format = False
-        else:
-            # Standard OpenAI backend
-            logger.info("Initializing KeywordResearchAgent with OpenAI backend, model=%s", self.model)
-            self.client = OpenAI(api_key=settings.OPENAI_API_KEY)
-            self._use_response_format = True
+        self.client = OpenAI(
+            base_url=settings.ASPOSE_LLM_BASE_URL,
+            api_key=settings.ASPOSE_LLM_API_KEY,
+        )
+        # Many custom servers don't fully support response_format yet
+        self._use_response_format = False
 
     @staticmethod
     def _extract_json_block(text: str) -> str | None:
