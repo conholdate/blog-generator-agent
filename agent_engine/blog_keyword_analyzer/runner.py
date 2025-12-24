@@ -298,6 +298,8 @@ def write_topics_markdown(
     lines.append(heading)
     lines.append("")
     lines.append(f"- **Brand:** {result.brand}")
+    lines.append(f"- **Product:** {result.product}")
+    lines.append(f"- **Platform:** {result.platform}")
     lines.append(f"- **Run ID:** {result.run_id}")
     lines.append(f"- **Topics:** {len(result.topics)}")
     lines.append("")
