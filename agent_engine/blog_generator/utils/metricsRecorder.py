@@ -9,7 +9,6 @@ import uuid
 from datetime import datetime, timezone
 from typing import Optional, Dict, Any, Literal
 import logging
-import os
 import os, sys
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 from config import settings
@@ -72,7 +71,7 @@ class MetricsRecorder:
         self.platform = None
         self.website = None
         self.website_section = "Blog"
-        self.item_name = "Blog Post"
+        self.item_name = "Blog Posts"
         
         # Timing (in milliseconds)
         self.start_time_ms = None
@@ -246,6 +245,7 @@ class MetricsRecorder:
         Returns:
             True if successful, False otherwise
         """
+        
         payload = self.get_metrics_payload()
         # Remove run_env for prod endpoint if needed
         payload.pop('run_env', None) 
