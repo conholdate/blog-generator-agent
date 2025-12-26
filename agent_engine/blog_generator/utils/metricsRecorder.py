@@ -10,7 +10,9 @@ from datetime import datetime, timezone
 from typing import Optional, Dict, Any, Literal
 import logging
 import os
-
+import os, sys
+sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
+from config import settings
 logger = logging.getLogger(__name__)
 
 
