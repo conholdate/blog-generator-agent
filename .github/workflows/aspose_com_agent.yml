@@ -65,6 +65,8 @@ jobs:
         ASPOSE_LLM_MODEL=${{ secrets.ASPOSE_LLM_MODEL }}
         TOKEN_FOR_TEAM=${{ secrets.TOKEN_FOR_TEAM }}
         TOKEN_FOR_PROD=${{ secrets.TOKEN_FOR_PROD }}
+        REPO_PAT=${{ secrets.GISTS_PAT_ASPOSE_COM }}
+        GIST_NAME=${{ vars.ASPOSE_COM_GIST }}
         EOF
         echo ".env file created"
 
