@@ -25,10 +25,14 @@ class Settings(BaseSettings):
     PRODUCTS_JSON_PATH: str = "../data/products.json"
     OUTPUT_DIR: str = "../output/blogs"
     
-    SERPAPI_API_KEY: str = ""  # Add this!
+    SERPAPI_API_KEY: str = ""  
+    GOOGLE_SCRIPT_URL_FOR_TEAM: str= ""
+    TOKEN_FOR_TEAM: str = ""
+    GOOGLE_SCRIPT_URL_FOR_PROD: str = ""
+    TOKEN_FOR_PROD: str = ""
     
     # Agent Settings
-    NUMBER_OF_BLOG_SECTIONS: int = 5  # FIX: must be int, cannot be "5-7"
+    NUMBER_OF_BLOG_WORDS: int = 6  # FIX: must be int, cannot be "5-7"
     ENVIRONMENT: str = ""
     KRA_DATA_DIR: str = "./src/data/samples"
     KRA_OUTPUT_DIR: str = "./src/data/outputs"

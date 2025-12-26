@@ -3,40 +3,15 @@ name: Generate Blog Post for conholdate.com
 on:
   workflow_dispatch:
     inputs:
-      topic:
-        description: 'Blog topic'
+      keywords_file:
+        description: 'Keywords File (e.g., content/Conholdate/output/449388a2_aspose-cells_java_topics.md)'
         required: true
         type: string
       
-      product:
-        description: 'Product name'
-        required: true
-        type: choice
-        default: 'Conholdate.Total'
-        options:
-          - 'Conholdate.Total'
-      
-      platform:
-        description: 'Platform'
-        required: true
-        type: choice
-        options:
-          - '.NET'
-          - 'Java'
-        default: '.NET'
       author:
-        description: 'Author name'
+        description: 'Author Name'
         required: true
         type: string
-      keyword_source:
-        description: 'Keyword source'
-        required: true
-        type: choice
-        options:
-          - 'auto (using SerpApi)'
-          - 'manual (using Google Keyword Planner Sheet)'
-        default: 'auto (using SerpApi)'
-
 jobs:
   generate:
     runs-on: ubuntu-latest
@@ -57,19 +32,11 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-pip-
 
-    - name: Prepare keywords file
-      run: |
-        mkdir -p output/kra/samples
-        # Note: Capital K in Keywords.xlsx
-        cp output/kra/samples/Keywords.xlsx output/kra/samples/keywords.xlsx
-        ls -la output/kra/samples/keywords.xlsx
-        echo "Keywords file prepared successfully"
-
     - name: Clean up old blog folders
       run: |
         # Remove any existing blog folders to avoid confusion
         echo "=== Cleaning up old blog folders ==="
-        find output/blogs -type d -name "20??-??-??-*" -exec rm -rf {} + 2>/dev/null || true
+        find content/blogPosts -type d -name "20??-??-??-*" -exec rm -rf {} + 2>/dev/null || true
         echo "✅ Cleanup completed"
 
     - name: Remove any .env files that could interfere
@@ -81,7 +48,9 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         cd agent_engine
+        cd blog_generator
         pip install -r requirements.txt
+        cd ..
         cd ..
         cd mcp-servers
         pip install -r requirements.txt
@@ -89,14 +58,10 @@ jobs:
 
     - name: Create runtime .env file with secrets
       run: |
-        cd agent_engine
         cat > .env << EOF
         ASPOSE_LLM_API_KEY=${{ secrets.ASPOSE_LLM_API_KEY }}
         ASPOSE_LLM_BASE_URL=${{ secrets.ASPOSE_LLM_BASE_URL }}
         ASPOSE_LLM_MODEL=${{ secrets.ASPOSE_LLM_MODEL }}
-        SERPAPI_API_KEY=${{ secrets.SERPAPI_API_KEY }}
-        REPO_PAT=${{ secrets.GISTS_PAT_CONHOLDATE_COM }}
-        GIST_NAME=${{ vars.CONHOLDATE_COM_GIST }}
         EOF
         echo ".env file created"
 
@@ -104,17 +69,15 @@ jobs:
       id: generate_blog
       run: |
         cd agent_engine
+        cd blog_generator
         echo "=== Starting blog generation ==="
-        echo "Brand: conholdate.com"
+        echo "Brand: aspose.com"
         echo "Product: ${{ inputs.product }}"
         echo "Platform: ${{ inputs.platform }}"
         echo "Topic: ${{ inputs.topic }}"
         
         python main.py \
-          --topic "${{ inputs.topic }}" \
-          --product "${{ inputs.product }}" \
-          --platform "${{ inputs.platform }}" \
-          --keyword_source "${{ inputs.keyword_source }}" \
+          --keywords_file "${{ inputs.keywords_file }}" \
           --brand "conholdate.com" \
           --author "${{ inputs.author }}"
         
@@ -126,7 +89,7 @@ jobs:
         echo "=== Searching for generated blog folder ==="
         
         # Search specifically in brand directory
-        BRAND_DIR="output/blogs/conholdate_com"
+        BRAND_DIR="content/blogPosts/conholdate_com"
         
         if [ ! -d "$BRAND_DIR" ]; then
           echo "❌ Brand directory not found: $BRAND_DIR"
@@ -176,165 +139,3 @@ jobs:
         name: generated-blog-conholdate-${{ github.run_number }}
         path: ${{ steps.find_blog.outputs.blog_folder_path }}
         if-no-files-found: error
-
-    ####################################################################
-    # Create Pull Request in blog-conholdate-com repo
-    ####################################################################
-    - name: Create Pull Request in blog.conholdate.com repo
-      if: success()
-      env:
-        BLOG_FOLDER_NAME: ${{ steps.find_blog.outputs.blog_folder_name }}
-        BLOG_FOLDER_PATH: ${{ steps.find_blog.outputs.blog_folder_path }}
-        PRODUCT_FOLDER: ${{ steps.product_folder.outputs.product_folder }}
-        GH_TOKEN: ${{ secrets.REPO_PAT }}
-      run: |
-        git config --global user.email "action@github.com"
-        git config --global user.name "GitHub Action"
-
-        if [ -z "${{ secrets.REPO_PAT }}" ]; then
-          echo "❌ REPO_PAT is EMPTY! Fix your repo secret."
-          exit 1
-        fi
-
-        echo "Cloning conholdate-blog repo..."
-        git clone https://x-access-token:${{ secrets.REPO_PAT }}@github.com/conholdate/conholdate-blog.git conholdate-blog || {
-          echo "❌ Failed to clone repo — invalid PAT or wrong GitHub account."
-          exit 1
-        }
-
-        cd conholdate-blog
-        
-        # Ensure we're on the correct base branch
-        git checkout main
-        git pull origin main
-        
-        # Create the target directory structure if it doesn't exist
-        TARGET_DIR="content/Conholdate.Total/total"
-        mkdir -p "$TARGET_DIR"
-        echo "✅ Target directory: $TARGET_DIR"
-        
-        # Create a new branch for this blog post
-        BRANCH_NAME="blog/total/$BLOG_FOLDER_NAME"
-        
-        # Check if branch exists remotely and delete it
-        if git ls-remote --heads origin "$BRANCH_NAME" | grep -q "$BRANCH_NAME"; then
-          echo "⚠️  Branch $BRANCH_NAME already exists remotely. Deleting..."
-          git push origin --delete "$BRANCH_NAME" || echo "Could not delete remote branch (may not exist)"
-        fi
-        
-        # Delete local branch if it exists
-        git branch -D "$BRANCH_NAME" 2>/dev/null || true
-        
-        # Create fresh branch from main
-        git checkout -b "$BRANCH_NAME" main
-        
-        echo "Copying blog folder: $BLOG_FOLDER_NAME to $TARGET_DIR"
-        
-        # Get absolute path to blog folder
-        BLOG_ABS_PATH=$(cd .. && pwd)/"$BLOG_FOLDER_PATH"
-        echo "Source path: $BLOG_ABS_PATH"
-        
-        # Verify source exists before copying
-        if [ ! -d "$BLOG_ABS_PATH" ]; then
-          echo "❌ Source blog folder does not exist: $BLOG_ABS_PATH"
-          exit 1
-        fi
-        
-        # Copy the blog folder to the correct product directory
-        cp -r "$BLOG_ABS_PATH" "$TARGET_DIR/" || {
-          echo "❌ Failed to copy folder from $BLOG_ABS_PATH to $TARGET_DIR"
-          exit 1
-        }
-        
-        # Verify the copy was successful
-        if [ ! -d "$TARGET_DIR/$BLOG_FOLDER_NAME" ]; then
-          echo "❌ Blog folder was not copied successfully"
-          echo "Target contents:"
-          ls -la "$TARGET_DIR"
-          exit 1
-        fi
-        
-        echo "✅ Blog folder copied successfully"
-        echo "=== Target folder contents ==="
-        ls -la "$TARGET_DIR/$BLOG_FOLDER_NAME"
-        
-        # Add only the new blog folder
-        git add "$TARGET_DIR/$BLOG_FOLDER_NAME"
-        
-        # Check what's being committed
-        echo "=== Files to be committed ==="
-        git status --short
-        
-        if git diff --staged --quiet; then
-          echo "ℹ️  No new files to commit"
-          exit 0
-        fi
-        
-        # Show diff summary
-        echo "=== Commit summary ==="
-        git diff --staged --stat
-        
-        # Commit the changes
-        git commit -m "Add generated blog for ${{ inputs.product }}: ${{ inputs.topic }}" || {
-          echo "❌ Failed to commit changes"
-          exit 1
-        }
-        
-        # Show last commit
-        echo "=== Last commit ==="
-        git log -1 --oneline
-        
-        # Push the branch (force push since we deleted and recreated)
-        git push -u origin "$BRANCH_NAME" --force || {
-          echo "❌ Failed to push branch."
-          exit 1
-        }
-        
-        echo "✅ Branch $BRANCH_NAME pushed successfully"
-        
-        # Wait for GitHub to process the push
-        sleep 2
-        
-        # Check if PR already exists for this branch
-        EXISTING_PR=$(gh pr list --repo conholdate/conholdate-blog --head "$BRANCH_NAME" --json number --jq '.[0].number' 2>/dev/null || echo "")
-        
-        if [ -n "$EXISTING_PR" ]; then
-          echo "ℹ️  PR #$EXISTING_PR already exists for this branch"
-          echo "PR URL: https://github.com/conholdate/conholdate-blog/pull/$EXISTING_PR"
-        else
-          # Create Pull Request using GitHub CLI
-          gh pr create \
-            --repo conholdate/conholdate-blog \
-            --base main \
-            --head "$BRANCH_NAME" \
-            --title "[${{ inputs.product }}] ${{ inputs.topic }}" \
-            --body "## Generated Blog Post
-
-          **Product:** ${{ inputs.product }}
-          **Topic:** ${{ inputs.topic }}
-          **Platform:** ${{ inputs.platform }}
-          **Keyword Source:** ${{ inputs.keyword_source }}
-          **Target Path:** \`content/Conholdate.Total/total/$BLOG_FOLDER_NAME\`
-
-          **Generated by:** GitHub Actions (Run #${{ github.run_number }})
-          **Workflow:** ${{ github.workflow }}
-          **Brand:** conholdate.com
-
-          ---
-
-          This pull request adds a new blog post generated by the autonomous blog agent.
-
-          ### Contents:
-          - Folder: \`$BLOG_FOLDER_NAME\`
-          - File: \`index.md\`
-          - Location: \`content/Conholdate.Total/total/\`
-
-          Please review and merge if the content looks good!" || {
-            echo "❌ Failed to create pull request."
-            echo "Attempting to show branch diff..."
-            git log origin/main..$BRANCH_NAME --oneline
-            exit 1
-          }
-          
-          echo "✅ Pull request created successfully!"
-        fi

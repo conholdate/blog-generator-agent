@@ -27,7 +27,7 @@
   "APIReferenceURL" : "https://reference.conholdate.com/java/",
   "FreeAppsURL" : "https://products.conholdate.app/conversion",
   "ForumsURL" : "https://forum.conholdate.com/c/total/5",
-  "InstallCommand" : "<dependency><groupId>com.aspose</groupId><artifactId>aspose-total</artifactId><version>25.10</version><type>pom</type></dependency>",
+  "InstallCommand" : "<repositories><repository><id>conholdate-repo</id><name>Conholdate Maven Repository</name><url>https://repository.conholdate.com/repo/</url></repository></repositories><dependency><groupId>com.conholdate</groupId><artifactId>conholdate-total</artifactId><version>24.9</version><type>pom</type></dependency>",
   "urlPrefix" : "total",
   "license":"https://purchase.conholdate.com/temporary-license/"
 }

@@ -1,9 +1,7 @@
 from mcp import ClientSession, StdioServerParameters
 from mcp.client.stdio import stdio_client
 from typing import Dict, Optional
-from utils.helpers import sanitize_keywords, parse_keywords_response, extract_first_topic
 import json
-import os
 
 
 async def fetch_category_related_articles(
@@ -140,94 +138,6 @@ async def enhance_blog_with_category_articles(
     return blog_content
 
 
-async def fetch_keywords_auto(topic: str, product_name: str = "", platform:str="") -> str:
-    """Fetch high-ranking SEO keywords for a topic"""
-
-    print(f" fetch_keywords TOOL CALLED! upper")
-
-    try:
-        params = StdioServerParameters(
-            command="python",
-            args=["../../mcp-servers/keywords_auto/server.py"]
-        )
-        
-        print(f" Connecting to MCP server fetch_keywords...")
-        
-        async with stdio_client(params) as (read, write):
-            async with ClientSession(read, write) as session:
-                await session.initialize()
-                result = await session.call_tool("fetch_keywords", {
-                    "topic": topic,
-                    "product_name": product_name,
-                    "platform": platform
-                })
-                keywords_data = parse_keywords_response(result.content[0])
-                f_keywords = keywords_data.get('keywords', {}).get('primary', [topic])
-                f_keywords = sanitize_keywords(f_keywords)
-                print(f" keywords - {f_keywords}")
-                return f_keywords
-                
-    except Exception as e:
-        print(f" ERROR in fetch_keywords: {e}")
-        import traceback
-        traceback.print_exc()
-        return '{"error": "failed"}'
-
-
-async def fetch_keywords_manual( product_name: str = "", brand: str = "") -> str:
-    """Fetch high-ranking SEO keywords for a topic"""
-
-    MCP_KRA_PATH = os.path.abspath("../mcp-servers/keywords_manual/src")
-    try:
-        params = StdioServerParameters(
-            command="python",
-            args=["-m", "agent_engine.kra.runner",],
-            env={
-                "PYTHONPATH": MCP_KRA_PATH + ":" + os.environ.get("PYTHONPATH", "")
-            }
-        )
-
-        print(f" Connecting to KRA MCP server (run_kra)...{brand}")
-
-        async with stdio_client(params) as (read, write):
-            async with ClientSession(read, write) as session:
-                if os.getenv('GITHUB_ACTIONS'):
-                    file_path= "output/kra/samples/Keywords.xlsx"
-                else:
-                    file_path= "../../output/kra/samples/Keywords.xlsx"
-                print(f"env is -- {os.getenv('GITHUB_ACTIONS')}")
-                # handshake
-                await session.initialize()
-
-                # call the actual tool
-                result = await session.call_tool("run_kra", {
-                    "brand": brand,
-                    "product": product_name,
-                    "locale": "en-US",
-                    "file_path": file_path,
-                    "clustering_k": None,
-                    "top_clusters": 12,
-                    "max_rows": 10
-                })
-    
-                raw = result.content[0].text
-                parsed = json.loads(raw)
-                # print(f"kra response {parsed} ")
-                if parsed.get("status") == "error":
-                    print("keywords tool returned an error:")
-                    print(parsed.get("error"))
-                    print(parsed.get("traceback"))
-                    return None
-            topic_info = extract_first_topic(parsed)
-            return topic_info
-                
-    except Exception as e:
-        print(f" ERROR in fetch_keywords: {e}")
-        import traceback
-        traceback.print_exc()
-        return '{"error": "failed"}'
-    
-
 async def generate_markdown_file(title, content, brand) -> dict:
     """
     Save blog content as a markdown file.
@@ -263,46 +173,7 @@ async def generate_markdown_file(title, content, brand) -> dict:
                 "output": data,
                 "status": "success"
             }
-
-
-async def generate_blog_outline(topic: str, keywords) -> str:
-    print(f" In outline - {topic}")
-    
-    params = StdioServerParameters(
-        command="python",
-        args=["../../mcp-servers/outline_generator/server.py"]
-    )
-    print(f" Connecting to MCP server generate_blog_outline...")
-    async with stdio_client(params) as (read, write):
-        async with ClientSession(read, write) as session:
-            await session.initialize()
-            result = await session.call_tool("generate_outline", {
-                "title": topic,
-                "keywords": keywords
-            })
-            parsed = json.loads(result.content[0].text)
-            outline = parsed.get("outline")
-            return outline
-        
-async def generate_seo_title(topic: str, keywords_json: str, product_name: str = "") -> str:
-    
-    params = StdioServerParameters(
-        command="python",
-        args=["../../mcp-servers/title_generator/server.py"]
-    )
-    print(f" Connecting to MCP server generate_seo_title...")
-    async with stdio_client(params) as (read, write):
-        async with ClientSession(read, write) as session:
-            await session.initialize()
-            result = await session.call_tool("generate_seo_title", {
-                "topic": topic,
-                "keywords": keywords_json,
-                "product_name": product_name
-            })
-            parsed = json.loads(result.content[0].text)
-            title = parsed.get("title")
-            return title
-        
+                
 async def gist_injector(content: str, res_title: str) -> str:
     
     params = StdioServerParameters(

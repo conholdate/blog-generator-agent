@@ -29,53 +29,9 @@ ASPOSE_LLM_API_KEY=
 
 ASPOSE_LLM_MODEL=gpt-oss
 
-### SerpAPI
-
-SERPAPI_API_KEY=
-
-GIST_NAME=
-
-REPO_PAT=
-
-NUMBER_OF_BLOG_SECTIONS=6
-
-### Paths
-
-KRA_DATA_DIR=../output
-
-KRA_OUTPUT_DIR=../output/kra/output
-
-### Keyword extraction settings
-
-TOP_CLUSTERS=10
-
-MAX_ROWS=50000
-
-DEBUG=False
-
 ## Run the Agent
 
-### Automatic Keyword Research (SERP API)
-
-python3 main.py \
---topic "Create a Pie Chart" \
---product "Aspose.Slides" \
---platform "Java" \
---brand "aspose.com" \
---keyword_source "auto (using SerpApi)" \
---author "Muhammad Mustafa"
-
-### Manual Keyword Research (Google Keyword Planner Sheet)
-
-Before running the following command, please put your Google Keyword Planner generated file(XLSX/CSV) inside /output/kra/samples.
-
-python3 main.py \
---topic "Convert PPTX to PDF" \
---product "Aspose.Slides" \
---platform "Java" \
---brand "aspose.com" \
---keyword_source "manual (using Google Keyword Planner Sheet)" \
---author "Muhammad Mustafa"
+python3 main.py --keywords_file "content/GroupDocs/output/e5afbdf4_groupdocs-conversion_c_topics.md" --author "Muhammad Mustafa" --brand "groupdocs.com"
 
 ## Project Structure
 
@@ -99,16 +55,8 @@ blog-agent-backend/
 ├── mcp-servers/
 │   ├── file-generator/
 │   │   └── server.py              # Markdown file generator
-│   ├── keywords_auto/
-│   │   └── server.py              # Automated SERP keyword tool
-│   ├── keywords_manual/
-│   │   └── server.py              # Manual CSV/XLSX keyword tool
-│   ├── outline_generator/
-│   │   └── server.py              # Blog outline generator
 │   ├── related-topics/
 │   │   └── server.py              # Related content fetcher
-│   ├── title_generator/
-│   │   └── server.py              # SEO title generator
 │   ├── gist-injector/
 │   │   └── server.py              # Gist Creator & Injector
 │   └── requirements.txt

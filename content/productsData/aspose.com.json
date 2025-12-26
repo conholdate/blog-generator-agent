@@ -1,5 +1,21 @@
 [
   {
+  "ProductName" : "Aspose.Cells for .NET",
+  "Category" : "Aspose.Cells Product Family",
+  "ProgrammingLanguage" : "C#",
+  "ProductURL" : "https://products.aspose.com/cells/net/",
+  "DownloadURL" : "https://releases.aspose.com/cells/net/",
+  "ExternalDownloadURL" : "https://github.com/aspose-cells/Aspose.Cells-for-.NET",
+  "DocumentationURL" : "https://docs.aspose.com/cells/net/",
+  "BlogsURL" : "https://blog.aspose.com/categories/aspose.cells-product-family/",
+  "APIReferenceURL" : "https://reference.aspose.com/cells/net/",
+  "FreeAppsURL" : "https://products.aspose.app/cells",
+  "ForumsURL" : "https://forum.aspose.com/c/cells/",
+  "InstallCommand" : "dotnet add package Aspose.Cells --version 25.12.0",
+  "urlPrefix" : "cells",
+  "license":"https://purchase.aspose.com/temporary-license/"
+},
+  {
   "ProductName" : "Aspose.OMR for C++",
   "Category" : "Aspose.PSD Product Family",
   "ProgrammingLanguage" : "C++",

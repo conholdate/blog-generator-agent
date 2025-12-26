@@ -1,6 +1,171 @@
-import re, ast, json, sys
+import re, ast, json, sys, os
 from datetime import datetime
 import requests
+from typing import Dict, Any, Optional
+
+def parse_markdown_topics(markdown_content: str) -> Dict[str, Any]:
+    """
+    Parse markdown file containing blog topics and extract metadata.
+    
+    Args:
+        markdown_content: Full markdown content string
+        
+    Returns:
+        Dictionary with metadata (brand, product, platform) and list of topics
+    """
+    # Extract metadata from header
+    brand_match = re.search(r'\*\*Brand:\*\*\s*(.+)', markdown_content)
+    product_match = re.search(r'\*\*Product:\*\*\s*(.+)', markdown_content)
+    platform_match = re.search(r'\*\*Platform:\*\*\s*(.+)', markdown_content)
+    run_id_match = re.search(r'\*\*Run ID:\*\*\s*(.+)', markdown_content)
+    
+    metadata = {
+        "brand": brand_match.group(1).strip() if brand_match else None,
+        "product": product_match.group(1).strip() if product_match else None,
+        "platform": platform_match.group(1).strip() if platform_match else None,
+        "run_id": run_id_match.group(1).strip() if run_id_match else None,
+    }
+    
+    # Extract all topic sections
+    topic_pattern = r'##\s+\d+\.\s+(.+?)\n(.*?)(?=##\s+\d+\.|$)'
+    topics = []
+    
+    for match in re.finditer(topic_pattern, markdown_content, re.DOTALL):
+        topic_title = match.group(1).strip()
+        topic_details = match.group(2).strip()
+        
+        parsed_topic = parse_topic_details(topic_title, topic_details, metadata)
+        topics.append(parsed_topic)
+    
+    return {
+        "metadata": metadata,
+        "topics": topics
+    }
+
+
+def parse_topic_details(
+    topic_title: str, 
+    details: str, 
+    metadata: Dict[str, Optional[str]]
+) -> Dict[str, Any]:
+    """
+    Parse individual topic details into structured format.
+    
+    Args:
+        topic_title: Title of the topic
+        details: Details string containing persona, angle, keywords, and outline
+        metadata: Dictionary containing brand, product, platform info
+        
+    Returns:
+        Dictionary with topic, product, platform, keywords, and outline
+    """
+    result = {
+        "topic": topic_title.strip(),
+        "product": metadata.get("product"),
+        "platform": metadata.get("platform"),
+        "keywords": {
+            "primary": [],
+            "secondary": []
+        },
+        "outline": []
+    }
+    
+    # Extract cluster ID
+    cluster_match = re.search(r'\*\*Cluster ID:\*\*\s*`([^`]+)`', details)
+    if cluster_match:
+        result["cluster_id"] = cluster_match.group(1).strip()
+    
+    # Extract target persona
+    persona_match = re.search(r'\*\*Target persona:\*\*\s*(.+?)(?=\n-|\n\*\*|$)', details)
+    if persona_match:
+        result["target_persona"] = persona_match.group(1).strip()
+    
+    # Extract angle
+    angle_match = re.search(r'\*\*Angle:\*\*\s*(.+?)(?=\n-|\n\*\*|$)', details)
+    if angle_match:
+        result["angle"] = angle_match.group(1).strip()
+    
+    # Extract primary keyword
+    primary_match = re.search(r'\*\*Primary keyword:\*\*\s*`([^`]+)`', details)
+    if primary_match:
+        result["keywords"]["primary"].append(primary_match.group(1).strip())
+    
+    # Extract supporting keywords
+    supporting_match = re.search(
+        r'\*\*Supporting keywords:\*\*\s*(.+?)(?=\n\n|\n\*\*|$)',
+        details,
+        re.DOTALL
+    )
+    
+    if supporting_match:
+        keywords_text = supporting_match.group(1)
+        # Extract all keywords within backticks
+        keywords = re.findall(r'`([^`]+)`', keywords_text)
+        result["keywords"]["secondary"] = [kw.strip() for kw in keywords if kw.strip()]
+    
+    # Extract outline items
+    outline_match = re.search(
+        r'\*\*Suggested outline:\*\*\s*((?:^-\s*.+$\n?)+)',
+        details,
+        re.MULTILINE
+    )
+    
+    if outline_match:
+        outline_text = outline_match.group(1)
+        # Extract each bullet point
+        outline_items = re.findall(r'^-\s*(.+)$', outline_text, re.MULTILINE)
+        result["outline"] = [item.strip() for item in outline_items if item.strip()]
+    
+    return result
+
+def get_project_root() -> str:
+    """
+    Resolve project root assuming this file lives under:
+    project_root/agent_engine/...
+    """
+    return os.path.abspath(
+        os.path.join(os.path.dirname(__file__), "../../..")
+    )
+
+def get_topic_by_index(input_file: str) -> str:
+    # Resolve project root
+    base_dir = get_project_root()
+    print(f"Project root: {base_dir}")
+
+    # If user passed absolute path, use it directly
+    if os.path.isabs(input_file):
+        file_path = input_file
+    else:
+        file_path = os.path.join(base_dir, input_file)
+
+    print(f"Looking for file at: {file_path}")
+
+    # Fallback: try relative to current working directory
+    if not os.path.exists(file_path):
+        cwd_path = os.path.abspath(input_file)
+        if os.path.exists(cwd_path):
+            file_path = cwd_path
+            print(f"Found file via CWD: {file_path}")
+        else:
+            raise FileNotFoundError(
+                f"File not found.\n"
+                f"Tried:\n"
+                f" - {file_path}\n"
+                f" - {cwd_path}"
+            )
+
+    # Read file
+    with open(file_path, "r", encoding="utf-8") as f:
+        content = f.read()
+
+    print(f"Successfully read {content}")
+    parsed = parse_markdown_topics(content)
+    index=1
+    if 1 <= index <= len(parsed["topics"]):
+        return parsed["topics"][index - 1]
+    return None
+
+
 
 def slugify(text: str) -> str:
     """Convert text into a clean URL slug with C# → csharp normalization."""
@@ -24,6 +189,15 @@ def sanitize_markdown_title(title: str) -> str:
     Removes special characters that can break Markdown formatting,
     such as ':', '|', '`', '*', etc., while keeping letters,
     numbers, spaces, and basic punctuation.
+    
+    Also converts the title to proper Title Case with smart handling of:
+    - Common lowercase words (a, an, the, in, on, at, to, for, with, etc.)
+    - Programming terms (C#, .NET, API, SDK, JSON, XML, etc.)
+    - Abbreviations and acronyms
+    
+    Example:
+        Input: "convert PDF to jpg in c# with a powerful sdk"
+        Output: "Convert PDF to JPG in C# with a Powerful SDK"
     """
     # Remove markdown-breaking characters
     sanitized = re.sub(r'[:`*>|\\/\[\](){}_~]', '', title)
@@ -34,7 +208,131 @@ def sanitize_markdown_title(title: str) -> str:
     # Trim extra spaces at the ends
     sanitized = sanitized.strip()
     
+    # Convert to title case with smart handling
+    sanitized = smart_title_case(sanitized)
+    
     return sanitized
+
+
+def smart_title_case(text: str) -> str:
+    """
+    Converts text to Title Case with intelligent handling of:
+    - Articles and prepositions (kept lowercase unless first/last word)
+    - Programming language names (C#, .NET, etc.)
+    - Common technical abbreviations (API, SDK, JSON, XML, HTML, CSS, etc.)
+    - File formats (PDF, JPG, PNG, DOCX, etc.)
+    
+    Args:
+        text: Input string to convert
+        
+    Returns:
+        Title-cased string with proper capitalization
+    """
+    # Words that should remain lowercase (unless first or last word)
+    lowercase_words = {
+        'a', 'an', 'the', 'and', 'but', 'or', 'nor', 'for', 'yet', 'so',
+        'at', 'by', 'in', 'of', 'on', 'to', 'up', 'as', 'is', 'if',
+        'with', 'from', 'into', 'via', 'per', 'vs', 'etc'
+    }
+    
+    # Technical terms and abbreviations that should be uppercase
+    uppercase_terms = {
+        # Programming languages
+        'c#': 'C#',
+        'csharp': 'CSharp',
+        'vb': 'VB',
+        'sql': 'SQL',
+        'php': 'PHP',
+        'css': 'CSS',
+        'html': 'HTML',
+        'xml': 'XML',
+        'json': 'JSON',
+        'yaml': 'YAML',
+        
+        # Frameworks and platforms
+        '.net': '.NET',
+        'dotnet': '.NET',
+        'nodejs': 'Node.js',
+        'node.js': 'Node.js',
+        
+        # Common abbreviations
+        'api': 'API',
+        'sdk': 'SDK',
+        'rest': 'REST',
+        'http': 'HTTP',
+        'https': 'HTTPS',
+        'url': 'URL',
+        'uri': 'URI',
+        'ui': 'UI',
+        'ux': 'UX',
+        'ide': 'IDE',
+        'cli': 'CLI',
+        'gui': 'GUI',
+        'ajax': 'AJAX',
+        
+        # File formats
+        'pdf': 'PDF',
+        'jpg': 'JPG',
+        'jpeg': 'JPEG',
+        'png': 'PNG',
+        'gif': 'GIF',
+        'svg': 'SVG',
+        'bmp': 'BMP',
+        'tiff': 'TIFF',
+        'docx': 'DOCX',
+        'xlsx': 'XLSX',
+        'pptx': 'PPTX',
+        'txt': 'TXT',
+        'csv': 'CSV',
+        'md': 'MD',
+        'zip': 'ZIP',
+        'rar': 'RAR',
+        
+        # Other technical terms
+        'io': 'IO',
+        'os': 'OS',
+        'db': 'DB',
+        'ai': 'AI',
+        'ml': 'ML',
+        'ocr': 'OCR',
+        'oauth': 'OAuth',
+        'jwt': 'JWT',
+        'seo': 'SEO',
+        'crm': 'CRM',
+        'erp': 'ERP',
+    }
+    
+    # Split into words
+    words = text.split()
+    
+    if not words:
+        return text
+    
+    result = []
+    
+    for i, word in enumerate(words):
+        is_first = (i == 0)
+        is_last = (i == len(words) - 1)
+        
+        word_lower = word.lower()
+        
+        # Check if it's a known uppercase term
+        if word_lower in uppercase_terms:
+            result.append(uppercase_terms[word_lower])
+        # Check if it should be lowercase (and not first/last word)
+        elif word_lower in lowercase_words and not is_first and not is_last:
+            result.append(word_lower)
+        # Check if it's already an acronym (all uppercase)
+        elif word.isupper() and len(word) > 1:
+            result.append(word)  # Keep acronyms as-is
+        # Check if it contains numbers and uppercase (e.g., "C++", "MP3")
+        elif any(c.isupper() for c in word) and any(c.isdigit() for c in word):
+            result.append(word)  # Keep mixed alphanumeric as-is
+        # Default: Title case (capitalize first letter)
+        else:
+            result.append(word.capitalize())
+    
+    return ' '.join(result)
 
 def current_utc_date() -> str:
     """Return current UTC date in blog format."""
@@ -130,99 +428,34 @@ def sanitize_for_hugo(text):
     
     return result
 
-def sanitize_keywords(keywords_dict):
-    """Recursively sanitize all keyword strings in the structure"""
-    if isinstance(keywords_dict, dict):
-        return {k: sanitize_keywords(v) for k, v in keywords_dict.items()}
-    elif isinstance(keywords_dict, list):
-        return [sanitize_keywords(item) for item in keywords_dict]
-    elif isinstance(keywords_dict, str):
-        return sanitize_for_hugo(keywords_dict)
-    else:
-        return keywords_dict
-
-def parse_keywords_response(content):
-    """Safely parse keywords from MCP response with multiple fallback strategies"""
-    
-    # Strategy 1: Direct dict access
-    if hasattr(content, "data") and isinstance(content.data, dict):
-        return content.data
-    
-    # Strategy 2: Parse text content
-    if hasattr(content, "text") and content.text:
-        text = content.text.strip()
-        
-        # Remove markdown code blocks
-        if text.startswith("```"):
-            parts = text.split("```")
-            if len(parts) >= 2:
-                text = parts[1]
-                # Remove language identifier (json, python, etc.)
-                if text.startswith(("json", "python", "py")):
-                    text = text.split("\n", 1)[1] if "\n" in text else text[4:]
-        
-        text = text.strip()
-        
-        # Try multiple parsing strategies
-        strategies = [
-            # Standard JSON
-            lambda: json.loads(text),
-            # Python literal (handles single quotes)
-            lambda: ast.literal_eval(text),
-            # JSON with relaxed parsing (allows trailing commas, comments)
-            lambda: json.loads(re.sub(r',(\s*[}\]])', r'\1', text)),
-            # Remove any leading/trailing non-JSON text
-            lambda: json.loads(re.search(r'\{.*\}', text, re.DOTALL).group())
-        ]
-        
-        for strategy in strategies:
-            try:
-                return strategy()
-            except (json.JSONDecodeError, ValueError, SyntaxError, AttributeError):
-                continue
-        
-        # If all strategies fail, log the raw text for debugging
-        print(f"PARSE ERROR - Raw text: {repr(text)}")
-        raise ValueError(f"Unable to parse keywords response: {text[:200]}...")
-    
-    raise ValueError("No valid content found in response")
-
-def extract_first_topic(response: dict) -> dict:
-    # Ensure 'topics' exists and has at least one item
-    topics = response.get("topics", [])
-    if not topics:
-        return {}
-    
-    first_topic = topics[0]
-    
-    # Extract data
-    topic_title = first_topic.get("title", "")
-    primary_keywords = [first_topic.get("primary_keyword", "")] if first_topic.get("primary_keyword") else []
-    secondary_keywords = first_topic.get("supporting_keywords", [])
-    topic_outline = first_topic.get("outline", [])
-    
-    return {
-        "topic": topic_title,
-        "keywords": {
-            "primary": primary_keywords,
-            "secondary": secondary_keywords
-        },
-        "outline": topic_outline
-    }
-
-
 def extract_all_complete_code_snippets(markdown_content: str) -> dict:
     """
     Extract ALL complete code snippets from Complete Code Example sections
+    
     Handles multiple tag formats:
     - <!--[CODE_SNIPPET_START_COMPLETE]--> ... <!--[CODE_SNIPPET_END_COMPLETE]-->
     - <!--[COMPLETE_CODE_SNIPPET_START]--> ... <!--[COMPLETE_CODE_SNIPPET_END]-->
     - <!--[CODE_SNIPPET_START]--> ... <!--[CODE_SNIPPET_END]-->
     - Plain code blocks without tags
+    
+    Handles common edge cases:
+    - Tags on same line as code blocks
+    - Tags on separate lines
+    - Multiple spaces/tabs
+    - Windows/Unix line endings
+    - Empty lines between tags and code
+    - Multiple code blocks in same section
+    - Nested code in explanatory text
     """
     import re
+    import sys
     
-    section_pattern = r'##\s+(.+?)\s*-\s*Complete Code Example(.*?)(?=##|\Z)'
+    # Normalize line endings
+    markdown_content = markdown_content.replace('\r\n', '\n').replace('\r', '\n')
+    
+    # Find all "Complete Code Example" sections
+    # Handles variations: "Complete Code Example", "- Complete Code Example", etc.
+    section_pattern = r'##\s+([^#\n]+?)\s*-?\s*Complete\s+Code\s+Example\s*(.*?)(?=##|\Z)'
     sections = re.finditer(section_pattern, markdown_content, re.DOTALL | re.IGNORECASE)
     
     snippets = {}
@@ -237,59 +470,90 @@ def extract_all_complete_code_snippets(markdown_content: str) -> dict:
         code = None
         match = None
         
-        # Pattern 1: Try CODE_SNIPPET_START_COMPLETE tags
-        code_pattern_1 = r'<!--\[CODE_SNIPPET_START_COMPLETE\]-->\s*```[\w#+-]*\s*.*?\s*```\s*<!--\[CODE_SNIPPET_END_COMPLETE\]-->'
+        print(f"\n🔍 Processing section: {task_name}", flush=True, file=sys.stderr)
+        
+        # =====================================================================
+        # Pattern 1: CODE_SNIPPET_START_COMPLETE tags
+        # =====================================================================
+        code_pattern_1 = r'<!--\s*\[CODE_SNIPPET_START_COMPLETE\]\s*-->\s*```([\w#+-]*)\s*(.*?)```\s*<!--\s*\[CODE_SNIPPET_END_COMPLETE\]\s*-->'
         match = re.search(code_pattern_1, section_content, re.DOTALL)
         
         if match:
+            print("  ✓ Matched: CODE_SNIPPET_START_COMPLETE tags", flush=True, file=sys.stderr)
             matched_text = match.group(0)
-            inner_pattern = r'```([\w#+-]*)\s*(.*?)\s*```'
-            inner_match = re.search(inner_pattern, matched_text, re.DOTALL)
-            if inner_match:
-                language = inner_match.group(1).strip() or 'text'
-                code = inner_match.group(2).strip()
+            language = match.group(1).strip() or 'text'
+            code = match.group(2).strip()
         
-        # Pattern 2: Try COMPLETE_CODE_SNIPPET_START tags (alternate format)
+        # =====================================================================
+        # Pattern 2: COMPLETE_CODE_SNIPPET_START tags (alternate format)
+        # =====================================================================
         if not match:
-            code_pattern_2 = r'<!--\[COMPLETE_CODE_SNIPPET_START\]-->\s*```[\w#+-]*\s*.*?\s*```\s*<!--\[COMPLETE_CODE_SNIPPET_END\]-->'
+            code_pattern_2 = r'<!--\s*\[COMPLETE_CODE_SNIPPET_START\]\s*-->\s*```([\w#+-]*)\s*(.*?)```\s*<!--\s*\[COMPLETE_CODE_SNIPPET_END\]\s*-->'
             match = re.search(code_pattern_2, section_content, re.DOTALL)
             
             if match:
-                matched_text = match.group(0)
-                inner_pattern = r'```([\w#+-]*)\s*(.*?)\s*```'
-                inner_match = re.search(inner_pattern, matched_text, re.DOTALL)
-                if inner_match:
-                    language = inner_match.group(1).strip() or 'text'
-                    code = inner_match.group(2).strip()
-        
-        # Pattern 3: Fallback to regular CODE_SNIPPET tags
-        if not match:
-            code_pattern_3 = r'<!--\[CODE_SNIPPET_START\]-->\s*```[\w#+-]*\s*.*?\s*```\s*<!--\[CODE_SNIPPET_END\]-->'
-            match = re.search(code_pattern_3, section_content, re.DOTALL)
-            
-            if match:
-                matched_text = match.group(0)
-                inner_pattern = r'```([\w#+-]*)\s*(.*?)\s*```'
-                inner_match = re.search(inner_pattern, matched_text, re.DOTALL)
-                if inner_match:
-                    language = inner_match.group(1).strip() or 'text'
-                    code = inner_match.group(2).strip()
-        
-        # Pattern 4: Final fallback - just get first code block without tags
-        if not match:
-            code_pattern_plain = r'```([\w#+-]*)\s*(.*?)\s*```'
-            match = re.search(code_pattern_plain, section_content, re.DOTALL)
-            
-            if match:
+                print("  ✓ Matched: COMPLETE_CODE_SNIPPET_START tags", flush=True, file=sys.stderr)
                 matched_text = match.group(0)
                 language = match.group(1).strip() or 'text'
                 code = match.group(2).strip()
         
+        # =====================================================================
+        # Pattern 3: Regular CODE_SNIPPET tags
+        # =====================================================================
+        if not match:
+            code_pattern_3 = r'<!--\s*\[CODE_SNIPPET_START\]\s*-->\s*```([\w#+-]*)\s*(.*?)```\s*<!--\s*\[CODE_SNIPPET_END\]\s*-->'
+            match = re.search(code_pattern_3, section_content, re.DOTALL)
+            
+            if match:
+                print("  ✓ Matched: CODE_SNIPPET_START tags", flush=True, file=sys.stderr)
+                matched_text = match.group(0)
+                language = match.group(1).strip() or 'text'
+                code = match.group(2).strip()
+        
+        # =====================================================================
+        # Pattern 4: Plain code block (no tags) - Get LARGEST block
+        # =====================================================================
+        if not match:
+            print("  ⚠ No tags found, searching for plain code blocks...", flush=True, file=sys.stderr)
+            
+            # Find ALL code blocks in the section
+            code_pattern_plain = r'```([\w#+-]*)\s*(.*?)```'
+            all_matches = list(re.finditer(code_pattern_plain, section_content, re.DOTALL))
+            
+            if all_matches:
+                # Get the largest code block (most likely the complete example)
+                largest_match = max(all_matches, key=lambda m: len(m.group(2)))
+                match = largest_match
+                matched_text = match.group(0)
+                language = match.group(1).strip() or 'text'
+                code = match.group(2).strip()
+                
+                print(f"  ✓ Found {len(all_matches)} code blocks, using largest ({len(code)} chars)", 
+                      flush=True, file=sys.stderr)
+        
+        # =====================================================================
+        # Process extracted code
+        # =====================================================================
         if match and matched_text and code:
+            # Validate code is not empty or whitespace only
+            if not code or len(code.strip()) == 0:
+                print(f"  ⚠ Code block is empty, skipping", flush=True, file=sys.stderr)
+                continue
+            
+            # Check for minimum code length (avoid extracting placeholder text)
+            if len(code) < 20:
+                print(f"  ⚠ Code too short ({len(code)} chars), possibly not real code", 
+                      flush=True, file=sys.stderr)
+                continue
+            
             # Create a clean, safe filename
             safe_task_name = re.sub(r'[^\w\s-]', '', task_name)
             safe_task_name = re.sub(r'[-\s]+', '_', safe_task_name)
-            safe_task_name = safe_task_name.lower()[:50]
+            safe_task_name = safe_task_name.lower().strip('_')[:50]
+            
+            # Handle empty task names
+            if not safe_task_name:
+                safe_task_name = f"code_example_{snippet_index}"
             
             # Get proper file extension
             extension = get_file_extension(language)
@@ -302,12 +566,26 @@ def extract_all_complete_code_snippets(markdown_content: str) -> dict:
                 "extension": extension,
                 "code": code,
                 "task_name": task_name,
-                "matched_text": matched_text,  # This now includes EVERYTHING
-                "filename": filename
+                "matched_text": matched_text,
+                "filename": filename,
+                "code_lines": len(code.split('\n')),
+                "has_tags": "<!--[" in matched_text
             }
             
-            print(f"✓ Extracted snippet {snippet_index}: {filename} (matched {len(matched_text)} chars)", flush=True, file=sys.stderr)
+            print(f"  ✅ Extracted snippet {snippet_index}: {filename}", flush=True, file=sys.stderr)
+            
             snippet_index += 1
+        else:
+            print(f"  ❌ No valid code block found in section: {task_name}", flush=True, file=sys.stderr)
+    
+    # Final summary
+    print("\n" + "="*60, file=sys.stderr, flush=True)
+    if snippets:
+        print(f"✅ Successfully extracted {len(snippets)} code snippet(s)", file=sys.stderr, flush=True)
+    else:
+        print("⚠️ WARNING: No code snippets extracted from any Complete Code Example sections", 
+              file=sys.stderr, flush=True)
+    print("="*60 + "\n", file=sys.stderr, flush=True)
     
     return snippets
 
@@ -421,46 +699,46 @@ def replace_code_snippets_with_gists(markdown_content: str, snippets: dict, shor
 
 def get_file_extension(language: str) -> str:
     """
-    Map code language to proper file extension
-    
-    Args:
-        language: Language identifier from code block (e.g., 'java', 'csharp', 'python')
-    
-    Returns:
-        File extension (e.g., 'java', 'cs', 'py')
+    Map language identifiers to file extensions
+    Handles common variations and edge cases
     """
     language = language.lower().strip()
     
-    # Language to extension mapping
-    extension_map = {
-        # Java
-        'java': 'java',
-        
-        # C#/.NET
+    # Comprehensive language mapping
+    language_map = {
+        # C# variations
         'csharp': 'cs',
         'cs': 'cs',
         'c#': 'cs',
+        'c-sharp': 'cs',
         'dotnet': 'cs',
         '.net': 'cs',
+        
+        # Java
+        'java': 'java',
         
         # Python
         'python': 'py',
         'py': 'py',
+        'python3': 'py',
+        'py3': 'py',
         
         # JavaScript/TypeScript
         'javascript': 'js',
         'js': 'js',
         'typescript': 'ts',
         'ts': 'ts',
+        'node': 'js',
+        'nodejs': 'js',
         
         # C/C++
-        'c': 'c',
         'cpp': 'cpp',
         'c++': 'cpp',
+        'cplusplus': 'cpp',
+        'cxx': 'cpp',
+        'c': 'c',
         
-        # Web
-        'html': 'html',
-        'css': 'css',
+        # PHP
         'php': 'php',
         
         # Ruby
@@ -482,23 +760,45 @@ def get_file_extension(language: str) -> str:
         'kotlin': 'kt',
         'kt': 'kt',
         
-        # Shell/Bash
-        'bash': 'sh',
-        'sh': 'sh',
-        'shell': 'sh',
+        # Scala
+        'scala': 'scala',
         
-        # SQL
-        'sql': 'sql',
-        
-        # XML/JSON/YAML
+        # Markup/Data
+        'html': 'html',
+        'css': 'css',
         'xml': 'xml',
         'json': 'json',
         'yaml': 'yaml',
         'yml': 'yml',
+        'markdown': 'md',
+        'md': 'md',
         
-        # Default fallback
+        # Shell
+        'shell': 'sh',
+        'bash': 'sh',
+        'sh': 'sh',
+        'zsh': 'sh',
+        'powershell': 'ps1',
+        'ps1': 'ps1',
+        'batch': 'bat',
+        'cmd': 'bat',
+        
+        # Database
+        'sql': 'sql',
+        'mysql': 'sql',
+        'postgresql': 'sql',
+        'plsql': 'sql',
+        
+        # Other
+        'vb': 'vb',
+        'vbnet': 'vb',
+        'perl': 'pl',
+        'r': 'r',
+        'matlab': 'm',
+        'lua': 'lua',
         'text': 'txt',
+        'plaintext': 'txt',
         '': 'txt'
     }
     
-    return extension_map.get(language, language or 'txt')
+    return language_map.get(language, 'txt')

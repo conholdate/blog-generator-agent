@@ -4,10 +4,10 @@ Orchestrator with OpenAI Agents SDK + Runner + Metrics Tracking
 from openai import AsyncOpenAI
 from agents import Agent, Runner, OpenAIChatCompletionsModel, set_tracing_disabled, ModelSettings
 from config import settings
-from tools.mcp_tools import fetch_keywords_auto, fetch_keywords_manual, generate_markdown_file, fetch_category_related_articles, generate_seo_title, generate_blog_outline, gist_injector
+from tools.mcp_tools import generate_markdown_file, fetch_category_related_articles, gist_injector
 from utils import prompts
-from utils.helpers import sanitize_markdown_title, prepare_context, get_productInfo
-from utils.metricsRecorder import MetricsRecorder  # Import the metrics recorder
+from utils.helpers import sanitize_markdown_title, prepare_context, get_productInfo, get_topic_by_index
+from utils.metricsRecorder import MetricsRecorder
 import json
 import os
 
@@ -71,14 +71,17 @@ class BlogOrchestrator:
 
     async def create_blog_autonomously(
         self, 
-        topic: str, 
-        product_name: str = None, 
-        platform: str = "", 
-        keyword_source: str = "", 
+        topics_file: str, 
         author: str = ""
     ):
         """Let the agent autonomously create a blog with metrics tracking"""
         set_tracing_disabled(disabled=True)
+        topics_raw_data = get_topic_by_index(topics_file)
+        post_topic = topics_raw_data.pop("topic")
+        product_name = topics_raw_data.pop("product")
+        platform = topics_raw_data.pop("platform")
+
+        print(f"updateee --- {topics_raw_data}", flush=True)
         
         # Get product info
         product_info = get_productInfo(product_name, platform, self.products)
@@ -95,69 +98,46 @@ class BlogOrchestrator:
             
             print("📚 Connecting to fetch_category_related_articles MCP server")
             related_links = await fetch_category_related_articles(
-                topic, 
+                post_topic, 
                 product_name, 
                 product_info.get('BlogsURL'), 
                 3
             )
-            
-            print(f"🔑 Connecting to keywords MCP server - {keyword_source}")
-            
-            if keyword_source == "manual (using Google Keyword Planner Sheet)":
-                res_keywords = await fetch_keywords_manual(
-                    product_name=product_name, 
-                    brand=self.brand
-                )
-                primary = res_keywords.get("keywords", {}).get("primary", [])
-                secondary = res_keywords.get("keywords", {}).get("secondary", [])
-                f_keywords = primary + secondary
-                blog_outline = res_keywords.get("outline")
-                res_title = sanitize_markdown_title(res_keywords.get("topic"))
-                
-            elif keyword_source == "auto (using SerpApi)":
-                f_keywords = await fetch_keywords_auto(
-                    topic=topic, 
-                    product_name=product_name, 
-                    platform=platform
-                )
-                
-                print("📝 Connecting to SEO-Title MCP server")
-                res_title = await generate_seo_title(
-                    topic=topic, 
-                    keywords_json=f_keywords, 
-                    product_name=product_name
-                )
-                res_title = sanitize_markdown_title(res_title)
-                
-                print("📋 Connecting to generate_blog_outline MCP server")
-                blog_outline = await generate_blog_outline(res_title, f_keywords)
+    
+            print(f"response keyword -- {topics_raw_data}", flush=True)
+            primary = topics_raw_data.get("keywords", {}).get("primary", [])
+            secondary = topics_raw_data.get("keywords", {}).get("secondary", [])
+            f_keywords = primary + secondary
+            blog_outline = topics_raw_data.get("outline")
+            post_topic = sanitize_markdown_title(post_topic)
             
             print(" Generating content now")
             agent = Agent(
                 name="blog-writer-agent",
                 instructions=prompts.get_blog_writer_prompt(
-                    res_title,
+                    post_topic,
                     f_keywords,
                     blog_outline,
                     related_links,
                     context,
-                    author
+                    author,
+                    platform
                 ),
                 model=self.model,
                 model_settings=ModelSettings(temperature=0.6)
             )
 
             result = await Runner.run(agent, context, max_turns=10)
-            print(f"💉 Injecting gists now")
+            print(f" Injecting gists now -- {result.final_output}", flush=True)
             
-            jistified = await gist_injector(result.final_output, res_title)
+            jistified = await gist_injector(result.final_output, post_topic)
             text_output = jistified.content[0].text
             data = json.loads(text_output)
             final_content = data["jistified_content"]
 
             print(f"💾 Generating markdown file")
             file_res = await generate_markdown_file(
-                title=res_title,
+                title=post_topic,
                 content=final_content,
                 brand= self.brand
             )
@@ -176,13 +156,13 @@ class BlogOrchestrator:
             # Print and send metrics
             self.metrics.print_summary()
             print("📊 Sending metrics to Google Script...")
-            # metrics_sent_for_team = await self.metrics.send_metrics_to_team()
-            # metrics_sent_for_pro = await self.metrics.send_metrics_to_prod()
+            metrics_sent_for_team = await self.metrics.send_metrics_to_team()
+            metrics_sent_for_pro = await self.metrics.send_metrics_to_prod()
             
-            # if metrics_sent_for_team and metrics_sent_for_pro:
-            #     print("Metrics sent successfully\n")
-            # else:
-            #     print("Failed to send metrics (check logs)\n")
+            if metrics_sent_for_team and metrics_sent_for_pro:
+                print("Metrics sent successfully\n")
+            else:
+                print("Failed to send metrics (check logs)\n")
 
             return {
                 "agent_output": result.final_output,
