@@ -430,22 +430,9 @@ def sanitize_for_hugo(text):
 
 def extract_all_complete_code_snippets(markdown_content: str) -> dict:
     """
-    Extract ALL complete code snippets from Complete Code Example sections
+    Extract ALL complete code snippets marked with COMPLETE_CODE_SNIPPET tags
     
-    Handles multiple tag formats:
-    - <!--[CODE_SNIPPET_START_COMPLETE]--> ... <!--[CODE_SNIPPET_END_COMPLETE]-->
-    - <!--[COMPLETE_CODE_SNIPPET_START]--> ... <!--[COMPLETE_CODE_SNIPPET_END]-->
-    - <!--[CODE_SNIPPET_START]--> ... <!--[CODE_SNIPPET_END]-->
-    - Plain code blocks without tags
-    
-    Handles common edge cases:
-    - Tags on same line as code blocks
-    - Tags on separate lines
-    - Multiple spaces/tabs
-    - Windows/Unix line endings
-    - Empty lines between tags and code
-    - Multiple code blocks in same section
-    - Nested code in explanatory text
+    Searches for tags anywhere in the document, not just in specific section headers
     """
     import re
     import sys
@@ -453,113 +440,77 @@ def extract_all_complete_code_snippets(markdown_content: str) -> dict:
     # Normalize line endings
     markdown_content = markdown_content.replace('\r\n', '\n').replace('\r', '\n')
     
-    # Find all "Complete Code Example" sections
-    # Handles variations: "Complete Code Example", "- Complete Code Example", etc.
-    section_pattern = r'##\s+([^#\n]+?)\s*-?\s*Complete\s+Code\s+Example\s*(.*?)(?=##|\Z)'
-    sections = re.finditer(section_pattern, markdown_content, re.DOTALL | re.IGNORECASE)
-    
     snippets = {}
     snippet_index = 1
     
-    for section in sections:
-        task_name = section.group(1).strip()
-        section_content = section.group(2)
+    print("\n" + "="*60, file=sys.stderr, flush=True)
+    print("Searching for COMPLETE_CODE_SNIPPET tags in entire document...", file=sys.stderr, flush=True)
+    print("="*60, file=sys.stderr, flush=True)
+    
+    # =========================================================================
+    # Strategy: Find ALL occurrences of COMPLETE_CODE_SNIPPET tags
+    # anywhere in the document, regardless of section headers
+    # =========================================================================
+    
+    # Pattern 1: COMPLETE_CODE_SNIPPET_START/END
+    code_pattern_1 = (
+        r'<!--\s*\[COMPLETE_CODE_SNIPPET_START\]\s*-->'  # Opening tag
+        r'\s*'                                              # Optional whitespace
+        r'```(\w*)'                                         # Opening code fence with language
+        r'\s*'                                              # Optional whitespace
+        r'(.*?)'                                            # Code content (non-greedy)
+        r'```'                                              # Closing code fence
+        r'\s*'                                              # Optional whitespace
+        r'<!--\s*\[COMPLETE_CODE_SNIPPET_END\]\s*-->'     # Closing tag
+    )
+    
+    matches = list(re.finditer(code_pattern_1, markdown_content, re.DOTALL))
+    
+    if matches:
+        print(f"✓ Found {len(matches)} COMPLETE_CODE_SNIPPET tag pairs", file=sys.stderr, flush=True)
         
-        matched_text = None
-        language = None
-        code = None
-        match = None
-        
-        print(f"\n🔍 Processing section: {task_name}", flush=True, file=sys.stderr)
-        
-        # =====================================================================
-        # Pattern 1: CODE_SNIPPET_START_COMPLETE tags
-        # =====================================================================
-        code_pattern_1 = r'<!--\s*\[CODE_SNIPPET_START_COMPLETE\]\s*-->\s*```([\w#+-]*)\s*(.*?)```\s*<!--\s*\[CODE_SNIPPET_END_COMPLETE\]\s*-->'
-        match = re.search(code_pattern_1, section_content, re.DOTALL)
-        
-        if match:
-            print("  ✓ Matched: CODE_SNIPPET_START_COMPLETE tags", flush=True, file=sys.stderr)
+        for match in matches:
             matched_text = match.group(0)
             language = match.group(1).strip() or 'text'
             code = match.group(2).strip()
-        
-        # =====================================================================
-        # Pattern 2: COMPLETE_CODE_SNIPPET_START tags (alternate format)
-        # =====================================================================
-        if not match:
-            code_pattern_2 = r'<!--\s*\[COMPLETE_CODE_SNIPPET_START\]\s*-->\s*```([\w#+-]*)\s*(.*?)```\s*<!--\s*\[COMPLETE_CODE_SNIPPET_END\]\s*-->'
-            match = re.search(code_pattern_2, section_content, re.DOTALL)
             
-            if match:
-                print("  ✓ Matched: COMPLETE_CODE_SNIPPET_START tags", flush=True, file=sys.stderr)
-                matched_text = match.group(0)
-                language = match.group(1).strip() or 'text'
-                code = match.group(2).strip()
-        
-        # =====================================================================
-        # Pattern 3: Regular CODE_SNIPPET tags
-        # =====================================================================
-        if not match:
-            code_pattern_3 = r'<!--\s*\[CODE_SNIPPET_START\]\s*-->\s*```([\w#+-]*)\s*(.*?)```\s*<!--\s*\[CODE_SNIPPET_END\]\s*-->'
-            match = re.search(code_pattern_3, section_content, re.DOTALL)
+            # Find the section this code belongs to (look backwards for nearest H2)
+            match_start = match.start()
+            text_before = markdown_content[:match_start]
             
-            if match:
-                print("  ✓ Matched: CODE_SNIPPET_START tags", flush=True, file=sys.stderr)
-                matched_text = match.group(0)
-                language = match.group(1).strip() or 'text'
-                code = match.group(2).strip()
-        
-        # =====================================================================
-        # Pattern 4: Plain code block (no tags) - Get LARGEST block
-        # =====================================================================
-        if not match:
-            print("  ⚠ No tags found, searching for plain code blocks...", flush=True, file=sys.stderr)
+            # Find the most recent ## heading
+            section_match = re.findall(r'##\s+([^\n]+)', text_before)
+            task_name = section_match[-1].strip() if section_match else f"Code Example {snippet_index}"
             
-            # Find ALL code blocks in the section
-            code_pattern_plain = r'```([\w#+-]*)\s*(.*?)```'
-            all_matches = list(re.finditer(code_pattern_plain, section_content, re.DOTALL))
+            print(f"\n🔍 Processing snippet {snippet_index}", flush=True, file=sys.stderr)
+            print(f"  Section: '{task_name}'", flush=True, file=sys.stderr)
+            print(f"  Language: {language}", flush=True, file=sys.stderr)
+            print(f"  Code length: {len(code)} chars", flush=True, file=sys.stderr)
             
-            if all_matches:
-                # Get the largest code block (most likely the complete example)
-                largest_match = max(all_matches, key=lambda m: len(m.group(2)))
-                match = largest_match
-                matched_text = match.group(0)
-                language = match.group(1).strip() or 'text'
-                code = match.group(2).strip()
-                
-                print(f"  ✓ Found {len(all_matches)} code blocks, using largest ({len(code)} chars)", 
-                      flush=True, file=sys.stderr)
-        
-        # =====================================================================
-        # Process extracted code
-        # =====================================================================
-        if match and matched_text and code:
-            # Validate code is not empty or whitespace only
+            # Validate code
             if not code or len(code.strip()) == 0:
-                print(f"  ⚠ Code block is empty, skipping", flush=True, file=sys.stderr)
+                print(f"  ❌ Code is empty, skipping", flush=True, file=sys.stderr)
                 continue
             
-            # Check for minimum code length (avoid extracting placeholder text)
-            if len(code) < 20:
-                print(f"  ⚠ Code too short ({len(code)} chars), possibly not real code", 
+            if len(code) < 50:
+                print(f"  ⚠ Code is short ({len(code)} chars), but extracting anyway", 
                       flush=True, file=sys.stderr)
-                continue
             
-            # Create a clean, safe filename
+            # Create safe filename
             safe_task_name = re.sub(r'[^\w\s-]', '', task_name)
             safe_task_name = re.sub(r'[-\s]+', '_', safe_task_name)
             safe_task_name = safe_task_name.lower().strip('_')[:50]
             
-            # Handle empty task names
             if not safe_task_name:
                 safe_task_name = f"code_example_{snippet_index}"
             
-            # Get proper file extension
             extension = get_file_extension(language)
-            
             key = f"snippet_{snippet_index}_{safe_task_name}"
             filename = f"{safe_task_name}.{extension}"
+            
+            # Count lines
+            code_lines = [line for line in code.split('\n') if line.strip()]
+            total_lines = len(code.split('\n'))
             
             snippets[key] = {
                 "language": language,
@@ -568,27 +519,181 @@ def extract_all_complete_code_snippets(markdown_content: str) -> dict:
                 "task_name": task_name,
                 "matched_text": matched_text,
                 "filename": filename,
-                "code_lines": len(code.split('\n')),
-                "has_tags": "<!--[" in matched_text
+                "code_lines": total_lines,
+                "code_lines_non_empty": len(code_lines),
+                "code_length": len(code),
+                "has_tags": True
             }
             
-            print(f"  ✅ Extracted snippet {snippet_index}: {filename}", flush=True, file=sys.stderr)
+            print(f"  ✅ Extracted: {filename} ({len(code)} chars, {len(code_lines)} non-empty lines)", 
+                  flush=True, file=sys.stderr)
             
             snippet_index += 1
-        else:
-            print(f"  ❌ No valid code block found in section: {task_name}", flush=True, file=sys.stderr)
+    
+    # =========================================================================
+    # Pattern 2: CODE_SNIPPET_START_COMPLETE (alternative tag format)
+    # =========================================================================
+    if not snippets:
+        print("\nNo COMPLETE_CODE_SNIPPET tags found, trying CODE_SNIPPET_START_COMPLETE...", 
+              file=sys.stderr, flush=True)
+        
+        code_pattern_2 = (
+            r'<!--\s*\[CODE_SNIPPET_START_COMPLETE\]\s*-->'
+            r'\s*```(\w*)\s*'
+            r'(.*?)'
+            r'```\s*'
+            r'<!--\s*\[CODE_SNIPPET_END_COMPLETE\]\s*-->'
+        )
+        
+        matches = list(re.finditer(code_pattern_2, markdown_content, re.DOTALL))
+        
+        if matches:
+            print(f"✓ Found {len(matches)} CODE_SNIPPET_START_COMPLETE tag pairs", 
+                  file=sys.stderr, flush=True)
+            
+            for match in matches:
+                matched_text = match.group(0)
+                language = match.group(1).strip() or 'text'
+                code = match.group(2).strip()
+                
+                # Find section
+                match_start = match.start()
+                text_before = markdown_content[:match_start]
+                section_match = re.findall(r'##\s+([^\n]+)', text_before)
+                task_name = section_match[-1].strip() if section_match else f"Code Example {snippet_index}"
+                
+                if not code or len(code.strip()) == 0:
+                    continue
+                
+                safe_task_name = re.sub(r'[^\w\s-]', '', task_name)
+                safe_task_name = re.sub(r'[-\s]+', '_', safe_task_name).lower().strip('_')[:50]
+                
+                if not safe_task_name:
+                    safe_task_name = f"code_example_{snippet_index}"
+                
+                extension = get_file_extension(language)
+                key = f"snippet_{snippet_index}_{safe_task_name}"
+                filename = f"{safe_task_name}.{extension}"
+                
+                code_lines = [line for line in code.split('\n') if line.strip()]
+                
+                snippets[key] = {
+                    "language": language,
+                    "extension": extension,
+                    "code": code,
+                    "task_name": task_name,
+                    "matched_text": matched_text,
+                    "filename": filename,
+                    "code_lines": len(code.split('\n')),
+                    "code_lines_non_empty": len(code_lines),
+                    "code_length": len(code),
+                    "has_tags": True
+                }
+                
+                print(f"  ✅ Extracted snippet {snippet_index}: {filename}", 
+                      flush=True, file=sys.stderr)
+                
+                snippet_index += 1
+    
+    # =========================================================================
+    # Fallback: Look for "Complete Code Example" sections with any code
+    # =========================================================================
+    if not snippets:
+        print("\nNo tagged snippets found, searching for 'Complete Code Example' sections...", 
+              file=sys.stderr, flush=True)
+        
+        section_pattern = r'##\s+([^#\n]+?)\s*-?\s*Complete\s+Code\s+Example[^\n]*\n(.*?)(?=\n##|\Z)'
+        sections = re.finditer(section_pattern, markdown_content, re.DOTALL | re.IGNORECASE)
+        
+        for section in sections:
+            task_name = section.group(1).strip()
+            section_content = section.group(2)
+            
+            # Find any code block
+            code_pattern = r'```(\w*)\s*(.*?)```'
+            matches = list(re.finditer(code_pattern, section_content, re.DOTALL))
+            
+            if matches:
+                # Use largest code block
+                largest = max(matches, key=lambda m: len(m.group(2)))
+                language = largest.group(1).strip() or 'text'
+                code = largest.group(2).strip()
+                
+                if code and len(code) > 0:
+                    safe_task_name = re.sub(r'[^\w\s-]', '', task_name)
+                    safe_task_name = re.sub(r'[-\s]+', '_', safe_task_name).lower().strip('_')[:50]
+                    
+                    if not safe_task_name:
+                        safe_task_name = f"code_example_{snippet_index}"
+                    
+                    extension = get_file_extension(language)
+                    key = f"snippet_{snippet_index}_{safe_task_name}"
+                    filename = f"{safe_task_name}.{extension}"
+                    
+                    snippets[key] = {
+                        "language": language,
+                        "extension": extension,
+                        "code": code,
+                        "task_name": task_name,
+                        "matched_text": largest.group(0),
+                        "filename": filename,
+                        "code_lines": len(code.split('\n')),
+                        "code_lines_non_empty": len([l for l in code.split('\n') if l.strip()]),
+                        "code_length": len(code),
+                        "has_tags": False
+                    }
+                    
+                    print(f"  ✅ Extracted from section: {filename}", flush=True, file=sys.stderr)
+                    snippet_index += 1
     
     # Final summary
-    print("\n" + "="*60, file=sys.stderr, flush=True)
+    separator = "=" * 60
+    print(f"\n{separator}", file=sys.stderr, flush=True)
     if snippets:
         print(f"✅ Successfully extracted {len(snippets)} code snippet(s)", file=sys.stderr, flush=True)
+        for key, data in snippets.items():
+            print(f"   - {data['filename']}: {data['code_length']} chars, "
+                  f"{data['code_lines_non_empty']} lines of code", 
+                  file=sys.stderr, flush=True)
     else:
-        print("⚠️ WARNING: No code snippets extracted from any Complete Code Example sections", 
+        print("⚠️ WARNING: No code snippets found with COMPLETE_CODE_SNIPPET tags or in Complete Code Example sections", 
               file=sys.stderr, flush=True)
-    print("="*60 + "\n", file=sys.stderr, flush=True)
+    print(f"{separator}\n", file=sys.stderr, flush=True)
     
     return snippets
 
+
+def get_file_extension(language: str) -> str:
+    """Map language identifier to file extension"""
+    extensions = {
+        'python': 'py',
+        'javascript': 'js',
+        'typescript': 'ts',
+        'java': 'java',
+        'csharp': 'cs',
+        'c#': 'cs',
+        'cpp': 'cpp',
+        'c++': 'cpp',
+        'c': 'c',
+        'go': 'go',
+        'rust': 'rs',
+        'ruby': 'rb',
+        'php': 'php',
+        'swift': 'swift',
+        'kotlin': 'kt',
+        'scala': 'scala',
+        'html': 'html',
+        'css': 'css',
+        'sql': 'sql',
+        'bash': 'sh',
+        'shell': 'sh',
+        'powershell': 'ps1',
+        'json': 'json',
+        'xml': 'xml',
+        'yaml': 'yml',
+        'markdown': 'md',
+    }
+    return extensions.get(language.lower(), 'txt')
 
 async def upload_to_gist(
     files_dict: dict,  # {"file1.java": "code1", "file2.py": "code2"}
@@ -697,108 +802,3 @@ def replace_code_snippets_with_gists(markdown_content: str, snippets: dict, shor
     return updated_content
 
 
-def get_file_extension(language: str) -> str:
-    """
-    Map language identifiers to file extensions
-    Handles common variations and edge cases
-    """
-    language = language.lower().strip()
-    
-    # Comprehensive language mapping
-    language_map = {
-        # C# variations
-        'csharp': 'cs',
-        'cs': 'cs',
-        'c#': 'cs',
-        'c-sharp': 'cs',
-        'dotnet': 'cs',
-        '.net': 'cs',
-        
-        # Java
-        'java': 'java',
-        
-        # Python
-        'python': 'py',
-        'py': 'py',
-        'python3': 'py',
-        'py3': 'py',
-        
-        # JavaScript/TypeScript
-        'javascript': 'js',
-        'js': 'js',
-        'typescript': 'ts',
-        'ts': 'ts',
-        'node': 'js',
-        'nodejs': 'js',
-        
-        # C/C++
-        'cpp': 'cpp',
-        'c++': 'cpp',
-        'cplusplus': 'cpp',
-        'cxx': 'cpp',
-        'c': 'c',
-        
-        # PHP
-        'php': 'php',
-        
-        # Ruby
-        'ruby': 'rb',
-        'rb': 'rb',
-        
-        # Go
-        'go': 'go',
-        'golang': 'go',
-        
-        # Rust
-        'rust': 'rs',
-        'rs': 'rs',
-        
-        # Swift
-        'swift': 'swift',
-        
-        # Kotlin
-        'kotlin': 'kt',
-        'kt': 'kt',
-        
-        # Scala
-        'scala': 'scala',
-        
-        # Markup/Data
-        'html': 'html',
-        'css': 'css',
-        'xml': 'xml',
-        'json': 'json',
-        'yaml': 'yaml',
-        'yml': 'yml',
-        'markdown': 'md',
-        'md': 'md',
-        
-        # Shell
-        'shell': 'sh',
-        'bash': 'sh',
-        'sh': 'sh',
-        'zsh': 'sh',
-        'powershell': 'ps1',
-        'ps1': 'ps1',
-        'batch': 'bat',
-        'cmd': 'bat',
-        
-        # Database
-        'sql': 'sql',
-        'mysql': 'sql',
-        'postgresql': 'sql',
-        'plsql': 'sql',
-        
-        # Other
-        'vb': 'vb',
-        'vbnet': 'vb',
-        'perl': 'pl',
-        'r': 'r',
-        'matlab': 'm',
-        'lua': 'lua',
-        'text': 'txt',
-        'plaintext': 'txt',
-        '': 'txt'
-    }
-    
-    return language_map.get(language, 'txt')

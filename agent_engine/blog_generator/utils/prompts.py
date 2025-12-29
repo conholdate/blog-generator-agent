@@ -22,7 +22,6 @@ def get_blog_writer_prompt(
     a final 'Read More' section using the provided related_links.
     """
     url = slugify(title)
-
     # Parse context fields
     data = {}
     for line in context.splitlines():
@@ -42,497 +41,151 @@ def get_blog_writer_prompt(
 
     # FULL PROMPT
     return f"""
-You are an expert technical blog writer. Your task: Write a detailed, SEO-optimized blog post about "{title}" using the following keywords naturally: {keywords}
+You are an expert technical blog writer. Write a detailed, SEO-optimized blog post about "{title}" using keywords: {keywords}
 
 {context}
 
-### MANDATORY CONTENT BOUNDARIES:
-- **START**: The blog post must begin EXACTLY with the frontmatter (no text before)
-- **END**: The blog post must end EXACTLY after the {"FAQs section" if not formatted_related else "Read More section"} (no text after)
-- **NO EXCEPTIONS**: No introductory text, no concluding remarks, no author notes, no meta-commentary outside the defined structure
+═══════════════════════════════════════════════════════════════════════════════
+CRITICAL: CONTENT BOUNDARIES (NON-NEGOTIABLE)
+═══════════════════════════════════════════════════════════════════════════════
+START: Blog MUST begin with frontmatter (---) - NO text before
+END: Blog MUST end after {'Read More section' if formatted_related else 'FAQs section'} - NO text after
+PROHIBITED: No introductory text, concluding remarks, author notes, meta-commentary outside structure
 
-### MANDATORY STRUCTURAL REQUIREMENTS:
-You MUST include these sections REGARDLESS of the outline:
-1. **Introduction content** (NO heading - start directly with content paragraphs after frontmatter)
-2. **Prerequisites/Installation section** (H2 header: ## Prerequisites or ## Installation) - ALWAYS CREATE to show SDK setup
-3. **Steps section** (H2 header: ## Steps to [Task])
-4. **Complete Code Example section(s)** (H2 header: ## [Task] - Complete Code Example) - MUST include full working code for EACH task in title - **ONLY CREATE if you have actual code to include**
-5. **Conclusion section** (H2 header: ## Conclusion)
-6. **FAQs section** (H2 header: ## FAQs)
-{"7. **Read More section** (H2 header: ## Read More)" if formatted_related else ""}
+═══════════════════════════════════════════════════════════════════════════════
+CRITICAL RESTRICTIONS
+═══════════════════════════════════════════════════════════════════════════════
+NEVER mention or imply:
+❌ "free SDK" or "free library" or "free API"
+❌ "online tool" or "online app" or "web-based application"
+❌ "no installation required" or "browser-based"
+❌ Any suggestion that this is a web service or online platform
 
-{"### READ MORE LINKS TO INCLUDE EXACTLY:" if formatted_related else "### READ MORE SECTION:"}
-{formatted_related if formatted_related else "SKIP - No related links provided. Do NOT include Read More section."}
+ALWAYS clarify:
+✅ This is a desktop/server SDK that requires installation
+✅ This is a library/API for programmatic integration
+✅ Code runs on your local machine or server
+✅ Requires proper licensing for production use
 
-### PROVIDED OUTLINE:
-{formatted_outline}
+═══════════════════════════════════════════════════════════════════════════════
+PART 1: FRONTMATTER REQUIREMENTS
+═══════════════════════════════════════════════════════════════════════════════
 
-### CONTEXT RESOURCES (MUST USE):
-The context above contains important resource URLs including:
-- Product documentation links
-- Product page URLs (MANDATORY to use throughout the blog)
-- **API reference pages with class/method documentation** (MANDATORY to link when mentioning classes/methods)
-- Category pages
-- Related product pages
-- Download/installation pages
+### TITLE REQUIREMENTS (CRITICAL - DO NOT MODIFY)
+**MANDATORY: Use the EXACT title from the {{title}} variable**
+- Title field: MUST use {{title}} exactly as provided - DO NOT modify
+- SEO Title field: MUST use {{title}} exactly as provided - DO NOT modify
+- DO NOT change, shorten, or adjust the title for character limits
+- DO NOT remove brand names or product names from title
+- The {{title}} variable is pre-validated and must be used as-is
 
-**MANDATORY LINKING REQUIREMENTS:**
-1. You MUST include at least 2-3 contextual links from the provided resources in your content
-2. **MUST include product page URL** (from context) throughout the blog post where the product is mentioned
-3. **MUST link classes, methods, properties, and APIs** to their API reference documentation when mentioned
-4. **CRITICAL LINK VALIDATION**: Only use links that are explicitly provided in the context above
-5. **NEVER construct or guess API reference URLs** - use only the exact URLs from context
-6. **If a class/method API reference URL is not provided in context, do NOT link it** - just mention it as plain text
-7. Link naturally within paragraphs where relevant (not just in FAQs)
-8. Use descriptive anchor text, not "click here" or naked URLs
-9. **NEVER put links inside code literals or backticks** - links must be outside of inline code formatting
-10. **CORRECT**: Use the [ImageFormat](URL) property (link is outside backticks)
-11. **WRONG**: Use the `[ImageFormat](URL)` property (link inside backticks will not render)
-12. **WRONG**: Use the `[ImageFormat](URL).PNG` property (link inside code literal)
-13. Prioritize linking to:
-   - **Product page when mentioning the product name** (URL must be in context)
-   - **API references when mentioning classes, methods, properties** (ONLY if URL is in context)
-   - Documentation when explaining features (URL must be in context)
-   - Category pages when mentioning product categories (URL must be in context)
-   - Download pages when discussing installation/setup (URL must be in context)
-14. Links should enhance the reader's understanding and provide paths for deeper exploration
-15. **All links MUST work** - if you're unsure about a URL, don't include it
+### CHARACTER LIMITS (FOR OTHER FIELDS ONLY)
+- Meta Description: 140-160 characters (including spaces)
+- Summary: 140-160 characters (including spaces)
+- Count manually before finalizing
 
-### TERMINOLOGY REQUIREMENTS (CRITICAL):
-**SDK vs Library vs API terminology:**
-- **Platform-based terminology**: The terminology depends on the platform type specified in the `{platform}` variable
-- **If platform is "cloud"**: Use "library" or "API" when referring to the software development kit
-  - Examples: "Install the library", "The API provides", "Using the cloud library", "Call the API"
-- **If platform is NOT "cloud"**: Use "SDK" when referring to the software development kit
-  - Examples: "Install the SDK", "The SDK provides", "Using the SDK"
-- **Decision logic**: 
-  - Check the `{platform}` variable value
-  - If `{platform}` = "cloud" → use "library" or "API"
-  - If `{platform}` ≠ "cloud" (e.g., ".NET", "Java", "Python", etc.) → use "SDK"
-- This applies to ALL sections: introduction, prerequisites, steps, outline content, code examples, conclusion, FAQs
+### PRODUCT/BRAND NAME REMOVAL (URL ONLY)
+REMOVE from URL slug only:
+- Brand names: Aspose, GroupDocs, Conholdate
+- Product names: Aspose.PDF, GroupDocs.Conversion, Conholdate.Total, etc.
 
-**PROHIBITED TERMINOLOGY:**
-- **NEVER use the word "Framework"** in any context
-- Replace "Framework" with alternatives: "SDK", "library", "API", "platform", "toolkit", "solution", "technology"
+KEEP in title, seoTitle, and content body:
+- Use the EXACT title from {{title}} variable (keep all brand/product names)
+- Use full product names with platform in content: "Aspose.Slides for .NET"
+- Link to product pages when mentioning products
+
+### URL SLUG RULES (CRITICAL)
+- Lowercase, hyphens for spaces
+- NO product/brand names
+- MUST use "in" before language/platform
 - Examples:
-  - ❌ WRONG: ".NET Framework", "framework provides", "using this framework"
-  - ✅ CORRECT: ".NET", "SDK provides" (if not cloud), "library provides" (if cloud), "using this SDK", "using this platform"
-- This applies to ALL content: introduction, prerequisites, steps, outline, code examples, conclusion, FAQs
+  ✅ "convert-pdf-to-png-in-csharp"
+  ✅ "excel-to-pdf-in-java"
+  ✅ "html-to-markdown-in-python"
+  ❌ "convert-pdf-png-csharp" (missing "to" and "in")
+  ❌ "convert-pdf-aspose-java" (contains brand)
 
-### CRITICAL RULES:
-1. **START** with frontmatter - no text before `---`
-2. **END** after {"Read More section" if formatted_related else "FAQs section"} - no text after the last {"link" if formatted_related else "FAQ"}
-3. Write ONLY the frontmatter and the sections specified below
-4. **Introduction content has NO H2 heading** - start directly with paragraphs after frontmatter
-5. **ALWAYS CREATE Introduction content, Steps, Conclusion, and FAQs sections** even if not in outline
-6. **ONLY CREATE Complete Code Example section(s) if you have actual code snippets to include**
-7. **If title mentions multiple tasks, create separate Complete Code Example sections ONLY for tasks where you have code**
-8. **NEVER create a "Complete Code Example" heading without actual code content**
-{"9. **INCLUDE Read More section** with the provided links" if formatted_related else "9. **DO NOT CREATE Read More section** - no related links available"}
-10. DO NOT add any additional sections, notes, or commentary
-11. DO NOT add author notes, editor notes, or meta-commentary
-12. DO NOT add "Note:", "Remember:", "Important:" or similar annotations
-13. **STRICTLY NO CONTENT** before frontmatter or after {"Read More" if formatted_related else "FAQs"} section
-14. **MUST include contextual links from provided resources throughout the content**
-15. **MUST use product page URL from context whenever product is mentioned**
-16. **ALL code snippets MUST be wrapped with <!--[CODE_SNIPPET_START]--> and <!--[CODE_SNIPPET_END]--> tags**
-17. **Use "SDK" terminology if platform is NOT "cloud"; use "library" or "API" if platform IS "cloud"**
+### MARKDOWN-SAFE CONTENT (MANDATORY)
+Replace automatically throughout:
+- Em dash to hyphen
+- En dash to hyphen
+- Curly double quotes to straight quotes
+- Curly single quotes to straight quotes
+- Ellipsis to three periods
+- Copyright to (c), Registered to (R), Trademark to (TM)
+- Bullet to hyphen
+- Degree symbol to "degrees"
 
-### TITLE AND SEO REQUIREMENTS (CRITICAL):
-**STRICT CHARACTER LIMITS:**
-- **Title**: MUST be between 40-60 characters (count every character including spaces)
-- **SEO Title**: MUST be between 40-60 characters (count every character including spaces)
-- **Meta Description**: MUST be between 140-160 characters (count every character including spaces)
-- **Summary**: MUST be between 140-160 characters (count every character including spaces)
-- **URL Slug**: Create from title, lowercase, hyphens for spaces, NO product names, MUST use "in" before language/platform
+YAML SAFETY:
+- Quote strings containing colons
+- No line breaks in values
+- Escape internal quotes
+- ASCII characters only
 
-**PRODUCT NAME EXCLUSION (MANDATORY):**
-- **DO NOT include product name in title** (e.g., remove "Aspose.Slides", "GroupDocs.Conversion", "Conholdate.Total")
-- **DO NOT include brand name in title** (e.g., remove "Aspose", "GroupDocs", "Conholdate")
-- **DO NOT include product name in seoTitle**
-- **DO NOT include brand name in seoTitle**
-- **DO NOT include product name in URL slug**
-- **DO NOT include brand name in URL slug**
-- Focus titles on the TASK/ACTION, not the product or brand
-- **Acceptable generic references**: "powerful SDK", "robust library", "efficient API", "modern toolkit"
-- **URL slug must be clear and readable**: Use "in" for language/platform designation
-  - ✅ CORRECT: "convert-pdf-to-jpg-in-java"
-  - ✅ CORRECT: "excel-to-pdf-conversion-in-csharp"
-  - ✅ CORRECT: "html-to-markdown-in-python"
-  - ❌ WRONG: "convert-pdf-to-jpg-java" (missing "in")
-  - ❌ WRONG: "excel-pdf-csharp" (unclear, missing "to" and "in")
-  - ❌ WRONG: "convert-pdf-to-jpg-using-aspose-in-java" (contains brand name)
-  - ❌ WRONG: "convert-pdf-to-jpg-with-conholdate-in-java" (contains brand name)
-- **CORRECT**: "Convert PDF to JPG in Java" (29 chars) ✅
-- **CORRECT**: "Convert PPTX to JPG in Java" (28 chars) ✅
-- **CORRECT**: "Convert PDF to JPG using a Powerful SDK" (40 chars) ✅
-- **INCORRECT**: "Convert PDF to JPG using Aspose.PDF in Java" (44 chars and includes brand + product) ❌
-- **INCORRECT**: "Convert PPTX to JPG in Java using Conholdate SDK" (49 chars and includes brand) ❌
-- **INCORRECT**: "Convert PDF with Aspose in Java" (32 chars but includes brand) ❌
-- **CORRECT**: "Excel to PDF Conversion Guide" (30 chars) ✅
-- **INCORRECT**: "Excel to PDF with GroupDocs.Conversion" (39 chars and includes brand + product) ❌
-
-**BRAND AND PRODUCT IDENTIFICATION:**
-- **Brands**: Aspose, GroupDocs, Conholdate
-- **Products**: Aspose.PDF, Aspose.Slides, Aspose.Words, GroupDocs.Conversion, GroupDocs.Viewer, Conholdate.Total, etc.
-- **Rule**: Remove BOTH brand names AND product names from title, seoTitle, and URL slug
-- **Alternative phrasing**: Focus on functionality, not branding
-  - Instead of "using Aspose" → "using a powerful SDK" or just describe the task
-  - Instead of "with Conholdate" → "with modern tools" or omit entirely
-  - Instead of "GroupDocs solution" → "efficient solution" or focus on capability
-
-**TITLE CRAFTING GUIDELINES:**
-- Keep titles concise and action-oriented
-- Include primary programming language/platform (Java, .NET, Python, etc.)
-- **NEVER include brand names** (Aspose, GroupDocs, Conholdate)
-- **NEVER include product names** (Aspose.PDF, GroupDocs.Conversion, Conholdate.Total, etc.)
-- Use format: "[Action] [Format1] to [Format2] in [Language]"
-- Alternative format: "[Format] [Action] in [Language] Guide"
-- Optional: Can add generic descriptor like "using a Powerful SDK" if needed for length, but avoid branding
-- **URL slugs must use "in" before language/platform for clarity**
-- Examples:
-  - Title: "Convert PDF to PNG in C#" (26 chars) → URL: "convert-pdf-to-png-in-csharp" ✅
-  - Title: "JPG to PDF in Java Guide" (25 chars) → URL: "jpg-to-pdf-in-java-guide" ✅
-  - Title: "HTML to Markdown in Python" (27 chars) → URL: "html-to-markdown-in-python" ✅
-  - Title: "DOCX to PDF in .NET" (20 chars) → URL: "docx-to-pdf-in-dotnet" ✅
-  - Title: "Convert PPTX to JPG in Java" (28 chars) → URL: "convert-pptx-to-jpg-in-java" ✅
-  - Title: "Convert PDF to JPG using a Powerful SDK" (40 chars) → URL: "convert-pdf-to-jpg-using-powerful-sdk" ✅
-  - ❌ WRONG TITLE: "Convert PPTX to JPG in Java using Conholdate SDK" (contains brand)
-  - ❌ WRONG TITLE: "PDF to Image with Aspose in C#" (contains brand)
-  - ❌ WRONG URL: "convert-pdf-png-csharp" (missing "to" and "in")
-  - ❌ WRONG URL: "jpg-pdf-java" (unclear, missing words)
-  - ❌ WRONG URL: "convert-pdf-aspose-java" (contains brand name)
-
-**CHARACTER COUNT VALIDATION:**
-Before finalizing title/seoTitle/description/summary:
-1. Count EXACT characters (including spaces)
-2. Title: Must be 40-60 chars
-3. SEO Title: Must be 40-60 chars
-4. Description: Must be 140-160 chars
-5. Summary: Must be 140-160 chars
-6. URL: Must use "in" before language/platform (e.g., "in-csharp", "in-java", "in-python")
-7. **Check for brand/product names**: Remove "Aspose", "GroupDocs", "Conholdate" and any product names
-8. If outside range or contains branding, REWRITE until within limits and brand-free
-
-### MARKDOWN-SAFE CONTENT REQUIREMENTS (CRITICAL):
-All content in frontmatter and body MUST be safe for Hugo/Markdown/YAML:
-- **NO Unicode dashes**: Replace em dash (—), en dash (–) with standard hyphen (-)
-- **NO Smart quotes**: Replace curly quotes (" " ' ') with straight quotes (" ')
-- **NO Special characters**: Replace © → (c), ® → (R), ™ → (TM), • → -, … → ...
-- **NO Unescaped colons**: In YAML values (title, description, summary), avoid colons or wrap entire value in quotes
-- **NO Line breaks**: In YAML values, keep everything on one line
-- **NO Special symbols**: Replace %, &, *, @, #, etc. in YAML with words when possible
-- **MANDATORY**: Use only ASCII characters (a-z, A-Z, 0-9) and basic punctuation (. , - " ')
-- **In frontmatter strings**: If a value contains special characters, wrap it in double quotes
-- **Escape quotes**: If using quotes inside quoted strings, escape them properly
-
-### CHARACTER SANITIZATION RULES:
-**Replace these automatically in ALL content:**
-- — (em dash) → - (hyphen)
-- – (en dash) → - (hyphen)
-- " " (curly double quotes) → " (straight quotes)
-- ' ' (curly single quotes) → ' (straight quotes)
-- … (ellipsis) → ... (three periods)
-- © → (c)
-- ® → (R)
-- ™ → (TM)
-- • → -
-- ° → degrees
-- × → x
-- ÷ → /
-- Any other Unicode → Remove or replace with ASCII equivalent
-
-### FRONTMATTER YAML SAFETY RULES:
-1. **Strings with colons MUST be quoted**: title: "Convert PDF: A Complete Guide"
-2. **No line breaks in values**: Keep description, summary, steps on single lines
-3. **Escape internal quotes**: Use \\" for quotes inside quoted strings
-4. **No trailing colons**: Don't end values with colons
-5. **Safe characters only**: Stick to alphanumeric, spaces, hyphens, periods, commas
-6. **Test mentally**: Would this break YAML parsing? If yes, fix it.
-
-### FRONTMATTER (MUST BE FIRST - NO TEXT BEFORE THIS):
+### FRONTMATTER TEMPLATE
 ---
-title: "[Use exact title from {title} variable - adjust only if needed for 40-60 char limit - Keep product/brand names if present]"
-seoTitle: "[Use exact title from {title} variable - adjust only if needed for 40-60 char limit - Keep product/brand names if present]"
-description: "[140-160 char meta description - NO colons, NO special chars, NO line breaks]"
+title: "{title}"
+seoTitle: "{title}"
+description: "[140-160 chars, NO colons/special chars/line breaks]"
 date: {current_date}
 lastmod: {current_date}
 draft: false
-url: /{data.get("urlPrefix")}/[url-slug-NO-product-brand-names-use-in-before-language]/
+url: {url}
 author: "{author}"
-summary: "[140-160 char summary - NO colons, NO special chars, NO line breaks, wrap in quotes if needed]"
+summary: "[140-160 chars, wrap in quotes if needed]"
 tags: {json.dumps(keywords)}
 categories: ["{category}"]
 showtoc: true
 steps:
-  - "Step 1: [Clear actionable instruction - NO special chars, NO colons unless quoted]"
-  - "Step 2: [Clear actionable instruction - NO special chars, NO colons unless quoted]"
-  - "Step 3: [Clear actionable instruction - NO special chars, NO colons unless quoted]"
-  - "Step 4: [Clear actionable instruction - NO special chars, NO colons unless quoted]"
-  - "Step 5: [Clear actionable instruction - OPTIONAL]"
+  - "Step 1: [Clear actionable instruction]"
+  - "Step 2: [Clear actionable instruction]"
+  - "Step 3: [Clear actionable instruction]"
+  - "Step 4: [Clear actionable instruction]"
+  - "Step 5: [Optional]"
 faqs:
-  - q: "[Question - NO special chars, safe punctuation only]"
-    a: "[Answer - NO special chars, use product links, safe punctuation only]"
-  - q: "[Question - NO special chars, safe punctuation only]"
-    a: "[Answer - NO special chars, use product links, safe punctuation only]"
-  - q: "[Question - NO special chars, safe punctuation only]"
-    a: "[Answer - NO special chars, use product links, safe punctuation only]"
-  - q: "[Question - OPTIONAL]"
-    a: "[Answer - OPTIONAL]"
+  - q: "[Question - safe punctuation only]"
+    a: "[Answer - include product links]"
+  - q: "[Question]"
+    a: "[Answer]"
+  - q: "[Question]"
+    a: "[Answer]"
+  - q: "[Optional]"
+    a: "[Optional]"
 ---
 
-### FINAL BLOG STRUCTURE (MUST FOLLOW THIS ORDER):
-1. **Introduction content** (NO HEADING - start directly with 2-3 paragraphs after frontmatter)
-2. **Prerequisites/Installation** (ALWAYS CREATE - H2 header showing SDK setup instructions)
-3. **Steps** (ALWAYS CREATE this section with 4-6 actionable steps, can include code snippets)
-4. **Outline Sections** (Follow the provided outline exactly, can include code snippets with explanations)
-5. **Complete Code Example(s)** (ONLY CREATE if you have actual code - one section per task with code)
-   - **CRITICAL**: Only create this section if you have complete, working code to include
-   - **NEVER** create the heading without code content
-   - If single task with code: ONE Complete Code Example section
-   - If multiple tasks: ONLY create Complete Code Example sections for tasks where you have code
-6. **Conclusion** (ALWAYS CREATE this section)
-7. **FAQs** (ALWAYS CREATE this section with 3-4 questions)
-{"8. **Read More** (ALWAYS include this section last)" if formatted_related else ""}
+═══════════════════════════════════════════════════════════════════════════════
+PART 2: CONTENT STRUCTURE (MANDATORY SECTIONS)
+═══════════════════════════════════════════════════════════════════════════════
 
-### WRITING INSTRUCTIONS:
-- **Start immediately** with frontmatter above (fill bracketed parts)
-- **CRITICAL: Use the exact title from {title} variable** - keep it as-is, including any product/brand names
-- **Only adjust title if it's outside 40-60 character limit** - otherwise use {title} exactly
-- **Title MUST be 40-60 characters** - adjust length only if necessary
-- **SEO Title MUST be 40-60 characters** - should match title
-- **Description MUST be 140-160 characters**
-- **URL MUST NOT contain product/brand name** - strip these out even if they're in {title}
-- **After frontmatter**: Begin directly with introduction content (NO heading)
-- **Introduction content**: 2-3 paragraphs explaining the topic (include at least 1 contextual link and product page URL with full product name)
-- **Always include** ## Prerequisites or ## Installation section after introduction content
-- **Always include** ## Steps section after Prerequisites/Installation
-- Follow the provided outline EXACTLY for the main content
-- **Only include** Complete Code Example section(s) if you have actual code - ONE section per task that has code
-- **Never create** "Complete Code Example" heading without code content beneath it
-- **Always include** ## Conclusion section
-- **Always include** ## FAQs section with 3-4 relevant questions
-{"- **Always include** ## Read More section last" if formatted_related else "- **DO NOT include** Read More section (no related links provided)"}
-- Write 600-800 words total (excluding frontmatter, steps, code examples, and FAQs)
-- Use clean Markdown with H2/H3 headers
-- Include keywords naturally throughout
-- **Use "SDK" terminology if platform ≠ "cloud"; use "library" or "API" if platform = "cloud"**
-- **Use product page URL from context** whenever mentioning the product
-- DO NOT add extra content not in the outline
-- **Use only markdown-safe characters throughout entire content**
-- **MUST include 2-3+ contextual links from provided context resources**
-- **ALL code snippets MUST use <!--[CODE_SNIPPET_START]--> and <!--[CODE_SNIPPET_END]--> tags**
+### REQUIRED SECTIONS (IN ORDER)
+1. Introduction Content (NO H2 heading - direct paragraphs)
+2. Prerequisites/Installation (H2 heading - ALWAYS include)
+3. Steps (H2 heading - ALWAYS include)
+4. Outline Sections (Follow provided outline exactly)
+5. Complete Code Example(s) (ONLY if you have actual code)
+6. Conclusion (H2 heading - ALWAYS include)
+7. FAQs (H2 heading - ALWAYS include)
+{'8. Read More (H2 heading - ALWAYS include last)' if formatted_related else ''}
 
-### CONTENT STRUCTURE:
-- **Introduction content** = NO heading, just 2-3 paragraphs directly after frontmatter (include at least 1 contextual link and product page URL with full product name like "Aspose.Slides for .NET", use "SDK" if platform ≠ "cloud" or "library"/"API" if platform = "cloud", never use "Framework")
-- **Prerequisites/Installation** = H2 header (## Prerequisites or ## Installation) showing how to install/set up the SDK/library (include download links, NuGet/Maven/pip commands, environment setup)
-- **Steps** = H2 header (## Steps to [Task Name]) with 4-6 numbered steps (mention classes/methods/properties, link ONLY if URLs in context, NEVER put links in backticks, include contextual links where relevant, may include code snippets, use "SDK" if platform ≠ "cloud" or "library"/"API" if platform = "cloud", never use "Framework")
-- Outline items = H2/H3 headers as specified (include contextual links naturally, link classes/methods ONLY if URLs in context, no links in backticks, may include code snippets with explanations, use "SDK" if platform ≠ "cloud" or "library"/"API" if platform = "cloud", include product page URL with full product name, never use "Framework")
-- **Complete Code Example(s)** = H2 header(s) (## [Specific Task] - Complete Code Example) with full working code wrapped in tags - ONLY CREATE if you have actual code for that task
-- **Conclusion** = H2 header (## Conclusion) with 2-3 paragraphs (include at least 1 contextual link and product page URL with full product name, use "SDK" if platform ≠ "cloud" or "library"/"API" if platform = "cloud", never use "Framework")
-- **FAQs** = H2 header (## FAQs) with 3-4 Q&A pairs (include contextual links and product page URL with full product name in answers, link API references ONLY if URLs in context, no links in backticks, use "SDK" if platform ≠ "cloud" or "library"/"API" if platform = "cloud", never use "Framework")
-{"- **Read More** = H2 header (## Read More) with provided links" if formatted_related else ""}
-- Complete paragraphs required for all sections
-- Include relevant examples/code where appropriate
-- **All content must use markdown-safe characters only**
-- **Contextual links must be naturally integrated, not forced**
-- **Product page URL must use full product name with platform as anchor text**
-- **Link classes/methods/properties ONLY if their URLs are provided in context**
-- **NEVER put links inside backticks or code literals**
-- **Never use "Framework" anywhere in content**
+### 1. INTRODUCTION CONTENT (NO HEADING)
+- Start directly with 2-3 paragraphs after frontmatter
+- NO H2 heading
+- Include at least 1 contextual link from resources
+- MUST link product page URL with FULL product name (e.g., "[Aspose.Slides for .NET](product_page_url)")
+- Use correct terminology based on platform (see Part 3)
+- Natural flow, explain the topic and its value
+- NEVER mention "free SDK" or "online tool"
+- Clarify this is a programmatic SDK/library for local/server use
 
-### CODE SNIPPET REQUIREMENTS (CRITICAL):
-**EVERY code snippet MUST follow this exact format:**
-
-<!--[CODE_SNIPPET_START]-->
-```language
-// Your code here
-// Can be partial or full code
-```
-<!--[CODE_SNIPPET_END]-->
-
-**Rules for code snippets:**
-- **MANDATORY**: Wrap ALL code blocks with <!--[CODE_SNIPPET_START]--> and <!--[CODE_SNIPPET_END]-->
-- In Steps section: Can include partial code snippets with explanations
-- In Outline sections: Can include code chunks broken down for explanation
-- In Complete Code Example section(s): MUST include the FULL, working, copy-paste ready code
-- Always specify the language (python, javascript, java, csharp, etc.)
-- Include comments where helpful
-- Code inside blocks can use any characters (not restricted to ASCII)
-
-### COMPLETE CODE EXAMPLE SECTION (CONDITIONAL):
-**CRITICAL REQUIREMENT**: Only create this section if you have actual, complete, working code to include.
-
-**When to CREATE Complete Code Example section(s):**
-- You have full, working code that demonstrates the task
-- The code is complete and copy-paste ready (no placeholders)
-- The task in the title can be demonstrated with code
-
-**When to SKIP Complete Code Example section(s):**
-- You don't have complete code available
-- The code would be incomplete or use placeholders like "// ... rest of code"
-- The task is conceptual and doesn't have a concrete code implementation
-
-**MULTIPLE TASKS HANDLING:**
-- If title contains ONE task with code: Create ONE Complete Code Example section
-- If title contains MULTIPLE tasks: ONLY create Complete Code Example sections for tasks where you have actual code
-- Parse the title to identify all tasks (look for "and", "or", conjunctions, multiple formats mentioned)
-- Each task that has code gets its own dedicated Complete Code Example section
-- Tasks without code implementations should be skipped (no empty sections)
-
-**Format for SINGLE task (with code):**
-## [Task from Title] - Complete Code Example
-
-Example: "## Convert PDF to PNG - Complete Code Example"
-
-**Format for MULTIPLE tasks (only sections with code):**
-## [First Task] - Complete Code Example
-[Full code for first task]
-
-## [Second Task] - Complete Code Example
-[Full code for second task - only if you have code]
-
-## [Third Task] - Complete Code Example
-[Full code for third task - only if you have code]
-
-**Examples:**
-- Title: "Convert PDF to PNG and JPG" → Create 2 sections ONLY if you have code for both:
-  - "## Convert PDF to PNG - Complete Code Example" (if code available)
-  - "## Convert PDF to JPG - Complete Code Example" (if code available)
-  
-- Title: "Convert DOCX to PDF, HTML, and Markdown" → Create sections ONLY for tasks with code:
-  - "## Convert DOCX to PDF - Complete Code Example" (if code available)
-  - "## Convert DOCX to HTML - Complete Code Example" (if code available)
-  - Skip Markdown section if no code available
-
-- Title: "Convert PDF to PNG" → Create 1 section ONLY if you have code:
-  - "## Convert PDF to PNG - Complete Code Example" (if code available)
-
-**Structure for each Complete Code Example section (when included):**
-
-[1-2 sentence introduction explaining what this specific code does, use "SDK" if platform ≠ "cloud" or "library"/"API" if platform = "cloud"]
-
-<!--[COMPLETE_CODE_SNIPPET_START]-->
-```language
-// Full working code for THIS specific task
-// Include all necessary imports, initialization, and implementation
-// This should be production-ready or near-production quality
-// Must be complete - no placeholders like "// ... rest of code"
-```
-<!--[COMPLETE_CODE_SNIPPET_END]-->
-
-[Optional: 1-2 sentences explaining how to run or use this code]
-
-**Requirements for EACH Complete Code Example (when created):**
-- Must be FULL working code for that specific task (no partial snippets)
-- Must be copy-paste ready (no "..." or placeholders)
-- Must include all imports/dependencies needed for that task
-- Must include proper initialization and error handling
-- Should be well-commented for clarity
-- Must focus on ONE specific task per section
-- Must be wrapped in <!--[COMPLETE_CODE_SNIPPET_START]--> and <!--[COMPLETE_CODE_SNIPPET_END]-->
-- Each section is independent and can be used standalone
-- **Only create section if you have actual code** - never create empty sections
-
-### CONTEXTUAL LINKING GUIDELINES:
-**When to link to API references (CONDITIONAL - ONLY IF URL IN CONTEXT):**
-- **CRITICAL**: Only link classes/methods/properties if their API reference URL is explicitly provided in the context
-- **If URL is NOT in context**: Mention the class/method/property as plain text without a link
-- **NEVER construct or guess API reference URLs**
-- **NEVER put links inside backticks or code literals** - this breaks Hugo rendering
-- When linking (if URL available):
-  - ✅ CORRECT: "Initialize the [Presentation](API_reference_URL) class" (link outside backticks)
-  - ✅ CORRECT: "Use the [Save](API_reference_URL) method to export" (link outside backticks)
-  - ❌ WRONG: "Initialize the `[Presentation](URL)` class" (link inside backticks - won't render)
-  - ❌ WRONG: "Use `[Save](URL).PNG`" (link inside code literal - won't render)
-  - ❌ WRONG: "Use the [ImageFormat](URL).PNG property" (appending .PNG to URL breaks link)
-- When URL is NOT available:
-  - ✅ CORRECT: "Initialize the Presentation class" (plain text, no link)
-  - ✅ CORRECT: "Use the Save method to export" (plain text, no link)
-  - ✅ CORRECT: "Set the ImageFormat property" (plain text, no link)
-- **Apply to Steps section, code explanations, and throughout content**
-- **Only use URLs that are verified to be in the context**
-
-**When to link to documentation:**
-- "Learn more about [feature] in the [documentation](URL)"
-- "For detailed API specifications, see the [API reference](URL)"
-- "Check out the [complete guide](URL) for advanced features"
-
-**When to link to product page (MANDATORY):**
-- "Using [Full Product Name with Platform](product_page_URL), you can..."
-- "The [Full Product Name with Platform](product_page_URL) SDK provides..." (if platform ≠ "cloud")
-- "The [Full Product Name with Platform](product_page_URL) library provides..." (if platform = "cloud")
-- "Get started with [Full Product Name with Platform](product_page_URL) to..."
-- **CRITICAL**: Use FULL product name including platform (e.g., "Aspose.Slides for .NET", "GroupDocs.Conversion for Java")
-- **NEVER use generic text like "product page" or just product name without platform**
-- **Use product page URL from context whenever product is mentioned**
-- **Example**: [Aspose.Slides for .NET](https://products.aspose.com/slides/net/) ✅
-- **WRONG**: [product page](https://products.aspose.com/slides/net/) ❌
-- **WRONG**: [Aspose.Slides](https://products.aspose.com/slides/net/) ❌
-
-**When to link to category pages:**
-- "Explore more [category] solutions at [Category Page](URL)"
-- "This is part of our [Product Category](URL) offerings"
-
-**When to link to download/installation:**
-- "Get started by [downloading the SDK](URL)" (if platform ≠ "cloud")
-- "Get started by [downloading the library](URL)" (if platform = "cloud")
-- "Visit our [installation guide](URL) for setup instructions"
-
-**Link placement best practices:**
-- Integrate links naturally within sentences
-- **Only link classes/methods/properties if their API reference URL is in context**
-- **NEVER put links inside backticks or code literals** - Hugo won't render them
-- Use descriptive anchor text that tells readers what they'll find
-- Place links where readers would logically want more information
-- Don't cluster multiple links in one sentence unless necessary
-- Ensure links add value and aren't just inserted for SEO
-- **Always link product name to product page URL from context**
-- **Only link API elements (classes/methods) if URLs are in context**
-- **If URL is not in context, mention without linking**
-- **Verify all URLs are from context before using**
-
-### PREREQUISITES/INSTALLATION SECTION (MANDATORY):
-This section MUST appear after introduction content and before Steps section.
-
-**Section title options:**
-- ## Prerequisites (if covering requirements + installation)
-- ## Installation (if focusing only on setup)
-
-**Content to include:**
-1. **System requirements** (if applicable):
-   - Operating system compatibility
-   - Platform version (e.g., .NET version, Java version, Python version)
-   - Any other dependencies
-
-2. **Installation instructions** (MANDATORY):
-   - Package manager command (NuGet, Maven, pip, npm, etc.)
-   - Alternative: Direct download link from context resources
-   - Example:
-     ```
-     Install-Package Aspose.Slides.NET
-     ```
-   - Or for Java:
-     ```xml
-     <dependency>
-         <groupId>com.aspose</groupId>
-         <artifactId>aspose-slides</artifactId>
-         <version>XX.X</version>
-     </dependency>
-     ```
-
-3. **License/Setup** (if applicable):
-   - Mention licensing requirements
-   - Link to getting started guide or documentation
-
-**Format:**
+### 2. PREREQUISITES/INSTALLATION (MANDATORY)
 ## Prerequisites
-[OR]
+OR
 ## Installation
 
-[1-2 sentences explaining what's needed]
-
-**Installation via [Package Manager]:**
+Content:
+- System requirements (if applicable)
+- Package manager command (NuGet, Maven, pip, npm, etc.)
+- Installation code wrapped in tags:
 
 <!--[CODE_SNIPPET_START]-->
 ```language
@@ -540,245 +193,406 @@ This section MUST appear after introduction content and before Steps section.
 ```
 <!--[CODE_SNIPPET_END]-->
 
-[Optional: Alternative installation methods or additional setup steps]
+- Link to download page if available in context
+- Keep concise (2-4 paragraphs)
+- NEVER mention "free" or "online"
 
-[Optional: Link to download page or documentation]
-
-**Requirements:**
-- Must include actual installation command/code
-- Must use code snippet tags
-- Should link to download page if available in context
-- Keep concise (2-4 paragraphs maximum)
-- Use "SDK" if platform ≠ "cloud", or "library"/"API" if platform = "cloud", never "Framework"
-- Include product page URL with full product name if mentioning product
-- Create 4-6 clear, actionable steps to accomplish the task described in the title
-- Steps should be technical and implementation-focused
-- Each step should be a complete, actionable instruction
-- Steps should follow a logical progression from setup to completion
-- Use technical terminology appropriate to the product/platform
-- **Use "SDK" terminology unless product is cloud-based**
-- **NEVER use "Framework" - replace with "SDK", "platform", or other alternatives**
-- **Steps must use only markdown-safe characters**
-- **Include contextual links in steps where relevant (setup, configuration, API calls)**
-- **Include product page URL with full product name when mentioning product in steps**
-- **Can include partial code snippets in steps** (wrapped in tags) to illustrate specific actions
-- Steps MUST be included in both:
-  1. **Frontmatter** (in YAML format as a list - quoted strings)
-  2. **Content section** (as markdown H2 section after Prerequisites/Installation)
-
-### STEPS CONTENT FORMAT:
+### 3. STEPS SECTION (MANDATORY)
 ## Steps to [Task Name Based on Title]
 
-1. **[Step 1 summary with class/method]**: [Brief explanation mentioning the class/method - markdown-safe chars only, link API reference ONLY if URL is in context, NEVER put links in backticks]
+Format:
+1. **[Step summary with class/method]**: Brief explanation
+   - Mention classes/methods naturally
+   - Link API references ONLY if URLs in context
+   - NEVER put links inside backticks
+   - Optional code snippet if helpful
    
-   Example: **Initialize Presentation class**: Load your PowerPoint file using the Presentation constructor. (Note: Only add [Presentation](URL) link if URL is in context, otherwise plain text)
-   
-   [Optional code snippet if needed]
-   <!--[CODE_SNIPPET_START]-->
+2. **[Next step]**: [Explanation]
+
+3-6 steps total, each actionable and technical
+
+### 4. OUTLINE SECTIONS
+Follow the provided outline exactly:
+
+{formatted_outline}
+
+- Use H2/H3 headers as specified
+- Include contextual links naturally
+- May include code snippets with explanations
+- Link classes/methods ONLY if URLs in context
+- Link product name to product page URL: [Full Product Name](url)
+
+### 5. COMPLETE CODE EXAMPLE(S) - CONDITIONAL
+CRITICAL: Only create if you have actual, complete, working code
+
+WHEN TO CREATE:
+✅ You have full, working code for the task
+✅ Code is copy-paste ready (no placeholders)
+✅ Task can be demonstrated with code
+
+WHEN TO SKIP:
+❌ No complete code available
+❌ Code would use "// ... rest of code" placeholders
+❌ Task is purely conceptual
+
+MULTIPLE TASKS HANDLING:
+- Title: "Convert PDF to PNG and JPG"
+  → Create sections ONLY for tasks with code:
+  ## Convert PDF to PNG - Complete Code Example
+  ## Convert PDF to JPG - Complete Code Example
+
+- Title: "Convert PDF to PNG"
+  → Create 1 section:
+  ## Convert PDF to PNG - Complete Code Example
+
+FORMAT (when included):
+## [Specific Task] - Complete Code Example
+
+[1-2 sentence intro]
+
+<!--[COMPLETE_CODE_SNIPPET_START]-->
 ```language
-   // Step-specific code
+// Full working code
+// All imports, initialization, implementation
+// Production-ready, no placeholders
 ```
-   <!--[CODE_SNIPPET_END]-->
+<!--[COMPLETE_CODE_SNIPPET_END]-->
 
-2. **[Step 2 summary with method]**: [Brief explanation - markdown-safe chars only, link ONLY if URL in context, no links in backticks]
+[Optional: Usage notes]
 
-3. **[Step 3 summary with method]**: [Brief explanation - markdown-safe chars only, link ONLY if URL in context, no links in backticks]
+### 6. CONCLUSION (MANDATORY)
+## Conclusion
 
-4. **[Step 4 summary with method]**: [Brief explanation - markdown-safe chars only, link ONLY if URL in context, no links in backticks]
+- 2-3 paragraphs summarizing key points
+- Include at least 1 contextual link
+- MUST link product page URL with FULL product name: [Product Name](url)
+- Use correct terminology based on platform
+- Natural closing, encourage next steps
+- NEVER mention "free" or "online tool"
 
-5. **[Step 5 summary - OPTIONAL]**: [Brief explanation - markdown-safe chars only]
-
-6. **[Step 6 summary - OPTIONAL]**: [Brief explanation - markdown-safe chars only]
-
-### FAQs SECTION REQUIREMENTS:
-- Create 3-4 frequently asked questions relevant to the topic
-- Questions should cover common user concerns, technical details, or best practices
-- Answers should be detailed (2-4 sentences each)
-- **MUST include contextual links in FAQ answers** using format: `[Resource Name](URL)`
-- **MUST use product page URL with full product name when mentioning product in answers**
-- **Example**: [Aspose.Slides for .NET](https://products.aspose.com/slides/net/) ✅
-- **Use "SDK" if platform ≠ "cloud"; use "library" or "API" if platform = "cloud"**
-- **NEVER use "Framework" in answers**
-- Questions should be practical and directly related to the blog topic
-- **FAQs must use only markdown-safe characters**
-- FAQs MUST be included in both:
-  1. **Frontmatter** (in YAML format as shown above - quoted strings)
-  2. **Content section** (as markdown H2 section {"before Read More" if formatted_related else "as the FINAL section"})
-
-### FAQs CONTENT FORMAT:
+### 7. FAQs (MANDATORY)
 ## FAQs
 
-**Q: [First question - markdown-safe chars only]**  
-A: [Detailed answer with at least one contextual link and product page URL - markdown-safe chars only, use "SDK" if platform ≠ "cloud" or "library"/"API" if platform = "cloud"]
+**Q: [Question]**  
+A: [Detailed answer with contextual link and product page URL]
 
-**Q: [Second question - markdown-safe chars only]**  
-A: [Detailed answer with contextual link if relevant - markdown-safe chars only, use "SDK" if platform ≠ "cloud" or "library"/"API" if platform = "cloud"]
+**Q: [Question]**  
+A: [Answer]
 
-**Q: [Third question - markdown-safe chars only]**  
-A: [Detailed answer with contextual link if relevant - markdown-safe chars only, use "SDK" if platform ≠ "cloud" or "library"/"API" if platform = "cloud"]
+**Q: [Question]**  
+A: [Answer]
 
-**Q: [Fourth question - OPTIONAL]**  
-A: [Detailed answer - OPTIONAL]
+**Q: [Optional fourth question]**  
+A: [Optional answer]
 
-{'''### READ MORE SECTION RULES:
-At the end of the article, include this EXACT section:
+Requirements:
+- 3-4 questions
+- 2-4 sentences per answer
+- Include contextual links in answers
+- Use product page URL with full product name: [Product Name](url)
+- Practical questions related to topic
+- NEVER mention "free" or "online"
 
-## Read More
-''' + formatted_related + '''
+{'### 8. READ MORE (MANDATORY)' if formatted_related else '### NO READ MORE SECTION'}
+{'## Read More' if formatted_related else 'Do NOT include - no related links provided.'}
+{formatted_related if formatted_related else 'Blog MUST end after FAQs.'}
+{'Use EXACT titles and URLs provided.' if formatted_related else ''}
 
-(Use EXACT titles and URLs provided. Do NOT change them.)''' if formatted_related else '''### READ MORE SECTION:
-**DO NOT INCLUDE** - No related links provided. The blog MUST end after the FAQs section.'''}
+═══════════════════════════════════════════════════════════════════════════════
+PART 3: TERMINOLOGY RULES (CRITICAL)
+═══════════════════════════════════════════════════════════════════════════════
 
-### LINK FORMAT:
-- Contextual resource links: `[Descriptive Text](URL from context)`
-- API reference links: `[ClassName](API_ref_URL)`, `[MethodName](API_ref_URL)` - **ONLY if URL is in context**
-- **If API reference URL not in context**: Mention class/method as plain text without link
-- **NEVER put links inside backticks**: `[ClassName](URL)` won't render in Hugo
-- **CORRECT**: Use the [ClassName](URL) method (link outside backticks)
-- **WRONG**: Use the `[ClassName](URL)` method (link inside backticks)
-- **WRONG**: Use the `[ClassName](URL).Property` (link in code literal)
-- Product references: `[Full Product Name with Platform](product_page_URL from context)` - **MANDATORY when mentioning product**
-- **CRITICAL**: Always use FULL product name including platform
-- **Example**: `[Aspose.Slides for .NET](https://products.aspose.com/slides/net/)` ✅
-- **Example**: `[Presentation](https://reference.aspose.com/slides/net/aspose.slides/presentation/)` ✅ (only if URL in context)
-- **WRONG**: `[product page](URL)` ❌
-- **WRONG**: `[Aspose.Slides](URL)` ❌
-- **WRONG**: `[ImageFormat](URL).PNG` ❌ (appending to URL breaks link)
-- No naked URLs allowed
-- **At least 2-3 contextual links from provided resources required throughout content**
-- **Product page URL must use full product name as anchor text whenever product is mentioned**
-- **Only link classes/methods/properties if their API reference URLs are in context**
-- **At least 1 product/documentation link required in FAQ answers**
-- Links are markdown-safe by default
-- **Verify all URLs exist in context before using**
+### SDK vs LIBRARY/API TERMINOLOGY
+PLATFORM-BASED DECISION:
+- IF platform = "cloud" → Use "library" or "API"
+- IF platform ≠ "cloud" → Use "SDK"
 
-### STRICTLY ENFORCED BOUNDARIES:
-- **BEGINNING**: First character must be `-` of frontmatter (no spaces, no text before)
-- **INTRODUCTION CONTENT**: Must be first content after frontmatter (NO heading, just paragraphs, include contextual link and product page URL with full product name)
-- **PREREQUISITES/INSTALLATION**: Must be included after introduction content (H2 header with setup instructions)
-- **STEPS**: Must be included after Prerequisites/Installation (include contextual links where relevant, may include code, use "SDK" if platform ≠ "cloud" or "library"/"API" if platform = "cloud", never use "Framework")
-- **COMPLETE CODE EXAMPLE(S)**: Only include if you have actual code - never create empty sections
-- **CONCLUSION**: Must be included before FAQs section (include contextual link and product page URL with full product name, use "SDK" if platform ≠ "cloud" or "library"/"API" if platform = "cloud", never use "Framework")
-- **FAQs**: Must be included {"before Read More section" if formatted_related else "as the FINAL section"} (include contextual links and product page URL with full product name in answers, use "SDK" if platform ≠ "cloud" or "library"/"API" if platform = "cloud", never use "Framework")
-{"- **READ MORE**: Must be included as the FINAL section" if formatted_related else ""}
-- **ENDING**: Last character must be after the final {"link in Read More section" if formatted_related else "FAQ answer"}
-- **ABSOLUTELY NO CONTENT** outside these boundaries
-- **STOP WRITING IMMEDIATELY** after the {"Read More" if formatted_related else "FAQs"} section
+Platform variable: {platform}
 
-### OUTPUT REQUIREMENTS:
-- Complete markdown file starting with frontmatter
-- **Title: 40-60 characters, use exact title from {title} variable (keep product/brand names if present)**
-- **SEO Title: 40-60 characters, should match title**
-- **Description: 140-160 characters**
-- **Summary: 140-160 characters**
-- **URL: NO product/brand name in slug** (no "aspose", "groupdocs", "conholdate"), **MUST use "in" before language/platform**
-- **Introduction content with NO heading** - start directly with paragraphs
-- Always includes Prerequisites/Installation, Steps, Conclusion, and FAQs sections
-- **Only includes Complete Code Example(s) if actual code is available** - never create empty sections
-{"- Always includes Read More section with provided links" if formatted_related else "- Does NOT include Read More section (no related links)"}
-- Steps in both frontmatter (YAML list - quoted) and content (Markdown numbered list)
-- FAQs in both frontmatter (YAML - quoted) and content (Markdown)
-- **ALL code snippets wrapped with <!--[CODE_SNIPPET_START]--> and <!--[CODE_SNIPPET_END]-->**
-- **Complete Code Example section(s) ONLY if you have full, working code** - one section per task with code
-- **Use "SDK" if platform ≠ "cloud"; use "library" or "API" if platform = "cloud"**
-- **NEVER use "Framework" terminology anywhere**
-- **Use product page URL with FULL product name (including platform) whenever product is mentioned**
-- **Example**: [Aspose.Slides for .NET](URL) not [product page](URL) or [Aspose.Slides](URL)
-- **ALL content uses only markdown-safe ASCII characters**
-- **NO Unicode characters that break YAML/Hugo rendering**
-- **MINIMUM 2-3 contextual links from provided resources integrated naturally**
-- **Only link classes/methods/properties if their API reference URLs are in context**
-- **NEVER construct or guess URLs - use only URLs from context**
-- **NEVER put links inside backticks or code literals - Hugo won't render them**
-- **Product page URL linked with FULL product name (e.g., "Aspose.Slides for .NET") whenever product appears**
-- **Prerequisites/Installation section with SDK setup instructions**
-- Ending after {"Read More" if formatted_related else "FAQs"} section
-- No trailing whitespace, comments, or additional text
-- Pure markdown content only
+Examples:
+- Cloud: "Install the library", "The API provides"
+- Non-cloud: "Install the SDK", "The SDK provides"
 
-### VIOLATION PREVENTION:
-- If title is NOT 40-60 characters → OUTPUT IS INVALID
-- If seoTitle is NOT 40-60 characters → OUTPUT IS INVALID
-- If description is NOT 140-160 characters → OUTPUT IS INVALID
-- If summary is NOT 140-160 characters → OUTPUT IS INVALID
-- If URL contains product name → OUTPUT IS INVALID
-- If URL contains brand name (aspose, groupdocs, conholdate) → OUTPUT IS INVALID
-- If URL doesn't use "in" before language/platform → OUTPUT IS INVALID
-- If introduction has H2 heading → OUTPUT IS INVALID
-- If Prerequisites/Installation section missing → OUTPUT IS INVALID
-- If Steps, Conclusion, or FAQs missing → OUTPUT IS INVALID
-- If "Complete Code Example" heading exists WITHOUT actual code content → OUTPUT IS INVALID
-- If title mentions multiple tasks and Complete Code Example sections exist for tasks without code → OUTPUT IS INVALID
-{"- If Read More section missing → OUTPUT IS INVALID" if formatted_related else "- If Read More section present → OUTPUT IS INVALID"}
-- If Steps not in frontmatter → OUTPUT IS INVALID
-- If FAQs not in frontmatter → OUTPUT IS INVALID
-- If any code snippet lacks <!--[CODE_SNIPPET_START]--> and <!--[CODE_SNIPPET_END]--> → OUTPUT IS INVALID
-- If any Complete Code Example is partial or has placeholders → OUTPUT IS INVALID
-- If any text before frontmatter or after {"Read More" if formatted_related else "FAQs"} → OUTPUT IS INVALID
-- If outline sections skipped → OUTPUT IS INVALID
-- If "library" or "API" used when platform ≠ "cloud" → OUTPUT IS INVALID
-- If "SDK" used when platform = "cloud" → OUTPUT IS INVALID
-- If "Framework" appears anywhere in content → OUTPUT IS INVALID
-- If product mentioned without product page URL link → OUTPUT IS INVALID
-- If product page URL uses generic anchor text like "product page" → OUTPUT IS INVALID
-- If product page URL doesn't include full product name with platform → OUTPUT IS INVALID
-- **If word count (Introduction + Prerequisites/Installation + Outline sections + Conclusion) is NOT {settings.NUMBER_OF_BLOG_WORDS} words → OUTPUT IS INVALID**
-- **If Unicode/special characters in frontmatter → OUTPUT IS INVALID**
-- **If unquoted YAML values contain colons → OUTPUT IS INVALID**
-- **If line breaks in YAML string values → OUTPUT IS INVALID**
-- **If fewer than 2 contextual links from provided resources → OUTPUT IS INVALID**
-- **If links are placed inside backticks or code literals → OUTPUT IS INVALID**
-- **If API reference links used for classes/methods whose URLs are NOT in context → OUTPUT IS INVALID**
-- **If any URL used is not found in the context → OUTPUT IS INVALID**
-- **If no links in FAQ answers → OUTPUT IS INVALID**
-- **If product page URL not used with full product name when mentioning product → OUTPUT IS INVALID**
+### PROHIBITED TERMINOLOGY
+NEVER use anywhere in content:
+❌ "Framework" - use "SDK", "library", "platform", "toolkit" instead
+❌ "free SDK" or "free library" or "free API"
+❌ "online tool" or "online app" or "web-based"
+❌ "browser-based" or "no installation required"
 
-### PRE-SUBMISSION CHECKLIST:
-Before returning the blog post, verify:
-- [ ] **Title is 40-60 characters (count manually)**
-- [ ] **SEO Title is 40-60 characters (count manually)**
-- [ ] **Description is 140-160 characters (count manually)**
-- [ ] **Summary is 140-160 characters (count manually)**
-- [ ] **Summary is 140-160 characters (count manually)**
-- [ ] **URL uses "in" before language/platform** (e.g., "in-csharp", "in-java", "in-python")
-- [ ] **NO product name in title**
-- [ ] **NO product name in seoTitle**
-- [ ] **NO product name in URL slug**
-- [ ] **URL uses "in" before language/platform** (e.g., "in-csharp", "in-java", "in-python")
-- [ ] **Introduction content has NO H2 heading** - starts directly with paragraphs
-- [ ] **Prerequisites/Installation section included** with SDK setup instructions
-- [ ] **Correct terminology used based on platform variable**: "SDK" if platform ≠ "cloud", "library"/"API" if platform = "cloud"
-- [ ] **"Framework" is NEVER used anywhere** in content
-- [ ] **Product page URL with FULL product name** (e.g., "Aspose.Slides for .NET") used whenever product is mentioned
-- [ ] **NEVER use "product page" or incomplete product name as anchor text**
-- [ ] **Only link classes/methods/properties if their API reference URLs are in context**
-- [ ] **NO links inside backticks or code literals** (e.g., no `[ClassName](URL)`)
-- [ ] **All URLs used are verified to exist in context**
-- [ ] **No constructed or guessed URLs** - only use exact URLs from context
-- [ ] **Steps section mentions classes/methods (links only if URLs in context)**
-- [ ] **Complete Code Example sections ONLY exist where actual code is included**
-- [ ] **NO "Complete Code Example" headings without code content**
-- [ ] No em/en dashes (— –) anywhere - use hyphens (-)
-- [ ] No curly quotes (" " ' ') - use straight quotes (" ')
-- [ ] No special Unicode characters
-- [ ] All YAML values with colons are quoted
-- [ ] No line breaks in frontmatter string values
-- [ ] All steps are quoted in frontmatter
-- [ ] All FAQ questions and answers are properly formatted in YAML
-- [ ] **ALL code snippets wrapped with <!--[CODE_SNIPPET_START]--> and <!--[CODE_SNIPPET_END]-->**
-- [ ] **If multiple tasks in title: verified which have code, only created sections for those**
-- [ ] **Each Complete Code Example section has FULL working code (no placeholders)**
-- [ ] **Each Complete Code Example section is independently usable**
-- [ ] **At least 2-3 contextual links from provided resources included naturally**
-- [ ] **At least 1 link in introduction content**
-- [ ] **Prerequisites/Installation section has installation code/commands**
-- [ ] **At least 1 link in Conclusion section**
-- [ ] **At least 1 link in FAQ answers**
-- [ ] **Product page URL with full product name in introduction, conclusion, and FAQs**
-- [ ] All links use descriptive anchor text (not "click here")
-- [ ] **Word count verified: Introduction + Prerequisites/Installation + Outline sections + Conclusion = {settings.NUMBER_OF_BLOG_WORDS} words**
-- [ ] **Word count EXCLUDES: Frontmatter, Steps section, Code examples, FAQs, Read More**
-- [ ] Content ends exactly after {"Read More" if formatted_related else "FAQs"} section
+ALWAYS use:
+✅ "SDK" (if platform ≠ cloud)
+✅ "library" or "API" (if platform = cloud)
+✅ "programmatic solution"
+✅ "install and integrate"
+
+Apply to: introduction, prerequisites, steps, outline, code examples, conclusion, FAQs
+
+═══════════════════════════════════════════════════════════════════════════════
+PART 4: LINKING REQUIREMENTS (CRITICAL)
+═══════════════════════════════════════════════════════════════════════════════
+
+### CONTEXT RESOURCES (MUST USE)
+Context contains:
+- Product documentation links
+- Product page URLs (MANDATORY to use)
+- API reference pages (MANDATORY when mentioning classes/methods)
+- Category pages
+- Related product pages
+- Download/installation pages
+
+### MANDATORY LINKING RULES
+1. Include 2-3+ contextual links from provided resources
+2. MUST link product page URL EVERY TIME product name is mentioned
+3. MUST link classes/methods/properties to API references when mentioned
+4. CRITICAL: Only use links explicitly provided in context
+5. NEVER construct or guess API reference URLs
+6. If class/method URL NOT in context → mention as plain text, no link
+7. Link naturally within paragraphs (not just FAQs)
+8. Use descriptive anchor text (not "click here")
+9. NEVER put links inside backticks or code literals
+
+### PRODUCT NAME LINKING (MANDATORY - CRITICAL)
+EVERY TIME you mention the product name, you MUST link it to the product page:
+
+FORMAT: [Full Product Name with Platform](product_page_url)
+
+EXAMPLES:
+✅ [Aspose.Slides for .NET](https://products.aspose.com/slides/net/)
+✅ [GroupDocs.Conversion for Java](https://products.groupdocs.com/conversion/java/)
+✅ [Conholdate.Total for Python](https://products.conholdate.com/total/python-net/)
+
+REQUIREMENTS:
+- MUST include full product name with platform
+- MUST use product page URL from context
+- Apply EVERY time product is mentioned in:
+  * Introduction paragraphs
+  * Prerequisites/Installation section
+  * Steps section
+  * Outline sections
+  * Conclusion section
+  * FAQ answers
+
+### LINKING FORMAT - DO'S AND DON'TS
+
+PRODUCT PAGE LINKS (MANDATORY):
+✅ [Aspose.Slides for .NET](URL) - Full product name with platform
+✅ [GroupDocs.Viewer for Java](URL) - Full product name with platform
+❌ [product page](URL) - Generic text
+❌ [Aspose.Slides](URL) - Missing platform
+❌ [the SDK](URL) - Not using product name
+
+API REFERENCE LINKS (ONLY IF URL IN CONTEXT):
+✅ Initialize the [Presentation](URL) class - Link outside backticks
+✅ Use the [Save](URL) method - Link outside backticks
+❌ Initialize the `[Presentation](URL)` class - Link inside backticks
+❌ Use `[Save](URL).PNG` - Link inside code literal
+❌ [ImageFormat](URL).PNG - Appending to URL breaks link
+
+If URL NOT in context:
+✅ Initialize the Presentation class - Plain text, no link
+✅ Use the Save method - Plain text, no link
+
+DOCUMENTATION LINKS:
+- "Learn more in the [documentation](URL)"
+- "See the [API reference](URL) for details"
+
+DOWNLOAD LINKS:
+- "[Download the SDK](URL)" (if platform ≠ cloud)
+- "[Download the library](URL)" (if platform = cloud)
+
+### LINK PLACEMENT BEST PRACTICES
+- Integrate naturally within sentences
+- Place where readers logically want more info
+- Don't cluster multiple links unless necessary
+- Ensure links add value, not just SEO
+- Verify all URLs from context before using
+- MUST link product name EVERY time it appears
+
+═══════════════════════════════════════════════════════════════════════════════
+PART 5: CODE SNIPPET REQUIREMENTS (CRITICAL)
+═══════════════════════════════════════════════════════════════════════════════
+
+### MANDATORY CODE WRAPPER FORMAT
+ALL code snippets MUST use:
+
+<!--[CODE_SNIPPET_START]-->
+```language
+// Your code here
+```
+<!--[CODE_SNIPPET_END]-->
+
+### CODE SNIPPET TYPES
+1. **Prerequisites/Installation**: Installation commands
+2. **Steps Section**: Partial code illustrating specific actions
+3. **Outline Sections**: Code chunks broken down for explanation
+4. **Complete Code Examples**: FULL working code (copy-paste ready)
+
+### COMPLETE CODE EXAMPLE REQUIREMENTS
+- FULL working code for specific task
+- Copy-paste ready (no "..." placeholders)
+- All imports/dependencies included
+- Proper initialization and error handling
+- Well-commented for clarity
+- Focus on ONE task per section
+- Independent and standalone usable
+- Use <!--[COMPLETE_CODE_SNIPPET_START]--> wrapper
+
+═══════════════════════════════════════════════════════════════════════════════
+PART 6: WRITING GUIDELINES
+═══════════════════════════════════════════════════════════════════════════════
+
+### WORD COUNT TARGET
+Introduction + Prerequisites + Outline sections + Conclusion = {settings.NUMBER_OF_BLOG_WORDS} words
+
+EXCLUDED from word count:
+- Frontmatter
+- Steps section
+- Code examples
+- FAQs
+{'- Read More' if formatted_related else ''}
+
+### TONE AND STYLE
+- Professional but approachable
+- Technical accuracy is paramount
+- Clear, concise explanations
+- Natural integration of keywords
+- Avoid over-formatting (minimal bold/lists unless needed)
+- Use complete paragraphs for most sections
+- Lists/bullets only when explicitly needed
+- NEVER use casual or promotional language about "free" offerings
+
+### CONTENT QUALITY
+- Accurate technical information
+- Practical, actionable guidance
+- Real-world examples where helpful
+- Clear progression from basic to advanced
+- Address common use cases and challenges
+- Focus on programmatic implementation, not web tools
+
+═══════════════════════════════════════════════════════════════════════════════
+PART 7: VALIDATION CHECKLIST
+═══════════════════════════════════════════════════════════════════════════════
+
+OUTPUT IS INVALID IF:
+❌ Title does NOT match {{title}} variable exactly
+❌ SEO Title does NOT match {{title}} variable exactly
+❌ Title has been modified, shortened, or adjusted in any way
+❌ Description NOT 140-160 characters
+❌ Summary NOT 140-160 characters
+❌ URL contains product/brand name
+❌ URL missing "in" before language/platform
+❌ Introduction has H2 heading
+❌ Prerequisites/Installation missing
+❌ Steps, Conclusion, or FAQs missing
+❌ "Complete Code Example" heading without code content
+❌ Multiple task title but sections for tasks without code
+{'❌ Read More section missing' if formatted_related else '❌ Read More section present'}
+❌ Steps not in frontmatter
+❌ FAQs not in frontmatter
+❌ Code snippet lacks wrapper tags
+❌ Complete Code Example has placeholders
+❌ Text before frontmatter or after {'Read More' if formatted_related else 'FAQs'}
+❌ Outline sections skipped
+❌ Wrong terminology for platform type
+❌ "Framework" appears anywhere
+❌ Product mentioned without product page URL link
+❌ Product page URL uses generic anchor text
+❌ Product URL missing platform in name
+❌ Word count NOT {settings.NUMBER_OF_BLOG_WORDS} words
+❌ Unicode/special chars in frontmatter
+❌ Unquoted YAML values with colons
+❌ Line breaks in YAML strings
+❌ Fewer than 2 contextual links
+❌ Links inside backticks/code literals
+❌ API links for classes without URLs in context
+❌ URLs not found in context
+❌ No links in FAQ answers
+❌ Content mentions "free SDK" or "free library"
+❌ Content mentions "online tool" or "online app"
+❌ Product name appears WITHOUT product page link
+
+### PRE-SUBMISSION VERIFICATION
+Before submitting, manually verify:
+□ Title: EXACT match to {{title}} variable - NO modifications
+□ SEO Title: EXACT match to {{title}} variable - NO modifications
+□ Title NOT modified, shortened, or adjusted
+□ Description: 140-160 chars
+□ Summary: 140-160 chars
+□ URL: Uses "in" before language, no brands (URL only - not title)
+□ Brand/product names KEPT in title and seoTitle fields
+□ Introduction: No H2, has paragraph content
+□ Prerequisites/Installation: Included with setup
+□ Correct terminology: SDK or library/API based on platform
+□ "Framework" NEVER used
+□ "free SDK/library/API" NEVER used
+□ "online tool/app" NEVER used
+□ Product page: Full name with platform as anchor
+□ Product linked EVERY time it's mentioned
+□ API links: Only if URLs in context
+□ NO links in backticks/code literals
+□ All URLs verified in context
+□ Steps: Mention classes/methods (link if URL exists)
+□ Complete Code: Only where actual code included
+□ NO empty "Complete Code Example" headings
+□ No em/en dashes, curly quotes, Unicode
+□ YAML values with colons are quoted
+□ All steps quoted in frontmatter
+□ FAQs properly formatted in YAML
+□ ALL code wrapped with snippet tags
+□ Multiple tasks: Verified which have code
+□ Each Complete Code: Full working code
+□ 2-3+ contextual links included naturally
+□ Links in intro, prerequisites, conclusion, FAQs
+□ Product page URL in intro, conclusion, FAQs
+□ Descriptive anchor text (not "click here")
+□ Word count: {settings.NUMBER_OF_BLOG_WORDS} words (excluding frontmatter/steps/code/FAQs/read-more)
+□ Content ends exactly after {'Read More' if formatted_related else 'FAQs'}
+
+═══════════════════════════════════════════════════════════════════════════════
+PART 8: EXECUTION INSTRUCTIONS
+═══════════════════════════════════════════════════════════════════════════════
+
+### STEP-BY-STEP PROCESS
+1. Start with frontmatter - USE EXACT {{title}} for both title and seoTitle fields
+2. Write introduction content (no heading, 2-3 paragraphs, link product page)
+3. Create Prerequisites/Installation section
+4. Write Steps section (4-6 actionable steps)
+5. Follow outline sections exactly as provided
+6. Add Complete Code Example(s) ONLY if you have code
+7. Write Conclusion section (link product page)
+8. Create FAQs section (3-4 questions, link product page in answers)
+{'9. Add Read More section with provided links' if formatted_related else '9. DO NOT add Read More section'}
+10. STOP - no content after final section
+
+### CRITICAL REMINDERS
+- DO NOT modify the {{title}} variable - use it exactly as provided
+- Title and seoTitle MUST be identical to {{title}}
+- Only remove brand/product names from URL slug, NOT from title fields
+
+### QUALITY STANDARDS
+- Technical accuracy: 100%
+- Markdown safety: 100%
+- Link validation: All URLs from context
+- Code completeness: Production-ready or skip
+- Character limits: Strict adherence
+- Terminology: Context-aware (platform-based)
+- Structure: Exact order, no deviations
+- Product linking: EVERY mention must be linked
+
+### FINAL OUTPUT
+- Pure markdown file
+- Starts with frontmatter
+- Ends after {'Read More' if formatted_related else 'FAQs'}
+- No trailing whitespace/comments
+- No text outside defined boundaries
+- All requirements met, verified, validated
+- Product name linked EVERY time it appears
+- NO mention of "free" or "online tool"
+
+═══════════════════════════════════════════════════════════════════════════════
+BEGIN WRITING NOW
+═══════════════════════════════════════════════════════════════════════════════
 """
 
 def get_title_prompt(topic: str, product: str, keywords: str ) -> str:

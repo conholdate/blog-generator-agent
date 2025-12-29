@@ -111,7 +111,8 @@ class BlogOrchestrator:
             blog_outline = topics_raw_data.get("outline")
             post_topic = sanitize_markdown_title(post_topic)
             
-            print(" Generating content now")
+            print(f" Generating content now.")
+       
             agent = Agent(
                 name="blog-writer-agent",
                 instructions=prompts.get_blog_writer_prompt(
