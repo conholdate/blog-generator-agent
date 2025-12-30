@@ -1,4 +1,4 @@
-import re, ast, json, sys, os
+import re, sys, os
 from datetime import datetime
 import requests
 from typing import Dict, Any, Optional
@@ -184,155 +184,75 @@ def slugify(text: str) -> str:
 
     return text
 
+import re
+
 def sanitize_markdown_title(title: str) -> str:
-    """
-    Removes special characters that can break Markdown formatting,
-    such as ':', '|', '`', '*', etc., while keeping letters,
-    numbers, spaces, and basic punctuation.
-    
-    Also converts the title to proper Title Case with smart handling of:
-    - Common lowercase words (a, an, the, in, on, at, to, for, with, etc.)
-    - Programming terms (C#, .NET, API, SDK, JSON, XML, etc.)
-    - Abbreviations and acronyms
-    
-    Example:
-        Input: "convert PDF to jpg in c# with a powerful sdk"
-        Output: "Convert PDF to JPG in C# with a Powerful SDK"
-    """
-    # Remove markdown-breaking characters
+    # Remove markdown-breaking characters (keeping common punctuation)
     sanitized = re.sub(r'[:`*>|\\/\[\](){}_~]', '', title)
     
     # Replace multiple spaces with a single space
     sanitized = re.sub(r'\s+', ' ', sanitized)
-    
-    # Trim extra spaces at the ends
     sanitized = sanitized.strip()
     
     # Convert to title case with smart handling
-    sanitized = smart_title_case(sanitized)
-    
-    return sanitized
-
+    return smart_title_case(sanitized)
 
 def smart_title_case(text: str) -> str:
-    """
-    Converts text to Title Case with intelligent handling of:
-    - Articles and prepositions (kept lowercase unless first/last word)
-    - Programming language names (C#, .NET, etc.)
-    - Common technical abbreviations (API, SDK, JSON, XML, HTML, CSS, etc.)
-    - File formats (PDF, JPG, PNG, DOCX, etc.)
-    
-    Args:
-        text: Input string to convert
-        
-    Returns:
-        Title-cased string with proper capitalization
-    """
-    # Words that should remain lowercase (unless first or last word)
     lowercase_words = {
         'a', 'an', 'the', 'and', 'but', 'or', 'nor', 'for', 'yet', 'so',
         'at', 'by', 'in', 'of', 'on', 'to', 'up', 'as', 'is', 'if',
         'with', 'from', 'into', 'via', 'per', 'vs', 'etc'
     }
     
-    # Technical terms and abbreviations that should be uppercase
     uppercase_terms = {
-        # Programming languages
-        'c#': 'C#',
-        'csharp': 'CSharp',
-        'vb': 'VB',
-        'sql': 'SQL',
-        'php': 'PHP',
-        'css': 'CSS',
-        'html': 'HTML',
-        'xml': 'XML',
-        'json': 'JSON',
-        'yaml': 'YAML',
-        
-        # Frameworks and platforms
-        '.net': '.NET',
-        'dotnet': '.NET',
-        'nodejs': 'Node.js',
-        'node.js': 'Node.js',
-        
-        # Common abbreviations
-        'api': 'API',
-        'sdk': 'SDK',
-        'rest': 'REST',
-        'http': 'HTTP',
-        'https': 'HTTPS',
-        'url': 'URL',
-        'uri': 'URI',
-        'ui': 'UI',
-        'ux': 'UX',
-        'ide': 'IDE',
-        'cli': 'CLI',
-        'gui': 'GUI',
-        'ajax': 'AJAX',
-        
-        # File formats
-        'pdf': 'PDF',
-        'jpg': 'JPG',
-        'jpeg': 'JPEG',
-        'png': 'PNG',
-        'gif': 'GIF',
-        'svg': 'SVG',
-        'bmp': 'BMP',
-        'tiff': 'TIFF',
-        'docx': 'DOCX',
-        'xlsx': 'XLSX',
-        'pptx': 'PPTX',
-        'txt': 'TXT',
-        'csv': 'CSV',
-        'md': 'MD',
-        'zip': 'ZIP',
-        'rar': 'RAR',
-        
-        # Other technical terms
-        'io': 'IO',
-        'os': 'OS',
-        'db': 'DB',
-        'ai': 'AI',
-        'ml': 'ML',
-        'ocr': 'OCR',
-        'oauth': 'OAuth',
-        'jwt': 'JWT',
-        'seo': 'SEO',
-        'crm': 'CRM',
-        'erp': 'ERP',
+        'c#': 'C#', 'csharp': 'CSharp', 'sql': 'SQL', 'php': 'PHP', 
+        'css': 'CSS', 'html': 'HTML', 'xml': 'XML', 'json': 'JSON', 
+        '.net': '.NET', 'api': 'API', 'sdk': 'SDK', 'pdf': 'PDF', 
+        'pptx': 'PPTX', 'jpg': 'JPG', 'png': 'PNG'
     }
-    
-    # Split into words
-    words = text.split()
-    
-    if not words:
-        return text
-    
-    result = []
-    
-    for i, word in enumerate(words):
-        is_first = (i == 0)
-        is_last = (i == len(words) - 1)
+
+    def process_word(word: str, is_first: bool, is_last: bool) -> str:
+        if not word: return ""
         
         word_lower = word.lower()
-        
-        # Check if it's a known uppercase term
         if word_lower in uppercase_terms:
-            result.append(uppercase_terms[word_lower])
-        # Check if it should be lowercase (and not first/last word)
-        elif word_lower in lowercase_words and not is_first and not is_last:
-            result.append(word_lower)
-        # Check if it's already an acronym (all uppercase)
-        elif word.isupper() and len(word) > 1:
-            result.append(word)  # Keep acronyms as-is
-        # Check if it contains numbers and uppercase (e.g., "C++", "MP3")
-        elif any(c.isupper() for c in word) and any(c.isdigit() for c in word):
-            result.append(word)  # Keep mixed alphanumeric as-is
-        # Default: Title case (capitalize first letter)
-        else:
-            result.append(word.capitalize())
+            return uppercase_terms[word_lower]
+
+        # 1. Handle all types of dashes (Standard, Non-breaking, En, Em)
+        dash_pattern = r'([\-\u2011\u2013\u2014])'
+        if re.search(dash_pattern, word):
+            parts = re.split(dash_pattern, word)
+            processed = []
+            for i, p in enumerate(parts):
+                if re.match(dash_pattern, p):
+                    processed.append(p)
+                else:
+                    # Inner segments follow standard casing rules
+                    is_sub_first = is_first and i == 0
+                    is_sub_last = is_last and i == len(parts) - 1
+                    processed.append(process_word(p, is_sub_first, is_sub_last))
+            return "".join(processed)
+
+        # 2. Handle dot-separated segments (e.g., Aspose.Slides)
+        if '.' in word and word.count('.') <= 2:
+            parts = word.split('.')
+            return '.'.join([process_word(p, is_first and i==0, False) for i, p in enumerate(parts)])
+
+        # 3. Default Casing Rules
+        if word_lower in lowercase_words and not is_first and not is_last:
+            return word_lower
+        
+        if word.isupper() and len(word) > 1:
+            return word
+            
+        return word.capitalize()
+
+    words = text.split()
+    if not words: return text
     
-    return ' '.join(result)
+    return ' '.join(process_word(w, i == 0, i == len(words)-1) for i, w in enumerate(words))
+
+
 
 def current_utc_date() -> str:
     """Return current UTC date in blog format."""
@@ -802,3 +722,51 @@ def replace_code_snippets_with_gists(markdown_content: str, snippets: dict, shor
     return updated_content
 
 
+def inject_file_format_links(full_markdown, FILE_FORMAT_MAPPINGS, BASE_URL):
+    # --- 1. Separate Frontmatter ---
+    # Split by '---' only at the start of lines
+    parts = re.split(r'^---$', full_markdown, maxsplit=2, flags=re.MULTILINE)
+    
+    if len(parts) >= 3:
+        frontmatter = parts[1]
+        body = parts[2]
+    else:
+        frontmatter = None
+        body = full_markdown
+
+    # --- 2. Protect Code Blocks ---
+    code_blocks = []
+    def hide_code(match):
+        code_blocks.append(match.group(0))
+        return f"%%CODE_BLOCK_{len(code_blocks)-1}%%"
+    
+    # Hide both fenced blocks (```) and inline code (`)
+    body_protected = re.sub(r'```.*?```|`.*?`', hide_code, body, flags=re.DOTALL)
+
+    # --- 3. Inject Links into Body ---
+    # Sort keys by length descending: "Markdown" comes before "MD"
+    sorted_keys = sorted(FILE_FORMAT_MAPPINGS.keys(), key=len, reverse=True)
+    pattern = r'\b(' + '|'.join(re.escape(k) for k in sorted_keys) + r')\b'
+    
+    linked_terms = set()
+
+    def replace_logic(match):
+        found_text = match.group(0)
+        # Find the dictionary key that matches the found text (case-insensitive)
+        lookup_key = next((k for k in sorted_keys if k.lower() == found_text.lower()), None)
+        
+        if lookup_key and lookup_key.lower() not in linked_terms:
+            linked_terms.add(lookup_key.lower())
+            return f"[{found_text}]({BASE_URL}{FILE_FORMAT_MAPPINGS[lookup_key]})"
+        return found_text
+
+    # Apply replacement (re.IGNORECASE handles 'markdown' vs 'Markdown')
+    body_linked = re.sub(pattern, replace_logic, body_protected, flags=re.IGNORECASE)
+
+    # --- 4. Restore and Reassemble ---
+    for i, block in enumerate(code_blocks):
+        body_linked = body_linked.replace(f"%%CODE_BLOCK_{i}%%", block)
+    
+    if frontmatter:
+        return f"---{frontmatter}---\n{body_linked}"
+    return body_linked

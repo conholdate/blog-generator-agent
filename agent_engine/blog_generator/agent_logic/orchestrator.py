@@ -6,7 +6,8 @@ from agents import Agent, Runner, OpenAIChatCompletionsModel, set_tracing_disabl
 from config import settings
 from tools.mcp_tools import generate_markdown_file, fetch_category_related_articles, gist_injector
 from utils import prompts
-from utils.helpers import sanitize_markdown_title, prepare_context, get_productInfo, get_topic_by_index
+from utils.file_format_mappings import FILE_FORMAT_MAPPINGS, BASE_URL
+from utils.helpers import sanitize_markdown_title, prepare_context, get_productInfo, get_topic_by_index, inject_file_format_links
 from utils.metricsRecorder import MetricsRecorder
 import json
 import os
@@ -80,12 +81,10 @@ class BlogOrchestrator:
         post_topic = topics_raw_data.pop("topic")
         product_name = topics_raw_data.pop("product")
         platform = topics_raw_data.pop("platform")
-
-        print(f"updateee --- {topics_raw_data}", flush=True)
         
         # Get product info
         product_info = get_productInfo(product_name, platform, self.products)
-        
+        print(f"Product Infor --- {product_info}", flush=True)
         # Start metrics tracking
         self.metrics.start_job(
             product=product_name,
@@ -132,11 +131,12 @@ class BlogOrchestrator:
             print(f" Injecting gists now -- {result.final_output}", flush=True)
             
             jistified = await gist_injector(result.final_output, post_topic)
+
             text_output = jistified.content[0].text
             data = json.loads(text_output)
             final_content = data["jistified_content"]
-
-            print(f"💾 Generating markdown file")
+            final_content = inject_file_format_links(final_content, FILE_FORMAT_MAPPINGS, BASE_URL)
+            print(f" Generating markdown file")
             file_res = await generate_markdown_file(
                 title=post_topic,
                 content=final_content,

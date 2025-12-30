@@ -11,11 +11,11 @@ engine:
   # === Core KRA inputs ===
   # input_file: "content/Aspose/keywords.csv"
   use-serp-api: true
-  serp-topic: "convert CSV to Excel"
+  serp-topic: "convert PPTX to Markdown"
 
-  brand: "Aspose"
-  product: "Aspose.Cells"
-  platform: "java"           # used as --platform; also passed into prompt as fw_label
+  brand: "aspose"
+  product: "Aspose.Slides"
+  platform: "Java"           # used as --platform; also passed into prompt as fw_label
   # locale: "en-US"
 
   # === KRA behavior tuning ===
