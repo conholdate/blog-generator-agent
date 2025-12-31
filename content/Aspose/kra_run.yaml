@@ -11,7 +11,7 @@ engine:
   # === Core KRA inputs ===
   # input_file: "content/Aspose/keywords.csv"
   use-serp-api: true
-  serp-topic: "convert PPTX to Markdown"
+  serp-topic: "Generate an SVG Image from a Slide"
 
   brand: "aspose"
   product: "Aspose.Slides"

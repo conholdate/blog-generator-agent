@@ -184,7 +184,6 @@ def slugify(text: str) -> str:
 
     return text
 
-import re
 
 def sanitize_markdown_title(title: str) -> str:
     # Remove markdown-breaking characters (keeping common punctuation)
@@ -724,7 +723,6 @@ def replace_code_snippets_with_gists(markdown_content: str, snippets: dict, shor
 
 def inject_file_format_links(full_markdown, FILE_FORMAT_MAPPINGS, BASE_URL):
     # --- 1. Separate Frontmatter ---
-    # Split by '---' only at the start of lines
     parts = re.split(r'^---$', full_markdown, maxsplit=2, flags=re.MULTILINE)
     
     if len(parts) >= 3:
@@ -734,17 +732,21 @@ def inject_file_format_links(full_markdown, FILE_FORMAT_MAPPINGS, BASE_URL):
         frontmatter = None
         body = full_markdown
 
-    # --- 2. Protect Code Blocks ---
-    code_blocks = []
-    def hide_code(match):
-        code_blocks.append(match.group(0))
-        return f"%%CODE_BLOCK_{len(code_blocks)-1}%%"
+    # --- 2. Protect Code Blocks and Existing Links ---
+    placeholders = []
     
-    # Hide both fenced blocks (```) and inline code (`)
-    body_protected = re.sub(r'```.*?```|`.*?`', hide_code, body, flags=re.DOTALL)
+    def hide_content(match):
+        placeholders.append(match.group(0))
+        return f"%%CONTENT_HOLDER_{len(placeholders)-1}%%"
+    
+    # 2a. Hide fenced blocks (```) and inline code (`)
+    body_protected = re.sub(r'```.*?```|`.*?`', hide_content, body, flags=re.DOTALL)
+    
+    # 2b. Hide existing Markdown links: [Text](URL)
+    # This prevents the lookup from finding terms inside [Markdown](link)
+    body_protected = re.sub(r'\[([^\]]+)\]\(([^)]+)\)', hide_content, body_protected)
 
     # --- 3. Inject Links into Body ---
-    # Sort keys by length descending: "Markdown" comes before "MD"
     sorted_keys = sorted(FILE_FORMAT_MAPPINGS.keys(), key=len, reverse=True)
     pattern = r'\b(' + '|'.join(re.escape(k) for k in sorted_keys) + r')\b'
     
@@ -752,7 +754,6 @@ def inject_file_format_links(full_markdown, FILE_FORMAT_MAPPINGS, BASE_URL):
 
     def replace_logic(match):
         found_text = match.group(0)
-        # Find the dictionary key that matches the found text (case-insensitive)
         lookup_key = next((k for k in sorted_keys if k.lower() == found_text.lower()), None)
         
         if lookup_key and lookup_key.lower() not in linked_terms:
@@ -760,12 +761,12 @@ def inject_file_format_links(full_markdown, FILE_FORMAT_MAPPINGS, BASE_URL):
             return f"[{found_text}]({BASE_URL}{FILE_FORMAT_MAPPINGS[lookup_key]})"
         return found_text
 
-    # Apply replacement (re.IGNORECASE handles 'markdown' vs 'Markdown')
     body_linked = re.sub(pattern, replace_logic, body_protected, flags=re.IGNORECASE)
 
     # --- 4. Restore and Reassemble ---
-    for i, block in enumerate(code_blocks):
-        body_linked = body_linked.replace(f"%%CODE_BLOCK_{i}%%", block)
+    # Restore in reverse order to handle any potential nesting issues
+    for i in range(len(placeholders) - 1, -1, -1):
+        body_linked = body_linked.replace(f"%%CONTENT_HOLDER_{i}%%", placeholders[i])
     
     if frontmatter:
         return f"---{frontmatter}---\n{body_linked}"

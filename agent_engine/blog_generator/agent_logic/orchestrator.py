@@ -106,7 +106,12 @@ class BlogOrchestrator:
             print(f"response keyword -- {topics_raw_data}", flush=True)
             primary = topics_raw_data.get("keywords", {}).get("primary", [])
             secondary = topics_raw_data.get("keywords", {}).get("secondary", [])
+            print(f"primary -- {primary}")
+            print(f"secondary -- {secondary}")
+
             f_keywords = primary + secondary
+            print(f"f_keywords -- {f_keywords}")
+  
             blog_outline = topics_raw_data.get("outline")
             post_topic = sanitize_markdown_title(post_topic)
             

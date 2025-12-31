@@ -38,7 +38,7 @@ def get_blog_writer_prompt(
 
     # Date
     current_date = datetime.utcnow().strftime("%a, %d %b %Y %H:%M:%S +0000")
-
+    primary_keyword = keywords[0]
     # FULL PROMPT
     return f"""
 You are an expert technical blog writer. Write a detailed, SEO-optimized blog post about "{title}" using keywords: {keywords}
@@ -130,7 +130,7 @@ description: "[140-160 chars, NO colons/special chars/line breaks]"
 date: {current_date}
 lastmod: {current_date}
 draft: false
-url: {url}
+url: /{data.get("urlPrefix")}/{url}/
 author: "{author}"
 summary: "[140-160 chars, wrap in quotes if needed]"
 tags: {json.dumps(keywords)}
@@ -452,11 +452,38 @@ EXCLUDED from word count:
 - FAQs
 {'- Read More' if formatted_related else ''}
 
+### PRIMARY KEYWORD USAGE (CRITICAL - SEO REQUIREMENT)
+The PRIMARY keyword is the first keyword in the list: {primary_keyword}
+
+**MANDATORY REQUIREMENT:**
+- PRIMARY keyword MUST appear AT LEAST 5 TIMES in the blog post body
+- Count includes: Introduction, Prerequisites, Steps, Outline sections, Conclusion
+- Does NOT count: Frontmatter, FAQs, Read More section
+- Use naturally within sentences - avoid keyword stuffing
+- Variations are acceptable but exact keyword should appear 5+ times
+- **NEVER surround primary keyword with asterisks or make it italic/bold**
+- **NEVER use markdown formatting around the primary keyword**
+- Primary keyword should appear as plain text in natural sentences
+
+**CORRECT examples:**
+- "When working with {primary_keyword}, developers need to..."
+- "The {primary_keyword} process involves several steps..."
+- "To implement {primary_keyword} functionality..."
+- "Best practices for {primary_keyword} include..."
+- "Common {primary_keyword} scenarios require..."
+
+**INCORRECT examples:**
+- ❌ "When working with *{primary_keyword}*, developers..." (has asterisks)
+- ❌ "The **{primary_keyword}** process involves..." (has bold)
+- ❌ "To implement _{primary_keyword}_ functionality..." (has underscores)
+- ❌ "Best practices for `{primary_keyword}` include..." (has backticks)
+
 ### TONE AND STYLE
 - Professional but approachable
 - Technical accuracy is paramount
 - Clear, concise explanations
-- Natural integration of keywords
+- Natural integration of all keywords (primary keyword minimum 5 times)
+- **Primary keyword MUST appear as plain text without any markdown formatting (no asterisks, bold, italic, backticks)**
 - Avoid over-formatting (minimal bold/lists unless needed)
 - Use complete paragraphs for most sections
 - Lists/bullets only when explicitly needed
@@ -469,15 +496,19 @@ EXCLUDED from word count:
 - Clear progression from basic to advanced
 - Address common use cases and challenges
 - Focus on programmatic implementation, not web tools
+- Ensure primary keyword density meets 5+ occurrences requirement
 
 ═══════════════════════════════════════════════════════════════════════════════
 PART 7: VALIDATION CHECKLIST
 ═══════════════════════════════════════════════════════════════════════════════
 
 OUTPUT IS INVALID IF:
-❌ Title does NOT match {{title}} variable exactly
-❌ SEO Title does NOT match {{title}} variable exactly
+❌ Title does NOT match title variable exactly
+❌ SEO Title does NOT match title variable exactly
 ❌ Title has been modified, shortened, or adjusted in any way
+❌ PRIMARY keyword appears fewer than 5 times in blog body
+❌ PRIMARY keyword is surrounded by asterisks, underscores, or backticks anywhere
+❌ PRIMARY keyword has any markdown formatting applied to it
 ❌ Description NOT 140-160 characters
 ❌ Summary NOT 140-160 characters
 ❌ URL contains product/brand name
@@ -514,9 +545,12 @@ OUTPUT IS INVALID IF:
 
 ### PRE-SUBMISSION VERIFICATION
 Before submitting, manually verify:
-□ Title: EXACT match to {{title}} variable - NO modifications
-□ SEO Title: EXACT match to {{title}} variable - NO modifications
+□ Title: EXACT match to title variable - NO modifications
+□ SEO Title: EXACT match to title variable - NO modifications
 □ Title NOT modified, shortened, or adjusted
+□ PRIMARY keyword used at least 5 times in blog body
+□ PRIMARY keyword appears as PLAIN TEXT (no asterisks, bold, italic, backticks)
+□ Primary keyword counted in: Intro, Prerequisites, Steps (explanations), Outline, Conclusion
 □ Description: 140-160 chars
 □ Summary: 140-160 chars
 □ URL: Uses "in" before language, no brands (URL only - not title)
@@ -546,7 +580,7 @@ Before submitting, manually verify:
 □ Links in intro, prerequisites, conclusion, FAQs
 □ Product page URL in intro, conclusion, FAQs
 □ Descriptive anchor text (not "click here")
-□ Word count: {settings.NUMBER_OF_BLOG_WORDS} words (excluding frontmatter/steps/code/FAQs/read-more)
+□ Word count: word_count_target words (excluding frontmatter/steps/code/FAQs/read-more)
 □ Content ends exactly after {'Read More' if formatted_related else 'FAQs'}
 
 ═══════════════════════════════════════════════════════════════════════════════
@@ -554,21 +588,24 @@ PART 8: EXECUTION INSTRUCTIONS
 ═══════════════════════════════════════════════════════════════════════════════
 
 ### STEP-BY-STEP PROCESS
-1. Start with frontmatter - USE EXACT {{title}} for both title and seoTitle fields
-2. Write introduction content (no heading, 2-3 paragraphs, link product page)
-3. Create Prerequisites/Installation section
-4. Write Steps section (4-6 actionable steps)
-5. Follow outline sections exactly as provided
+1. Start with frontmatter - USE EXACT title for both title and seoTitle fields
+2. Write introduction content (no heading, 2-3 paragraphs, link product page, include primary keyword)
+3. Create Prerequisites/Installation section (include primary keyword naturally)
+4. Write Steps section (4-6 actionable steps, use primary keyword in explanations)
+5. Follow outline sections exactly as provided (integrate primary keyword naturally)
 6. Add Complete Code Example(s) ONLY if you have code
-7. Write Conclusion section (link product page)
+7. Write Conclusion section (link product page, include primary keyword)
 8. Create FAQs section (3-4 questions, link product page in answers)
-{'9. Add Read More section with provided links' if formatted_related else '9. DO NOT add Read More section'}
-10. STOP - no content after final section
+9. VERIFY primary keyword appears at least 5 times in body (not counting FAQs/Read More)
+10. Add Read More section with provided links OR skip if not provided
+11. STOP - no content after final section
 
 ### CRITICAL REMINDERS
-- DO NOT modify the {{title}} variable - use it exactly as provided
-- Title and seoTitle MUST be identical to {{title}}
+- DO NOT modify the title variable - use it exactly as provided
+- Title and seoTitle MUST be identical to title variable
 - Only remove brand/product names from URL slug, NOT from title fields
+- PRIMARY keyword MUST appear 5+ times in blog body naturally
+- Count primary keyword in: Introduction, Prerequisites, Steps, Outline, Conclusion only
 
 ### QUALITY STANDARDS
 - Technical accuracy: 100%

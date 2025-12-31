@@ -1,19 +1,19 @@
 # Blog Topics for Aspose.Slides (en-US)
 
 - **Brand:** aspose
-- **Product:** Aspose.Words
+- **Product:** Aspose.Slides
 - **Platform:** java
 - **Run ID:** a58f4ce0
 - **Topics:** 11
 
 ---
 
-## 1. How to Convert Docx to PDF Using Java
+## 1. Generate an SVG Image from a Slide
 - **Cluster ID:** `c1`
-- **Target persona:** Java developers needing to automate documentation from Docx files.
-- **Angle:** A hands‑on tutorial showing Java developers the exact code to turn docx files into clean pdf.
-- **Primary keyword:** `how to convert Docx to PDF using java`
-- **Supporting keywords:** `word to pdf`, `docx to pdf`, `doc to pdf`
+- **Target persona:** Java developers 
+- **Angle:** A hands‑on tutorial showing Java developers 
+- **Primary keyword:** `Generate an SVG Image from a Slide`
+- **Supporting keywords:** `PPTX to pdf`, `docx to pdf`, `doc to pdf`
 
 **Suggested outline:**
 - Setting up Aspose.Slides for Java in your project

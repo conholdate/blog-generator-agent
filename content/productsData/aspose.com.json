@@ -27,7 +27,7 @@
     "APIReferenceURL" : "https://reference.aspose.com/cells/java/",
     "FreeAppsURL" : "https://products.aspose.app/cells",
     "ForumsURL" : "https://forum.aspose.com/c/cells/",
-    "InstallCommand" : "<dependency>\n    <groupId>com.aspose</groupId>\n    <artifactId>aspose-cells</artifactId>\n    <version>25.12</version>\n</dependency>",
+    "InstallCommand" : "<repository>\n  <id>AsposeJavaAPI</id>\n  <name>Aspose Java API</name>\n  <url>https://repository.aspose.com/repo/</url>\n</repository>\n<dependency>\n    <groupId>com.aspose</groupId>\n    <artifactId>aspose-cells</artifactId>\n    <version>25.12</version>\n</dependency>",
     "urlPrefix" : "cells",
     "license":"https://purchase.aspose.com/temporary-license/"
   },
@@ -1227,7 +1227,7 @@
   "APIReferenceURL" : "https://reference.aspose.com/words/java/",
   "FreeAppsURL" : "https://products.aspose.app/words",
   "ForumsURL" : "https://forum.aspose.com/c/words/",
-  "InstallCommand" : "<repository>\n  <id>AsposeJavaAPI</id>\n  <name>Aspose Java API</name>\n  <url>https://repository.aspose.com/repo/</url>\n</repository>\n<dependency>\n  <groupId>com.aspose</groupId>\n  <artifactId>aspose-java</artifactId>\n  <version>25.10</version>\n <classifier>jdk17</classifier>\n </dependency>",
+  "InstallCommand" : "<repository>\n  <id>AsposeJavaAPI</id>\n  <name>Aspose Java API</name>\n  <url>https://repository.aspose.com/repo/</url>\n</repository>\n<dependency>\n  <groupId>com.aspose</groupId>\n  <artifactId>aspose-words</artifactId>\n  <version>25.12</version>\n  <classifier>jdk17</classifier>\n</dependency>",
   "urlPrefix" : "words",
   "license":"https://purchase.aspose.com/temporary-license/"
 },
