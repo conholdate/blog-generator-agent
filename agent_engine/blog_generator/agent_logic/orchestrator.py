@@ -6,6 +6,7 @@ from agents import Agent, Runner, OpenAIChatCompletionsModel, set_tracing_disabl
 from config import settings
 from tools.mcp_tools import generate_markdown_file, fetch_category_related_articles, gist_injector
 from utils import prompts
+from utils.seo_validator import validate_seo_content
 from utils.file_format_mappings import FILE_FORMAT_MAPPINGS, BASE_URL
 from utils.helpers import sanitize_markdown_title, prepare_context, get_productInfo, get_topic_by_index, inject_file_format_links
 from utils.metricsRecorder import MetricsRecorder
@@ -133,7 +134,16 @@ class BlogOrchestrator:
             )
 
             result = await Runner.run(agent, context, max_turns=10)
-            print(f" Injecting gists now -- {result.final_output}", flush=True)
+            print(f" Content Generated, Performing SEO Audti Now --", flush=True)
+            targets = {
+                "primary_keyword": f_keywords[0],
+                "target_keyword_count": 5,
+                "min_words": settings.NUMBER_OF_BLOG_WORDS
+            }
+            report = validate_seo_content(result.final_output, targets)
+            print(f" Audit completed -- {report}", flush=True)
+             
+            print(f" Injecting gists now -- ",flush=True)
             
             jistified = await gist_injector(result.final_output, post_topic)
 
@@ -147,7 +157,9 @@ class BlogOrchestrator:
                 content=final_content,
                 brand= self.brand
             )
+         
             filepath = file_res.get("output", {}).get("filepath")
+            folder_name = file_res.get("output", {}).get("folder_name")
             
             # Record success
             self.metrics.record_success(f"Blog post created: {filepath}")
@@ -162,19 +174,20 @@ class BlogOrchestrator:
             # Print and send metrics
             self.metrics.print_summary()
             print("📊 Sending metrics to Google Script...")
-            metrics_sent_for_team = await self.metrics.send_metrics_to_team()
-            metrics_sent_for_pro = await self.metrics.send_metrics_to_prod()
+            # metrics_sent_for_team = await self.metrics.send_metrics_to_team()
+            # metrics_sent_for_pro = await self.metrics.send_metrics_to_prod()
             
-            if metrics_sent_for_team and metrics_sent_for_pro:
-                print("Metrics sent successfully\n")
-            else:
-                print("Failed to send metrics (check logs)\n")
+            # if metrics_sent_for_team and metrics_sent_for_pro:
+            #     print("Metrics sent successfully\n")
+            # else:
+            #     print("Failed to send metrics (check logs)\n")
 
             return {
-                "agent_output": result.final_output,
-                "filepath": filepath,
+                "folder_name": folder_name,
                 "product": product_name,
+                "platform": platform,
                 "brand": self.brand,
+                "SEO_Score": report["score"],
                 "run_id": self.metrics.run_id,
                 "duration_ms": self.metrics.run_duration_ms,
                 "status": "success"

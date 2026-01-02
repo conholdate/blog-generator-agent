@@ -20,9 +20,7 @@ def main():
             author=args.author
         )
     )
-    print(f"Generated markdown file path: {result.get('filepath')}")
-    print(f"Platform: {result.get('platform')}")
-    print(f"Product: {result.get('product')}")
+    print(f"Generated blog post details : {result}")
 
 if __name__ == "__main__":
     main()

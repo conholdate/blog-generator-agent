@@ -39,7 +39,8 @@ def get_blog_writer_prompt(
     # Date
     current_date = datetime.utcnow().strftime("%a, %d %b %Y %H:%M:%S +0000")
     primary_keyword = keywords[0]
-    # FULL PROMPT
+ 
+    # FULL PROMPT.  /{data.get("urlPrefix")}/{url}/
     return f"""
 You are an expert technical blog writer. Write a detailed, SEO-optimized blog post about "{title}" using keywords: {keywords}
 
@@ -71,13 +72,41 @@ ALWAYS clarify:
 PART 1: FRONTMATTER REQUIREMENTS
 ═══════════════════════════════════════════════════════════════════════════════
 
-### TITLE REQUIREMENTS (CRITICAL - DO NOT MODIFY)
-**MANDATORY: Use the EXACT title from the {{title}} variable**
-- Title field: MUST use {{title}} exactly as provided - DO NOT modify
-- SEO Title field: MUST use {{title}} exactly as provided - DO NOT modify
-- DO NOT change, shorten, or adjust the title for character limits
+### TITLE REQUIREMENTS (CRITICAL)
+**Title Field (DO NOT MODIFY):**
+- Title field: MUST use title variable exactly as provided - DO NOT modify
+- DO NOT change, shorten, or adjust the title
 - DO NOT remove brand names or product names from title
-- The {{title}} variable is pre-validated and must be used as-is
+- The title variable is pre-validated and must be used as-is
+
+**SEO Title Field (MUST CREATE):**
+- SEO Title: MUST be created using the primary keyword
+- SEO Title MUST be 50-60 characters (including spaces) - STRICTLY ENFORCED
+- SEO Title format should be compelling and click-worthy
+- MUST include the primary keyword naturally
+- Should focus on the action/benefit/solution
+- NO brand/product names in SEO Title
+- Count characters carefully before finalizing
+
+**SEO Title Examples:**
+Primary Keyword: "convert pdf to png"
+✅ "Convert PDF to PNG: Complete Step-by-Step Guide" (51 chars)
+✅ "How to Convert PDF to PNG Files Easily in Minutes" (51 chars)
+✅ "PDF to PNG Conversion Made Simple and Fast" (43 chars) - TOO SHORT
+✅ "Master PDF to PNG Conversion: Quick Tutorial" (47 chars) - TOO SHORT
+✅ "Convert PDF to PNG Images: Complete Developer Guide" (54 chars)
+
+Primary Keyword: "excel to pdf conversion"
+✅ "Excel to PDF Conversion: Developer's Complete Guide" (53 chars)
+✅ "How to Convert Excel to PDF Programmatically" (47 chars) - TOO SHORT
+✅ "Excel to PDF Conversion Tutorial for Developers" (50 chars)
+
+**Character Count Validation for SEO Title:**
+- Count EVERY character including spaces
+- Minimum: 50 characters (reject if less)
+- Maximum: 60 characters (reject if more)
+- Must include primary keyword naturally
+- Must be grammatically correct and compelling
 
 ### CHARACTER LIMITS (FOR OTHER FIELDS ONLY)
 - Meta Description: 140-160 characters (including spaces)
@@ -170,12 +199,16 @@ PART 2: CONTENT STRUCTURE (MANDATORY SECTIONS)
 ### 1. INTRODUCTION CONTENT (NO HEADING)
 - Start directly with 2-3 paragraphs after frontmatter
 - NO H2 heading
-- Include at least 1 contextual link from resources
-- MUST link product page URL with FULL product name (e.g., "[Aspose.Slides for .NET](product_page_url)")
+- **CRITICAL: The FIRST paragraph MUST contain the product page URL**
+- **MANDATORY: Link format in first paragraph**: [Full Product Name with Platform](ProductURL)
+- Example: "Using [Aspose.Slides for Java](https://products.aspose.com/slides/java/), developers can..."
+- Example: "This guide demonstrates how [Aspose.PDF for .NET](ProductURL) enables..."
+- Include at least 1 additional contextual link in subsequent paragraphs
 - Use correct terminology based on platform (see Part 3)
 - Natural flow, explain the topic and its value
 - NEVER mention "free SDK" or "online tool"
 - Clarify this is a programmatic SDK/library for local/server use
+- Total: 2-3 paragraphs with product link in FIRST paragraph
 
 ### 2. PREREQUISITES/INSTALLATION (MANDATORY)
 ## Prerequisites
@@ -184,6 +217,8 @@ OR
 
 Content:
 - System requirements (if applicable)
+- **MUST link Download URL**: "Download the latest version from [this page](download_url)" or "Get it from the [releases page](download_url)"
+- **MUST link License URL**: "Obtain a [temporary license](license_url) for evaluation" or "Get your [license](license_url)"
 - Package manager command (NuGet, Maven, pip, npm, etc.)
 - Installation code wrapped in tags:
 
@@ -193,8 +228,8 @@ Content:
 ```
 <!--[CODE_SNIPPET_END]-->
 
-- Link to download page if available in context
-- Keep concise (2-4 paragraphs)
+- **Optional: Link Documentation**: "See the [installation guide](documentation_url) for more details"
+- Keep concise (2-4 paragraphs but MUST include download and license links)
 - NEVER mention "free" or "online"
 
 ### 3. STEPS SECTION (MANDATORY)
@@ -203,13 +238,15 @@ Content:
 Format:
 1. **[Step summary with class/method]**: Brief explanation
    - Mention classes/methods naturally
-   - Link API references ONLY if URLs in context
+   - **Link API references if URLs in context**: "Initialize the [ClassName](api_url) class"
    - NEVER put links inside backticks
    - Optional code snippet if helpful
+   - **Can reference documentation**: "For more details, see [documentation](doc_url)"
    
 2. **[Next step]**: [Explanation]
 
 3-6 steps total, each actionable and technical
+**MUST include at least 1 Documentation or API Reference link in this section**
 
 ### 4. OUTLINE SECTIONS
 Follow the provided outline exactly:
@@ -266,6 +303,8 @@ FORMAT (when included):
 - 2-3 paragraphs summarizing key points
 - Include at least 1 contextual link
 - MUST link product page URL with FULL product name: [Product Name](url)
+- **MUST link License URL**: "Get your [license](license_url) to use in production"
+- **Optional: Link Forums or Blogs**: "Explore more [tutorials](blogs_url)" or "Join our [community](forums_url)"
 - Use correct terminology based on platform
 - Natural closing, encourage next steps
 - NEVER mention "free" or "online tool"
@@ -290,6 +329,11 @@ Requirements:
 - 2-4 sentences per answer
 - Include contextual links in answers
 - Use product page URL with full product name: [Product Name](url)
+- **Suggested FAQ topics to include**:
+  - "How do I get a license?" → Link License URL
+  - "Where can I find more examples?" → Link Documentation or Blogs URL
+  - "Where can I get support?" → Link Forums URL
+  - Technical question → Link API Reference or Documentation
 - Practical questions related to topic
 - NEVER mention "free" or "online"
 
@@ -332,25 +376,70 @@ Apply to: introduction, prerequisites, steps, outline, code examples, conclusion
 PART 4: LINKING REQUIREMENTS (CRITICAL)
 ═══════════════════════════════════════════════════════════════════════════════
 
-### CONTEXT RESOURCES (MUST USE)
-Context contains:
-- Product documentation links
-- Product page URLs (MANDATORY to use)
-- API reference pages (MANDATORY when mentioning classes/methods)
-- Category pages
-- Related product pages
-- Download/installation pages
+### CONTEXT RESOURCES (MUST USE - COMPREHENSIVE LINKING)
+Context contains ALL these resource types - YOU MUST USE THEM:
+- **Product Page URL** (MANDATORY - link every time product mentioned)
+- **Documentation URL** (MANDATORY - link in Prerequisites, Steps, or Outline)
+- **API Reference URL** (MANDATORY - link when mentioning classes/methods)
+- **Download URL** (MANDATORY - link in Prerequisites/Installation section)
+- **License URL** (MANDATORY - link in Prerequisites or Conclusion)
+- Blog Category URL (optional - can link in Introduction or Conclusion)
+- Forums URL (optional - can mention for support in Conclusion or FAQs)
+- Free Apps URL (optional - avoid mentioning as per restrictions)
 
-### MANDATORY LINKING RULES
-1. Include 2-3+ contextual links from provided resources
+### MANDATORY LINKING RULES - EXPANDED
+1. Include **MINIMUM 5-7 contextual links** from provided resources (not just 2-3)
 2. MUST link product page URL EVERY TIME product name is mentioned
-3. MUST link classes/methods/properties to API references when mentioned
-4. CRITICAL: Only use links explicitly provided in context
-5. NEVER construct or guess API reference URLs
-6. If class/method URL NOT in context → mention as plain text, no link
-7. Link naturally within paragraphs (not just FAQs)
-8. Use descriptive anchor text (not "click here")
-9. NEVER put links inside backticks or code literals
+3. MUST link **Documentation URL** at least once (Prerequisites, Steps, or Outline)
+4. MUST link **API Reference URL** when mentioning any class, method, or property
+5. MUST link **Download URL** in Prerequisites/Installation section
+6. MUST link **License URL** at least once (Prerequisites or Conclusion)
+7. CRITICAL: Only use links explicitly provided in context
+8. NEVER construct or guess URLs
+9. If class/method URL NOT in context → mention as plain text, no link
+10. Link naturally within paragraphs (not just FAQs)
+11. Use descriptive anchor text (not "click here")
+12. NEVER put links inside backticks or code literals
+
+### WHERE TO USE EACH RESOURCE LINK
+
+**Product Page URL** - Use in:
+- Introduction (when first mentioning product)
+- Prerequisites/Installation (when explaining what product does)
+- Outline sections (when referencing product capabilities)
+- Conclusion (final mention of product)
+- FAQs (when answering product-related questions)
+
+**Documentation URL** - Use in:
+- Prerequisites (link to getting started docs)
+- Steps section ("For more details, see the [documentation](URL)")
+- Outline sections (when explaining complex features)
+- Example: "Learn more about configuration in the [official documentation](URL)"
+
+**API Reference URL** - Use in:
+- Steps section (when mentioning classes/methods)
+- Outline sections (when explaining APIs)
+- Example: "Initialize the [Presentation](API_URL) class"
+- Example: "Use the [save](API_URL) method"
+
+**Download URL** - Use in:
+- Prerequisites/Installation section (MANDATORY)
+- Example: "Download the latest version from the [release page](URL)"
+- Can also link External Download URL if provided
+
+**License URL** - Use in:
+- Prerequisites section ("Get a [temporary license](URL) for testing")
+- Conclusion section ("For production use, obtain a [license](URL)")
+- FAQs ("How do I get a license? Visit [this page](URL)")
+
+**Blog Category URL** - Use in:
+- Introduction or Conclusion (optional)
+- Example: "Check out more [tutorials](URL) on our blog"
+
+**Forums URL** - Use in:
+- Conclusion or FAQs (optional)
+- Example: "Need help? Visit our [support forums](URL)"
+- Example FAQ: "Where can I get support? Check the [community forums](URL)"
 
 ### PRODUCT NAME LINKING (MANDATORY - CRITICAL)
 EVERY TIME you mention the product name, you MUST link it to the product page:
@@ -504,7 +593,9 @@ PART 7: VALIDATION CHECKLIST
 
 OUTPUT IS INVALID IF:
 ❌ Title does NOT match title variable exactly
-❌ SEO Title does NOT match title variable exactly
+❌ SEO Title is NOT 50-60 characters (strict enforcement)
+❌ SEO Title does NOT include primary keyword
+❌ SEO Title contains brand/product names
 ❌ Title has been modified, shortened, or adjusted in any way
 ❌ PRIMARY keyword appears fewer than 5 times in blog body
 ❌ PRIMARY keyword is surrounded by asterisks, underscores, or backticks anywhere
@@ -514,7 +605,12 @@ OUTPUT IS INVALID IF:
 ❌ URL contains product/brand name
 ❌ URL missing "in" before language/platform
 ❌ Introduction has H2 heading
+❌ Product page URL (ProductURL) NOT linked in FIRST paragraph
 ❌ Prerequisites/Installation missing
+❌ Download URL NOT linked in Prerequisites/Installation
+❌ License URL NOT linked anywhere (Prerequisites or Conclusion)
+❌ Documentation URL NOT linked anywhere in content
+❌ Fewer than 5 total contextual links from provided resources
 ❌ Steps, Conclusion, or FAQs missing
 ❌ "Complete Code Example" heading without code content
 ❌ Multiple task title but sections for tasks without code
@@ -546,7 +642,10 @@ OUTPUT IS INVALID IF:
 ### PRE-SUBMISSION VERIFICATION
 Before submitting, manually verify:
 □ Title: EXACT match to title variable - NO modifications
-□ SEO Title: EXACT match to title variable - NO modifications
+□ SEO Title: 50-60 characters (count manually including spaces)
+□ SEO Title: Includes primary keyword naturally
+□ SEO Title: NO brand/product names included
+□ SEO Title: Compelling and click-worthy
 □ Title NOT modified, shortened, or adjusted
 □ PRIMARY keyword used at least 5 times in blog body
 □ PRIMARY keyword appears as PLAIN TEXT (no asterisks, bold, italic, backticks)
@@ -554,7 +653,16 @@ Before submitting, manually verify:
 □ Description: 140-160 chars
 □ Summary: 140-160 chars
 □ URL: Uses "in" before language, no brands (URL only - not title)
-□ Brand/product names KEPT in title and seoTitle fields
+□ Brand/product names KEPT in title field only (not in seoTitle)
+□ **CRITICAL: Product page URL (ProductURL) linked in FIRST paragraph of introduction**
+□ **RESOURCE LINKS VERIFICATION (CRITICAL)**:
+  □ Product Page URL linked in FIRST paragraph (MANDATORY)
+  □ Product Page URL linked at least 3 times total (intro, sections, conclusion, FAQs)
+  □ Download URL linked in Prerequisites/Installation section
+  □ License URL linked in Prerequisites or Conclusion
+  □ Documentation URL linked at least once (Prerequisites, Steps, or Outline)
+  □ API Reference URLs linked when mentioning classes/methods (if available)
+  □ MINIMUM 5 total contextual links from provided resources
 □ Introduction: No H2, has paragraph content
 □ Prerequisites/Installation: Included with setup
 □ Correct terminology: SDK or library/API based on platform
@@ -576,8 +684,8 @@ Before submitting, manually verify:
 □ ALL code wrapped with snippet tags
 □ Multiple tasks: Verified which have code
 □ Each Complete Code: Full working code
-□ 2-3+ contextual links included naturally
-□ Links in intro, prerequisites, conclusion, FAQs
+□ 5-7+ contextual links included naturally (not just 2-3)
+□ Links in intro, prerequisites, steps, outline, conclusion, FAQs
 □ Product page URL in intro, conclusion, FAQs
 □ Descriptive anchor text (not "click here")
 □ Word count: word_count_target words (excluding frontmatter/steps/code/FAQs/read-more)
@@ -588,8 +696,15 @@ PART 8: EXECUTION INSTRUCTIONS
 ═══════════════════════════════════════════════════════════════════════════════
 
 ### STEP-BY-STEP PROCESS
-1. Start with frontmatter - USE EXACT title for both title and seoTitle fields
-2. Write introduction content (no heading, 2-3 paragraphs, link product page, include primary keyword)
+1. Start with frontmatter:
+   - USE EXACT title from variable for title field
+   - CREATE compelling seoTitle using primary keyword (50-60 chars, NO brand names)
+   - Verify seoTitle character count manually
+2. Write introduction content:
+   - **CRITICAL: FIRST paragraph MUST contain product page URL link**
+   - Format: [Full Product Name with Platform](ProductURL) in first paragraph
+   - Add 1-2 more paragraphs with natural flow
+   - Include primary keyword naturally
 3. Create Prerequisites/Installation section (include primary keyword naturally)
 4. Write Steps section (4-6 actionable steps, use primary keyword in explanations)
 5. Follow outline sections exactly as provided (integrate primary keyword naturally)
@@ -597,15 +712,20 @@ PART 8: EXECUTION INSTRUCTIONS
 7. Write Conclusion section (link product page, include primary keyword)
 8. Create FAQs section (3-4 questions, link product page in answers)
 9. VERIFY primary keyword appears at least 5 times in body (not counting FAQs/Read More)
-10. Add Read More section with provided links OR skip if not provided
-11. STOP - no content after final section
+10. VERIFY seoTitle is exactly 50-60 characters
+11. VERIFY product page URL is in FIRST paragraph of introduction
+12. Add Read More section with provided links OR skip if not provided
+13. STOP - no content after final section
 
 ### CRITICAL REMINDERS
 - DO NOT modify the title variable - use it exactly as provided
-- Title and seoTitle MUST be identical to title variable
-- Only remove brand/product names from URL slug, NOT from title fields
+- Title field = exact title from variable
+- SEO Title field = create new using primary keyword (50-60 chars, no brands)
+- **FIRST paragraph MUST contain ProductURL link with full product name**
+- Only remove brand/product names from URL slug and seoTitle, NOT from title field
 - PRIMARY keyword MUST appear 5+ times in blog body naturally
 - Count primary keyword in: Introduction, Prerequisites, Steps, Outline, Conclusion only
+- SEO Title must be compelling, click-worthy, and include primary keyword
 
 ### QUALITY STANDARDS
 - Technical accuracy: 100%
