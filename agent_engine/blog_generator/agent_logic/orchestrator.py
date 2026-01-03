@@ -26,11 +26,11 @@ class BlogOrchestrator:
         self.brand = brand.lower().strip()
 
         self.client = AsyncOpenAI(
-            base_url=settings.ASPOSE_LLM_BASE_URL,
-            api_key=settings.ASPOSE_LLM_API_KEY
+            base_url=settings.PROFESSIONALIZE_BASE_URL,
+            api_key=settings.PROFESSIONALIZE_API_KEY
         )
         self.model = OpenAIChatCompletionsModel(
-            model=settings.ASPOSE_LLM_MODEL,
+            model=settings.PROFESSIONALIZE_LLM_MODEL,
             openai_client=self.client
         )
 

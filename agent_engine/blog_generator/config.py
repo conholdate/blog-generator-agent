@@ -16,9 +16,9 @@ class Settings(BaseSettings):
         env_file_encoding="utf-8"
     )
 
-    ASPOSE_LLM_BASE_URL: str = "http://your-llm-server.com/v1"
-    ASPOSE_LLM_API_KEY: str = "your-api-key"
-    ASPOSE_LLM_MODEL: str = "gpt-oss"
+    PROFESSIONALIZE_BASE_URL: str = "http://your-llm-server.com/v1"
+    PROFESSIONALIZE_API_KEY: str = "your-api-key"
+    PROFESSIONALIZE_LLM_MODEL: str = "gpt-oss"
     GIST_NAME: str = "mustafabutt"
     REPO_PAT: str = ""
     # Paths

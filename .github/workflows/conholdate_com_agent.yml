@@ -59,9 +59,9 @@ jobs:
     - name: Create runtime .env file with secrets
       run: |
         cat > .env << EOF
-        ASPOSE_LLM_API_KEY=${{ secrets.ASPOSE_LLM_API_KEY }}
-        ASPOSE_LLM_BASE_URL=${{ secrets.ASPOSE_LLM_BASE_URL }}
-        ASPOSE_LLM_MODEL=${{ secrets.ASPOSE_LLM_MODEL }}
+        PROFESSIONALIZE_API_KEY=${{ secrets.PROFESSIONALIZE_API_KEY }}
+        PROFESSIONALIZE_BASE_URL=${{ secrets.PROFESSIONALIZE_BASE_URL }}
+        PROFESSIONALIZE_LLM_MODEL=${{ secrets.PROFESSIONALIZE_LLM_MODEL }}
         TOKEN_FOR_TEAM=${{ secrets.TOKEN_FOR_TEAM }}
         TOKEN_FOR_PROD=${{ secrets.TOKEN_FOR_PROD }}
         GOOGLE_SCRIPT_URL_FOR_PROD=${{ vars.GOOGLE_SCRIPT_URL_FOR_PROD }}
