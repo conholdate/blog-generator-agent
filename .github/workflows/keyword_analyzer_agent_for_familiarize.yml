@@ -57,9 +57,9 @@ jobs:
       KRA_OUTPUT_DIR: "content/Familiarize/output"
       KRA_METRICS_DB_PATH: "content/kra_metrics_db.json"
 
-      ASPOSE_LLM_BASE_URL: "https://llm.professionalize.com/v1"
-      ASPOSE_LLM_API_KEY: ${{ secrets.ASPOSE_LLM_API_KEY }}
-      OPENAI_API_KEY: ${{ secrets.ASPOSE_LLM_API_KEY }}
+      PROFESSIONALIZE_BASE_URL: "https://llm.professionalize.com/v1"
+      PROFESSIONALIZE_API_KEY: ${{ secrets.PROFESSIONALIZE_API_KEY }}
+      OPENAI_API_KEY: ${{ secrets.PROFESSIONALIZE_API_KEY }}
 
       BLOG_CONTENT_REPO: "familiarize/familiarize-blog"
       BLOG_CONTENT_ROOT: "blog_content/content/Familiarize.Blog"

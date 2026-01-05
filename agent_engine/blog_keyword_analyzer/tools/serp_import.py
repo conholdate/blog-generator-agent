@@ -45,8 +45,8 @@ def fetch_serp_keywords(
     so we leave those fields as None and let your scoring logic
     treat volume=0 or use fallbacks.
     """
-    if not settings.SERPAPI_API_KEY:
-        raise RuntimeError("SERPAPI_API_KEY is not configured in settings/.env")
+    if not settings.SERPAPI_KEY:
+        raise RuntimeError("SERPAPI_KEY is not configured in settings/.env")
 
     hl, gl = _locale_to_hl_gl(locale)
 
@@ -56,7 +56,7 @@ def fetch_serp_keywords(
         "q": query,
         "hl": hl,
         "gl": gl,
-        "api_key": settings.SERPAPI_API_KEY,
+        "api_key": settings.SERPAPI_KEY,
     }
 
     resp = requests.get("https://serpapi.com/search", params=params, timeout=30)

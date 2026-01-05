@@ -31,21 +31,21 @@ class KeywordResearchAgent:
         """
         Initialize the agent and choose which model / backend to use.
         """
-        self.model = settings.ASPOSE_LLM_MODEL
+        self.model = settings.PROFESSIONALIZE_LLM_MODEL
 
         # Decide which backend to use: custom (self-hosted) or OpenAI
         # Your self-hosted LLM (OpenAI-compatible)
         logger.info(
             "Initializing KeywordResearchAgent with custom LLM backend: base_url=%s model=%s",
-            settings.ASPOSE_LLM_BASE_URL,
+            settings.PROFESSIONALIZE_BASE_URL,
             self.model,
         )
 
         try:
             # Client construction itself can throw (bad types, etc.)
             self.client = OpenAI(
-                base_url=settings.ASPOSE_LLM_BASE_URL,
-                api_key=settings.ASPOSE_LLM_API_KEY,
+                base_url=settings.PROFESSIONALIZE_BASE_URL,
+                api_key=settings.PROFESSIONALIZE_API_KEY,
             )
         except Exception as e:
             logger.info(
