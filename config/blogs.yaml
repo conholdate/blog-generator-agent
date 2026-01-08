@@ -1,0 +1,32 @@
+blogs:
+  aspose:
+    display_name: "Aspose"
+    blog_repo: "https://github.com/Aspose/aspose-blog.git"
+    blog_branch: "master"
+    website: "https://blog.aspose.com"
+    search_patterns:
+      - "aspose.{product}"
+      - "{product} for {platform}"
+      - "aspose {product}"
+    enabled: true
+
+  groupdocs:
+    display_name: "GroupDocs"
+    blog_repo: "https://github.com/groupdocs-blog/groupdocs-blog.git"
+    blog_branch: "main"
+    website: "https://blog.groupdocs.com"
+    search_patterns:
+      - "groupdocs.{product}"
+      - "{product} for {platform}"
+      - "groupdocs {product}"
+    enabled: false  # Enable when ready
+
+  conholdate:
+    display_name: "Conholdate"
+    blog_repo: "https://github.com/conholdate/conholdate-blog.git"
+    blog_branch: "main"
+    website: "https://blog.conholdate.com"
+    search_patterns:
+      - "conholdate.{product}"
+      - "{product} for {platform}"
+    enabled: false  # Enable when ready

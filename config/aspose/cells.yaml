@@ -1,0 +1,67 @@
+blog: aspose
+
+# Reusable platform definitions
+platform_definitions:
+  net:
+    display_name: ".NET"
+    keywords: ["c#", "csharp", ".net", "dotnet", "vb.net", "visual basic"]
+
+  java:
+    display_name: "Java"
+    keywords: ["java", "j2se", "j2ee", "jsp"]
+
+  python_net:
+    display_name: "Python via .NET"
+    keywords: ["python", "python-net", "py", "python .net"]
+
+  cpp:
+    display_name: "C++"
+    keywords: ["cpp", "c++", "cplusplus"]
+
+  android:
+    display_name: "Android via Java"
+    keywords: ["android", "android java"]
+
+  nodejs:
+    display_name: "Node.js via Java"
+    keywords: ["nodejs", "node.js", "javascript"]
+
+# Product: Aspose.Cells
+display_name: "Aspose.Cells"
+description: "Excel spreadsheet manipulation and conversion APIs"
+enabled: true
+
+# Common repo URLs for all platforms
+doc_repo: "https://github.com/aspose-cells/Aspose.Cells-Doc-md.git"
+doc_branch: "master"
+api_repo: "https://github.com/aspose-cells/Aspose.Cells-API-References.git"
+api_branch: "main"
+tut_repo: "https://github.com/aspose-cells/Aspose-Cells-Tutorials.git"
+tut_branch: "main"
+
+platforms:
+  - net:
+      definition: net
+      doc_path: "english/net"
+      api_path: "english/net"
+      tut_path: "cells/english/net"
+      enabled: true
+
+  - java:
+      definition: java
+      doc_path: "english/java"
+      api_path: "english/java"
+      tut_path: "cells/english/java"
+      enabled: true
+
+  - python_net:
+      definition: python_net
+      doc_path: "english/python-net"
+      api_path: "english/python-net"
+      enabled: true
+
+  - cpp:
+      definition: cpp
+      doc_path: "english/cpp"
+      api_path: "english/cpp"
+      enabled: false  # Enable when needed
