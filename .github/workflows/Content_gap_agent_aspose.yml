@@ -63,6 +63,10 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Configure Git credentials for private repos
+        run: |
+          git config --global url."https://${{ secrets.ASPOSE_BLOG_TOKEN }}@github.com/".insteadOf "https://github.com/"
+
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
