@@ -4,53 +4,53 @@ on:
   workflow_dispatch:
     inputs:
       product:
-        description: 'Product to analyze'
+        description: "Product to analyze"
         required: true
         type: choice
         options:
-          - 'cells'
-        default: 'cells'
+          - "cells"
+        default: "cells"
       platform:
-        description: 'Platform to analyze'
+        description: "Platform to analyze"
         required: true
         type: choice
         options:
-          - 'net'
-          - 'java'
-          - 'python_net'
-          - 'cpp'
-          - 'android'
-          - 'nodejs'
-        default: 'net'
+          - "net"
+          - "java"
+          - "python_net"
+          - "cpp"
+          - "android"
+          - "nodejs"
+        default: "net"
       mode:
-        description: 'Pipeline mode to run'
+        description: "Pipeline mode to run"
         required: true
         type: choice
         options:
-          - 'index'
-          - 'coverage'
-          - 'semantic-coverage'
-          - 'semantic-analyze'
-          - 'analyze'
-          - 'run-all'
-        default: 'run-all'
+          - "index"
+          - "coverage"
+          - "semantic-coverage"
+          - "semantic-analyze"
+          - "analyze"
+          - "run-all"
+        default: "run-all"
       case:
-        description: 'Semantic coverage case'
+        description: "Semantic coverage case"
         required: false
         type: choice
         options:
-          - ''
-          - 'docs_to_blogs'
-          - 'docs_to_tutorials'
-          - 'blogs_to_blogs'
-        default: ''
+          - ""
+          - "docs_to_blogs"
+          - "docs_to_tutorials"
+          - "blogs_to_blogs"
+        default: ""
       flush:
-        description: 'Clear cache/output before running'
+        description: "Clear cache/output before running"
         required: false
         type: boolean
         default: false
       force:
-        description: 'Force re-run even if step is complete'
+        description: "Force re-run even if step is complete"
         required: false
         type: boolean
         default: false
@@ -63,14 +63,35 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Configure Git credentials for private repos
+      - name: Configure Git credentials for private repos (PAT via x-access-token)
+        env:
+          ASPOSE_BLOG_TOKEN: ${{ secrets.ASPOSE_BLOG_TOKEN }}
         run: |
-          git config --global url."https://${{ secrets.ASPOSE_BLOG_TOKEN }}@github.com/".insteadOf "https://github.com/"
+          set -euo pipefail
+
+          if [ -z "${ASPOSE_BLOG_TOKEN}" ]; then
+            echo "ASPOSE_BLOG_TOKEN is empty or not available to this workflow run."
+            exit 1
+          fi
+
+          # Rewrite any https://github.com/... clone URL to include the token.
+          git config --global url."https://x-access-token:${ASPOSE_BLOG_TOKEN}@github.com/".insteadOf "https://github.com/"
+          git config --global url."https://x-access-token:${ASPOSE_BLOG_TOKEN}@github.com/".insteadOf "http://github.com/"
+          # If any tooling uses SSH-style urls, rewrite those too (optional, but helpful).
+          git config --global url."https://x-access-token:${ASPOSE_BLOG_TOKEN}@github.com/".insteadOf "git@github.com:"
+
+          # Fail fast instead of prompting (Actions runner is non-interactive).
+          git config --global core.askPass ""
+          git config --global credential.helper ""
+
+      - name: Show git url rewrite rules (safe)
+        run: |
+          git config --global --get-regexp '^url\..*\.insteadOf$' || true
 
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.11'
+          python-version: "3.11"
 
       - name: Install dependencies
         run: |
@@ -79,14 +100,19 @@ jobs:
 
       - name: Run Aspose Blog Analysis
         env:
+          # Prevent any git prompt from hanging/failing obscurely.
+          GIT_TERMINAL_PROMPT: "0"
+
           PROFESSIONALIZE_API_KEY: ${{ secrets.PROFESSIONALIZE_API_KEY }}
           PROFESSIONALIZE_BASE_URL: ${{ secrets.PROFESSIONALIZE_BASE_URL }}
           PROFESSIONALIZE_LLM_MODEL: ${{ secrets.PROFESSIONALIZE_LLM_MODEL }}
           PROFESSIONALIZE_EMBEDDING_MODEL: ${{ secrets.PROFESSIONALIZE_EMBEDDING_MODEL }}
         run: |
+          set -euo pipefail
+
           # Build base arguments
           ARGS="--brand aspose --product ${{ github.event.inputs.product }} --platform ${{ github.event.inputs.platform }}"
-          
+
           # Add mode flag
           MODE="${{ github.event.inputs.mode }}"
           case "$MODE" in
@@ -109,22 +135,22 @@ jobs:
               ARGS="$ARGS --run-all"
               ;;
           esac
-          
+
           # Add case if specified
           if [ -n "${{ github.event.inputs.case }}" ]; then
             ARGS="$ARGS --case ${{ github.event.inputs.case }}"
           fi
-          
+
           # Add flush flag if enabled
           if [ "${{ github.event.inputs.flush }}" == "true" ]; then
             ARGS="$ARGS --flush"
           fi
-          
+
           # Add force flag if enabled
           if [ "${{ github.event.inputs.force }}" == "true" ]; then
             ARGS="$ARGS --force"
           fi
-          
+
           echo "Running: python -m agent_engine.content_gap_agent $ARGS"
           python -m agent_engine.content_gap_agent $ARGS
 
