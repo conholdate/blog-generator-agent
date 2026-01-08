@@ -31,6 +31,7 @@ class PipelineOptions:
     flush: bool = False
     force: bool = False
     # Optional overrides via env vars
+    config_dir: Path = Path(os.getenv("BTA_CONFIG_DIR", "config"))
     cache_dir: Path = Path(os.getenv("BTA_CACHE_DIR", "repo_cache"))
     output_dir: Path = Path(os.getenv("BTA_OUTPUT_DIR", "outputs"))
     state_dir: Path = Path(os.getenv("BTA_STATE_DIR", ".bta_state"))
@@ -94,10 +95,10 @@ def _mark_done(paths: PipelinePaths, step: str) -> None:
     paths.marker(step).write_text("ok\n", encoding="utf-8")
 
 
-def _get_service(paths: PipelinePaths) -> TopicAnalyzerService:
+def _get_service(paths: PipelinePaths, options: PipelineOptions) -> TopicAnalyzerService:
     """Create a TopicAnalyzerService instance with scoped paths."""
     return TopicAnalyzerService(
-        config_dir="./config",
+        config_dir=str(options.config_dir),
         cache_dir=str(paths.cache_root),
         output_dir=str(paths.output_root),
     )
@@ -110,7 +111,7 @@ def _run_index(brand: str, product: str, platform: str, options: PipelineOptions
         logger.info("Skipping %s (already done). Use --force to re-run.", step)
         return {"step": step, "status": "skipped"}
 
-    service = _get_service(paths)
+    service = _get_service(paths, options)
 
     # Clone repos and index
     logger.info("Cloning repositories for %s/%s...", brand, product)
@@ -135,7 +136,7 @@ def _run_coverage(brand: str, product: str, platform: str, options: PipelineOpti
     metrics = get_metrics_service()
     ctx = metrics.start_step(brand, product, platform, step)
 
-    service = _get_service(paths)
+    service = _get_service(paths, options)
     success = True
 
     try:
@@ -168,7 +169,7 @@ def _run_semantic_coverage(brand: str, product: str, platform: str, options: Pip
     metrics = get_metrics_service()
     ctx = metrics.start_step(brand, product, platform, f"semantic-coverage:{options.case}")
 
-    service = _get_service(paths)
+    service = _get_service(paths, options)
     success = True
 
     try:
@@ -201,7 +202,7 @@ def _run_semantic_analyze(brand: str, product: str, platform: str, options: Pipe
     metrics = get_metrics_service()
     ctx = metrics.start_step(brand, product, platform, f"semantic-analyze:{options.case}")
 
-    service = _get_service(paths)
+    service = _get_service(paths, options)
     success = True
 
     try:
@@ -239,7 +240,7 @@ def _run_analyze(brand: str, product: str, platform: str, options: PipelineOptio
     metrics = get_metrics_service()
     ctx = metrics.start_step(brand, product, platform, step)
 
-    service = _get_service(paths)
+    service = _get_service(paths, options)
     success = True
 
     try:

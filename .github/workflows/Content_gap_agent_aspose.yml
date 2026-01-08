@@ -55,6 +55,9 @@ on:
         type: boolean
         default: false
 
+permissions:
+  contents: write
+
 jobs:
   analyze:
     runs-on: ubuntu-latest
@@ -99,6 +102,7 @@ jobs:
           pip install -r requirements.txt
 
       - name: Run Aspose Blog Analysis
+        working-directory: ${{ github.workspace }}
         env:
           GIT_TERMINAL_PROMPT: "0"
           PROFESSIONALIZE_API_KEY: ${{ secrets.PROFESSIONALIZE_API_KEY }}
@@ -108,21 +112,8 @@ jobs:
         run: |
           set -euo pipefail
 
-          # Resolve config path from repo workspace
-          CONFIG_PATH="${GITHUB_WORKSPACE}/config/aspose/${{ github.event.inputs.product }}.yaml"
-          echo "Using config: ${CONFIG_PATH}"
+          ARGS="--brand aspose --product ${{ github.event.inputs.product }} --platform ${{ github.event.inputs.platform }}"
 
-          if [ ! -f "${CONFIG_PATH}" ]; then
-            echo "Config file not found: ${CONFIG_PATH}"
-            echo "Repo config/aspose listing:"
-            ls -la "${GITHUB_WORKSPACE}/config/aspose" || true
-            exit 1
-          fi
-
-          # Build base arguments (add --config)
-          ARGS="--config ${CONFIG_PATH} --brand aspose --product ${{ github.event.inputs.product }} --platform ${{ github.event.inputs.platform }}"
-
-          # Add mode flag
           MODE="${{ github.event.inputs.mode }}"
           case "$MODE" in
             "index") ARGS="$ARGS --index" ;;
@@ -133,20 +124,41 @@ jobs:
             "run-all") ARGS="$ARGS --run-all" ;;
           esac
 
-          # Add case if specified
           if [ -n "${{ github.event.inputs.case }}" ]; then
             ARGS="$ARGS --case ${{ github.event.inputs.case }}"
           fi
-
-          # Add flush flag if enabled
           if [ "${{ github.event.inputs.flush }}" == "true" ]; then
             ARGS="$ARGS --flush"
           fi
-
-          # Add force flag if enabled
           if [ "${{ github.event.inputs.force }}" == "true" ]; then
             ARGS="$ARGS --force"
           fi
 
           echo "Running: python -m agent_engine.content_gap_agent $ARGS"
           python -m agent_engine.content_gap_agent $ARGS
+
+      - name: Commit and push outputs
+        run: |
+          set -euo pipefail
+
+          # Configure identity for the commit
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          # Make sure we are on the branch that triggered the workflow
+          git checkout "${GITHUB_REF_NAME}"
+
+          # Stage only what you want committed
+          git add outputs/ || true
+
+          # Commit only if there are changes
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+            exit 0
+          fi
+
+          git commit -m "Update content gap outputs (${GITHUB_RUN_ID})"
+
+          # Rebase to reduce push failures if multiple runs happen
+          git pull --rebase origin "${GITHUB_REF_NAME}"
+          git push origin "HEAD:${GITHUB_REF_NAME}"
