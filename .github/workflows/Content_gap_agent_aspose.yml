@@ -1,4 +1,4 @@
-name: Content Gap Analyser for Aspose
+name: Content Gap Analyzer for Aspose
 
 on:
   workflow_dispatch:
