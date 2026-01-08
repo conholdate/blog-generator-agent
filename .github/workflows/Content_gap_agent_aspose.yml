@@ -100,9 +100,7 @@ jobs:
 
       - name: Run Aspose Blog Analysis
         env:
-          # Prevent any git prompt from hanging/failing obscurely.
           GIT_TERMINAL_PROMPT: "0"
-
           PROFESSIONALIZE_API_KEY: ${{ secrets.PROFESSIONALIZE_API_KEY }}
           PROFESSIONALIZE_BASE_URL: ${{ secrets.PROFESSIONALIZE_BASE_URL }}
           PROFESSIONALIZE_LLM_MODEL: ${{ secrets.PROFESSIONALIZE_LLM_MODEL }}
@@ -110,30 +108,29 @@ jobs:
         run: |
           set -euo pipefail
 
-          # Build base arguments
-          ARGS="--brand aspose --product ${{ github.event.inputs.product }} --platform ${{ github.event.inputs.platform }}"
+          # Resolve config path from repo workspace
+          CONFIG_PATH="${GITHUB_WORKSPACE}/config/aspose/${{ github.event.inputs.product }}.yaml"
+          echo "Using config: ${CONFIG_PATH}"
+
+          if [ ! -f "${CONFIG_PATH}" ]; then
+            echo "Config file not found: ${CONFIG_PATH}"
+            echo "Repo config/aspose listing:"
+            ls -la "${GITHUB_WORKSPACE}/config/aspose" || true
+            exit 1
+          fi
+
+          # Build base arguments (add --config)
+          ARGS="--config ${CONFIG_PATH} --brand aspose --product ${{ github.event.inputs.product }} --platform ${{ github.event.inputs.platform }}"
 
           # Add mode flag
           MODE="${{ github.event.inputs.mode }}"
           case "$MODE" in
-            "index")
-              ARGS="$ARGS --index"
-              ;;
-            "coverage")
-              ARGS="$ARGS --coverage"
-              ;;
-            "semantic-coverage")
-              ARGS="$ARGS --semantic-coverage"
-              ;;
-            "semantic-analyze")
-              ARGS="$ARGS --semantic-analyze"
-              ;;
-            "analyze")
-              ARGS="$ARGS --analyze"
-              ;;
-            "run-all")
-              ARGS="$ARGS --run-all"
-              ;;
+            "index") ARGS="$ARGS --index" ;;
+            "coverage") ARGS="$ARGS --coverage" ;;
+            "semantic-coverage") ARGS="$ARGS --semantic-coverage" ;;
+            "semantic-analyze") ARGS="$ARGS --semantic-analyze" ;;
+            "analyze") ARGS="$ARGS --analyze" ;;
+            "run-all") ARGS="$ARGS --run-all" ;;
           esac
 
           # Add case if specified
@@ -153,11 +150,3 @@ jobs:
 
           echo "Running: python -m agent_engine.content_gap_agent $ARGS"
           python -m agent_engine.content_gap_agent $ARGS
-
-      - name: Upload analysis results
-        uses: actions/upload-artifact@v4
-        with:
-          name: aspose-${{ github.event.inputs.product }}-${{ github.event.inputs.platform }}-results
-          path: |
-            outputs/
-          retention-days: 30
