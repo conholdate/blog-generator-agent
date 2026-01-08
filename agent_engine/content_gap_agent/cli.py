@@ -38,7 +38,7 @@ class CliArgs:
 
 def _build_parser() -> argparse.ArgumentParser:
     p = argparse.ArgumentParser(
-        prog="blog-topic-analyzer",
+        prog="content-gap-agent",
         description="Run Content Gap Analyzer pipeline for a single brand + product + platform.",
     )
 
