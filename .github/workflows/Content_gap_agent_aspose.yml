@@ -63,11 +63,38 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout Aspose blog repo
         uses: actions/checkout@v4
         with:
+          repository: Aspose/aspose-blog
+          path: repo_cache/aspose-blog
+          token: ${{ secrets.ASPOSE_BLOG_TOKEN }}
           fetch-depth: 0
-          persist-credentials: true
+
+      - name: Checkout Cells docs repo
+        uses: actions/checkout@v4
+        with:
+          repository: aspose-cells/Aspose.Cells-Doc-md
+          path: repo_cache/Aspose.Cells-Doc-md
+          token: ${{ secrets.ASPOSE_BLOG_TOKEN }}
+          fetch-depth: 0
+
+      - name: Checkout Cells API refs repo
+        uses: actions/checkout@v4
+        with:
+          repository: aspose-cells/Aspose.Cells-API-References
+          path: repo_cache/Aspose.Cells-API-References
+          token: ${{ secrets.ASPOSE_BLOG_TOKEN }}
+          fetch-depth: 0
+
+      - name: Checkout Cells tutorials repo
+        uses: actions/checkout@v4
+        with:
+          repository: aspose-cells/Aspose-Cells-Tutorials
+          path: repo_cache/Aspose-Cells-Tutorials
+          token: ${{ secrets.ASPOSE_BLOG_TOKEN }}
+          fetch-depth: 0
+
 
       - name: Verify PAT can access required GitHub repos
         env:
