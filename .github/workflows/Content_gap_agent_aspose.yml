@@ -65,7 +65,7 @@ jobs:
 
       - name: Configure Git credentials for private repos (PAT via x-access-token)
         env:
-          ASPOSE_BLOG_TOKEN: ${{ secrets.REPO_PAT }}
+          ASPOSE_BLOG_TOKEN: ${{ secrets.ASPOSE_BLOG_TOKEN }}
         run: |
           set -euo pipefail
 
