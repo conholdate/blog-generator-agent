@@ -210,7 +210,15 @@ class TopicAnalyzerService:
             blog_path_pattern=pattern,
         )
         saved["blogs"] = self.indexer.save_index(blog_index)
-
+        # In GitHub Actions / CI, keep only index JSON outputs (no repo_cache persistence)
+        if os.getenv("CONTENT_GAP_EPHEMERAL_REPOS", "").lower() in ("1", "true", "yes"):
+            import shutil
+            for _, p in repos.items():
+                try:
+                    shutil.rmtree(p, ignore_errors=True)
+                except Exception:
+                    pass
+                
         return saved
 
     # -----------------

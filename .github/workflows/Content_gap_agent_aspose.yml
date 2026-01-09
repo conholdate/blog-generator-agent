@@ -150,6 +150,8 @@ jobs:
       - name: Configure Git URL rewrite for private clones (scoped)
         env:
           ASPOSE_BLOG_TOKEN: ${{ secrets.ASPOSE_BLOG_TOKEN }}
+          CONTENT_GAP_REPO_FETCH: zip           # forces zipball mode (recommended)
+          CONTENT_GAP_EPHEMERAL_REPOS: "1"      # delete repos after indexing
         run: |
           set -euo pipefail
           if [ -z "${ASPOSE_BLOG_TOKEN:-}" ]; then
