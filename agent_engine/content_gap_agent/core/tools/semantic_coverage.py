@@ -124,7 +124,7 @@ class SemanticCoverageMatrixGenerator:
         output_dir: str = "./output/semantic_coverage",
         base_url: Optional[str] = None,
         api_key: Optional[str] = None,
-        embedding_model: str = "text-embedding-3-small",
+        embedding_model: str = os.getenv("PROFESSIONALIZE_EMBEDDING_MODEL"),
         threshold: float = 0.82,
         top_k: int = 8,
         batch_size: int = 96,
