@@ -6,7 +6,7 @@ from dataclasses import dataclass, field
 from datetime import datetime
 from pathlib import Path
 from typing import Any, Dict, Iterable, List, Optional, Tuple, Literal
-
+from agent_engine.content_gap_agent import Settings
 from openai import OpenAI
 
 from ..models import ProductIndex, BlogIndex, TopicEntry, CategoryNode
@@ -122,9 +122,9 @@ class SemanticCoverageMatrixGenerator:
     def __init__(
         self,
         output_dir: str = "./output/semantic_coverage",
-        base_url: Optional[str] = None,
-        api_key: Optional[str] = None,
-        embedding_model: str = os.getenv("PROFESSIONALIZE_EMBEDDING_MODEL"),
+        base_url: Optional[str] = Settings.PROFESSIONALIZE_BASE_URL,
+        api_key: Optional[str] = Settings.PROFESSIONALIZE_API_KEY,
+        embedding_model: str = Settings.PROFESSIONALIZE_EMBEDDING_MODEL,
         threshold: float = 0.82,
         top_k: int = 8,
         batch_size: int = 96,
