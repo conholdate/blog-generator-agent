@@ -166,6 +166,11 @@ jobs:
           # Safe debug output (does not print token)
           git config --global --get-regexp '^url\..*\.insteadOf$' || true
 
+      - name: Checkout Content Gap Agent (workflow repo)
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
