@@ -248,7 +248,6 @@ def load_background_image(product_name: str, alignment: str):
     
     # 3. Load image
     file_path = os.path.join(TEMPLATE_DIR, filename)
-    print(f"bingoo - {file_path}", flush=True, file=sys.stderr )
     img = Image.open(file_path).convert("RGBA")
     draw = ImageDraw.Draw(img)
     

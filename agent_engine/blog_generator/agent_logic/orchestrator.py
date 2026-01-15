@@ -183,6 +183,7 @@ class BlogOrchestrator:
             self.metrics.print_summary()
             print("📊 Sending metrics to Google Script...")
             metrics_sent_for_team = await self.metrics.send_metrics_to_team()
+            print(f"metrix sent - {metrics_sent_for_team}", flush=True)
             # metrics_sent_for_pro = await self.metrics.send_metrics_to_prod()
             
             # if metrics_sent_for_team and metrics_sent_for_pro:
