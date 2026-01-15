@@ -189,3 +189,22 @@ async def gist_injector(content: str, res_title: str) -> str:
                 "title": res_title
             })
             return result
+        
+async def generate_blog_image(product_family: str, main_Heading: str, product_label_alignment: str, output_path: str) -> str:
+    
+    params = StdioServerParameters(
+        command="python",
+        args=["../../mcp-servers/blog-banner-generator/tools/public-release-post-cover/generate_cover.py"]
+    )
+    print(f" Connecting to MCP server blog_banner_generator...")
+    async with stdio_client(params) as (read, write):
+        async with ClientSession(read, write) as session:
+            await session.initialize()
+            result = await session.call_tool("generate_blog_image", {
+                "product_family": product_family,
+                "main_Heading": main_Heading,
+                "product_label_alignment": product_label_alignment,
+                "output_path": output_path
+        
+            })
+            return result

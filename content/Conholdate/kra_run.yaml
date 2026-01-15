@@ -10,9 +10,10 @@ meta:
 engine:
   # === Core KRA inputs ===
   # input_file: "content/Conholdate/keywords.csv"
+  use-serp-api: true
   brand: "Conholdate"
   product: "Conholdate.Total"
-  platform: "c#"           # used as --platform; also passed into prompt as fw_label
+  platform: ".NET"           # used as --platform; also passed into prompt as fw_label
   locale: "en-US"
   use-serp-api: true
   serp-topic: "convert PPT to PNG"

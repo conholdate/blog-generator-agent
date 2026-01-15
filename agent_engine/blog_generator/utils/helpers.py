@@ -185,74 +185,6 @@ def slugify(text: str) -> str:
     return text
 
 
-def sanitize_markdown_title(title: str) -> str:
-    # Remove markdown-breaking characters (keeping common punctuation)
-    sanitized = re.sub(r'[:`*>|\\/\[\](){}_~]', '', title)
-    
-    # Replace multiple spaces with a single space
-    sanitized = re.sub(r'\s+', ' ', sanitized)
-    sanitized = sanitized.strip()
-    
-    # Convert to title case with smart handling
-    return smart_title_case(sanitized)
-
-def smart_title_case(text: str) -> str:
-    lowercase_words = {
-        'a', 'an', 'the', 'and', 'but', 'or', 'nor', 'for', 'yet', 'so',
-        'at', 'by', 'in', 'of', 'on', 'to', 'up', 'as', 'is', 'if',
-        'with', 'from', 'into', 'via', 'per', 'vs', 'etc'
-    }
-    
-    uppercase_terms = {
-        'c#': 'C#', 'csharp': 'CSharp', 'sql': 'SQL', 'php': 'PHP', 
-        'css': 'CSS', 'html': 'HTML', 'xml': 'XML', 'json': 'JSON', 
-        '.net': '.NET', 'api': 'API', 'sdk': 'SDK', 'pdf': 'PDF', 
-        'pptx': 'PPTX', 'jpg': 'JPG', 'png': 'PNG'
-    }
-
-    def process_word(word: str, is_first: bool, is_last: bool) -> str:
-        if not word: return ""
-        
-        word_lower = word.lower()
-        if word_lower in uppercase_terms:
-            return uppercase_terms[word_lower]
-
-        # 1. Handle all types of dashes (Standard, Non-breaking, En, Em)
-        dash_pattern = r'([\-\u2011\u2013\u2014])'
-        if re.search(dash_pattern, word):
-            parts = re.split(dash_pattern, word)
-            processed = []
-            for i, p in enumerate(parts):
-                if re.match(dash_pattern, p):
-                    processed.append(p)
-                else:
-                    # Inner segments follow standard casing rules
-                    is_sub_first = is_first and i == 0
-                    is_sub_last = is_last and i == len(parts) - 1
-                    processed.append(process_word(p, is_sub_first, is_sub_last))
-            return "".join(processed)
-
-        # 2. Handle dot-separated segments (e.g., Aspose.Slides)
-        if '.' in word and word.count('.') <= 2:
-            parts = word.split('.')
-            return '.'.join([process_word(p, is_first and i==0, False) for i, p in enumerate(parts)])
-
-        # 3. Default Casing Rules
-        if word_lower in lowercase_words and not is_first and not is_last:
-            return word_lower
-        
-        if word.isupper() and len(word) > 1:
-            return word
-            
-        return word.capitalize()
-
-    words = text.split()
-    if not words: return text
-    
-    return ' '.join(process_word(w, i == 0, i == len(words)-1) for i, w in enumerate(words))
-
-
-
 def current_utc_date() -> str:
     """Return current UTC date in blog format."""
     return datetime.utcnow().strftime("%a, %d %b %Y %H:%M:%S +0000")
@@ -283,20 +215,26 @@ def format_related_posts(related_links):
 
     return "\n".join(formatted_lines)
 
-def get_productInfo(product_name:str, platform:str, products) -> str:
+def get_productInfo(product_name: str, platform: str, products) -> str:
     base_name = product_name.strip()
-    platform_clean = platform.strip()
+    platform_clean = platform.strip().lower()
+
+    # Normalize platform
+    if platform_clean == "net":
+        platform_clean = ".net"
 
     # Build expected product name EXACTLY as in your data
-    if(platform == "cloud"):
+    if platform_clean == "cloud":
         expected_name = f"{base_name} {platform_clean}"
-    else: 
+    else:
         expected_name = f"{base_name} for {platform_clean}"
 
     # Case-insensitive matching
     product_info = next(
-        (p for p in products
-        if p["ProductName"].lower() == expected_name.lower()),
+        (
+            p for p in products
+            if p["ProductName"].lower() == expected_name.lower()
+        ),
         None
     )
 
@@ -306,6 +244,7 @@ def get_productInfo(product_name:str, platform:str, products) -> str:
         )
 
     return product_info
+
 
 def prepare_context(product_info) -> str:
     context=''

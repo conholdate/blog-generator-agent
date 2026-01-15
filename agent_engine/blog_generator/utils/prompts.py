@@ -14,7 +14,9 @@ def get_blog_writer_prompt(
     related_links: List[Dict[str, str]],
     context: str = "",
     author: str = "",
-    platform: str = ""
+    platform: str = "",
+    target_persona: str = "",
+    angle: str = ""
     
 ) -> str:
     """
@@ -39,10 +41,11 @@ def get_blog_writer_prompt(
     # Date
     current_date = datetime.utcnow().strftime("%a, %d %b %Y %H:%M:%S +0000")
     primary_keyword = keywords[0]
- 
+    secondary_keywords = keywords[0]
+    print(f"hingaaa -- {secondary_keywords}", flush=True)
     # FULL PROMPT.  /{data.get("urlPrefix")}/{url}/
     return f"""
-You are an expert technical blog writer. Write a detailed, SEO-optimized blog post about "{title}" using keywords: {keywords}
+You are an expert technical blog writer. Write a detailed, SEO-optimized blog post about "{title}" using keywords: {keywords}, target persona: {target_persona}, angle: {angle}
 
 {context}
 
@@ -165,6 +168,10 @@ summary: "[140-160 chars, wrap in quotes if needed]"
 tags: {json.dumps(keywords)}
 categories: ["{category}"]
 showtoc: true
+cover:
+   image: images/{url}.png
+   alt: "{title}"
+   caption: "{title}"
 steps:
   - "Step 1: [Clear actionable instruction]"
   - "Step 2: [Clear actionable instruction]"
@@ -512,20 +519,153 @@ ALL code snippets MUST use:
 <!--[CODE_SNIPPET_END]-->
 
 ### CODE SNIPPET TYPES
-1. **Prerequisites/Installation**: Installation commands
-2. **Steps Section**: Partial code illustrating specific actions
-3. **Outline Sections**: Code chunks broken down for explanation
-4. **Complete Code Examples**: FULL working code (copy-paste ready)
+1. **Prerequisites/Installation**: Installation commands (must be valid and working)
+2. **Steps Section**: Partial code illustrating specific actions (must be syntactically correct)
+3. **Outline Sections**: Code chunks broken down for explanation (must be valid code)
+4. **Complete Code Examples**: FULL working code (copy-paste ready, production-quality)
 
-### COMPLETE CODE EXAMPLE REQUIREMENTS
-- FULL working code for specific task
-- Copy-paste ready (no "..." placeholders)
-- All imports/dependencies included
-- Proper initialization and error handling
-- Well-commented for clarity
-- Focus on ONE task per section
-- Independent and standalone usable
-- Use <!--[COMPLETE_CODE_SNIPPET_START]--> wrapper
+### CODE QUALITY REQUIREMENTS (CRITICAL - NON-NEGOTIABLE)
+
+**ALL CODE MUST BE:**
+✅ **Syntactically correct** - No syntax errors, proper language conventions
+✅ **Executable** - Code runs without errors when executed
+✅ **Complete** - All necessary imports, dependencies, and initialization included
+✅ **Production-ready** - Proper error handling, resource cleanup, best practices
+✅ **Tested logic** - Code logic is sound and achieves the stated purpose
+✅ **Bug-free** - No runtime errors, null pointer exceptions, or logical bugs
+✅ **Platform-appropriate** - Uses correct APIs and methods for the specified platform/language
+✅ **Version-compatible** - Works with the library/SDK version being discussed
+
+**PROHIBITED IN CODE:**
+❌ Placeholder comments like "// ... rest of code" or "// your code here"
+❌ Undefined variables or missing imports
+❌ Syntax errors (missing semicolons, brackets, quotes, etc.)
+❌ Incorrect method names or class names
+❌ Wrong API usage or deprecated methods
+❌ Missing file paths or hardcoded invalid paths
+❌ Unhandled exceptions or missing try-catch blocks
+❌ Memory leaks or resource leaks (unclosed streams, connections)
+❌ Logic errors that would cause runtime failures
+❌ Pseudo-code or conceptual code that won't compile/run
+
+### CODE VERIFICATION CHECKLIST
+
+Before including ANY code snippet, verify:
+□ All imports/includes are present and correct
+□ All variables are declared before use
+□ All method/function names are spelled correctly
+□ All class names match the actual API
+□ Proper syntax for the language (semicolons, brackets, indentation)
+□ File paths use proper format (forward slashes, backslashes as needed)
+□ Resources are properly initialized and disposed
+□ Error handling is present (try-catch, if-checks)
+□ Code follows the documented API for the product version
+□ No hardcoded values that would cause failures
+□ Comments are helpful, not placeholders
+
+### INSTALLATION CODE REQUIREMENTS
+
+**Package Manager Commands:**
+- Must use correct package manager for platform (NuGet, Maven, pip, npm)
+- Must include correct package name and syntax
+- Version numbers should be current or use latest tag
+- Must be copy-paste ready for terminal/command prompt
+
+**Examples:**
+✅ CORRECT (NuGet):
+```bash
+Install-Package Aspose.Slides.NET
+```
+
+✅ CORRECT (Maven):
+```xml
+<dependency>
+    <groupId>com.aspose</groupId>
+    <artifactId>aspose-slides</artifactId>
+    <version>25.1</version>
+    <classifier>jdk16</classifier>
+</dependency>
+```
+
+❌ WRONG:
+```bash
+Install-Package [PackageName]  # Placeholder not allowed
+```
+
+### COMPLETE CODE EXAMPLE REQUIREMENTS (ENHANCED)
+
+**MUST INCLUDE:**
+1. **All Imports/Includes** at the top
+   - Every class, method, or type used must be imported
+   - Use correct import syntax for the language
+   - Include platform-specific imports (System, java.io, etc.)
+
+2. **Proper Initialization**
+   - Objects created with correct constructors
+   - Variables initialized before use
+   - Configuration set up properly
+
+3. **Working Logic**
+   - Code achieves the stated goal (e.g., actually converts PDF to PNG)
+   - All steps are present and in correct order
+   - No logical errors or missing steps
+
+4. **Error Handling**
+   - Try-catch blocks for operations that can fail
+   - Proper exception handling
+   - Graceful failure messages
+
+5. **Resource Cleanup**
+   - Close file streams after use
+   - Dispose of objects properly
+   - Release memory/resources
+
+6. **Correct File Paths**
+   - Use realistic example paths (e.g., "input.pdf", "output.png")
+   - Use proper path separators for platform
+   - No invalid or system-specific paths
+
+7. **Comments for Clarity**
+   - Explain what the code does
+   - Not placeholders or TODOs
+   - Help users understand the logic
+
+**QUALITY STANDARDS:**
+- Code should compile/execute without modifications
+- Users should be able to copy-paste and run (after updating file paths)
+- Code demonstrates best practices for the SDK/library
+- Code is efficient and doesn't include unnecessary operations
+- Code matches the examples in official documentation style
+
+### PARTIAL CODE SNIPPETS (Steps/Outline Sections)
+
+Even partial code must be:
+✅ Syntactically valid (can be compiled if isolated)
+✅ Logically sound
+✅ Use correct API methods
+✅ Include necessary imports in context
+
+### CODE TESTING MANDATE
+
+**Before including code, mentally verify:**
+1. Would this code compile without errors?
+2. Would this code run without exceptions?
+3. Would this code produce the expected output?
+4. Are all API calls correct for this product/platform?
+5. Is proper error handling included?
+6. Are resources cleaned up properly?
+
+**If answer to ANY question is "No" or "Unsure" - DO NOT INCLUDE THE CODE**
+Rewrite until all answers are "Yes"
+
+### USE <!--[COMPLETE_CODE_SNIPPET_START]--> WRAPPER FOR FULL EXAMPLES
+
+Complete, production-ready code examples use:
+<!--[COMPLETE_CODE_SNIPPET_START]-->
+```language
+// Full working code here
+```
+<!--[COMPLETE_CODE_SNIPPET_END]-->
 
 ═══════════════════════════════════════════════════════════════════════════════
 PART 6: WRITING GUIDELINES
@@ -543,36 +683,62 @@ EXCLUDED from word count:
 
 ### PRIMARY KEYWORD USAGE (CRITICAL - SEO REQUIREMENT)
 The PRIMARY keyword is the first keyword in the list: {primary_keyword}
+The SECONDARY keywords are all remaining keywords in the list: {secondary_keywords}
 
-**MANDATORY REQUIREMENT:**
-- PRIMARY keyword MUST appear AT LEAST 5 TIMES in the blog post body
+**MANDATORY PRIMARY KEYWORD DENSITY:**
+- PRIMARY keyword MUST appear at 1% density of total blog word count
+- Formula: (Word Count / 100) = Minimum keyword occurrences
+- Examples:
+  * 600 words = 6 occurrences minimum
+  * 800 words = 8 occurrences minimum
+  * 1000 words = 10 occurrences minimum
+  * 1200 words = 12 occurrences minimum
 - Count includes: Introduction, Prerequisites, Steps, Outline sections, Conclusion
 - Does NOT count: Frontmatter, FAQs, Read More section
 - Use naturally within sentences - avoid keyword stuffing
-- Variations are acceptable but exact keyword should appear 5+ times
+- Distribute evenly throughout content (not clustered in one section)
+- Variations are acceptable but exact keyword should meet minimum count
 - **NEVER surround primary keyword with asterisks or make it italic/bold**
 - **NEVER use markdown formatting around the primary keyword**
 - Primary keyword should appear as plain text in natural sentences
+
+**SECONDARY KEYWORDS USAGE (MANDATORY):**
+- MUST use ALL secondary keywords throughout the blog post
+- Each secondary keyword should appear 2-4 times naturally
+- Distribute across different sections (Introduction, Prerequisites, Steps, Outline, Conclusion)
+- Use in context where they naturally fit
+- Can use variations or related forms
+- Should enhance content, not force awkward phrasing
+- Secondary keywords support the primary keyword naturally
+
+**KEYWORD DISTRIBUTION STRATEGY:**
+- Introduction: 1-2 primary keyword uses, 1-2 secondary keywords
+- Prerequisites: 1 primary keyword use, 1-2 secondary keywords
+- Steps: 2-3 primary keyword uses (in explanations), 2-3 secondary keywords
+- Outline Sections: Majority of primary keyword uses, most secondary keywords
+- Conclusion: 1-2 primary keyword uses, 1-2 secondary keywords
 
 **CORRECT examples:**
 - "When working with {primary_keyword}, developers need to..."
 - "The {primary_keyword} process involves several steps..."
 - "To implement {primary_keyword} functionality..."
 - "Best practices for {primary_keyword} include..."
-- "Common {primary_keyword} scenarios require..."
 
 **INCORRECT examples:**
 - ❌ "When working with *{primary_keyword}*, developers..." (has asterisks)
 - ❌ "The **{primary_keyword}** process involves..." (has bold)
 - ❌ "To implement _{primary_keyword}_ functionality..." (has underscores)
 - ❌ "Best practices for `{primary_keyword}` include..." (has backticks)
+- ❌ Using same keyword 5 times in one paragraph (keyword stuffing)
+- ❌ Forcing keywords awkwardly: "The {primary_keyword} is a {primary_keyword} solution for {primary_keyword}" (unnatural)
 
 ### TONE AND STYLE
 - Professional but approachable
 - Technical accuracy is paramount
 - Clear, concise explanations
-- Natural integration of all keywords (primary keyword minimum 5 times)
+- Natural integration of all keywords (primary keyword at 1% density, all secondary keywords 2-4 times)
 - **Primary keyword MUST appear as plain text without any markdown formatting (no asterisks, bold, italic, backticks)**
+- **Secondary keywords must be distributed naturally across all sections**
 - Avoid over-formatting (minimal bold/lists unless needed)
 - Use complete paragraphs for most sections
 - Lists/bullets only when explicitly needed
@@ -585,7 +751,8 @@ The PRIMARY keyword is the first keyword in the list: {primary_keyword}
 - Clear progression from basic to advanced
 - Address common use cases and challenges
 - Focus on programmatic implementation, not web tools
-- Ensure primary keyword density meets 5+ occurrences requirement
+- Ensure primary keyword density meets 1% requirement (Word Count / 100)
+- Ensure all secondary keywords are used 2-4 times naturally
 
 ═══════════════════════════════════════════════════════════════════════════════
 PART 7: VALIDATION CHECKLIST
@@ -597,9 +764,12 @@ OUTPUT IS INVALID IF:
 ❌ SEO Title does NOT include primary keyword
 ❌ SEO Title contains brand/product names
 ❌ Title has been modified, shortened, or adjusted in any way
-❌ PRIMARY keyword appears fewer than 5 times in blog body
+❌ PRIMARY keyword density is NOT 1% of word count (Word Count / 100 = minimum occurrences)
 ❌ PRIMARY keyword is surrounded by asterisks, underscores, or backticks anywhere
 ❌ PRIMARY keyword has any markdown formatting applied to it
+❌ SECONDARY keywords are missing or not used throughout content
+❌ SECONDARY keywords used fewer than 2 times each
+❌ Keywords clustered unnaturally (keyword stuffing detected)
 ❌ Description NOT 140-160 characters
 ❌ Summary NOT 140-160 characters
 ❌ URL contains product/brand name
@@ -614,6 +784,18 @@ OUTPUT IS INVALID IF:
 ❌ Steps, Conclusion, or FAQs missing
 ❌ "Complete Code Example" heading without code content
 ❌ Multiple task title but sections for tasks without code
+❌ **CODE QUALITY VIOLATIONS (CRITICAL)**:
+  ❌ Code contains syntax errors (won't compile)
+  ❌ Code has placeholder comments like "// ... rest of code"
+  ❌ Code uses undefined variables or missing imports
+  ❌ Code has incorrect method/class names
+  ❌ Code would throw runtime exceptions
+  ❌ Code lacks proper error handling
+  ❌ Code has resource leaks (unclosed streams/connections)
+  ❌ Installation commands are incorrect or incomplete
+  ❌ Code uses wrong API or deprecated methods
+  ❌ Code is pseudo-code or non-executable
+  ❌ Code won't achieve stated purpose (logical errors)
 {'❌ Read More section missing' if formatted_related else '❌ Read More section present'}
 ❌ Steps not in frontmatter
 ❌ FAQs not in frontmatter
@@ -647,9 +829,17 @@ Before submitting, manually verify:
 □ SEO Title: NO brand/product names included
 □ SEO Title: Compelling and click-worthy
 □ Title NOT modified, shortened, or adjusted
-□ PRIMARY keyword used at least 5 times in blog body
+□ **KEYWORD DENSITY VERIFICATION (CRITICAL)**:
+  □ Calculate word count of blog body (Intro + Prerequisites + Steps + Outline + Conclusion)
+  □ Divide by 100 to get minimum primary keyword occurrences
+  □ Example: 800 words / 100 = 8 minimum occurrences
+  □ Count primary keyword uses in body (exclude frontmatter, FAQs, Read More)
+  □ PRIMARY keyword meets 1% density requirement
+  □ PRIMARY keyword distributed evenly (not clustered)
+  □ ALL SECONDARY keywords used 2-4 times each
+  □ Secondary keywords appear across multiple sections
+  □ No keyword stuffing (natural usage throughout)
 □ PRIMARY keyword appears as PLAIN TEXT (no asterisks, bold, italic, backticks)
-□ Primary keyword counted in: Intro, Prerequisites, Steps (explanations), Outline, Conclusion
 □ Description: 140-160 chars
 □ Summary: 140-160 chars
 □ URL: Uses "in" before language, no brands (URL only - not title)
@@ -675,7 +865,20 @@ Before submitting, manually verify:
 □ NO links in backticks/code literals
 □ All URLs verified in context
 □ Steps: Mention classes/methods (link if URL exists)
-□ Complete Code: Only where actual code included
+□ **CODE QUALITY VERIFICATION (CRITICAL)**:
+  □ ALL code snippets are syntactically correct (will compile)
+  □ NO placeholder comments ("// ... rest of code", "// your code here")
+  □ ALL variables declared and initialized before use
+  □ ALL imports/includes present and correct
+  □ Method/class names spelled correctly and match actual API
+  □ Installation commands are valid and complete
+  □ Code includes proper error handling (try-catch where needed)
+  □ Resources properly closed/disposed (no leaks)
+  □ Code is executable and produces stated results
+  □ NO pseudo-code or non-working examples
+  □ Code logic is sound and bug-free
+  □ File paths are realistic and properly formatted
+□ Complete Code: Only where actual WORKING code included
 □ NO empty "Complete Code Example" headings
 □ No em/en dashes, curly quotes, Unicode
 □ YAML values with colons are quoted
@@ -704,18 +907,46 @@ PART 8: EXECUTION INSTRUCTIONS
    - **CRITICAL: FIRST paragraph MUST contain product page URL link**
    - Format: [Full Product Name with Platform](ProductURL) in first paragraph
    - Add 1-2 more paragraphs with natural flow
-   - Include primary keyword naturally
-3. Create Prerequisites/Installation section (include primary keyword naturally)
-4. Write Steps section (4-6 actionable steps, use primary keyword in explanations)
-5. Follow outline sections exactly as provided (integrate primary keyword naturally)
-6. Add Complete Code Example(s) ONLY if you have code
-7. Write Conclusion section (link product page, include primary keyword)
+   - Include primary keyword 1-2 times and 1-2 secondary keywords
+3. Create Prerequisites/Installation section:
+   - Include primary keyword 1 time, 1-2 secondary keywords
+   - **VERIFY installation commands are correct and working**
+   - Test syntax of package manager commands
+4. Write Steps section:
+   - 4-6 actionable steps
+   - Use primary keyword 2-3 times in explanations, use 2-3 secondary keywords
+   - **IF including code snippets: VERIFY they are syntactically correct**
+5. Follow outline sections exactly as provided:
+   - Integrate primary keyword naturally (majority of uses should be here)
+   - Use most secondary keywords across these sections
+   - Distribute keywords evenly, not clustered
+   - **IF including code snippets: VERIFY they are complete and working**
+6. Add Complete Code Example(s) ONLY if you have WORKING code:
+   - **CRITICAL: Code MUST be production-ready and bug-free**
+   - Include ALL imports/dependencies
+   - Include proper error handling
+   - Include resource cleanup
+   - Test logic mentally - would this code actually work?
+   - NO placeholders or pseudo-code allowed
+   - If unsure about code correctness, DO NOT include Complete Code Example section
+7. Write Conclusion section (include primary keyword 1-2 times, 1-2 secondary keywords)
 8. Create FAQs section (3-4 questions, link product page in answers)
-9. VERIFY primary keyword appears at least 5 times in body (not counting FAQs/Read More)
-10. VERIFY seoTitle is exactly 50-60 characters
-11. VERIFY product page URL is in FIRST paragraph of introduction
-12. Add Read More section with provided links OR skip if not provided
-13. STOP - no content after final section
+9. **VERIFY keyword density**:
+   - Count total word count of body (exclude frontmatter, FAQs, Read More)
+   - Calculate: Word Count / 100 = Minimum primary keyword occurrences
+   - Count primary keyword uses - must meet or exceed minimum
+   - Verify all secondary keywords used 2-4 times each
+   - Ensure keywords distributed naturally, not clustered
+10. **VERIFY all code quality**:
+   - Review every code snippet for syntax correctness
+   - Ensure all variables are declared
+   - Ensure all imports are present
+   - Ensure proper error handling exists
+   - Ensure no placeholder comments remain
+11. VERIFY seoTitle is exactly 50-60 characters
+12. VERIFY product page URL is in FIRST paragraph of introduction
+13. Add Read More section with provided links OR skip if not provided
+14. STOP - no content after final section
 
 ### CRITICAL REMINDERS
 - DO NOT modify the title variable - use it exactly as provided
@@ -723,9 +954,14 @@ PART 8: EXECUTION INSTRUCTIONS
 - SEO Title field = create new using primary keyword (50-60 chars, no brands)
 - **FIRST paragraph MUST contain ProductURL link with full product name**
 - Only remove brand/product names from URL slug and seoTitle, NOT from title field
-- PRIMARY keyword MUST appear 5+ times in blog body naturally
+- **PRIMARY keyword MUST appear at 1% density** (Word Count / 100 = occurrences)
+- **ALL SECONDARY keywords MUST be used 2-4 times each**
+- Distribute keywords naturally across all sections - avoid clustering
 - Count primary keyword in: Introduction, Prerequisites, Steps, Outline, Conclusion only
 - SEO Title must be compelling, click-worthy, and include primary keyword
+- **ALL CODE MUST BE WORKING, BUG-FREE, AND PRODUCTION-READY**
+- **NO placeholder code, pseudo-code, or incomplete snippets allowed**
+- **If code correctness is uncertain, omit Complete Code Example section entirely**
 
 ### QUALITY STANDARDS
 - Technical accuracy: 100%
@@ -750,33 +986,6 @@ PART 8: EXECUTION INSTRUCTIONS
 ═══════════════════════════════════════════════════════════════════════════════
 BEGIN WRITING NOW
 ═══════════════════════════════════════════════════════════════════════════════
-"""
-
-def get_title_prompt(topic: str, product: str, keywords: str ) -> str:
-      
-    return f"""
-Generate one short, SEO-optimized blog title.
-Topic: "{topic}"
-Product: "{product}"
-Keywords: {keywords}
-
-CRITICAL RULES:
-- Keep under 60 characters
-- Sound natural and human-written
-- Include 1-2 keywords if possible
-- DO NOT change, modify, or alter the product name in any way
-- Use the EXACT product name as provided: "{product}"
-- Do NOT remove dots, hyphens, or any punctuation from the product name
-- Do NOT use colons (:), slashes (/), pipes (|), quotes, or any special characters that might break Markdown
-- Return ONLY the plain title text, with no commentary or formatting
-
-PRODUCT NAME PROTECTION:
-- Product name must appear exactly as: "{product}"
-- No substitutions: ".NET" stays ".NET", not "dotnet" or "NET"
-- No removals: "Aspose.CAD" stays "Aspose.CAD", not "Aspose CAD"
-- No additions: Don't add extra words to the product name
-
-Return ONLY the plain title text.
 """
 def build_outline_prompt(title: str, keywords: list[str]) -> str:
     keyword_list = ", ".join(keywords)

@@ -9,10 +9,12 @@ meta:
 
 engine:
   # === Core KRA inputs ===
-  input_file: "content/GroupDocs/keywords.csv"
+  # input_file: "content/GroupDocs/keywords.csv"
+  use-serp-api: true
+  serp-topic: "Generate an SVG Image from a Slide"
   brand: "GroupDocs"
-  product: "GroupDocs.Total"
-  platform: "python"           # used as --platform; also passed into prompt as fw_label
+  product: "GroupDocs.Conversion"
+  platform: ".NET"           # used as --platform; also passed into prompt as fw_label
   locale: "en-US"
 
   # === KRA behavior tuning ===

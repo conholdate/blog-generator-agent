@@ -4,11 +4,11 @@ Orchestrator with OpenAI Agents SDK + Runner + Metrics Tracking
 from openai import AsyncOpenAI
 from agents import Agent, Runner, OpenAIChatCompletionsModel, set_tracing_disabled, ModelSettings
 from config import settings
-from tools.mcp_tools import generate_markdown_file, fetch_category_related_articles, gist_injector
+from tools.mcp_tools import generate_markdown_file, fetch_category_related_articles, gist_injector, generate_blog_image
 from utils import prompts
 from utils.seo_validator import validate_seo_content
 from utils.file_format_mappings import FILE_FORMAT_MAPPINGS, BASE_URL
-from utils.helpers import sanitize_markdown_title, prepare_context, get_productInfo, get_topic_by_index, inject_file_format_links
+from utils.helpers import prepare_context, get_productInfo, get_topic_by_index, inject_file_format_links, slugify
 from utils.metricsRecorder import MetricsRecorder
 import json
 import os
@@ -104,17 +104,20 @@ class BlogOrchestrator:
                 3
             )
     
-            print(f"response keyword -- {topics_raw_data}", flush=True)
             primary = topics_raw_data.get("keywords", {}).get("primary", [])
             secondary = topics_raw_data.get("keywords", {}).get("secondary", [])
-            print(f"primary -- {primary}")
-            print(f"secondary -- {secondary}")
+            target_persona = topics_raw_data.get("target_persona", "")
+            angle = topics_raw_data.get("angle", "")
+            print(f"primary -- {primary}", flush=True)
+            print(f"secondary -- {secondary}", flush=True)
+            print(f"target persona -- {target_persona}", flush=True)
+            print(f"angle -- {angle}", flush=True)
 
             f_keywords = primary + secondary
             print(f"f_keywords -- {f_keywords}")
   
             blog_outline = topics_raw_data.get("outline")
-            post_topic = sanitize_markdown_title(post_topic)
+            # post_topic = sanitize_markdown_title(post_topic)
             
             print(f" Generating content now.")
        
@@ -127,7 +130,9 @@ class BlogOrchestrator:
                     related_links,
                     context,
                     author,
-                    platform
+                    platform,
+                    target_persona,
+                    angle
                 ),
                 model=self.model,
                 model_settings=ModelSettings(temperature=0.6)
@@ -160,7 +165,10 @@ class BlogOrchestrator:
          
             filepath = file_res.get("output", {}).get("filepath")
             folder_name = file_res.get("output", {}).get("folder_name")
-            
+            banner_location = f"../../content/blogPosts/{file_res['output']['brand_folder']}/{file_res['output']['folder_name']}/images/{slugify(post_topic)}.png"
+            banner = await generate_blog_image(product_name, post_topic, "Left", banner_location)
+            print(f"banner generated -- {banner}", flush=True)
+
             # Record success
             self.metrics.record_success(f"Blog post created: {filepath}")
             
