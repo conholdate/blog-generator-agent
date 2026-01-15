@@ -42,7 +42,7 @@ def get_blog_writer_prompt(
     current_date = datetime.utcnow().strftime("%a, %d %b %Y %H:%M:%S +0000")
     primary_keyword = keywords[0]
     secondary_keywords = keywords[0]
-    print(f"hingaaa -- {secondary_keywords}", flush=True)
+ 
     # FULL PROMPT.  /{data.get("urlPrefix")}/{url}/
     return f"""
 You are an expert technical blog writer. Write a detailed, SEO-optimized blog post about "{title}" using keywords: {keywords}, target persona: {target_persona}, angle: {angle}

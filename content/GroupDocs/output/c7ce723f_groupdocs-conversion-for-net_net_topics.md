@@ -8,12 +8,12 @@
 
 ---
 
-## 1. Building a JPG to SVG File Converter in .NET with GroupDocs
+## 1. Building a JPG to SVG File Converter in .NET 
 - **Cluster ID:** `c4`
 - **Target persona:** C#/.NET developer building document conversion features
 - **Angle:** Step-by-step guide to create a JPG‑to‑SVG converter using GroupDocs.Conversion for .NET.
-- **Primary keyword:** `jpg to svg file converter for c# .net applications - groupdocs`
-- **Supporting keywords:** `steps to convert jpg to svg file in c# · install groupdocs.conversion for .net using your favorite package manager. · create an instance of fluentconverter class.`, `simply change ppt to svg by uploading your file, choosing a target format, and clicking convert. your file will be ready to download in seconds, no registration ...`, `groupdocs.conversion for .net is an advanced document conversion api developed to convert files of different formats from within any .net application.`
+- **Primary keyword:** `JPG to SVG file converter for C#`
+- **Supporting keywords:** `convert JPG to SVG `, `JPG to SVG converter`, `JPG to SVG conversion`
 
 **Suggested outline:**
 - Introduction to image format conversion in .NET

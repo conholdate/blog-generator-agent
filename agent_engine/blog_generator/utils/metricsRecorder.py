@@ -50,9 +50,9 @@ class MetricsRecorder:
         if run_env is None:
             # Check common environment variables
             if os.getenv("CI") or os.getenv("GITHUB_ACTIONS"):
-                self.run_env = "PROD"
+                self.run_env = "DEV"
             elif os.getenv("ENVIRONMENT") == "production":
-                self.run_env = "PROD"
+                self.run_env = "DEV"
             else:
                 self.run_env = "DEV"
         else:
