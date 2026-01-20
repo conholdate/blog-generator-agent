@@ -141,7 +141,7 @@ jobs:
           serp_topic = os.environ.get("INPUT_SERP_TOPIC", "")
           top_clusters = int(os.environ.get("INPUT_TOP_CLUSTERS", "15"))
           use_content_index = as_bool(os.environ.get("INPUT_USE_CONTENT_INDEX", "false"))
-          include_product_in_title = : as_bool(os.environ.get("INPUT_INCLUDE_PRODUCT_IN_TITLE", "true"))
+          include_product_in_title = as_bool(os.environ.get("INPUT_INCLUDE_PRODUCT_IN_TITLE", "true"))
 
           # Defaults (not exposed as workflow inputs)
           locale = "en-US"
