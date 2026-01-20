@@ -73,6 +73,18 @@ def build_command(engine: Dict[str, Any]) -> list[str]:
     if not use_content_index:
         cmd.append("--no-content-index")
 
+    # NEW: include_product_in_title flag (default True)
+    # Support both snake_case and kebab-case keys in kra_run.yaml
+    include_product_in_title = engine.get("include_product_in_title")
+    if include_product_in_title is None:
+        include_product_in_title = engine.get("include-product-in-title")
+    # Default to True if not specified
+    include_product_in_title = True if include_product_in_title is None else bool(include_product_in_title)
+
+    # Only pass a flag when turning it OFF (since CLI default is True)
+    if not include_product_in_title:
+        cmd.append("--no-product-in-title")
+
     return cmd
 
 

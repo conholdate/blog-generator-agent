@@ -11,9 +11,27 @@ on:
 
       platform:
         description: "Optional target platform (e.g., java, c#, python)."
-        type: string
         required: false
-        default: "java"
+        type: choice
+        options:
+          - 'Java'
+          - '.NET'
+          - 'C++'
+          - 'PHP'
+          - 'SharePoint'
+          - 'JasperReports'
+          - 'Reporting Services'
+          - 'JavaScript via C++'
+          - 'Go via C++'
+          - 'Rust via C++'
+          - 'Node.js via C++'
+          - 'Node.js via Java'
+          - 'Node.js via .NET'
+          - 'PHP via Java'
+          - 'Python via .NET'
+          - 'Python via Java'
+          - 'Android via Java'
+        default: 'Java'
 
       keywords_file:
         description: "Keywords file path (recommended: content/Aspose/keywords.csv)."
@@ -44,6 +62,12 @@ on:
         type: boolean
         required: false
         default: false
+
+      include_product_in_title:
+        description: "If true, enforce product name in generated topic titles. If false, ensure product name is NOT used in titles."
+        type: boolean
+        required: false
+        default: true
 
 permissions:
   contents: write
@@ -117,6 +141,7 @@ jobs:
           serp_topic = os.environ.get("INPUT_SERP_TOPIC", "")
           top_clusters = int(os.environ.get("INPUT_TOP_CLUSTERS", "15"))
           use_content_index = as_bool(os.environ.get("INPUT_USE_CONTENT_INDEX", "false"))
+          include_product_in_title = : as_bool(os.environ.get("INPUT_INCLUDE_PRODUCT_IN_TITLE", "true"))
 
           # Defaults (not exposed as workflow inputs)
           locale = "en-US"
@@ -145,6 +170,7 @@ jobs:
               f"  top_clusters: {top_clusters}\n"
               f"  max_rows: {max_rows}\n"
               f"  use_content_index: {b(use_content_index)}\n"
+              f"  include_product_in_title: {b(include_product_in_title)}\n"
               f"  debug: {b(debug)}\n"
               "\n"
               "content_index:\n"
@@ -166,6 +192,7 @@ jobs:
           INPUT_SERP_TOPIC: ${{ inputs.serp_topic }}
           INPUT_TOP_CLUSTERS: ${{ inputs.top_clusters }}
           INPUT_USE_CONTENT_INDEX: ${{ inputs.use_content_index }}
+          INPUT_INCLUDE_PRODUCT_IN_TITLE: ${{ inputs.include_product_in_title }}
 
       - name: Run KRA
         run: |

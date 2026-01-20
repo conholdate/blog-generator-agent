@@ -93,6 +93,106 @@ class KeywordResearchAgent:
         if f in {"csharp", "c#"}:
             return "C#"
         return fw  # fallback: echo as-is
+    @staticmethod
+    def _product_variants(product: str) -> List[str]:
+        """
+        Generate common textual variants of a product name for matching/removal.
+        Example: "Aspose.Cells" -> ["Aspose.Cells", "Aspose Cells", "Cells", "aspose.cells", ...]
+        """
+        p = (product or "").strip()
+        if not p:
+            return []
+
+        # Base variants
+        variants = {p}
+
+        # Normalize separators: dot <-> space
+        variants.add(p.replace(".", " "))
+        variants.add(p.replace(" ", "."))
+
+        # Tokenize and add last token (e.g., "Cells")
+        tokens = re.split(r"[.\s/\\_-]+", p)
+        tokens = [t for t in tokens if t]
+        if tokens:
+            variants.add(tokens[-1])  # e.g., "Cells"
+
+        # Add lowercase variants as well (for matching)
+        out = set()
+        for v in variants:
+            v = v.strip()
+            if not v:
+                continue
+            out.add(v)
+            out.add(v.lower())
+
+        # Prefer longer variants first for removal (avoid removing "Cells" too early)
+        return sorted(out, key=len, reverse=True)
+
+    @staticmethod
+    def _contains_product(title: str, product_variants: List[str]) -> bool:
+        t = (title or "").strip()
+        if not t:
+            return False
+        for v in product_variants:
+            if not v:
+                continue
+            # word-boundary-ish match, but allow dots
+            pat = rf"(?i)(?<!\w){re.escape(v)}(?!\w)"
+            if re.search(pat, t):
+                return True
+        return False
+
+    @staticmethod
+    def _ensure_product_in_title(title: str, product: str) -> str:
+        """
+        Ensure product appears in title. If missing, append "(<product>)".
+        """
+        t = (title or "").strip()
+        p = (product or "").strip()
+        if not t or not p:
+            return t
+
+        variants = KeywordResearchAgent._product_variants(p)
+        if KeywordResearchAgent._contains_product(t, variants):
+            return t
+
+        # Append in a consistent, non-disruptive way
+        return f"{t} ({p})"
+
+    @staticmethod
+    def _remove_product_from_title(title: str, product: str) -> str:
+        """
+        Ensure product does NOT appear in title.
+        Removes product variants and cleans leftover punctuation/whitespace.
+        """
+        t = (title or "").strip()
+        p = (product or "").strip()
+        if not t or not p:
+            return t
+
+        variants = KeywordResearchAgent._product_variants(p)
+        out = t
+
+        # Remove variants (longest first)
+        for v in variants:
+            if not v:
+                continue
+            pat = rf"(?i)(?<!\w){re.escape(v)}(?!\w)"
+            out = re.sub(pat, "", out)
+
+        # Clean up empty parentheses/brackets caused by removal
+        out = re.sub(r"\(\s*\)", "", out)
+        out = re.sub(r"\[\s*\]", "", out)
+
+        # Clean up duplicated punctuation / separators
+        out = re.sub(r"\s{2,}", " ", out).strip()
+        out = re.sub(r"\s+([:,\-–—])", r"\1", out)     # space before punctuation
+        out = re.sub(r"([:,\-–—])\s{2,}", r"\1 ", out) # too many spaces after punctuation
+
+        # Remove leading/trailing separators
+        out = out.strip(" -–—,:;")
+
+        return out
 
     def generate_topics(
         self,
@@ -104,6 +204,7 @@ class KeywordResearchAgent:
         platform: Optional[str] = None,
         existing_topics: Optional[List[Dict[str, Any]]] = None,
         metrics: Optional[RunMetrics] = None,
+        include_product_in_title: bool = True,
     ) -> List[TopicIdea]:
         """
         Generate topic ideas from the top N clusters.
@@ -235,6 +336,21 @@ class KeywordResearchAgent:
                 "- Propose language-agnostic topics or topics that are clearly relevant across languages.\n"
             )
 
+        # Product title rules
+        if include_product_in_title:
+            system += (
+                "\nPRODUCT TITLE RULE\n"
+                f"- The product name '{product}' MUST appear in EVERY 'title'.\n"
+                "- If any title does NOT contain the product name, the response is INVALID.\n"
+            )
+        else:
+            system += (
+                "\nPRODUCT TITLE RULE\n"
+                f"- The product name '{product}' MUST NOT appear in ANY 'title'.\n"
+                "- Do not mention the product name or close variants (e.g., with '.' or spaces).\n"
+                "- If any title contains the product name, the response is INVALID.\n"
+            )
+
         system += (
             "\nPRIORITIZATION\n"
             "- Prefer clusters/keywords with meaningful search volume and reasonable competition.\n"
@@ -323,6 +439,29 @@ class KeywordResearchAgent:
 
         out: List[TopicIdea] = []
         invalid_count = 0
+        # Enforce product inclusion/exclusion deterministically after parsing.
+        if product:
+            if include_product_in_title:
+                fixed = 0
+                variants = self._product_variants(product)
+                for topic in out:
+                    original = (topic.title or "").strip()
+                    if not self._contains_product(original, variants):
+                        topic.title = self._ensure_product_in_title(original, product)
+                        fixed += 1
+                if fixed:
+                    logger.info("Title enforcement: appended product to %d titles.", fixed)
+            else:
+                stripped = 0
+                variants = self._product_variants(product)
+                for topic in out:
+                    original = (topic.title or "").strip()
+                    if self._contains_product(original, variants):
+                        topic.title = self._remove_product_from_title(original, product)
+                        stripped += 1
+                if stripped:
+                    logger.info("Title enforcement: removed product from %d titles.", stripped)
+
         for t in topics_raw:
             if not isinstance(t, dict):
                 invalid_count += 1

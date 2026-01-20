@@ -143,6 +143,35 @@ def _derive_product_code(product: str) -> str:
         return p
     return tokens[-1]
 
+def _print_run_title(
+    *,
+    brand: str,
+    product: str,
+    include_product_in_title: bool = True,
+) -> None:
+    """
+    Print a simple CLI title banner. Optionally includes product name.
+
+    Args:
+        brand: Brand string shown in title context.
+        product: Product string shown in title context.
+        include_product_in_title: If True, append product name in title.
+    """
+    print("=" * 80)
+    title = "Blog Keyword Analyzer"
+    if include_product_in_title:
+        # Include product if available; keep formatting stable
+        p = (product or "").strip()
+        if p:
+            title = f"{title} - {p}"
+    # Brand is always useful context; keep it as a subtitle line
+    print(title)
+    b = (brand or "").strip()
+    if b:
+        print(f"Brand: {b}")
+    print("=" * 80)
+    print()
+
 def _load_existing_topics_for_prompt(
     product: str,
     platform: Optional[str],
@@ -525,6 +554,7 @@ def run_sync(
     platform: Optional[str] = None,
     use_content_index: bool = True,
     records: Optional[List[KeywordRecord]] = None,
+    include_product_in_title: bool = True,
 ) -> tuple[RunResult, RunMetrics]:
     run_id = str(uuid.uuid4())[:8]
     start = time.perf_counter()
@@ -646,6 +676,7 @@ def run_sync(
             platform=platform,
             existing_topics=existing_topics,
             metrics=metrics,
+            include_product_in_title=include_product_in_title,
         )
         dt_llm = time.perf_counter() - t0_llm
         metrics.mark_llm_call(duration_seconds=dt_llm, failed=topics is None)
@@ -802,6 +833,21 @@ def main() -> None:
         help="Topic/angle to seed the SerpAPI query, e.g. 'convert CSV to Excel'.",
     )
 
+    # NEW: Include product name in title banner (default True)
+    parser.add_argument(
+        "--include-product-in-title",
+        dest="include_product_in_title",
+        action="store_true",
+        help="Include product name in the printed title banner (default: enabled).",
+    )
+    parser.add_argument(
+        "--no-product-in-title",
+        dest="include_product_in_title",
+        action="store_false",
+        help="Do not include product name in the printed title banner.",
+    )
+    parser.set_defaults(include_product_in_title=True)
+
     args = parser.parse_args()
 
     # Decide ingestion mode: file vs SerpAPI
@@ -869,6 +915,7 @@ def main() -> None:
         platform=args.platform or None,
         use_content_index=args.use_content_index,
         records=records,  # <--- THIS prevents import_file(req) in SerpAPI mode
+        include_product_in_title=args.include_product_in_title,
     )
 
     # Print a brief human summary of clusters/topics (optional)
