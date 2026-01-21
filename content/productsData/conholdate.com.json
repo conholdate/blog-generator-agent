@@ -13,7 +13,8 @@
   "ForumsURL" : "https://forum.conholdate.com/c/total/5",
   "InstallCommand" : "dotnet add package Conholdate.Total --version 25.10.0",
   "urlPrefix" : "total",
-  "license":"https://purchase.conholdate.com/temporary-license/"
+  "license":"https://purchase.conholdate.com/temporary-license/",
+  "pricing": "https://purchase.conholdate.com/pricing/total/family/"
 },
 {
   "ProductName" : "Conholdate.Total for Java",
@@ -29,6 +30,7 @@
   "ForumsURL" : "https://forum.conholdate.com/c/total/5",
   "InstallCommand" : "<repositories><repository><id>conholdate-repo</id><name>Conholdate Maven Repository</name><url>https://repository.conholdate.com/repo/</url></repository></repositories><dependency><groupId>com.conholdate</groupId><artifactId>conholdate-total</artifactId><version>24.9</version><type>pom</type></dependency>",
   "urlPrefix" : "total",
-  "license":"https://purchase.conholdate.com/temporary-license/"
+  "license":"https://purchase.conholdate.com/temporary-license/",
+  "pricing": "https://purchase.conholdate.com/pricing/total/family/"
 }
 ]

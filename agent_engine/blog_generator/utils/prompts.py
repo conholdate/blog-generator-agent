@@ -139,14 +139,17 @@ KEEP in title, seoTitle, and content body:
 
 ### MARKDOWN-SAFE CONTENT (MANDATORY)
 Replace automatically throughout:
-- Em dash to hyphen
-- En dash to hyphen
-- Curly double quotes to straight quotes
-- Curly single quotes to straight quotes
-- Ellipsis to three periods
-- Copyright to (c), Registered to (R), Trademark to (TM)
-- Bullet to hyphen
-- Degree symbol to "degrees"
+- Em dash (—) to single hyphen (-)
+- En dash (–) to single hyphen (-)
+- Curly double quotes (" ") to straight quotes (" ")
+- Curly single quotes (' ') to straight quotes (' ')
+- Ellipsis (…) to three periods (...)
+- Copyright (©) to (c), Registered (®) to (R), Trademark (™) to (TM)
+- Bullet (•) to hyphen (-)
+- Degree symbol (°) to "degrees"
+- NEVER use em dashes or en dashes anywhere in content
+- NEVER use typographic quotes or smart quotes
+- ALWAYS use simple ASCII punctuation
 
 YAML SAFETY:
 - Quote strings containing colons
@@ -195,21 +198,84 @@ PART 2: CONTENT STRUCTURE (MANDATORY SECTIONS)
 
 ### REQUIRED SECTIONS (IN ORDER)
 1. Introduction Content (NO H2 heading - direct paragraphs)
-2. Prerequisites/Installation (H2 heading - ALWAYS include)
+2. Prerequisites and Setup (H2 heading - ALWAYS include - combines installation and environment setup)
 3. Steps (H2 heading - ALWAYS include)
-4. Outline Sections (Follow provided outline exactly)
-5. Complete Code Example(s) (ONLY if you have actual code)
+4. Outline Sections (Follow provided outline exactly - SKIP any "Setting Up" or "Installation" sections as they're covered in Prerequisites)
+5. **Complete Code Example(s) (H2 heading - MANDATORY - NEVER SKIP)**
 6. Conclusion (H2 heading - ALWAYS include)
 7. FAQs (H2 heading - ALWAYS include)
 {'8. Read More (H2 heading - ALWAYS include last)' if formatted_related else ''}
+
+**CRITICAL SECTION ORDERING RULES:**
+- Prerequisites and Setup MUST come immediately after Introduction
+- Steps MUST come immediately after Prerequisites and Setup
+- Outline sections MUST come after Steps
+- **IMPORTANT: Skip any "Setting Up [Product]" or "Installation" or "Configuration" sections from the outline - these are already covered in Prerequisites and Setup**
+- **Steps section MUST appear in the document BEFORE Complete Code Example(s)**
+- Complete Code Example(s) MUST come after ALL Outline sections
+- Conclusion MUST come after Complete Code Example(s)
+- FAQs MUST come after Conclusion
+- Order: Intro → Prerequisites and Setup → Steps → Outline (excluding setup topics) → Complete Code → Conclusion → FAQs → Read More
+- **INVALID: If Complete Code Example appears before Steps section**
+- **INVALID: If Steps section is missing from the document**
+
+**LOGICAL FLOW ENFORCEMENT FOR OUTLINE SECTIONS:**
+The outline sections come AFTER the Steps section. Within the outline sections:
+
+- **SKIP** any sections about "Setting Up", "Installation", "Configuration", "Prerequisites" - these are already covered
+- Include Understanding/Conceptual sections FIRST
+- Include Implementation/Usage/Advanced sections SECOND
+
+**Example of CORRECT order:**
+1. Introduction
+2. Prerequisites and Setup (covers installation, environment setup, configuration)
+3. **Steps to Uncompress Z File ← (MUST appear here, BEFORE Complete Code Example)**
+4. Understanding Z File Compression ← (Outline section - conceptual)
+5. Advanced Compression Options ← (Outline section - advanced usage)
+6. **Complete Code Example ← (MUST appear AFTER Steps section)**
+7. Conclusion
+8. FAQs
+
+**Example of WRONG order (don't do this):**
+1. Introduction
+2. Prerequisites and Setup
+3. Steps to Uncompress Z File
+4. Setting Up Aspose.ZIP ← (WRONG - redundant, already covered in Prerequisites and Setup)
+5. Understanding Z File Compression
+6. Complete Code Example
+7. Conclusion
+
+**Another WRONG example (missing Steps or wrong position):**
+1. Introduction
+2. Prerequisites and Setup
+3. Understanding Z File Compression
+4. Complete Code Example ← (WRONG - appears before Steps section)
+5. Steps to Uncompress Z File ← (WRONG - should be before Complete Code Example)
+6. Conclusion
+
+**GRAMMAR RULES FOR HEADINGS:**
+- Product names: NEVER use articles (a/an) before product names
+- ✅ CORRECT: "Prerequisites and Setup"
+- ❌ WRONG: "Prerequisites and a Setup"
 
 ### 1. INTRODUCTION CONTENT (NO HEADING)
 - Start directly with 2-3 paragraphs after frontmatter
 - NO H2 heading
 - **CRITICAL: The FIRST paragraph MUST contain the product page URL**
 - **MANDATORY: Link format in first paragraph**: [Full Product Name with Platform](ProductURL)
-- Example: "Using [Aspose.Slides for Java](https://products.aspose.com/slides/java/), developers can..."
-- Example: "This guide demonstrates how [Aspose.PDF for .NET](ProductURL) enables..."
+- **EXACT FORMAT REQUIRED**: [BrandName.ProductName for Platform](ProductPageURL)
+- **Examples of CORRECT format**:
+  * [Aspose.PDF for .NET](https://products.aspose.com/pdf/net/)
+  * [GroupDocs.Conversion for Java](https://products.groupdocs.com/conversion/java/)
+  * [Aspose.Slides for Python via .NET](https://products.aspose.com/slides/python-net/)
+  * [Conholdate.Total for .NET](https://products.conholdate.com/total/net/)
+- **Examples of WRONG format**:
+  * ❌ Aspose.PDF for .NET (no link)
+  * ❌ [Aspose.PDF](URL) (missing platform)
+  * ❌ [the SDK](URL) (not using product name)
+  * ❌ Using [Aspose.PDF for .NET](URL) in second or third paragraph (must be in FIRST paragraph)
+- **The product name link MUST appear in the FIRST sentence or FIRST paragraph**
+- **Use the FULL product name including platform (e.g., "for .NET", "for Java")**
 - Include at least 1 additional contextual link in subsequent paragraphs
 - Use correct terminology based on platform (see Part 3)
 - Natural flow, explain the topic and its value
@@ -217,15 +283,16 @@ PART 2: CONTENT STRUCTURE (MANDATORY SECTIONS)
 - Clarify this is a programmatic SDK/library for local/server use
 - Total: 2-3 paragraphs with product link in FIRST paragraph
 
-### 2. PREREQUISITES/INSTALLATION (MANDATORY)
-## Prerequisites
-OR
-## Installation
+### 2. PREREQUISITES AND SETUP (MANDATORY)
+## Prerequisites and Setup
 
-Content:
+**This section combines all installation, configuration, and environment setup requirements.**
+
+Content MUST include:
 - System requirements (if applicable)
+- **Product installation instructions**
+- **Environment/project setup if needed**
 - **MUST link Download URL**: "Download the latest version from [this page](download_url)" or "Get it from the [releases page](download_url)"
-- **MUST link License URL**: "Obtain a [temporary license](license_url) for evaluation" or "Get your [license](license_url)"
 - Package manager command (NuGet, Maven, pip, npm, etc.)
 - Installation code wrapped in tags:
 
@@ -236,8 +303,26 @@ Content:
 <!--[CODE_SNIPPET_END]-->
 
 - **Optional: Link Documentation**: "See the [installation guide](documentation_url) for more details"
-- Keep concise (2-4 paragraphs but MUST include download and license links)
-- NEVER mention "free" or "online"
+
+**IMPORTANT: LICENSE HANDLING**
+- **DO NOT mention license setup in Prerequisites section**
+- **DO NOT include license code in any code examples**
+- **DO mention licensing AFTER Complete Code Example or in Conclusion**
+- **Format for license mention**: "For production use, you can purchase a license by visiting the [pricing page](pricing_url)" or "Get your [license](license_url) for commercial use"
+
+Keep comprehensive but well-organized (2-5 paragraphs covering installation and setup)
+NEVER mention "free" or "online"
+
+**What to include in this section:**
+✅ Installing the library/SDK
+✅ Setting up the development environment
+✅ Configuring project dependencies
+✅ Initial configuration steps
+✅ Any prerequisites needed before using the product
+
+**What NOT to include:**
+❌ License setup or license code
+❌ License acquisition steps (save for later sections)
 
 ### 3. STEPS SECTION (MANDATORY)
 ## Steps to [Task Name Based on Title]
@@ -256,53 +341,189 @@ Format:
 **MUST include at least 1 Documentation or API Reference link in this section**
 
 ### 4. OUTLINE SECTIONS
-Follow the provided outline exactly:
+Follow the provided outline but SKIP any setup/installation sections:
 
 {formatted_outline}
 
+**CRITICAL: SKIP THESE TOPICS FROM OUTLINE (already covered in Prerequisites and Setup):**
+❌ Skip: "Setting Up [Product]"
+❌ Skip: "Installing [Product]"
+❌ Skip: "Configuring [Product]"
+❌ Skip: "Environment Setup"
+❌ Skip: "Prerequisites"
+❌ Skip: Any section about installation or initial configuration
+
+**ONLY INCLUDE THESE TYPES OF OUTLINE SECTIONS:**
+✅ Include: Understanding/Conceptual sections (e.g., "Understanding Z File Compression")
+✅ Include: Feature explanations (e.g., "Key Features of the API")
+✅ Include: Usage/Implementation topics (e.g., "Advanced Compression Options")
+✅ Include: Best practices, tips, or optimization sections
+
+**ORDERING RULES FOR REMAINING OUTLINE SECTIONS:**
+The outline sections appear AFTER the Steps section. Arrange remaining sections logically:
+
+1. **Overall document order**:
+   - Introduction (no heading)
+   - Prerequisites and Setup (covers ALL installation and configuration)
+   - Steps to [Task Name]
+   - **Then include relevant outline sections:**
+     - Understanding/Conceptual sections FIRST (e.g., "Understanding Z Compression")
+     - Advanced/Usage sections SECOND (e.g., "Advanced Options", "Best Practices")
+   - Complete Code Example(s)
+   - Conclusion
+   - FAQs
+
+2. **Correct sequence for outline sections (after skipping setup topics)**:
+   ✅ After Steps: "Understanding [Concept]" → "Advanced [Feature]" → "Best Practices"
+   ✅ After Steps: "Key Features Overview" → "Usage Examples" → "Optimization Tips"
+   
+3. **Grammar check for headings**:
+   - NEVER use "a" or "an" before product names
+   - ✅ "Understanding Z File Compression"
+   - ✅ "Advanced Compression Options"
+
+**Section Content Requirements:**
 - Use H2/H3 headers as specified
 - Include contextual links naturally
 - May include code snippets with explanations
 - Link classes/methods ONLY if URLs in context
 - Link product name to product page URL: [Full Product Name](url)
 
-### 5. COMPLETE CODE EXAMPLE(S) - CONDITIONAL
-CRITICAL: Only create if you have actual, complete, working code
+### 5. COMPLETE CODE EXAMPLE(S) - MANDATORY (NON-NEGOTIABLE)
+CRITICAL: This section is MANDATORY and MUST ALWAYS be included. NO EXCEPTIONS.
 
-WHEN TO CREATE:
-✅ You have full, working code for the task
-✅ Code is copy-paste ready (no placeholders)
-✅ Task can be demonstrated with code
+**ABSOLUTE REQUIREMENT:**
+- EVERY blog post MUST have at least ONE Complete Code Example section
+- This is a HARD REQUIREMENT that cannot be skipped
+- Even if the outline doesn't explicitly mention it, you MUST create it
+- If multiple tasks in title, create a section for EACH task that can be demonstrated with code
+- **This section MUST appear AFTER the Steps section in the document**
+- **This section MUST appear AFTER all Outline sections**
+- **NEVER place Complete Code Example before the Steps section**
 
-WHEN TO SKIP:
-❌ No complete code available
-❌ Code would use "// ... rest of code" placeholders
-❌ Task is purely conceptual
+**MANDATORY IMPLEMENTATION:**
+✅ MUST include full, working code that demonstrates the concept
+✅ MUST be syntactically correct and compilable
+✅ MUST demonstrate the main task from the title
+✅ Code MUST be executable with appropriate setup
+✅ MUST include all imports, initialization, and implementation
+✅ MUST have error handling where applicable
 
-MULTIPLE TASKS HANDLING:
+**NEVER SKIP THIS SECTION:**
+❌ Do NOT skip even if you think the task is "conceptual"
+❌ Do NOT skip because the outline doesn't mention it
+❌ Do NOT skip for any reason whatsoever
+❌ Skipping this section makes the output INVALID
+
+**MULTIPLE TASKS HANDLING:**
 - Title: "Convert PDF to PNG and JPG"
-  → Create sections ONLY for tasks with code:
+  → Create BOTH sections (MANDATORY):
   ## Convert PDF to PNG - Complete Code Example
   ## Convert PDF to JPG - Complete Code Example
 
 - Title: "Convert PDF to PNG"
-  → Create 1 section:
+  → Create 1 section (MANDATORY):
   ## Convert PDF to PNG - Complete Code Example
 
-FORMAT (when included):
-## [Specific Task] - Complete Code Example
+- Title: "Extract Text from PDF and Save to Word"
+  → Create BOTH sections (MANDATORY):
+  ## Extract Text from PDF - Complete Code Example
+  ## Save Text to Word - Complete Code Example
 
-[1-2 sentence intro]
+**FORMAT (ALWAYS INCLUDE):**
+## [Specific Task from Title] - Complete Code Example
+
+**INTRO SENTENCE (1-2 sentences before code block):**
+- Explain what the code demonstrates or shows
+- NEVER use: "ready-to-run", "ready-to-use", "production-ready", "copy-paste ready"
+- DO use phrases like:
+  * "This example demonstrates how to..."
+  * "The following code shows the implementation of..."
+  * "This code illustrates the process of..."
+  * "Here's an example that demonstrates..."
+
+**CORRECT intro examples:**
+✅ "This example demonstrates how to convert PDF to PNG using Aspose.PDF for .NET."
+✅ "The following code shows how to implement the conversion process."
+✅ "This code illustrates the basic steps for PDF to PNG conversion."
+
+**INCORRECT intro examples:**
+❌ "This ready-to-run example converts PDF to PNG."
+❌ "Here's a production-ready console application that converts PDF."
+❌ "This copy-paste ready code handles PDF conversion."
+
+[Write your 1-2 sentence intro here following the CORRECT examples above]
+
+**⚠️ CRITICAL: YOU MUST USE THESE EXACT TAGS BELOW ⚠️**
+**⚠️ TAG NAME: COMPLETE_CODE_SNIPPET_START (NOT CODE_SNIPPET_START) ⚠️**
+**⚠️ DO NOT FORGET THE WORD "COMPLETE" IN THE TAG ⚠️**
 
 <!--[COMPLETE_CODE_SNIPPET_START]-->
 ```language
 // Full working code
-// All imports, initialization, implementation
-// Production-ready, no placeholders
+// All necessary imports at the top
+// Complete initialization
+// Full implementation logic
+// Error handling where applicable
+// Resource cleanup
+// Demonstrates the concept, no placeholders, no "// ... rest of code" comments
 ```
 <!--[COMPLETE_CODE_SNIPPET_END]-->
 
-[Optional: Usage notes]
+**⚠️ CRITICAL: YOU MUST USE THESE EXACT TAGS ABOVE ⚠️**
+**⚠️ TAG NAME: COMPLETE_CODE_SNIPPET_END (NOT CODE_SNIPPET_END) ⚠️**
+**⚠️ THE TAGS MUST INCLUDE THE WORD "COMPLETE" ⚠️**
+
+**IMPORTANT READER DISCLAIMER (MANDATORY - INCLUDE AFTER EVERY COMPLETE CODE EXAMPLE):**
+
+After each complete code example, you MUST include this exact disclaimer text (adapt the file paths to match the actual code):
+
+> **Note:** This code example demonstrates the core functionality. Before using it in your project, make sure to update the file paths (`input.pdf`, `output.png`, etc.) to match your actual file locations, verify that all required dependencies are properly installed, and test thoroughly in your development environment. If you encounter any issues, please refer to the [official documentation](documentation_url) or reach out to the [support team](forums_url) for assistance.
+
+**Disclaimer Requirements:**
+- Place this note IMMEDIATELY after the code block (after the closing tag)
+- Use the blockquote format (>) for visibility
+- Replace `documentation_url` and `forums_url` with actual URLs from context
+- Adapt file path examples to match what's actually used in the code
+- Keep the tone helpful and professional, not apologetic
+- This disclaimer is MANDATORY for EVERY complete code example section
+
+**CRITICAL TAG USAGE REMINDER (READ THIS CAREFULLY):**
+- Complete Code Examples MUST use: <!--[COMPLETE_CODE_SNIPPET_START]--> and <!--[COMPLETE_CODE_SNIPPET_END]-->
+- These tags are DIFFERENT from regular code snippet tags
+- Regular code snippets use: <!--[CODE_SNIPPET_START]--> and <!--[CODE_SNIPPET_END]-->
+- DO NOT confuse these tags - Complete Code Examples require the word "COMPLETE" in the tag name
+- Using <!--[CODE_SNIPPET_START]--> for Complete Code Examples is WRONG and makes output INVALID
+- YOU MUST TYPE: COMPLETE_CODE_SNIPPET_START (with the word COMPLETE)
+- YOU MUST TYPE: COMPLETE_CODE_SNIPPET_END (with the word COMPLETE)
+
+**VISUAL EXAMPLE OF THE DIFFERENCE:**
+
+❌ WRONG - DO NOT USE THIS FOR COMPLETE CODE EXAMPLES:
+<!--[CODE_SNIPPET_START]-->
+```java
+// This is WRONG for Complete Code Examples
+```
+<!--[CODE_SNIPPET_END]-->
+
+✅ CORRECT - USE THIS FOR COMPLETE CODE EXAMPLES:
+<!--[COMPLETE_CODE_SNIPPET_START]-->
+```java
+// This is CORRECT for Complete Code Examples
+// Notice the word "COMPLETE" in the tag
+```
+<!--[COMPLETE_CODE_SNIPPET_END]-->
+
+**MEMORIZE THIS:**
+- Section 5 (Complete Code Examples) = MUST use COMPLETE_CODE_SNIPPET_START
+- All other sections = use CODE_SNIPPET_START (without COMPLETE)
+
+**ENFORCEMENT:**
+- Output is INVALID if this section is missing
+- Output is INVALID if the disclaimer is missing after code examples
+- Blog generation FAILS if Complete Code Example is not present
+- This section MUST appear after outline sections and before Conclusion
+- Order: Outline Sections → Complete Code Example(s) → Conclusion → FAQs → Read More
 
 ### 6. CONCLUSION (MANDATORY)
 ## Conclusion
@@ -310,11 +531,28 @@ FORMAT (when included):
 - 2-3 paragraphs summarizing key points
 - Include at least 1 contextual link
 - MUST link product page URL with FULL product name: [Product Name](url)
-- **MUST link License URL**: "Get your [license](license_url) to use in production"
+- **MUST mention licensing in second half or end of conclusion**
+- **License mention must include BOTH pricing and temporary license**
+- **Format for license mention (use one of these patterns)**:
+  * "For production use, you can purchase a license by visiting the [pricing page](pricing_url). Alternatively, you can request a [temporary license](license_url) for evaluation purposes."
+  * "To use this SDK in commercial projects, obtain a [license](pricing_url). You can also get a [temporary license](license_url) for testing."
+  * "Explore the [pricing options](pricing_url) for commercial use, or request a [temporary license](license_url) to evaluate the SDK."
 - **Optional: Link Forums or Blogs**: "Explore more [tutorials](blogs_url)" or "Join our [community](forums_url)"
 - Use correct terminology based on platform
 - Natural closing, encourage next steps
 - NEVER mention "free" or "online tool"
+
+**License Mention Requirements:**
+- Mention license availability AFTER discussing the main content
+- Include link to pricing page using pricing_url from context
+- Include link to temporary license using license_url from context
+- Keep it brief and natural (1-2 sentences total)
+- Don't make it overly promotional
+- Examples:
+  * ✅ "For production use, visit the [pricing page](pricing_url) to purchase a license. You can also request a [temporary license](license_url) for evaluation."
+  * ✅ "Get a [license](pricing_url) for commercial deployment, or try it with a [temporary license](license_url) first."
+  * ❌ "Get your free trial license" (don't mention free)
+  * ❌ Only mentioning pricing without temporary license option
 
 ### 7. FAQs (MANDATORY)
 ## FAQs
@@ -336,13 +574,31 @@ Requirements:
 - 2-4 sentences per answer
 - Include contextual links in answers
 - Use product page URL with full product name: [Product Name](url)
-- **Suggested FAQ topics to include**:
-  - "How do I get a license?" → Link License URL
-  - "Where can I find more examples?" → Link Documentation or Blogs URL
-  - "Where can I get support?" → Link Forums URL
-  - Technical question → Link API Reference or Documentation
+- **LICENSE QUESTION PLACEMENT**: 
+  * If including a license question, place it as the 2nd, 3rd, or 4th question (NOT first)
+  * License answer should include BOTH pricing page and temporary license links
+  * Format: "You can purchase a license by visiting the [pricing page](pricing_url) for commercial use. For evaluation, you can request a [temporary license](license_url)."
+- **Suggested FAQ topics** (in order of preference):
+  1. Technical question related to main topic → Link API Reference or Documentation
+  2. "How do I get a license?" or "What are the licensing options?" → Link BOTH Pricing URL and License URL
+  3. "Where can I find more examples?" → Link Documentation or Blogs URL
+  4. "Where can I get support?" → Link Forums URL
 - Practical questions related to topic
 - NEVER mention "free" or "online"
+
+**LICENSE FAQ EXAMPLES:**
+✅ **Q: How can I use this SDK in production?**  
+   A: For commercial use, you can purchase a license from the [pricing page](pricing_url). If you want to evaluate the SDK first, request a [temporary license](license_url) for testing purposes.
+
+✅ **Q: What licensing options are available?**  
+   A: Visit the [pricing page](pricing_url) to explore different licensing tiers for production use. You can also obtain a [temporary license](license_url) to evaluate the SDK before purchasing.
+
+✅ **Q: Do I need a license to use this SDK?**  
+   A: Yes, for production deployment you need a license from the [pricing page](pricing_url). For evaluation and testing, you can get a [temporary license](license_url).
+
+❌ **Q: How do I get a license?** (as first question - WRONG placement)
+
+❌ A: Purchase from the [pricing page](pricing_url). (WRONG - missing temporary license option)
 
 {'### 8. READ MORE (MANDATORY)' if formatted_related else '### NO READ MORE SECTION'}
 {'## Read More' if formatted_related else 'Do NOT include - no related links provided.'}
@@ -350,34 +606,78 @@ Requirements:
 {'Use EXACT titles and URLs provided.' if formatted_related else ''}
 
 ═══════════════════════════════════════════════════════════════════════════════
-PART 3: TERMINOLOGY RULES (CRITICAL)
+PART 3: TERMINOLOGY RULES (CRITICAL - STRICTLY ENFORCED)
 ═══════════════════════════════════════════════════════════════════════════════
 
-### SDK vs LIBRARY/API TERMINOLOGY
-PLATFORM-BASED DECISION:
-- IF platform = "cloud" → Use "library" or "API"
-- IF platform ≠ "cloud" → Use "SDK"
+### SDK vs LIBRARY/API TERMINOLOGY - MANDATORY ENFORCEMENT
+**CRITICAL: Platform determines which term to use throughout the ENTIRE blog post.**
 
 Platform variable: {platform}
 
-Examples:
-- Cloud: "Install the library", "The API provides"
-- Non-cloud: "Install the SDK", "The SDK provides"
+**DECISION RULE:**
+- IF platform = "cloud" → Use "library" or "API" EVERYWHERE
+- IF platform ≠ "cloud" (on-premises) → Use "SDK" EVERYWHERE
 
-### PROHIBITED TERMINOLOGY
-NEVER use anywhere in content:
+**Platform Examples:**
+- Cloud platforms: "cloud"
+- On-premises platforms: ".NET", "Java", "Python", "C++", "Node.js", "PHP", etc.
+
+**TERMINOLOGY APPLICATION:**
+IF platform = "cloud":
+  ✅ "the library provides"
+  ✅ "install the library"
+  ✅ "using this API"
+  ✅ "the library handles"
+  ❌ "the SDK provides" (WRONG)
+  ❌ "install the SDK" (WRONG)
+
+IF platform ≠ "cloud" (on-premises like .NET, Java, Python, etc.):
+  ✅ "the SDK provides"
+  ✅ "install the SDK"
+  ✅ "using this SDK"
+  ✅ "the SDK handles"
+  ❌ "the library provides" (WRONG)
+  ❌ "install the library" (WRONG)
+
+**APPLY EVERYWHERE IN BLOG:**
+- Introduction paragraphs
+- Prerequisites and Setup section
+- Steps section
+- Outline sections
+- Complete Code Example descriptions
+- Conclusion section
+- FAQ answers
+
+**EXAMPLES BY PLATFORM:**
+
+Platform = ".NET" (on-premises):
+  ✅ "Aspose.PDF for .NET is a powerful SDK for document processing"
+  ✅ "Install the SDK via NuGet"
+  ✅ "This SDK provides comprehensive features"
+  ❌ "Aspose.PDF for .NET is a powerful library" (WRONG)
+
+Platform = "Java" (on-premises):
+  ✅ "GroupDocs.Conversion for Java SDK enables developers"
+  ✅ "Download the SDK from the releases page"
+  ❌ "GroupDocs.Conversion for Java library enables" (WRONG)
+
+Platform = "cloud":
+  ✅ "The Aspose.PDF Cloud library offers REST API access"
+  ✅ "Install the library using pip"
+  ❌ "The Aspose.PDF Cloud SDK offers" (WRONG)
+
+### PROHIBITED TERMINOLOGY (NEVER USE)
+**NEVER use anywhere in content:**
 ❌ "Framework" - use "SDK", "library", "platform", "toolkit" instead
 ❌ "free SDK" or "free library" or "free API"
 ❌ "online tool" or "online app" or "web-based"
 ❌ "browser-based" or "no installation required"
 
-ALWAYS use:
+**ALWAYS use:**
 ✅ "SDK" (if platform ≠ cloud)
 ✅ "library" or "API" (if platform = cloud)
 ✅ "programmatic solution"
 ✅ "install and integrate"
-
-Apply to: introduction, prerequisites, steps, outline, code examples, conclusion, FAQs
 
 ═══════════════════════════════════════════════════════════════════════════════
 PART 4: LINKING REQUIREMENTS (CRITICAL)
@@ -448,7 +748,50 @@ Context contains ALL these resource types - YOU MUST USE THEM:
 - Example: "Need help? Visit our [support forums](URL)"
 - Example FAQ: "Where can I get support? Check the [community forums](URL)"
 
-### PRODUCT NAME LINKING (MANDATORY - CRITICAL)
+### PRODUCT NAME AND FILE FORMAT LINKING (CRITICAL - NEW RULES)
+
+**CRITICAL DISTINCTION: Product Names vs File Formats**
+
+**1. PRODUCT NAMES (Link to Product Page):**
+When mentioning the product (e.g., Aspose.ZIP, Aspose.PDF, GroupDocs.Conversion):
+- Link the FULL product name to the product page
+- Format: [Aspose.ZIP for .NET](product_page_url)
+- Examples:
+  * [Aspose.ZIP for .NET](https://products.aspose.com/zip/net/)
+  * [Aspose.PDF for Java](https://products.aspose.com/pdf/java/)
+  * [GroupDocs.Conversion for Python](https://products.groupdocs.com/conversion/python-net/)
+
+**2. FILE FORMATS (Link to FileFormat.com):**
+When discussing file formats separately (e.g., ZIP, PDF, DOCX, PNG):
+- Link ONLY the file format to docs.fileformat.com
+- Format: [ZIP](https://docs.fileformat.com/compression/zip/)
+- Examples:
+  * [ZIP](https://docs.fileformat.com/compression/zip/)
+  * [PDF](https://docs.fileformat.com/pdf/)
+  * [PNG](https://docs.fileformat.com/image/png/)
+  * [DOCX](https://docs.fileformat.com/word-processing/docx/)
+
+**3. WRONG PATTERNS TO AVOID:**
+❌ [Aspose.ZIP](fileformat_url) - Product linked to file format
+❌ [ZIP for .NET](product_url) - File format with platform linked to product
+❌ Aspose.[ZIP](fileformat_url) - Splitting product name with file format link
+
+**4. CORRECT USAGE EXAMPLES:**
+
+**Example 1: Introduction paragraph**
+"[Aspose.ZIP for .NET](https://products.aspose.com/zip/net/) is a powerful SDK for working with [ZIP](https://docs.fileformat.com/compression/zip/) archives in C# applications."
+
+**Example 2: Discussing formats**
+"The [PDF](https://docs.fileformat.com/pdf/) format is widely used for documents, and [Aspose.PDF for Java](https://products.aspose.com/pdf/java/) provides comprehensive features for PDF manipulation."
+
+**Example 3: Format comparison**
+"Converting between [DOCX](https://docs.fileformat.com/word-processing/docx/) and [PDF](https://docs.fileformat.com/pdf/) formats is straightforward with [GroupDocs.Conversion for .NET](https://products.groupdocs.com/conversion/net/)."
+
+**5. APPLICATION THROUGHOUT BLOG:**
+- First mention of product: Link product name to product page
+- First mention of file format: Link format to docs.fileformat.com
+- Subsequent mentions: Can be plain text or link again as appropriate
+- Never split product names with file format links
 EVERY TIME you mention the product name, you MUST link it to the product page:
 
 FORMAT: [Full Product Name with Platform](product_page_url)
@@ -510,29 +853,52 @@ PART 5: CODE SNIPPET REQUIREMENTS (CRITICAL)
 ═══════════════════════════════════════════════════════════════════════════════
 
 ### MANDATORY CODE WRAPPER FORMAT
-ALL code snippets MUST use:
+ALL code snippets MUST use appropriate wrapper tags:
 
+**For Regular Code Snippets (Prerequisites, Steps, Outline):**
 <!--[CODE_SNIPPET_START]-->
 ```language
 // Your code here
 ```
 <!--[CODE_SNIPPET_END]-->
 
-### CODE SNIPPET TYPES
+**For Complete Code Examples (MANDATORY - DIFFERENT TAGS):**
+<!--[COMPLETE_CODE_SNIPPET_START]-->
+```language
+// Your complete working code here
+```
+<!--[COMPLETE_CODE_SNIPPET_END]-->
+
+**CRITICAL DISTINCTION:**
+- Regular snippets = CODE_SNIPPET_START/END (no COMPLETE_ prefix)
+- Complete examples = COMPLETE_CODE_SNIPPET_START/END (WITH COMPLETE_ prefix)
+- Using wrong tags makes output INVALID
+- Complete Code Examples MUST use COMPLETE_CODE_SNIPPET tags
+
+### CODE SNIPPET TYPES AND THEIR WRAPPERS
 1. **Prerequisites/Installation**: Installation commands (must be valid and working)
+   - Use: <!--[CODE_SNIPPET_START]--> ... <!--[CODE_SNIPPET_END]-->
+
 2. **Steps Section**: Partial code illustrating specific actions (must be syntactically correct)
+   - Use: <!--[CODE_SNIPPET_START]--> ... <!--[CODE_SNIPPET_END]-->
+
 3. **Outline Sections**: Code chunks broken down for explanation (must be valid code)
-4. **Complete Code Examples**: FULL working code (copy-paste ready, production-quality)
+   - Use: <!--[CODE_SNIPPET_START]--> ... <!--[CODE_SNIPPET_END]-->
+
+4. **Complete Code Examples**: FULL working code (demonstrates entire concept)
+   - Use: <!--[COMPLETE_CODE_SNIPPET_START]--> ... <!--[COMPLETE_CODE_SNIPPET_END]-->
+   - **CRITICAL: Must use COMPLETE_ prefix in tags**
+   - **This is the ONLY section that uses COMPLETE_CODE_SNIPPET tags**
 
 ### CODE QUALITY REQUIREMENTS (CRITICAL - NON-NEGOTIABLE)
 
 **ALL CODE MUST BE:**
 ✅ **Syntactically correct** - No syntax errors, proper language conventions
-✅ **Executable** - Code runs without errors when executed
+✅ **Executable** - Code runs without errors when executed with proper setup
 ✅ **Complete** - All necessary imports, dependencies, and initialization included
-✅ **Production-ready** - Proper error handling, resource cleanup, best practices
-✅ **Tested logic** - Code logic is sound and achieves the stated purpose
-✅ **Bug-free** - No runtime errors, null pointer exceptions, or logical bugs
+✅ **Functional** - Demonstrates the concept with appropriate error handling
+✅ **Sound logic** - Code logic achieves the stated purpose
+✅ **Bug-free compilation** - No compilation errors, null pointer exceptions, or obvious bugs
 ✅ **Platform-appropriate** - Uses correct APIs and methods for the specified platform/language
 ✅ **Version-compatible** - Works with the library/SDK version being discussed
 
@@ -543,10 +909,13 @@ ALL code snippets MUST use:
 ❌ Incorrect method names or class names
 ❌ Wrong API usage or deprecated methods
 ❌ Missing file paths or hardcoded invalid paths
-❌ Unhandled exceptions or missing try-catch blocks
+❌ Unhandled exceptions in critical sections
 ❌ Memory leaks or resource leaks (unclosed streams, connections)
 ❌ Logic errors that would cause runtime failures
 ❌ Pseudo-code or conceptual code that won't compile/run
+❌ **License initialization code (License class, SetLicense, ApplyLicense)**
+❌ **License file paths or license-related variables**
+❌ **Any code related to license setup**
 
 ### CODE VERIFICATION CHECKLIST
 
@@ -569,7 +938,7 @@ Before including ANY code snippet, verify:
 - Must use correct package manager for platform (NuGet, Maven, pip, npm)
 - Must include correct package name and syntax
 - Version numbers should be current or use latest tag
-- Must be copy-paste ready for terminal/command prompt
+- Must be valid commands that can be executed in terminal/command prompt
 
 **Examples:**
 ✅ CORRECT (NuGet):
@@ -604,6 +973,8 @@ Install-Package [PackageName]  # Placeholder not allowed
    - Objects created with correct constructors
    - Variables initialized before use
    - Configuration set up properly
+   - **DO NOT include license initialization code**
+   - **DO NOT include License class or SetLicense calls**
 
 3. **Working Logic**
    - Code achieves the stated goal (e.g., actually converts PDF to PNG)
@@ -612,8 +983,8 @@ Install-Package [PackageName]  # Placeholder not allowed
 
 4. **Error Handling**
    - Try-catch blocks for operations that can fail
-   - Proper exception handling
-   - Graceful failure messages
+   - Appropriate exception handling
+   - Graceful error messages where needed
 
 5. **Resource Cleanup**
    - Close file streams after use
@@ -630,9 +1001,15 @@ Install-Package [PackageName]  # Placeholder not allowed
    - Not placeholders or TODOs
    - Help users understand the logic
 
+**WHAT NOT TO INCLUDE IN CODE:**
+❌ License initialization (License class)
+❌ SetLicense() or ApplyLicense() calls
+❌ License file paths
+❌ Any licensing-related code
+
 **QUALITY STANDARDS:**
-- Code should compile/execute without modifications
-- Users should be able to copy-paste and run (after updating file paths)
+- Code should compile without modifications (except file paths)
+- Users should be able to adapt and use it (after updating file paths and obtaining license separately)
 - Code demonstrates best practices for the SDK/library
 - Code is efficient and doesn't include unnecessary operations
 - Code matches the examples in official documentation style
@@ -649,23 +1026,38 @@ Even partial code must be:
 
 **Before including code, mentally verify:**
 1. Would this code compile without errors?
-2. Would this code run without exceptions?
+2. Would this code run without exceptions (with proper setup)?
 3. Would this code produce the expected output?
 4. Are all API calls correct for this product/platform?
-5. Is proper error handling included?
+5. Is appropriate error handling included?
 6. Are resources cleaned up properly?
 
 **If answer to ANY question is "No" or "Unsure" - DO NOT INCLUDE THE CODE**
 Rewrite until all answers are "Yes"
 
-### USE <!--[COMPLETE_CODE_SNIPPET_START]--> WRAPPER FOR FULL EXAMPLES
+**Note:** Code examples are meant to demonstrate concepts and functionality. Users should test and adapt them for their specific needs.
 
-Complete, production-ready code examples use:
+### CRITICAL: CORRECT WRAPPER TAG USAGE
+
+**Complete Code Examples (Section 5) - MUST USE THESE TAGS:**
 <!--[COMPLETE_CODE_SNIPPET_START]-->
 ```language
 // Full working code here
 ```
 <!--[COMPLETE_CODE_SNIPPET_END]-->
+
+**Regular Code Snippets (Prerequisites, Steps, Outline) - MUST USE THESE TAGS:**
+<!--[CODE_SNIPPET_START]-->
+```language
+// Code snippet here
+```
+<!--[CODE_SNIPPET_END]-->
+
+**CRITICAL RULES:**
+- Complete Code Examples = COMPLETE_CODE_SNIPPET_START/END (with COMPLETE_ prefix)
+- Regular snippets = CODE_SNIPPET_START/END (without COMPLETE_ prefix)
+- Using wrong tags makes output INVALID
+- This distinction is MANDATORY and NON-NEGOTIABLE
 
 ═══════════════════════════════════════════════════════════════════════════════
 PART 6: WRITING GUIDELINES
@@ -744,6 +1136,142 @@ The SECONDARY keywords are all remaining keywords in the list: {secondary_keywor
 - Lists/bullets only when explicitly needed
 - NEVER use casual or promotional language about "free" offerings
 
+### HUMAN-LIKE WRITING QUALITY (CRITICAL - NON-NEGOTIABLE)
+**ELIMINATE ALL AI-GENERATED PATTERNS:**
+
+**PROHIBITED PUNCTUATION (NEVER USE):**
+❌ Em dashes (—) - Use single hyphen (-) instead
+❌ En dashes (–) - Use single hyphen (-) instead
+❌ Curly quotes (" " ' ') - Use straight quotes (" ') only
+❌ Ellipsis character (…) - Use three periods (...) instead
+❌ Bullet points (•) - Use hyphen (-) for lists
+❌ Any Unicode punctuation - ASCII only
+
+**CORRECT PUNCTUATION USAGE:**
+✅ Single hyphen (-) for all dash uses
+✅ Straight double quotes (") for quotations
+✅ Straight single quotes (') for apostrophes
+✅ Three periods (...) if trailing off
+✅ Simple commas, periods, semicolons
+✅ Standard ASCII punctuation throughout
+
+**AVOID AI-TYPICAL PHRASES:**
+Never use these overused AI phrases:
+❌ "In today's digital landscape"
+❌ "In the ever-evolving world of"
+❌ "It's worth noting that"
+❌ "It's important to remember"
+❌ "Delve into"
+❌ "Dive deep into"
+❌ "Seamlessly integrate"
+❌ "Robust solution"
+❌ "Cutting-edge technology"
+❌ "Game-changing"
+❌ "Revolutionary approach"
+❌ "Unlock the power of"
+❌ "Harness the potential"
+❌ "Elevate your"
+❌ "Streamline your workflow"
+❌ "Production-ready code" (code examples are demonstrative)
+❌ "Production-grade solution"
+❌ "Enterprise-ready"
+❌ "Ready-to-run example"
+❌ "Ready-to-use code"
+❌ "Copy-paste ready"
+❌ "Plug-and-play solution"
+❌ "Out-of-the-box functionality"
+❌ "Battle-tested"
+❌ "Industry-standard"
+❌ "In conclusion, it's clear that"
+❌ "To sum up"
+❌ "At the end of the day"
+❌ "The bottom line is"
+
+**USE NATURAL ALTERNATIVES:**
+✅ "Modern applications require..."
+✅ "Software developers need..."
+✅ "This solution provides..."
+✅ "The library offers..."
+✅ "Remember to..."
+✅ "Keep in mind..."
+✅ "This approach works well for..."
+✅ "Developers can use this to..."
+✅ "This method handles..."
+
+**SENTENCE STRUCTURE VARIETY:**
+- Mix short and long sentences naturally
+- Don't start multiple sentences the same way
+- Vary sentence openings (avoid repetitive patterns)
+- Use active voice primarily, passive occasionally
+- Break up long technical explanations with shorter statements
+
+**PARAGRAPH FLOW:**
+- Each paragraph should have ONE main idea
+- Use transition words naturally (however, therefore, additionally, also)
+- Don't overuse transition phrases (avoid starting every paragraph with "Moreover" or "Furthermore")
+- Connect ideas logically without forced connectors
+- 3-5 sentences per paragraph typically
+
+**NATURAL TECHNICAL WRITING:**
+✅ "The Presentation class loads the PowerPoint file"
+✅ "You can configure the output settings before saving"
+✅ "This method returns the converted document"
+✅ "Set the image format to PNG using the Save method"
+
+❌ "Leverage the Presentation class to seamlessly load"
+❌ "You can effortlessly configure cutting-edge output settings"
+❌ "This robust method returns the converted document"
+❌ "Harness the power of the Save method to unlock PNG format"
+
+**CONVERSATIONAL BUT PROFESSIONAL:**
+- Use "you" and "your" naturally (not "one's" or "the user's")
+- Occasionally use contractions (it's, you're, don't) for natural flow
+- Address the reader directly but professionally
+- Explain complex concepts simply without being condescending
+
+**EXAMPLES OF NATURAL WRITING:**
+
+BAD (AI-like):
+"In today's rapidly evolving digital landscape, it's worth noting that seamlessly converting PDF files to PNG images has become increasingly important. Let's delve into how you can leverage cutting-edge technology to unlock the power of efficient document conversion."
+
+GOOD (Human-like):
+"Converting PDF files to PNG images is a common requirement in modern applications. This guide shows you how to implement this conversion programmatically using a reliable SDK."
+
+BAD (AI-like):
+"It's important to remember that, when working with document conversion, the robust Aspose.PDF library offers a comprehensive suite of cutting-edge features that empower developers to seamlessly transform files."
+
+GOOD (Human-like):
+"Aspose.PDF for .NET provides extensive features for document conversion. The library handles various file formats and offers flexible configuration options."
+
+BAD (AI-like):
+"This production-ready, enterprise-grade solution delivers battle-tested code that seamlessly integrates into your workflow."
+
+GOOD (Human-like):
+"This code example demonstrates the conversion process. Test it in your development environment and adapt it to your specific requirements."
+
+BAD (AI-like):
+"Here's a ready-to-run, copy-paste ready example that provides out-of-the-box functionality for your production environment."
+
+GOOD (Human-like):
+"This example shows the implementation approach. You'll need to adjust file paths and test it with your specific setup."
+
+**CONTENT AUTHENTICITY CHECKS:**
+Before finalizing, verify:
+□ No em dashes (—) or en dashes (–) anywhere
+□ Only straight quotes (" '), no curly quotes
+□ No overused AI phrases from the prohibited list
+□ Sentence variety (not all starting the same way)
+□ Natural transitions between paragraphs
+□ Active voice used predominantly
+□ Technical terms explained simply
+□ No excessive adjectives (robust, seamless, cutting-edge, powerful)
+□ No terms like "production-ready", "production-grade", "enterprise-ready"
+□ No terms like "ready-to-run", "ready-to-use", "copy-paste ready", "plug-and-play"
+□ Code examples described as demonstrative, requiring testing and adaptation
+□ Contractions used occasionally for natural flow
+□ Direct address to reader ("you can" not "one can")
+□ Simple, clear language over complex phrasing
+
 ### CONTENT QUALITY
 - Accurate technical information
 - Practical, actionable guidance
@@ -759,6 +1287,17 @@ PART 7: VALIDATION CHECKLIST
 ═══════════════════════════════════════════════════════════════════════════════
 
 OUTPUT IS INVALID IF:
+❌ **HUMAN-LIKE WRITING VIOLATIONS (CRITICAL)**:
+  ❌ Em dashes (—) found anywhere in content
+  ❌ En dashes (–) found anywhere in content
+  ❌ Curly quotes (" " ' ') used instead of straight quotes
+  ❌ Ellipsis character (…) used instead of three periods
+  ❌ Prohibited AI phrases detected (delve, seamlessly, robust, cutting-edge, leverage, unlock, harness, revolutionary, game-changing)
+  ❌ Repetitive sentence structures (multiple sentences starting the same way)
+  ❌ Excessive adjectives or marketing language
+  ❌ Unnatural phrasing that sounds AI-generated
+  ❌ No contractions used (sounds too formal/robotic)
+  ❌ Using "one" instead of "you" to address reader
 ❌ Title does NOT match title variable exactly
 ❌ SEO Title is NOT 50-60 characters (strict enforcement)
 ❌ SEO Title does NOT include primary keyword
@@ -775,13 +1314,23 @@ OUTPUT IS INVALID IF:
 ❌ URL contains product/brand name
 ❌ URL missing "in" before language/platform
 ❌ Introduction has H2 heading
-❌ Product page URL (ProductURL) NOT linked in FIRST paragraph
+❌ **Product page URL (ProductURL) NOT linked in FIRST paragraph**
+❌ **Product name link in FIRST paragraph missing platform (e.g., just "Aspose.PDF" instead of "Aspose.PDF for .NET")**
+❌ **Product name link uses generic text instead of full product name (e.g., "[SDK](URL)" instead of "[Aspose.PDF for .NET](URL)")**
+❌ **Product name link appears in second or third paragraph instead of FIRST paragraph**
 ❌ Prerequisites/Installation missing
 ❌ Download URL NOT linked in Prerequisites/Installation
-❌ License URL NOT linked anywhere (Prerequisites or Conclusion)
+❌ **Pricing URL (pricing_url) NOT linked in Conclusion or license FAQ**
+❌ **Temporary License URL (license_url) NOT linked in Conclusion or license FAQ**
+❌ **Conclusion has only pricing OR temporary license link (must have BOTH)**
 ❌ Documentation URL NOT linked anywhere in content
 ❌ Fewer than 5 total contextual links from provided resources
 ❌ Steps, Conclusion, or FAQs missing
+❌ **COMPLETE CODE EXAMPLE SECTION MISSING (CRITICAL FAILURE)**
+❌ **Complete Code Example intro text uses "ready-to-run", "ready-to-use", "production-ready", or "copy-paste ready"**
+❌ **DISCLAIMER MISSING after Complete Code Example (CRITICAL FAILURE)**
+❌ Disclaimer not in blockquote format (>)
+❌ Disclaimer missing documentation or support links
 ❌ "Complete Code Example" heading without code content
 ❌ Multiple task title but sections for tasks without code
 ❌ **CODE QUALITY VIOLATIONS (CRITICAL)**:
@@ -796,14 +1345,28 @@ OUTPUT IS INVALID IF:
   ❌ Code uses wrong API or deprecated methods
   ❌ Code is pseudo-code or non-executable
   ❌ Code won't achieve stated purpose (logical errors)
+  ❌ **Code includes license initialization (License class, SetLicense, ApplyLicense)**
+  ❌ **Prerequisites section includes license setup steps**
+  ❌ **License mentioned before Complete Code Example or Conclusion**
 {'❌ Read More section missing' if formatted_related else '❌ Read More section present'}
 ❌ Steps not in frontmatter
 ❌ FAQs not in frontmatter
 ❌ Code snippet lacks wrapper tags
+❌ **Complete Code Example uses wrong tags (must use COMPLETE_CODE_SNIPPET_START/END)**
+❌ **Regular code snippets use COMPLETE_CODE_SNIPPET tags (should use CODE_SNIPPET_START/END)**
 ❌ Complete Code Example has placeholders
 ❌ Text before frontmatter or after {'Read More' if formatted_related else 'FAQs'}
+❌ **Sections in wrong order (must be: Intro → Prerequisites and Setup → Steps → Outline → Complete Code → Conclusion → FAQs)**
+❌ **Steps section is missing from the document**
+❌ **Complete Code Example appears BEFORE Steps section (Steps MUST come before Complete Code)**
+❌ **Outline sections include "Setting Up", "Installation", or "Configuration" topics (these belong in Prerequisites and Setup only)**
+❌ **Prerequisites and Setup section is not comprehensive (must cover installation, setup, configuration)**
+❌ **Headings use articles before product names (e.g., "a Aspose.ZIP", "an Aspose.Slides")**
 ❌ Outline sections skipped
 ❌ Wrong terminology for platform type
+❌ **Platform is on-premises (not cloud) but content uses "library" instead of "SDK"**
+❌ **Platform is cloud but content uses "SDK" instead of "library"**
+❌ **Mixed usage of "SDK" and "library" for same platform (must be consistent)**
 ❌ "Framework" appears anywhere
 ❌ Product mentioned without product page URL link
 ❌ Product page URL uses generic anchor text
@@ -819,6 +1382,9 @@ OUTPUT IS INVALID IF:
 ❌ No links in FAQ answers
 ❌ Content mentions "free SDK" or "free library"
 ❌ Content mentions "online tool" or "online app"
+❌ Content mentions "production-ready" or "production-grade" code
+❌ Content mentions "ready-to-run", "ready-to-use", "copy-paste ready", or "plug-and-play"
+❌ Content implies code is ready for production use without testing
 ❌ Product name appears WITHOUT product page link
 
 ### PRE-SUBMISSION VERIFICATION
@@ -829,6 +1395,28 @@ Before submitting, manually verify:
 □ SEO Title: NO brand/product names included
 □ SEO Title: Compelling and click-worthy
 □ Title NOT modified, shortened, or adjusted
+□ **HUMAN-LIKE WRITING QUALITY VERIFICATION (CRITICAL)**:
+  □ NO em dashes (—) anywhere in content
+  □ NO en dashes (–) anywhere in content
+  □ ONLY straight quotes (" ') used, NO curly quotes (" " ' ')
+  □ NO ellipsis character (…), use three periods (...) if needed
+  □ NO prohibited AI phrases (delve, seamlessly, robust, cutting-edge, leverage, unlock, harness)
+  □ Sentence structure varies (not all starting the same way)
+  □ Natural transitions between paragraphs
+  □ Active voice used predominantly
+  □ Contractions used occasionally (it's, you're, don't) for natural flow
+  □ Direct address to reader ("you" not "one")
+  □ NO excessive adjectives or marketing language
+  □ Technical explanations are clear and simple
+  □ Content sounds like a professional human wrote it
+□ **LICENSE MENTION VERIFICATION (CRITICAL)**:
+  □ Conclusion section includes BOTH pricing and temporary license links
+  □ Pricing link format: [pricing page](pricing_url) or [license](pricing_url)
+  □ Temporary license link format: [temporary license](license_url)
+  □ If license FAQ exists, it's NOT the first FAQ (should be 2nd, 3rd, or 4th)
+  □ If license FAQ exists, it includes BOTH pricing_url and license_url
+  □ License NOT mentioned in Prerequisites section
+  □ No license code in any code examples
 □ **KEYWORD DENSITY VERIFICATION (CRITICAL)**:
   □ Calculate word count of blog body (Intro + Prerequisites + Steps + Outline + Conclusion)
   □ Divide by 100 to get minimum primary keyword occurrences
@@ -844,7 +1432,14 @@ Before submitting, manually verify:
 □ Summary: 140-160 chars
 □ URL: Uses "in" before language, no brands (URL only - not title)
 □ Brand/product names KEPT in title field only (not in seoTitle)
-□ **CRITICAL: Product page URL (ProductURL) linked in FIRST paragraph of introduction**
+□ **CRITICAL: Product page URL (ProductURL) linked in FIRST paragraph**
+□ **Product link format verification**:
+  □ Uses FULL product name with platform: [BrandName.ProductName for Platform](URL)
+  □ Example format: [Aspose.PDF for .NET](https://products.aspose.com/pdf/net/)
+  □ NOT just product name: ❌ [Aspose.PDF](URL)
+  □ NOT generic text: ❌ [this SDK](URL) or [the library](URL)
+  □ Link appears in FIRST paragraph (not second or third)
+  □ Link includes platform designation (for .NET, for Java, for Python, etc.)
 □ **RESOURCE LINKS VERIFICATION (CRITICAL)**:
   □ Product Page URL linked in FIRST paragraph (MANDATORY)
   □ Product Page URL linked at least 3 times total (intro, sections, conclusion, FAQs)
@@ -854,17 +1449,48 @@ Before submitting, manually verify:
   □ API Reference URLs linked when mentioning classes/methods (if available)
   □ MINIMUM 5 total contextual links from provided resources
 □ Introduction: No H2, has paragraph content
-□ Prerequisites/Installation: Included with setup
+□ **Prerequisites and Setup: Comprehensive section covering installation, environment, configuration, license**
+□ **Prerequisites and Setup: Included with ALL setup requirements - NO separate setup sections later**
+□ **Steps section EXISTS and appears BEFORE Complete Code Example section**
+□ **Section order verified: Intro → Prerequisites and Setup → Steps → Outline → Complete Code → Conclusion → FAQs**
+□ **Outline sections do NOT contain "Setting Up", "Installation", or "Configuration" topics**
+□ **Outline sections contain only Understanding, Advanced, Usage, Best Practices type content**
+□ **No articles (a/an) used before product names in any headings**
+□ **TERMINOLOGY VERIFICATION (CRITICAL):**
+  □ Check platform value: {platform}
+  □ If platform ≠ "cloud": Content uses "SDK" throughout (NOT "library")
+  □ If platform = "cloud": Content uses "library" or "API" throughout (NOT "SDK")
+  □ Terminology is CONSISTENT throughout entire blog (no mixing SDK and library)
+  □ Search for "library" if platform is on-premises - should find ZERO instances
+  □ Search for "SDK" if platform is cloud - should find ZERO instances
 □ Correct terminology: SDK or library/API based on platform
 □ "Framework" NEVER used
 □ "free SDK/library/API" NEVER used
 □ "online tool/app" NEVER used
+□ **"production-ready" or "production-grade" NEVER used**
+□ **"ready-to-run", "ready-to-use", "copy-paste ready", "plug-and-play" NEVER used**
+□ **Code examples NOT described as ready for production without testing**
+□ **Code examples described as demonstrative, requiring adaptation and testing**
 □ Product page: Full name with platform as anchor
 □ Product linked EVERY time it's mentioned
 □ API links: Only if URLs in context
 □ NO links in backticks/code literals
 □ All URLs verified in context
 □ Steps: Mention classes/methods (link if URL exists)
+□ **COMPLETE CODE EXAMPLE SECTION VERIFICATION (CRITICAL)**:
+  □ At least ONE Complete Code Example section EXISTS
+  □ Section appears AFTER outline sections and BEFORE Conclusion
+  □ If multiple tasks in title, section created for EACH demonstrable task
+  □ Section is NOT empty (contains actual working code)
+  □ **INTRO SENTENCE uses correct language (demonstrates/shows/illustrates)**
+  □ **INTRO SENTENCE does NOT use: ready-to-run, ready-to-use, production-ready, copy-paste ready**
+  □ **CRITICAL: Uses <!--[COMPLETE_CODE_SNIPPET_START]--> tags (NOT CODE_SNIPPET_START)**
+  □ **CRITICAL: Uses <!--[COMPLETE_CODE_SNIPPET_END]--> tags (NOT CODE_SNIPPET_END)**
+  □ **MANDATORY disclaimer included AFTER each code example**
+  □ Disclaimer uses blockquote format (>)
+  □ Disclaimer includes links to documentation and support
+  □ Disclaimer mentions file paths and dependencies
+  □ Code meets ALL quality requirements (see below)
 □ **CODE QUALITY VERIFICATION (CRITICAL)**:
   □ ALL code snippets are syntactically correct (will compile)
   □ NO placeholder comments ("// ... rest of code", "// your code here")
@@ -899,38 +1525,114 @@ PART 8: EXECUTION INSTRUCTIONS
 ═══════════════════════════════════════════════════════════════════════════════
 
 ### STEP-BY-STEP PROCESS
+
+**BEFORE YOU START - MEMORIZE THESE TAG RULES:**
+1. Complete Code Examples (Section 5) MUST use: <!--[COMPLETE_CODE_SNIPPET_START]-->
+2. Complete Code Examples (Section 5) MUST use: <!--[COMPLETE_CODE_SNIPPET_END]-->
+3. Regular code snippets (Prerequisites, Steps, Outline) use: <!--[CODE_SNIPPET_START]-->
+4. Regular code snippets (Prerequisites, Steps, Outline) use: <!--[CODE_SNIPPET_END]-->
+5. The difference is the word "COMPLETE" - Complete Code Examples MUST include it
+
+**NOW BEGIN THE WRITING PROCESS:**
+
 1. Start with frontmatter:
    - USE EXACT title from variable for title field
    - CREATE compelling seoTitle using primary keyword (50-60 chars, NO brand names)
    - Verify seoTitle character count manually
 2. Write introduction content:
    - **CRITICAL: FIRST paragraph MUST contain product page URL link**
-   - Format: [Full Product Name with Platform](ProductURL) in first paragraph
+   - **MANDATORY FORMAT: [Full Product Name with Platform](ProductURL)**
+   - **EXACT EXAMPLES**:
+     * [Aspose.PDF for .NET](https://products.aspose.com/pdf/net/)
+     * [GroupDocs.Conversion for Java](https://products.groupdocs.com/conversion/java/)
+     * [Aspose.Slides for Python via .NET](https://products.aspose.com/slides/python-net/)
+   - **The link MUST be in the FIRST paragraph (not second or third)**
+   - **MUST include platform designation (for .NET, for Java, for Python, etc.)**
+   - **DO NOT use generic text like "[this SDK](URL)" or "[the library](URL)"**
    - Add 1-2 more paragraphs with natural flow
    - Include primary keyword 1-2 times and 1-2 secondary keywords
-3. Create Prerequisites/Installation section:
+   - **CRITICAL: Check platform value {platform}**
+   - **IF platform ≠ "cloud": Use "SDK" (e.g., "This SDK provides...", "The SDK enables...")**
+   - **IF platform = "cloud": Use "library" or "API" (e.g., "This library provides...", "The API enables...")**
+   - **NEVER mix SDK and library terminology**
+   - **Use natural, human-like language - NO AI clichés**
+   - **Use single hyphens (-) NOT em dashes (—)**
+3. Create Prerequisites and Setup section (COMPREHENSIVE):
    - Include primary keyword 1 time, 1-2 secondary keywords
+   - **Cover: installation, environment setup, configuration (NO LICENSE)**
+   - **This section replaces any "Setting Up [Product]" sections from outline**
+   - **CRITICAL: Use correct terminology based on platform {platform}**
+   - **IF platform ≠ "cloud": "Install the SDK", "Download the SDK", "The SDK requires"**
+   - **IF platform = "cloud": "Install the library", "Download the library", "The library requires"**
+   - **DO NOT mention license setup or license code here**
+   - **License will be mentioned later in Conclusion or FAQs**
    - **VERIFY installation commands are correct and working**
    - Test syntax of package manager commands
+   - **Write naturally - avoid "seamlessly install" or "robust library"**
 4. Write Steps section:
    - 4-6 actionable steps
    - Use primary keyword 2-3 times in explanations, use 2-3 secondary keywords
    - **IF including code snippets: VERIFY they are syntactically correct**
-5. Follow outline sections exactly as provided:
+   - **Use clear, professional language - NO marketing speak**
+5. Process outline sections with filtering:
+   - **CRITICAL: SKIP any "Setting Up", "Installation", "Configuration" sections from outline**
+   - **These topics are already covered in Prerequisites and Setup**
+   - ONLY include Understanding, Advanced, Usage, Best Practices type sections
    - Integrate primary keyword naturally (majority of uses should be here)
    - Use most secondary keywords across these sections
    - Distribute keywords evenly, not clustered
+   - **Arrange REMAINING outline sections logically:**
+     1. First: Understanding/Conceptual sections
+     2. Second: Advanced/Usage sections
+   - **Example: Skip "Setting Up Aspose.ZIP", keep "Understanding Z Compression" and "Advanced Options"**
+   - **NEVER use "a" or "an" before product names in headings**
    - **IF including code snippets: VERIFY they are complete and working**
-6. Add Complete Code Example(s) ONLY if you have WORKING code:
-   - **CRITICAL: Code MUST be production-ready and bug-free**
+   - **Vary sentence structure - don't start every sentence the same way**
+   - **Use contractions occasionally for natural flow (it's, you're, don't)**
+6. **CREATE Complete Code Example(s) section - MANDATORY:**
+   - **THIS STEP CANNOT BE SKIPPED UNDER ANY CIRCUMSTANCES**
+   - Extract main task(s) from title
+   - Create section for EACH demonstrable task
+   - **CRITICAL: Code MUST be syntactically correct and functional**
    - Include ALL imports/dependencies
-   - Include proper error handling
+   - **DO NOT include license initialization code (License, SetLicense, ApplyLicense)**
+   - Include error handling where applicable
    - Include resource cleanup
-   - Test logic mentally - would this code actually work?
+   - Test logic mentally - would this code compile and run?
    - NO placeholders or pseudo-code allowed
-   - If unsure about code correctness, DO NOT include Complete Code Example section
-7. Write Conclusion section (include primary keyword 1-2 times, 1-2 secondary keywords)
-8. Create FAQs section (3-4 questions, link product page in answers)
+   - If you're unsure about code correctness, research the API and verify before including
+   - Format: "## [Task Name] - Complete Code Example"
+   - **WRITE INTRO SENTENCE: Use "This example demonstrates..." NOT "ready-to-run"**
+   - **NEVER write: "ready-to-run", "ready-to-use", "production-ready", "copy-paste ready"**
+   - **DO write: "demonstrates how to", "shows the implementation", "illustrates the process"**
+   - **⚠️ STOP AND READ THIS CAREFULLY ⚠️**
+   - **YOU MUST TYPE EXACTLY: <!--[COMPLETE_CODE_SNIPPET_START]-->**
+   - **NOT: <!--[CODE_SNIPPET_START]-->**
+   - **THE TAG MUST CONTAIN THE WORD "COMPLETE"**
+   - **AT THE END YOU MUST TYPE: <!--[COMPLETE_CODE_SNIPPET_END]-->**
+   - **NOT: <!--[CODE_SNIPPET_END]-->**
+   - **DOUBLE-CHECK: Does your tag include the word COMPLETE? If NO, it's WRONG**
+   - **MANDATORY: Add disclaimer note AFTER each code block**
+   - Disclaimer MUST include links to documentation and support
+   - Disclaimer MUST use blockquote format (>)
+   - This section MUST exist between Outline sections and Conclusion
+7. Write Conclusion section:
+   - Include primary keyword 1-2 times, 1-2 secondary keywords
+   - **MUST mention licensing with BOTH pricing page and temporary license links in second half or end**
+   - **Example: "For production use, visit the [pricing page](pricing_url) to purchase a license. You can also request a [temporary license](license_url) for evaluation."**
+   - **Both links are mandatory - pricing_url AND license_url**
+   - **Use correct terminology: "SDK" for on-premises, "library" for cloud**
+   - **Write naturally - NO "in conclusion" or "to sum up"**
+   - **Use professional but conversational tone**
+8. Create FAQs section (3-4 questions):
+   - **First FAQ should be technical, NOT about licensing**
+   - **If including license FAQ, place it as 2nd, 3rd, or 4th question**
+   - **License FAQ must include BOTH pricing page and temporary license links**
+   - **Example: "Purchase from the [pricing page](pricing_url) or get a [temporary license](license_url) for evaluation."**
+   - Link product page in relevant answers
+   - Include documentation, blog, or forum links where appropriate
+   - **Write questions as real users would ask them**
+   - **Provide helpful, natural answers**
 9. **VERIFY keyword density**:
    - Count total word count of body (exclude frontmatter, FAQs, Read More)
    - Calculate: Word Count / 100 = Minimum primary keyword occurrences
@@ -943,35 +1645,135 @@ PART 8: EXECUTION INSTRUCTIONS
    - Ensure all imports are present
    - Ensure proper error handling exists
    - Ensure no placeholder comments remain
-11. VERIFY seoTitle is exactly 50-60 characters
-12. VERIFY product page URL is in FIRST paragraph of introduction
-13. Add Read More section with provided links OR skip if not provided
-14. STOP - no content after final section
+11. **VERIFY Complete Code Example section exists**:
+   - Confirm at least one section with this exact format exists
+   - Confirm it contains actual working code
+   - Confirm it appears between Outline and Conclusion
+   - **VERIFY intro text uses: "demonstrates", "shows", "illustrates" (NOT "ready-to-run")**
+   - **VERIFY intro does NOT contain: ready-to-run, ready-to-use, production-ready, copy-paste ready**
+   - **CRITICAL: Verify uses <!--[COMPLETE_CODE_SNIPPET_START]--> tag (NOT CODE_SNIPPET_START)**
+   - **CRITICAL: Verify uses <!--[COMPLETE_CODE_SNIPPET_END]--> tag (NOT CODE_SNIPPET_END)**
+   - **CONFIRM disclaimer note exists AFTER each code block**
+   - **CONFIRM disclaimer uses blockquote format (>)**
+   - **CONFIRM disclaimer includes documentation and support links**
+12. **VERIFY section ordering and content filtering**:
+   - Confirm overall order: Intro → Prerequisites and Setup → Steps → Outline (filtered) → Complete Code → Conclusion → FAQs
+   - **CRITICAL: Verify Steps section EXISTS in the document**
+   - **CRITICAL: Verify Steps section appears BEFORE Complete Code Example section**
+   - **VERIFY outline sections do NOT include any "Setting Up", "Installation", or "Configuration" sections**
+   - **VERIFY Prerequisites and Setup section is comprehensive (covers installation, setup, configuration)**
+   - **VERIFY remaining outline sections are in logical order (Understanding before Advanced)**
+   - **VERIFY no headings use "a" or "an" before product names**
+12. **VERIFY human-like writing quality**:
+   - Search content for em dashes (—) - replace ALL with single hyphen (-)
+   - Search content for en dashes (–) - replace ALL with single hyphen (-)
+   - Search for curly quotes (" " ' ') - replace with straight quotes (" ')
+   - Check for AI clichés (delve, seamlessly, robust, leverage, unlock) - rewrite naturally
+   - Verify sentence variety - not all starting the same way
+   - Confirm contractions used occasionally
+   - Confirm direct address to reader with "you"
+13. VERIFY seoTitle is exactly 50-60 characters
+14. VERIFY product page URL is in FIRST paragraph of introduction
+   - **Confirm link uses full product name with platform**
+   - **Confirm format: [BrandName.ProductName for Platform](URL)**
+   - **Examples: [Aspose.PDF for .NET](URL), [GroupDocs.Conversion for Java](URL)**
+   - **NOT generic text like "[SDK](URL)" or "[library](URL)"**
+   - **NOT incomplete name like "[Aspose.PDF](URL)" without platform**
+   - **Confirm link is in FIRST paragraph, not second or third**
+15. **VERIFY SDK vs Library terminology (CRITICAL)**:
+   - Check platform value: {platform}
+   - If platform is on-premises (.NET, Java, Python, etc.): Search entire blog for "library" - should be ZERO
+   - If platform is on-premises: Confirm "SDK" is used consistently throughout
+   - If platform is cloud: Search entire blog for "SDK" (not in product names) - should be ZERO
+   - If platform is cloud: Confirm "library" or "API" is used consistently
+   - No mixing of "SDK" and "library" terminology
+16. Add Read More section with provided links OR skip if not provided
+17. **FINAL HUMAN-LIKE QUALITY CHECK**:
+   - Read through entire content
+   - Does it sound like a professional human wrote it?
+   - Is it free of AI-typical patterns and phrases?
+   - Is punctuation simple and ASCII-only?
+   - Is the tone professional but natural?
+18. **MANDATORY PRE-SUBMISSION SELF-CHECK (CRITICAL - DO NOT SKIP)**:
+   - **STOP: Before submitting, verify you have completed ALL sections**
+   - □ Complete Code Example section EXISTS (heading present)
+   - □ Complete Code Example uses <!--[COMPLETE_CODE_SNIPPET_START]--> tag
+   - □ Complete Code Example uses <!--[COMPLETE_CODE_SNIPPET_END]--> tag
+   - □ Disclaimer present after code block (starts with "> **Note:**")
+   - □ Product link in FIRST paragraph: [Product Name for Platform](URL)
+   - □ Section order: Intro → Prerequisites → Steps → Outline → Complete Code → Conclusion → FAQs
+   - **IF ANY CHECKBOX IS UNCHECKED, THE BLOG IS INVALID - DO NOT SUBMIT**
+   - **IF Complete Code Example section is missing, GO BACK and CREATE IT NOW**
+19. STOP - no content after final section
 
 ### CRITICAL REMINDERS
 - DO NOT modify the title variable - use it exactly as provided
 - Title field = exact title from variable
 - SEO Title field = create new using primary keyword (50-60 chars, no brands)
 - **FIRST paragraph MUST contain ProductURL link with full product name**
+- **MANDATORY LINK FORMAT: [Full Product Name with Platform](ProductURL)**
+- **EXAMPLE: [Aspose.PDF for .NET](https://products.aspose.com/pdf/net/)**
+- **MUST include platform: "for .NET", "for Java", "for Python", etc.**
+- **MUST be in FIRST paragraph (not second or third)**
+- **NEVER use generic text like "[SDK](URL)" or "[the library](URL)"**
 - Only remove brand/product names from URL slug and seoTitle, NOT from title field
+- **TERMINOLOGY IS CRITICAL - CHECK PLATFORM VALUE: {platform}**
+- **IF platform ≠ "cloud" (on-premises): Use "SDK" throughout ENTIRE blog, NEVER "library"**
+- **IF platform = "cloud": Use "library" or "API" throughout ENTIRE blog, NEVER "SDK"**
+- **Examples: .NET, Java, Python, C++, PHP are on-premises → use "SDK"**
+- **Example: cloud platform → use "library"**
+- **SECTION ORDER: Intro → Prerequisites and Setup → Steps → Outline (filtered) → Complete Code → Conclusion → FAQs**
+- **Steps section is MANDATORY and MUST appear BEFORE Complete Code Example**
+- **Prerequisites and Setup section covers ALL installation, configuration, and setup - make it comprehensive**
+- **SKIP any "Setting Up", "Installation", "Configuration" sections from outline - already in Prerequisites and Setup**
+- **NEVER use "a" or "an" before product names in headings (e.g., NOT "a Aspose.ZIP")**
 - **PRIMARY keyword MUST appear at 1% density** (Word Count / 100 = occurrences)
 - **ALL SECONDARY keywords MUST be used 2-4 times each**
 - Distribute keywords naturally across all sections - avoid clustering
 - Count primary keyword in: Introduction, Prerequisites, Steps, Outline, Conclusion only
 - SEO Title must be compelling, click-worthy, and include primary keyword
-- **ALL CODE MUST BE WORKING, BUG-FREE, AND PRODUCTION-READY**
+- **⚠️ COMPLETE CODE EXAMPLE SECTION IS MANDATORY - NEVER SKIP ⚠️**
+- **⚠️ MISSING COMPLETE CODE EXAMPLE = INVALID OUTPUT = COMPLETE FAILURE ⚠️**
+- **COMPLETE CODE EXAMPLES MUST USE <!--[COMPLETE_CODE_SNIPPET_START]--> TAGS**
+- **Regular code snippets use <!--[CODE_SNIPPET_START]--> tags (no COMPLETE_ prefix)**
+- **DO NOT confuse the two tag types - they are different**
+- **DISCLAIMER AFTER CODE EXAMPLES IS MANDATORY - NEVER SKIP**
+- Disclaimer must use blockquote format (>) and include documentation/support links
+- **ALL CODE MUST BE SYNTACTICALLY CORRECT AND FUNCTIONAL**
 - **NO placeholder code, pseudo-code, or incomplete snippets allowed**
-- **If code correctness is uncertain, omit Complete Code Example section entirely**
+- **If code correctness is uncertain, research the API before including**
+- Complete Code Example must appear between Outline sections and Conclusion
+- **NEVER use "production-ready" or similar terms in blog content**
+- **NEVER use "ready-to-run", "ready-to-use", "copy-paste ready", "plug-and-play"**
+- **NEVER imply code is immediately usable without testing and adaptation**
+- Code examples demonstrate functionality but require testing and adaptation
+- Always clarify code needs testing, file path updates, and environment setup
+- **HUMAN-LIKE WRITING IS MANDATORY**:
+  - NO em dashes (—) or en dashes (–) - use single hyphen (-) only
+  - NO curly quotes - use straight quotes (" ') only
+  - NO AI clichés (delve, seamlessly, robust, leverage, unlock, harness)
+  - Vary sentence structure naturally
+  - Use contractions occasionally (it's, you're, don't)
+  - Address reader directly with "you"
+  - Keep language clear and professional, not promotional
+  - Write like a human technical writer, not an AI
 
 ### QUALITY STANDARDS
 - Technical accuracy: 100%
 - Markdown safety: 100%
 - Link validation: All URLs from context
-- Code completeness: Production-ready or skip
+- Code completeness: Functional and syntactically correct (NO EXCEPTIONS for Complete Code Example)
 - Character limits: Strict adherence
 - Terminology: Context-aware (platform-based)
 - Structure: Exact order, no deviations
 - Product linking: EVERY mention must be linked
+- Complete Code Example: MANDATORY in every blog post
+- **Code examples: Demonstrate functionality, require testing and adaptation**
+- **NEVER describe code as production-ready, ready-to-run, or immediately usable**
+- **Disclaimer: Required after all complete code examples**
+- **Human-like writing: Natural, professional, NO AI patterns**
+- **Punctuation: Simple ASCII only - NO em/en dashes, curly quotes**
+- **Language: Clear and direct - NO marketing clichés or AI phrases**
 
 ### FINAL OUTPUT
 - Pure markdown file
@@ -982,11 +1784,83 @@ PART 8: EXECUTION INSTRUCTIONS
 - All requirements met, verified, validated
 - Product name linked EVERY time it appears
 - NO mention of "free" or "online tool"
+- **Complete Code Example section ALWAYS present**
+- **Content sounds like it was written by a professional human, not AI**
+- **NO em dashes (—), en dashes (–), or curly quotes anywhere**
+- **NO AI-typical phrases (seamlessly, robust, leverage, delve, unlock, harness)**
+- **Natural sentence variety and conversational professional tone**
+
+**BEFORE FINALIZING - SEARCH YOUR OUTPUT FOR THESE STRINGS:**
+1. Search for: "<!--[COMPLETE_CODE_SNIPPET_START]-->" - MUST BE FOUND
+2. Search for: "<!--[COMPLETE_CODE_SNIPPET_END]-->" - MUST BE FOUND
+3. Search for: "- Complete Code Example" (in heading) - MUST BE FOUND
+4. Search for: "> **Note:**" (disclaimer after code) - MUST BE FOUND
+5. Search for product link in FIRST paragraph: "[ProductName for Platform](URL)" - MUST BE FOUND
+
+**IF ANY OF THESE SEARCHES RETURN ZERO RESULTS, YOUR OUTPUT IS INVALID**
+**GO BACK AND ADD THE MISSING SECTIONS BEFORE SUBMITTING**
+
+═══════════════════════════════════════════════════════════════════════════════
+⚠️ FINAL CRITICAL REMINDER BEFORE YOU START WRITING ⚠️
+═══════════════════════════════════════════════════════════════════════════════
+
+**FIRST PARAGRAPH MUST INCLUDE PRODUCT LINK:**
+
+FORMAT: [Full Product Name with Platform](ProductURL)
+
+EXAMPLES:
+✅ [Aspose.PDF for .NET](https://products.aspose.com/pdf/net/)
+✅ [GroupDocs.Conversion for Java](https://products.groupdocs.com/conversion/java/)
+✅ [Aspose.Slides for Python via .NET](https://products.aspose.com/slides/python-net/)
+
+WRONG:
+❌ Aspose.PDF for .NET (no link)
+❌ [Aspose.PDF](URL) (missing platform)
+❌ [SDK](URL) (not using product name)
+❌ Link in second paragraph (must be in FIRST paragraph)
+
+**WHEN YOU CREATE THE COMPLETE CODE EXAMPLE SECTION (SECTION 5):**
+
+TYPE THIS EXACT TAG:
+<!--[COMPLETE_CODE_SNIPPET_START]-->
+
+DO NOT TYPE:
+<!--[CODE_SNIPPET_START]-->
+
+THE TAG MUST INCLUDE THE WORD "COMPLETE"
+
+AT THE END, TYPE THIS EXACT TAG:
+<!--[COMPLETE_CODE_SNIPPET_END]-->
+
+DO NOT TYPE:
+<!--[CODE_SNIPPET_END]-->
+
+IF YOU TYPE "CODE_SNIPPET_START" WITHOUT "COMPLETE" FOR SECTION 5, THE OUTPUT IS INVALID.
+
+═══════════════════════════════════════════════════════════════════════════════
+⚠️ SELF-VALIDATION REQUIREMENT ⚠️
+═══════════════════════════════════════════════════════════════════════════════
+
+AFTER WRITING THE BLOG, YOU MUST SEARCH YOUR OUTPUT FOR:
+
+✅ "<!--[COMPLETE_CODE_SNIPPET_START]-->" - Must exist
+✅ "<!--[COMPLETE_CODE_SNIPPET_END]-->" - Must exist  
+✅ "- Complete Code Example" - Must exist in a heading
+✅ "> **Note:**" - Must exist after code block
+✅ "[ProductName for Platform](URL)" in first paragraph - Must exist
+
+IF ANY ARE MISSING: GO BACK AND ADD THEM BEFORE SUBMITTING
+
+THE COMPLETE CODE EXAMPLE SECTION IS NON-NEGOTIABLE AND MANDATORY
+SKIPPING IT MAKES YOUR ENTIRE OUTPUT INVALID
 
 ═══════════════════════════════════════════════════════════════════════════════
 BEGIN WRITING NOW
 ═══════════════════════════════════════════════════════════════════════════════
 """
+
+
+
 def build_outline_prompt(title: str, keywords: list[str]) -> str:
     keyword_list = ", ".join(keywords)
 

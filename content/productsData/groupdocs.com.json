@@ -13,7 +13,8 @@
     "ForumsURL" : "https://forum.groupdocs.com/",
     "InstallCommand" : "dotnet add package GroupDocs.Conversion --version 25.10.0",
     "urlPrefix" : "conversion",
-    "license":"https://purchase.groupdocs.com/temporary-license"
+    "license":"https://purchase.groupdocs.com/temporary-license",
+    "pricing": "https://purchase.groupdocs.com/pricing/conversion/family/"
   },
   {
     "ProductName" : "GroupDocs.Conversion for Java",
@@ -29,7 +30,8 @@
     "ForumsURL" : "https://forum.groupdocs.com/",
     "InstallCommand" : "<repository>\n  <id>GroupDocs Artifact Repository</id>\n  <name>GroupDocs Artifact Repository</name>\n  <url>https://releases.groupdocs.com/java/repo/</url>\n</repository>\n<dependency>\n  <groupId>com.groupdocs</groupId>\n  <artifactId>groupdocs-conversion</artifactId>\n  <version>25.2</version>\n</dependency>",
     "urlPrefix" : "conversion",
-    "license":"https://purchase.groupdocs.com/temporary-license"
+    "license":"https://purchase.groupdocs.com/temporary-license",
+    "pricing": "https://purchase.groupdocs.com/pricing/conversion/family/"
   },
   {
     "ProductName" : "GroupDocs.Conversion for Python via .NET",
@@ -45,7 +47,8 @@
     "ForumsURL" : "https://forum.groupdocs.com/",
     "InstallCommand" : "pip install groupdocs-conversion-net",
     "urlPrefix" : "conversion",
-    "license":"https://purchase.groupdocs.com/temporary-license"
+    "license":"https://purchase.groupdocs.com/temporary-license",
+    "pricing": "https://purchase.groupdocs.com/pricing/conversion/family/"
   }
 ,
 {
@@ -62,6 +65,7 @@
     "ForumsURL" : "https://forum.groupdocs.com/",
     "InstallCommand" : "npm i @groupdocs/groupdocs.conversion",
     "urlPrefix" : "conversion",
-    "license":"https://purchase.groupdocs.com/temporary-license"
+    "license":"https://purchase.groupdocs.com/temporary-license",
+    "pricing": "https://purchase.groupdocs.com/pricing/conversion/family/"
   }
 ]

@@ -22,7 +22,6 @@ async def gist_injector(content: str, title: str) -> dict:
 
     try:
         snippets = extract_all_complete_code_snippets(content)
-
         if len(snippets) == 0:
             print("No complete code snippets foundee!", flush=True, file=sys.stderr)
             return {"jistified_content":content}
@@ -32,7 +31,7 @@ async def gist_injector(content: str, title: str) -> dict:
                 data['filename']: data['code'] 
                 for data in snippets.values()
             }
-            print(f"token is or not {settings.REPO_PAT}", flush=True, file=sys.stderr)
+            print(f"Repo Token - {settings.REPO_PAT}", flush=True, file=sys.stderr)
             # Step 3: Upload to gist
             gist_result = await upload_to_gist(
                 code_for_gist,

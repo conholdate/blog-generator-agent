@@ -11,11 +11,11 @@ engine:
   # === Core KRA inputs ===
   # input_file: "content/Aspose/keywords.csv"
   use-serp-api: true
-  serp-topic: "Generate an SVG Image from a Slide"
+  serp-topic: "Convert LaTeX to PNG in Python"
 
   brand: "aspose"
-  product: "Aspose.Slides"
-  platform: "Java"           # used as --platform; also passed into prompt as fw_label
+  product: "Aspose.TeX"
+  platform: "Python via .NET"           # used as --platform; also passed into prompt as fw_label
   # locale: "en-US"
 
   # === KRA behavior tuning ===

@@ -682,17 +682,20 @@ def inject_file_format_links(full_markdown, FILE_FORMAT_MAPPINGS, BASE_URL):
     body_protected = re.sub(r'```.*?```|`.*?`', hide_content, body, flags=re.DOTALL)
     
     # 2b. Hide existing Markdown links: [Text](URL)
-    # This prevents the lookup from finding terms inside [Markdown](link)
     body_protected = re.sub(r'\[([^\]]+)\]\(([^)]+)\)', hide_content, body_protected)
 
     # --- 3. Inject Links into Body ---
     sorted_keys = sorted(FILE_FORMAT_MAPPINGS.keys(), key=len, reverse=True)
-    pattern = r'\b(' + '|'.join(re.escape(k) for k in sorted_keys) + r')\b'
+    
+    # Updated pattern: Use negative lookbehind and lookahead to ensure standalone terms
+    # (?<![A-Za-z0-9_.]) - not preceded by alphanumeric, underscore, or dot
+    # (?![A-Za-z0-9_.]) - not followed by alphanumeric, underscore, or dot
+    pattern = r'(?<![A-Za-z0-9_.])\b(' + '|'.join(re.escape(k) for k in sorted_keys) + r')\b(?![A-Za-z0-9_.])'
     
     linked_terms = set()
 
     def replace_logic(match):
-        found_text = match.group(0)
+        found_text = match.group(1)  # Changed from group(0) to group(1) to get captured group
         lookup_key = next((k for k in sorted_keys if k.lower() == found_text.lower()), None)
         
         if lookup_key and lookup_key.lower() not in linked_terms:
