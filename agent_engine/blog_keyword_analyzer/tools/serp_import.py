@@ -280,7 +280,7 @@ def fetch_serp_keywords(
       - Platform scoping in query + strict post-filter
     """
     if not settings.SERPAPI_KEY:
-        raise RuntimeError("SERPAPI_KEY is not configured in settings/.env")
+        return []
 
     hl, gl = _locale_to_hl_gl(locale)
 

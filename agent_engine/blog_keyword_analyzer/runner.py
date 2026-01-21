@@ -909,6 +909,10 @@ def main() -> None:
                     locale=args.locale,
                     max_keywords=args.max_rows,
                 )
+        except RuntimeError as e:
+            # Covers missing SERPAPI_KEY or other intentional SerpAPI tool runtime errors
+            records = None
+            print(f"⚠️ SERPAPI_KEY is not configured in settings/.env: {e}")
         except (requests.RequestException, OSError) as e:
             # RequestException covers DNS, timeouts, connection errors, 4xx/5xx after raise_for_status, etc.
             # OSError catches low-level socket/DNS issues on some platforms.
