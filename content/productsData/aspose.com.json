@@ -13,7 +13,8 @@
   "ForumsURL" : "https://forum.aspose.com/c/cells/",
   "InstallCommand" : "dotnet add package Aspose.Cells --version 25.12.0",
   "urlPrefix" : "cells",
-  "license":"https://purchase.aspose.com/temporary-license/"
+  "license":"https://purchase.aspose.com/temporary-license/",
+  "pricing": "https://purchase.aspose.com/pricing/cells/family/"
 },
   {
     "ProductName" : "Aspose.Cells for Java",
@@ -29,7 +30,8 @@
     "ForumsURL" : "https://forum.aspose.com/c/cells/",
     "InstallCommand" : "<repository>\n  <id>AsposeJavaAPI</id>\n  <name>Aspose Java API</name>\n  <url>https://repository.aspose.com/repo/</url>\n</repository>\n<dependency>\n    <groupId>com.aspose</groupId>\n    <artifactId>aspose-cells</artifactId>\n    <version>25.12</version>\n</dependency>",
     "urlPrefix" : "cells",
-    "license":"https://purchase.aspose.com/temporary-license/"
+    "license":"https://purchase.aspose.com/temporary-license/",
+    "pricing": "https://purchase.aspose.com/pricing/cells/family/"
   },
   {
     "ProductName" : "Aspose.Cells for C++",
@@ -45,7 +47,8 @@
     "ForumsURL" : "https://forum.aspose.com/c/cells/",
     "InstallCommand" : "Install-Package Aspose.Cells.Cpp -Version 25.12.0",
     "urlPrefix" : "cells",
-    "license":"https://purchase.aspose.com/temporary-license/"
+    "license":"https://purchase.aspose.com/temporary-license/",
+    "pricing": "https://purchase.aspose.com/pricing/cells/family/"
   },
   {
     "ProductName" : "Aspose.Cells for Node.js via C++",
@@ -61,7 +64,8 @@
     "ForumsURL" : "https://forum.aspose.com/c/cells/",
     "InstallCommand" : "npm install aspose.cells.node",
     "urlPrefix" : "cells",
-    "license":"https://purchase.aspose.com/temporary-license/"
+    "license":"https://purchase.aspose.com/temporary-license/",
+    "pricing": "https://purchase.aspose.com/pricing/cells/family/"
   },
   {
     "ProductName" : "Aspose.Cells for Python via .NET",
@@ -77,7 +81,8 @@
     "ForumsURL" : "https://forum.aspose.com/c/cells/",
     "InstallCommand" : "pip install aspose-cells-python-net",
     "urlPrefix" : "cells",
-    "license":"https://purchase.aspose.com/temporary-license/"
+    "license":"https://purchase.aspose.com/temporary-license/",
+    "pricing": "https://purchase.aspose.com/pricing/cells/family/"
   },
   {
     "ProductName" : "Aspose.Cells for Python via Java",
@@ -93,7 +98,8 @@
     "ForumsURL" : "https://forum.aspose.com/c/cells/",
     "InstallCommand" : "pip install aspose-cells-python",
     "urlPrefix" : "cells",
-    "license":"https://purchase.aspose.com/temporary-license/"
+    "license":"https://purchase.aspose.com/temporary-license/",
+    "pricing": "https://purchase.aspose.com/pricing/cells/family/"
   },
   {
     "ProductName" : "Aspose.Cells for Node.js via Java",
@@ -109,7 +115,8 @@
     "ForumsURL" : "https://forum.aspose.com/c/cells/",
     "InstallCommand" : "npm install aspose.cells",
     "urlPrefix" : "cells",
-    "license":"https://purchase.aspose.com/temporary-license/"
+    "license":"https://purchase.aspose.com/temporary-license/",
+    "pricing": "https://purchase.aspose.com/pricing/cells/family/"
   },
   {
     "ProductName" : "Aspose.Cells for PHP via Java",
@@ -125,7 +132,8 @@
     "ForumsURL" : "https://forum.aspose.com/c/cells/",
     "InstallCommand" : "composer require aspose/cells ",
     "urlPrefix" : "cells",
-    "license":"https://purchase.aspose.com/temporary-license/"
+    "license":"https://purchase.aspose.com/temporary-license/",
+    "pricing": "https://purchase.aspose.com/pricing/cells/family/"
   },
   {
     "ProductName" : "Aspose.Cells for Android via Java",
@@ -141,7 +149,8 @@
     "ForumsURL" : "https://forum.aspose.com/c/cells/",
     "InstallCommand" : "maven {url 'https://releases.aspose.com/java/repo/' }",
     "urlPrefix" : "cells",
-    "license":"https://purchase.aspose.com/temporary-license/"
+    "license":"https://purchase.aspose.com/temporary-license/",
+    "pricing": "https://purchase.aspose.com/pricing/cells/family/"
   },
   {
   "ProductName" : "Aspose.OMR for C++",
@@ -157,7 +166,8 @@
   "ForumsURL" : "https://forum.aspose.com/c/omr/",
   "InstallCommand" : "dotnet add package Aspose.OMR.Cpp --version 24.9.0",
   "urlPrefix" : "omr",
-  "license":"https://purchase.aspose.com/temporary-license/"
+  "license":"https://purchase.aspose.com/temporary-license/",
+  "pricing": "https://purchase.aspose.com/pricing/omr/family/"
 },
   {
   "ProductName" : "Aspose.OMR for Java",
@@ -173,7 +183,8 @@
   "ForumsURL" : "https://forum.aspose.com/c/omr/",
   "InstallCommand" : "<repository>\n  <id>AsposeJavaAPI</id>\n  <name>Aspose Java API</name>\n  <url>https://repository.aspose.com/repo/</url>\n</repository>\n<dependency>\n  <groupId>com.aspose</groupId>\n  <artifactId>aspose-omr</artifactId>\n  <version>25.10</version>\n <classifier>jdk16</classifier>\n </dependency>",
   "urlPrefix" : "omr",
-  "license":"https://purchase.aspose.com/temporary-license/"
+  "license":"https://purchase.aspose.com/temporary-license/",
+  "pricing": "https://purchase.aspose.com/pricing/omr/family/"
 },
   {
   "ProductName" : "Aspose.OMR for .NET",
@@ -189,7 +200,8 @@
   "ForumsURL" : "https://forum.aspose.com/c/omr/",
   "InstallCommand" : "dotnet add package Aspose.OMR --version 25.8.0",
   "urlPrefix" : "omr",
-  "license":"https://purchase.aspose.com/temporary-license/"
+  "license":"https://purchase.aspose.com/temporary-license/",
+  "pricing": "https://purchase.aspose.com/pricing/omr/family/"
 },
   {
   "ProductName" : "Aspose.PSD for .NET",
@@ -205,7 +217,8 @@
   "ForumsURL" : "https://forum.aspose.com/c/psd/",
   "InstallCommand" : "Install-Package Aspose.PSD",
   "urlPrefix" : "psd",
-  "license":"https://purchase.aspose.com/temporary-license/"
+  "license":"https://purchase.aspose.com/temporary-license/",
+  "pricing": "https://purchase.aspose.com/pricing/psd/family/"
 },
   {
   "ProductName" : "Aspose.PSD for Python via .NET",
@@ -221,7 +234,8 @@
   "ForumsURL" : "https://forum.aspose.com/c/psd/",
   "InstallCommand" : "pip install aspose-psd",
   "urlPrefix" : "psd",
-  "license":"https://purchase.aspose.com/temporary-license/"
+  "license":"https://purchase.aspose.com/temporary-license/",
+  "pricing": "https://purchase.aspose.com/pricing/psd/family/"
 },
 {
   "ProductName" : "Aspose.PSD for Java",
@@ -237,7 +251,8 @@
   "ForumsURL" : "https://forum.aspose.com/c/psd/",
   "InstallCommand" : "<repository>\n  <id>AsposeJavaAPI</id>\n  <name>Aspose Java API</name>\n  <url>https://repository.aspose.com/repo/</url>\n</repository>\n<dependency>\n  <groupId>com.aspose</groupId>\n  <artifactId>aspose-psd</artifactId>\n  <version>25.2</version>\n <classifier>jdk16</classifier>\n </dependency>",
   "urlPrefix" : "psd",
-  "license":"https://purchase.aspose.com/temporary-license/"
+  "license":"https://purchase.aspose.com/temporary-license/",
+  "pricing": "https://purchase.aspose.com/pricing/psd/family/"
 },
    {
   "ProductName" : "Aspose.Page for JavaScript via C++",
@@ -253,7 +268,8 @@
   "ForumsURL" : "https://forum.aspose.com/c/page/",
   "InstallCommand" : "dotnet add package Aspose.Page.Cpp --version 25.9.0",
   "urlPrefix" : "page",
-  "license":"https://purchase.aspose.com/temporary-license/"
+  "license":"https://purchase.aspose.com/temporary-license/",
+  "pricing": "https://purchase.aspose.com/pricing/page/family/"
 },
 {
   "ProductName" : "Aspose.Page for Node.js via C++",
@@ -269,7 +285,8 @@
   "ForumsURL" : "https://forum.aspose.com/c/page/",
   "InstallCommand" : "npm install asposepagenodejs",
   "urlPrefix" : "page",
-  "license":"https://purchase.aspose.com/temporary-license/"
+  "license":"https://purchase.aspose.com/temporary-license/",
+  "pricing": "https://purchase.aspose.com/pricing/page/family/"
 },
   {
   "ProductName" : "Aspose.Page for Python via .NET",
@@ -285,7 +302,8 @@
   "ForumsURL" : "https://forum.aspose.com/c/page/",
   "InstallCommand" : "pip install aspose-page",
   "urlPrefix" : "page",
-  "license":"https://purchase.aspose.com/temporary-license/"
+  "license":"https://purchase.aspose.com/temporary-license/",
+  "pricing": "https://purchase.aspose.com/pricing/page/family/"
 },
   {
   "ProductName" : "Aspose.Page for C++",
@@ -301,7 +319,8 @@
   "ForumsURL" : "https://forum.aspose.com/c/page/",
   "InstallCommand" : "dotnet add package Aspose.Page.Cpp --version 25.9.0",
   "urlPrefix" : "page",
-  "license":"https://purchase.aspose.com/temporary-license/"
+  "license":"https://purchase.aspose.com/temporary-license/",
+  "pricing": "https://purchase.aspose.com/pricing/page/family/"
 },
   {
   "ProductName" : "Aspose.Page for .NET",
@@ -317,7 +336,8 @@
   "ForumsURL" : "https://forum.aspose.com/c/page/",
   "InstallCommand" : "\n\nInstall-Package Aspose.Page\n\n",
   "urlPrefix" : "page",
-  "license":"https://purchase.aspose.com/temporary-license/"
+  "license":"https://purchase.aspose.com/temporary-license/",
+  "pricing": "https://purchase.aspose.com/pricing/page/family/"
 },
 {
   "ProductName" : "Aspose.Page for Java",
@@ -333,7 +353,8 @@
   "ForumsURL" : "https://forum.aspose.com/c/page/",
   "InstallCommand" : "<repository>\n  <id>AsposeJavaAPI</id>\n  <name>Aspose Java API</name>\n  <url>https://repository.aspose.com/repo/</url>\n</repository>\n<dependency>\n  <groupId>com.aspose</groupId>\n  <artifactId>aspose-page</artifactId>\n  <version>25.10</version>\n</dependency>",
   "urlPrefix" : "page",
-  "license":"https://purchase.aspose.com/temporary-license/"
+  "license":"https://purchase.aspose.com/temporary-license/",
+  "pricing": "https://purchase.aspose.com/pricing/page/family/"
 },
    {
   "ProductName" : "Aspose.ZIP for Python via .NET",
@@ -349,7 +370,8 @@
   "ForumsURL" : "https://forum.aspose.com/c/zip/",
   "InstallCommand" : "pip install aspose-zip ",
   "urlPrefix" : "zip",
-  "license":"https://purchase.aspose.com/temporary-license/"
+  "license":"https://purchase.aspose.com/temporary-license/",
+  "pricing": "https://purchase.aspose.com/pricing/zip/family/"
 },
   {
   "ProductName" : "Aspose.ZIP for .NET",
@@ -365,7 +387,8 @@
   "ForumsURL" : "https://forum.aspose.com/c/zip/",
   "InstallCommand" : " Install-Package Aspose.Zip ",
   "urlPrefix" : "zip",
-  "license":"https://purchase.aspose.com/temporary-license/"
+  "license":"https://purchase.aspose.com/temporary-license/",
+  "pricing": "https://purchase.aspose.com/pricing/zip/family/"
 },
   {
   "ProductName" : "Aspose.ZIP for Java",
@@ -381,7 +404,8 @@
   "ForumsURL" : "https://forum.aspose.com/c/zip/",
   "InstallCommand" : "<repository>\n  <id>AsposeJavaAPI</id>\n  <name>Aspose Java API</name>\n  <url>https://repository.aspose.com/repo/</url>\n</repository>\n<dependency>\n  <groupId>com.aspose</groupId>\n  <artifactId>aspose-zip</artifactId>\n  <version>24.5</version>\n </dependency>",
   "urlPrefix" : "zip",
-  "license":"https://purchase.aspose.com/temporary-license/"
+  "license":"https://purchase.aspose.com/temporary-license/",
+  "pricing": "https://purchase.aspose.com/pricing/zip/family/"
 },
   {
   "ProductName" : "Aspose.GIS for Python via .NET",
@@ -397,7 +421,8 @@
   "ForumsURL" : "https://forum.aspose.com/c/gis/14",
   "InstallCommand" : "Install-Package Aspose.GIS ",
   "urlPrefix" : "gis",
-  "license":"https://purchase.aspose.com/temporary-license/"
+  "license":"https://purchase.aspose.com/temporary-license/",
+  "pricing": "https://purchase.aspose.com/pricing/gis/family/"
 },
   {
   "ProductName" : "Aspose.GIS for .NET",
@@ -413,7 +438,8 @@
   "ForumsURL" : "https://forum.aspose.com/c/gis/14",
   "InstallCommand" : "\n\nInstall-Package Aspose.GIS\n\n",
   "urlPrefix" : "gis",
-  "license":"https://purchase.aspose.com/temporary-license/"
+  "license":"https://purchase.aspose.com/temporary-license/",
+  "pricing": "https://purchase.aspose.com/pricing/gis/family/"
 },
   {
   "ProductName" : "Aspose.HTML for Python via .NET",
@@ -445,7 +471,8 @@
   "ForumsURL" : "https://forum.aspose.com/c/html/",
   "InstallCommand" : "<repository>\n  <id>AsposeJavaAPI</id>\n  <name>Aspose Java API</name>\n  <url>https://repository.aspose.com/repo/</url>\n</repository>\n<dependency>\n  <groupId>com.aspose</groupId>\n  <artifactId>aspose-html</artifactId>\n  <version>24.5</version>\n </dependency>",
   "urlPrefix" : "html",
-  "license":"https://purchase.aspose.com/temporary-license/"
+  "license":"https://purchase.aspose.com/temporary-license/",
+  "pricing": "https://purchase.aspose.com/pricing/html/family/"
 },
 {
   "ProductName" : "Aspose.HTML for .NET",
@@ -461,7 +488,8 @@
   "ForumsURL" : "https://forum.aspose.com/c/html/",
   "InstallCommand" : "\n\nInstall-Package Aspose.Html\n\n",
   "urlPrefix" : "html",
-  "license":"https://purchase.aspose.com/temporary-license/"
+  "license":"https://purchase.aspose.com/temporary-license/",
+  "pricing": "https://purchase.aspose.com/pricing/html/family/"
 },
   {
   "ProductName" : "Aspose.3D for Node.js via Java",
@@ -477,7 +505,8 @@
   "ForumsURL" : "https://forum.aspose.com/c/3d/18",
   "InstallCommand" : "npm install aspose.3d ",
   "urlPrefix" : "3d",
-  "license":"https://purchase.aspose.com/temporary-license/"
+  "license":"https://purchase.aspose.com/temporary-license/",
+  "pricing": "https://purchase.aspose.com/pricing/3d/family/"
 },
   {
   "ProductName" : "Aspose.3D for .NET",
@@ -493,7 +522,8 @@
   "ForumsURL" : "https://forum.aspose.com/c/3d/18",
   "InstallCommand" : "dotnet add package Aspose.3D --version 25.11.0",
   "urlPrefix" : "3d",
-  "license":"https://purchase.aspose.com/temporary-license/"
+  "license":"https://purchase.aspose.com/temporary-license/",
+  "pricing": "https://purchase.aspose.com/pricing/3d/family/"
 },
   {
   "ProductName" : "Aspose.3D for Java",
@@ -509,7 +539,8 @@
   "ForumsURL" : "https://forum.aspose.com/c/3d/18",
   "InstallCommand" : "<repository>\n  <id>AsposeJavaAPI</id>\n  <name>Aspose Java API</name>\n  <url>https://repository.aspose.com/repo/</url>\n</repository>\n<dependency>\n  <groupId>com.aspose</groupId>\n  <artifactId>aspose-3d</artifactId>\n  <version>25.1.0</version>\n</dependency>",
   "urlPrefix" : "3d",
-  "license":"https://purchase.aspose.com/temporary-license/"
+  "license":"https://purchase.aspose.com/temporary-license/",
+  "pricing": "https://purchase.aspose.com/pricing/3d/family/"
 },
 {
   "ProductName" : "Aspose.3D for Python",
@@ -525,7 +556,8 @@
   "ForumsURL" : "https://forum.aspose.com/c/3d/",
   "InstallCommand" : "pip install aspose-3d",
   "urlPrefix" : "3d",
-  "license":"https://purchase.aspose.com/temporary-license/"
+  "license":"https://purchase.aspose.com/temporary-license/",
+  "pricing": "https://purchase.aspose.com/pricing/3d/family/"
 },
   {
   "ProductName" : "Aspose.CAD for Python via .NET",
@@ -541,7 +573,8 @@
   "ForumsURL" : "https://forum.aspose.com/c/cad/",
   "InstallCommand" : "pip install aspose-cad",
   "urlPrefix" : "cad",
-  "license":"https://purchase.aspose.com/temporary-license/"
+  "license":"https://purchase.aspose.com/temporary-license/",
+  "pricing": "https://purchase.aspose.com/pricing/cad/family/"
 },
   {
   "ProductName" : "Aspose.CAD for .NET",
@@ -557,7 +590,8 @@
   "ForumsURL" : "https://forum.aspose.com/c/cad",
   "InstallCommand" : "\n\nInstall-Package Aspose.CAD\n\n",
   "urlPrefix" : "cad",
-  "license":"https://purchase.aspose.com/temporary-license/"
+  "license":"https://purchase.aspose.com/temporary-license/",
+  "pricing": "https://purchase.aspose.com/pricing/cad/family/"
 },
    {
   "ProductName" : "Aspose.CAD for Java",
@@ -573,7 +607,8 @@
   "ForumsURL" : "https://forum.aspose.com/cad/",
   "InstallCommand" : "<repository>\n  <id>AsposeJavaAPI</id>\n  <name>Aspose Java API</name>\n  <url>https://repository.aspose.com/repo/</url>\n</repository>\n<dependency>\n  <groupId>com.aspose</groupId>\n  <artifactId>aspose-cad</artifactId>\n  <version>25.10</version>\n </dependency>",
   "urlPrefix" : "cad",
-  "license":"https://purchase.aspose.com/temporary-license/"
+  "license":"https://purchase.aspose.com/temporary-license/",
+  "pricing": "https://purchase.aspose.com/pricing/cad/family/"
 },
  {
   "ProductName" : "Aspose.CAD for JavaScript",
@@ -589,7 +624,8 @@
   "ForumsURL" : "https://forum.aspose.com/cad/",
   "InstallCommand" : "npm i aspose-cad",
   "urlPrefix" : "cad",
-  "license":"https://purchase.aspose.com/temporary-license/"
+  "license":"https://purchase.aspose.com/temporary-license/",
+  "pricing": "https://purchase.aspose.com/pricing/cad/family/"
 },
 {
   "ProductName" : "Aspose.CAD for JasperReports",
@@ -605,7 +641,8 @@
   "ForumsURL" : "https://forum.aspose.com/cad/",
   "InstallCommand" : "",
   "urlPrefix" : "cad",
-  "license":"https://purchase.aspose.com/temporary-license/"
+  "license":"https://purchase.aspose.com/temporary-license/",
+  "pricing": "https://purchase.aspose.com/pricing/cad/family/"
 },
   {
   "ProductName" : "Aspose.BarCode for Node.js via Java",
@@ -621,7 +658,8 @@
   "ForumsURL" : "https://forum.aspose.com/c/barcode/",
   "InstallCommand" : "npm install aspose.barcode ",
   "urlPrefix" : "barcode",
-  "license":"https://purchase.aspose.com/temporary-license/"
+  "license":"https://purchase.aspose.com/temporary-license/",
+  "pricing": "https://purchase.aspose.com/pricing/barcode/family/"
 },
 {
   "ProductName" : "Aspose.BarCode for JavaScript via C++",
@@ -637,7 +675,8 @@
   "ForumsURL" : "https://forum.aspose.com/c/barcode/",
   "InstallCommand" : " ",
   "urlPrefix" : "barcode",
-  "license":"https://purchase.aspose.com/temporary-license/"
+  "license":"https://purchase.aspose.com/temporary-license/",
+  "pricing": "https://purchase.aspose.com/pricing/barcode/family/"
 },
   {
   "ProductName" : "Aspose.BarCode for PHP via Java",
@@ -653,7 +692,8 @@
   "ForumsURL" : "https://forum.aspose.com/c/barcode/",
   "InstallCommand" : "composer require aspose/barcode",
   "urlPrefix" : "barcode",
-  "license":"https://purchase.aspose.com/temporary-license/"
+  "license":"https://purchase.aspose.com/temporary-license/",
+  "pricing": "https://purchase.aspose.com/pricing/barcode/family/"
 },
   {
   "ProductName" : "Aspose.BarCode for C++",
@@ -669,7 +709,8 @@
   "ForumsURL" : "https://forum.aspose.com/c/barcode/",
   "InstallCommand" : " Install-Package Aspose.BarCode.Cpp",
   "urlPrefix" : "barcode",
-  "license":"https://purchase.aspose.com/temporary-license/"
+  "license":"https://purchase.aspose.com/temporary-license/",
+  "pricing": "https://purchase.aspose.com/pricing/barcode/family/"
 },
   {
   "ProductName" : "Aspose.BarCode for Python via .NET",
@@ -685,7 +726,8 @@
   "ForumsURL" : "https://forum.aspose.com/c/barcode/",
   "InstallCommand" : "pip install aspose-barcode-for-python-via-net",
   "urlPrefix" : "barcode",
-  "license":"https://purchase.aspose.com/temporary-license/"
+  "license":"https://purchase.aspose.com/temporary-license/",
+  "pricing": "https://purchase.aspose.com/pricing/barcode/family/"
 },
   {
   "ProductName" : "Aspose.BarCode for .NET",
@@ -701,7 +743,8 @@
   "ForumsURL" : "https://forum.aspose.com/c/barcode/",
   "InstallCommand" : "\n\nInstall-Package Aspose.BarCode\n\n",
   "urlPrefix" : "barcode",
-  "license":"https://purchase.aspose.com/temporary-license/"
+  "license":"https://purchase.aspose.com/temporary-license/",
+  "pricing": "https://purchase.aspose.com/pricing/barcode/family/"
 },
 {
   "ProductName" : "Aspose.BarCode for SharePoint",
@@ -717,7 +760,8 @@
   "ForumsURL" : "https://forum.aspose.com/c/barcode/",
   "InstallCommand" : "",
   "urlPrefix" : "barcode",
-  "license":"https://purchase.aspose.com/temporary-license/"
+  "license":"https://purchase.aspose.com/temporary-license/",
+  "pricing": "https://purchase.aspose.com/pricing/barcode/family/"
 },
 {
   "ProductName" : "Aspose.BarCode for JasperReports",
@@ -733,7 +777,8 @@
   "ForumsURL" : "https://forum.aspose.com/c/barcode/",
   "InstallCommand" : "",
   "urlPrefix" : "barcode",
-  "license":"https://purchase.aspose.com/temporary-license/"
+  "license":"https://purchase.aspose.com/temporary-license/",
+  "pricing": "https://purchase.aspose.com/pricing/barcode/family/"
 },
 {
   "ProductName" : "Aspose.BarCode for SQL Reporting",
@@ -749,7 +794,8 @@
   "ForumsURL" : "https://forum.aspose.com/c/barcode/",
   "InstallCommand" : "",
   "urlPrefix" : "barcode",
-  "license":"https://purchase.aspose.com/temporary-license/"
+  "license":"https://purchase.aspose.com/temporary-license/",
+  "pricing": "https://purchase.aspose.com/pricing/barcode/family/"
 },
 {
   "ProductName" : "Aspose.BarCode for Java",
@@ -765,7 +811,8 @@
   "ForumsURL" : "https://forum.aspose.com/c/barcode/",
   "InstallCommand" : "<repository>\n  <id>AsposeJavaAPI</id>\n  <name>Aspose Java API</name>\n  <url>https://repository.aspose.com/repo/</url>\n</repository>\n<dependency>\n  <groupId>com.aspose</groupId>\n  <artifactId>aspose-barcode</artifactId>\n  <version>23.10</version>\n </dependency>",
   "urlPrefix" : "barcode",
-  "license":"https://purchase.aspose.com/temporary-license/"
+  "license":"https://purchase.aspose.com/temporary-license/",
+  "pricing": "https://purchase.aspose.com/pricing/barcode/family/"
 },
 {
   "ProductName" : "Aspose.BarCode for Android",
@@ -781,7 +828,8 @@
   "ForumsURL" : "https://forum.aspose.com/c/barcode/",
   "InstallCommand" : "maven { url \"https://releases.aspose.com/java/repo/\" } implementation group: 'com.aspose', name: 'aspose-barcode-android-java', version: '23.7', ext: 'aar' implementation group: 'com.aspose', name: 'aspose-barcode-android-java', classifier: 'javadoc', version: '23.7'",
   "urlPrefix" : "barcode",
-  "license":"https://purchase.aspose.com/temporary-license/"
+  "license":"https://purchase.aspose.com/temporary-license/",
+  "pricing": "https://purchase.aspose.com/pricing/barcode/family/"
 },
   {
   "ProductName" : "Aspose.Imaging for Python via .NET",
@@ -797,7 +845,8 @@
   "ForumsURL" : "https://forum.aspose.com/c/imaging/",
   "InstallCommand" : "pip install aspose-imaging-python-net",
   "urlPrefix" : "imaging",
-  "license":"https://purchase.aspose.com/temporary-license/"
+  "license":"https://purchase.aspose.com/temporary-license/",
+  "pricing": "https://purchase.aspose.com/pricing/imaging/family/"
 },
   {
   "ProductName" : "Aspose.Imaging for Java",
@@ -813,7 +862,8 @@
   "ForumsURL" : "https://forum.aspose.com/c/imaging/14",
   "InstallCommand" : "<repository>\n  <id>AsposeJavaAPI</id>\n  <name>Aspose Java API</name>\n  <url>https://repository.aspose.com/repo/</url>\n</repository>\n<dependency>\n  <groupId>com.aspose</groupId>\n  <artifactId>aspose-imaging</artifactId>\n  <version>24.5</version>\n  <classifier>jdk16</classifier>\n</dependency>",
   "urlPrefix" : "imaging",
-  "license":"https://purchase.aspose.com/temporary-license/"
+  "license":"https://purchase.aspose.com/temporary-license/",
+  "pricing": "https://purchase.aspose.com/pricing/imaging/family/"
 },
    {
   "ProductName" : "Aspose.Imaging for .NET",
@@ -829,7 +879,8 @@
   "ForumsURL" : "https://forum.aspose.com/c/imaging/14",
   "InstallCommand" : "\n\nInstall-Package Aspose.Imaging\n\n",
   "urlPrefix" : "imaging",
-  "license":"https://purchase.aspose.com/temporary-license/"
+  "license":"https://purchase.aspose.com/temporary-license/",
+  "pricing": "https://purchase.aspose.com/pricing/imaging/family/"
 },
 {
   "ProductName" : "Aspose.Imaging for SharePoint",
@@ -845,7 +896,8 @@
   "ForumsURL" : "https://forum.aspose.com/c/imaging/14",
   "InstallCommand" : "",
   "urlPrefix" : "imaging",
-  "license":"https://purchase.aspose.com/temporary-license/"
+  "license":"https://purchase.aspose.com/temporary-license/",
+  "pricing": "https://purchase.aspose.com/pricing/imaging/family/"
 },
 {
   "ProductName" : "Aspose.Imaging for JasperReports",
@@ -861,7 +913,8 @@
   "ForumsURL" : "https://forum.aspose.com/c/imaging/14",
   "InstallCommand" : "",
   "urlPrefix" : "imaging",
-  "license":"https://purchase.aspose.com/temporary-license/"
+  "license":"https://purchase.aspose.com/temporary-license/",
+  "pricing": "https://purchase.aspose.com/pricing/imaging/family/"
 },
   {
   "ProductName" : "Aspose.Slides for Java",
@@ -877,7 +930,8 @@
   "ForumsURL" : "https://forum.aspose.com/c/slides/14",
   "InstallCommand" : "<repository>\n  <id>AsposeJavaAPI</id>\n  <name>Aspose Java API</name>\n  <url>https://repository.aspose.com/repo/</url>\n</repository>\n<dependency>\n  <groupId>com.aspose</groupId>\n  <artifactId>aspose-slides</artifactId>\n  <version>25.1</version>\n  <classifier>jdk16</classifier>\n</dependency>",
   "urlPrefix" : "slides",
-  "license":"https://purchase.aspose.com/temporary-license/"
+  "license":"https://purchase.aspose.com/temporary-license/",
+  "pricing": "https://purchase.aspose.com/pricing/slides/family/"
 },
 {
   "ProductName" : "Aspose.Slides for .NET",
@@ -893,7 +947,8 @@
   "ForumsURL" : "https://forum.aspose.com/c/slides/14",
   "InstallCommand" : "Install-Package Aspose.Slides.NET ",
   "urlPrefix" : "slides",
-  "license":"https://purchase.aspose.com/temporary-license/"
+  "license":"https://purchase.aspose.com/temporary-license/",
+  "pricing": "https://purchase.aspose.com/pricing/slides/family/"
 },
 {
   "ProductName" : "Aspose.Slides for .NET Core",
@@ -909,7 +964,8 @@
   "ForumsURL" : "https://forum.aspose.com/c/slides/14",
   "InstallCommand" : "Install-Package Aspose.Slides.NET ",
   "urlPrefix" : "slides",
-  "license":"https://purchase.aspose.com/temporary-license/"
+  "license":"https://purchase.aspose.com/temporary-license/",
+  "pricing": "https://purchase.aspose.com/pricing/slides/family/"
 },
 {
   "ProductName" : "Aspose.Slides for C++",
@@ -925,7 +981,8 @@
   "ForumsURL" : "https://forum.aspose.com/c/slides/14",
   "InstallCommand" : "Install-Package Aspose.Slides.Cpp",
   "urlPrefix" : "slides",
-  "license":"https://purchase.aspose.com/temporary-license/"
+  "license":"https://purchase.aspose.com/temporary-license/",
+  "pricing": "https://purchase.aspose.com/pricing/slides/family/"
 },
 {
   "ProductName" : "Aspose.Slides for Python via .NET",
@@ -941,7 +998,8 @@
   "ForumsURL" : "https://forum.aspose.com/c/slides/14",
   "InstallCommand" : "pip install aspose.slides ",
   "urlPrefix" : "slides",
-  "license":"https://purchase.aspose.com/temporary-license/"
+  "license":"https://purchase.aspose.com/temporary-license/",
+  "pricing": "https://purchase.aspose.com/pricing/slides/family/"
 },
 {
   "ProductName" : "Aspose.Slides for Xamarin",
@@ -957,7 +1015,8 @@
   "ForumsURL" : "https://forum.aspose.com/c/slides/14",
   "InstallCommand" : "Install-Package Aspose.Slides.NET ",
   "urlPrefix" : "slides",
-  "license":"https://purchase.aspose.com/temporary-license/"
+  "license":"https://purchase.aspose.com/temporary-license/",
+  "pricing": "https://purchase.aspose.com/pricing/slides/family/"
 },
 {
   "ProductName" : "Aspose.Slides for Python via Java",
@@ -973,7 +1032,8 @@
   "ForumsURL" : "https://forum.aspose.com/c/slides/14",
   "InstallCommand" : "pip install aspose.slides ",
   "urlPrefix" : "slides",
-  "license":"https://purchase.aspose.com/temporary-license/"
+  "license":"https://purchase.aspose.com/temporary-license/",
+  "pricing": "https://purchase.aspose.com/pricing/slides/family/"
 },
 {
   "ProductName" : "Aspose.Slides for Android via Java",
@@ -989,7 +1049,8 @@
   "ForumsURL" : "https://forum.aspose.com/c/slides/14",
   "InstallCommand" : "pip install aspose.slides ",
   "urlPrefix" : "slides",
-  "license":"https://purchase.aspose.com/temporary-license/"
+  "license":"https://purchase.aspose.com/temporary-license/",
+  "pricing": "https://purchase.aspose.com/pricing/slides/family/"
 },
 {
   "ProductName" : "Aspose.Slides for Node.js via Java",
@@ -1005,7 +1066,8 @@
   "ForumsURL" : "https://forum.aspose.com/c/slides/14",
   "InstallCommand" : "npm install aspose.slides.via.java",
   "urlPrefix" : "slides",
-  "license":"https://purchase.aspose.com/temporary-license/"
+  "license":"https://purchase.aspose.com/temporary-license/",
+  "pricing": "https://purchase.aspose.com/pricing/slides/family/"
 },
 {
   "ProductName" : "Aspose.Slides for Node.js via .NET",
@@ -1021,7 +1083,8 @@
   "ForumsURL" : "https://forum.aspose.com/c/slides/14",
   "InstallCommand" : "npm install aspose.slides.via.java  ",
   "urlPrefix" : "slides",
-  "license":"https://purchase.aspose.com/temporary-license/"
+  "license":"https://purchase.aspose.com/temporary-license/",
+  "pricing": "https://purchase.aspose.com/pricing/slides/family/"
 },
 {
   "ProductName" : "Aspose.Slides for PHP via Java",
@@ -1037,7 +1100,8 @@
   "ForumsURL" : "https://forum.aspose.com/c/slides/14",
   "InstallCommand" : "composer require aspose/slides ",
   "urlPrefix" : "slides",
-  "license":"https://purchase.aspose.com/temporary-license/"
+  "license":"https://purchase.aspose.com/temporary-license/",
+  "pricing": "https://purchase.aspose.com/pricing/slides/family/"
 },
 {
   "ProductName" : "Aspose.Slides for SharePoint",
@@ -1053,7 +1117,8 @@
   "ForumsURL" : "https://forum.aspose.com/c/slides/14",
   "InstallCommand" : "",
   "urlPrefix" : "slides",
-  "license":"https://purchase.aspose.com/temporary-license/"
+  "license":"https://purchase.aspose.com/temporary-license/",
+  "pricing": "https://purchase.aspose.com/pricing/slides/family/"
 },
 {
   "ProductName" : "Aspose.Slides for Reporting Services",
@@ -1069,7 +1134,8 @@
   "ForumsURL" : "https://forum.aspose.com/c/slides/14",
   "InstallCommand" : "",
   "urlPrefix" : "slides",
-  "license":"https://purchase.aspose.com/temporary-license/"
+  "license":"https://purchase.aspose.com/temporary-license/",
+  "pricing": "https://purchase.aspose.com/pricing/slides/family/"
 },
 {
   "ProductName" : "Aspose.Slides for Reporting Services",
@@ -1085,7 +1151,8 @@
   "ForumsURL" : "https://forum.aspose.com/c/slides/14",
   "InstallCommand" : "",
   "urlPrefix" : "slides",
-  "license":"https://purchase.aspose.com/temporary-license/"
+  "license":"https://purchase.aspose.com/temporary-license/",
+  "pricing": "https://purchase.aspose.com/pricing/slides/family/"
 },
   {
   "ProductName" : "Aspose.Email for C++",
@@ -1101,7 +1168,8 @@
   "ForumsURL" : "https://forum.aspose.com/c/email/",
   "InstallCommand" : "Install-Package Aspose.Email.Cpp.VC140",
   "urlPrefix" : "email",
-  "license":"https://purchase.aspose.com/temporary-license/"
+  "license":"https://purchase.aspose.com/temporary-license/",
+  "pricing": "https://purchase.aspose.com/pricing/email/family/"
 },
   {
   "ProductName" : "Aspose.Email for Python via .NET",
@@ -1117,7 +1185,8 @@
   "ForumsURL" : "https://forum.aspose.com/c/email/",
   "InstallCommand" : "pip install Aspose.Email-for-Python-via-NET ",
   "urlPrefix" : "email",
-  "license":"https://purchase.aspose.com/temporary-license/"
+  "license":"https://purchase.aspose.com/temporary-license/",
+  "pricing": "https://purchase.aspose.com/pricing/email/family/"
 },
   {
   "ProductName" : "Aspose.Email for Node.js via .NET",
@@ -1133,7 +1202,8 @@
   "ForumsURL" : "https://forum.aspose.com/c/email/",
   "InstallCommand" : "npm install @aspose/email",
   "urlPrefix" : "email",
-  "license":"https://purchase.aspose.com/temporary-license/"
+  "license":"https://purchase.aspose.com/temporary-license/",
+  "pricing": "https://purchase.aspose.com/pricing/email/family/"
 },
   {
   "ProductName" : "Aspose.Email for .NET",
@@ -1149,7 +1219,8 @@
   "ForumsURL" : "https://forum.aspose.com/c/email/14",
   "InstallCommand" : "\n\nInstall-Package Aspose.Email\n\n",
   "urlPrefix" : "email",
-  "license":"https://purchase.aspose.com/temporary-license/"
+  "license":"https://purchase.aspose.com/temporary-license/",
+  "pricing": "https://purchase.aspose.com/pricing/email/family/"
 },
 {
   "ProductName" : "Aspose.Email for Java",
@@ -1165,7 +1236,8 @@
   "ForumsURL" : "https://forum.aspose.com/c/email/",
   "InstallCommand" : "<repository>\n  <id>AsposeJavaAPI</id>\n  <name>Aspose Java API</name>\n  <url>https://repository.aspose.com/repo/</url>\n</repository>\n<dependency>\n  <groupId>com.aspose</groupId>\n  <artifactId>aspose-email</artifactId>\n  <version>25.1</version>\n <classifier>jdk16</classifier>\n </dependency>",
   "urlPrefix" : "email",
-  "license":"https://purchase.aspose.com/temporary-license/"
+  "license":"https://purchase.aspose.com/temporary-license/",
+  "pricing": "https://purchase.aspose.com/pricing/email/family/"
 },
 {
   "ProductName" : "Aspose.Email for Android via Java",
@@ -1181,7 +1253,8 @@
   "ForumsURL" : "https://forum.aspose.com/c/email/",
   "InstallCommand" : "repositories {\n    mavenCentral()\n    maven { url \"http://repository.aspose.com/repo/\" }\n}\ndependencies {\n    compile (\n        group: 'com.aspose',\n        name: 'aspose-email',\n        version: '18.4',\n        classifier: 'android.via.java'\n    )\n}",
   "urlPrefix" : "email",
-  "license":"https://purchase.aspose.com/temporary-license/"
+  "license":"https://purchase.aspose.com/temporary-license/",
+  "pricing": "https://purchase.aspose.com/pricing/email/family/"
 },
 {
   "ProductName" : "Aspose.Email for SharePoint",
@@ -1197,7 +1270,8 @@
   "ForumsURL" : "https://forum.aspose.com/c/email/",
   "InstallCommand" : "",
   "urlPrefix" : "email",
-  "license":"https://purchase.aspose.com/temporary-license/"
+  "license":"https://purchase.aspose.com/temporary-license/",
+  "pricing": "https://purchase.aspose.com/pricing/email/family/"
 },
 {
   "ProductName" : "Aspose.Words for .NET",
@@ -1213,7 +1287,8 @@
   "ForumsURL" : "https://forum.aspose.com/c/words/",
   "InstallCommand" : "\n\nInstall-Package Aspose.Words\n\n",
   "urlPrefix" : "words",
-  "license":"https://purchase.aspose.com/temporary-license/"
+  "license":"https://purchase.aspose.com/temporary-license/",
+  "pricing": "https://purchase.aspose.com/pricing/words/family/"
 },
 {
   "ProductName" : "Aspose.Words for Java",
@@ -1229,7 +1304,8 @@
   "ForumsURL" : "https://forum.aspose.com/c/words/",
   "InstallCommand" : "<repository>\n  <id>AsposeJavaAPI</id>\n  <name>Aspose Java API</name>\n  <url>https://repository.aspose.com/repo/</url>\n</repository>\n<dependency>\n  <groupId>com.aspose</groupId>\n  <artifactId>aspose-words</artifactId>\n  <version>25.12</version>\n  <classifier>jdk17</classifier>\n</dependency>",
   "urlPrefix" : "words",
-  "license":"https://purchase.aspose.com/temporary-license/"
+  "license":"https://purchase.aspose.com/temporary-license/",
+  "pricing": "https://purchase.aspose.com/pricing/words/family/"
 },
 {
   "ProductName" : "Aspose.Words for C++",
@@ -1245,7 +1321,8 @@
   "ForumsURL" : "https://forum.aspose.com/c/words/",
   "InstallCommand" : "dotnet add package Aspose.Words.Cpp --version 25.9.0",
   "urlPrefix" : "words",
-  "license":"https://purchase.aspose.com/temporary-license/"
+  "license":"https://purchase.aspose.com/temporary-license/",
+  "pricing": "https://purchase.aspose.com/pricing/words/family/"
 },
 {
   "ProductName" : "Aspose.Words for Python via .NET",
@@ -1261,7 +1338,8 @@
   "ForumsURL" : "https://forum.aspose.com/c/words/",
   "InstallCommand" : "pip install aspose-words",
   "urlPrefix" : "words",
-  "license":"https://purchase.aspose.com/temporary-license/"
+  "license":"https://purchase.aspose.com/temporary-license/",
+  "pricing": "https://purchase.aspose.com/pricing/words/family/"
 },
 {
   "ProductName" : "Aspose.Words for Node.js via .NET",
@@ -1277,7 +1355,8 @@
   "ForumsURL" : "https://forum.aspose.com/c/words/",
   "InstallCommand" : "npm install @aspose/words ",
   "urlPrefix" : "words",
-  "license":"https://purchase.aspose.com/temporary-license/"
+  "license":"https://purchase.aspose.com/temporary-license/",
+  "pricing": "https://purchase.aspose.com/pricing/words/family/"
 },
 
 {
@@ -1294,7 +1373,8 @@
   "ForumsURL" : "https://forum.aspose.com/c/tex/",
   "InstallCommand" : "pip install aspose-tex-net",
   "urlPrefix" : "tex",
-  "license":"https://purchase.aspose.com/temporary-license/"
+  "license":"https://purchase.aspose.com/temporary-license/",
+  "pricing": "https://purchase.aspose.com/pricing/tex/family/"
 },
 {
   "ProductName" : "Aspose.TeX for Java",
@@ -1310,7 +1390,8 @@
   "ForumsURL" : "https://forum.aspose.com/c/tex/",
   "InstallCommand" : "<repository>\n  <id>AsposeJavaAPI</id>\n  <name>Aspose Java API</name>\n  <url>https://repository.aspose.com/repo/</url>\n</repository>\n<dependency>\n  <groupId>com.aspose</groupId>\n  <artifactId>aspose-tex</artifactId>\n  <version>22.6</version>\n </dependency>",
   "urlPrefix" : "tex",
-  "license":"https://purchase.aspose.com/temporary-license/"
+  "license":"https://purchase.aspose.com/temporary-license/",
+  "pricing": "https://purchase.aspose.com/pricing/tex/family/"
 },
 {
   "ProductName" : "Aspose.TeX for C++",
@@ -1326,7 +1407,8 @@
   "ForumsURL" : "https://forum.aspose.com/c/tex/",
   "InstallCommand" : "Install-Package Aspose.TeX.Cpp ",
   "urlPrefix" : "tex",
-  "license":"https://purchase.aspose.com/temporary-license/"
+  "license":"https://purchase.aspose.com/temporary-license/",
+  "pricing": "https://purchase.aspose.com/pricing/tex/family/"
 },
 {
   "ProductName" : "Aspose.TeX for .NET",
@@ -1342,7 +1424,8 @@
   "ForumsURL" : "https://forum.aspose.com/c/tex/",
   "InstallCommand" : "Install-Package Aspose.TeX ",
   "urlPrefix" : "tex",
-  "license":"https://purchase.aspose.com/temporary-license/"
+  "license":"https://purchase.aspose.com/temporary-license/",
+  "pricing": "https://purchase.aspose.com/pricing/tex/family/"
 }
 ]
 

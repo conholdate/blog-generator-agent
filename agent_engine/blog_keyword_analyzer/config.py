@@ -17,7 +17,7 @@ class Settings(BaseSettings):
     PROFESSIONALIZE_LLM_MODEL: str = "gpt-oss"
 
     # --- SerpAPI integration ---
-    SERPAPI_KEY: str | None = None
+    SERPAPI_KEY: str = ""
     SERPAPI_ENGINE: str = "google"  # we’ll use standard Google search
 
     # --- KRA scoring / data dirs (unchanged) ---
