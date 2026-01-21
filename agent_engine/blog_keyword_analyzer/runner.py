@@ -5,13 +5,13 @@ import argparse
 import json
 import logging
 import re
-import sys
 import time
 import uuid
 from datetime import datetime, timezone
 from pathlib import Path
 from statistics import mean
 from typing import Optional, List, Mapping, Any, Dict, Tuple
+
 import requests
 
 from .metrics_sender import send_stage_metrics
@@ -25,6 +25,7 @@ from .tools.intent_brand import annotate_intent_brand
 from .tools.scoring import score_clusters
 from .config import settings, BRAND_METRICS
 from .tools.metrics import RunMetrics, timed_step
+from .blog_keyword_generator import LLMKeywordGenRequest, fetch_llm_keywords
 
 logger = logging.getLogger(__name__)
 
@@ -882,22 +883,53 @@ def main() -> None:
 
     # If using SerpAPI, fetch KeywordRecord list here
     records: Optional[List[KeywordRecord]] = None
+
     if args.use_serp_api:
         from .tools.serp_import import fetch_serp_keywords
 
         topic = args.serp_topic.strip() or args.product
-        if settings.DEBUG:
-            print(f"[KRA] Using SerpAPI for topic={topic!r}, product={args.product!r}")
+        _platform = (args.platform or "").strip() or None
 
-        records = fetch_serp_keywords(
-            topic=topic,
-            product=args.product,
-            locale=args.locale,
-            max_keywords=args.max_rows,
-        )
+        if settings.DEBUG:
+            print(f"[KRA] Using SerpAPI for topic={topic!r}, product={args.product!r}, platform={_platform!r}")
+
+        try:
+            if _platform:
+                records = fetch_serp_keywords(
+                    topic=topic,
+                    product=args.product,
+                    platform=_platform,
+                    locale=args.locale,
+                    max_keywords=args.max_rows,
+                )
+            else:
+                records = fetch_serp_keywords(
+                    topic=topic,
+                    product=args.product,
+                    locale=args.locale,
+                    max_keywords=args.max_rows,
+                )
+        except (requests.RequestException, OSError) as e:
+            # RequestException covers DNS, timeouts, connection errors, 4xx/5xx after raise_for_status, etc.
+            # OSError catches low-level socket/DNS issues on some platforms.
+            records = None
+            print(f"⚠️ SerpAPI request failed ({type(e).__name__}): {e}")
+            print("⚠️ Falling back to LLM keyword generation...")
 
         if not records:
-            print("⚠️ SerpAPI returned no keywords; exiting.")
+            print("⚠️ SerpAPI returned no keywords (or failed); trying LLM fallback...")
+
+            key_gen_req = LLMKeywordGenRequest(
+                topic=topic,
+                product=args.product,
+                platform=_platform,
+                locale=args.locale,
+                max_keywords=min(args.max_rows, 200),
+            )
+            records = fetch_llm_keywords(key_gen_req)
+
+        if not records:
+            print("❌ No keywords produced by SerpAPI or LLM fallback; exiting.")
             raise SystemExit(1)
 
     logger.info(

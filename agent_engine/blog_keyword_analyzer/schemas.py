@@ -12,7 +12,7 @@ class KeywordRecord(BaseModel):
     """
 
     keyword: str
-    source: Literal["upload", "serpapi"]
+    source: Literal["upload", "serpapi", "llm"]
     locale: str = "en-US"
     volume: Optional[int] = None
     cpc: Optional[float] = None
