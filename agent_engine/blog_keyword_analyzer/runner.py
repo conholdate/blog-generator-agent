@@ -324,7 +324,7 @@ def write_topics_markdown(
     print(md_path)
 
     lines: List[str] = []
-    heading = f"# Blog Topics for {result.product} ({result.locale})"
+    heading = f"# Blog Topics for {result.product}"
     lines.append(heading)
     lines.append("")
     lines.append(f"- **Brand:** {result.brand}")
