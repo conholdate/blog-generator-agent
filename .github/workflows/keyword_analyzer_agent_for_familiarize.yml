@@ -7,22 +7,19 @@ on:
         description: "Product name (e.g., Familiarize.Forms)."
         type: string
         required: true
-        default: "Familiarize.Forms"
-
       platform:
-        description: "Optional target platform (e.g., java, c#, python)."
-        type: string
-        required: false
-        default: "java"
-
-      keywords_file:
-        description: "Keywords file path (recommended: content/Familiarize/keywords.csv)."
+        description: "Platform (e.g., net, java, python)."
         type: string
         required: true
+        default: "java"
+      keywords_file:
+        description: "Path to keywords CSV in repo (e.g., content/Familiarize/keywords.csv)."
+        type: string
+        required: false
         default: "content/Familiarize/keywords.csv"
 
       use_serp_api:
-        description: "If true, ingest keywords via SerpAPI instead of file."
+        description: "If true, ingest keywords using SerpAPI (requires SERPAPI_KEY)."
         type: boolean
         required: false
         default: false
@@ -45,6 +42,12 @@ on:
         required: false
         default: false
 
+      include_product_in_title:
+        description: "If true, enforce product name in generated topic titles. If false, ensure product name is NOT used in titles."
+        type: boolean
+        required: false
+        default: true
+
 permissions:
   contents: write
 
@@ -61,32 +64,17 @@ jobs:
       PROFESSIONALIZE_API_KEY: ${{ secrets.PROFESSIONALIZE_API_KEY }}
       OPENAI_API_KEY: ${{ secrets.PROFESSIONALIZE_API_KEY }}
 
-      BLOG_CONTENT_REPO: "familiarize/familiarize-blog"
+      BLOG_CONTENT_REPO: "Familiarize/familiarize-blog"
       BLOG_CONTENT_ROOT: "blog_content/content/Familiarize.Blog"
 
     steps:
-      - name: Checkout this repo
+      - name: Checkout
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
-      - name: Checkout Familiarize blog content repo (only if use_content_index=true)
-        if: ${{ inputs.use_content_index }}
-        uses: actions/checkout@v4
-        with:
-          repository: ${{ env.BLOG_CONTENT_REPO }}
-          path: blog_content
-          token: ${{ secrets.ASPOSE_BLOG_TOKEN }}
-
-      - name: Export BLOG_CONTENT_ROOT (only if use_content_index=true)
-        if: ${{ inputs.use_content_index }}
-        run: |
-          echo "BLOG_CONTENT_ROOT=${BLOG_CONTENT_ROOT}" >> "$GITHUB_ENV"
-
-      - name: Set up Python
+      - name: Setup Python
         uses: actions/setup-python@v5
         with:
-          python-version: "3.12"
+          python-version: "3.11"
 
       - name: Install dependencies
         run: |
@@ -115,6 +103,7 @@ jobs:
           serp_topic = os.environ.get("INPUT_SERP_TOPIC", "")
           top_clusters = int(os.environ.get("INPUT_TOP_CLUSTERS", "15"))
           use_content_index = as_bool(os.environ.get("INPUT_USE_CONTENT_INDEX", "false"))
+          include_product_in_title = as_bool(os.environ.get("INPUT_INCLUDE_PRODUCT_IN_TITLE", "true"))
 
           locale = "en-US"
           max_rows = 50000
@@ -142,6 +131,7 @@ jobs:
               f"  top_clusters: {top_clusters}\n"
               f"  max_rows: {max_rows}\n"
               f"  use_content_index: {b(use_content_index)}\n"
+              f"  include_product_in_title: {b(include_product_in_title)}\n"
               f"  debug: {b(debug)}\n"
               "\n"
               "content_index:\n"
@@ -163,6 +153,7 @@ jobs:
           INPUT_SERP_TOPIC: ${{ inputs.serp_topic }}
           INPUT_TOP_CLUSTERS: ${{ inputs.top_clusters }}
           INPUT_USE_CONTENT_INDEX: ${{ inputs.use_content_index }}
+          INPUT_INCLUDE_PRODUCT_IN_TITLE: ${{ inputs.include_product_in_title }}
 
       - name: Run KRA
         run: |
@@ -177,13 +168,3 @@ jobs:
             content/Familiarize/output/**
             content/familiarize/output/**
           if-no-files-found: warn
-
-      - name: Commit Familiarize outputs
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add -A content
-          git diff --cached --quiet && echo "No staged changes, skipping commit & push" && exit 0
-          git commit -m "Update Familiarize KRA results [skip ci]"
-          git pull --rebase origin "${GITHUB_REF_NAME}"
-          git push origin HEAD:"${GITHUB_REF_NAME}"
