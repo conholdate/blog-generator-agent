@@ -115,7 +115,7 @@ jobs:
 
       # Prevent interactive git prompts in CI
       GIT_TERMINAL_PROMPT: "0"
-
+      PROFESSIONALIZE_BASE_URL: "https://llm.professionalize.com/v1"
       # Used by your CLI callback (you log its presence).
       PROFESSIONALIZE_API_KEY: ${{ secrets.PROFESSIONALIZE_API_KEY }}
 
