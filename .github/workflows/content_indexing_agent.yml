@@ -201,7 +201,7 @@ jobs:
           echo "  log_level=$LOG_LEVEL"
           echo "  outputs_root=$CG_OUTPUTS_ROOT"
 
-          python -m agent_engine.content_gap_agent.indexer.cli \
+          python -m agent_engine.content_indexer_agent.cli \
             --log-level "$LOG_LEVEL" \
             run \
             --brand "$BRAND" \
