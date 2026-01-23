@@ -184,8 +184,8 @@ jobs:
           echo "  outputs_root=$CG_OUTPUTS_ROOT"
 
           # Preferred: call the module directly (robust even if console scripts aren't installed).
-          # Replace `agent_engine.content_indexing_agent.cli` with your actual module path if different.
-          python -m agent_engine.content_indexing_agent.cli \
+          # Replace `agent_engine.content_indexer_agent.cli` with your actual module path if different.
+          python -m agent_engine.content_indexer_agent.cli \
             --log-level "$LOG_LEVEL" \
             run \
             --brand "$BRAND" \
