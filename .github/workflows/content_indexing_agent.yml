@@ -101,31 +101,50 @@ on:
           - WARNING
           - ERROR
 
+permissions:
+  contents: write
+
 jobs:
   run-indexer:
     runs-on: ubuntu-latest
     timeout-minutes: 60
 
-    permissions:
-      contents: read
-
     env:
-      # Common env defaults (adjust to your project conventions)
       CG_REPO_ROOT: ${{ github.workspace }}
       CG_OUTPUTS_ROOT: ${{ github.workspace }}/outputs
 
-      # Required by your CLI callback (you log its presence).
-      # Put it in repo secrets: Settings > Secrets and variables > Actions
+      # Prevent interactive git prompts in CI
+      GIT_TERMINAL_PROMPT: "0"
+
+      # Used by your CLI callback (you log its presence).
       PROFESSIONALIZE_API_KEY: ${{ secrets.PROFESSIONALIZE_API_KEY }}
 
-      # Very likely needed if normalize_topics=true or use_agent=true
+      # Needed if normalize_topics=true or use_agent=true
       OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
 
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      # Token used to clone private Aspose org repos (PAT with appropriate access)
+      # Create in repo secrets: ASPOSE_BLOG_TOKEN
+      ASPOSE_BLOG_TOKEN: ${{ secrets.ASPOSE_BLOG_TOKEN }}
 
-      - name: Setup Python
+    steps:
+      - name: Checkout this repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          # Keep GITHUB_TOKEN credentials so we can push commits back
+          persist-credentials: true
+
+      - name: Configure git auth for cloning Aspose org repos (private-safe)
+        if: ${{ env.ASPOSE_BLOG_TOKEN != '' }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          # Scope token rewrite ONLY to Aspose org repos, so pushing to origin still uses GITHUB_TOKEN.
+          git config --global url."https://x-access-token:${ASPOSE_BLOG_TOKEN}@github.com/Aspose/".insteadOf "https://github.com/Aspose/"
+          git config --global advice.detachedHead false
+          git --version
+
+      - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
@@ -134,14 +153,14 @@ jobs:
       - name: Install dependencies
         shell: bash
         run: |
+          set -euo pipefail
           python -m pip install --upgrade pip
           if [ -f requirements.txt ]; then
             pip install -r requirements.txt
           elif [ -f pyproject.toml ]; then
-            # Works if your project is installable as a package
             pip install -e .
           else
-            echo "No requirements.txt or pyproject.toml found. Please add one."
+            echo "No requirements.txt or pyproject.toml found. Add one for CI installs."
             exit 1
           fi
 
@@ -156,7 +175,6 @@ jobs:
           STEPS="${{ inputs.steps }}"
           LOG_LEVEL="${{ inputs.log_level }}"
 
-          # Map booleans to CLI flags
           DELETE_FLAG=""
           if [ "${{ inputs.delete_missing }}" = "true" ]; then
             DELETE_FLAG="--delete-missing"
@@ -183,9 +201,7 @@ jobs:
           echo "  log_level=$LOG_LEVEL"
           echo "  outputs_root=$CG_OUTPUTS_ROOT"
 
-          # Preferred: call the module directly (robust even if console scripts aren't installed).
-          # Replace `agent_engine.content_indexer_agent.cli` with your actual module path if different.
-          python -m agent_engine.content_indexer_agent.cli \
+          python -m agent_engine.content_gap_agent.indexer.cli \
             --log-level "$LOG_LEVEL" \
             run \
             --brand "$BRAND" \
@@ -195,6 +211,29 @@ jobs:
             $DELETE_FLAG \
             $AGENT_FLAG \
             $NORMALIZE_FLAG
+
+      - name: Commit and push outputs back to repo (exclude outputs/_repos)
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          # Safety: ensure _repos is never staged (in case something else added it)
+          git reset -q outputs/_repos || true
+          git restore --staged outputs/_repos 2>/dev/null || true
+
+          # No changes => nothing to commit
+          if git diff --cached --quiet; then
+            echo "No output changes to commit (excluding outputs/_repos)."
+            exit 0
+          fi
+
+          MSG="Update indexing outputs: platform=${{ inputs.platform }}, steps=${{ inputs.steps }}, product=${{ inputs.product_yaml }} (run $GITHUB_RUN_ID)"
+          git commit -m "$MSG"
+          git push
+      
 
       - name: Upload outputs artifact
         if: always()
