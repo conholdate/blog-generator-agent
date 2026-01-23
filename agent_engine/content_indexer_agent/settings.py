@@ -11,9 +11,9 @@ class Settings:
     # Read env at INSTANCE creation time (not import time)
     PROFESSIONALIZE_API_KEY: Optional[str] = field(default_factory=lambda: os.getenv("PROFESSIONALIZE_API_KEY"))
     PROFESSIONALIZE_BASE_URL: Optional[str] = field(default_factory=lambda: os.getenv("PROFESSIONALIZE_BASE_URL"))
-    PROFESSIONALIZE_LLM_MODEL: str = field(default_factory=lambda: os.getenv("PROFESSIONALIZE_LLM_MODEL", "gpt-5.2"))
+    PROFESSIONALIZE_LLM_MODEL: str = field(default_factory=lambda: os.getenv("PROFESSIONALIZE_LLM_MODEL", "gpt-oss"))
     PROFESSIONALIZE_EMBEDDING_MODEL: str = field(
-        default_factory=lambda: os.getenv("PROFESSIONALIZE_EMBEDDING_MODEL", "text-embedding-3-large")
+        default_factory=lambda: os.getenv("PROFESSIONALIZE_EMBEDDING_MODEL", "qwen3-embedding-8b")
     )
 
     # Local dev fallback

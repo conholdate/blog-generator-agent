@@ -15,36 +15,36 @@ on:
           - configs/conholdate.yaml
 
       product_yaml:
-        description: "Path to product YAML (repo-relative), e.g. configs/products/cells.yaml"
+        description: "Path to product YAML (repo-relative), e.g. configs/aspose/cells.yaml"
         required: true
-        default: "configs/products/cells.yaml"
+        default: "configs/aspose/cells.yaml"
         type: choice
         options:
-          - configs/products/cells.yaml
-          - configs/products/words.yaml
-          - configs/products/pdf.yaml
-          - configs/products/slides.yaml
-          - configs/products/imaging.yaml
-          - configs/products/barcode.yaml
-          - configs/products/email.yaml
-          - configs/products/tasks.yaml
-          - configs/products/cad.yaml
-          - configs/products/diagram.yaml
-          - configs/products/note.yaml
-          - configs/products/3d.yaml
-          - configs/products/html.yaml
-          - configs/products/zip.yaml
-          - configs/products/ocr.yaml
-          - configs/products/omr.yaml
-          - configs/products/svg.yaml
-          - configs/products/gis.yaml
-          - configs/products/tex.yaml
-          - configs/products/page.yaml
-          - configs/products/font.yaml
-          - configs/products/psd.yaml
-          - configs/products/pub.yaml
-          - configs/products/drawing.yaml
-          - configs/products/finance.yaml
+          - configs/aspose/cells.yaml
+          - configs/aspose/words.yaml
+          - configs/aspose/pdf.yaml
+          - configs/aspose/slides.yaml
+          - configs/aspose/imaging.yaml
+          - configs/aspose/barcode.yaml
+          - configs/aspose/email.yaml
+          - configs/aspose/tasks.yaml
+          - configs/aspose/cad.yaml
+          - configs/aspose/diagram.yaml
+          - configs/aspose/note.yaml
+          - configs/aspose/3d.yaml
+          - configs/aspose/html.yaml
+          - configs/aspose/zip.yaml
+          - configs/aspose/ocr.yaml
+          - configs/aspose/omr.yaml
+          - configs/aspose/svg.yaml
+          - configs/aspose/gis.yaml
+          - configs/aspose/tex.yaml
+          - configs/aspose/page.yaml
+          - configs/aspose/font.yaml
+          - configs/aspose/psd.yaml
+          - configs/aspose/pub.yaml
+          - configs/aspose/drawing.yaml
+          - configs/aspose/finance.yaml
 
       platform:
         description: "Target platform (1 platform per run)"
