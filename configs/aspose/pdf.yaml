@@ -1,0 +1,68 @@
+blog: aspose
+key: pdf
+
+# Reusable platform definitions
+platform_definitions:
+  net:
+    display_name: ".NET"
+    keywords: ["c#", "csharp", ".net", "dotnet", "vb.net", "visual basic"]
+
+  java:
+    display_name: "Java"
+    keywords: ["java", "j2se", "j2ee", "jsp"]
+
+  cpp:
+    display_name: "C++"
+    keywords: ["cpp", "c++", "cplusplus"]
+
+  android:
+    display_name: "Android via Java"
+    keywords: ["android", "android java"]
+
+  python_net:
+    display_name: "Python via .NET"
+    keywords: ["python-net", "python .net", "python for .net", "python via .net", "pythonnet"]
+
+  nodejs:
+    display_name: "Node.js via Java"
+    keywords: ["nodejs", "node.js"]
+
+# Product: Aspose.PDF
+display_name: "Aspose.PDF"
+description: "PDF document manipulation and conversion APIs"
+enabled: true
+
+# Common repo URLs for all platforms
+doc_repo: "https://github.com/aspose-pdf/Aspose.PDF-Documentation.git"
+doc_branch: "master"
+api_repo: "https://github.com/aspose-pdf/Aspose.PDF-API-References.git"
+api_branch: "main"
+tut_repo: "https://github.com/aspose-pdf/Aspose-PDF-Tutorials.git"
+tut_branch: "main"
+
+platforms:
+  - net:
+      definition: net
+      doc_path: "en/net"
+      api_path: "english/net"
+      tut_path: "pdf/english/net"
+      enabled: true
+
+  - java:
+      definition: java
+      doc_path: "en/java"
+      api_path: "english/java"
+      tut_path: "pdf/english/java"
+      enabled: true
+
+  - python_net:
+      definition: python_net
+      doc_path: "en/python-net"
+      api_path: "english/python-net"
+      enabled: true
+
+  - cpp:
+      definition: cpp
+      doc_path: "en/cpp"
+      api_path: "english/cpp"
+      enabled: false  # Enable when needed
