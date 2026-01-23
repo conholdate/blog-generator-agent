@@ -10,3 +10,4 @@ __pycache__/
 .env
 /.bta_state
 /repo_cache
+/outputs/_repos
