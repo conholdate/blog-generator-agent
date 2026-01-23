@@ -10,7 +10,7 @@ on:
         default: "configs/aspose.yaml"
         type: choice
         options:
-          - configs/blogs.yaml
+          - configs/aspose.yaml
           - configs/groupdocs.yaml
           - configs/conholdate.yaml
 
