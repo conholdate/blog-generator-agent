@@ -1,0 +1,87 @@
+# Aspose.Words
+blog: aspose
+key: words
+# Reusable platform definitions
+platform_definitions:
+  net:
+    display_name: ".NET"
+    keywords: ["c#", "csharp", ".net", "dotnet", "vb.net", "visual basic"]
+
+  java:
+    display_name: "Java"
+    keywords: ["java", "j2se", "j2ee", "jsp"]
+
+  python_net:
+    display_name: "Python via .NET"
+    keywords: ["python", "python-net", "py", "python .net"]
+
+  cpp:
+    display_name: "C++"
+    keywords: ["cpp", "c++", "cplusplus"]
+
+  android:
+    display_name: "Android via Java"
+    keywords: ["android", "android java"]
+
+  nodejs:
+    display_name: "Node.js via .NET"
+    keywords: ["nodejs", "node.js", "javascript"]
+
+# Product: Aspose.Words
+display_name: "Aspose.Words"
+description: "Word document processing, manipulation, rendering, and conversion APIs"
+enabled: true
+
+# Common repo URLs for all platforms
+# NOTE: Aspose.Words documentation repo is archived but still usable as a content source.
+doc_repo: "https://github.com/aspose-words/Aspose.Words-Documentation.git"
+doc_branch: "master"
+
+api_repo: "https://github.com/aspose-words/Aspose.Words-API-References.git"
+api_branch: "main"
+
+tut_repo: "https://github.com/aspose-words/Aspose-Words-Tutorials.git"
+tut_branch: "main"
+
+platforms:
+  - net:
+      definition: net
+      doc_path: "en/net"
+      api_path: "english/net"
+      tut_path: "words/english/net"
+      enabled: true
+
+  - java:
+      definition: java
+      doc_path: "en/java"
+      api_path: "english/java"
+      tut_path: "words/english/java"
+      enabled: true
+
+  - python_net:
+      definition: python_net
+      doc_path: "en/python-via-net"
+      api_path: "english/python-via-net"
+      tut_path: "words/english/python-via-net"
+      enabled: true
+
+  - cpp:
+      definition: cpp
+      doc_path: "en/cpp"
+      api_path: "english/cpp"
+      tut_path: "words/english/cpp"
+      enabled: false  # Enable when needed
+
+  - android:
+      definition: android
+      doc_path: "en/androidviajava"
+      api_path: "english/androidviajava"
+      tut_path: "words/english/androidviajava"
+      enabled: false  # Enable when needed
+
+  - nodejs:
+      definition: nodejs
+      doc_path: "en/nodejs-via-net"
+      api_path: "english/nodejs-via-net"
+      tut_path: "words/english/nodejs-via-net"
+      enabled: false  # Enable when needed

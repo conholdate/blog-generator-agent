@@ -1,0 +1,21 @@
+key: aspose
+display_name: Aspose
+website: https://blog.aspose.com
+enabled: true
+
+# outputs_root: outputs  # optional; can be absolute too
+
+search_patterns:
+  - "aspose.{product}"
+  - "{product} for {platform}"
+  - "aspose {product}"
+
+repositories:
+  - repo_key: "blog"
+    repo_type: "blog"
+    repo_url: "https://github.com/Aspose/aspose-blog.git"
+    branch: "master"
+    scope: "all"
+    root_subdir: "content/Aspose.Blog"
+    include_globs:
+      - "**/index.md"

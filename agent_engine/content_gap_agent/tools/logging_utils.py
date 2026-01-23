@@ -1,0 +1,15 @@
+from __future__ import annotations
+
+import logging
+
+
+def get_logger(name: str = "cg-cover") -> logging.Logger:
+    logger = logging.getLogger(name)
+    if not logger.handlers:
+        handler = logging.StreamHandler()
+        fmt = "%(asctime)s | %(levelname)s | %(name)s | %(message)s"
+        handler.setFormatter(logging.Formatter(fmt))
+        logger.addHandler(handler)
+        logger.setLevel(logging.INFO)
+        logger.propagate = False
+    return logger
