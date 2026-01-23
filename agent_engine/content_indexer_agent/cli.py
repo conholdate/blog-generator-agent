@@ -33,12 +33,16 @@ def _configure_logging(level: Optional[str]) -> None:
 
 @app.callback()
 def _main(log_level: Optional[str] = typer.Option(None, "--log-level", "-l")) -> None:
+    import os
+
     load_dotenv()  # loads .env into os.environ
     _configure_logging(log_level)
 
-    import os
     log.info("CLI started")
+    log.info("PROFESSIONALIZE_BASE_URL set: %s", os.getenv("PROFESSIONALIZE_BASE_URL"))
     log.info("PROFESSIONALIZE_API_KEY set: %s", bool(os.getenv("PROFESSIONALIZE_API_KEY")))
+    log.info("OPENAI_BASE_URL set: %s", os.getenv("OPENAI_BASE_URL"))
+    log.info("OPENAI_API_KEY  set: %s", bool(os.getenv("OPENAI_API_KEY ")))
 
 
 def _pick(msg: str, options: list[str]) -> str:
