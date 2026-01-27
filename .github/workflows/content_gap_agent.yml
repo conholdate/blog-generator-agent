@@ -1,0 +1,260 @@
+name: Content Gap Coverage
+
+on:
+  workflow_dispatch:
+    inputs:
+      brand_yaml:
+        description: "Path to brand YAML (e.g., configs/aspose.yaml)"
+        required: true
+        default: "configs/aspose.yaml"
+        type: choice
+        options:
+          - configs/aspose.yaml
+          - configs/groupdocs.yaml
+          - configs/conholdate.yaml
+
+
+      product_yaml:
+        description: "Path to product YAML (e.g., configs/aspose/cells.yaml)"
+        required: true
+        default: "configs/aspose/cells.yaml"
+        type: choice
+        options:
+          - configs/aspose/cells.yaml
+          - configs/aspose/words.yaml
+          - configs/aspose/pdf.yaml
+          - configs/aspose/slides.yaml
+          - configs/aspose/imaging.yaml
+          - configs/aspose/barcode.yaml
+          - configs/aspose/email.yaml
+          - configs/aspose/tasks.yaml
+          - configs/aspose/cad.yaml
+          - configs/aspose/diagram.yaml
+          - configs/aspose/note.yaml
+          - configs/aspose/3d.yaml
+          - configs/aspose/html.yaml
+          - configs/aspose/zip.yaml
+          - configs/aspose/ocr.yaml
+          - configs/aspose/omr.yaml
+          - configs/aspose/svg.yaml
+          - configs/aspose/gis.yaml
+          - configs/aspose/tex.yaml
+          - configs/aspose/page.yaml
+          - configs/aspose/font.yaml
+          - configs/aspose/psd.yaml
+          - configs/aspose/pub.yaml
+          - configs/aspose/drawing.yaml
+          - configs/aspose/finance.yaml
+
+
+      case:
+        description: "Coverage case"
+        required: true
+        type: choice
+        options:
+          - blogs_to_blogs
+          - docs_to_blogs
+          - docs_to_tutorials
+        default: "blogs_to_blogs"
+
+      platform:
+        description: "Baseline platform (required for docs_to_*). Example: net"
+        required: false
+        type: string
+        default: ""
+
+      threshold_strict:
+        description: "Strict threshold"
+        required: true
+        type: string
+        default: "0.86"
+
+      threshold_loose:
+        description: "Loose threshold"
+        required: true
+        type: string
+        default: "0.80"
+
+      top_k:
+        description: "Top-K matches"
+        required: true
+        type: string
+        default: "5"
+
+      platforms:
+        description: "Optional comma-separated platform limit (blogs_to_blogs). Example: net,java,python"
+        required: false
+        type: string
+        default: ""
+
+      no_embeddings:
+        description: "Force lexical-only fallback"
+        required: false
+        type: boolean
+        default: false
+
+      python_version:
+        description: "Python version"
+        required: true
+        type: string
+        default: "3.11"
+
+      push_results:
+        description: "Commit & push generated outputs back to repo"
+        required: false
+        type: boolean
+        default: false
+
+      commit_message:
+        description: "Commit message (if push_results=true)"
+        required: false
+        type: string
+        default: "chore: update cg-cover outputs"
+
+jobs:
+  run-cg-cover:
+    runs-on: ubuntu-latest
+
+    # Needed only if you enable pushing; safe to keep always.
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ inputs.python_version }}
+          cache: "pip"
+
+      - name: Install dependencies
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install --upgrade pip
+
+          # Prefer editable install if pyproject exists; otherwise fallback to requirements.txt.
+          if [ -f pyproject.toml ]; then
+            pip install -e .
+          elif [ -f requirements.txt ]; then
+            pip install -r requirements.txt
+          else
+            echo "ERROR: Neither pyproject.toml nor requirements.txt found. Add one to install dependencies."
+            exit 1
+          fi
+
+      - name: Resolve CG_OUTPUTS_ROOT from brand yaml
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          BRAND_YAML="${{ inputs.brand_yaml }}"
+          python - << 'PY'
+          import os
+          from pathlib import Path
+          import yaml
+
+          brand_yaml = Path(os.environ["BRAND_YAML"])
+          data = yaml.safe_load(brand_yaml.read_text(encoding="utf-8"))
+          raw = (data.get("outputs_root") or "outputs")
+          p = Path(str(raw))
+          if not p.is_absolute():
+            p = (brand_yaml.parent / p).resolve()
+
+          # Export for subsequent steps
+          print(f"CG_OUTPUTS_ROOT={p}")
+          PY
+        env:
+          BRAND_YAML: ${{ inputs.brand_yaml }}
+
+      - name: Export env vars
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          BRAND_YAML="${{ inputs.brand_yaml }}"
+          # Write CG_OUTPUTS_ROOT to GITHUB_ENV for later steps
+          python - << 'PY' >> "$GITHUB_ENV"
+          import os
+          from pathlib import Path
+          import yaml
+
+          brand_yaml = Path(os.environ["BRAND_YAML"])
+          data = yaml.safe_load(brand_yaml.read_text(encoding="utf-8"))
+          raw = (data.get("outputs_root") or "outputs")
+          p = Path(str(raw))
+          if not p.is_absolute():
+            p = (brand_yaml.parent / p).resolve()
+
+          print(f"CG_OUTPUTS_ROOT={p}")
+          # Optional but sometimes helpful:
+          print(f"CG_REPO_ROOT={Path.cwd().resolve()}")
+          PY
+        env:
+          BRAND_YAML: ${{ inputs.brand_yaml }}
+
+      - name: Run cg-cover
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          ARGS=(run
+            --brand "${{ inputs.brand_yaml }}"
+            --product "${{ inputs.product_yaml }}"
+            --case "${{ inputs.case }}"
+            --threshold-strict "${{ inputs.threshold_strict }}"
+            --threshold-loose "${{ inputs.threshold_loose }}"
+            --top-k "${{ inputs.top_k }}"
+          )
+
+          # --platform is required by your CLI for docs_to_* cases
+          if [ -n "${{ inputs.platform }}" ]; then
+            ARGS+=(--platform "${{ inputs.platform }}")
+          fi
+
+          if [ -n "${{ inputs.platforms }}" ]; then
+            ARGS+=(--platforms "${{ inputs.platforms }}")
+          fi
+
+          if [ "${{ inputs.no_embeddings }}" = "true" ]; then
+            ARGS+=(--no-embeddings)
+          fi
+
+          # Run via module to avoid relying on console-script installation
+          python -m agent_engine.content_gap_agent.cli "${ARGS[@]}"
+
+      - name: Upload outputs as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: cg-cover-outputs
+          path: ${{ env.CG_OUTPUTS_ROOT }}
+          if-no-files-found: error
+
+      - name: Commit & push outputs (optional)
+        if: ${{ inputs.push_results }}
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          # Never commit cloned repos
+          if [ -d "${CG_OUTPUTS_ROOT}/_repos" ]; then
+            rm -rf "${CG_OUTPUTS_ROOT}/_repos"
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          # Only add the outputs root contents (after removing _repos)
+          git add "${CG_OUTPUTS_ROOT}"
+
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+            exit 0
+          fi
+
+          git commit -m "${{ inputs.commit_message }}"
+          git push
