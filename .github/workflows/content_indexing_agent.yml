@@ -212,19 +212,37 @@ jobs:
             $AGENT_FLAG \
             $NORMALIZE_FLAG
 
+
+      - name: "Debug: show outputs and git status"
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo "== outputs tree (top levels) =="
+          ls -la outputs || true
+          echo "== outputs/aspose tree (depth 3) =="
+          find outputs/aspose -maxdepth 3 -type d -print 2>/dev/null || true
+          echo "== count files in outputs/aspose =="
+          find outputs/aspose -type f 2>/dev/null | wc -l || true
+          echo "== git status =="
+          git status --porcelain=v1 || true
+          echo "== git ignored in outputs/aspose (sample) =="
+          git check-ignore -v outputs/aspose 2>/dev/null || true
+
       - name: Commit and push outputs back to repo (exclude outputs/_repos)
         shell: bash
         run: |
           set -euo pipefail
-
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-          # Safety: ensure _repos is never staged (in case something else added it)
+          # Stage all outputs
+          git add outputs || true
+
+          # Ensure cloned repos cache is never committed
           git reset -q outputs/_repos || true
           git restore --staged outputs/_repos 2>/dev/null || true
 
-          # No changes => nothing to commit
           if git diff --cached --quiet; then
             echo "No output changes to commit (excluding outputs/_repos)."
             exit 0
@@ -233,7 +251,6 @@ jobs:
           MSG="Update indexing outputs: platform=${{ inputs.platform }}, steps=${{ inputs.steps }}, product=${{ inputs.product_yaml }} (run $GITHUB_RUN_ID)"
           git commit -m "$MSG"
           git push
-      
 
       - name: Upload outputs artifact
         if: always()
