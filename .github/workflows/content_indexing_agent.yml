@@ -164,6 +164,17 @@ jobs:
             exit 1
           fi
 
+      - name: Restore SQLite Cache
+        uses: actions/cache@v4
+        with:
+          # This matches the path where your agent creates the database
+          path: "**/cache/*.sqlite"
+          # The key changes every run so GitHub saves the updated DB at the end
+          key: ${{ runner.os }}-sqlite-${{ github.run_id }}
+          # If no exact match, grab the most recent cache starting with this prefix
+          restore-keys: |
+            ${{ runner.os }}-sqlite-
+
       - name: Run Content Indexing Agent
         shell: bash
         run: |
@@ -229,29 +240,32 @@ jobs:
           echo "== git ignored in outputs/aspose (sample) =="
           git check-ignore -v outputs/aspose 2>/dev/null || true
 
-      - name: Commit and push outputs back to repo (exclude outputs/_repos)
+      - name: Commit and push outputs back to repo (exclude outputs/_repos and sqlite)
         shell: bash
         run: |
           set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-
-          # Stage all outputs
+          
+          # 1. Stage all outputs
           git add outputs || true
-
-          # Ensure cloned repos cache is never committed
+          
+          # 2. UNSTAGE the heavy files (cloned repos AND sqlite cache)
           git reset -q outputs/_repos || true
+          # This line finds any .sqlite files staged and removes them from the commit
+          find outputs -name "*.sqlite" -exec git reset -q {} + || true
+          
+          # 3. Clean up the working directory for those files so git diff is clean
           git restore --staged outputs/_repos 2>/dev/null || true
-
+          
           if git diff --cached --quiet; then
-            echo "No output changes to commit (excluding outputs/_repos)."
+            echo "No output changes to commit (excluding repos and sqlite)."
             exit 0
           fi
-
+          
           MSG="Update indexing outputs: platform=${{ inputs.platform }}, steps=${{ inputs.steps }}, product=${{ inputs.product_yaml }} (run $GITHUB_RUN_ID)"
           git commit -m "$MSG"
           git push
-
       - name: Upload outputs artifact
         if: always()
         uses: actions/upload-artifact@v4
