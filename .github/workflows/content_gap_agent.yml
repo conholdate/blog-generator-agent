@@ -61,7 +61,7 @@ on:
         description: "Baseline platform (required for docs_to_*). Example: net"
         required: false
         type: string
-        default: ""
+        default: "net"
 
       threshold_strict:
         description: "Strict threshold"
@@ -103,7 +103,7 @@ on:
         description: "Commit & push generated outputs back to repo"
         required: false
         type: boolean
-        default: false
+        default: true
 
       commit_message:
         description: "Commit message (if push_results=true)"

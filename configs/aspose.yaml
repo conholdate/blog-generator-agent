@@ -19,3 +19,5 @@ repositories:
     root_subdir: "content/Aspose.Blog"
     include_globs:
       - "**/index.md"
+
+outputs_root: ../outputs
