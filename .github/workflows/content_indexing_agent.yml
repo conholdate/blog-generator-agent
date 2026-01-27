@@ -107,7 +107,7 @@ permissions:
 jobs:
   run-indexer:
     runs-on: ubuntu-latest
-    timeout-minutes: 60
+    timeout-minutes: 360
 
     env:
       CG_REPO_ROOT: ${{ github.workspace }}
