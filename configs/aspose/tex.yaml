@@ -1,0 +1,65 @@
+# Aspose.TeX
+blog: aspose
+
+# Reusable platform definitions
+platform_definitions:
+  net:
+    display_name: ".NET"
+    keywords: ["c#", "csharp", ".net", "dotnet", "vb.net", "visual basic"]
+
+  java:
+    display_name: "Java"
+    keywords: ["java", "j2se", "j2ee", "jsp"]
+
+  cpp:
+    display_name: "C++"
+    keywords: ["cpp", "c++", "cplusplus"]
+
+  python_net:
+    display_name: "Python via .NET"
+    keywords: ["python", "python-net", "py", "python .net", "python via .net"]
+
+# Product: Aspose.TeX
+display_name: "Aspose.TeX"
+description: "TeX/LaTeX typesetting and conversion APIs (PDF/XPS/SVG/images)"
+enabled: true
+
+# Common repo URLs for all platforms
+doc_repo: "https://github.com/aspose-tex/Aspose.TeX-Documentation.git"
+doc_branch: "master"
+
+api_repo: "https://github.com/aspose-tex/Aspose.TeX-API-References.git"
+api_branch: "master"
+
+tut_repo: "https://github.com/aspose-tex/Aspose.TeX-Reference-Tutorials.git"
+tut_branch: "main"
+
+platforms:
+  - net:
+      definition: net
+      doc_path: "net"
+      api_path: "english/net"
+      tut_path: "tex/english/net"
+      enabled: true
+
+  - java:
+      definition: java
+      doc_path: "java"
+      api_path: "english/java"
+      tut_path: "tex/english/java"
+      enabled: true
+
+  - cpp:
+      definition: cpp
+      doc_path: "cpp"
+      api_path: "english/cpp"
+      tut_path: "tex"
+      enabled: true
+
+  - python_net:
+      definition: python_net
+      # Docs repo appears to be organized by net/java/cpp; Python-via-.NET typically maps to .NET docs.
+      doc_path: "net"
+      api_path: "english/net"
+      tut_path: "tex"
+      enabled: true
