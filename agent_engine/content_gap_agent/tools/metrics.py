@@ -102,28 +102,28 @@ class MetricsSender:
         try:
             log.info("Metrics payload (about to send):\n%s", json.dumps(data, ensure_ascii=False, indent=2))
             # Aspose Metrics
-            # resp1 = requests.post(
-            #     self.webhook_url,
-            #     params={"token": self.token},
-            #     headers={"Content-Type": "application/json"},
-            #     data=json.dumps(data, ensure_ascii=False),
-            #     timeout=self.timeout_s,
-            # )
-            #
-            # print("[metrics] response status =", resp1.status_code)
-            # print("[metrics] response text =", resp1.text[:500])
-            #
-            # # Blog metrics
-            # resp2 = requests.post(
-            #     self.int_webhook_url,
-            #     params={"token": self.int_token},
-            #     headers={"Content-Type": "application/json"},
-            #     data=json.dumps(data, ensure_ascii=False),
-            #     timeout=self.timeout_s,
-            # )
-            #
-            # print("[metrics] response status =", resp2.status_code)
-            # print("[metrics] response text =", resp2.text[:500])
+            resp1 = requests.post(
+                self.webhook_url,
+                params={"token": self.token},
+                headers={"Content-Type": "application/json"},
+                data=json.dumps(data, ensure_ascii=False),
+                timeout=self.timeout_s,
+            )
+
+            print("[metrics] response status =", resp1.status_code)
+            print("[metrics] response text =", resp1.text[:500])
+
+            # Blog metrics
+            resp2 = requests.post(
+                self.int_webhook_url,
+                params={"token": self.int_token},
+                headers={"Content-Type": "application/json"},
+                data=json.dumps(data, ensure_ascii=False),
+                timeout=self.timeout_s,
+            )
+
+            print("[metrics] response status =", resp2.status_code)
+            print("[metrics] response text =", resp2.text[:500])
 
         except Exception as e:
             print("[metrics] send failed:", repr(e))
