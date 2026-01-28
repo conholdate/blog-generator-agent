@@ -923,14 +923,14 @@ def main() -> None:
         if not records:
             print("⚠️ SerpAPI returned no keywords (or failed); trying LLM fallback...")
 
-            key_gen_req = LLMKeywordGenRequest(
-                topic=topic,
-                product=args.product,
-                platform=_platform,
-                locale=args.locale,
-                max_keywords=min(args.max_rows, 200),
-            )
-            records = fetch_llm_keywords(key_gen_req)
+        key_gen_req = LLMKeywordGenRequest(
+            topic=topic,
+            product=args.product,
+            platform=_platform,
+            locale=args.locale,
+            max_keywords=min(args.max_rows, 200),
+        )
+        records = fetch_llm_keywords(key_gen_req)
 
         if not records:
             print("❌ No keywords produced by SerpAPI or LLM fallback; exiting.")
