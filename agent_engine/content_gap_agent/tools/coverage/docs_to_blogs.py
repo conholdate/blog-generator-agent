@@ -15,17 +15,65 @@ from .blogs_to_blogs import infer_platforms
 logger = get_logger("cg-cover.coverage.docs_to_blogs")
 
 
-def _dedupe_baseline_docs(records: List[IndexRecord]) -> List[IndexRecord]:
+# Common platform tokens that may appear in "Title | Platform" style doc headers.
+# normalize_text(".NET") typically becomes "net", so we include both forms here.
+_PLATFORM_TOKENS: set[str] = {
+    "net",
+    ".net",
+    "dotnet",
+    "java",
+    "python",
+    "cpp",
+    "c++",
+    "cplusplus",
+    "c#",
+    "csharp",
+    "node",
+    "nodejs",
+    "node.js",
+    "javascript",
+    "js",
+    "android",
+    "ios",
+}
+
+
+def _strip_platform_suffix(text: str, baseline_platform_n: str) -> str:
+    """
+    Strip a trailing ' | <platform>' suffix from titles/topics, e.g.
+
+      'Developer Guide | .NET' -> 'Developer Guide'
+
+    Only strips if the right-hand side looks like a platform token OR matches the
+    provided baseline platform. This prevents accidental stripping for legitimate
+    titles that contain pipes for other reasons.
+    """
+    s = (text or "").strip()
+    if " | " not in s:
+        return s
+
+    left, right = s.rsplit(" | ", 1)
+    rhs_n = normalize_text(right)
+
+    # rhs_n could be "", so guard it.
+    if rhs_n and (rhs_n == baseline_platform_n or rhs_n in _PLATFORM_TOKENS):
+        return left.strip()
+
+    return s
+
+
+def _dedupe_baseline_docs(records: List[IndexRecord], baseline_platform_n: str) -> List[IndexRecord]:
     """
     De-dupe baseline docs by a stable topic key.
     Preference order:
-      1) normalized topic/title
+      1) normalized (stripped) topic/title
       2) normalized id
     Keeps the first occurrence.
     """
     out: Dict[str, IndexRecord] = {}
     for r in records:
-        topic_text = (r.topic or r.title or "").strip()
+        raw_topic = (r.topic or r.title or "").strip()
+        topic_text = _strip_platform_suffix(raw_topic, baseline_platform_n)
         topic_key = normalize_text(topic_text) or normalize_text(r.id) or ""
         if not topic_key:
             continue
@@ -46,12 +94,17 @@ def compute_docs_to_blogs(
       - Load docs/{baseline_platform}.jsonl as baseline (required)
       - Load blog/all.jsonl as candidates grouped by inferred blog platforms
       - For each baseline docs topic, match into each blog platform subset using lexical_fast_match
+
+    IMPORTANT:
+      Some docs titles are shaped like 'Topic | .NET'. That pipe breaks Markdown tables.
+      This function strips a trailing ' | <platform>' suffix (when it looks like a platform)
+      before dedupe/matching/reporting.
     """
     t0 = perf_counter()
 
     baseline_platform_n = normalize_text(baseline_platform or "")
     if not baseline_platform_n:
-        raise ValueError("docs_to_blogs requires baseline_platform (e.g., net, java).")
+        raise ValueError("docs_to_blogs requires baseline_platform (e.g. net, java).")
 
     indexes_root = outputs_product_root / "indexes"
     docs_path = indexes_root / "docs" / f"{baseline_platform_n}.jsonl"
@@ -85,7 +138,7 @@ def compute_docs_to_blogs(
         if not rp or rp == baseline_platform_n:
             baseline_docs.append(r)
 
-    baseline_items = _dedupe_baseline_docs(baseline_docs)
+    baseline_items = _dedupe_baseline_docs(baseline_docs, baseline_platform_n)
     logger.info(
         "Baseline docs selected: baseline_platform=%s records=%d unique_topics=%d",
         baseline_platform_n,
@@ -155,13 +208,17 @@ def compute_docs_to_blogs(
     )
 
     for i, d in enumerate(baseline_items, start=1):
-        topic_text = (d.topic or d.title or "").strip()
+        raw_topic = (d.topic or d.title or "").strip()
+        topic_text = _strip_platform_suffix(raw_topic, baseline_platform_n)
         topic_key = normalize_text(topic_text) or normalize_text(d.id) or ""
 
         cat = str(d.category or "General")
         sub = str(d.sub_category or "General")
 
         row_cov: Dict[str, Dict[str, object]] = {}
+
+        # Use stripped baseline text for matching
+        base_text = topic_text
 
         for p in platforms:
             best: Dict[str, object] = {
@@ -177,8 +234,6 @@ def compute_docs_to_blogs(
             if not candidates:
                 row_cov[p] = best
                 continue
-
-            base_text = (d.topic or d.title or "").strip()
 
             for c in candidates:
                 cand_text = (c.topic or c.title or "").strip()
@@ -202,7 +257,7 @@ def compute_docs_to_blogs(
             CoverageRow(
                 category=cat,
                 sub_category=sub,
-                topic=topic_text,
+                topic=topic_text,  # IMPORTANT: no pipe → markdown-safe topic cell
                 topic_key=topic_key,
                 baseline_record_id=d.id,
                 coverage=row_cov,

@@ -313,6 +313,8 @@ def write_topics_markdown(
     Write a Markdown file with the generated topics for this run.
     Example: <runid>_<product>_<platform>_topics.md
     """
+    from collections.abc import Mapping  # local import to avoid touching global imports
+
     # Respect the caller-provided output_dir (workflow sets KRA_OUTPUT_DIR)
     output_dir.mkdir(parents=True, exist_ok=True)
 
@@ -336,14 +338,38 @@ def write_topics_markdown(
     lines.append("---")
     lines.append("")
 
+    def _to_mapping(obj: Any) -> Dict[str, Any]:
+        """Support dict topics + Pydantic v1/v2 models."""
+        if isinstance(obj, Mapping):
+            return dict(obj)
+        if hasattr(obj, "model_dump"):  # Pydantic v2
+            try:
+                return obj.model_dump()
+            except Exception:
+                return {}
+        if hasattr(obj, "dict"):  # Pydantic v1
+            try:
+                return obj.dict()
+            except Exception:
+                return {}
+        return {}
+
     for idx, t in enumerate(result.topics, start=1):
-        title = getattr(t, "title", None) or t.get("title")
-        cluster_id = getattr(t, "cluster_id", None) or t.get("cluster_id")
-        angle = getattr(t, "angle", None) or t.get("angle")
-        primary_kw = getattr(t, "primary_keyword", None) or t.get("primary_keyword")
-        supporting_kws = getattr(t, "supporting_keywords", None) or t.get("supporting_keywords") or []
-        outline = getattr(t, "outline", None) or t.get("outline") or []
-        persona = getattr(t, "target_persona", None) or t.get("target_persona")
+        data = _to_mapping(t)
+
+        def pick(key: str, default: Any = None) -> Any:
+            v = getattr(t, key, None)
+            if v is not None:
+                return v
+            return data.get(key, default)
+
+        title = pick("title", "") or ""
+        cluster_id = pick("cluster_id")
+        angle = pick("angle")
+        primary_kw = pick("primary_keyword")
+        supporting_kws = pick("supporting_keywords", []) or []
+        outline = pick("outline", []) or []
+        persona = pick("target_persona")
 
         lines.append(f"## {idx}. {title}")
         if cluster_id is not None:
@@ -592,8 +618,23 @@ def run_sync(
             records = preprocess(records)
         metrics.keywords_after_preprocess = len(records)
 
+        # Clamp K to avoid: ValueError: n_samples < n_clusters
         with timed_step(metrics, "cluster"):
-            clusters = cluster_records(records, k=req.clustering_k)
+            n_samples = len(records)
+
+            # Default K if not provided
+            default_k = 10
+            k_requested = req.clustering_k if req.clustering_k is not None else default_k
+
+            if n_samples <= 1:
+                clusters = []
+                if n_samples == 1:
+                    from agent_engine.blog_keyword_analyzer.types import Cluster  # adjust if needed
+                    clusters = [Cluster(cluster_id=0, members=[records[0]])]
+            else:
+                k = min(int(k_requested), n_samples)
+                clusters = cluster_records(records, k=k)
+
         metrics.clusters_created = len(clusters)
 
         clustered_keywords: set[str] = set()
@@ -605,6 +646,7 @@ def run_sync(
         metrics.keywords_not_clustered = max(
             0, metrics.keywords_after_preprocess - metrics.keywords_clustered
         )
+
 
         with timed_step(metrics, "annotate_intent_brand"):
             clusters = annotate_intent_brand(clusters, req.product)
@@ -757,6 +799,7 @@ def run_sync(
             stage=current_stage,
             stage_status="failed",
             req=req,
+            item_name=req.product,
             platform=platform,
             website=website,
             section=section,
@@ -931,7 +974,7 @@ def main() -> None:
             max_keywords=min(args.max_rows, 200),
         )
         records = fetch_llm_keywords(key_gen_req)
-
+        print(records)
         if not records:
             print("❌ No keywords produced by SerpAPI or LLM fallback; exiting.")
             raise SystemExit(1)

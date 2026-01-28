@@ -54,8 +54,8 @@
     {
       "category": "Developer Guide",
       "sub_category": "General",
-      "topic": "Developer Guide | .NET",
-      "topic_key": "developer guide net",
+      "topic": "Developer Guide",
+      "topic_key": "developer guide",
       "baseline_record_id": "docs::net::developer-guide/_index.md",
       "coverage": {
         "general": {
@@ -95,8 +95,8 @@
     {
       "category": "Developer Guide",
       "sub_category": "Advanced Features",
-      "topic": "Advanced Features | .NET",
-      "topic_key": "advanced features net",
+      "topic": "Advanced Features",
+      "topic_key": "advanced features",
       "baseline_record_id": "docs::net::developer-guide/advanced-features/_index.md",
       "coverage": {
         "general": {
@@ -136,8 +136,8 @@
     {
       "category": "Developer Guide",
       "sub_category": "Advanced Features",
-      "topic": "LaTeX Figure rendering | .NET",
-      "topic_key": "latex figure rendering net",
+      "topic": "LaTeX Figure rendering",
+      "topic_key": "latex figure rendering",
       "baseline_record_id": "docs::net::developer-guide/advanced-features/latex-figure-rendering/_index.md",
       "coverage": {
         "general": {
@@ -177,8 +177,8 @@
     {
       "category": "Developer Guide",
       "sub_category": "Advanced Features",
-      "topic": "LaTeX math formulas rendering | .NET",
-      "topic_key": "latex math formulas rendering net",
+      "topic": "LaTeX math formulas rendering",
+      "topic_key": "latex math formulas rendering",
       "baseline_record_id": "docs::net::developer-guide/advanced-features/latex-math-rendering/_index.md",
       "coverage": {
         "general": {
@@ -218,49 +218,49 @@
     {
       "category": "Developer Guide",
       "sub_category": "Conversion",
-      "topic": "Conversion | .NET",
-      "topic_key": "conversion net",
+      "topic": "Conversion",
+      "topic_key": "conversion",
       "baseline_record_id": "docs::net::developer-guide/conversion/_index.md",
       "coverage": {
         "general": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
+          "matched": true,
+          "score": 0.9,
+          "record_id": "blog::tex/2025-05-08-convert-latex-to-pdf-online/index.md",
+          "title": "Convert LaTeX to PDF Online",
+          "topic": "Online LaTeX to PDF conversion",
+          "url": "https://blog.aspose.com/tex/convert-latex-to-pdf-online/"
         },
         "java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
+          "matched": true,
+          "score": 0.9,
+          "record_id": "blog::tex/2023-08-07-latex-document-conversion-in-java/index.md",
+          "title": "LaTeX Document Conversion in Java",
+          "topic": "LaTeX Document Conversion Using Java API",
+          "url": "https://blog.aspose.com/tex/latex-document-conversion-in-java/"
         },
         "net": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
+          "matched": true,
+          "score": 0.9,
+          "record_id": "blog::tex/2024-07-11-csharp-library-for-latex-to-xps/index.md",
+          "title": "C# Library for Programmatic LaTeX to XPS Conversion",
+          "topic": "Programmatic LaTeX to XPS Conversion with .NET Library",
+          "url": "https://blog.aspose.com/tex/csharp-library-for-latex-to-xps/"
         },
         "python": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
+          "matched": true,
+          "score": 0.9,
+          "record_id": "blog::tex/2025-10-22-convert-latex-to-xps-in-python/index.md",
+          "title": "Convert LaTeX to XPS in Python Programmatically",
+          "topic": "Programmatic LaTeX to XPS conversion",
+          "url": "https://blog.aspose.com/tex/convert-latex-to-xps-in-python/"
         }
       }
     },
     {
       "category": "Developer Guide",
       "sub_category": "Conversion",
-      "topic": "Aspose.TeX's input interface | .NET",
-      "topic_key": "aspose tex s input interface net",
+      "topic": "Aspose.TeX's input interface",
+      "topic_key": "aspose tex s input interface",
       "baseline_record_id": "docs::net::developer-guide/conversion/aspose-tex-input/_index.md",
       "coverage": {
         "general": {
@@ -300,8 +300,8 @@
     {
       "category": "Developer Guide",
       "sub_category": "Conversion",
-      "topic": "Aspose.TeX's output interface | .NET",
-      "topic_key": "aspose tex s output interface net",
+      "topic": "Aspose.TeX's output interface",
+      "topic_key": "aspose tex s output interface",
       "baseline_record_id": "docs::net::developer-guide/conversion/aspose-tex-output/_index.md",
       "coverage": {
         "general": {
@@ -341,8 +341,8 @@
     {
       "category": "Developer Guide",
       "sub_category": "Conversion",
-      "topic": "External LaTeX packages | .NET",
-      "topic_key": "external latex packages net",
+      "topic": "External LaTeX packages",
+      "topic_key": "external latex packages",
       "baseline_record_id": "docs::net::developer-guide/conversion/external-latex-packages/_index.md",
       "coverage": {
         "general": {
@@ -382,8 +382,8 @@
     {
       "category": "Developer Guide",
       "sub_category": "Conversion",
-      "topic": "LaTeX to image | .NET",
-      "topic_key": "latex to image net",
+      "topic": "LaTeX to image",
+      "topic_key": "latex to image",
       "baseline_record_id": "docs::net::developer-guide/conversion/latex-to-image/_index.md",
       "coverage": {
         "general": {
@@ -423,17 +423,17 @@
     {
       "category": "Developer Guide",
       "sub_category": "Conversion",
-      "topic": "LaTeX to PDF | .NET",
-      "topic_key": "latex to pdf net",
+      "topic": "LaTeX to PDF",
+      "topic_key": "latex to pdf",
       "baseline_record_id": "docs::net::developer-guide/conversion/latex-to-pdf/_index.md",
       "coverage": {
         "general": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
+          "matched": true,
+          "score": 0.9,
+          "record_id": "blog::tex/2025-05-08-convert-latex-to-pdf-online/index.md",
+          "title": "Convert LaTeX to PDF Online",
+          "topic": "Online LaTeX to PDF conversion",
+          "url": "https://blog.aspose.com/tex/convert-latex-to-pdf-online/"
         },
         "java": {
           "matched": false,
@@ -464,25 +464,25 @@
     {
       "category": "Developer Guide",
       "sub_category": "Conversion",
-      "topic": "LaTeX to SVG | .NET",
-      "topic_key": "latex to svg net",
+      "topic": "LaTeX to SVG",
+      "topic_key": "latex to svg",
       "baseline_record_id": "docs::net::developer-guide/conversion/latex-to-svg/_index.md",
       "coverage": {
         "general": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
+          "matched": true,
+          "score": 0.9,
+          "record_id": "blog::tex/2024-10-18-convert-latex-to-svg-programmatically/index.md",
+          "title": "Convert LaTeX to SVG Programmatically",
+          "topic": "Programmatic Conversion of LaTeX to SVG",
+          "url": "https://blog.aspose.com/tex/convert-latex-to-svg-programmatically/"
         },
         "java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
+          "matched": true,
+          "score": 0.9,
+          "record_id": "blog::tex/2022-10-07-convert-latex-to-svg-java/index.md",
+          "title": "Convert LaTeX to SVG Image in Java",
+          "topic": "Convert LaTeX to SVG Images Programmatically",
+          "url": "https://blog.aspose.com/tex/convert-latex-to-svg-in-java/"
         },
         "net": {
           "matched": false,
@@ -505,8 +505,8 @@
     {
       "category": "Developer Guide",
       "sub_category": "Conversion",
-      "topic": "LaTeX to XPS | .NET",
-      "topic_key": "latex to xps net",
+      "topic": "LaTeX to XPS",
+      "topic_key": "latex to xps",
       "baseline_record_id": "docs::net::developer-guide/conversion/latex-to-xps/_index.md",
       "coverage": {
         "general": {
@@ -526,28 +526,28 @@
           "url": null
         },
         "net": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
+          "matched": true,
+          "score": 0.9,
+          "record_id": "blog::tex/2024-07-11-csharp-library-for-latex-to-xps/index.md",
+          "title": "C# Library for Programmatic LaTeX to XPS Conversion",
+          "topic": "Programmatic LaTeX to XPS Conversion with .NET Library",
+          "url": "https://blog.aspose.com/tex/csharp-library-for-latex-to-xps/"
         },
         "python": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
+          "matched": true,
+          "score": 0.9,
+          "record_id": "blog::tex/2025-10-22-convert-latex-to-xps-in-python/index.md",
+          "title": "Convert LaTeX to XPS in Python Programmatically",
+          "topic": "Programmatic LaTeX to XPS conversion",
+          "url": "https://blog.aspose.com/tex/convert-latex-to-xps-in-python/"
         }
       }
     },
     {
       "category": "Developer Guide",
       "sub_category": "Conversion",
-      "topic": "Other managing TeX options | .NET",
-      "topic_key": "other managing tex options net",
+      "topic": "Other managing TeX options",
+      "topic_key": "other managing tex options",
       "baseline_record_id": "docs::net::developer-guide/conversion/other-options/_index.md",
       "coverage": {
         "general": {
@@ -587,8 +587,8 @@
     {
       "category": "Developer Guide",
       "sub_category": "Conversion",
-      "topic": "Other TeX conversion output formats | .NET",
-      "topic_key": "other tex conversion output formats net",
+      "topic": "Other TeX conversion output formats",
+      "topic_key": "other tex conversion output formats",
       "baseline_record_id": "docs::net::developer-guide/conversion/other-tex-formats/_index.md",
       "coverage": {
         "general": {
@@ -628,8 +628,8 @@
     {
       "category": "Developer Guide",
       "sub_category": "Conversion",
-      "topic": "Other ways to provide main TeX input file | .NET",
-      "topic_key": "other ways to provide main tex input file net",
+      "topic": "Other ways to provide main TeX input file",
+      "topic_key": "other ways to provide main tex input file",
       "baseline_record_id": "docs::net::developer-guide/conversion/other-ways-of-main-input/_index.md",
       "coverage": {
         "general": {
@@ -669,8 +669,8 @@
     {
       "category": "Getting Started",
       "sub_category": "General",
-      "topic": "Getting Started | .NET",
-      "topic_key": "getting started net",
+      "topic": "Getting Started",
+      "topic_key": "getting started",
       "baseline_record_id": "docs::net::getting-started/_index.md",
       "coverage": {
         "general": {
@@ -710,8 +710,8 @@
     {
       "category": "Getting Started",
       "sub_category": "Feature List",
-      "topic": "Feature List | .NET",
-      "topic_key": "feature list net",
+      "topic": "Feature List",
+      "topic_key": "feature list",
       "baseline_record_id": "docs::net::getting-started/feature-list/_index.md",
       "coverage": {
         "general": {
@@ -874,8 +874,8 @@
     {
       "category": "Getting Started",
       "sub_category": "Product Overview",
-      "topic": "Product Overview | .NET",
-      "topic_key": "product overview net",
+      "topic": "Product Overview",
+      "topic_key": "product overview",
       "baseline_record_id": "docs::net::getting-started/product-overview/_index.md",
       "coverage": {
         "general": {
@@ -915,8 +915,8 @@
     {
       "category": "Getting Started",
       "sub_category": "Supported File Formats",
-      "topic": "Supported File Formats | .NET",
-      "topic_key": "supported file formats net",
+      "topic": "Supported File Formats",
+      "topic_key": "supported file formats",
       "baseline_record_id": "docs::net::getting-started/supported-file-formats/_index.md",
       "coverage": {
         "general": {
@@ -956,8 +956,8 @@
     {
       "category": "Getting Started",
       "sub_category": "System Requirements",
-      "topic": "System Requirements | .NET",
-      "topic_key": "system requirements net",
+      "topic": "System Requirements",
+      "topic_key": "system requirements",
       "baseline_record_id": "docs::net::getting-started/system-requirements/_index.md",
       "coverage": {
         "general": {
@@ -1161,8 +1161,8 @@
     {
       "category": "Introduction To Tex",
       "sub_category": "Latex Io",
-      "topic": "LaTeX I/O | .NET",
-      "topic_key": "latex i o net",
+      "topic": "LaTeX I/O",
+      "topic_key": "latex i o",
       "baseline_record_id": "docs::net::introduction-to-tex/latex-io/_index.md",
       "coverage": {
         "general": {
@@ -1243,8 +1243,8 @@
     {
       "category": "Introduction To Tex",
       "sub_category": "What Is Latex",
-      "topic": "What is LaTeX? | .NET",
-      "topic_key": "what is latex net",
+      "topic": "What is LaTeX?",
+      "topic_key": "what is latex",
       "baseline_record_id": "docs::net::introduction-to-tex/what-is-latex/_index.md",
       "coverage": {
         "general": {
@@ -1284,8 +1284,8 @@
     {
       "category": "Introduction To Tex",
       "sub_category": "What Is Tex",
-      "topic": "What is TeX? | .NET",
-      "topic_key": "what is tex net",
+      "topic": "What is TeX?",
+      "topic_key": "what is tex",
       "baseline_record_id": "docs::net::introduction-to-tex/what-is-tex/_index.md",
       "coverage": {
         "general": {

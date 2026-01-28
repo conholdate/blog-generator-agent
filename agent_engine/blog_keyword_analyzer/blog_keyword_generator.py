@@ -169,12 +169,100 @@ _KEYWORD_GEN_AGENT = Agent(
     # model="gpt-5.2",
 )
 
-
 def fetch_llm_keywords(req: LLMKeywordGenRequest) -> List[KeywordRecord]:
     """
     LLM fallback keyword generator using OpenAI Agents SDK.
     Returns KeywordRecord list with source='llm'.
+
+    Improvements:
+    - Robust JSON extraction (handles code fences / extra prose).
+    - Logs raw output on parse failure (so you can see why you got []).
+    - Optional one retry without platform if platform-filtering nukes everything.
     """
+    import logging
+
+    log = logging.getLogger("kra.llm_keyword_gen")
+
+    def _run(prompt_obj: dict) -> str:
+        res = Runner.run_sync(_KEYWORD_GEN_AGENT, json.dumps(prompt_obj, ensure_ascii=False))
+        return ((res.final_output or "").strip())
+
+    def _extract_json_list(raw_text: str) -> List[str]:
+        """
+        Accepts:
+          - a real JSON array
+          - ```json ... ``` fenced blocks
+          - extra text around a JSON array (extract first [...] block)
+        """
+        txt = (raw_text or "").strip()
+        if not txt:
+            return []
+
+        # Strip fenced code blocks if present
+        if txt.startswith("```"):
+            # remove leading/trailing fences; keep inner
+            txt = re.sub(r"^```(?:json)?\s*", "", txt, flags=re.IGNORECASE)
+            txt = re.sub(r"\s*```$", "", txt).strip()
+
+        # First try: direct JSON parse
+        try:
+            data = json.loads(txt)
+            if isinstance(data, list):
+                return [str(x) for x in data]
+        except Exception:
+            pass
+
+        # Second try: extract the first JSON-array-looking block
+        m = re.search(r"\[[\s\S]*\]", txt)
+        if not m:
+            return []
+
+        candidate = m.group(0).strip()
+        try:
+            data = json.loads(candidate)
+            if isinstance(data, list):
+                return [str(x) for x in data]
+        except Exception:
+            return []
+
+        return []
+
+    def _generate(prompt_obj: dict, platform_for_filter: Optional[str]) -> List[KeywordRecord]:
+        raw = _run(prompt_obj)
+
+        phrases = _extract_json_list(raw)
+        if not phrases:
+            # This is the key: you were seeing [] with no clue why.
+            log.warning("LLM returned non-parseable or empty output. Raw output:\n%s", raw)
+
+        cleaned: List[str] = []
+        for s in phrases:
+            s2 = _clean_phrase(s)
+            if not _is_acceptable(s2):
+                continue
+            if _platform_contamination(s2, platform_for_filter):
+                continue
+            cleaned.append(s2)
+
+        cleaned = _dedupe(cleaned)[: prompt_obj.get("max_keywords", req.max_keywords)]
+        print(cleaned)
+
+        return [
+            KeywordRecord(
+                keyword=kw,
+                source="llm",
+                locale=req.locale,
+                volume=None,
+                cpc=None,
+                kd=None,
+                clicks=None,
+                url=None,
+                competition=None,
+                competition_label=None,
+            )
+            for kw in cleaned
+        ]
+
     prompt = {
         "topic": req.topic,
         "product": req.product,
@@ -183,49 +271,18 @@ def fetch_llm_keywords(req: LLMKeywordGenRequest) -> List[KeywordRecord]:
         "max_keywords": req.max_keywords,
         "output_format": "JSON array of strings only",
     }
-    result = Runner.run_sync(_KEYWORD_GEN_AGENT, json.dumps(prompt, ensure_ascii=False))
-    raw = (result.final_output or "").strip()
 
-    print(result)
+    # Attempt 1: as requested
+    records = _generate(prompt, platform_for_filter=req.platform)
 
-    # Parse JSON safely
-    phrases: List[str] = []
-    try:
-        data = json.loads(raw)
-        if isinstance(data, list):
-            phrases = [str(x) for x in data]
-    except Exception:
-        # Hard fail-safe: no keywords if model didn't comply
-        phrases = []
+    # Attempt 2 (optional): if platform filtering / constraints resulted in nothing, retry once without platform
+    if not records and req.platform:
+        log.info("Retrying LLM keyword gen without platform constraint (was: %s)", req.platform)
+        prompt2 = dict(prompt)
+        prompt2["platform"] = None
+        records = _generate(prompt2, platform_for_filter=None)
 
-    # Clean, filter, enforce platform specificity, dedupe
-    cleaned: List[str] = []
-    for s in phrases:
-        s2 = _clean_phrase(s)
-        if not _is_acceptable(s2):
-            continue
-        if _platform_contamination(s2, req.platform):
-            continue
-        cleaned.append(s2)
-
-    cleaned = _dedupe(cleaned)[: req.max_keywords]
-
-    return [
-        KeywordRecord(
-            keyword=kw,
-            source="llm",
-            locale=req.locale,
-            volume=None,
-            cpc=None,
-            kd=None,
-            clicks=None,
-            url=None,
-            competition=None,
-            competition_label=None,
-        )
-        for kw in cleaned
-    ]
-
+    return records
 
 # ----------------------------
 # Example (manual run)
