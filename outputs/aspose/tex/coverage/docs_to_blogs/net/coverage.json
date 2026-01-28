@@ -1,0 +1,1326 @@
+{
+  "case": "docs_to_blogs",
+  "brand_key": "aspose",
+  "product_key": "tex",
+  "baseline_platform": "net",
+  "platforms": [
+    "general",
+    "java",
+    "net",
+    "python"
+  ],
+  "rows": [
+    {
+      "category": "General",
+      "sub_category": "General",
+      "topic": "Aspose.TeX for .NET",
+      "topic_key": "aspose tex for net",
+      "baseline_record_id": "docs::net::_index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Developer Guide",
+      "sub_category": "General",
+      "topic": "Developer Guide | .NET",
+      "topic_key": "developer guide net",
+      "baseline_record_id": "docs::net::developer-guide/_index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Developer Guide",
+      "sub_category": "Advanced Features",
+      "topic": "Advanced Features | .NET",
+      "topic_key": "advanced features net",
+      "baseline_record_id": "docs::net::developer-guide/advanced-features/_index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Developer Guide",
+      "sub_category": "Advanced Features",
+      "topic": "LaTeX Figure rendering | .NET",
+      "topic_key": "latex figure rendering net",
+      "baseline_record_id": "docs::net::developer-guide/advanced-features/latex-figure-rendering/_index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Developer Guide",
+      "sub_category": "Advanced Features",
+      "topic": "LaTeX math formulas rendering | .NET",
+      "topic_key": "latex math formulas rendering net",
+      "baseline_record_id": "docs::net::developer-guide/advanced-features/latex-math-rendering/_index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Developer Guide",
+      "sub_category": "Conversion",
+      "topic": "Conversion | .NET",
+      "topic_key": "conversion net",
+      "baseline_record_id": "docs::net::developer-guide/conversion/_index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Developer Guide",
+      "sub_category": "Conversion",
+      "topic": "Aspose.TeX's input interface | .NET",
+      "topic_key": "aspose tex s input interface net",
+      "baseline_record_id": "docs::net::developer-guide/conversion/aspose-tex-input/_index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Developer Guide",
+      "sub_category": "Conversion",
+      "topic": "Aspose.TeX's output interface | .NET",
+      "topic_key": "aspose tex s output interface net",
+      "baseline_record_id": "docs::net::developer-guide/conversion/aspose-tex-output/_index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Developer Guide",
+      "sub_category": "Conversion",
+      "topic": "External LaTeX packages | .NET",
+      "topic_key": "external latex packages net",
+      "baseline_record_id": "docs::net::developer-guide/conversion/external-latex-packages/_index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Developer Guide",
+      "sub_category": "Conversion",
+      "topic": "LaTeX to image | .NET",
+      "topic_key": "latex to image net",
+      "baseline_record_id": "docs::net::developer-guide/conversion/latex-to-image/_index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Developer Guide",
+      "sub_category": "Conversion",
+      "topic": "LaTeX to PDF | .NET",
+      "topic_key": "latex to pdf net",
+      "baseline_record_id": "docs::net::developer-guide/conversion/latex-to-pdf/_index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Developer Guide",
+      "sub_category": "Conversion",
+      "topic": "LaTeX to SVG | .NET",
+      "topic_key": "latex to svg net",
+      "baseline_record_id": "docs::net::developer-guide/conversion/latex-to-svg/_index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Developer Guide",
+      "sub_category": "Conversion",
+      "topic": "LaTeX to XPS | .NET",
+      "topic_key": "latex to xps net",
+      "baseline_record_id": "docs::net::developer-guide/conversion/latex-to-xps/_index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Developer Guide",
+      "sub_category": "Conversion",
+      "topic": "Other managing TeX options | .NET",
+      "topic_key": "other managing tex options net",
+      "baseline_record_id": "docs::net::developer-guide/conversion/other-options/_index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Developer Guide",
+      "sub_category": "Conversion",
+      "topic": "Other TeX conversion output formats | .NET",
+      "topic_key": "other tex conversion output formats net",
+      "baseline_record_id": "docs::net::developer-guide/conversion/other-tex-formats/_index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Developer Guide",
+      "sub_category": "Conversion",
+      "topic": "Other ways to provide main TeX input file | .NET",
+      "topic_key": "other ways to provide main tex input file net",
+      "baseline_record_id": "docs::net::developer-guide/conversion/other-ways-of-main-input/_index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Getting Started",
+      "sub_category": "General",
+      "topic": "Getting Started | .NET",
+      "topic_key": "getting started net",
+      "baseline_record_id": "docs::net::getting-started/_index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Getting Started",
+      "sub_category": "Feature List",
+      "topic": "Feature List | .NET",
+      "topic_key": "feature list net",
+      "baseline_record_id": "docs::net::getting-started/feature-list/_index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Getting Started",
+      "sub_category": "How To Run The Examples",
+      "topic": "How to Run the Examples in C#",
+      "topic_key": "how to run the examples in c",
+      "baseline_record_id": "docs::net::getting-started/how-to-run-the-examples/_index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Getting Started",
+      "sub_category": "Installation",
+      "topic": "Installation - Aspose.TeX for .NET",
+      "topic_key": "installation aspose tex for net",
+      "baseline_record_id": "docs::net::getting-started/installation/_index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Getting Started",
+      "sub_category": "Licensing",
+      "topic": "Licensing - Aspose.TeX for .NET",
+      "topic_key": "licensing aspose tex for net",
+      "baseline_record_id": "docs::net::getting-started/licensing/_index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Getting Started",
+      "sub_category": "Product Overview",
+      "topic": "Product Overview | .NET",
+      "topic_key": "product overview net",
+      "baseline_record_id": "docs::net::getting-started/product-overview/_index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Getting Started",
+      "sub_category": "Supported File Formats",
+      "topic": "Supported File Formats | .NET",
+      "topic_key": "supported file formats net",
+      "baseline_record_id": "docs::net::getting-started/supported-file-formats/_index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Getting Started",
+      "sub_category": "System Requirements",
+      "topic": "System Requirements | .NET",
+      "topic_key": "system requirements net",
+      "baseline_record_id": "docs::net::getting-started/system-requirements/_index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Introduction To Tex",
+      "sub_category": "General",
+      "topic": "Introduction to TeXs",
+      "topic_key": "introduction to texs",
+      "baseline_record_id": "docs::net::introduction-to-tex/_index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Introduction To Tex",
+      "sub_category": "Aspose Tex And Object Tex",
+      "topic": "Aspose.TeX and Object TeX",
+      "topic_key": "aspose tex and object tex",
+      "baseline_record_id": "docs::net::introduction-to-tex/aspose-tex-and-object-tex/_index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Introduction To Tex",
+      "sub_category": "Embedded Packages",
+      "topic": "Aspose.TeX embedded LaTeX packages",
+      "topic_key": "aspose tex embedded latex packages",
+      "baseline_record_id": "docs::net::introduction-to-tex/embedded-packages/_index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Introduction To Tex",
+      "sub_category": "Latex Graphics",
+      "topic": "LaTeX graphics | \\includegraphics command",
+      "topic_key": "latex graphics includegraphics command",
+      "baseline_record_id": "docs::net::introduction-to-tex/latex-graphics/_index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Introduction To Tex",
+      "sub_category": "Latex Io",
+      "topic": "LaTeX I/O | .NET",
+      "topic_key": "latex i o net",
+      "baseline_record_id": "docs::net::introduction-to-tex/latex-io/_index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Introduction To Tex",
+      "sub_category": "Tex Io",
+      "topic": "TeX I/O | .NET Solution",
+      "topic_key": "tex i o net solution",
+      "baseline_record_id": "docs::net::introduction-to-tex/tex-io/_index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Introduction To Tex",
+      "sub_category": "What Is Latex",
+      "topic": "What is LaTeX? | .NET",
+      "topic_key": "what is latex net",
+      "baseline_record_id": "docs::net::introduction-to-tex/what-is-latex/_index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Introduction To Tex",
+      "sub_category": "What Is Tex",
+      "topic": "What is TeX? | .NET",
+      "topic_key": "what is tex net",
+      "baseline_record_id": "docs::net::introduction-to-tex/what-is-tex/_index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    }
+  ]
+}
