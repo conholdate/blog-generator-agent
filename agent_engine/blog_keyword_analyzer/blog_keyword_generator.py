@@ -186,6 +186,8 @@ def fetch_llm_keywords(req: LLMKeywordGenRequest) -> List[KeywordRecord]:
     result = Runner.run_sync(_KEYWORD_GEN_AGENT, json.dumps(prompt, ensure_ascii=False))
     raw = (result.final_output or "").strip()
 
+    print(result)
+
     # Parse JSON safely
     phrases: List[str] = []
     try:
@@ -230,9 +232,9 @@ def fetch_llm_keywords(req: LLMKeywordGenRequest) -> List[KeywordRecord]:
 # ----------------------------
 if __name__ == "__main__":
     req = LLMKeywordGenRequest(
-        topic="render powerpoint slides as svg images",
-        product="Aspose.Slides",
-        platform="java",
+        topic="LaTeX to PNG in Pytho",
+        product="Aspose.Tex",
+        platform="python",
         locale="en-US",
         max_keywords=20,
     )
