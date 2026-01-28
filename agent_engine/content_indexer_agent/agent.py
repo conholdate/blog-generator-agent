@@ -5,7 +5,7 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Sequence, Tuple
 from urllib.parse import urlparse
-
+import re
 from agents import Agent, Runner, function_tool, handoff
 from openai import OpenAI
 
@@ -77,6 +77,89 @@ def _platforms_from_text(text: str, platform_defs: Dict[str, Any]) -> List[str]:
                 break
     return sorted(set(found)) if found else ["general"]
 
+def _platform_defs_for_product(product: ProductSpec) -> Dict[str, Dict[str, Any]]:
+    """
+    Build {platform_key: {"keywords":[...]}} from product YAML platforms.
+    Safe if YAML/platform metadata is incomplete.
+    """
+    out: Dict[str, Dict[str, Any]] = {}
+    try:
+        for p in product.iter_platforms():
+            key = (getattr(p, "key", "") or "").strip()
+            if not key:
+                continue
+            # Respect enabled flag if present (default True)
+            if getattr(p, "enabled", True) is False:
+                continue
+            kws = getattr(p, "keywords", None) or []
+            out[key] = {"keywords": list(kws)}
+    except Exception:
+        pass
+    return out
+
+
+def _normalize_platform_key_one(platform_key: str) -> str:
+    """
+    Normalize to your desired canonical keys.
+    - Any python* (python, python_net, python-java, ...) => python
+    - csharp => net (optional backstop)
+    """
+    k = (platform_key or "").strip().lower()
+    if not k:
+        return "general"
+    if k.startswith("python"):
+        return "python"
+    if k in {"csharp", "c#", "dotnet", ".net"}:
+        return "net"
+    return k
+
+
+def _infer_platform_from_record(rec: IndexRecord, product: ProductSpec) -> str:
+    """
+    Infer ONE platform from content:
+    - Use YAML platform keywords first
+    - Add strong title heuristics as backstop
+    - If multiple platforms found => general
+    - If none => general
+    """
+    # Keep text bounded and high-signal
+    parts = [
+        rec.title or "",
+        rec.topic or "",
+        f"{rec.category}/{rec.sub_category}",
+        (rec.excerpt or "")[:4000],
+    ]
+    text = "\n".join([p for p in parts if p]).strip()
+    lt = text.lower()
+
+    platform_defs = _platform_defs_for_product(product)
+    found = _platforms_from_text(text, platform_defs)  # returns ["general"] if none
+
+    # Strong backstop heuristics (helps when YAML keywords are missing/weak)
+    # Keep these conservative to avoid false positives.
+    heuristic_hits: List[str] = []
+    if re.search(r"\bpython\b", lt):
+        heuristic_hits.append("python")
+    if re.search(r"\bjava\b", lt):
+        heuristic_hits.append("java")
+    if re.search(r"\b(c\+\+|cpp)\b", lt):
+        heuristic_hits.append("cpp")
+    if re.search(r"\b(c#|csharp|\.net|dotnet)\b", lt):
+        heuristic_hits.append("net")
+
+    # Merge + normalize
+    merged = found + heuristic_hits
+    merged_norm = sorted(set(_normalize_platform_key_one(x) for x in merged if x))
+
+    # Remove 'general' when we have real platform candidates
+    non_general = [x for x in merged_norm if x != "general"]
+
+    # Enforce "1 platform per article" rule
+    if len(non_general) == 1:
+        return non_general[0]
+    if len(non_general) >= 2:
+        return "general"
+    return "general"
 
 def _platform_display_name(product: ProductSpec, platform_key: str) -> str:
     """
@@ -326,6 +409,11 @@ def incremental_index_repo(
             product=product,
             ctx=ctx,
         )
+
+        # For all-scoped repos (blogs), infer platform from content.
+        # Platform-scoped repos already encode platform in path/target and should not be overridden.
+        if repo_target.scope != "platform":
+            rec.platform = _infer_platform_from_record(rec, product)
 
         # Embed only new/changed records (cached)
         key, _ = embedding_store.embed(_topic_embed_text(rec))

@@ -1,0 +1,1736 @@
+{
+  "case": "blogs_to_blogs",
+  "brand_key": "aspose",
+  "product_key": "tex",
+  "baseline_platform": "all",
+  "platforms": [
+    "general",
+    "java",
+    "net",
+    "python"
+  ],
+  "rows": [
+    {
+      "category": "Conversion",
+      "sub_category": "Image Conversion",
+      "topic": "Convert LaTeX to PNG or JPG Image in Java",
+      "topic_key": "convert latex documents to png or jpg images",
+      "baseline_record_id": "blog::tex/2021-11-28-convert-latex-to-png-or-jpg-image-in-java/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::tex/2021-11-28-convert-latex-to-png-or-jpg-image-in-java/index.md",
+          "title": "Convert LaTeX to PNG or JPG Image in Java",
+          "topic": "Convert LaTeX Documents to PNG or JPG Images",
+          "url": "https://blog.aspose.com/tex/convert-latex-to-png-or-jpg-image-in-java/"
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Development",
+      "sub_category": "Document Processing",
+      "topic": "Convert LaTeX to PDF in C# Programmatically",
+      "topic_key": "programmatic latex to pdf conversion in c",
+      "baseline_record_id": "blog::tex/2021-04-13-convert-tex-latex-to-pdf-xps-csharp/index.md",
+      "coverage": {
+        "general": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::tex/2021-04-13-convert-tex-latex-to-pdf-xps-csharp/index.md",
+          "title": "Convert LaTeX to PDF in C# Programmatically",
+          "topic": "Programmatic LaTeX to PDF conversion in C#",
+          "url": "https://blog.aspose.com/tex/convert-tex-latex-to-pdf-xps-csharp/"
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Development",
+      "sub_category": "Document Processing",
+      "topic": "C# Library for Programmatic LaTeX to XPS Conversion",
+      "topic_key": "programmatic latex to xps conversion library",
+      "baseline_record_id": "blog::tex/2024-07-11-csharp-library-for-latex-to-xps/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::tex/2024-07-11-csharp-library-for-latex-to-xps/index.md",
+          "title": "C# Library for Programmatic LaTeX to XPS Conversion",
+          "topic": "Programmatic LaTeX to XPS Conversion with .NET Library",
+          "url": "https://blog.aspose.com/tex/csharp-library-for-latex-to-xps/"
+        },
+        "python": {
+          "matched": true,
+          "score": 0.9,
+          "record_id": "blog::tex/2025-10-22-convert-latex-to-xps-in-python/index.md",
+          "title": "Convert LaTeX to XPS in Python Programmatically",
+          "topic": "Programmatic LaTeX to XPS conversion",
+          "url": "https://blog.aspose.com/tex/convert-latex-to-xps-in-python/"
+        }
+      }
+    },
+    {
+      "category": "Development",
+      "sub_category": "Image Processing",
+      "topic": "Convert TeX to PNG using a C# TeX Solution",
+      "topic_key": "converting tex documents to png images",
+      "baseline_record_id": "blog::tex/2024-10-15-convert-tex-to-png-using-a-csharp-tex-solution/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::tex/2024-10-15-convert-tex-to-png-using-a-csharp-tex-solution/index.md",
+          "title": "Convert TeX to PNG using a C# TeX Solution",
+          "topic": "Converting TeX Documents to PNG Images in .NET",
+          "url": "https://blog.aspose.com/tex/convert-tex-to-png-using-a-csharp-tex-solution/"
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Development",
+      "sub_category": "Math Rendering",
+      "topic": "Render LaTeX Equations and Math Formulas in C#",
+      "topic_key": "rendering latex equations and math formulas",
+      "baseline_record_id": "blog::tex/2022-03-08-render-latex-equations-and-math-formulas-using-csharp/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::tex/2022-03-08-render-latex-equations-and-math-formulas-using-csharp/index.md",
+          "title": "Render LaTeX Equations and Math Formulas in C#",
+          "topic": "Rendering LaTeX Equations and Math Formulas",
+          "url": "https://blog.aspose.com/tex/render-latex-equations-and-math-formulas-using-csharp/"
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Document Conversion",
+      "sub_category": "LaTeX To XPS",
+      "topic": "Convert LaTeX to XPS Document in Java",
+      "topic_key": "converting latex documents to xps format",
+      "baseline_record_id": "blog::tex/2022-10-07-convert-latex-to-xps-java/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::tex/2022-10-07-convert-latex-to-xps-java/index.md",
+          "title": "Convert LaTeX to XPS Document in Java",
+          "topic": "Converting LaTeX Documents to XPS Format",
+          "url": "https://blog.aspose.com/tex/convert-latex-to-xps-in-java/"
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Document Conversion",
+      "sub_category": "LaTeX to PDF",
+      "topic": "Convert LaTeX to PDF Online",
+      "topic_key": "online latex to pdf conversion",
+      "baseline_record_id": "blog::tex/2025-05-08-convert-latex-to-pdf-online/index.md",
+      "coverage": {
+        "general": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::tex/2025-05-08-convert-latex-to-pdf-online/index.md",
+          "title": "Convert LaTeX to PDF Online",
+          "topic": "Online LaTeX to PDF conversion",
+          "url": "https://blog.aspose.com/tex/convert-latex-to-pdf-online/"
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Document Conversion",
+      "sub_category": "LaTeX to SVG",
+      "topic": "Convert LaTeX to SVG Programmatically",
+      "topic_key": "programmatic conversion of latex to svg",
+      "baseline_record_id": "blog::tex/2024-10-18-convert-latex-to-svg-programmatically/index.md",
+      "coverage": {
+        "general": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::tex/2024-10-18-convert-latex-to-svg-programmatically/index.md",
+          "title": "Convert LaTeX to SVG Programmatically",
+          "topic": "Programmatic Conversion of LaTeX to SVG",
+          "url": "https://blog.aspose.com/tex/convert-latex-to-svg-programmatically/"
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Document Conversion",
+      "sub_category": "LaTeX to Word",
+      "topic": "Convert LaTeX to Word Online - Free Converter",
+      "topic_key": "online latex to word conversion",
+      "baseline_record_id": "blog::tex/2023-02-22-convert-latex-to-word-online/index.md",
+      "coverage": {
+        "general": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::tex/2023-02-22-convert-latex-to-word-online/index.md",
+          "title": "Convert LaTeX to Word Online - Free Converter",
+          "topic": "Online LaTeX to Word Conversion",
+          "url": "https://blog.aspose.com/tex/convert-latex-to-word-online-latex-to-docx/"
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Document Conversion",
+      "sub_category": "LaTeX to XPS",
+      "topic": "Convert LaTeX to XPS in Python Programmatically",
+      "topic_key": "programmatic latex to xps conversion",
+      "baseline_record_id": "blog::tex/2025-10-22-convert-latex-to-xps-in-python/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": true,
+          "score": 0.9,
+          "record_id": "blog::tex/2024-07-11-csharp-library-for-latex-to-xps/index.md",
+          "title": "C# Library for Programmatic LaTeX to XPS Conversion",
+          "topic": "Programmatic LaTeX to XPS Conversion with .NET Library",
+          "url": "https://blog.aspose.com/tex/csharp-library-for-latex-to-xps/"
+        },
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::tex/2025-10-22-convert-latex-to-xps-in-python/index.md",
+          "title": "Convert LaTeX to XPS in Python Programmatically",
+          "topic": "Programmatic LaTeX to XPS conversion",
+          "url": "https://blog.aspose.com/tex/convert-latex-to-xps-in-python/"
+        }
+      }
+    },
+    {
+      "category": "Document Generation",
+      "sub_category": "PDF Creation",
+      "topic": "Generate PDF from LaTeX in Java",
+      "topic_key": "generate pdf from latex",
+      "baseline_record_id": "blog::tex/2022-04-07-create-pdf-from-latex-in-java/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::tex/2022-04-07-create-pdf-from-latex-in-java/index.md",
+          "title": "Generate PDF from LaTeX in Java",
+          "topic": "Generate PDF from LaTeX using Java",
+          "url": "https://blog.aspose.com/tex/create-pdf-from-latex-in-java/"
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Document Processing",
+      "sub_category": "Conversion",
+      "topic": "Convert TeX to PDF or XPS File Programmatically using C++",
+      "topic_key": "programmatic tex to pdf and xps conversion",
+      "baseline_record_id": "blog::tex/2021-06-22-convert-tex-to-pdf-or-xps-file-programmatically-using-cpp/index.md",
+      "coverage": {
+        "general": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::tex/2021-06-22-convert-tex-to-pdf-or-xps-file-programmatically-using-cpp/index.md",
+          "title": "Convert TeX to PDF or XPS File Programmatically using C++",
+          "topic": "Programmatic TeX to PDF and XPS Conversion",
+          "url": "https://blog.aspose.com/tex/convert-tex-to-pdf-or-xps-file-programmatically-using-cpp/"
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Document Processing",
+      "sub_category": "Equation Rendering",
+      "topic": "LaTeX Formula Generator",
+      "topic_key": "online latex formula generator and export tool",
+      "baseline_record_id": "blog::tex/2023-06-19-latex-formula-generator/index.md",
+      "coverage": {
+        "general": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::tex/2023-06-19-latex-formula-generator/index.md",
+          "title": "LaTeX Formula Generator",
+          "topic": "Online LaTeX Formula Generator and Export Tool",
+          "url": "https://blog.aspose.com/tex/latex-formula-generator/"
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Document Processing",
+      "sub_category": "Format Conversion",
+      "topic": "Convert LaTeX to TIFF using C#",
+      "topic_key": "convert latex files to tiff images",
+      "baseline_record_id": "blog::tex/2022-04-27-convert-latex-to-tiff-using-csharp/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::tex/2022-07-18-convert-latex-to-tiff-in-java/index.md",
+          "title": "Convert LaTeX to TIFF in Java",
+          "topic": "Convert LaTeX files to TIFF images",
+          "url": "https://blog.aspose.com/tex/convert-latex-to-tiff-in-java/"
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::tex/2022-04-27-convert-latex-to-tiff-using-csharp/index.md",
+          "title": "Convert LaTeX to TIFF using C#",
+          "topic": "Convert LaTeX files to TIFF images",
+          "url": "https://blog.aspose.com/tex/convert-latex-to-tiff-using-csharp/"
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Document Processing",
+      "sub_category": "Format Conversion",
+      "topic": "LaTeX Document Conversion in C# – The Ultimate Guide",
+      "topic_key": "latex document conversion in c",
+      "baseline_record_id": "blog::tex/2023-04-20-latex-document-conversion-in-csharp/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::tex/2023-04-20-latex-document-conversion-in-csharp/index.md",
+          "title": "LaTeX Document Conversion in C# – The Ultimate Guide",
+          "topic": "LaTeX Document Conversion in C#",
+          "url": "https://blog.aspose.com/tex/latex-document-conversion-in-csharp/"
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Document Processing",
+      "sub_category": "Image Conversion",
+      "topic": "Convert LaTeX to PNG or JPG Image in C#",
+      "topic_key": "convert latex to png or jpg images with c",
+      "baseline_record_id": "blog::tex/2021-12-28-convert-latex-to-png-jpg-csharp/index.md",
+      "coverage": {
+        "general": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::tex/2021-12-28-convert-latex-to-png-jpg-csharp/index.md",
+          "title": "Convert LaTeX to PNG or JPG Image in C#",
+          "topic": "Convert LaTeX to PNG or JPG Images with C#",
+          "url": "https://blog.aspose.com/tex/convert-latex-to-png-jpg-csharp/"
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Document Processing",
+      "sub_category": "LaTeX Conversion",
+      "topic": "Convert LaTeX to TIFF in Python",
+      "topic_key": "convert latex to tiff",
+      "baseline_record_id": "blog::tex/2025-02-19-latex-to-image-converter-online-tool/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::tex/2025-02-19-latex-to-image-converter-online-tool/index.md",
+          "title": "Convert LaTeX to TIFF in Python",
+          "topic": "Convert LaTeX to TIFF with Python",
+          "url": "https://blog.aspose.com/tex/convert-latex-to-tiff-in-python/"
+        }
+      }
+    },
+    {
+      "category": "Document Processing",
+      "sub_category": "LaTeX Conversion",
+      "topic": "LaTeX to Image Converter - Online Tool",
+      "topic_key": "converting latex to bmp images with aspose tex",
+      "baseline_record_id": "blog::tex/2025-02-18-latex-to-image-converter-online-tool/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::tex/2025-02-18-latex-to-image-converter-online-tool/index.md",
+          "title": "LaTeX to Image Converter - Online Tool",
+          "topic": "Converting LaTeX to BMP Images with Aspose.TeX",
+          "url": "https://blog.aspose.com/tex/latex-to-image-converter-online-tool/"
+        }
+      }
+    },
+    {
+      "category": "Document Processing",
+      "sub_category": "LaTeX Conversion",
+      "topic": "LaTeX Document Conversion in Java",
+      "topic_key": "latex document conversion api",
+      "baseline_record_id": "blog::tex/2023-08-07-latex-document-conversion-in-java/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::tex/2023-08-07-latex-document-conversion-in-java/index.md",
+          "title": "LaTeX Document Conversion in Java",
+          "topic": "LaTeX Document Conversion Using Java API",
+          "url": "https://blog.aspose.com/tex/latex-document-conversion-in-java/"
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Document Processing",
+      "sub_category": "LaTeX Repair",
+      "topic": "Repair LaTeX File in Python using Aspose.TeX",
+      "topic_key": "programmatic repair of latex files",
+      "baseline_record_id": "blog::tex/2025-10-21-repair-latex-file-in-python/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::tex/2025-10-21-repair-latex-file-in-python/index.md",
+          "title": "Repair LaTeX File in Python using Aspose.TeX",
+          "topic": "Programmatic Repair of LaTeX Files",
+          "url": "https://blog.aspose.com/tex/repair-latex-file-in-python/"
+        }
+      }
+    },
+    {
+      "category": "Document Processing",
+      "sub_category": "LaTeX To SVG Conversion",
+      "topic": "Convert LaTeX to SVG Image in Java",
+      "topic_key": "convert latex to svg images programmatically",
+      "baseline_record_id": "blog::tex/2022-10-07-convert-latex-to-svg-java/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::tex/2022-10-07-convert-latex-to-svg-java/index.md",
+          "title": "Convert LaTeX to SVG Image in Java",
+          "topic": "Convert LaTeX to SVG Images Programmatically",
+          "url": "https://blog.aspose.com/tex/convert-latex-to-svg-in-java/"
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Document Processing",
+      "sub_category": "LaTeX Typesetting",
+      "topic": "Create Custom TeX (LaTeX) Format and Typeset to PDF, XPS in Java",
+      "topic_key": "custom latex format creation and typesetting to pdf xps",
+      "baseline_record_id": "blog::tex/2021-04-21-create-custom-tex-latex-format-convert-typeset-to-pdf-xps-java/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::tex/2021-04-21-create-custom-tex-latex-format-convert-typeset-to-pdf-xps-java/index.md",
+          "title": "Create Custom TeX (LaTeX) Format and Typeset to PDF, XPS in Java",
+          "topic": "Custom LaTeX Format Creation and Typesetting to PDF/XPS",
+          "url": "https://blog.aspose.com/tex/create-custom-tex-latex-format-convert-typeset-to-pdf-xps-java/"
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Document Processing",
+      "sub_category": "LaTeX to Image Conversion",
+      "topic": "Convert LaTeX to JPG in Python",
+      "topic_key": "converting latex documents to jpeg images",
+      "baseline_record_id": "blog::tex/2024-12-04-convert-latex-to-jpg-in-python/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::tex/2024-12-04-convert-latex-to-jpg-in-python/index.md",
+          "title": "Convert LaTeX to JPG in Python",
+          "topic": "Converting LaTeX Documents to JPEG Images",
+          "url": "https://blog.aspose.com/tex/convert-latex-to-jpg-in-python/"
+        }
+      }
+    },
+    {
+      "category": "Document Processing",
+      "sub_category": "PDF Generation",
+      "topic": "Convert LaTeX to PDF in Python Programmatically",
+      "topic_key": "programmatic latex to pdf conversion",
+      "baseline_record_id": "blog::tex/2024-10-16-convert-latex-to-pdf-in-python-programmatically/index.md",
+      "coverage": {
+        "general": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::tex/2024-10-16-convert-latex-to-pdf-in-python-programmatically/index.md",
+          "title": "Convert LaTeX to PDF in Python Programmatically",
+          "topic": "Programmatic LaTeX to PDF conversion in Python",
+          "url": "https://blog.aspose.com/tex/convert-latex-to-pdf-in-python-programmatically/"
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Document Processing",
+      "sub_category": "TeX Conversion",
+      "topic": "Convert TeX to JPG in C# - C# TeX Library",
+      "topic_key": "convert tex files to jpg images",
+      "baseline_record_id": "blog::tex/2024-08-22-convert-tex-to-jpg-in-csharp/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::tex/2024-08-22-convert-tex-to-jpg-in-csharp/index.md",
+          "title": "Convert TeX to JPG in C# - C# TeX Library",
+          "topic": "Convert TeX files to JPG images",
+          "url": "https://blog.aspose.com/tex/convert-tex-to-jpg-in-csharp/"
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Document Processing",
+      "sub_category": "TeX Typesetting",
+      "topic": "Create Custom TeX Format and Typeset to PDF, XPS using C++",
+      "topic_key": "creating custom tex format and typesetting to pdf xps with c",
+      "baseline_record_id": "blog::tex/2021-05-21-create-custom-tex-format-and-typeset-to-pdf-xps-using-cpp/index.md",
+      "coverage": {
+        "general": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::tex/2021-05-21-create-custom-tex-format-and-typeset-to-pdf-xps-using-cpp/index.md",
+          "title": "Create Custom TeX Format and Typeset to PDF, XPS using C++",
+          "topic": "Creating Custom TeX Format and Typesetting to PDF/XPS with C++",
+          "url": "https://blog.aspose.com/tex/create-custom-tex-format-and-typeset-to-pdf-xps-using-cpp/"
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Document Processing",
+      "sub_category": "TeX to Image Conversion",
+      "topic": "Convert TeX Files to Images using C++",
+      "topic_key": "convert tex files to images with c",
+      "baseline_record_id": "blog::tex/2021-08-06-convert-tex-files-to-images-using-cpp/index.md",
+      "coverage": {
+        "general": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::tex/2021-08-06-convert-tex-files-to-images-using-cpp/index.md",
+          "title": "Convert TeX Files to Images using C++",
+          "topic": "Convert TeX Files to Images with C++",
+          "url": "https://blog.aspose.com/tex/convert-tex-files-to-images-using-cpp/"
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "File Conversion",
+      "sub_category": "Document to Image",
+      "topic": "Convert TeX to BMP - TeX API for Java Developers",
+      "topic_key": "convert tex documents to bmp images",
+      "baseline_record_id": "blog::tex/2024-02-14-convert-tex-to-bmp-tex-api-for-java-developers/index.md",
+      "coverage": {
+        "general": {
+          "matched": true,
+          "score": 0.9,
+          "record_id": "blog::tex/2025-05-12-convert-tex-to-bmp-online/index.md",
+          "title": "Free TeX File Converter - Convert TeX to BMP Online",
+          "topic": "Convert TeX Documents to BMP Images Online",
+          "url": "https://blog.aspose.com/tex/convert-tex-to-bmp-online/"
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::tex/2024-02-14-convert-tex-to-bmp-tex-api-for-java-developers/index.md",
+          "title": "Convert TeX to BMP - TeX API for Java Developers",
+          "topic": "Convert TeX Documents to BMP Images Using Java",
+          "url": "https://blog.aspose.com/tex/convert-tex-to-bmp-tex-api-for-java-developers"
+        },
+        "net": {
+          "matched": true,
+          "score": 0.9,
+          "record_id": "blog::tex/2024-05-03-bmp-image-generation-from-tex-in-csharp-tex-to-image/index.md",
+          "title": "BMP Image Generation From TeX in C# - TeX to Image",
+          "topic": "Convert TeX Documents to BMP Images in C#",
+          "url": "https://blog.aspose.com/tex/bmp-image-generation-from-tex-in-csharp-tex-to-image/"
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "File Conversion",
+      "sub_category": "Document to Image",
+      "topic": "Free TeX File Converter - Convert TeX to BMP Online",
+      "topic_key": "convert tex documents to bmp images online",
+      "baseline_record_id": "blog::tex/2025-05-12-convert-tex-to-bmp-online/index.md",
+      "coverage": {
+        "general": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::tex/2025-05-12-convert-tex-to-bmp-online/index.md",
+          "title": "Free TeX File Converter - Convert TeX to BMP Online",
+          "topic": "Convert TeX Documents to BMP Images Online",
+          "url": "https://blog.aspose.com/tex/convert-tex-to-bmp-online/"
+        },
+        "java": {
+          "matched": true,
+          "score": 0.9,
+          "record_id": "blog::tex/2024-02-14-convert-tex-to-bmp-tex-api-for-java-developers/index.md",
+          "title": "Convert TeX to BMP - TeX API for Java Developers",
+          "topic": "Convert TeX Documents to BMP Images Using Java",
+          "url": "https://blog.aspose.com/tex/convert-tex-to-bmp-tex-api-for-java-developers"
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "File Conversion",
+      "sub_category": "Document to Image",
+      "topic": "LaTeX to PNG Converter - Online Application",
+      "topic_key": "latex to png conversion",
+      "baseline_record_id": "blog::tex/2024-10-17-latex-to-png-converter-online-application/index.md",
+      "coverage": {
+        "general": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::tex/2024-10-17-latex-to-png-converter-online-application/index.md",
+          "title": "LaTeX to PNG Converter - Online Application",
+          "topic": "LaTeX to PNG Conversion",
+          "url": "https://blog.aspose.com/tex/latex-to-png-converter-online-application/"
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "File Conversion",
+      "sub_category": "LaTeX to Image",
+      "topic": "Convert LaTeX to TIFF in Java",
+      "topic_key": "convert latex files to tiff images",
+      "baseline_record_id": "blog::tex/2022-07-18-convert-latex-to-tiff-in-java/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::tex/2022-07-18-convert-latex-to-tiff-in-java/index.md",
+          "title": "Convert LaTeX to TIFF in Java",
+          "topic": "Convert LaTeX files to TIFF images",
+          "url": "https://blog.aspose.com/tex/convert-latex-to-tiff-in-java/"
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::tex/2022-04-27-convert-latex-to-tiff-using-csharp/index.md",
+          "title": "Convert LaTeX to TIFF using C#",
+          "topic": "Convert LaTeX files to TIFF images",
+          "url": "https://blog.aspose.com/tex/convert-latex-to-tiff-using-csharp/"
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "File Conversion",
+      "sub_category": "LaTeX to SVG",
+      "topic": "Convert LaTeX to SVG Image in C#",
+      "topic_key": "convert latex documents to svg images",
+      "baseline_record_id": "blog::tex/2022-09-26-convert-latex-to-svg-csharp/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::tex/2022-09-26-convert-latex-to-svg-csharp/index.md",
+          "title": "Convert LaTeX to SVG Image in C#",
+          "topic": "Convert LaTeX Documents to SVG Images",
+          "url": "https://blog.aspose.com/tex/convert-latex-to-svg-csharp/"
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Imaging",
+      "sub_category": "TeX to Bitmap Conversion",
+      "topic": "BMP Image Generation From TeX in C# - TeX to Image",
+      "topic_key": "convert tex documents to bmp images in c",
+      "baseline_record_id": "blog::tex/2024-05-03-bmp-image-generation-from-tex-in-csharp-tex-to-image/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": true,
+          "score": 0.9,
+          "record_id": "blog::tex/2024-02-14-convert-tex-to-bmp-tex-api-for-java-developers/index.md",
+          "title": "Convert TeX to BMP - TeX API for Java Developers",
+          "topic": "Convert TeX Documents to BMP Images Using Java",
+          "url": "https://blog.aspose.com/tex/convert-tex-to-bmp-tex-api-for-java-developers"
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::tex/2024-05-03-bmp-image-generation-from-tex-in-csharp-tex-to-image/index.md",
+          "title": "BMP Image Generation From TeX in C# - TeX to Image",
+          "topic": "Convert TeX Documents to BMP Images in C#",
+          "url": "https://blog.aspose.com/tex/bmp-image-generation-from-tex-in-csharp-tex-to-image/"
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Product Documentation",
+      "sub_category": "File Viewer",
+      "topic": "Open Latex File Online - Free TeX File Viewer",
+      "topic_key": "online latex file viewer",
+      "baseline_record_id": "blog::tex/2023-03-15-open-latex-file-online/index.md",
+      "coverage": {
+        "general": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::tex/2023-03-15-open-latex-file-online/index.md",
+          "title": "Open Latex File Online - Free TeX File Viewer",
+          "topic": "Online LaTeX File Viewer",
+          "url": "https://blog.aspose.com/tex/open-latex-file-online-tex-viewer-online/"
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Productivity Tools",
+      "sub_category": "Table Creation",
+      "topic": "LaTeX Table Generator - Free Online LaTeX Generator",
+      "topic_key": "online latex table generator",
+      "baseline_record_id": "blog::tex/2023-03-13-latex-table-generator-online/index.md",
+      "coverage": {
+        "general": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::tex/2023-03-13-latex-table-generator-online/index.md",
+          "title": "LaTeX Table Generator - Free Online LaTeX Generator",
+          "topic": "Online LaTeX Table Generator",
+          "url": "https://blog.aspose.com/tex/latex-table-generator-online/"
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Programming",
+      "sub_category": "Document Automation",
+      "topic": "Create TeX File Programmatically",
+      "topic_key": "programmatic generation of tex files",
+      "baseline_record_id": "blog::tex/2025-02-17-create-tex-file-programmatically/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::tex/2025-02-17-create-tex-file-programmatically/index.md",
+          "title": "Create TeX File Programmatically",
+          "topic": "Programmatic Generation of TeX Files",
+          "url": "https://blog.aspose.com/tex/create-tex-file-programmatically/"
+        }
+      }
+    },
+    {
+      "category": "Programming",
+      "sub_category": "Document Conversion",
+      "topic": "Convert LaTeX to PNG in Java",
+      "topic_key": "convert latex files to png images",
+      "baseline_record_id": "blog::tex/2025-05-09-convert-latex-to-png-in-java/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::tex/2025-05-09-convert-latex-to-png-in-java/index.md",
+          "title": "Convert LaTeX to PNG in Java",
+          "topic": "Convert LaTeX files to PNG images",
+          "url": "https://blog.aspose.com/tex/convert-latex-to-png-in-java/"
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Programming",
+      "sub_category": "Graphics",
+      "topic": "Render LaTeX Math Formula to SVG in Java",
+      "topic_key": "rendering latex math formulas to svg",
+      "baseline_record_id": "blog::tex/2023-09-14-render-latex-math-formula-to-svg-in-java/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::tex/2023-09-14-render-latex-math-formula-to-svg-in-java/index.md",
+          "title": "Render LaTeX Math Formula to SVG in Java",
+          "topic": "Rendering LaTeX Math Formulas to SVG",
+          "url": "https://blog.aspose.com/tex/render-latex-math-formula-to-svg-in-java/"
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Programming",
+      "sub_category": "Graphics & Imaging",
+      "topic": "Convert LaTex to SVG using C# LaTex Library",
+      "topic_key": "convert latex formulas to svg in c",
+      "baseline_record_id": "blog::tex/2022-10-28-latex-formula-to-svg-in-csharp/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::tex/2022-10-28-latex-formula-to-svg-in-csharp/index.md",
+          "title": "Convert LaTex to SVG using C# LaTex Library",
+          "topic": "Convert LaTeX formulas to SVG in C#",
+          "url": "https://blog.aspose.com/tex/latex-formula-to-svg-in-csharp/"
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Programming",
+      "sub_category": "Image Conversion",
+      "topic": "Convert TeX to TIFF Image in C#",
+      "topic_key": "convert tex documents to tiff images",
+      "baseline_record_id": "blog::tex/2024-07-26-convert-tex-to-tiff-image-in-csharp/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::tex/2024-07-26-convert-tex-to-tiff-image-in-csharp/index.md",
+          "title": "Convert TeX to TIFF Image in C#",
+          "topic": "Convert TeX Documents to TIFF Images",
+          "url": "https://blog.aspose.com/tex/convert-tex-to-tiff-image-in-csharp/"
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Programming",
+      "sub_category": "Image Generation",
+      "topic": "LaTeX Mathematical Expressions using LaTeX to Image API",
+      "topic_key": "rendering latex math to png images",
+      "baseline_record_id": "blog::tex/2024-03-28-latex-mathematical-expressions-using-latex-to-image-api/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::tex/2024-03-28-latex-mathematical-expressions-using-latex-to-image-api/index.md",
+          "title": "LaTeX Mathematical Expressions using LaTeX to Image API",
+          "topic": "Rendering LaTeX Math to PNG Images",
+          "url": "https://blog.aspose.com/tex/latex-mathematical-expressions-using-latex-to-image-api/"
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Programming",
+      "sub_category": "LaTeX Rendering",
+      "topic": "Render LaTeX Math Formulas and Equations in Java",
+      "topic_key": "render latex math formulas",
+      "baseline_record_id": "blog::tex/2022-05-18-render-latex-math-formulas-and-equations-in-java/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::tex/2022-05-18-render-latex-math-formulas-and-equations-in-java/index.md",
+          "title": "Render LaTeX Math Formulas and Equations in Java",
+          "topic": "Render LaTeX Math Formulas in Java",
+          "url": "https://blog.aspose.com/tex/render-latex-math-formulas-and-equations-in-java/"
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    }
+  ]
+}

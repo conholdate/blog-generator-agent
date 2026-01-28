@@ -1,4 +1,4 @@
-from content_gap_agent.run import RunArgs, run_sync
+from agent_engine.content_gap_agent.cli import RunArgs, run_sync
 
 if __name__ == "__main__":
     out = run_sync(
