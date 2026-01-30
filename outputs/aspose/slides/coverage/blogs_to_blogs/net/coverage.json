@@ -1,0 +1,456 @@
+{
+  "case": "blogs_to_blogs",
+  "brand_key": "aspose",
+  "product_key": "slides",
+  "baseline_platform": "net",
+  "platforms": [
+    "net",
+    "cpp",
+    "general",
+    "java",
+    "python"
+  ],
+  "rows": [
+    {
+      "category": "Development",
+      "sub_category": "Office Automation",
+      "topic": "Merge PowerPoint Presentations using C# or VB.NET",
+      "topic_key": "merging powerpoint presentations programmatically",
+      "baseline_record_id": "blog::slides/2020-08-17-merge-powerpoint-presentations-using-csharp/index.md",
+      "coverage": {
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::slides/2020-08-17-merge-powerpoint-presentations-using-csharp/index.md",
+          "title": "Merge PowerPoint Presentations using C# or VB.NET",
+          "topic": "Merging PowerPoint Presentations Programmatically",
+          "url": "https://blog.aspose.com/slides/merge-powerpoint-presentations-using-csharp/"
+        },
+        "cpp": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "general": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::slides/2021-03-13-merge-powerpoint-presentations-using-cpp/index.md",
+          "title": "Merge PowerPoint Presentations using C++",
+          "topic": "Merging PowerPoint Presentations Programmatically",
+          "url": "https://blog.aspose.com/slides/merge-powerpoint-presentations-using-cpp/"
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::slides/2020-12-09-merge-powerpoint-presentations-using-java/index.md",
+          "title": "Merge PowerPoint Presentations using Java",
+          "topic": "Merging PowerPoint Presentations Programmatically",
+          "url": "https://blog.aspose.com/slides/merge-powerpoint-presentations-using-java/"
+        },
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::slides/2022-01-25-merge-powerpoint-ppt-in-python/index.md",
+          "title": "Merge PowerPoint Presentations in Python",
+          "topic": "Merging PowerPoint Presentations Programmatically",
+          "url": "https://blog.aspose.com/slides/merge-powerpoint-ppt-in-python/"
+        }
+      }
+    },
+    {
+      "category": "Development",
+      "sub_category": "Presentation Generation",
+      "topic": "Create and Edit PowerPoint PPT in ASP.NET",
+      "topic_key": "generating and editing powerpoint in asp",
+      "baseline_record_id": "blog::slides/2021-09-09-create-edit-powerpoint-files-in-asp-net/index.md",
+      "coverage": {
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::slides/2021-09-09-create-edit-powerpoint-files-in-asp-net/index.md",
+          "title": "Create and Edit PowerPoint PPT in ASP.NET",
+          "topic": "Generating and Editing PowerPoint in ASP.NET",
+          "url": "https://blog.aspose.com/slides/create-edit-powerpoint-files-in-asp-net/"
+        },
+        "cpp": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Document Conversion",
+      "sub_category": "Presentation Formats",
+      "topic": "Convert ODP to PPTX in C# using Aspose.Slides",
+      "topic_key": "convert odp presentations to pptx",
+      "baseline_record_id": "blog::slides/2025-07-08-convert-odp-to-pptx-in-csharp/index.md",
+      "coverage": {
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::slides/2025-07-08-convert-odp-to-pptx-in-csharp/index.md",
+          "title": "Convert ODP to PPTX in C# using Aspose.Slides",
+          "topic": "Convert ODP presentations to PPTX with .NET",
+          "url": "https://blog.aspose.com/slides/convert-odp-to-pptx-in-csharp/"
+        },
+        "cpp": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "File Conversion",
+      "sub_category": "Presentation to Image",
+      "topic": "PowerPoint Presentation Converter - Convert PPTX to EMF in C#",
+      "topic_key": "convert powerpoint pptx to emf using c",
+      "baseline_record_id": "blog::slides/2025-07-10-convert-pptx-to-emf-in-csharp/index.md",
+      "coverage": {
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::slides/2025-07-10-convert-pptx-to-emf-in-csharp/index.md",
+          "title": "PowerPoint Presentation Converter - Convert PPTX to EMF in C#",
+          "topic": "Convert PowerPoint PPTX to EMF Using C#",
+          "url": "https://blog.aspose.com/slides/convert-pptx-to-emf-in-csharp/"
+        },
+        "cpp": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Office Automation",
+      "sub_category": "PowerPoint Development",
+      "topic": "Add QR Code to PowerPoint Presentation using C#",
+      "topic_key": "add qr code to powerpoint presentation using c",
+      "baseline_record_id": "blog::slides/2022-06-02-add-qr-code-to-powerpoint-presentation-using-csharp/index.md",
+      "coverage": {
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::slides/2022-06-02-add-qr-code-to-powerpoint-presentation-using-csharp/index.md",
+          "title": "Add QR Code to PowerPoint Presentation using C#",
+          "topic": "Add QR Code to PowerPoint Presentation Using C#",
+          "url": "https://blog.aspose.com/slides/add-qr-code-to-powerpoint-presentation-using-csharp/"
+        },
+        "cpp": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Office Development",
+      "sub_category": "PowerPoint Automation",
+      "topic": "Add Digital Signature to PowerPoint in C#",
+      "topic_key": "add digital signature to powerpoint presentation",
+      "baseline_record_id": "blog::slides/2022-09-12-add-digital-signature-to-powerpoint-in-csharp/index.md",
+      "coverage": {
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::slides/2022-09-12-add-digital-signature-to-powerpoint-in-csharp/index.md",
+          "title": "Add Digital Signature to PowerPoint in C#",
+          "topic": "Add Digital Signature to PowerPoint Presentation",
+          "url": "https://blog.aspose.com/slides/add-digital-signature-to-powerpoint-in-csharp/"
+        },
+        "cpp": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": true,
+          "score": 0.9,
+          "record_id": "blog::slides/2022-09-28-use-java-to-add-digital-signature-in-ppt/index.md",
+          "title": "Add Digital Signature in PowerPoint PPT in Java",
+          "topic": "Add Digital Signature to PowerPoint Using Java",
+          "url": "https://blog.aspose.com/slides/use-java-to-add-digital-signature-in-ppt/"
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Product Updates",
+      "sub_category": "Release Notes",
+      "topic": "Improved Text and Chart Rendering using C# or VB.NET",
+      "topic_key": "aspose slides 18 2 release highlights",
+      "baseline_record_id": "blog::slides/2018-03-02-improved-text-and-chart-rendering-support-available-in-aspose.slides/index.md",
+      "coverage": {
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::slides/2018-03-02-improved-text-and-chart-rendering-support-available-in-aspose.slides/index.md",
+          "title": "Improved Text and Chart Rendering using C# or VB.NET",
+          "topic": "Aspose Slides for .NET 18.2 Release Highlights",
+          "url": "https://blog.aspose.com/slides/improved-text-and-chart-rendering-support-available-in-aspose.slides/"
+        },
+        "cpp": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::slides/2018-03-02-improved-performance-and-presentation-management-support-in-aspose.slides/index.md",
+          "title": "Improved Performance and Presentation Management Support in Aspose.Slides",
+          "topic": "Aspose Slides for Java 18.2 Release Highlights",
+          "url": "https://blog.aspose.com/slides/improved-performance-and-presentation-management-support-in-aspose.slides/"
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Product Updates",
+      "sub_category": "Release Notes",
+      "topic": "Aspose.Slides for .NET 2.6.24.0 Released",
+      "topic_key": "aspose slides net 2 6 24 release",
+      "baseline_record_id": "blog::slides/2007-06-13-80379/index.md",
+      "coverage": {
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::slides/2007-06-13-80379/index.md",
+          "title": "Aspose.Slides for .NET 2.6.24.0 Released",
+          "topic": "Aspose Slides .NET 2.6.24 Release",
+          "url": "https://blog.aspose.com/slides/80379/"
+        },
+        "cpp": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Web Development",
+      "sub_category": "Document Rendering",
+      "topic": "ASP.NET PowerPoint Viewer - Display PowerPoint Presentations in ASP.NET",
+      "topic_key": "displaying powerpoint presentations in asp net core",
+      "baseline_record_id": "blog::slides/2020-02-23-asp-net-core-powerpoint-viewer-display-ppt-pptx-presentations/index.md",
+      "coverage": {
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::slides/2020-02-23-asp-net-core-powerpoint-viewer-display-ppt-pptx-presentations/index.md",
+          "title": "ASP.NET PowerPoint Viewer - Display PowerPoint Presentations in ASP.NET",
+          "topic": "Displaying PowerPoint Presentations in ASP.NET Core",
+          "url": "https://blog.aspose.com/slides/asp-net-core-powerpoint-viewer-display-ppt-pptx-presentations/"
+        },
+        "cpp": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    }
+  ]
+}
