@@ -1,0 +1,1485 @@
+{
+  "case": "blogs_to_blogs",
+  "brand_key": "aspose",
+  "product_key": "words",
+  "baseline_platform": "net",
+  "platforms": [
+    "net",
+    "cpp",
+    "general",
+    "java",
+    "python"
+  ],
+  "rows": [
+    {
+      "category": "Community",
+      "sub_category": "Reviews",
+      "topic": "Pat Yourself on the Back",
+      "topic_key": "encouraging fresh reviews for aspose words net",
+      "baseline_record_id": "blog::words/2009-08-31-pat-yourself-on-the-back/index.md",
+      "coverage": {
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::words/2009-08-31-pat-yourself-on-the-back/index.md",
+          "title": "Pat Yourself on the Back",
+          "topic": "Encouraging Fresh Reviews for Aspose.Words .NET",
+          "url": "https://blog.aspose.com/words/pat-yourself-on-the-back/"
+        },
+        "cpp": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Development",
+      "sub_category": "Document Processing",
+      "topic": "Compare Two Word Documents in C#",
+      "topic_key": "comparing word documents programmatically",
+      "baseline_record_id": "blog::words/2023-11-10-compare-two-word-documents-in-csharp/index.md",
+      "coverage": {
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::words/2023-11-10-compare-two-word-documents-in-csharp/index.md",
+          "title": "Compare Two Word Documents in C#",
+          "topic": "Comparing Word Documents Programmatically",
+          "url": "https://blog.aspose.com/words/compare-two-word-documents-in-csharp/"
+        },
+        "cpp": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::words/2020-10-05-compare-ms-word-documents-using-java/index.md",
+          "title": "How to Compare Word Documents in Java",
+          "topic": "Comparing Word Documents Programmatically",
+          "url": "https://blog.aspose.com/words/compare-ms-word-documents-using-java/"
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Development",
+      "sub_category": "Document Processing",
+      "topic": "Merge MS Word Documents using C# ASP.NET",
+      "topic_key": "merging microsoft word documents in an asp net application",
+      "baseline_record_id": "blog::words/2020-07-07-merge-ms-word-documents-using-csharp-asp.net-core/index.md",
+      "coverage": {
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::words/2020-07-07-merge-ms-word-documents-using-csharp-asp.net-core/index.md",
+          "title": "Merge MS Word Documents using C# ASP.NET",
+          "topic": "Merging Microsoft Word Documents in an ASP.NET Application",
+          "url": "https://blog.aspose.com/words/merge-ms-word-documents-using-csharp-asp.net-core/"
+        },
+        "cpp": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Development",
+      "sub_category": "Web Development",
+      "topic": "Compare Two Word Documents using C# in ASP.NET",
+      "topic_key": "comparing word documents in asp",
+      "baseline_record_id": "blog::words/2020-07-06-compare-two-word-documents-using-csharp-in-asp.net-core/index.md",
+      "coverage": {
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::words/2020-07-06-compare-two-word-documents-using-csharp-in-asp.net-core/index.md",
+          "title": "Compare Two Word Documents using C# in ASP.NET",
+          "topic": "Comparing Word Documents in ASP.NET",
+          "url": "https://blog.aspose.com/words/compare-two-word-documents-using-csharp-in-asp.net-core/"
+        },
+        "cpp": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Development",
+      "sub_category": "Web Development",
+      "topic": "WYSIWYG Word Processing in the Browser with Aspose.Editor",
+      "topic_key": "wysiwyg word document editing in browser",
+      "baseline_record_id": "blog::words/2007-05-10-asp-net-wysiwyg-word-processing-in-the-browser/index.md",
+      "coverage": {
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::words/2007-05-10-asp-net-wysiwyg-word-processing-in-the-browser/index.md",
+          "title": "WYSIWYG Word Processing in the Browser with Aspose.Editor",
+          "topic": "WYSIWYG Word Document Editing in Browser",
+          "url": "https://blog.aspose.com/words/asp-net-wysiwyg-word-processing-in-the-browser/"
+        },
+        "cpp": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Document Generation",
+      "sub_category": "Word and PDF Conversion",
+      "topic": "Detektei Müller GmbH Uses Aspose APIs for Generating Word and PDF Documents in ASP.NET Core",
+      "topic_key": "generating word and pdf documents in asp net core",
+      "baseline_record_id": "blog::words/2019-04-11-generating-word-and-pdf-through-aspo.net-core-using-apis/index.md",
+      "coverage": {
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::words/2019-04-11-generating-word-and-pdf-through-aspo.net-core-using-apis/index.md",
+          "title": "Detektei Müller GmbH Uses Aspose APIs for Generating Word and PDF Documents in ASP.NET Core",
+          "topic": "Generating Word and PDF Documents in ASP.NET Core",
+          "url": "https://blog.aspose.com/words/generating-word-and-pdf-through-aspo.net-core-using-apis/"
+        },
+        "cpp": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Document Generation",
+      "sub_category": "Word and PDF Export",
+      "topic": "Spring.NET E-ticket Generation in SpringAir using Aspose.Words for .NET",
+      "topic_key": "generating e tickets in word and pdf with spring",
+      "baseline_record_id": "blog::words/2014-02-15-spring.net-e-ticket-generation-in-springair-using-aspose.words/index.md",
+      "coverage": {
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::words/2014-02-15-spring.net-e-ticket-generation-in-springair-using-aspose.words/index.md",
+          "title": "Spring.NET E-ticket Generation in SpringAir using Aspose.Words for .NET",
+          "topic": "Generating e‑tickets in Word and PDF with Spring.NET",
+          "url": "https://blog.aspose.com/words/spring.net-e-ticket-generation-in-springair-using-aspose.words/"
+        },
+        "cpp": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Document Processing",
+      "sub_category": "Barcode Integration",
+      "topic": "Create Barcode in Word Documents using C#",
+      "topic_key": "generate barcodes in word documents",
+      "baseline_record_id": "blog::words/2022-05-31-create-barcode-in-word-documents-using-csharp/index.md",
+      "coverage": {
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::words/2022-05-31-create-barcode-in-word-documents-using-csharp/index.md",
+          "title": "Create Barcode in Word Documents using C#",
+          "topic": "Generate Barcodes in Word Documents",
+          "url": "https://blog.aspose.com/words/create-barcode-in-word-documents-using-csharp/"
+        },
+        "cpp": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Document Processing",
+      "sub_category": "Export To Word",
+      "topic": "Export any page to a Word Processing Document in ASP.NET MVC using Aspose.Words for .NET",
+      "topic_key": "export web pages to word documents with aspose words",
+      "baseline_record_id": "blog::words/2015-12-31-export-any-page-to-a-word-processing-document-in-asp-net-mvc-using-aspose-words-fornet/index.md",
+      "coverage": {
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::words/2015-12-31-export-any-page-to-a-word-processing-document-in-asp-net-mvc-using-aspose-words-fornet/index.md",
+          "title": "Export any page to a Word Processing Document in ASP.NET MVC using Aspose.Words for .NET",
+          "topic": "Export Web Pages to Word Documents with Aspose.Words",
+          "url": "https://blog.aspose.com/words/export-any-page-to-a-word-processing-document-in-asp-net-mvc-using-aspose-words-fornet/"
+        },
+        "cpp": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Document Processing",
+      "sub_category": "Image Cropping and Rendering",
+      "topic": "Crop Image in Word to PDF and XPS using C# or VB.NET",
+      "topic_key": "rendering cropped images from word to pdf and xps",
+      "baseline_record_id": "blog::words/2009-08-06-aspose-words-now-supports-image-cropping-is-output-to-pdf-xps-printing-and-images/index.md",
+      "coverage": {
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::words/2009-08-06-aspose-words-now-supports-image-cropping-is-output-to-pdf-xps-printing-and-images/index.md",
+          "title": "Crop Image in Word to PDF and XPS using C# or VB.NET",
+          "topic": "Rendering Cropped Images from Word to PDF and XPS",
+          "url": "https://blog.aspose.com/words/aspose-words-now-supports-image-cropping-is-output-to-pdf-xps-printing-and-images/"
+        },
+        "cpp": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Document Processing",
+      "sub_category": "Mail Merge",
+      "topic": "Mail Merge in Word Documents using C# or VB.NET - .NET Mail Merge API",
+      "topic_key": "performing mail merge in word api",
+      "baseline_record_id": "blog::words/2020-07-14-mail-merge-in-word-documents-using-csharp-or-vb.net/index.md",
+      "coverage": {
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::words/2020-07-14-mail-merge-in-word-documents-using-csharp-or-vb.net/index.md",
+          "title": "Mail Merge in Word Documents using C# or VB.NET - .NET Mail Merge API",
+          "topic": "Performing Mail Merge in Word with .NET API",
+          "url": "https://blog.aspose.com/words/mail-merge-in-word-documents-using-csharp-or-vb.net/"
+        },
+        "cpp": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Document Processing",
+      "sub_category": "RTF to PDF Conversion",
+      "topic": "Convert RTF Documents to PDF using C#",
+      "topic_key": "convert rtf to pdf",
+      "baseline_record_id": "blog::words/2020-10-26-convert-rtf-to-pdf-in-csharp/index.md",
+      "coverage": {
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::words/2020-10-26-convert-rtf-to-pdf-in-csharp/index.md",
+          "title": "Convert RTF Documents to PDF using C#",
+          "topic": "Convert RTF to PDF",
+          "url": "https://blog.aspose.com/words/convert-rtf-to-pdf-in-csharp/"
+        },
+        "cpp": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Document Processing",
+      "sub_category": "Web Page Export",
+      "topic": "Export Any Page to PDF or Word Processing Document in ASP.NET MVC using Aspose.Words for .NET",
+      "topic_key": "export web page to pdf or word in asp net mvc",
+      "baseline_record_id": "blog::words/2016-02-03-export-any-page-to-a-pdf-or-any-word-processing-document-in-asp.net-mvc-using-aspose.words-for-.net/index.md",
+      "coverage": {
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::words/2016-02-03-export-any-page-to-a-pdf-or-any-word-processing-document-in-asp.net-mvc-using-aspose.words-for-.net/index.md",
+          "title": "Export Any Page to PDF or Word Processing Document in ASP.NET MVC using Aspose.Words for .NET",
+          "topic": "Export Web Page to PDF or Word in ASP.NET MVC",
+          "url": "https://blog.aspose.com/words/export-any-page-to-a-pdf-or-any-word-processing-document-in-asp.net-mvc-using-aspose.words-for-.net/"
+        },
+        "cpp": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Document Processing",
+      "sub_category": "Word Automation",
+      "topic": "How to Remove Pages from Word Document in C#",
+      "topic_key": "remove pages from word documents programmatically",
+      "baseline_record_id": "blog::words/2024-08-26-remove-pages-from-word-in-csharp/index.md",
+      "coverage": {
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::words/2024-08-26-remove-pages-from-word-in-csharp/index.md",
+          "title": "How to Remove Pages from Word Document in C#",
+          "topic": "Remove Pages from Word Documents Programmatically",
+          "url": "https://blog.aspose.com/words/remove-pages-from-word-in-csharp/"
+        },
+        "cpp": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Document Processing",
+      "sub_category": "Word Automation",
+      "topic": "Delete Blank Page in Word using C#",
+      "topic_key": "removing blank pages from word documents programmatically",
+      "baseline_record_id": "blog::words/2025-02-10-delete-blank-page-in-word-using-csharp/index.md",
+      "coverage": {
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::words/2025-02-10-delete-blank-page-in-word-using-csharp/index.md",
+          "title": "Delete Blank Page in Word using C#",
+          "topic": "Removing Blank Pages from Word Documents Programmatically",
+          "url": "https://blog.aspose.com/words/delete-blank-page-in-word-using-csharp/"
+        },
+        "cpp": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Document Processing",
+      "sub_category": "Word Editing",
+      "topic": "Create MS Word Editor in ASP.NET MVC",
+      "topic_key": "web based ms word editor with asp net mvc",
+      "baseline_record_id": "blog::words/2020-04-17-asp.net-mvc-word-editor-create-edit-word-documents/index.md",
+      "coverage": {
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::words/2020-04-17-asp.net-mvc-word-editor-create-edit-word-documents/index.md",
+          "title": "Create MS Word Editor in ASP.NET MVC",
+          "topic": "Web-Based MS Word Editor with ASP.NET MVC",
+          "url": "https://blog.aspose.com/words/asp.net-mvc-word-editor-create-edit-word-documents/"
+        },
+        "cpp": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Document Processing",
+      "sub_category": "Word Generation",
+      "topic": "Convert Picture to Word in C#",
+      "topic_key": "convert images to word documents using c",
+      "baseline_record_id": "blog::words/2024-01-08-convert-picture-to-word-in-csharp/index.md",
+      "coverage": {
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::words/2024-01-08-convert-picture-to-word-in-csharp/index.md",
+          "title": "Convert Picture to Word in C#",
+          "topic": "Convert Images to Word Documents Using C#",
+          "url": "https://blog.aspose.com/words/convert-picture-to-word-in-csharp/"
+        },
+        "cpp": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "general": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::words/2022-07-28-convert-image-to-doc-in-csharp/index.md",
+          "title": "Convert Image to DOC in C#",
+          "topic": "Convert Images to Word Documents Using C#",
+          "url": "https://blog.aspose.com/words/convert-image-to-doc-in-csharp/"
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": true,
+          "score": 0.9,
+          "record_id": "blog::words/2024-09-20-convert-photo-to-word-in-python/index.md",
+          "title": "Convert Photo to Word in Python",
+          "topic": "Convert Images to Word Documents",
+          "url": "https://blog.aspose.com/words/convert-photo-to-word-in-python/"
+        }
+      }
+    },
+    {
+      "category": "Document Processing",
+      "sub_category": "Word Page Extraction",
+      "topic": "Extract Pages from a Word Document in C# Using Aspose.Words",
+      "topic_key": "extract specific pages from word documents using c",
+      "baseline_record_id": "blog::words/2025-07-11-extract-word-pages-in-csharp/index.md",
+      "coverage": {
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::words/2025-07-11-extract-word-pages-in-csharp/index.md",
+          "title": "Extract Pages from a Word Document in C# Using Aspose.Words",
+          "topic": "Extract Specific Pages from Word Documents Using C#",
+          "url": "https://blog.aspose.com/words/extract-word-pages-in-csharp/"
+        },
+        "cpp": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Document Processing",
+      "sub_category": "Word Tables",
+      "topic": "Create Table in Word Documents using C#",
+      "topic_key": "create word table programmatically",
+      "baseline_record_id": "blog::words/2024-05-15-create-table-in-word-using-csharp/index.md",
+      "coverage": {
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::words/2024-05-15-create-table-in-word-using-csharp/index.md",
+          "title": "Create Table in Word Documents using C#",
+          "topic": "Create Word Table Programmatically",
+          "url": "https://blog.aspose.com/words/create-table-in-word-using-csharp/"
+        },
+        "cpp": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Documentation",
+      "sub_category": "Examples",
+      "topic": "Download and Run Examples for Aspose.Words for .NET",
+      "topic_key": "downloading and running aspose words net example projects",
+      "baseline_record_id": "blog::words/2016-01-25-download-and-run-examples-for-aspose.words-for-.net/index.md",
+      "coverage": {
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::words/2016-01-25-download-and-run-examples-for-aspose.words-for-.net/index.md",
+          "title": "Download and Run Examples for Aspose.Words for .NET",
+          "topic": "Downloading and Running Aspose.Words .NET Example Projects",
+          "url": "https://blog.aspose.com/words/download-and-run-examples-for-aspose.words-for-.net/"
+        },
+        "cpp": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "File Conversion",
+      "sub_category": "Word Document Formats",
+      "topic": "Convert DOCX to DOC or DOC to DOCX with C# VB.NET",
+      "topic_key": "convert word docx to doc and vice versa",
+      "baseline_record_id": "blog::words/2020-10-24-convert-docx-doc-with-csharp-vb-net/index.md",
+      "coverage": {
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::words/2020-10-24-convert-docx-doc-with-csharp-vb-net/index.md",
+          "title": "Convert DOCX to DOC or DOC to DOCX with C# VB.NET",
+          "topic": "Convert Word DOCX to DOC and vice versa",
+          "url": "https://blog.aspose.com/words/convert-docx-doc-with-csharp-vb-net/"
+        },
+        "cpp": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Libraries",
+      "sub_category": "Document Processing",
+      "topic": "Aspose.Words with AJAX Demo",
+      "topic_key": "using aspose words in ajax enabled net application",
+      "baseline_record_id": "blog::words/2008-03-05-aspose-words-with-ajax-demo/index.md",
+      "coverage": {
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::words/2008-03-05-aspose-words-with-ajax-demo/index.md",
+          "title": "Aspose.Words with AJAX Demo",
+          "topic": "Using Aspose.Words in AJAX‑enabled .NET Application",
+          "url": "https://blog.aspose.com/words/aspose-words-with-ajax-demo/"
+        },
+        "cpp": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Printing",
+      "sub_category": "Server-Side .NET",
+      "topic": "How-to: Print a Document on a Server via the XpsPrint API",
+      "topic_key": "server side document printing with xpsprint api",
+      "baseline_record_id": "blog::words/2009-10-18-how-to-print-a-document-on-a-server-via-the-xpsprint-api/index.md",
+      "coverage": {
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::words/2009-10-18-how-to-print-a-document-on-a-server-via-the-xpsprint-api/index.md",
+          "title": "How-to: Print a Document on a Server via the XpsPrint API",
+          "topic": "Server-Side Document Printing with XpsPrint API",
+          "url": "https://blog.aspose.com/words/how-to-print-a-document-on-a-server-via-the-xpsprint-api/"
+        },
+        "cpp": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Product Updates",
+      "sub_category": "Release Notes",
+      "topic": "Aspose.Words for .NET 4.3.0 Released",
+      "topic_key": "aspose words net 4 3 0 release features and fixes",
+      "baseline_record_id": "blog::words/2007-07-20-aspose-words-for-net-4-3-0-released/index.md",
+      "coverage": {
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::words/2007-07-20-aspose-words-for-net-4-3-0-released/index.md",
+          "title": "Aspose.Words for .NET 4.3.0 Released",
+          "topic": "Aspose.Words .NET 4.3.0 Release Features and Fixes",
+          "url": "https://blog.aspose.com/words/aspose-words-for-net-4-3-0-released/"
+        },
+        "cpp": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Software Development",
+      "sub_category": "Document Automation",
+      "topic": "Service Software Uses Aspose.Words Enabling Users to Create Custom Word Files for Communication",
+      "topic_key": "custom word document generation with aspose words",
+      "baseline_record_id": "blog::words/2012-12-29-create-document-templates-enabling-users-to-create-custom-word-files/index.md",
+      "coverage": {
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::words/2012-12-29-create-document-templates-enabling-users-to-create-custom-word-files/index.md",
+          "title": "Service Software Uses Aspose.Words Enabling Users to Create Custom Word Files for Communication",
+          "topic": "Custom Word Document Generation with Aspose.Words",
+          "url": "https://blog.aspose.com/words/create-document-templates-enabling-users-to-create-custom-word-files/"
+        },
+        "cpp": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Web Development",
+      "sub_category": "ASP.NET Controls",
+      "topic": "Aspose .NET Export ListView To Word Control for Visual Studio",
+      "topic_key": "export asp net listview to word document",
+      "baseline_record_id": "blog::words/2015-11-19-aspose-.net-export-listview-to-word-control-for-visual-studio/index.md",
+      "coverage": {
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::words/2015-11-19-aspose-.net-export-listview-to-word-control-for-visual-studio/index.md",
+          "title": "Aspose .NET Export ListView To Word Control for Visual Studio",
+          "topic": "Export ASP.NET ListView to Word Document",
+          "url": "https://blog.aspose.com/words/aspose-.net-export-listview-to-word-control-for-visual-studio/"
+        },
+        "cpp": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Web Development",
+      "sub_category": "ASP.NET Controls",
+      "topic": "Aspose .NET Export Repeater To Word Control for Visual Studio",
+      "topic_key": "export asp net repeater to word document",
+      "baseline_record_id": "blog::words/2015-11-04-aspose-.net-export-repeater-to-word-control-for-visual-studio/index.md",
+      "coverage": {
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::words/2015-11-04-aspose-.net-export-repeater-to-word-control-for-visual-studio/index.md",
+          "title": "Aspose .NET Export Repeater To Word Control for Visual Studio",
+          "topic": "Export ASP.NET Repeater to Word Document",
+          "url": "https://blog.aspose.com/words/aspose-.net-export-repeater-to-word-control-for-visual-studio/"
+        },
+        "cpp": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Web Development",
+      "sub_category": "Data Export",
+      "topic": "Export GridView To Word Control for Visual Studio",
+      "topic_key": "export gridview data to word document in visual studio",
+      "baseline_record_id": "blog::words/2015-06-23-aspose-.net-export-gridview-to-word-control-for-visual-studio/index.md",
+      "coverage": {
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::words/2015-06-23-aspose-.net-export-gridview-to-word-control-for-visual-studio/index.md",
+          "title": "Export GridView To Word Control for Visual Studio",
+          "topic": "Export GridView Data to Word Document in Visual Studio",
+          "url": "https://blog.aspose.com/words/aspose-.net-export-gridview-to-word-control-for-visual-studio/"
+        },
+        "cpp": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Web Development",
+      "sub_category": "Image Export",
+      "topic": "Export Webpage Contents to an Image or Image Archive Using Aspose.Words for ASP.NET MVC",
+      "topic_key": "export webpage content to images in asp net mvc",
+      "baseline_record_id": "blog::words/2016-04-23-export-webpage-contents-to-an-image-or-image-archive-using-aspose.words-for-asp.net-mvc/index.md",
+      "coverage": {
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::words/2016-04-23-export-webpage-contents-to-an-image-or-image-archive-using-aspose.words-for-asp.net-mvc/index.md",
+          "title": "Export Webpage Contents to an Image or Image Archive Using Aspose.Words for ASP.NET MVC",
+          "topic": "Export Webpage Content to Images in ASP.NET MVC",
+          "url": "https://blog.aspose.com/words/export-webpage-contents-to-an-image-or-image-archive-using-aspose.words-for-asp.net-mvc/"
+        },
+        "cpp": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Word Processing",
+      "sub_category": "Charts",
+      "topic": "Create Charts in Word using C#",
+      "topic_key": "create charts in word documents programmatically",
+      "baseline_record_id": "blog::words/2024-12-03-create-charts-in-word-using-csharp/index.md",
+      "coverage": {
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::words/2024-12-03-create-charts-in-word-using-csharp/index.md",
+          "title": "Create Charts in Word using C#",
+          "topic": "Create charts in Word documents programmatically",
+          "url": "https://blog.aspose.com/words/create-charts-in-word-using-csharp/"
+        },
+        "cpp": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    }
+  ]
+}
