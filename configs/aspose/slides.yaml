@@ -1,0 +1,94 @@
+# Aspose.Slides
+blog: aspose
+key: slides
+
+# Reusable platform definitions
+platform_definitions:
+  net:
+    display_name: ".NET"
+    keywords: ["c#", "csharp", ".net", "dotnet", "vb.net", "visual basic"]
+
+  java:
+    display_name: "Java"
+    keywords: ["java", "j2se", "j2ee", "jsp"]
+
+  cpp:
+    display_name: "C++"
+    keywords: ["cpp", "c++", "cplusplus"]
+
+  python_net:
+    display_name: "Python via .NET"
+    keywords: ["python", "python-net", "py", "python .net", "python via .net"]
+
+  android:
+    display_name: "Android via Java"
+    keywords: ["android", "android java"]
+
+  nodejs_java:
+    display_name: "Node.js via Java"
+    keywords: ["nodejs", "node.js", "javascript", "node via java"]
+
+  php_java:
+    display_name: "PHP via Java"
+    keywords: ["php", "php via java"]
+
+# Product: Aspose.Slides
+display_name: "Aspose.Slides"
+description: "PowerPoint presentation processing, rendering, and conversion APIs (PPT/PPTX/ODP)"
+enabled: true
+
+# Common repo URLs for all platforms
+doc_repo: "https://github.com/aspose-slides/Aspose.Slides-Documentation"
+doc_branch: "master"
+
+api_repo: "https://github.com/aspose-slides/Aspose.Slides-API-References"
+api_branch: "main"
+
+tut_repo: "https://github.com/aspose-slides/Aspose.Slides-Reference-Tutorials"
+tut_branch: "main"
+
+platforms:
+  - net:
+      definition: net
+      # Docs repo is language-rooted (e.g., en/...), then platform folders underneath.
+      doc_path: "en/net"
+      # API refs repo is Hugo-based; content lives under /content (platform filtering is done by your indexer/platform detector).
+      api_path: "content"
+      tut_path: "slides"
+      enabled: true
+
+  - java:
+      definition: java
+      doc_path: "en/java"
+      api_path: "content"
+      tut_path: "slides"
+      enabled: true
+
+  - cpp:
+      definition: cpp
+      doc_path: "en/cpp"
+      api_path: "content"
+      tut_path: "slides"
+      enabled: true
+
+  - python_net:
+      definition: python_net
+      doc_path: "en/python-net"
+      api_path: "content"
+      tut_path: "slides"
+      enabled: true
+
+  - nodejs_java:
+      definition: nodejs_java
+      # There isn't always a dedicated docs subtree; typically maps to Java docs + Node.js via Java examples.
+      doc_path: "en/nodejs-java"
+      api_path: "content"
+      tut_path: "slides"
+      enabled: false  # Enable when needed
+
+  - php_java:
+      definition: php_java
+      doc_path: "en/php-java"
+      api_path: "content"
+      tut_path: "slides"
+      enabled: false  # Enable when needed
