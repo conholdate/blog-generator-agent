@@ -61,7 +61,7 @@ on:
         description: "Baseline platform (required for docs_to_*). Example: net"
         required: false
         type: string
-        default: "net"
+        default: ""
 
       threshold_strict:
         description: "Strict threshold"
