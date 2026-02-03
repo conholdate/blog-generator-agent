@@ -1,0 +1,86 @@
+# Aspose.Email
+blog: aspose
+key: email
+# Reusable platform definitions
+platform_definitions:
+  net:
+    display_name: ".NET"
+    keywords: ["c#", "csharp", ".net", "dotnet", "vb.net", "visual basic"]
+
+  java:
+    display_name: "Java"
+    keywords: ["java", "j2se", "j2ee", "jsp"]
+
+  cpp:
+    display_name: "C++"
+    keywords: ["cpp", "c++", "cplusplus"]
+
+  python_net:
+    display_name: "Python via .NET"
+    keywords: ["python", "python-net", "py", "python .net", "python via .net"]
+
+  android_java:
+    display_name: "Android via Java"
+    keywords: ["android", "android java", "android via java"]
+
+  sharepoint:
+    display_name: "SharePoint"
+    keywords: ["sharepoint"]
+
+# Product: Aspose.Email
+display_name: "Aspose.Email"
+description: "Email processing APIs for MSG/EML/MBOX, PST/OST, MIME, calendars/contacts, and mail protocols"
+enabled: true
+
+# Common repo URLs for all platforms
+doc_repo: "https://github.com/aspose-email/Aspose.Email-Documentation"
+doc_branch: "master"
+
+api_repo: "https://github.com/aspose-email/Aspose.Email-API-References"
+api_branch: "main"
+
+tut_repo: "https://github.com/aspose-email/Aspose.Email-API-Reference-Tutorials"
+tut_branch: "main"
+
+platforms:
+  - net:
+      definition: net
+      doc_path: "en/net"
+      api_path: "english/net"
+      tut_path: "email"
+      enabled: true
+
+  - java:
+      definition: java
+      doc_path: "en/java"
+      api_path: "english/java"
+      tut_path: "email"
+      enabled: true
+
+  - cpp:
+      definition: cpp
+      doc_path: "en/cpp"
+      api_path: "english/cpp"
+      tut_path: "email"
+      enabled: true
+
+  - python_net:
+      definition: python_net
+      doc_path: "en/python-net"
+      api_path: "english/python-net"
+      tut_path: "email"
+      enabled: true
+
+  - android_java:
+      definition: android_java
+      doc_path: "en/androidjava"
+      api_path: "english/androidjava"
+      tut_path: "email"
+      enabled: false  # Enable when needed
+
+  - sharepoint:
+      definition: sharepoint
+      doc_path: "en/sharepoint"
+      api_path: "english/net"   # usually aligns with .NET API
+      tut_path: "email"
+      enabled: false  # Enable when needed
