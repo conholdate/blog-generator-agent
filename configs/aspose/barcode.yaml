@@ -1,0 +1,119 @@
+# Aspose.BarCode
+blog: aspose
+key: barcode
+# Reusable platform definitions
+platform_definitions:
+  net:
+    display_name: ".NET"
+    keywords: ["c#", "csharp", ".net", "dotnet", "vb.net", "visual basic"]
+
+  java:
+    display_name: "Java"
+    keywords: ["java", "j2se", "j2ee", "jsp"]
+
+  cpp:
+    display_name: "C++"
+    keywords: ["cpp", "c++", "cplusplus"]
+
+  python_net:
+    display_name: "Python via .NET"
+    keywords: ["python", "python-net", "py", "python .net", "python via .net"]
+
+  android_java:
+    display_name: "Android via Java"
+    keywords: ["android", "android java", "android via java"]
+
+  nodejs_java:
+    display_name: "Node.js via Java"
+    keywords: ["nodejs", "node.js", "javascript", "node via java"]
+
+  php_java:
+    display_name: "PHP via Java"
+    keywords: ["php", "php via java"]
+
+  python_java:
+    display_name: "Python via Java"
+    keywords: ["python", "python via java", "jython"]
+
+  javascript_cpp:
+    display_name: "JavaScript via C++"
+    keywords: ["javascript", "js", "wasm", "webassembly", "javascript via c++"]
+
+# Product: Aspose.BarCode
+display_name: "Aspose.BarCode"
+description: "Barcode generation and recognition APIs (1D, 2D, postal, QR, DataMatrix, etc.)"
+enabled: true
+
+# Common repo URLs for all platforms
+doc_repo: "https://github.com/aspose-barcode/Aspose.BarCode-Documentation"
+doc_branch: "master"
+
+api_repo: "https://github.com/aspose-barcode/Aspose.BarCode-API-References"
+api_branch: "main"
+
+tut_repo: "https://github.com/aspose-barcode/aspose-barcode-reference-tutorials"
+tut_branch: "main"
+
+platforms:
+  - net:
+      definition: net
+      doc_path: "net"
+      api_path: "english/net"
+      tut_path: "barcode"
+      enabled: true
+
+  - java:
+      definition: java
+      doc_path: "java"
+      api_path: "english/java"
+      tut_path: "barcode"
+      enabled: true
+
+  - cpp:
+      definition: cpp
+      doc_path: "cpp"
+      api_path: "english/cpp"
+      tut_path: "barcode"
+      enabled: true
+
+  - python_net:
+      definition: python_net
+      doc_path: "python-net"
+      api_path: "english/python-net"
+      tut_path: "barcode"
+      enabled: true
+
+  - android_java:
+      definition: android_java
+      doc_path: "androidjava"
+      api_path: "english/androidjava"
+      tut_path: "barcode"
+      enabled: false  # Enable when needed
+
+  - nodejs_java:
+      definition: nodejs_java
+      doc_path: "nodejsjava"
+      api_path: "english/nodejsjava"
+      tut_path: "barcode"
+      enabled: false  # Enable when needed
+
+  - php_java:
+      definition: php_java
+      doc_path: "phpjava"
+      api_path: "english/phpjava"
+      tut_path: "barcode"
+      enabled: false  # Enable when needed
+
+  - python_java:
+      definition: python_java
+      doc_path: "pythonjava"
+      api_path: "english/pythonjava"
+      tut_path: "barcode"
+      enabled: false  # Enable when needed
+
+  - javascript_cpp:
+      definition: javascript_cpp
+      doc_path: "javascript-cpp"
+      api_path: "english/javascript-cpp"
+      tut_path: "barcode"
+      enabled: false  # Enable when needed
