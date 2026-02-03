@@ -1,0 +1,75 @@
+# Aspose.Diagram
+blog: aspose
+key: diagram
+# Reusable platform definitions
+platform_definitions:
+  net:
+    display_name: ".NET"
+    keywords: ["c#", "csharp", ".net", "dotnet", "vb.net", "visual basic"]
+
+  java:
+    display_name: "Java"
+    keywords: ["java", "j2se", "j2ee", "jsp"]
+
+  python_net:
+    display_name: "Python via .NET"
+    keywords: ["python", "python-net", "py", "python .net", "python via .net"]
+
+  nodejs_java:
+    display_name: "Node.js via Java"
+    keywords: ["nodejs", "node.js", "javascript", "node via java", "nodejs via java"]
+
+  python_java:
+    display_name: "Python via Java"
+    keywords: ["python", "python via java", "jython"]
+
+# Product: Aspose.Diagram
+display_name: "Aspose.Diagram"
+description: "Microsoft Visio (VSD/VSDX/VSS/VST) diagram processing and conversion APIs"
+enabled: true
+
+# Common repo URLs for all platforms
+doc_repo: "https://github.com/aspose-diagram/Aspose.Diagram-Documentation"
+doc_branch: "master"
+
+api_repo: "https://github.com/aspose-diagram/Aspose.Diagram-API-References"
+api_branch: "main"
+
+tut_repo: "https://github.com/aspose-diagram/aspose-diagram-tutorials"
+tut_branch: "main"
+
+platforms:
+  - net:
+      definition: net
+      doc_path: "en/net"
+      api_path: "english/net"
+      tut_path: "diagram/english/net"
+      enabled: true
+
+  - java:
+      definition: java
+      doc_path: "en/java"
+      api_path: "english/java"
+      tut_path: "diagram/english/java"
+      enabled: true
+
+  - python_net:
+      definition: python_net
+      doc_path: "en/python-via-net"
+      api_path: "english/net"          # Python-via-.NET typically maps to .NET API ref
+      tut_path: "diagram/english/net"  # tutorials commonly reuse .NET track
+      enabled: true
+
+  - nodejs_java:
+      definition: nodejs_java
+      doc_path: "en/nodejs-via-java"
+      api_path: "english/java"
+      tut_path: "diagram/english/java"
+      enabled: false  # Enable when needed
+
+  - python_java:
+      definition: python_java
+      doc_path: "en/python-via-java"
+      api_path: "english/java"
+      tut_path: "diagram/english/java"
+      enabled: false  # Enable when needed
