@@ -13,7 +13,7 @@ from statistics import mean
 from typing import Optional, List, Mapping, Any, Dict, Tuple
 
 import requests
-
+from .tools.keyword_refiner import KeywordRefiner
 from .metrics_sender import send_stage_metrics
 from .tools.content_index import get_existing_posts
 from .schemas import RunRequest, RunResult, Cluster, KeywordRecord
@@ -28,7 +28,7 @@ from .tools.metrics import RunMetrics, timed_step
 from .blog_keyword_generator import LLMKeywordGenRequest, fetch_llm_keywords
 
 logger = logging.getLogger(__name__)
-
+refiner = KeywordRefiner()
 
 def _project_root(start: Optional[Path] = None) -> Path:
     """
@@ -366,8 +366,11 @@ def write_topics_markdown(
         title = pick("title", "") or ""
         cluster_id = pick("cluster_id")
         angle = pick("angle")
-        primary_kw = pick("primary_keyword")
-        supporting_kws = pick("supporting_keywords", []) or []
+        primary_kw_r = pick("primary_keyword")
+        primary_kw = refiner.refine(primary_kw_r)
+
+        supporting_kws_r = pick("supporting_keywords", []) or []
+        supporting_kws = refiner.refine(supporting_kws_r)
         outline = pick("outline", []) or []
         persona = pick("target_persona")
 
