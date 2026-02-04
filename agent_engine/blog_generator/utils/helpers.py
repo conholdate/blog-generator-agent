@@ -223,6 +223,8 @@ def get_productInfo(product_name: str, platform: str, products, brand) -> str:
     # Normalize platform
     if platform_clean == "net":
         platform_clean = ".net"
+    elif platform_clean == "python-via-net":
+        platform_clean = "Python via .NET"
 
     # Build expected product name based on brand and platform
     if "cloud" in brand_clean.lower():
