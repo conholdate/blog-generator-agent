@@ -215,19 +215,30 @@ def format_related_posts(related_links):
 
     return "\n".join(formatted_lines)
 
-def get_productInfo(product_name: str, platform: str, products) -> str:
+def get_productInfo(product_name: str, platform: str, products, brand) -> str:
     base_name = product_name.strip()
     platform_clean = platform.strip().lower()
+    brand_clean = brand.strip() if brand else ""
 
     # Normalize platform
     if platform_clean == "net":
         platform_clean = ".net"
 
-    # Build expected product name EXACTLY as in your data
-    if platform_clean == "cloud":
-        expected_name = f"{base_name} {platform_clean}"
+    # Build expected product name based on brand and platform
+    if "cloud" in brand_clean.lower():
+        # For Cloud brands (GroupDocs.Cloud, Aspose.Cloud)
+        if platform_clean == "cloud":
+            # If platform is also "cloud", use format: "ProductName Cloud"
+            expected_name = f"{base_name} {platform_clean}"
+        else:
+            # For specific platforms, use format: "ProductName Cloud SDK for .NET"
+            expected_name = f"{base_name} Cloud SDK for {platform_clean}"
     else:
-        expected_name = f"{base_name} for {platform_clean}"
+        # For non-Cloud brands (regular Aspose, GroupDocs, Conholdate)
+        if platform_clean == "cloud":
+            expected_name = f"{base_name} {platform_clean}"
+        else:
+            expected_name = f"{base_name} for {platform_clean}"
 
     # Case-insensitive matching
     product_info = next(
@@ -240,7 +251,8 @@ def get_productInfo(product_name: str, platform: str, products) -> str:
 
     if not product_info:
         raise ValueError(
-            f"No product found for '{product_name}' with platform '{platform}'"
+            f"No product found for '{product_name}' with platform '{platform}' and brand '{brand}'. "
+            f"Expected product name: '{expected_name}'"
         )
 
     return product_info

@@ -2,8 +2,8 @@
 # KRA run configuration for Aspose.Cells (Python)
 
 meta:
-  blog_name: "aspose.com"
-  brand: "Aspose"
+  blog_name: "GroupDocs.cloud"
+  brand: "GroupDocs.cloud"
   created_at: "2025-12-04"
   owner: "content-team"         # optional, just for humans
 
@@ -11,11 +11,11 @@ engine:
   # === Core KRA inputs ===
   # input_file: "content/Aspose/keywords.csv"
   use-serp-api: true
-  serp-topic: "Convert LaTeX to PNG in Python"
+  serp-topic: "Convert Markdown to HTML"
 
-  brand: "aspose"
-  product: "Aspose.TeX"
-  platform: "Python via .NET"           # used as --platform; also passed into prompt as fw_label
+  brand: "GroupDocs.cloud"
+  product: "GroupDocs.Conversion"
+  platform: ".NET"           # used as --platform; also passed into prompt as fw_label
   # locale: "en-US"
 
   # === KRA behavior tuning ===

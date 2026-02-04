@@ -7,8 +7,8 @@ load_dotenv()  # loads .env from project root by default
 
 
 class Settings(BaseSettings):
-    PROFESSIONALIZE_BASE_URL: str | None = None
-    PROFESSIONALIZE_API_KEY: str | None = None
+    PROFESSIONALIZE_BASE_URL: str ="https://llm.professionalize.com/v1"
+    PROFESSIONALIZE_API_KEY: str ="sk-etp8ZujXM8fJYQ8ApV6a-Q"
 
     # Standard OpenAI key (used when no custom base URL is set)
     OPENAI_API_KEY: str | None = None
@@ -17,7 +17,7 @@ class Settings(BaseSettings):
     PROFESSIONALIZE_LLM_MODEL: str = "gpt-oss"
 
     # --- SerpAPI integration ---
-    SERPAPI_KEY: str = ""
+    SERPAPI_KEY: str = "66c1df1bd9d524fc1f5864c6070b9a73666994b392127d642839817119d7992d"
     SERPAPI_ENGINE: str = "google"  # we’ll use standard Google search
 
     # --- KRA scoring / data dirs (unchanged) ---
@@ -36,7 +36,7 @@ class Settings(BaseSettings):
 
     # --- NEW: Metrics / Google Apps Script webhook ---
     METRICS_WEBHOOK_URL: str = "https://script.google.com/macros/s/AKfycbyCHwElrM6RcYLi0JNQAkJmzGrBjAhf28mKXVyub_6SdaZ2ITvzCwfM5xCLE7rmuxio/exec"
-    METRICS_TOKEN: str = "lM6iU2mW0gV1eZ"
+    METRICS_TOKEN: str = ""
     METRICS_AGENT_NAME: str = "Keyword Analyzer"
     METRICS_AGENT_OWNER: str = "Muzammil Khan"
     METRICS_KEYWORD_CLUSTERING_JOB: str = "Keyword Clustering"
@@ -44,7 +44,7 @@ class Settings(BaseSettings):
 
     # --- Internal Blog Teams Metrics / Google Apps Script webhook ---
     INT_METRICS_WEBHOOK_URL: str = "https://script.google.com/macros/s/AKfycbwYyPBs3ox6xhYfznVpu4Gh8T4l7cXrAIj1m_y1g-vWn6tyP_LAkv3eo6W2EZYAeHgLag/exec"
-    INT_METRICS_TOKEN: str = "blog_team_agent-2026"
+    INT_METRICS_TOKEN: str = "-2026"
 
 settings = Settings()
 

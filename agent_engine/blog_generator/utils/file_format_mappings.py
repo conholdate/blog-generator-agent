@@ -317,7 +317,6 @@ FILE_FORMAT_MAPPINGS = {
     "GDB": "database/gdb/",
     "ITW": "database/itw/",
     "LDF": "database/ldf/",
-    "LOG": "database/log/",
     "MDB": "database/mdb/",
     "MYI": "database/myi/",
     "NDF": "database/ndf/",
@@ -541,7 +540,6 @@ FILE_FORMAT_MAPPINGS = {
     "GMA": "game/gma/",
     "IPS-PS2": "game/ips-ps2/",
     "KODU": "game/kodu/",
-    "LANG": "game/lang/",
     "LITEMOD": "game/litemod/",
     "MAP": "game/map/",
     "MCA": "game/mca/",
@@ -798,7 +796,6 @@ FILE_FORMAT_MAPPINGS = {
     "ENL": "misc/enl/",
     "ERR": "misc/err/",
     "FIG": "misc/fig/",
-    "FILE": "misc/file/",
     "FLA": "misc/fla/",
     "GPG": "misc/gpg/",
     "H4": "misc/h4/",
@@ -820,7 +817,6 @@ FILE_FORMAT_MAPPINGS = {
     "OBB": "misc/obb/",
     "ODF": "misc/odf/",
     "OGG": "misc/ogg/",
-    "PACKAGE": "misc/package/",
     "PDO": "misc/pdo/",
     "PES": "misc/pes/",
     "PFX": "misc/pfx/",
@@ -844,7 +840,6 @@ FILE_FORMAT_MAPPINGS = {
     "XSMX": "misc/xsmx/",
 
     # Note-taking
-    "ONE": "note-taking/one/",
     "ONETOC2": "note-taking/onetoc2/",
 
     # Page-description-language
@@ -864,7 +859,6 @@ FILE_FORMAT_MAPPINGS = {
 
     # Pdf
     "DOWNLOAD-PDF": "pdf/download-pdf/",
-    "E": "pdf/e/",
     "FDF": "pdf/fdf/",
     "UA": "pdf/ua/",
     "VT": "pdf/vt/",
@@ -967,7 +961,6 @@ FILE_FORMAT_MAPPINGS = {
     "GMD": "programming/gmd/",
     "GO": "programming/go/",
     "GROOVY": "programming/groovy/",
-    "H": "programming/h/",
     "HAML": "programming/haml/",
     "HH": "programming/hh/",
     "HPP": "programming/hpp/",
@@ -1002,7 +995,6 @@ FILE_FORMAT_MAPPINGS = {
     "PYM": "programming/pym/",
     "PYW": "programming/pyw/",
     "PYX": "programming/pyx/",
-    "R": "programming/r/",
     "RB": "programming/rb/",
     "RBXL": "programming/rbxl/",
     "RBXM": "programming/rbxm/",
@@ -1140,7 +1132,6 @@ FILE_FORMAT_MAPPINGS = {
     "_XLSX": "spreadsheet/_xlsx/",
 
     # System
-    "1": "system/1/",
     "ADM": "system/adm/",
     "ADMX": "system/admx/",
     "AML": "system/aml/",
@@ -1367,9 +1358,6 @@ FILE_FORMAT_MAPPINGS = {
     "JSON": "web/json/",
     "JSPA": "web/jspa/",
     "KEY": "web/key/",
-    "KIT": "web/kit/",
-    "LESS": "web/less/",
-    "MASTER": "web/master/",
     "MHT": "web/mht/",
     "MHTML": "web/mhtml/",
     "MJS": "web/mjs/",
@@ -1398,7 +1386,6 @@ FILE_FORMAT_MAPPINGS = {
     "STML": "web/stml/",
     "SVR": "web/svr/",
     "TPL": "web/tpl/",
-    "TS": "web/ts/",
     "URL": "web/url/",
     "VDISCO": "web/vdisco/",
     "VRT": "web/vrt/",
@@ -1438,6 +1425,7 @@ FILE_FORMAT_MAPPINGS = {
     "LTX": "word-processing/ltx/",
     "MAN": "word-processing/man/",
     "MD": "word-processing/md/",
+    "Markdown": "word-processing/md/",
     "ODM": "word-processing/odm/",
     "ODT": "word-processing/odt/",
     "OTT": "word-processing/ott/",

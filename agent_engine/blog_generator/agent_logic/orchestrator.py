@@ -84,8 +84,9 @@ class BlogOrchestrator:
         platform = topics_raw_data.pop("platform")
         
         # Get product info
-        product_info = get_productInfo(product_name, platform, self.products)
-        print(f"Product Infor --- {product_info}", flush=True)
+        product_info = get_productInfo(product_name, platform, self.products, self.brand)
+        isCloud = "cloud" in product_info["ProductName"].lower()
+        print(f"Product Info {isCloud} --- {product_info}", flush=True)
         # Start metrics tracking
         self.metrics.start_job(
             product=product_name,
@@ -132,7 +133,8 @@ class BlogOrchestrator:
                     author,
                     platform,
                     target_persona,
-                    angle
+                    angle,
+                    isCloud
                 ),
                 model=self.model,
                 model_settings=ModelSettings(temperature=0.6)
@@ -182,13 +184,13 @@ class BlogOrchestrator:
             # Print and send metrics
             self.metrics.print_summary()
             print("📊 Sending metrics to Google Script...")
-            # metrics_sent_for_team = await self.metrics.send_metrics_to_team()
-            # metrics_sent_for_pro = await self.metrics.send_metrics_to_prod()
+            metrics_sent_for_team = await self.metrics.send_metrics_to_team()
+            metrics_sent_for_pro = await self.metrics.send_metrics_to_prod()
             
-            # if metrics_sent_for_team and metrics_sent_for_pro:
-            #     print("Metrics sent successfully\n")
-            # else:
-            #     print("Failed to send metrics (check logs)\n")
+            if metrics_sent_for_team and metrics_sent_for_pro:
+                print("Metrics sent successfully\n")
+            else:
+                print("Failed to send metrics (check logs)\n")
 
             return {
                 "folder_name": folder_name,
