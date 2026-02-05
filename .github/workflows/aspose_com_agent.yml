@@ -20,6 +20,42 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
+    - name: Extract product name from keywords file
+      id: extract_product
+      run: |
+        KEYWORDS_FILE="${{ inputs.keywords_file }}"
+        
+        echo "=== Extracting product name from keywords file ==="
+        echo "Keywords file: $KEYWORDS_FILE"
+        
+        if [ ! -f "$KEYWORDS_FILE" ]; then
+          echo "❌ Keywords file not found: $KEYWORDS_FILE"
+          exit 1
+        fi
+        
+        # Extract product name from the file content
+        # Format: **Product:** Aspose.Cells or Aspose.TeX
+        PRODUCT_LINE=$(grep -i "^\*\*Product:\*\*" "$KEYWORDS_FILE" | head -1)
+        
+        if [ -z "$PRODUCT_LINE" ]; then
+          echo "❌ Product line not found in keywords file"
+          cat "$KEYWORDS_FILE"
+          exit 1
+        fi
+        
+        echo "Found product line: $PRODUCT_LINE"
+        
+        # Extract product name and convert to lowercase folder name
+        # From "**Product:** Aspose.Cells" to "cells"
+        FULL_PRODUCT=$(echo "$PRODUCT_LINE" | sed 's/.*Product:\*\*[ ]*//' | xargs)
+        echo "Full product name: $FULL_PRODUCT"
+        
+        # Remove "Aspose." prefix and convert to lowercase
+        PRODUCT_NAME=$(echo "$FULL_PRODUCT" | sed 's/^Aspose\.//' | tr '[:upper:]' '[:lower:]')
+        
+        echo "✅ Extracted product name: $PRODUCT_NAME"
+        echo "product_name=$PRODUCT_NAME" >> $GITHUB_OUTPUT
+
     - name: Set up Python
       uses: actions/setup-python@v5
       with:
@@ -79,9 +115,8 @@ jobs:
         cd blog_generator
         echo "=== Starting blog generation ==="
         echo "Brand: aspose.com"
-        echo "Product: ${{ inputs.product }}"
-        echo "Platform: ${{ inputs.platform }}"
-        echo "Topic: ${{ inputs.topic }}"
+        echo "Product: ${{ steps.extract_product.outputs.product_name }}"
+        echo "Keywords file: ${{ inputs.keywords_file }}"
         
         python main.py \
           --keywords_file "${{ inputs.keywords_file }}" \
@@ -95,8 +130,8 @@ jobs:
       run: |
         echo "=== Searching for generated blog folder ==="
         
-        # Search specifically in brand directory
         BRAND_DIR="content/blogPosts/aspose_com"
+        PRODUCT_NAME="${{ steps.extract_product.outputs.product_name }}"
         
         if [ ! -d "$BRAND_DIR" ]; then
           echo "❌ Brand directory not found: $BRAND_DIR"
@@ -104,6 +139,7 @@ jobs:
         fi
         
         echo "Searching in: $BRAND_DIR"
+        echo "Product: $PRODUCT_NAME"
         
         # Find the most recently created folder (within last 10 minutes)
         blog_folder=$(find "$BRAND_DIR" -mindepth 1 -maxdepth 1 -type d -name "20??-??-??-*" -mmin -10 -printf '%T@ %p\n' | sort -nr | head -1 | cut -d' ' -f2-)
@@ -126,7 +162,7 @@ jobs:
           exit 1
         fi
         
-        # Optional: Verify the brand in frontmatter
+        # Verify the brand in frontmatter
         if grep -q "aspose" "$blog_folder/index.md" 2>/dev/null; then
           echo "✅ Verified: Blog is for aspose.com"
         else
@@ -135,19 +171,12 @@ jobs:
         
         echo "blog_folder_name=$blog_folder_name" >> $GITHUB_OUTPUT
         echo "blog_folder_path=$blog_folder" >> $GITHUB_OUTPUT
+        echo "product_name=$PRODUCT_NAME" >> $GITHUB_OUTPUT
         
         echo "✅ Found: $blog_folder_name with index.md"
+        echo "✅ Product: $PRODUCT_NAME"
         echo "=== Folder contents ==="
         ls -la "$blog_folder"
-
-    - name: Extract product folder name
-      id: product_folder
-      run: |
-        # Convert product name to lowercase and remove "Aspose." prefix
-        # Example: "Aspose.Slides" -> "slides"
-        product_folder=$(echo "${{ inputs.product }}" | sed 's/Aspose\.//g' | tr '[:upper:]' '[:lower:]')
-        echo "product_folder=$product_folder" >> $GITHUB_OUTPUT
-        echo "✅ Product folder name: $product_folder"
 
     - name: Verify blog content before upload
       run: |
@@ -156,6 +185,7 @@ jobs:
         
         echo "Blog folder: $BLOG_PATH"
         echo "Expected brand: aspose.com"
+        echo "Product: ${{ steps.find_blog.outputs.product_name }}"
         
         # Check frontmatter for brand indicators
         if [ -f "$BLOG_PATH/index.md" ]; then
@@ -170,6 +200,7 @@ jobs:
         name: generated-blog-aspose-${{ github.run_number }}
         path: ${{ steps.find_blog.outputs.blog_folder_path }}
         if-no-files-found: error
+
     # ####################################################################
     # # Create Pull Request in aspose-blog repo
     # ####################################################################
@@ -178,6 +209,7 @@ jobs:
       env:
         BLOG_FOLDER_NAME: ${{ steps.find_blog.outputs.blog_folder_name }}
         BLOG_FOLDER_PATH: ${{ steps.find_blog.outputs.blog_folder_path }}
+        PRODUCT_NAME: ${{ steps.find_blog.outputs.product_name }}
         GH_TOKEN: ${{ secrets.REPO_PAT }}
       run: |
         git config --global user.email "action@github.com"
@@ -200,10 +232,11 @@ jobs:
         git checkout master
         git pull origin master
         
-        # Create the target directory structure if it doesn't exist
-        TARGET_DIR="content/Aspose.Blog"
+        # Create the target directory structure with product subfolder
+        TARGET_DIR="content/Aspose.Blog/$PRODUCT_NAME"
         mkdir -p "$TARGET_DIR"
         echo "✅ Target directory: $TARGET_DIR"
+        echo "✅ Product: $PRODUCT_NAME"
         
         # Create a new branch for this blog post
         BRANCH_NAME="blog/$BLOG_FOLDER_NAME"
@@ -222,7 +255,7 @@ jobs:
         
         echo "Copying blog folder: $BLOG_FOLDER_NAME to $TARGET_DIR"
         
-        # FIXED: Get absolute path to blog folder correctly
+        # Get absolute path to blog folder correctly
         WORKFLOW_DIR=$(pwd)
         cd ..
         REPO_ROOT=$(pwd)
@@ -242,7 +275,7 @@ jobs:
         
         cd "$WORKFLOW_DIR"
         
-        # Copy the blog folder to the correct directory
+        # Copy the blog folder to the product-specific directory
         cp -r "$BLOG_ABS_PATH" "$TARGET_DIR/" || {
           echo "❌ Failed to copy folder from $BLOG_ABS_PATH to $TARGET_DIR"
           exit 1
@@ -256,7 +289,7 @@ jobs:
           exit 1
         fi
         
-        echo "✅ Blog folder copied successfully"
+        echo "✅ Blog folder copied successfully to content/Aspose.Blog/$PRODUCT_NAME/"
         echo "=== Target folder contents ==="
         ls -la "$TARGET_DIR/$BLOG_FOLDER_NAME"
         
@@ -278,7 +311,7 @@ jobs:
         git diff --staged --stat
         
         # Commit the changes
-        git commit -m "Add generated blog: $BLOG_FOLDER_NAME" || {
+        git commit -m "Add generated blog for $PRODUCT_NAME: $BLOG_FOLDER_NAME" || {
           echo "❌ Failed to commit changes"
           exit 1
         }
@@ -310,12 +343,13 @@ jobs:
             --repo Aspose/aspose-blog \
             --base master \
             --head "$BRANCH_NAME" \
-            --title "Add blog post: $BLOG_FOLDER_NAME" \
+            --title "Add blog post for $PRODUCT_NAME: $BLOG_FOLDER_NAME" \
             --body "## Generated Blog Post
 
           **Folder:** $BLOG_FOLDER_NAME
+          **Product:** Aspose.$PRODUCT_NAME
           **Author:** ${{ inputs.author }}
-          **Target Path:** \`content/Aspose.Blog/$BLOG_FOLDER_NAME\`
+          **Target Path:** \`content/Aspose.Blog/$PRODUCT_NAME/$BLOG_FOLDER_NAME\`
 
           **Generated by:** GitHub Actions (Run #${{ github.run_number }})
           **Workflow:** ${{ github.workflow }}
@@ -328,7 +362,7 @@ jobs:
           ### Contents:
           - Folder: \`$BLOG_FOLDER_NAME\`
           - File: \`index.md\`
-          - Location: \`content/Aspose.Blog/\`
+          - Location: \`content/Aspose.Blog/$PRODUCT_NAME/\`
 
           Please review and merge if the content looks good!" || {
             echo "❌ Failed to create pull request."

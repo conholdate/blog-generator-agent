@@ -8,7 +8,7 @@
 
 ---
 
-## 1. How to Convert LaTeX to PNG Using Aspose.Tex in Python via .NET
+## 1. How to Convert LaTeX to PNG in Python
 - **Cluster ID:** `c5`
 - **Target persona:** Python web developers who need to display LaTeX equations as images.
 - **Angle:** Step‑by‑step guide that shows how to render LaTeX snippets to PNG inside a Flask web app.
