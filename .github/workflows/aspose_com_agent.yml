@@ -34,11 +34,12 @@ jobs:
         fi
         
         # Extract product name from the file content
-        # Format: **Product:** Aspose.Cells or Aspose.TeX
-        PRODUCT_LINE=$(grep -i "^\*\*Product:\*\*" "$KEYWORDS_FILE" | head -1)
+        # Format: - **Product:** Aspose.Cells or Aspose.TeX (with or without leading dash/spaces)
+        PRODUCT_LINE=$(grep -i "\*\*Product:\*\*" "$KEYWORDS_FILE" | head -1)
         
         if [ -z "$PRODUCT_LINE" ]; then
           echo "❌ Product line not found in keywords file"
+          echo "File contents:"
           cat "$KEYWORDS_FILE"
           exit 1
         fi
@@ -46,8 +47,8 @@ jobs:
         echo "Found product line: $PRODUCT_LINE"
         
         # Extract product name and convert to lowercase folder name
-        # From "**Product:** Aspose.Cells" to "cells"
-        FULL_PRODUCT=$(echo "$PRODUCT_LINE" | sed 's/.*Product:\*\*[ ]*//' | xargs)
+        # From "- **Product:** Aspose.Cells" to "cells"
+        FULL_PRODUCT=$(echo "$PRODUCT_LINE" | sed 's/.*Product:\*\*[ ]*//' | sed 's/^[ ]*//' | xargs)
         echo "Full product name: $FULL_PRODUCT"
         
         # Remove "Aspose." prefix and convert to lowercase
