@@ -1353,7 +1353,6 @@ FILE_FORMAT_MAPPINGS = {
     "SCSS": "web/scss/",
     "SEAM": "web/seam/",
     "SHTML": "web/shtml/",
-    "SITE": "web/site/",
     "SPC": "web/spc/",
     "SSP": "web/ssp/",
     "STC": "web/stc/",

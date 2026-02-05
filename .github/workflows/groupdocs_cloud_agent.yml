@@ -1,10 +1,10 @@
-name: Generate Blog Post for groupdocs.com
+name: Generate Blog Post for groupdocs.cloud
 
 on:
   workflow_dispatch:
     inputs:
       keywords_file:
-        description: 'Keywords File (e.g., content/GroupDocs/output/449388a2_groupdocs-conversion_java_topics.md)'
+        description: 'Keywords File (e.g., content/GroupDocs.Cloud/output/449388a2_groupdocs-conversion-cloud_java_topics.md)'
         required: true
         type: string
       
@@ -34,7 +34,7 @@ jobs:
         fi
         
         # Extract product name from the file content
-        # Format: - **Product:** GroupDocs.Conversion or GroupDocs.Viewer (with or without leading dash/spaces)
+        # Format: - **Product:** GroupDocs.Conversion Cloud or GroupDocs.Viewer Cloud (with or without leading dash/spaces)
         PRODUCT_LINE=$(grep -i "\*\*Product:\*\*" "$KEYWORDS_FILE" | head -1)
         
         if [ -z "$PRODUCT_LINE" ]; then
@@ -47,12 +47,13 @@ jobs:
         echo "Found product line: $PRODUCT_LINE"
         
         # Extract product name and convert to lowercase folder name
-        # From "- **Product:** GroupDocs.Conversion" to "conversion"
+        # From "- **Product:** GroupDocs.Conversion Cloud" to "conversion"
         FULL_PRODUCT=$(echo "$PRODUCT_LINE" | sed 's/.*Product:\*\*[ ]*//' | sed 's/^[ ]*//' | xargs)
         echo "Full product name: $FULL_PRODUCT"
         
-        # Remove "GroupDocs." prefix and convert to lowercase
-        PRODUCT_NAME=$(echo "$FULL_PRODUCT" | sed 's/^GroupDocs\.//' | tr '[:upper:]' '[:lower:]')
+        # Remove "GroupDocs." prefix and " Cloud" suffix, then convert to lowercase
+        # Handle formats like "GroupDocs.Conversion Cloud" or "GroupDocs.Viewer Cloud"
+        PRODUCT_NAME=$(echo "$FULL_PRODUCT" | sed 's/^GroupDocs\.//' | sed 's/[ ]*Cloud$//' | tr '[:upper:]' '[:lower:]')
         
         echo "✅ Extracted product name: $PRODUCT_NAME"
         echo "product_name=$PRODUCT_NAME" >> $GITHUB_OUTPUT
@@ -105,7 +106,7 @@ jobs:
         GOOGLE_SCRIPT_URL_FOR_PROD=${{ vars.GOOGLE_SCRIPT_URL_FOR_PROD }}
         GOOGLE_SCRIPT_URL_FOR_TEAM=${{ vars.GOOGLE_SCRIPT_URL_FOR_TEAM }}
         REPO_PAT=${{ secrets.GISTS_PAT_ASPOSE_COM }}
-        GIST_NAME=${{ vars.GROUPDOCS_COM_GIST }}
+        GIST_NAME=${{ vars.GROUPDOCS_CLOUD_GIST }}
         EOF
         echo ".env file created"
 
@@ -115,13 +116,13 @@ jobs:
         cd agent_engine
         cd blog_generator
         echo "=== Starting blog generation ==="
-        echo "Brand: groupdocs.com"
+        echo "Brand: groupdocs.cloud"
         echo "Product: ${{ steps.extract_product.outputs.product_name }}"
         echo "Keywords file: ${{ inputs.keywords_file }}"
         
         python main.py \
           --keywords_file "${{ inputs.keywords_file }}" \
-          --brand "groupdocs.com" \
+          --brand "groupdocs.cloud" \
           --author "${{ inputs.author }}"
         
         echo "✅ Blog generation completed"
@@ -131,7 +132,7 @@ jobs:
       run: |
         echo "=== Searching for generated blog folder ==="
         
-        BRAND_DIR="content/blogPosts/groupdocs_com"
+        BRAND_DIR="content/blogPosts/groupdocs_cloud"
         PRODUCT_NAME="${{ steps.extract_product.outputs.product_name }}"
         
         if [ ! -d "$BRAND_DIR" ]; then
@@ -164,8 +165,8 @@ jobs:
         fi
         
         # Verify the brand in frontmatter
-        if grep -q "groupdocs" "$blog_folder/index.md" 2>/dev/null; then
-          echo "✅ Verified: Blog is for groupdocs.com"
+        if grep -qi "groupdocs.*cloud\|cloud.*groupdocs" "$blog_folder/index.md" 2>/dev/null; then
+          echo "✅ Verified: Blog is for groupdocs.cloud"
         else
           echo "⚠️  Warning: Could not verify brand in frontmatter"
         fi
@@ -185,7 +186,7 @@ jobs:
         BLOG_PATH="${{ steps.find_blog.outputs.blog_folder_path }}"
         
         echo "Blog folder: $BLOG_PATH"
-        echo "Expected brand: groupdocs.com"
+        echo "Expected brand: groupdocs.cloud"
         echo "Product: ${{ steps.find_blog.outputs.product_name }}"
         
         # Check frontmatter for brand indicators
@@ -198,14 +199,14 @@ jobs:
     - name: Upload Generated Blog as Artifact
       uses: actions/upload-artifact@v4
       with:
-        name: generated-blog-groupdocs-${{ github.run_number }}
+        name: generated-blog-groupdocs-cloud-${{ github.run_number }}
         path: ${{ steps.find_blog.outputs.blog_folder_path }}
         if-no-files-found: error
 
     ###################################################################
-    # Create Pull Request in groupdocs-blog repo
+    # Create Pull Request in groupdocs-cloud-blog repo
     ###################################################################
-    - name: Create Pull Request in blog.groupdocs.com repo
+    - name: Create Pull Request in groupdocs-cloud-blog repo
       if: success()
       env:
         BLOG_FOLDER_NAME: ${{ steps.find_blog.outputs.blog_folder_name }}
@@ -221,20 +222,20 @@ jobs:
           exit 1
         fi
 
-        echo "Cloning groupdocs-blog repo..."
-        git clone https://x-access-token:${{ secrets.REPO_PAT }}@github.com/groupdocs/groupdocs-blog.git groupdocs-blog || {
+        echo "Cloning groupdocs-cloud-blog repo..."
+        git clone https://x-access-token:${{ secrets.REPO_PAT }}@github.com/groupdocs-cloud/groupdocs-cloud-blog.git groupdocs-cloud-blog || {
           echo "❌ Failed to clone repo — invalid PAT or wrong GitHub account."
           exit 1
         }
 
-        cd groupdocs-blog
+        cd groupdocs-cloud-blog
         
-        # Ensure we're on the correct base branch
+        # Ensure we're on master and it's up to date
         git checkout master
         git pull origin master
         
         # Create the target directory structure with product subfolder
-        TARGET_DIR="content/Groupdocs.Blog/$PRODUCT_NAME"
+        TARGET_DIR="content/GroupDocs.Cloud/$PRODUCT_NAME"
         mkdir -p "$TARGET_DIR"
         echo "✅ Target directory: $TARGET_DIR"
         echo "✅ Product: $PRODUCT_NAME"
@@ -269,8 +270,8 @@ jobs:
         # Verify source exists before copying
         if [ ! -d "$BLOG_ABS_PATH" ]; then
           echo "❌ Source blog folder does not exist: $BLOG_ABS_PATH"
-          echo "Checking what exists in content/blogPosts/groupdocs_com:"
-          ls -la "$REPO_ROOT/content/blogPosts/groupdocs_com/" || echo "Directory doesn't exist"
+          echo "Checking what exists in content/blogPosts/groupdocs_cloud:"
+          ls -la "$REPO_ROOT/content/blogPosts/groupdocs_cloud/" || echo "Directory doesn't exist"
           exit 1
         fi
         
@@ -290,7 +291,7 @@ jobs:
           exit 1
         fi
         
-        echo "✅ Blog folder copied successfully to content/Groupdocs.Blog/$PRODUCT_NAME/"
+        echo "✅ Blog folder copied successfully to content/GroupDocs.Cloud/$PRODUCT_NAME/"
         echo "=== Target folder contents ==="
         ls -la "$TARGET_DIR/$BLOG_FOLDER_NAME"
         
@@ -301,6 +302,7 @@ jobs:
         echo "=== Files to be committed ==="
         git status --short
         
+        # Check if there are actually changes to commit
         if git diff --staged --quiet; then
           echo "ℹ️ No new files to commit - content may already exist"
           exit 0
@@ -311,7 +313,7 @@ jobs:
         git diff --staged --stat
         
         # Commit the changes
-        git commit -m "Add generated blog for $PRODUCT_NAME: $BLOG_FOLDER_NAME" || {
+        git commit -m "Add generated blog for $PRODUCT_NAME Cloud: $BLOG_FOLDER_NAME" || {
           echo "❌ Failed to commit changes"
           exit 1
         }
@@ -328,32 +330,32 @@ jobs:
         
         echo "✅ Branch $BRANCH_NAME pushed successfully"
         
-        # Wait for GitHub to process the push
+        # Wait a moment for GitHub to process the push
         sleep 2
         
         # Check if PR already exists for this branch
-        EXISTING_PR=$(gh pr list --repo groupdocs/groupdocs-blog --head "$BRANCH_NAME" --json number --jq '.[0].number' 2>/dev/null || echo "")
+        EXISTING_PR=$(gh pr list --repo groupdocs-cloud/groupdocs-cloud-blog --head "$BRANCH_NAME" --json number --jq '.[0].number' 2>/dev/null || echo "")
         
         if [ -n "$EXISTING_PR" ]; then
           echo "ℹ️  PR #$EXISTING_PR already exists for this branch"
-          echo "PR URL: https://github.com/groupdocs/groupdocs-blog/pull/$EXISTING_PR"
+          echo "PR URL: https://github.com/groupdocs-cloud/groupdocs-cloud-blog/pull/$EXISTING_PR"
         else
           # Create Pull Request using GitHub CLI
           gh pr create \
-            --repo groupdocs/groupdocs-blog \
+            --repo groupdocs-cloud/groupdocs-cloud-blog \
             --base master \
             --head "$BRANCH_NAME" \
-            --title "Add blog post for $PRODUCT_NAME: $BLOG_FOLDER_NAME" \
+            --title "Add blog post for $PRODUCT_NAME Cloud: $BLOG_FOLDER_NAME" \
             --body "## Generated Blog Post
 
           **Folder:** $BLOG_FOLDER_NAME
-          **Product:** GroupDocs.$PRODUCT_NAME
+          **Product:** GroupDocs.$PRODUCT_NAME Cloud
           **Author:** ${{ inputs.author }}
-          **Target Path:** \`content/Groupdocs.Blog/$PRODUCT_NAME/$BLOG_FOLDER_NAME\`
+          **Target Path:** \`content/GroupDocs.Cloud/$PRODUCT_NAME/$BLOG_FOLDER_NAME\`
 
           **Generated by:** GitHub Actions (Run #${{ github.run_number }})
           **Workflow:** ${{ github.workflow }}
-          **Brand:** groupdocs.com
+          **Brand:** groupdocs.cloud
 
           ---
 
@@ -362,7 +364,7 @@ jobs:
           ### Contents:
           - Folder: \`$BLOG_FOLDER_NAME\`
           - File: \`index.md\`
-          - Location: \`content/Groupdocs.Blog/$PRODUCT_NAME/\`
+          - Location: \`content/GroupDocs.Cloud/$PRODUCT_NAME/\`
 
           Please review and merge if the content looks good!" || {
             echo "❌ Failed to create pull request."

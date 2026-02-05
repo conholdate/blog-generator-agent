@@ -701,15 +701,16 @@ def inject_file_format_links(full_markdown, FILE_FORMAT_MAPPINGS, BASE_URL):
     # --- 3. Inject Links into Body ---
     sorted_keys = sorted(FILE_FORMAT_MAPPINGS.keys(), key=len, reverse=True)
     
-    # Updated pattern: Use negative lookbehind and lookahead to ensure standalone terms
-    # (?<![A-Za-z0-9_.]) - not preceded by alphanumeric, underscore, or dot
-    # (?![A-Za-z0-9_.]) - not followed by alphanumeric, underscore, or dot
-    pattern = r'(?<![A-Za-z0-9_.])\b(' + '|'.join(re.escape(k) for k in sorted_keys) + r')\b(?![A-Za-z0-9_.])'
+    # Updated pattern: Include hyphen (-) in the negative lookbehind and lookahead
+    # This prevents matching "com" in "gist-com" or any hyphenated words
+    # (?<![A-Za-z0-9_.-]) - not preceded by alphanumeric, underscore, dot, or hyphen
+    # (?![A-Za-z0-9_.-]) - not followed by alphanumeric, underscore, dot, or hyphen
+    pattern = r'(?<![A-Za-z0-9_.-])\b(' + '|'.join(re.escape(k) for k in sorted_keys) + r')\b(?![A-Za-z0-9_.-])'
     
     linked_terms = set()
 
     def replace_logic(match):
-        found_text = match.group(1)  # Changed from group(0) to group(1) to get captured group
+        found_text = match.group(1)  # Get the captured group
         lookup_key = next((k for k in sorted_keys if k.lower() == found_text.lower()), None)
         
         if lookup_key and lookup_key.lower() not in linked_terms:
