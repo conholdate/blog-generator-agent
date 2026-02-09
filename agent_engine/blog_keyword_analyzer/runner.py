@@ -366,11 +366,37 @@ def write_topics_markdown(
         title = pick("title", "") or ""
         cluster_id = pick("cluster_id")
         angle = pick("angle")
+
+        # Refine Keywords
         primary_kw_r = pick("primary_keyword")
         primary_kw = refiner.refine(primary_kw_r)
 
         supporting_kws_r = pick("supporting_keywords", []) or []
-        supporting_kws = refiner.refine(supporting_kws_r)
+
+        def _flatten(x: Any) -> List[Any]:
+            if x is None:
+                return []
+            if isinstance(x, (list, tuple)):
+                out: List[Any] = []
+                for item in x:
+                    out.extend(_flatten(item))
+                return out
+            return [x]
+
+        # Normalize/flatten to a list of items
+        if isinstance(supporting_kws_r, str) or hasattr(supporting_kws_r, "keyword"):
+            supporting_kws_r = [supporting_kws_r]
+        else:
+            supporting_kws_r = _flatten(supporting_kws_r)
+
+        # Refine each keyword
+        supporting_kws = [refiner.refine(k) for k in supporting_kws_r]
+        supporting_kws = [k for k in supporting_kws if k]
+
+        # Optional: de-dupe (case-insensitive) while keeping order
+        seen = set()
+        supporting_kws = [k for k in supporting_kws if not (k.lower() in seen or seen.add(k.lower()))]
+
         outline = pick("outline", []) or []
         persona = pick("target_persona")
 

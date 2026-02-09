@@ -254,6 +254,15 @@ def _smart_join(tokens: List[str]) -> str:
 if __name__ == "__main__":
     refiner = KeywordRefiner()
 
+    # Minimal KeywordRecord-like stub for testing (matches `.keyword` attribute access)
+    class KeywordRecordStub:
+        def __init__(self, keyword: str):
+            self.keyword = keyword
+
+        def __repr__(self) -> str:
+            return f"KeywordRecordStub(keyword={self.keyword!r})"
+
+    # Single keyword samples (your original ones)
     samples = [
         "latex to png using aspose.tex in python",
         "pdf to docx in c# using aspose.pdf",
@@ -261,7 +270,74 @@ if __name__ == "__main__":
         "ocr pdf to docx using aspose.pdf in dotnet",
     ]
 
+    print("=== refine() single keyword tests ===")
     for s in samples:
         print("IN :", s)
         print("OUT:", refiner.refine(s))
+        print("-" * 60)
+
+    # Supporting keywords scenarios (this is where your bug showed up)
+    supporting_cases = [
+        "Convert LaTeX PDFs to JPG using Aspose.TeX in Python Code",  # single string
+        [
+            "latex to png using aspose.tex in python",
+            "save latex output as png file with aspose.tex .net",
+            "render latex to transparent png in .net",
+        ],  # list[str]
+        [
+            "latex to png using aspose.tex in python",
+            [
+                "batch convert latex files to png in .net using aspose.tex",
+                "render latex to png in windows forms using aspose.tex",
+            ],
+            KeywordRecordStub("pdf to docx in c# using aspose.pdf"),
+        ],  # nested list + KeywordRecord-like object
+        KeywordRecordStub("convert json to xlsx using aspose.cells in nodejs"),  # single KeywordRecord-like object
+    ]
+
+    def normalize_to_list(x):
+        """Mirror the writer normalization: strings are wrapped, lists/tuples preserved."""
+        if x is None:
+            return []
+        if isinstance(x, str) or hasattr(x, "keyword"):
+            return [x]
+        if isinstance(x, tuple):
+            return list(x)
+        if isinstance(x, list):
+            return x
+        return [x]
+
+    def flatten(x):
+        """Optional hardening: flatten nested lists/tuples."""
+        if x is None:
+            return []
+        if isinstance(x, (list, tuple)):
+            out = []
+            for item in x:
+                out.extend(flatten(item))
+            return out
+        return [x]
+
+    print("\n=== supporting keywords scenarios ===")
+    for i, case in enumerate(supporting_cases, 1):
+        print(f"\nCASE {i}: raw type={type(case).__name__}")
+        print("RAW :", case)
+
+        # Show what refine() does if someone calls it incorrectly with a list (for awareness)
+        print("refine(raw) ->", refiner.refine(case))
+
+        # Correct approach: normalize -> (optionally flatten) -> refine each -> join
+        items = normalize_to_list(case)
+        items_flat = flatten(items)  # keep this line if you want nested support; remove if not needed
+
+        refined_list = [refiner.refine(k) for k in items_flat]
+        refined_list = [k for k in refined_list if k]
+
+        # De-dupe (case-insensitive), preserve order
+        seen = set()
+        refined_list = [k for k in refined_list if not (k.lower() in seen or seen.add(k.lower()))]
+
+        joined = ", ".join(f"`{kw}`" for kw in refined_list)
+        print("refined list:", refined_list)
+        print("joined      :", joined)
         print("-" * 60)
