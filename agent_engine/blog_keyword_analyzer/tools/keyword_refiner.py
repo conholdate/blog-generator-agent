@@ -98,36 +98,39 @@ class KeywordRefiner:
 
     def refine(self, keyword: KeywordLike) -> str:
         """
-        Normalize/canonicalize a single keyword into a title-cased, product/platform-canonical phrase.
+        Normalize/canonicalize ONE keyword into a refined title-cased phrase.
 
         Accepts:
-          - str
+          - str (treated as atomic, NEVER iterated char-by-char)
           - KeywordRecord-like objects with `.keyword`
-          - list/tuple (possibly nested) -> flattened & joined with spaces
+          - list/tuple (possibly nested) -> flattened, but each string remains atomic
 
         Returns:
           - refined keyword string, or "" if empty/invalid
         """
-        # ---- normalize input into a single string ----
+
         def _to_text(x: Any) -> str:
             if x is None:
                 return ""
+
+            # IMPORTANT: strings are atomic
+            if isinstance(x, str):
+                return x
+
             # KeywordRecord or similar: has `.keyword`
             if hasattr(x, "keyword"):
                 val = getattr(x, "keyword")
                 return val if isinstance(val, str) else str(val)
-            # Plain string
-            if isinstance(x, str):
-                return x
-            # Nested list/tuple: flatten & join
+
+            # Nested list/tuple: flatten and join by " | " (or space)
             if isinstance(x, (list, tuple)):
                 parts: List[str] = []
                 for item in x:
                     t = _to_text(item)
-                    if t:
-                        parts.append(t)
-                return " ".join(parts)
-            # Fallback
+                    if t and t.strip():
+                        parts.append(t.strip())
+                return " | ".join(parts)
+
             return str(x)
 
         keyword_s = _to_text(keyword)
@@ -155,11 +158,7 @@ class KeywordRefiner:
         for i, tok in enumerate(tokens):
             if _is_word_token(tok):
                 out_tokens.append(
-                    _titlecase_token(
-                        tok,
-                        is_first=(i == first_word_pos),
-                        is_last=(i == last_word_pos),
-                    )
+                    _titlecase_token(tok, is_first=(i == first_word_pos), is_last=(i == last_word_pos))
                 )
             else:
                 out_tokens.append(tok)
