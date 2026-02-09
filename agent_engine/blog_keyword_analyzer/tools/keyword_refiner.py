@@ -2,8 +2,11 @@ from __future__ import annotations
 
 import re
 from dataclasses import dataclass
-from typing import Dict, List, Set
+from typing import Dict, List, Set, Union, Sequence, Any, Iterable
 
+# If KeywordRecord is in your project, import it instead of using Any:
+# from agent_engine.blog_keyword_analyzer.models import KeywordRecord  # adjust import
+KeywordLike = Union[str, Any, Sequence[Any]]  # supports KeywordRecord + nested lists
 
 # -----------------------------
 # Config / dictionaries
@@ -93,11 +96,45 @@ class KeywordRefiner:
         print(refiner.refine("pdf to docx in c# using aspose.pdf"))
     """
 
-    def refine(self, keyword: str) -> str:
-        if not keyword or not keyword.strip():
+    def refine(self, keyword: KeywordLike) -> str:
+        """
+        Normalize/canonicalize a single keyword into a title-cased, product/platform-canonical phrase.
+
+        Accepts:
+          - str
+          - KeywordRecord-like objects with `.keyword`
+          - list/tuple (possibly nested) -> flattened & joined with spaces
+
+        Returns:
+          - refined keyword string, or "" if empty/invalid
+        """
+        # ---- normalize input into a single string ----
+        def _to_text(x: Any) -> str:
+            if x is None:
+                return ""
+            # KeywordRecord or similar: has `.keyword`
+            if hasattr(x, "keyword"):
+                val = getattr(x, "keyword")
+                return val if isinstance(val, str) else str(val)
+            # Plain string
+            if isinstance(x, str):
+                return x
+            # Nested list/tuple: flatten & join
+            if isinstance(x, (list, tuple)):
+                parts: List[str] = []
+                for item in x:
+                    t = _to_text(item)
+                    if t:
+                        parts.append(t)
+                return " ".join(parts)
+            # Fallback
+            return str(x)
+
+        keyword_s = _to_text(keyword)
+        if not keyword_s or not keyword_s.strip():
             return ""
 
-        s = _normalize_whitespace(keyword)
+        s = _normalize_whitespace(keyword_s)
 
         # Phrase canon first (C#, .NET, Node.js, etc.)
         s = _apply_phrase_canon(s)
@@ -118,7 +155,11 @@ class KeywordRefiner:
         for i, tok in enumerate(tokens):
             if _is_word_token(tok):
                 out_tokens.append(
-                    _titlecase_token(tok, is_first=(i == first_word_pos), is_last=(i == last_word_pos))
+                    _titlecase_token(
+                        tok,
+                        is_first=(i == first_word_pos),
+                        is_last=(i == last_word_pos),
+                    )
                 )
             else:
                 out_tokens.append(tok)

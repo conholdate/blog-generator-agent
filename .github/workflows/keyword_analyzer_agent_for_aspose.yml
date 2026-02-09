@@ -33,7 +33,7 @@ on:
         default: "Aspose.Cells"
 
       platform:
-        description: "Optional target platform (e.g., java, c#, python)."
+        description: "Optional target platform (e.g., Java, .NET, Python via .NET)."
         required: false
         type: choice
         options:
@@ -57,7 +57,7 @@ on:
         default: 'Java'
 
       keywords_file:
-        description: "Keywords file path (recommended: content/Aspose/keywords.csv)."
+        description: "Keywords file path (recommended: content/Aspose/keywords.csv). Ignored if use_serp_api=true."
         type: string
         required: true
         default: "content/Aspose/keywords.csv"
@@ -101,7 +101,6 @@ jobs:
 
     env:
       BRAND: "Aspose"
-      # Keep this consistent with your upload/commit steps
       KRA_OUTPUT_DIR: "content/Aspose/output"
       KRA_METRICS_DB_PATH: "content/kra_metrics_db.json"
 
@@ -145,6 +144,7 @@ jobs:
         run: |
           python - <<'PY'
           from __future__ import annotations
+
           import os
           from pathlib import Path
 
@@ -156,9 +156,8 @@ jobs:
 
           brand = os.environ["BRAND"]
 
-          # Only values coming from workflow form
           product = os.environ.get("INPUT_PRODUCT", "Aspose.Cells")
-          platform = os.environ.get("INPUT_PLATFORM", "java")  # <-- platform (not platform)
+          platform = os.environ.get("INPUT_PLATFORM", "Java")
           keywords_file = os.environ.get("INPUT_KEYWORDS_FILE", "content/Aspose/keywords.csv")
           use_serp_api = as_bool(os.environ.get("INPUT_USE_SERP_API", "false"))
           serp_topic = os.environ.get("INPUT_SERP_TOPIC", "")
@@ -173,6 +172,8 @@ jobs:
 
           cfg_path = Path(os.environ["RUNNER_TEMP"]) / "kra_run.generated.yaml"
 
+          # If SerpAPI is enabled, we still write input_file but it won't be used by your runner.
+          # Keeping it avoids breaking older config parsers that expect a field.
           cfg_text = (
               "meta:\n"
               "  blog_name: \"\"\n"
@@ -228,20 +229,53 @@ jobs:
           name: kra-output-Aspose
           path: |
             content/Aspose/output/**
-            content/aspose/output/**
+            content/kra_metrics_db.json
           if-no-files-found: warn
 
-      # Optional: keep commit step but not exposed in workflow form (defaults to off)
-      - name: Commit Aspose outputs
+      - name: Commit Aspose outputs (with ignore-safe staging)
         run: |
+          set -euo pipefail
+
+          echo "=== workspace ==="
+          pwd
+          echo "GITHUB_REF_NAME=${GITHUB_REF_NAME}"
+          echo "GITHUB_SHA=${GITHUB_SHA}"
+          echo "KRA_OUTPUT_DIR=${KRA_OUTPUT_DIR}"
+
+          echo "=== list output ==="
+          ls -la "${KRA_OUTPUT_DIR}" || true
+
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-          # Stage all changes under content (case-proof)
+          echo "=== git status (before add) ==="
+          git status --porcelain=v1 || true
+
+          echo "=== check ignore rules for KRA output ==="
+          git check-ignore -v "${KRA_OUTPUT_DIR}"/** 2>/dev/null || true
+
+          # Stage all changes under content first
           git add -A content
 
-          git diff --cached --quiet && echo "No staged changes, skipping commit & push" && exit 0
+          echo "=== staged diff (after add -A content) ==="
+          git diff --cached --name-status || true
+
+          # If nothing staged, it is very often due to .gitignore on output paths.
+          # Force-add ONLY the KRA output folder and metrics DB (narrow + safe).
+          if git diff --cached --quiet; then
+            echo "No staged changes after 'git add -A content'. Trying force-add on KRA outputs..."
+            git add -f "${KRA_OUTPUT_DIR}" || true
+            git add -f "${KRA_METRICS_DB_PATH}" || true
+          fi
+
+          echo "=== staged diff (final) ==="
+          git diff --cached --name-status || true
+
+          if git diff --cached --quiet; then
+            echo "No staged changes, skipping commit & push"
+            exit 0
+          fi
+
           git commit -m "Update Aspose KRA results [skip ci]"
           git pull --rebase origin "${GITHUB_REF_NAME}"
           git push origin HEAD:"${GITHUB_REF_NAME}"
-      
