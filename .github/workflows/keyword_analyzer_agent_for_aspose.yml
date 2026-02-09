@@ -5,8 +5,31 @@ on:
     inputs:
       product:
         description: "Product name (e.g., Aspose.Cells)."
-        type: string
+        type: choice
         required: true
+        options:
+          - 'Aspose.BarCode'
+          - 'Aspose.CAD'
+          - 'Aspose.Cells'
+          - 'Aspose.Diagram'
+          - 'Aspose.Drawing'
+          - 'Aspose.Email'
+          - 'Aspose.Font'
+          - 'Aspose.HTML'
+          - 'Aspose.Imaging'
+          - 'Aspose.Note'
+          - 'Aspose.OCR'
+          - 'Aspose.OMR'
+          - 'Aspose.Page'
+          - 'Aspose.PDF'
+          - 'Aspose.PSD'
+          - 'Aspose.PUB'
+          - 'Aspose.Slides'
+          - 'Aspose.Tasks'
+          - 'Aspose.TeX'
+          - 'Aspose.ThreeD'
+          - 'Aspose.Words'
+          - 'Aspose.Zip'
         default: "Aspose.Cells"
 
       platform:
