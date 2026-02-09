@@ -27,7 +27,7 @@ on:
           - 'Aspose.Slides'
           - 'Aspose.Tasks'
           - 'Aspose.TeX'
-          - 'Aspose.ThreeD'
+          - 'Aspose.3D'
           - 'Aspose.Words'
           - 'Aspose.Zip'
         default: "Aspose.Cells"
