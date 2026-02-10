@@ -6,10 +6,20 @@ from pathlib import Path
 from typing import Optional
 
 
+def _get_professionalize_api_key() -> str:
+    # Backward/alternate name (your current secret)
+    v = os.getenv("PROFESSIONALIZE_API_KEY_1")
+    if v and v.strip():
+        return v.strip()
+
+    raise OSError(
+        "Missing API key. Set PROFESSIONALIZE_API_KEY (preferred) "
+        "or PROFESSIONALIZE_API_KEY_1."
+    )
 @dataclass(frozen=True)
 class Settings:
-    # Read env at INSTANCE creation time (not import time)
-    PROFESSIONALIZE_API_KEY: Optional[str] = field(default_factory=lambda: os.getenv("PROFESSIONALIZE_API_KEY_1"))
+
+    PROFESSIONALIZE_API_KEY: str = field(default_factory=_get_professionalize_api_key)
     PROFESSIONALIZE_BASE_URL: Optional[str] = field(default_factory=lambda: os.getenv("PROFESSIONALIZE_BASE_URL"))
     PROFESSIONALIZE_LLM_MODEL: str = field(default_factory=lambda: os.getenv("PROFESSIONALIZE_LLM_MODEL", "gpt-oss"))
     PROFESSIONALIZE_EMBEDDING_MODEL: str = field(
