@@ -1,0 +1,54 @@
+# Aspose.HTML
+blog: aspose
+key: html
+# Reusable platform definitions
+platform_definitions:
+  net:
+    display_name: ".NET"
+    keywords: ["c#", "csharp", ".net", "dotnet", "vb.net", "visual basic"]
+
+  java:
+    display_name: "Java"
+    keywords: ["java", "j2se", "j2ee", "jsp"]
+
+  python_net:
+    display_name: "Python via .NET"
+    keywords: ["python", "python-net", "py", "python .net", "python via .net"]
+
+# Product: Aspose.HTML
+display_name: "Aspose.HTML"
+description: "HTML processing, manipulation, rendering, and conversion APIs (HTML/MHTML/XHTML/EPUB/Markdown/SVG)"
+enabled: true
+
+# Common repo URLs for all platforms
+doc_repo: "https://github.com/aspose-html/Aspose.HTML-Documentation"
+doc_branch: "main"
+
+api_repo: "https://github.com/aspose-html/Aspose.HTML-API-References"
+api_branch: "main"
+
+tut_repo: "https://github.com/aspose-html/aspose-html-reference-tutorials"
+tut_branch: "main"
+
+platforms:
+  - net:
+      definition: net
+      # Hugo-style docs repo; keep broad and let your platform detector + frontmatter drive platform tagging.
+      doc_path: "content"
+      api_path: "content"
+      tut_path: "html"
+      enabled: true
+
+  - java:
+      definition: java
+      doc_path: "content"
+      api_path: "content"
+      tut_path: "html"
+      enabled: true
+
+  - python_net:
+      definition: python_net
+      doc_path: "content"
+      api_path: "content"
+      tut_path: "html"
+      enabled: true
