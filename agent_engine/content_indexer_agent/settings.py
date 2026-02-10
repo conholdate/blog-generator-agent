@@ -3,32 +3,38 @@ from __future__ import annotations
 import os
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Optional
+from pydantic import Field, SecretStr
+from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
-def _get_professionalize_api_key() -> str:
-    # Backward/alternate name (your current secret)
-    v = os.getenv("PROFESSIONALIZE_API_KEY_1")
-    if v and v.strip():
-        return v.strip()
+class Settings(BaseSettings):
+    """
+        Settings are loaded in this order (typical):
+        1) Environment variables (CI/CD / repo secrets / container env)
+        2) .env file (local dev)
+        3) Defaults (non-secret safe defaults only)
+        """
 
-    raise OSError(
-        "Missing API key. Set PROFESSIONALIZE_API_KEY (preferred) "
-        "or PROFESSIONALIZE_API_KEY_1."
+    # Tell pydantic-settings where to look for .env
+    # Adjust Path(...) if your config.py is not in repo root.
+    model_config = SettingsConfigDict(
+        env_file=Path(".env"),
+        env_file_encoding="utf-8",
+        extra="ignore",
     )
-@dataclass(frozen=True)
-class Settings:
+    PROFESSIONALIZE_BASE_URL: str ="https://llm.professionalize.com/v1"
+    PROFESSIONALIZE_API_KEY_1: SecretStr | None = None
+    PROFESSIONALIZE_API_KEY: str = PROFESSIONALIZE_API_KEY_1
 
-    PROFESSIONALIZE_API_KEY: str = field(default_factory=_get_professionalize_api_key)
-    PROFESSIONALIZE_BASE_URL: Optional[str] = field(default_factory=lambda: os.getenv("PROFESSIONALIZE_BASE_URL"))
-    PROFESSIONALIZE_LLM_MODEL: str = field(default_factory=lambda: os.getenv("PROFESSIONALIZE_LLM_MODEL", "gpt-oss"))
+    # Standard OpenAI key (used when no custom base URL is set)
+    OPENAI_API_KEY: str | None = None
+
+    # --- Model defaults ---
+    PROFESSIONALIZE_LLM_MODEL: str = "gpt-oss"
+
     PROFESSIONALIZE_EMBEDDING_MODEL: str = field(
         default_factory=lambda: os.getenv("PROFESSIONALIZE_EMBEDDING_MODEL", "qwen3-embedding-8b")
     )
-
-    # Local dev fallback
-    OPENAI_API_KEY: Optional[str] = field(default_factory=lambda: os.getenv("OPENAI_API_KEY"))
-    OPENAI_BASE_URL: Optional[str] = field(default_factory=lambda: os.getenv("OPENAI_BASE_URL"))
 
     # Output root
     OUTPUTS_DIR: Path = field(default_factory=lambda: Path(os.getenv("CG_OUTPUTS_DIR", "outputs")))
