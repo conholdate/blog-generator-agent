@@ -3,8 +3,12 @@ from __future__ import annotations
 import os
 from dataclasses import dataclass, field
 from pathlib import Path
+
+from dotenv import load_dotenv
 from pydantic import Field, SecretStr
 from pydantic_settings import BaseSettings, SettingsConfigDict
+
+load_dotenv()  # loads .env from project root by default
 
 
 class Settings(BaseSettings):
@@ -55,3 +59,6 @@ class Settings(BaseSettings):
     DEBUG = False
     INT_METRICS_WEBHOOK_URL: str = "https://script.google.com/macros/s/AKfycbwYyPBs3ox6xhYfznVpu4Gh8T4l7cXrAIj1m_y1g-vWn6tyP_LAkv3eo6W2EZYAeHgLag/exec"
     INT_METRICS_TOKEN: str = "blog_team_agent-2026"
+
+
+settings = Settings()
