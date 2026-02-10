@@ -97,7 +97,7 @@ jobs:
     - name: Create runtime .env file with secrets
       run: |
         cat > .env << EOF
-        PROFESSIONALIZE_API_KEY=${{ secrets.PROFESSIONALIZE_API_KEY }}
+        PROFESSIONALIZE_API_KEY_2=${{ secrets.PROFESSIONALIZE_API_KEY_2 }}
         PROFESSIONALIZE_BASE_URL=${{ secrets.PROFESSIONALIZE_BASE_URL }}
         PROFESSIONALIZE_LLM_MODEL=${{ secrets.PROFESSIONALIZE_LLM_MODEL }}
         TOKEN_FOR_TEAM=${{ secrets.TOKEN_FOR_TEAM }}
