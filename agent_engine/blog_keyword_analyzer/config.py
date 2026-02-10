@@ -2,13 +2,30 @@ from pydantic_settings import BaseSettings
 from typing import Dict, List, Tuple
 from dotenv import load_dotenv
 from pathlib import Path
+from pydantic import Field, SecretStr
+from pydantic_settings import BaseSettings, SettingsConfigDict
 
 load_dotenv()  # loads .env from project root by default
 
 
 class Settings(BaseSettings):
+    """
+        Settings are loaded in this order (typical):
+        1) Environment variables (CI/CD / repo secrets / container env)
+        2) .env file (local dev)
+        3) Defaults (non-secret safe defaults only)
+        """
+
+    # Tell pydantic-settings where to look for .env
+    # Adjust Path(...) if your config.py is not in repo root.
+    model_config = SettingsConfigDict(
+        env_file=Path(".env"),
+        env_file_encoding="utf-8",
+        extra="ignore",
+    )
     PROFESSIONALIZE_BASE_URL: str ="https://llm.professionalize.com/v1"
-    PROFESSIONALIZE_API_KEY: str ="sk-etp8ZujXM8fJYQ8ApV6a-Q"
+    PROFESSIONALIZE_API_KEY_1: SecretStr | None = None
+    PROFESSIONALIZE_API_KEY: str = PROFESSIONALIZE_API_KEY_1
 
     # Standard OpenAI key (used when no custom base URL is set)
     OPENAI_API_KEY: str | None = None

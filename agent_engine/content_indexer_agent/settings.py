@@ -9,7 +9,7 @@ from typing import Optional
 @dataclass(frozen=True)
 class Settings:
     # Read env at INSTANCE creation time (not import time)
-    PROFESSIONALIZE_API_KEY: Optional[str] = field(default_factory=lambda: os.getenv("PROFESSIONALIZE_API_KEY"))
+    PROFESSIONALIZE_API_KEY: Optional[str] = field(default_factory=lambda: os.getenv("PROFESSIONALIZE_API_KEY_1"))
     PROFESSIONALIZE_BASE_URL: Optional[str] = field(default_factory=lambda: os.getenv("PROFESSIONALIZE_BASE_URL"))
     PROFESSIONALIZE_LLM_MODEL: str = field(default_factory=lambda: os.getenv("PROFESSIONALIZE_LLM_MODEL", "gpt-oss"))
     PROFESSIONALIZE_EMBEDDING_MODEL: str = field(
