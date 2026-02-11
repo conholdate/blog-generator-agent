@@ -33,7 +33,7 @@ class Settings(BaseSettings):
     PROFESSIONALIZE_EMBEDDING_MODEL: str = "qwen3-embedding-8b"
 
     # Output root
-    OUTPUTS_DIR: str = "outputs"
+    OUTPUTS_DIR: Path = Path("outputs")  # ✅ Path, supports `/`
 
     # Metrics
     METRICS_ENABLED: bool = True
