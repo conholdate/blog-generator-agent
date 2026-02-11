@@ -6,6 +6,8 @@ from pathlib import Path
 from typing import Optional
 
 from dotenv import load_dotenv
+from pydantic import SecretStr
+from pydantic_settings import SettingsConfigDict
 
 
 def _load_env_once() -> None:
@@ -36,6 +38,15 @@ def _get_required_env(name: str) -> str:
 
 @dataclass(frozen=True)
 class CoverageSettings:
+    # Existing standardized env vars (your convention)
+    # Tell pydantic-settings where to look for .env
+    # Adjust Path(...) if your config.py is not in repo root.
+    model_config = SettingsConfigDict(
+        env_file=Path(".env"),
+        env_file_encoding="utf-8",
+        extra="ignore",
+    )
+    
     # Paths
     repo_root: Path = field(default_factory=lambda: Path(os.getenv("CG_REPO_ROOT", Path.cwd())).resolve())
     outputs_root: Path = field(
@@ -47,31 +58,29 @@ class CoverageSettings:
     threshold_loose: float = 0.80
     top_k: int = 5
 
-    # Existing standardized env vars (your convention)
-    # IMPORTANT: must come from .env or repo secrets (env vars). No hardcoded default.
-    PROFESSIONALIZE_API_KEY: str = field(default_factory=lambda: _get_required_env("PROFESSIONALIZE_API_KEY_1"))
+    PROFESSIONALIZE_BASE_URL: str = "https://llm.professionalize.com/v1"
+    PROFESSIONALIZE_API_KEY_1: SecretStr | None = None
+    PROFESSIONALIZE_API_KEY: str = PROFESSIONALIZE_API_KEY_1
 
-    PROFESSIONALIZE_BASE_URL: Optional[str] = field(default_factory=lambda: os.getenv("PROFESSIONALIZE_BASE_URL"))
-    PROFESSIONALIZE_LLM_MODEL: str = field(default_factory=lambda: os.getenv("PROFESSIONALIZE_LLM_MODEL", "gpt-oss"))
-    PROFESSIONALIZE_EMBEDDING_MODEL: str = field(
-        default_factory=lambda: os.getenv("PROFESSIONALIZE_EMBEDDING_MODEL", "qwen3-embedding-8b")
-    )
+    # --- Model defaults ---
+    PROFESSIONALIZE_LLM_MODEL: str = "gpt-oss"
+    PROFESSIONALIZE_EMBEDDING_MODEL: str = "qwen3-embedding-8b"
 
-    # Canonical resolved OpenAI settings (what the SDK/client should use)
-    OPENAI_API_KEY: Optional[str] = field(default_factory=lambda: os.getenv("OPENAI_API_KEY"))
-    OPENAI_BASE_URL: Optional[str] = field(default_factory=lambda: os.getenv("OPENAI_BASE_URL"))
+    # Standard OpenAI key (used when no custom base URL is set)
+    OPENAI_API_KEY: str | None = None
+    OPENAI_BASE_URL: str | None = None
 
     # Metrics
     METRICS_ENABLED: bool = True
     METRICS_TIMEOUT_S: float = 12.0
 
     # Required
-    METRICS_WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbyCHwElrM6RcYLi0JNQAkJmzGrBjAhf28mKXVyub_6SdaZ2ITvzCwfM5xCLE7rmuxio/exec"
-    METRICS_TOKEN = "lM6iU2mW0gV1eZ"
+    METRICS_WEBHOOK_URL: str = "https://script.google.com/macros/s/AKfycbyCHwElrM6RcYLi0JNQAkJmzGrBjAhf28mKXVyub_6SdaZ2ITvzCwfM5xCLE7rmuxio/exec"
+    METRICS_TOKEN: str = "lM6iU2mW0gV1eZ"
 
     # Required metadata
-    METRICS_AGENT_NAME = "Content Gap Agent"  # or whatever run-level name you want
-    METRICS_AGENT_OWNER = "Muzammil Khan"
+    METRICS_AGENT_NAME: str = "Content Gap Agent"  # or whatever run-level name you want
+    METRICS_AGENT_OWNER: str = "Muzammil Khan"
 
     # Optional
     DEBUG = False
