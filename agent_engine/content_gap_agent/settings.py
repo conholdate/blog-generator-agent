@@ -46,7 +46,7 @@ class CoverageSettings:
         env_file_encoding="utf-8",
         extra="ignore",
     )
-    
+
     # Paths
     repo_root: Path = field(default_factory=lambda: Path(os.getenv("CG_REPO_ROOT", Path.cwd())).resolve())
     outputs_root: Path = field(
