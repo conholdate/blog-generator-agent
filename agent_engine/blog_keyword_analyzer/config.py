@@ -1,4 +1,3 @@
-from pydantic_settings import BaseSettings
 from typing import Dict, List, Tuple
 from dotenv import load_dotenv
 from pathlib import Path
@@ -53,7 +52,7 @@ class Settings(BaseSettings):
 
     # --- NEW: Metrics / Google Apps Script webhook ---
     METRICS_WEBHOOK_URL: str = "https://script.google.com/macros/s/AKfycbyCHwElrM6RcYLi0JNQAkJmzGrBjAhf28mKXVyub_6SdaZ2ITvzCwfM5xCLE7rmuxio/exec"
-    METRICS_TOKEN: str = ""
+    METRICS_TOKEN: str = "lM6iU2mW0gV1eZ"
     METRICS_AGENT_NAME: str = "Keyword Analyzer"
     METRICS_AGENT_OWNER: str = "Muzammil Khan"
     METRICS_KEYWORD_CLUSTERING_JOB: str = "Keyword Clustering"
@@ -61,7 +60,7 @@ class Settings(BaseSettings):
 
     # --- Internal Blog Teams Metrics / Google Apps Script webhook ---
     INT_METRICS_WEBHOOK_URL: str = "https://script.google.com/macros/s/AKfycbwYyPBs3ox6xhYfznVpu4Gh8T4l7cXrAIj1m_y1g-vWn6tyP_LAkv3eo6W2EZYAeHgLag/exec"
-    INT_METRICS_TOKEN: str = "-2026"
+    INT_METRICS_TOKEN: str = "blog_team_agent-2026"
 
 settings = Settings()
 

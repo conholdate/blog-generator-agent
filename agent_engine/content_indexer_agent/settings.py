@@ -1,10 +1,6 @@
-from __future__ import annotations
-
-import os
-from dataclasses import dataclass, field
-from pathlib import Path
 
 from dotenv import load_dotenv
+from pathlib import Path
 from pydantic import Field, SecretStr
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
@@ -20,7 +16,6 @@ class Settings(BaseSettings):
         """
 
     # Tell pydantic-settings where to look for .env
-    # Adjust Path(...) if your config.py is not in repo root.
     model_config = SettingsConfigDict(
         env_file=Path(".env"),
         env_file_encoding="utf-8",
@@ -35,30 +30,23 @@ class Settings(BaseSettings):
 
     # --- Model defaults ---
     PROFESSIONALIZE_LLM_MODEL: str = "gpt-oss"
-
-    PROFESSIONALIZE_EMBEDDING_MODEL: str = field(
-        default_factory=lambda: os.getenv("PROFESSIONALIZE_EMBEDDING_MODEL", "qwen3-embedding-8b")
-    )
+    PROFESSIONALIZE_EMBEDDING_MODEL: str = "qwen3-embedding-8b"
 
     # Output root
-    OUTPUTS_DIR: Path = field(default_factory=lambda: Path(os.getenv("CG_OUTPUTS_DIR", "outputs")))
+    OUTPUTS_DIR: str = "outputs"
 
     # Metrics
     METRICS_ENABLED: bool = True
     METRICS_TIMEOUT_S: float = 10.0
 
-    # Required
-    METRICS_WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbyCHwElrM6RcYLi0JNQAkJmzGrBjAhf28mKXVyub_6SdaZ2ITvzCwfM5xCLE7rmuxio/exec"
-    METRICS_TOKEN = "lM6iU2mW0gV1eZ"
+    # --- NEW: Metrics / Google Apps Script webhook ---
+    METRICS_WEBHOOK_URL: str = "https://script.google.com/macros/s/AKfycbyCHwElrM6RcYLi0JNQAkJmzGrBjAhf28mKXVyub_6SdaZ2ITvzCwfM5xCLE7rmuxio/exec"
+    METRICS_TOKEN: str = "lM6iU2mW0gV1eZ"
+    METRICS_AGENT_NAME: str = "Content Indexer Agent"   # or whatever run-level name you want
+    METRICS_AGENT_OWNER: str = "Muzammil Khan"
 
-    # Required metadata
-    METRICS_AGENT_NAME = "Content Indexer Agent"   # or whatever run-level name you want
-    METRICS_AGENT_OWNER = "Muzammil Khan"
-
-    # Optional
-    DEBUG = False
+    # --- Internal Blog Teams Metrics / Google Apps Script webhook ---
     INT_METRICS_WEBHOOK_URL: str = "https://script.google.com/macros/s/AKfycbwYyPBs3ox6xhYfznVpu4Gh8T4l7cXrAIj1m_y1g-vWn6tyP_LAkv3eo6W2EZYAeHgLag/exec"
     INT_METRICS_TOKEN: str = "blog_team_agent-2026"
-
 
 settings = Settings()
