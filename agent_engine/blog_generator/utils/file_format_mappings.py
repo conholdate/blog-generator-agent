@@ -1344,7 +1344,6 @@ FILE_FORMAT_MAPPINGS = {
     "P7B": "web/p7b/",
     "P7C": "web/p7c/",
     "PAC": "web/pac/",
-    "PART": "web/part/",
     "PEM": "web/pem/",
     "RHTML": "web/rhtml/",
     "RJS": "web/rjs/",

@@ -677,54 +677,71 @@ def replace_code_snippets_with_gists(markdown_content: str, snippets: dict, shor
 def inject_file_format_links(full_markdown, FILE_FORMAT_MAPPINGS, BASE_URL):
     # --- 1. Separate Frontmatter ---
     parts = re.split(r'^---$', full_markdown, maxsplit=2, flags=re.MULTILINE)
-    
     if len(parts) >= 3:
         frontmatter = parts[1]
         body = parts[2]
     else:
         frontmatter = None
         body = full_markdown
-
-    # --- 2. Protect Code Blocks and Existing Links ---
+    
+    # --- 2. Protect ALL contexts where we should NOT add links ---
     placeholders = []
     
     def hide_content(match):
         placeholders.append(match.group(0))
         return f"%%CONTENT_HOLDER_{len(placeholders)-1}%%"
     
-    # 2a. Hide fenced blocks (```) and inline code (`)
-    body_protected = re.sub(r'```.*?```|`.*?`', hide_content, body, flags=re.DOTALL)
+    # Protect in order of specificity:
     
-    # 2b. Hide existing Markdown links: [Text](URL)
-    body_protected = re.sub(r'\[([^\]]+)\]\(([^)]+)\)', hide_content, body_protected)
-
-    # --- 3. Inject Links into Body ---
+    # 2a. Hide fenced code blocks (```)
+    body_protected = re.sub(r'```.*?```', hide_content, body, flags=re.DOTALL)
+    
+    # 2b. Hide inline code (`)
+    body_protected = re.sub(r'`[^`]+`', hide_content, body_protected)
+    
+    # 2c. Hide existing Markdown links COMPLETELY: [any text](any url)
+    body_protected = re.sub(r'\[[^\]]+\]\([^)]+\)', hide_content, body_protected)
+    
+    # 2d. Hide HTML tags and their contents
+    body_protected = re.sub(r'<[^>]+>', hide_content, body_protected)
+    
+    # 2e. Hide URLs that aren't in markdown link format (bare URLs)
+    body_protected = re.sub(r'https?://[^\s\)]+', hide_content, body_protected)
+    
+    # 2f. Hide image references ![alt](url)
+    body_protected = re.sub(r'!\[[^\]]*\]\([^)]+\)', hide_content, body_protected)
+    
+    # 2g. Hide any text within parentheses that contains forward slashes (likely paths/URLs)
+    body_protected = re.sub(r'\([^)]*\/[^)]*\)', hide_content, body_protected)
+    
+    # --- 3. Inject Links into Body (ONLY standalone terms) ---
     sorted_keys = sorted(FILE_FORMAT_MAPPINGS.keys(), key=len, reverse=True)
     
-    # Updated pattern: Include hyphen (-) in the negative lookbehind and lookahead
-    # This prevents matching "com" in "gist-com" or any hyphenated words
-    # (?<![A-Za-z0-9_.-]) - not preceded by alphanumeric, underscore, dot, or hyphen
-    # (?![A-Za-z0-9_.-]) - not followed by alphanumeric, underscore, dot, or hyphen
-    pattern = r'(?<![A-Za-z0-9_.-])\b(' + '|'.join(re.escape(k) for k in sorted_keys) + r')\b(?![A-Za-z0-9_.-])'
+    # STRICT pattern: Must be completely standalone
+    # - Not preceded by: letters, numbers, underscore, dot, hyphen, forward slash, colon
+    # - Not followed by: letters, numbers, underscore, dot, hyphen, forward slash, colon
+    # This ensures -png and .png are ignored
+    pattern = r'(?<![A-Za-z0-9_.\/:-])\b(' + '|'.join(re.escape(k) for k in sorted_keys) + r')\b(?![A-Za-z0-9_.\/:-])'
     
     linked_terms = set()
-
+    
     def replace_logic(match):
-        found_text = match.group(1)  # Get the captured group
+        found_text = match.group(1)
         lookup_key = next((k for k in sorted_keys if k.lower() == found_text.lower()), None)
         
+        # Only link the first occurrence of each term
         if lookup_key and lookup_key.lower() not in linked_terms:
             linked_terms.add(lookup_key.lower())
             return f"[{found_text}]({BASE_URL}{FILE_FORMAT_MAPPINGS[lookup_key]})"
         return found_text
-
+    
     body_linked = re.sub(pattern, replace_logic, body_protected, flags=re.IGNORECASE)
-
-    # --- 4. Restore and Reassemble ---
-    # Restore in reverse order to handle any potential nesting issues
+    
+    # --- 4. Restore Protected Content ---
     for i in range(len(placeholders) - 1, -1, -1):
         body_linked = body_linked.replace(f"%%CONTENT_HOLDER_{i}%%", placeholders[i])
     
+    # --- 5. Reassemble ---
     if frontmatter:
         return f"---{frontmatter}---\n{body_linked}"
     return body_linked

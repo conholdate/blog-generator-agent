@@ -2,7 +2,7 @@
 
 - **Brand:** Aspose
 - **Product:** Aspose.Tex
-- **Platform:** Python via .NET
+- **Platform:** 
 - **Run ID:** cd528817
 - **Topics:** 10
 

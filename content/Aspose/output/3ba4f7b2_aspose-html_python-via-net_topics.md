@@ -8,20 +8,20 @@
 
 ---
 
-## 1. How to Convert HTML to JPG with Python via .NET Using Aspose.HTML
+## 1. How to Convert HTML to BMP with Python via .NET Using Aspose.HTML
 - **Cluster ID:** `c6`
 - **Target persona:** Developers who need to create image thumbnails or snapshots from web pages.
-- **Angle:** Step‑by‑step guide to generate high‑quality JPG images from HTML content.
-- **Primary keyword:** `HTML to JPG`
-- **Supporting keywords:** `Convert HTML to JPG`, `Change HTML to JPG`, `Chrome HTML to JPG Converter`
+- **Angle:** Step‑by‑step guide to generate high‑quality BMP images from HTML content.
+- **Primary keyword:** `HTML to BMP`
+- **Supporting keywords:** `Convert HTML to BMP`, `Change HTML to BMP`, `Chrome HTML to BMP Converter`
 
 **Suggested outline:**
-- Introduction to HTML‑to‑JPG conversion
+- Introduction to HTML‑to‑BMP conversion
 - Setting up Aspose.HTML in Python via .NET
 - Loading and preparing HTML content
-- Converting HTML to JPG with Aspose.HTML
+- Converting HTML to BMP with Aspose.HTML
 - Customizing image options (resolution, quality, background)
-- Saving and verifying the output JPG file
+- Saving and verifying the output BMP file
 - Conclusion and performance tips
 
 ---
