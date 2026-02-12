@@ -158,7 +158,6 @@ def get_topic_by_index(input_file: str) -> str:
     with open(file_path, "r", encoding="utf-8") as f:
         content = f.read()
 
-    print(f"Successfully read {content}")
     parsed = parse_markdown_topics(content)
     index=1
     if 1 <= index <= len(parsed["topics"]):
@@ -745,3 +744,263 @@ def inject_file_format_links(full_markdown, FILE_FORMAT_MAPPINGS, BASE_URL):
     if frontmatter:
         return f"---{frontmatter}---\n{body_linked}"
     return body_linked
+
+
+
+import re
+
+def normalize_case_preserve_formats_in_keywords(text_array, file_formats):
+    """
+    Lowercase the first letter and all other words (except file formats, product names, 
+    and common suffix words) while preserving file formats in uppercase.
+    
+    Args:
+        text_array: List of strings to process
+        file_formats: List of file format names to keep uppercase
+    
+    Returns:
+        List of processed strings with normalized casing
+    """
+    # Comprehensive list of words to lowercase
+    lowercase_words = [
+        # Articles
+        'a', 'an', 'the',
+        
+        # Prepositions
+        'to', 'from', 'in', 'on', 'at', 'by', 'for', 'with', 'about', 'against', 
+        'between', 'into', 'through', 'during', 'before', 'after', 'above', 'below', 
+        'up', 'down', 'out', 'off', 'over', 'under', 'again', 'further', 'then', 
+        'once', 'here', 'there', 'when', 'where', 'why', 'how', 'all', 'both', 
+        'each', 'few', 'more', 'most', 'other', 'some', 'such', 'no', 'nor', 
+        'not', 'only', 'own', 'same', 'so', 'than', 'too', 'very', 'can', 'will',
+        'just', 'should', 'now', 'until', 'without', 'within', 'upon', 'via',
+        'per', 'plus', 'minus', 'across', 'among', 'around', 'behind', 'beside',
+        'beyond', 'inside', 'outside', 'throughout', 'toward', 'towards', 'underneath',
+        'unlike', 'onto', 'past', 'since', 'near', 'next', 'opposite', 'regarding',
+        
+        # Conjunctions
+        'and', 'or', 'but', 'nor', 'so', 'yet', 'as', 'if', 'because', 'although',
+        'though', 'unless', 'while', 'whereas', 'whether',
+        
+        # Common verbs (infinitive and conjugated forms)
+        'is', 'are', 'was', 'were', 'be', 'been', 'being', 'have', 'has', 'had',
+        'do', 'does', 'did', 'make', 'makes', 'made', 'making', 'get', 'gets', 'got',
+        'create', 'creates', 'created', 'creating', 'build', 'builds', 'built', 'building',
+        'develop', 'develops', 'developed', 'developing', 'design', 'designs', 'designed', 'designing',
+        'convert', 'converts', 'converted', 'converting', 'change', 'changes', 'changed', 'changing',
+        'transform', 'transforms', 'transformed', 'transforming', 'edit', 'edits', 'edited', 'editing',
+        'view', 'views', 'viewed', 'viewing', 'open', 'opens', 'opened', 'opening',
+        'save', 'saves', 'saved', 'saving', 'export', 'exports', 'exported', 'exporting',
+        'import', 'imports', 'imported', 'importing', 'download', 'downloads', 'downloaded', 'downloading',
+        'upload', 'uploads', 'uploaded', 'uploading', 'generate', 'generates', 'generated', 'generating',
+        'process', 'processes', 'processed', 'processing', 'render', 'renders', 'rendered', 'rendering',
+        'parse', 'parses', 'parsed', 'parsing', 'compile', 'compiles', 'compiled', 'compiling',
+        'extract', 'extracts', 'extracted', 'extracting', 'compress', 'compresses', 'compressed', 'compressing',
+        'decompress', 'decompresses', 'decompressed', 'decompressing', 'merge', 'merges', 'merged', 'merging',
+        'split', 'splits', 'splitting', 'join', 'joins', 'joined', 'joining',
+        'combine', 'combines', 'combined', 'combining', 'separate', 'separates', 'separated', 'separating',
+        'compare', 'compares', 'compared', 'comparing', 'validate', 'validates', 'validated', 'validating',
+        'verify', 'verifies', 'verified', 'verifying', 'check', 'checks', 'checked', 'checking',
+        'test', 'tests', 'tested', 'testing', 'analyze', 'analyzes', 'analyzed', 'analyzing',
+        'scan', 'scans', 'scanned', 'scanning', 'search', 'searches', 'searched', 'searching',
+        'find', 'finds', 'found', 'finding', 'replace', 'replaces', 'replaced', 'replacing',
+        'insert', 'inserts', 'inserted', 'inserting', 'delete', 'deletes', 'deleted', 'deleting',
+        'remove', 'removes', 'removed', 'removing', 'add', 'adds', 'added', 'adding',
+        'update', 'updates', 'updated', 'updating', 'modify', 'modifies', 'modified', 'modifying',
+        'read', 'reads', 'reading', 'write', 'writes', 'wrote', 'written', 'writing',
+        'print', 'prints', 'printed', 'printing', 'display', 'displays', 'displayed', 'displaying',
+        'show', 'shows', 'showed', 'shown', 'showing', 'hide', 'hides', 'hid', 'hidden', 'hiding',
+        'enable', 'enables', 'enabled', 'enabling', 'disable', 'disables', 'disabled', 'disabling',
+        'support', 'supports', 'supported', 'supporting', 'allow', 'allows', 'allowed', 'allowing',
+        'provide', 'provides', 'provided', 'providing', 'offer', 'offers', 'offered', 'offering',
+        'use', 'uses', 'used', 'using', 'apply', 'applies', 'applied', 'applying',
+        'set', 'sets', 'setting', 'configure', 'configures', 'configured', 'configuring',
+        'install', 'installs', 'installed', 'installing', 'uninstall', 'uninstalls', 'uninstalled', 'uninstalling',
+        'load', 'loads', 'loaded', 'loading', 'unload', 'unloads', 'unloaded', 'unloading',
+        'start', 'starts', 'started', 'starting', 'stop', 'stops', 'stopped', 'stopping',
+        'run', 'runs', 'ran', 'running', 'execute', 'executes', 'executed', 'executing',
+        'launch', 'launches', 'launched', 'launching', 'close', 'closes', 'closed', 'closing',
+        'copy', 'copies', 'copied', 'copying', 'paste', 'pastes', 'pasted', 'pasting',
+        'cut', 'cuts', 'cutting', 'undo', 'undoes', 'undid', 'undone', 'undoing',
+        'redo', 'redoes', 'redid', 'redone', 'redoing', 'rotate', 'rotates', 'rotated', 'rotating',
+        'resize', 'resizes', 'resized', 'resizing', 'crop', 'crops', 'cropped', 'cropping',
+        'scale', 'scales', 'scaled', 'scaling', 'flip', 'flips', 'flipped', 'flipping',
+        'mirror', 'mirrors', 'mirrored', 'mirroring', 'invert', 'inverts', 'inverted', 'inverting',
+        'filter', 'filters', 'filtered', 'filtering', 'sort', 'sorts', 'sorted', 'sorting',
+        'group', 'groups', 'grouped', 'grouping', 'ungroup', 'ungroups', 'ungrouped', 'ungrouping',
+        'align', 'aligns', 'aligned', 'aligning', 'arrange', 'arranges', 'arranged', 'arranging',
+        'optimize', 'optimizes', 'optimized', 'optimizing', 'enhance', 'enhances', 'enhanced', 'enhancing',
+        'improve', 'improves', 'improved', 'improving', 'fix', 'fixes', 'fixed', 'fixing',
+        'repair', 'repairs', 'repaired', 'repairing', 'recover', 'recovers', 'recovered', 'recovering',
+        'restore', 'restores', 'restored', 'restoring', 'backup', 'backups', 'backed', 'backing',
+        'preview', 'previews', 'previewed', 'previewing', 'review', 'reviews', 'reviewed', 'reviewing',
+        'share', 'shares', 'shared', 'sharing', 'publish', 'publishes', 'published', 'publishing',
+        'send', 'sends', 'sent', 'sending', 'receive', 'receives', 'received', 'receiving',
+        'transfer', 'transfers', 'transferred', 'transferring', 'sync', 'syncs', 'synced', 'syncing',
+        'synchronize', 'synchronizes', 'synchronized', 'synchronizing',
+        
+        # Common adjectives
+        'online', 'offline', 'free', 'premium', 'pro', 'basic', 'advanced', 'simple', 'easy',
+        'fast', 'quick', 'slow', 'high', 'low', 'best', 'better', 'good', 'bad', 'new', 'old',
+        'modern', 'classic', 'professional', 'personal', 'public', 'private', 'secure', 'safe',
+        'reliable', 'efficient', 'effective', 'powerful', 'lightweight', 'portable', 'compatible',
+        'compatible', 'universal', 'standard', 'custom', 'automatic', 'manual', 'smart', 'intelligent',
+        'interactive', 'responsive', 'adaptive', 'flexible', 'scalable', 'robust', 'stable',
+        'latest', 'newest', 'updated', 'improved', 'enhanced', 'optimized', 'complete', 'full',
+        'partial', 'total', 'entire', 'whole', 'main', 'primary', 'secondary', 'multiple', 'single',
+        'unique', 'common', 'rare', 'popular', 'favorite', 'premium', 'deluxe', 'ultimate',
+        'essential', 'necessary', 'optional', 'required', 'recommended', 'suggested', 'preferred',
+        'available', 'unavailable', 'accessible', 'inaccessible', 'visible', 'invisible', 'hidden',
+        'open', 'closed', 'active', 'inactive', 'enabled', 'disabled', 'supported', 'unsupported',
+        
+        # Common nouns (tools, features, etc.)
+        'tool', 'tools', 'converter', 'converters', 'editor', 'editors', 'viewer', 'viewers',
+        'generator', 'generators', 'creator', 'creators', 'maker', 'makers', 'builder', 'builders',
+        'designer', 'designers', 'manager', 'managers', 'organizer', 'organizers', 'optimizer', 'optimizers',
+        'analyzer', 'analyzers', 'scanner', 'scanners', 'reader', 'readers', 'writer', 'writers',
+        'parser', 'parsers', 'compiler', 'compilers', 'interpreter', 'interpreters', 'processor', 'processors',
+        'renderer', 'renderers', 'exporter', 'exporters', 'importer', 'importers', 'downloader', 'downloaders',
+        'uploader', 'uploaders', 'compressor', 'compressors', 'decompressor', 'decompressors',
+        'extractor', 'extractors', 'merger', 'mergers', 'splitter', 'splitters', 'joiner', 'joiners',
+        'validator', 'validators', 'checker', 'checkers', 'tester', 'testers', 'debugger', 'debuggers',
+        'application', 'applications', 'app', 'apps', 'program', 'programs', 'software', 'utility', 'utilities',
+        'service', 'services', 'platform', 'platforms', 'system', 'systems', 'solution', 'solutions',
+        'library', 'libraries', 'framework', 'frameworks', 'api', 'apis', 'sdk', 'sdks',
+        'plugin', 'plugins', 'extension', 'extensions', 'addon', 'addons', 'module', 'modules',
+        'component', 'components', 'widget', 'widgets', 'control', 'controls', 'element', 'elements',
+        'feature', 'features', 'function', 'functions', 'functionality', 'option', 'options',
+        'setting', 'settings', 'preference', 'preferences', 'configuration', 'configurations',
+        'parameter', 'parameters', 'property', 'properties', 'attribute', 'attributes', 'value', 'values',
+        'file', 'files', 'document', 'documents', 'page', 'pages', 'sheet', 'sheets',
+        'slide', 'slides', 'image', 'images', 'picture', 'pictures', 'photo', 'photos',
+        'graphic', 'graphics', 'icon', 'icons', 'logo', 'logos', 'banner', 'banners',
+        'template', 'templates', 'theme', 'themes', 'style', 'styles', 'layout', 'layouts',
+        'format', 'formats', 'type', 'types', 'kind', 'kinds', 'version', 'versions',
+        'edition', 'editions', 'release', 'releases', 'update', 'updates', 'patch', 'patches',
+        'mode', 'modes', 'view', 'views', 'display', 'displays', 'screen', 'screens',
+        'window', 'windows', 'panel', 'panels', 'tab', 'tabs', 'menu', 'menus',
+        'toolbar', 'toolbars', 'sidebar', 'sidebars', 'statusbar', 'statusbars', 'header', 'headers',
+        'footer', 'footers', 'navigation', 'navigations', 'content', 'contents', 'section', 'sections',
+        'chapter', 'chapters', 'part', 'parts', 'item', 'items', 'entry', 'entries',
+        'record', 'records', 'data', 'information', 'details', 'text', 'code', 'script', 'scripts',
+        'size', 'sizes', 'dimension', 'dimensions', 'resolution', 'resolutions', 'quality', 'qualities',
+        'color', 'colors', 'colour', 'colours', 'background', 'backgrounds', 'foreground', 'foregrounds',
+        'border', 'borders', 'margin', 'margins', 'padding', 'spacing', 'alignment', 'alignments',
+        'position', 'positions', 'location', 'locations', 'path', 'paths', 'directory', 'directories',
+        'folder', 'folders', 'drive', 'drives', 'disk', 'disks', 'storage', 'memory',
+        'cache', 'buffer', 'queue', 'stack', 'list', 'lists', 'array', 'arrays',
+        'table', 'tables', 'row', 'rows', 'column', 'columns', 'cell', 'cells',
+        'field', 'fields', 'form', 'forms', 'input', 'inputs', 'output', 'outputs',
+        'result', 'results', 'response', 'responses', 'request', 'requests', 'query', 'queries',
+        'command', 'commands', 'action', 'actions', 'operation', 'operations', 'task', 'tasks',
+        'process', 'job', 'jobs', 'workflow', 'workflows', 'pipeline', 'pipelines',
+        'step', 'steps', 'stage', 'stages', 'phase', 'phases', 'level', 'levels',
+        'layer', 'layers', 'object', 'objects', 'instance', 'instances', 'class', 'classes',
+        'method', 'methods', 'event', 'events', 'handler', 'handlers', 'callback', 'callbacks',
+        'error', 'errors', 'warning', 'warnings', 'message', 'messages', 'notification', 'notifications',
+        'alert', 'alerts', 'dialog', 'dialogs', 'prompt', 'prompts', 'confirmation', 'confirmations',
+        'user', 'users', 'account', 'accounts', 'profile', 'profiles', 'session', 'sessions',
+        'login', 'logout', 'signin', 'signout', 'signup', 'register', 'registration',
+        'password', 'passwords', 'username', 'usernames', 'email', 'emails', 'address', 'addresses',
+        'link', 'links', 'url', 'urls', 'path', 'paths', 'route', 'routes',
+        'connection', 'connections', 'network', 'networks', 'server', 'servers', 'client', 'clients',
+        'database', 'databases', 'schema', 'schemas', 'index', 'indexes', 'indices',
+        'key', 'keys', 'token', 'tokens', 'certificate', 'certificates', 'license', 'licenses',
+        'permission', 'permissions', 'role', 'roles', 'group', 'groups', 'team', 'teams',
+        'project', 'projects', 'workspace', 'workspaces', 'environment', 'environments',
+        'package', 'packages', 'bundle', 'bundles', 'archive', 'archives', 'backup', 'backups',
+        'copy', 'copies', 'duplicate', 'duplicates', 'clone', 'clones', 'snapshot', 'snapshots',
+        'checkpoint', 'checkpoints', 'milestone', 'milestones', 'branch', 'branches', 'tag', 'tags',
+        'commit', 'commits', 'change', 'changes', 'diff', 'diffs', 'patch', 'patches',
+        'issue', 'issues', 'bug', 'bugs', 'fix', 'fixes', 'enhancement', 'enhancements',
+        'feature', 'improvement', 'improvements', 'optimization', 'optimizations',
+        'performance', 'speed', 'efficiency', 'accuracy', 'precision', 'reliability',
+        'security', 'privacy', 'safety', 'protection', 'encryption', 'decryption',
+        'compression', 'decompression', 'encoding', 'decoding', 'conversion', 'transformation',
+        'translation', 'localization', 'internationalization', 'customization', 'personalization',
+        'automation', 'integration', 'synchronization', 'migration', 'import', 'export',
+        'batch', 'bulk', 'mass', 'multi', 'single', 'individual', 'specific', 'general',
+        'default', 'custom', 'standard', 'advanced', 'expert', 'professional', 'enterprise',
+        'business', 'commercial', 'corporate', 'industrial', 'educational', 'academic',
+        'personal', 'home', 'office', 'desktop', 'mobile', 'web', 'cloud', 'local', 'remote',
+        'source', 'target', 'destination', 'origin', 'input', 'output', 'start', 'end',
+        'beginning', 'finish', 'first', 'last', 'initial', 'final', 'original', 'modified',
+        'current', 'previous', 'next', 'recent', 'old', 'new', 'existing', 'available',
+        
+        # Temporal words
+        'today', 'yesterday', 'tomorrow', 'now', 'later', 'soon', 'recently', 'currently',
+        'always', 'never', 'sometimes', 'often', 'rarely', 'seldom', 'frequently',
+        
+        # Quantifiers
+        'all', 'any', 'some', 'none', 'every', 'each', 'many', 'much', 'few', 'little',
+        'several', 'various', 'numerous', 'countless', 'multiple', 'single', 'double', 'triple',
+        'half', 'quarter', 'third', 'full', 'empty', 'partial', 'complete', 'incomplete',
+        
+        # Pronouns
+        'i', 'you', 'he', 'she', 'it', 'we', 'they', 'me', 'him', 'her', 'us', 'them',
+        'my', 'your', 'his', 'her', 'its', 'our', 'their', 'mine', 'yours', 'hers', 'ours', 'theirs',
+        'this', 'that', 'these', 'those', 'who', 'whom', 'whose', 'which', 'what',
+        'myself', 'yourself', 'himself', 'herself', 'itself', 'ourselves', 'yourselves', 'themselves',
+        
+        # Other common words
+        'yes', 'no', 'maybe', 'ok', 'okay', 'please', 'thanks', 'thank', 'welcome',
+        'hello', 'hi', 'bye', 'goodbye', 'help', 'support', 'guide', 'tutorial', 'demo',
+        'example', 'sample', 'test', 'trial', 'beta', 'alpha', 'stable', 'experimental',
+        'deprecated', 'legacy', 'obsolete', 'outdated', 'current', 'modern', 'classic',
+    ]
+    
+    result = []
+    
+    for text in text_array:
+        if not text:
+            result.append(text)
+            continue
+        
+        words = text.split()
+        if not words:
+            result.append(text)
+            continue
+        
+        processed_words = []
+        
+        for i, word in enumerate(words):
+            # Check if this word is a product name (contains dot)
+            is_product_name = '.' in word
+            
+            # Check if this word is a file format (case-insensitive)
+            is_file_format = word.upper() in [fmt.upper() for fmt in file_formats]
+            
+            # For the first word
+            if i == 0:
+                if is_product_name or is_file_format:
+                    # Keep as-is
+                    processed_words.append(word)
+                else:
+                    # Lowercase the first character only
+                    processed_words.append(word[0].lower() + word[1:] if len(word) > 1 else word.lower())
+            else:
+                # For subsequent words
+                if is_product_name or is_file_format:
+                    # Keep as-is (will be uppercased later if it's a format)
+                    processed_words.append(word)
+                else:
+                    # Check if it's a common word that should be lowercase
+                    if word.lower() in lowercase_words:
+                        processed_words.append(word.lower())
+                    else:
+                        # Keep original casing for other words (like "Chrome", brand names, etc.)
+                        processed_words.append(word)
+        
+        # Join the words back
+        processed = ' '.join(processed_words)
+        
+        # Ensure all file formats are uppercase everywhere in the text
+        for fmt in file_formats:
+            pattern = r'\b' + re.escape(fmt) + r'\b'
+            processed = re.sub(pattern, fmt.upper(), processed, flags=re.IGNORECASE)
+        
+        result.append(processed)
+    
+    return result
+
+

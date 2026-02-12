@@ -8,7 +8,7 @@ from tools.mcp_tools import generate_markdown_file, fetch_category_related_artic
 from utils import prompts
 from utils.seo_validator import validate_seo_content
 from utils.file_format_mappings import FILE_FORMAT_MAPPINGS, BASE_URL
-from utils.helpers import prepare_context, get_productInfo, get_topic_by_index, inject_file_format_links, slugify
+from utils.helpers import prepare_context, get_productInfo, get_topic_by_index, inject_file_format_links, slugify, normalize_case_preserve_formats_in_keywords
 from utils.metricsRecorder import MetricsRecorder
 import json
 import os
@@ -114,9 +114,9 @@ class BlogOrchestrator:
             print(f"target persona -- {target_persona}", flush=True)
             print(f"angle -- {angle}", flush=True)
 
-            f_keywords = primary + secondary
+            f_keywords = normalize_case_preserve_formats_in_keywords(primary + secondary, FILE_FORMAT_MAPPINGS)
             print(f"f_keywords -- {f_keywords}")
-  
+
             blog_outline = topics_raw_data.get("outline")
             # post_topic = sanitize_markdown_title(post_topic)
             
