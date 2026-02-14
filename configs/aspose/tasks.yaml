@@ -1,0 +1,67 @@
+# Aspose.Tasks
+blog: aspose
+key: tasks
+
+# Reusable platform definitions
+platform_definitions:
+  net:
+    display_name: ".NET"
+    keywords: ["c#", "csharp", ".net", "dotnet", "vb.net", "visual basic"]
+
+  java:
+    display_name: "Java"
+    keywords: ["java", "j2se", "j2ee", "jsp"]
+
+  cpp:
+    display_name: "C++"
+    keywords: ["cpp", "c++", "cplusplus"]
+
+  python_net:
+    display_name: "Python via .NET"
+    keywords: ["python", "python-net", "py", "python .net", "python via .net"]
+
+# Product: Aspose.Tasks
+display_name: "Aspose.Tasks"
+description: "Microsoft Project (MPP/MPT/MPX/XML) and Primavera (XER/P6XML) project file processing APIs"
+enabled: true
+
+# Common repo URLs for all platforms
+doc_repo: "https://github.com/aspose-tasks/Aspose.Tasks-Documentation"
+doc_branch: "master"
+
+api_repo: "https://github.com/aspose-tasks/Aspose.Tasks-API-References"
+api_branch: "main"
+
+tut_repo: "https://github.com/aspose-tasks/Aspose-Task-Reference-Tutorials"
+tut_branch: "main"
+
+platforms:
+  - net:
+      definition: net
+      # Docs repo browsing sometimes doesn’t expose a clean platform subtree; keep root and let your indexer/platform detector classify.
+      doc_path: "."
+      api_path: "english/net"
+      tut_path: "tasks"
+      enabled: true
+
+  - java:
+      definition: java
+      doc_path: "."
+      api_path: "english/java"
+      tut_path: "tasks"
+      enabled: true
+
+  - cpp:
+      definition: cpp
+      doc_path: "."
+      # Tasks API refs repo is primarily net/java; keep cpp disabled unless you have a cpp subtree in API refs.
+      api_path: "english/cpp"
+      tut_path: "tasks"
+      enabled: false  # Enable if your API refs include C++ docs
+
+  - python_net:
+      definition: python_net
+      doc_path: "."
+      api_path: "english/net"
+      tut_path: "tasks"
+      enabled: false  # Enable when you add Python-via-.NET content sources
