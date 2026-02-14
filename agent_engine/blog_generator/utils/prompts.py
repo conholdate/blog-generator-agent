@@ -191,6 +191,65 @@ Replace automatically throughout:
 - NEVER use typographic quotes or smart quotes
 - ALWAYS use simple ASCII punctuation
 
+### MARKDOWN LINK VALIDATION (MANDATORY - CRITICAL)
+**ABSOLUTE REQUIREMENT: All markdown links MUST use correct format [text](url)**
+
+PROHIBITED PATTERNS (these are ERRORS that must be prevented):
+❌ ]text](url) - Missing opening bracket
+❌ [text(url) - Missing closing bracket before opening parenthesis  
+❌ text](url) - Missing opening bracket entirely
+❌ [text]url) - Missing opening parenthesis
+❌ ]app](link) - Missing opening bracket (common LLM error)
+
+CORRECT FORMAT (ALWAYS use this):
+✅ [text](url) - Square brackets around text, parentheses around URL
+✅ [app](link) - Properly formatted with both brackets
+✅ [documentation](https://example.com) - Complete and correct
+
+**PREVENTION RULES:**
+1. ALWAYS write opening square bracket [ BEFORE link text
+2. ALWAYS write closing square bracket ] AFTER link text
+3. ALWAYS write opening parenthesis ( BEFORE URL
+4. ALWAYS write closing parenthesis ) AFTER URL
+5. NEVER start a link with ] - this is ALWAYS wrong
+6. NEVER omit the opening bracket [
+
+**VALIDATION BEFORE OUTPUT:**
+Before finalizing the blog post, mentally scan for these patterns:
+- Look for any ] at the start of a word followed by ](
+- Look for patterns like ]word]( or ]text](
+- If found, ADD the missing opening bracket [
+
+**EXAMPLES OF AUTO-CORRECTION:**
+
+WRONG → CORRECT:
+]API Reference](https://example.com) → [API Reference](https://example.com)
+]documentation](url) → [documentation](url)  
+product page](link) → [product page](link)
+]app](link) → [app](link)
+]Aspose.PDF](url) → [Aspose.PDF](url)
+
+**DETECTION PATTERNS TO AVOID:**
+These regex patterns indicate errors (for your awareness, not to use):
+- `\][^\[]*?\]\(` - Closing bracket followed by text then bracket-paren
+- `[^\[]\w+\]\(` - Word without opening bracket followed by bracket-paren
+- `^\]` - Line starting with closing bracket
+
+**ENFORCEMENT:**
+- Every markdown link in the output MUST be validated
+- If malformed link detected, it MUST be fixed before output
+- Output with malformed links is INVALID
+- This applies to ALL sections: Introduction, Prerequisites, Steps, Outline, Conclusion, FAQs
+
+**SELF-CHECK QUESTIONS:**
+Before writing any link, ask:
+1. Did I write the opening bracket [ first?
+2. Is the link text between [ and ]?
+3. Is the URL between ( and )?
+4. Does it follow the exact pattern [text](url)?
+
+If answer to ANY question is "No" - FIX IT IMMEDIATELY
+
 YAML SAFETY:
 - Quote strings containing colons
 - No line breaks in values
@@ -1360,6 +1419,7 @@ Before finalizing, verify:
 □ Contractions used occasionally for natural flow
 □ Direct address to reader ("you can" not "one can")
 □ Simple, clear language over complex phrasing
+□ All markdown links properly formatted as [text](url) with no malformed patterns
 
 ### CONTENT QUALITY
 - Accurate technical information

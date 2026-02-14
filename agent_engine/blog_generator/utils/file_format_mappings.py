@@ -504,7 +504,6 @@ FILE_FORMAT_MAPPINGS = {
 
     # Game
     "3DSX": "game/3dsx/",
-    "ASSET": "game/asset/",
     "BAK-TERRARIA": "game/bak-terraria/",
     "BIN-PCSX": "game/bin-pcsx/",
     "BMZ": "game/bmz/",
