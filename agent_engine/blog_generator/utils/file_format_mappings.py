@@ -243,7 +243,6 @@ FILE_FORMAT_MAPPINGS = {
     "SAFETENSORS": "data/safetensors/",
     "SPS": "data/sps/",
     "TGC": "data/tgc/",
-    "TIME": "data/time/",
     "TRF": "data/trf/",
     "VCE": "data/vce/",
     "VCS": "data/vcs/",
