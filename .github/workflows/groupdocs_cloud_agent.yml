@@ -8,6 +8,12 @@ on:
         required: true
         type: string
       
+      index:
+        description: 'Index in Keyword File (e.g. 1,2,3..) - Default is 1'
+        required: false
+        type: number
+        default: 1
+
       author:
         description: 'Author Name'
         required: true
@@ -123,7 +129,8 @@ jobs:
         python main.py \
           --keywords_file "${{ inputs.keywords_file }}" \
           --brand "groupdocs.cloud" \
-          --author "${{ inputs.author }}"
+          --author "${{ inputs.author }}" \
+          --index "${{ inputs.index }}"
         
         echo "✅ Blog generation completed"
 

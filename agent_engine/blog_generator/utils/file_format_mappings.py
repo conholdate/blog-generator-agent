@@ -847,6 +847,7 @@ FILE_FORMAT_MAPPINGS = {
     "UA": "pdf/ua/",
     "VT": "pdf/vt/",
     "XFDF": "pdf/xfdf/",
+    "PDF": "pdf",
 
     # Plugin
     "8BI8": "plugin/8bi8/",
