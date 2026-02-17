@@ -127,7 +127,7 @@ def get_project_root() -> str:
         os.path.join(os.path.dirname(__file__), "../../..")
     )
 
-def get_topic_by_index(input_file: str) -> str:
+def get_topic_by_index(input_file: str, ind) -> str:
     # Resolve project root
     base_dir = get_project_root()
     print(f"Project root: {base_dir}")
@@ -159,9 +159,8 @@ def get_topic_by_index(input_file: str) -> str:
         content = f.read()
 
     parsed = parse_markdown_topics(content)
-    index=1
-    if 1 <= index <= len(parsed["topics"]):
-        return parsed["topics"][index - 1]
+    if 1 <= ind <= len(parsed["topics"]):
+        return parsed["topics"][ind - 1]
     return None
 
 

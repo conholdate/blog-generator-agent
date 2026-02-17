@@ -74,15 +74,17 @@ class BlogOrchestrator:
     async def create_blog_autonomously(
         self, 
         topics_file: str, 
-        author: str = ""
+        author: str = "",
+        index: int = 1
     ):
         """Let the agent autonomously create a blog with metrics tracking"""
         set_tracing_disabled(disabled=True)
-        topics_raw_data = get_topic_by_index(topics_file)
+        topics_raw_data = get_topic_by_index(topics_file,index)
+        print(f"hell yaaa {index} clea-- {topics_raw_data}")
         post_topic = topics_raw_data.pop("topic")
         product_name = topics_raw_data.pop("product")
         platform = topics_raw_data.pop("platform")
-        
+
         # Get product info
         product_info = get_productInfo(product_name, platform, self.products, self.brand)
         isCloud = "cloud" in product_info["ProductName"].lower()

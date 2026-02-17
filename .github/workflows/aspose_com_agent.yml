@@ -7,7 +7,13 @@ on:
         description: 'Keywords File (e.g., content/Aspose/output/449388a2_aspose-cells_java_topics.md)'
         required: true
         type: string
-      
+
+      index:
+        description: 'Index in Keyword File (e.g. 1,2,3..) - Default is 1'
+        required: false
+        type: number
+        default: 1
+
       author:
         description: 'Author Name'
         required: true
@@ -122,7 +128,8 @@ jobs:
         python main.py \
           --keywords_file "${{ inputs.keywords_file }}" \
           --brand "aspose.com" \
-          --author "${{ inputs.author }}"
+          --author "${{ inputs.author }}" \
+          --index "${{ inputs.index }}"
         
         echo "✅ Blog generation completed"
 

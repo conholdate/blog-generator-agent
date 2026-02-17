@@ -10,6 +10,7 @@ def main():
     parser.add_argument("--author", type=str, required=True,  default=None)
     parser.add_argument("--brand", type=str, required=True,  default=None)
     parser.add_argument("--keywords_file", type=str, required=True,  default=None)
+    parser.add_argument("--index", type=int, default=None)
     args = parser.parse_args()
 
     orchestrator = BlogOrchestrator(brand=args.brand)
@@ -17,7 +18,8 @@ def main():
     result = asyncio.run(
         orchestrator.create_blog_autonomously(
             topics_file=args.keywords_file,
-            author=args.author
+            author=args.author,
+            index=args.index
         )
     )
     print(f"Generated blog post details : {result}")
