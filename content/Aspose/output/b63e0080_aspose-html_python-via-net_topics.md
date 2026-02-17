@@ -8,23 +8,7 @@
 
 ---
 
-## 1. Boost Performance of HTML to PDF Conversion with Aspose.HTML in Python via .NET
-- **Cluster ID:** `c1`
-- **Target persona:** Developers building high‑throughput document generation services.
-- **Angle:** Practical tips to speed up large‑scale HTML to PDF conversions using Aspose.HTML.
-- **Primary keyword:** `Aspose.HTML HTML to PDF Conversion Performance Tips`
-- **Supporting keywords:** `Aspose.HTML HTML to PDF Conversion Tutorial`, `Custom Fonts in Aspose.HTML HTML to PDF Conversion`, `Set PDF Page Margins in Aspose.HTML HTML Conversion`, `Aspose.HTML Async HTML to PDF Conversion Sample`
-
-**Suggested outline:**
-- Understanding the conversion pipeline in Aspose.HTML for Python via .NET
-- Configuring memory and thread settings for optimal performance
-- Using streaming and incremental conversion to handle big files
-- Best practices for resource cleanup and avoiding memory leaks
-- Measuring performance gains with real‑world benchmarks
-
----
-
-## 2. Batch Convert Multiple HTML Files to PDF with Aspose.HTML in Python via .NET
+## 1. Batch Convert Multiple HTML Files to PDF with Aspose.HTML in Python via .NET
 - **Cluster ID:** `c4`
 - **Target persona:** Engineers automating document workflows for enterprise applications.
 - **Angle:** Step‑by‑step guide to automate bulk HTML‑to‑PDF conversions in a Python‑.NET environment.
@@ -37,6 +21,22 @@
 - Using the batch conversion API with progress events
 - Managing fonts and resources for consistent output
 - Error handling and logging for large batch jobs
+
+---
+
+## 2. Boost Performance of HTML to PDF Conversion with Aspose.HTML in Python via .NET
+- **Cluster ID:** `c1`
+- **Target persona:** Developers building high‑throughput document generation services.
+- **Angle:** Practical tips to speed up large‑scale HTML to PDF conversions using Aspose.HTML.
+- **Primary keyword:** `Aspose.HTML HTML to PDF Conversion Performance Tips`
+- **Supporting keywords:** `Aspose.HTML HTML to PDF Conversion Tutorial`, `Custom Fonts in Aspose.HTML HTML to PDF Conversion`, `Set PDF Page Margins in Aspose.HTML HTML Conversion`, `Aspose.HTML Async HTML to PDF Conversion Sample`
+
+**Suggested outline:**
+- Understanding the conversion pipeline in Aspose.HTML for Python via .NET
+- Configuring memory and thread settings for optimal performance
+- Using streaming and incremental conversion to handle big files
+- Best practices for resource cleanup and avoiding memory leaks
+- Measuring performance gains with real‑world benchmarks
 
 ---
 
