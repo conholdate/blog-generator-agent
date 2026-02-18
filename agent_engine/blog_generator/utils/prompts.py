@@ -326,7 +326,7 @@ draft: false
 url: /{data.get("urlPrefix")}/{url}/
 author: "{author}"
 summary: "[MUST BE 200-260 chars - count every character including spaces before finalizing]"
-tags: {json.dumps(keywords)}
+tags: {json.dumps(keywords[:3])}
 categories: ["{category}"]
 showtoc: true
 cover:

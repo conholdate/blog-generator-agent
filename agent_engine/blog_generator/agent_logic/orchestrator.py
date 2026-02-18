@@ -165,7 +165,6 @@ class BlogOrchestrator:
                 result.final_output = fixed_content
             else:
                 print(f"✅ Meta description is already valid", flush=True)
-                return
             print(f" Content Generated, Performing SEO Audit Now --", flush=True)
 
             targets = {
