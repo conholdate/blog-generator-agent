@@ -15,8 +15,6 @@ PARENT_PATH = os.path.abspath(os.path.join(BASE_DIR, ""))
 if PARENT_PATH not in sys.path:
     sys.path.append(PARENT_PATH)
 
-print(f"binaa - {PARENT_PATH}", flush=True, file=sys.stderr)
-
 FONTS_DIR = os.path.join(BASE_DIR, "fonts")
 LOGOS_DIR = os.path.join(BASE_DIR, "logos")
 

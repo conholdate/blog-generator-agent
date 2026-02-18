@@ -1,8 +1,8 @@
 """
 Orchestrator with OpenAI Agents SDK + Runner + Metrics Tracking
+NOW USING CENTRALIZED LLM SERVICE
 """
-from openai import AsyncOpenAI
-from agents import Agent, Runner, OpenAIChatCompletionsModel, set_tracing_disabled, ModelSettings
+from agents import set_tracing_disabled
 from config import settings
 from tools.mcp_tools import generate_markdown_file, fetch_category_related_articles, gist_injector, generate_blog_image
 from utils import prompts
@@ -10,6 +10,8 @@ from utils.seo_validator import validate_seo_content
 from utils.file_format_mappings import FILE_FORMAT_MAPPINGS, BASE_URL
 from utils.helpers import prepare_context, get_productInfo, get_topic_by_index, inject_file_format_links, slugify, normalize_case_preserve_formats_in_keywords
 from utils.metricsRecorder import MetricsRecorder
+from services.LLMservice import llm_service, complete, complete_with_retry
+from utils.metaDescValidator import validate_and_fix_meta_description
 import json
 import os
 
@@ -25,14 +27,17 @@ class BlogOrchestrator:
         """
         self.brand = brand.lower().strip()
 
-        self.client = AsyncOpenAI(
-            base_url=settings.PROFESSIONALIZE_BASE_URL,
-            api_key=settings.PROFESSIONALIZE_API_KEY_2
-        )
-        self.model = OpenAIChatCompletionsModel(
-            model=settings.PROFESSIONALIZE_LLM_MODEL,
-            openai_client=self.client
-        )
+        # ════════════════════════════════════════════════════════════════════
+        # REMOVED: Direct client initialization - now handled by LLM service
+        # ════════════════════════════════════════════════════════════════════
+        # self.client = AsyncOpenAI(
+        #     base_url=settings.PROFESSIONALIZE_BASE_URL,
+        #     api_key=settings.PROFESSIONALIZE_API_KEY_2
+        # )
+        # self.model = OpenAIChatCompletionsModel(
+        #     model=settings.PROFESSIONALIZE_LLM_MODEL,
+        #     openai_client=self.client
+        # )
 
         self.products = self.load_products()
         
@@ -79,7 +84,7 @@ class BlogOrchestrator:
     ):
         """Let the agent autonomously create a blog with metrics tracking"""
         set_tracing_disabled(disabled=True)
-        topics_raw_data = get_topic_by_index(topics_file,index)
+        topics_raw_data = get_topic_by_index(topics_file, index)
         print(f"hell yaaa {index} clea-- {topics_raw_data}")
         post_topic = topics_raw_data.pop("topic")
         product_name = topics_raw_data.pop("product")
@@ -89,6 +94,7 @@ class BlogOrchestrator:
         product_info = get_productInfo(product_name, platform, self.products, self.brand)
         isCloud = "cloud" in product_info["ProductName"].lower()
         print(f"Product Info {isCloud} --- {product_info}", flush=True)
+        
         # Start metrics tracking
         self.metrics.start_job(
             product=product_name,
@@ -96,6 +102,7 @@ class BlogOrchestrator:
             website=self.brand
         )
         product_name = product_info.get("ProductName")
+        
         try:
             context = prepare_context(product_info)
             
@@ -120,30 +127,47 @@ class BlogOrchestrator:
             print(f"f_keywords -- {f_keywords}")
 
             blog_outline = topics_raw_data.get("outline")
-            # post_topic = sanitize_markdown_title(post_topic)
             
             print(f" Generating content now.")
        
-            agent = Agent(
-                name="blog-writer-agent",
-                instructions=prompts.get_blog_writer_prompt(
-                    post_topic,
-                    f_keywords,
-                    blog_outline,
-                    related_links,
-                    context,
-                    author,
-                    platform,
-                    target_persona,
-                    angle,
-                    isCloud
-                ),
-                model=self.model,
-                model_settings=ModelSettings(temperature=0.6)
+            # ════════════════════════════════════════════════════════════════════
+            # UPDATED: Using centralized LLM service instead of direct Agent creation
+            # ════════════════════════════════════════════════════════════════════
+            instructions = prompts.get_blog_writer_prompt(
+                post_topic,
+                f_keywords,
+                blog_outline,
+                related_links,
+                context,
+                author,
+                platform,
+                target_persona,
+                angle,
+                isCloud
             )
+            
+            result = await llm_service.run_agent(
+                instructions=instructions,
+                context=context,
+                agent_name="blog-writer-agent",
+                temperature=0.6,
+                max_turns=10
+            )
+            # ════════════════════════════════════════════════════════════════════
 
-            result = await Runner.run(agent, context, max_turns=10)
-            print(f" Content Generated, Performing SEO Audti Now --", flush=True)
+         
+            # Validate and fix if needed
+            fixed_content, was_fixed = await validate_and_fix_meta_description(result.final_output)
+            
+            if was_fixed:
+                print(f"✅ Meta description was corrected and is now valid (140-160 chars)", flush=True)
+                # Update the result with fixed content
+                result.final_output = fixed_content
+            else:
+                print(f"✅ Meta description is already valid", flush=True)
+                return
+            print(f" Content Generated, Performing SEO Audit Now --", flush=True)
+
             targets = {
                 "primary_keyword": f_keywords[0],
                 "target_keyword_count": 5,
@@ -152,7 +176,7 @@ class BlogOrchestrator:
             report = validate_seo_content(result.final_output, targets)
             print(f" Audit completed -- {report}", flush=True)
              
-            print(f" Injecting gists now -- ",flush=True)
+            print(f" Injecting gists now -- ", flush=True)
             
             jistified = await gist_injector(result.final_output, post_topic)
 
@@ -160,11 +184,12 @@ class BlogOrchestrator:
             data = json.loads(text_output)
             final_content = data["jistified_content"]
             final_content = inject_file_format_links(final_content, FILE_FORMAT_MAPPINGS, BASE_URL)
+            
             print(f" Generating markdown file")
             file_res = await generate_markdown_file(
                 title=post_topic,
                 content=final_content,
-                brand= self.brand
+                brand=self.brand
             )
          
             filepath = file_res.get("output", {}).get("filepath")

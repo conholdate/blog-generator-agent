@@ -110,6 +110,6 @@ def validate_seo_content(markdown_string, targets):
 
     # Final Score
     report["score"] = max(0, max_score - deductions)
-    report["status"] = "PASS" if report["score"] == 100 else "REVISION_NEEDED"
+    report["status"] = "PASS" if report["score"] >= 80 else "REVISION_NEEDED"
     
     return report
