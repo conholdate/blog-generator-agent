@@ -741,6 +741,7 @@ FILE_FORMAT_MAPPINGS = {
     "PEF": "image/pef/",
     "PICT": "image/pict/",
     "PNG": "image/png/",
+    "JPG": "image/jpg/",
     "PNJ": "image/pnj/",
     "PPF": "image/ppf/",
     "PPP": "image/ppp/",

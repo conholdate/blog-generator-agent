@@ -8,9 +8,9 @@ from tools.mcp_tools import generate_markdown_file, fetch_category_related_artic
 from utils import prompts
 from utils.seo_validator import validate_seo_content
 from utils.file_format_mappings import FILE_FORMAT_MAPPINGS, BASE_URL
-from utils.helpers import prepare_context, get_productInfo, get_topic_by_index, inject_file_format_links, slugify, normalize_case_preserve_formats_in_keywords
+from utils.helpers import prepare_context, get_productInfo, get_topic_by_index, inject_file_format_links, slugify, normalize_case_preserve_formats_in_keywords, clean_ai_generated_markdown
 from utils.metricsRecorder import MetricsRecorder
-from services.LLMservice import llm_service, complete, complete_with_retry
+from services.LLMservice import llm_service
 from utils.metaDescValidator import validate_and_fix_meta_description
 import json
 import os
@@ -165,6 +165,8 @@ class BlogOrchestrator:
                 result.final_output = fixed_content
             else:
                 print(f"✅ Meta description is already valid", flush=True)
+
+            result.final_output = clean_ai_generated_markdown(result.final_output)
             print(f" Content Generated, Performing SEO Audit Now --", flush=True)
 
             targets = {

@@ -1138,3 +1138,400 @@ def validate_and_fix_meta_description(blog_content: str) -> tuple[str, bool]:
     updated_content = replace_meta_description(blog_content, fixed_description)
     print(f"✅ Meta description fixed: {len(fixed_description)} chars.")
     return updated_content, True
+
+def extract_protected_blocks(content: str) -> tuple[str, dict]:
+    """
+    Extract and protect markdown blocks that should not be modified.
+    Returns content with placeholders and a dict of protected blocks.
+    
+    Protected elements:
+    - Code blocks (```...```)
+    - Inline code (`...`)
+    - Images (![alt](url))
+    - URLs/Links ([text](url))
+    - HTML comments (<!-- ... -->)
+    - Gist embeds or script tags
+    
+    Note: Frontmatter is NOT protected - we want to process titles there
+    """
+    protected = {}
+    placeholder_content = content
+    counter = 0
+    
+    # 1. Protect code blocks (```...```) - non-greedy, handles nested backticks
+    def protect_code_block(match):
+        nonlocal counter
+        placeholder = f"___PROTECTED_CODE_BLOCK_{counter}___"
+        protected[placeholder] = match.group(0)
+        counter += 1
+        return placeholder
+    
+    placeholder_content = re.sub(
+        r'```[\s\S]*?```',
+        protect_code_block,
+        placeholder_content,
+        flags=re.MULTILINE
+    )
+    
+    # 2. Protect inline code (`...`) - handles edge cases with multiple backticks
+    def protect_inline_code(match):
+        nonlocal counter
+        placeholder = f"___PROTECTED_INLINE_CODE_{counter}___"
+        protected[placeholder] = match.group(0)
+        counter += 1
+        return placeholder
+    
+    # Match both single and double backticks, non-greedy
+    placeholder_content = re.sub(
+        r'``[^`]+``|`[^`\n]+`',
+        protect_inline_code,
+        placeholder_content
+    )
+    
+    # 3. Protect images (![alt](url)) - handles optional title, spaces in URLs
+    def protect_image(match):
+        nonlocal counter
+        placeholder = f"___PROTECTED_IMAGE_{counter}___"
+        protected[placeholder] = match.group(0)
+        counter += 1
+        return placeholder
+    
+    placeholder_content = re.sub(
+        r'!\[([^\]]*)\]\(([^\)]+)\)',
+        protect_image,
+        placeholder_content
+    )
+    
+    # 4. Protect links ([text](url)) - only the URL part, handles nested brackets
+    def protect_link(match):
+        nonlocal counter
+        text = match.group(1)
+        url = match.group(2)
+        url_placeholder = f"___PROTECTED_URL_{counter}___"
+        protected[url_placeholder] = url
+        counter += 1
+        return f"[{text}]({url_placeholder})"
+    
+    # More robust link pattern - handles spaces and special chars in URLs
+    placeholder_content = re.sub(
+        r'\[([^\]]+)\]\(([^\)]+)\)',
+        protect_link,
+        placeholder_content
+    )
+    
+    # 5. Protect HTML comments (<!-- ... -->) - handles multiline
+    def protect_comment(match):
+        nonlocal counter
+        placeholder = f"___PROTECTED_COMMENT_{counter}___"
+        protected[placeholder] = match.group(0)
+        counter += 1
+        return placeholder
+    
+    placeholder_content = re.sub(
+        r'<!--[\s\S]*?-->',
+        protect_comment,
+        placeholder_content,
+        flags=re.MULTILINE
+    )
+    
+    # 6. Protect script tags (for gists) - handles attributes and multiline
+    def protect_script(match):
+        nonlocal counter
+        placeholder = f"___PROTECTED_SCRIPT_{counter}___"
+        protected[placeholder] = match.group(0)
+        counter += 1
+        return placeholder
+    
+    placeholder_content = re.sub(
+        r'<script[\s\S]*?</script>',
+        protect_script,
+        placeholder_content,
+        flags=re.IGNORECASE | re.MULTILINE
+    )
+    
+    # 7. Protect HTML/XML tags that might contain dashes (e.g., <div class="my-class">)
+    def protect_html_tag(match):
+        nonlocal counter
+        placeholder = f"___PROTECTED_HTML_TAG_{counter}___"
+        protected[placeholder] = match.group(0)
+        counter += 1
+        return placeholder
+    
+    placeholder_content = re.sub(
+        r'<[^>]+>',
+        protect_html_tag,
+        placeholder_content
+    )
+    
+    return placeholder_content, protected
+
+
+def restore_protected_blocks(content: str, protected: dict) -> str:
+    """Restore protected blocks back into the content."""
+    for placeholder, original in protected.items():
+        content = content.replace(placeholder, original)
+    return content
+
+
+def get_line_number(content: str, position: int) -> int:
+    """Get line number for a given character position in content."""
+    return content[:position].count('\n') + 1
+
+
+def find_replacements_with_lines(content: str, pattern: str, replacement: str, pattern_name: str) -> list[dict]:
+    """
+    Find all occurrences of a pattern and return details including line numbers.
+    
+    Returns:
+        List of dicts with: line_number, original_text, context, replacement
+    """
+    replacements = []
+    
+    for match in re.finditer(re.escape(pattern), content):
+        start_pos = match.start()
+        end_pos = match.end()
+        line_num = get_line_number(content, start_pos)
+        
+        # Extract context (50 chars before and after)
+        context_start = max(0, start_pos - 50)
+        context_end = min(len(content), end_pos + 50)
+        context = content[context_start:context_end]
+        
+        # Clean up context for display
+        context = context.replace('\n', ' ').strip()
+        
+        replacements.append({
+            'line_number': line_num,
+            'pattern_name': pattern_name,
+            'original': pattern,
+            'replacement': replacement,
+            'context': f"...{context}..."
+        })
+    
+    return replacements
+
+
+def remove_all_fancy_punctuation_with_tracking(content: str) -> tuple[str, dict, list[dict]]:
+    """
+    Remove all fancy/typographic punctuation with detailed tracking.
+    Preserves code blocks, gists, images, and URLs.
+    
+    CONTEXT-AWARE EM DASH HANDLING:
+    - In frontmatter title/seoTitle: Replace em dash with hyphen (-)
+    - In headings (##, ###): Replace em dash with hyphen (-)
+    - In regular text: Remove em dash completely
+    
+    Returns:
+        tuple of (cleaned_content, stats, all_replacements)
+        - cleaned_content: Content with fancy punctuation replaced
+        - stats: Dict with counts of each type replaced
+        - all_replacements: List of dicts with line numbers and contexts
+    """
+    # First, protect code blocks, images, URLs, etc.
+    protected_content, protected_blocks = extract_protected_blocks(content)
+    
+    stats = {
+        "em_dashes_in_frontmatter": 0,
+        "em_dashes_in_headings": 0,
+        "em_dashes_in_body": 0,
+        "en_dashes": 0,
+        "curly_double_quotes": 0,
+        "curly_single_quotes": 0,
+        "ellipsis": 0,
+        "bullets": 0,
+        "other": 0
+    }
+    
+    all_replacements = []
+    
+    # ═══════════════════════════════════════════════════════════════════════
+    # SPECIAL HANDLING FOR EM DASHES (context-aware)
+    # ═══════════════════════════════════════════════════════════════════════
+    
+    # Split content into lines for context-aware processing
+    lines = protected_content.split('\n')
+    processed_lines = []
+    
+    # Detect frontmatter boundaries
+    in_frontmatter = False
+    frontmatter_delimiter_count = 0
+    
+    for line_idx, line in enumerate(lines, start=1):
+        # Track frontmatter boundaries (between --- delimiters)
+        if line.strip() == '---':
+            frontmatter_delimiter_count += 1
+            if frontmatter_delimiter_count <= 2:
+                in_frontmatter = not in_frontmatter
+        
+        # Check if this line is a heading
+        is_heading = line.strip().startswith('#') and not in_frontmatter
+        
+        # Check if this line is a frontmatter title field
+        is_frontmatter_title = (
+            in_frontmatter and 
+            (line.strip().startswith('title:') or line.strip().startswith('seoTitle:'))
+        )
+        
+        if '\u2014' in line:  # Em dash present
+            if is_frontmatter_title or is_heading:
+                # In frontmatter titles or headings: Replace with hyphen
+                count = line.count('\u2014')
+                for match in re.finditer(re.escape('\u2014'), line):
+                    start_pos = match.start()
+                    context_start = max(0, start_pos - 50)
+                    context_end = min(len(line), start_pos + 51)
+                    context = line[context_start:context_end].strip()
+                    
+                    if is_frontmatter_title:
+                        label = 'Em dash in frontmatter title (\u2014)'
+                        stats["em_dashes_in_frontmatter"] += 1
+                    else:
+                        label = 'Em dash in heading (\u2014)'
+                        stats["em_dashes_in_headings"] += 1
+                    
+                    all_replacements.append({
+                        'line_number': line_idx,
+                        'pattern_name': label,
+                        'original': '\u2014',
+                        'replacement': '-',
+                        'context': f"...{context}..."
+                    })
+                
+                line = line.replace('\u2014', '-')
+                
+            elif not in_frontmatter:
+                # In body text: Remove completely (with smart spacing)
+                count = line.count('\u2014')
+                for match in re.finditer(re.escape('\u2014'), line):
+                    start_pos = match.start()
+                    context_start = max(0, start_pos - 50)
+                    context_end = min(len(line), start_pos + 51)
+                    context = line[context_start:context_end].strip()
+                    
+                    all_replacements.append({
+                        'line_number': line_idx,
+                        'pattern_name': 'Em dash in body (\u2014)',
+                        'original': '\u2014',
+                        'replacement': '[removed]',
+                        'context': f"...{context}..."
+                    })
+                
+                # Smart removal: handle spacing around em dash
+                # "word — word" → "word word"
+                # "word—word" → "word word"
+                line = re.sub(r'\s*\u2014\s*', ' ', line)
+                stats["em_dashes_in_body"] += count
+        
+        processed_lines.append(line)
+    
+    protected_content = '\n'.join(processed_lines)
+    
+    # ═══════════════════════════════════════════════════════════════════════
+    # HANDLE ALL OTHER PUNCTUATION (same throughout)
+    # ═══════════════════════════════════════════════════════════════════════
+    
+    # Define other replacements (excluding em dash which we already handled)
+    replacements_map = [
+        ("\u2013", "-", "En dash (\u2013)"),           # – (U+2013)
+        ("\u201C", '"', "Left curly double quote (\u201C)"),   # " (U+201C)
+        ("\u201D", '"', "Right curly double quote (\u201D)"),  # " (U+201D)
+        ("\u2018", "'", "Left curly single quote (\u2018)"),   # ' (U+2018)
+        ("\u2019", "'", "Right curly single quote (\u2019)"),  # ' (U+2019)
+        ("\u2026", "...", "Ellipsis (\u2026)"),        # … (U+2026)
+        ("\u2022", "-", "Bullet (\u2022)"),            # • (U+2022)
+        ("\u00A9", "(c)", "Copyright (\u00A9)"),       # © (U+00A9)
+        ("\u00AE", "(R)", "Registered (\u00AE)"),      # ® (U+00AE)
+        ("\u2122", "(TM)", "Trademark (\u2122)"),      # ™ (U+2122)
+        ("\u00B0", " degrees", "Degree (\u00B0)"),     # ° (U+00B0)
+        ("\u00D7", "x", "Multiplication (\u00D7)"),    # × (U+00D7)
+        ("\u00F7", "/", "Division (\u00F7)"),          # ÷ (U+00F7)
+    ]
+    
+    # Process each replacement and track changes
+    for original, replacement, name in replacements_map:
+        if original in protected_content:
+            # Find all occurrences with line numbers
+            found = find_replacements_with_lines(protected_content, original, replacement, name)
+            all_replacements.extend(found)
+            
+            # Perform replacement
+            protected_content = protected_content.replace(original, replacement)
+            
+            # Update stats
+            count = len(found)
+            if "dash" in name.lower():
+                stats["en_dashes"] += count
+            elif "quote" in name.lower():
+                if "double" in name.lower():
+                    stats["curly_double_quotes"] += count
+                else:
+                    stats["curly_single_quotes"] += count
+            elif "Ellipsis" in name:
+                stats["ellipsis"] += count
+            elif "Bullet" in name:
+                stats["bullets"] += count
+            else:
+                stats["other"] += count
+    
+    # Restore protected blocks
+    cleaned_content = restore_protected_blocks(protected_content, protected_blocks)
+    
+    return cleaned_content, stats, all_replacements
+
+
+def clean_ai_generated_markdown(content: str, verbose: bool = True) -> str:
+    """
+    Main function to clean AI-generated markdown content.
+    Removes all fancy punctuation that indicates AI generation.
+    PRESERVES: Code blocks, gists, images, URLs, and other markdown elements.
+    
+    Args:
+        content: Raw markdown content from LLM
+        verbose: If True, print detailed cleanup report with line numbers
+        
+    Returns:
+        Cleaned markdown content with all fancy punctuation replaced
+    """
+    # Perform cleanup with tracking
+    cleaned_content, stats, replacements = remove_all_fancy_punctuation_with_tracking(content)
+    
+    total_replaced = sum(stats.values())
+    
+    if verbose:
+        print("\n" + "=" * 70)
+        print("AI CONTENT CLEANUP - Markdown-Aware Processing")
+        print("=" * 70)
+        
+        if total_replaced == 0:
+            print("✅ No AI indicators found - content looks clean!")
+            print("=" * 70 + "\n")
+            return cleaned_content
+        
+        print(f"⚠️  Found {total_replaced} AI generation indicators\n")
+        
+        # Group replacements by type
+        by_type = {}
+        for rep in replacements:
+            pattern_name = rep['pattern_name']
+            if pattern_name not in by_type:
+                by_type[pattern_name] = []
+            by_type[pattern_name].append(rep)
+        
+        # Display grouped results
+        for pattern_name, items in by_type.items():
+            print(f"📍 {pattern_name}: {len(items)} occurrence(s)")
+            
+            # Show first 5 occurrences with line numbers
+            for i, item in enumerate(items[:5], 1):
+                print(f"   Line {item['line_number']}: '{item['original']}' → '{item['replacement']}'")
+                print(f"   Context: {item['context']}")
+            
+            if len(items) > 5:
+                print(f"   ... and {len(items) - 5} more occurrence(s)")
+            print()
+        
+        print(f"🔧 Cleanup completed: Replaced {total_replaced} fancy punctuation marks")
+        print("✅ Protected: Code blocks, inline code, images, URLs, gists")
+        print("=" * 70 + "\n")
+    
+    return cleaned_content

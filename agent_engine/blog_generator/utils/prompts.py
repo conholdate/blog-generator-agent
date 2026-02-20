@@ -364,6 +364,13 @@ PART 2: CONTENT STRUCTURE (MANDATORY SECTIONS)
 7. FAQs (H2 heading - ALWAYS include)
 {'8. Read More (H2 heading - ALWAYS include last)' if formatted_related else ''}
 
+**CRITICAL: ALL HEADINGS MUST USE TITLE CASE**
+Every H2 and H3 heading MUST follow Title Case capitalization rules (see GRAMMAR RULES FOR HEADINGS above).
+Examples:
+✅ "Prerequisites and Setup" (NOT "Prerequisites and setup")
+✅ "Steps to Convert PDF to PNG" (NOT "Steps to convert PDF to PNG")
+✅ "Understanding File Compression" (NOT "Understanding file compression")
+
 **CRITICAL SECTION ORDERING RULES:**
 - Prerequisites and Setup MUST come immediately after Introduction
 - Steps MUST come immediately after Prerequisites and Setup
@@ -407,6 +414,42 @@ The outline sections come AFTER the Steps section. Within the outline sections:
 - Product names: NEVER use articles (a/an) before product names
 - ✅ CORRECT: "Prerequisites and Setup"
 - ❌ WRONG: "Prerequisites and a Setup"
+
+**HEADING CAPITALIZATION (MANDATORY - TITLE CASE):**
+ALL headings (H2, H3, etc.) MUST use Title Case capitalization.
+
+**Title Case Rules:**
+- Capitalize: First word, last word, and all major words
+- Major words: Nouns, verbs, adjectives, adverbs, pronouns
+- Lowercase: Articles (a, an, the), conjunctions (and, but, or), prepositions (in, on, at, to, for, with, from)
+- EXCEPTION: Always capitalize prepositions of 5+ letters (Between, Through, Without)
+
+**CORRECT Title Case Examples:**
+✅ "Prerequisites and Setup"
+✅ "Steps to Convert PDF to PNG"
+✅ "Understanding Z File Compression"
+✅ "Advanced Compression Options and Settings"
+✅ "How to Handle Large Files"
+✅ "Working with Multiple File Formats"
+✅ "Convert PDF to PNG - Complete Code Example"
+
+**INCORRECT (Sentence case or wrong capitalization):**
+❌ "Prerequisites and setup" (lowercase 'setup')
+❌ "Steps to convert PDF to PNG" (lowercase 'convert')
+❌ "Understanding z file compression" (lowercase 'z', 'file', 'compression')
+❌ "Advanced compression options and settings" (all lowercase except first word)
+❌ "How To Handle Large Files" (capitalized 'To')
+❌ "Working With Multiple File Formats" (capitalized 'With')
+
+**VALIDATION BEFORE OUTPUT:**
+Before finalizing, check EVERY heading:
+1. Is the first word capitalized? ✓
+2. Is the last word capitalized? ✓
+3. Are all nouns, verbs, adjectives capitalized? ✓
+4. Are small words (a, an, the, and, but, or, in, on, at, to, for, with) lowercase? ✓
+5. Are prepositions of 5+ letters capitalized? ✓
+
+If ANY check fails → FIX the heading immediately
 
 ### 1. INTRODUCTION CONTENT (NO HEADING) - CRITICAL PRODUCT LINK REQUIREMENT
 
@@ -678,6 +721,7 @@ Before finalizing, verify:
 □ All markdown links properly formatted as [text](url)
 □ Meta description is EXACTLY 140-160 characters (counted manually)
 □ Summary is EXACTLY 200-260 characters (counted manually)
+□ ALL headings (H2, H3) use Title Case capitalization (check every single one)
 
 ═══════════════════════════════════════════════════════════════════════════════
 END OF PROMPT
