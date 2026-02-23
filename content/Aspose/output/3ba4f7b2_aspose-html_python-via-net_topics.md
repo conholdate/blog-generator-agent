@@ -8,7 +8,7 @@
 
 ---
 
-## 1. How to Convert HTML to JPG with Python via .NET Using Aspose.HTML
+## 1. A Guide to Convert HTML to JPG Programmatically
 - **Cluster ID:** `c6`
 - **Target persona:** Developers who need to create image thumbnails or snapshots from web pages.
 - **Angle:** Step‑by‑step guide to generate high‑quality JPG images from HTML content.

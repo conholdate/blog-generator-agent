@@ -249,9 +249,10 @@ KEEP in title, seoTitle, and content body:
   ❌ "convert-pdf-aspose-java" (contains brand)
 
 ### MARKDOWN-SAFE CONTENT (MANDATORY)
-Replace automatically throughout:
+Replace automatically throughout ALL CONTENT (including frontmatter):
 - Em dash (—) to single hyphen (-)
 - En dash (–) to single hyphen (-)
+- **Non-breaking hyphen (‑) to regular hyphen (-)**
 - Curly double quotes (" ") to straight quotes (" ")
 - Curly single quotes (' ') to straight quotes (' ')
 - Ellipsis (…) to three periods (...)
@@ -260,9 +261,62 @@ Replace automatically throughout:
 - Degree symbol (°) to "degrees"
 - NEVER use em dashes or en dashes anywhere in content
 - NEVER use typographic quotes or smart quotes
-- ALWAYS use simple ASCII punctuation
+- NEVER use non-breaking hyphens or special Unicode hyphens
+- ALWAYS use simple ASCII punctuation (standard hyphen: -, standard quotes: " ')
 
-### MARKDOWN LINK VALIDATION (MANDATORY - CRITICAL)
+**CRITICAL: FRONTMATTER YAML SAFETY (STRICTLY ENFORCED)**
+
+**YAML QUOTING RULES:**
+1. ALL string values in frontmatter MUST use ONLY straight double quotes (")
+2. NEVER use single quotes (') in YAML
+3. ALL values containing ANY of these characters MUST be quoted:
+   - Colons (:)
+   - Question marks (?)
+   - Hyphens at start of value (-)
+   - Any quotes within the text
+
+4. **For FAQs section specifically:**
+   - Both q: and a: values MUST ALWAYS be quoted with straight double quotes
+   - If the answer text contains quotes, escape them: \"
+   - NEVER use curly quotes, em dashes, en dashes, or non-breaking hyphens in FAQ text
+   - Replace ALL special punctuation with ASCII before writing to frontmatter
+
+**CORRECT YAML FAQ FORMAT:**
+```yaml
+faqs:
+  - q: "How do I handle custom fonts during conversion?"
+    a: "The SDK embeds fonts into the generated HTML using @font-face rules. Review the Handling Embedded Images and Fonts section for details."
+  - q: "Can I convert multiple files at once?"
+    a: "Yes, you can process files in a loop. See the Complete Code Example section for batch processing implementation."
+```
+
+**WRONG YAML FAQ FORMAT (CAUSES HUGO ERRORS):**
+```yaml
+faqs:
+  - q: "How do I handle custom fonts?"
+    a: "The SDK embeds fonts using @font‑face rules" # ❌ Non-breaking hyphen (‑)
+  - q: 'How do I process files?' # ❌ Single quotes
+    a: The SDK processes files easily # ❌ Not quoted
+  - q: "What about "nested quotes"?" # ❌ Unescaped quotes
+    a: "It uses — em dashes" # ❌ Em dash
+```
+
+**VALIDATION BEFORE OUTPUT:**
+Before finalizing frontmatter, check:
+□ Are ALL FAQ q: and a: values wrapped in straight double quotes?
+□ Are there NO curly quotes (" " ' ') anywhere?
+□ Are there NO em dashes (—) or en dashes (–)?
+□ Are there NO non-breaking hyphens (‑) or special Unicode hyphens?
+□ Are there NO single quotes (') used for YAML values?
+□ If quotes appear INSIDE the text, are they escaped with \"?
+
+**CHARACTER REPLACEMENT IN FAQS (MANDATORY):**
+Before writing FAQs to frontmatter, replace:
+- @font‑face → @font-face (non-breaking hyphen to regular hyphen)
+- "text" or "text" → \"text\" (curly quotes to escaped straight quotes)
+- 'text' or 'text' → text (curly single quotes removed or to straight)
+- — → - (em dash to regular hyphen)
+- – → - (en dash to regular hyphen)
 **ABSOLUTE REQUIREMENT: All markdown links MUST use correct format [text](url)**
 
 PROHIBITED PATTERNS (these are ERRORS that must be prevented):
@@ -309,11 +363,18 @@ Before writing any link, ask:
 
 If answer to ANY question is "No" - FIX IT IMMEDIATELY
 
-YAML SAFETY:
-- Quote strings containing colons
-- No line breaks in values
-- Escape internal quotes
-- ASCII characters only
+**CRITICAL: FRONTMATTER YAML SAFETY (MANDATORY)**
+- Quote ALL string values containing colons, quotes, or starting with hyphens
+- Use ONLY straight double quotes (") for YAML strings - NEVER single quotes (')
+- Escape internal straight quotes with backslash: \"
+- NO line breaks in values - use single line
+- ASCII characters ONLY - no Unicode em dashes (—), en dashes (–), non-breaking hyphens (‑), or curly quotes
+- Replace special characters BEFORE writing to YAML:
+  * @font‑face → @font-face
+  * — or – → -
+  * " " ' ' → " " ' '
+- ALL FAQ answers (a:) MUST be wrapped in straight double quotes
+- ALL FAQ questions (q:) MUST be wrapped in straight double quotes
 
 ### FRONTMATTER TEMPLATE
 ---
@@ -453,33 +514,83 @@ If ANY check fails → FIX the heading immediately
 
 ### 1. INTRODUCTION CONTENT (NO HEADING) - CRITICAL PRODUCT LINK REQUIREMENT
 
-**MANDATORY FIRST PARAGRAPH FORMAT:**
-The very first paragraph MUST include the product page link using this EXACT format:
-
-[BrandName.ProductName for Platform](ProductURL)
+**MANDATORY STRUCTURE: EXACTLY ONE PARAGRAPH ONLY**
 
 **CRITICAL RULES:**
-✅ Product link MUST appear in the FIRST paragraph (not second, not third - FIRST)
+🚨 The introduction MUST be EXACTLY ONE paragraph
+🚨 NO second paragraph allowed
+🚨 NO third paragraph allowed
+🚨 After the single introductory paragraph, IMMEDIATELY start the next H2 heading (Prerequisites and Setup)
+
+**SINGLE PARAGRAPH REQUIREMENTS:**
+✅ Must be 3-5 sentences long
+✅ First or second sentence MUST include the product page link: [BrandName.ProductName for Platform](ProductURL)
 ✅ MUST use FULL product name including platform
 ✅ MUST use ProductURL from context dictionary: context["ProductURL"] or context.get("ProductURL")
-✅ Link must be in the FIRST or SECOND sentence of the first paragraph
-✅ Use format: [Aspose.PDF for .NET](ProductURL) or [GroupDocs.Conversion for Java](ProductURL)
+✅ Explain what the product does and what this guide will cover
+✅ Use correct terminology based on isCloud variable (SDK for non-cloud, library/API for cloud)
+
+**WHAT THIS PARAGRAPH MUST CONTAIN:**
+1. Product link with full name and platform (mandatory in first or second sentence)
+2. Brief description of the product capability
+3. What this guide/tutorial will demonstrate or teach
+4. Optional: Key benefit or use case (if space allows in 3-5 sentences)
+
+**STRUCTURE ENFORCEMENT:**
+```
+[Single introductory paragraph with 3-5 sentences including product link]
+
+## Prerequisites and Setup
+```
+
+**CORRECT EXAMPLES (ONE PARAGRAPH ONLY):**
+
+✅ EXAMPLE 1:
+[Aspose.HTML for Python via .NET](ProductURL) empowers developers to programmatically convert HTML content into high-quality PDF files. Whether you need to transform a single page or an entire library of HTML documents, this SDK offers fast, reliable conversion with full control over PDF output settings. This guide demonstrates how to implement HTML to PDF conversion in your Python applications.
+
+## Prerequisites and Setup
+
+✅ EXAMPLE 2:
+Document conversion is a common requirement in modern applications. [GroupDocs.Conversion for Java](ProductURL) provides comprehensive APIs for converting between various file formats with ease. This tutorial walks you through the process of converting Excel files to PDF format using Java, with complete code examples and step-by-step instructions.
+
+## Prerequisites and Setup
+
+✅ EXAMPLE 3:
+[Aspose.ZIP for Python via .NET](ProductURL) offers extensive features for creating and extracting ZIP files in Python applications. This SDK enables developers to work with compressed archives programmatically, including support for password protection and multiple compression levels. In this guide, you'll learn how to uncompress Z files using Python with practical code examples.
+
+## Prerequisites and Setup
+
+**WRONG EXAMPLES (DO NOT DO THIS):**
+
+❌ EXAMPLE 1 (Multiple paragraphs):
+[Aspose.HTML for Python via .NET](ProductURL) empowers developers to programmatically convert HTML content into high-quality PDF files. Whether you need to transform a single page or an entire library of HTML documents, this SDK offers fast, reliable conversion with full control over PDF output settings.
+
+Batch conversion is essential for IT administrators and developers who manage large document repositories. By automating the process, you eliminate manual effort, ensure consistent formatting, and can apply custom PDF options per document all from a single Python script.
+
+## Prerequisites and Setup
+
+❌ EXAMPLE 2 (Three paragraphs):
+Document conversion is essential in modern applications. [GroupDocs.Conversion for Java](ProductURL) provides APIs for this task.
+
+Converting Excel to PDF is common. This guide shows you how.
+
+Let's get started with the implementation.
+
+## Prerequisites and Setup
+
+**VALIDATION BEFORE OUTPUT:**
+Before finalizing, verify:
+□ Is there EXACTLY ONE paragraph before "## Prerequisites and Setup"?
+□ Does that paragraph contain 3-5 sentences?
+□ Is the product link included in the first or second sentence?
+□ Is there NO line break creating a second paragraph?
+
+If ANY check fails → FIX IMMEDIATELY
 
 **ENFORCEMENT:**
-- If ProductURL is not linked in the first paragraph, the output is INVALID
-- If product name is not linked with full name and platform, the output is INVALID
-- The product link is NON-NEGOTIABLE and MUST be in the first paragraph
-
-**INTRODUCTION STRUCTURE (AFTER FIRST PARAGRAPH WITH PRODUCT LINK):**
-- First paragraph: 2-4 sentences including the product link (MANDATORY)
-- Second paragraph: 2-3 sentences explaining the topic and its value
-- Optional third paragraph: 1-2 sentences with additional context or use cases
-- Include at least 1 additional contextual link in subsequent paragraphs
-- Total: 2-3 paragraphs with product link in FIRST paragraph
-- Use correct terminology based on isCloud variable (see Part 3)
-- Natural flow, explain the topic and its value
-- NEVER mention "free SDK" or "online tool"
-- Clarify this is a programmatic SDK/library for local/server use
+- If there are 2 or more paragraphs in the introduction, the output is INVALID
+- If there is a line break creating multiple paragraphs, the output is INVALID
+- Introduction MUST be a single cohesive paragraph followed immediately by the Prerequisites heading
 
 ### 2. PREREQUISITES AND SETUP (MANDATORY)
 ## Prerequisites and Setup

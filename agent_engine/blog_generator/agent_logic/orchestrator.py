@@ -6,12 +6,11 @@ from agents import set_tracing_disabled
 from config import settings
 from tools.mcp_tools import generate_markdown_file, fetch_category_related_articles, gist_injector, generate_blog_image
 from utils import prompts
-from utils.seo_validator import validate_seo_content
+from utils.seo_validator import validate_seo_content, validate_and_fix_meta_description, validate_and_fix_seo_title
 from utils.file_format_mappings import FILE_FORMAT_MAPPINGS, BASE_URL
 from utils.helpers import prepare_context, get_productInfo, get_topic_by_index, inject_file_format_links, slugify, normalize_case_preserve_formats_in_keywords, clean_ai_generated_markdown, validate_markdown_links
 from utils.metricsRecorder import MetricsRecorder
 from services.LLMservice import llm_service
-from utils.metaDescValidator import validate_and_fix_meta_description
 import json
 import os
 
@@ -26,19 +25,6 @@ class BlogOrchestrator:
             run_env: Environment - "DEV" or "PROD" (auto-detected if None)
         """
         self.brand = brand.lower().strip()
-
-        # ════════════════════════════════════════════════════════════════════
-        # REMOVED: Direct client initialization - now handled by LLM service
-        # ════════════════════════════════════════════════════════════════════
-        # self.client = AsyncOpenAI(
-        #     base_url=settings.PROFESSIONALIZE_BASE_URL,
-        #     api_key=settings.PROFESSIONALIZE_API_KEY_2
-        # )
-        # self.model = OpenAIChatCompletionsModel(
-        #     model=settings.PROFESSIONALIZE_LLM_MODEL,
-        #     openai_client=self.client
-        # )
-
         self.products = self.load_products()
         
         # Initialize metrics recorder with updated parameters
@@ -85,16 +71,16 @@ class BlogOrchestrator:
         """Let the agent autonomously create a blog with metrics tracking"""
         set_tracing_disabled(disabled=True)
         topics_raw_data = get_topic_by_index(topics_file, index)
-        print(f"hell yaaa {index} clea-- {topics_raw_data}")
         post_topic = topics_raw_data.pop("topic")
+       
         product_name = topics_raw_data.pop("product")
         platform = topics_raw_data.pop("platform")
 
         # Get product info
         product_info = get_productInfo(product_name, platform, self.products, self.brand)
         isCloud = "cloud" in product_info["ProductName"].lower()
-        print(f"Product Info {isCloud} --- {product_info}", flush=True)
-        
+        print(f'Product Info {post_topic} --- {topics_raw_data.get("keywords", {}).get("primary")[0]}', flush=True)
+        post_topic = await validate_and_fix_seo_title(post_topic, topics_raw_data.get("keywords", {}).get("primary")[0], product_info.get("ProductName"), isCloud, platform)
         # Start metrics tracking
         self.metrics.start_job(
             product=product_name,
@@ -165,7 +151,7 @@ class BlogOrchestrator:
                 result.final_output = fixed_content
             else:
                 print(f"✅ Meta description is already valid", flush=True)
-                
+            
             print(f"Meta description check done - {result.final_output}", flush=True)
             result.final_output = clean_ai_generated_markdown(result.final_output)
             print(f"clean_ai_generated_markdown done - {result.final_output}", flush=True)
