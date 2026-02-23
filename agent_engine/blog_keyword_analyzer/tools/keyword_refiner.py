@@ -85,7 +85,6 @@ _TOKEN_RE = re.compile(r"[A-Za-z0-9#+.]+|[-–—]|[()/:]")
 # -----------------------------
 # Public API
 # -----------------------------
-
 @dataclass(frozen=True)
 class KeywordRefiner:
     """
@@ -103,7 +102,7 @@ class KeywordRefiner:
         Accepts:
           - str (treated as atomic, NEVER iterated char-by-char)
           - KeywordRecord-like objects with `.keyword`
-          - list/tuple (possibly nested) -> flattened, but each string remains atomic
+          - list/tuple (possibly nested) -> flattened/joined, but each string remains atomic
 
         Returns:
           - refined keyword string, or "" if empty/invalid
@@ -122,7 +121,7 @@ class KeywordRefiner:
                 val = getattr(x, "keyword")
                 return val if isinstance(val, str) else str(val)
 
-            # Nested list/tuple: flatten and join by " | " (or space)
+            # Nested list/tuple: flatten and join by " | "
             if isinstance(x, (list, tuple)):
                 parts: List[str] = []
                 for item in x:
@@ -157,15 +156,76 @@ class KeywordRefiner:
         out_tokens: List[str] = []
         for i, tok in enumerate(tokens):
             if _is_word_token(tok):
-                out_tokens.append(
-                    _titlecase_token(tok, is_first=(i == first_word_pos), is_last=(i == last_word_pos))
-                )
+                out_tokens.append(_sentencecase_token(tok, is_first=(i == first_word_pos)))
+                # out_tokens.append(
+                #     _titlecase_token(tok, is_first=(i == first_word_pos), is_last=(i == last_word_pos))
+                # )
             else:
                 out_tokens.append(tok)
 
         joined = _smart_join(out_tokens)
         return _normalize_whitespace(joined)
 
+    def to_title_case(self, text: str) -> str:
+        if not text or not str(text).strip():
+            return ""
+
+        s = _normalize_whitespace(str(text))
+        s = _apply_phrase_canon(s)
+        s = _canon_aspose_products(s)
+
+        tokens = _TOKEN_RE.findall(s)
+        word_positions = [i for i, t in enumerate(tokens) if _is_word_token(t)]
+        if not word_positions:
+            return _normalize_whitespace(s)
+
+        first_word_pos = word_positions[0]
+        last_word_pos = word_positions[-1]
+
+        out_tokens: List[str] = []
+        for i, tok in enumerate(tokens):
+            if _is_word_token(tok):
+                out_tokens.append(
+                    _titlecase_token(tok, is_first=(i == first_word_pos), is_last=(i == last_word_pos))
+                )
+            else:
+                out_tokens.append(tok)
+
+        return _normalize_whitespace(_smart_join(out_tokens))
+
+    def to_sentence_case(self, text: str) -> str:
+        """
+        Sentence case while preserving:
+        - phrase canon (C#, .NET, Node.js, Python, etc.)
+        - Aspose product canon (Aspose.PDF, Aspose.TeX, etc.)
+        - acronyms/file formats (PDF, DOCX, HTML, etc.)
+        - special cases (LaTeX)
+        """
+        if not text or not str(text).strip():
+            return ""
+
+        s = _normalize_whitespace(str(text))
+
+        # Preserve your existing canonicalization rules
+        s = _apply_phrase_canon(s)
+        s = _canon_aspose_products(s)
+
+        tokens = _TOKEN_RE.findall(s)
+        word_positions = [i for i, t in enumerate(tokens) if _is_word_token(t)]
+        if not word_positions:
+            return _normalize_whitespace(s)
+
+        first_word_pos = word_positions[0]
+
+        out_tokens: List[str] = []
+        for i, tok in enumerate(tokens):
+            if not _is_word_token(tok):
+                out_tokens.append(tok)
+                continue
+            out_tokens.append(_sentencecase_token(tok, is_first=(i == first_word_pos)))
+
+        joined = _smart_join(out_tokens)
+        return _normalize_whitespace(joined)
 
 # -----------------------------
 # Internals
@@ -202,6 +262,29 @@ def _canon_aspose_products(text: str) -> str:
 def _is_word_token(tok: str) -> bool:
     return bool(re.match(r"^[A-Za-z0-9#+.]+$", tok))
 
+def _sentencecase_token(tok: str, is_first: bool) -> str:
+    low = tok.lower()
+
+    # Preserve canonical tokens exactly (same preservation set as _titlecase_token)
+    if tok.startswith("Aspose."):
+        return tok
+    if tok in {".NET", "ASP.NET", "C#", "C++", "Node.js", "JavaScript", "TypeScript", "VS Code"}:
+        return tok
+
+    # Special-case mapping (LaTeX)
+    if low in _SPECIAL_CASE:
+        return _SPECIAL_CASE[low]
+
+    # Acronyms / formats
+    if low in _ACRONYMS:
+        return low.upper()
+
+    # Sentence case behavior:
+    # - first word => capitalize first letter, rest lower
+    # - subsequent words => all lower
+    if is_first:
+        return low[:1].upper() + low[1:]
+    return low
 
 def _titlecase_token(tok: str, is_first: bool, is_last: bool) -> str:
     low = tok.lower()
@@ -268,12 +351,15 @@ if __name__ == "__main__":
         "pdf to docx in c# using aspose.pdf",
         "convert json to xlsx using aspose.cells in nodejs",
         "ocr pdf to docx using aspose.pdf in dotnet",
+        "preparing a list of HTML sources and handling file I/O",
     ]
 
     print("=== refine() single keyword tests ===")
     for s in samples:
         print("IN :", s)
         print("OUT:", refiner.refine(s))
+        print("SENTENCE:  ", refiner.to_sentence_case(s))
+        print("TITLE:     ", refiner.to_title_case(s))
         print("-" * 60)
 
     # Supporting keywords scenarios (this is where your bug showed up)

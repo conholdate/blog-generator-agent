@@ -417,7 +417,8 @@ def write_topics_markdown(
             lines.append("")
             lines.append("**Suggested outline:**")
             for bullet in outline:
-                lines.append(f"- {bullet}")
+                line_item = refiner.to_title_case(bullet)
+                lines.append(f"- {line_item}")
 
         lines.append("")
         lines.append("---")
