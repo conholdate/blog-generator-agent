@@ -337,6 +337,14 @@ class KeywordResearchAgent:
             )
 
         # Product title rules
+
+        system += (
+            "KEYWORD-IN-TITLE RULE\n"
+            "- The 'title' MUST contain the exact 'primary_keyword' string verbatim.\n"
+            "- The 'title' MUST NOT contain keywords that are not in that cluster.\n"
+            "\n"
+        )
+
         if include_product_in_title:
             system += (
                 "\nPRODUCT TITLE RULE\n"
@@ -351,6 +359,47 @@ class KeywordResearchAgent:
                 "- If any title contains the product name, the response is INVALID.\n"
             )
 
+        system += (
+            "SEARCH INTENT\n"
+            "- Each topic must match one primary search intent: informational, tutorial/how-to, troubleshooting, comparison.\n"
+            "- Use that intent to shape the outline (e.g., troubleshooting intent => error patterns + fixes).\n"
+            "\n"
+        )
+        
+        system += (
+            "OUTLINE TEMPLATE RULE (GRAMMAR-AWARE)\n"
+            "- The outline MUST be 6–10 items in this order:\n"
+            "  1) 'Using {LIBRARY} <to/for/with> {PRIMARY_KEYWORD} in {PLATFORM}'\n"
+            "  2) '{LIBRARY} Key Features <for> {PRIMARY_KEYWORD}' (use 'for' or 'for working with' if needed)\n"
+            "  3) 'Setting Up {LIBRARY} in {PLATFORM}'\n"
+            "  4) 'Step-by-Step: {PRIMARY_KEYWORD} in {PLATFORM}'\n"
+            "  5) 'Use Cases'\n"
+            "  6+) 2–4 bullets starting with 'Use Case:'\n"
+            "\n"
+            "PLACEHOLDER BINDING RULES\n"
+            "- {LIBRARY} refers to the product name IF include_product_in_title is True; otherwise use the generic term 'the SDK'.\n"
+            "- {PRIMARY_KEYWORD} MUST be the exact 'primary_keyword' value.\n"
+            "- {PLATFORM} MUST be the exact platform label (fw_label) when provided; otherwise omit 'in {PLATFORM}'.\n"
+            "\n"
+            "USE CASE RULES\n"
+            "- Each 'Use Case:' bullet must be ONE concrete scenario and should include at least one cluster keyword verbatim.\n"
+            "- At least TWO 'Use Case:' bullets must include a supporting keyword verbatim.\n"
+            "- Do NOT add generic sections like 'Conclusion'.\n"
+            "\n"
+        )
+        system += (
+            "GRAMMAR-SAFE HEADING RULES\n"
+            "- {PRIMARY_KEYWORD} MUST appear verbatim in headings (no rewriting).\n"
+            "- When forming headings, choose the connector that makes the sentence grammatically correct:\n"
+            "  1) Prefer 'to' when {PRIMARY_KEYWORD} is a verb phrase (starts with verbs like: convert, create, generate, extract, merge, split, compress, encrypt, decrypt, sign, parse, render, export, import, validate).\n"
+            "     Example: 'Using {LIBRARY} to {PRIMARY_KEYWORD} in {PLATFORM}'.\n"
+            "  2) Use 'for' when {PRIMARY_KEYWORD} is a noun phrase.\n"
+            "     Example: 'Using {LIBRARY} for {PRIMARY_KEYWORD} in {PLATFORM}'.\n"
+            "  3) If uncertain, reframe using 'with' to keep grammar correct:\n"
+            "     Example: 'Using {LIBRARY} with {PRIMARY_KEYWORD} in {PLATFORM}'.\n"
+            "- Never change the casing, spacing, or wording of {PRIMARY_KEYWORD}; only adjust connector words around it.\n"
+            "\n"
+        )
         system += (
             "\nPRIORITIZATION\n"
             "- Prefer clusters/keywords with meaningful search volume and reasonable competition.\n"
