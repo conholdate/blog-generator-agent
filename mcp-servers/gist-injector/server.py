@@ -31,7 +31,7 @@ async def gist_injector(content: str, title: str) -> dict:
                 data['filename']: data['code'] 
                 for data in snippets.values()
             }
-            print(f"Repo Token - {settings.REPO_PAT}", flush=True, file=sys.stderr)
+            # print(f"Repo Token - {settings.REPO_PAT}", flush=True, file=sys.stderr)
             # Step 3: Upload to gist
             gist_result = await upload_to_gist(
                 code_for_gist,
@@ -39,7 +39,7 @@ async def gist_injector(content: str, title: str) -> dict:
                 token=settings.REPO_PAT,
                 gist_name=settings.GIST_NAME
             )
-            
+            print(f"gist result --- {gist_result}",flush=True, file=sys.stderr)
             if gist_result.get("success"):
                 shortcodes_map = gist_result['shortcodes']
                 
