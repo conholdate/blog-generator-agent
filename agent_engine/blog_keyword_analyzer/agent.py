@@ -195,32 +195,17 @@ class KeywordResearchAgent:
         return out
 
     def generate_topics(
-        self,
-        brand: str,
-        product: str,
-        locale: str,
-        clusters: List[Cluster],
-        top_n: int = 10,
-        platform: Optional[str] = None,
-        existing_topics: Optional[List[Dict[str, Any]]] = None,
-        metrics: Optional[RunMetrics] = None,
-        include_product_in_title: bool = True,
+            self,
+            brand: str,
+            product: str,
+            locale: str,
+            clusters: List[Cluster],
+            top_n: int = 10,
+            platform: Optional[str] = None,
+            existing_topics: Optional[List[Dict[str, Any]]] = None,
+            metrics: Optional[RunMetrics] = None,
+            include_product_in_title: bool = True,
     ) -> List[TopicIdea]:
-        """
-        Generate topic ideas from the top N clusters.
-
-        Args:
-            brand: Brand name (e.g. "Aspose").
-            product: Product name (e.g. "Aspose.Cells").
-            locale: Locale string like "en-US".
-            clusters: List of scored Cluster objects.
-            top_n: How many top clusters to consider.
-            platform: Optional canonical platform (e.g. "python", "csharp").
-            existing_topics: Existing blog posts used for deduplication.
-
-        Returns:
-            List[TopicIdea] parsed from the LLM response. Empty list on failure.
-        """
         if not clusters:
             logger.warning("generate_topics called with no clusters – returning empty list.")
             return []
@@ -238,185 +223,256 @@ class KeywordResearchAgent:
             len(existing_topics or []),
         )
 
-        # Compact payload for the LLM – keep it lightweight but informative
-        payload = {
+        fw_label = self._platform_label(platform)
+        platform_label: Optional[str] = fw_label
+
+        # Outline ALWAYS uses product name (independent of title mode)
+        outline_library_name: str = product.strip() if (product or "").strip() else "the library"
+
+        # -------------------------
+        # Keyword helpers
+        # -------------------------
+        def _kw_is_complete(kw: str) -> bool:
+            """Reject fragments like 'to jpg', trailing 'to', etc."""
+            if not kw or not isinstance(kw, str):
+                return False
+            s = " ".join(kw.strip().split())
+            low = s.lower()
+
+            if low.startswith("to "):
+                return False
+            if low.endswith(" to") or re.search(r"\bto\s*$", low):
+                return False
+            if low.startswith("how to "):
+                return False
+
+            # Reject "convert to jpg" missing source
+            if re.search(r"\bconvert\s+to\s+\w+\b", low) and not re.search(
+                    r"\bconvert\s+\w+(\s+\w+){0,6}\s+to\s+\w+", low
+            ):
+                return False
+
+            # Accept "x to y" and "convert x to y"
+            return (" to " in low and len(low.split()) >= 3) or (len(low.split()) >= 3)
+
+        def _select_keywords_for_cluster(raw: List[str], limit: int = 12) -> List[str]:
+            cleaned = [" ".join(k.strip().split()) for k in raw if isinstance(k, str) and k.strip()]
+            if not cleaned:
+                return []
+            complete = [k for k in cleaned if _kw_is_complete(k)]
+            ordered = complete + [k for k in cleaned if k not in complete]
+            return ordered[:limit]
+
+        # -------------------------
+        # Deterministic SEO title builder (PRIMARY KEYWORD MUST APPEAR VERBATIM)
+        # -------------------------
+        def _stable_idx(cluster_id: object, kw: str) -> int:
+            seed = f"{cluster_id}::{kw}"
+            h = 0
+            for ch in seed:
+                h = (h * 33 + ord(ch)) % 10_000_000
+            return h % 3
+
+        def _build_title_from_primary(primary_keyword: str, cluster_id: object) -> str:
+            """
+            Build a grammatical SEO title, while ensuring primary_keyword appears verbatim.
+            Works for both:
+              - 'convert html to jpg'
+              - 'html to jpg'
+            """
+            kw = " ".join((primary_keyword or "").strip().split())
+            if not kw:
+                return ""
+
+            idx = _stable_idx(cluster_id, kw)
+
+            # We do NOT rewrite kw; we only wrap around it.
+            # Avoid "How to {kw}" (bad for noun phrase keywords). Use "How to Convert {kw}" instead.
+            if platform_label:
+                if idx == 0:
+                    title = f"{kw} in {platform_label}"
+                elif idx == 1:
+                    title = f"How to Convert {kw} in {platform_label}"
+                else:
+                    title = f"{kw}: A Complete Tutorial in {platform_label}"
+            else:
+                if idx == 0:
+                    title = kw
+                elif idx == 1:
+                    title = f"How to Convert {kw}"
+                else:
+                    title = f"{kw}: A Complete Tutorial"
+
+            # HARD guarantee: kw must be present verbatim
+            if kw not in title:
+                title = f"{kw} in {platform_label}" if platform_label else kw
+
+            return title
+
+        # -------------------------
+        # Safe product enforcement for titles
+        # IMPORTANT: In "product NOT in title" mode, do NOT remove the last token (e.g., HTML).
+        # -------------------------
+        def _safe_product_title_variants(prod: str) -> List[str]:
+            """
+            Only variants that represent the full product name, not the last token.
+            Example: Aspose.HTML -> ['Aspose.HTML', 'Aspose HTML', lowercase variants]
+            """
+            p = (prod or "").strip()
+            if not p:
+                return []
+            base = {p, p.replace(".", " "), p.replace(" ", ".")}
+            out = set()
+            for v in base:
+                if v.strip():
+                    out.add(v.strip())
+                    out.add(v.strip().lower())
+            return sorted(out, key=len, reverse=True)
+
+        def _remove_product_safely(title: str, prod: str) -> str:
+            t = (title or "").strip()
+            if not t or not prod:
+                return t
+            variants = _safe_product_title_variants(prod)
+            out = t
+            for v in variants:
+                pat = rf"(?i)(?<!\w){re.escape(v)}(?!\w)"
+                out = re.sub(pat, "", out)
+            out = re.sub(r"\(\s*\)", "", out)
+            out = re.sub(r"\[\s*\]", "", out)
+            out = re.sub(r"\s{2,}", " ", out).strip()
+            out = out.strip(" -–—,:;")
+            return out
+
+        # -------------------------
+        # Build payload
+        # -------------------------
+        payload: Dict[str, Any] = {
             "brand": brand,
             "product": product,
             "locale": locale,
-            "clusters": [
+            "clusters": [],
+        }
+
+        for c in chosen:
+            raw_keywords = [m.keyword for m in c.members]
+            payload["clusters"].append(
                 {
                     "cluster_id": c.cluster_id,
                     "label": c.label,
                     "intent": c.metrics.intent,
                     "brand_fit": c.metrics.brand_fit,
                     "score": c.metrics.score,
-                    "keywords": [m.keyword for m in c.members[:12]],
+                    "keywords": _select_keywords_for_cluster(raw_keywords, limit=12),
                 }
-                for c in chosen
-            ],
-        }
+            )
 
         if platform:
             payload["platform"] = platform
 
         if existing_topics:
-            # Keep payload small: only title + url + slug + platforms
-            compact: List[Dict[str, Any]] = []
-            for e in existing_topics:
-                compact.append(
-                    {
-                        "title": e.get("title"),
-                        "url": e.get("url"),
-                        "slug": e.get("slug"),
-                        "platforms": e.get("platforms"),
-                    }
-                )
-            payload["existing_topics"] = compact
-
-        # Derive a human-readable label like "Python", "Java", "C#"
-        fw_label = self._platform_label(platform)
-        logger.debug("platform=%r -> fw_label=%r", platform, fw_label)
+            payload["existing_topics"] = [
+                {"title": e.get("title"), "url": e.get("url"), "slug": e.get("slug"), "platforms": e.get("platforms")}
+                for e in existing_topics
+            ]
 
         if settings.DEBUG:
-            logger.debug(
-                "Payload sent to LLM (truncated): %s",
-                json.dumps(payload, indent=2)[:2000],
-            )
+            logger.debug("Payload sent to LLM (truncated): %s", json.dumps(payload, indent=2)[:2000])
 
+        # Build cluster->keywords map for strict primary_keyword validation
+        cluster_keywords_map: Dict[str, List[str]] = {
+            str(c["cluster_id"]): [k for k in (c.get("keywords") or []) if isinstance(k, str)]
+            for c in payload.get("clusters", [])
+        }
+
+        # -------------------------
+        # Prompt
+        # -------------------------
         system = (
             "You are a 'Blog Keyword Analyzer' agent.\n\n"
-            "CONTEXT\n"
-            "- You receive clustered keyword data (from Google Keyword Planner or similar).\n"
-            "- Your job is to propose high-impact blog post topics based on these clusters.\n"
-            "- You must return STRICT JSON with a single top-level key 'topics'.\n\n"
-            "EACH topic object MUST include:\n"
-            "- 'cluster_id': string/int, matching the cluster that inspired this topic.\n"
-            "- 'title': SEO-optimized, compelling (but not clickbait) blog post title.\n"
-            "- 'angle': ONE short sentence describing the unique hook/perspective.\n"
-            "- 'outline': list of 3–7 bullets, each an H2/H3-style section.\n"
-            "- 'target_persona': ONE short description of the ideal reader.\n"
-            "- 'primary_keyword': ONE main keyword taken DIRECTLY from the input keywords.\n"
-            "- 'supporting_keywords': 3–8 related keywords from the SAME cluster.\n"
-            "- 'internal_links': list of 0–5 internal link targets as strings.\n\n"
-            "TOPIC COUNT\n"
-            "- Generate between 10 and 20 topics in total.\n"
-            "- It is better to return fewer, higher-quality topics than many weak ones.\n\n"
-            "CLUSTER & KEYWORD CONSISTENCY\n"
-            "- 'cluster_id' MUST be taken directly from the input cluster identifier.\n"
-            "- 'primary_keyword' MUST be an exact string match of one keyword from that cluster.\n"
-            "- 'supporting_keywords' MUST be exact string matches of other keywords from the SAME cluster.\n"
-            "- Do NOT invent new keywords or cluster IDs.\n\n"
-            "DEDUPLICATION & EXISTING CONTENT RULES\n"
-            "- The user payload may include 'existing_topics': a list of existing blog posts.\n"
-            "- You MUST NOT propose any topic whose title or core idea substantially overlaps\n"
-            "  with any 'existing_topics' entry.\n"
-            "- Treat 'existing_topics' as a RESERVED set of angles; look for gaps and new angles.\n"
-            "- If 'existing_topics' is missing or empty, ignore this rule and propose the best topics you can.\n\n"
-            "INTERNAL LINKS\n"
-            "- 'internal_links' should be 0–5 string slugs or titles of existing posts from 'existing_topics'\n"
-            "  that would be relevant as internal links.\n"
-            "- If there is no good internal link, use an empty list [].\n"
-            "- Never invent posts that are not in 'existing_topics'.\n\n"
+            "Return STRICT JSON with top-level key 'topics'.\n\n"
+            "Each topic MUST include:\n"
+            "- cluster_id\n"
+            "- title\n"
+            "- angle\n"
+            "- outline (6–10 headings)\n"
+            "- target_persona\n"
+            "- primary_keyword (EXACT string from cluster)\n"
+            "- supporting_keywords (3–8 EXACT strings from same cluster)\n"
+            "- internal_links (0–5 from existing_topics only)\n\n"
+            "CLUSTER CONSISTENCY\n"
+            "- Do not invent keywords.\n"
         )
 
-        # Dynamic platform rules
         system += "platform / LANGUAGE RULES\n"
-        if fw_label:
+        if platform_label:
             system += (
-                f"- For THIS run, the target programming language/platform is '{fw_label}'.\n"
-                f"  1) EVERY topic MUST be written ONLY for '{fw_label}'.\n"
-                f"  2) The word '{fw_label}' MUST appear in EVERY 'title'. If any title does NOT\n"
-                f"     contain '{fw_label}', your response is INVALID.\n"
-                "  3) Do NOT mention any other programming language or platform in titles or angles.\n"
-                "  4) The outline MUST assume code examples and usage in this language/platform only.\n"
+                f"- Target platform is '{platform_label}'.\n"
+                f"- '{platform_label}' MUST appear in EVERY title.\n"
+                "- Do NOT mention other platforms.\n"
             )
-        else:
-            system += (
-                "- 'platform' is NOT provided.\n"
-                "- Propose language-agnostic topics or topics that are clearly relevant across languages.\n"
-            )
-
-        # Product title rules
 
         system += (
-            "KEYWORD-IN-TITLE RULE\n"
-            "- The 'title' MUST contain the exact 'primary_keyword' string verbatim.\n"
-            "- The 'title' MUST NOT contain keywords that are not in that cluster.\n"
+            "\nTITLE RULES\n"
+            "- The title MUST contain the exact primary_keyword verbatim.\n"
+            "- The title MUST be grammatical.\n"
+            "- Avoid incomplete titles like 'To PDF in .NET'.\n"
             "\n"
         )
 
         if include_product_in_title:
             system += (
                 "\nPRODUCT TITLE RULE\n"
-                f"- The product name '{product}' MUST appear in EVERY 'title'.\n"
-                "- If any title does NOT contain the product name, the response is INVALID.\n"
+                f"- The product name '{product}' MUST appear in EVERY title.\n"
             )
         else:
             system += (
                 "\nPRODUCT TITLE RULE\n"
-                f"- The product name '{product}' MUST NOT appear in ANY 'title'.\n"
-                "- Do not mention the product name or close variants (e.g., with '.' or spaces).\n"
-                "- If any title contains the product name, the response is INVALID.\n"
+                f"- The product name '{product}' MUST NOT appear in ANY title.\n"
             )
 
         system += (
-            "SEARCH INTENT\n"
-            "- Each topic must match one primary search intent: informational, tutorial/how-to, troubleshooting, comparison.\n"
-            "- Use that intent to shape the outline (e.g., troubleshooting intent => error patterns + fixes).\n"
+            "\nOUTLINE RULES\n"
+            f"- In the outline, ALWAYS refer to the library as '{outline_library_name}'.\n"
+            "- NEVER use 'SDK', 'the SDK', or 'the library' in the outline.\n"
+            "- Do NOT include 'Use Cases' and do NOT use the words 'Use Case'.\n"
             "\n"
         )
-        
+
+        if platform_label:
+            system += (
+                "OUTLINE STRUCTURE\n"
+                "- Outline MUST be 6–10 items.\n"
+                "- First 4 items MUST be exactly:\n"
+                f"  1) 'Using {outline_library_name} in {platform_label}'\n"
+                f"  2) '{outline_library_name} features that matter for this task'\n"
+                f"  3) 'Installation and setup in {platform_label}'\n"
+                f"  4) 'Step-by-step implementation in {platform_label}'\n"
+                "- Then append 2–6 practical SEO sections (config, performance, troubleshooting, etc.).\n"
+            )
+        else:
+            system += (
+                "OUTLINE STRUCTURE\n"
+                "- Outline MUST be 6–10 items.\n"
+                "- First 4 items MUST be exactly:\n"
+                f"  1) 'Using {outline_library_name}'\n"
+                f"  2) '{outline_library_name} features that matter for this task'\n"
+                "  3) 'Installation and setup'\n"
+                "  4) 'Step-by-step implementation'\n"
+                "- Then append 2–6 practical SEO sections.\n"
+            )
+
         system += (
-            "OUTLINE TEMPLATE RULE (GRAMMAR-AWARE)\n"
-            "- The outline MUST be 6–10 items in this order:\n"
-            "  1) 'Using {LIBRARY} <to/for/with> {PRIMARY_KEYWORD} in {PLATFORM}'\n"
-            "  2) '{LIBRARY} Key Features <for> {PRIMARY_KEYWORD}' (use 'for' or 'for working with' if needed)\n"
-            "  3) 'Setting Up {LIBRARY} in {PLATFORM}'\n"
-            "  4) 'Step-by-Step: {PRIMARY_KEYWORD} in {PLATFORM}'\n"
-            "  5) 'Use Cases'\n"
-            "  6+) 2–4 bullets starting with 'Use Case:'\n"
-            "\n"
-            "PLACEHOLDER BINDING RULES\n"
-            "- {LIBRARY} refers to the product name IF include_product_in_title is True; otherwise use the generic term 'the SDK'.\n"
-            "- {PRIMARY_KEYWORD} MUST be the exact 'primary_keyword' value.\n"
-            "- {PLATFORM} MUST be the exact platform label (fw_label) when provided; otherwise omit 'in {PLATFORM}'.\n"
-            "\n"
-            "USE CASE RULES\n"
-            "- Each 'Use Case:' bullet must be ONE concrete scenario and should include at least one cluster keyword verbatim.\n"
-            "- At least TWO 'Use Case:' bullets must include a supporting keyword verbatim.\n"
-            "- Do NOT add generic sections like 'Conclusion'.\n"
-            "\n"
-        )
-        system += (
-            "GRAMMAR-SAFE HEADING RULES\n"
-            "- {PRIMARY_KEYWORD} MUST appear verbatim in headings (no rewriting).\n"
-            "- When forming headings, choose the connector that makes the sentence grammatically correct:\n"
-            "  1) Prefer 'to' when {PRIMARY_KEYWORD} is a verb phrase (starts with verbs like: convert, create, generate, extract, merge, split, compress, encrypt, decrypt, sign, parse, render, export, import, validate).\n"
-            "     Example: 'Using {LIBRARY} to {PRIMARY_KEYWORD} in {PLATFORM}'.\n"
-            "  2) Use 'for' when {PRIMARY_KEYWORD} is a noun phrase.\n"
-            "     Example: 'Using {LIBRARY} for {PRIMARY_KEYWORD} in {PLATFORM}'.\n"
-            "  3) If uncertain, reframe using 'with' to keep grammar correct:\n"
-            "     Example: 'Using {LIBRARY} with {PRIMARY_KEYWORD} in {PLATFORM}'.\n"
-            "- Never change the casing, spacing, or wording of {PRIMARY_KEYWORD}; only adjust connector words around it.\n"
-            "\n"
-        )
-        system += (
-            "\nPRIORITIZATION\n"
-            "- Prefer clusters/keywords with meaningful search volume and reasonable competition.\n"
-            "- Prefer clear informational/commercial-intent queries suitable for blog content.\n"
-            "- Ignore/de-prioritize very low-volume, extremely broad, or irrelevant terms.\n\n"
-            "STRICT JSON RULES\n"
-            "- Return ONLY JSON. No markdown, no commentary.\n"
-            '- Use a single object: {\"topics\": [ ... ]}.\n'
-            "- Use double quotes for all keys and string values.\n"
+            "\nSTRICT JSON RULES\n"
+            "- Return ONLY JSON.\n"
+            '- Single object: {"topics":[...]}\n'
+            "- Double quotes only.\n"
             "- No trailing commas.\n"
-            "- Do not include any explanations or meta text outside the JSON object.\n"
         )
 
         if settings.DEBUG:
             logger.debug("System prompt for LLM:\n%s", system)
 
-        # Build request kwargs
         request_kwargs: Dict[str, Any] = {
             "model": self.model,
             "temperature": 0.2,
@@ -428,54 +484,29 @@ class KeywordResearchAgent:
         if self._use_response_format:
             request_kwargs["response_format"] = {"type": "json_object"}
 
-        # Call LLM with timing
         logger.info("Calling LLM to generate topics...")
         t0 = time.perf_counter()
         resp = self.client.chat.completions.create(**request_kwargs)
         dt = time.perf_counter() - t0
         logger.info("LLM call completed in %.3f seconds", dt)
 
-        # 🔹 Token usage
         usage = getattr(resp, "usage", None)
-        if usage is not None:
-            # openai-python returns a CompletionUsage object
-            prompt_tokens = getattr(usage, "prompt_tokens", 0) or 0
-            completion_tokens = getattr(usage, "completion_tokens", 0) or 0
-            total_tokens = getattr(usage, "total_tokens", 0) or 0
-
-            logger.info(
-                "LLM token usage: prompt=%d completion=%d total=%d",
-                prompt_tokens,
-                completion_tokens,
-                total_tokens,
-            )
-
-            if metrics is not None:
-                # accumulate in case you ever do multiple calls per run
-                metrics.llm_prompt_tokens += prompt_tokens
-                metrics.llm_completion_tokens += completion_tokens
+        if usage is not None and metrics is not None:
+            metrics.llm_prompt_tokens += getattr(usage, "prompt_tokens", 0) or 0
+            metrics.llm_completion_tokens += getattr(usage, "completion_tokens", 0) or 0
 
         txt = resp.choices[0].message.content or ""
         logger.debug("Raw LLM response (truncated to 1200 chars): %s", txt[:1200])
 
-        # Try to parse JSON strictly
-        data_obj: Any = None
+        # Parse JSON
         try:
-            data_obj = json.loads(txt)
+            data_obj: Any = json.loads(txt)
         except json.JSONDecodeError:
-            logger.warning("Failed direct JSON parse of LLM response; attempting to extract JSON block.")
             json_block = self._extract_json_block(txt)
-            if json_block is not None:
-                if settings.DEBUG:
-                    logger.debug("Extracted JSON block (truncated): %s", json_block[:1200])
-                try:
-                    data_obj = json.loads(json_block)
-                except json.JSONDecodeError as exc:
-                    logger.error("Failed to parse extracted JSON block: %s", exc)
-                    data_obj = None
-            else:
+            if not json_block:
                 logger.error("No JSON object found in LLM output; returning no topics.")
-                data_obj = None
+                return []
+            data_obj = json.loads(json_block)
 
         if not isinstance(data_obj, dict):
             logger.error("LLM JSON payload is not an object; returning no topics.")
@@ -483,38 +514,115 @@ class KeywordResearchAgent:
 
         topics_raw = data_obj.get("topics", [])
         if not isinstance(topics_raw, list):
-            logger.error("'topics' key missing or not a list in JSON; returning no topics.")
+            logger.error("'topics' key missing or not a list; returning no topics.")
             return []
 
+        # -------------------------
+        # Deterministic outline post-processing
+        # -------------------------
+        def _normalize_outline_items(items: Any) -> List[str]:
+            if not isinstance(items, list):
+                return []
+            fixed: List[str] = []
+            for s in items:
+                if not isinstance(s, str):
+                    continue
+                s2 = " ".join(s.strip().split())
+                s2 = re.sub(r"(?i)\bthe\s+sdk\b", outline_library_name, s2)
+                s2 = re.sub(r"(?i)\bsdk\b", outline_library_name, s2)
+                s2 = re.sub(r"(?i)\bthe\s+library\b", outline_library_name, s2)
+                s2 = re.sub(r"(?i)\bthis\s+library\b", outline_library_name, s2)
+                s2 = re.sub(r"(?i)\bstep\s*-\s*by\s*-\s*step\b", "Step-by-Step", s2)
+                s2 = re.sub(r"(?i)\bstep\s*by\s*step\b", "Step-by-Step", s2)
+
+                # NEW: enforce spacing after colon (fixes "Step-by-Step:Save" -> "Step-by-Step: Save")
+                s2 = re.sub(r"\s*:\s*", ": ", s2)
+
+                # NEW: collapse any double spaces introduced
+                s2 = re.sub(r"\s{2,}", " ", s2).strip()
+                if re.search(r"(?i)\buse\s+cases?\b", s2):
+                    continue
+                fixed.append(s2)
+            return fixed
+
+        def _force_first4_outline(outline: List[str], primary_kw: str) -> List[str]:
+            kw = " ".join((primary_kw or "").strip().split())
+
+            if platform_label:
+                base = [
+                    f"{kw} with {outline_library_name} for {platform_label}",
+                    f"Key Features of {outline_library_name} for {platform_label}",
+                    f"Installation and Setup in {platform_label}",
+                    f"Step-by-Step: {kw}",
+                ]
+            else:
+                base = [
+                    f"{kw} with {outline_library_name}",
+                    f"Key Features of {outline_library_name}",
+                    "Installation and Setup",
+                    f"Step-by-Step: {kw}",
+                ]
+            base = [s.replace("{PRIMARY_KEYWORD}", kw) for s in base]
+            rest = outline[4:] if len(outline) > 4 else []
+            outline2 = base + rest
+
+            fillers = [
+                "Configuration options and output quality",
+                "Handling CSS, fonts, images, and layout fidelity",
+                "Pagination, headers, footers, and page size control",
+                "Batch processing and performance tuning",
+                "Working with URLs, local files, and streams",
+                "Error handling and troubleshooting",
+                "Testing, validation, and regression checks",
+                "Security, sandboxing, and safe inputs",
+            ]
+            seen = set(x.lower() for x in outline2)
+            for f in fillers:
+                if len(outline2) >= 6:
+                    break
+                if f.lower() not in seen:
+                    outline2.append(f)
+                    seen.add(f.lower())
+
+            return outline2[:10]
+
+        # -------------------------
+        # Parse + HARD title enforcement
+        # -------------------------
         out: List[TopicIdea] = []
         invalid_count = 0
-        # Enforce product inclusion/exclusion deterministically after parsing.
-        if product:
-            if include_product_in_title:
-                fixed = 0
-                variants = self._product_variants(product)
-                for topic in out:
-                    original = (topic.title or "").strip()
-                    if not self._contains_product(original, variants):
-                        topic.title = self._ensure_product_in_title(original, product)
-                        fixed += 1
-                if fixed:
-                    logger.info("Title enforcement: appended product to %d titles.", fixed)
-            else:
-                stripped = 0
-                variants = self._product_variants(product)
-                for topic in out:
-                    original = (topic.title or "").strip()
-                    if self._contains_product(original, variants):
-                        topic.title = self._remove_product_from_title(original, product)
-                        stripped += 1
-                if stripped:
-                    logger.info("Title enforcement: removed product from %d titles.", stripped)
 
         for t in topics_raw:
             if not isinstance(t, dict):
                 invalid_count += 1
                 continue
+
+            cid = str(t.get("cluster_id", "")).strip()
+            pk = " ".join((t.get("primary_keyword") or "").strip().split())
+
+            # HARD: primary_keyword must be exact keyword from that cluster (prevents 'to jpg' fragments)
+            cluster_kws = cluster_keywords_map.get(cid, [])
+            if pk not in cluster_kws:
+                invalid_count += 1
+                continue
+            if not _kw_is_complete(pk):
+                invalid_count += 1
+                continue
+
+            # HARD: build title from primary keyword (guarantees pk appears verbatim)
+            t["title"] = _build_title_from_primary(pk, cid)
+
+            # Product title mode enforcement (SAFE)
+            if include_product_in_title:
+                t["title"] = self._ensure_product_in_title(t["title"], product)
+            else:
+                # Do NOT call self._remove_product_from_title (it removes 'HTML' for Aspose.HTML). :contentReference[oaicite:1]{index=1}
+                t["title"] = _remove_product_safely(t["title"], product)
+
+            # Outline enforcement
+            if "outline" in t:
+                t["outline"] = _force_first4_outline(_normalize_outline_items(t.get("outline")), pk)
+
             try:
                 out.append(TopicIdea(**t))
             except Exception as e:
@@ -527,5 +635,4 @@ class KeywordResearchAgent:
             invalid_count,
             len(topics_raw),
         )
-
         return out

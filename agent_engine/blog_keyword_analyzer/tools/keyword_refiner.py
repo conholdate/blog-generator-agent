@@ -46,7 +46,7 @@ _ACRONYMS: Set[str] = {
     "pdf", "doc", "docx", "ppt", "pptx", "xls", "xlsx", "csv", "xml", "json", "html",
     "png", "jpg", "jpeg", "gif", "tiff", "bmp", "svg", "webp",
     "ocr", "api", "sdk", "cli", "url", "http", "https", "sql",
-    "latex",
+    "latex", "psd", "mhtml"
 }
 
 # Acronyms that require special casing (not simple upper()).
@@ -234,6 +234,34 @@ class KeywordRefiner:
 def _normalize_whitespace(s: str) -> str:
     return re.sub(r"\s+", " ", s).strip()
 
+import re
+
+def _normalize_step_by_step(text: str) -> str:
+    """
+    Normalize all common variants to 'Step-by-Step' (no extra spaces),
+    and ensure a space after the colon if present.
+
+    Examples:
+      "Step- by- Step" -> "Step-by-Step"
+      "step by step" -> "Step-by-Step"
+      "Step - By - Step:Save" -> "Step-by-Step: Save"
+    """
+    if not text:
+        return text
+
+    s = text
+
+    # Normalize variants like "step - by - step", "step by step"
+    s = re.sub(r"(?i)\bstep\s*-\s*by\s*-\s*step\b", "Step-by-Step", s)
+    s = re.sub(r"(?i)\bstep\s+by\s+step\b", "Step-by-Step", s)
+
+    # Ensure colon spacing: "Step-by-Step:Save" -> "Step-by-Step: Save"
+    s = re.sub(r"(Step-by-Step)\s*:\s*", r"\1: ", s)
+
+    # Clean any double spaces introduced
+    s = re.sub(r"\s{2,}", " ", s).strip()
+
+    return s
 
 def _apply_phrase_canon(text: str) -> str:
     # Apply longest phrases first to avoid partial overlaps.

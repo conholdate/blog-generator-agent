@@ -400,7 +400,8 @@ def write_topics_markdown(
         outline = pick("outline", []) or []
         persona = pick("target_persona")
 
-        lines.append(f"## {idx}. {title}")
+        topic_title = refiner.to_title_case(title)
+        lines.append(f"## {idx}. {topic_title}")
         if cluster_id is not None:
             lines.append(f"- **Cluster ID:** `{cluster_id}`")
         if persona:
