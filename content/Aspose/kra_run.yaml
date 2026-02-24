@@ -9,8 +9,8 @@ meta:
 
 engine:
   # === Core KRA inputs ===
-  input_file: "content/Aspose/Keyword Stats 2026-02-10 at 18_17_39.csv"
-  use-serp-api: false
+  # input_file: "content/Aspose/Keyword Stats 2026-02-10 at 18_17_39.csv"
+  use-serp-api: true
   serp-topic: "Convert Markdown to HTML"
 
   brand: "Aspose"

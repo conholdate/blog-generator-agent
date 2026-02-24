@@ -282,17 +282,6 @@ async def validate_and_fix_meta_description(blog_content: str) -> tuple[str, boo
     print(f"✅ Meta description fixed: {len(fixed_description)} chars.")
     return updated_content, True
 
-# ══════════════════════════════════════════════════════════════════════════════
-# SEO TITLE VALIDATION AND FIXING
-# ══════════════════════════════════════════════════════════════════════════════
-
-
-# ── Configuration ─────────────────────────────────────────────────────────────
-META_DESC_MIN = 140
-META_DESC_MAX = 160
-SEO_TITLE_MIN = 40
-SEO_TITLE_MAX = 60
-MAX_RETRIES = 3
 
 
 # ── Core helpers ──────────────────────────────────────────────────────────────
@@ -630,6 +619,166 @@ async def validate_and_fix_meta_description(blog_content: str) -> tuple[str, boo
 # SEO TITLE VALIDATION AND FIXING
 # ══════════════════════════════════════════════════════════════════════════════
 
+def extract_meta_description(content: str) -> str | None:
+    """
+    Extract the meta description value from Hugo frontmatter.
+    Handles both single-line and quoted multi-word values.
+
+    Returns the raw description string, or None if not found.
+    """
+    # Match:  description: "some text"  OR  description: some text
+    match = re.search(
+        r'^description:\s*["\']?(.+?)["\']?\s*$',
+        content,
+        flags=re.MULTILINE,
+    )
+    return match.group(1).strip() if match else None
+
+
+def replace_meta_description(content: str, new_description: str) -> str:
+    """
+    Replace the existing description line in the frontmatter with new_description.
+    Always wraps the value in double quotes for YAML safety.
+    """
+    replacement = f'description: "{new_description}"'
+    updated = re.sub(
+        r'^description:\s*["\']?.+?["\']?\s*$',
+        replacement,
+        content,
+        flags=re.MULTILINE,
+    )
+    return updated
+
+
+def is_valid_meta_description(description: str) -> bool:
+    """Return True if description length is within 140-160 characters."""
+    length = len(description)
+    return META_DESC_MIN <= length <= META_DESC_MAX
+
+
+async def fix_meta_description_with_llm(bad_description: str) -> str | None:
+    """
+    Send the bad meta description to the LLM and ask it to fix the length.
+    Returns the corrected description string, or None if all retries fail.
+    
+    NOW USES CENTRALIZED LLM SERVICE
+    """
+    current = bad_description
+
+    for attempt in range(1, MAX_RETRIES + 1):
+        length = len(current)
+        direction = "shorter" if length > META_DESC_MAX else "longer"
+        action = (
+            f"It is {length} characters, which exceeds the {META_DESC_MAX} character limit. "
+            f"Shorten it."
+            if length > META_DESC_MAX
+            else
+            f"It is {length} characters, which is below the {META_DESC_MIN} character limit. "
+            f"Expand it."
+        )
+
+        print(f"  [Attempt {attempt}/{MAX_RETRIES}] Current length: {length} — asking LLM to make it {direction}...")
+
+        instructions = f"""
+You are a meta description optimizer.
+
+Your task:
+- Rewrite the meta description to be exactly {META_DESC_MIN}-{META_DESC_MAX} characters (including spaces)
+- {action}
+- Keep the same meaning and keywords
+- Count every character including spaces before replying
+- Return ONLY the rewritten description text — no quotes, no labels, no explanation
+
+Current description:
+{current}
+"""
+
+        # ═══════════════════════════════════════════════════════════════════
+        # USING AGENT-BASED APPROACH (works with self-hosted LLM)
+        # ═══════════════════════════════════════════════════════════════════
+        try:
+            result = await llm_service.run_agent(
+                instructions=instructions,
+                context="Rewrite the meta description above.",
+                agent_name="meta-description-fixer",
+                temperature=0.7,
+                max_turns=1
+            )
+            
+            candidate = result.final_output.strip().strip('"').strip("'")
+            
+            # Validate response
+            if not candidate or len(candidate.strip()) == 0:
+                print(f"  [Attempt {attempt}/{MAX_RETRIES}] LLM returned empty response")
+                if attempt == MAX_RETRIES:
+                    return None
+                continue
+                
+        except Exception as e:
+            print(f"  [Attempt {attempt}/{MAX_RETRIES}] LLM call failed: {e}")
+            import traceback
+            traceback.print_exc()
+            if attempt == MAX_RETRIES:
+                return None
+            continue
+        # ═══════════════════════════════════════════════════════════════════
+
+        print(f"  [Attempt {attempt}/{MAX_RETRIES}] New length: {len(candidate)} — '{candidate[:60]}...'")
+
+        if is_valid_meta_description(candidate):
+            print(f"  ✅ Valid meta description on attempt {attempt}.")
+            return candidate
+
+        # Feed the latest attempt back for the next retry
+        current = candidate
+
+    print(f"  ❌ Could not fix meta description after {MAX_RETRIES} attempts.")
+    return None
+
+
+# ── Main public function ──────────────────────────────────────────────────────
+
+async def validate_and_fix_meta_description(blog_content: str) -> tuple[str, bool]:
+    """
+    Validate the meta description in blog_content.
+    If invalid, attempt to fix it via the LLM.
+
+    Returns:
+        (updated_content, was_fixed)
+        - updated_content : the blog content with the (possibly corrected) description
+        - was_fixed       : True if a correction was applied, False if already valid
+                            or if correction failed (content returned as-is in that case)
+    """
+    description = extract_meta_description(blog_content)
+
+    if description is None:
+        print("⚠️  No meta description found in content. Skipping validation.")
+        return blog_content, False
+
+    length = len(description)
+    print(f"📏 Meta description length: {length} characters")
+    print(f"   '{description[:80]}{'...' if length > 80 else ''}'")
+
+    if is_valid_meta_description(description):
+        print(f"✅ Meta description is valid ({length} chars — within {META_DESC_MIN}-{META_DESC_MAX}).")
+        return blog_content, False
+
+    print(f"⚠️  Meta description is OUT OF RANGE ({length} chars). Attempting fix...")
+
+    fixed_description = await fix_meta_description_with_llm(description)
+
+    if fixed_description is None:
+        print("❌ Fix failed. Returning original content unchanged.")
+        return blog_content, False
+
+    updated_content = replace_meta_description(blog_content, fixed_description)
+    print(f"✅ Meta description fixed: {len(fixed_description)} chars.")
+    return updated_content, True
+
+
+# ══════════════════════════════════════════════════════════════════════════════
+# SEO TITLE VALIDATION AND FIXING
+# ══════════════════════════════════════════════════════════════════════════════
 def fix_title_case(title: str) -> str:
     """
     Auto-correct title to use proper Title Case.
@@ -639,6 +788,7 @@ def fix_title_case(title: str) -> str:
     - Capitalize major words (nouns, verbs, adjectives, adverbs)
     - Lowercase small words (a, an, the, and, but, or, for, in, on, at, to, by, of, with, from)
     - Keep acronyms uppercase (PDF, HTML, PSD, etc.)
+    - Preserve known product/brand names (PowerPoint, Excel, SharePoint, etc.)
     - Capitalize prepositions of 5+ letters
     
     Returns:
@@ -650,12 +800,52 @@ def fix_title_case(title: str) -> str:
     # Small words that should be lowercase (unless first/last)
     small_words = {'a', 'an', 'the', 'and', 'but', 'or', 'for', 'nor', 'on', 'at', 'to', 'by', 'in', 'of', 'with', 'from', 'into', 'via'}
     
+    # Known product/brand names that should preserve their exact capitalization
+    # Key: lowercase version, Value: correct capitalization
+    proper_nouns = {
+        'powerpoint': 'PowerPoint',
+        'sharepoint': 'SharePoint',
+        'excel': 'Excel',
+        'word': 'Word',
+        'outlook': 'Outlook',
+        'onenote': 'OneNote',
+        'visio': 'Visio',
+        'photoshop': 'Photoshop',
+        'illustrator': 'Illustrator',
+        'indesign': 'InDesign',
+        'javascript': 'JavaScript',
+        'typescript': 'TypeScript',
+        'nodejs': 'Node.js',
+        'mongodb': 'MongoDB',
+        'mysql': 'MySQL',
+        'postgresql': 'PostgreSQL',
+        'github': 'GitHub',
+        'gitlab': 'GitLab',
+        'linkedin': 'LinkedIn',
+        'youtube': 'YouTube',
+        'iphone': 'iPhone',
+        'ipad': 'iPad',
+        'macos': 'macOS',
+        'ios': 'iOS',
+        'android': 'Android',
+        'windows': 'Windows',
+        'linux': 'Linux',
+        'ubuntu': 'Ubuntu',
+    }
+    
     words = title.split()
     corrected_words = []
     
     for i, word in enumerate(words):
         is_first = i == 0
         is_last = i == len(words) - 1
+        
+        # Check if word is a known proper noun (case-insensitive match)
+        word_lower = word.lower()
+        if word_lower in proper_nouns:
+            # Use the correct capitalization from our dictionary
+            corrected_words.append(proper_nouns[word_lower])
+            continue
         
         # Check if word is likely an acronym (all uppercase and 2+ chars)
         if word.isupper() and len(word) > 1:
@@ -669,14 +859,16 @@ def fix_title_case(title: str) -> str:
             parts = word.split('-')
             corrected_parts = []
             for j, part in enumerate(parts):
-                if part.lower() in small_words and not (j == 0 or j == len(parts) - 1):
-                    corrected_parts.append(part.lower())
+                part_lower = part.lower()
+                # Check if part is a proper noun
+                if part_lower in proper_nouns:
+                    corrected_parts.append(proper_nouns[part_lower])
+                elif part_lower in small_words and not (j == 0 or j == len(parts) - 1):
+                    corrected_parts.append(part_lower)
                 else:
                     corrected_parts.append(part.capitalize())
             corrected_words.append('-'.join(corrected_parts))
             continue
-        
-        word_lower = word.lower()
         
         # First and last words always capitalized
         if is_first or is_last:
@@ -873,8 +1065,13 @@ When referring to the software/tool (if applicable):
 🚫 STRICTLY FORBIDDEN TERMS:
 ❌ NEVER use: "online tool", "online app", "web-based tool", "web app"
 ❌ NEVER use: "browser-based", "no installation required"
+❌ NEVER use: "free", "free library", "free API", "free SDK", "no cost"
+❌ NEVER use: "open source" (unless explicitly true)
 
-REASON: We are NOT writing about online/web-based applications. This is a programmatic {terminology} that runs on your local machine or server.
+REASON: 
+1. We are NOT writing about online/web-based applications
+2. This is a COMMERCIAL {terminology} that requires licensing
+3. This is NOT free software - it requires purchase for production use
 
 Examples:
 - Cloud-based: "Convert PDF Using Python Library"
@@ -995,17 +1192,23 @@ Return ONLY the title text — no quotes, no labels, no explanation.
             if product_name_violated:
                 continue
             
-            # Check for banned terms (online tool, online app, etc.)
+            # Check for banned terms (online tool, online app, free, etc.)
             banned_terms = [
                 'online tool', 'online app', 'web-based tool', 'web app',
-                'browser-based', 'web-based', 'no installation'
+                'browser-based', 'web-based', 'no installation',
+                'free library', 'free api', 'free sdk', 'free tool',
+                'free software', 'free download'
             ]
             
-            banned_found = None
-            for banned_term in banned_terms:
-                if banned_term.lower() in candidate.lower():
-                    banned_found = banned_term
-                    break
+            # Also check for standalone "free" word (case-insensitive, word boundary)
+            if re.search(r'\bfree\b', candidate, re.IGNORECASE):
+                banned_found = 'free'
+            else:
+                banned_found = None
+                for banned_term in banned_terms:
+                    if banned_term.lower() in candidate.lower():
+                        banned_found = banned_term
+                        break
             
             if banned_found:
                 print(f"  [Attempt {attempt}/{MAX_RETRIES}] Banned term detected: '{banned_found}'")
@@ -1120,69 +1323,3 @@ async def validate_and_fix_seo_title(
         print(f"✅ SEO title generated: '{generated_title}' ({len(generated_title)} chars)")
     
     return generated_title
-# ── Example usage ─────────────────────────────────────────────────────────────
-
-if __name__ == "__main__":
-    import asyncio
-    
-    # Simulate blog content with a too-long meta description (168 chars)
-    sample_blog = """\
----
-title: "Convert PDF to PNG in Python"
-seoTitle: "Convert PDF to PNG in Python: Step-by-Step Guide"
-description: "Learn how to convert PDF files to high-quality PNG images in Python using Aspose.PDF. This guide covers installation, code examples, and best practices for developers."
-date: 2026-02-17
-draft: false
-url: /pdf/convert-pdf-to-png-in-python/
-author: "John Doe"
-summary: "A comprehensive guide to converting PDF files to PNG images programmatically in Python."
----
-
-## Introduction
-
-This is the blog content...
-"""
-
-    async def test():
-        print("=" * 60)
-        print("Running meta description validator")
-        print("=" * 60)
-
-        updated_blog, was_fixed = await validate_and_fix_meta_description(sample_blog)
-
-        if was_fixed:
-            print("\n📝 Updated frontmatter excerpt:")
-            for line in updated_blog.splitlines()[:10]:
-                print(f"   {line}")
-        else:
-            print("\nNo changes were made to the content.")
-        
-        print("\n" + "=" * 60)
-        print("Running SEO title generator")
-        print("=" * 60)
-        
-        # Test SEO title generation with different scenarios
-        test_cases = [
-            # (title, primary_keyword, product_name, isCloud, platform, description)
-            ("", "convert psd to html", None, False, "Python via .NET", "PSD to HTML with platform"),
-            ("", "convert pdf to png", "Aspose.PDF for .NET", False, ".NET", "With product and platform"),
-            ("Convert PSD to HTML in Python Programmatically", "convert psd to html", None, False, "Python via .NET", "Valid title (return as-is)"),
-            ("", "excel to pdf", None, False, "JavaScript via C++", "Platform with 'via' (should use JavaScript)"),
-            ("", "compress files", "Aspose.ZIP Cloud", True, "Java", "Cloud product with platform"),
-        ]
-        
-        for title, keyword, product, isCloud, platform, desc in test_cases:
-            print(f"\n--- Test: {desc} ---")
-            result_title = await validate_and_fix_seo_title(title, keyword, product, isCloud, platform, verbose=True)
-            print(f"   Final title: '{result_title}'")
-            
-            # Verify product name if provided
-            if product and product.lower() in result_title.lower():
-                if product in result_title:
-                    print(f"   ✅ Product name '{product}' preserved exactly")
-                else:
-                    print(f"   ⚠️ Product name present but case mismatch")
-            elif product:
-                print(f"   ℹ️  Product name removed (title focuses on keywords)")
-    
-    asyncio.run(test())

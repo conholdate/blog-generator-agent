@@ -1,19 +1,19 @@
-# Blog Topics for Aspose.HTML
+# Blog Topics for GroupDocs.Editor
 
-- **Brand:** Aspose
-- **Product:** Aspose.HTML
-- **Platform:** Python via .NET
+- **Brand:** GroupDocs.Cloud
+- **Product:** GroupDocs.Editor Cloud SDK
+- **Platform:** Java 
 - **Run ID:** 3ba4f7b2
 - **Topics:** 10
 
 ---
 
-## 1. A Guide to Convert HTML to JPG Programmatically
+## 1. Edit PowerPoint Files using Java Library 
 - **Cluster ID:** `c6`
-- **Target persona:** Developers who need to create image thumbnails or snapshots from web pages.
-- **Angle:** Step‑by‑step guide to generate high‑quality JPG images from HTML content.
-- **Primary keyword:** `HTML to JPG`
-- **Supporting keywords:** `Convert HTML to JPG`, `Change HTML to JPG`, `Chrome HTML to JPG Converter`
+- **Target persona:** Developers who need to edit PowerPoint files in Java using REST API
+- **Angle:** Step‑by‑step guide to edit PowerPoint files
+- **Primary keyword:** `Edit PowerPoint Files`
+- **Supporting keywords:** `Edit PowerPoint Files`, `PowerPoint Files Editor`, `How to edit PPT files in Java`
 
 **Suggested outline:**
 - Introduction to HTML‑to‑JPG conversion

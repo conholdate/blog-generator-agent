@@ -214,32 +214,81 @@ def format_related_posts(related_links):
     return "\n".join(formatted_lines)
 
 def get_productInfo(product_name: str, platform: str, products, brand) -> str:
+    """
+    Get product info by matching product name and platform.
+    
+    Handles various product name formats:
+    - "ProductName" + platform → "ProductName for Platform"
+    - "ProductName Cloud" + platform → "ProductName Cloud SDK for Platform"
+    - "ProductName Cloud SDK" + platform → "ProductName Cloud SDK for Platform"
+    
+    Args:
+        product_name: Base product name (e.g., "GroupDocs.Editor", "GroupDocs.Editor Cloud SDK")
+        platform: Platform name (e.g., "Java", ".NET", "Python via .NET")
+        products: List of product dictionaries with ProductName field
+        brand: Brand name (e.g., "groupdocs.cloud", "aspose")
+        
+    Returns:
+        Product info dictionary
+        
+    Raises:
+        ValueError: If no matching product found
+    """
     base_name = product_name.strip()
     platform_clean = platform.strip().lower()
     brand_clean = brand.strip() if brand else ""
-
-    # Normalize platform
+    
+    print(f"DEBUG: base_name='{base_name}', platform='{platform_clean}', brand='{brand_clean}'")
+    
+    # Normalize platform capitalization
     if platform_clean == "net":
-        platform_clean = ".net"
+        platform_clean = ".NET"
     elif platform_clean == "python-via-net":
         platform_clean = "Python via .NET"
-
+    elif platform_clean == "java":
+        platform_clean = "Java"
+    elif platform_clean == "python":
+        platform_clean = "Python"
+    else:
+        # Capitalize first letter for other platforms
+        platform_clean = platform_clean.capitalize()
+    
+    # Check if base_name already contains "Cloud SDK" or "Cloud"
+    base_lower = base_name.lower()
+    has_cloud_sdk = "cloud sdk" in base_lower
+    has_cloud = "cloud" in base_lower
+    
     # Build expected product name based on brand and platform
     if "cloud" in brand_clean.lower():
         # For Cloud brands (GroupDocs.Cloud, Aspose.Cloud)
-        if platform_clean == "cloud":
-            # If platform is also "cloud", use format: "ProductName Cloud"
-            expected_name = f"{base_name} {platform_clean}"
+        
+        if has_cloud_sdk:
+            # base_name already has "Cloud SDK" (e.g., "GroupDocs.Editor Cloud SDK")
+            # Just add "for {platform}"
+            expected_name = f"{base_name} for {platform_clean}"
+            
+        elif has_cloud:
+            # base_name has "Cloud" but not "Cloud SDK" (e.g., "GroupDocs.Editor Cloud")
+            if platform_clean.lower() == "cloud":
+                expected_name = base_name  # Use as-is
+            else:
+                expected_name = f"{base_name} SDK for {platform_clean}"
+                
         else:
-            # For specific platforms, use format: "ProductName Cloud SDK for .NET"
-            expected_name = f"{base_name} Cloud SDK for {platform_clean}"
+            # base_name doesn't have "Cloud" at all
+            if platform_clean.lower() == "cloud":
+                expected_name = f"{base_name} Cloud"
+            else:
+                expected_name = f"{base_name} Cloud SDK for {platform_clean}"
     else:
         # For non-Cloud brands (regular Aspose, GroupDocs, Conholdate)
-        if platform_clean == "cloud":
-            expected_name = f"{base_name} {platform_clean}"
+        if platform_clean.lower() == "cloud":
+            expected_name = f"{base_name} Cloud"
         else:
             expected_name = f"{base_name} for {platform_clean}"
-
+    
+    print(f"DEBUG: Expected product name: '{expected_name}'")
+    
     # Case-insensitive matching
     product_info = next(
         (
@@ -250,10 +299,21 @@ def get_productInfo(product_name: str, platform: str, products, brand) -> str:
     )
 
     if not product_info:
-        raise ValueError(
-            f"No product found for '{product_name}' with platform '{platform}' and brand '{brand}'. "
-            f"Expected product name: '{expected_name}'"
+        # Try to find a close match for better error message
+        available_products = [p["ProductName"] for p in products]
+        similar = [p for p in available_products if base_name.lower() in p.lower()]
+        
+        error_msg = (
+            f"No product found for '{product_name}' with platform '{platform}' and brand '{brand}'.\n"
+            f"Expected product name: '{expected_name}'\n"
         )
+        
+        if similar:
+            error_msg += f"Similar products found: {', '.join(similar[:5])}"
+        else:
+            error_msg += f"Available products: {', '.join(available_products[:5])}"
+        
+        raise ValueError(error_msg)
 
     return product_info
 
