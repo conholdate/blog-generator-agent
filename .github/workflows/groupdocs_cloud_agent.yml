@@ -40,7 +40,7 @@ jobs:
         fi
         
         # Extract product name from the file content
-        # Format: - **Product:** GroupDocs.Conversion Cloud or GroupDocs.Viewer Cloud (with or without leading dash/spaces)
+        # Format: - **Product:** GroupDocs.Editor Cloud SDK or GroupDocs.Conversion Cloud SDK
         PRODUCT_LINE=$(grep -i "\*\*Product:\*\*" "$KEYWORDS_FILE" | head -1)
         
         if [ -z "$PRODUCT_LINE" ]; then
@@ -52,16 +52,23 @@ jobs:
         
         echo "Found product line: $PRODUCT_LINE"
         
-        # Extract product name and convert to lowercase folder name
-        # From "- **Product:** GroupDocs.Conversion Cloud" to "conversion"
+        # Extract full product name
+        # From "- **Product:** GroupDocs.Editor Cloud SDK" to "GroupDocs.Editor Cloud SDK"
         FULL_PRODUCT=$(echo "$PRODUCT_LINE" | sed 's/.*Product:\*\*[ ]*//' | sed 's/^[ ]*//' | xargs)
         echo "Full product name: $FULL_PRODUCT"
         
-        # Remove "GroupDocs." prefix and " Cloud" suffix, then convert to lowercase
-        # Handle formats like "GroupDocs.Conversion Cloud" or "GroupDocs.Viewer Cloud"
-        PRODUCT_NAME=$(echo "$FULL_PRODUCT" | sed 's/^GroupDocs\.//' | sed 's/[ ]*Cloud$//' | tr '[:upper:]' '[:lower:]')
+        # Extract just the product name part for folder naming
+        # "GroupDocs.Editor Cloud SDK" → "editor"
+        # "GroupDocs.Conversion Cloud SDK" → "conversion"
+        # "GroupDocs.Merger Cloud SDK" → "merger"
         
-        echo "✅ Extracted product name: $PRODUCT_NAME"
+        # Remove "GroupDocs." prefix, then extract word before "Cloud"
+        # Pattern: GroupDocs.<ProductName> Cloud SDK
+        PRODUCT_NAME=$(echo "$FULL_PRODUCT" | sed 's/^GroupDocs\.//' | sed 's/[ ]*Cloud.*$//' | tr '[:upper:]' '[:lower:]')
+        
+        echo "✅ Extracted product name for folder: $PRODUCT_NAME"
+        echo "   Full product: $FULL_PRODUCT"
+        echo "   Folder name: $PRODUCT_NAME"
         echo "product_name=$PRODUCT_NAME" >> $GITHUB_OUTPUT
 
     - name: Set up Python
@@ -194,7 +201,7 @@ jobs:
         
         echo "Blog folder: $BLOG_PATH"
         echo "Expected brand: groupdocs.cloud"
-        echo "Product: ${{ steps.find_blog.outputs.product_name }}"
+        echo "Product folder: ${{ steps.find_blog.outputs.product_name }}"
         
         # Check frontmatter for brand indicators
         if [ -f "$BLOG_PATH/index.md" ]; then
@@ -242,10 +249,20 @@ jobs:
         git pull origin master
         
         # Create the target directory structure with product subfolder
+        # Product name is now just the product part (e.g., "editor", "conversion")
         TARGET_DIR="content/GroupDocs.Cloud/$PRODUCT_NAME"
-        mkdir -p "$TARGET_DIR"
-        echo "✅ Target directory: $TARGET_DIR"
-        echo "✅ Product: $PRODUCT_NAME"
+        
+        echo "=== Target directory information ==="
+        echo "Product name: $PRODUCT_NAME"
+        echo "Target directory: $TARGET_DIR"
+        
+        # Check if target directory exists
+        if [ -d "$TARGET_DIR" ]; then
+          echo "✅ Target directory exists: $TARGET_DIR"
+        else
+          echo "⚠️  Target directory does not exist, creating: $TARGET_DIR"
+          mkdir -p "$TARGET_DIR"
+        fi
         
         # Create a new branch for this blog post
         BRANCH_NAME="blog/$BLOG_FOLDER_NAME"
@@ -320,7 +337,7 @@ jobs:
         git diff --staged --stat
         
         # Commit the changes
-        git commit -m "Add generated blog for $PRODUCT_NAME Cloud: $BLOG_FOLDER_NAME" || {
+        git commit -m "Add generated blog for $PRODUCT_NAME: $BLOG_FOLDER_NAME" || {
           echo "❌ Failed to commit changes"
           exit 1
         }
@@ -352,11 +369,11 @@ jobs:
             --repo groupdocs-cloud/groupdocs-cloud-blog \
             --base master \
             --head "$BRANCH_NAME" \
-            --title "Add blog post for $PRODUCT_NAME Cloud: $BLOG_FOLDER_NAME" \
+            --title "Add blog post: $BLOG_FOLDER_NAME" \
             --body "## Generated Blog Post
 
           **Folder:** $BLOG_FOLDER_NAME
-          **Product:** GroupDocs.$PRODUCT_NAME Cloud
+          **Product:** GroupDocs.$PRODUCT_NAME Cloud SDK
           **Author:** ${{ inputs.author }}
           **Target Path:** \`content/GroupDocs.Cloud/$PRODUCT_NAME/$BLOG_FOLDER_NAME\`
 
@@ -373,12 +390,16 @@ jobs:
           - File: \`index.md\`
           - Location: \`content/GroupDocs.Cloud/$PRODUCT_NAME/\`
 
+          ### Product Details:
+          - Product category: $PRODUCT_NAME
+          - Target folder: \`content/GroupDocs.Cloud/$PRODUCT_NAME/\`
+
           Please review and merge if the content looks good!" || {
-            echo "❌ Failed to create pull request."
-            echo "Attempting to show branch diff..."
-            git log origin/master..$BRANCH_NAME --oneline
-            exit 1
-          }
-          
-          echo "✅ Pull request created successfully!"
-        fi
+                      echo "❌ Failed to create pull request."
+                      echo "Attempting to show branch diff..."
+                      git log origin/master..$BRANCH_NAME --oneline
+                      exit 1
+                    }
+                    
+                    echo "✅ Pull request created successfully!"
+                  fi

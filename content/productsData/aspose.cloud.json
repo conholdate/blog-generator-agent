@@ -1,7 +1,7 @@
 [
   {
   "ProductName" : "Aspose.Words Cloud SDK for .NET",
-  "Category" : "Aspose.Words Product Family",
+  "Category" : "Aspose.Words Cloud Product Family",
   "ProgrammingLanguage" : ".NET",
   "ProductURL" : "https://products.aspose.cloud/words/net/",
   "DownloadURL" : "https://releases.aspose.cloud/words/net/",
@@ -17,7 +17,7 @@
 },
 {
   "ProductName": "Aspose.Words Cloud SDK for Java",
-  "Category": "Aspose.Words Product Family",
+  "Category": "Aspose.Words Cloud Product Family",
   "ProgrammingLanguage": "Java",
   "ProductURL": "https://products.aspose.cloud/words/java/",
   "DownloadURL": "https://releases.aspose.cloud/words/java/",
@@ -33,7 +33,7 @@
 },
 {
   "ProductName": "Aspose.Words Cloud SDK for C++",
-  "Category": "Aspose.Words Product Family",
+  "Category": "Aspose.Words Cloud Product Family",
   "ProgrammingLanguage": "C++",
   "ProductURL": "https://products.aspose.cloud/words/cpp/",
   "DownloadURL": "https://releases.aspose.cloud/words/cpp/",
@@ -49,7 +49,7 @@
 },
 {
   "ProductName": "Aspose.Words Cloud SDK for PHP",
-  "Category": "Aspose.Words Product Family",
+  "Category": "Aspose.Words Cloud Product Family",
   "ProgrammingLanguage": "PHP",
   "ProductURL": "https://products.aspose.cloud/words/php/",
   "DownloadURL": "https://releases.aspose.cloud/words/php/",
@@ -65,7 +65,7 @@
 },
 {
   "ProductName": "Aspose.Words Cloud SDK for Python",
-  "Category": "Aspose.Words Product Family",
+  "Category": "Aspose.Words Cloud Product Family",
   "ProgrammingLanguage": "Python",
   "ProductURL": "https://products.aspose.cloud/words/python/",
   "DownloadURL": "https://releases.aspose.cloud/words/python/",
@@ -81,7 +81,7 @@
 },
 {
   "ProductName": "Aspose.Words Cloud SDK for Ruby",
-  "Category": "Aspose.Words Product Family",
+  "Category": "Aspose.Words Cloud Product Family",
   "ProgrammingLanguage": "Ruby",
   "ProductURL": "https://products.aspose.cloud/words/ruby/",
   "DownloadURL": "https://releases.aspose.cloud/words/ruby/",
@@ -97,7 +97,7 @@
 },
 {
   "ProductName": "Aspose.Words Cloud SDK for Node.js",
-  "Category": "Aspose.Words Product Family",
+  "Category": "Aspose.Words Cloud Product Family",
   "ProgrammingLanguage": "Node.js",
   "ProductURL": "https://products.aspose.cloud/words/nodejs/",
   "DownloadURL": "https://releases.aspose.cloud/words/nodejs/",
@@ -113,7 +113,7 @@
 },
 {
   "ProductName": "Aspose.Words Cloud SDK for Swift",
-  "Category": "Aspose.Words Product Family",
+  "Category": "Aspose.Words Cloud Product Family",
   "ProgrammingLanguage": "Swift",
   "ProductURL": "https://products.aspose.cloud/words/swift/",
   "DownloadURL": "https://releases.aspose.cloud/words/swift/",
@@ -129,7 +129,7 @@
 },
 {
   "ProductName": "Aspose.Words Cloud SDK for Go",
-  "Category": "Aspose.Words Product Family",
+  "Category": "Aspose.Words Cloud Product Family",
   "ProgrammingLanguage": "Go",
   "ProductURL": "https://products.aspose.cloud/words/go/",
   "DownloadURL": "https://releases.aspose.cloud/words/go/",
@@ -145,7 +145,7 @@
 },
 {
   "ProductName": "Aspose.Words Cloud SDK for Dart",
-  "Category": "Aspose.Words Product Family",
+  "Category": "Aspose.Words Cloud Product Family",
   "ProgrammingLanguage": "Dart",
   "ProductURL": "https://products.aspose.cloud/words/dart/",
   "DownloadURL": "https://releases.aspose.cloud/words/dart/",
@@ -161,7 +161,7 @@
 },
 {
   "ProductName": "Aspose.PDF Cloud SDK for .NET",
-  "Category": "Aspose.PDF Product Family",
+  "Category": "Aspose.PDF Cloud Product Family",
   "ProgrammingLanguage": ".NET",
   "ProductURL": "https://products.aspose.cloud/pdf/net/",
   "DownloadURL": "https://releases.aspose.cloud/pdf/net/",
@@ -177,7 +177,7 @@
 },
 {
   "ProductName": "Aspose.PDF Cloud SDK for Java",
-  "Category": "Aspose.PDF Product Family",
+  "Category": "Aspose.PDF Cloud Product Family",
   "ProgrammingLanguage": "Java",
   "ProductURL": "https://products.aspose.cloud/pdf/java/",
   "DownloadURL": "https://releases.aspose.cloud/pdf/java/",
@@ -193,7 +193,7 @@
 },
 {
   "ProductName": "Aspose.PDF Cloud SDK for PHP",
-  "Category": "Aspose.PDF Product Family",
+  "Category": "Aspose.PDF Cloud Product Family",
   "ProgrammingLanguage": "PHP",
   "ProductURL": "https://products.aspose.cloud/pdf/php/",
   "DownloadURL": "https://releases.aspose.cloud/pdf/php/",
@@ -209,7 +209,7 @@
 },
 {
   "ProductName": "Aspose.PDF Cloud SDK for Android",
-  "Category": "Aspose.PDF Product Family",
+  "Category": "Aspose.PDF Cloud Product Family",
   "ProgrammingLanguage": "Android",
   "ProductURL": "https://products.aspose.cloud/pdf/android/",
   "DownloadURL": "https://releases.aspose.cloud/pdf/android/",
@@ -225,7 +225,7 @@
 },
 {
   "ProductName": "Aspose.PDF Cloud SDK for Python",
-  "Category": "Aspose.PDF Product Family",
+  "Category": "Aspose.PDF Cloud Product Family",
   "ProgrammingLanguage": "Python",
   "ProductURL": "https://products.aspose.cloud/pdf/python/",
   "DownloadURL": "https://releases.aspose.cloud/pdf/python/",
@@ -241,7 +241,7 @@
 },
 {
   "ProductName": "Aspose.PDF Cloud SDK for Ruby",
-  "Category": "Aspose.PDF Product Family",
+  "Category": "Aspose.PDF Cloud Product Family",
   "ProgrammingLanguage": "Ruby",
   "ProductURL": "https://products.aspose.cloud/pdf/ruby/",
   "DownloadURL": "https://releases.aspose.cloud/pdf/ruby/",
@@ -257,7 +257,7 @@
 },
 {
   "ProductName": "Aspose.PDF Cloud SDK for Node.js",
-  "Category": "Aspose.PDF Product Family",
+  "Category": "Aspose.PDF Cloud Product Family",
   "ProgrammingLanguage": "Node.js",
   "ProductURL": "https://products.aspose.cloud/pdf/nodejs/",
   "DownloadURL": "https://releases.aspose.cloud/pdf/nodejs/",
@@ -273,7 +273,7 @@
 },
 {
   "ProductName": "Aspose.PDF Cloud SDK for Swift",
-  "Category": "Aspose.PDF Product Family",
+  "Category": "Aspose.PDF Cloud Product Family",
   "ProgrammingLanguage": "Swift",
   "ProductURL": "https://products.aspose.cloud/pdf/swift/",
   "DownloadURL": "https://releases.aspose.cloud/pdf/swift/",
@@ -289,7 +289,7 @@
 },
 {
   "ProductName": "Aspose.PDF Cloud SDK for Go",
-  "Category": "Aspose.PDF Product Family",
+  "Category": "Aspose.PDF Cloud Product Family",
   "ProgrammingLanguage": "Go",
   "ProductURL": "https://products.aspose.cloud/pdf/go/",
   "DownloadURL": "https://releases.aspose.cloud/pdf/go/",
@@ -305,7 +305,7 @@
 },
 {
   "ProductName": "Aspose.PDF for AWS",
-  "Category": "Aspose.PDF Product Family",
+  "Category": "Aspose.PDF Cloud Product Family",
   "ProgrammingLanguage": "AWS",
   "ProductURL": "https://products.aspose.cloud/pdf/aws/",
   "ExternalDownloadURL": "https://github.com/aspose-pdf-cloud/aspose-pdf-for-aws-sdk",
@@ -320,7 +320,7 @@
 },
 {
   "ProductName": "Aspose.Cells Cloud SDK for Go",
-  "Category": "Aspose.Cells Product Family",
+  "Category": "Aspose.Cells Cloud Product Family",
   "ProgrammingLanguage": "Go",
   "ProductURL": "https://products.aspose.cloud/cells/go/",
   "DownloadURL": "https://releases.aspose.cloud/cells/go/",
@@ -336,7 +336,7 @@
 },
 {
   "ProductName": "Aspose.Cells Cloud SDK for Java",
-  "Category": "Aspose.Cells Product Family",
+  "Category": "Aspose.Cells Cloud Product Family",
   "ProgrammingLanguage": "Java",
   "ProductURL": "https://products.aspose.cloud/cells/java/",
   "DownloadURL": "https://releases.aspose.cloud/cells/java/",
@@ -352,7 +352,7 @@
 },
 {
   "ProductName": "Aspose.Cells Cloud SDK for .NET",
-  "Category": "Aspose.Cells Product Family",
+  "Category": "Aspose.Cells Cloud Product Family",
   "ProgrammingLanguage": ".NET",
   "ProductURL": "https://products.aspose.cloud/cells/net/",
   "DownloadURL": "https://releases.aspose.cloud/cells/net/",
@@ -368,7 +368,7 @@
 },
 {
   "ProductName": "Aspose.Cells Cloud SDK for Node.js",
-  "Category": "Aspose.Cells Product Family",
+  "Category": "Aspose.Cells Cloud Product Family",
   "ProgrammingLanguage": "Node.js",
   "ProductURL": "https://products.aspose.cloud/cells/nodejs/",
   "DownloadURL": "https://releases.aspose.cloud/cells/nodejs/",
@@ -384,7 +384,7 @@
 },
 {
   "ProductName": "Aspose.Cells Cloud SDK for PHP",
-  "Category": "Aspose.Cells Product Family",
+  "Category": "Aspose.Cells Cloud Product Family",
   "ProgrammingLanguage": "PHP",
   "ProductURL": "https://products.aspose.cloud/cells/php/",
   "DownloadURL": "https://releases.aspose.cloud/cells/php/",
@@ -400,7 +400,7 @@
 },
 {
   "ProductName": "Aspose.Cells Cloud SDK for Python",
-  "Category": "Aspose.Cells Product Family",
+  "Category": "Aspose.Cells Cloud Product Family",
   "ProgrammingLanguage": "Python",
   "ProductURL": "https://products.aspose.cloud/cells/python/",
   "DownloadURL": "https://releases.aspose.cloud/cells/python/",
@@ -416,7 +416,7 @@
 },
 {
   "ProductName": "Aspose.Cells Cloud SDK for Ruby",
-  "Category": "Aspose.Cells Product Family",
+  "Category": "Aspose.Cells Cloud Product Family",
   "ProgrammingLanguage": "Ruby",
   "ProductURL": "https://products.aspose.cloud/cells/ruby/",
   "DownloadURL": "https://releases.aspose.cloud/cells/ruby/",
@@ -432,7 +432,7 @@
 },
 {
   "ProductName": "Aspose.Cells Cloud SDK for Perl",
-  "Category": "Aspose.Cells Product Family",
+  "Category": "Aspose.Cells Cloud Product Family",
   "ProgrammingLanguage": "Perl",
   "ProductURL": "https://products.aspose.cloud/cells/perl/",
   "DownloadURL": "https://releases.aspose.cloud/cells/perl/",
@@ -448,7 +448,7 @@
 },
 {
   "ProductName": "Aspose.Email Cloud SDK for .NET",
-  "Category": "Aspose.Email Product Family",
+  "Category": "Aspose.Email Cloud Product Family",
   "ProgrammingLanguage": ".NET",
   "ProductURL": "https://products.aspose.cloud/email/net/",
   "DownloadURL": "https://releases.aspose.cloud/email/net/",
@@ -464,7 +464,7 @@
 },
 {
   "ProductName": "Aspose.Email Cloud SDK for Java",
-  "Category": "Aspose.Email Product Family",
+  "Category": "Aspose.Email Cloud Product Family",
   "ProgrammingLanguage": "Java",
   "ProductURL": "https://products.aspose.cloud/email/java/",
   "DownloadURL": "https://releases.aspose.cloud/email/java/",
@@ -480,7 +480,7 @@
 },
 {
   "ProductName": "Aspose.Email Cloud SDK for PHP",
-  "Category": "Aspose.Email Product Family",
+  "Category": "Aspose.Email Cloud Product Family",
   "ProgrammingLanguage": "PHP",
   "ProductURL": "https://products.aspose.cloud/email/php/",
   "DownloadURL": "https://releases.aspose.cloud/email/php/",
@@ -496,7 +496,7 @@
 },
 {
   "ProductName": "Aspose.Email Cloud SDK for Python",
-  "Category": "Aspose.Email Product Family",
+  "Category": "Aspose.Email Cloud Product Family",
   "ProgrammingLanguage": "Python",
   "ProductURL": "https://products.aspose.cloud/email/python/",
   "DownloadURL": "https://releases.aspose.cloud/email/python/",
@@ -512,7 +512,7 @@
 },
 {
   "ProductName": "Aspose.Email Cloud SDK for Ruby",
-  "Category": "Aspose.Email Product Family",
+  "Category": "Aspose.Email Cloud Product Family",
   "ProgrammingLanguage": "Ruby",
   "ProductURL": "https://products.aspose.cloud/email/ruby/",
   "DownloadURL": "https://releases.aspose.cloud/email/ruby/",
@@ -528,7 +528,7 @@
 },
 {
   "ProductName": "Aspose.Email Cloud SDK for Node.js",
-  "Category": "Aspose.Email Product Family",
+  "Category": "Aspose.Email Cloud Product Family",
   "ProgrammingLanguage": "Node.js",
   "ProductURL": "https://products.aspose.cloud/email/nodejs/",
   "DownloadURL": "https://releases.aspose.cloud/email/nodejs/",
@@ -544,7 +544,7 @@
 },
 {
   "ProductName": "Aspose.Slides Cloud SDK for .NET",
-  "Category": "Aspose.Slides Product Family",
+  "Category": "Aspose.Slides Cloud Product Family",
   "ProgrammingLanguage": ".NET",
   "ProductURL": "https://products.aspose.cloud/slides/net/",
   "DownloadURL": "https://releases.aspose.cloud/slides/net/",
@@ -560,7 +560,7 @@
 },
 {
   "ProductName": "Aspose.Slides Cloud SDK for Java",
-  "Category": "Aspose.Slides Product Family",
+  "Category": "Aspose.Slides Cloud Product Family",
   "ProgrammingLanguage": "Java",
   "ProductURL": "https://products.aspose.cloud/slides/java/",
   "DownloadURL": "https://releases.aspose.cloud/slides/java/",
@@ -576,7 +576,7 @@
 },
 {
   "ProductName": "Aspose.Slides Cloud SDK for PHP",
-  "Category": "Aspose.Slides Product Family",
+  "Category": "Aspose.Slides Cloud Product Family",
   "ProgrammingLanguage": "PHP",
   "ProductURL": "https://products.aspose.cloud/slides/php/",
   "DownloadURL": "https://releases.aspose.cloud/slides/php/",
@@ -592,7 +592,7 @@
 },
 {
   "ProductName": "Aspose.Slides Cloud SDK for Android",
-  "Category": "Aspose.Slides Product Family",
+  "Category": "Aspose.Slides Cloud Product Family",
   "ProgrammingLanguage": "Android",
   "ProductURL": "https://products.aspose.cloud/slides/android/",
   "DownloadURL": "https://releases.aspose.cloud/slides/android/",
@@ -608,7 +608,7 @@
 },
 {
   "ProductName": "Aspose.Slides Cloud SDK for Python",
-  "Category": "Aspose.Slides Product Family",
+  "Category": "Aspose.Slides Cloud Product Family",
   "ProgrammingLanguage": "Python",
   "ProductURL": "https://products.aspose.cloud/slides/python/",
   "DownloadURL": "https://releases.aspose.cloud/slides/python/",
@@ -624,7 +624,7 @@
 },
 {
   "ProductName": "Aspose.Slides Cloud SDK for Ruby",
-  "Category": "Aspose.Slides Product Family",
+  "Category": "Aspose.Slides Cloud Product Family",
   "ProgrammingLanguage": "Ruby",
   "ProductURL": "https://products.aspose.cloud/slides/ruby/",
   "DownloadURL": "https://releases.aspose.cloud/slides/ruby/",
@@ -640,7 +640,7 @@
 },
 {
   "ProductName": "Aspose.Slides Cloud SDK for Node.js",
-  "Category": "Aspose.Slides Product Family",
+  "Category": "Aspose.Slides Cloud Product Family",
   "ProgrammingLanguage": "Node.js",
   "ProductURL": "https://products.aspose.cloud/slides/nodejs/",
   "DownloadURL": "https://releases.aspose.cloud/slides/nodejs/",
@@ -656,7 +656,7 @@
 },
 {
   "ProductName": "Aspose.Slides Cloud SDK for C++",
-  "Category": "Aspose.Slides Product Family",
+  "Category": "Aspose.Slides Cloud Product Family",
   "ProgrammingLanguage": "C++",
   "ProductURL": "https://products.aspose.cloud/slides/cpp/",
   "DownloadURL": "https://releases.aspose.cloud/slides/cpp/",
@@ -672,7 +672,7 @@
 },
 {
   "ProductName": "Aspose.Slides Cloud SDK for Perl",
-  "Category": "Aspose.Slides Product Family",
+  "Category": "Aspose.Slides Cloud Product Family",
   "ProgrammingLanguage": "Perl",
   "ProductURL": "https://products.aspose.cloud/slides/perl/",
   "DownloadURL": "https://releases.aspose.cloud/slides/perl/",
@@ -688,7 +688,7 @@
 },
 {
   "ProductName": "Aspose.Slides Cloud SDK for Swift",
-  "Category": "Aspose.Slides Product Family",
+  "Category": "Aspose.Slides Cloud Product Family",
   "ProgrammingLanguage": "Swift",
   "ProductURL": "https://products.aspose.cloud/slides/swift/",
   "DownloadURL": "https://releases.aspose.cloud/slides/swift/",
@@ -704,7 +704,7 @@
 },
 {
   "ProductName": "Aspose.Slides Cloud SDK for Go",
-  "Category": "Aspose.Slides Product Family",
+  "Category": "Aspose.Slides Cloud Product Family",
   "ProgrammingLanguage": "Go",
   "ProductURL": "https://products.aspose.cloud/slides/go/",
   "DownloadURL": "https://releases.aspose.cloud/slides/go/",
@@ -720,7 +720,7 @@
 },
 {
   "ProductName": "Aspose.Imaging Cloud SDK for .NET",
-  "Category": "Aspose.Imaging Product Family",
+  "Category": "Aspose.Imaging Cloud Product Family",
   "ProgrammingLanguage": ".NET",
   "ProductURL": "https://products.aspose.cloud/imaging/net/",
   "DownloadURL": "https://releases.aspose.cloud/imaging/net/",
@@ -736,7 +736,7 @@
 },
 {
   "ProductName": "Aspose.Imaging Cloud SDK for Java",
-  "Category": "Aspose.Imaging Product Family",
+  "Category": "Aspose.Imaging Cloud Product Family",
   "ProgrammingLanguage": "Java",
   "ProductURL": "https://products.aspose.cloud/imaging/java/",
   "DownloadURL": "https://releases.aspose.cloud/imaging/java/",
@@ -752,7 +752,7 @@
 },
 {
   "ProductName": "Aspose.Imaging Cloud SDK for PHP",
-  "Category": "Aspose.Imaging Product Family",
+  "Category": "Aspose.Imaging Cloud Product Family",
   "ProgrammingLanguage": "PHP",
   "ProductURL": "https://products.aspose.cloud/imaging/php/",
   "DownloadURL": "https://releases.aspose.cloud/imaging/php/",
@@ -768,7 +768,7 @@
 },
 {
   "ProductName": "Aspose.Imaging Cloud SDK for Android",
-  "Category": "Aspose.Imaging Product Family",
+  "Category": "Aspose.Imaging Cloud Product Family",
   "ProgrammingLanguage": "Android",
   "ProductURL": "https://products.aspose.cloud/imaging/android/",
   "DownloadURL": "https://releases.aspose.cloud/imaging/android/",
@@ -784,7 +784,7 @@
 },
 {
   "ProductName": "Aspose.Imaging Cloud SDK for Python",
-  "Category": "Aspose.Imaging Product Family",
+  "Category": "Aspose.Imaging Cloud Product Family",
   "ProgrammingLanguage": "Python",
   "ProductURL": "https://products.aspose.cloud/imaging/python/",
   "DownloadURL": "https://releases.aspose.cloud/imaging/python/",
@@ -800,7 +800,7 @@
 },
 {
   "ProductName": "Aspose.Imaging Cloud SDK for Ruby",
-  "Category": "Aspose.Imaging Product Family",
+  "Category": "Aspose.Imaging Cloud Product Family",
   "ProgrammingLanguage": "Ruby",
   "ProductURL": "https://products.aspose.cloud/imaging/ruby/",
   "DownloadURL": "https://releases.aspose.cloud/imaging/ruby/",
@@ -816,7 +816,7 @@
 },
 {
   "ProductName": "Aspose.Imaging Cloud SDK for Node.js",
-  "Category": "Aspose.Imaging Product Family",
+  "Category": "Aspose.Imaging Cloud Product Family",
   "ProgrammingLanguage": "Node.js",
   "ProductURL": "https://products.aspose.cloud/imaging/nodejs/",
   "DownloadURL": "https://releases.aspose.cloud/imaging/nodejs/",
@@ -832,7 +832,7 @@
 },
 {
   "ProductName": "Aspose.Imaging Cloud SDK for JavaScript",
-  "Category": "Aspose.Imaging Product Family",
+  "Category": "Aspose.Imaging Cloud Product Family",
   "ProgrammingLanguage": "JavaScript",
   "ProductURL": "https://products.aspose.cloud/imaging/javascript/",
   "DownloadURL": "https://releases.aspose.cloud/imaging/javascript/",
@@ -848,7 +848,7 @@
 },
 {
   "ProductName": "Aspose.BarCode Cloud SDK for .NET",
-  "Category": "Aspose.BarCode Product Family",
+  "Category": "Aspose.BarCode Cloud Product Family",
   "ProgrammingLanguage": ".NET",
   "ProductURL": "https://products.aspose.cloud/barcode/net/",
   "DownloadURL": "https://releases.aspose.cloud/barcode/net/",
@@ -864,7 +864,7 @@
 },
 {
   "ProductName": "Aspose.BarCode Cloud SDK for Java",
-  "Category": "Aspose.BarCode Product Family",
+  "Category": "Aspose.BarCode Cloud Product Family",
   "ProgrammingLanguage": "Java",
   "ProductURL": "https://products.aspose.cloud/barcode/java/",
   "DownloadURL": "https://releases.aspose.cloud/barcode/java/",
@@ -880,7 +880,7 @@
 },
 {
   "ProductName": "Aspose.BarCode Cloud SDK for PHP",
-  "Category": "Aspose.BarCode Product Family",
+  "Category": "Aspose.BarCode Cloud Product Family",
   "ProgrammingLanguage": "PHP",
   "ProductURL": "https://products.aspose.cloud/barcode/php/",
   "DownloadURL": "https://releases.aspose.cloud/barcode/php/",
@@ -896,7 +896,7 @@
 },
 {
   "ProductName": "Aspose.BarCode Cloud SDK for Python",
-  "Category": "Aspose.BarCode Product Family",
+  "Category": "Aspose.BarCode Cloud Product Family",
   "ProgrammingLanguage": "Python",
   "ProductURL": "https://products.aspose.cloud/barcode/python/",
   "DownloadURL": "https://releases.aspose.cloud/barcode/python/",
@@ -912,7 +912,7 @@
 },
 {
   "ProductName": "Aspose.BarCode Cloud SDK for Node.js",
-  "Category": "Aspose.BarCode Product Family",
+  "Category": "Aspose.BarCode Cloud Product Family",
   "ProgrammingLanguage": "Node.js",
   "ProductURL": "https://products.aspose.cloud/barcode/nodejs/",
   "DownloadURL": "https://releases.aspose.cloud/barcode/nodejs/",
@@ -928,7 +928,7 @@
 },
 {
   "ProductName": "Aspose.BarCode Cloud SDK for Go",
-  "Category": "Aspose.BarCode Product Family",
+  "Category": "Aspose.BarCode Cloud Product Family",
   "ProgrammingLanguage": "Go",
   "ProductURL": "https://products.aspose.cloud/barcode/go/",
   "DownloadURL": "https://releases.aspose.cloud/barcode/go/",
@@ -944,7 +944,7 @@
 },
 {
   "ProductName": "Aspose.BarCode Cloud SDK for Dart",
-  "Category": "Aspose.BarCode Product Family",
+  "Category": "Aspose.BarCode Cloud Product Family",
   "ProgrammingLanguage": "Dart",
   "ProductURL": "https://products.aspose.cloud/barcode/dart/",
   "DownloadURL": "https://releases.aspose.cloud/barcode/dart/",
@@ -960,7 +960,7 @@
 },
 {
   "ProductName": "Aspose.Diagram Cloud SDK for .NET",
-  "Category": "Aspose.Diagram Product Family",
+  "Category": "Aspose.Diagram Cloud Product Family",
   "ProgrammingLanguage": ".NET",
   "ProductURL": "https://products.aspose.cloud/diagram/net/",
   "DownloadURL": "https://releases.aspose.cloud/diagram/net/",
@@ -976,7 +976,7 @@
 },
 {
   "ProductName": "Aspose.Diagram Cloud SDK for Java",
-  "Category": "Aspose.Diagram Product Family",
+  "Category": "Aspose.Diagram Cloud Product Family",
   "ProgrammingLanguage": "Java",
   "ProductURL": "https://products.aspose.cloud/diagram/java/",
   "DownloadURL": "https://releases.aspose.cloud/diagram/java/",
@@ -992,7 +992,7 @@
 },
 {
   "ProductName": "Aspose.Diagram Cloud SDK for PHP",
-  "Category": "Aspose.Diagram Product Family",
+  "Category": "Aspose.Diagram Cloud Product Family",
   "ProgrammingLanguage": "PHP",
   "ProductURL": "https://products.aspose.cloud/diagram/php/",
   "DownloadURL": "https://releases.aspose.cloud/diagram/php/",
@@ -1008,7 +1008,7 @@
 },
 {
   "ProductName": "Aspose.Diagram Cloud SDK for Android",
-  "Category": "Aspose.Diagram Product Family",
+  "Category": "Aspose.Diagram Cloud Product Family",
   "ProgrammingLanguage": "Android",
   "ProductURL": "https://products.aspose.cloud/diagram/android/",
   "DownloadURL": "https://releases.aspose.cloud/diagram/android/",
@@ -1024,7 +1024,7 @@
 },
 {
   "ProductName": "Aspose.Diagram Cloud SDK for Python",
-  "Category": "Aspose.Diagram Product Family",
+  "Category": "Aspose.Diagram Cloud Product Family",
   "ProgrammingLanguage": "Python",
   "ProductURL": "https://products.aspose.cloud/diagram/python/",
   "DownloadURL": "https://releases.aspose.cloud/diagram/python/",
@@ -1040,7 +1040,7 @@
 },
 {
   "ProductName": "Aspose.Diagram Cloud SDK for Ruby",
-  "Category": "Aspose.Diagram Product Family",
+  "Category": "Aspose.Diagram Cloud Product Family",
   "ProgrammingLanguage": "Ruby",
   "ProductURL": "https://products.aspose.cloud/diagram/ruby/",
   "DownloadURL": "https://releases.aspose.cloud/diagram/ruby/",
@@ -1056,7 +1056,7 @@
 },
 {
   "ProductName": "Aspose.Diagram Cloud SDK for Node.js",
-  "Category": "Aspose.Diagram Product Family",
+  "Category": "Aspose.Diagram Cloud Product Family",
   "ProgrammingLanguage": "Node.js",
   "ProductURL": "https://products.aspose.cloud/diagram/nodejs/",
   "DownloadURL": "https://releases.aspose.cloud/diagram/nodejs/",
@@ -1072,7 +1072,7 @@
 },
 {
   "ProductName": "Aspose.Diagram Cloud SDK for Perl",
-  "Category": "Aspose.Diagram Product Family",
+  "Category": "Aspose.Diagram Cloud Product Family",
   "ProgrammingLanguage": "Perl",
   "ProductURL": "https://products.aspose.cloud/diagram/perl/",
   "DownloadURL": "https://releases.aspose.cloud/diagram/perl/",
@@ -1088,7 +1088,7 @@
 },
 {
   "ProductName": "Aspose.Diagram Cloud SDK for Swift",
-  "Category": "Aspose.Diagram Product Family",
+  "Category": "Aspose.Diagram Cloud Product Family",
   "ProgrammingLanguage": "Swift",
   "ProductURL": "https://products.aspose.cloud/diagram/swift/",
   "DownloadURL": "https://releases.aspose.cloud/diagram/swift/",
@@ -1104,7 +1104,7 @@
 },
 {
   "ProductName": "Aspose.Tasks Cloud SDK for .NET",
-  "Category": "Aspose.Tasks Product Family",
+  "Category": "Aspose.Tasks Cloud Product Family",
   "ProgrammingLanguage": ".NET",
   "ProductURL": "https://products.aspose.cloud/tasks/net/",
   "DownloadURL": "https://releases.aspose.cloud/tasks/net/",
@@ -1120,7 +1120,7 @@
 },
 {
   "ProductName": "Aspose.Tasks Cloud SDK for Java",
-  "Category": "Aspose.Tasks Product Family",
+  "Category": "Aspose.Tasks Cloud Product Family",
   "ProgrammingLanguage": "Java",
   "ProductURL": "https://products.aspose.cloud/tasks/java/",
   "DownloadURL": "https://releases.aspose.cloud/tasks/java/",
@@ -1136,7 +1136,7 @@
 },
 {
   "ProductName": "Aspose.Tasks Cloud SDK for PHP",
-  "Category": "Aspose.Tasks Product Family",
+  "Category": "Aspose.Tasks Cloud Product Family",
   "ProgrammingLanguage": "PHP",
   "ProductURL": "https://products.aspose.cloud/tasks/php/",
   "DownloadURL": "https://releases.aspose.cloud/tasks/php/",
@@ -1152,7 +1152,7 @@
 },
 {
   "ProductName": "Aspose.Tasks Cloud SDK for Python",
-  "Category": "Aspose.Tasks Product Family",
+  "Category": "Aspose.Tasks Cloud Product Family",
   "ProgrammingLanguage": "Python",
   "ProductURL": "https://products.aspose.cloud/tasks/python/",
   "DownloadURL": "https://releases.aspose.cloud/tasks/python/",
@@ -1168,7 +1168,7 @@
 },
 {
   "ProductName": "Aspose.Tasks Cloud SDK for Node.js",
-  "Category": "Aspose.Tasks Product Family",
+  "Category": "Aspose.Tasks Cloud Product Family",
   "ProgrammingLanguage": "Node.js",
   "ProductURL": "https://products.aspose.cloud/tasks/nodejs/",
   "DownloadURL": "https://releases.aspose.cloud/tasks/nodejs/",
@@ -1184,7 +1184,7 @@
 },
 {
   "ProductName": "Aspose.Tasks Cloud SDK for Go",
-  "Category": "Aspose.Tasks Product Family",
+  "Category": "Aspose.Tasks Cloud Product Family",
   "ProgrammingLanguage": "Go",
   "ProductURL": "https://products.aspose.cloud/tasks/go/",
   "DownloadURL": "https://releases.aspose.cloud/tasks/go/",
@@ -1200,7 +1200,7 @@
 },
 {
   "ProductName": "Aspose.OCR Cloud SDK for .NET",
-  "Category": "Aspose.OCR Product Family",
+  "Category": "Aspose.OCR Cloud Product Family",
   "ProgrammingLanguage": ".NET",
   "ProductURL": "https://products.aspose.cloud/ocr/net/",
   "DownloadURL": "https://releases.aspose.cloud/ocr/net/",
@@ -1216,7 +1216,7 @@
 },
 {
   "ProductName": "Aspose.OCR Cloud SDK for Java",
-  "Category": "Aspose.OCR Product Family",
+  "Category": "Aspose.OCR Cloud Product Family",
   "ProgrammingLanguage": "Java",
   "ProductURL": "https://products.aspose.cloud/ocr/java/",
   "DownloadURL": "https://releases.aspose.cloud/ocr/java/",
@@ -1232,7 +1232,7 @@
 },
 {
   "ProductName": "Aspose.OCR Cloud SDK for Android",
-  "Category": "Aspose.OCR Product Family",
+  "Category": "Aspose.OCR Cloud Product Family",
   "ProgrammingLanguage": "Android",
   "ProductURL": "https://products.aspose.cloud/ocr/android/",
   "DownloadURL": "https://releases.aspose.cloud/ocr/android/",
@@ -1248,7 +1248,7 @@
 },
 {
   "ProductName": "Aspose.OCR Cloud SDK for Python",
-  "Category": "Aspose.OCR Product Family",
+  "Category": "Aspose.OCR Cloud Product Family",
   "ProgrammingLanguage": "Python",
   "ProductURL": "https://products.aspose.cloud/ocr/python/",
   "DownloadURL": "https://releases.aspose.cloud/ocr/python/",
@@ -1264,7 +1264,7 @@
 },
 {
   "ProductName": "Aspose.OCR Cloud SDK for Node.js",
-  "Category": "Aspose.OCR Product Family",
+  "Category": "Aspose.OCR Cloud Product Family",
   "ProgrammingLanguage": "Node.js",
   "ProductURL": "https://products.aspose.cloud/ocr/nodejs/",
   "DownloadURL": "https://releases.aspose.cloud/ocr/nodejs/",
@@ -1280,7 +1280,7 @@
 },
 {
   "ProductName": "Aspose.OMR Cloud SDK for .NET",
-  "Category": "Aspose.OMR Product Family",
+  "Category": "Aspose.OMR Cloud Product Family",
   "ProgrammingLanguage": ".NET",
   "ProductURL": "https://products.aspose.cloud/omr/net/",
   "DownloadURL": "https://releases.aspose.cloud/omr/net/",
@@ -1296,7 +1296,7 @@
 },
 {
   "ProductName": "Aspose.OMR Cloud SDK for Java",
-  "Category": "Aspose.OMR Product Family",
+  "Category": "Aspose.OMR Cloud Product Family",
   "ProgrammingLanguage": "Java",
   "ProductURL": "https://products.aspose.cloud/omr/java/",
   "DownloadURL": "https://releases.aspose.cloud/omr/java/",
@@ -1312,7 +1312,7 @@
 },
 {
   "ProductName": "Aspose.OMR Cloud SDK for PHP",
-  "Category": "Aspose.OMR Product Family",
+  "Category": "Aspose.OMR Cloud Product Family",
   "ProgrammingLanguage": "PHP",
   "ProductURL": "https://products.aspose.cloud/omr/php/",
   "DownloadURL": "https://releases.aspose.cloud/omr/php/",
@@ -1328,7 +1328,7 @@
 },
 {
   "ProductName": "Aspose.OMR Cloud SDK for Python",
-  "Category": "Aspose.OMR Product Family",
+  "Category": "Aspose.OMR Cloud Product Family",
   "ProgrammingLanguage": "Python",
   "ProductURL": "https://products.aspose.cloud/omr/python/",
   "DownloadURL": "https://releases.aspose.cloud/omr/python/",
@@ -1344,7 +1344,7 @@
 },
 {
   "ProductName": "Aspose.OMR Cloud SDK for Ruby",
-  "Category": "Aspose.OMR Product Family",
+  "Category": "Aspose.OMR Cloud Product Family",
   "ProgrammingLanguage": "Ruby",
   "ProductURL": "https://products.aspose.cloud/omr/ruby/",
   "DownloadURL": "https://releases.aspose.cloud/omr/ruby/",
@@ -1360,7 +1360,7 @@
 },
 {
   "ProductName": "Aspose.OMR Cloud SDK for Node.js",
-  "Category": "Aspose.OMR Product Family",
+  "Category": "Aspose.OMR Cloud Product Family",
   "ProgrammingLanguage": "Node.js",
   "ProductURL": "https://products.aspose.cloud/omr/nodejs/",
   "DownloadURL": "https://releases.aspose.cloud/omr/nodejs/",
@@ -1376,7 +1376,7 @@
 },
 {
   "ProductName": "Aspose.OMR Cloud SDK for Perl",
-  "Category": "Aspose.OMR Product Family",
+  "Category": "Aspose.OMR Cloud Product Family",
   "ProgrammingLanguage": "Perl",
   "ProductURL": "https://products.aspose.cloud/omr/perl/",
   "DownloadURL": "https://releases.aspose.cloud/omr/perl/",
@@ -1392,7 +1392,7 @@
 },
 {
   "ProductName": "Aspose.OMR Cloud SDK for Dart",
-  "Category": "Aspose.OMR Product Family",
+  "Category": "Aspose.OMR Cloud Product Family",
   "ProgrammingLanguage": "Dart",
   "ProductURL": "https://products.aspose.cloud/omr/dart/",
   "DownloadURL": "https://releases.aspose.cloud/omr/dart/",
@@ -1408,7 +1408,7 @@
 },
 {
   "ProductName": "Aspose.CAD Cloud SDK for .NET",
-  "Category": "Aspose.CAD Product Family",
+  "Category": "Aspose.CAD Cloud Product Family",
   "ProgrammingLanguage": ".NET",
   "ProductURL": "https://products.aspose.cloud/cad/net/",
   "DownloadURL": "https://releases.aspose.cloud/cad/net/",
@@ -1424,7 +1424,7 @@
 },
 {
   "ProductName": "Aspose.CAD Cloud SDK for Java",
-  "Category": "Aspose.CAD Product Family",
+  "Category": "Aspose.CAD Cloud Product Family",
   "ProgrammingLanguage": "Java",
   "ProductURL": "https://products.aspose.cloud/cad/java/",
   "DownloadURL": "https://releases.aspose.cloud/cad/java/",
@@ -1440,7 +1440,7 @@
 },
 {
   "ProductName": "Aspose.CAD Cloud SDK for PHP",
-  "Category": "Aspose.CAD Product Family",
+  "Category": "Aspose.CAD Cloud Product Family",
   "ProgrammingLanguage": "PHP",
   "ProductURL": "https://products.aspose.cloud/cad/php/",
   "DownloadURL": "https://releases.aspose.cloud/cad/php/",
@@ -1456,7 +1456,7 @@
 },
 {
   "ProductName": "Aspose.CAD Cloud SDK for Python",
-  "Category": "Aspose.CAD Product Family",
+  "Category": "Aspose.CAD Cloud Product Family",
   "ProgrammingLanguage": "Python",
   "ProductURL": "https://products.aspose.cloud/cad/python/",
   "DownloadURL": "https://releases.aspose.cloud/cad/python/",
@@ -1472,7 +1472,7 @@
 },
 {
   "ProductName": "Aspose.CAD Cloud SDK for Ruby",
-  "Category": "Aspose.CAD Product Family",
+  "Category": "Aspose.CAD Cloud Product Family",
   "ProgrammingLanguage": "Ruby",
   "ProductURL": "https://products.aspose.cloud/cad/ruby/",
   "DownloadURL": "https://releases.aspose.cloud/cad/ruby/",
@@ -1488,7 +1488,7 @@
 },
 {
   "ProductName": "Aspose.CAD Cloud SDK for Node.js",
-  "Category": "Aspose.CAD Product Family",
+  "Category": "Aspose.CAD Cloud Product Family",
   "ProgrammingLanguage": "Node.js",
   "ProductURL": "https://products.aspose.cloud/cad/nodejs/",
   "DownloadURL": "https://releases.aspose.cloud/cad/nodejs/",
@@ -1504,7 +1504,7 @@
 },
 {
   "ProductName": "Aspose.3D Cloud SDK for .NET",
-  "Category": "Aspose.3D Product Family",
+  "Category": "Aspose.3D Cloud Product Family",
   "ProgrammingLanguage": ".NET",
   "ProductURL": "https://products.aspose.cloud/3d/net/",
   "DownloadURL": "https://releases.aspose.cloud/total/3d/",
@@ -1520,7 +1520,7 @@
 },
 {
   "ProductName": "Aspose.3D Cloud SDK for Java",
-  "Category": "Aspose.3D Product Family",
+  "Category": "Aspose.3D Cloud Product Family",
   "ProgrammingLanguage": "Java",
   "ProductURL": "https://products.aspose.cloud/3d/java/",
   "DownloadURL": "https://releases.aspose.cloud/total/3d/",
@@ -1536,7 +1536,7 @@
 },
 {
   "ProductName": "Aspose.3D Cloud SDK for PHP",
-  "Category": "Aspose.3D Product Family",
+  "Category": "Aspose.3D Cloud Product Family",
   "ProgrammingLanguage": "PHP",
   "ProductURL": "https://products.aspose.cloud/3d/php/",
   "DownloadURL": "https://releases.aspose.cloud/3d/php/",
@@ -1552,7 +1552,7 @@
 },
 {
   "ProductName": "Aspose.3D Cloud SDK for Python",
-  "Category": "Aspose.3D Product Family",
+  "Category": "Aspose.3D Cloud Product Family",
   "ProgrammingLanguage": "Python",
   "ProductURL": "https://products.aspose.cloud/3d/python/",
   "DownloadURL": "https://releases.aspose.cloud/total/3d/",
@@ -1568,7 +1568,7 @@
 },
 {
   "ProductName": "Aspose.3D Cloud SDK for Ruby",
-  "Category": "Aspose.3D Product Family",
+  "Category": "Aspose.3D Cloud Product Family",
   "ProgrammingLanguage": "Ruby",
   "ProductURL": "https://products.aspose.cloud/3d/ruby/",
   "DownloadURL": "https://releases.aspose.cloud/total/3d/",
@@ -1584,7 +1584,7 @@
 },
 {
   "ProductName": "Aspose.3D Cloud SDK for Node.js",
-  "Category": "Aspose.3D Product Family",
+  "Category": "Aspose.3D Cloud Product Family",
   "ProgrammingLanguage": "Node.js",
   "ProductURL": "https://products.aspose.cloud/3d/nodejs/",
   "DownloadURL": "https://releases.aspose.cloud/total/3d/",
@@ -1600,7 +1600,7 @@
 },
 {
   "ProductName": "Aspose.3D Cloud SDK for Perl",
-  "Category": "Aspose.3D Product Family",
+  "Category": "Aspose.3D Cloud Product Family",
   "ProgrammingLanguage": "Perl",
   "ProductURL": "https://products.aspose.cloud/3d/perl/",
   "DownloadURL": "https://releases.aspose.cloud/total/3d/",
@@ -1616,7 +1616,7 @@
 },
 {
   "ProductName": "Aspose.3D Cloud SDK for Swift",
-  "Category": "Aspose.3D Product Family",
+  "Category": "Aspose.3D Cloud Product Family",
   "ProgrammingLanguage": "Swift",
   "ProductURL": "https://products.aspose.cloud/3d/swift/",
   "DownloadURL": "https://releases.aspose.cloud/total/3d/",
@@ -1632,7 +1632,7 @@
 },
 {
   "ProductName": "Aspose.3D Cloud SDK for Go",
-  "Category": "Aspose.3D Product Family",
+  "Category": "Aspose.3D Cloud Product Family",
   "ProgrammingLanguage": "Go",
   "ProductURL": "https://products.aspose.cloud/3d/go/",
   "DownloadURL": "https://releases.aspose.cloud/total/3d/",
@@ -1648,7 +1648,7 @@
 },
 {
   "ProductName": "Aspose.HTML Cloud SDK for .NET",
-  "Category": "Aspose.HTML Product Family",
+  "Category": "Aspose.HTML Cloud Product Family",
   "ProgrammingLanguage": ".NET",
   "ProductURL": "https://products.aspose.cloud/html/net/",
   "DownloadURL": "https://releases.aspose.cloud/html/net/",
@@ -1664,7 +1664,7 @@
 },
 {
   "ProductName": "Aspose.HTML Cloud SDK for Java",
-  "Category": "Aspose.HTML Product Family",
+  "Category": "Aspose.HTML Cloud Product Family",
   "ProgrammingLanguage": "Java",
   "ProductURL": "https://products.aspose.cloud/html/java/",
   "DownloadURL": "https://releases.aspose.cloud/html/java/",
@@ -1680,7 +1680,7 @@
 },
 {
   "ProductName": "Aspose.HTML Cloud SDK for C++",
-  "Category": "Aspose.HTML Product Family",
+  "Category": "Aspose.HTML Cloud Product Family",
   "ProgrammingLanguage": "C++",
   "ProductURL": "https://products.aspose.cloud/html/cpp/",
   "DownloadURL": "https://releases.aspose.cloud/html/cpp/",
@@ -1696,7 +1696,7 @@
 },
 {
   "ProductName": "Aspose.HTML Cloud SDK for PHP",
-  "Category": "Aspose.HTML Product Family",
+  "Category": "Aspose.HTML Cloud Product Family",
   "ProgrammingLanguage": "PHP",
   "ProductURL": "https://products.aspose.cloud/html/php/",
   "DownloadURL": "https://releases.aspose.cloud/html/php/",
@@ -1712,7 +1712,7 @@
 },
 {
   "ProductName": "Aspose.HTML Cloud SDK for Android",
-  "Category": "Aspose.HTML Product Family",
+  "Category": "Aspose.HTML Cloud Product Family",
   "ProgrammingLanguage": "Android",
   "ProductURL": "https://products.aspose.cloud/html/android/",
   "DownloadURL": "https://releases.aspose.cloud/html/android/",
@@ -1728,7 +1728,7 @@
 },
 {
   "ProductName": "Aspose.HTML Cloud SDK for Python",
-  "Category": "Aspose.HTML Product Family",
+  "Category": "Aspose.HTML Cloud Product Family",
   "ProgrammingLanguage": "Python",
   "ProductURL": "https://products.aspose.cloud/html/python/",
   "DownloadURL": "https://releases.aspose.cloud/html/python/",
@@ -1744,7 +1744,7 @@
 },
 {
   "ProductName": "Aspose.HTML Cloud SDK for Ruby",
-  "Category": "Aspose.HTML Product Family",
+  "Category": "Aspose.HTML Cloud Product Family",
   "ProgrammingLanguage": "Ruby",
   "ProductURL": "https://products.aspose.cloud/html/ruby/",
   "DownloadURL": "https://releases.aspose.cloud/html/ruby/",
@@ -1760,7 +1760,7 @@
 },
 {
   "ProductName": "Aspose.HTML Cloud SDK for Node.js",
-  "Category": "Aspose.HTML Product Family",
+  "Category": "Aspose.HTML Cloud Product Family",
   "ProgrammingLanguage": "Node.js",
   "ProductURL": "https://products.aspose.cloud/html/nodejs/",
   "DownloadURL": "https://releases.aspose.cloud/html/nodejs/",
@@ -1776,7 +1776,7 @@
 },
 {
   "ProductName": "Aspose.HTML Cloud SDK for Swift",
-  "Category": "Aspose.HTML Product Family",
+  "Category": "Aspose.HTML Cloud Product Family",
   "ProgrammingLanguage": "Swift",
   "ProductURL": "https://products.aspose.cloud/html/swift/",
   "DownloadURL": "https://releases.aspose.cloud/html/swift/",
@@ -1792,7 +1792,7 @@
 },
 {
   "ProductName": "Aspose.HTML Cloud SDK for Go",
-  "Category": "Aspose.HTML Product Family",
+  "Category": "Aspose.HTML Cloud Product Family",
   "ProgrammingLanguage": "Go",
   "ProductURL": "https://products.aspose.cloud/html/go/",
   "DownloadURL": "https://releases.aspose.cloud/html/go/",
