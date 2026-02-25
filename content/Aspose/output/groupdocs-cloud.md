@@ -13,7 +13,7 @@
 - **Target persona:** Developers who need to edit PowerPoint files in Java using REST API
 - **Angle:** Step‑by‑step guide to edit PowerPoint files
 - **Primary keyword:** `Edit PowerPoint Files`
-- **Supporting keywords:** `Edit PowerPoint Files`, `PowerPoint Files Editor`, `How to edit PPT files in Java`
+- **Supporting keywords:** `Edit PowerPoint Files`, `PowerPoint files Editor`, `how to edit PPT files in Java`
 
 **Suggested outline:**
 - Introduction to Edit PowerPoint Files

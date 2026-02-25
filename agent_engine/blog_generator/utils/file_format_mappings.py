@@ -777,7 +777,6 @@ FILE_FORMAT_MAPPINGS = {
     "BUP": "misc/bup/",
     "CFG-CAL3D": "misc/cfg-cal3d/",
     "CTG": "misc/ctg/",
-    "DOWNLOADING": "misc/downloading/",
     "ENC": "misc/enc/",
     "ENL": "misc/enl/",
     "ERR": "misc/err/",
