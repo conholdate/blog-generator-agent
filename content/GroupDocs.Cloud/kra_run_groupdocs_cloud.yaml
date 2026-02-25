@@ -1,0 +1,39 @@
+# content/GroupDocsCloud/kra_run_groupdocs_cloud.yaml
+# KRA run configuration for GroupDocs.Cloud (brand-level)
+
+meta:
+  blog_name: "groupdocs.cloud"
+  brand: "GroupDocs.Cloud"
+  created_at: "2026-02-25"
+  owner: "content-team"
+
+engine:
+  # === Core KRA inputs ===
+  input_file: "content/GroupDocs.Cloud/keywords.csv"
+  use-serp-api: false
+  serp-topic: ""               # optional seed topic if you enable SerpAPI later
+
+  brand: "GroupDocs.Cloud"
+  product: "GroupDocs.Conversion Cloud"   # keep generic; you said no per-product run YAML
+  platform: ".NET"                # or "REST" / "Java" etc if you want
+  # locale: "en-US"
+
+  # === KRA behavior tuning ===
+  top_clusters: 15
+  max_rows: 50000
+  use_content_index: true
+  include_product_in_title: true
+  debug: false
+  output_dir: "content/GroupDocs.Cloud/output"
+
+content_index:
+  # Where the groupdocs.cloud blog content lives locally (clone repo here)
+  local_root: "C:\\GitHub\\groupdocs-cloud-blog\\content"
+
+  index_file_name: "index.md"
+  file_glob: "**/index.md"
+
+  # Repo metadata (for humans / later automation)
+  repo_url: "https://github.com/groupdocs-cloud/groupdocs-cloud-blog"
+  branch: "master"
+  subdir: "/content"

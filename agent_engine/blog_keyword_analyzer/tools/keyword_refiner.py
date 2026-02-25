@@ -2,11 +2,12 @@ from __future__ import annotations
 
 import re
 from dataclasses import dataclass
-from typing import Dict, List, Set, Union, Sequence, Any, Iterable
+from typing import Any, Dict, List, Sequence, Set, Tuple, Union
 
 # If KeywordRecord is in your project, import it instead of using Any:
 # from agent_engine.blog_keyword_analyzer.models import KeywordRecord  # adjust import
 KeywordLike = Union[str, Any, Sequence[Any]]  # supports KeywordRecord + nested lists
+
 
 # -----------------------------
 # Config / dictionaries
@@ -46,7 +47,7 @@ _ACRONYMS: Set[str] = {
     "pdf", "doc", "docx", "ppt", "pptx", "xls", "xlsx", "csv", "xml", "json", "html",
     "png", "jpg", "jpeg", "gif", "tiff", "bmp", "svg", "webp",
     "ocr", "api", "sdk", "cli", "url", "http", "https", "sql",
-    "latex", "psd", "mhtml"
+    "latex", "psd", "mhtml",
 }
 
 # Acronyms that require special casing (not simple upper()).
@@ -80,6 +81,16 @@ _ASPOSE_PRODUCT_MAP: Dict[str, str] = {
 
 # Tokenizer: words + some punctuation we want to preserve.
 _TOKEN_RE = re.compile(r"[A-Za-z0-9#+.]+|[-–—]|[()/:]")
+
+# True for tokens that already contain meaningful mixed casing (GroupDocs, OAuth, OpenAI, etc.)
+_MIXED_CASE_RE = re.compile(r"^(?=.*[A-Z].*[a-z]|.*[a-z].*[A-Z])[A-Za-z0-9]+$")
+
+_GROUPDOCS_PREFIX_RE = re.compile(r"\bgroupdocs\s*\.\s*([a-z0-9]+)\b", re.IGNORECASE)
+_ASPOSE_PREFIX_RE = re.compile(r"\baspose\s*\.\s*([a-z0-9]+)\b", re.IGNORECASE)
+
+_PRESERVE_TOKENS: Set[str] = {
+    ".NET", "ASP.NET", "C#", "C++", "Node.js", "JavaScript", "TypeScript", "VS Code",
+}
 
 
 # -----------------------------
@@ -141,6 +152,10 @@ class KeywordRefiner:
         # Phrase canon first (C#, .NET, Node.js, etc.)
         s = _apply_phrase_canon(s)
 
+        # Canonicalize dotted brand/product prefixes BEFORE tokenization
+        s = self._canon_groupdocs_products(s)
+        s = self._canon_aspose_dotted_prefix(s)
+
         # Aspose product canon (aspose.pdf -> Aspose.PDF)
         s = _canon_aspose_products(s)
 
@@ -156,10 +171,7 @@ class KeywordRefiner:
         out_tokens: List[str] = []
         for i, tok in enumerate(tokens):
             if _is_word_token(tok):
-                out_tokens.append(_sentencecase_token(tok, is_first=(i == first_word_pos)))
-                # out_tokens.append(
-                #     _titlecase_token(tok, is_first=(i == first_word_pos), is_last=(i == last_word_pos))
-                # )
+                out_tokens.append(_titlecase_token(tok, is_first=(i == first_word_pos), is_last=(i == last_word_pos)))
             else:
                 out_tokens.append(tok)
 
@@ -172,6 +184,10 @@ class KeywordRefiner:
 
         s = _normalize_whitespace(str(text))
         s = _apply_phrase_canon(s)
+
+        # Canonicalize dotted brand/product prefixes BEFORE tokenization
+        s = self._canon_groupdocs_products(s)
+        s = self._canon_aspose_dotted_prefix(s)
         s = _canon_aspose_products(s)
 
         tokens = _TOKEN_RE.findall(s)
@@ -185,9 +201,7 @@ class KeywordRefiner:
         out_tokens: List[str] = []
         for i, tok in enumerate(tokens):
             if _is_word_token(tok):
-                out_tokens.append(
-                    _titlecase_token(tok, is_first=(i == first_word_pos), is_last=(i == last_word_pos))
-                )
+                out_tokens.append(_titlecase_token(tok, is_first=(i == first_word_pos), is_last=(i == last_word_pos)))
             else:
                 out_tokens.append(tok)
 
@@ -198,6 +212,7 @@ class KeywordRefiner:
         Sentence case while preserving:
         - phrase canon (C#, .NET, Node.js, Python, etc.)
         - Aspose product canon (Aspose.PDF, Aspose.TeX, etc.)
+        - GroupDocs dotted canon (GroupDocs.Conversion, etc.)
         - acronyms/file formats (PDF, DOCX, HTML, etc.)
         - special cases (LaTeX)
         """
@@ -205,9 +220,11 @@ class KeywordRefiner:
             return ""
 
         s = _normalize_whitespace(str(text))
-
-        # Preserve your existing canonicalization rules
         s = _apply_phrase_canon(s)
+
+        # Canonicalize dotted brand/product prefixes BEFORE tokenization
+        s = self._canon_groupdocs_products(s)
+        s = self._canon_aspose_dotted_prefix(s)
         s = _canon_aspose_products(s)
 
         tokens = _TOKEN_RE.findall(s)
@@ -227,41 +244,49 @@ class KeywordRefiner:
         joined = _smart_join(out_tokens)
         return _normalize_whitespace(joined)
 
+    # -----------------------------
+    # Canon helpers (MUST include self)
+    # -----------------------------
+    def _canon_groupdocs_products(self, s: str) -> str:
+        """
+        Canonicalize GroupDocs dotted product prefixes:
+          groupdocs.conversion -> GroupDocs.Conversion
+          groupdocs.viewer     -> GroupDocs.Viewer
+        """
+        if not s:
+            return s
+
+        def repl(m: re.Match) -> str:
+            tail = m.group(1)
+            return f"GroupDocs.{tail[:1].upper()}{tail[1:]}" if tail else "GroupDocs"
+
+        s = _GROUPDOCS_PREFIX_RE.sub(repl, s)
+        s = re.sub(r"\bgroupdocs\b", "GroupDocs", s, flags=re.IGNORECASE)
+        return s
+
+    def _canon_aspose_dotted_prefix(self, s: str) -> str:
+        """
+        Safety net for: aspose.cells -> Aspose.Cells.
+        (Your _canon_aspose_products already covers most cases; this protects edge cases.)
+        """
+        if not s:
+            return s
+
+        def repl(m: re.Match) -> str:
+            tail = m.group(1)
+            return f"Aspose.{tail[:1].upper()}{tail[1:]}" if tail else "Aspose"
+
+        s = _ASPOSE_PREFIX_RE.sub(repl, s)
+        s = re.sub(r"\baspose\b", "Aspose", s, flags=re.IGNORECASE)
+        return s
+
+
 # -----------------------------
 # Internals
 # -----------------------------
-
 def _normalize_whitespace(s: str) -> str:
     return re.sub(r"\s+", " ", s).strip()
 
-import re
-
-def _normalize_step_by_step(text: str) -> str:
-    """
-    Normalize all common variants to 'Step-by-Step' (no extra spaces),
-    and ensure a space after the colon if present.
-
-    Examples:
-      "Step- by- Step" -> "Step-by-Step"
-      "step by step" -> "Step-by-Step"
-      "Step - By - Step:Save" -> "Step-by-Step: Save"
-    """
-    if not text:
-        return text
-
-    s = text
-
-    # Normalize variants like "step - by - step", "step by step"
-    s = re.sub(r"(?i)\bstep\s*-\s*by\s*-\s*step\b", "Step-by-Step", s)
-    s = re.sub(r"(?i)\bstep\s+by\s+step\b", "Step-by-Step", s)
-
-    # Ensure colon spacing: "Step-by-Step:Save" -> "Step-by-Step: Save"
-    s = re.sub(r"(Step-by-Step)\s*:\s*", r"\1: ", s)
-
-    # Clean any double spaces introduced
-    s = re.sub(r"\s{2,}", " ", s).strip()
-
-    return s
 
 def _apply_phrase_canon(text: str) -> str:
     # Apply longest phrases first to avoid partial overlaps.
@@ -290,13 +315,18 @@ def _canon_aspose_products(text: str) -> str:
 def _is_word_token(tok: str) -> bool:
     return bool(re.match(r"^[A-Za-z0-9#+.]+$", tok))
 
+
 def _sentencecase_token(tok: str, is_first: bool) -> str:
     low = tok.lower()
 
-    # Preserve canonical tokens exactly (same preservation set as _titlecase_token)
-    if tok.startswith("Aspose."):
+    # Preserve meaningful mixed-case tokens (GroupDocs, Aspose, OAuth, etc.)
+    if _MIXED_CASE_RE.match(tok):
         return tok
-    if tok in {".NET", "ASP.NET", "C#", "C++", "Node.js", "JavaScript", "TypeScript", "VS Code"}:
+
+    # Preserve canonical tokens
+    if tok.startswith("Aspose.") or tok.startswith("GroupDocs."):
+        return tok
+    if tok in _PRESERVE_TOKENS:
         return tok
 
     # Special-case mapping (LaTeX)
@@ -314,13 +344,20 @@ def _sentencecase_token(tok: str, is_first: bool) -> str:
         return low[:1].upper() + low[1:]
     return low
 
+
 def _titlecase_token(tok: str, is_first: bool, is_last: bool) -> str:
     low = tok.lower()
 
-    # Preserve canonical tokens
-    if tok.startswith("Aspose."):
+    # ✅ Preserve meaningful mixed-case tokens (prevents GroupDocs -> Groupdocs)
+    if _MIXED_CASE_RE.match(tok):
         return tok
-    if tok in {".NET", "ASP.NET", "C#", "C++", "Node.js", "JavaScript", "TypeScript", "VS Code"}:
+
+    # Preserve canonical dotted product tokens
+    if tok.startswith("Aspose.") or tok.startswith("GroupDocs."):
+        return tok
+
+    # Preserve canonical tokens
+    if tok in _PRESERVE_TOKENS:
         return tok
 
     # Special-case mapping (LaTeX)
@@ -365,7 +402,6 @@ def _smart_join(tokens: List[str]) -> str:
 if __name__ == "__main__":
     refiner = KeywordRefiner()
 
-    # Minimal KeywordRecord-like stub for testing (matches `.keyword` attribute access)
     class KeywordRecordStub:
         def __init__(self, keyword: str):
             self.keyword = keyword
@@ -373,85 +409,21 @@ if __name__ == "__main__":
         def __repr__(self) -> str:
             return f"KeywordRecordStub(keyword={self.keyword!r})"
 
-    # Single keyword samples (your original ones)
     samples = [
         "latex to png using aspose.tex in python",
         "pdf to docx in c# using aspose.pdf",
         "convert json to xlsx using aspose.cells in nodejs",
         "ocr pdf to docx using aspose.pdf in dotnet",
         "preparing a list of HTML sources and handling file I/O",
+        "groupdocs.conversion cloud api examples",
+        "convert docx to pdf with groupdocs.conversion cloud",
+        "GroupDocs.Conversion Cloud API in .NET",
     ]
 
-    print("=== refine() single keyword tests ===")
+    print("=== refine() tests ===")
     for s in samples:
         print("IN :", s)
         print("OUT:", refiner.refine(s))
-        print("SENTENCE:  ", refiner.to_sentence_case(s))
-        print("TITLE:     ", refiner.to_title_case(s))
-        print("-" * 60)
-
-    # Supporting keywords scenarios (this is where your bug showed up)
-    supporting_cases = [
-        "Convert LaTeX PDFs to JPG using Aspose.TeX in Python Code",  # single string
-        [
-            "latex to png using aspose.tex in python",
-            "save latex output as png file with aspose.tex .net",
-            "render latex to transparent png in .net",
-        ],  # list[str]
-        [
-            "latex to png using aspose.tex in python",
-            [
-                "batch convert latex files to png in .net using aspose.tex",
-                "render latex to png in windows forms using aspose.tex",
-            ],
-            KeywordRecordStub("pdf to docx in c# using aspose.pdf"),
-        ],  # nested list + KeywordRecord-like object
-        KeywordRecordStub("convert json to xlsx using aspose.cells in nodejs"),  # single KeywordRecord-like object
-    ]
-
-    def normalize_to_list(x):
-        """Mirror the writer normalization: strings are wrapped, lists/tuples preserved."""
-        if x is None:
-            return []
-        if isinstance(x, str) or hasattr(x, "keyword"):
-            return [x]
-        if isinstance(x, tuple):
-            return list(x)
-        if isinstance(x, list):
-            return x
-        return [x]
-
-    def flatten(x):
-        """Optional hardening: flatten nested lists/tuples."""
-        if x is None:
-            return []
-        if isinstance(x, (list, tuple)):
-            out = []
-            for item in x:
-                out.extend(flatten(item))
-            return out
-        return [x]
-
-    print("\n=== supporting keywords scenarios ===")
-    for i, case in enumerate(supporting_cases, 1):
-        print(f"\nCASE {i}: raw type={type(case).__name__}")
-        print("RAW :", case)
-
-        # Show what refine() does if someone calls it incorrectly with a list (for awareness)
-        print("refine(raw) ->", refiner.refine(case))
-
-        # Correct approach: normalize -> (optionally flatten) -> refine each -> join
-        items = normalize_to_list(case)
-        items_flat = flatten(items)  # keep this line if you want nested support; remove if not needed
-
-        refined_list = [refiner.refine(k) for k in items_flat]
-        refined_list = [k for k in refined_list if k]
-
-        # De-dupe (case-insensitive), preserve order
-        seen = set()
-        refined_list = [k for k in refined_list if not (k.lower() in seen or seen.add(k.lower()))]
-
-        joined = ", ".join(f"`{kw}`" for kw in refined_list)
-        print("refined list:", refined_list)
-        print("joined      :", joined)
+        print("SENTENCE:", refiner.to_sentence_case(s))
+        print("TITLE   :", refiner.to_title_case(s))
         print("-" * 60)

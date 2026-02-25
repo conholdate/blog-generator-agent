@@ -68,8 +68,8 @@ BRAND_METRICS: dict[str, Tuple[str, str]] = {
     # key: normalized brand (lowercase)
     "aspose": ("aspose.com", "Blog"),
     "groupdocs": ("groupdocs.com", "Blog"),
-    "asposecloud": ("aspose.cloud", "Blog"),
-    "groupdocscloud": ("groupdocs.cloud", "Blog"),
+    "aspose-cloud": ("aspose.cloud", "Blog"),
+    "groupdocs-cloud": ("groupdocs.cloud", "Blog"),
     "conholdate": ("conholdate.com", "Blog"),
     "familiarize": ("familiarize.com", "Blog"),
     # add more brands here...
