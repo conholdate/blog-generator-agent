@@ -11,7 +11,7 @@ from openai import OpenAI
 from .config import settings
 from .schemas import Cluster, TopicIdea
 from .tools.metrics import RunMetrics
-
+from .tools.seo_title_polisher import SeoTitlePolishRequest, polish_title
 
 logger = logging.getLogger(__name__)
 
@@ -377,8 +377,8 @@ class KeywordResearchAgent:
                 platform_label: Optional[str],
                 product: str,
                 include_product_in_title: bool,
-                min_len: int = 40,
-                max_len: int = 60,
+                min_len: Optional[int] = None,
+                max_len: Optional[int] = None
         ) -> str:
             t = " ".join((title or "").strip().split())
             kw = " ".join((primary_keyword or "").strip().split())
@@ -388,18 +388,33 @@ class KeywordResearchAgent:
             if not t:
                 return t
 
-            # 1) Fix colon spacing: "JPG:a" -> "JPG: a"
+            # 1) Fix spacing: "JPG:a" -> "JPG: a"
             t = re.sub(r"\s*:\s*", ": ", t)
+            # Normalize Step-by-Step variations in TITLES too (not only outlines)
+            t = re.sub(r"(?i)\bstep\s*-\s*by\s*-\s*step\b", "Step-by-Step", t)
+            t = re.sub(r"(?i)\bstep\s+by\s+step\b", "Step-by-Step", t)
+
+            # Ban "Libraries" phrasing in titles (preferred: "Using C#")
+            t = re.sub(r"(?i)\busing\s+c#\s+libraries\b", "Using C#", t)
+            t = re.sub(r"(?i)\bc#\s+libraries\b", "C#", t)
 
             # 2) Remove any parenthetical suffixes like "(GroupDocs.Conversion Cloud)"
             # (keeps the left part, which typically contains keyword)
             t = re.sub(r"\s*\([^)]*\)\s*$", "", t).strip()
 
-            # 3) Enforce platform label (replace "in Java"/"in Python"/etc with your run's platform)
+            # 3) Enforce platform label, with a .NET/C# exception:
+            # If title already specifies C#, prefer "Using C#" (no trailing "in .NET").
             if pl:
-                t = re.sub(r"(?i)\bin\s+[A-Za-z0-9\.\+#/ ]+$", f"in {pl}", t).strip()
-                if f"in {pl}" not in t:
-                    t = f"{t} in {pl}".strip()
+                has_csharp = bool(re.search(r"(?i)\bC#\b", t))
+
+                if pl == ".NET" and has_csharp:
+                    # Remove a trailing "in .NET" if present
+                    t = re.sub(r"(?i)\s*\bin\s+\.net\s*$", "", t).strip()
+                else:
+                    # Normal enforcement for other cases/platforms
+                    t = re.sub(r"(?i)\bin\s+[A-Za-z0-9\.\+#/ ]+$", f"in {pl}", t).strip()
+                    if f"in {pl}" not in t:
+                        t = f"{t} in {pl}".strip()
 
             # 4) Product mode (title only)
             if not include_product_in_title and prod:
@@ -429,14 +444,16 @@ class KeywordResearchAgent:
                 t = core
 
             # If still too long (very long kw), last resort: keep kw + platform even if > max
-            if len(t) > max_len and kw:
-                t = _clean(f"{kw} in {pl}") if pl else kw
+            if max_len is not None and len(t) > max_len:
+                if len(t) > max_len and kw:
+                    t = _clean(f"{kw} in {pl}") if pl else kw
 
             # If too short, add a short suffix (if room)
-            if len(t) < min_len:
-                suffix = " Guide"
-                if len(t) + len(suffix) <= max_len:
-                    t = _clean(t + suffix)
+            if min_len is not None and len(t) < min_len:
+                if len(t) < min_len:
+                    suffix = " Guide"
+                    if len(t) + len(suffix) <= max_len:
+                        t = _clean(t + suffix)
 
             return t
 
@@ -765,8 +782,42 @@ class KeywordResearchAgent:
                 product=product,
                 include_product_in_title=include_product_in_title,
                 min_len=40,
-                max_len=60,
+                max_len=100,
             )
+            # 4) OPTIONAL: LLM second-pass polish (Agents SDK) with hard fallback
+            polished = polish_title(
+                SeoTitlePolishRequest(
+                    raw_title=t["title"],
+                    primary_keyword=pk,
+                    supporting_keywords=list(t.get("supporting_keywords") or []),
+                    platform_label=platform_label,
+                    product=product,
+                    include_product_in_title=include_product_in_title,
+                    min_len=40,
+                    max_len=60,
+                )
+            )
+
+            if polished:
+                # Apply the polished title, then re-apply your deterministic normalizer
+                t["title"] = polished
+
+                # Re-apply safe product enforcement (keeps your existing behavior)
+                if include_product_in_title:
+                    t["title"] = self._ensure_product_in_title(t["title"], product)
+                else:
+                    t["title"] = _remove_product_safely(t["title"], product)
+
+                # Re-normalize to enforce platform + length + colon spacing, etc.
+                t["title"] = normalize_title(
+                    title=t.get("title", ""),
+                    primary_keyword=t.get("primary_keyword", ""),
+                    platform_label=platform_label,
+                    product=product,
+                    include_product_in_title=include_product_in_title,
+                    min_len=0,
+                    max_len=100,
+                )
 
             # Outline enforcement
             if "outline" in t:
