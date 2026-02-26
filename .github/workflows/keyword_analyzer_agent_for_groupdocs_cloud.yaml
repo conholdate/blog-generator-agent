@@ -8,22 +8,22 @@ on:
         type: choice
         required: true
         options:
-          - 'GroupDocs.Annotation Cloud'
-          - 'GroupDocs.Assembly Cloud'
-          - 'GroupDocs.Classification Cloud'
-          - 'GroupDocs.Comparison Cloud'
-          - 'GroupDocs.Conversion Cloud '
-          - 'GroupDocs.Editor Cloud'
-          - 'GroupDocs.Merger Cloud'
-          - 'GroupDocs.Metadata Cloud'
-          - 'GroupDocs.Parser Cloud'
-          - 'GroupDocs.Rewriter Cloud'
-          - 'GroupDocs.Signature Cloud'
-          - 'GroupDocs.Total Cloud'
-          - 'GroupDocs.Translation Cloud'
-          - 'GroupDocs.Viewer Cloud'
-          - 'GroupDocs.Watermark Cloud'
-        default: "GroupDocs.Conversion Cloud"
+          - 'GroupDocs.Annotation Cloud SDK'
+          - 'GroupDocs.Assembly Cloud SDK'
+          - 'GroupDocs.Classification Cloud SDK'
+          - 'GroupDocs.Comparison Cloud SDK'
+          - 'GroupDocs.Conversion Cloud SDK'
+          - 'GroupDocs.Editor Cloud SDK'
+          - 'GroupDocs.Merger Cloud SDK'
+          - 'GroupDocs.Metadata Cloud SDK'
+          - 'GroupDocs.Parser Cloud SDK'
+          - 'GroupDocs.Rewriter Cloud SDK'
+          - 'GroupDocs.Signature Cloud SDK'
+          - 'GroupDocs.Total Cloud SDK'
+          - 'GroupDocs.Translation Cloud SDK'
+          - 'GroupDocs.Viewer Cloud SDK'
+          - 'GroupDocs.Watermark Cloud SDK'
+        default: "GroupDocs.Conversion Cloud SDK"
 
       platform:
         description: "Optional target platform label (e.g. REST, Java, .NET, Python)."
