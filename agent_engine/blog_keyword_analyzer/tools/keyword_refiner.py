@@ -388,9 +388,12 @@ def _smart_join(tokens: List[str]) -> str:
         # No space before these punctuation tokens
         if t in {")", ":", "/", "-", "–", "—"}:
             out += t
-        # No space after opening paren or before after slash/colon
-        elif prev in {"(", "/", ":"}:
+        # No space after opening paren or after slash
+        elif prev in {"(", "/"}:
             out += t
+        # ✅ Colon SHOULD have a space after it
+        elif prev == ":":
+            out += " " + t
         else:
             out += " " + t
     return out

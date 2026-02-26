@@ -272,10 +272,6 @@ class KeywordResearchAgent:
             return h % 3
 
         def _build_title_from_primary(primary_keyword: str, cluster_id: object) -> str:
-            """
-            Build a grammatical SEO title while ensuring primary_keyword appears verbatim.
-            Enforces title length ~40–60 chars (hard clamp).
-            """
             MIN_LEN = 40
             MAX_LEN = 60
 
@@ -283,6 +279,7 @@ class KeywordResearchAgent:
             if not kw:
                 return ""
 
+            kw_low = kw.lower()
             idx = _stable_idx(cluster_id, kw)
 
             def _clean(s: str) -> str:
@@ -292,62 +289,83 @@ class KeywordResearchAgent:
             def _in_range(s: str) -> bool:
                 return MIN_LEN <= len(s) <= MAX_LEN
 
-            # Prefer compact templates first (A, then B, then C)
-            candidates = []
+            # Detect if keyword is already phrased as an action ("Convert ...", "Create ...", etc.)
+            verb_prefixes = (
+                "convert ", "create ", "generate ", "merge ", "split ", "compress ",
+                "extract ", "edit ", "render ", "export ", "import ", "watermark ",
+                "sign ", "ocr ",
+            )
+
             if platform_label:
-                candidates = [
-                    f"{kw} in {platform_label}",  # A (shortest)
-                    f"How to Convert {kw} in {platform_label}",  # B
-                    f"{kw}: A Complete Tutorial in {platform_label}",  # C (longest)
-                ]
+                if kw_low.startswith("how to "):
+                    candidates = [
+                        f"{kw} in {platform_label}",
+                        f"{kw}: A Complete Tutorial in {platform_label}",
+                        f"{kw} Guide in {platform_label}",
+                    ]
+                elif kw_low.startswith(verb_prefixes):
+                    # Keyword already contains the verb → do NOT add "Convert" again
+                    candidates = [
+                        f"How to {kw} in {platform_label}",
+                        f"{kw} in {platform_label}",
+                        f"{kw}: A Complete Tutorial in {platform_label}",
+                    ]
+                else:
+                    # Noun phrase keywords like "HTML to PDF Converter" → avoid awkward "How to <noun phrase>"
+                    candidates = [
+                        f"{kw} in {platform_label}",
+                        f"{kw}: A Complete Tutorial in {platform_label}",
+                        f"How to Convert {kw} in {platform_label}",
+                    ]
             else:
-                candidates = [
-                    kw,
-                    f"How to Convert {kw}",
-                    f"{kw}: A Complete Tutorial",
-                ]
+                if kw_low.startswith("how to "):
+                    candidates = [
+                        kw,
+                        f"{kw}: A Complete Tutorial",
+                        f"{kw} Guide",
+                    ]
+                elif kw_low.startswith(verb_prefixes):
+                    candidates = [
+                        f"How to {kw}",
+                        kw,
+                        f"{kw}: A Complete Tutorial",
+                    ]
+                else:
+                    candidates = [
+                        kw,
+                        f"{kw}: A Complete Tutorial",
+                        f"How to Convert {kw}",
+                    ]
 
             candidates = [_clean(c) for c in candidates]
 
-            # Choose candidate by stable idx preference, but fall back to any in-range
             preferred = candidates[idx]
             if _in_range(preferred) and kw in preferred:
                 return preferred
 
             in_range = [c for c in candidates if _in_range(c) and kw in c]
             if in_range:
-                # choose closest to middle of range
                 target = (MIN_LEN + MAX_LEN) // 2
                 return min(in_range, key=lambda x: abs(len(x) - target))
 
-            # If none are in range, shorten deterministically while preserving kw verbatim
-            # Strategy: drop long suffixes/fillers, then use shortest base.
+            # Fallback shortening while preserving kw verbatim
             title = preferred
-
-            # Remove common filler phrases if present
             title = re.sub(r"(?i)\s*:?\s*a\s+complete\s+tutorial\b", "", title)
             title = re.sub(r"(?i)\s*:?\s*tutorial\b", "", title)
             title = re.sub(r"(?i)\s*:?\s*guide\b", "", title)
             title = _clean(title)
 
-            # If still too long, fall back to the shortest template
             if len(title) > MAX_LEN:
                 title = candidates[0]
 
-            # If still too long (very long kw), keep kw + minimal platform suffix if possible
             if len(title) > MAX_LEN:
-                if platform_label:
-                    title = _clean(f"{kw} in {platform_label}")
-                else:
-                    title = kw
+                title = _clean(f"{kw} in {platform_label}") if platform_label else kw
 
-            # If too short, pad lightly (but keep <= MAX_LEN)
             if len(title) < MIN_LEN:
                 pad = " Guide"
                 if len(title) + len(pad) <= MAX_LEN:
                     title = _clean(title + pad)
 
-            # HARD guarantee: kw must appear verbatim
             if kw not in title:
                 title = _clean(f"{kw} in {platform_label}") if platform_label else kw
 
