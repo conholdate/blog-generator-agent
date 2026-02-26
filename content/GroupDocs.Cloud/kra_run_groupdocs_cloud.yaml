@@ -15,7 +15,7 @@ engine:
 
   brand: "GroupDocs.Cloud"
   product: "GroupDocs.Conversion Cloud"   # keep generic; you said no per-product run YAML
-  platform: ".NET"                # or "REST" / "Java" etc if you want
+  platform: "Java"                # or "REST" / "Java" etc if you want
   # locale: "en-US"
 
   # === KRA behavior tuning ===

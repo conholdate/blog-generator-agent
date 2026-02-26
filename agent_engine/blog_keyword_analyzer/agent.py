@@ -79,20 +79,18 @@ class KeywordResearchAgent:
 
     @staticmethod
     def _platform_label(fw: Optional[str]) -> Optional[str]:
-        """
-        Map a canonical platform key -> human label to embed in titles.
-        Keeps LLM prompt consistent and human-readable.
-        """
         if not fw:
             return None
         f = fw.lower().strip()
+        if f in {"net", ".net", "dotnet", "csharp", "c#"}:
+            return ".NET"
         if f == "python":
             return "Python"
         if f == "java":
             return "Java"
-        if f in {"csharp", "c#"}:
-            return "C#"
-        return fw  # fallback: echo as-is
+        return fw
+
+
     @staticmethod
     def _product_variants(product: str) -> List[str]:
         """
@@ -145,7 +143,8 @@ class KeywordResearchAgent:
     @staticmethod
     def _ensure_product_in_title(title: str, product: str) -> str:
         """
-        Ensure product appears in title. If missing, append "(<product>)".
+        Ensure product appears in title. If missing, append 'with <product>'.
+        (Avoid parentheses because they blow up title length and look spammy.)
         """
         t = (title or "").strip()
         p = (product or "").strip()
@@ -156,8 +155,7 @@ class KeywordResearchAgent:
         if KeywordResearchAgent._contains_product(t, variants):
             return t
 
-        # Append in a consistent, non-disruptive way
-        return f"{t} ({p})"
+        return f"{t} with {p}"
 
     @staticmethod
     def _remove_product_from_title(title: str, product: str) -> str:
@@ -275,39 +273,154 @@ class KeywordResearchAgent:
 
         def _build_title_from_primary(primary_keyword: str, cluster_id: object) -> str:
             """
-            Build a grammatical SEO title, while ensuring primary_keyword appears verbatim.
-            Works for both:
-              - 'convert html to jpg'
-              - 'html to jpg'
+            Build a grammatical SEO title while ensuring primary_keyword appears verbatim.
+            Enforces title length ~40–60 chars (hard clamp).
             """
+            MIN_LEN = 40
+            MAX_LEN = 60
+
             kw = " ".join((primary_keyword or "").strip().split())
             if not kw:
                 return ""
 
             idx = _stable_idx(cluster_id, kw)
 
-            # We do NOT rewrite kw; we only wrap around it.
-            # Avoid "How to {kw}" (bad for noun phrase keywords). Use "How to Convert {kw}" instead.
-            if platform_label:
-                if idx == 0:
-                    title = f"{kw} in {platform_label}"
-                elif idx == 1:
-                    title = f"How to Convert {kw} in {platform_label}"
-                else:
-                    title = f"{kw}: A Complete Tutorial in {platform_label}"
-            else:
-                if idx == 0:
-                    title = kw
-                elif idx == 1:
-                    title = f"How to Convert {kw}"
-                else:
-                    title = f"{kw}: A Complete Tutorial"
+            def _clean(s: str) -> str:
+                s = re.sub(r"\s{2,}", " ", (s or "").strip())
+                return s.strip(" -–—,:;")
 
-            # HARD guarantee: kw must be present verbatim
+            def _in_range(s: str) -> bool:
+                return MIN_LEN <= len(s) <= MAX_LEN
+
+            # Prefer compact templates first (A, then B, then C)
+            candidates = []
+            if platform_label:
+                candidates = [
+                    f"{kw} in {platform_label}",  # A (shortest)
+                    f"How to Convert {kw} in {platform_label}",  # B
+                    f"{kw}: A Complete Tutorial in {platform_label}",  # C (longest)
+                ]
+            else:
+                candidates = [
+                    kw,
+                    f"How to Convert {kw}",
+                    f"{kw}: A Complete Tutorial",
+                ]
+
+            candidates = [_clean(c) for c in candidates]
+
+            # Choose candidate by stable idx preference, but fall back to any in-range
+            preferred = candidates[idx]
+            if _in_range(preferred) and kw in preferred:
+                return preferred
+
+            in_range = [c for c in candidates if _in_range(c) and kw in c]
+            if in_range:
+                # choose closest to middle of range
+                target = (MIN_LEN + MAX_LEN) // 2
+                return min(in_range, key=lambda x: abs(len(x) - target))
+
+            # If none are in range, shorten deterministically while preserving kw verbatim
+            # Strategy: drop long suffixes/fillers, then use shortest base.
+            title = preferred
+
+            # Remove common filler phrases if present
+            title = re.sub(r"(?i)\s*:?\s*a\s+complete\s+tutorial\b", "", title)
+            title = re.sub(r"(?i)\s*:?\s*tutorial\b", "", title)
+            title = re.sub(r"(?i)\s*:?\s*guide\b", "", title)
+            title = _clean(title)
+
+            # If still too long, fall back to the shortest template
+            if len(title) > MAX_LEN:
+                title = candidates[0]
+
+            # If still too long (very long kw), keep kw + minimal platform suffix if possible
+            if len(title) > MAX_LEN:
+                if platform_label:
+                    title = _clean(f"{kw} in {platform_label}")
+                else:
+                    title = kw
+
+            # If too short, pad lightly (but keep <= MAX_LEN)
+            if len(title) < MIN_LEN:
+                pad = " Guide"
+                if len(title) + len(pad) <= MAX_LEN:
+                    title = _clean(title + pad)
+
+            # HARD guarantee: kw must appear verbatim
             if kw not in title:
-                title = f"{kw} in {platform_label}" if platform_label else kw
+                title = _clean(f"{kw} in {platform_label}") if platform_label else kw
 
             return title
+
+        def normalize_title(
+                title: str,
+                primary_keyword: str,
+                platform_label: Optional[str],
+                product: str,
+                include_product_in_title: bool,
+                min_len: int = 40,
+                max_len: int = 60,
+        ) -> str:
+            t = " ".join((title or "").strip().split())
+            kw = " ".join((primary_keyword or "").strip().split())
+            pl = (platform_label or "").strip()
+            prod = (product or "").strip()
+
+            if not t:
+                return t
+
+            # 1) Fix colon spacing: "JPG:a" -> "JPG: a"
+            t = re.sub(r"\s*:\s*", ": ", t)
+
+            # 2) Remove any parenthetical suffixes like "(GroupDocs.Conversion Cloud)"
+            # (keeps the left part, which typically contains keyword)
+            t = re.sub(r"\s*\([^)]*\)\s*$", "", t).strip()
+
+            # 3) Enforce platform label (replace "in Java"/"in Python"/etc with your run's platform)
+            if pl:
+                t = re.sub(r"(?i)\bin\s+[A-Za-z0-9\.\+#/ ]+$", f"in {pl}", t).strip()
+                if f"in {pl}" not in t:
+                    t = f"{t} in {pl}".strip()
+
+            # 4) Product mode (title only)
+            if not include_product_in_title and prod:
+                # Remove only the full product name variants, not tokens like "HTML"
+                variants = {prod, prod.replace(".", " "), prod.replace(" ", ".")}
+                for v in sorted(variants, key=len, reverse=True):
+                    t = re.sub(rf"(?i)(?<!\w){re.escape(v)}(?!\w)", "", t)
+                t = re.sub(r"\s{2,}", " ", t).strip(" -–—,:; ")
+
+            # 5) Length clamp (40–60): remove filler first, keep kw verbatim
+            def _clean(x: str) -> str:
+                return re.sub(r"\s{2,}", " ", x).strip(" -–—,:; ")
+
+            t = _clean(t)
+
+            # If too long, drop "A Complete Tutorial" phrase (case-insensitive)
+            if len(t) > max_len:
+                t2 = re.sub(r"(?i):?\s*a\s+complete\s+tutorial\b", "", t).strip()
+                t2 = _clean(t2)
+                # keep only if it still contains kw verbatim (if kw is expected)
+                if (not kw) or (kw and kw in t2):
+                    t = t2
+
+            # If still too long, prefer shortest core: "<kw> in <pl>"
+            if len(t) > max_len and kw and pl:
+                core = _clean(f"{kw} in {pl}")
+                t = core
+
+            # If still too long (very long kw), last resort: keep kw + platform even if > max
+            if len(t) > max_len and kw:
+                t = _clean(f"{kw} in {pl}") if pl else kw
+
+            # If too short, add a short suffix (if room)
+            if len(t) < min_len:
+                suffix = " Guide"
+                if len(t) + len(suffix) <= max_len:
+                    t = _clean(t + suffix)
+
+            return t
 
         # -------------------------
         # Safe product enforcement for titles
@@ -417,6 +530,13 @@ class KeywordResearchAgent:
             "- The title MUST contain the exact primary_keyword verbatim.\n"
             "- The title MUST be grammatical.\n"
             "- Avoid incomplete titles like 'To PDF in .NET'.\n"
+            "\n"
+        )
+
+        system += (
+            "\nTITLE LENGTH RULE (HARD)\n"
+            "- Each title MUST be between 40 and 60 characters (inclusive).\n"
+            "- Avoid parentheses in titles unless necessary.\n"
             "\n"
         )
 
@@ -610,14 +730,25 @@ class KeywordResearchAgent:
                 continue
 
             # HARD: build title from primary keyword (guarantees pk appears verbatim)
+            # 1) HARD: build title from primary keyword
             t["title"] = _build_title_from_primary(pk, cid)
 
-            # Product title mode enforcement (SAFE)
+            # 2) Apply product title mode (SAFE)
             if include_product_in_title:
                 t["title"] = self._ensure_product_in_title(t["title"], product)
             else:
-                # Do NOT call self._remove_product_from_title (it removes 'HTML' for Aspose.HTML). :contentReference[oaicite:1]{index=1}
                 t["title"] = _remove_product_safely(t["title"], product)
+
+            # 3) FINAL: normalize AFTER all edits (fixes :a, removes any trailing (...), enforces platform + length)
+            t["title"] = normalize_title(
+                title=t.get("title", ""),
+                primary_keyword=t.get("primary_keyword", ""),
+                platform_label=platform_label,
+                product=product,
+                include_product_in_title=include_product_in_title,
+                min_len=40,
+                max_len=60,
+            )
 
             # Outline enforcement
             if "outline" in t:
