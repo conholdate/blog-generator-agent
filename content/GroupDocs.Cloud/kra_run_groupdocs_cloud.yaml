@@ -15,6 +15,7 @@ engine:
 
   brand: "GroupDocs.Cloud"
   product: "GroupDocs.Editor Cloud SDK"   # keep generic; you said no per-product run YAML
+
   platform: "Java"                # or "REST" / "Java" etc if you want
   # locale: "en-US"
 
