@@ -8,22 +8,22 @@ on:
         type: choice
         required: true
         options:
-          - 'Aspose.3D Cloud'
-          - 'Aspose.BarCode Cloud'
-          - 'Aspose.CAD Cloud'
-          - 'Aspose.Cells Cloud'
-          - 'Aspose.Diagram Cloud'
-          - 'Aspose.Email Cloud'
-          - 'Aspose.HTML Cloud'
-          - 'Aspose.Imaging Cloud'
-          - 'Aspose.OCR Cloud'
-          - 'Aspose.OMR Cloud'
-          - 'Aspose.PDF Cloud'
-          - 'Aspose.Slides Cloud'
-          - 'Aspose.Tasks Cloud'
-          - 'Aspose.Total Cloud'
-          - 'Aspose.Words Cloud'
-        default: "Aspose.PDF Cloud"
+          - 'Aspose.3D Cloud SDK'
+          - 'Aspose.BarCode Cloud SDK'
+          - 'Aspose.CAD Cloud SDK'
+          - 'Aspose.Cells Cloud SDK'
+          - 'Aspose.Diagram Cloud SDK'
+          - 'Aspose.Email Cloud SDK'
+          - 'Aspose.HTML Cloud SDK'
+          - 'Aspose.Imaging Cloud SDK'
+          - 'Aspose.OCR Cloud SDK'
+          - 'Aspose.OMR Cloud SDK'
+          - 'Aspose.PDF Cloud SDK'
+          - 'Aspose.Slides Cloud SDK'
+          - 'Aspose.Tasks Cloud SDK'
+          - 'Aspose.Total Cloud SDK'
+          - 'Aspose.Words Cloud SDK'
+        default: "Aspose.PDF Cloud SDK"
 
       platform:
         description: "Optional target platform label (e.g. REST, Java, .NET, Python)."

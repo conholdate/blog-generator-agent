@@ -76,7 +76,7 @@ THE FIRST PARAGRAPH OF YOUR BLOG POST **MUST** CONTAIN A LINK TO THE PRODUCT PAG
 
 ✅ "Document conversion is essential in modern applications. [GroupDocs.Conversion for Java](ProductURL) provides comprehensive APIs for converting between various file formats with ease."
 
-✅ "Working with compressed archives programmatically requires a robust solution. [Aspose.ZIP for Python via .NET](ProductURL) offers extensive features for creating and extracting ZIP files in Python applications."
+✅ "Working with compressed archives programmatically requires a robust solution. [Aspose.ZIP for Python via .NET](ProductURL) offers extensive features for creating and ZIP files in Python applications."
 
 **Wrong Examples (DO NOT DO THIS):**
 
@@ -422,9 +422,10 @@ PART 2: CONTENT STRUCTURE (MANDATORY SECTIONS)
 3. Steps (H2 heading - ALWAYS include)
 4. Outline Sections (Follow provided outline exactly - SKIP any "Setting Up" or "Installation" sections as they're covered in Prerequisites)
 5. **Complete Code Example(s) (H2 heading - MANDATORY - NEVER SKIP)**
-6. Conclusion (H2 heading - ALWAYS include)
-7. FAQs (H2 heading - ALWAYS include)
-{'8. Read More (H2 heading - ALWAYS include last)' if formatted_related else ''}
+6. **[CLOUD ONLY] [Core Action] via REST API using cURL (H2 heading - MANDATORY when isCloud = true - NEVER SKIP - heading must NOT copy the blog title keyword)**
+7. Conclusion (H2 heading - ALWAYS include)
+8. FAQs (H2 heading - ALWAYS include)
+{'9. Read More (H2 heading - ALWAYS include last)' if formatted_related else ''}
 
 **CRITICAL: ALL HEADINGS MUST USE TITLE CASE**
 Every H2 and H3 heading MUST follow Title Case capitalization rules (see GRAMMAR RULES FOR HEADINGS above).
@@ -440,11 +441,14 @@ Examples:
 - **IMPORTANT: Skip any "Setting Up [Product]" or "Installation" or "Configuration" sections from the outline - these are already covered in Prerequisites and Setup**
 - **Steps section MUST appear in the document BEFORE Complete Code Example(s)**
 - Complete Code Example(s) MUST come after ALL Outline sections
-- Conclusion MUST come after Complete Code Example(s)
+- **[CLOUD ONLY] cURL Commands section MUST come immediately after Complete Code Example(s) when isCloud = true**
+- Conclusion MUST come after Complete Code Example(s) (and after cURL section if present)
 - FAQs MUST come after Conclusion
-- Order: Intro → Prerequisites and Setup → Steps → Outline (excluding setup topics) → Complete Code → Conclusion → FAQs → Read More
+- Order (non-cloud): Intro → Prerequisites and Setup → Steps → Outline (excluding setup topics) → Complete Code → Conclusion → FAQs → Read More
+- Order (cloud): Intro → Prerequisites and Setup → Steps → Outline (excluding setup topics) → Complete Code → cURL Commands → Conclusion → FAQs → Read More
 - **INVALID: If Complete Code Example appears before Steps section**
 - **INVALID: If Steps section is missing from the document**
+- **INVALID (cloud only): If cURL Commands section is missing when isCloud = true**
 
 **LOGICAL FLOW ENFORCEMENT FOR OUTLINE SECTIONS:**
 The outline sections come AFTER the Steps section. Within the outline sections:
@@ -453,7 +457,7 @@ The outline sections come AFTER the Steps section. Within the outline sections:
 - Include Understanding/Conceptual sections FIRST
 - Include Implementation/Usage/Advanced sections SECOND
 
-**Example of CORRECT order:**
+**Example of CORRECT order (non-cloud):**
 1. Introduction
 2. Prerequisites and Setup (covers installation, environment setup, configuration)
 3. **Steps to Uncompress Z File (MUST appear here, BEFORE Complete Code Example)**
@@ -462,6 +466,17 @@ The outline sections come AFTER the Steps section. Within the outline sections:
 6. **Complete Code Example (MUST appear AFTER Steps section)**
 7. Conclusion
 8. FAQs
+
+**Example of CORRECT order (cloud):**
+1. Introduction
+2. Prerequisites and Setup
+3. **Steps to Convert 3DS File to STL**
+4. Understanding 3DS and STL Formats (Outline section - conceptual)
+5. Advanced Conversion Options (Outline section - advanced usage)
+6. **Complete Code Example**
+7. **3DS to STL Conversion via REST API using cURL** (note: no product/language in heading)
+8. Conclusion
+9. FAQs
 
 **Example of WRONG order (don't do this):**
 1. Introduction
@@ -494,6 +509,7 @@ ALL headings (H2, H3, etc.) MUST use Title Case capitalization.
 ✅ "How to Handle Large Files"
 ✅ "Working with Multiple File Formats"
 ✅ "Convert PDF to PNG - Complete Code Example"
+✅ "3DS File to STL Conversion using cURL Commands"
 
 **INCORRECT (Sentence case or wrong capitalization):**
 ❌ "Prerequisites and setup" (lowercase 'setup')
@@ -685,6 +701,109 @@ CRITICAL: This section is MANDATORY and MUST ALWAYS be included. NO EXCEPTIONS.
 
 > **Note:** This code example demonstrates the core functionality. Before using it in your project, make sure to update the file paths (`input.pdf`, `output.png`, etc.) to match your actual file locations, verify that all required dependencies are properly installed, and test thoroughly in your development environment. If you encounter any issues, please refer to the [official documentation](documentation_url) or reach out to the [support team](forums_url) for assistance.
 
+═══════════════════════════════════════════════════════════════════════════════
+### 5a. [CLOUD ONLY] CURL COMMANDS SECTION - MANDATORY WHEN isCloud = true
+═══════════════════════════════════════════════════════════════════════════════
+
+**CONDITION: Include this section ONLY when isCloud = {isCloud}**
+
+**IF isCloud = true → THIS SECTION IS MANDATORY. NEVER SKIP IT.**
+**IF isCloud = false → DO NOT include this section at all.**
+
+**HEADING CONSTRUCTION RULES (CRITICAL - READ CAREFULLY):**
+
+The cURL section heading MUST be meaningfully different from the Complete Code Example heading to avoid targeting the same keyword twice.
+
+**RULE: The cURL heading MUST use ONLY the core file formats or action — NEVER the product name, library name, platform, or language.**
+
+**Heading formula:**
+## [Core Action or Source Format to Target Format] via REST API using cURL
+
+**HOW TO DERIVE THE HEADING:**
+1. Extract ONLY the core technical action from the blog title (e.g., the file formats involved or the operation name)
+2. STRIP OUT: product names (Aspose, GroupDocs), library descriptions ("Java Library", "Python SDK", ".NET API"), platform names (Java, Python, C#, .NET)
+3. ADD: "via REST API" to clearly differentiate from the programmatic code example
+
+**HEADING DERIVATION EXAMPLES:**
+
+Blog title: "Edit PowerPoint Files Using Java Library"
+- Core action: "Edit PowerPoint Files"
+- ✅ Correct cURL heading: "Edit PowerPoint Files via REST API using cURL"
+- ❌ Wrong: "Edit PowerPoint Files Using Java Library using cURL Commands" (copies blog title keyword)
+
+Blog title: "Convert PDF to PNG in C# Using Aspose.PDF for .NET"
+- Core action: "PDF to PNG Conversion"
+- ✅ Correct cURL heading: "PDF to PNG Conversion via REST API using cURL"
+- ❌ Wrong: "Convert PDF to PNG in C# using cURL Commands" (still contains language keyword)
+
+Blog title: "3DS File to STL Conversion Using Aspose.3D for Java"
+- Core action: "3DS to STL Conversion"
+- ✅ Correct cURL heading: "3DS to STL Conversion via REST API using cURL"
+- ❌ Wrong: "3DS File to STL Conversion Using Java Library using cURL Commands"
+
+Blog title: "Merge Excel Files in Python"
+- Core action: "Merge Excel Files"
+- ✅ Correct cURL heading: "Merge Excel Files via REST API using cURL"
+- ❌ Wrong: "Merge Excel Files in Python using cURL Commands"
+
+**FORMAT:**
+## [Core Action] via REST API using cURL
+
+**REQUIREMENTS:**
+- Place this section IMMEDIATELY after the Complete Code Example section
+- Provide a brief 2-3 sentence introduction explaining that the API can also be accessed directly via REST calls using cURL, useful for shell scripts, CI/CD pipelines, or any environment where installing an SDK is not practical
+- Include all required cURL steps in logical order:
+  1. **Authenticate and Get Access Token** - Show the cURL command to retrieve a JWT access token using client credentials (client_id and client_secret)
+  2. **Upload the Source File** - Show the cURL command to upload the input file to cloud storage
+  3. **Execute the Conversion or Operation** - Show the cURL command to trigger the operation via the REST API endpoint
+  4. **Download the Output File** - Show the cURL command to download the result
+
+**CODE FORMAT FOR EACH cURL STEP:**
+Each individual cURL command MUST be wrapped in regular code snippet tags:
+
+<!--[CODE_SNIPPET_START]-->
+```bash
+curl -X POST "https://api.example.com/v1/endpoint" \
+     -H "Authorization: Bearer YOUR_ACCESS_TOKEN" \
+     -H "Content-Type: application/json" \
+     -d '{{"inputFile": "input.ext", "outputFormat": "target"}}'
+```
+<!--[CODE_SNIPPET_END]-->
+
+**cURL SECTION CONTENT RULES:**
+- Use placeholder values for credentials: YOUR_CLIENT_ID, YOUR_CLIENT_SECRET, YOUR_ACCESS_TOKEN
+- Use realistic but generic API endpoint URLs consistent with the product's REST API style
+- Use the actual source and target file formats from the blog title
+- Add a brief explanatory sentence before each cURL command describing what it does
+- NEVER use COMPLETE_CODE_SNIPPET tags in this section - use regular CODE_SNIPPET tags only
+- Include a closing note pointing readers to the [official API documentation](documentation_url) for full endpoint references
+
+**CORRECT HEADING EXAMPLES:**
+✅ "Edit PowerPoint Files via REST API using cURL"
+✅ "PDF to PNG Conversion via REST API using cURL"
+✅ "Excel to PDF Conversion via REST API using cURL"
+✅ "3DS to STL Conversion via REST API using cURL"
+✅ "Merge Word Documents via REST API using cURL"
+
+**WRONG HEADING EXAMPLES:**
+❌ "Edit PowerPoint Files Using Java Library using cURL Commands" (copies blog title - DUPLICATE KEYWORD)
+❌ "Convert PDF to PNG in C# using cURL Commands" (contains language name - NEAR DUPLICATE)
+❌ "Using cURL" (too vague)
+❌ "cURL Commands" (missing conversion context)
+❌ "REST API cURL Examples" (doesn't name the operation)
+
+**SELF-CHECK BEFORE WRITING THE HEADING:**
+Ask yourself:
+1. Does my cURL heading contain any product name (Aspose, GroupDocs, etc.)? → REMOVE IT
+2. Does my cURL heading contain a language or platform (Java, Python, C#, .NET)? → REMOVE IT
+3. Does my cURL heading contain "Library", "SDK", or "API" as a product descriptor? → REMOVE IT
+4. Does my cURL heading share the same primary keyword as my Complete Code Example heading? → REWRITE IT
+5. Does my heading include "via REST API"? → MUST ADD IT
+
+If ANY check fails → FIX THE HEADING before proceeding
+
+═══════════════════════════════════════════════════════════════════════════════
+
 ### 6. CONCLUSION (MANDATORY)
 ## Conclusion
 
@@ -758,7 +877,7 @@ Format: [ZIP](https://docs.fileformat.com/compression/zip/)
 PART 5: CODE SNIPPET REQUIREMENTS (CRITICAL)
 ═══════════════════════════════════════════════════════════════════════════════
 
-**For Regular Code Snippets (Prerequisites, Steps, Outline):**
+**For Regular Code Snippets (Prerequisites, Steps, Outline, cURL Commands):**
 <!--[CODE_SNIPPET_START]-->
 ```language
 // Your code here
@@ -775,6 +894,7 @@ PART 5: CODE SNIPPET REQUIREMENTS (CRITICAL)
 **CRITICAL DISTINCTION:**
 - Regular snippets = CODE_SNIPPET_START/END (no COMPLETE_ prefix)
 - Complete examples = COMPLETE_CODE_SNIPPET_START/END (WITH COMPLETE_ prefix)
+- cURL commands in the cURL section = CODE_SNIPPET_START/END (regular tags, NOT COMPLETE_ prefix)
 - Using wrong tags makes output INVALID
 
 **ALL CODE MUST BE:**
@@ -834,6 +954,7 @@ Before finalizing, verify:
 □ Meta description is EXACTLY 140-160 characters (counted manually)
 □ Summary is EXACTLY 200-260 characters (counted manually)
 □ ALL headings (H2, H3) use Title Case capitalization (check every single one)
+□ [CLOUD ONLY] cURL Commands section is present when isCloud = true
 
 ═══════════════════════════════════════════════════════════════════════════════
 END OF PROMPT
