@@ -9,6 +9,7 @@ from config import settings
 
 def get_blog_writer_prompt(
     title: str,
+    seo_topic: str,
     keywords: List[str],
     outline: List[str],
     related_links: List[Dict[str, str]],
@@ -379,7 +380,7 @@ If answer to ANY question is "No" - FIX IT IMMEDIATELY
 ### FRONTMATTER TEMPLATE
 ---
 title: "{title}"
-seoTitle: "{title}"
+seoTitle: "{seo_topic}"
 description: "[MUST BE 140-160 chars - count every character including spaces before finalizing]"
 date: {current_date}
 lastmod: {current_date}

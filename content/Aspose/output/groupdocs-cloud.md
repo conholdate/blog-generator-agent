@@ -8,7 +8,7 @@
 
 ---
 
-## 1. Edit PowerPoint Files using Java Library 
+## 1. How to Edit PowerPoint Files using Java Library 
 - **Cluster ID:** `c6`
 - **Target persona:** Developers who need to edit PowerPoint files in Java using REST API
 - **Angle:** Step‑by‑step guide to edit PowerPoint files

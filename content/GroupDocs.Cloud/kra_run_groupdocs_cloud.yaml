@@ -9,13 +9,13 @@ meta:
 
 engine:
   # === Core KRA inputs ===
-  input_file: "content/GroupDocs.Cloud/keywords.csv"
-  use-serp-api: false
-  serp-topic: ""               # optional seed topic if you enable SerpAPI later
+  # input_file: "content/GroupDocs.Cloud/keywords.csv"
+  use-serp-api: true
+  serp-topic: "Edit PowerPoint Files using Java Library"               # optional seed topic if you enable SerpAPI later
 
   brand: "GroupDocs.Cloud"
-  product: "GroupDocs.Conversion Cloud"   # keep generic; you said no per-product run YAML
-  platform: ".NET"                # or "REST" / "Java" etc if you want
+  product: "GroupDocs.Editor Cloud SDK"   # keep generic; you said no per-product run YAML
+  platform: "Java"                # or "REST" / "Java" etc if you want
   # locale: "en-US"
 
   # === KRA behavior tuning ===

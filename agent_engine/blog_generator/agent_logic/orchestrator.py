@@ -81,7 +81,7 @@ class BlogOrchestrator:
         print(f"product info -- {product_info}")
 
         isCloud = "cloud" in product_info["ProductName"].lower()
-        post_topic = await validate_and_fix_seo_title(post_topic, topics_raw_data.get("keywords", {}).get("primary")[0], product_info.get("ProductName"), isCloud, platform)
+        seo_topic = await validate_and_fix_seo_title(post_topic, topics_raw_data.get("keywords", {}).get("primary")[0], product_info.get("ProductName"), isCloud, platform)
         # Start metrics tracking
         self.metrics.start_job(
             product=product_name,
@@ -122,6 +122,7 @@ class BlogOrchestrator:
             # ════════════════════════════════════════════════════════════════════
             instructions = prompts.get_blog_writer_prompt(
                 post_topic,
+                seo_topic,
                 f_keywords,
                 blog_outline,
                 related_links,
