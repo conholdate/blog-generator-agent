@@ -1,0 +1,65 @@
+# Aspose.3D
+blog: aspose
+key: 3d
+# Reusable platform definitions
+platform_definitions:
+  net:
+    display_name: ".NET"
+    keywords: ["c#", "csharp", ".net", "dotnet", "vb.net", "visual basic"]
+
+  java:
+    display_name: "Java"
+    keywords: ["java", "j2se", "j2ee", "jsp"]
+
+  python_net:
+    display_name: "Python via .NET"
+    keywords: ["python", "python-net", "py", "python .net", "python via .net"]
+
+  nodejs:
+    display_name: "Node.js"
+    keywords: ["nodejs", "node.js", "javascript"]
+
+# Product: Aspose.3D
+display_name: "Aspose.3D"
+description: "3D model/scene processing and conversion APIs (FBX, OBJ, GLTF/GLB, STL, 3DS, DAE, etc.)"
+enabled: true
+
+# Common repo URLs for all platforms
+doc_repo: "https://github.com/aspose-3d/Aspose.3D-Doc-md"
+doc_branch: "master"
+
+api_repo: "https://github.com/aspose-3d/Aspose.3D-API-References"
+api_branch: "main"
+
+tut_repo: "https://github.com/aspose-3d/Aspose-3D-Reference-Tutorials"
+tut_branch: "main"
+
+platforms:
+  - net:
+      definition: net
+      doc_path: "english/net"
+      api_path: "english/net"
+      tut_path: "3d"
+      enabled: true
+
+  - java:
+      definition: java
+      doc_path: "english/java"
+      api_path: "english/java"
+      tut_path: "3d"
+      enabled: true
+
+  - python_net:
+      definition: python_net
+      doc_path: "english/python-via-net"
+      api_path: "english/python-via-net"
+      tut_path: "3d"
+      enabled: true
+
+  - nodejs:
+      definition: nodejs
+      # Node.js examples exist, but keep disabled unless you have doc/API content sources for it in your pipeline.
+      doc_path: "english/net"
+      api_path: "english/net"
+      tut_path: "3d"
+      enabled: false  # Enable when needed
