@@ -9,13 +9,13 @@ meta:
 
 engine:
   # === Core KRA inputs ===
-  input_file: "content/Aspose.Cloud/keywords.csv"
-  use-serp-api: false
-  serp-topic: "<OPTIONAL_TOPIC_FOR_SERP>"
+  # input_file: "content/Aspose.Cloud/keywords.csv"
+  use-serp-api: true
+  serp-topic: "Convert 3MF to STL"
 
   # IMPORTANT: treat Aspose.Cloud as a different brand namespace
   brand: "Aspose.Cloud"
-  product: "Aspose.PDF Cloud SDK"     # e.g. "Aspose.Words Cloud" (your naming)
+  product: "Aspose.3D Cloud SDK"     # e.g. "Aspose.Words Cloud" (your naming)
   platform: "Java"               # or your internal label (REST, Java, .NET, etc.)
   # locale: "en-US"
 

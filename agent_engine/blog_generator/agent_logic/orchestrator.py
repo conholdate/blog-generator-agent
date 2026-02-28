@@ -8,7 +8,7 @@ from tools.mcp_tools import generate_markdown_file, fetch_category_related_artic
 from utils import prompts
 from utils.seo_validator import validate_seo_content, validate_and_fix_meta_description, validate_and_fix_seo_title
 from utils.file_format_mappings import FILE_FORMAT_MAPPINGS, BASE_URL
-from utils.helpers import prepare_context, get_productInfo, get_topic_by_index, inject_file_format_links, slugify, normalize_case_preserve_formats_in_keywords, clean_ai_generated_markdown, validate_markdown_links
+from utils.helpers import prepare_context, get_productInfo, get_topic_by_index, inject_file_format_links, slugify, normalize_case_preserve_formats_in_keywords, clean_ai_generated_markdown, validate_markdown_links, capitalize_file_formats_for_title
 from utils.metricsRecorder import MetricsRecorder
 from services.LLMservice import llm_service
 import json
@@ -81,7 +81,10 @@ class BlogOrchestrator:
         print(f"product info -- {product_info}")
 
         isCloud = "cloud" in product_info["ProductName"].lower()
+        post_topic = capitalize_file_formats_for_title(post_topic, FILE_FORMAT_MAPPINGS)
+     
         seo_topic = await validate_and_fix_seo_title(post_topic, topics_raw_data.get("keywords", {}).get("primary")[0], product_info.get("ProductName"), isCloud, platform)
+
         # Start metrics tracking
         self.metrics.start_job(
             product=product_name,

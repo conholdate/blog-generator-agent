@@ -2050,3 +2050,55 @@ def validate_markdown_links(content: str, fix_automatically: bool = True, verbos
             for issue in issues[:5]:
                 print(f"   Line {issue['line_number']}: {issue['original']}")
         return content
+
+
+
+def capitalize_file_formats_for_title(
+    title: str, 
+    file_format_mappings: Dict[str, str]
+) -> str:
+    """
+    Capitalize file format names in a title based on FILE_FORMAT_MAPPINGS dict.
+    
+    This function works with your FILE_FORMAT_MAPPINGS dictionary structure where
+    keys are file format names (e.g., "3D2", "3DS", "PDF") and values are paths.
+    
+    Args:
+        title: The title string to process
+        file_format_mappings: Dictionary with format names as keys
+                              Example: {"PDF": "document/pdf/", "PNG": "image/png/"}
+                     
+    Returns:
+        Title with matching file formats capitalized
+        
+    Examples:
+        >>> mappings = {"3DS": "3d/3ds/", "STL": "3d/stl/", "PDF": "document/pdf/"}
+        >>> capitalize_file_formats_from_mappings("Convert 3ds to stl", mappings)
+        'Convert 3DS to STL'
+    """
+    # Extract format names from dictionary keys and convert to lowercase for matching
+    format_set = {fmt.lower() for fmt in file_format_mappings.keys()}
+    
+    # Split title into words while preserving spaces and punctuation
+    words = re.split(r'(\s+|[^\w\s])', title)
+    
+    result = []
+    for word in words:
+        if not word:  # Skip empty strings
+            continue
+            
+        # Check if it's a whitespace or punctuation (preserve as-is)
+        if re.match(r'^\s+$', word) or re.match(r'^[^\w\s]+$', word):
+            result.append(word)
+            continue
+        
+        word_lower = word.lower()
+        
+        # Check if the word matches any format in our mappings
+        if word_lower in format_set:
+            result.append(word.upper())
+        else:
+            # Preserve original capitalization
+            result.append(word)
+    
+    return ''.join(result)
