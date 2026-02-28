@@ -19,6 +19,9 @@ class IndexRecord(BaseModel):
     repo_type: str         # semantic type label (usually same as repo_key)
     platform: str          # platform key or 'all'/'general'
 
+    # Stable cluster key for grouping related posts (e.g., "OBJ-to-STL")
+    key: Optional[str] = None
+
     title: str
     topic: str
     category: str = "General"
