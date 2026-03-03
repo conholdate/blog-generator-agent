@@ -8,7 +8,7 @@ from urllib.parse import urlparse
 import re
 from agents import Agent, Runner, function_tool, handoff
 from openai import OpenAI
-
+from .tools.key_maker import make_key
 from .settings import Settings
 from .tools.normalize import nor_website_domain, nor_platform_display_name, nor_section_label
 from .types import IndexRecord, RepoTarget
@@ -65,6 +65,74 @@ def _repos_root(s: Settings) -> Path:
 def _topic_embed_text(rec: IndexRecord) -> str:
     return f"{rec.topic}. {rec.title}. {rec.category}/{rec.sub_category}. {rec.excerpt or ''}".strip()
 
+# --- Conversion key inference (e.g., "OBJ-to-STL") ----------------------------
+
+_CONV_PATTERNS = [
+    # "OBJ to STL", "obj 2 stl", "OBJ→STL", "OBJ->STL"
+    re.compile(
+        r"\b(?P<src>[A-Za-z0-9]{1,12}(?:/[A-Za-z0-9]{1,12})?)\s*(?:to|2|→|->|➜|⇒|⟶)\s*(?P<dst>[A-Za-z0-9]{1,12}(?:/[A-Za-z0-9]{1,12})?)\b",
+        re.IGNORECASE,
+    ),
+    # "convert OBJ file to STL"
+    re.compile(
+        r"\bconvert\s+(?P<src>[A-Za-z0-9]{1,12}(?:/[A-Za-z0-9]{1,12})?)\s+(?:file\s+)?to\s+(?P<dst>[A-Za-z0-9]{1,12}(?:/[A-Za-z0-9]{1,12})?)\b",
+        re.IGNORECASE,
+    ),
+    # "from OBJ to STL"
+    re.compile(
+        r"\bfrom\s+(?P<src>[A-Za-z0-9]{1,12}(?:/[A-Za-z0-9]{1,12})?)\s+to\s+(?P<dst>[A-Za-z0-9]{1,12}(?:/[A-Za-z0-9]{1,12})?)\b",
+        re.IGNORECASE,
+    ),
+]
+
+def _canon_format_token(s: str) -> str:
+    """
+    Canonicalize a format token:
+    - Trim punctuation and dots
+    - Uppercase
+    - Normalize separators (e.g., 'pdf/a' -> 'PDF-A')
+    """
+    t = (s or "").strip()
+    if not t:
+        return ""
+    t = t.strip().strip(".")
+    t = re.sub(r"[^A-Za-z0-9/]+", "", t)  # keep alnum + '/'
+    t = t.upper().replace("/", "-")       # PDF/A -> PDF-A
+    return t
+
+def _extract_conversion_key_from_text(text: str) -> Optional[str]:
+    if not text:
+        return None
+    for pat in _CONV_PATTERNS:
+        m = pat.search(text)
+        if not m:
+            continue
+        src = _canon_format_token(m.group("src"))
+        dst = _canon_format_token(m.group("dst"))
+        if not src or not dst or src == dst:
+            continue
+        return f"{src}-to-{dst}"
+    return None
+
+def _infer_record_key(rec: IndexRecord) -> Optional[str]:
+    """
+    Infer a stable key for clustering.
+    Primary target: conversion pair keys like 'OBJ-to-STL'.
+    Uses title/topic first, then keywords.
+    """
+    title = (rec.title or "").strip()
+    topic = (rec.topic or "").strip()
+
+    k = _extract_conversion_key_from_text(title) or _extract_conversion_key_from_text(topic)
+    if k:
+        return k
+
+    for kw in (rec.keywords or []):
+        k = _extract_conversion_key_from_text(str(kw))
+        if k:
+            return k
+
+    return None
 
 def _platforms_from_text(text: str, platform_defs: Dict[str, Any]) -> List[str]:
     lt = text.lower()
@@ -409,6 +477,17 @@ def incremental_index_repo(
             product=product,
             ctx=ctx,
         )
+
+        # Intelligent key (heuristic first, LLM fallback when needed)
+        kd = make_key(
+            client,
+            rec.model_dump(),
+            llm_model=getattr(s, "PROFESSIONALIZE_KEY_MODEL", "") or getattr(s, "PROFESSIONALIZE_MODEL",
+                                                                             "") or "gpt-4.1-mini",
+            enable_llm=bool(getattr(s, "ENABLE_LLM_KEYS", True)),
+            llm_min_confidence=float(getattr(s, "LLM_KEY_MIN_CONFIDENCE", 0.55)),
+        )
+        rec.key = kd.key
 
         # For all-scoped repos (blogs), infer platform from content.
         # Platform-scoped repos already encode platform in path/target and should not be overridden.
