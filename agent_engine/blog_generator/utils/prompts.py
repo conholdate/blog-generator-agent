@@ -940,14 +940,55 @@ Introduction + Prerequisites + Outline sections + Conclusion = {settings.NUMBER_
 The PRIMARY keyword is the first keyword in the list: {primary_keyword}
 The SECONDARY keywords are all remaining keywords in the list: {secondary_keywords}
 
-**MANDATORY PRIMARY KEYWORD DENSITY:**
-- PRIMARY keyword MUST appear at 1% density of total blog word count
-- Formula: (Word Count / 100) = Minimum keyword occurrences
-- NEVER surround primary keyword with asterisks or make it italic/bold
+**MANDATORY PRIMARY KEYWORD PLACEMENT (STRICTLY ENFORCED):**
+
+The primary keyword MUST appear AT LEAST 3-5 times across the blog body content, EXCLUDING frontmatter fields (title, description, summary, tags). These occurrences must be distributed across specific sections as described below. Cramming all occurrences into one section is INVALID.
+
+**REQUIRED PLACEMENT MAP — each location is MANDATORY:**
+
+| # | Location | Requirement |
+|---|----------|-------------|
+| 1 | **Introduction paragraph** | Primary keyword MUST appear in the first paragraph — ideally in the first or second sentence. This is the single most important placement for SEO. |
+| 2 | **Middle of the blog body** | Primary keyword MUST appear at least once within the Outline sections or the Steps section — somewhere in the middle third of the post. |
+| 3 | **Conclusion section** | Primary keyword MUST appear at least once in the Conclusion. Work it in naturally when summarizing what was covered. |
+| 4 | **FAQs section** | Primary keyword MUST appear at least once in the FAQs — either in a question or its answer. At least one FAQ question or answer should directly reference the primary keyword naturally. |
+| 5 | **Optional additional occurrence** | A 5th occurrence anywhere else in the body (Prerequisites, Outline sections, or Steps) is encouraged to reach the 1% density target but must read naturally. |
+
+**PRIMARY KEYWORD DENSITY RULE:**
+- Target density: 1% of total blog word count
+- Formula: (Total Word Count / 100) = Target minimum occurrences
+- The 3-5 mandatory placed occurrences above count toward this density target
+- NEVER pad keyword usage artificially — every occurrence must read naturally in context
+
+**PLACEMENT RULES:**
+- NEVER surround the primary keyword with asterisks, bold, or italics
+- NEVER force the keyword awkwardly — it must fit naturally into the sentence
+- NEVER place all occurrences in the same section
+- The keyword may appear in a heading only if it reads naturally — do NOT add it to headings purely for SEO
+
+**PLACEMENT VALIDATION — check before finalizing:**
+□ Occurrence 1: Primary keyword present in the Introduction paragraph?
+□ Occurrence 2: Primary keyword present somewhere in the Outline or Steps sections?
+□ Occurrence 3: Primary keyword present in the Conclusion section?
+□ Occurrence 4: Primary keyword present in at least one FAQ question or answer?
+□ Total occurrences (body only, excluding frontmatter): at least 3, ideally 4-5?
+
+If ANY checkbox above is unchecked → GO BACK and insert the keyword naturally into that section before finalizing.
+
+**CORRECT PLACEMENT EXAMPLE (primary keyword: "convert PDF to PNG"):**
+✅ Introduction: "This guide shows you how to convert PDF to PNG images programmatically using C#."
+✅ Middle (Steps or Outline): "The following steps walk through everything needed to convert PDF to PNG with high fidelity."
+✅ Conclusion: "You now have a working implementation to convert PDF to PNG files on demand."
+✅ FAQ question: "Can I convert PDF to PNG with custom resolution settings?"
+
+**WRONG PLACEMENT EXAMPLE:**
+❌ Keyword appears 4 times in Prerequisites and 0 times in Introduction, Conclusion, and FAQs — INVALID distribution
+❌ Keyword bolded or italicized: "use **convert PDF to PNG** to..." — INVALID formatting
 
 **SECONDARY KEYWORDS USAGE (MANDATORY):**
 - MUST use ALL secondary keywords throughout the blog post
 - Each secondary keyword should appear 2-4 times naturally
+- Distribute secondary keywords across different sections — do not cluster them
 
 ### HUMAN-LIKE WRITING QUALITY (CRITICAL - NON-NEGOTIABLE)
 
@@ -982,6 +1023,11 @@ Before finalizing, verify:
 □ Steps section appears immediately after the last Outline section
 □ Complete Code Example appears immediately after Steps with NO heading between them
 □ [CLOUD ONLY] cURL Commands section is present when isCloud = true
+□ PRIMARY KEYWORD - Occurrence 1: present in the Introduction paragraph?
+□ PRIMARY KEYWORD - Occurrence 2: present in the Outline or Steps sections?
+□ PRIMARY KEYWORD - Occurrence 3: present in the Conclusion section?
+□ PRIMARY KEYWORD - Occurrence 4: present in at least one FAQ question or answer?
+□ PRIMARY KEYWORD - Total body occurrences (excluding frontmatter): at least 3, ideally 4-5?
 
 ═══════════════════════════════════════════════════════════════════════════════
 END OF PROMPT

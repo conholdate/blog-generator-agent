@@ -21,7 +21,6 @@ FILE_FORMAT_MAPPINGS = {
     "JT": "3d/jt/",
     "MA": "3d/ma/",
     "MAX": "3d/max/",
-    "MB": "3d/mb/",
     "MDX": "3d/mdx/",
     "MTL": "3d/mtl/",
     "OBJ": "3d/obj/",
