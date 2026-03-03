@@ -37,7 +37,7 @@
 - Java Program to Convert 3mf Files to Stl using Aspose.With Aspose.3D Cloud SDK for Java
 - Key Features of Aspose.3D Cloud SDK for Java
 - Installation and Setup in Java
-- Step-by-Step: Java Program to Convert 3mf Files to Stl using Aspose
+- Steps- Java Program to Convert 3mf Files to Stl using Aspose
 - Setting Conversion Parameters with Aspose.3D Cloud Aspose.3D Cloud SDK
 - Improving Speed for Large Model Batches
 - Debugging Common Conversion Failures

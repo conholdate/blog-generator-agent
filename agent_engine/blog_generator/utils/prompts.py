@@ -318,6 +318,7 @@ Before writing FAQs to frontmatter, replace:
 - 'text' or 'text' → text (curly single quotes removed or to straight)
 - — → - (em dash to regular hyphen)
 - – → - (en dash to regular hyphen)
+
 **ABSOLUTE REQUIREMENT: All markdown links MUST use correct format [text](url)**
 
 PROHIBITED PATTERNS (these are ERRORS that must be prevented):
@@ -419,9 +420,9 @@ PART 2: CONTENT STRUCTURE (MANDATORY SECTIONS)
 ### REQUIRED SECTIONS (IN ORDER)
 1. Introduction Content (NO H2 heading - direct paragraphs)
 2. Prerequisites and Setup (H2 heading - ALWAYS include - combines installation and environment setup)
-3. Steps (H2 heading - ALWAYS include)
-4. Outline Sections (Follow provided outline exactly - SKIP any "Setting Up" or "Installation" sections as they're covered in Prerequisites)
-5. **Complete Code Example(s) (H2 heading - MANDATORY - NEVER SKIP)**
+3. Outline Sections (Follow provided outline exactly - SKIP any "Setting Up", "Installation", or "Steps/Step-by-Step" sections as they are already covered by dedicated sections)
+4. **Steps (H2 heading - ALWAYS include - MUST appear immediately before Complete Code Example with NO other heading between them)**
+5. **Complete Code Example(s) (H2 heading - MANDATORY - NEVER SKIP - MUST appear immediately after Steps with NO other heading between them)**
 6. **[CLOUD ONLY] [Core Action] via REST API using cURL (H2 heading - MANDATORY when isCloud = true - NEVER SKIP - heading must NOT copy the blog title keyword)**
 7. Conclusion (H2 heading - ALWAYS include)
 8. FAQs (H2 heading - ALWAYS include)
@@ -436,44 +437,47 @@ Examples:
 
 **CRITICAL SECTION ORDERING RULES:**
 - Prerequisites and Setup MUST come immediately after Introduction
-- Steps MUST come immediately after Prerequisites and Setup
-- Outline sections MUST come after Steps
-- **IMPORTANT: Skip any "Setting Up [Product]" or "Installation" or "Configuration" sections from the outline - these are already covered in Prerequisites and Setup**
-- **Steps section MUST appear in the document BEFORE Complete Code Example(s)**
-- Complete Code Example(s) MUST come after ALL Outline sections
+- Outline sections MUST come immediately after Prerequisites and Setup
+- **IMPORTANT: Skip any "Setting Up [Product]", "Installation", "Configuration", or "Steps/Step-by-Step" sections from the outline - these are already covered by dedicated sections**
+- **Steps MUST come immediately after ALL Outline sections — NO other heading is allowed between the last Outline section and the Steps heading**
+- **Complete Code Example(s) MUST come immediately after Steps — NO other heading is allowed between Steps and Complete Code Example**
+- **Steps and Complete Code Example are a tightly paired block: [...Outline sections] → Steps → Complete Code Example → [rest of post]**
 - **[CLOUD ONLY] cURL Commands section MUST come immediately after Complete Code Example(s) when isCloud = true**
 - Conclusion MUST come after Complete Code Example(s) (and after cURL section if present)
 - FAQs MUST come after Conclusion
-- Order (non-cloud): Intro → Prerequisites and Setup → Steps → Outline (excluding setup topics) → Complete Code → Conclusion → FAQs → Read More
-- Order (cloud): Intro → Prerequisites and Setup → Steps → Outline (excluding setup topics) → Complete Code → cURL Commands → Conclusion → FAQs → Read More
-- **INVALID: If Complete Code Example appears before Steps section**
+- Order (non-cloud): Intro → Prerequisites and Setup → Outline (excluding setup and steps topics) → Steps → Complete Code → Conclusion → FAQs → Read More
+- Order (cloud): Intro → Prerequisites and Setup → Outline (excluding setup and steps topics) → Steps → Complete Code → cURL Commands → Conclusion → FAQs → Read More
+- **INVALID: If any heading appears between Steps and Complete Code Example**
 - **INVALID: If Steps section is missing from the document**
+- **INVALID: If Complete Code Example is not the heading that immediately follows Steps**
 - **INVALID (cloud only): If cURL Commands section is missing when isCloud = true**
 
 **LOGICAL FLOW ENFORCEMENT FOR OUTLINE SECTIONS:**
-The outline sections come AFTER the Steps section. Within the outline sections:
+The outline sections come AFTER Prerequisites and Setup, and BEFORE the Steps section. Within the outline sections:
 
 - **SKIP** any sections about "Setting Up", "Installation", "Configuration", "Prerequisites" - these are already covered
+- **SKIP** any sections containing "Steps" or "Step-by-Step" in the heading - these are already covered by the dedicated Steps section that follows
 - Include Understanding/Conceptual sections FIRST
 - Include Implementation/Usage/Advanced sections SECOND
+- The last outline section MUST be immediately followed by the Steps heading - insert NO extra heading between them
 
 **Example of CORRECT order (non-cloud):**
 1. Introduction
 2. Prerequisites and Setup (covers installation, environment setup, configuration)
-3. **Steps to Uncompress Z File (MUST appear here, BEFORE Complete Code Example)**
-4. Understanding Z File Compression (Outline section - conceptual)
-5. Advanced Compression Options (Outline section - advanced usage)
-6. **Complete Code Example (MUST appear AFTER Steps section)**
+3. Understanding Z File Compression (Outline section - conceptual)
+4. Advanced Compression Options (Outline section - advanced usage)
+5. **Steps to Uncompress Z File (immediately after last outline section, NO heading between)**
+6. **Uncompress Z File - Complete Code Example (immediately after Steps, NO heading between)**
 7. Conclusion
 8. FAQs
 
 **Example of CORRECT order (cloud):**
 1. Introduction
 2. Prerequisites and Setup
-3. **Steps to Convert 3DS File to STL**
-4. Understanding 3DS and STL Formats (Outline section - conceptual)
-5. Advanced Conversion Options (Outline section - advanced usage)
-6. **Complete Code Example**
+3. Understanding 3DS and STL Formats (Outline section - conceptual)
+4. Advanced Conversion Options (Outline section - advanced usage)
+5. **Steps to Convert 3DS File to STL (immediately after last outline section)**
+6. **Convert 3DS File to STL - Complete Code Example (immediately after Steps)**
 7. **3DS to STL Conversion via REST API using cURL** (note: no product/language in heading)
 8. Conclusion
 9. FAQs
@@ -481,11 +485,15 @@ The outline sections come AFTER the Steps section. Within the outline sections:
 **Example of WRONG order (don't do this):**
 1. Introduction
 2. Prerequisites and Setup
-3. Steps to Uncompress Z File
+3. Steps to Uncompress Z File (WRONG - Steps must come AFTER outline sections, not before)
 4. Setting Up Aspose.ZIP (WRONG - redundant, already covered in Prerequisites and Setup)
-5. Understanding Z File Compression
-6. Complete Code Example
-7. Conclusion
+5. Step-by-Step Conversion Process (WRONG - redundant, already covered by dedicated Steps section)
+6. Understanding Z File Compression
+7. Advanced Compression Options
+8. Steps to Uncompress Z File (WRONG - if Steps is here, Complete Code Example must follow immediately)
+9. Some Other Heading (WRONG - nothing is allowed between Steps and Complete Code Example)
+10. Complete Code Example
+11. Conclusion
 
 **GRAMMAR RULES FOR HEADINGS:**
 - Product names: NEVER use articles (a/an) before product names
@@ -509,7 +517,7 @@ ALL headings (H2, H3, etc.) MUST use Title Case capitalization.
 ✅ "How to Handle Large Files"
 ✅ "Working with Multiple File Formats"
 ✅ "Convert PDF to PNG - Complete Code Example"
-✅ "3DS File to STL Conversion using cURL Commands"
+✅ "PDF to PNG Conversion via REST API using cURL"
 
 **INCORRECT (Sentence case or wrong capitalization):**
 ❌ "Prerequisites and setup" (lowercase 'setup')
@@ -634,8 +642,42 @@ Content MUST include:
 Keep comprehensive but well-organized (2-5 paragraphs covering installation and setup)
 NEVER mention "free" or "online"
 
-### 3. STEPS SECTION (MANDATORY)
+### 3. OUTLINE SECTIONS
+Follow the provided outline but SKIP any setup/installation/steps sections:
+
+{formatted_outline}
+
+**CRITICAL: SKIP THESE TOPICS FROM OUTLINE (already covered by dedicated prompt sections):**
+❌ Skip: "Setting Up [Product]"
+❌ Skip: "Installing [Product]"
+❌ Skip: "Configuring [Product]"
+❌ Skip: "Environment Setup"
+❌ Skip: "Prerequisites"
+❌ Skip: ANY heading containing the word "Steps" or "Step-by-Step" — for example:
+   - "Steps to Convert PDF to PNG"
+   - "Step-by-Step Guide to Merging Files"
+   - "Step-by-Step Conversion Process"
+   - "Steps for Editing PowerPoint Files"
+   These are ALWAYS skipped because the dedicated Steps section that follows the outline already covers this.
+   Including another steps heading from the outline creates a duplicate section with the same purpose,
+   confusing readers and harming SEO.
+   If the outline's steps section contains unique technical detail not covered in the dedicated Steps section,
+   silently fold that detail into the dedicated Steps section content rather than adding a new heading.
+
+**ONLY INCLUDE THESE TYPES OF OUTLINE SECTIONS:**
+✅ Include: Understanding/Conceptual sections
+✅ Include: Feature explanations
+✅ Include: Usage/Implementation topics
+✅ Include: Best practices, tips, or optimization sections
+❌ Never include: Sections whose primary purpose is listing implementation steps, regardless of exact wording used
+
+### 4. STEPS SECTION (MANDATORY)
 ## Steps to [Task Name Based on Title]
+
+**PLACEMENT RULE (NON-NEGOTIABLE):**
+- This section MUST appear immediately after the last Outline section
+- This section MUST be immediately followed by the Complete Code Example section
+- **NO other heading is allowed between Steps and Complete Code Example — they are a tightly paired block**
 
 Format:
 1. **[Step summary with class/method]**: Brief explanation
@@ -647,33 +689,15 @@ Format:
 3-6 steps total, each actionable and technical
 **MUST include at least 1 Documentation or API Reference link in this section**
 
-### 4. OUTLINE SECTIONS
-Follow the provided outline but SKIP any setup/installation sections:
-
-{formatted_outline}
-
-**CRITICAL: SKIP THESE TOPICS FROM OUTLINE (already covered in Prerequisites and Setup):**
-❌ Skip: "Setting Up [Product]"
-❌ Skip: "Installing [Product]"
-❌ Skip: "Configuring [Product]"
-❌ Skip: "Environment Setup"
-❌ Skip: "Prerequisites"
-
-**ONLY INCLUDE THESE TYPES OF OUTLINE SECTIONS:**
-✅ Include: Understanding/Conceptual sections
-✅ Include: Feature explanations
-✅ Include: Usage/Implementation topics
-✅ Include: Best practices, tips, or optimization sections
-
 ### 5. COMPLETE CODE EXAMPLE(S) - MANDATORY (NON-NEGOTIABLE)
 CRITICAL: This section is MANDATORY and MUST ALWAYS be included. NO EXCEPTIONS.
 
 **ABSOLUTE REQUIREMENT:**
 - EVERY blog post MUST have at least ONE Complete Code Example section
 - This is a HARD REQUIREMENT that cannot be skipped
-- **This section MUST appear AFTER the Steps section in the document**
-- **This section MUST appear AFTER all Outline sections**
-- **NEVER place Complete Code Example before the Steps section**
+- **This section MUST appear immediately after the Steps section — NO other heading is allowed between them**
+- **Steps and Complete Code Example are a tightly paired block. The sequence must always be: [...Outline sections] → ## Steps → ## [Task] - Complete Code Example → [rest of post]**
+- **NEVER insert any heading between Steps and Complete Code Example**
 
 **FORMAT (ALWAYS INCLUDE):**
 ## [Specific Task from Title] - Complete Code Example
@@ -954,6 +978,9 @@ Before finalizing, verify:
 □ Meta description is EXACTLY 140-160 characters (counted manually)
 □ Summary is EXACTLY 200-260 characters (counted manually)
 □ ALL headings (H2, H3) use Title Case capitalization (check every single one)
+□ No duplicate Steps/Step-by-Step headings from outline (outline steps content folded into dedicated Steps section)
+□ Steps section appears immediately after the last Outline section
+□ Complete Code Example appears immediately after Steps with NO heading between them
 □ [CLOUD ONLY] cURL Commands section is present when isCloud = true
 
 ═══════════════════════════════════════════════════════════════════════════════
