@@ -201,6 +201,64 @@ jobs:
           head -20 "$BLOG_PATH/index.md"
           echo "--- End excerpt ---"
         fi
+    ###################################################################
+    # NEW: Commit to THIS repository (content/blogPosts/aspose_cloud)
+    ###################################################################
+    - name: Commit generated blog to this repository
+      env:
+        BLOG_FOLDER_NAME: ${{ steps.find_blog.outputs.blog_folder_name }}
+        BLOG_FOLDER_PATH: ${{ steps.find_blog.outputs.blog_folder_path }}
+        PRODUCT_NAME: ${{ steps.find_blog.outputs.product_name }}
+      run: |
+        git config --global user.email "action@github.com"
+        git config --global user.name "GitHub Action"
+        
+        echo "=== Committing blog to this repository ==="
+        echo "Blog folder: $BLOG_FOLDER_PATH"
+        echo "Blog folder name: $BLOG_FOLDER_NAME"
+        echo "Product: $PRODUCT_NAME"
+        
+        # Verify the blog folder exists
+        if [ ! -d "$BLOG_FOLDER_PATH" ]; then
+          echo "❌ Blog folder does not exist: $BLOG_FOLDER_PATH"
+          exit 1
+        fi
+        
+        # Verify index.md exists
+        if [ ! -f "$BLOG_FOLDER_PATH/index.md" ]; then
+          echo "❌ index.md not found in $BLOG_FOLDER_PATH"
+          exit 1
+        fi
+        
+        echo "=== Files to be committed ==="
+        ls -la "$BLOG_FOLDER_PATH"
+        
+        # Add the generated blog folder
+        git add "$BLOG_FOLDER_PATH"
+        
+        # Check if there are changes to commit
+        if git diff --staged --quiet; then
+          echo "ℹ️  No changes to commit - blog may already exist"
+        else
+          echo "=== Changes to be committed ==="
+          git status --short
+          git diff --staged --stat
+          
+          # Commit the changes
+          git commit -m "Add generated blog post: $BLOG_FOLDER_NAME
+
+          Product: $PRODUCT_NAME
+          Author: ${{ inputs.author }}
+          Path: $BLOG_FOLDER_PATH
+          Generated: $(date -u +'%Y-%m-%d %H:%M:%S UTC')
+          Workflow Run: ${{ github.run_number }}"
+                    
+                    # Push to the current branch
+                    git push origin HEAD
+                    
+                    echo "✅ Blog committed and pushed successfully to this repository"
+                    echo "   Location: $BLOG_FOLDER_PATH"
+                  fi
 
     - name: Upload Generated Blog as Artifact
       uses: actions/upload-artifact@v4
