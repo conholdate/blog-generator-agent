@@ -6,9 +6,9 @@
 
 | 🧩 Metric | Value | Status |
 | --- | --- | --- |
-| **Total Canonical Topics** | **104** | — |
-| **Topics with Gaps** | **104** | ⚠️ |
-| **Fully Covered Topics** | 0 | — |
+| **Total Canonical Topics** | **64** | — |
+| **Topics with Gaps** | **63** | ⚠️ |
+| **Fully Covered Topics** | 1 | ✅ |
 | **Excluded (Release / Updates)** | 26 | ℹ️ |
 | **Baseline Scope** | all | — |
 | **Case** | blogs_to_blogs | — |
@@ -19,9 +19,9 @@
 
 | Indicator | Score | Interpretation |
 | --- | --- | --- |
-| Cross-Platform Parity | 0.0% | 🔴 Weak |
+| Cross-Platform Parity | 1.6% | 🔴 Weak |
 | Content Reusability | High | ✅ Strong |
-| Porting Opportunity | 100.0% gaps | 🔥 Very High |
+| Porting Opportunity | 98.4% gaps | 🔥 Very High |
 | Excluded Noise (Releases) | 26 | ✅ Controlled |
 
 ---
@@ -30,17 +30,17 @@
 
 | Platform | # Covered | # Missing | Coverage |
 | --- | --- | --- | --- |
-| **general** | 44 | 60 | 🔴 Weak (42.3%) |
-| **java** | 38 | 66 | 🔴 Weak (36.5%) |
-| **net** | 20 | 84 | 🔴 Weak (19.2%) |
-| **python** | 12 | 92 | 🔴 Weak (11.5%) |
+| **general** | 36 | 28 | 🔴 Weak (56.2%) |
+| **java** | 30 | 34 | 🔴 Weak (46.9%) |
+| **net** | 13 | 51 | 🔴 Weak (20.3%) |
+| **python** | 9 | 55 | 🔴 Weak (14.1%) |
 
 ---
 
 ### 🔎 Executive Insights
 
-- **100.0%** of canonical topics are missing on at least one platform (after exclusions).
-- Highest gap density: **python** (92 missing), **net** (84 missing), **java** (66 missing).
+- **98.4%** of canonical topics are missing on at least one platform (after exclusions).
+- Highest gap density: **python** (55 missing), **net** (51 missing), **java** (34 missing).
 - Gaps are concentrated in **8** major category/subcategory clusters (see Section 4).
 - Release notes, product updates, and version announcements are intentionally excluded from this report.
 
@@ -50,21 +50,21 @@
 
 | # | Cluster | Representative topic | Missing platforms (high-impact) | Suggested new titles (examples) |
 | --- | --- | --- | --- | --- |
-| 1 | **3D Graphics / File Format Conversion** | Convert Dae To Obj Using C | java, net, python | Convert Dae To Obj Using C — java; Convert Dae To Obj Using C — net; Convert Dae To Obj Using C — python |
-| 2 | **3D Graphics / File Format Conversion** | Convert Glb To Obj Using C | general, java, python | Convert Glb To Obj Using C — general; Convert Glb To Obj Using C — java; Convert Glb To Obj Using C — python |
-| 3 | **3D Modeling / File Format Conversion** | Convert 3ds Files To Usdz | general, java, python | Convert 3ds Files To Usdz — general; Convert 3ds Files To Usdz — java; Convert 3ds Files To Usdz — python |
-| 4 | **3D Modeling / File Format Conversion** | Convert 3mf To Stl | java, net, python | Convert 3mf To Stl — java; Convert 3mf To Stl — net; Convert 3mf To Stl — python |
-| 5 | **File Conversion / 3D Model Formats** | Convert Fbx And Rvm Files Api | general, net, python | Convert Fbx And Rvm Files Api — general; Convert Fbx And Rvm Files Api — net; Convert Fbx And Rvm Files Api — python |
-| 6 | **File Conversion / 3D Model Formats** | Convert Fbx Files To Obj Or Pdf With C | java, net, python | Convert Fbx Files To Obj Or Pdf With C — java; Convert Fbx Files To Obj Or Pdf With C — net; Convert Fbx Files To Obj Or Pdf With C — python |
-| 7 | **3D Modeling / File Conversion** | Convert Glb Files To Fbx Online | java, net, python | Convert Glb Files To Fbx Online — java; Convert Glb Files To Fbx Online — net; Convert Glb Files To Fbx Online — python |
-| 8 | **3D Modeling / File Conversion** | Convert Obj To Amf 3d Api | general, java, net | Convert Obj To Amf 3d Api — general; Convert Obj To Amf 3d Api — java; Convert Obj To Amf 3d Api — net |
-| 9 | **Graphics / File Format Conversion** | Convert 3d Ply Files To Obj Api | general, java, python | Convert 3d Ply Files To Obj Api — general; Convert 3d Ply Files To Obj Api — java; Convert 3d Ply Files To Obj Api — python |
-| 10 | **Graphics / File Format Conversion** | Convert Obj Files To Stl Using C | general, java, python | Convert Obj Files To Stl Using C — general; Convert Obj Files To Stl Using C — java; Convert Obj Files To Stl Using C — python |
-| 11 | **Development / 3D Graphics** | 3d Model Import Export Api | general, net, python | 3d Model Import Export Api — general; 3d Model Import Export Api — net; 3d Model Import Export Api — python |
-| 12 | **Development / 3D Graphics** | 3d Modeling And Animation | general, net, python | 3d Modeling And Animation — general; 3d Modeling And Animation — net; 3d Modeling And Animation — python |
-| 13 | **3D Modeling / Format Conversion** | Convert Usd And Usdz To 3ds Format | general, net, python | Convert Usd And Usdz To 3ds Format — general; Convert Usd And Usdz To 3ds Format — net; Convert Usd And Usdz To 3ds Format — python |
-| 14 | **3D Modeling / Format Conversion** | Convert Usdz Files To Stl Online And Programmatically | java, net, python | Convert Usdz Files To Stl Online And Programmatically — java; Convert Usdz Files To Stl Online And Programmatically — net; Convert Usdz Files To Stl Online And Programmatically — python |
-| 15 | **File Conversion / 3D Model Conversion** | Convert Obj Files To Pdf Or Fbx Using C | java, net, python | Convert Obj Files To Pdf Or Fbx Using C — java; Convert Obj Files To Pdf Or Fbx Using C — net; Convert Obj Files To Pdf Or Fbx Using C — python |
+| 1 | **3D Graphics / File Format Conversion** | convert dae to obj | java, net, python | convert dae to obj — java; convert dae to obj — net; convert dae to obj — python |
+| 2 | **3D Graphics / File Format Conversion** | convert files to glb | java, net, python | convert files to glb — java; convert files to glb — net; convert files to glb — python |
+| 3 | **3D Modeling / File Format Conversion** | convert fbx to obj | java, net, python | convert fbx to obj — java; convert fbx to obj — net; convert fbx to obj — python |
+| 4 | **3D Modeling / File Format Conversion** | convert fbx to stl | general, net, python | convert fbx to stl — general; convert fbx to stl — net; convert fbx to stl — python |
+| 5 | **Development / 3D Graphics** | 3d model import export api | general, net, python | 3d model import export api — general; 3d model import export api — net; 3d model import export api — python |
+| 6 | **Development / 3D Graphics** | 3d modeling and animation | general, net, python | 3d modeling and animation — general; 3d modeling and animation — net; 3d modeling and animation — python |
+| 7 | **File Conversion / 3D Model Formats** | convert fbx and rvm files api | general, net, python | convert fbx and rvm files api — general; convert fbx and rvm files api — net; convert fbx and rvm files api — python |
+| 8 | **File Conversion / 3D Model Formats** | convert usdz to fbx | general, net, python | convert usdz to fbx — general; convert usdz to fbx — net; convert usdz to fbx — python |
+| 9 | **Graphics / 3D Modeling** | creating 3d cylinders with aspose 3d | general, net, python | creating 3d cylinders with aspose 3d — general; creating 3d cylinders with aspose 3d — net; creating 3d cylinders with aspose 3d — python |
+| 10 | **Graphics / 3D Modeling** | creating and saving 3d scenes with c and aspose 3d | general, java, python | creating and saving 3d scenes with c and aspose 3d — general; creating and saving 3d scenes with c and aspose 3d — java; creating and saving 3d scenes with c and aspose 3d — python |
+| 11 | **File Conversion / 3D Model Conversion** | convert ply to usdz | java, net, python | convert ply to usdz — java; convert ply to usdz — net; convert ply to usdz — python |
+| 12 | **File Conversion / 3D Model Conversion** | convert files to pdf | net, python | convert files to pdf — net; convert files to pdf — python |
+| 13 | **Programming / 3D Graphics** | 3d modeling and scene manipulation | general, java, net | 3d modeling and scene manipulation — general; 3d modeling and scene manipulation — java; 3d modeling and scene manipulation — net |
+| 14 | **Programming / 3D Graphics** | convert obj to stl | net | convert obj to stl — net |
+| 15 | **Software Development / 3D Graphics** | 3d file format api | java, net, python | 3d file format api — java; 3d file format api — net; 3d file format api — python |
 
 *These recommendations are derived from topics missing across the largest number of platforms and clustered by category/subcategory.*
 
@@ -74,10 +74,10 @@
 
 | Platform | # topics covered | % of baseline rows | # topics missing |
 | --- | --- | --- | --- |
-| **general** | 44 | 42.3% | 60 |
-| **java** | 38 | 36.5% | 66 |
-| **net** | 20 | 19.2% | 84 |
-| **python** | 12 | 11.5% | 92 |
+| **general** | 36 | 56.2% | 28 |
+| **java** | 30 | 46.9% | 34 |
+| **net** | 13 | 20.3% | 51 |
+| **python** | 9 | 14.1% | 55 |
 
 **Takeaway:** Focus first on platforms with the highest missing counts and lowest coverage percentage; port high-impact topics from the best-covered platform first.
 
@@ -87,18 +87,18 @@
 
 | Cluster | # gap topics | Missing signals | Most-missed platforms |
 | --- | --- | --- | --- |
-| **3D Graphics / File Format Conversion** | 21 | 61 | python, net, general, java |
-| **3D Modeling / File Format Conversion** | 12 | 36 | python, java, net, general |
-| **File Conversion / 3D Model Formats** | 11 | 29 | net, python, general, java |
-| **3D Modeling / File Conversion** | 5 | 14 | java, general, net, python |
-| **Graphics / File Format Conversion** | 4 | 12 | general, java, python, net |
-| **Development / 3D Graphics** | 4 | 11 | python, general, net, java |
-| **3D Modeling / Format Conversion** | 2 | 6 | net, python, general, java |
-| **File Conversion / 3D Model Conversion** | 2 | 6 | java, net, python |
-| **Graphics / 3D Modeling** | 2 | 5 | general, python, net |
-| **Programming / 3D Graphics** | 2 | 5 | general, net, java |
-| **3D Conversion / USDZ to HTML** | 1 | 3 | java, net, python |
-| **3D Graphics / Export to HTML** | 1 | 3 | general, net, python |
+| **3D Graphics / File Format Conversion** | 10 | 25 | python, net, java, general |
+| **3D Modeling / File Format Conversion** | 7 | 17 | net, python, java, general |
+| **Development / 3D Graphics** | 4 | 12 | net, python, general, java |
+| **File Conversion / 3D Model Formats** | 5 | 11 | net, python, general |
+| **Graphics / 3D Modeling** | 2 | 6 | general, python, net, java |
+| **File Conversion / 3D Model Conversion** | 2 | 5 | net, python, java |
+| **Programming / 3D Graphics** | 2 | 4 | net, general, java |
+| **Software Development / 3D Graphics** | 1 | 3 | java, net, python |
+| **Graphics / Mesh Manipulation** | 1 | 3 | java, net, python |
+| **Development / 3D Model Conversion** | 1 | 3 | java, net, python |
+| **3D Graphics / Model Conversion** | 1 | 3 | general, java, python |
+| **3D Modeling / Lithophane Generation** | 1 | 3 | java, net, python |
 
 ---
 
