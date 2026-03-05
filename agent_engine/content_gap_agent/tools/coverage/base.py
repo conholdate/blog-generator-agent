@@ -9,7 +9,7 @@ class CoverageRow:
     category: str
     sub_category: str
     topic: str
-    topic_key: str
+    key: str
     baseline_record_id: str
 
     # Per-platform details: {"net": {"matched": True, "score": 1.0, ...}, ...}
@@ -37,7 +37,7 @@ class CoverageResult:
                     "category": r.category,
                     "sub_category": r.sub_category,
                     "topic": r.topic,
-                    "topic_key": r.topic_key,
+                    "key": r.key,
                     "baseline_record_id": r.baseline_record_id,
                     "coverage": r.coverage,
                 }

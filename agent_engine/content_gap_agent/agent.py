@@ -100,6 +100,20 @@ def _compute_gap_stats(result: Any) -> Dict[str, int]:
         "topics_with_any_gap": topics_with_any_gap,
     }
 
+# Somewhere central (e.g., agent.py near request parsing, or a constants module)
+CASE_DISPLAY_NAME: dict[str, str] = {
+    "docs_to_blogs": "Articles",
+    "docs_to_tutorials": "Articles",
+    "blogs_to_blogs": "Articles",
+}
+
+def case_display_name(case: str) -> str:
+    # 1) explicit mapping (preferred)
+    if case in CASE_DISPLAY_NAME:
+        return CASE_DISPLAY_NAME[case]
+    # 2) safe fallback
+    return case.replace("_", " ").title()
+
 
 def run_coverage(settings: CoverageSettings, req: CoverageRunRequest) -> Dict[str, Any]:
     """
@@ -151,7 +165,9 @@ def run_coverage(settings: CoverageSettings, req: CoverageRunRequest) -> Dict[st
 
     website = req.brand_site
     website_section = nor_website_section_from_case(req.case)
-    item_name = f"{req.case}"
+    # item_name = f"{req.case}"
+    item_name = case_display_name(req.case)
+    print(item_name)
 
     # Resolve output directory early (deterministic)
     out_dir = _coverage_out_dir(settings, req.brand_key, req.product_key, req.case, req.baseline_platform)

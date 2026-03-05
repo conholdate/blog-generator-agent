@@ -37,7 +37,6 @@ _TRAILING_LANG_TOKEN_RE = re.compile(
     re.IGNORECASE | re.VERBOSE,
 )
 
-
 def normalize_text(text: str) -> str:
     """
     Canonical topic normalization:
@@ -53,26 +52,46 @@ def normalize_text(text: str) -> str:
     t = _WS_RE.sub(" ", t).strip()
     return t
 
+# "OBJ to STL", "OBJ into STL", "OBJ -> STL", "OBJ2STL" (optional), etc.
+_CONVERSION_PAIR_RE = re.compile(
+    r"\b([a-z0-9]{2,8})\s*(?:to|into|in2|->|→)\s*([a-z0-9]{2,8})\b",
+    re.IGNORECASE,
+)
+
+# Optional: catch "Convert OBJ to STL" where "convert" might be earlier in the string anyway.
+# The pair regex above already matches the "OBJ to STL" part, so this is often enough.
 
 def canonical_topic_key(text: str) -> str:
     """
-    Create a stable topic key for cross-platform matching.
+    Stable topic key for cross-platform matching.
 
-    This removes language/platform qualifiers (e.g., "using C#", "in Java", "for .NET")
-    before applying normalize_text(). This makes lexical matching robust when titles/topics
-    differ only by language markers or slightly different phrasing.
+    Primary rule (critical):
+      If the title contains a conversion pair like "OBJ to STL",
+      collapse everything to: "convert <src> to <dst>"
+
+    This forces:
+      - "Convert OBJ to STL in Python - 3D Modeling Software"
+      - "OBJ to STL conversion"
+      - "OBJ to STL file conversion guide"
+    to map to the SAME key.
     """
     if not text:
         return ""
 
     t = unicodedata.normalize("NFKC", text).strip()
-    # Remove common "using/in/with/for <lang>" phrases
-    t = _LANG_QUALIFIER_RE.sub(" ", t)
-    # Remove trailing language token
-    t = _TRAILING_LANG_TOKEN_RE.sub(" ", t)
-    # Final canonical normalization
-    return normalize_text(t)
 
+    # 1) Try to extract conversion pair and canonicalize to a single key.
+    m = _CONVERSION_PAIR_RE.search(t)
+    if m:
+        src = m.group(1).lower()
+        dst = m.group(2).lower()
+        # Build canonical conversion key
+        return normalize_text(f"convert {src} to {dst}")
+
+    # 2) Fallback to your old logic (language qualifier stripping + normalize)
+    t = _LANG_QUALIFIER_RE.sub(" ", t)
+    t = _TRAILING_LANG_TOKEN_RE.sub(" ", t)
+    return normalize_text(t)
 
 def nor_platform_key(platform_key: Optional[str]) -> str:
     """

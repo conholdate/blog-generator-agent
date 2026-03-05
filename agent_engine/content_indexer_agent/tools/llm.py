@@ -50,6 +50,8 @@ def classify_blog_with_llm(
     model: str,
     title: str,
     excerpt: str,
+    url: str | None,
+    seo_title: str | None,
     allowed_platforms: List[str],
     inferred_platforms: List[str],
 ) -> Tuple[str, str, str, List[str]]:
@@ -64,12 +66,22 @@ def classify_blog_with_llm(
     sys = (
         "You are a taxonomy normalizer for product blog posts.\n"
         "Return a concise platform-agnostic topic (<= 12 words), category, sub_category, and platform list.\n"
+        "The topic must be a short plain-language summary of what the blog is about.\n"
+        "Use simple sentence case with spaces, not kebab-case or underscores.\n"
+        "Do not include platform qualifier sections like 'using C#', 'in Java', 'with Python', or 'for .NET'.\n"
+        "Ignore platform/runtime names such as C#, Java, Python, .NET, Node.js, Android, PHP, Ruby, Go, Swift, Kotlin, and Online.\n"
+        "Keep file formats uppercase when they are central to the topic, for example 'XLSX to PDF'.\n"
         f"Allowed platforms: {allowed_platforms}\n"
         f"Inferred platforms (soft hint): {inferred_platforms}\n"
         "If no platform applies, return platforms=['general'].\n"
         "Use title case for category and sub_category."
     )
-    user = f"TITLE:\n{title}\n\nEXCERPT:\n{excerpt}"
+    user = (
+        f"TITLE:\n{title}\n\n"
+        f"SEO TITLE:\n{seo_title or ''}\n\n"
+        f"URL:\n{url or ''}\n\n"
+        f"EXCERPT:\n{excerpt}"
+    )
 
     input_msgs = [
         {"role": "system", "content": sys},

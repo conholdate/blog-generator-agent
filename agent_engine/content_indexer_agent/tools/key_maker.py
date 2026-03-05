@@ -1,318 +1,260 @@
 from __future__ import annotations
 
-import json
 import re
-from dataclasses import dataclass
-from typing import Any, Dict, List, Optional, Tuple
+import unicodedata
+from typing import Any, Dict, Optional
+from urllib.parse import urlparse
 
-from openai import OpenAI
+_NON_ALNUM_RE = re.compile(r"[^a-z0-9]+")
+_MULTI_DASH_RE = re.compile(r"-+")
 
-# ----------------------------
-# Result model
-# ----------------------------
+_SEO_TITLE_KEYS = (
+    "seo_title",
+    "seo-title",
+    "seoTitle",
+    "seotitle",
+    "meta_title",
+    "meta-title",
+    "title_seo",
+)
 
-@dataclass(frozen=True)
-class KeyDecision:
-    key: Optional[str]
-    confidence: float
-    method: str          # "heuristic" | "llm" | "none"
-    rationale: str
+_PLATFORM_VALUE_RE = r"(c\#|csharp|vb\.net|vbnet|vb|\.net|dotnet|java|python|node\.js|nodejs|javascript|js|c\+\+|cpp|cplusplus|android|php|ruby|go|golang|swift|kotlin|online)"
+_PLATFORM_PHRASE_RE = re.compile(
+    rf"(?:^|[\s\-_]+)(?:using|in|with|for|via|on)[\s\-_]+{_PLATFORM_VALUE_RE}(?:$|[\s\-_]+)",
+    re.IGNORECASE,
+)
+_TRAILING_PLATFORM_RE = re.compile(rf"(?:[\s\-_]+|^){_PLATFORM_VALUE_RE}$", re.IGNORECASE)
+_CONVERSION_PREFIX_RE = re.compile(r"^(?:convert|export|save|transform|change)-(.+?-to-.+)$")
+_LEADING_NOISE_RE = re.compile(r"^(how-to|how-do-i|tutorial|guide)-")
+_LEADING_PHRASE_RE = re.compile(r"^(let-s|lets|let-us)-")
+_FORMAT_FILLER_RE = re.compile(r"\b(file|files|format|formats)\b", re.IGNORECASE)
+_TRAILING_NOISE_RE = re.compile(r"-(programmatically|converter|converters)$")
+_CONVERSION_CORE_RE = re.compile(r"([a-z0-9]+)-to-([a-z0-9]+)")
+_GENERIC_TRAILING_RE = re.compile(r"-(online|free|software|application|app|tool|tools)$")
+_ACTION_ARTICLE_RE = re.compile(r"^(create|read|build|repair|merge|split|convert|export|import)-(?:a|an|the)-")
+_ACTION_START_RE = re.compile(r"(create|read|build|repair|merge|split|convert|export|import)-")
+_MODEL_SCENE_RE = re.compile(r"-model-scenes?$")
 
-
-# ----------------------------
-# Heuristic (fast) key maker
-# ----------------------------
-
-_FORMAT_SYNONYMS: Dict[str, str] = {
-    "DAE": "COLLADA",
-    "COLLADA": "COLLADA",
-    "OBJ": "OBJ",
-    "STL": "STL",
-    "FBX": "FBX",
-    "GLTF": "GLTF",
-    "GLB": "GLB",
-    "3DS": "3DS",
-    "PLY": "PLY",
-    "USD": "USD",
-    "USDA": "USD",
-    "USDC": "USD",
-    "STEP": "STEP",
-    "STP": "STEP",
-    "IGES": "IGES",
-    "IGS": "IGES",
-    "AMF": "AMF",
-    "U3D": "U3D",
-    "DXF": "DXF",
-    "DWG": "DWG",
-    "VRML": "VRML",
-    "WRL": "VRML",
-    "JT": "JT",
-    "IFC": "IFC",
+_UPPERCASE_FORMATS = {
+    "pdf",
+    "xlsx",
+    "xls",
+    "xlsm",
+    "xltx",
+    "xltm",
+    "csv",
+    "tsv",
+    "ods",
+    "doc",
+    "docx",
+    "dotx",
+    "rtf",
+    "txt",
+    "html",
+    "htm",
+    "xml",
+    "json",
+    "yaml",
+    "yml",
+    "ppt",
+    "pptx",
+    "ppsx",
+    "odp",
+    "png",
+    "jpg",
+    "jpeg",
+    "gif",
+    "bmp",
+    "tiff",
+    "svg",
+    "emf",
+    "wmf",
+    "epub",
+    "md",
+    "mhtml",
+    "xps",
+    "ps",
+    "slsx",
+    "obj",
+    "stl",
+    "fbx",
+    "glb",
+    "gltf",
+    "3ds",
+    "dae",
+    "ply",
+    "usd",
+    "usdz",
 }
 
-_NOT_FORMAT_TOKENS = {
-    "A", "AN", "AND", "OR", "THE",
-    "API", "SDK",
-    "CREATE", "READ", "SAVE", "GET", "TRY", "FREE",
-    "GUIDE", "TUTORIAL", "ONLINE",
-    "JAVA", "PYTHON", "C", "CPP", "CXX", "CSHARP", "DOTNET", "NET",
-    "SCENE", "MODEL", "MESH", "VIEWPORT", "EFFECTS",
-    "IMPORT", "EXPORT", "CONVERT", "RENDER", "SPLIT", "MERGE",
-    "WITH", "USING", "FROM", "TO", "IN", "ON", "BY", "OF", "AS", "AT",
-}
 
-_INTENT_MAP: List[Tuple[str, str]] = [
-    (r"\bconvert\b|\bconversion\b|\btransform\b", "CONVERT"),
-    (r"\bimport\b|\bload\b|\bopen\b|\bread\b", "IMPORT"),
-    (r"\bexport\b|\bsave\b|\bwrite\b|\bgenerate\b", "EXPORT"),
-    (r"\brender\b|\bdraw\b", "RENDER"),
-    (r"\bcreate\b|\bbuild\b|\bconstruct\b", "CREATE"),
-    (r"\bsplit\b|\bseparate\b", "SPLIT"),
-    (r"\bmerge\b|\bcombine\b|\bjoin\b", "MERGE"),
-]
-
-_PAIR_PATTERNS = [
-    # whitespace-delimited only (prevents AND-to-RUS from "and Torus")
-    re.compile(r"\b(?P<src>[A-Za-z0-9]{1,12})\b\s+(?:to|2)\s+\b(?P<dst>[A-Za-z0-9]{1,12})\b", re.I),
-    re.compile(r"\b(?P<src>[A-Za-z0-9]{1,12})\b\s*(?:→|->|➜|⇒|⟶)\s*\b(?P<dst>[A-Za-z0-9]{1,12})\b", re.I),
-    re.compile(r"\bfrom\s+(?P<src>[A-Za-z0-9]{1,12})\b\s+to\s+\b(?P<dst>[A-Za-z0-9]{1,12})\b", re.I),
-    re.compile(r"\bconvert\s+(?P<src>[A-Za-z0-9]{1,12})\b\s+(?:file\s+)?to\s+\b(?P<dst>[A-Za-z0-9]{1,12})\b", re.I),
-]
-
-_IMPORT_FROM = re.compile(r"\bimport\b.*\bfrom\s+(?P<src>[A-Za-z0-9]{1,12})\b", re.I)
-_SAVE_TO = re.compile(r"\b(?:save|export|write)\b.*\bto\s+(?P<dst>[A-Za-z0-9]{1,12})\b", re.I)
-_EXT = re.compile(r"\.([A-Za-z0-9]{1,6})\b")
-
-
-def _canon_format(raw: str) -> Optional[str]:
-    tok = (raw or "").strip().strip(".").upper()
-    tok = re.sub(r"[^A-Z0-9]+", "", tok)
-    if not tok:
-        return None
-    if tok in _NOT_FORMAT_TOKENS:
-        return None
-    if not (2 <= len(tok) <= 6):
-        return None
-    if not re.search(r"[A-Z]", tok):
-        return None
-    return _FORMAT_SYNONYMS.get(tok, tok)
-
-
-def _detect_intent(text: str) -> str:
-    lt = (text or "").lower()
-    for pat, norm in _INTENT_MAP:
-        if re.search(pat, lt, flags=re.I):
-            return norm
-    return "GENERAL"
-
-
-def _extract_formats(text: str) -> List[str]:
-    found: List[str] = []
-
-    for m in _EXT.finditer(text):
-        fmt = _canon_format(m.group(1))
-        if fmt:
-            found.append(fmt)
-
-    tokens = re.findall(r"\b[A-Za-z0-9]{2,6}\b", text)
-    for tok in tokens:
-        fmt = _canon_format(tok)
-        if fmt and fmt in set(_FORMAT_SYNONYMS.values()):
-            found.append(fmt)
-
-    freq: Dict[str, int] = {}
-    for f in found:
-        freq[f] = freq.get(f, 0) + 1
-    return sorted(freq.keys(), key=lambda x: (-freq[x], x))
-
-
-def _extract_pair(text: str) -> Optional[Tuple[str, str]]:
-    canon_vals = set(_FORMAT_SYNONYMS.values())
-    for pat in _PAIR_PATTERNS:
-        m = pat.search(text)
-        if not m:
+def extract_seo_title(frontmatter: Dict[str, Any]) -> Optional[str]:
+    for key in _SEO_TITLE_KEYS:
+        value = frontmatter.get(key)
+        if value is None:
             continue
-        src = _canon_format(m.group("src"))
-        dst = _canon_format(m.group("dst"))
-        if not src or not dst or src == dst:
-            continue
-        # Require at least one side be a known format (reduces API-to-CREATE)
-        if (src not in canon_vals) and (dst not in canon_vals):
-            continue
-        return src, dst
+        text = str(value).strip()
+        if text:
+            return text
     return None
 
 
-def heuristic_key(record: Dict[str, Any]) -> KeyDecision:
-    parts: List[str] = []
-    for k in ("title", "topic", "excerpt"):
-        v = record.get(k)
-        if isinstance(v, str) and v.strip():
-            parts.append(v.strip())
-    kws = record.get("keywords") or []
-    if isinstance(kws, list):
-        parts.extend([str(x) for x in kws if str(x).strip()])
-    text = "\n".join(parts)
-
-    intent = _detect_intent(text)
-    fmts = _extract_formats(text)
-    pair = _extract_pair(text)
-
-    if pair:
-        src, dst = pair
-        return KeyDecision(
-            key=f"{src}-to-{dst}",
-            confidence=0.95,
-            method="heuristic",
-            rationale=f"Detected explicit conversion pair {src} to {dst}.",
-        )
-
-    if intent == "IMPORT":
-        m = _IMPORT_FROM.search(text)
-        if m:
-            src = _canon_format(m.group("src"))
-            if src:
-                return KeyDecision(
-                    key=f"IMPORT-SCENE-FROM-{src}",
-                    confidence=0.85,
-                    method="heuristic",
-                    rationale=f"Detected import intent with source format {src}.",
-                )
-        if fmts:
-            return KeyDecision(
-                key=f"IMPORT-SCENE-FROM-{fmts[0]}",
-                confidence=0.70,
-                method="heuristic",
-                rationale=f"Detected import intent with dominant format {fmts[0]}.",
-            )
-
-    if intent in {"EXPORT", "RENDER"}:
-        m = _SAVE_TO.search(text)
-        if m:
-            dst = _canon_format(m.group("dst"))
-            if dst:
-                return KeyDecision(
-                    key=f"{intent}-SCENE-TO-{dst}",
-                    confidence=0.80,
-                    method="heuristic",
-                    rationale=f"Detected {intent.lower()} intent with target format {dst}.",
-                )
-        if fmts:
-            return KeyDecision(
-                key=f"{intent}-SCENE-TO-{fmts[0]}",
-                confidence=0.60,
-                method="heuristic",
-                rationale=f"Detected {intent.lower()} intent with dominant format {fmts[0]}.",
-            )
-
-    return KeyDecision(key=None, confidence=0.0, method="none", rationale="No reliable heuristic key.")
+def _slugify(text: str) -> str:
+    if not text:
+        return ""
+    normalized = unicodedata.normalize("NFKC", text).lower()
+    normalized = normalized.replace("&", " and ")
+    normalized = normalized.replace("/", " ")
+    normalized = _NON_ALNUM_RE.sub("-", normalized)
+    normalized = _MULTI_DASH_RE.sub("-", normalized).strip("-")
+    return normalized
 
 
-# ----------------------------
-# LLM fallback (validated)
-# ----------------------------
+def _strip_platform_qualifiers(text: str) -> str:
+    if not text:
+        return ""
 
-_KEY_ALLOWED = re.compile(r"^[A-Z0-9]+(?:-[A-Z0-9]+){1,8}$")  # 2..9 segments
-
-
-def _validate_key(key: Optional[str]) -> Optional[str]:
-    if not key:
-        return None
-    k = key.strip().upper()
-    if not _KEY_ALLOWED.fullmatch(k):
-        return None
-    # avoid junk keys like API-to-CREATE patterns (common failure)
-    bad = {"API", "SDK", "CREATE", "READ", "SAVE", "GET", "TRY", "FREE", "GUIDE", "TUTORIAL"}
-    segs = k.split("-")
-    if any(s in bad for s in segs):
-        return None
-    return k
+    out = text
+    while True:
+        next_out = _PLATFORM_PHRASE_RE.sub(" ", out)
+        next_out = _TRAILING_PLATFORM_RE.sub("", next_out)
+        next_out = re.sub(r"\s+", " ", next_out).strip(" -_")
+        if next_out == out:
+            break
+        out = next_out
+    return out
 
 
-def llm_key(client: OpenAI, record: Dict[str, Any], *, model: str) -> KeyDecision:
+def _normalize_candidate(text: str) -> str:
+    if not text:
+        return ""
+    text = unicodedata.normalize("NFKC", text).strip()
+    text = _strip_platform_qualifiers(text)
+    text = _FORMAT_FILLER_RE.sub(" ", text)
+    text = re.sub(r"\s+", " ", text).strip()
+    slug = _slugify(text)
+    slug = _LEADING_NOISE_RE.sub("", slug)
+    slug = _LEADING_PHRASE_RE.sub("", slug)
+    slug = _ACTION_ARTICLE_RE.sub(r"\1-", slug)
+
+    action_match = _ACTION_START_RE.search(slug)
+    if action_match and action_match.start() > 0:
+        prefix = slug[:action_match.start()].strip("-")
+        if prefix in {"3d", "model", "models", "3d-model", "3d-models"}:
+            slug = slug[action_match.start():]
+
+    match = _CONVERSION_PREFIX_RE.match(slug)
+    if match:
+        slug = match.group(1)
+
+    core_match = _CONVERSION_CORE_RE.search(slug)
+    if core_match:
+        slug = f"{core_match.group(1)}-to-{core_match.group(2)}"
+
+    slug = _TRAILING_NOISE_RE.sub("", slug)
+    while True:
+        next_slug = _GENERIC_TRAILING_RE.sub("", slug)
+        if next_slug == slug:
+            break
+        slug = next_slug
+    slug = _MODEL_SCENE_RE.sub("-model", slug)
+    slug = _MULTI_DASH_RE.sub("-", slug).strip("-")
+    return slug
+
+
+def _extract_preserved_uppercase_terms(*values: Optional[str]) -> set[str]:
     """
-    LLM generates a key when heuristics cannot.
-    Output MUST be a JSON object: {"key": "...", "confidence": 0..1, "rationale": "..."}.
-    We validate the key and drop it if it doesn't conform.
+    Capture likely file-format tokens already written in uppercase in the source text.
+    This lets titles like "Convert OBJ to STL in Java" render as "OBJ to STL".
     """
-    payload = {
-        "id": record.get("id"),
-        "product": record.get("product"),
-        "platform": record.get("platform"),
-        "title": record.get("title"),
-        "topic": record.get("topic"),
-        "category": record.get("category"),
-        "sub_category": record.get("sub_category"),
-        "keywords": record.get("keywords", [])[:30],
-        "excerpt": (record.get("excerpt") or "")[:2000],
-        "url": record.get("url"),
-    }
-
-    system = (
-        "You are an indexing key generator.\n"
-        "Create a SHORT, STABLE, CLUSTERING key.\n"
-        "Rules:\n"
-        "- Output JSON only.\n"
-        "- key must be uppercase with '-' separators.\n"
-        "- Prefer conversion: OBJ-to-STL.\n"
-        "- Prefer intent keys: IMPORT-SCENE-FROM-COLLADA, EXPORT-SCENE-TO-FBX.\n"
-        "- Do NOT use generic words like API, SDK, GUIDE, TUTORIAL, FREE.\n"
-        "- Keep 2 to 6 segments.\n"
-    )
-
-    user = f"Record:\n{json.dumps(payload, ensure_ascii=False)}\nReturn JSON: {{\"key\":\"...\",\"confidence\":0.0,\"rationale\":\"...\"}}"
-
-    # Using Responses API style (works with modern OpenAI python). If your client uses chat.completions,
-    # swap accordingly.
-    resp = client.responses.create(
-        model=model,
-        input=[
-            {"role": "system", "content": system},
-            {"role": "user", "content": user},
-        ],
-        temperature=0.2,
-        max_output_tokens=200,
-    )
-
-    text = (resp.output_text or "").strip()
-    try:
-        data = json.loads(text)
-    except Exception:
-        return KeyDecision(key=None, confidence=0.0, method="llm", rationale="LLM returned non-JSON.")
-
-    key = _validate_key(str(data.get("key") or ""))
-    if not key:
-        return KeyDecision(key=None, confidence=0.0, method="llm", rationale="LLM key failed validation.")
-
-    conf = float(data.get("confidence") or 0.55)
-    conf = max(0.0, min(1.0, conf))
-    rationale = str(data.get("rationale") or "LLM-generated key.")
-    return KeyDecision(key=key, confidence=conf, method="llm", rationale=rationale)
+    out: set[str] = set()
+    for value in values:
+        if not value:
+            continue
+        for token in re.findall(r"\b[A-Z0-9]{2,8}\b", value):
+            lowered = token.lower()
+            if lowered in {"in", "on", "to", "for", "with", "and", "or"}:
+                continue
+            out.add(lowered)
+    return out
 
 
-def make_key(
-    client: OpenAI,
-    record: Dict[str, Any],
+def _to_sentence_case(slug: str, preserve_upper: set[str]) -> str:
+    words = [w for w in (slug or "").split("-") if w]
+    if not words:
+        return ""
+
+    rendered = []
+    for i, word in enumerate(words):
+        if word in _UPPERCASE_FORMATS or word in preserve_upper:
+            rendered.append(word.upper())
+            continue
+        if i == 0:
+            rendered.append(word.capitalize())
+        else:
+            rendered.append(word.lower())
+
+    return " ".join(rendered)
+
+
+def _looks_too_generic(slug: str) -> bool:
+    words = [w for w in (slug or "").split("-") if w]
+    if not words:
+        return True
+    if len(words) == 1 and words[0] in {"3d", "model", "models", "scene", "file", "files"}:
+        return True
+    return False
+
+
+def _key_from_url(url: Optional[str]) -> str:
+    if not url:
+        return ""
+    parsed = urlparse(url)
+    parts = [p for p in (parsed.path or "").split("/") if p]
+    if not parts:
+        return ""
+
+    # Prefer the last slug-like path segment, but skip common archive buckets.
+    for part in reversed(parts):
+        token = _normalize_candidate(part)
+        if token and token not in {"blog", "blogs", "article", "articles"}:
+            return token
+    return ""
+
+
+def build_content_topic(
     *,
-    llm_model: str,
-    enable_llm: bool = True,
-    llm_min_confidence: float = 0.55,
-) -> KeyDecision:
+    title: str,
+    url: Optional[str] = None,
+    seo_title: Optional[str] = None,
+    llm_topic: Optional[str] = None,
+) -> str:
     """
-    Main entrypoint:
-    - heuristic first
-    - LLM fallback if enabled and heuristic failed
-    - always validated
+    Build a short, stable topic summary for indexed content.
+
+    Rules:
+      1) Prefer deterministic sources (URL, SEO title, title) before LLM wording.
+      2) Strip platform qualifiers like "in Java", "using C#", "for .NET".
+      3) For conversions, drop leading verbs like "Convert" and keep only "X to Y".
+      4) Render in simple sentence case with spaces.
+      5) Keep detected file formats uppercase (for example "OBJ to STL", "XLSX to PDF").
+
+    Priority:
+      1) URL slug
+      2) SEO title
+      3) Page title
+      4) LLM-proposed topic
     """
-    h = heuristic_key(record)
-    if h.key:
-        return h
+    preserve_upper = _extract_preserved_uppercase_terms(title, seo_title, url, llm_topic)
 
-    if not enable_llm:
-        return h
+    candidates = [_key_from_url(url), seo_title, title, llm_topic]
+    normalized_candidates = [_normalize_candidate(candidate or "") for candidate in candidates]
 
-    l = llm_key(client, record, model=llm_model)
-    if l.key and l.confidence >= llm_min_confidence:
-        return l
+    # If the URL slug collapses to something too generic, prefer richer title-derived text.
+    if normalized_candidates and _looks_too_generic(normalized_candidates[0]):
+        normalized_candidates = normalized_candidates[1:] + normalized_candidates[:1]
 
-    return KeyDecision(key=None, confidence=0.0, method="none", rationale="No valid key.")
+    for normalized in normalized_candidates:
+        if normalized:
+            return _to_sentence_case(normalized, preserve_upper)
+    return ""

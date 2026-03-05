@@ -14,25 +14,19 @@ log = logging.getLogger(__name__)
 # -----------------------------
 # Exceptions
 # -----------------------------
-@dataclass
+@dataclass(frozen=True)
 class CommandError(RuntimeError):
     cmd: Sequence[str]
     returncode: int
     stdout: str
     stderr: str
 
-    def __post_init__(self) -> None:
-        # Initialize base exception message
-        super().__init__(self.__str__())
-
     def __str__(self) -> str:
-        cmd_str = " ".join(self.cmd)
         return (
-            f"Command failed (rc={self.returncode}): {cmd_str}\n"
-            f"--- stdout ---\n{self.stdout}\n"
-            f"--- stderr ---\n{self.stderr}\n"
+            f"Command failed ({self.returncode}): {' '.join(self.cmd)}\n"
+            f"STDOUT:\n{self.stdout}\n"
+            f"STDERR:\n{self.stderr}"
         )
-
 
 
 class GitNetworkError(RuntimeError):

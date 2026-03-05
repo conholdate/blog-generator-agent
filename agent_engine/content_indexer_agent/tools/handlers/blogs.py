@@ -5,6 +5,7 @@ from pathlib import Path
 from typing import Any, Dict, List, Sequence, Tuple, Optional, Set
 
 from ...types import IndexRecord, RepoTarget
+from ..key_maker import build_content_topic, extract_seo_title
 from ..llm import classify_blog_with_llm
 from ..record_id import RecordId
 from ..text_utils import ParsedMarkdown, normalize_ws, extract_subheadings
@@ -461,6 +462,7 @@ class BlogsHandler(MarkdownRepoHandler):
         keywords = _clean_keywords(tag_list + headings)
 
         url = _build_url(fm, getattr(brand, "website", None))
+        seo_title = extract_seo_title(fm)
 
         excerpt = parsed.body[:2500]
 
@@ -470,6 +472,8 @@ class BlogsHandler(MarkdownRepoHandler):
                 model=ctx.settings.PROFESSIONALIZE_LLM_MODEL,
                 title=parsed.title,
                 excerpt=excerpt,
+                url=url,
+                seo_title=seo_title,
                 allowed_platforms=allowed_platforms,
                 inferred_platforms=inferred_plats,
             )
@@ -491,7 +495,7 @@ class BlogsHandler(MarkdownRepoHandler):
                 repo_type=repo_target.repo_type,
                 platform=primary_platform,
                 title=parsed.title[:300],
-                topic=str(topic)[:200],
+                topic=build_content_topic(title=parsed.title, url=url, seo_title=seo_title, llm_topic=str(topic))[:200],
                 category=str(cat)[:100],
                 sub_category=str(subcat)[:100],
                 url=url,
@@ -527,7 +531,7 @@ class BlogsHandler(MarkdownRepoHandler):
             repo_type=repo_target.repo_type,
             platform=primary_platform,
             title=parsed.title[:300],
-            topic=str(topic)[:200],
+            topic=build_content_topic(title=parsed.title, url=url, seo_title=seo_title, llm_topic=str(topic))[:200],
             category=str(category)[:100],
             sub_category=str(sub_category)[:100],
             url=url,

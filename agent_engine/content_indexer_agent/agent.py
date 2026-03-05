@@ -5,10 +5,10 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Sequence, Tuple
 from urllib.parse import urlparse
-import re
+
 from agents import Agent, Runner, function_tool, handoff
 from openai import OpenAI
-from .tools.key_maker import make_key
+
 from .settings import Settings
 from .tools.normalize import nor_website_domain, nor_platform_display_name, nor_section_label
 from .types import IndexRecord, RepoTarget
@@ -65,74 +65,6 @@ def _repos_root(s: Settings) -> Path:
 def _topic_embed_text(rec: IndexRecord) -> str:
     return f"{rec.topic}. {rec.title}. {rec.category}/{rec.sub_category}. {rec.excerpt or ''}".strip()
 
-# --- Conversion key inference (e.g., "OBJ-to-STL") ----------------------------
-
-_CONV_PATTERNS = [
-    # "OBJ to STL", "obj 2 stl", "OBJ→STL", "OBJ->STL"
-    re.compile(
-        r"\b(?P<src>[A-Za-z0-9]{1,12}(?:/[A-Za-z0-9]{1,12})?)\s*(?:to|2|→|->|➜|⇒|⟶)\s*(?P<dst>[A-Za-z0-9]{1,12}(?:/[A-Za-z0-9]{1,12})?)\b",
-        re.IGNORECASE,
-    ),
-    # "convert OBJ file to STL"
-    re.compile(
-        r"\bconvert\s+(?P<src>[A-Za-z0-9]{1,12}(?:/[A-Za-z0-9]{1,12})?)\s+(?:file\s+)?to\s+(?P<dst>[A-Za-z0-9]{1,12}(?:/[A-Za-z0-9]{1,12})?)\b",
-        re.IGNORECASE,
-    ),
-    # "from OBJ to STL"
-    re.compile(
-        r"\bfrom\s+(?P<src>[A-Za-z0-9]{1,12}(?:/[A-Za-z0-9]{1,12})?)\s+to\s+(?P<dst>[A-Za-z0-9]{1,12}(?:/[A-Za-z0-9]{1,12})?)\b",
-        re.IGNORECASE,
-    ),
-]
-
-def _canon_format_token(s: str) -> str:
-    """
-    Canonicalize a format token:
-    - Trim punctuation and dots
-    - Uppercase
-    - Normalize separators (e.g., 'pdf/a' -> 'PDF-A')
-    """
-    t = (s or "").strip()
-    if not t:
-        return ""
-    t = t.strip().strip(".")
-    t = re.sub(r"[^A-Za-z0-9/]+", "", t)  # keep alnum + '/'
-    t = t.upper().replace("/", "-")       # PDF/A -> PDF-A
-    return t
-
-def _extract_conversion_key_from_text(text: str) -> Optional[str]:
-    if not text:
-        return None
-    for pat in _CONV_PATTERNS:
-        m = pat.search(text)
-        if not m:
-            continue
-        src = _canon_format_token(m.group("src"))
-        dst = _canon_format_token(m.group("dst"))
-        if not src or not dst or src == dst:
-            continue
-        return f"{src}-to-{dst}"
-    return None
-
-def _infer_record_key(rec: IndexRecord) -> Optional[str]:
-    """
-    Infer a stable key for clustering.
-    Primary target: conversion pair keys like 'OBJ-to-STL'.
-    Uses title/topic first, then keywords.
-    """
-    title = (rec.title or "").strip()
-    topic = (rec.topic or "").strip()
-
-    k = _extract_conversion_key_from_text(title) or _extract_conversion_key_from_text(topic)
-    if k:
-        return k
-
-    for kw in (rec.keywords or []):
-        k = _extract_conversion_key_from_text(str(kw))
-        if k:
-            return k
-
-    return None
 
 def _platforms_from_text(text: str, platform_defs: Dict[str, Any]) -> List[str]:
     lt = text.lower()
@@ -145,89 +77,6 @@ def _platforms_from_text(text: str, platform_defs: Dict[str, Any]) -> List[str]:
                 break
     return sorted(set(found)) if found else ["general"]
 
-def _platform_defs_for_product(product: ProductSpec) -> Dict[str, Dict[str, Any]]:
-    """
-    Build {platform_key: {"keywords":[...]}} from product YAML platforms.
-    Safe if YAML/platform metadata is incomplete.
-    """
-    out: Dict[str, Dict[str, Any]] = {}
-    try:
-        for p in product.iter_platforms():
-            key = (getattr(p, "key", "") or "").strip()
-            if not key:
-                continue
-            # Respect enabled flag if present (default True)
-            if getattr(p, "enabled", True) is False:
-                continue
-            kws = getattr(p, "keywords", None) or []
-            out[key] = {"keywords": list(kws)}
-    except Exception:
-        pass
-    return out
-
-
-def _normalize_platform_key_one(platform_key: str) -> str:
-    """
-    Normalize to your desired canonical keys.
-    - Any python* (python, python_net, python-java, ...) => python
-    - csharp => net (optional backstop)
-    """
-    k = (platform_key or "").strip().lower()
-    if not k:
-        return "general"
-    if k.startswith("python"):
-        return "python"
-    if k in {"csharp", "c#", "dotnet", ".net"}:
-        return "net"
-    return k
-
-
-def _infer_platform_from_record(rec: IndexRecord, product: ProductSpec) -> str:
-    """
-    Infer ONE platform from content:
-    - Use YAML platform keywords first
-    - Add strong title heuristics as backstop
-    - If multiple platforms found => general
-    - If none => general
-    """
-    # Keep text bounded and high-signal
-    parts = [
-        rec.title or "",
-        rec.topic or "",
-        f"{rec.category}/{rec.sub_category}",
-        (rec.excerpt or "")[:4000],
-    ]
-    text = "\n".join([p for p in parts if p]).strip()
-    lt = text.lower()
-
-    platform_defs = _platform_defs_for_product(product)
-    found = _platforms_from_text(text, platform_defs)  # returns ["general"] if none
-
-    # Strong backstop heuristics (helps when YAML keywords are missing/weak)
-    # Keep these conservative to avoid false positives.
-    heuristic_hits: List[str] = []
-    if re.search(r"\bpython\b", lt):
-        heuristic_hits.append("python")
-    if re.search(r"\bjava\b", lt):
-        heuristic_hits.append("java")
-    if re.search(r"\b(c\+\+|cpp)\b", lt):
-        heuristic_hits.append("cpp")
-    if re.search(r"\b(c#|csharp|\.net|dotnet)\b", lt):
-        heuristic_hits.append("net")
-
-    # Merge + normalize
-    merged = found + heuristic_hits
-    merged_norm = sorted(set(_normalize_platform_key_one(x) for x in merged if x))
-
-    # Remove 'general' when we have real platform candidates
-    non_general = [x for x in merged_norm if x != "general"]
-
-    # Enforce "1 platform per article" rule
-    if len(non_general) == 1:
-        return non_general[0]
-    if len(non_general) >= 2:
-        return "general"
-    return "general"
 
 def _platform_display_name(product: ProductSpec, platform_key: str) -> str:
     """
@@ -477,22 +326,6 @@ def incremental_index_repo(
             product=product,
             ctx=ctx,
         )
-
-        # Intelligent key (heuristic first, LLM fallback when needed)
-        kd = make_key(
-            client,
-            rec.model_dump(),
-            llm_model=getattr(s, "PROFESSIONALIZE_KEY_MODEL", "") or getattr(s, "PROFESSIONALIZE_MODEL",
-                                                                             "") or "gpt-4.1-mini",
-            enable_llm=bool(getattr(s, "ENABLE_LLM_KEYS", True)),
-            llm_min_confidence=float(getattr(s, "LLM_KEY_MIN_CONFIDENCE", 0.55)),
-        )
-        rec.key = kd.key
-
-        # For all-scoped repos (blogs), infer platform from content.
-        # Platform-scoped repos already encode platform in path/target and should not be overridden.
-        if repo_target.scope != "platform":
-            rec.platform = _infer_platform_from_record(rec, product)
 
         # Embed only new/changed records (cached)
         key, _ = embedding_store.embed(_topic_embed_text(rec))

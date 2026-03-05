@@ -113,6 +113,11 @@ class MetricsSender:
             print("[metrics] response status =", resp1.status_code)
             print("[metrics] response text =", resp1.text[:500])
 
+            # Ensure run_env is present (default to PROD if missing/None)
+            data.setdefault("run_env", "PROD")
+            if data.get("run_env") is None:
+                data["run_env"] = "PROD"
+
             # Blog metrics
             resp2 = requests.post(
                 self.int_webhook_url,

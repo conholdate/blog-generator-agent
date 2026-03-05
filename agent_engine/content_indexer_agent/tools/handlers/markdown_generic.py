@@ -4,6 +4,7 @@ from pathlib import Path
 from typing import Any, Tuple
 
 from ...types import IndexRecord, RepoTarget
+from ..key_maker import build_content_topic
 from ..text_utils import ParsedMarkdown, normalize_ws, extract_subheadings
 from .base import HandlerContext, MarkdownRepoHandler
 from ..record_id import RecordId
@@ -70,7 +71,7 @@ class GenericMarkdownHandler(MarkdownRepoHandler):
                 repo_type=repo_target.repo_type,
                 platform=ctx.platform_for_record,
                 title=parsed.title[:300],
-                topic=str(topic)[:200],
+                topic=build_content_topic(title=str(topic))[:200],
                 category=str(category)[:100],
                 sub_category=str(subcat)[:100],
                 url=None,
@@ -93,7 +94,7 @@ class GenericMarkdownHandler(MarkdownRepoHandler):
             repo_type=repo_target.repo_type,
             platform=ctx.platform_for_record,
             title=parsed.title[:300],
-            topic=parsed.title[:200],
+            topic=build_content_topic(title=parsed.title)[:200],
             category=category[:100],
             sub_category=subcat[:100],
             url=None,

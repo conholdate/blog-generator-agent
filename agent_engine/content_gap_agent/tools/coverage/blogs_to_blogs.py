@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import re
 from collections import defaultdict
 from pathlib import Path
 from time import perf_counter
@@ -7,17 +8,44 @@ from typing import Dict, List, Optional, Tuple, Set
 
 from ..io import IndexRecord, read_jsonl
 from ..logging_utils import get_logger
-from ..normalize import canonical_topic_key, nor_platform_key
-from ..similarity import lexical_fast_match
+from ..normalize import canonical_topic_key, nor_platform_key, normalize_text
 from .base import CoverageResult, CoverageRow
 
 logger = get_logger("cg-cover.agent")
 
 GENERAL_PLATFORM_KEY = "general"
 
+# -----------------------------
+# KEY-BASED GROUPING + MATCHING
+# -----------------------------
+
+_KEY_SPLIT_RE = re.compile(r"[^a-z0-9]+", re.I)
+
+
+def normalize_gap_key(k: str) -> str:
+    """
+    Normalize indexer key for stable grouping/matching.
+    Example: "OBJ-to-STL" -> "obj-to-stl"
+    """
+    k = (k or "").strip()
+    if not k:
+        return ""
+    parts = [p.lower() for p in _KEY_SPLIT_RE.split(k) if p]
+    return "-".join(parts)
+
+
+def record_gap_key(r: IndexRecord) -> str:
+    """
+    Prefer indexer-provided key; fallback to canonical topic key if missing.
+    NOTE: if your pipeline guarantees key is present, you can remove the fallback.
+    """
+    if getattr(r, "key", None):
+        return normalize_gap_key(str(r.key))
+    # Fallback for older indexes (should become unnecessary)
+    return canonical_topic_key(r.topic or r.title)
+
 
 def _normalize_platform_key(s: Optional[str]) -> str:
-    """Normalize a platform key consistently; empty -> ''."""
     return nor_platform_key(s) if s else ""
 
 
@@ -27,22 +55,14 @@ def infer_platforms(
     allowed_platform_keys: Optional[Set[str]] = None,
 ) -> List[str]:
     """
-    Determine platform keys for a blog record.
-
-    POLICY:
-    - Exactly one platform per article in indexing.
-    - Coverage must treat record.platform as the ONLY source of truth.
-    - Keywords must never be treated as platform keys.
-
-    If allowed_platform_keys is provided, output is validated against it.
+    Determine platform keys for a record.
+    Policy: platform comes ONLY from record.platform.
     """
     p0 = _normalize_platform_key(record.platform)
     if not p0:
         return []
-
     if allowed_platform_keys is not None and p0 not in allowed_platform_keys:
         return []
-
     return [p0]
 
 
@@ -53,18 +73,15 @@ def compute_blogs_to_blogs(
     outputs_product_root: Path,
     baseline_platform: Optional[str] = None,
     platforms_limit: Optional[List[str]] = None,
-    # preferred source-of-truth platform universe (from product YAML)
     allowed_platforms: Optional[List[str]] = None,
     include_general: bool = True,
 ) -> CoverageResult:
     """
-    blogs_to_blogs:
+    blogs_to_blogs (KEY-based):
       - Load blogs/all.jsonl
-      - Map records to platforms (record.platform only)
-      - Choose baseline topics:
-          * if baseline_platform provided: baseline topics from that platform
-          * else: baseline topics from all blogs (canonical topic universe)
-      - For each baseline topic, check matches in each platform subset (lexical match on canonical topic keys)
+      - Group baseline topics by IndexRecord.key (normalized)
+      - Match presence across platforms by KEY equality
+      - Output CoverageRow.key and CoverageRow.topic = key
     """
     t0 = perf_counter()
     logger.info(
@@ -84,7 +101,7 @@ def compute_blogs_to_blogs(
     records = list(read_jsonl(blogs_path))
     logger.info("Loaded blog index records: %d (%.2f ms)", len(records), (perf_counter() - t_load) * 1000.0)
 
-    # Allowed platform set (normalized + python collapsing)
+    # Allowed platform set (normalized)
     allowed_set: Optional[Set[str]] = None
     if allowed_platforms:
         allowed_set = {p for p in (_normalize_platform_key(x) for x in allowed_platforms) if p}
@@ -121,19 +138,11 @@ def compute_blogs_to_blogs(
         general_fallback_assignments,
     )
 
-    # Normalize baseline
+    # Normalize baseline platform
     baseline_platform_n = _normalize_platform_key(baseline_platform) if baseline_platform else ""
     baseline_label = baseline_platform_n or "all"
-    logger.info(
-        "Baseline resolved: input=%s normalized=%s label=%s",
-        baseline_platform or "None",
-        baseline_platform_n or "None",
-        baseline_label,
-    )
 
-    # Determine platform universe:
-    # - If allowed_platforms provided => use it as the source of truth (even if some have 0 records)
-    # - Else fall back to inferred platforms (legacy behavior)
+    # Determine platform universe
     if allowed_set is not None:
         ordered_allowed = [_normalize_platform_key(p) for p in (allowed_platforms or [])]
         ordered_allowed = [p for p in ordered_allowed if p]
@@ -145,100 +154,52 @@ def compute_blogs_to_blogs(
         if include_general and GENERAL_PLATFORM_KEY not in all_platforms:
             all_platforms.append(GENERAL_PLATFORM_KEY)
 
-    logger.info("Initial platform universe size: %d", len(all_platforms))
-
-    # Apply platforms_limit (validated against universe)
+    # Apply platforms_limit
     if platforms_limit:
-        t_limit = perf_counter()
         limit_norm = [_normalize_platform_key(p) for p in platforms_limit if p and _normalize_platform_key(p)]
         limit_set = set(limit_norm)
-        before = len(all_platforms)
         all_platforms = [p for p in all_platforms if p in limit_set]
-        after = len(all_platforms)
-
-        # If baseline is explicit and was not included in limit, keep it for matrix integrity.
-        baseline_added = False
         if baseline_platform_n and baseline_platform_n not in all_platforms:
             all_platforms = [baseline_platform_n] + all_platforms
-            baseline_added = True
-
-        logger.info(
-            "Applied platforms_limit (%.2f ms): before=%d after=%d baseline_added=%s limit_norm=%s",
-            (perf_counter() - t_limit) * 1000.0,
-            before,
-            after,
-            str(baseline_added),
-            ",".join(limit_norm) if limit_norm else "None",
-        )
 
     # Choose baseline records
-    if baseline_platform_n:
-        baseline_records = platform_to_records.get(baseline_platform_n, [])
-        logger.info("Baseline records selected from platform=%s: %d records", baseline_platform_n, len(baseline_records))
-        if not baseline_records:
-            logger.info(
-                "Baseline platform has zero records: platform=%s. Coverage will still run but matrix will be sparse.",
-                baseline_platform_n,
-            )
-    else:
-        baseline_records = records
-        logger.info("Baseline records selected from full corpus: %d records", len(baseline_records))
+    baseline_records = platform_to_records.get(baseline_platform_n, []) if baseline_platform_n else records
 
-    # Group baseline by (category, sub_category, canonical_topic_key) to reduce duplicates
+    # Group baseline by KEY only (one row per key)
     t_group = perf_counter()
-    grouped: Dict[Tuple[str, str, str], IndexRecord] = {}
-    skipped_empty_topics = 0
+    grouped: Dict[str, IndexRecord] = {}
+    skipped_empty_keys = 0
 
     for r in baseline_records:
-        # Canonical key: removes "using C# / in Java / for .NET" etc.
-        topic_key = canonical_topic_key(r.topic or r.title)
-        if not topic_key:
-            skipped_empty_topics += 1
+        k = record_gap_key(r)
+        if not k:
+            skipped_empty_keys += 1
             continue
-        key = (r.category or "", r.sub_category or "", topic_key)
-        if key not in grouped:
-            grouped[key] = r
+        if k not in grouped:
+            grouped[k] = r  # representative record for this key
 
     logger.info(
-        "Baseline grouping complete (%.2f ms): baseline_records=%d grouped_topics=%d skipped_empty_topics=%d",
+        "Baseline grouping complete (%.2f ms): baseline_records=%d grouped_keys=%d skipped_empty_keys=%d",
         (perf_counter() - t_group) * 1000.0,
         len(baseline_records),
         len(grouped),
-        skipped_empty_topics,
+        skipped_empty_keys,
     )
 
-    # High-level platform candidate stats (useful for debugging skew)
-    logger.info("Candidate pool sizes per platform (top 10 by size):")
-    plat_sizes = sorted(((p, len(rs)) for p, rs in platform_to_records.items()), key=lambda x: x[1], reverse=True)
-    for p, n in plat_sizes[:10]:
-        logger.info("  platform=%s candidates=%d", p, n)
-
+    # Build rows
     rows: List[CoverageRow] = []
-
-    # Progress + matching stats
     t_match = perf_counter()
     total_topics = len(grouped)
-    progress_every = 20
+
     matched_cells = 0
     total_cells = 0
 
-    logger.info(
-        "Starting lexical matching: topics=%d platforms_to_evaluate=%d baseline_platform_explicit=%s",
-        total_topics,
-        len(all_platforms),
-        str(bool(baseline_platform_n)),
-    )
-
-    for i, ((cat, sub, topic_key), b) in enumerate(
-        sorted(grouped.items(), key=lambda x: (x[0][0], x[0][1], x[0][2])),
-        start=1,
-    ):
+    for key_norm, b in sorted(grouped.items(), key=lambda x: x[0]):
+        cat = b.category or ""
+        sub = b.sub_category or ""
         row_cov: Dict[str, Dict[str, object]] = {}
 
-        # Canonical baseline text for comparisons
-        base_text = canonical_topic_key(b.topic or b.title)
-
-        # If baseline platform was explicitly provided, mark that platform as covered by definition.
+        # If baseline platform explicitly provided, mark it as covered by definition.
         if baseline_platform_n:
             row_cov[baseline_platform_n] = {
                 "matched": True,
@@ -251,7 +212,6 @@ def compute_blogs_to_blogs(
             matched_cells += 1
             total_cells += 1
 
-        # For each platform, find best match
         for p in all_platforms:
             if baseline_platform_n and p == baseline_platform_n:
                 continue
@@ -265,63 +225,54 @@ def compute_blogs_to_blogs(
                 continue
 
             for c in candidates:
-                cand_text = canonical_topic_key(c.topic or c.title)
-
-                # Lexical match is now applied to canonicalized text
-                m = lexical_fast_match(base_text, cand_text)
-                if m.matched and m.score >= float(best["score"]):
+                cand_key = record_gap_key(c)
+                if cand_key and cand_key == key_norm:
                     best = {
                         "matched": True,
-                        "score": float(m.score),
+                        "score": 1.0,
                         "record_id": c.id,
                         "title": c.title,
                         "topic": c.topic,
                         "url": c.url,
                     }
-
-            if bool(best["matched"]):
-                matched_cells += 1
+                    break
 
             row_cov[p] = best
+            if best["matched"]:
+                matched_cells += 1
 
+        # Topic column = key
         rows.append(
             CoverageRow(
                 category=cat,
                 sub_category=sub,
-                # Display the original title (less confusing than LLM topic alone)
-                topic=b.title or b.topic,
-                topic_key=topic_key,
+                topic=key_norm,
+                key=key_norm,
                 baseline_record_id=b.id,
                 coverage=row_cov,
             )
         )
 
-        if i == 1 or i % progress_every == 0 or i == total_topics:
-            elapsed_ms = (perf_counter() - t_match) * 1000.0
-            logger.info("Matching progress: %d/%d topics processed (%.2f ms elapsed)", i, total_topics, elapsed_ms)
-
-    match_ms = (perf_counter() - t_match) * 1000.0
     logger.info(
-        "Lexical matching complete: topics=%d total_cells=%d matched_cells=%d match_rate=%.2f%% (%.2f ms)",
+        "KEY matching complete: topics=%d total_cells=%d matched_cells=%d match_rate=%.2f%% (%.2f ms)",
         total_topics,
         total_cells,
         matched_cells,
         (matched_cells / total_cells * 100.0) if total_cells else 0.0,
-        match_ms,
+        (perf_counter() - t_match) * 1000.0,
     )
 
-    # Output platforms ordering:
+    # Output platform order
     if baseline_platform_n:
         platforms_out = [baseline_platform_n] + [p for p in all_platforms if p != baseline_platform_n]
     else:
         platforms_out = list(all_platforms)
 
     logger.info(
-        "Platforms output ordering: %d platforms (baseline_first=%s)",
-        len(platforms_out),
-        str(bool(baseline_platform_n)),
+        "compute_blogs_to_blogs finished: rows=%d total_time=%.2f ms",
+        len(rows),
+        (perf_counter() - t0) * 1000.0,
     )
-    logger.info("compute_blogs_to_blogs finished: rows=%d total_time=%.2f ms", len(rows), (perf_counter() - t0) * 1000.0)
 
     return CoverageResult(
         case="blogs_to_blogs",

@@ -29,6 +29,7 @@ class IndexRecord:
 
     url: Optional[str] = None
     source_path: Optional[str] = None
+    key: Optional[str] = None
 
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> "IndexRecord":
@@ -49,6 +50,7 @@ class IndexRecord:
 
             url=d.get("url"),
             source_path=d.get("source_path"),
+            key=d.get("key"),
         )
 
 
