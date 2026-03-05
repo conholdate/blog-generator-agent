@@ -4,7 +4,7 @@ NOW USING CENTRALIZED LLM SERVICE
 """
 from agents import set_tracing_disabled
 from config import settings
-from tools.mcp_tools import generate_markdown_file, fetch_category_related_articles, gist_injector, generate_blog_image
+from tools.mcp_tools import generate_markdown_file, fetch_category_related_articles, gist_injector, generate_blog_image, fetch_keywords_auto
 from utils import prompts
 from utils.seo_validator import validate_seo_content, validate_and_fix_meta_description, validate_and_fix_seo_title
 from utils.file_format_mappings import FILE_FORMAT_MAPPINGS, BASE_URL
@@ -76,6 +76,13 @@ class BlogOrchestrator:
         product_name = topics_raw_data.pop("product")
         platform = topics_raw_data.pop("platform")
 
+        f_keywords = await fetch_keywords_auto(
+                            topic=post_topic, 
+                            product_name=product_name, 
+                            platform=platform
+                        )
+        print(f"bingaaaaa ----- {f_keywords}", flush=True)
+
         # Get product info
         product_info = get_productInfo(product_name, platform, self.products, self.brand)
         print(f"product info -- {product_info}")
@@ -112,8 +119,10 @@ class BlogOrchestrator:
             print(f"secondary -- {secondary}", flush=True)
             print(f"target persona -- {target_persona}", flush=True)
             print(f"angle -- {angle}", flush=True)
+            
+            # f_keywords = normalize_case_preserve_formats_in_keywords(primary + secondary, FILE_FORMAT_MAPPINGS)
 
-            f_keywords = normalize_case_preserve_formats_in_keywords(primary + secondary, FILE_FORMAT_MAPPINGS)
+            f_keywords = normalize_case_preserve_formats_in_keywords(primary + f_keywords, FILE_FORMAT_MAPPINGS)
             print(f"f_keywords -- {f_keywords}")
 
             blog_outline = topics_raw_data.get("outline")

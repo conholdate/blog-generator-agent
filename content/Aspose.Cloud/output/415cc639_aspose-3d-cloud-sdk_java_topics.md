@@ -1,18 +1,18 @@
 # Blog Topics for Aspose.3D Cloud SDK
 
-- **Brand:** Aspose.Cloud
-- **Product:** Aspose.3D Cloud SDK
-- **Platform:** Java
+- **Brand:** Aspose.com
+- **Product:** Aspose.Email
+- **Platform:** .NET
 - **Run ID:** 415cc639
 - **Topics:** 9
 
 ---
 
-## 1. How to Convert 3MF to STL in Java
+## 1. Edit MSG Files using C# 
 - **Cluster ID:** `c5`
-- **Target persona:** Java developer working with 3D models
-- **Angle:** Step‑by‑step tutorial for Java developers to convert 3MF files to STL using Aspose.3D Cloud SDK.
-- **Primary keyword:** `Convert 3MF to STL in Java`
+- **Target persona:** .NET developer looking to Edit MSG Files using C#
+- **Angle:** Step‑by‑step tutorial for .NET developers to Edit MSG Files using C#
+- **Primary keyword:** `Edit MSG Files using C#`
 - **Supporting keywords:** ` Code Snippet Convert 3MF to STL`, `3MF to STL conversion using REST API`, `3MF to STL converter`
 
 **Suggested outline:**

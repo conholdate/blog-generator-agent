@@ -2,7 +2,7 @@ from mcp import ClientSession, StdioServerParameters
 from mcp.client.stdio import stdio_client
 from typing import Dict, Optional
 import json
-
+from utils.helpers import sanitize_keywords, parse_keywords_response
 
 async def fetch_category_related_articles(
     topic: str,
@@ -208,3 +208,56 @@ async def generate_blog_image(product_family: str, main_Heading: str, product_la
         
             })
             return result
+        
+
+async def fetch_keywords_auto(topic: str, product_name: str = "", platform:str="") -> str:
+    """Fetch high-ranking SEO keywords for a topic"""
+
+    print(f" fetch_keywords TOOL CALLED! upper")
+
+    try:
+        params = StdioServerParameters(
+            command="python",
+            args=["../../mcp-servers/keywords_auto/server.py"]
+        )
+        
+        print(f" Connecting to MCP server fetch_keywords...")
+        
+        async with stdio_client(params) as (read, write):
+            async with ClientSession(read, write) as session:
+                await session.initialize()
+                result = await session.call_tool("fetch_keywords", {
+                    "topic": topic,
+                    "product_name": product_name,
+                    "platform": platform
+                })
+                print(f" serp keywords - {result.content[0]}", flush=True)
+                keywords_data = parse_keywords_response(result.content[0])
+
+                keywords_block = keywords_data.get('keywords', {})
+                primary   = keywords_block.get('primary', [])
+                secondary = keywords_block.get('secondary', [])
+                long_tail = keywords_block.get('long_tail', [])
+
+                f_keywords = primary + secondary + long_tail
+                if not f_keywords:
+                    f_keywords = [topic]
+
+                print(f" raw keywords - {f_keywords}", flush=True)
+                f_keywords = sanitize_keywords(f_keywords)
+
+                if not f_keywords:
+                    f_keywords = [topic]
+
+                print(f" sanitized keywords - {f_keywords}")
+                return f_keywords
+                
+    except Exception as e:
+        print(f" ERROR in fetch_keywords: {e}")
+        import traceback
+        traceback.print_exc()
+        return '{"error": "failed"}'
+    
+
+
+    

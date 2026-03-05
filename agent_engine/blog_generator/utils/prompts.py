@@ -1086,69 +1086,207 @@ def build_outline_prompt(title: str, keywords: list[str]) -> str:
         Now create the outline for: **{title}**
         """
 
-def keyword_filter_prompt(PRODUCT_NAME, KEYWORDS, platform) -> str:
+def keyword_filter_prompt(TOPIC, PRODUCT_NAME, KEYWORDS, platform) -> str:
   
     return f"""
     You are an expert in keyword filtering and refinement.
-    I have a product called {PRODUCT_NAME} and a list of candidate keywords: {KEYWORDS} and platform: {platform}.
     
-    1. Only return keywords that are relevant to the exact product.
-    2. Exclude any keyword that refers to other products or cloud offerings if the product is on-premises.
-    3. **PLATFORM-SPECIFIC FILTERING:**
-       - If platform is NOT 'cloud' (i.e., on-premises/desktop):
-         * EXCLUDE all keywords mentioning: REST API, REST APIs, Web API, Cloud API, cURL, HTTP requests, API endpoints, web services, cloud storage, cloud conversion
-         * EXCLUDE keywords with terms: "online", "web-based", "cloud", "SaaS", "API call", "REST", "endpoint"
-         * KEEP only keywords related to: desktop applications, local libraries, SDK, on-premise tools, offline conversion
-       - If platform IS 'cloud':
-         * INCLUDE keywords related to REST APIs, cloud services, web APIs, online tools
-    4. If any keyword is incomplete, truncated, or has trailing ellipses (e.g., "..."), complete it sensibly while keeping it relevant.
-    5. Remove or replace any characters that break Hugo/Markdown rendering:
-       - Replace Unicode dashes (\\u2013, \\u2014, em dash, en dash) with standard hyphens (-)
-       - Replace smart quotes (\\u201c, \\u201d, \\u2018, \\u2019) with straight quotes (' or ")
-       - Replace ellipsis character (\\u2026) with three periods (...)
-       - Remove any other Unicode characters that could break YAML frontmatter
-       - Ensure all characters are safe for Hugo YAML frontmatter rendering
-    6. **MINIMUM KEYWORD REQUIREMENT:**
-       - If after filtering, the total number of keywords (primary + secondary + long_tail) is less than 2:
-         * Generate 2-5 additional relevant keywords based on the product name and topic
-         * Add them to the appropriate category (primary for broad terms, long_tail for specific queries)
-         * Ensure generated keywords match the platform type (cloud vs on-premises)
-         * Generated keywords must be realistic search queries users would actually type
-    7. Return the filtered and refined keywords in the **exact structure as you received** (e.g., primary, secondary, long_tail).
-    
-    **Character Replacement Rules:**
-    - \\u2013 (en dash) → - (hyphen)
-    - \\u2014 (em dash) → - (hyphen)
-    - \\u201c, \\u201d (curly double quotes) → " (straight double quote)
-    - \\u2018, \\u2019 (curly single quotes) → ' (straight single quote)
-    - \\u2026 (ellipsis) → ... (three periods)
-    - Any other problematic Unicode → Remove or replace with ASCII equivalent
-    
-    **CRITICAL OUTPUT FORMAT REQUIREMENT:**
-    - You MUST return ONLY valid JSON format
-    - Use DOUBLE QUOTES for all strings (not single quotes)
-    - Do NOT return Python dict format with single quotes
-    - Your response must be parseable by json.loads() without any modifications
-    - Example of CORRECT format: {{"primary": ["keyword1", "keyword2"], "secondary": [], "long_tail": ["how to keyword3"]}}
-    - Example of INCORRECT format: {{'primary': ['keyword1', 'keyword2']}}
-    
-    **EXAMPLES OF PLATFORM-SPECIFIC FILTERING:**
-    
-    Example 1 - On-premises platform:
-    Input: platform="java", keywords=["Convert PDF using REST API", "PDF to Word Java", "Cloud PDF conversion"]
-    Output: {{"primary": ["PDF to Word Java"], "secondary": [], "long_tail": []}}
-    (Excluded: REST API and Cloud keywords)
-    
-    Example 2 - Cloud platform:
-    Input: platform="cloud", keywords=["Convert PDF REST API", "PDF to Word online", "Java PDF library"]
-    Output: {{"primary": ["Convert PDF REST API", "PDF to Word online"], "secondary": [], "long_tail": []}}
-    (Kept: REST API and online keywords, excluded Java library as it's not cloud-related)
-    
-    Example 3 - Minimum keywords requirement:
-    Input: After filtering, only 1 keyword remains
-    Output: {{"primary": ["original keyword", "generated relevant keyword 1"], "secondary": [], "long_tail": ["generated long-tail keyword"]}}
-    (Added keywords to meet minimum of 2)
-    
-    Return ONLY the JSON object with no additional text, explanation, or markdown formatting.
-    Ensure all output keywords are Hugo/YAML-safe and will render correctly in frontmatter.
+    **HARD RULE — READ THIS FIRST:**
+    Your final output MUST contain EXACTLY 3 or 4 keywords total (primary + secondary + long_tail combined).
+    Before returning, count your keywords. If the count is less than 3, generate more. If more than 4, trim.
+    This rule overrides everything else. There are NO exceptions.
+
+    I have a product called {PRODUCT_NAME}, topic: {TOPIC}, platform: {platform}
+    and a list of candidate keywords: {KEYWORDS}
+
+    **STEP-BY-STEP INSTRUCTIONS — FOLLOW IN ORDER:**
+
+    STEP 1 — FILTER:
+       - A keyword is relevant ONLY if it relates to both the TOPIC "{TOPIC}" and the product "{PRODUCT_NAME}"
+       - If a keyword mentions a completely different product, file format, or technology
+         that has nothing to do with "{TOPIC}", DISCARD it entirely
+       - A keyword is relevant if it relates to the TOPIC or FILE FORMAT the product handles,
+         even if it does not explicitly mention the product name or platform
+       - GOOD: relates to "{TOPIC}" even without mentioning product name or platform
+       - BAD: mentions unrelated formats, products, or technologies not related to "{TOPIC}"
+       - If platform is NOT 'cloud': EXCLUDE any keyword containing "REST API", "Web API", "Cloud API",
+         "cURL", "online", "web-based", "cloud", "SaaS", "API call", "REST", "endpoint"
+       - If platform IS 'cloud': INCLUDE keywords related to REST APIs, cloud services, online tools
+
+    STEP 2 — CLEAN:
+       - Strip trailing suffixes like "- Blog", "- Tutorial", "- Easy Guide", "- Step by Step", "- Free"
+       - Max ~60 characters per keyword; trim to core intent if longer
+       - Remove duplicate or near-duplicate keywords
+       - **REMOVE PRODUCT NAME: Do NOT include "{PRODUCT_NAME}" or any part of it in any keyword**
+         * Strip product name if it appears anywhere in the keyword
+         * BAD:  "Convert AI to PDF using Aspose.PDF in Python"
+         * GOOD: "Convert AI to PDF in Python"
+         * BAD:  "Aspose.3D Java 3MF to STL conversion"
+         * GOOD: "3MF to STL conversion in Java"
+       - **REMOVE VERSION NUMBERS:**
+         * Strip any version numbers, release numbers, or version strings from keywords
+         * Patterns to remove: "25.2", "v1.0", "2024.1", "23.11", or any "digits.digits" pattern
+         * BAD: "Email .NET 25.2: Filter & Paginate MBOX Messages"
+         * GOOD: "Filter and Paginate MBOX Messages in .NET"
+         * After stripping version, also clean up any leftover colons, dashes, or double spaces
+       - **PLATFORM TERM ENFORCEMENT:**
+         * Only the platform term "{platform}" is allowed in keywords
+         * REMOVE or DISCARD any keyword containing other platform/language terms
+         * Forbidden terms (when not the current platform): Java, .NET, C#, Node.js, Ruby, PHP, Go, Swift, Kotlin, VB.NET
+         * BAD (platform=python): "LaTeX to JPEG conversion .NET"
+         * BAD (platform=python): "LaTeX to JPEG Java library"
+         * GOOD (platform=python): "LaTeX to JPEG conversion in Python"
+         * GOOD (platform=python): "LaTeX to JPEG Python library"
+       - **TOPIC STRICT ENFORCEMENT:**
+         * Every keyword must strictly reflect the exact file formats and intent mentioned in TOPIC="{TOPIC}"
+         * Extract the exact format names from "{TOPIC}" — only those formats are allowed in keywords
+         * If a keyword introduces file formats, extensions, or terms NOT present in "{TOPIC}", remove them
+         * BAD (topic="Export LaTeX to JPG"): "Convert LaTeX to PNG JPG image" — PNG is not in topic, strip it
+         * GOOD (topic="Export LaTeX to JPG"): "Convert LaTeX to JPG in Python"
+         * BAD (topic="PDF to Word Conversion"): "PDF to Word or DOCX conversion" — DOCX not in topic, strip it
+         * GOOD (topic="PDF to Word Conversion"): "PDF to Word conversion in Python"
+         * Strip any extra format names, synonyms, or alternatives not explicitly in "{TOPIC}"
+
+    STEP 3 — COUNT AND TOP UP:
+       - Count how many keywords you have after STEP 1 and STEP 2
+       - If count is 0, 1, or 2: generate additional keywords until you have exactly 3 or 4
+       - If count is 0 (all keywords were irrelevant or list was empty):
+         * Ignore candidate list entirely
+         * Generate 3-4 fresh keywords using TOPIC="{TOPIC}", PLATFORM="{platform}"
+         * Use the topic as the primary source of intent
+         * DO NOT include "{PRODUCT_NAME}" in any generated keyword
+       - Generated keywords must be realistic search queries a developer would type
+       - No cloud/API terms for on-premises platforms; include them for cloud
+       - Place generated keywords in secondary or long_tail categories
+       - If count exceeds 4: keep only the 4 most relevant, discard the rest
+       - **GENERATION PLATFORM RULES:**
+         * ONLY use "{platform}" as the technology term in generated keywords
+         * NEVER generate keywords containing: Java, .NET, C#, Node.js, Ruby, PHP, Go, Swift, Kotlin
+         * BAD (platform=python): "convert LaTeX to JPEG in .NET"
+         * GOOD (platform=python): "convert LaTeX to JPEG in Python"
+       - **GENERATION TOPIC RULES:**
+         * ONLY use file formats and terms present in "{TOPIC}" in generated keywords
+         * NEVER introduce new formats, synonyms, or alternatives not in "{TOPIC}"
+         * BAD (topic="Export LaTeX to JPG"): generate "convert LaTeX to PNG in Python"
+         * GOOD (topic="Export LaTeX to JPG"): generate "export LaTeX to JPG in Python"
+
+    STEP 4 — FIX CHARACTERS:
+       - \\u2013, \\u2014 (en/em dash) → - (hyphen)
+       - \\u201c, \\u201d, \\u2018, \\u2019 (curly quotes) → straight quotes
+       - \\u2026 (ellipsis) → ...
+       - Replace & with "and"
+       - Remove any other Unicode that could break Hugo YAML frontmatter
+
+    STEP 5 — VERIFY AND RETURN:
+       - Count total keywords one final time — must be between 3 and 4, fix if not
+       - Confirm no keyword contains "{PRODUCT_NAME}" — if any does, strip it out
+       - Confirm no keyword contains any platform term other than "{platform}"
+         * Scan every keyword for: Java, .NET, C#, Node.js, Ruby, PHP, Go, Swift, Kotlin
+         * If found, remove the term or discard and replace the keyword
+       - Confirm no keyword contains file formats or terms not present in "{TOPIC}"
+         * Re-read "{TOPIC}" and extract the exact format names
+         * Scan every keyword — if it contains a format outside of "{TOPIC}", strip it or fix the keyword
+       - Confirm no keyword contains version numbers
+         * Scan every keyword for patterns like "25.2", "v1.0", "2024.1", any "digits.digits" pattern
+         * If found, strip the version number and clean up leftover punctuation
+       - Return ONLY valid JSON with double quotes, no extra text
+
+    **CRITICAL OUTPUT FORMAT:**
+    - Return ONLY a JSON object — no markdown, no explanation, no preamble
+    - Use DOUBLE QUOTES for all strings
+    - Must be parseable by json.loads()
+    - CORRECT:   {{"primary": ["keyword1", "keyword2"], "secondary": ["keyword3"], "long_tail": ["keyword4"]}}
+    - INCORRECT: {{'primary': ['keyword1']}}
+
+    **EXAMPLES:**
+
+    Example 1 — Strip version number from keyword:
+    Input: topic="Filter and Paginate MBOX Emails", platform=".NET",
+           keywords={{"primary": ["Filter and Paginate MBOX Emails", "Email .NET 25.2: Filter & Paginate MBOX Messages"],
+                      "secondary": ["Filter MBOX messages with .NET library"],
+                      "long_tail": ["MBOX email pagination in .NET"]}}
+    Step 2: strip version "25.2" and clean up → "Filter and Paginate MBOX Messages in .NET"
+    Step 2: replace "&" with "and" → "Filter and Paginate MBOX Messages in .NET"
+    Step 3: count is 4 — no top up needed
+    Output: {{"primary": ["Filter and Paginate MBOX Emails", "Filter and Paginate MBOX Messages in .NET"],
+              "secondary": ["Filter MBOX messages with .NET library"],
+              "long_tail": ["MBOX email pagination in .NET"]}}
+
+    Example 2 — Keyword introduces format not in topic, strip it:
+    Input: topic="Export LaTeX to JPG", platform="python",
+           keywords={{"primary": ["Convert LaTeX to PNG JPG image"], "secondary": [], "long_tail": []}}
+    Step 2: "PNG" is not in topic "Export LaTeX to JPG" — strip PNG, keep JPG only
+    Step 3: only 1 keyword remains — generate 2-3 more using topic and platform
+    Output: {{"primary": ["Export LaTeX to JPG in Python", "convert LaTeX to JPG in Python"],
+              "secondary": ["LaTeX to JPG conversion Python"],
+              "long_tail": ["how to export LaTeX to JPG programmatically in Python"]}}
+
+    Example 3 — All keywords irrelevant to topic, generate from scratch:
+    Input: topic="AI to PDF Conversion", product="Aspose.PDF", platform="python",
+           keywords={{"primary": [], "secondary": ["Convert PSD to PNG with Aspose.PSD in Python",
+                      "Load and edit PSD file using Aspose.PSD Python"],
+                      "long_tail": ["Extract PSD layers using Aspose.PSD in Python"]}}
+    Step 1: ALL keywords discarded — PSD/PNG has nothing to do with "AI to PDF Conversion"
+    Step 3: 0 keywords remain — generate 3-4 fresh ones from topic, no product name
+    Output: {{"primary": ["AI to PDF conversion in Python", "convert AI file to PDF in Python"],
+              "secondary": ["AI to PDF Python library"],
+              "long_tail": ["how to convert AI file to PDF using Python"]}}
+
+    Example 4 — Strip product name and wrong platform terms:
+    Input: topic="LaTeX to JPEG Conversion", product="Aspose", platform="python",
+           keywords={{"primary": ["LaTeX to JPEG conversion API .NET", "LaTeX to JPEG Java library"],
+                      "secondary": ["convert LaTeX to JPEG in Python"],
+                      "long_tail": ["how to convert LaTeX to JPEG file"]}}
+    Step 2: discard ".NET" and "Java" keywords — wrong platform
+    Step 3: 2 keywords remain — generate 2 more using platform=python
+    Output: {{"primary": ["convert LaTeX to JPEG in Python", "LaTeX to JPEG conversion in Python"],
+              "secondary": ["LaTeX to JPEG Python library"],
+              "long_tail": ["how to convert LaTeX to JPEG using Python"]}}
+
+    Example 5 — Strip product name from existing keywords:
+    Input: topic="3MF to STL Conversion", product="Aspose.3D", platform="java",
+           keywords={{"primary": ["Convert 3MF to STL using Aspose.3D in Java", "Aspose.3D 3MF to STL Java"],
+                      "secondary": ["How to convert 3MF files to STL"],
+                      "long_tail": ["How do I convert a 3MF file to STL?"]}}
+    Step 2: strip product name → ["Convert 3MF to STL in Java", "3MF to STL in Java"]
+    Step 3: count is 4 — no top up needed
+    Output: {{"primary": ["Convert 3MF to STL in Java", "3MF to STL in Java"],
+              "secondary": ["How to convert 3MF files to STL"],
+              "long_tail": ["How do I convert a 3MF file to STL?"]}}
+
+    Example 6 — 2 keywords survive filtering, top up with correct platform:
+    Input: topic="PDF to Word Conversion", product="Aspose.Words", platform="java",
+           keywords={{"primary": ["Convert PDF to Word in Java", "PDF to Word Java"],
+                      "secondary": [], "long_tail": []}}
+    Step 3: only 2 keywords — generate 2 more using platform=java, no product name
+    Output: {{"primary": ["Convert PDF to Word in Java", "PDF to Word Java"],
+              "secondary": ["PDF to Word Java library"],
+              "long_tail": ["how to convert PDF to Word document in Java"]}}
+
+    Example 7 — Cloud platform, keep REST/online keywords:
+    Input: topic="PDF to Word Conversion", product="Aspose.PDF Cloud", platform="cloud",
+           keywords={{"primary": ["Convert PDF REST API", "PDF to Word online"],
+                      "secondary": ["Aspose.PDF Cloud Java library"], "long_tail": []}}
+    Step 1: exclude "Aspose.PDF Cloud Java library" (contains product name and wrong platform)
+    Step 3: 2 keywords remain — generate 2 more
+    Output: {{"primary": ["Convert PDF REST API", "PDF to Word online"],
+              "secondary": ["PDF conversion REST API"],
+              "long_tail": ["how to convert PDF to Word using REST API"]}}
+
+    Example 8 — Too many keywords, trim to 4:
+    Input: 6 keywords survive filtering
+    Step 3: trim to 4 most relevant
+    Output: {{"primary": ["keyword1", "keyword2"], "secondary": ["keyword3"], "long_tail": ["keyword4"]}}
+
+    Example 9 — Dirty keywords, clean then top up:
+    Input: topic="3MF to STL Conversion", platform="java",
+           keywords={{"primary": ["Convert 3MF to STL in Java - Easy Conversion Guide - Blog",
+                                  "3MF to STL Java"], "secondary": [], "long_tail": []}}
+    Step 2: strip suffixes → ["Convert 3MF to STL in Java", "3MF to STL Java"]
+    Step 3: only 2 — generate 2 more using platform=java, no product name
+    Output: {{"primary": ["Convert 3MF to STL in Java", "3MF to STL Java"],
+              "secondary": ["3MF to STL Java library"],
+              "long_tail": ["how to export 3MF as STL file in Java"]}}
+
+    Return ONLY the JSON object. No text before or after it.
 """

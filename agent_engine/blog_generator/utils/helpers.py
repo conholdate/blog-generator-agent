@@ -1,4 +1,4 @@
-import re, sys, os
+import re, sys, os, json
 from datetime import datetime
 import requests
 from typing import Dict, Any, Optional, List, Tuple
@@ -2102,3 +2102,62 @@ def capitalize_file_formats_for_title(
             result.append(word)
     
     return ''.join(result)
+
+
+
+def sanitize_keywords(keywords_dict):
+    """Recursively sanitize all keyword strings in the structure"""
+    if isinstance(keywords_dict, dict):
+        return {k: sanitize_keywords(v) for k, v in keywords_dict.items()}
+    elif isinstance(keywords_dict, list):
+        return [sanitize_keywords(item) for item in keywords_dict]
+    elif isinstance(keywords_dict, str):
+        return sanitize_for_hugo(keywords_dict)
+    else:
+        return keywords_dict
+    
+def parse_keywords_response(content):
+    """Safely parse keywords from MCP response with multiple fallback strategies"""
+    
+    # Strategy 1: Direct dict access
+    if hasattr(content, "data") and isinstance(content.data, dict):
+        return content.data
+    
+    # Strategy 2: Parse text content
+    if hasattr(content, "text") and content.text:
+        text = content.text.strip()
+        
+        # Remove markdown code blocks
+        if text.startswith("```"):
+            parts = text.split("```")
+            if len(parts) >= 2:
+                text = parts[1]
+                # Remove language identifier (json, python, etc.)
+                if text.startswith(("json", "python", "py")):
+                    text = text.split("\n", 1)[1] if "\n" in text else text[4:]
+        
+        text = text.strip()
+        
+        # Try multiple parsing strategies
+        strategies = [
+            # Standard JSON
+            lambda: json.loads(text),
+            # Python literal (handles single quotes)
+            lambda: ast.literal_eval(text),
+            # JSON with relaxed parsing (allows trailing commas, comments)
+            lambda: json.loads(re.sub(r',(\s*[}\]])', r'\1', text)),
+            # Remove any leading/trailing non-JSON text
+            lambda: json.loads(re.search(r'\{.*\}', text, re.DOTALL).group())
+        ]
+        
+        for strategy in strategies:
+            try:
+                return strategy()
+            except (json.JSONDecodeError, ValueError, SyntaxError, AttributeError):
+                continue
+        
+        # If all strategies fail, log the raw text for debugging
+        print(f"PARSE ERROR - Raw text: {repr(text)}")
+        raise ValueError(f"Unable to parse keywords response: {text[:200]}...")
+    
+    raise ValueError("No valid content found in response")
