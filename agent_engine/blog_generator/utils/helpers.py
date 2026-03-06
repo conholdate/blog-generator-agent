@@ -1,3 +1,5 @@
+
+from datetime import datetime
 import re, sys, os, json
 from datetime import datetime
 import requests
@@ -2161,3 +2163,18 @@ def parse_keywords_response(content):
         raise ValueError(f"Unable to parse keywords response: {text[:200]}...")
     
     raise ValueError("No valid content found in response")
+
+
+def setup_logger():
+    BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
+    LOG_FILE = os.path.join(BASE_DIR, "content", "logs", "logs.txt")
+    os.makedirs(os.path.dirname(LOG_FILE), exist_ok=True)
+
+    def log(message: str):
+        timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        line = f"[{timestamp}] {message}\n"
+        print(line, end="")  # console
+        with open(LOG_FILE, "a", encoding="utf-8") as f:
+            f.write(line)
+
+    return log

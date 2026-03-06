@@ -8,7 +8,7 @@ from tools.mcp_tools import generate_markdown_file, fetch_category_related_artic
 from utils import prompts
 from utils.seo_validator import validate_seo_content, validate_and_fix_meta_description, validate_and_fix_seo_title
 from utils.file_format_mappings import FILE_FORMAT_MAPPINGS, BASE_URL
-from utils.helpers import prepare_context, get_productInfo, get_topic_by_index, inject_file_format_links, slugify, normalize_case_preserve_formats_in_keywords, clean_ai_generated_markdown, validate_markdown_links, capitalize_file_formats_for_title
+from utils.helpers import prepare_context, get_productInfo, get_topic_by_index, inject_file_format_links, slugify, normalize_case_preserve_formats_in_keywords, clean_ai_generated_markdown, validate_markdown_links, capitalize_file_formats_for_title, setup_logger
 from utils.metricsRecorder import MetricsRecorder
 from services.LLMservice import llm_service
 import json
@@ -26,6 +26,7 @@ class BlogOrchestrator:
         """
         self.brand = brand.lower().strip()
         self.products = self.load_products()
+        self.log = setup_logger()
         
         # Initialize metrics recorder with updated parameters
         self.metrics = MetricsRecorder(
@@ -71,6 +72,7 @@ class BlogOrchestrator:
         """Let the agent autonomously create a blog with metrics tracking"""
         set_tracing_disabled(disabled=True)
         topics_raw_data = get_topic_by_index(topics_file, index)
+        
         post_topic = topics_raw_data.pop("topic")
        
         product_name = topics_raw_data.pop("product")
@@ -81,12 +83,12 @@ class BlogOrchestrator:
                             product_name=product_name, 
                             platform=platform
                         )
-        print(f"bingaaaaa ----- {f_keywords}", flush=True)
+        print(f"keywords ----- {f_keywords}", flush=True)
 
         # Get product info
         product_info = get_productInfo(product_name, platform, self.products, self.brand)
         print(f"product info -- {product_info}")
-
+       
         isCloud = "cloud" in product_info["ProductName"].lower()
         post_topic = capitalize_file_formats_for_title(post_topic, FILE_FORMAT_MAPPINGS)
      
@@ -123,7 +125,7 @@ class BlogOrchestrator:
             # f_keywords = normalize_case_preserve_formats_in_keywords(primary + secondary, FILE_FORMAT_MAPPINGS)
 
             f_keywords = normalize_case_preserve_formats_in_keywords(primary + f_keywords, FILE_FORMAT_MAPPINGS)
-            print(f"f_keywords -- {f_keywords}")
+            print(f"normalized f_keywords -- {f_keywords}")
 
             blog_outline = topics_raw_data.get("outline")
             
@@ -166,11 +168,11 @@ class BlogOrchestrator:
             else:
                 print(f"✅ Meta description is already valid", flush=True)
             
-            print(f"Meta description check done - {result.final_output}", flush=True)
+            print(f"Meta description check done")
             result.final_output = clean_ai_generated_markdown(result.final_output)
-            print(f"clean_ai_generated_markdown done - {result.final_output}", flush=True)
+            print(f"clean_ai_generated_markdown done ")
             result.final_output = validate_markdown_links(result.final_output)
-            print(f"validate_markdown_links done - {result.final_output}", flush=True)
+            print(f"validate_markdown_links done ")
             print(f" Content Generated, Performing SEO Audit Now --", flush=True)
 
             targets = {
@@ -223,6 +225,12 @@ class BlogOrchestrator:
                 print("Metrics sent successfully\n")
             else:
                 print("Failed to send metrics (check logs)\n")
+
+            self.log("---Execution started---")
+            self.log(f"Keyword file index -> {topics_raw_data}")
+            self.log(f"product info {product_info}")
+            self.log(f" File path: {filepath}")
+            self.log("---Execution ended---")
 
             return {
                 "folder_name": folder_name,
