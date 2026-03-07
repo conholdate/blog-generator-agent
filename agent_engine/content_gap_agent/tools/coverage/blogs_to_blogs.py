@@ -8,8 +8,9 @@ from typing import Dict, List, Optional, Tuple, Set
 
 from ..io import IndexRecord, read_jsonl
 from ..logging_utils import get_logger
-from ..normalize import canonical_topic_key, nor_platform_key, normalize_text
+from ..normalize import nor_platform_key, normalize_text
 from .base import CoverageResult, CoverageRow
+from .filters import is_release_update_record
 
 logger = get_logger("cg-cover.agent")
 
@@ -37,12 +38,11 @@ def normalize_gap_key(k: str) -> str:
 def record_gap_key(r: IndexRecord) -> str:
     """
     Prefer indexer-provided key; fallback to canonical topic key if missing.
-    NOTE: if your pipeline guarantees key is present, you can remove the fallback.
+    Indexing is now responsible for topic normalization quality.
     """
     if getattr(r, "key", None):
         return normalize_gap_key(str(r.key))
-    # Fallback for older indexes (should become unnecessary)
-    return canonical_topic_key(r.topic or r.title)
+    return normalize_text(r.topic or r.title)
 
 
 def _normalize_platform_key(s: Optional[str]) -> str:
@@ -99,7 +99,12 @@ def compute_blogs_to_blogs(
 
     t_load = perf_counter()
     records = list(read_jsonl(blogs_path))
+    total_records = len(records)
+    records = [r for r in records if not is_release_update_record(r)]
+    excluded_release = total_records - len(records)
     logger.info("Loaded blog index records: %d (%.2f ms)", len(records), (perf_counter() - t_load) * 1000.0)
+    if excluded_release:
+        logger.info("Excluded release/update records from coverage map: %d", excluded_release)
 
     # Allowed platform set (normalized)
     allowed_set: Optional[Set[str]] = None

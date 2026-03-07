@@ -11,6 +11,7 @@ from ..normalize import normalize_text
 from ..similarity import lexical_fast_match
 from .base import CoverageResult, CoverageRow
 from .blogs_to_blogs import infer_platforms
+from .filters import is_release_update_record
 
 logger = get_logger("cg-cover.coverage.docs_to_blogs")
 
@@ -125,11 +126,15 @@ def compute_docs_to_blogs(
     # -----------------------------
     t_load_docs = perf_counter()
     docs_records = list(read_jsonl(docs_path))
+    docs_total = len(docs_records)
+    docs_records = [r for r in docs_records if not is_release_update_record(r)]
     logger.info(
         "Loaded docs baseline records: %d (%.2f ms)",
         len(docs_records),
         (perf_counter() - t_load_docs) * 1000.0,
     )
+    if docs_total != len(docs_records):
+        logger.info("Excluded release/update docs baseline records: %d", docs_total - len(docs_records))
 
     # Optional safety filter (in case platform file contains mixed platforms due to bug)
     baseline_docs: List[IndexRecord] = []
@@ -151,11 +156,15 @@ def compute_docs_to_blogs(
     # -----------------------------
     t_load_blogs = perf_counter()
     blog_records = list(read_jsonl(blogs_path))
+    blog_total = len(blog_records)
+    blog_records = [r for r in blog_records if not is_release_update_record(r)]
     logger.info(
         "Loaded blog index records: %d (%.2f ms)",
         len(blog_records),
         (perf_counter() - t_load_blogs) * 1000.0,
     )
+    if blog_total != len(blog_records):
+        logger.info("Excluded release/update blog records: %d", blog_total - len(blog_records))
 
     # -----------------------------
     # Build blog platform -> records mapping

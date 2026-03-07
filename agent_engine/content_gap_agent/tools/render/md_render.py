@@ -11,6 +11,7 @@ def _use_details() -> bool:
 
 _TAXONOMY_HEADERS = {"category", "subcategory", "topic"}
 _UPPERCASE_TERMS = {
+    "3d",
     ".net",
     "asp.net",
     "net",
@@ -102,6 +103,7 @@ _UPPERCASE_TERMS = {
     "yml",
     "zip",
 }
+_TITLE_SMALL_WORDS = {"a", "an", "and", "as", "at", "for", "in", "of", "on", "or", "the", "to", "via", "with"}
 
 
 def _split_label_value(line: str) -> Optional[Tuple[str, str]]:
@@ -164,7 +166,7 @@ def _uppercase_protected_terms(text: str, protected_terms: set[str]) -> str:
     if not normalized or not protected_terms:
         return normalized
 
-    rendered = normalized.lower()
+    rendered = normalized
     for term in sorted({t.lower() for t in protected_terms if t}, key=len, reverse=True):
         rendered = re.sub(
             rf"(?<![A-Za-z0-9]){re.escape(term)}(?![A-Za-z0-9])",
@@ -180,11 +182,19 @@ def _sentence_case_topic(topic: str, platform_terms: set[str]) -> str:
     protected_terms.update(t.lower() for t in platform_terms if t)
 
     rendered = _uppercase_protected_terms(topic, protected_terms)
-    match = re.search(r"[a-z]", rendered)
-    if not match:
+    if not rendered:
         return rendered
-    idx = match.start()
-    return rendered[:idx] + rendered[idx].upper() + rendered[idx + 1 :]
+
+    words = rendered.split()
+    if not words:
+        return rendered
+
+    # Sentence case: capitalize first word only when it is not an acronym.
+    first = words[0]
+    has_alpha = any(ch.isalpha() for ch in first)
+    if has_alpha and not first.isupper():
+        words[0] = first[0].upper() + first[1:]
+    return " ".join(words)
 
 
 def _topic_column_index(headers: List[str]) -> Optional[int]:
@@ -211,6 +221,30 @@ def _normalize_summary_value(label: str, value: str) -> str:
     return ", ".join(part.upper() for part in parts if part)
 
 
+def _title_case_document_title(title: str, platform_terms: set[str]) -> str:
+    normalized = " ".join((title or "").replace("_", " ").split())
+    if not normalized:
+        return normalized
+
+    words = normalized.split(" ")
+    rendered: List[str] = []
+    for i, raw in enumerate(words):
+        core = re.sub(r"^[^A-Za-z0-9.+#]+|[^A-Za-z0-9.+#]+$", "", raw)
+        if not core:
+            rendered.append(raw)
+            continue
+        low = core.lower()
+        if i != 0 and i != len(words) - 1 and low in _TITLE_SMALL_WORDS:
+            cased = low
+        else:
+            cased = low.capitalize()
+        rendered.append(raw.replace(core, cased, 1))
+
+    protected_terms = set(_UPPERCASE_TERMS)
+    protected_terms.update(t.lower() for t in platform_terms if t)
+    return _uppercase_protected_terms(" ".join(rendered), protected_terms)
+
+
 def render_md_matrix(
     title: str,
     summary_lines: List[str],
@@ -225,7 +259,8 @@ def render_md_matrix(
     - Matrix rows auto-aligned to headers (drops Category/Subcategory if headers start with Topic).
     """
     out: List[str] = []
-    out.append(f"# {title}")
+    platform_terms = _platform_terms_from_headers(headers)
+    out.append(f"# {_title_case_document_title(title, platform_terms)}")
     out.append("")
 
     if summary_lines:
@@ -267,7 +302,6 @@ def render_md_matrix(
 
     display_headers = [header.upper() for header in headers]
     topic_idx = _topic_column_index(headers)
-    platform_terms = _platform_terms_from_headers(headers)
 
     out.append("| " + " | ".join(display_headers) + " |")
     out.append("| " + " | ".join(["---"] * len(display_headers)) + " |")

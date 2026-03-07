@@ -27,13 +27,25 @@ _TRAILING_PLATFORM_RE = re.compile(rf"(?:[\s\-_]+|^){_PLATFORM_VALUE_RE}$", re.I
 _CONVERSION_PREFIX_RE = re.compile(r"^(?:convert|export|save|transform|change)-(.+?-to-.+)$")
 _LEADING_NOISE_RE = re.compile(r"^(how-to|how-do-i|tutorial|guide)-")
 _LEADING_PHRASE_RE = re.compile(r"^(let-s|lets|let-us)-")
-_FORMAT_FILLER_RE = re.compile(r"\b(file|files|format|formats)\b", re.IGNORECASE)
+_FORMAT_FILLER_RE = re.compile(r"\b(file|files|format|formats|image|images)\b", re.IGNORECASE)
+_ARTICLE_NOISE_RE = re.compile(r"\b(a|an)\b", re.IGNORECASE)
 _TRAILING_NOISE_RE = re.compile(r"-(programmatically|converter|converters)$")
 _CONVERSION_CORE_RE = re.compile(r"([a-z0-9]+)-to-([a-z0-9]+)")
 _GENERIC_TRAILING_RE = re.compile(r"-(online|free|software|application|app|tool|tools)$")
 _ACTION_ARTICLE_RE = re.compile(r"^(create|read|build|repair|merge|split|convert|export|import)-(?:a|an|the)-")
 _ACTION_START_RE = re.compile(r"(create|read|build|repair|merge|split|convert|export|import)-")
 _MODEL_SCENE_RE = re.compile(r"-model-scenes?$")
+_PLATFORM_ANYWHERE_RE = re.compile(
+    r"\b(c\#|csharp|vb\.net|vbnet|vb|\.net|dotnet|java|python|node\.js|nodejs|javascript|js|c\+\+|cpp|cplusplus|android|php|ruby|go|golang|swift|kotlin|asp\.net|aspnet)\b",
+    re.IGNORECASE,
+)
+_PLATFORM_SLUG_TOKEN_RE = re.compile(
+    r"(?:^|-)(csharp|vbnet|vb|dotnet|net|java|python|nodejs|javascript|js|cpp|cplusplus|android|php|ruby|go|golang|swift|kotlin|aspnet|asp|online)(?:-|$)",
+    re.IGNORECASE,
+)
+_FROM_TO_RE = re.compile(r"\bfrom\s+to\b", re.IGNORECASE)
+_TRAILING_PREPOSITION_RE = re.compile(r"\b(in|with|using|for|via|on)\b\s*$", re.IGNORECASE)
+_TRAILING_CONNECTOR_RE = re.compile(r"-(?:in|with|using|for|via|on)$", re.IGNORECASE)
 
 _UPPERCASE_FORMATS = {
     "pdf",
@@ -86,6 +98,7 @@ _UPPERCASE_FORMATS = {
     "usd",
     "usdz",
 }
+_FORMAT_TOKENS = set(_UPPERCASE_FORMATS) | {"iges", "igs", "3mf", "u3d", "x"}
 
 
 def extract_seo_title(frontmatter: Dict[str, Any]) -> Optional[str]:
@@ -129,8 +142,13 @@ def _normalize_candidate(text: str) -> str:
     if not text:
         return ""
     text = unicodedata.normalize("NFKC", text).strip()
+    text = re.sub(r"[-_/]+", " ", text)
     text = _strip_platform_qualifiers(text)
+    text = _PLATFORM_ANYWHERE_RE.sub(" ", text)
     text = _FORMAT_FILLER_RE.sub(" ", text)
+    text = _ARTICLE_NOISE_RE.sub(" ", text)
+    text = _FROM_TO_RE.sub(" ", text)
+    text = _TRAILING_PREPOSITION_RE.sub(" ", text)
     text = re.sub(r"\s+", " ", text).strip()
     slug = _slugify(text)
     slug = _LEADING_NOISE_RE.sub("", slug)
@@ -149,8 +167,13 @@ def _normalize_candidate(text: str) -> str:
 
     core_match = _CONVERSION_CORE_RE.search(slug)
     if core_match:
-        slug = f"{core_match.group(1)}-to-{core_match.group(2)}"
+        src = core_match.group(1).lower()
+        dst = core_match.group(2).lower()
+        if src in _FORMAT_TOKENS and dst in _FORMAT_TOKENS:
+            slug = f"{src}-to-{dst}"
 
+    slug = _PLATFORM_SLUG_TOKEN_RE.sub("-", slug)
+    slug = _TRAILING_CONNECTOR_RE.sub("", slug)
     slug = _TRAILING_NOISE_RE.sub("", slug)
     while True:
         next_slug = _GENERIC_TRAILING_RE.sub("", slug)
@@ -240,14 +263,14 @@ def build_content_topic(
       5) Keep detected file formats uppercase (for example "OBJ to STL", "XLSX to PDF").
 
     Priority:
-      1) URL slug
+      1) Page title
       2) SEO title
-      3) Page title
+      3) URL slug
       4) LLM-proposed topic
     """
     preserve_upper = _extract_preserved_uppercase_terms(title, seo_title, url, llm_topic)
 
-    candidates = [_key_from_url(url), seo_title, title, llm_topic]
+    candidates = [title, seo_title, _key_from_url(url), llm_topic]
     normalized_candidates = [_normalize_candidate(candidate or "") for candidate in candidates]
 
     # If the URL slug collapses to something too generic, prefer richer title-derived text.

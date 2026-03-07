@@ -110,17 +110,21 @@ def classify_blog_with_llm(
     schema = BlogClassifyOut.model_json_schema()
 
     try:
-        resp = client.responses.create(
+        # Chat Completions API
+        # NEW
+        resp = client.chat.completions.create(
             model=model,
-            input=input_msgs,
-            text={
-                "format": {
-                    "type": "json_schema",
+            messages=input_msgs,
+            response_format={
+                "type": "json_schema",
+                "json_schema": {
+                    "name": "blog_classification",
                     "strict": True,
                     "schema": schema,
-                }
+                },
             },
         )
+
         raw = _extract_output_text(resp)
         data = json.loads(raw)
         parsed = BlogClassifyOut.model_validate(data)
@@ -131,12 +135,16 @@ def classify_blog_with_llm(
         # 3) Fallback to JSON mode if model/provider doesn't support json_schema
         log.debug("json_schema failed; falling back to json_object. err=%s", e_schema)
 
-        resp = client.responses.create(
+        # NEW
+        resp = client.chat.completions.create(
             model=model,
-            input=input_msgs,
-            text={"format": {"type": "json_object"}},
+            messages=input_msgs,
+            response_format={"type": "json_object"},
         )
-        raw = _extract_output_text(resp)
+
+        raw = resp.choices[0].message.content or ""
+
+        # raw = _extract_output_text(raw)
 
         # Try to parse JSON object
         try:

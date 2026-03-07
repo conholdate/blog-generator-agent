@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+from datetime import datetime
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Sequence, Tuple
@@ -30,6 +31,7 @@ from .tools.text_utils import parse_markdown, sha256_file
 from .tools.handlers import HandlerRegistry
 from .tools.handlers.base import HandlerContext
 from .tools.record_id import RecordId
+from .tools.key_maker import build_content_topic
 
 from .tools.metrics import MetricsSender, MetricsRun, new_run_id
 from time import perf_counter
@@ -143,6 +145,23 @@ def _preview(items: Sequence[str], n: int = 10) -> str:
         return ", ".join(items)
     return ", ".join(items[:n]) + f", ... (+{len(items) - n} more)"
 
+
+def _refresh_blog_topics_in_store(store: JsonlIndexStore) -> int:
+    """
+    Recompute topics for already-indexed blog records so normalization rule
+    changes apply even when markdown files are unchanged.
+    """
+    updated = 0
+    for rec in store.records.values():
+        if (rec.repo_type or "").lower() != "blog":
+            continue
+        new_topic = build_content_topic(title=rec.title, url=rec.url, llm_topic=rec.topic)[:200]
+        if new_topic and new_topic != rec.topic:
+            rec.topic = new_topic
+            rec.updated_at = datetime.utcnow().isoformat()
+            updated += 1
+    return updated
+
 # ------------------ Core indexing ------------------
 
 def incremental_index_repo(
@@ -221,6 +240,11 @@ def incremental_index_repo(
         len(getattr(store, "records", {}) or getattr(store, "_records", {}) or {}),
         len(state.file_fingerprints),
     )
+
+    if normalize_topics and (repo_target.repo_type or "").lower() == "blog":
+        refreshed = _refresh_blog_topics_in_store(store)
+        if refreshed:
+            log.info("Refreshed existing blog topics from current normalization rules: updated=%d", refreshed)
 
     registry = HandlerRegistry()
     handler = registry.resolve(repo_target.repo_type, repo_target.handler)

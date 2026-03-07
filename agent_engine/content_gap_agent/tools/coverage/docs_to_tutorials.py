@@ -9,6 +9,7 @@ from ..logging_utils import get_logger
 from ..normalize import normalize_text
 from ..similarity import lexical_fast_match
 from .base import CoverageResult, CoverageRow
+from .filters import is_release_update_record
 
 logger = get_logger("cg-cover.agent")
 
@@ -70,11 +71,15 @@ def compute_docs_to_tutorials(
     # -----------------------------
     t_load_docs = perf_counter()
     docs_records = list(read_jsonl(docs_path))
+    docs_total = len(docs_records)
+    docs_records = [r for r in docs_records if not is_release_update_record(r)]
     logger.info(
         "Loaded docs baseline records: %d (%.2f ms)",
         len(docs_records),
         (perf_counter() - t_load_docs) * 1000.0,
     )
+    if docs_total != len(docs_records):
+        logger.info("Excluded release/update docs baseline records: %d", docs_total - len(docs_records))
 
     # Safety filter: keep only platform-matching records (in case of indexing issues)
     baseline_docs: List[IndexRecord] = []
@@ -96,11 +101,15 @@ def compute_docs_to_tutorials(
     # -----------------------------
     t_load_tuts = perf_counter()
     tutorial_records = list(read_jsonl(tuts_path))
+    tuts_total = len(tutorial_records)
+    tutorial_records = [r for r in tutorial_records if not is_release_update_record(r)]
     logger.info(
         "Loaded tutorial index records: %d (%.2f ms)",
         len(tutorial_records),
         (perf_counter() - t_load_tuts) * 1000.0,
     )
+    if tuts_total != len(tutorial_records):
+        logger.info("Excluded release/update tutorial records: %d", tuts_total - len(tutorial_records))
 
     # -----------------------------
     # Match docs topics -> tutorials topics

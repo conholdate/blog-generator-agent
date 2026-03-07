@@ -37,6 +37,45 @@ _TRAILING_LANG_TOKEN_RE = re.compile(
     re.IGNORECASE | re.VERBOSE,
 )
 
+# Remove platform/language tokens even when not introduced by using/in/with/for.
+_LANG_TOKEN_ANYWHERE_RE = re.compile(
+    r"""
+    \b
+    (c\#|csharp|vb\.net|vbnet|vb|\.net|dotnet|java|python|node\.js|nodejs|javascript|js|c\+\+|cpp|cplusplus|android)
+    \b
+    """,
+    re.IGNORECASE | re.VERBOSE,
+)
+
+# Remove generic filler words that make conversion keys noisy.
+_TOPIC_NOISE_WORDS_RE = re.compile(r"\b(file|files|format|formats)\b", re.IGNORECASE)
+_TRAILING_PREPOSITION_RE = re.compile(r"\b(in|with|using|for)\b\s*$", re.IGNORECASE)
+_C_NET_NOISE_RE = re.compile(r"\bc\s+net\b", re.IGNORECASE)
+_FROM_TO_NOISE_RE = re.compile(r"\bfrom\s+to\b", re.IGNORECASE)
+_FORMAT_TOKENS = {
+    "3ds",
+    "3mf",
+    "dae",
+    "drc",
+    "dxf",
+    "fbx",
+    "glb",
+    "gltf",
+    "igs",
+    "iges",
+    "json",
+    "ma",
+    "obj",
+    "pdf",
+    "ply",
+    "stl",
+    "u3d",
+    "usd",
+    "usdz",
+    "x",
+    "xml",
+}
+
 def normalize_text(text: str) -> str:
     """
     Canonical topic normalization:
@@ -61,13 +100,23 @@ _CONVERSION_PAIR_RE = re.compile(
 # Optional: catch "Convert OBJ to STL" where "convert" might be earlier in the string anyway.
 # The pair regex above already matches the "OBJ to STL" part, so this is often enough.
 
+def _final_topic_cleanup(normalized: str) -> str:
+    if not normalized:
+        return ""
+    t = re.sub(r"\busing\s+c\s+net\b", " ", normalized, flags=re.IGNORECASE)
+    t = re.sub(r"\bc\s+net\b", " ", t, flags=re.IGNORECASE)
+    t = re.sub(r"\busing\b\s*$", " ", t, flags=re.IGNORECASE)
+    t = _WS_RE.sub(" ", t).strip()
+    return t
+
+
 def canonical_topic_key(text: str) -> str:
     """
     Stable topic key for cross-platform matching.
 
     Primary rule (critical):
       If the title contains a conversion pair like "OBJ to STL",
-      collapse everything to: "convert <src> to <dst>"
+      collapse everything to: "<src> to <dst>"
 
     This forces:
       - "Convert OBJ to STL in Python - 3D Modeling Software"
@@ -79,19 +128,28 @@ def canonical_topic_key(text: str) -> str:
         return ""
 
     t = unicodedata.normalize("NFKC", text).strip()
+    t = re.sub(r"[-_/]+", " ", t)
+    t = _LANG_QUALIFIER_RE.sub(" ", t)
+    t = _TRAILING_LANG_TOKEN_RE.sub(" ", t)
+    t = _LANG_TOKEN_ANYWHERE_RE.sub(" ", t)
+    t = _TOPIC_NOISE_WORDS_RE.sub(" ", t)
+    t = _C_NET_NOISE_RE.sub(" ", t)
+    t = _FROM_TO_NOISE_RE.sub(" ", t)
+    t = _TRAILING_PREPOSITION_RE.sub(" ", t)
+    t = _WS_RE.sub(" ", t).strip()
 
     # 1) Try to extract conversion pair and canonicalize to a single key.
     m = _CONVERSION_PAIR_RE.search(t)
     if m:
         src = m.group(1).lower()
         dst = m.group(2).lower()
-        # Build canonical conversion key
-        return normalize_text(f"convert {src} to {dst}")
+        # Build canonical conversion key only for known file-format pairs.
+        # This avoids false positives like "scene to real".
+        if src in _FORMAT_TOKENS and dst in _FORMAT_TOKENS:
+            return _final_topic_cleanup(normalize_text(f"{src} to {dst}"))
 
     # 2) Fallback to your old logic (language qualifier stripping + normalize)
-    t = _LANG_QUALIFIER_RE.sub(" ", t)
-    t = _TRAILING_LANG_TOKEN_RE.sub(" ", t)
-    return normalize_text(t)
+    return _final_topic_cleanup(normalize_text(t))
 
 def nor_platform_key(platform_key: Optional[str]) -> str:
     """
@@ -157,7 +215,6 @@ def nor_platform_display_name(platform_key: Optional[str]) -> str:
         "ruby": "Ruby",
     }
     return fallback.get(pk, platform_key or "All")
-
 
 def nor_website_section_from_case(case: str) -> str:
     mapping = {

@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from pathlib import Path
+import re
 from time import perf_counter
 from typing import Any, Dict, Optional
 
@@ -24,6 +25,7 @@ log = get_logger("cg-cover.agent")
 @dataclass(frozen=True)
 class CoverageRunRequest:
     brand_key: str
+    brand_name: str
     brand_site: str
     product_key: str
     product_name: str
@@ -100,19 +102,81 @@ def _compute_gap_stats(result: Any) -> Dict[str, int]:
         "topics_with_any_gap": topics_with_any_gap,
     }
 
-# Somewhere central (e.g., agent.py near request parsing, or a constants module)
-CASE_DISPLAY_NAME: dict[str, str] = {
-    "docs_to_blogs": "Articles",
-    "docs_to_tutorials": "Articles",
-    "blogs_to_blogs": "Articles",
+_FILE_FORMAT_TOKENS = {
+    "3ds",
+    "3mf",
+    "amf",
+    "dae",
+    "fbx",
+    "glb",
+    "gltf",
+    "ifc",
+    "iges",
+    "igs",
+    "jt",
+    "obj",
+    "pdf",
+    "ply",
+    "rvm",
+    "step",
+    "stl",
+    "stp",
+    "u3d",
+    "usd",
+    "usdz",
 }
+_FILE_FORMAT_PATTERN = re.compile(
+    r"\b(" + "|".join(sorted(_FILE_FORMAT_TOKENS, key=len, reverse=True)) + r")\b",
+    re.IGNORECASE,
+)
 
-def case_display_name(case: str) -> str:
-    # 1) explicit mapping (preferred)
-    if case in CASE_DISPLAY_NAME:
-        return CASE_DISPLAY_NAME[case]
-    # 2) safe fallback
-    return case.replace("_", " ").title()
+
+def _to_sentence_case_with_upper_formats(topic: str) -> str:
+    s = re.sub(r"\s+", " ", str(topic or "").strip()).lower()
+    if not s:
+        return s
+    s = _FILE_FORMAT_PATTERN.sub(lambda m: m.group(1).upper(), s)
+    for idx, ch in enumerate(s):
+        if ch.isalpha():
+            return s[:idx] + ch.upper() + s[idx + 1 :]
+    return s
+
+
+def _render_missing_topics_md(
+    *,
+    brand_name: str,
+    product_name: str,
+    platform_name: str,
+    platforms: list[str],
+    rows: list[Any],
+) -> str:
+    missing_rows: list[tuple[str, list[str]]] = []
+    for r in rows:
+        coverage = getattr(r, "coverage", {}) or {}
+        missing_platforms = [p.upper() for p in platforms if not bool((coverage.get(p) or {}).get("matched"))]
+        if missing_platforms:
+            normalized_topic = _to_sentence_case_with_upper_formats(getattr(r, "topic", ""))
+            missing_rows.append((normalized_topic, missing_platforms))
+
+    out: list[str] = []
+    out.append(f"# Missing Blog Topics for {product_name}")
+    out.append("")
+    out.append(f"- **Brand:** {brand_name}")
+    out.append(f"- **Product:** {product_name}")
+    out.append(f"- **Platform:** {platform_name}")
+    out.append(f"- **Total Topics:** {len(missing_rows)}")
+    out.append("")
+    out.append("---")
+    out.append("## All Missing Topics")
+    out.append("")
+    out.append("| # | Topic | Missing platforms (high-impact)|")
+    out.append("| --- | --- | --- |")
+    for i, (topic, missing_platforms) in enumerate(missing_rows, start=1):
+        out.append(f"| {i} | {topic} | {', '.join(missing_platforms)} |")
+    out.append("")
+    out.append("---")
+    out.append("")
+    return "\n".join(out)
 
 
 def run_coverage(settings: CoverageSettings, req: CoverageRunRequest) -> Dict[str, Any]:
@@ -165,9 +229,7 @@ def run_coverage(settings: CoverageSettings, req: CoverageRunRequest) -> Dict[st
 
     website = req.brand_site
     website_section = nor_website_section_from_case(req.case)
-    # item_name = f"{req.case}"
-    item_name = case_display_name(req.case)
-    print(item_name)
+    item_name = f"{req.case}"
 
     # Resolve output directory early (deterministic)
     out_dir = _coverage_out_dir(settings, req.brand_key, req.product_key, req.case, req.baseline_platform)
@@ -335,6 +397,19 @@ def run_coverage(settings: CoverageSettings, req: CoverageRunRequest) -> Dict[st
             )
             write_text(out_dir / "coverage.md", coverage_md)
             log.info("Wrote coverage.md (%.2f ms)", (perf_counter() - t_md) * 1000.0)
+
+            missing_topics_md = _render_missing_topics_md(
+                brand_name=req.brand_name,
+                product_name=req.product_name,
+                platform_name=(req.baseline_platform or "all").upper(),
+                platforms=platforms,
+                rows=list(result.rows),
+            )
+            missing_topics_path = (
+                out_dir / f"{req.brand_key}-{req.product_key}_{(req.baseline_platform or 'all')}_missing_topics.md"
+            )
+            write_text(missing_topics_path, missing_topics_md)
+            log.info("Wrote missing topics markdown: %s", missing_topics_path)
 
             # Metrics counts for Coverage Map
             coverage_discovered = int(stats["total_topics"])

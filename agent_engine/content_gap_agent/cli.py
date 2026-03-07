@@ -80,6 +80,7 @@ def main(argv: Optional[list[str]] = None) -> int:
     if not brand_key:
         logger.error("Brand yaml key is empty: %s", brand_yaml_path)
         return 2
+    brand_name = str(brand_data.get("display_name") or brand_key).strip()
 
     # Load product config
     product_yaml_path: Path = args.product
@@ -115,6 +116,7 @@ def main(argv: Optional[list[str]] = None) -> int:
 
     req = CoverageRunRequest(
         brand_key=brand_key,
+        brand_name=brand_name,
         brand_site=brand_site,
         product_key=product_key,
         product_name=product_name,
