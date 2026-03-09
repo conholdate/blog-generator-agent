@@ -9,19 +9,18 @@ from dotenv import load_dotenv
 from fastmcp import FastMCP
 from typing import Dict, List
 from openai import OpenAI
+
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 PARENT_PATH = os.path.abspath(os.path.join(BASE_DIR, "../../"))
 
 if PARENT_PATH not in sys.path:
     sys.path.append(PARENT_PATH)
-    
+
 from agent_engine.blog_generator.services.serpapi_keyword_service import SerpAPIKeywordService
 from agent_engine.blog_generator.utils.prompts import keyword_filter_prompt
 from agent_engine.blog_generator.config import settings
-client = OpenAI(
-    base_url=settings.PROFESSIONALIZE_BASE_URL,
-    api_key=settings.PROFESSIONALIZE_API_KEY_2
-)
+
+from agent_engine.blog_generator.services.LLMservice import llm_service
 # ---------------------------------------------
 # Log only to stderr — keep stdout clean for JSON-RPC
 # ---------------------------------------------
@@ -39,46 +38,36 @@ mcp = FastMCP("keywords-server")
 # Define MCP Tool
 # ---------------------------------------------
 @mcp.tool()
-async def fetch_keywords(topic: str, product_name: str = None, platform:str=None) -> dict:
-    print(f"fetch_keywords TOOL CALLED (topic={topic}, product={product_name})", file=sys.stderr, flush=True)
-    
+async def fetch_keywords(topic: str, product_name: str = None, platform: str = None) -> dict:
     try:
         all_results = []
-        serpapi = SerpAPIKeywordService(api_key="66c1df1bd9d524fc1f5864c6070b9a73666994b392127d642839817119d7992d")
-        
+        serpapi = SerpAPIKeywordService(api_key=settings.SERPAPI_KEY)
+
         try:
             result = await serpapi.fetch_keywords(topic, product_name, 10)
             all_results.append(result)
         except Exception as e:
-            print(f"Error from SerpAPI: {e}", file=sys.stderr, flush=True)
-        
+            pass  # silently skip — do NOT print to stderr (corrupts MCP stdio stream)
+
         # Merge results
         merged = _merge_keywords(all_results)
+
         prompt = keyword_filter_prompt(topic, product_name, merged, platform)
-        
-        response = client.responses.create(
-            model='gpt-oss', 
-            input=prompt,
-        )
-        
-        # Add robust parsing here
-        output_text = response.output_text.strip()
-        
+
+        response = await llm_service.complete(prompt, max_tokens=4000)
+
+        output_text = response.strip()
+
         if not output_text:
             raise ValueError("Empty response from LLM")
-        
+
         # Try parsing with fallbacks
         try:
             final_keywords = json.loads(output_text)
         except json.JSONDecodeError:
-            print(f"LLM returned invalid JSON: {repr(output_text)}", file=sys.stderr, flush=True)
-            
-            # Try Python literal eval (handles single quotes)
             try:
                 final_keywords = ast.literal_eval(output_text)
-                print("Successfully parsed as Python dict", file=sys.stderr, flush=True)
             except (ValueError, SyntaxError):
-                # Try to extract JSON from text
                 match = re.search(r'\{.*\}', output_text, re.DOTALL)
                 if match:
                     try:
@@ -87,18 +76,19 @@ async def fetch_keywords(topic: str, product_name: str = None, platform:str=None
                         final_keywords = ast.literal_eval(match.group())
                 else:
                     # Fallback to original merged keywords if LLM fails
-                    print("Falling back to unfiltered keywords", file=sys.stderr, flush=True)
                     final_keywords = merged
+
+        # Ensure final_keywords is always a dict, never a string
+        if isinstance(final_keywords, str):
+            final_keywords = json.loads(final_keywords)
 
         return {
             "topic": topic,
             "keywords": final_keywords,
             "status": "success"
         }
-        
+
     except Exception as e:
-        print(f"ERROR in fetch_keywords: {str(e)}", file=sys.stderr, flush=True)
-        # Return error in proper format instead of raising
         return {
             "topic": topic,
             "keywords": {"primary": [topic], "secondary": [], "long_tail": []},
@@ -106,12 +96,12 @@ async def fetch_keywords(topic: str, product_name: str = None, platform:str=None
             "error": str(e)
         }
 
-def _merge_keywords( results: List[Dict]) -> Dict:
-    """
-    Merge keywords from multiple sources
-    Removes duplicates and combines metadata
-    """
 
+def _merge_keywords(results: List[Dict]) -> Dict:
+    """
+    Merge keywords from multiple sources.
+    Removes duplicates and combines metadata.
+    """
     primary = []
     secondary = []
     long_tail = []

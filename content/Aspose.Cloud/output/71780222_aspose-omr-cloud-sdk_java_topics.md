@@ -1,26 +1,25 @@
 # Blog Topics for Aspose.OMR Cloud SDK
 
-- **Brand:** Aspose.Cloud
-- **Product:** Aspose.OMR Cloud SDK
+- **Brand:** Conholdate.com
+- **Product:** Conholdate.Total
 - **Platform:** Java
 - **Run ID:** 71780222
 - **Topics:** 5
 
 ---
 
-## 1. Convert PDF to CSV using Java Cloud SDK
+## 1. Convert CAD to PDF in Java
 - **Cluster ID:** `c0`
-- **Target persona:** Java developers looking to Convert PDF to CSV using Java Cloud SDK 
-- **Angle:** A comprehensive step‑by‑step tutorial that shows how to Convert PDF to CSV using Java Cloud SDK 
-- **Primary keyword:** `Convert PDF to CSV using Java Cloud SDK`
-- **Supporting keywords:** `Example Code Aspose.OMR Java PDF to CSV`, `Step by Step PDF to CSV Conversion Aspose.OMR Java`, `Aspose.OMR Java PDF to CSV Conversion Best Practices`, `Java Omr PDF to CSV Conversion using Aspose.Sdk`
+- **Target persona:** Java developers looking to Convert CAD to PDF in Java
+- **Angle:** A comprehensive step‑by‑step tutorial that shows how to Convert CAD to PDF in Java
+- **Primary keyword:** `Convert CAD to PDF in Java`
+- **Supporting keywords:** `Convert CAD to PDF in Java`, `Step by Step PDF to CSV Conversion Aspose.OMR Java`, `Aspose.OMR Java PDF to CSV Conversion Best Practices`, `Java Omr PDF to CSV Conversion using Aspose.Sdk`
 
 **Suggested outline:**
-- Key Features of Aspose.OMR Cloud SDK for Java
-- Step-by-Step: Java Tutorial Aspose.OMR PDF to CSV Conversion
-- Configuring PDF Input and CSV Output Options
+- Key Features of Conholdate.Total for Java
+- Configuring CAD to PDF Conversion
 - Handling Common Conversion Errors and Troubleshooting
-- Best Practices for CSV Formatting and Data Integrity
+- Best Practices for CAD Formatting and Data Integrity
 
 ---
 

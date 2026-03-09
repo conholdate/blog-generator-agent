@@ -231,7 +231,7 @@ async def fetch_keywords_auto(topic: str, product_name: str = "", platform:str="
                     "product_name": product_name,
                     "platform": platform
                 })
-                print(f" serp keywords - {result.content[0]}", flush=True)
+                print(f" serp final keywords - {result.content[0]}", flush=True)
                 keywords_data = parse_keywords_response(result.content[0])
 
                 keywords_block = keywords_data.get('keywords', {})

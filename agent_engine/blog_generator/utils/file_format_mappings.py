@@ -98,6 +98,7 @@ FILE_FORMAT_MAPPINGS = {
     "WV": "audio/wv/",
 
     # Cad
+    "CAD": "cad/",
     "AFS": "cad/afs/",
     "AXM": "cad/axm/",
     "BDC": "cad/bdc/",

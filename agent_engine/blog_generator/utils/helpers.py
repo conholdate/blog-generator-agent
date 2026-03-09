@@ -168,13 +168,14 @@ def get_topic_by_index(input_file: str, ind) -> str:
 
 
 def slugify(text: str) -> str:
-    """Convert text into a clean URL slug with C# → csharp normalization."""
+    """Convert text into a clean URL slug with C# → csharp and .NET → dotnet normalization."""
 
     if not text:
         return ""
 
-    # Normalize C# → CSharp BEFORE lowercasing
+    # Normalize special tech terms BEFORE any stripping
     text = text.replace("C#", "CSharp").replace("c#", "CSharp")
+    text = re.sub(r"\.NET", "dotnet", text, flags=re.IGNORECASE)
 
     # Continue with normal slugify steps
     text = text.lower().strip()

@@ -107,20 +107,20 @@ class LLMService:
         prompt: str,
         model: Optional[str] = None,
         temperature: float = 0.7,
-        max_tokens: int = 1000,
+        max_tokens: int = 4000,
         system: Optional[str] = None
     ) -> str:
         """
         Simple completion call using self-hosted LLM (OpenAI-compatible API).
         Best for: Quick corrections, validations, simple generations.
-        
+
         Args:
             prompt: The user prompt/message
             model: Model name (uses default if None)
             temperature: Model temperature
             max_tokens: Maximum tokens in response
             system: Optional system message
-            
+
         Returns:
             The generated text response
         """
@@ -129,67 +129,34 @@ class LLMService:
             if system:
                 messages.append({"role": "system", "content": system})
             messages.append({"role": "user", "content": prompt})
-            
+
             response = await self.openai_client.chat.completions.create(
                 model=model or settings.PROFESSIONALIZE_LLM_MODEL,
                 messages=messages,
                 temperature=temperature,
                 max_tokens=max_tokens
             )
-            
-            # Debug logging - print full response structure
-            print(f"\n🔍 DEBUG: LLM Response received")
-            print(f"   Response type: {type(response)}")
-            print(f"   Has choices: {hasattr(response, 'choices')}")
-            
-            if hasattr(response, 'choices') and response.choices:
-                print(f"   Choices count: {len(response.choices)}")
-                first_choice = response.choices[0]
-                print(f"   First choice type: {type(first_choice)}")
-                print(f"   First choice attributes: {dir(first_choice)}")
-                print(f"   Has message: {hasattr(first_choice, 'message')}")
-                
-                if hasattr(first_choice, 'message'):
-                    msg = first_choice.message
-                    print(f"   Message type: {type(msg)}")
-                    print(f"   Message attributes: {dir(msg)}")
-                    print(f"   Message content: {msg.content}")
-                    print(f"   Message dict: {msg.model_dump() if hasattr(msg, 'model_dump') else 'N/A'}")
-                    
-                    # Check for alternative fields
-                    if hasattr(msg, 'text'):
-                        print(f"   Message.text: {msg.text}")
-                    if hasattr(msg, 'content_text'):
-                        print(f"   Message.content_text: {msg.content_text}")
-                    
-                print(f"   First choice dict: {first_choice.model_dump() if hasattr(first_choice, 'model_dump') else 'N/A'}")
-            
-            print(f"   Full response dict: {response.model_dump() if hasattr(response, 'model_dump') else response}\n")
-            
-            logger.info(f"LLM Response type: {type(response)}")
-            logger.info(f"LLM Response: {response}")
-            
-            # Robust response extraction with validation
+
             if not response or not response.choices:
                 logger.error("Empty response from LLM")
-                logger.error(f"Response object: {response}")
                 raise ValueError("LLM returned empty response")
-            
-            logger.info(f"Choices count: {len(response.choices)}")
-            logger.info(f"First choice: {response.choices[0]}")
-            logger.info(f"Message: {response.choices[0].message}")
-            logger.info(f"Message content: {response.choices[0].message.content}")
-            
+
             content = response.choices[0].message.content
-            
+
+            # Fallback: reasoning models sometimes put output in reasoning_content
+            # when they run out of tokens before producing actual content
             if content is None:
-                logger.error("LLM returned None content")
-                logger.error(f"Full response: {response}")
-                logger.error(f"Response dict: {response.model_dump() if hasattr(response, 'model_dump') else 'N/A'}")
-                raise ValueError("LLM returned None content")
-            
+                provider_fields = getattr(response.choices[0].message, 'provider_specific_fields', {}) or {}
+                reasoning = provider_fields.get('reasoning_content') or provider_fields.get('reasoning')
+                if reasoning:
+                    logger.warning("content was None, falling back to reasoning_content")
+                    content = reasoning
+                else:
+                    logger.error(f"LLM returned None content. Full response: {response.model_dump() if hasattr(response, 'model_dump') else response}")
+                    raise ValueError("LLM returned None content and no reasoning fallback")
+
             return content.strip()
-            
+
         except Exception as e:
             logger.error(f"Completion call failed: {e}")
             raise

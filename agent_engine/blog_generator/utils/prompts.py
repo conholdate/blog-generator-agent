@@ -1109,12 +1109,20 @@ def keyword_filter_prompt(TOPIC, PRODUCT_NAME, KEYWORDS, platform) -> str:
          even if it does not explicitly mention the product name or platform
        - GOOD: relates to "{TOPIC}" even without mentioning product name or platform
        - BAD: mentions unrelated formats, products, or technologies not related to "{TOPIC}"
-       - If platform is NOT 'cloud': EXCLUDE any keyword containing "REST API", "Web API", "Cloud API",
-         "cURL", "online", "web-based", "cloud", "SaaS", "API call", "REST", "endpoint"
+       - If platform is NOT 'cloud': EXCLUDE keywords where the PRIMARY intent is a cloud/REST service
+         (e.g. "Edit PPTX using .NET REST API" where REST API IS the product being advertised)
+         Do NOT discard a keyword merely because it contains the word "API" or "library" in passing
+         Still EXCLUDE keywords containing: "cURL", "online", "web-based", "cloud", "SaaS", "endpoint"
        - If platform IS 'cloud': INCLUDE keywords related to REST APIs, cloud services, online tools
+       - DISCARD any keyword that is a generic FAQ or consumer question with no developer implementation intent
+         Examples to DISCARD: "What is the 5 5 5 rule in PowerPoint?", "Why can't I edit my PPTX?",
+         "How many slides should a presentation have?", "What makes a good presentation?"
+         Examples to KEEP: "How do I edit an existing PPT file programmatically?",
+         "Can a PPTX file be edited with code?", "How to update PPTX slides in .NET?"
 
     STEP 2 — CLEAN:
        - Strip trailing suffixes like "- Blog", "- Tutorial", "- Easy Guide", "- Step by Step", "- Free"
+       - Strip URL fragments (e.g. "https://kb. ..." or any partial/full URL at end of keyword)
        - Max ~60 characters per keyword; trim to core intent if longer
        - Remove duplicate or near-duplicate keywords
        - **REMOVE PRODUCT NAME: Do NOT include "{PRODUCT_NAME}" or any part of it in any keyword**
@@ -1131,12 +1139,17 @@ def keyword_filter_prompt(TOPIC, PRODUCT_NAME, KEYWORDS, platform) -> str:
          * After stripping version, also clean up any leftover colons, dashes, or double spaces
        - **PLATFORM TERM ENFORCEMENT:**
          * Only the platform term "{platform}" is allowed in keywords
-         * REMOVE or DISCARD any keyword containing other platform/language terms
-         * Forbidden terms (when not the current platform): Java, .NET, C#, Node.js, Ruby, PHP, Go, Swift, Kotlin, VB.NET
+         * If platform is ".NET": treat "C#" as an alias for .NET — a keyword containing "C#" alongside
+           valid topic content may be kept, but normalize by removing "C#" and retaining ".NET"
+           (e.g. "Edit PPTX in C# .NET" → "Edit PPTX in .NET")
+         * REMOVE or DISCARD any keyword containing other unrelated platform/language terms
+         * Forbidden terms (when not the current platform): Java, Node.js, Ruby, PHP, Go, Swift, Kotlin, VB.NET
+         * If platform=".NET": also treat standalone "C#" without ".NET" as forbidden — strip or normalize
          * BAD (platform=python): "LaTeX to JPEG conversion .NET"
          * BAD (platform=python): "LaTeX to JPEG Java library"
          * GOOD (platform=python): "LaTeX to JPEG conversion in Python"
          * GOOD (platform=python): "LaTeX to JPEG Python library"
+         * GOOD (platform=.NET): "Edit PPTX in C# .NET" → normalize to "Edit PPTX in .NET"
        - **TOPIC STRICT ENFORCEMENT:**
          * Every keyword must strictly reflect the exact file formats and intent mentioned in TOPIC="{TOPIC}"
          * Extract the exact format names from "{TOPIC}" — only those formats are allowed in keywords
@@ -1149,10 +1162,11 @@ def keyword_filter_prompt(TOPIC, PRODUCT_NAME, KEYWORDS, platform) -> str:
 
     STEP 3 — COUNT AND TOP UP:
        - Count how many keywords you have after STEP 1 and STEP 2
-       - If count is 0, 1, or 2: generate additional keywords until you have exactly 3 or 4
+       - TARGET is exactly 4 keywords — always try to reach 4 before settling for 3
+       - If count is 0, 1, 2, or 3: generate additional keywords until you have exactly 4
        - If count is 0 (all keywords were irrelevant or list was empty):
          * Ignore candidate list entirely
-         * Generate 3-4 fresh keywords using TOPIC="{TOPIC}", PLATFORM="{platform}"
+         * Generate 4 fresh keywords using TOPIC="{TOPIC}", PLATFORM="{platform}"
          * Use the topic as the primary source of intent
          * DO NOT include "{PRODUCT_NAME}" in any generated keyword
        - Generated keywords must be realistic search queries a developer would type
@@ -1161,7 +1175,8 @@ def keyword_filter_prompt(TOPIC, PRODUCT_NAME, KEYWORDS, platform) -> str:
        - If count exceeds 4: keep only the 4 most relevant, discard the rest
        - **GENERATION PLATFORM RULES:**
          * ONLY use "{platform}" as the technology term in generated keywords
-         * NEVER generate keywords containing: Java, .NET, C#, Node.js, Ruby, PHP, Go, Swift, Kotlin
+         * NEVER generate keywords containing: Java, C#, Node.js, Ruby, PHP, Go, Swift, Kotlin
+         * If platform is ".NET", you may use ".NET" only — do not generate "C#" standalone
          * BAD (platform=python): "convert LaTeX to JPEG in .NET"
          * GOOD (platform=python): "convert LaTeX to JPEG in Python"
        - **GENERATION TOPIC RULES:**
@@ -1171,9 +1186,9 @@ def keyword_filter_prompt(TOPIC, PRODUCT_NAME, KEYWORDS, platform) -> str:
          * GOOD (topic="Export LaTeX to JPG"): generate "export LaTeX to JPG in Python"
 
     STEP 4 — FIX CHARACTERS:
-       - \\u2013, \\u2014 (en/em dash) → - (hyphen)
-       - \\u201c, \\u201d, \\u2018, \\u2019 (curly quotes) → straight quotes
-       - \\u2026 (ellipsis) → ...
+       - \u2013, \u2014 (en/em dash) → - (hyphen)
+       - \u201c, \u201d, \u2018, \u2019 (curly quotes) → straight quotes
+       - \u2026 (ellipsis) → ...
        - Replace & with "and"
        - Remove any other Unicode that could break Hugo YAML frontmatter
 
@@ -1181,7 +1196,7 @@ def keyword_filter_prompt(TOPIC, PRODUCT_NAME, KEYWORDS, platform) -> str:
        - Count total keywords one final time — must be between 3 and 4, fix if not
        - Confirm no keyword contains "{PRODUCT_NAME}" — if any does, strip it out
        - Confirm no keyword contains any platform term other than "{platform}"
-         * Scan every keyword for: Java, .NET, C#, Node.js, Ruby, PHP, Go, Swift, Kotlin
+         * Scan every keyword for: Java, .NET (if platform != .NET), C#, Node.js, Ruby, PHP, Go, Swift, Kotlin
          * If found, remove the term or discard and replace the keyword
        - Confirm no keyword contains file formats or terms not present in "{TOPIC}"
          * Re-read "{TOPIC}" and extract the exact format names
@@ -1189,6 +1204,8 @@ def keyword_filter_prompt(TOPIC, PRODUCT_NAME, KEYWORDS, platform) -> str:
        - Confirm no keyword contains version numbers
          * Scan every keyword for patterns like "25.2", "v1.0", "2024.1", any "digits.digits" pattern
          * If found, strip the version number and clean up leftover punctuation
+       - Confirm no keyword is a generic FAQ/consumer question — if found, discard and replace with
+         a developer-intent keyword generated from TOPIC and PLATFORM
        - Return ONLY valid JSON with double quotes, no extra text
 
     **CRITICAL OUTPUT FORMAT:**
@@ -1216,7 +1233,7 @@ def keyword_filter_prompt(TOPIC, PRODUCT_NAME, KEYWORDS, platform) -> str:
     Input: topic="Export LaTeX to JPG", platform="python",
            keywords={{"primary": ["Convert LaTeX to PNG JPG image"], "secondary": [], "long_tail": []}}
     Step 2: "PNG" is not in topic "Export LaTeX to JPG" — strip PNG, keep JPG only
-    Step 3: only 1 keyword remains — generate 2-3 more using topic and platform
+    Step 3: only 1 keyword remains — generate 3 more using topic and platform
     Output: {{"primary": ["Export LaTeX to JPG in Python", "convert LaTeX to JPG in Python"],
               "secondary": ["LaTeX to JPG conversion Python"],
               "long_tail": ["how to export LaTeX to JPG programmatically in Python"]}}
@@ -1227,7 +1244,7 @@ def keyword_filter_prompt(TOPIC, PRODUCT_NAME, KEYWORDS, platform) -> str:
                       "Load and edit PSD file using Aspose.PSD Python"],
                       "long_tail": ["Extract PSD layers using Aspose.PSD in Python"]}}
     Step 1: ALL keywords discarded — PSD/PNG has nothing to do with "AI to PDF Conversion"
-    Step 3: 0 keywords remain — generate 3-4 fresh ones from topic, no product name
+    Step 3: 0 keywords remain — generate 4 fresh ones from topic, no product name
     Output: {{"primary": ["AI to PDF conversion in Python", "convert AI file to PDF in Python"],
               "secondary": ["AI to PDF Python library"],
               "long_tail": ["how to convert AI file to PDF using Python"]}}
@@ -1287,6 +1304,29 @@ def keyword_filter_prompt(TOPIC, PRODUCT_NAME, KEYWORDS, platform) -> str:
     Output: {{"primary": ["Convert 3MF to STL in Java", "3MF to STL Java"],
               "secondary": ["3MF to STL Java library"],
               "long_tail": ["how to export 3MF as STL file in Java"]}}
+
+    Example 10 — Mixed valid, REST API, FAQ, and C# keywords for .NET platform:
+    Input: topic="Update PPTX File", product="Aspose.Slides", platform=".NET",
+           keywords={{"primary": ["Update PPTX File in .NET",
+                                  "Edit PowerPoint Presentations in C# using .NET REST API",
+                                  "Edit PPTX Metadata in C# using .NET REST API https://kb. ...",
+                                  "Groupdocs Editor with PPTX - Free Support Forum"],
+                      "secondary": [],
+                      "long_tail": ["How do I edit an already existing PPT?",
+                                    "What is the 5 5 5 rule in PowerPoint?",
+                                    "Can a PPTX file be edited?",
+                                    "Why can't I edit my PPTX?"]}}
+    Step 1: discard "Groupdocs Editor..." (wrong product), discard "What is the 5 5 5 rule..." (generic FAQ),
+            discard "Why can't I edit my PPTX?" (consumer FAQ, no developer intent),
+            discard "Edit PowerPoint in C# using .NET REST API" (primary intent is REST API service),
+            keep "Update PPTX File in .NET", keep "How do I edit an already existing PPT?" (borderline developer),
+            keep "Can a PPTX file be edited?" (borderline)
+    Step 2: strip URL from "Edit PPTX Metadata in C# using .NET REST API https://kb. ..." → discard (REST API product)
+            normalize "C#" → ".NET" where applicable
+    Step 3: 3 keywords remain — generate 1 more using platform=.NET
+    Output: {{"primary": ["Update PPTX File in .NET", "Edit PPTX in .NET"],
+              "secondary": ["How to update an existing PPTX file in .NET"],
+              "long_tail": ["how to edit PowerPoint slides programmatically in .NET"]}}
 
     Return ONLY the JSON object. No text before or after it.
 """
