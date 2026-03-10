@@ -24,7 +24,7 @@ class Settings(BaseSettings):
     )
     PROFESSIONALIZE_BASE_URL: str ="https://llm.professionalize.com/v1"
     PROFESSIONALIZE_API_KEY_1: SecretStr | None = None
-    PROFESSIONALIZE_API_KEY: str = PROFESSIONALIZE_API_KEY_1
+    PROFESSIONALIZE_API_KEY: str = "sk-xGYZ4MrBB1w50eXNLS0Prw"
 
     # Standard OpenAI key (used when no custom base URL is set)
     OPENAI_API_KEY: str | None = None
@@ -52,7 +52,7 @@ class Settings(BaseSettings):
 
     # --- NEW: Metrics / Google Apps Script webhook ---
     METRICS_WEBHOOK_URL: str = "https://script.google.com/macros/s/AKfycbyCHwElrM6RcYLi0JNQAkJmzGrBjAhf28mKXVyub_6SdaZ2ITvzCwfM5xCLE7rmuxio/exec"
-    METRICS_TOKEN: str = "lM6iU2mW0gV1eZ"
+    METRICS_TOKEN: str = ""
     METRICS_AGENT_NAME: str = "Keyword Analyzer"
     METRICS_AGENT_OWNER: str = "Muzammil Khan"
     METRICS_KEYWORD_CLUSTERING_JOB: str = "Keyword Clustering"
@@ -60,7 +60,7 @@ class Settings(BaseSettings):
 
     # --- Internal Blog Teams Metrics / Google Apps Script webhook ---
     INT_METRICS_WEBHOOK_URL: str = "https://script.google.com/macros/s/AKfycbwYyPBs3ox6xhYfznVpu4Gh8T4l7cXrAIj1m_y1g-vWn6tyP_LAkv3eo6W2EZYAeHgLag/exec"
-    INT_METRICS_TOKEN: str = "blog_team_agent-2026"
+    INT_METRICS_TOKEN: str = "-2026"
 
 settings = Settings()
 
