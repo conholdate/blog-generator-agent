@@ -27,6 +27,25 @@
 
 ---
 
+## 1a. How to Merge PPTX Files in .NET
+- **Cluster ID:** `c9`
+- **Target persona:** .NET developers who need to programmatically merge PowerPoint presentations
+- **Angle:** Step-by-step tutorial for merging PPTX files in .NET
+- **Primary keyword:** `Merge PPTX Files`
+- **Supporting keywords:** `How to Replace PPTX Placeholders`, `Insert Shape into PPTX`, `Delete Slide in PPTX`
+
+**Suggested outline:**
+- How to Merge PPTX Files with GroupDocs.Editor Cloud SDK for .NET
+- Key Features of GroupDocs.Editor Cloud SDK for .NET
+- Installation and Setup in .NET
+- Step-by-Step: How to Merge PPTX Files
+- Configuration Best Practices for PPTX Merging
+- Performance Optimization Tips
+- Error Handling and Troubleshooting
+- Security Considerations for PPTX Files
+
+---
+
 ## 2. GroupDocs Editor Cloud .NET Edit Powerpoint File Example in .NET
 - **Cluster ID:** `c1`
 - **Target persona:** .NET developers looking for concrete code samples to edit PowerPoint files
