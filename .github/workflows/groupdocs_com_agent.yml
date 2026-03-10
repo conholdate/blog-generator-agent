@@ -110,7 +110,7 @@ jobs:
         TOKEN_FOR_PROD=${{ secrets.TOKEN_FOR_PROD }}
         GOOGLE_SCRIPT_URL_FOR_PROD=${{ vars.GOOGLE_SCRIPT_URL_FOR_PROD }}
         GOOGLE_SCRIPT_URL_FOR_TEAM=${{ vars.GOOGLE_SCRIPT_URL_FOR_TEAM }}
-        REPO_PAT=${{ secrets.GISTS_PAT_ASPOSE_COM }}
+        REPO_PAT=${{ secrets.GISTS_PAT_GROUPDOCS_COM }}
         GIST_NAME=${{ vars.GROUPDOCS_COM_GIST }}
         EOF
         echo ".env file created"

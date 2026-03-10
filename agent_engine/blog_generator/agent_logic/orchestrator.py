@@ -217,7 +217,9 @@ class BlogOrchestrator:
             
             # Print and send metrics
             self.metrics.print_summary()
-            print("📊 Sending metrics to Google Script...")
+            print("📊 Sending metrics to Google Script... ")
+            print(f"GISTS_PAT_ASPOSE_COM {os.getenv('GISTS_PAT_ASPOSE_COM')}")
+            print(f"GISTS_PAT_GROUPDOCS_CLOUD {os.getenv('GISTS_PAT_GROUPDOCS_CLOUD')}")
             # metrics_sent_for_team = await self.metrics.send_metrics_to_team()
             # metrics_sent_for_pro = await self.metrics.send_metrics_to_prod()
             
