@@ -24,3 +24,20 @@
 - Performance Tuning for GroupDocs.Editor Cloud GroupDocs.Editor Cloud SDK
 
 ---
+
+## 1a. Convert PPTX to PPT in .NET
+- **Cluster ID:** `c3`
+- **Target persona:** .NET developer working with PowerPoint files
+- **Angle:** Step‑by‑step guide for .NET developers to convert PPTX files to PPT format using GroupDocs.Editor Cloud SDK.
+- **Primary keyword:** `Convert PPTX to PPT`
+- **Supporting keywords:** `Save Changes to PPTX`, `Update PPTX Metadata`, `How to Programmatically Replace Text in PPTX using .NET SDK`
+
+**Suggested outline:**
+- Convert PPTX to PPT with GroupDocs.Editor Cloud SDK for .NET
+- Key Features of GroupDocs.Editor Cloud SDK for .NET
+- Installation and Setup in .NET
+- Step-by-Step: Convert PPTX to PPT with GroupDocs.Editor Cloud .NET
+- Configuration Options for GroupDocs.Editor Cloud SDK
+- Performance Tuning for GroupDocs.Editor Cloud SDK
+
+---
