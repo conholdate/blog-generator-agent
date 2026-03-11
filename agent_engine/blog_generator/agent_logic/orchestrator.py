@@ -72,7 +72,7 @@ class BlogOrchestrator:
         """Let the agent autonomously create a blog with metrics tracking"""
         set_tracing_disabled(disabled=True)
         topics_raw_data = get_topic_by_index(topics_file, index)
-        
+      
         post_topic = topics_raw_data.pop("topic")
        
         product_name = topics_raw_data.pop("product")
