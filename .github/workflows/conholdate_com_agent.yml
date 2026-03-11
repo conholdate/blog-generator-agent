@@ -64,15 +64,17 @@ jobs:
 
     - name: Create runtime .env file with secrets
       run: |
-        echo "PROFESSIONALIZE_API_KEY_2=${{ secrets.PROFESSIONALIZE_API_KEY_2 }}" >> .env
-        echo "PROFESSIONALIZE_BASE_URL=${{ secrets.PROFESSIONALIZE_BASE_URL }}" >> .env
-        echo "PROFESSIONALIZE_LLM_MODEL=${{ secrets.PROFESSIONALIZE_LLM_MODEL }}" >> .env
-        echo "TOKEN_FOR_TEAM=${{ secrets.TOKEN_FOR_TEAM }}" >> .env
-        echo "TOKEN_FOR_PROD=${{ secrets.TOKEN_FOR_PROD }}" >> .env
-        echo "GOOGLE_SCRIPT_URL_FOR_PROD=${{ vars.GOOGLE_SCRIPT_URL_FOR_PROD }}" >> .env
-        echo "GOOGLE_SCRIPT_URL_FOR_TEAM=${{ vars.GOOGLE_SCRIPT_URL_FOR_TEAM }}" >> .env
-        echo "REPO_PAT=${{ secrets.GISTS_PAT_CONHOLDATE_COM }}" >> .env
-        echo "GIST_NAME=${{ vars.CONHOLDATE_COM_GIST }}" >> .env
+        cat > .env << EOF
+        PROFESSIONALIZE_API_KEY_2=${{ secrets.PROFESSIONALIZE_API_KEY_2 }}
+        PROFESSIONALIZE_BASE_URL=${{ secrets.PROFESSIONALIZE_BASE_URL }}
+        PROFESSIONALIZE_LLM_MODEL=${{ secrets.PROFESSIONALIZE_LLM_MODEL }}
+        TOKEN_FOR_TEAM=${{ secrets.TOKEN_FOR_TEAM }}
+        TOKEN_FOR_PROD=${{ secrets.TOKEN_FOR_PROD }}
+        GOOGLE_SCRIPT_URL_FOR_PROD=${{ vars.GOOGLE_SCRIPT_URL_FOR_PROD }}
+        GOOGLE_SCRIPT_URL_FOR_TEAM=${{ vars.GOOGLE_SCRIPT_URL_FOR_TEAM }}
+        REPO_PAT=${{ secrets.GISTS_PAT_CONHOLDATE_COM }}
+        GIST_NAME=${{ vars.CONHOLDATE_COM_GIST }}
+        EOF
         echo ".env file created"
 
     - name: Generate Blog
@@ -93,6 +95,8 @@ jobs:
           --index "${{ inputs.index }}"
         
         echo "✅ Blog generation completed"
+      env:
+        REPO_PAT: ${{ secrets.GISTS_PAT_CONHOLDATE_COM }} 
 
     - name: Find generated blog folder
       id: find_blog
