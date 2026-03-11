@@ -6,13 +6,13 @@
   "ProductURL" : "https://products.conholdate.cloud/total/",
   "DownloadURL" : "https://releases.aspose.cloud/total/",
   "ExternalDownloadURL" : "https://github.com/conholdate-cloud",
-  "DocumentationURL" : "https://docs.aspose.cloud/total/",
+  "DocumentationURL" : "",
   "BlogsURL" : "https://blog.conholdate.cloud/categories/conholdate.total-product-family/",
   "APIReferenceURL" : "https://reference.conholdate.cloud/",
-  "FreeAppsURL" : "https://products.conholdate.app/conversion",
-  "ForumsURL" : "https://forum.conholdate.cloud/c/total/5",
+  "FreeAppsURL" : "https://products.conholdate.app/",
+  "ForumsURL" : "https://forum.conholdate.cloud/",
   "InstallCommand" : "",
   "urlPrefix" : "total",
-  "license":"https://purchase.conholdate.cloud/temporary-license/"
+  "license":"https://purchase.conholdate.cloud/pricing/total"
 }
 ]
