@@ -1,8 +1,8 @@
 [
   {
-  "ProductName" : "Conholdate.Total Cloud",
+  "ProductName" : "Conholdate.Total Cloud SDK for Java",
   "Category" : "Conholdate.Total Cloud Product Family",
-  "ProgrammingLanguage" : "",
+  "ProgrammingLanguage" : "Java",
   "ProductURL" : "https://products.conholdate.cloud/total/",
   "DownloadURL" : "https://releases.aspose.cloud/total/",
   "ExternalDownloadURL" : "https://github.com/conholdate-cloud",
