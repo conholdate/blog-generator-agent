@@ -1,14 +1,14 @@
 ---
 title: "Merge PDF Documents using Java Cloud API"
 seoTitle: "Merge PDF Documents Using Java Cloud API: Complete Guide"
-description: "Learn to merge PDFs with Java using Conholdate.Total Cloud SDK. Follow our step guide with setup, code samples, and REST cURL examples for seamless merging."
-date: Thu, 12 Mar 2026 14:49:59 +0000
-lastmod: Thu, 12 Mar 2026 14:49:59 +0000
+description: "Learn how to merge PDF documents using Java cloud API with Conholdate.Total Cloud SDK for Java. Includes setup, code sample, and cURL commands handling files."
+date: Thu, 12 Mar 2026 14:55:43 +0000
+lastmod: Thu, 12 Mar 2026 14:55:43 +0000
 draft: false
 url: /total/merge-pdf-documents-using-java-cloud-api/
 author: "Muhammad Mustafa"
-summary: "This guide teaches Java developers to merge PDF documents using the Conholdate.Total Cloud SDK for Java. It covers library installation, calling the merge API for many files, and performing the task via REST cURL commands. Full code samples and best practices included."
-tags: ["merge PDF documents using Java cloud api", "merge PDF files in Java", "combine multiple PDFs using Java"]
+summary: "Learn to merge PDF documents using Conholdate.Total Cloud SDK for Java. The guide walks Java developers through installing the library, combining multiple PDFs programmatically, and calling the REST API with cURL. Complete code and best practices are provided."
+tags: ["merge PDF documents using Java cloud api", "merge PDF documents in Java", "combine multiple PDFs using Java"]
 categories: ["Conholdate.Total Cloud Product Family"]
 showtoc: true
 cover:
@@ -16,199 +16,141 @@ cover:
    alt: "Merge PDF Documents using Java Cloud API"
    caption: "Merge PDF Documents using Java Cloud API"
 steps:
-  - "Step 1: Add the Conholdate.Total Cloud SDK for Java dependency to your project."
-  - "Step 2: Initialize the PDF API client with your access credentials."
-  - "Step 3: Upload the source PDF files to the cloud storage."
-  - "Step 4: Call the merge endpoint, passing the list of uploaded files."
-  - "Step 5: Download the merged PDF result and handle any errors."
+  - "Step 1: Install the Conholdate.Total Cloud SDK for Java via Maven"
+  - "Step 2: Configure authentication with your client credentials"
+  - "Step 3: Prepare a list of source PDF files"
+  - "Step 4: Call the merge API method"
+  - "Step 5: Download the merged PDF result"
 faqs:
-  - q: "How can I programmatically merge PDF documents in Java using a cloud API?"
-    a: "Use the Conholdate.Total Cloud SDK for Java to call the merge endpoint. The library handles authentication, file upload, and merging, allowing you to combine PDFs with just a few lines of code."
-  - q: "Is there a way to merge PDF files in Java without writing Java code?"
-    a: "Yes, the same operation can be performed via REST calls. See the cURL example in this article or use any HTTP client to invoke the merge API directly."
-  - q: "Can I combine multiple PDFs using Java and preserve document properties?"
-    a: "The SDK lets you set PDF document properties before merging. Refer to the API reference for methods that modify metadata such as title, author, and keywords."
-  - q: "Where can I find a java PDF merge library example for this task?"
-    a: "The complete code example below demonstrates a java PDF merge library example using Conholdate.Total Cloud SDK for Java. It shows initialization, file upload, merge request, and result download."
+  - q: "Can I merge PDF documents using Java cloud API without writing Java code?"
+    a: "Yes, you can use the REST API directly with cURL or any HTTP client. The cloud service handles the merge operation, so only authentication and file upload are required."
+  - q: "What is the best way to combine multiple PDFs using Java?"
+    a: "Using Conholdate.Total Cloud SDK for Java provides a simple java PDF merge library example that abstracts the HTTP calls and returns the merged document in one step."
+  - q: "How to programmatically merge PDFs in Java with high performance?"
+    a: "The SDK processes files on the server side, reducing memory usage on your machine. Follow the java PDF merge library example in this guide for optimal results."
+  - q: "Is there a limit on the number of PDFs I can merge in a single request?"
+    a: "The cloud API supports merging dozens of files, but very large batches may require splitting. Refer to the official documentation for detailed limits."
 ---
 
 
-Conholdate.Total Cloud SDK for Java empowers developers to programmatically manipulate [PDF](https://docs.fileformat.com/pdf) files in the cloud. This guide demonstrates how to merge PDF documents using Java cloud API, covering everything from project setup to a full working example. By the end you will be able to combine multiple PDFs using Java with just a few API calls.
+[Conholdate.Total Cloud SDK for Java](https://products.conholdate.cloud/total/) enables Java developers to programmatically merge [PDF](https://docs.fileformat.com/pdf) documents using Java cloud API with high performance and reliability. In many enterprise scenarios you need to combine several reports, invoices or contracts into a single PDF file. This guide walks you through installing the library, configuring authentication, and writing code to merge PDF documents using Java cloud API. By the end you will have a reusable solution that can be integrated into any server‑side Java application.
 
 ## Prerequisites and Setup
 
-To follow this tutorial you need:
+To work with the Conholdate.Total Cloud SDK for Java you need:
 
-- Java 8 or higher installed on your development machine.
-- An active Conholdate.Total Cloud account with API credentials (client ID and client secret).
-- Network access to the Conholdate.Total Cloud endpoints.
+- Java 11 or higher installed on your development machine.
+- An active Conholdate.Total Cloud subscription (required for production use).  
+- Access to the cloud API with a client ID and client secret.
 
-Download the latest version from [this page](https://releases.aspose.cloud/total/).
-
-Add the SDK to your project using Maven:
+Download the latest version from [this page](https://releases.aspose.cloud/total/). The SDK is distributed via Maven Central, so add the following dependency to your `pom.xml`:
 
 <!--[CODE_SNIPPET_START]-->
 ```xml
 <dependency>
     <groupId>com.conholdate.total</groupId>
     <artifactId>total-sdk</artifactId>
-    <version>23.12</version>
+    <version>latest</version>
 </dependency>
 ```
 <!--[CODE_SNIPPET_END]-->
 
-If you prefer Gradle, use:
-
-<!--[CODE_SNIPPET_START]-->
-```gradle
-implementation 'com.conholdate.total:total-sdk:23.12'
-```
-<!--[CODE_SNIPPET_END]-->
-
-After adding the dependency, import the required classes in your Java source files.
+After adding the dependency, run `mvn clean install` to resolve it. No additional native binaries are required because the library communicates with the cloud service over HTTPS.
 
 ## Key Features of Conholdate.Total Cloud SDK for Java
 
-The SDK offers a comprehensive set of PDF manipulation capabilities, including:
+- **Unified API** for all supported document formats, including PDF, [DOCX](https://docs.fileformat.com/word-processing/docx/), [XLSX](https://docs.fileformat.com/spreadsheet/xlsx/), [PPTX](https://docs.fileformat.com/presentation/pptx/), and more.  
+- **Server‑side processing** that offloads heavy PDF manipulation to the cloud, reducing local memory consumption.  
+- **Built‑in authentication** using OAuth 2.0 client credentials.  
+- **Batch operations** such as merging, splitting, and converting multiple files in a single request.
 
-- Merging, splitting, and reordering pages.
-- Editing document properties such as title, author, and keywords.
-- Converting PDFs to other formats (e.g., images, [HTML](https://docs.fileformat.com/web/html/)).
-- Secure cloud storage and access control.
-
-These features are exposed through a clean, fluent API that works on any Java platform, from desktop applications to server‑side services.
+These features make it easy to implement a java PDF merge library example that can be called from any Java application, whether it runs on a desktop, a web server, or a microservice.
 
 ## Modify PDF Document Properties in Java using Conholdate.Total Cloud SDK
 
-Before merging, you may want to adjust metadata on each source file. The SDK provides methods like `setTitle`, `setAuthor`, and `setKeywords` that can be called on a `PdfDocument` instance. Changing properties before the merge ensures the final document inherits the desired metadata.
-
-```java
-PdfDocument doc = new PdfDocument();
-doc.setTitle("Quarterly Report");
-doc.setAuthor("Finance Team");
-doc.setKeywords("Q1, Finance, Report");
-```
-
-These adjustments are optional but useful for compliance and document management.
+Beyond merging, the SDK lets you edit metadata, add watermarks, or set permissions on the resulting PDF. For example, you can set the title and author of the merged document before saving it. This flexibility is useful when you need to comply with corporate branding or legal requirements while combining multiple PDFs.
 
 ## Steps to Merge PDF Documents Using Java Cloud API
 
-1. **Create the API client**: Initialize `PdfApi` with your client credentials.  
-   <!--[CODE_SNIPPET_START]-->  
-   ```java
-   PdfApi pdfApi = new PdfApi("YOUR_CLIENT_ID", "YOUR_CLIENT_SECRET");
-   ```  
-   <!--[CODE_SNIPPET_END]-->  
+1. **Create an ApiClient instance**: Initialize the client with your `clientId` and `clientSecret`.  
+   - The client handles token acquisition automatically.  
+2. **Prepare the list of source files**: Upload each PDF to the cloud storage or provide URLs.  
+3. **Call the merge operation**: Use the `PdfApi.mergeDocuments` method, passing the list of file IDs.  
+4. **Download the merged result**: Retrieve the merged PDF stream and save it locally.  
+5. **Handle errors**: Catch `ApiException` to process any HTTP or service errors.
 
-2. **Upload source PDFs**: Use `uploadFile` to place each PDF in cloud storage.  
-   <!--[CODE_SNIPPET_START]-->  
-   ```java
-   String fileId1 = pdfApi.uploadFile("input1.pdf");
-   String fileId2 = pdfApi.uploadFile("input2.pdf");
-   ```  
-   <!--[CODE_SNIPPET_END]-->  
-
-3. **Prepare merge request**: Build a `MergePdfRequest` with the uploaded file IDs.  
-   <!--[CODE_SNIPPET_START]-->  
-   ```java
-   MergePdfRequest request = new MergePdfRequest();
-   request.setFileIds(Arrays.asList(fileId1, fileId2));
-   ```  
-   <!--[CODE_SNIPPET_END]-->  
-
-4. **Execute merge**: Call `mergePdf` to combine the files. The method returns the ID of the merged document.  
-   <!--[CODE_SNIPPET_START]-->  
-   ```java
-   String mergedFileId = pdfApi.mergePdf(request);
-   ```  
-   <!--[CODE_SNIPPET_END]-->  
-
-5. **Download the result**: Retrieve the merged PDF and save it locally.  
-   <!--[CODE_SNIPPET_START]-->  
-   ```java
-   byte[] mergedPdf = pdfApi.downloadFile(mergedFileId);
-   Files.write(Paths.get("merged_output.pdf"), mergedPdf);
-   ```  
-   <!--[CODE_SNIPPET_END]-->  
-
-These steps illustrate how to programmatically merge PDF files in Java using the cloud API.
+For detailed class reference, see the [PDF API documentation](https://reference.conholdate.cloud/).
 
 ## Merge PDF Documents Using Java Cloud API - Complete Code Example
 
-The following example puts all the steps together into a single, runnable program.
+The following example demonstrates a complete end‑to‑end workflow that merges three PDF files stored locally, uploads them to the cloud, merges them, and downloads the final document.
 
-{{< gist "conholdate-cloud-gists" "1069fa33621a860fc73e91f339617f9a" "merge_pdf_documents_using_java_cloud_api_complete_.java" >}}
+{{< gist "conholdate-cloud-gists" "997f04a663ae2322807ecbaa2bd7b8e0" "merge_pdf_documents_using_java_cloud_api_complete_.java" >}}
 
-> **Note:** This code example demonstrates the core functionality. Before using it in your project, make sure to update the file paths (`input1.pdf`, `input2.pdf`, etc.) to match your actual file locations, verify that all required dependencies are properly installed, and test thoroughly in your development environment. If you encounter any issues, please refer to the [official documentation](https://reference.conholdate.cloud/) or reach out to the [support team](https://forum.conholdate.cloud/) for assistance.
+> **Note:** This code example demonstrates the core functionality. Before using it in your project, make sure to update the file paths (`doc1.pdf`, `doc2.pdf`, etc.) to match your actual file locations, verify that all required dependencies are properly installed, and test thoroughly in your development environment. If you encounter any issues, please refer to the [official documentation](https://reference.conholdate.cloud/) or reach out to the [support team](https://forum.conholdate.cloud/) for assistance.
 
 ## Merge PDF Documents via REST API using cURL
 
-If you prefer not to use the Java library, you can call the same service directly through HTTP. The following cURL commands illustrate the complete workflow.
+You can perform the same merge operation without the Java library by calling the REST endpoints directly. This is handy for scripting, CI/CD pipelines, or environments where installing the SDK is not practical.
 
 **1. Authenticate and obtain an access token**
 
-<!--[CODE_SNIPPET_START]-->
 ```bash
 curl -X POST "https://api.conholdate.cloud/v1.0/oauth2/token" \
      -H "Content-Type: application/x-www-form-urlencoded" \
      -d "grant_type=client_credentials&client_id=YOUR_CLIENT_ID&client_secret=YOUR_CLIENT_SECRET"
 ```
-<!--[CODE_SNIPPET_END]-->
 
-**2. Upload the source PDF files**
+**2. Upload source PDF files**
 
-Replace `YOUR_ACCESS_TOKEN` with the token from the previous step.
-
-<!--[CODE_SNIPPET_START]-->
 ```bash
-curl -X POST "https://api.conholdate.cloud/v1.0/storage/file/input1.pdf" \
+curl -X POST "https://api.conholdate.cloud/v1.0/storage/file/doc1.pdf" \
      -H "Authorization: Bearer YOUR_ACCESS_TOKEN" \
-     -F "file=@input1.pdf"
+     -H "Content-Type: application/pdf" \
+     --data-binary "@doc1.pdf"
 ```
-<!--[CODE_SNIPPET_END]-->
 
-Repeat the upload command for `input2.pdf`.
+Repeat the upload command for `doc2.pdf` and `doc3.pdf`.
 
-**3. Execute the merge operation**
+**3. Request the merge operation**
 
-<!--[CODE_SNIPPET_START]-->
 ```bash
 curl -X POST "https://api.conholdate.cloud/v1.0/pdf/merge" \
      -H "Authorization: Bearer YOUR_ACCESS_TOKEN" \
      -H "Content-Type: application/json" \
-     -d '{"fileIds":["input1.pdf","input2.pdf"],"outputFile":"merged_output.pdf"}'
+     -d '{
+           "filePaths": ["doc1.pdf","doc2.pdf","doc3.pdf"],
+           "outputFile": "mergedResult.pdf"
+         }'
 ```
-<!--[CODE_SNIPPET_END]-->
 
 **4. Download the merged PDF**
 
-<!--[CODE_SNIPPET_START]-->
 ```bash
-curl -X GET "https://api.conholdate.cloud/v1.0/storage/file/merged_output.pdf" \
+curl -X GET "https://api.conholdate.cloud/v1.0/storage/file/mergedResult.pdf" \
      -H "Authorization: Bearer YOUR_ACCESS_TOKEN" \
-     -o merged_output.pdf
+     -o mergedResult.pdf
 ```
-<!--[CODE_SNIPPET_END]-->
 
-For a full list of endpoints and parameters, consult the [API reference](https://reference.conholdate.cloud/).
+These cURL commands illustrate the same workflow shown in the Java code example, giving you flexibility to integrate PDF merging into any environment.
 
 ## Conclusion
 
-Merging PDF documents using Java cloud API is straightforward with Conholdate.Total Cloud SDK for Java. The library abstracts authentication, file handling, and the merge operation, letting you focus on business logic. You can also achieve the same result via REST calls, which is useful for scripting or environments where the Java library cannot be installed. Remember to acquire a proper license for production use; pricing details are available on the [Conholdate.Total Cloud SDK for Java](https://products.conholdate.cloud/total/) page, and a temporary trial license can be requested during evaluation.
+Merging PDF documents using Java cloud API becomes straightforward with the [Conholdate.Total Cloud SDK for Java](https://products.conholdate.cloud/total/). The library abstracts authentication, file handling, and the merge request, letting you focus on business logic. For production deployments you must acquire a proper license; pricing details are available on the [license page](https://purchase.conholdate.cloud/pricing/total) and a temporary evaluation license can be requested for testing. Implement the provided code or cURL example to start consolidating PDFs in your Java applications today.
 
 ## FAQs
 
-**How can I programmatically merge PDF documents in Java using a cloud API?**  
-Use the Conholdate.Total Cloud SDK for Java to upload your source files, call the `mergePdf` method, and download the combined result. The same workflow is available through REST calls if you prefer cURL.
+**Can I merge PDF documents using Java cloud API without writing Java code?**  
+Yes, the REST API can be called directly with tools like cURL or any HTTP client library. This approach still uses the same cloud service that powers the Java SDK.
 
-**Can I merge PDF files in Java without writing any code?**  
-Yes, the REST API can be invoked from any HTTP client, including command‑line tools like cURL or Postman. This allows you to merge PDFs without embedding the Java library.
+**What is the difference between merge PDF documents in Java and combine multiple PDFs using Java?**  
+Both phrases describe the same operation; the SDK provides a single `mergeDocuments` method that internally combines multiple PDFs in the order you specify.
 
-**What is the best way to combine multiple PDFs using Java for large documents?**  
-Upload each PDF to cloud storage, then pass the list of file IDs to the merge endpoint. The service processes the files server‑side, which is efficient for large or many documents.
+**Is there a java PDF merge library example that shows error handling?**  
+The complete code example above includes try‑catch blocks for `ApiException` and generic exceptions, demonstrating proper error handling in a java PDF merge library example.
 
-**Where can I find a java PDF merge library example?**  
-The complete code example in this article shows a java PDF merge library example using Conholdate.Total Cloud SDK for Java. Additional samples are available in the official [documentation](https://reference.conholdate.cloud/).
+**How to programmatically merge PDFs in Java when files are large?**  
+Upload the files to cloud storage first; the server performs the merge, so only the upload streams need to handle large sizes, keeping your local memory usage low.
 
 ## Read More
 - [Manipulate PDF Documents using Conholdate.Cloud](https://blog.conholdate.cloud/total/manipulate-pdf-documents/)
