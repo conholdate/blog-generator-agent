@@ -220,19 +220,19 @@ class BlogOrchestrator:
             print("📊 Sending metrics to Google Script... ")
           
         
-            # metrics_sent_for_team = await self.metrics.send_metrics_to_team()
-            # metrics_sent_for_pro = await self.metrics.send_metrics_to_prod()
+            metrics_sent_for_team = await self.metrics.send_metrics_to_team()
+            metrics_sent_for_pro = await self.metrics.send_metrics_to_prod()
             
-            # if metrics_sent_for_team and metrics_sent_for_pro:
-            #     print("Metrics sent successfully\n")
-            # else:
-            #     print("Failed to send metrics (check logs)\n")
+            if metrics_sent_for_team and metrics_sent_for_pro:
+                print("Metrics sent successfully\n")
+            else:
+                print("Failed to send metrics (check logs)\n")
 
-            # self.log("---Execution started---")
-            # self.log(f"Keyword file index -> {topics_raw_data}")
-            # self.log(f"product info {product_info}")
-            # self.log(f" File path: {filepath}")
-            # self.log("---Execution ended---")
+            self.log("---Execution started---")
+            self.log(f"Keyword file index -> {topics_raw_data}")
+            self.log(f"product info {product_info}")
+            self.log(f" File path: {filepath}")
+            self.log("---Execution ended---")
 
             return {
                 "folder_name": folder_name,
