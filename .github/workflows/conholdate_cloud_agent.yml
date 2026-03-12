@@ -1,10 +1,10 @@
-name: Generate Blog Post for conholdate.com
+name: Generate Blog Post for conholdate.cloud
 
 on:
   workflow_dispatch:
     inputs:
       keywords_file:
-        description: 'Keywords File (e.g., content/Conholdate-com/output/449388a2_aspose-cells_java_topics.md)'
+        description: 'Keywords File (e.g., content/Conholdate-cloud/output/449388a2_aspose-cells_java_topics.md)'
         required: true
         type: string
       
@@ -18,6 +18,7 @@ on:
         description: 'Author Name'
         required: true
         type: string
+
 jobs:
   generate:
     runs-on: ubuntu-latest
@@ -40,7 +41,6 @@ jobs:
 
     - name: Clean up old blog folders
       run: |
-        # Remove any existing blog folders to avoid confusion
         echo "=== Cleaning up old blog folders ==="
         find content/blogPosts -type d -name "20??-??-??-*" -exec rm -rf {} + 2>/dev/null || true
         echo "✅ Cleanup completed"
@@ -64,17 +64,15 @@ jobs:
 
     - name: Create runtime .env file with secrets
       run: |
-        cat > .env << EOF
-        PROFESSIONALIZE_API_KEY_2=${{ secrets.PROFESSIONALIZE_API_KEY_2 }}
-        PROFESSIONALIZE_BASE_URL=${{ secrets.PROFESSIONALIZE_BASE_URL }}
-        PROFESSIONALIZE_LLM_MODEL=${{ secrets.PROFESSIONALIZE_LLM_MODEL }}
-        TOKEN_FOR_TEAM=${{ secrets.TOKEN_FOR_TEAM }}
-        TOKEN_FOR_PROD=${{ secrets.TOKEN_FOR_PROD }}
-        GOOGLE_SCRIPT_URL_FOR_PROD=${{ vars.GOOGLE_SCRIPT_URL_FOR_PROD }}
-        GOOGLE_SCRIPT_URL_FOR_TEAM=${{ vars.GOOGLE_SCRIPT_URL_FOR_TEAM }}
-        REPO_PAT=${{ secrets.GISTS_PAT_CONHOLDATE_COM }}
-        GIST_NAME=${{ vars.CONHOLDATE_COM_GIST }}
-        EOF
+        echo "PROFESSIONALIZE_API_KEY_2=${{ secrets.PROFESSIONALIZE_API_KEY_2 }}" >> .env
+        echo "PROFESSIONALIZE_BASE_URL=${{ secrets.PROFESSIONALIZE_BASE_URL }}" >> .env
+        echo "PROFESSIONALIZE_LLM_MODEL=${{ secrets.PROFESSIONALIZE_LLM_MODEL }}" >> .env
+        echo "TOKEN_FOR_TEAM=${{ secrets.TOKEN_FOR_TEAM }}" >> .env
+        echo "TOKEN_FOR_PROD=${{ secrets.TOKEN_FOR_PROD }}" >> .env
+        echo "GOOGLE_SCRIPT_URL_FOR_PROD=${{ vars.GOOGLE_SCRIPT_URL_FOR_PROD }}" >> .env
+        echo "GOOGLE_SCRIPT_URL_FOR_TEAM=${{ vars.GOOGLE_SCRIPT_URL_FOR_TEAM }}" >> .env
+        echo "REPO_PAT=${{ secrets.GISTS_PAT_CONHOLDATE_CLOUD }}" >> .env
+        echo "GIST_NAME=${{ vars.CONHOLDATE_CLOUD_GIST }}" >> .env
         echo ".env file created"
 
     - name: Generate Blog
@@ -83,72 +81,55 @@ jobs:
         cd agent_engine
         cd blog_generator
         echo "=== Starting blog generation ==="
-        echo "Brand: aspose.com"
-        echo "Product: ${{ inputs.product }}"
-        echo "Platform: ${{ inputs.platform }}"
-        echo "Topic: ${{ inputs.topic }}"
-        
+        echo "Brand: conholdate.cloud"
+
         python main.py \
           --keywords_file "${{ inputs.keywords_file }}" \
-          --brand "conholdate.com" \
+          --brand "conholdate.cloud" \
           --author "${{ inputs.author }}" \
           --index "${{ inputs.index }}"
-        
+
         echo "✅ Blog generation completed"
 
     - name: Find generated blog folder
       id: find_blog
       run: |
         echo "=== Searching for generated blog folder ==="
-        
-        # Search specifically in brand directory
-        BRAND_DIR="content/blogPosts/conholdate_com"
-        
+
+        BRAND_DIR="content/blogPosts/conholdate_cloud"
+
         if [ ! -d "$BRAND_DIR" ]; then
           echo "❌ Brand directory not found: $BRAND_DIR"
           exit 1
         fi
-        
-        # Find the most recently created folder
+
         blog_folder=$(find "$BRAND_DIR" -mindepth 1 -maxdepth 1 -type d -name "20??-??-??-*" -mmin -10 -printf '%T@ %p\n' | sort -nr | head -1 | cut -d' ' -f2-)
-        
+
         if [ -z "$blog_folder" ]; then
           echo "❌ No blog folder found in $BRAND_DIR"
           exit 1
         fi
-        
+
         echo "✅ Found: $(basename $blog_folder)"
-        
+
         blog_folder_name=$(basename "$blog_folder")
         echo "blog_folder_name=$blog_folder_name" >> $GITHUB_OUTPUT
         echo "blog_folder_path=$blog_folder" >> $GITHUB_OUTPUT
-
-    - name: Extract product folder name
-      id: product_folder
-      run: |
-        # Convert product name to lowercase and remove "Conholdate." prefix
-        product_folder=$(echo "${{ inputs.product }}" | sed 's/Conholdate\.//g' | tr '[:upper:]' '[:lower:]')
-        echo "product_folder=$product_folder" >> $GITHUB_OUTPUT
-        echo "✅ Product folder name: $product_folder"
 
     - name: Verify blog content before upload
       run: |
         echo "=== Verifying blog content ==="
         BLOG_PATH="${{ steps.find_blog.outputs.blog_folder_path }}"
-        
+
         echo "Blog folder: $BLOG_PATH"
-        echo "Expected brand: conholdate.com"
-        
-        # Check frontmatter for brand indicators
+        echo "Expected brand: conholdate.cloud"
+
         if [ -f "$BLOG_PATH/index.md" ]; then
           echo "--- Frontmatter excerpt ---"
           head -20 "$BLOG_PATH/index.md"
           echo "--- End excerpt ---"
         fi
 
-    ###################################################################
-    # NEW: Commit to THIS repository (content/blogPosts/conholdate_com)
-    ###################################################################
     - name: Commit generated blog to this repository
       env:
         BLOG_FOLDER_NAME: ${{ steps.find_blog.outputs.blog_folder_name }}
@@ -156,195 +137,170 @@ jobs:
       run: |
         git config --global user.email "action@github.com"
         git config --global user.name "GitHub Action"
-        
+
         echo "=== Committing blog to this repository ==="
         echo "Blog folder: $BLOG_FOLDER_PATH"
         echo "Blog folder name: $BLOG_FOLDER_NAME"
-        
-        # Verify the blog folder exists
+
         if [ ! -d "$BLOG_FOLDER_PATH" ]; then
           echo "❌ Blog folder does not exist: $BLOG_FOLDER_PATH"
           exit 1
         fi
-        
-        # Verify index.md exists
+
         if [ ! -f "$BLOG_FOLDER_PATH/index.md" ]; then
           echo "❌ index.md not found in $BLOG_FOLDER_PATH"
           exit 1
         fi
-        
+
         echo "=== Files to be committed ==="
         ls -la "$BLOG_FOLDER_PATH"
-        
-        # Add the generated blog folder
+
         git add "$BLOG_FOLDER_PATH"
-        
-        # Check if there are changes to commit
+
         if git diff --staged --quiet; then
           echo "ℹ️  No changes to commit - blog may already exist"
         else
           echo "=== Changes to be committed ==="
           git status --short
           git diff --staged --stat
-          
-          # Commit the changes
+
           git commit -m "Add generated blog post: $BLOG_FOLDER_NAME
 
           Author: ${{ inputs.author }}
           Path: $BLOG_FOLDER_PATH
           Generated: $(date -u +'%Y-%m-%d %H:%M:%S UTC')
           Workflow Run: ${{ github.run_number }}"
-                    
-                    # Push to the current branch
-                    git push origin HEAD
-                    
-                    echo "✅ Blog committed and pushed successfully to this repository"
-                    echo "   Location: $BLOG_FOLDER_PATH"
-                  fi
-                  
+
+          git push origin HEAD
+
+          echo "✅ Blog committed and pushed successfully to this repository"
+          echo "   Location: $BLOG_FOLDER_PATH"
+        fi
+
     - name: Upload Generated Blog as Artifact
       uses: actions/upload-artifact@v4
       with:
-        name: generated-blog-conholdate-${{ github.run_number }}
+        name: generated-blog-conholdate-cloud-${{ github.run_number }}
         path: ${{ steps.find_blog.outputs.blog_folder_path }}
         if-no-files-found: error
+
     ####################################################################
-    # Create Pull Request in blog-conholdate-com repo
+    # Create Pull Request in blog.conholdate.cloud repo
     ####################################################################
-    - name: Create Pull Request in blog.conholdate.com repo
+    - name: Create Pull Request in blog.conholdate.cloud repo
       if: success()
       env:
         BLOG_FOLDER_NAME: ${{ steps.find_blog.outputs.blog_folder_name }}
         BLOG_FOLDER_PATH: ${{ steps.find_blog.outputs.blog_folder_path }}
-        GH_TOKEN: ${{ secrets.REPO_PAT }}
+        GH_TOKEN: ${{ secrets.REPO_PAT_CONHOLDATE_CLOUD }}
       run: |
         git config --global user.email "action@github.com"
         git config --global user.name "GitHub Action"
 
-        if [ -z "${{ secrets.REPO_PAT }}" ]; then
-          echo "❌ REPO_PAT is EMPTY! Fix your repo secret."
+        if [ -z "${{ secrets.REPO_PAT_CONHOLDATE_CLOUD }}" ]; then
+          echo "❌ REPO_PAT_CONHOLDATE_CLOUD is EMPTY! Fix your repo secret."
           exit 1
         fi
 
-        echo "Cloning conholdate-blog repo..."
-        git clone https://x-access-token:${{ secrets.REPO_PAT }}@github.com/conholdate/conholdate-blog.git conholdate-blog || {
+        echo "Cloning blog.conholdate.cloud repo..."
+        git clone https://x-access-token:${{ secrets.REPO_PAT_CONHOLDATE_CLOUD }}@github.com/conholdate-cloud/blog.conholdate.cloud.git conholdate-cloud-blog || {
           echo "❌ Failed to clone repo — invalid PAT or wrong GitHub account."
           exit 1
         }
 
-        cd conholdate-blog
-        
-        # Ensure we're on the correct base branch
+        cd conholdate-cloud-blog
+
         git checkout main
         git pull origin main
-        
-        # Create the target directory structure if it doesn't exist
+
         TARGET_DIR="content/Conholdate.Total/total"
         mkdir -p "$TARGET_DIR"
         echo "✅ Target directory: $TARGET_DIR"
-        
-        # Create a new branch for this blog post
+
         BRANCH_NAME="blog/total/$BLOG_FOLDER_NAME"
-        
-        # Check if branch exists remotely and delete it
+
         if git ls-remote --heads origin "$BRANCH_NAME" | grep -q "$BRANCH_NAME"; then
           echo "⚠️  Branch $BRANCH_NAME already exists remotely. Deleting..."
           git push origin --delete "$BRANCH_NAME" || echo "Could not delete remote branch (may not exist)"
         fi
-        
-        # Delete local branch if it exists
+
         git branch -D "$BRANCH_NAME" 2>/dev/null || true
-        
-        # Create fresh branch from main
         git checkout -b "$BRANCH_NAME" main
-        
+
         echo "Copying blog folder: $BLOG_FOLDER_NAME to $TARGET_DIR"
-        
-        # FIXED: Get absolute path to blog folder correctly
+
         WORKFLOW_DIR=$(pwd)
         cd ..
         REPO_ROOT=$(pwd)
         BLOG_ABS_PATH="$REPO_ROOT/$BLOG_FOLDER_PATH"
-        
+
         echo "Repository root: $REPO_ROOT"
         echo "Blog relative path: $BLOG_FOLDER_PATH"
         echo "Blog absolute path: $BLOG_ABS_PATH"
-        
-        # Verify source exists before copying
+
         if [ ! -d "$BLOG_ABS_PATH" ]; then
           echo "❌ Source blog folder does not exist: $BLOG_ABS_PATH"
-          echo "Checking what exists in content/blogPosts/conholdate_com:"
-          ls -la "$REPO_ROOT/content/blogPosts/conholdate_com/" || echo "Directory doesn't exist"
+          echo "Checking what exists in content/blogPosts/conholdate_cloud:"
+          ls -la "$REPO_ROOT/content/blogPosts/conholdate_cloud/" || echo "Directory doesn't exist"
           exit 1
         fi
-        
+
         cd "$WORKFLOW_DIR"
-        
-        # Copy the blog folder to the correct product directory
+
         cp -r "$BLOG_ABS_PATH" "$TARGET_DIR/" || {
           echo "❌ Failed to copy folder from $BLOG_ABS_PATH to $TARGET_DIR"
           exit 1
         }
-        
-        # Verify the copy was successful
+
         if [ ! -d "$TARGET_DIR/$BLOG_FOLDER_NAME" ]; then
           echo "❌ Blog folder was not copied successfully"
           echo "Target contents:"
           ls -la "$TARGET_DIR"
           exit 1
         fi
-        
+
         echo "✅ Blog folder copied successfully"
         echo "=== Target folder contents ==="
         ls -la "$TARGET_DIR/$BLOG_FOLDER_NAME"
-        
-        # Add only the new blog folder
+
         git add "$TARGET_DIR/$BLOG_FOLDER_NAME"
-        
-        # Check what's being committed
+
         echo "=== Files to be committed ==="
         git status --short
-        
+
         if git diff --staged --quiet; then
           echo "ℹ️  No new files to commit"
           exit 0
         fi
-        
-        # Show diff summary
+
         echo "=== Commit summary ==="
         git diff --staged --stat
-        
-        # Commit the changes
+
         git commit -m "Add generated blog: $BLOG_FOLDER_NAME" || {
           echo "❌ Failed to commit changes"
           exit 1
         }
-        
-        # Show last commit
+
         echo "=== Last commit ==="
         git log -1 --oneline
-        
-        # Push the branch (force push since we deleted and recreated)
+
         git push -u origin "$BRANCH_NAME" --force || {
           echo "❌ Failed to push branch."
           exit 1
         }
-        
+
         echo "✅ Branch $BRANCH_NAME pushed successfully"
-        
-        # Wait for GitHub to process the push
+
         sleep 2
-        
-        # Check if PR already exists for this branch
-        EXISTING_PR=$(gh pr list --repo conholdate/conholdate-blog --head "$BRANCH_NAME" --json number --jq '.[0].number' 2>/dev/null || echo "")
-        
+
+        EXISTING_PR=$(gh pr list --repo conholdate-cloud/blog.conholdate.cloud --head "$BRANCH_NAME" --json number --jq '.[0].number' 2>/dev/null || echo "")
+
         if [ -n "$EXISTING_PR" ]; then
           echo "ℹ️  PR #$EXISTING_PR already exists for this branch"
-          echo "PR URL: https://github.com/conholdate/conholdate-blog/pull/$EXISTING_PR"
+          echo "PR URL: https://github.com/conholdate-cloud/blog.conholdate.cloud/pull/$EXISTING_PR"
         else
-          # Create Pull Request using GitHub CLI
           gh pr create \
-            --repo conholdate/conholdate-blog \
+            --repo conholdate-cloud/blog.conholdate.cloud \
             --base main \
             --head "$BRANCH_NAME" \
             --title "Add blog post: $BLOG_FOLDER_NAME" \
@@ -356,7 +312,7 @@ jobs:
 
           **Generated by:** GitHub Actions (Run #${{ github.run_number }})
           **Workflow:** ${{ github.workflow }}
-          **Brand:** conholdate.com
+          **Brand:** conholdate.cloud
 
           ---
 
@@ -369,10 +325,9 @@ jobs:
 
           Please review and merge if the content looks good!" || {
             echo "❌ Failed to create pull request."
-            echo "Attempting to show branch diff..."
             git log origin/main..$BRANCH_NAME --oneline
             exit 1
           }
-          
+
           echo "✅ Pull request created successfully!"
         fi
