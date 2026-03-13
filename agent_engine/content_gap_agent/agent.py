@@ -196,7 +196,8 @@ def run_coverage(settings: CoverageSettings, req: CoverageRunRequest) -> Dict[st
 
     website = req.brand_site
     website_section = nor_website_section_from_case(req.case)
-    item_name = f"{req.case}"
+    # item_name = f"{req.case}"
+    item_name = "Articles"
 
     # Resolve output directory early (deterministic)
     out_dir = _coverage_out_dir(settings, req.brand_key, req.product_key, req.case, req.baseline_platform)
