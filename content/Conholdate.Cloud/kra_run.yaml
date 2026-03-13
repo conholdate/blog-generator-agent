@@ -2,24 +2,24 @@
 # KRA run configuration for Conholdate.Total (C#)
 
 meta:
-  blog_name: "conholdate.com"
-  brand: "Conholdate"
+  blog_name: "conholdate.cloud"
+  brand: "Conholdate.Cloud"
   created_at: "2025-12-04"
   owner: "content-team"         # optional, just for humans
 
 engine:
   # === Core KRA inputs ===
-  # input_file: "content/Conholdate/keywords.csv"
+  # input_file: "content/Conholdate.Cloud/keywords.csv"
 
-  use-serp-api: true
-  # use-llm-keywords: true
+  # use-serp-api: true
+  use-llm-keywords: true
   serp-topic: "Convert CDR to PNG in .NET"
 
-  # missing_topics_file: "content/Conholdate/aspose-3d_all_missing_topics.md"
+  # missing_topics_file: "content/Conholdate.Cloud/aspose-3d_all_missing_topics.md"
   # missing_topic_row: 5
 
-  brand: "Conholdate"
-  product: "Conholdate.Total"
+  brand: "Conholdate.Cloud"
+  product: "Conholdate.Cloud"
   platform: "c#"           # used as --platform; also passed into prompt as fw_label
   locale: "en-US"
   # use_llm_keywords: true  # skip SerpAPI and use the built-in LLM keyword generator
@@ -30,7 +30,7 @@ engine:
   max_rows: 50000               # --max-rows
   use_content_index: true       # if false, we skip existing_topics lookup
   debug: false                  # optional, you can map this to LOG_LEVEL/DEBUG flag
-  output_dir: "content/Conholdate/output"
+  output_dir: "content/Conholdate.Cloud/output"
 
 content_index:
   # Where the blog content lives locally for directory search
@@ -42,6 +42,6 @@ content_index:
 
   # Optional metadata about the source repo (not used by KRA yet,
   # but good to document and later automate pulls)
-  repo_url: "https://github.com/conholdate/conholdate-blog"
+  repo_url: "https://github.com/conholdate-cloud/blog.conholdate.cloud"
   branch: "main"
-  subdir: "/content/Conholdate.Total"                   # or "blog/content" if content is under a subfolder
+  subdir: "/content/Conholdate.Cloud/total"                   # or "blog/content" if content is under a subfolder

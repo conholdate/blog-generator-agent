@@ -3,7 +3,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Optional, Tuple
 
-from .normalize import normalize_text
+from .normalization import normalize_text
 
 
 @dataclass(frozen=True)

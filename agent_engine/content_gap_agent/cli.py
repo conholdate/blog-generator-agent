@@ -6,7 +6,7 @@ from typing import Any, Dict, Optional
 
 import yaml
 
-from agent_engine.content_gap_agent.tools.normalize import nor_website_domain
+from .tools.normalization import nor_website_domain
 from .settings import CoverageSettings
 from .agent import CoverageRunRequest, run_sync
 from .tools.logging_utils import get_logger

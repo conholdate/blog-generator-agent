@@ -15,7 +15,11 @@ def build_command(engine: Dict[str, Any]) -> list[str]:
     """
     Build the CLI command to run the KRA runner.
 
-    - If engine.use_serp_api / use-serp-api is truthy:
+    - If engine.missing_topics_file is set:
+        - process a missing-topics markdown row via --missing-topics-file and --missing-topic-row
+    - Else if engine.use_llm_keywords / use-llm-keywords is truthy:
+        - skip SerpAPI and use the built-in LLM keyword generator
+    - Else if engine.use_serp_api / use-serp-api is truthy:
         - use SerpAPI ingestion: pass --use-serp-api and optional --serp-topic
     - Otherwise:
         - require engine.input_file and pass --file <path>
@@ -26,12 +30,40 @@ def build_command(engine: Dict[str, Any]) -> list[str]:
         "agent_engine.blog_keyword_analyzer.runner",
     ]
 
-    # Support both snake_case and kebab-case keys in kra_run.yaml
+    missing_topics_file = engine.get("missing_topics_file") or engine.get("missing-topics-file")
+    missing_topic_row = engine.get("missing_topic_row") or engine.get("missing-topic-row")
+    use_llm_keywords = bool(engine.get("use_llm_keywords") or engine.get("use-llm-keywords"))
     use_serp_api = bool(engine.get("use_serp_api") or engine.get("use-serp-api"))
 
-    if use_serp_api:
+    if use_llm_keywords and use_serp_api:
+        raise SystemExit(
+            "Use only one of engine.use_llm_keywords or engine.use_serp_api in kra_run.yaml."
+        )
+
+    if missing_topics_file:
+        cmd.extend(["--missing-topics-file", str(missing_topics_file)])
+        if not missing_topic_row:
+            raise SystemExit(
+                "engine.missing_topic_row is required in kra_run.yaml when missing_topics_file is set."
+            )
+        cmd.extend(["--missing-topic-row", str(missing_topic_row)])
+        if use_llm_keywords:
+            cmd.append("--use-llm-keywords")
+        elif use_serp_api:
+            cmd.append("--use-serp-api")
+    elif use_serp_api:
         # Flag only, no value
         cmd.append("--use-serp-api")
+
+        serp_topic = (
+            engine.get("serp_topic")
+            or engine.get("serp-topic")
+            or ""
+        )
+        if serp_topic:
+            cmd.extend(["--serp-topic", serp_topic])
+    elif use_llm_keywords:
+        cmd.append("--use-llm-keywords")
 
         serp_topic = (
             engine.get("serp_topic")
@@ -44,7 +76,7 @@ def build_command(engine: Dict[str, Any]) -> list[str]:
         input_file = engine.get("input_file")
         if not input_file:
             raise SystemExit(
-                "engine.input_file is required in kra_run.yaml when use_serp_api is false."
+                "engine.input_file is required in kra_run.yaml when both use_serp_api and use_llm_keywords are false."
             )
         cmd.extend(["--file", input_file])
 
@@ -68,22 +100,19 @@ def build_command(engine: Dict[str, Any]) -> list[str]:
     if platform:
         cmd.extend(["--platform", platform])
 
+    include_product_in_title = engine.get("include_product_in_title")
+    if include_product_in_title is None:
+        include_product_in_title = engine.get("include-product-in-title")
+    if include_product_in_title is not None:
+        if bool(include_product_in_title):
+            cmd.append("--include-product-in-title")
+        else:
+            cmd.append("--no-product-in-title")
+
     # Optional: if your CLI supports --no-content-index
     use_content_index = bool(engine.get("use_content_index", True))
     if not use_content_index:
         cmd.append("--no-content-index")
-
-    # NEW: include_product_in_title flag (default True)
-    # Support both snake_case and kebab-case keys in kra_run.yaml
-    include_product_in_title = engine.get("include_product_in_title")
-    if include_product_in_title is None:
-        include_product_in_title = engine.get("include-product-in-title")
-    # Default to True if not specified
-    include_product_in_title = True if include_product_in_title is None else bool(include_product_in_title)
-
-    # Only pass a flag when turning it OFF (since CLI default is True)
-    if not include_product_in_title:
-        cmd.append("--no-product-in-title")
 
     return cmd
 

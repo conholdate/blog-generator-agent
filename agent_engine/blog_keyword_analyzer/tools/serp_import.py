@@ -7,6 +7,7 @@ from typing import Iterable, List, Optional, Tuple
 import requests
 
 from ..config import settings
+from agent_engine.blog_keyword_analyzer.tools.normalization import normalize_display_text, normalize_platform_mentions
 from ..schemas import KeywordRecord
 
 
@@ -35,6 +36,7 @@ def _locale_to_hl_gl(locale: str) -> Tuple[str, str]:
 _BULLET_SEPARATORS = re.compile(r"[\u00b7•|]+")  # · • |
 _SENTENCE_SPLIT = re.compile(r"[.!?؛;:\n]+")
 _WHITESPACE = re.compile(r"\s+")
+_TOKEN_RE = re.compile(r"[a-z0-9.+#]+")
 # Common “noise” suffixes seen in SERP snippets/titles (tune over time)
 _NOISE_SUFFIX = re.compile(
     r"""
@@ -59,6 +61,12 @@ _NOISE_SUFFIX = re.compile(
 _MIN_WORDS = 3
 _MAX_WORDS = 14
 _MAX_CHARS = 120
+_STOPWORDS = {
+    "a", "an", "and", "api", "best", "by", "file", "files", "for", "from", "guide",
+    "how", "in", "into", "of", "on", "or", "the", "to", "tutorial", "using", "with",
+}
+_BRAND_TOKENS = {"aspose", "groupdocs", "conholdate", "adobe", "acrobat"}
+_ENDING_VERBS = {"add", "edit", "replace", "update", "convert", "render", "save", "merge", "split"}
 
 
 def _clean_text(s: str) -> str:
@@ -261,6 +269,115 @@ def _dedupe_preserve_order(items: Iterable[str]) -> List[str]:
     return out
 
 
+def _product_brand_tokens(product: str) -> set[str]:
+    return set(_TOKEN_RE.findall((product or "").lower()))
+
+
+def _topic_anchor_tokens(topic: str) -> set[str]:
+    tokens = set()
+    for token in _TOKEN_RE.findall((topic or "").lower()):
+        if len(token) <= 1 or token in _STOPWORDS:
+            continue
+        tokens.add(token)
+    return tokens
+
+
+def _mentions_unrelated_brand(phrase: str, product: str) -> bool:
+    phrase_tokens = set(_TOKEN_RE.findall((phrase or "").lower()))
+    allowed = _product_brand_tokens(product)
+    for brand in _BRAND_TOKENS:
+        if brand in phrase_tokens and brand not in allowed:
+            return True
+    return False
+
+
+def _is_relevant_phrase(phrase: str, topic: str, product: str) -> bool:
+    phrase_tokens = set(_TOKEN_RE.findall((phrase or "").lower()))
+    if not phrase_tokens:
+        return False
+    if _mentions_unrelated_brand(phrase, product):
+        return False
+
+    anchors = _topic_anchor_tokens(topic)
+    if not anchors:
+        return True
+
+    return bool(phrase_tokens.intersection(anchors))
+
+
+def _strip_product_noise(phrase: str, product: str) -> str:
+    out = phrase
+    variants = {product, product.replace(".", " "), product.replace(" ", ".")}
+    for v in variants:
+        v = (v or "").strip()
+        if not v:
+            continue
+        out = re.sub(rf"(?i)(?<!\w){re.escape(v)}(?!\w)", " ", out)
+    out = re.sub(r"(?i)\bcloud\s+sdk\b", " ", out)
+    out = re.sub(r"(?i)\bsdk\b", " ", out)
+    out = re.sub(r"(?i)\bcloud\b", " ", out)
+    out = re.sub(r"(?i)\bapi\b", " ", out)
+    return re.sub(r"\s{2,}", " ", out).strip()
+
+def _normalize_action_phrases(phrase: str) -> str:
+    out = phrase
+    replacements = [
+        (r"(?i)\btext replace\b", "replace text"),
+        (r"(?i)\bslide add\b", "add slide"),
+        (r"(?i)\bslides add\b", "add slides"),
+        (r"(?i)\bfile update\b", "update file"),
+        (r"(?i)\bpptx update\b", "update PPTX"),
+        (r"(?i)\bpptx edit\b", "edit PPTX"),
+        (r"(?i)\bpptx convert\b", "convert PPTX"),
+    ]
+    for pattern, repl in replacements:
+        out = re.sub(pattern, repl, out)
+    return re.sub(r"\s{2,}", " ", out).strip()
+
+
+def _collapse_duplicate_words(phrase: str) -> str:
+    words = phrase.split()
+    if not words:
+        return ""
+    collapsed = [words[0]]
+    for word in words[1:]:
+        if word.lower() == collapsed[-1].lower():
+            continue
+        collapsed.append(word)
+    out = " ".join(collapsed)
+    out = re.sub(r"(?i)\b(\.net)\s+in\s+\1\b", r"\1", out)
+    out = re.sub(r"(?i)\bin\s+(\.net)\s+in\s+\1\b", r"in \1", out)
+    return out.strip()
+
+
+def _looks_malformed(phrase: str) -> bool:
+    low = phrase.lower()
+    if re.search(r"(?i)\bwith in\b|\bin in\b", low):
+        return True
+    if low.count(".net") > 1 or low.count("node.js") > 1 or low.count("c++") > 1:
+        return True
+    tokens = _TOKEN_RE.findall(low)
+    if tokens and tokens[-1] in _ENDING_VERBS:
+        return True
+    if re.search(r"(?i)\b(powerpoint|pptx|text|slide|file)\s+(add|edit|replace|update|convert)\b", low):
+        return True
+    return False
+
+
+def _sanitize_phrase(phrase: str, topic: str, product: str, platform: Optional[str]) -> str:
+    out = _clean_text(phrase)
+    out = _strip_product_noise(out, product)
+    out = _normalize_action_phrases(out)
+    out = normalize_platform_mentions(out, platform)
+    out = _collapse_duplicate_words(out)
+    out = re.sub(r"\s{2,}", " ", out).strip(" -,:;")
+    if _looks_malformed(out):
+        return ""
+    if not _is_relevant_phrase(out, topic, product):
+        return ""
+    return normalize_display_text(out)
+
+
 # ----------------------------
 # Main fetch
 # ----------------------------
@@ -345,7 +462,7 @@ def fetch_serp_keywords(
     for c in candidates:
         c = _clean_text(c)
         c = _trim_noise_suffix(c)
-        c = _clean_text(c)
+        c = _sanitize_phrase(c, topic, product, platform)
 
         if not c:
             continue

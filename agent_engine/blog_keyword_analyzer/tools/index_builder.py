@@ -1,14 +1,15 @@
-# src/agent_engine/kra/blog_index_builder.py
+# Legacy utility for building a JSON snapshot of blog metadata.
+# The active runtime path uses directory_search/content_index directly.
 from __future__ import annotations
 
 import json
-import re
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
 import yaml  # pip install pyyaml
 
-from ..config import settings, platform_PATTERNS
+from ..config import settings
+from agent_engine.blog_keyword_analyzer.tools.normalization import detect_blog_platform_keys_in_text
 
 
 class FrontMatterError(Exception):
@@ -41,30 +42,11 @@ def detect_platforms_from_front_matter(fm: Dict[str, Any]) -> List[str]:
         if isinstance(value, list):
             chunks.extend(str(item) for item in value)
 
-    combined = " ".join(chunks).lower()
-
-    detected: List[str] = []
-    for fw, patterns in platform_PATTERNS.items():
-        for p in patterns:
-            if p in combined:
-                detected.append(fw)
-                break  # stop on first match for this platform
-
-    # De-duplicate while preserving order
-    seen: set[str] = set()
-    unique: List[str] = []
-    for fw in detected:
-        if fw not in seen:
-            seen.add(fw)
-            unique.append(fw)
-
+    combined = " ".join(chunks)
+    detected = detect_blog_platform_keys_in_text(combined)
     if settings.DEBUG:
-        # Optional: uncomment if you want to debug per-post
-        # print("DEBUG platforms combined text:", combined)
-        # print("DEBUG platforms detected:", unique)
         pass
-
-    return unique
+    return detected
 
 # -------------------------------------------------------------------
 # Front matter parsing & metadata
@@ -237,7 +219,7 @@ def main() -> None:
 
     Usage (from project root):
 
-        python -m agents.kra.blog_index_builder
+        python -m agent_engine.blog_keyword_analyzer.tools.index_builder
     """
     print(f"📂 Scanning blog content root: {settings.BLOG_CONTENT_ROOT}")
     entries = build_blog_index()

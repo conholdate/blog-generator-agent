@@ -7,16 +7,16 @@ import logging
 import re
 import time
 import uuid
+from dataclasses import dataclass
 from datetime import datetime, timezone
 from pathlib import Path
 from statistics import mean
 from typing import Optional, List, Mapping, Any, Dict, Tuple
 
 import requests
-from .tools.keyword_refiner import KeywordRefiner
 from .metrics_sender import send_stage_metrics
 from .tools.content_index import get_existing_posts
-from .schemas import RunRequest, RunResult, Cluster, KeywordRecord
+from .schemas import RunRequest, RunResult, Cluster, ClusterMetrics, KeywordRecord
 from .agent import KeywordResearchAgent
 from .tools.file_import import import_file
 from .tools.preprocess import preprocess
@@ -26,9 +26,156 @@ from .tools.scoring import score_clusters
 from .config import settings, BRAND_METRICS
 from .tools.metrics import RunMetrics, timed_step
 from .blog_keyword_generator import LLMKeywordGenRequest, fetch_llm_keywords
+from agent_engine.blog_keyword_analyzer.tools.normalization import (
+    KeywordRefiner,
+    canonical_blog_platform_key,
+    canonical_platform_label,
+    normalize_missing_platform,
+)
 
 logger = logging.getLogger(__name__)
 refiner = KeywordRefiner()
+
+
+def _keyword_intent_key(text: str) -> str:
+    s = " ".join((text or "").strip().split()).lower()
+    s = re.sub(r"(?i)^(tutorial|guide|example|examples|code sample|sample)\s*:\s*", "", s)
+    s = re.sub(r"(?i)\b(how to|tutorial|guide|example|examples|code sample|sample)\b", " ", s)
+    s = re.sub(r"[^a-z0-9.+#]+", " ", s)
+    s = re.sub(r"\s{2,}", " ", s).strip()
+    return s
+
+
+def _seed_anchor_tokens(text: str) -> set[str]:
+    stopwords = {
+        "a", "an", "and", "api", "best", "by", "file", "files", "for", "from", "guide",
+        "how", "in", "into", "of", "on", "or", "the", "to", "tutorial", "using", "with",
+    }
+    return {
+        token for token in re.findall(r"[a-z0-9.+#]+", (text or "").lower())
+        if len(token) > 1 and token not in stopwords
+    }
+
+
+def _platform_phrase(platform: Optional[str]) -> str:
+    return canonical_platform_label(platform)
+
+
+def _focus_records_for_seed_topic(
+    records: List[KeywordRecord],
+    *,
+    seed_topic: Optional[str],
+    platform: Optional[str],
+    locale: str,
+) -> List[KeywordRecord]:
+    if not seed_topic:
+        return records
+
+    anchors = _seed_anchor_tokens(seed_topic)
+    if not anchors:
+        return records
+
+    required_overlap = 2 if len(anchors) >= 3 else 1
+    focused: List[KeywordRecord] = []
+    for record in records:
+        text = " ".join((record.keyword or "").strip().split())
+        tokens = set(re.findall(r"[a-z0-9.+#]+", text.lower()))
+        if len(tokens.intersection(anchors)) >= required_overlap:
+            focused.append(record)
+
+    if len(focused) >= 3:
+        return focused
+
+    label = _platform_phrase(platform)
+    seed_clean = " ".join((seed_topic or "").strip().split())
+    synthetic_keywords = [seed_clean]
+    if label and label.lower() not in seed_clean.lower():
+        synthetic_keywords.extend([
+            f"{seed_clean} in {label}",
+            f"How to {seed_clean} in {label}",
+            f"{seed_clean} using {label}",
+        ])
+    else:
+        synthetic_keywords.extend([
+            f"How to {seed_clean}",
+            f"{seed_clean} tutorial",
+        ])
+
+    synthetic_records = [
+        KeywordRecord(
+            keyword=kw,
+            source="llm",
+            locale=locale,
+            volume=None,
+            cpc=None,
+            kd=None,
+            clicks=None,
+            url=None,
+            competition=None,
+            competition_label=None,
+        )
+        for kw in synthetic_keywords
+    ]
+
+    merged: List[KeywordRecord] = []
+    seen = set()
+    for record in focused + synthetic_records:
+        key = _keyword_intent_key(record.keyword)
+        if not key or key in seen:
+            continue
+        seen.add(key)
+        merged.append(record)
+    return merged
+
+
+@dataclass(frozen=True)
+class MissingTopicSelection:
+    brand: str
+    product: str
+    topic: str
+    row_index: int
+    platforms: List[str]
+
+
+def _parse_missing_topics_selection(path: Path, row_index: int) -> MissingTopicSelection:
+    text = path.read_text(encoding="utf-8")
+
+    brand_match = re.search(r"^- \*\*Brand:\*\*\s*(.+?)\s*$", text, re.MULTILINE)
+    product_match = re.search(r"^- \*\*Product:\*\*\s*(.+?)\s*$", text, re.MULTILINE)
+    if not brand_match or not product_match:
+        raise ValueError(f"Brand/Product metadata not found in missing topics file: {path}")
+
+    table_row_re = re.compile(
+        r"^\|\s*(\d+)\s*\|\s*(.*?)\s*\|\s*(.*?)\s*\|\s*$",
+        re.MULTILINE,
+    )
+    selected_topic: Optional[str] = None
+    selected_platforms: List[str] = []
+
+    for match in table_row_re.finditer(text):
+        current_row = int(match.group(1))
+        if current_row != row_index:
+            continue
+
+        selected_topic = match.group(2).strip()
+        platform_tokens = [p.strip() for p in match.group(3).split(",")]
+        selected_platforms = []
+        for token in platform_tokens:
+            normalized = normalize_missing_platform(token)
+            if normalized and normalized not in selected_platforms:
+                selected_platforms.append(normalized)
+        break
+
+    if not selected_topic:
+        raise ValueError(f"Row #{row_index} was not found in missing topics table: {path}")
+
+    return MissingTopicSelection(
+        brand=brand_match.group(1).strip(),
+        product=product_match.group(1).strip(),
+        topic=selected_topic,
+        row_index=row_index,
+        platforms=selected_platforms,
+    )
 
 def _project_root(start: Optional[Path] = None) -> Path:
     """
@@ -118,12 +265,7 @@ def _canonical_platform(platform: Optional[str]) -> Optional[str]:
     Examples:
       'C#', 'c-sharp', 'dotnet', '.net', 'asp.net' -> 'csharp'
     """
-    if not platform:
-        return None
-    f = platform.lower().strip()
-    if f in {"c#", "c-sharp", "dotnet", ".net", "asp.net"}:
-        return "csharp"
-    return f
+    return canonical_blog_platform_key(platform)
 
 def _derive_product_code(product: str) -> str:
     """
@@ -308,6 +450,7 @@ def write_topics_markdown(
     result: RunResult,
     output_dir: Path,
     platform: Optional[str] = None,
+    file_name: Optional[str] = None,
 ) -> Path:
     """
     Write a Markdown file with the generated topics for this run.
@@ -322,7 +465,7 @@ def write_topics_markdown(
     safe_platform = _brand_slug(platform or "all")
 
     run_suffix = result.run_id[:8] if result.run_id else "run"
-    md_path = output_dir / f"{run_suffix}_{safe_product}_{safe_platform}_topics.md"
+    md_path = output_dir / (file_name or f"{run_suffix}_{safe_product}_{safe_platform}_topics.md")
     print(md_path)
 
     lines: List[str] = []
@@ -392,6 +535,8 @@ def write_topics_markdown(
         # Refine each keyword
         supporting_kws = [refiner.refine(k) for k in supporting_kws_r]
         supporting_kws = [k for k in supporting_kws if k]
+        primary_intent_key = _keyword_intent_key(primary_kw)
+        supporting_kws = [k for k in supporting_kws if _keyword_intent_key(k) != primary_intent_key]
 
         # Optional: de-dupe (case-insensitive) while keeping order
         seen = set()
@@ -399,6 +544,8 @@ def write_topics_markdown(
 
         outline = pick("outline", []) or []
         persona = pick("target_persona")
+        keyword_groups = pick("keyword_groups", {}) or {}
+        editorial_notes = pick("editorial_notes", []) or []
 
         topic_title = refiner.to_title_case(title)
         lines.append(f"## {idx}. {topic_title}")
@@ -407,19 +554,40 @@ def write_topics_markdown(
         if persona:
             lines.append(f"- **Target persona:** {persona}")
         if angle:
-            lines.append(f"- **Angle:** {angle}")
+            lines.append(f"- **Blog post angle:** {angle}")
         if primary_kw:
             lines.append(f"- **Primary keyword:** `{primary_kw}`")
         if supporting_kws:
             sk = ", ".join(f"`{kw}`" for kw in supporting_kws)
             lines.append(f"- **Supporting keywords:** {sk}")
 
+        if isinstance(keyword_groups, Mapping):
+            core = [refiner.refine(k) for k in (keyword_groups.get("core_seo_keywords") or []) if k]
+            long_tail = [refiner.refine(k) for k in (keyword_groups.get("long_tail_keywords") or []) if k]
+            context = [refiner.refine(k) for k in (keyword_groups.get("context_keywords") or []) if k]
+            core = [k for k in core if _keyword_intent_key(k) != primary_intent_key]
+            long_tail = [k for k in long_tail if _keyword_intent_key(k) != primary_intent_key]
+            context = [k for k in context if _keyword_intent_key(k) != primary_intent_key]
+
+            if core:
+                lines.append(f"- **Core SEO keywords:** {', '.join(f'`{k}`' for k in core)}")
+            if long_tail:
+                lines.append(f"- **Long-tail keywords for high AI visibility:** {', '.join(f'`{k}`' for k in long_tail)}")
+            if context:
+                lines.append(f"- **Context keywords for semantic SEO:** {', '.join(f'`{k}`' for k in context)}")
+
         if outline:
             lines.append("")
-            lines.append("**Suggested outline:**")
+            lines.append("**Outline for the article:**")
             for bullet in outline:
                 line_item = refiner.to_title_case(bullet)
                 lines.append(f"- {line_item}")
+
+        if editorial_notes:
+            lines.append("")
+            lines.append("**Other important and relevant things:**")
+            for note in editorial_notes:
+                lines.append(f"- {refiner.to_sentence_case(note)}")
 
         lines.append("")
         lines.append("---")
@@ -427,6 +595,78 @@ def write_topics_markdown(
 
     md_path.write_text("\n".join(lines), encoding="utf-8")
     logger.info("Saved topics markdown to %s", md_path)
+    return md_path
+
+
+def write_missing_topics_markdown(
+    *,
+    selection: MissingTopicSelection,
+    runs: List[Tuple[str, RunResult]],
+    output_dir: Path,
+) -> Path:
+    output_dir.mkdir(parents=True, exist_ok=True)
+    safe_product = _brand_slug(selection.product)
+    safe_topic = _brand_slug(selection.topic)[:60] or f"row-{selection.row_index}"
+    md_path = output_dir / f"missing-topic-{selection.row_index}_{safe_product}_{safe_topic}_topics.md"
+
+    lines: List[str] = []
+    lines.append(f"# Blog Topics for {selection.product}")
+    lines.append("")
+    lines.append(f"- **Brand:** {selection.brand}")
+    lines.append(f"- **Product:** {selection.product}")
+    lines.append(f"- **Missing topic row:** {selection.row_index}")
+    lines.append(f"- **Seed topic:** {selection.topic}")
+    lines.append(f"- **Platforms covered:** {', '.join(platform for platform, _ in runs)}")
+    lines.append("")
+    lines.append("---")
+    lines.append("")
+
+    for platform, result in runs:
+        lines.append(f"## {platform}")
+        lines.append("")
+        for idx, topic in enumerate(result.topics, start=1):
+            lines.append(f"### {idx}. {refiner.to_title_case(topic.title)}")
+            lines.append(f"- **Cluster ID:** `{topic.cluster_id}`")
+            lines.append(f"- **Target persona:** {topic.target_persona}")
+            lines.append(f"- **Blog post angle:** {topic.angle}")
+            lines.append(f"- **Primary keyword:** `{refiner.refine(topic.primary_keyword)}`")
+
+            supporting = [refiner.refine(k) for k in topic.supporting_keywords or []]
+            supporting = [k for k in supporting if k]
+            if supporting:
+                lines.append(f"- **Supporting keywords:** {', '.join(f'`{k}`' for k in supporting)}")
+
+            keyword_groups = getattr(topic, "keyword_groups", None)
+            if keyword_groups:
+                core = [refiner.refine(k) for k in getattr(keyword_groups, "core_seo_keywords", []) if k]
+                long_tail = [refiner.refine(k) for k in getattr(keyword_groups, "long_tail_keywords", []) if k]
+                context = [refiner.refine(k) for k in getattr(keyword_groups, "context_keywords", []) if k]
+                if core:
+                    lines.append(f"- **Core SEO keywords:** {', '.join(f'`{k}`' for k in core)}")
+                if long_tail:
+                    lines.append(f"- **Long-tail keywords for high AI visibility:** {', '.join(f'`{k}`' for k in long_tail)}")
+                if context:
+                    lines.append(f"- **Context keywords for semantic SEO:** {', '.join(f'`{k}`' for k in context)}")
+
+            if topic.outline:
+                lines.append("")
+                lines.append("**Outline for the article:**")
+                for bullet in topic.outline:
+                    lines.append(f"- {refiner.to_title_case(bullet)}")
+
+            editorial_notes = getattr(topic, "editorial_notes", []) or []
+            if editorial_notes:
+                lines.append("")
+                lines.append("**Other important and relevant things:**")
+                for note in editorial_notes:
+                    lines.append(f"- {refiner.to_sentence_case(note)}")
+
+            lines.append("")
+        lines.append("---")
+        lines.append("")
+
+    md_path.write_text("\n".join(lines), encoding="utf-8")
+    logger.info("Saved missing-topics markdown to %s", md_path)
     return md_path
 
 def append_metrics_db_entry(
@@ -612,6 +852,7 @@ def run_sync(
     platform: Optional[str] = None,
     use_content_index: bool = True,
     records: Optional[List[KeywordRecord]] = None,
+    seed_topic: Optional[str] = None,
     include_product_in_title: bool = True,
 ) -> tuple[RunResult, RunMetrics]:
     run_id = str(uuid.uuid4())[:8]
@@ -643,6 +884,13 @@ def run_sync(
         with timed_step(metrics, "import"):
             if records is None:
                 records = import_file(req)
+            elif seed_topic:
+                records = _focus_records_for_seed_topic(
+                    records,
+                    seed_topic=seed_topic,
+                    platform=platform,
+                    locale=req.locale,
+                )
         metrics.keywords_processed = len(records)
 
         with timed_step(metrics, "preprocess"):
@@ -660,8 +908,14 @@ def run_sync(
             if n_samples <= 1:
                 clusters = []
                 if n_samples == 1:
-                    from agent_engine.blog_keyword_analyzer.types import Cluster  # adjust if needed
-                    clusters = [Cluster(cluster_id=0, members=[records[0]])]
+                    clusters = [
+                        Cluster(
+                            cluster_id="c0",
+                            label=records[0].keyword,
+                            members=[records[0]],
+                            metrics=ClusterMetrics(),
+                        )
+                    ]
             else:
                 k = min(int(k_requested), n_samples)
                 clusters = cluster_records(records, k=k)
@@ -685,7 +939,8 @@ def run_sync(
         with timed_step(metrics, "score"):
             clusters = score_clusters(clusters, req.weights)
 
-        metrics.clusters_used_for_topics = min(len(clusters), req.top_clusters)
+        topic_top_n = 1 if seed_topic else req.top_clusters
+        metrics.clusters_used_for_topics = min(len(clusters), topic_top_n)
         metrics.set_cluster_score_stats([c.metrics.score for c in clusters if c.metrics is not None])
 
         # Send stage 1 metrics (best-effort)
@@ -746,7 +1001,8 @@ def run_sync(
             product=req.product,
             locale=req.locale,
             clusters=clusters,
-            top_n=req.top_clusters,
+            top_n=topic_top_n,
+            seed_topic=seed_topic,
             platform=platform,
             existing_topics=existing_topics,
             metrics=metrics,
@@ -800,7 +1056,7 @@ def run_sync(
         )
 
     except Exception as exc:
-        # IMPORTANT: flip status so “success” isn’t reported accidentally
+        # IMPORTANT: flip status so â€œsuccessâ€ isnâ€™t reported accidentally
         status = "failed"
         error_message = str(exc)
 
@@ -856,6 +1112,69 @@ def run_sync(
     )
     return result, metrics
 
+
+def _fetch_records_for_topic(
+    *,
+    topic: str,
+    product: str,
+    platform: Optional[str],
+    locale: str,
+    max_rows: int,
+    source: str = "serp",
+) -> List[KeywordRecord]:
+    from .tools.serp_import import fetch_serp_keywords
+
+    if source == "llm":
+        key_gen_req = LLMKeywordGenRequest(
+            topic=topic,
+            product=product,
+            platform=platform,
+            locale=locale,
+            max_keywords=min(max_rows, 200),
+        )
+        records = fetch_llm_keywords(key_gen_req)
+        if not records:
+            raise RuntimeError("No keywords produced by the LLM keyword generator.")
+        return records
+
+    records: Optional[List[KeywordRecord]] = None
+
+    if settings.DEBUG:
+        print(
+            f"[KRA] Using SerpAPI for topic={topic!r}, product={product!r}, platform={platform!r}"
+        )
+
+    try:
+        records = fetch_serp_keywords(
+            topic=topic,
+            product=product,
+            platform=platform,
+            locale=locale,
+            max_keywords=max_rows,
+        )
+    except RuntimeError as e:
+        records = None
+        print(f"SERPAPI_KEY is not configured in settings/.env: {e}")
+    except (requests.RequestException, OSError) as e:
+        records = None
+        print(f"SerpAPI request failed ({type(e).__name__}): {e}")
+
+    if records:
+        return records
+
+    print("SerpAPI returned no keywords (or failed); trying LLM fallback...")
+    key_gen_req = LLMKeywordGenRequest(
+        topic=topic,
+        product=product,
+        platform=platform,
+        locale=locale,
+        max_keywords=min(max_rows, 200),
+    )
+    records = fetch_llm_keywords(key_gen_req)
+    if not records:
+        raise RuntimeError("No keywords produced by SerpAPI or LLM fallback.")
+    return records
+
 def main() -> None:
     """
     CLI entrypoint.
@@ -874,6 +1193,19 @@ def main() -> None:
         description="Run Blog Keyword Analyzer agent on a CSV/XLSX file."
     )
     parser.add_argument("--file", dest="file_path", default="", help="Path to CSV/XLSX (optional).")
+    parser.add_argument(
+        "--missing-topics-file",
+        dest="missing_topics_file",
+        default="",
+        help="Path to a missing-topics markdown file with Brand/Product metadata and a table.",
+    )
+    parser.add_argument(
+        "--missing-topic-row",
+        dest="missing_topic_row",
+        type=int,
+        default=0,
+        help="1-based row number from the missing-topics table to process.",
+    )
     parser.add_argument("--brand", default="Aspose")
     parser.add_argument("--product", default="Aspose.Cells")
     parser.add_argument(
@@ -902,6 +1234,11 @@ def main() -> None:
         help="Fetch keywords from Google SERP via SerpAPI instead of reading a file.",
     )
     parser.add_argument(
+        "--use-llm-keywords",
+        action="store_true",
+        help="Skip SerpAPI and fetch keywords directly from the built-in LLM keyword generator.",
+    )
+    parser.add_argument(
         "--serp-topic",
         dest="serp_topic",
         default="",
@@ -925,21 +1262,113 @@ def main() -> None:
 
     args = parser.parse_args()
 
+    if args.use_serp_api and args.use_llm_keywords:
+        raise SystemExit("Use only one of --use-serp-api or --use-llm-keywords.")
+
+    if args.missing_topics_file:
+        try:
+            missing_topics_path = _resolve_input_file(args.missing_topics_file)
+        except FileNotFoundError as e:
+            print(f"\n{e}")
+            raise SystemExit(1)
+
+        if args.missing_topic_row < 1:
+            raise SystemExit("--missing-topic-row must be a positive table row index.")
+
+        assert missing_topics_path is not None
+        selection = _parse_missing_topics_selection(missing_topics_path, args.missing_topic_row)
+        if not selection.platforms:
+            print(
+                f"Row #{selection.row_index} only contains GENERAL or unsupported platforms; nothing to generate."
+            )
+            raise SystemExit(0)
+
+        req = RunRequest(
+            brand=selection.brand,
+            product=selection.product,
+            locale=args.locale,
+            file_path="",
+            clustering_k=args.clustering_k,
+            top_clusters=args.top_clusters,
+            max_rows=args.max_rows,
+        )
+
+        logger.info(
+            "CLI invoked in missing-topics mode: brand=%s product=%s row=%s topic=%s platforms=%s",
+            selection.brand,
+            selection.product,
+            selection.row_index,
+            selection.topic,
+            ",".join(selection.platforms),
+        )
+
+        md_paths: List[Path] = []
+        for platform in selection.platforms:
+            try:
+                platform_records = _fetch_records_for_topic(
+                    topic=selection.topic,
+                    product=selection.product,
+                    platform=platform,
+                    locale=args.locale,
+                    max_rows=args.max_rows,
+                    source="llm" if args.use_llm_keywords else "serp",
+                )
+            except RuntimeError as e:
+                print(e)
+                raise SystemExit(1)
+
+            result, metrics = run_sync(
+                req,
+                platform=platform,
+                use_content_index=args.use_content_index,
+                records=platform_records,
+                seed_topic=selection.topic,
+                include_product_in_title=args.include_product_in_title,
+            )
+
+            _print_summary(result)
+            print()
+            print(metrics.as_cli_summary())
+            print()
+
+            safe_product = _brand_slug(selection.product)
+            safe_topic = _brand_slug(selection.topic)[:60] or f"row-{selection.row_index}"
+            if len(selection.platforms) == 1:
+                file_name = f"missing-topic-{selection.row_index}_{safe_product}_{safe_topic}_topics.md"
+            else:
+                file_name = (
+                    f"missing-topic-{selection.row_index}_{safe_product}_{platform}_{safe_topic}_topics.md"
+                )
+
+            brand_out_dir = _resolve_brand_output_dir(selection.brand)
+            md_paths.append(
+                write_topics_markdown(
+                    result,
+                    output_dir=brand_out_dir,
+                    platform=platform,
+                    file_name=file_name,
+                )
+            )
+
+        for md_path in md_paths:
+            print(md_path)
+        return
+
     # Decide ingestion mode: file vs SerpAPI
-    if args.use_serp_api:
+    if args.use_serp_api or args.use_llm_keywords:
         # We won't use file import, so no need to resolve a file path
         resolved_input: Optional[Path] = None
     else:
         # Old behavior: require and resolve the file
         if not args.file_path:
             raise SystemExit(
-                "Input file is required unless you specify --use-serp-api."
+                "Input file is required unless you specify --use-serp-api or --use-llm-keywords."
             )
 
         try:
             resolved_input = _resolve_input_file(args.file_path)
         except FileNotFoundError as e:
-            print(f"\n❌ {e}")
+            print(f"\nâŒ {e}")
             raise SystemExit(1)
 
     # Build request (defaults come from .env-backed settings)
@@ -955,60 +1384,27 @@ def main() -> None:
         # weights keep defaults from model unless you want to override here
     )
 
-    # If using SerpAPI, fetch KeywordRecord list here
+    # If using SerpAPI or direct LLM keyword generation, fetch KeywordRecord list here
     records: Optional[List[KeywordRecord]] = None
 
-    if args.use_serp_api:
-        from .tools.serp_import import fetch_serp_keywords
-
+    if args.use_serp_api or args.use_llm_keywords:
         topic = args.serp_topic.strip() or args.product
         _platform = (args.platform or "").strip() or None
-
-        if settings.DEBUG:
-            print(f"[KRA] Using SerpAPI for topic={topic!r}, product={args.product!r}, platform={_platform!r}")
-
         try:
-            if _platform:
-                records = fetch_serp_keywords(
-                    topic=topic,
-                    product=args.product,
-                    platform=_platform,
-                    locale=args.locale,
-                    max_keywords=args.max_rows,
-                )
-            else:
-                records = fetch_serp_keywords(
-                    topic=topic,
-                    product=args.product,
-                    locale=args.locale,
-                    max_keywords=args.max_rows,
-                )
+            records = _fetch_records_for_topic(
+                topic=topic,
+                product=args.product,
+                platform=_platform,
+                locale=args.locale,
+                max_rows=args.max_rows,
+                source="llm" if args.use_llm_keywords else "serp",
+            )
         except RuntimeError as e:
-            # Covers missing SERPAPI_KEY or other intentional SerpAPI tool runtime errors
-            records = None
-            print(f"⚠️ SERPAPI_KEY is not configured in settings/.env: {e}")
-        except (requests.RequestException, OSError) as e:
-            # RequestException covers DNS, timeouts, connection errors, 4xx/5xx after raise_for_status, etc.
-            # OSError catches low-level socket/DNS issues on some platforms.
-            records = None
-            print(f"⚠️ SerpAPI request failed ({type(e).__name__}): {e}")
-            print("⚠️ Falling back to LLM keyword generation...")
-
-        if not records:
-            print("⚠️ SerpAPI returned no keywords (or failed); trying LLM fallback...")
-
-        key_gen_req = LLMKeywordGenRequest(
-            topic=topic,
-            product=args.product,
-            platform=_platform,
-            locale=args.locale,
-            max_keywords=min(args.max_rows, 200),
-        )
-        records = fetch_llm_keywords(key_gen_req)
-        print(records)
-        if not records:
-            print("❌ No keywords produced by SerpAPI or LLM fallback; exiting.")
+            print(e)
             raise SystemExit(1)
+        args.use_serp_api = False
+        args.use_llm_keywords = False
+
 
     logger.info(
         "CLI invoked with brand=%s product=%s locale=%s platform=%s file_path=%s",
@@ -1025,6 +1421,7 @@ def main() -> None:
         platform=args.platform or None,
         use_content_index=args.use_content_index,
         records=records,  # <--- THIS prevents import_file(req) in SerpAPI mode
+        seed_topic=(args.serp_topic.strip() or args.product) if records is not None and (args.file_path == "" or args.use_serp_api or args.use_llm_keywords) else None,
         include_product_in_title=args.include_product_in_title,
     )
 
@@ -1063,7 +1460,7 @@ def main() -> None:
     except Exception as e:
         logger.warning("Post-processing (topics/metrics) failed: %s", e, exc_info=True)
 
-    # 🔹 NOW print metrics summary right after JSON file line
+    # ðŸ”¹ NOW print metrics summary right after JSON file line
     print()  # blank line for spacing
     print(metrics.as_cli_summary())
     print()  # trailing newline

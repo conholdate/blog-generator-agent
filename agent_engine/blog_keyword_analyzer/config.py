@@ -1,4 +1,4 @@
-from typing import Dict, List, Tuple
+from typing import Tuple
 from dotenv import load_dotenv
 from pathlib import Path
 from pydantic import Field, SecretStr
@@ -24,7 +24,7 @@ class Settings(BaseSettings):
     )
     PROFESSIONALIZE_BASE_URL: str ="https://llm.professionalize.com/v1"
     PROFESSIONALIZE_API_KEY_1: SecretStr | None = None
-    PROFESSIONALIZE_API_KEY: str = "sk-xGYZ4MrBB1w50eXNLS0Prw"
+    PROFESSIONALIZE_API_KEY: str = PROFESSIONALIZE_API_KEY_1
 
     # Standard OpenAI key (used when no custom base URL is set)
     OPENAI_API_KEY: str | None = None
@@ -43,7 +43,7 @@ class Settings(BaseSettings):
     W_BRAND: float = 0.15
     W_INTENT: float = 0.10
     TOP_CLUSTERS: int = 15
-    MAX_ROWS: int = 50000    
+    MAX_ROWS: int = 50000
     KRA_DATA_DIR: str = "./content"
     KRA_OUTPUT_DIR: str = "./content"
     BLOG_CONTENT_ROOT: str = ""
@@ -52,7 +52,7 @@ class Settings(BaseSettings):
 
     # --- NEW: Metrics / Google Apps Script webhook ---
     METRICS_WEBHOOK_URL: str = "https://script.google.com/macros/s/AKfycbyCHwElrM6RcYLi0JNQAkJmzGrBjAhf28mKXVyub_6SdaZ2ITvzCwfM5xCLE7rmuxio/exec"
-    METRICS_TOKEN: str = ""
+    METRICS_TOKEN: str = "lM6iU2mW0gV1eZ"
     METRICS_AGENT_NAME: str = "Keyword Analyzer"
     METRICS_AGENT_OWNER: str = "Muzammil Khan"
     METRICS_KEYWORD_CLUSTERING_JOB: str = "Keyword Clustering"
@@ -60,7 +60,7 @@ class Settings(BaseSettings):
 
     # --- Internal Blog Teams Metrics / Google Apps Script webhook ---
     INT_METRICS_WEBHOOK_URL: str = "https://script.google.com/macros/s/AKfycbwYyPBs3ox6xhYfznVpu4Gh8T4l7cXrAIj1m_y1g-vWn6tyP_LAkv3eo6W2EZYAeHgLag/exec"
-    INT_METRICS_TOKEN: str = "-2026"
+    INT_METRICS_TOKEN: str = "blog_team_agent-2026"
 
 settings = Settings()
 
@@ -71,27 +71,7 @@ BRAND_METRICS: dict[str, Tuple[str, str]] = {
     "aspose-cloud": ("aspose.cloud", "Blog"),
     "groupdocs-cloud": ("groupdocs.cloud", "Blog"),
     "conholdate": ("conholdate.com", "Blog"),
+    "conholdate-cloud": ("conholdate.cloud", "Blog"),
     "familiarize": ("familiarize.com", "Blog"),
     # add more brands here...
-}
-platform_LABELS: Dict[str, str] = {
-    "python": "Python",
-    "java": "Java",
-    "c#": "C#",
-    "c++": "C++",
-    "php": "PHP",
-    "javascript": "JavaScript",
-    "nodejs": "Node.js",
-}
-
-# Canonical platform -> list of patterns to search for
-platform_PATTERNS: Dict[str, List[str]] = {
-    "python": ["python"],
-    "java": ["java"],
-    "c#": ["c#", "csharp", "c-sharp", "dotnet", ".net", "asp.net", "vb.net"],
-    "c++": ["c++", "cpp"],
-    "php": ["php"],
-    "javascript": ["javascript", "js"],
-    "nodejs": ["node.js", "nodejs", "node js"],
-    # you can add more later: "go": ["golang", "go "], etc.
 }

@@ -54,6 +54,12 @@ class Cluster(BaseModel):
     metrics: ClusterMetrics
 
 
+class SupportingKeywordGroups(BaseModel):
+    core_seo_keywords: List[str] = Field(default_factory=list)
+    long_tail_keywords: List[str] = Field(default_factory=list)
+    context_keywords: List[str] = Field(default_factory=list)
+
+
 class TopicIdea(BaseModel):
     """
     Final topic proposal produced by the LLM.
@@ -67,6 +73,8 @@ class TopicIdea(BaseModel):
     target_persona: str
     primary_keyword: str
     supporting_keywords: List[str]
+    keyword_groups: SupportingKeywordGroups = Field(default_factory=SupportingKeywordGroups)
+    editorial_notes: List[str] = Field(default_factory=list)
     internal_links: List[str] = []
 
 

@@ -2,13 +2,16 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from pathlib import Path
-import re
 from time import perf_counter
 from typing import Any, Dict, Optional
 
 from .settings import CoverageSettings
 from .tools.logging_utils import get_logger
-from .tools.normalize import nor_platform_display_name, nor_website_section_from_case
+from .tools.normalization import (
+    nor_platform_display_name,
+    nor_website_section_from_case,
+    normalize_sentence_text,
+)
 from .tools.prerequisites import ensure_prerequisites
 from .tools.io import write_json, write_text
 from .tools.render.md_render import render_md_matrix
@@ -102,44 +105,8 @@ def _compute_gap_stats(result: Any) -> Dict[str, int]:
         "topics_with_any_gap": topics_with_any_gap,
     }
 
-_FILE_FORMAT_TOKENS = {
-    "3ds",
-    "3mf",
-    "amf",
-    "dae",
-    "fbx",
-    "glb",
-    "gltf",
-    "ifc",
-    "iges",
-    "igs",
-    "jt",
-    "obj",
-    "pdf",
-    "ply",
-    "rvm",
-    "step",
-    "stl",
-    "stp",
-    "u3d",
-    "usd",
-    "usdz",
-}
-_FILE_FORMAT_PATTERN = re.compile(
-    r"\b(" + "|".join(sorted(_FILE_FORMAT_TOKENS, key=len, reverse=True)) + r")\b",
-    re.IGNORECASE,
-)
-
-
 def _to_sentence_case_with_upper_formats(topic: str) -> str:
-    s = re.sub(r"\s+", " ", str(topic or "").strip()).lower()
-    if not s:
-        return s
-    s = _FILE_FORMAT_PATTERN.sub(lambda m: m.group(1).upper(), s)
-    for idx, ch in enumerate(s):
-        if ch.isalpha():
-            return s[:idx] + ch.upper() + s[idx + 1 :]
-    return s
+    return normalize_sentence_text(str(topic or ""))
 
 
 def _render_missing_topics_md(

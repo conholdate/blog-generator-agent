@@ -10,8 +10,14 @@ meta:
 engine:
   # === Core KRA inputs ===
   # input_file: "content/Aspose.Cloud/keywords.csv"
+
   use-serp-api: true
-  serp-topic: "Convert 3MF to STL"
+  # use-llm-keywords: true
+
+  serp-topic: "Convert CDR to PNG in .NET"
+
+  # missing_topics_file: "content/Aspose.Cloud/aspose-3d_all_missing_topics.md"
+  # missing_topic_row: 5
 
   # IMPORTANT: treat Aspose.Cloud as a different brand namespace
   brand: "Aspose.Cloud"

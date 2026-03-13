@@ -1,4 +1,4 @@
-# aspose.3d — Gaps (blogs_to_blogs, baseline=all)
+# Aspose.3D — Gaps (Blogs to Blogs, Baseline=all)
 
 ---
 
@@ -7,10 +7,10 @@
 | 🧩 Metric | Value | Status |
 | --- | --- | --- |
 | **Total Canonical Topics** | **64** | — |
-| **Topics with Gaps** | **63** | ⚠️ |
-| **Fully Covered Topics** | 1 | ✅ |
-| **Excluded (Release / Updates)** | 26 | ℹ️ |
-| **Baseline Scope** | all | — |
+| **Topics with Gaps** | **61** | ⚠️ |
+| **Fully Covered Topics** | 3 | ✅ |
+| **Excluded (Release / Updates)** | 0 | ℹ️ |
+| **Baseline Scope** | ALL | — |
 | **Case** | blogs_to_blogs | — |
 
 ---
@@ -19,10 +19,10 @@
 
 | Indicator | Score | Interpretation |
 | --- | --- | --- |
-| Cross-Platform Parity | 1.6% | 🔴 Weak |
+| Cross-Platform Parity | 4.7% | 🔴 Weak |
 | Content Reusability | High | ✅ Strong |
-| Porting Opportunity | 98.4% gaps | 🔥 Very High |
-| Excluded Noise (Releases) | 26 | ✅ Controlled |
+| Porting Opportunity | 95.3% gaps | 🔥 Very High |
+| Excluded Noise (Releases) | 0 | ✅ Controlled |
 
 ---
 
@@ -30,17 +30,17 @@
 
 | Platform | # Covered | # Missing | Coverage |
 | --- | --- | --- | --- |
-| **general** | 36 | 28 | 🔴 Weak (56.2%) |
-| **java** | 30 | 34 | 🔴 Weak (46.9%) |
-| **net** | 13 | 51 | 🔴 Weak (20.3%) |
-| **python** | 9 | 55 | 🔴 Weak (14.1%) |
+| **GENERAL** | 23 | 41 | 🔴 Weak (35.9%) |
+| **JAVA** | 27 | 37 | 🔴 Weak (42.2%) |
+| **NET** | 45 | 19 | 🟡 Moderate (70.3%) |
+| **PYTHON** | 4 | 60 | 🔴 Weak (6.2%) |
 
 ---
 
 ### 🔎 Executive Insights
 
-- **98.4%** of canonical topics are missing on at least one platform (after exclusions).
-- Highest gap density: **python** (55 missing), **net** (51 missing), **java** (34 missing).
+- **95.3%** of canonical topics are missing on at least one platform (after exclusions).
+- Highest gap density: **PYTHON** (60 missing), **GENERAL** (41 missing), **JAVA** (37 missing).
 - Gaps are concentrated in **8** major category/subcategory clusters (see Section 4).
 - Release notes, product updates, and version announcements are intentionally excluded from this report.
 
@@ -50,21 +50,21 @@
 
 | # | Cluster | Representative topic | Missing platforms (high-impact) | Suggested new titles (examples) |
 | --- | --- | --- | --- | --- |
-| 1 | **3D Graphics / File Format Conversion** | convert dae to obj | java, net, python | convert dae to obj — java; convert dae to obj — net; convert dae to obj — python |
-| 2 | **3D Graphics / File Format Conversion** | convert files to glb | java, net, python | convert files to glb — java; convert files to glb — net; convert files to glb — python |
-| 3 | **3D Modeling / File Format Conversion** | convert fbx to obj | java, net, python | convert fbx to obj — java; convert fbx to obj — net; convert fbx to obj — python |
-| 4 | **3D Modeling / File Format Conversion** | convert fbx to stl | general, net, python | convert fbx to stl — general; convert fbx to stl — net; convert fbx to stl — python |
-| 5 | **Development / 3D Graphics** | 3d model import export api | general, net, python | 3d model import export api — general; 3d model import export api — net; 3d model import export api — python |
-| 6 | **Development / 3D Graphics** | 3d modeling and animation | general, net, python | 3d modeling and animation — general; 3d modeling and animation — net; 3d modeling and animation — python |
-| 7 | **File Conversion / 3D Model Formats** | convert fbx and rvm files api | general, net, python | convert fbx and rvm files api — general; convert fbx and rvm files api — net; convert fbx and rvm files api — python |
-| 8 | **File Conversion / 3D Model Formats** | convert usdz to fbx | general, net, python | convert usdz to fbx — general; convert usdz to fbx — net; convert usdz to fbx — python |
-| 9 | **Graphics / 3D Modeling** | creating 3d cylinders with aspose 3d | general, net, python | creating 3d cylinders with aspose 3d — general; creating 3d cylinders with aspose 3d — net; creating 3d cylinders with aspose 3d — python |
-| 10 | **Graphics / 3D Modeling** | creating and saving 3d scenes with c and aspose 3d | general, java, python | creating and saving 3d scenes with c and aspose 3d — general; creating and saving 3d scenes with c and aspose 3d — java; creating and saving 3d scenes with c and aspose 3d — python |
-| 11 | **File Conversion / 3D Model Conversion** | convert ply to usdz | java, net, python | convert ply to usdz — java; convert ply to usdz — net; convert ply to usdz — python |
-| 12 | **File Conversion / 3D Model Conversion** | convert files to pdf | net, python | convert files to pdf — net; convert files to pdf — python |
-| 13 | **Programming / 3D Graphics** | 3d modeling and scene manipulation | general, java, net | 3d modeling and scene manipulation — general; 3d modeling and scene manipulation — java; 3d modeling and scene manipulation — net |
-| 14 | **Programming / 3D Graphics** | convert obj to stl | net | convert obj to stl — net |
-| 15 | **Software Development / 3D Graphics** | 3d file format api | java, net, python | 3d file format api — java; 3d file format api — net; 3d file format api — python |
+| 1 | **File Conversion / 3D Model Formats** | FBX to GLTF | GENERAL, JAVA, PYTHON | FBX to GLTF — GENERAL; FBX to GLTF — JAVA; FBX to GLTF — PYTHON |
+| 2 | **File Conversion / 3D Model Formats** | FBX to rvm or rvm to FBX | GENERAL, NET, PYTHON | FBX to rvm or rvm to FBX — GENERAL; FBX to rvm or rvm to FBX — NET; FBX to rvm or rvm to FBX — PYTHON |
+| 3 | **File Conversion / 3D Model Conversion** | OBJ 3D object to FBX or STL | GENERAL, NET, PYTHON | OBJ 3D object to FBX or STL — GENERAL; OBJ 3D object to FBX or STL — NET; OBJ 3D object to FBX or STL — PYTHON |
+| 4 | **File Conversion / 3D Model Conversion** | OBJ to amf | JAVA, NET, PYTHON | OBJ to amf — JAVA; OBJ to amf — NET; OBJ to amf — PYTHON |
+| 5 | **3D / File Conversion** | OBJ to 3DS | GENERAL, PYTHON | OBJ to 3DS — GENERAL; OBJ to 3DS — PYTHON |
+| 6 | **3D / File Conversion** | USDZ to 3DS | GENERAL, PYTHON | USDZ to 3DS — GENERAL; USDZ to 3DS — PYTHON |
+| 7 | **3D / File Format Conversion** | FBX to OBJ | JAVA, NET, PYTHON | FBX to OBJ — JAVA; FBX to OBJ — NET; FBX to OBJ — PYTHON |
+| 8 | **3D / File Format Conversion** | STL to FBX | GENERAL, PYTHON | STL to FBX — GENERAL; STL to FBX — PYTHON |
+| 9 | **3D Modeling / File Format Conversion** | 3DS to USDZ | GENERAL, JAVA, PYTHON | 3DS to USDZ — GENERAL; 3DS to USDZ — JAVA; 3DS to USDZ — PYTHON |
+| 10 | **3D Modeling / File Format Conversion** | Learn how to convert OBJ to PLY | JAVA, NET, PYTHON | Learn how to convert OBJ to PLY — JAVA; Learn how to convert OBJ to PLY — NET; Learn how to convert OBJ to PLY — PYTHON |
+| 11 | **Graphics / 3D Modeling** | Import and export collada and add vertex element to mesh 3D API | GENERAL, JAVA, PYTHON | Import and export collada and add vertex element to mesh 3D API — GENERAL; Import and export collada and add vertex element to mesh 3D API — JAVA; Import and export collada and add vertex element to mesh 3D API — PYTHON |
+| 12 | **Graphics / 3D Modeling** | Make 3D sphere seamlessly | GENERAL, NET, PYTHON | Make 3D sphere seamlessly — GENERAL; Make 3D sphere seamlessly — NET; Make 3D sphere seamlessly — PYTHON |
+| 13 | **3D / Image Conversion** | Jpg to lithophane | GENERAL, JAVA, PYTHON | Jpg to lithophane — GENERAL; Jpg to lithophane — JAVA; Jpg to lithophane — PYTHON |
+| 14 | **3D / Image Conversion** | PNG to lithophane | GENERAL, JAVA, PYTHON | PNG to lithophane — GENERAL; PNG to lithophane — JAVA; PNG to lithophane — PYTHON |
+| 15 | **File Formats / 3D Model Conversion** | FBX to rvm or vice versa | GENERAL, JAVA, PYTHON | FBX to rvm or vice versa — GENERAL; FBX to rvm or vice versa — JAVA; FBX to rvm or vice versa — PYTHON |
 
 *These recommendations are derived from topics missing across the largest number of platforms and clustered by category/subcategory.*
 
@@ -74,10 +74,10 @@
 
 | Platform | # topics covered | % of baseline rows | # topics missing |
 | --- | --- | --- | --- |
-| **general** | 36 | 56.2% | 28 |
-| **java** | 30 | 46.9% | 34 |
-| **net** | 13 | 20.3% | 51 |
-| **python** | 9 | 14.1% | 55 |
+| **GENERAL** | 23 | 35.9% | 41 |
+| **JAVA** | 27 | 42.2% | 37 |
+| **NET** | 45 | 70.3% | 19 |
+| **PYTHON** | 4 | 6.2% | 60 |
 
 **Takeaway:** Focus first on platforms with the highest missing counts and lowest coverage percentage; port high-impact topics from the best-covered platform first.
 
@@ -87,18 +87,18 @@
 
 | Cluster | # gap topics | Missing signals | Most-missed platforms |
 | --- | --- | --- | --- |
-| **3D Graphics / File Format Conversion** | 10 | 25 | python, net, java, general |
-| **3D Modeling / File Format Conversion** | 7 | 17 | net, python, java, general |
-| **Development / 3D Graphics** | 4 | 12 | net, python, general, java |
-| **File Conversion / 3D Model Formats** | 5 | 11 | net, python, general |
-| **Graphics / 3D Modeling** | 2 | 6 | general, python, net, java |
-| **File Conversion / 3D Model Conversion** | 2 | 5 | net, python, java |
-| **Programming / 3D Graphics** | 2 | 4 | net, general, java |
-| **Software Development / 3D Graphics** | 1 | 3 | java, net, python |
-| **Graphics / Mesh Manipulation** | 1 | 3 | java, net, python |
-| **Development / 3D Model Conversion** | 1 | 3 | java, net, python |
-| **3D Graphics / Model Conversion** | 1 | 3 | general, java, python |
-| **3D Modeling / Lithophane Generation** | 1 | 3 | java, net, python |
+| **File Conversion / 3D Model Formats** | 6 | 13 | PYTHON, GENERAL, JAVA, NET |
+| **File Conversion / 3D Model Conversion** | 4 | 11 | PYTHON, GENERAL, NET, JAVA |
+| **3D / File Conversion** | 5 | 8 | PYTHON, GENERAL |
+| **3D / File Format Conversion** | 3 | 7 | PYTHON, GENERAL, JAVA, NET |
+| **3D Modeling / File Format Conversion** | 2 | 6 | JAVA, PYTHON, GENERAL, NET |
+| **Graphics / 3D Modeling** | 2 | 6 | GENERAL, PYTHON, JAVA, NET |
+| **3D / Image Conversion** | 2 | 6 | GENERAL, JAVA, PYTHON |
+| **File Formats / 3D Model Conversion** | 2 | 5 | GENERAL, PYTHON, JAVA |
+| **3D Modeling / File Conversion** | 2 | 5 | JAVA, PYTHON, GENERAL |
+| **3D Modeling / Export and Geometry Scaling** | 1 | 3 | GENERAL, JAVA, PYTHON |
+| **Graphics / Scene Manipulation** | 1 | 3 | JAVA, NET, PYTHON |
+| **3D / Html Export** | 1 | 3 | JAVA, NET, PYTHON |
 
 ---
 

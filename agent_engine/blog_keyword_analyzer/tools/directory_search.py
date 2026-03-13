@@ -8,7 +8,8 @@ from typing import Any, Dict, List, Optional
 
 import yaml  # pip install pyyaml
 
-from ..config import settings, platform_PATTERNS
+from ..config import settings
+from agent_engine.blog_keyword_analyzer.tools.normalization import canonical_blog_platform_key, detect_blog_platform_keys_in_text
 
 
 class FrontMatterError(Exception):
@@ -33,23 +34,8 @@ def detect_platforms_from_front_matter(fm: Dict[str, Any]) -> List[str]:
         if isinstance(value, list):
             chunks.extend(str(item) for item in value)
 
-    combined = " ".join(chunks).lower()
-
-    detected: List[str] = []
-    for fw, patterns in platform_PATTERNS.items():
-        for p in patterns:
-            if p in combined:
-                detected.append(fw)
-                break
-
-    seen: set[str] = set()
-    unique: List[str] = []
-    for fw in detected:
-        if fw not in seen:
-            seen.add(fw)
-            unique.append(fw)
-
-    return unique
+    combined = " ".join(chunks)
+    return detect_blog_platform_keys_in_text(combined)
 
 
 # -------------------------------------------------------------------
@@ -177,7 +163,7 @@ def search_from_directory(
         print(f"DEBUG: Found {len(index_files)} index.md files under {content_root}")
 
     product_norm = product.lower().strip()
-    platform_norm = platform.lower().strip() if platform else None
+    platform_norm = canonical_blog_platform_key(platform)
 
     results: List[Dict[str, Any]] = []
 
@@ -198,7 +184,7 @@ def search_from_directory(
         primary_platform: Optional[str] = platforms[0] if platforms else None
 
         if platform_norm:
-            platforms_norm = [f.lower().strip() for f in platforms]
+            platforms_norm = [canonical_blog_platform_key(f) or str(f).lower().strip() for f in platforms]
             if platform_norm not in platforms_norm:
                 continue
 
@@ -225,10 +211,10 @@ def main() -> None:
     Usage examples (from project root):
 
         # All Cells posts (any platform), sorted by date ascending
-        python -m agents.kra.blog_frontmatter_search --product cells
+        python -m agent_engine.blog_keyword_analyzer.tools.directory_search --product cells
 
         # Cells + Python only
-        python -m agents.kra.blog_frontmatter_search --product cells --platform python
+        python -m agent_engine.blog_keyword_analyzer.tools.directory_search --product cells --platform python
     """
     parser = argparse.ArgumentParser(
         description="Search blog posts directly from directory based on front matter."

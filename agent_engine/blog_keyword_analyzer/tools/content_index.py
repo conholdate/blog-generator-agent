@@ -13,10 +13,10 @@ def get_existing_posts(
     platform: Optional[str] = None,
 ) -> List[ExistingPost]:
     """
-    Thin wrapper around Content Index Service directory search.
+    Thin wrapper around local directory-based content search.
 
     Both product and platform are optional, to match the CLI:
-      python -m src.content_index_service.directory_search --product ... --platform ...
+      python -m agent_engine.blog_keyword_analyzer.tools.directory_search --product ... --platform ...
 
     If they are None, we just pass them through as None.
     """
@@ -32,7 +32,7 @@ def get_existing_posts(
             slug=entry.get("slug") or "",
             url=entry.get("url") or "",
             product=entry.get("product"),
-            platform=entry.get("platform"),
+            platform=entry.get("primary_platform"),
             rel_path=entry.get("rel_path"),
         )
         for entry in raw_matches

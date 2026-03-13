@@ -1,11 +1,15 @@
 from __future__ import annotations
 
+# Legacy utility for searching a prebuilt JSON blog index.
+# The active runtime path uses directory_search/content_index directly.
+
 import argparse
 import json
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
-from ..config import settings, platform_PATTERNS
+from ..config import settings
+from agent_engine.blog_keyword_analyzer.tools.normalization import canonical_blog_platform_key
 
 def _get_index_path() -> Path:
     """
@@ -67,7 +71,7 @@ def search_blog_index(
     entries = load_blog_index()
 
     product_norm = product.lower().strip()
-    platform_norm = platform.lower().strip() if platform else None
+    platform_norm = canonical_blog_platform_key(platform)
 
     results: List[Dict[str, Any]] = []
 
@@ -78,15 +82,8 @@ def search_blog_index(
 
         if platform_norm:
             platforms = entry.get("platforms") or []
-            platforms_norm = [str(f).lower().strip() for f in platforms]
-
-            # Very small safety: allow "c#" / "csharp" mismatch by normalizing
-            if platform_norm in {"c#", "c-sharp"}:
-                platform_norm_cmp = "csharp"
-            else:
-                platform_norm_cmp = platform_norm
-
-            if platform_norm_cmp not in platforms_norm:
+            platforms_norm = [canonical_blog_platform_key(f) or str(f).lower().strip() for f in platforms]
+            if platform_norm not in platforms_norm:
                 continue
 
         results.append(entry)
@@ -101,13 +98,13 @@ def main() -> None:
     Usage examples (from project root):
 
         # All 'cells' posts
-        python -m agent_engine.kra.blog_index_search --product cells
+        python -m agent_engine.blog_keyword_analyzer.tools.index_search --product cells
 
         # Only 'cells' + 'python'
-        python -m agent_engine.kra.blog_index_search --product cells --platform python
+        python -m agent_engine.blog_keyword_analyzer.tools.index_search --product cells --platform python
 
         # Only 'cells' + 'java'
-        python -m agent_engine.kra.blog_index_search --product cells --platform java
+        python -m agent_engine.blog_keyword_analyzer.tools.index_search --product cells --platform java
     """
     parser = argparse.ArgumentParser(
         description="Test blog index search by product and optional platform."

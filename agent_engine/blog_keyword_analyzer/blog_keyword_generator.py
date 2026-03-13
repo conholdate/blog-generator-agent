@@ -1,10 +1,9 @@
-# src/agents/kra/tools/llm_keyword_gen.py
 from __future__ import annotations
 
 import json
 import re
 from dataclasses import dataclass
-from typing import List, Optional
+from typing import Any, List, Optional
 
 from openai import AsyncOpenAI
 from agents import (
@@ -16,12 +15,13 @@ from agents import (
 )
 
 from agent_engine.blog_keyword_analyzer.config import settings
+from agent_engine.blog_keyword_analyzer.tools.normalization import (
+    normalize_display_text,
+    normalize_platform_mentions,
+)
 from agent_engine.blog_keyword_analyzer.schemas import KeywordRecord
 
 
-# ----------------------------
-# Request / config
-# ----------------------------
 @dataclass(frozen=True)
 class LLMKeywordGenRequest:
     topic: str
@@ -31,37 +31,31 @@ class LLMKeywordGenRequest:
     max_keywords: int = 50
 
 
-# ----------------------------
-# Sanitization utilities
-# ----------------------------
 _WHITESPACE = re.compile(r"\s+")
-_BAD_CHARS = re.compile(r"[•·\u2026]")  # bullets, middle-dot, ellipsis char
+_BAD_CHARS = re.compile(r"[\u2022\u00b7\u2026]")
 _DISALLOWED_PUNCT = re.compile(r"[\"'`()\[\]{}<>|]")
 _MULTI_PUNCT = re.compile(r"[,:;.!?]+$")
+_TOKEN_RE = re.compile(r"[a-z0-9.+#]+")
 
-# Keep it tight; these can match your scoring expectations
 _MIN_WORDS = 3
 _MAX_WORDS = 12
 _MAX_CHARS = 90
+_STOPWORDS = {
+    "a", "an", "and", "api", "best", "by", "file", "files", "for", "from", "guide",
+    "how", "in", "into", "of", "on", "or", "the", "to", "tutorial", "using", "with",
+}
+_BRAND_TOKENS = {"aspose", "groupdocs", "conholdate", "adobe", "acrobat"}
+_ENDING_VERBS = {"add", "edit", "replace", "update", "convert", "render", "save", "merge", "split"}
+
 
 def _configure_agents_sdk() -> None:
-    """
-    Make the Agents SDK use our OpenAI-compatible backend instead of requiring OPENAI_API_KEY.
-    """
-    # Use your custom OpenAI-compatible endpoint
     client = AsyncOpenAI(
         base_url=settings.PROFESSIONALIZE_BASE_URL,
         api_key=settings.PROFESSIONALIZE_API_KEY,
     )
-    set_default_openai_client(client)  # global default for Runner/Agents :contentReference[oaicite:1]{index=1}
-
-    # Many non-OpenAI providers don't support the Responses API yet
-    # Switch Agents SDK to Chat Completions if needed. :contentReference[oaicite:2]{index=2}
+    set_default_openai_client(client)
     set_default_openai_api("chat_completions")
-
-    # If you don't have a real OpenAI key for tracing, disable tracing to avoid 401s. :contentReference[oaicite:3]{index=3}
     set_tracing_disabled(True)
-
 
 
 def _clean_phrase(s: str) -> str:
@@ -78,10 +72,6 @@ def _clean_phrase(s: str) -> str:
 
 
 def _platform_contamination(phrase: str, platform: Optional[str]) -> bool:
-    """
-    If platform is specified, drop phrases that mention other platforms.
-    Tune this list to match your taxonomy.
-    """
     if not platform:
         return False
 
@@ -98,7 +88,6 @@ def _platform_contamination(phrase: str, platform: Optional[str]) -> bool:
         "golang",
     ]
 
-    # allow selected platform token(s)
     allow = set()
     if p == "java":
         allow.update(["java", "jvm"])
@@ -111,7 +100,7 @@ def _platform_contamination(phrase: str, platform: Optional[str]) -> bool:
     elif p == "node":
         allow.update(["node", "node.js", "javascript", "typescript"])
     else:
-        allow.update([p])
+        allow.add(p)
 
     for tok in other_tokens:
         if tok in allow:
@@ -145,99 +134,225 @@ def _dedupe(items: List[str]) -> List[str]:
     return out
 
 
-# ----------------------------
-# Agent + generator
-# ----------------------------
+def _product_brand_tokens(product: str) -> set[str]:
+    return set(_TOKEN_RE.findall((product or "").lower()))
+
+
+def _topic_anchor_tokens(topic: str) -> set[str]:
+    tokens = set()
+    for token in _TOKEN_RE.findall((topic or "").lower()):
+        if len(token) <= 1 or token in _STOPWORDS:
+            continue
+        tokens.add(token)
+    return tokens
+
+
+def _mentions_unrelated_brand(phrase: str, product: str) -> bool:
+    phrase_tokens = set(_TOKEN_RE.findall((phrase or "").lower()))
+    allowed = _product_brand_tokens(product)
+    for brand in _BRAND_TOKENS:
+        if brand in phrase_tokens and brand not in allowed:
+            return True
+    return False
+
+
+def _is_relevant_phrase(phrase: str, topic: str, product: str) -> bool:
+    phrase_tokens = set(_TOKEN_RE.findall((phrase or "").lower()))
+    if not phrase_tokens:
+        return False
+    if _mentions_unrelated_brand(phrase, product):
+        return False
+
+    anchors = _topic_anchor_tokens(topic)
+    if not anchors:
+        return True
+
+    # Require direct overlap with the topic feature/action/format terms.
+    if phrase_tokens.intersection(anchors):
+        return True
+
+    return False
+
+
+def _strip_product_noise(phrase: str, product: str) -> str:
+    out = phrase
+    variants = {product, product.replace(".", " "), product.replace(" ", ".")}
+    for v in variants:
+        v = (v or "").strip()
+        if not v:
+            continue
+        out = re.sub(rf"(?i)(?<!\w){re.escape(v)}(?!\w)", " ", out)
+    out = re.sub(r"(?i)\bcloud\s+sdk\b", " ", out)
+    out = re.sub(r"(?i)\bsdk\b", " ", out)
+    out = re.sub(r"(?i)\bcloud\b", " ", out)
+    out = re.sub(r"(?i)\bapi\b", " ", out)
+    return re.sub(r"\s{2,}", " ", out).strip()
+
+def _normalize_action_phrases(phrase: str) -> str:
+    out = phrase
+    replacements = [
+        (r"(?i)\btext replace\b", "replace text"),
+        (r"(?i)\bslide add\b", "add slide"),
+        (r"(?i)\bslides add\b", "add slides"),
+        (r"(?i)\bfile update\b", "update file"),
+        (r"(?i)\bpptx update\b", "update PPTX"),
+        (r"(?i)\bpptx edit\b", "edit PPTX"),
+        (r"(?i)\bpptx convert\b", "convert PPTX"),
+    ]
+    for pattern, repl in replacements:
+        out = re.sub(pattern, repl, out)
+    return re.sub(r"\s{2,}", " ", out).strip()
+
+
+def _collapse_duplicate_words(phrase: str) -> str:
+    words = phrase.split()
+    if not words:
+        return ""
+    collapsed = [words[0]]
+    for word in words[1:]:
+        if word.lower() == collapsed[-1].lower():
+            continue
+        collapsed.append(word)
+    out = " ".join(collapsed)
+    out = re.sub(r"(?i)\b(\.net)\s+in\s+\1\b", r"\1", out)
+    out = re.sub(r"(?i)\bin\s+(\.net)\s+in\s+\1\b", r"in \1", out)
+    return out.strip()
+
+
+def _looks_malformed(phrase: str) -> bool:
+    low = phrase.lower()
+    if re.search(r"(?i)\bwith in\b|\bin in\b", low):
+        return True
+    if low.count(".net") > 1 or low.count("node.js") > 1 or low.count("c++") > 1:
+        return True
+    tokens = _TOKEN_RE.findall(low)
+    if tokens and tokens[-1] in _ENDING_VERBS:
+        return True
+    if re.search(r"(?i)\b(powerpoint|pptx|text|slide|file)\s+(add|edit|replace|update|convert)\b", low):
+        return True
+    return False
+
+
+def _sanitize_phrase(phrase: str, topic: str, product: str, platform: Optional[str]) -> str:
+    out = _clean_phrase(phrase)
+    out = _strip_product_noise(out, product)
+    out = _normalize_action_phrases(out)
+    out = normalize_platform_mentions(out, platform)
+    out = _collapse_duplicate_words(out)
+    out = re.sub(r"\s{2,}", " ", out).strip(" -,:;")
+    if _looks_malformed(out):
+        return ""
+    if not _is_relevant_phrase(out, topic, product):
+        return ""
+    return normalize_display_text(out)
+
+
+def _extract_json_payload(raw_text: str) -> Any:
+    txt = (raw_text or "").strip()
+    if not txt:
+        return None
+
+    if txt.startswith("```"):
+        txt = re.sub(r"^```(?:json)?\s*", "", txt, flags=re.IGNORECASE)
+        txt = re.sub(r"\s*```$", "", txt).strip()
+
+    try:
+        return json.loads(txt)
+    except Exception:
+        pass
+
+    obj_match = re.search(r"\{[\s\S]*\}", txt)
+    if obj_match:
+        try:
+            return json.loads(obj_match.group(0).strip())
+        except Exception:
+            pass
+
+    list_match = re.search(r"\[[\s\S]*\]", txt)
+    if list_match:
+        try:
+            return json.loads(list_match.group(0).strip())
+        except Exception:
+            pass
+
+    return None
+
+
+def _collect_phrases_from_payload(payload: Any) -> List[str]:
+    if isinstance(payload, list):
+        return [str(x) for x in payload]
+
+    if not isinstance(payload, dict):
+        return []
+
+    phrases: List[str] = []
+
+    primary = payload.get("primary_keyword")
+    if isinstance(primary, str) and primary.strip():
+        phrases.append(primary)
+
+    keyword_groups = payload.get("keyword_groups")
+    if isinstance(keyword_groups, dict):
+        for key in ("core_seo_keywords", "long_tail_keywords", "context_keywords"):
+            values = keyword_groups.get(key) or []
+            if isinstance(values, list):
+                phrases.extend(str(v) for v in values if isinstance(v, str))
+
+    supporting = payload.get("supporting_keywords")
+    if isinstance(supporting, list):
+        phrases.extend(str(v) for v in supporting if isinstance(v, str))
+
+    return phrases
+
 
 _configure_agents_sdk()
 _KEYWORD_GEN_AGENT = Agent(
     name="kra-keyword-gen",
     instructions=(
-        "You generate SEO keyword phrases for technical content.\n"
+        "You generate only the best possible relevant SEO keyword phrases for technical content.\n"
         "Return ONLY valid JSON.\n\n"
+        "Primary objective:\n"
+        "- Highlight the feature/topic first so it attracts broad relevant visitors, especially platform developers and AI agents that collect and rank content.\n"
+        "Secondary objective:\n"
+        "- Show that the given product provides that feature.\n\n"
+        "Return a JSON array of keyword strings only.\n\n"
         "Rules:\n"
         "- Output MUST be a JSON array of strings.\n"
-        "- Each string is a short keyword phrase (3–12 words, <= 90 chars).\n"
-        "- No bullets, no ellipses, no step lists, no trailing punctuation.\n"
-        "- Must be relevant to the given product + topic.\n"
+        "- Generate only concise keyword phrases, not personas, angles, outlines, or notes.\n"
+        "- Every keyword must be directly relevant to the given topic.\n"
+        "- Every keyword must stay feature-first and topic-first, not product-first.\n"
+        "- Include the product only when it helps clarify the feature, not as filler.\n"
+        "- Avoid competitor names, unrelated brands, subscriptions, pricing terms, and irrelevant software.\n"
         "- If a platform is provided, keywords must be platform-specific and must NOT mention other platforms.\n"
-        "- Generate diverse variants: how-to, convert, render, export, save, example, tutorial.\n"
-        "- Avoid duplicates.\n"
+        "- Prefer phrases that include the action, file format, or core feature from the topic.\n"
+        "- Generate only the strongest relevant SEO phrases a technical writer would actually target.\n"
+        "- Avoid vague phrases, generic brand terms, and off-topic software queries.\n"
+        "- No markdown fences. No commentary outside JSON.\n"
     ),
-    model=settings.PROFESSIONALIZE_LLM_MODEL,  # your model name (e.g., "gpt-oss")
-    # You can set model explicitly if you want; leaving default uses your SDK default config.
-    # model="gpt-5.2",
+    model=settings.PROFESSIONALIZE_LLM_MODEL,
 )
 
-def fetch_llm_keywords(req: LLMKeywordGenRequest) -> List[KeywordRecord]:
-    """
-    LLM fallback keyword generator using OpenAI Agents SDK.
-    Returns KeywordRecord list with source='llm'.
 
-    Improvements:
-    - Robust JSON extraction (handles code fences / extra prose).
-    - Logs raw output on parse failure (so you can see why you got []).
-    - Optional one retry without platform if platform-filtering nukes everything.
-    """
+def fetch_llm_keywords(req: LLMKeywordGenRequest) -> List[KeywordRecord]:
     import logging
 
     log = logging.getLogger("kra.llm_keyword_gen")
 
     def _run(prompt_obj: dict) -> str:
         res = Runner.run_sync(_KEYWORD_GEN_AGENT, json.dumps(prompt_obj, ensure_ascii=False))
-        return ((res.final_output or "").strip())
-
-    def _extract_json_list(raw_text: str) -> List[str]:
-        """
-        Accepts:
-          - a real JSON array
-          - ```json ... ``` fenced blocks
-          - extra text around a JSON array (extract first [...] block)
-        """
-        txt = (raw_text or "").strip()
-        if not txt:
-            return []
-
-        # Strip fenced code blocks if present
-        if txt.startswith("```"):
-            # remove leading/trailing fences; keep inner
-            txt = re.sub(r"^```(?:json)?\s*", "", txt, flags=re.IGNORECASE)
-            txt = re.sub(r"\s*```$", "", txt).strip()
-
-        # First try: direct JSON parse
-        try:
-            data = json.loads(txt)
-            if isinstance(data, list):
-                return [str(x) for x in data]
-        except Exception:
-            pass
-
-        # Second try: extract the first JSON-array-looking block
-        m = re.search(r"\[[\s\S]*\]", txt)
-        if not m:
-            return []
-
-        candidate = m.group(0).strip()
-        try:
-            data = json.loads(candidate)
-            if isinstance(data, list):
-                return [str(x) for x in data]
-        except Exception:
-            return []
-
-        return []
+        return (res.final_output or "").strip()
 
     def _generate(prompt_obj: dict, platform_for_filter: Optional[str]) -> List[KeywordRecord]:
         raw = _run(prompt_obj)
+        payload = _extract_json_payload(raw)
+        phrases = _collect_phrases_from_payload(payload)
 
-        phrases = _extract_json_list(raw)
         if not phrases:
-            # This is the key: you were seeing [] with no clue why.
             log.warning("LLM returned non-parseable or empty output. Raw output:\n%s", raw)
 
         cleaned: List[str] = []
         for s in phrases:
-            s2 = _clean_phrase(s)
+            s2 = _sanitize_phrase(s, req.topic, req.product, platform_for_filter)
             if not _is_acceptable(s2):
                 continue
             if _platform_contamination(s2, platform_for_filter):
@@ -245,7 +360,6 @@ def fetch_llm_keywords(req: LLMKeywordGenRequest) -> List[KeywordRecord]:
             cleaned.append(s2)
 
         cleaned = _dedupe(cleaned)[: prompt_obj.get("max_keywords", req.max_keywords)]
-        print(cleaned)
 
         return [
             KeywordRecord(
@@ -269,13 +383,11 @@ def fetch_llm_keywords(req: LLMKeywordGenRequest) -> List[KeywordRecord]:
         "platform": req.platform,
         "locale": req.locale,
         "max_keywords": req.max_keywords,
-        "output_format": "JSON array of strings only",
+        "output_format": "JSON array of keyword strings only",
     }
 
-    # Attempt 1: as requested
     records = _generate(prompt, platform_for_filter=req.platform)
 
-    # Attempt 2 (optional): if platform filtering / constraints resulted in nothing, retry once without platform
     if not records and req.platform:
         log.info("Retrying LLM keyword gen without platform constraint (was: %s)", req.platform)
         prompt2 = dict(prompt)
@@ -284,12 +396,10 @@ def fetch_llm_keywords(req: LLMKeywordGenRequest) -> List[KeywordRecord]:
 
     return records
 
-# ----------------------------
-# Example (manual run)
-# ----------------------------
+
 if __name__ == "__main__":
     req = LLMKeywordGenRequest(
-        topic="LaTeX to PNG in Pytho",
+        topic="LaTeX to PNG in Python",
         product="Aspose.Tex",
         platform="python",
         locale="en-US",

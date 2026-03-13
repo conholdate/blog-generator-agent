@@ -11,7 +11,7 @@ from agents import Agent, Runner, function_tool, handoff
 from openai import OpenAI
 
 from .settings import Settings
-from .tools.normalize import nor_website_domain, nor_platform_display_name, nor_section_label
+from .tools.normalization import nor_website_domain, nor_section_label
 from .types import IndexRecord, RepoTarget
 from .tools.embeddings import EmbeddingStore
 from .tools.git_ops import ensure_repo_cloned, get_head_commit

@@ -1,36 +1,18 @@
 from __future__ import annotations
 
-from dataclasses import asdict
 from datetime import datetime, timezone, timedelta
 from typing import Any, Optional
 
 import requests
 
-from .config import platform_PATTERNS, platform_LABELS
+from agent_engine.blog_keyword_analyzer.tools.normalization import canonical_platform_label, normalize_platform_family
 
 def canonicalize_platform(value: Optional[str]) -> str:
-    if not value:
-        return ""
-    v = value.strip().lower()
-
-    # Exact canonical match first
-    if v in platform_PATTERNS:
-        return v
-
-    # Match any pattern
-    for canonical, patterns in platform_PATTERNS.items():
-        for p in patterns:
-            if p in v:
-                return canonical
-
-    return v  # unknown, keep normalized raw
+    return normalize_platform_family(value)
 
 
 def platform_display(value: Optional[str]) -> str:
-    canonical = canonicalize_platform(value)
-    if not canonical:
-        return ""
-    return platform_LABELS.get(canonical, canonical.title())
+    return canonical_platform_label(value)
 
 def _post_json_best_effort(url: str, token: str, payload: dict[str, Any], debug: bool = False) -> None:
     """Best-effort POST; never raises."""
@@ -94,12 +76,10 @@ def send_stage_metrics(
     if extra_fields:
         payload.update(extra_fields)
 
-    _post_json_best_effort(
-        getattr(settings, "METRICS_WEBHOOK_URL", ""),
-        getattr(settings, "METRICS_TOKEN", ""),
-        payload,
-        debug=bool(getattr(settings, "DEBUG", False)),
-    )
+    metrics_url = getattr(settings, "METRICS_WEBHOOK_URL", "")
+    metrics_token = getattr(settings, "METRICS_TOKEN", "")
+
+    _post_json_best_effort(metrics_url, metrics_token, payload, debug=bool(getattr(settings, "DEBUG", False)))
 
     int_url = getattr(settings, "INT_METRICS_WEBHOOK_URL", "")
     int_token = getattr(settings, "INT_METRICS_TOKEN", "")

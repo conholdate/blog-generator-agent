@@ -6,7 +6,7 @@ from typing import Dict, List, Optional
 
 from ..io import IndexRecord, read_jsonl
 from ..logging_utils import get_logger
-from ..normalize import normalize_text
+from ..normalization import normalize_text
 from ..similarity import lexical_fast_match
 from .base import CoverageResult, CoverageRow
 from .filters import is_release_update_record

@@ -8,7 +8,7 @@ from typing import Dict, List, Optional, Tuple, Set
 
 from ..io import IndexRecord, read_jsonl
 from ..logging_utils import get_logger
-from ..normalize import nor_platform_key, normalize_text
+from ..normalization import nor_platform_key, normalize_text
 from .base import CoverageResult, CoverageRow
 from .filters import is_release_update_record
 

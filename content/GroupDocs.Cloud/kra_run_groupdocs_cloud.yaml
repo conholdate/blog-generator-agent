@@ -10,8 +10,13 @@ meta:
 engine:
   # === Core KRA inputs ===
   # input_file: "content/GroupDocs.Cloud/keywords.csv"
-  use-serp-api: true
+
+  # use-serp-api: true
+  use-llm-keywords: true
   serp-topic: "Update PPTX File in .NET"               # optional seed topic if you enable SerpAPI later
+
+  # missing_topics_file: "content/GroupDocs.Cloud/aspose-3d_all_missing_topics.md"
+  # missing_topic_row: 5
 
   brand: "GroupDocs.Cloud"
   product: "GroupDocs.Editor Cloud SDK"   # keep generic; you said no per-product run YAML
@@ -23,7 +28,7 @@ engine:
   top_clusters: 15
   max_rows: 50000
   use_content_index: true
-  include_product_in_title: true
+  include_product_in_title: false
   debug: false
   output_dir: "content/GroupDocs.Cloud/output"
 

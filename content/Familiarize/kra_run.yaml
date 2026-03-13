@@ -10,10 +10,21 @@ meta:
 engine:
   # === Core KRA inputs ===
   input_file: "content/Familiarize/keywords.csv"
+
+  use-serp-api: true
+  # use-llm-keywords: true
+
+  serp-topic: "Convert CDR to PNG in .NET"
+
+  # missing_topics_file: "content/Familiarize/aspose-3d_all_missing_topics.md"
+  # missing_topic_row: 5
+
   brand: "Familiarize"
   product: "Risk Management"
   # platform: "python"           # used as --platform; also passed into prompt as fw_label
   locale: "en-US"
+  # use_llm_keywords: true       # skip SerpAPI and use the built-in LLM keyword generator
+  # serp_topic: "Risk Management Framework"
 
   # === KRA behavior tuning ===
   top_clusters: 10              # --top

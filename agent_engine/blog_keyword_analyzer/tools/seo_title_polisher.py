@@ -11,6 +11,7 @@ from openai import AsyncOpenAI
 from agents import Agent, Runner, set_default_openai_client, set_default_openai_api, set_tracing_disabled
 
 from agent_engine.blog_keyword_analyzer.config import settings
+from agent_engine.blog_keyword_analyzer.tools.normalization import contains_platform_variant, platform_variant_pattern
 
 log = logging.getLogger("kra.seo_title_polisher")
 
@@ -69,7 +70,8 @@ _TITLE_POLISHER_AGENT = Agent(
         "HARD CONSTRAINTS:\n"
         "1) Output MUST be JSON object: {\"title\": \"...\", \"confidence\": 0.0-1.0, \"notes\": \"...\"}\n"
         "2) title MUST contain primary_keyword EXACTLY as provided (verbatim substring).\n"
-        "3) If platform_label is provided, title MUST end with 'in <platform_label>' exactly once.\n"
+        "3) If platform_label is provided, title MUST mention that platform exactly once.\n"
+        "   Treat equivalent forms as the same platform, e.g. '.NET' and 'C#'.\n"
         "4) If include_product_in_title is True, title MUST contain product (verbatim substring).\n"
         "   If include_product_in_title is False, title MUST NOT contain product.\n"
         "5) Avoid duplicate verbs (e.g., 'Convert Convert').\n"
@@ -126,13 +128,7 @@ def _extract_json_obj(text: str) -> Optional[Dict[str, Any]]:
 def _platform_suffix_ok(title: str, platform_label: Optional[str]) -> bool:
     if not platform_label:
         return True
-    t = title.strip()
-    # must end with "in <platform_label>"
-    if not re.search(rf"(?i)\bin\s+{re.escape(platform_label)}\s*$", t):
-        return False
-    # must not contain another "in <something>" at the end
-    # (your downstream normalizer also enforces this, but we validate here too)
-    return True
+    return contains_platform_variant(title, platform_label)
 
 def _contains_verbatim(haystack: str, needle: str) -> bool:
     return bool(needle) and (needle in (haystack or ""))
@@ -140,8 +136,10 @@ def _contains_verbatim(haystack: str, needle: str) -> bool:
 def _too_many_platform_mentions(title: str, platform_label: Optional[str]) -> bool:
     if not platform_label:
         return False
-    # reject if multiple occurrences of "in <platform_label>"
-    return len(re.findall(rf"(?i)\bin\s+{re.escape(platform_label)}\b", title)) > 1
+    pattern = platform_variant_pattern(platform_label)
+    if not pattern:
+        return False
+    return len(re.findall(rf"(?i){pattern}", title)) > 1
 
 def _has_duplicate_verb(title: str) -> bool:
     # catches "Convert Convert", "Generate Generate", etc.

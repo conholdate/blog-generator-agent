@@ -9,13 +9,22 @@ meta:
 
 engine:
   # === Core KRA inputs ===
-  # input_file: "content/GroupDocs/keywords.csv"
+  input_file: "content/GroupDocs/keywords.csv"
+
   use-serp-api: true
-  serp-topic: "Generate an SVG Image from a Slide"
+  # use-llm-keywords: true
+
+  serp-topic: "Convert CDR to PNG in .NET"
+
+  # missing_topics_file: "content/GroupDocs/aspose-3d_all_missing_topics.md"
+  # missing_topic_row: 5
+
   brand: "GroupDocs"
-  product: "GroupDocs.Conversion"
-  platform: ".NET"           # used as --platform; also passed into prompt as fw_label
+  product: "GroupDocs.Total"
+  platform: "python"           # used as --platform; also passed into prompt as fw_label
   locale: "en-US"
+  # use_llm_keywords: true     # skip SerpAPI and use the built-in LLM keyword generator
+  # serp_topic: "Update PPTX File"
 
   # === KRA behavior tuning ===
   top_clusters: 10              # --top
