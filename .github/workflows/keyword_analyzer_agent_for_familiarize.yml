@@ -18,11 +18,15 @@ on:
         required: false
         default: "content/Familiarize/keywords.csv"
 
-      use_serp_api:
-        description: "If true, ingest keywords using SerpAPI (requires SERPAPI_KEY)."
-        type: boolean
-        required: false
-        default: false
+      keyword_source:
+        description: "Keyword source."
+        type: choice
+        required: true
+        options:
+          - 'file'
+          - 'serp_api'
+          - 'llm_keywords'
+        default: 'file'
 
       serp_topic:
         description: "SerpAPI topic seed (used only if use_serp_api=true)."
@@ -99,7 +103,9 @@ jobs:
           product = os.environ.get("INPUT_PRODUCT", "Familiarize.Forms")
           platform = os.environ.get("INPUT_PLATFORM", "java")
           keywords_file = os.environ.get("INPUT_KEYWORDS_FILE", "content/Familiarize/keywords.csv")
-          use_serp_api = as_bool(os.environ.get("INPUT_USE_SERP_API", "false"))
+          keyword_source = os.environ.get("INPUT_KEYWORD_SOURCE", "file").strip().lower()
+          use_serp_api = keyword_source == "serp_api"
+          use_llm_keywords = keyword_source == "llm_keywords"
           serp_topic = os.environ.get("INPUT_SERP_TOPIC", "")
           top_clusters = int(os.environ.get("INPUT_TOP_CLUSTERS", "15"))
           use_content_index = as_bool(os.environ.get("INPUT_USE_CONTENT_INDEX", "false"))
@@ -121,6 +127,7 @@ jobs:
               "engine:\n"
               f"  input_file: \"{keywords_file}\"\n"
               f"  use_serp_api: {b(use_serp_api)}\n"
+              f"  use_llm_keywords: {b(use_llm_keywords)}\n"
               f"  serp_topic: \"{serp_topic}\"\n"
               "\n"
               f"  brand: \"{brand}\"\n"
@@ -149,7 +156,7 @@ jobs:
           INPUT_PRODUCT: ${{ inputs.product }}
           INPUT_PLATFORM: ${{ inputs.platform }}
           INPUT_KEYWORDS_FILE: ${{ inputs.keywords_file }}
-          INPUT_USE_SERP_API: ${{ inputs.use_serp_api }}
+          INPUT_KEYWORD_SOURCE: ${{ inputs.keyword_source }}
           INPUT_SERP_TOPIC: ${{ inputs.serp_topic }}
           INPUT_TOP_CLUSTERS: ${{ inputs.top_clusters }}
           INPUT_USE_CONTENT_INDEX: ${{ inputs.use_content_index }}

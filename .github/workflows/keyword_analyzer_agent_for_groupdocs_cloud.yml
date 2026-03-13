@@ -1,66 +1,50 @@
-name: Blog Keyword Analyzer for Aspose
+name: Blog Keyword Analyzer for GroupDocs.Cloud
 
 on:
   workflow_dispatch:
     inputs:
       product:
-        description: "Product name (e.g., Aspose.Cells)."
+        description: "Product name (e.g., GroupDocs.Conversion Cloud SDK)."
         type: choice
         required: true
         options:
-          - 'Aspose.BarCode'
-          - 'Aspose.CAD'
-          - 'Aspose.Cells'
-          - 'Aspose.Diagram'
-          - 'Aspose.Drawing'
-          - 'Aspose.Email'
-          - 'Aspose.Font'
-          - 'Aspose.HTML'
-          - 'Aspose.Imaging'
-          - 'Aspose.Note'
-          - 'Aspose.OCR'
-          - 'Aspose.OMR'
-          - 'Aspose.Page'
-          - 'Aspose.PDF'
-          - 'Aspose.PSD'
-          - 'Aspose.PUB'
-          - 'Aspose.Slides'
-          - 'Aspose.Tasks'
-          - 'Aspose.TeX'
-          - 'Aspose.3D'
-          - 'Aspose.Words'
-          - 'Aspose.Zip'
-        default: "Aspose.Cells"
+          - 'GroupDocs.Annotation Cloud SDK'
+          - 'GroupDocs.Assembly Cloud SDK'
+          - 'GroupDocs.Classification Cloud SDK'
+          - 'GroupDocs.Comparison Cloud SDK'
+          - 'GroupDocs.Conversion Cloud SDK'
+          - 'GroupDocs.Editor Cloud SDK'
+          - 'GroupDocs.Merger Cloud SDK'
+          - 'GroupDocs.Metadata Cloud SDK'
+          - 'GroupDocs.Parser Cloud SDK'
+          - 'GroupDocs.Rewriter Cloud SDK'
+          - 'GroupDocs.Signature Cloud SDK'
+          - 'GroupDocs.Total Cloud SDK'
+          - 'GroupDocs.Translation Cloud SDK'
+          - 'GroupDocs.Viewer Cloud SDK'
+          - 'GroupDocs.Watermark Cloud SDK'
+        default: "GroupDocs.Conversion Cloud SDK"
 
       platform:
-        description: "Optional target platform (e.g., Java, .NET, Python via .NET)."
+        description: "Optional target platform label (e.g. REST, Java, .NET, Python)."
         required: false
         type: choice
         options:
+          - 'REST'
           - 'Java'
           - '.NET'
-          - 'C++'
+          - 'Python'
+          - 'Node.js'
           - 'PHP'
-          - 'SharePoint'
-          - 'JasperReports'
-          - 'Reporting Services'
-          - 'JavaScript via C++'
-          - 'Go via C++'
-          - 'Rust via C++'
-          - 'Node.js via C++'
-          - 'Node.js via Java'
-          - 'Node.js via .NET'
-          - 'PHP via Java'
-          - 'Python via .NET'
-          - 'Python via Java'
-          - 'Android via Java'
-        default: 'Java'
+          - 'Ruby'
+          - 'Go'
+        default: '.NET'
 
       keywords_file:
-        description: "Keywords file path (recommended: content/Aspose/keywords.csv). Ignored if use_serp_api=true."
+        description: "Keywords file path (recommended: content/GroupDocs.Cloud/keywords.csv). Ignored unless keyword_source=file."
         type: string
         required: true
-        default: "content/Aspose/keywords.csv"
+        default: "content/GroupDocs.Cloud/keywords.csv"
 
       keyword_source:
         description: "Keyword source."
@@ -73,7 +57,7 @@ on:
         default: 'file'
 
       serp_topic:
-        description: "SerpAPI topic seed (used only if use_serp_api=true)."
+        description: "Topic seed used when keyword_source is serp_api or llm_keywords."
         type: string
         required: false
         default: ""
@@ -88,7 +72,7 @@ on:
         description: "If true, clone blog repo and dedupe topics against existing posts."
         type: boolean
         required: false
-        default: false
+        default: true
 
       include_product_in_title:
         description: "If true, enforce product name in generated topic titles. If false, ensure product name is NOT used in titles."
@@ -104,16 +88,16 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      BRAND: "Aspose"
-      KRA_OUTPUT_DIR: "content/Aspose/output"
+      BRAND: "GroupDocs.Cloud"
+      KRA_OUTPUT_DIR: "content/GroupDocs.Cloud/output"
       KRA_METRICS_DB_PATH: "content/kra_metrics_db.json"
 
       PROFESSIONALIZE_BASE_URL: "https://llm.professionalize.com/v1"
       PROFESSIONALIZE_API_KEY: ${{ secrets.PROFESSIONALIZE_API_KEY_1 }}
       OPENAI_API_KEY: ${{ secrets.PROFESSIONALIZE_API_KEY_1 }}
 
-      BLOG_CONTENT_REPO: "Aspose/aspose-blog"
-      BLOG_CONTENT_ROOT: "blog_content/content/Aspose.Blog"
+      BLOG_CONTENT_REPO: "groupdocs-cloud/groupdocs-cloud-blog"
+      BLOG_CONTENT_ROOT: "blog_content/content"
 
     steps:
       - name: Checkout this repo
@@ -121,7 +105,7 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Checkout Aspose blog content repo (only if use_content_index=true)
+      - name: Checkout GroupDocs.Cloud blog content repo (only if use_content_index=true)
         if: ${{ inputs.use_content_index }}
         uses: actions/checkout@v4
         with:
@@ -160,29 +144,29 @@ jobs:
 
           brand = os.environ["BRAND"]
 
-          product = os.environ.get("INPUT_PRODUCT", "Aspose.Cells")
-          platform = os.environ.get("INPUT_PLATFORM", "Java")
-          keywords_file = os.environ.get("INPUT_KEYWORDS_FILE", "content/Aspose/keywords.csv")
+          product = os.environ.get("INPUT_PRODUCT", "GroupDocs.Conversion Cloud SDK")
+          platform = os.environ.get("INPUT_PLATFORM", ".NET")
+          keywords_file = os.environ.get("INPUT_KEYWORDS_FILE", "content/GroupDocs.Cloud/keywords.csv")
           keyword_source = os.environ.get("INPUT_KEYWORD_SOURCE", "file").strip().lower()
           use_serp_api = keyword_source == "serp_api"
           use_llm_keywords = keyword_source == "llm_keywords"
           serp_topic = os.environ.get("INPUT_SERP_TOPIC", "")
           top_clusters = int(os.environ.get("INPUT_TOP_CLUSTERS", "15"))
-          use_content_index = as_bool(os.environ.get("INPUT_USE_CONTENT_INDEX", "false"))
+          use_content_index = as_bool(os.environ.get("INPUT_USE_CONTENT_INDEX", "true"))
           include_product_in_title = as_bool(os.environ.get("INPUT_INCLUDE_PRODUCT_IN_TITLE", "true"))
 
-          # Defaults (not exposed as workflow inputs)
           locale = "en-US"
           max_rows = 50000
           debug = False
 
           cfg_path = Path(os.environ["RUNNER_TEMP"]) / "kra_run.generated.yaml"
 
-          # If SerpAPI is enabled, we still write input_file but it won't be used by your runner.
-          # Keeping it avoids breaking older config parsers that expect a field.
+          blog_name = "groupdocs.cloud"
+          blog_root = os.environ.get("BLOG_CONTENT_ROOT", "")
+
           cfg_text = (
               "meta:\n"
-              "  blog_name: \"\"\n"
+              f"  blog_name: \"{blog_name}\"\n"
               f"  brand: \"{brand}\"\n"
               "  created_at: \"\"\n"
               "  owner: \"content-team\"\n"
@@ -203,10 +187,15 @@ jobs:
               f"  use_content_index: {b(use_content_index)}\n"
               f"  include_product_in_title: {b(include_product_in_title)}\n"
               f"  debug: {b(debug)}\n"
+              f"  output_dir: \"content/GroupDocs.Cloud/output\"\n"
               "\n"
               "content_index:\n"
+              f"  local_root: \"{blog_root}\"\n"
               "  index_file_name: \"index.md\"\n"
               "  file_glob: \"**/index.md\"\n"
+              "  repo_url: \"https://github.com/groupdocs-cloud/groupdocs-cloud-blog\"\n"
+              "  branch: \"master\"\n"
+              "  subdir: \"/content\"\n"
           )
 
           cfg_path.write_text(cfg_text, encoding="utf-8")
@@ -230,16 +219,16 @@ jobs:
           mkdir -p "${KRA_OUTPUT_DIR}"
           python scripts/run_kra_from_config.py --config "${KRA_CFG_PATH}"
 
-      - name: Upload Aspose outputs
+      - name: Upload GroupDocs.Cloud outputs
         uses: actions/upload-artifact@v4
         with:
-          name: kra-output-Aspose
+          name: kra-output-GroupDocs.Cloud
           path: |
-            content/Aspose/output/**
+            content/GroupDocs.Cloud/output/**
             content/kra_metrics_db.json
           if-no-files-found: warn
 
-      - name: Commit Aspose outputs (with ignore-safe staging)
+      - name: Commit GroupDocs.Cloud outputs (with ignore-safe staging)
         run: |
           set -euo pipefail
 
@@ -261,14 +250,11 @@ jobs:
           echo "=== check ignore rules for KRA output ==="
           git check-ignore -v "${KRA_OUTPUT_DIR}"/** 2>/dev/null || true
 
-          # Stage all changes under content first
           git add -A content
 
           echo "=== staged diff (after add -A content) ==="
           git diff --cached --name-status || true
 
-          # If nothing staged, it is very often due to .gitignore on output paths.
-          # Force-add ONLY the KRA output folder and metrics DB (narrow + safe).
           if git diff --cached --quiet; then
             echo "No staged changes after 'git add -A content'. Trying force-add on KRA outputs..."
             git add -f "${KRA_OUTPUT_DIR}" || true
@@ -283,6 +269,6 @@ jobs:
             exit 0
           fi
 
-          git commit -m "Update Aspose KRA results [skip ci]"
+          git commit -m "Update GroupDocs.Cloud KRA results [skip ci]"
           git pull --rebase origin "${GITHUB_REF_NAME}"
           git push origin HEAD:"${GITHUB_REF_NAME}"
