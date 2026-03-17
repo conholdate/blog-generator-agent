@@ -33,6 +33,7 @@ class PlatformSpec:
     display: str
     blog_key: str
     aliases: Tuple[str, ...] = field(default_factory=tuple)
+    display_aliases: Mapping[str, str] = field(default_factory=dict)
 
 
 @dataclass(frozen=True)
@@ -57,6 +58,22 @@ PLATFORM_REGISTRY: Dict[str, PlatformSpec] = {
             "vb", "vb.net", "vbnet", "visual basic", "visual basic .net",
             "asp.net", "asp net",
         ),
+        display_aliases={
+            ".net": ".NET",
+            "net": ".NET",
+            "dotnet": ".NET",
+            "dot net": ".NET",
+            "c#": "C#",
+            "c sharp": "C#",
+            "csharp": "C#",
+            "vb": "VB.NET",
+            "vb.net": "VB.NET",
+            "vbnet": "VB.NET",
+            "visual basic": "VB.NET",
+            "visual basic .net": "VB.NET",
+            "asp.net": "ASP.NET",
+            "asp net": "ASP.NET",
+        },
     ),
     "java": PlatformSpec(
         family="java",
@@ -622,6 +639,26 @@ def platform_to_display(value: Optional[str]) -> str:
     return canonical_platform_label(value)
 
 
+def platform_header_display(value: Optional[str]) -> str:
+    family = normalize_platform_family(value)
+    spec = PLATFORM_REGISTRY.get(family)
+    if not spec:
+        return canonical_platform_label(value)
+
+    raw = _compact_token(value or "")
+    if raw:
+        display_alias = spec.display_aliases.get(raw)
+        if display_alias:
+            return display_alias
+
+        dashed = raw.replace(" ", "-")
+        display_alias = spec.display_aliases.get(dashed)
+        if display_alias:
+            return display_alias
+
+    return spec.display
+
+
 def platform_aliases(value: Optional[str]) -> Tuple[str, ...]:
     family = normalize_platform_family(value)
     return PLATFORM_FAMILY_TO_ALIASES.get(family, tuple())
@@ -1125,6 +1162,7 @@ __all__ = [
     "nor_website_domain",
     "nor_website_section_from_case",
     "platform_aliases",
+    "platform_header_display",
     "platform_to_csharp",
     "platform_to_display",
     "platform_variant_pattern",

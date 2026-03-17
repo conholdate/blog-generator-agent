@@ -14,12 +14,13 @@ from agents import (
     set_tracing_disabled,
 )
 
-from agent_engine.blog_keyword_analyzer.config import settings
+from ..config import settings
+from ..prompt_loader import load_prompt
 from agent_engine.blog_keyword_analyzer.tools.normalization import (
     normalize_display_text,
     normalize_platform_mentions,
 )
-from agent_engine.blog_keyword_analyzer.schemas import KeywordRecord
+from ..schemas import KeywordRecord
 
 
 @dataclass(frozen=True)
@@ -308,32 +309,12 @@ def _collect_phrases_from_payload(payload: Any) -> List[str]:
 _configure_agents_sdk()
 _KEYWORD_GEN_AGENT = Agent(
     name="kra-keyword-gen",
-    instructions=(
-        "You generate only the best possible relevant SEO keyword phrases for technical content.\n"
-        "Return ONLY valid JSON.\n\n"
-        "Primary objective:\n"
-        "- Highlight the feature/topic first so it attracts broad relevant visitors, especially platform developers and AI agents that collect and rank content.\n"
-        "Secondary objective:\n"
-        "- Show that the given product provides that feature.\n\n"
-        "Return a JSON array of keyword strings only.\n\n"
-        "Rules:\n"
-        "- Output MUST be a JSON array of strings.\n"
-        "- Generate only concise keyword phrases, not personas, angles, outlines, or notes.\n"
-        "- Every keyword must be directly relevant to the given topic.\n"
-        "- Every keyword must stay feature-first and topic-first, not product-first.\n"
-        "- Include the product only when it helps clarify the feature, not as filler.\n"
-        "- Avoid competitor names, unrelated brands, subscriptions, pricing terms, and irrelevant software.\n"
-        "- If a platform is provided, keywords must be platform-specific and must NOT mention other platforms.\n"
-        "- Prefer phrases that include the action, file format, or core feature from the topic.\n"
-        "- Generate only the strongest relevant SEO phrases a technical writer would actually target.\n"
-        "- Avoid vague phrases, generic brand terms, and off-topic software queries.\n"
-        "- No markdown fences. No commentary outside JSON.\n"
-    ),
+    instructions=load_prompt("keyword_generator_instructions.txt"),
     model=settings.PROFESSIONALIZE_LLM_MODEL,
 )
 
 
-def fetch_llm_keywords(req: LLMKeywordGenRequest) -> List[KeywordRecord]:
+def generate_llm_keywords(req: LLMKeywordGenRequest) -> List[KeywordRecord]:
     import logging
 
     log = logging.getLogger("kra.llm_keyword_gen")
@@ -405,6 +386,6 @@ if __name__ == "__main__":
         locale="en-US",
         max_keywords=20,
     )
-    kws = fetch_llm_keywords(req)
+    kws = generate_llm_keywords(req)
     for k in kws[:10]:
         print("-", k.keyword)
