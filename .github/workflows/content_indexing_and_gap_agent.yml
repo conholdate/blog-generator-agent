@@ -1,4 +1,4 @@
-name: Content Indexing And Gap Agent
+name: Identify Blog Content Gap
 
 on:
   workflow_dispatch:

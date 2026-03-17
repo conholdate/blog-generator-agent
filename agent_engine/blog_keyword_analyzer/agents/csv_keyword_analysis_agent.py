@@ -4,6 +4,7 @@ from typing import List, Optional
 
 from agent_engine.blog_keyword_analyzer.schemas import KeywordRecord, RunRequest
 from agent_engine.blog_keyword_analyzer.tools.file_import import import_file
+from agent_engine.blog_keyword_analyzer.tools.metrics import RunMetrics
 
 from .workflow_base import KeywordWorkflowAgent
 
@@ -18,5 +19,6 @@ class CsvKeywordAnalysisAgent(KeywordWorkflowAgent):
         req: RunRequest,
         platform: Optional[str],
         seed_topic: Optional[str],
+        metrics: Optional[RunMetrics] = None,
     ) -> List[KeywordRecord]:
         return import_file(req)

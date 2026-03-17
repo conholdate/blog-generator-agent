@@ -47,10 +47,11 @@ class KeywordWorkflowAgent:
         req: RunRequest,
         platform: Optional[str],
         seed_topic: Optional[str],
+        metrics: Optional[RunMetrics],
         provided_records: Optional[List[KeywordRecord]],
     ) -> List[KeywordRecord]:
         if provided_records is None:
-            records = self.fetch_records(req=req, platform=platform, seed_topic=seed_topic)
+            records = self.fetch_records(req=req, platform=platform, seed_topic=seed_topic, metrics=metrics)
         else:
             records = provided_records
 
@@ -69,6 +70,7 @@ class KeywordWorkflowAgent:
         req: RunRequest,
         platform: Optional[str],
         seed_topic: Optional[str],
+        metrics: Optional[RunMetrics] = None,
     ) -> List[KeywordRecord]:
         raise NotImplementedError
 
@@ -112,6 +114,7 @@ class KeywordWorkflowAgent:
                     req=req,
                     platform=platform,
                     seed_topic=seed_topic,
+                    metrics=metrics,
                     provided_records=provided_records,
                 )
             metrics.keywords_processed = len(records)
@@ -173,6 +176,10 @@ class KeywordWorkflowAgent:
                 items_discovered=metrics.keywords_after_preprocess,
                 items_succeeded=metrics.keywords_clustered,
                 items_failed=metrics.keywords_not_clustered,
+                llm_requests=metrics.llm_requests,
+                llm_prompt_tokens=metrics.llm_prompt_tokens,
+                llm_completion_tokens=metrics.llm_completion_tokens,
+                llm_total_tokens=metrics.llm_total_tokens,
                 extra_fields={
                     "workflow_source": self.source,
                     "keywords_processed": metrics.keywords_processed,
@@ -217,7 +224,6 @@ class KeywordWorkflowAgent:
                 include_product_in_title=include_product_in_title,
             )
             dt_llm = time.perf_counter() - t0_llm
-            metrics.mark_llm_call(duration_seconds=dt_llm, failed=topics is None)
 
             if topics is None:
                 topics = []
@@ -243,6 +249,10 @@ class KeywordWorkflowAgent:
                 items_discovered=metrics.clusters_used_for_topics,
                 items_succeeded=metrics.topics_after_dedup,
                 items_failed=metrics.duplicates_dropped,
+                llm_requests=metrics.llm_requests,
+                llm_prompt_tokens=metrics.llm_prompt_tokens,
+                llm_completion_tokens=metrics.llm_completion_tokens,
+                llm_total_tokens=metrics.llm_total_tokens,
                 extra_fields={
                     "workflow_source": self.source,
                     "existing_topics_loaded": metrics.existing_topics_loaded,
@@ -296,6 +306,10 @@ class KeywordWorkflowAgent:
                 items_discovered=discovered,
                 items_succeeded=succeeded,
                 items_failed=failed,
+                llm_requests=metrics.llm_requests,
+                llm_prompt_tokens=metrics.llm_prompt_tokens,
+                llm_completion_tokens=metrics.llm_completion_tokens,
+                llm_total_tokens=metrics.llm_total_tokens,
                 extra_fields={
                     "workflow_source": self.source,
                     "error_message": str(exc),
@@ -322,6 +336,7 @@ class LlmKeywordDiscoveryMixin:
         req: RunRequest,
         platform: Optional[str],
         seed_topic: Optional[str],
+        metrics: Optional[RunMetrics] = None,
     ) -> List[KeywordRecord]:
         topic = (seed_topic or "").strip() or req.product
         records = generate_llm_keywords(
@@ -331,7 +346,8 @@ class LlmKeywordDiscoveryMixin:
                 platform=platform,
                 locale=req.locale,
                 max_keywords=min(req.max_rows, 200),
-            )
+            ),
+            metrics=metrics,
         )
         if not records:
             raise RuntimeError("No keywords produced by the LLM keyword generator.")

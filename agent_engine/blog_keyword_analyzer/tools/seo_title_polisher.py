@@ -4,6 +4,7 @@ from __future__ import annotations
 import json
 import logging
 import re
+import time
 from dataclasses import dataclass
 from typing import List, Optional, Dict, Any
 
@@ -12,6 +13,7 @@ from agents import Agent, Runner, set_default_openai_client, set_default_openai_
 
 from agent_engine.blog_keyword_analyzer.config import settings
 from agent_engine.blog_keyword_analyzer.prompt_loader import load_prompt
+from agent_engine.blog_keyword_analyzer.tools.metrics import RunMetrics
 from agent_engine.blog_keyword_analyzer.tools.normalization import contains_platform_variant, platform_variant_pattern
 
 log = logging.getLogger("kra.seo_title_polisher")
@@ -120,10 +122,34 @@ def _has_duplicate_verb(title: str) -> bool:
     # catches "Convert Convert", "Generate Generate", etc.
     return bool(re.search(r"(?i)\b(convert|generate|create|build|export|render|merge|split)\s+\1\b", title))
 
+
+def _record_run_result_usage(result: Any, metrics: Optional[RunMetrics], duration_seconds: float) -> None:
+    if metrics is None:
+        return
+
+    requests = 0
+    prompt_tokens = 0
+    completion_tokens = 0
+    raw_responses = getattr(result, "raw_responses", []) or []
+    for response in raw_responses:
+        usage = getattr(response, "usage", None)
+        if usage is None:
+            continue
+        requests += getattr(usage, "requests", 0) or 0
+        prompt_tokens += getattr(usage, "input_tokens", 0) or 0
+        completion_tokens += getattr(usage, "output_tokens", 0) or 0
+
+    metrics.record_llm_usage(
+        duration_seconds=duration_seconds,
+        prompt_tokens=prompt_tokens,
+        completion_tokens=completion_tokens,
+        requests=requests or 1,
+    )
+
 # ----------------------------
 # Public API
 # ----------------------------
-def polish_title(req: SeoTitlePolishRequest) -> Optional[str]:
+def polish_title(req: SeoTitlePolishRequest, metrics: Optional[RunMetrics] = None) -> Optional[str]:
     """
     Returns a polished title if it passes HARD validation; otherwise None.
     Caller should fallback to deterministic title.
@@ -145,7 +171,9 @@ def polish_title(req: SeoTitlePolishRequest) -> Optional[str]:
         "output_format": "JSON object with title/confidence/notes only",
     }
 
+    t0 = time.perf_counter()
     res = Runner.run_sync(_TITLE_POLISHER_AGENT, json.dumps(payload, ensure_ascii=False))
+    _record_run_result_usage(res, metrics, time.perf_counter() - t0)
     raw_out = (res.final_output or "").strip()
 
     obj = _extract_json_obj(raw_out)

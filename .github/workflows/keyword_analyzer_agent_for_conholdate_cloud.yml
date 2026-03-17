@@ -1,4 +1,4 @@
-name: Blog Keyword Analyzer for Conholdate.Cloud
+name: Keyword Analyzer for Conholdate.Cloud
 
 on:
   workflow_dispatch:

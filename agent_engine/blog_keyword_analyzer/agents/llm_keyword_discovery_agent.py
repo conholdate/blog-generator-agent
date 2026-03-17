@@ -17,5 +17,6 @@ class LlmKeywordDiscoveryAgent(LlmKeywordDiscoveryMixin, KeywordWorkflowAgent):
         req: RunRequest,
         platform: Optional[str],
         seed_topic: Optional[str],
+        metrics=None,
     ) -> List[KeywordRecord]:
-        return self.fetch_llm_records(req=req, platform=platform, seed_topic=seed_topic)
+        return self.fetch_llm_records(req=req, platform=platform, seed_topic=seed_topic, metrics=metrics)

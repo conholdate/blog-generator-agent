@@ -1110,9 +1110,13 @@ class KeywordResearchAgent:
         logger.info("LLM call completed in %.3f seconds", dt)
 
         usage = getattr(resp, "usage", None)
-        if usage is not None and metrics is not None:
-            metrics.llm_prompt_tokens += getattr(usage, "prompt_tokens", 0) or 0
-            metrics.llm_completion_tokens += getattr(usage, "completion_tokens", 0) or 0
+        if metrics is not None:
+            metrics.record_llm_usage(
+                duration_seconds=dt,
+                prompt_tokens=getattr(usage, "prompt_tokens", 0) or 0,
+                completion_tokens=getattr(usage, "completion_tokens", 0) or 0,
+                requests=1,
+            )
 
         txt = resp.choices[0].message.content or ""
         logger.debug("Raw LLM response (truncated to 1200 chars): %s", txt[:1200])
@@ -1344,7 +1348,8 @@ class KeywordResearchAgent:
                     include_product_in_title=include_product_in_title,
                     min_len=40,
                     max_len=60,
-                )
+                ),
+                metrics=metrics,
             )
 
             if polished:

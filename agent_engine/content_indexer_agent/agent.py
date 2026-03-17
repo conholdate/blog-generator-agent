@@ -34,6 +34,7 @@ from .tools.record_id import RecordId
 from .tools.key_maker import build_content_topic
 
 from .tools.metrics import MetricsSender, MetricsRun, new_run_id
+from .tools.usage import UsageAccumulator
 from time import perf_counter
 
 from .tools.logging_utils import get_logger
@@ -175,6 +176,7 @@ def incremental_index_repo(
     repo_target: RepoTarget,
     platform: str,
     embedding_store: EmbeddingStore,
+    usage: UsageAccumulator,
     delete_missing: bool,
     normalize_topics: bool
 ) -> Dict[str, int]:
@@ -313,6 +315,7 @@ def incremental_index_repo(
         product_key=product_key,
         platform_for_record=platform_for_record,
         normalize_topics=normalize_topics,
+        usage=usage,
     )
 
     # Process changed files
@@ -464,6 +467,8 @@ def execute_plan(plan: IndexPlan, *, s: Settings) -> Dict[str, Any]:
         log.info("Step section label: %s", website_section)
 
         step_t0 = perf_counter()
+        usage = UsageAccumulator()
+        embedding_store.usage = usage
         with MetricsRun(
             sender=sender,
             run_id=run_id,
@@ -494,18 +499,23 @@ def execute_plan(plan: IndexPlan, *, s: Settings) -> Dict[str, Any]:
                 repo_target=t,
                 platform=plan.platform,
                 embedding_store=embedding_store,
+                usage=usage,
                 delete_missing=plan.delete_missing,
                 normalize_topics=plan.normalize_topics,
             )
 
             results["details"][step] = step_result
 
-            discovered = int(step_result.get("files_scanned", 0) or 0)
-            succeeded = int(step_result.get("files_new_or_changed", 0) or 0)
-
             skipped_map = step_result.get("skipped") or {}
             failed = sum(int(v or 0) for v in skipped_map.values())
+            discovered = int(step_result.get("files_scanned", 0) or 0)
+            succeeded = max(0, discovered - failed)
 
+            usage_counts = usage.snapshot()
+            m.set_usage(
+                token_usage=int(usage_counts.get("token_usage", 0) or 0),
+                api_calls_count=int(usage_counts.get("api_calls_count", 0) or 0),
+            )
             m.set_counts(discovered=discovered, succeeded=succeeded, failed=failed)
 
         log.info(

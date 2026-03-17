@@ -1,35 +1,36 @@
-name: Blog Keyword Analyzer for GroupDocs.Cloud
+name: Keyword Analyzer for Aspose.Cloud
 
 on:
   workflow_dispatch:
     inputs:
       product:
-        description: "Product name (e.g., GroupDocs.Conversion Cloud)."
+        description: "Product name (e.g., Aspose.Words Cloud, Aspose.PDF Cloud)."
         type: choice
         required: true
         options:
-          - 'GroupDocs.Annotation Cloud SDK'
-          - 'GroupDocs.Assembly Cloud SDK'
-          - 'GroupDocs.Classification Cloud SDK'
-          - 'GroupDocs.Comparison Cloud SDK'
-          - 'GroupDocs.Conversion Cloud SDK'
-          - 'GroupDocs.Editor Cloud SDK'
-          - 'GroupDocs.Merger Cloud SDK'
-          - 'GroupDocs.Metadata Cloud SDK'
-          - 'GroupDocs.Parser Cloud SDK'
-          - 'GroupDocs.Rewriter Cloud SDK'
-          - 'GroupDocs.Signature Cloud SDK'
-          - 'GroupDocs.Total Cloud SDK'
-          - 'GroupDocs.Translation Cloud SDK'
-          - 'GroupDocs.Viewer Cloud SDK'
-          - 'GroupDocs.Watermark Cloud SDK'
-        default: "GroupDocs.Conversion Cloud SDK"
+          - 'Aspose.3D Cloud SDK'
+          - 'Aspose.BarCode Cloud SDK'
+          - 'Aspose.CAD Cloud SDK'
+          - 'Aspose.Cells Cloud SDK'
+          - 'Aspose.Diagram Cloud SDK'
+          - 'Aspose.Email Cloud SDK'
+          - 'Aspose.HTML Cloud SDK'
+          - 'Aspose.Imaging Cloud SDK'
+          - 'Aspose.OCR Cloud SDK'
+          - 'Aspose.OMR Cloud SDK'
+          - 'Aspose.PDF Cloud SDK'
+          - 'Aspose.Slides Cloud SDK'
+          - 'Aspose.Tasks Cloud SDK'
+          - 'Aspose.Total Cloud SDK'
+          - 'Aspose.Words Cloud SDK'
+        default: "Aspose.PDF Cloud SDK"
 
       platform:
         description: "Optional target platform label (e.g. REST, Java, .NET, Python)."
         required: false
         type: choice
         options:
+          - 'REST'
           - 'Java'
           - '.NET'
           - 'Python'
@@ -37,13 +38,13 @@ on:
           - 'PHP'
           - 'Ruby'
           - 'Go'
-        default: '.NET'
+        default: 'REST'
 
       keywords_file:
-        description: "Keywords file path (recommended: content/GroupDocs.Cloud/keywords.csv). Ignored if use_serp_api=true."
+        description: "Keywords file path (recommended: content/Aspose.Cloud/keywords.csv). Ignored if use_serp_api=true."
         type: string
         required: true
-        default: "content/GroupDocs.Cloud/keywords.csv"
+        default: "content/Aspose.Cloud/keywords.csv"
 
       use_serp_api:
         description: "If true, ingest keywords via SerpAPI instead of file."
@@ -83,16 +84,15 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      BRAND: "GroupDocs.Cloud"
-      KRA_OUTPUT_DIR: "content/GroupDocs.Cloud/output"
+      BRAND: "Aspose.Cloud"
+      KRA_OUTPUT_DIR: "content/Aspose.Cloud/output"
       KRA_METRICS_DB_PATH: "content/kra_metrics_db.json"
 
       PROFESSIONALIZE_BASE_URL: "https://llm.professionalize.com/v1"
       PROFESSIONALIZE_API_KEY: ${{ secrets.PROFESSIONALIZE_API_KEY_1 }}
       OPENAI_API_KEY: ${{ secrets.PROFESSIONALIZE_API_KEY_1 }}
 
-      # TODO: set to real GroupDocs.Cloud blog repo when confirmed
-      BLOG_CONTENT_REPO: "groupdocs-cloud/groupdocs-cloud-blog"
+      BLOG_CONTENT_REPO: "aspose-cloud/aspose-cloud-blog"
       BLOG_CONTENT_ROOT: "blog_content/content"
 
     steps:
@@ -101,7 +101,7 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Checkout GroupDocs.Cloud blog content repo (only if use_content_index=true)
+      - name: Checkout Aspose.Cloud blog content repo (only if use_content_index=true)
         if: ${{ inputs.use_content_index }}
         uses: actions/checkout@v4
         with:
@@ -140,22 +140,23 @@ jobs:
 
           brand = os.environ["BRAND"]
 
-          product = os.environ.get("INPUT_PRODUCT", "GroupDocs.Conversion Cloud")
+          product = os.environ.get("INPUT_PRODUCT", "Aspose.PDF Cloud")
           platform = os.environ.get("INPUT_PLATFORM", "Java")
-          keywords_file = os.environ.get("INPUT_KEYWORDS_FILE", "content/GroupDocs.Cloud/keywords.csv")
+          keywords_file = os.environ.get("INPUT_KEYWORDS_FILE", "content/Aspose.Cloud/keywords.csv")
           use_serp_api = as_bool(os.environ.get("INPUT_USE_SERP_API", "false"))
           serp_topic = os.environ.get("INPUT_SERP_TOPIC", "")
           top_clusters = int(os.environ.get("INPUT_TOP_CLUSTERS", "15"))
           use_content_index = as_bool(os.environ.get("INPUT_USE_CONTENT_INDEX", "true"))
           include_product_in_title = as_bool(os.environ.get("INPUT_INCLUDE_PRODUCT_IN_TITLE", "true"))
 
+          # Defaults (not exposed as workflow inputs)
           locale = "en-US"
           max_rows = 50000
           debug = False
 
           cfg_path = Path(os.environ["RUNNER_TEMP"]) / "kra_run.generated.yaml"
 
-          blog_name = "groupdocs.cloud"
+          blog_name = "aspose.cloud"
           blog_root = os.environ.get("BLOG_CONTENT_ROOT", "")
 
           cfg_text = (
@@ -180,13 +181,13 @@ jobs:
               f"  use_content_index: {b(use_content_index)}\n"
               f"  include_product_in_title: {b(include_product_in_title)}\n"
               f"  debug: {b(debug)}\n"
-              f"  output_dir: \"content/GroupDocs.Cloud/output\"\n"
+              f"  output_dir: \"content/Aspose.Cloud/output\"\n"
               "\n"
               "content_index:\n"
               f"  local_root: \"{blog_root}\"\n"
               "  index_file_name: \"index.md\"\n"
               "  file_glob: \"**/index.md\"\n"
-              "  repo_url: \"https://github.com/groupdocs-cloud/groupdocs-cloud-blog\"\n"
+              "  repo_url: \"https://github.com/aspose-cloud/aspose-cloud-blog\"\n"
               "  branch: \"master\"\n"
               "  subdir: \"/content\"\n"
           )
@@ -212,16 +213,16 @@ jobs:
           mkdir -p "${KRA_OUTPUT_DIR}"
           python scripts/run_kra_from_config.py --config "${KRA_CFG_PATH}"
 
-      - name: Upload GroupDocs.Cloud outputs
+      - name: Upload Aspose.Cloud outputs
         uses: actions/upload-artifact@v4
         with:
-          name: kra-output-GroupDocs.Cloud
+          name: kra-output-Aspose.Cloud
           path: |
-            content/GroupDocs.Cloud/output/**
+            content/Aspose.Cloud/output/**
             content/kra_metrics_db.json
           if-no-files-found: warn
 
-      - name: Commit GroupDocs.Cloud outputs (with ignore-safe staging)
+      - name: Commit Aspose.Cloud outputs (with ignore-safe staging)
         run: |
           set -euo pipefail
 
@@ -262,6 +263,6 @@ jobs:
             exit 0
           fi
 
-          git commit -m "Update GroupDocs.Cloud KRA results [skip ci]"
+          git commit -m "Update Aspose.Cloud KRA results [skip ci]"
           git pull --rebase origin "${GITHUB_REF_NAME}"
           git push origin HEAD:"${GITHUB_REF_NAME}"

@@ -1,4 +1,4 @@
-name: Blog Keyword Analyzer for Familiarize
+name: Keyword Analyzer for Familiarize
 
 on:
   workflow_dispatch:

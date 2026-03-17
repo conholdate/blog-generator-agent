@@ -21,6 +21,7 @@ from agent_engine.blog_keyword_analyzer.tools.normalization import (
     normalize_platform_mentions,
 )
 from ..schemas import KeywordRecord
+from ..tools.metrics import RunMetrics
 
 
 @dataclass(frozen=True)
@@ -306,6 +307,30 @@ def _collect_phrases_from_payload(payload: Any) -> List[str]:
     return phrases
 
 
+def _record_run_result_usage(result: Any, metrics: Optional[RunMetrics], duration_seconds: float) -> None:
+    if metrics is None:
+        return
+
+    requests = 0
+    prompt_tokens = 0
+    completion_tokens = 0
+    raw_responses = getattr(result, "raw_responses", []) or []
+    for response in raw_responses:
+        usage = getattr(response, "usage", None)
+        if usage is None:
+            continue
+        requests += getattr(usage, "requests", 0) or 0
+        prompt_tokens += getattr(usage, "input_tokens", 0) or 0
+        completion_tokens += getattr(usage, "output_tokens", 0) or 0
+
+    metrics.record_llm_usage(
+        duration_seconds=duration_seconds,
+        prompt_tokens=prompt_tokens,
+        completion_tokens=completion_tokens,
+        requests=requests or 1,
+    )
+
+
 _configure_agents_sdk()
 _KEYWORD_GEN_AGENT = Agent(
     name="kra-keyword-gen",
@@ -314,13 +339,16 @@ _KEYWORD_GEN_AGENT = Agent(
 )
 
 
-def generate_llm_keywords(req: LLMKeywordGenRequest) -> List[KeywordRecord]:
+def generate_llm_keywords(req: LLMKeywordGenRequest, metrics: Optional[RunMetrics] = None) -> List[KeywordRecord]:
     import logging
+    import time
 
     log = logging.getLogger("kra.llm_keyword_gen")
 
     def _run(prompt_obj: dict) -> str:
+        t0 = time.perf_counter()
         res = Runner.run_sync(_KEYWORD_GEN_AGENT, json.dumps(prompt_obj, ensure_ascii=False))
+        _record_run_result_usage(res, metrics, time.perf_counter() - t0)
         return (res.final_output or "").strip()
 
     def _generate(prompt_obj: dict, platform_for_filter: Optional[str]) -> List[KeywordRecord]:

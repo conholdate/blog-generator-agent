@@ -10,6 +10,7 @@ from openai import OpenAI
 from ...settings import Settings
 from ...types import IndexRecord, RepoTarget
 from ..text_utils import ParsedMarkdown
+from ..usage import UsageAccumulator
 
 
 @dataclass(frozen=True)
@@ -23,6 +24,7 @@ class HandlerContext:
     product_key: str
     platform_for_record: str  # 'all' for scope=all repos, else the selected platform key
     normalize_topics: bool = False
+    usage: UsageAccumulator | None = None
 
 class MarkdownRepoHandler(ABC):
     """

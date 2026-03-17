@@ -555,9 +555,7 @@ def append_metrics_db_entry(
     run_duration = getattr(metrics, "run_duration_seconds", None)
     success = getattr(metrics, "success", None)
 
-    llm_total_tokens = None
-    if llm_prompt_tokens is not None and llm_completion_tokens is not None:
-        llm_total_tokens = llm_prompt_tokens + llm_completion_tokens
+    llm_total_tokens = getattr(metrics, "llm_total_tokens", None)
 
     try:
         summary_text = metrics.as_cli_summary()
@@ -589,7 +587,7 @@ def append_metrics_db_entry(
         "llm_duration_total": llm_duration_total,
         "llm_prompt_tokens": llm_prompt_tokens,
         "llm_completion_tokens": llm_completion_tokens,
-        "total_tokens": llm_total_tokens,
+        "llm_total_tokens": llm_total_tokens,
         "content_index_calls": content_index_calls,
         "content_index_errs": content_index_errs,
         "content_index_time": content_index_time,

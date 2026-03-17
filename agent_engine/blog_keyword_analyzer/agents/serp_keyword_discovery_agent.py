@@ -25,6 +25,7 @@ class SerpKeywordDiscoveryAgent(KeywordWorkflowAgent):
         req: RunRequest,
         platform: Optional[str],
         seed_topic: Optional[str],
+        metrics=None,
     ) -> List[KeywordRecord]:
         topic = (seed_topic or "").strip() or req.product
         records: Optional[List[KeywordRecord]] = None
@@ -60,7 +61,8 @@ class SerpKeywordDiscoveryAgent(KeywordWorkflowAgent):
                 platform=platform,
                 locale=req.locale,
                 max_keywords=min(req.max_rows, 200),
-            )
+            ),
+            metrics=metrics,
         )
         if not records:
             raise RuntimeError("No keywords produced by SerpAPI or LLM fallback.")
