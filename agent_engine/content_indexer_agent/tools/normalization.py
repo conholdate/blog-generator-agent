@@ -880,6 +880,49 @@ def nor_website_section_from_case(case: str) -> str:
     return mapping.get(case, case)
 
 
+
+# =============================================================================
+# Normalize Product Short Name for Metrics
+# =============================================================================
+
+# Ordered from more specific to more general
+_PRODUCT_SUFFIX_PATTERNS = [
+    re.compile(r"\s+Cloud\s+SDK\s+for\s+.+$", re.IGNORECASE),
+    re.compile(r"\s+Cloud\s+API\s+for\s+.+$", re.IGNORECASE),
+    re.compile(r"\s+SDK\s+for\s+.+$", re.IGNORECASE),
+    re.compile(r"\s+API\s+for\s+.+$", re.IGNORECASE),
+    re.compile(r"\s+for\s+.+$", re.IGNORECASE),
+
+    re.compile(r"\s+Cloud\s+SDK\s*$", re.IGNORECASE),
+    re.compile(r"\s+Cloud\s+API\s*$", re.IGNORECASE),
+    re.compile(r"\s+Cloud\s*$", re.IGNORECASE),
+    re.compile(r"\s+SDK\s*$", re.IGNORECASE),
+    re.compile(r"\s+API\s*$", re.IGNORECASE),
+]
+
+def normalize_product_short_name(full_name: str) -> str:
+    """
+    Normalize a product full name into its short canonical product name.
+
+    Examples:
+        Aspose.3D Cloud SDK -> Aspose.3D
+        Aspose.BarCode Cloud API -> Aspose.BarCode
+        Conholdate.Total SDK for Python -> Conholdate.Total
+        GroupDocs.Annotation for .NET -> GroupDocs.Annotation
+    """
+    if not full_name:
+        return ""
+
+    name = " ".join(str(full_name).strip().split())
+
+    for pattern in _PRODUCT_SUFFIX_PATTERNS:
+        updated = pattern.sub("", name).strip()
+        if updated != name:
+            name = updated
+            break
+
+    return name
+
 # =============================================================================
 # Internal helpers
 # =============================================================================

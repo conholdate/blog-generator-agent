@@ -4,6 +4,7 @@ from __future__ import annotations
 import json
 import logging
 import re
+import time
 from dataclasses import dataclass
 from typing import List, Optional, Dict, Any
 
@@ -11,6 +12,8 @@ from openai import AsyncOpenAI
 from agents import Agent, Runner, set_default_openai_client, set_default_openai_api, set_tracing_disabled
 
 from agent_engine.blog_keyword_analyzer.config import settings
+from agent_engine.blog_keyword_analyzer.prompt_loader import load_prompt
+from agent_engine.blog_keyword_analyzer.tools.metrics import RunMetrics
 from agent_engine.blog_keyword_analyzer.tools.normalization import contains_platform_variant, platform_variant_pattern
 
 log = logging.getLogger("kra.seo_title_polisher")
@@ -36,7 +39,7 @@ class SeoTitlePolishRequest:
 def _configure_agents_sdk() -> None:
     """
     Make Agents SDK use the same OpenAI-compatible backend you already use.
-    Mirrors your existing pattern in blog_keyword_generator.py.
+    Mirrors the existing LLM keyword generator agent bootstrap.
     """
     client = AsyncOpenAI(
         base_url=settings.PROFESSIONALIZE_BASE_URL,
@@ -54,33 +57,7 @@ _configure_agents_sdk()
 # ----------------------------
 _TITLE_POLISHER_AGENT = Agent(
     name="kra-title-polisher",
-    instructions=(
-        "You are an SEO title polisher for developer blog topics.\n"
-        "Return ONLY strict JSON.\n\n"
-        "You will be given:\n"
-        "- raw_title\n"
-        "- primary_keyword (must appear verbatim)\n"
-        "- supporting_keywords\n"
-        "- platform_label\n"
-        "- product\n"
-        "- include_product_in_title\n"
-        "- min_len / max_len\n\n"
-        "TASK:\n"
-        "Rewrite raw_title into a grammatical, developer-focused, SEO-optimized title.\n\n"
-        "HARD CONSTRAINTS:\n"
-        "1) Output MUST be JSON object: {\"title\": \"...\", \"confidence\": 0.0-1.0, \"notes\": \"...\"}\n"
-        "2) title MUST contain primary_keyword EXACTLY as provided (verbatim substring).\n"
-        "3) If platform_label is provided, title MUST mention that platform exactly once.\n"
-        "   Treat equivalent forms as the same platform, e.g. '.NET' and 'C#'.\n"
-        "4) If include_product_in_title is True, title MUST contain product (verbatim substring).\n"
-        "   If include_product_in_title is False, title MUST NOT contain product.\n"
-        "5) Avoid duplicate verbs (e.g., 'Convert Convert').\n"
-        "6) Fix malformed phrases like 'PDF to HTML Converter Online' into ONE clear intent:\n"
-        "   - conversion intent: 'How to Convert <primary_keyword> in <platform>'\n"
-        "   - tool intent only if raw_title explicitly implies building a tool.\n"
-        "7) Title length should be within min_len..max_len when possible.\n"
-        "8) No parentheses unless unavoidable.\n"
-    ),
+    instructions=load_prompt("seo_title_polisher_instructions.txt"),
     model=settings.PROFESSIONALIZE_LLM_MODEL,
 )
 
@@ -145,10 +122,34 @@ def _has_duplicate_verb(title: str) -> bool:
     # catches "Convert Convert", "Generate Generate", etc.
     return bool(re.search(r"(?i)\b(convert|generate|create|build|export|render|merge|split)\s+\1\b", title))
 
+
+def _record_run_result_usage(result: Any, metrics: Optional[RunMetrics], duration_seconds: float) -> None:
+    if metrics is None:
+        return
+
+    requests = 0
+    prompt_tokens = 0
+    completion_tokens = 0
+    raw_responses = getattr(result, "raw_responses", []) or []
+    for response in raw_responses:
+        usage = getattr(response, "usage", None)
+        if usage is None:
+            continue
+        requests += getattr(usage, "requests", 0) or 0
+        prompt_tokens += getattr(usage, "input_tokens", 0) or 0
+        completion_tokens += getattr(usage, "output_tokens", 0) or 0
+
+    metrics.record_llm_usage(
+        duration_seconds=duration_seconds,
+        prompt_tokens=prompt_tokens,
+        completion_tokens=completion_tokens,
+        requests=requests or 1,
+    )
+
 # ----------------------------
 # Public API
 # ----------------------------
-def polish_title(req: SeoTitlePolishRequest) -> Optional[str]:
+def polish_title(req: SeoTitlePolishRequest, metrics: Optional[RunMetrics] = None) -> Optional[str]:
     """
     Returns a polished title if it passes HARD validation; otherwise None.
     Caller should fallback to deterministic title.
@@ -170,7 +171,9 @@ def polish_title(req: SeoTitlePolishRequest) -> Optional[str]:
         "output_format": "JSON object with title/confidence/notes only",
     }
 
+    t0 = time.perf_counter()
     res = Runner.run_sync(_TITLE_POLISHER_AGENT, json.dumps(payload, ensure_ascii=False))
+    _record_run_result_usage(res, metrics, time.perf_counter() - t0)
     raw_out = (res.final_output or "").strip()
 
     obj = _extract_json_obj(raw_out)

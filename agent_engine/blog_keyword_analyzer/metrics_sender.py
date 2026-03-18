@@ -43,6 +43,10 @@ def send_stage_metrics(
     items_discovered: int,
     items_succeeded: int,
     items_failed: int,
+    llm_requests: int = 0,
+    llm_prompt_tokens: int = 0,
+    llm_completion_tokens: int = 0,
+    llm_total_tokens: int = 0,
     extra_fields: Optional[dict[str, Any]] = None,
 ) -> None:
     """
@@ -70,6 +74,10 @@ def send_stage_metrics(
         "items_succeeded": int(items_succeeded),
         "items_failed": int(items_failed),
         "run_duration_ms": int(stage_duration_ms),
+        "api_calls_count": int(llm_requests),
+        # "llm_prompt_tokens": int(llm_prompt_tokens),
+        # "llm_completion_tokens": int(llm_completion_tokens),
+        "token_usage": int(llm_total_tokens),
         # "run_duration_ms": int(run_duration_ms),
         # "stage_duration_ms": int(stage_duration_ms),
     }

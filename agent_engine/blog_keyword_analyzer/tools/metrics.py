@@ -6,6 +6,8 @@ from contextlib import contextmanager
 from dataclasses import dataclass, field
 from typing import Any, Dict, List, Optional
 
+from agent_engine.blog_keyword_analyzer.tools.normalization import normalize_product_short_name
+
 
 @dataclass
 class RunMetrics:
@@ -70,16 +72,36 @@ class RunMetrics:
     # -------------------------------------------------------------------------
     # Basic API
     # -------------------------------------------------------------------------
+    @property
+    def product_short(self) -> str:
+        return normalize_product_short_name(self.product)
 
     def record_step_duration(self, step_name: str, duration_seconds: float) -> None:
         current = self.step_durations.get(step_name, 0.0)
         self.step_durations[step_name] = current + duration_seconds
 
-    def mark_llm_call(self, duration_seconds: float, failed: bool = False) -> None:
-        self.llm_requests += 1
-        self.llm_duration_seconds += duration_seconds
+    @property
+    def llm_total_tokens(self) -> int:
+        return self.llm_prompt_tokens + self.llm_completion_tokens
+
+    def record_llm_usage(
+        self,
+        *,
+        duration_seconds: float = 0.0,
+        prompt_tokens: int = 0,
+        completion_tokens: int = 0,
+        requests: int = 1,
+        failed: bool = False,
+    ) -> None:
+        self.llm_requests += max(int(requests), 0)
+        self.llm_duration_seconds += max(float(duration_seconds), 0.0)
+        self.llm_prompt_tokens += max(int(prompt_tokens), 0)
+        self.llm_completion_tokens += max(int(completion_tokens), 0)
         if failed:
             self.llm_failures += 1
+
+    def mark_llm_call(self, duration_seconds: float, failed: bool = False) -> None:
+        self.record_llm_usage(duration_seconds=duration_seconds, failed=failed)
 
     def mark_content_index_call(self, duration_seconds: float, failed: bool = False) -> None:
         self.content_index_requests += 1
@@ -119,7 +141,8 @@ class RunMetrics:
             "job_type": self.job_type,
             "run_id": self.run_id,
             "brand": self.brand,
-            "product": self.product,
+            # "product": self.product,
+            "product": self.product_short,
             "locale": self.locale,
             "platform": self.platform,
             "file_path": self.file_path,
@@ -138,6 +161,7 @@ class RunMetrics:
             "llm_duration_seconds": self.llm_duration_seconds,
             "llm_prompt_tokens": self.llm_prompt_tokens,
             "llm_completion_tokens": self.llm_completion_tokens,
+            "llm_total_tokens": self.llm_total_tokens,
             "content_index_requests": self.content_index_requests,
             "content_index_failures": self.content_index_failures,
             "content_index_duration_seconds": self.content_index_duration_seconds,
@@ -164,7 +188,8 @@ class RunMetrics:
 
         lines.append("Metrics summary:")
         lines.append(f"  - run_id              : {self.run_id}")
-        lines.append(f"  - brand/product       : {self.brand} / {self.product}")
+        # lines.append(f"  - brand/product       : {self.brand} / {self.product}")
+        lines.append(f"  - brand/product       : {self.brand} / {self.product_short}")
         if self.platform:
             lines.append(f"  - platform           : {self.platform}")
         if self.file_path:
@@ -188,8 +213,7 @@ class RunMetrics:
         lines.append(f"  - llm_duration_total  : {self.llm_duration_seconds:.3f} s")
         lines.append(f"  - llm_prompt_tokens   : {self.llm_prompt_tokens}")
         lines.append(f"  - llm_completion_tokens  : {self.llm_completion_tokens}")
-        total_tokens = self.llm_prompt_tokens + self.llm_completion_tokens
-        lines.append(f"  - llm_total_tokens    : {total_tokens}")
+        lines.append(f"  - llm_total_tokens    : {self.llm_total_tokens}")
         lines.append(f"  - content_index_calls : {self.content_index_requests}")
         lines.append(f"  - content_index_errs  : {self.content_index_failures}")
         lines.append(f"  - content_index_time  : {self.content_index_duration_seconds:.3f} s")

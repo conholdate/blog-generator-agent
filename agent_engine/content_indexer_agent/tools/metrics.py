@@ -12,6 +12,7 @@ from urllib.parse import urlparse
 import requests
 
 from .logging_utils import get_logger
+from .normalization import normalize_product_short_name
 
 log = get_logger("cg.metrics")
 
@@ -58,6 +59,10 @@ class MetricsPayload:
     # Duration
     run_duration_ms: int = 0
 
+    # API usage
+    token_usage: int = 0
+    api_calls_count: int = 0
+
     # Extensibility (safe extra data without schema break)
     extra: Dict[str, Any] = None  # will be normalized to {} when sending
 
@@ -88,8 +93,8 @@ class MetricsSender:
 
 
         data = asdict(payload)
-        # if data.get("extra") is None:
-        data["extra"] = {}
+        if data.get("extra") is None:
+            data["extra"] = {}
 
         # If your Apps Script expects token in JSON
         # if self.token:
@@ -164,7 +169,8 @@ class MetricsRun:
         self.run_id = run_id
         self.job_type = job_type
 
-        self.product = product
+        # self.product = product
+        self.product = normalize_product_short_name(product)
         self.platform = platform
         self.website = website
         self.website_section = website_section
@@ -173,6 +179,8 @@ class MetricsRun:
         self.items_discovered = int(items_discovered)
         self.items_failed = int(items_failed)
         self.items_succeeded = int(items_succeeded)
+        self.token_usage = 0
+        self.api_calls_count = 0
 
         self.extra: Dict[str, Any] = extra or {}
 
@@ -180,6 +188,10 @@ class MetricsRun:
         self.items_discovered = int(discovered)
         self.items_succeeded = int(succeeded)
         self.items_failed = int(failed)
+
+    def set_usage(self, *, token_usage: int, api_calls_count: int) -> None:
+        self.token_usage = int(token_usage)
+        self.api_calls_count = int(api_calls_count)
 
     def __enter__(self) -> "MetricsRun":
         self._t0 = time.time()
@@ -205,6 +217,8 @@ class MetricsRun:
             items_failed=self.items_failed,
             items_succeeded=self.items_succeeded,
             run_duration_ms=duration_ms,
+            token_usage=self.token_usage,
+            api_calls_count=self.api_calls_count,
             extra=self.extra,
         )
         self._sender.send(payload)

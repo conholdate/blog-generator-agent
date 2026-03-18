@@ -1,4 +1,4 @@
-name: Blog Keyword Analyzer for GroupDocs
+name: Keyword Analyzer for GroupDocs
 
 on:
   workflow_dispatch:

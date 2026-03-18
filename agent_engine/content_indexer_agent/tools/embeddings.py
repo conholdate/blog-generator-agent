@@ -9,13 +9,21 @@ import numpy as np
 from openai import OpenAI
 
 from .text_utils import sha256_text
+from .usage import UsageAccumulator
 
 
 class EmbeddingStore:
-    def __init__(self, db_path: Path, client: OpenAI, model: str) -> None:
+    def __init__(
+        self,
+        db_path: Path,
+        client: OpenAI,
+        model: str,
+        usage: UsageAccumulator | None = None,
+    ) -> None:
         self.db_path = db_path
         self.client = client
         self.model = model
+        self.usage = usage
         self.db_path.parent.mkdir(parents=True, exist_ok=True)
         self._init_db()
 
@@ -39,6 +47,8 @@ class EmbeddingStore:
             return key, cached
 
         resp = self.client.embeddings.create(model=self.model, input=text)
+        if self.usage is not None:
+            self.usage.record_response(resp)
         vec = resp.data[0].embedding  # type: ignore[attr-defined]
         self._put_cached(key, vec)
         return key, vec

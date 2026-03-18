@@ -476,6 +476,7 @@ class BlogsHandler(MarkdownRepoHandler):
                 seo_title=seo_title,
                 allowed_platforms=allowed_platforms,
                 inferred_platforms=inferred_plats,
+                usage=ctx.usage,
             )
 
             primary_platform = _apply_single_platform_policy(

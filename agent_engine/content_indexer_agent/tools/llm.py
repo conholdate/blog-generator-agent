@@ -7,6 +7,8 @@ from typing import List, Tuple
 from openai import OpenAI
 from pydantic import BaseModel, Field, ValidationError
 
+from .usage import UsageAccumulator
+
 log = logging.getLogger(__name__)
 
 
@@ -54,6 +56,7 @@ def classify_blog_with_llm(
     seo_title: str | None,
     allowed_platforms: List[str],
     inferred_platforms: List[str],
+    usage: UsageAccumulator | None = None,
 ) -> Tuple[str, str, str, List[str]]:
     """
     Returns: (topic, category, sub_category, platforms)
@@ -97,6 +100,8 @@ def classify_blog_with_llm(
                 input=input_msgs,
                 text_format=BlogClassifyOut,
             )
+            if usage is not None:
+                usage.record_response(resp)
             parsed = getattr(resp, "output_parsed", None)
             if isinstance(parsed, BlogClassifyOut):
                 platforms = parsed.platforms or []
@@ -124,6 +129,8 @@ def classify_blog_with_llm(
                 },
             },
         )
+        if usage is not None:
+            usage.record_response(resp)
 
         raw = _extract_output_text(resp)
         data = json.loads(raw)
@@ -141,6 +148,8 @@ def classify_blog_with_llm(
             messages=input_msgs,
             response_format={"type": "json_object"},
         )
+        if usage is not None:
+            usage.record_response(resp)
 
         raw = resp.choices[0].message.content or ""
 

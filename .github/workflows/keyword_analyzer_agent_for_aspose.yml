@@ -1,4 +1,4 @@
-name: Blog Keyword Analyzer for Aspose
+name: Keyword Analyzer for Aspose
 
 on:
   workflow_dispatch:

@@ -5,36 +5,56 @@ import argparse
 import json
 import logging
 import re
-import time
-import uuid
 from dataclasses import dataclass
 from datetime import datetime, timezone
 from pathlib import Path
 from statistics import mean
 from typing import Optional, List, Mapping, Any, Dict, Tuple
 
-import requests
-from .metrics_sender import send_stage_metrics
-from .tools.content_index import get_existing_posts
-from .schemas import RunRequest, RunResult, Cluster, ClusterMetrics, KeywordRecord
-from .agent import KeywordResearchAgent
-from .tools.file_import import import_file
-from .tools.preprocess import preprocess
-from .tools.cluster import cluster_records
-from .tools.intent_brand import annotate_intent_brand
-from .tools.scoring import score_clusters
-from .config import settings, BRAND_METRICS
-from .tools.metrics import RunMetrics, timed_step
-from .blog_keyword_generator import LLMKeywordGenRequest, fetch_llm_keywords
+from .schemas import RunRequest, RunResult, Cluster, KeywordRecord
+from .agents import build_keyword_workflow_agent
+from .config import settings
+from .tools.metrics import RunMetrics
 from agent_engine.blog_keyword_analyzer.tools.normalization import (
     KeywordRefiner,
-    canonical_blog_platform_key,
-    canonical_platform_label,
     normalize_missing_platform,
+    platform_header_display,
 )
 
 logger = logging.getLogger(__name__)
 refiner = KeywordRefiner()
+
+
+def _dedupe_keywords(values: List[str]) -> List[str]:
+    seen: set[str] = set()
+    out: List[str] = []
+    for value in values:
+        key = value.lower()
+        if not value or key in seen:
+            continue
+        seen.add(key)
+        out.append(value)
+    return out
+
+
+def _keyword_groups_to_mapping(value: Any) -> Dict[str, Any]:
+    if isinstance(value, Mapping):
+        return dict(value)
+    if hasattr(value, "model_dump"):
+        try:
+            dumped = value.model_dump()
+            if isinstance(dumped, Mapping):
+                return dict(dumped)
+        except Exception:
+            return {}
+    if hasattr(value, "dict"):
+        try:
+            dumped = value.dict()
+            if isinstance(dumped, Mapping):
+                return dict(dumped)
+        except Exception:
+            return {}
+    return {}
 
 
 def _keyword_intent_key(text: str) -> str:
@@ -46,86 +66,6 @@ def _keyword_intent_key(text: str) -> str:
     return s
 
 
-def _seed_anchor_tokens(text: str) -> set[str]:
-    stopwords = {
-        "a", "an", "and", "api", "best", "by", "file", "files", "for", "from", "guide",
-        "how", "in", "into", "of", "on", "or", "the", "to", "tutorial", "using", "with",
-    }
-    return {
-        token for token in re.findall(r"[a-z0-9.+#]+", (text or "").lower())
-        if len(token) > 1 and token not in stopwords
-    }
-
-
-def _platform_phrase(platform: Optional[str]) -> str:
-    return canonical_platform_label(platform)
-
-
-def _focus_records_for_seed_topic(
-    records: List[KeywordRecord],
-    *,
-    seed_topic: Optional[str],
-    platform: Optional[str],
-    locale: str,
-) -> List[KeywordRecord]:
-    if not seed_topic:
-        return records
-
-    anchors = _seed_anchor_tokens(seed_topic)
-    if not anchors:
-        return records
-
-    required_overlap = 2 if len(anchors) >= 3 else 1
-    focused: List[KeywordRecord] = []
-    for record in records:
-        text = " ".join((record.keyword or "").strip().split())
-        tokens = set(re.findall(r"[a-z0-9.+#]+", text.lower()))
-        if len(tokens.intersection(anchors)) >= required_overlap:
-            focused.append(record)
-
-    if len(focused) >= 3:
-        return focused
-
-    label = _platform_phrase(platform)
-    seed_clean = " ".join((seed_topic or "").strip().split())
-    synthetic_keywords = [seed_clean]
-    if label and label.lower() not in seed_clean.lower():
-        synthetic_keywords.extend([
-            f"{seed_clean} in {label}",
-            f"How to {seed_clean} in {label}",
-            f"{seed_clean} using {label}",
-        ])
-    else:
-        synthetic_keywords.extend([
-            f"How to {seed_clean}",
-            f"{seed_clean} tutorial",
-        ])
-
-    synthetic_records = [
-        KeywordRecord(
-            keyword=kw,
-            source="llm",
-            locale=locale,
-            volume=None,
-            cpc=None,
-            kd=None,
-            clicks=None,
-            url=None,
-            competition=None,
-            competition_label=None,
-        )
-        for kw in synthetic_keywords
-    ]
-
-    merged: List[KeywordRecord] = []
-    seen = set()
-    for record in focused + synthetic_records:
-        key = _keyword_intent_key(record.keyword)
-        if not key or key in seen:
-            continue
-        seen.add(key)
-        merged.append(record)
-    return merged
 
 
 @dataclass(frozen=True)
@@ -258,34 +198,6 @@ def _normalize_topic_key(text: str) -> str:
 def _brand_slug(brand: str) -> str:
     return _normalize_topic_key(brand or "unknown")
 
-def _canonical_platform(platform: Optional[str]) -> Optional[str]:
-    """
-    Normalize platform names so they match what blog tools use, e.g. 'csharp'.
-
-    Examples:
-      'C#', 'c-sharp', 'dotnet', '.net', 'asp.net' -> 'csharp'
-    """
-    return canonical_blog_platform_key(platform)
-
-def _derive_product_code(product: str) -> str:
-    """
-    Generic product normalizer that does NOT assume any brand.
-    We derive a short code from the last token (dot/space separated).
-
-    Examples:
-        'Aspose.Cells'   -> 'cells'
-        'Aspose Cells'   -> 'cells'
-        'cells'          -> 'cells'
-    """
-    p = (product or "").strip().lower()
-    if not p:
-        return ""
-    tokens = re.split(r"[.\s/\\_-]+", p)
-    tokens = [t for t in tokens if t]
-    if not tokens:
-        return p
-    return tokens[-1]
-
 def _print_run_title(
     *,
     brand: str,
@@ -315,122 +227,6 @@ def _print_run_title(
     print("=" * 80)
     print()
 
-def _load_existing_topics_for_prompt(
-    product: str,
-    platform: Optional[str],
-    use_content_index: bool = True,
-) -> List[dict]:
-    """
-    Use content index service to load existing blogs for a given product + platform.
-
-    If use_content_index is False, this function returns [] and does NOT call
-    the content index at all.
-    """
-    if not use_content_index:
-        logger.info(
-            "Content index lookup disabled (use_content_index=False); skipping existing topic search."
-        )
-        return []
-
-    product_code = _derive_product_code(product)
-    fw_canonical = _canonical_platform(platform)
-
-    logger.info(
-        "Loading existing topics for product=%r -> product_code=%r, platform=%r -> fw_canonical=%r",
-        product,
-        product_code,
-        platform,
-        fw_canonical,
-    )
-
-    try:
-        entries = get_existing_posts(product=product_code, platform=fw_canonical)
-    except Exception as e:
-        logger.warning("Failed to search existing blogs: %s", e, exc_info=True)
-        return []
-
-    logger.info("Content index returned %d raw entries.", len(entries))
-
-    topics_for_prompt: List[dict] = []
-
-    for e in entries:
-        # e may be a Pydantic model (ExistingPost) or a plain dict.
-        if hasattr(e, "dict"):  # Pydantic BaseModel-style
-            data: Mapping[str, Any] = e.dict()
-        elif isinstance(e, Mapping):
-            data = e
-        else:
-            # Fallback: try __dict__, or skip with a warning
-            data = getattr(e, "__dict__", {})
-            logger.debug("ExistingPost entry is non-mapping type %r; using __dict__", type(e))
-
-        topics_for_prompt.append(
-            {
-                "title": (data.get("title") or "").strip(),
-                "url": data.get("url"),
-                "slug": data.get("slug"),
-                "platforms": data.get("platforms"),
-            }
-        )
-
-    logger.info(
-        "Loaded %d existing topics from content index (after shaping).",
-        len(topics_for_prompt),
-    )
-
-    for sample in topics_for_prompt[:5]:
-        logger.info(
-            "Existing topic: title=%r slug=%r platforms=%r",
-            sample.get("title"),
-            sample.get("slug"),
-            sample.get("platforms"),
-        )
-
-    return topics_for_prompt
-
-def _build_existing_keys(existing_topics: List[dict]) -> set[str]:
-    """
-    Build a set of normalized keys from existing topics (url/title/slug).
-    Used for post-filtering as a safety net.
-    """
-    keys: set[str] = set()
-    for e in existing_topics:
-        for field in ("url", "title", "slug"):
-            val = e.get(field)
-            if val:
-                keys.add(_normalize_topic_key(str(val)))
-                break
-    return keys
-
-def _filter_duplicate_topics(
-    topics,
-    existing_topics: List[dict],
-):
-    """
-    Drop any generated topics whose normalized title matches an existing topic key.
-    """
-    existing_keys = _build_existing_keys(existing_topics)
-    if not existing_keys:
-        return topics
-
-    filtered = []
-    dropped = 0
-    for t in topics:
-        title = getattr(t, "title", "") or ""
-        key = _normalize_topic_key(title)
-        if key in existing_keys:
-            dropped += 1
-            continue
-        filtered.append(t)
-
-    logger.info(
-        "Duplicate filter: kept=%d dropped=%d (existing_keys=%d)",
-        len(filtered),
-        dropped,
-        len(existing_keys),
-    )
-
-    return filtered
 
 def _summarize_cluster_scores(clusters: List[Cluster]) -> dict:
     """
@@ -474,7 +270,7 @@ def write_topics_markdown(
     lines.append("")
     lines.append(f"- **Brand:** {result.brand}")
     lines.append(f"- **Product:** {result.product}")
-    lines.append(f"- **Platform:** {platform}")
+    lines.append(f"- **Platform:** {platform_header_display(platform)}")
     lines.append(f"- **Run ID:** {result.run_id}")
     lines.append(f"- **Topics:** {len(result.topics)}")
     lines.append("")
@@ -544,7 +340,7 @@ def write_topics_markdown(
 
         outline = pick("outline", []) or []
         persona = pick("target_persona")
-        keyword_groups = pick("keyword_groups", {}) or {}
+        keyword_groups = _keyword_groups_to_mapping(pick("keyword_groups", {}) or {})
         editorial_notes = pick("editorial_notes", []) or []
 
         topic_title = refiner.to_title_case(title)
@@ -557,24 +353,30 @@ def write_topics_markdown(
             lines.append(f"- **Blog post angle:** {angle}")
         if primary_kw:
             lines.append(f"- **Primary keyword:** `{primary_kw}`")
-        if supporting_kws:
-            sk = ", ".join(f"`{kw}`" for kw in supporting_kws)
-            lines.append(f"- **Supporting keywords:** {sk}")
 
-        if isinstance(keyword_groups, Mapping):
+        if keyword_groups:
             core = [refiner.refine(k) for k in (keyword_groups.get("core_seo_keywords") or []) if k]
             long_tail = [refiner.refine(k) for k in (keyword_groups.get("long_tail_keywords") or []) if k]
             context = [refiner.refine(k) for k in (keyword_groups.get("context_keywords") or []) if k]
             core = [k for k in core if _keyword_intent_key(k) != primary_intent_key]
             long_tail = [k for k in long_tail if _keyword_intent_key(k) != primary_intent_key]
             context = [k for k in context if _keyword_intent_key(k) != primary_intent_key]
+            core = _dedupe_keywords(core)
+            long_tail = _dedupe_keywords(long_tail)
+            context = _dedupe_keywords(context)
+        else:
+            core, long_tail, context = [], [], []
 
-            if core:
-                lines.append(f"- **Core SEO keywords:** {', '.join(f'`{k}`' for k in core)}")
-            if long_tail:
-                lines.append(f"- **Long-tail keywords for high AI visibility:** {', '.join(f'`{k}`' for k in long_tail)}")
-            if context:
-                lines.append(f"- **Context keywords for semantic SEO:** {', '.join(f'`{k}`' for k in context)}")
+        secondary_keywords = _dedupe_keywords(core or supporting_kws)
+        if secondary_keywords:
+            lines.append(
+                f"- **Secondary keywords (Core SEO Keywords):** {', '.join(f'`{kw}`' for kw in secondary_keywords)}"
+            )
+
+        if long_tail:
+            lines.append(f"- **Long Tails keywords:** {', '.join(f'`{k}`' for k in long_tail)}")
+        if context:
+            lines.append(f"- **Semantic SEO keywords:** {', '.join(f'`{k}`' for k in context)}")
 
         if outline:
             lines.append("")
@@ -633,20 +435,27 @@ def write_missing_topics_markdown(
 
             supporting = [refiner.refine(k) for k in topic.supporting_keywords or []]
             supporting = [k for k in supporting if k]
-            if supporting:
-                lines.append(f"- **Supporting keywords:** {', '.join(f'`{k}`' for k in supporting)}")
 
-            keyword_groups = getattr(topic, "keyword_groups", None)
+            keyword_groups = _keyword_groups_to_mapping(getattr(topic, "keyword_groups", None))
             if keyword_groups:
-                core = [refiner.refine(k) for k in getattr(keyword_groups, "core_seo_keywords", []) if k]
-                long_tail = [refiner.refine(k) for k in getattr(keyword_groups, "long_tail_keywords", []) if k]
-                context = [refiner.refine(k) for k in getattr(keyword_groups, "context_keywords", []) if k]
-                if core:
-                    lines.append(f"- **Core SEO keywords:** {', '.join(f'`{k}`' for k in core)}")
-                if long_tail:
-                    lines.append(f"- **Long-tail keywords for high AI visibility:** {', '.join(f'`{k}`' for k in long_tail)}")
-                if context:
-                    lines.append(f"- **Context keywords for semantic SEO:** {', '.join(f'`{k}`' for k in context)}")
+                core = [refiner.refine(k) for k in (keyword_groups.get("core_seo_keywords") or []) if k]
+                long_tail = [refiner.refine(k) for k in (keyword_groups.get("long_tail_keywords") or []) if k]
+                context = [refiner.refine(k) for k in (keyword_groups.get("context_keywords") or []) if k]
+                core = _dedupe_keywords(core)
+                long_tail = _dedupe_keywords(long_tail)
+                context = _dedupe_keywords(context)
+            else:
+                core, long_tail, context = [], [], []
+
+            secondary_keywords = _dedupe_keywords(core or supporting)
+            if secondary_keywords:
+                lines.append(
+                    f"- **Secondary keywords (Core SEO Keywords):** {', '.join(f'`{k}`' for k in secondary_keywords)}"
+                )
+            if long_tail:
+                lines.append(f"- **Long Tails keywords:** {', '.join(f'`{k}`' for k in long_tail)}")
+            if context:
+                lines.append(f"- **Semantic SEO keywords:** {', '.join(f'`{k}`' for k in context)}")
 
             if topic.outline:
                 lines.append("")
@@ -746,9 +555,7 @@ def append_metrics_db_entry(
     run_duration = getattr(metrics, "run_duration_seconds", None)
     success = getattr(metrics, "success", None)
 
-    llm_total_tokens = None
-    if llm_prompt_tokens is not None and llm_completion_tokens is not None:
-        llm_total_tokens = llm_prompt_tokens + llm_completion_tokens
+    llm_total_tokens = getattr(metrics, "llm_total_tokens", None)
 
     try:
         summary_text = metrics.as_cli_summary()
@@ -780,7 +587,7 @@ def append_metrics_db_entry(
         "llm_duration_total": llm_duration_total,
         "llm_prompt_tokens": llm_prompt_tokens,
         "llm_completion_tokens": llm_completion_tokens,
-        "total_tokens": llm_total_tokens,
+        "llm_total_tokens": llm_total_tokens,
         "content_index_calls": content_index_calls,
         "content_index_errs": content_index_errs,
         "content_index_time": content_index_time,
@@ -826,26 +633,6 @@ def _setup_logging() -> None:
     )
     logger.debug("Logging initialized with level=%s", logging.getLevelName(level))
 
-def _resolve_metric_context(brand: str) -> Tuple[str, str]:
-    """
-    Strict resolver: BOTH website and section must come from BRAND_METRICS.
-    No guessing, no defaults.
-    """
-    b = _brand_slug(brand)
-    try:
-        website, section = BRAND_METRICS[b]
-    except KeyError as e:
-        raise ValueError(
-            f"Unknown brand '{brand}'. Add it to BRAND_METRICS in config.py "
-            f"with (website, section)."
-        ) from e
-
-    if not website or not section:
-        raise ValueError(
-            f"Invalid BRAND_METRICS mapping for '{brand}': website/section cannot be empty."
-        )
-
-    return website, section
 
 def run_sync(
     req: RunRequest,
@@ -854,326 +641,20 @@ def run_sync(
     records: Optional[List[KeywordRecord]] = None,
     seed_topic: Optional[str] = None,
     include_product_in_title: bool = True,
+    source: str = "csv",
 ) -> tuple[RunResult, RunMetrics]:
-    run_id = str(uuid.uuid4())[:8]
-    start = time.perf_counter()
-
-    status = "success"
-    error_message: Optional[str] = None
-
-    metrics = RunMetrics(
-        run_id=run_id,
-        brand=req.brand,
-        product=req.product,
-        locale=req.locale,
+    workflow_agent = build_keyword_workflow_agent(source)
+    return workflow_agent.execute(
+        req=req,
         platform=platform,
-        file_path=req.file_path or None,
+        use_content_index=use_content_index,
+        seed_topic=seed_topic,
+        include_product_in_title=include_product_in_title,
+        provided_records=records,
     )
-    metrics.add_event("KRA_RUN_STARTED", "Blog Keyword Analyzer run started.")
-
-    website, section = _resolve_metric_context(req.brand)
-
-    # Track stage so we can emit failed stage metrics if something blows up
-    current_stage = settings.METRICS_KEYWORD_CLUSTERING_JOB
-    stage_start = time.perf_counter()
-
-    try:
-        # -----------------------
-        # STAGE 1: Keyword Clustering
-        # -----------------------
-        with timed_step(metrics, "import"):
-            if records is None:
-                records = import_file(req)
-            elif seed_topic:
-                records = _focus_records_for_seed_topic(
-                    records,
-                    seed_topic=seed_topic,
-                    platform=platform,
-                    locale=req.locale,
-                )
-        metrics.keywords_processed = len(records)
-
-        with timed_step(metrics, "preprocess"):
-            records = preprocess(records)
-        metrics.keywords_after_preprocess = len(records)
-
-        # Clamp K to avoid: ValueError: n_samples < n_clusters
-        with timed_step(metrics, "cluster"):
-            n_samples = len(records)
-
-            # Default K if not provided
-            default_k = 10
-            k_requested = req.clustering_k if req.clustering_k is not None else default_k
-
-            if n_samples <= 1:
-                clusters = []
-                if n_samples == 1:
-                    clusters = [
-                        Cluster(
-                            cluster_id="c0",
-                            label=records[0].keyword,
-                            members=[records[0]],
-                            metrics=ClusterMetrics(),
-                        )
-                    ]
-            else:
-                k = min(int(k_requested), n_samples)
-                clusters = cluster_records(records, k=k)
-
-        metrics.clusters_created = len(clusters)
-
-        clustered_keywords: set[str] = set()
-        for c in clusters:
-            for m in c.members:
-                clustered_keywords.add(m.keyword)
-
-        metrics.keywords_clustered = len(clustered_keywords)
-        metrics.keywords_not_clustered = max(
-            0, metrics.keywords_after_preprocess - metrics.keywords_clustered
-        )
 
 
-        with timed_step(metrics, "annotate_intent_brand"):
-            clusters = annotate_intent_brand(clusters, req.product)
 
-        with timed_step(metrics, "score"):
-            clusters = score_clusters(clusters, req.weights)
-
-        topic_top_n = 1 if seed_topic else req.top_clusters
-        metrics.clusters_used_for_topics = min(len(clusters), topic_top_n)
-        metrics.set_cluster_score_stats([c.metrics.score for c in clusters if c.metrics is not None])
-
-        # Send stage 1 metrics (best-effort)
-        run_duration_ms = int((time.perf_counter() - start) * 1000)
-        stage_duration_ms = int((time.perf_counter() - stage_start) * 1000)
-        topic_clustering_step_id: str = run_id + "kc"
-        send_stage_metrics(
-            settings=settings,
-            run_id=topic_clustering_step_id,
-            stage=current_stage,
-            stage_status="success",
-            req=req,
-            platform=platform,
-            website=website,
-            section=section,
-            run_duration_ms=run_duration_ms,
-            stage_duration_ms=stage_duration_ms,
-            item_name="Keywords",
-            items_discovered=metrics.keywords_after_preprocess,
-            items_succeeded=metrics.keywords_clustered,
-            items_failed=metrics.keywords_not_clustered,
-            extra_fields={
-                "keywords_processed": metrics.keywords_processed,
-                "keywords_after_preprocess": metrics.keywords_after_preprocess,
-                "clusters_created": metrics.clusters_created,
-                "clusters_used_for_topics": metrics.clusters_used_for_topics,
-            },
-        )
-
-        # -----------------------
-        # STAGE 2: Topic Generation
-        # -----------------------
-        current_stage = settings.METRICS_TOPIC_GENERATION_JOB
-        stage_start = time.perf_counter()
-
-        with timed_step(metrics, "content_index"):
-            existing_topics = _load_existing_topics_for_prompt(
-                product=req.product,
-                platform=platform,
-                use_content_index=use_content_index,
-            )
-
-        if use_content_index:
-            metrics.existing_topics_loaded = len(existing_topics)
-            metrics.content_index_requests += 1
-        else:
-            metrics.existing_topics_loaded = 0
-            metrics.add_event(
-                "CONTENT_INDEX_SKIPPED",
-                "Content index lookup disabled for this run (use_content_index=False).",
-            )
-
-        agent = KeywordResearchAgent()
-        t0_llm = time.perf_counter()
-
-        topics = agent.generate_topics(
-            brand=req.brand,
-            product=req.product,
-            locale=req.locale,
-            clusters=clusters,
-            top_n=topic_top_n,
-            seed_topic=seed_topic,
-            platform=platform,
-            existing_topics=existing_topics,
-            metrics=metrics,
-            include_product_in_title=include_product_in_title,
-        )
-        dt_llm = time.perf_counter() - t0_llm
-        metrics.mark_llm_call(duration_seconds=dt_llm, failed=topics is None)
-
-        if topics is None:
-            topics = []
-        metrics.topics_generated_raw = len(topics)
-
-        topics = _filter_duplicate_topics(topics=topics, existing_topics=existing_topics)
-        metrics.topics_after_dedup = len(topics)
-        metrics.duplicates_dropped = metrics.topics_generated_raw - metrics.topics_after_dedup
-
-        # Send stage 2 metrics (best-effort)
-        run_duration_ms = int((time.perf_counter() - start) * 1000)
-        stage_duration_ms = int((time.perf_counter() - stage_start) * 1000)
-        topic_generation_step_id = run_id + "tg"
-        send_stage_metrics(
-            settings=settings,
-            run_id=topic_generation_step_id,
-            stage=current_stage,
-            stage_status="success",
-            req=req,
-            platform=platform,
-            website=website,
-            section=section,
-            run_duration_ms=run_duration_ms,
-            stage_duration_ms=stage_duration_ms,
-            item_name="Topics",
-            items_discovered=metrics.clusters_used_for_topics,
-            items_succeeded=metrics.topics_after_dedup,
-            items_failed=metrics.duplicates_dropped,
-            extra_fields={
-                "existing_topics_loaded": metrics.existing_topics_loaded,
-                "topics_generated_raw": metrics.topics_generated_raw,
-                "topics_after_dedup": metrics.topics_after_dedup,
-                "duplicates_dropped": metrics.duplicates_dropped,
-                "llm_call_duration_s": float(dt_llm),
-            },
-        )
-
-        metrics.finish(success=True)
-        metrics.add_event(
-            "KRA_RUN_COMPLETED",
-            "Run completed successfully.",
-            clusters_used=metrics.clusters_used_for_topics,
-            topics_final=metrics.topics_after_dedup,
-        )
-
-    except Exception as exc:
-        # IMPORTANT: flip status so â€œsuccessâ€ isnâ€™t reported accidentally
-        status = "failed"
-        error_message = str(exc)
-
-        metrics.finish(success=False, error_message=error_message)
-        metrics.add_event(
-            "KRA_RUN_FAILED",
-            "Run failed with exception.",
-            exc_type=type(exc).__name__,
-        )
-
-        # Emit failed stage payload (best-effort)
-        run_duration_ms = int((time.perf_counter() - start) * 1000)
-        stage_duration_ms = int((time.perf_counter() - stage_start) * 1000)
-
-        if current_stage == settings.METRICS_KEYWORD_CLUSTERING_JOB:
-            discovered = int(getattr(metrics, "keywords_after_preprocess", 0) or 0)
-            succeeded = int(getattr(metrics, "keywords_clustered", 0) or 0)
-            failed = int(getattr(metrics, "keywords_not_clustered", 0) or 0)
-        else:
-            discovered = int(getattr(metrics, "clusters_used_for_topics", 0) or 0)
-            succeeded = int(getattr(metrics, "topics_after_dedup", 0) or 0)
-            failed = max(1, int(getattr(metrics, "duplicates_dropped", 0) or 0))
-
-        send_stage_metrics(
-            settings=settings,
-            run_id=run_id,
-            stage=current_stage,
-            stage_status="failed",
-            req=req,
-            item_name=req.product,
-            platform=platform,
-            website=website,
-            section=section,
-            run_duration_ms=run_duration_ms,
-            stage_duration_ms=stage_duration_ms,
-            items_discovered=discovered,
-            items_succeeded=succeeded,
-            items_failed=failed,
-            extra_fields={
-                "error_message": error_message,
-                "exc_type": type(exc).__name__,
-            },
-        )
-        raise
-
-    result = RunResult(
-        run_id=run_id,
-        brand=req.brand,
-        product=req.product,
-        locale=req.locale,
-        clusters=clusters[: req.top_clusters],
-        topics=topics,
-    )
-    return result, metrics
-
-
-def _fetch_records_for_topic(
-    *,
-    topic: str,
-    product: str,
-    platform: Optional[str],
-    locale: str,
-    max_rows: int,
-    source: str = "serp",
-) -> List[KeywordRecord]:
-    from .tools.serp_import import fetch_serp_keywords
-
-    if source == "llm":
-        key_gen_req = LLMKeywordGenRequest(
-            topic=topic,
-            product=product,
-            platform=platform,
-            locale=locale,
-            max_keywords=min(max_rows, 200),
-        )
-        records = fetch_llm_keywords(key_gen_req)
-        if not records:
-            raise RuntimeError("No keywords produced by the LLM keyword generator.")
-        return records
-
-    records: Optional[List[KeywordRecord]] = None
-
-    if settings.DEBUG:
-        print(
-            f"[KRA] Using SerpAPI for topic={topic!r}, product={product!r}, platform={platform!r}"
-        )
-
-    try:
-        records = fetch_serp_keywords(
-            topic=topic,
-            product=product,
-            platform=platform,
-            locale=locale,
-            max_keywords=max_rows,
-        )
-    except RuntimeError as e:
-        records = None
-        print(f"SERPAPI_KEY is not configured in settings/.env: {e}")
-    except (requests.RequestException, OSError) as e:
-        records = None
-        print(f"SerpAPI request failed ({type(e).__name__}): {e}")
-
-    if records:
-        return records
-
-    print("SerpAPI returned no keywords (or failed); trying LLM fallback...")
-    key_gen_req = LLMKeywordGenRequest(
-        topic=topic,
-        product=product,
-        platform=platform,
-        locale=locale,
-        max_keywords=min(max_rows, 200),
-    )
-    records = fetch_llm_keywords(key_gen_req)
-    if not records:
-        raise RuntimeError("No keywords produced by SerpAPI or LLM fallback.")
-    return records
 
 def main() -> None:
     """
@@ -1304,26 +785,13 @@ def main() -> None:
 
         md_paths: List[Path] = []
         for platform in selection.platforms:
-            try:
-                platform_records = _fetch_records_for_topic(
-                    topic=selection.topic,
-                    product=selection.product,
-                    platform=platform,
-                    locale=args.locale,
-                    max_rows=args.max_rows,
-                    source="llm" if args.use_llm_keywords else "serp",
-                )
-            except RuntimeError as e:
-                print(e)
-                raise SystemExit(1)
-
             result, metrics = run_sync(
                 req,
                 platform=platform,
                 use_content_index=args.use_content_index,
-                records=platform_records,
                 seed_topic=selection.topic,
                 include_product_in_title=args.include_product_in_title,
+                source="llm" if args.use_llm_keywords else "serp",
             )
 
             _print_summary(result)
@@ -1384,28 +852,6 @@ def main() -> None:
         # weights keep defaults from model unless you want to override here
     )
 
-    # If using SerpAPI or direct LLM keyword generation, fetch KeywordRecord list here
-    records: Optional[List[KeywordRecord]] = None
-
-    if args.use_serp_api or args.use_llm_keywords:
-        topic = args.serp_topic.strip() or args.product
-        _platform = (args.platform or "").strip() or None
-        try:
-            records = _fetch_records_for_topic(
-                topic=topic,
-                product=args.product,
-                platform=_platform,
-                locale=args.locale,
-                max_rows=args.max_rows,
-                source="llm" if args.use_llm_keywords else "serp",
-            )
-        except RuntimeError as e:
-            print(e)
-            raise SystemExit(1)
-        args.use_serp_api = False
-        args.use_llm_keywords = False
-
-
     logger.info(
         "CLI invoked with brand=%s product=%s locale=%s platform=%s file_path=%s",
         req.brand,
@@ -1420,9 +866,9 @@ def main() -> None:
         req,
         platform=args.platform or None,
         use_content_index=args.use_content_index,
-        records=records,  # <--- THIS prevents import_file(req) in SerpAPI mode
-        seed_topic=(args.serp_topic.strip() or args.product) if records is not None and (args.file_path == "" or args.use_serp_api or args.use_llm_keywords) else None,
+        seed_topic=(args.serp_topic.strip() or args.product) if (args.use_serp_api or args.use_llm_keywords) else None,
         include_product_in_title=args.include_product_in_title,
+        source="llm" if args.use_llm_keywords else ("serp" if args.use_serp_api else "csv"),
     )
 
     # Print a brief human summary of clusters/topics (optional)

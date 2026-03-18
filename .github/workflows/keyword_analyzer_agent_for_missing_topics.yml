@@ -1,4 +1,4 @@
-name: Blog Keyword Analyzer for Missing Topics
+name: Keyword Analyzer for Missing Topics
 
 on:
   workflow_dispatch:

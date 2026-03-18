@@ -8,7 +8,8 @@ from typing import List, Optional, Dict, Any, Iterable
 
 from openai import OpenAI
 
-from .config import settings
+from ..config import settings
+from ..prompt_loader import render_prompt
 from agent_engine.blog_keyword_analyzer.tools.normalization import (
     KeywordRefiner,
     canonical_platform_label,
@@ -16,9 +17,9 @@ from agent_engine.blog_keyword_analyzer.tools.normalization import (
     platform_variant_pattern,
     strip_platform_mentions,
 )
-from .schemas import Cluster, TopicIdea
-from .tools.metrics import RunMetrics
-from .tools.seo_title_polisher import SeoTitlePolishRequest, polish_title
+from ..schemas import Cluster, TopicIdea
+from ..tools.metrics import RunMetrics
+from ..tools.seo_title_polisher import SeoTitlePolishRequest, polish_title
 
 logger = logging.getLogger(__name__)
 refiner = KeywordRefiner()
@@ -35,11 +36,16 @@ class KeywordResearchAgent:
       - Call LLM and parse a strict JSON response into TopicIdea objects
     """
 
-    def __init__(self, model: str | None = None) -> None:
+    def __init__(
+            self,
+            model: str | None = None,
+            prompt_name: str = "keyword_research_system.txt",
+    ) -> None:
         """
         Initialize the agent and choose which model / backend to use.
         """
         self.model = settings.PROFESSIONALIZE_LLM_MODEL
+        self.prompt_name = prompt_name
 
         # Decide which backend to use: custom (self-hosted) or OpenAI
         # Your self-hosted LLM (OpenAI-compatible)
@@ -63,6 +69,69 @@ class KeywordResearchAgent:
 
         # Many custom servers don't fully support response_format yet
         self._use_response_format = False
+
+    def _render_system_prompt(
+            self,
+            *,
+            seed_topic_clean: str,
+            platform_label: Optional[str],
+            include_product_in_title: bool,
+            product: str,
+            outline_library_name: str,
+    ) -> str:
+        seed_topic_rules = ""
+        if seed_topic_clean:
+            seed_topic_rules = (
+                "SEED TOPIC RULES\n"
+                f"- Seed topic is '{seed_topic_clean}'.\n"
+                "- Return EXACTLY 1 topic.\n"
+                "- Keep the topic tightly aligned to the seed topic, not an adjacent or broader area.\n"
+                "- Choose the most relevant primary_keyword for the seed topic.\n"
+                "- Supporting keywords must be directly relevant variations of the same seed topic.\n"
+            )
+
+        platform_rules = "- No platform constraint.\n"
+        if platform_label:
+            platform_rules = (
+                f"- Target platform is '{platform_label}'.\n"
+                f"- '{platform_label}' MUST appear in EVERY title.\n"
+                "- Do NOT mention other platforms.\n"
+            )
+
+        if include_product_in_title:
+            product_title_rule = f"- The product name '{product}' MUST appear in EVERY title."
+        else:
+            product_title_rule = f"- The product name '{product}' MUST NOT appear in ANY title."
+
+        if platform_label:
+            outline_structure = (
+                "- Outline MUST be 6-10 items.\n"
+                "- First 4 items MUST be exactly:\n"
+                f"  1) 'Using {outline_library_name} in {platform_label}'\n"
+                f"  2) '{outline_library_name} features that matter for this task'\n"
+                f"  3) 'Installation and setup in {platform_label}'\n"
+                f"  4) 'Step-by-step implementation in {platform_label}'\n"
+                "- Then append 2-6 practical SEO sections (config, performance, troubleshooting, etc.)."
+            )
+        else:
+            outline_structure = (
+                "- Outline MUST be 6-10 items.\n"
+                "- First 4 items MUST be exactly:\n"
+                f"  1) 'Using {outline_library_name}'\n"
+                f"  2) '{outline_library_name} features that matter for this task'\n"
+                "  3) 'Installation and setup'\n"
+                "  4) 'Step-by-step implementation'\n"
+                "- Then append 2-6 practical SEO sections."
+            )
+
+        return render_prompt(
+            self.prompt_name,
+            seed_topic_rules=seed_topic_rules,
+            platform_rules=platform_rules,
+            product_title_rule=product_title_rule,
+            outline_library_name=outline_library_name,
+            outline_structure=outline_structure,
+        )
 
     @staticmethod
     def _extract_json_block(text: str) -> str | None:
@@ -563,6 +632,84 @@ class KeywordResearchAgent:
             ]
             return self._dedupe_keep_order(variants)[:5]
 
+        def _bucket_keyword_groups(
+                primary_kw: str,
+                supporting_keywords: List[str],
+                keyword_groups: Dict[str, List[str]],
+                candidate_keywords: List[str],
+                product_variants: List[str],
+        ) -> Dict[str, List[str]]:
+            pk_key = self._keyword_intent_key(primary_kw)
+
+            def _clean_items(values: List[str]) -> List[str]:
+                cleaned = [refiner.refine(v) for v in values if isinstance(v, str) and v.strip()]
+                cleaned = [
+                    v for v in cleaned
+                    if v
+                    and _kw_is_complete(v)
+                    and self._keyword_intent_key(v) != pk_key
+                    and not self._contains_product(v, product_variants)
+                ]
+                return self._dedupe_keep_order(cleaned)
+
+            core = _clean_items(list(keyword_groups.get("core_seo_keywords") or []))
+            long_tail = _clean_items(list(keyword_groups.get("long_tail_keywords") or []))
+            context = _clean_items(list(keyword_groups.get("context_keywords") or []))
+
+            pool = _clean_items(list(supporting_keywords) + list(candidate_keywords))
+            long_tail_markers = {"example", "examples", "tutorial", "guide", "using", "workflow", "automation"}
+
+            short_pool = [v for v in pool if len(v.split()) <= 5]
+            long_pool = [
+                v for v in pool
+                if len(v.split()) >= 5
+                or any(marker in v.lower().split() for marker in long_tail_markers)
+            ]
+            context_pool = [v for v in pool if v not in core and v not in long_tail]
+
+            if not core:
+                core = short_pool[:5] or pool[:5]
+
+            if not long_tail:
+                long_tail = long_pool[:5]
+            if not long_tail:
+                synthesized_long_tail: List[str] = []
+                if platform_label:
+                    synthesized_long_tail.extend([
+                        refiner.refine(f"{primary_kw} example in {platform_label}"),
+                        refiner.refine(f"{primary_kw} workflow in {platform_label}"),
+                    ])
+                synthesized_long_tail.append(refiner.refine(f"{primary_kw} automation workflow"))
+                long_tail = _clean_items(synthesized_long_tail)
+
+            if not context:
+                context = context_pool[:5]
+            if not context:
+                synthesized_context: List[str] = []
+                if platform_label:
+                    synthesized_context.extend([
+                        refiner.refine(f"{primary_kw} {platform_label} integration"),
+                        refiner.refine(f"{primary_kw} {platform_label} processing"),
+                    ])
+                synthesized_context.extend([
+                    refiner.refine(f"{primary_kw} document workflow"),
+                    refiner.refine(f"{primary_kw} file processing"),
+                ])
+                context = _clean_items(synthesized_context)
+
+            if not core:
+                core = _clean_items(long_tail + context)[:5]
+            if not long_tail:
+                long_tail = _clean_items(core + context)[:5]
+            if not context:
+                context = _clean_items(long_tail + core)[:5]
+
+            return {
+                "core_seo_keywords": core[:5],
+                "long_tail_keywords": long_tail[:5],
+                "context_keywords": context[:5],
+            }
+
         def _select_keywords_for_cluster(raw: List[str], limit: int = 12) -> List[str]:
             cleaned = [" ".join(k.strip().split()) for k in raw if isinstance(k, str) and k.strip()]
             if not cleaned:
@@ -933,125 +1080,13 @@ class KeywordResearchAgent:
         # -------------------------
         # Prompt
         # -------------------------
-        system = (
-            "You are a 'Blog Keyword Analyzer' agent.\n\n"
-            "Return STRICT JSON with top-level key 'topics'.\n\n"
-            "Each topic MUST include:\n"
-            "- cluster_id\n"
-            "- title\n"
-            "- angle\n"
-            "- outline (6ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Å“10 headings)\n"
-            "- target_persona\n"
-            "- primary_keyword (EXACT string from cluster)\n"
-            "- supporting_keywords (3ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Å“8 EXACT strings from same cluster)\n"
-            "- internal_links (0ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Å“5 from existing_topics only)\n\n"
-            "CLUSTER CONSISTENCY\n"
-            "- Do not invent keywords.\n"
-        )
 
-        system += (
-            "ADDITIONAL OUTPUT REQUIREMENTS\n"
-            "- Include keyword_groups with keys core_seo_keywords, long_tail_keywords, context_keywords.\n"
-            "- Include editorial_notes as a list of 3ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â€šÂ¬Ã…â€œ6 practical SEO/content bullets.\n"
-            "- For clusters with keyword_strategy='exact_cluster', primary_keyword must be an EXACT string from keywords.\n"
-            "- For clusters with keyword_strategy='analyzed_serp', primary_keyword must be an EXACT string from analyzed_keywords.\n"
-            "- Supporting keywords and keyword_groups must stay semantically grounded in the same cluster.\n\n"
-        )
-
-        if seed_topic_clean:
-            system += (
-                "SEED TOPIC RULES\n"
-                f"- Seed topic is '{seed_topic_clean}'.\n"
-                "- Return EXACTLY 1 topic.\n"
-                "- Keep the topic tightly aligned to the seed topic, not an adjacent or broader area.\n"
-                "- Choose the most relevant primary_keyword for the seed topic.\n"
-                "- Supporting keywords must be directly relevant variations of the same seed topic.\n\n"
-            )
-
-        system += "platform / LANGUAGE RULES\n"
-        if platform_label:
-            system += (
-                f"- Target platform is '{platform_label}'.\n"
-                f"- '{platform_label}' MUST appear in EVERY title.\n"
-                "- Do NOT mention other platforms.\n"
-            )
-
-        system += (
-            "\nTITLE RULES\n"
-            "- The title MUST contain the exact primary_keyword verbatim.\n"
-            "- The title MUST be grammatical.\n"
-            "- Avoid incomplete titles like 'To PDF in .NET'.\n"
-            "\n"
-        )
-
-        system += (
-            "\nSERP SEO STRATEGY\n"
-            "- When keyword_strategy is 'analyzed_serp', do NOT copy awkward raw SERP phrasing.\n"
-            "- Rewrite the keyword plan around the feature/topic first, so it attracts broad relevant visitors, especially platform developers and AI agents parsing the page.\n"
-            "- Primary keyword should be feature-led and natural, not product-led marketing copy.\n"
-            "- Secondary purpose: show that the product provides that feature.\n"
-            "- Use keyword_groups as follows:\n"
-            "  core_seo_keywords: direct feature/category phrases with platform or format intent.\n"
-            "  long_tail_keywords: specific natural-language phrases helpful for AI visibility.\n"
-            "  context_keywords: semantic entities, workflow terms, file types, and adjacent concepts.\n"
-            "- editorial_notes must provide practical SEO/content guidance, not fluff.\n"
-        )
-
-        system += (
-            "\nTITLE LENGTH RULE (HARD)\n"
-            "- Each title MUST be between 40 and 60 characters (inclusive).\n"
-            "- Avoid parentheses in titles unless necessary.\n"
-            "\n"
-        )
-
-        if include_product_in_title:
-            system += (
-                "\nPRODUCT TITLE RULE\n"
-                f"- The product name '{product}' MUST appear in EVERY title.\n"
-            )
-        else:
-            system += (
-                "\nPRODUCT TITLE RULE\n"
-                f"- The product name '{product}' MUST NOT appear in ANY title.\n"
-            )
-
-        system += (
-            "\nOUTLINE RULES\n"
-            f"- In the outline, ALWAYS refer to the library as '{outline_library_name}'.\n"
-            "- NEVER use 'SDK', 'the SDK', or 'the library' in the outline.\n"
-            "- Do NOT include 'Use Cases' and do NOT use the words 'Use Case'.\n"
-            "\n"
-        )
-
-        if platform_label:
-            system += (
-                "OUTLINE STRUCTURE\n"
-                "- Outline MUST be 6ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Å“10 items.\n"
-                "- First 4 items MUST be exactly:\n"
-                f"  1) 'Using {outline_library_name} in {platform_label}'\n"
-                f"  2) '{outline_library_name} features that matter for this task'\n"
-                f"  3) 'Installation and setup in {platform_label}'\n"
-                f"  4) 'Step-by-step implementation in {platform_label}'\n"
-                "- Then append 2ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Å“6 practical SEO sections (config, performance, troubleshooting, etc.).\n"
-            )
-        else:
-            system += (
-                "OUTLINE STRUCTURE\n"
-                "- Outline MUST be 6ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Å“10 items.\n"
-                "- First 4 items MUST be exactly:\n"
-                f"  1) 'Using {outline_library_name}'\n"
-                f"  2) '{outline_library_name} features that matter for this task'\n"
-                "  3) 'Installation and setup'\n"
-                "  4) 'Step-by-step implementation'\n"
-                "- Then append 2ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Å“6 practical SEO sections.\n"
-            )
-
-        system += (
-            "\nSTRICT JSON RULES\n"
-            "- Return ONLY JSON.\n"
-            '- Single object: {"topics":[...]}\n'
-            "- Double quotes only.\n"
-            "- No trailing commas.\n"
+        system = self._render_system_prompt(
+            seed_topic_clean=seed_topic_clean,
+            platform_label=platform_label,
+            include_product_in_title=include_product_in_title,
+            product=product,
+            outline_library_name=outline_library_name,
         )
 
         if settings.DEBUG:
@@ -1075,9 +1110,13 @@ class KeywordResearchAgent:
         logger.info("LLM call completed in %.3f seconds", dt)
 
         usage = getattr(resp, "usage", None)
-        if usage is not None and metrics is not None:
-            metrics.llm_prompt_tokens += getattr(usage, "prompt_tokens", 0) or 0
-            metrics.llm_completion_tokens += getattr(usage, "completion_tokens", 0) or 0
+        if metrics is not None:
+            metrics.record_llm_usage(
+                duration_seconds=dt,
+                prompt_tokens=getattr(usage, "prompt_tokens", 0) or 0,
+                completion_tokens=getattr(usage, "completion_tokens", 0) or 0,
+                requests=1,
+            )
 
         txt = resp.choices[0].message.content or ""
         logger.debug("Raw LLM response (truncated to 1200 chars): %s", txt[:1200])
@@ -1258,11 +1297,13 @@ class KeywordResearchAgent:
             if len(supporting_keywords) < 3:
                 supporting_keywords = _fallback_supporting_keywords(pk, supporting_keywords + allowed_primary_keywords)
             t["supporting_keywords"] = supporting_keywords[:5]
-            if not any(keyword_groups.get(key) for key in ("core_seo_keywords", "long_tail_keywords", "context_keywords")):
-                keyword_groups["core_seo_keywords"] = supporting_keywords[:3]
-                keyword_groups["long_tail_keywords"] = supporting_keywords[3:5]
-                keyword_groups["context_keywords"] = []
-                t["keyword_groups"] = keyword_groups
+            t["keyword_groups"] = _bucket_keyword_groups(
+                pk,
+                t["supporting_keywords"],
+                keyword_groups,
+                allowed_primary_keywords,
+                product_variants,
+            )
 
             editorial_notes = t.get("editorial_notes") or []
             if isinstance(editorial_notes, list):
@@ -1307,7 +1348,8 @@ class KeywordResearchAgent:
                     include_product_in_title=include_product_in_title,
                     min_len=40,
                     max_len=60,
-                )
+                ),
+                metrics=metrics,
             )
 
             if polished:
