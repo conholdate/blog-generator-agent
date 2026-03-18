@@ -321,6 +321,7 @@ FILE_FORMAT_REGISTRY: Dict[str, FileFormatSpec] = {
     "otg": FileFormatSpec("otg", "OTG", ("otg",)),
     "djvu": FileFormatSpec("djvu", "DJVU", ("djvu", "djv")),
     # 3D / CAD / model
+    "3d": FileFormatSpec("3d", "3D", ("3d",)),
     "3ds": FileFormatSpec("3ds", "3DS", ("3ds",)),
     "3mf": FileFormatSpec("3mf", "3MF", ("3mf",)),
     "amf": FileFormatSpec("amf", "AMF", ("amf",)),

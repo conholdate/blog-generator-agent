@@ -769,8 +769,8 @@ class KeywordResearchAgent:
                 elif kw_low.startswith(verb_prefixes):
                     # Keyword already contains the verb -> do NOT add another action verb
                     candidates = [
-                        f"How to {kw}" if kw_has_platform else f"How to {kw} in {platform_label}",
                         kw if kw_has_platform else f"{kw} in {platform_label}",
+                        f"How to {kw}" if kw_has_platform else f"How to {kw} in {platform_label}",
                         f"{kw}: A Complete Tutorial" if kw_has_platform else f"{kw}: A Complete Tutorial in {platform_label}",
                     ]
                 else:
@@ -796,8 +796,8 @@ class KeywordResearchAgent:
                     ]
                 elif kw_low.startswith(verb_prefixes):
                     candidates = [
-                        f"How to {kw}",
                         kw,
+                        f"How to {kw}",
                         f"{kw}: A Complete Tutorial",
                     ]
                 else:
@@ -947,6 +947,25 @@ class KeywordResearchAgent:
             def _clean(x: str) -> str:
                 return re.sub(r"\s{2,}", " ", x).strip(" -ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Å“ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â,:; ")
 
+            if pl:
+                t = re.sub(
+                    rf"(?i)\b(?:in|for|via|using|with)\s+{re.escape(pl)}\s+"
+                    rf"(?:in|for|via|using|with)\s+{re.escape(pl)}\b",
+                    f"in {pl}",
+                    t,
+                ).strip()
+
+            action_lead_re = re.compile(
+                r"(?i)^(convert|create|generate|merge|split|compress|extract|edit|render|export|import|watermark|sign|ocr|update|delete|remove|add|insert|replace|modify)\b"
+            )
+            if kw and action_lead_re.search(kw):
+                simple_title = kw if (not pl or _mentions_platform_label(kw, pl)) else _clean(f"{kw} in {pl}")
+                if re.search(r"(?i)\b(how to|guide|tutorial)\b", t):
+                    t = simple_title
+                elif not include_product_in_title and prod and self._contains_product(t, self._product_variants(prod)):
+                    t = simple_title
+
+            t = refiner.to_title_case(t)
             t = _clean(t)
 
             # If too long, drop "A Complete Tutorial" phrase (case-insensitive)
@@ -1173,10 +1192,11 @@ class KeywordResearchAgent:
         def _force_first4_outline(outline: List[str], primary_kw: str) -> List[str]:
             kw = " ".join((primary_kw or "").strip().split())
             kw_has_product = self._contains_product(kw, self._product_variants(outline_library_name))
+            kw_has_platform = self._contains_platform_variant(kw, platform_label)
 
             if platform_label:
                 base = [
-                    f"{kw} for {platform_label}" if kw_has_product else f"{kw} with {outline_library_name} for {platform_label}",
+                    kw if kw_has_platform else (f"{kw} in {platform_label}" if kw_has_product else f"{kw} with {outline_library_name} in {platform_label}"),
                     f"Key Features of {outline_library_name} for {platform_label}",
                     f"Installation and Setup in {platform_label}",
                     f"Step-by-Step: {kw}",

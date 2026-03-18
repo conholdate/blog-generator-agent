@@ -764,6 +764,18 @@ def main() -> None:
             )
             raise SystemExit(0)
 
+        selected_platform = normalize_missing_platform(args.platform)
+        if not selected_platform:
+            raise SystemExit(
+                "--platform is required in missing-topics mode and must target one supported platform."
+            )
+        if selected_platform not in selection.platforms:
+            available = ", ".join(platform_header_display(p) for p in selection.platforms)
+            raise SystemExit(
+                f"Row #{selection.row_index} does not include the selected platform "
+                f"'{platform_header_display(selected_platform)}'. Available platforms: {available}."
+            )
+
         req = RunRequest(
             brand=selection.brand,
             product=selection.product,
@@ -780,46 +792,44 @@ def main() -> None:
             selection.product,
             selection.row_index,
             selection.topic,
-            ",".join(selection.platforms),
+            selected_platform,
         )
 
-        md_paths: List[Path] = []
-        for platform in selection.platforms:
-            result, metrics = run_sync(
-                req,
-                platform=platform,
-                use_content_index=args.use_content_index,
-                seed_topic=selection.topic,
-                include_product_in_title=args.include_product_in_title,
-                source="llm" if args.use_llm_keywords else "serp",
-            )
+        platform_label = platform_header_display(selected_platform)
+        print(
+            f"Processing missing topic row #{selection.row_index} for platform: {platform_label}"
+        )
+        print()
 
-            _print_summary(result)
-            print()
-            print(metrics.as_cli_summary())
-            print()
+        result, metrics = run_sync(
+            req,
+            platform=selected_platform,
+            use_content_index=args.use_content_index,
+            seed_topic=selection.topic,
+            include_product_in_title=args.include_product_in_title,
+            source="llm" if args.use_llm_keywords else "serp",
+        )
 
-            safe_product = _brand_slug(selection.product)
-            safe_topic = _brand_slug(selection.topic)[:60] or f"row-{selection.row_index}"
-            if len(selection.platforms) == 1:
-                file_name = f"missing-topic-{selection.row_index}_{safe_product}_{safe_topic}_topics.md"
-            else:
-                file_name = (
-                    f"missing-topic-{selection.row_index}_{safe_product}_{platform}_{safe_topic}_topics.md"
-                )
+        _print_summary(result)
+        print()
+        print(metrics.as_cli_summary())
+        print()
 
-            brand_out_dir = _resolve_brand_output_dir(selection.brand)
-            md_paths.append(
-                write_topics_markdown(
-                    result,
-                    output_dir=brand_out_dir,
-                    platform=platform,
-                    file_name=file_name,
-                )
-            )
+        safe_product = _brand_slug(selection.product)
+        safe_topic = _brand_slug(selection.topic)[:60] or f"row-{selection.row_index}"
+        file_name = (
+            f"missing-topic-{selection.row_index}_{safe_product}_{selected_platform}_{safe_topic}_topics.md"
+        )
 
-        for md_path in md_paths:
-            print(md_path)
+        brand_out_dir = _resolve_brand_output_dir(selection.brand)
+        md_path = write_topics_markdown(
+            result,
+            output_dir=brand_out_dir,
+            platform=selected_platform,
+            file_name=file_name,
+        )
+
+        print(md_path)
         return
 
     # Decide ingestion mode: file vs SerpAPI

@@ -33,6 +33,7 @@ class PlatformSpec:
     display: str
     blog_key: str
     aliases: Tuple[str, ...] = field(default_factory=tuple)
+    display_aliases: Mapping[str, str] = field(default_factory=dict)
 
 
 @dataclass(frozen=True)
@@ -57,6 +58,22 @@ PLATFORM_REGISTRY: Dict[str, PlatformSpec] = {
             "vb", "vb.net", "vbnet", "visual basic", "visual basic .net",
             "asp.net", "asp net",
         ),
+        display_aliases={
+            ".net": ".NET",
+            "net": ".NET",
+            "dotnet": ".NET",
+            "dot net": ".NET",
+            "c#": "C#",
+            "c sharp": "C#",
+            "csharp": "C#",
+            "vb": "VB.NET",
+            "vb.net": "VB.NET",
+            "vbnet": "VB.NET",
+            "visual basic": "VB.NET",
+            "visual basic .net": "VB.NET",
+            "asp.net": "ASP.NET",
+            "asp net": "ASP.NET",
+        },
     ),
     "java": PlatformSpec(
         family="java",
@@ -304,6 +321,7 @@ FILE_FORMAT_REGISTRY: Dict[str, FileFormatSpec] = {
     "otg": FileFormatSpec("otg", "OTG", ("otg",)),
     "djvu": FileFormatSpec("djvu", "DJVU", ("djvu", "djv")),
     # 3D / CAD / model
+    "3d": FileFormatSpec("3d", "3D", ("3d",)),
     "3ds": FileFormatSpec("3ds", "3DS", ("3ds",)),
     "3mf": FileFormatSpec("3mf", "3MF", ("3mf",)),
     "amf": FileFormatSpec("amf", "AMF", ("amf",)),
@@ -480,7 +498,7 @@ PHRASE_CANON: Dict[str, str] = {
 
 ACRONYMS: Set[str] = {
     *FORMAT_CANONICAL_TO_UPPER.keys(),
-    "3d", "api", "sdk", "cli", "url", "http", "https", "sql", "vsd", "vsdx", "ssrs",
+    "api", "sdk", "cli", "url", "http", "https", "sql", "vsd", "vsdx", "ssrs",
 }
 
 PRESERVE_TOKENS: Set[str] = {
@@ -620,6 +638,26 @@ def platform_to_csharp(value: Optional[str]) -> str:
 
 def platform_to_display(value: Optional[str]) -> str:
     return canonical_platform_label(value)
+
+
+def platform_header_display(value: Optional[str]) -> str:
+    family = normalize_platform_family(value)
+    spec = PLATFORM_REGISTRY.get(family)
+    if not spec:
+        return canonical_platform_label(value)
+
+    raw = _compact_token(value or "")
+    if raw:
+        display_alias = spec.display_aliases.get(raw)
+        if display_alias:
+            return display_alias
+
+        dashed = raw.replace(" ", "-")
+        display_alias = spec.display_aliases.get(dashed)
+        if display_alias:
+            return display_alias
+
+    return spec.display
 
 
 def platform_aliases(value: Optional[str]) -> Tuple[str, ...]:
@@ -866,7 +904,7 @@ def nor_website_domain(site: str) -> str:
 
 def nor_section_label(step: str) -> str:
     step = (step or "").strip().lower()
-    mapping = {"blog": "Blog", "docs": "Docs", "tutorials": "Tutorials", "api": "API", "kb": "KB"}
+    mapping = {"blog": "blog", "docs": "Docs", "tutorials": "Tutorials", "api": "API", "kb": "KB"}
     return mapping.get(step, step.capitalize() if step else "")
 
 
@@ -878,6 +916,8 @@ def nor_website_section_from_case(case: str) -> str:
         "api_coverage": "API",
     }
     return mapping.get(case, case)
+
+
 
 
 # =============================================================================
@@ -1167,6 +1207,7 @@ __all__ = [
     "nor_website_domain",
     "nor_website_section_from_case",
     "platform_aliases",
+    "platform_header_display",
     "platform_to_csharp",
     "platform_to_display",
     "platform_variant_pattern",
