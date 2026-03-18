@@ -65,6 +65,15 @@ class MetricsRecorder:
         self.items_discovered = 0
         self.items_succeeded = 0
         self.items_failed = 0
+
+        # NEW: API usage tracking
+        self.token_usage = {
+            "input_tokens": 0,
+            "output_tokens": 0,
+            "total_tokens": 0
+        }
+        self.api_call_count = 0
+        self.api_calls_log = []   # list of {call_number, caller, input_tokens, output_tokens, total_tokens}
         
         # Job context
         self.product = None
@@ -137,14 +146,106 @@ class MetricsRecorder:
             "error": error
         })
         logger.error(f"Failure recorded [{self.run_id}]: {error}")
-    
+
+    def record_llm_usage(
+        self,
+        input_tokens: int = 0,
+        output_tokens: int = 0,
+        caller: str = "unknown"
+    ):
+        """
+        Record a single LLM API call with its token consumption and caller context.
+
+        Args:
+            input_tokens:  Number of prompt/input tokens consumed in this call.
+            output_tokens: Number of completion/output tokens produced in this call.
+            caller:        Name of the function/agent that made this LLM call
+                           (e.g. "blog-writer-agent", "seo-title-generator").
+
+        Example usage::
+
+            metrics.record_llm_usage(
+                input_tokens=result.token_usage["input_tokens"],
+                output_tokens=result.token_usage["output_tokens"],
+                caller="blog-writer-agent"
+            )
+        """
+        self.api_call_count += 1
+        self.token_usage["input_tokens"] += input_tokens
+        self.token_usage["output_tokens"] += output_tokens
+        self.token_usage["total_tokens"] += input_tokens + output_tokens
+
+        self.api_calls_log.append({
+            "call_number": self.api_call_count,
+            "caller":       caller,
+            "input_tokens":  input_tokens,
+            "output_tokens": output_tokens,
+            "total_tokens":  input_tokens + output_tokens,
+        })
+
+        print(
+            f"  🔵 LLM Call #{self.api_call_count} | caller: {caller} | "
+            f"in: {input_tokens} | out: {output_tokens} | "
+            f"call_total: {input_tokens + output_tokens} | "
+            f"running_total: {self.token_usage['total_tokens']}"
+        )
+        logger.debug(
+            f"LLM call #{self.api_call_count} [{self.run_id}] caller={caller} "
+            f"input={input_tokens} output={output_tokens} "
+            f"running_total={self.token_usage['total_tokens']}"
+        )
+
+    def record_http_call(
+        self,
+        count: int = 1,
+        caller: str = "unknown"
+    ):
+        """
+        Record one or more external HTTP calls (scraping, REST APIs, etc.).
+        Does NOT affect token_usage — only increments api_call_count.
+
+        Args:
+            count:  Number of HTTP calls to record (default 1).
+            caller: Name of the tool/function that made the calls
+                    (e.g. "fetch_category_related_articles", "fetch_article_content").
+
+        Example usage::
+
+            # After MCP scraper returns scan_stats
+            metrics.record_http_call(
+                count=scan_stats["tier1_scanned"] + scan_stats["tier2_scanned"],
+                caller="fetch_category_related_articles"
+            )
+        """
+        self.api_call_count += count
+
+        self.api_calls_log.append({
+            "call_number": self.api_call_count,
+            "caller":      caller,
+            "type":        "http",
+            "count":       count,
+        })
+
+        print(
+            f"  🟢 HTTP Call(s) +{count} | caller: {caller} | "
+            f"running_total_calls: {self.api_call_count}"
+        )
+        logger.debug(
+            f"HTTP calls +{count} [{self.run_id}] caller={caller} "
+            f"total_calls={self.api_call_count}"
+        )
+
     def end_job(self):
         """Mark the job as completed"""
         self.end_time_ms = self._get_current_time_ms()
         self.run_duration_ms = self.end_time_ms - self.start_time_ms
         self.timestamp = datetime.now(timezone.utc).isoformat()
         
-        logger.info(f"Job completed [{self.run_id}] in {self.run_duration_ms}ms")
+        logger.info(
+            f"Job completed [{self.run_id}] in {self.run_duration_ms}ms | "
+            f"api_calls: {self.api_call_count} | "
+            f"total_tokens: {self.token_usage['total_tokens']}"
+        )
     
     def _get_current_time_ms(self) -> int:
         """Get current time in milliseconds"""
@@ -173,7 +274,9 @@ class MetricsRecorder:
             "items_failed": self.items_failed,
             "items_succeeded": self.items_succeeded,
             "run_duration_ms": self.run_duration_ms,
-            "run_env": self.run_env
+            "run_env": self.run_env,
+            "token_usage": self.token_usage["total_tokens"],
+            "api_calls_count": self.api_call_count,
         }
         
         return payload
@@ -320,7 +423,14 @@ class MetricsRecorder:
         print(f"Items Failed:      {self.items_failed}")
         print(f"Duration:          {self.run_duration_ms}ms ({self.run_duration_ms/1000:.2f}s)")
         print(f"Timestamp:         {self.timestamp}")
+        # NEW fields in summary
+        print(f"API Call Count:    {self.api_call_count}")
+        print(f"Token Usage:")
+        print(f"  Input Tokens:    {self.token_usage['input_tokens']}")
+        print(f"  Output Tokens:   {self.token_usage['output_tokens']}")
+        print(f"  Total Tokens:    {self.token_usage['total_tokens']}")
         
+
         if self.errors:
             print(f"\nErrors ({len(self.errors)}):")
             for idx, error in enumerate(self.errors, 1):
@@ -340,4 +450,12 @@ class MetricsRecorder:
         self.run_duration_ms = 0
         self.status = "running"
         self.timestamp = None
+        # NEW: reset API usage fields
+        self.token_usage = {
+            "input_tokens": 0,
+            "output_tokens": 0,
+            "total_tokens": 0
+        }
+        self.api_call_count = 0
+        self.api_calls_log = []
         logger.info(f"Metrics reset with new run_id: {self.run_id}")

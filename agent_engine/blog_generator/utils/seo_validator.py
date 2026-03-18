@@ -163,15 +163,18 @@ def is_valid_meta_description(description: str) -> bool:
     return META_DESC_MIN <= length <= META_DESC_MAX
 
 
-async def fix_meta_description_with_llm(bad_description: str) -> str | None:
+async def fix_meta_description_with_llm(
+    bad_description: str,
+    metrics=None                          # ← NEW: optional MetricsRecorder
+) -> str | None:
     """
     Send the bad meta description to the LLM and ask it to fix the length.
     Returns the corrected description string, or None if all retries fail.
-    
+ 
     NOW USES CENTRALIZED LLM SERVICE
     """
     current = bad_description
-
+ 
     for attempt in range(1, MAX_RETRIES + 1):
         length = len(current)
         direction = "shorter" if length > META_DESC_MAX else "longer"
@@ -183,26 +186,23 @@ async def fix_meta_description_with_llm(bad_description: str) -> str | None:
             f"It is {length} characters, which is below the {META_DESC_MIN} character limit. "
             f"Expand it."
         )
-
+ 
         print(f"  [Attempt {attempt}/{MAX_RETRIES}] Current length: {length} — asking LLM to make it {direction}...")
-
+ 
         instructions = f"""
 You are a meta description optimizer.
-
+ 
 Your task:
 - Rewrite the meta description to be exactly {META_DESC_MIN}-{META_DESC_MAX} characters (including spaces)
 - {action}
 - Keep the same meaning and keywords
 - Count every character including spaces before replying
 - Return ONLY the rewritten description text — no quotes, no labels, no explanation
-
+ 
 Current description:
 {current}
 """
-
-        # ═══════════════════════════════════════════════════════════════════
-        # USING AGENT-BASED APPROACH (works with self-hosted LLM)
-        # ═══════════════════════════════════════════════════════════════════
+ 
         try:
             result = await llm_service.run_agent(
                 instructions=instructions,
@@ -211,16 +211,24 @@ Current description:
                 temperature=0.7,
                 max_turns=1
             )
-            
+ 
+            # ── Record token usage for this attempt ──────────────────────────
+            if metrics is not None:
+                print("metrx is no none")
+                metrics.record_llm_usage(
+                    input_tokens=result.token_usage["input_tokens"],
+                    output_tokens=result.token_usage["output_tokens"]
+                )
+            # ─────────────────────────────────────────────────────────────────
+            print(f"meta---- {result.token_usage['output_tokens']}-- {result.token_usage['input_tokens']}", flush=True)
             candidate = result.final_output.strip().strip('"').strip("'")
-            
-            # Validate response
+ 
             if not candidate or len(candidate.strip()) == 0:
                 print(f"  [Attempt {attempt}/{MAX_RETRIES}] LLM returned empty response")
                 if attempt == MAX_RETRIES:
                     return None
                 continue
-                
+ 
         except Exception as e:
             print(f"  [Attempt {attempt}/{MAX_RETRIES}] LLM call failed: {e}")
             import traceback
@@ -228,59 +236,23 @@ Current description:
             if attempt == MAX_RETRIES:
                 return None
             continue
-        # ═══════════════════════════════════════════════════════════════════
-
+ 
         print(f"  [Attempt {attempt}/{MAX_RETRIES}] New length: {len(candidate)} — '{candidate[:60]}...'")
-
+ 
         if is_valid_meta_description(candidate):
             print(f"  ✅ Valid meta description on attempt {attempt}.")
             return candidate
-
+ 
         # Feed the latest attempt back for the next retry
         current = candidate
-
+ 
     print(f"  ❌ Could not fix meta description after {MAX_RETRIES} attempts.")
     return None
 
 
 # ── Main public function ──────────────────────────────────────────────────────
 
-async def validate_and_fix_meta_description(blog_content: str) -> tuple[str, bool]:
-    """
-    Validate the meta description in blog_content.
-    If invalid, attempt to fix it via the LLM.
 
-    Returns:
-        (updated_content, was_fixed)
-        - updated_content : the blog content with the (possibly corrected) description
-        - was_fixed       : True if a correction was applied, False if already valid
-                            or if correction failed (content returned as-is in that case)
-    """
-    description = extract_meta_description(blog_content)
-
-    if description is None:
-        print("⚠️  No meta description found in content. Skipping validation.")
-        return blog_content, False
-
-    length = len(description)
-    print(f"📏 Meta description length: {length} characters")
-    print(f"   '{description[:80]}{'...' if length > 80 else ''}'")
-
-    if is_valid_meta_description(description):
-        print(f"✅ Meta description is valid ({length} chars — within {META_DESC_MIN}-{META_DESC_MAX}).")
-        return blog_content, False
-
-    print(f"⚠️  Meta description is OUT OF RANGE ({length} chars). Attempting fix...")
-
-    fixed_description = await fix_meta_description_with_llm(description)
-
-    if fixed_description is None:
-        print("❌ Fix failed. Returning original content unchanged.")
-        return blog_content, False
-
-    updated_content = replace_meta_description(blog_content, fixed_description)
-    print(f"✅ Meta description fixed: {len(fixed_description)} chars.")
-    return updated_content, True
 
 
 
@@ -323,124 +295,9 @@ def is_valid_meta_description(description: str) -> bool:
     return META_DESC_MIN <= length <= META_DESC_MAX
 
 
-async def fix_meta_description_with_llm(bad_description: str) -> str | None:
-    """
-    Send the bad meta description to the LLM and ask it to fix the length.
-    Returns the corrected description string, or None if all retries fail.
-    
-    NOW USES CENTRALIZED LLM SERVICE
-    """
-    current = bad_description
-
-    for attempt in range(1, MAX_RETRIES + 1):
-        length = len(current)
-        direction = "shorter" if length > META_DESC_MAX else "longer"
-        action = (
-            f"It is {length} characters, which exceeds the {META_DESC_MAX} character limit. "
-            f"Shorten it."
-            if length > META_DESC_MAX
-            else
-            f"It is {length} characters, which is below the {META_DESC_MIN} character limit. "
-            f"Expand it."
-        )
-
-        print(f"  [Attempt {attempt}/{MAX_RETRIES}] Current length: {length} — asking LLM to make it {direction}...")
-
-        instructions = f"""
-You are a meta description optimizer.
-
-Your task:
-- Rewrite the meta description to be exactly {META_DESC_MIN}-{META_DESC_MAX} characters (including spaces)
-- {action}
-- Keep the same meaning and keywords
-- Count every character including spaces before replying
-- Return ONLY the rewritten description text — no quotes, no labels, no explanation
-
-Current description:
-{current}
-"""
-
-        # ═══════════════════════════════════════════════════════════════════
-        # USING AGENT-BASED APPROACH (works with self-hosted LLM)
-        # ═══════════════════════════════════════════════════════════════════
-        try:
-            result = await llm_service.run_agent(
-                instructions=instructions,
-                context="Rewrite the meta description above.",
-                agent_name="meta-description-fixer",
-                temperature=0.7,
-                max_turns=1
-            )
-            
-            candidate = result.final_output.strip().strip('"').strip("'")
-            
-            # Validate response
-            if not candidate or len(candidate.strip()) == 0:
-                print(f"  [Attempt {attempt}/{MAX_RETRIES}] LLM returned empty response")
-                if attempt == MAX_RETRIES:
-                    return None
-                continue
-                
-        except Exception as e:
-            print(f"  [Attempt {attempt}/{MAX_RETRIES}] LLM call failed: {e}")
-            import traceback
-            traceback.print_exc()
-            if attempt == MAX_RETRIES:
-                return None
-            continue
-        # ═══════════════════════════════════════════════════════════════════
-
-        print(f"  [Attempt {attempt}/{MAX_RETRIES}] New length: {len(candidate)} — '{candidate[:60]}...'")
-
-        if is_valid_meta_description(candidate):
-            print(f"  ✅ Valid meta description on attempt {attempt}.")
-            return candidate
-
-        # Feed the latest attempt back for the next retry
-        current = candidate
-
-    print(f"  ❌ Could not fix meta description after {MAX_RETRIES} attempts.")
-    return None
 
 
-# ── Main public function ──────────────────────────────────────────────────────
 
-async def validate_and_fix_meta_description(blog_content: str) -> tuple[str, bool]:
-    """
-    Validate the meta description in blog_content.
-    If invalid, attempt to fix it via the LLM.
-
-    Returns:
-        (updated_content, was_fixed)
-        - updated_content : the blog content with the (possibly corrected) description
-        - was_fixed       : True if a correction was applied, False if already valid
-                            or if correction failed (content returned as-is in that case)
-    """
-    description = extract_meta_description(blog_content)
-
-    if description is None:
-        print("⚠️  No meta description found in content. Skipping validation.")
-        return blog_content, False
-
-    length = len(description)
-    print(f"📏 Meta description length: {length} characters")
-    print(f"   '{description[:80]}{'...' if length > 80 else ''}'")
-
-    if is_valid_meta_description(description):
-        print(f"✅ Meta description is valid ({length} chars — within {META_DESC_MIN}-{META_DESC_MAX}).")
-        return blog_content, False
-
-    print(f"⚠️  Meta description is OUT OF RANGE ({length} chars). Attempting fix...")
-
-    fixed_description = await fix_meta_description_with_llm(description)
-
-    if fixed_description is None:
-        print("❌ Fix failed. Returning original content unchanged.")
-        return blog_content, False
-
-    updated_content = replace_meta_description(blog_content, fixed_description)
-    print(f"✅ Meta description fixed: {len(fixed_description)} chars.")
-    return updated_content, True
 
 
 # ══════════════════════════════════════════════════════════════════════════════
@@ -495,125 +352,6 @@ def is_valid_meta_description(description: str) -> bool:
     return META_DESC_MIN <= length <= META_DESC_MAX
 
 
-async def fix_meta_description_with_llm(bad_description: str) -> str | None:
-    """
-    Send the bad meta description to the LLM and ask it to fix the length.
-    Returns the corrected description string, or None if all retries fail.
-    
-    NOW USES CENTRALIZED LLM SERVICE
-    """
-    current = bad_description
-
-    for attempt in range(1, MAX_RETRIES + 1):
-        length = len(current)
-        direction = "shorter" if length > META_DESC_MAX else "longer"
-        action = (
-            f"It is {length} characters, which exceeds the {META_DESC_MAX} character limit. "
-            f"Shorten it."
-            if length > META_DESC_MAX
-            else
-            f"It is {length} characters, which is below the {META_DESC_MIN} character limit. "
-            f"Expand it."
-        )
-
-        print(f"  [Attempt {attempt}/{MAX_RETRIES}] Current length: {length} — asking LLM to make it {direction}...")
-
-        instructions = f"""
-You are a meta description optimizer.
-
-Your task:
-- Rewrite the meta description to be exactly {META_DESC_MIN}-{META_DESC_MAX} characters (including spaces)
-- {action}
-- Keep the same meaning and keywords
-- Count every character including spaces before replying
-- Return ONLY the rewritten description text — no quotes, no labels, no explanation
-
-Current description:
-{current}
-"""
-
-        # ═══════════════════════════════════════════════════════════════════
-        # USING AGENT-BASED APPROACH (works with self-hosted LLM)
-        # ═══════════════════════════════════════════════════════════════════
-        try:
-            result = await llm_service.run_agent(
-                instructions=instructions,
-                context="Rewrite the meta description above.",
-                agent_name="meta-description-fixer",
-                temperature=0.7,
-                max_turns=1
-            )
-            
-            candidate = result.final_output.strip().strip('"').strip("'")
-            
-            # Validate response
-            if not candidate or len(candidate.strip()) == 0:
-                print(f"  [Attempt {attempt}/{MAX_RETRIES}] LLM returned empty response")
-                if attempt == MAX_RETRIES:
-                    return None
-                continue
-                
-        except Exception as e:
-            print(f"  [Attempt {attempt}/{MAX_RETRIES}] LLM call failed: {e}")
-            import traceback
-            traceback.print_exc()
-            if attempt == MAX_RETRIES:
-                return None
-            continue
-        # ═══════════════════════════════════════════════════════════════════
-
-        print(f"  [Attempt {attempt}/{MAX_RETRIES}] New length: {len(candidate)} — '{candidate[:60]}...'")
-
-        if is_valid_meta_description(candidate):
-            print(f"  ✅ Valid meta description on attempt {attempt}.")
-            return candidate
-
-        # Feed the latest attempt back for the next retry
-        current = candidate
-
-    print(f"  ❌ Could not fix meta description after {MAX_RETRIES} attempts.")
-    return None
-
-
-# ── Main public function ──────────────────────────────────────────────────────
-
-async def validate_and_fix_meta_description(blog_content: str) -> tuple[str, bool]:
-    """
-    Validate the meta description in blog_content.
-    If invalid, attempt to fix it via the LLM.
-
-    Returns:
-        (updated_content, was_fixed)
-        - updated_content : the blog content with the (possibly corrected) description
-        - was_fixed       : True if a correction was applied, False if already valid
-                            or if correction failed (content returned as-is in that case)
-    """
-    description = extract_meta_description(blog_content)
-
-    if description is None:
-        print("⚠️  No meta description found in content. Skipping validation.")
-        return blog_content, False
-
-    length = len(description)
-    print(f"📏 Meta description length: {length} characters")
-    print(f"   '{description[:80]}{'...' if length > 80 else ''}'")
-
-    if is_valid_meta_description(description):
-        print(f"✅ Meta description is valid ({length} chars — within {META_DESC_MIN}-{META_DESC_MAX}).")
-        return blog_content, False
-
-    print(f"⚠️  Meta description is OUT OF RANGE ({length} chars). Attempting fix...")
-
-    fixed_description = await fix_meta_description_with_llm(description)
-
-    if fixed_description is None:
-        print("❌ Fix failed. Returning original content unchanged.")
-        return blog_content, False
-
-    updated_content = replace_meta_description(blog_content, fixed_description)
-    print(f"✅ Meta description fixed: {len(fixed_description)} chars.")
-    return updated_content, True
-
 
 # ══════════════════════════════════════════════════════════════════════════════
 # SEO TITLE VALIDATION AND FIXING
@@ -656,93 +394,22 @@ def is_valid_meta_description(description: str) -> bool:
     return META_DESC_MIN <= length <= META_DESC_MAX
 
 
-async def fix_meta_description_with_llm(bad_description: str) -> str | None:
-    """
-    Send the bad meta description to the LLM and ask it to fix the length.
-    Returns the corrected description string, or None if all retries fail.
-    
-    NOW USES CENTRALIZED LLM SERVICE
-    """
-    current = bad_description
-
-    for attempt in range(1, MAX_RETRIES + 1):
-        length = len(current)
-        direction = "shorter" if length > META_DESC_MAX else "longer"
-        action = (
-            f"It is {length} characters, which exceeds the {META_DESC_MAX} character limit. "
-            f"Shorten it."
-            if length > META_DESC_MAX
-            else
-            f"It is {length} characters, which is below the {META_DESC_MIN} character limit. "
-            f"Expand it."
-        )
-
-        print(f"  [Attempt {attempt}/{MAX_RETRIES}] Current length: {length} — asking LLM to make it {direction}...")
-
-        instructions = f"""
-You are a meta description optimizer.
-
-Your task:
-- Rewrite the meta description to be exactly {META_DESC_MIN}-{META_DESC_MAX} characters (including spaces)
-- {action}
-- Keep the same meaning and keywords
-- Count every character including spaces before replying
-- Return ONLY the rewritten description text — no quotes, no labels, no explanation
-
-Current description:
-{current}
-"""
-
-        # ═══════════════════════════════════════════════════════════════════
-        # USING AGENT-BASED APPROACH (works with self-hosted LLM)
-        # ═══════════════════════════════════════════════════════════════════
-        try:
-            result = await llm_service.run_agent(
-                instructions=instructions,
-                context="Rewrite the meta description above.",
-                agent_name="meta-description-fixer",
-                temperature=0.7,
-                max_turns=1
-            )
-            
-            candidate = result.final_output.strip().strip('"').strip("'")
-            
-            # Validate response
-            if not candidate or len(candidate.strip()) == 0:
-                print(f"  [Attempt {attempt}/{MAX_RETRIES}] LLM returned empty response")
-                if attempt == MAX_RETRIES:
-                    return None
-                continue
-                
-        except Exception as e:
-            print(f"  [Attempt {attempt}/{MAX_RETRIES}] LLM call failed: {e}")
-            import traceback
-            traceback.print_exc()
-            if attempt == MAX_RETRIES:
-                return None
-            continue
-        # ═══════════════════════════════════════════════════════════════════
-
-        print(f"  [Attempt {attempt}/{MAX_RETRIES}] New length: {len(candidate)} — '{candidate[:60]}...'")
-
-        if is_valid_meta_description(candidate):
-            print(f"  ✅ Valid meta description on attempt {attempt}.")
-            return candidate
-
-        # Feed the latest attempt back for the next retry
-        current = candidate
-
-    print(f"  ❌ Could not fix meta description after {MAX_RETRIES} attempts.")
-    return None
 
 
 # ── Main public function ──────────────────────────────────────────────────────
 
-async def validate_and_fix_meta_description(blog_content: str) -> tuple[str, bool]:
+async def validate_and_fix_meta_description(
+    blog_content: str,
+    metrics=None                          # ← NEW: optional MetricsRecorder
+) -> tuple[str, bool]:
     """
     Validate the meta description in blog_content.
     If invalid, attempt to fix it via the LLM.
-
+ 
+    Args:
+        blog_content: Full blog post markdown content
+        metrics: Optional MetricsRecorder instance to track token usage
+ 
     Returns:
         (updated_content, was_fixed)
         - updated_content : the blog content with the (possibly corrected) description
@@ -750,27 +417,30 @@ async def validate_and_fix_meta_description(blog_content: str) -> tuple[str, boo
                             or if correction failed (content returned as-is in that case)
     """
     description = extract_meta_description(blog_content)
-
+ 
     if description is None:
         print("⚠️  No meta description found in content. Skipping validation.")
         return blog_content, False
-
+ 
     length = len(description)
     print(f"📏 Meta description length: {length} characters")
     print(f"   '{description[:80]}{'...' if length > 80 else ''}'")
-
+ 
     if is_valid_meta_description(description):
         print(f"✅ Meta description is valid ({length} chars — within {META_DESC_MIN}-{META_DESC_MAX}).")
         return blog_content, False
-
+ 
     print(f"⚠️  Meta description is OUT OF RANGE ({length} chars). Attempting fix...")
-
-    fixed_description = await fix_meta_description_with_llm(description)
-
+ 
+    fixed_description = await fix_meta_description_with_llm(
+        description,
+        metrics=metrics                   # ← pass it down
+    )
+ 
     if fixed_description is None:
         print("❌ Fix failed. Returning original content unchanged.")
         return blog_content, False
-
+ 
     updated_content = replace_meta_description(blog_content, fixed_description)
     print(f"✅ Meta description fixed: {len(fixed_description)} chars.")
     return updated_content, True
@@ -948,7 +618,8 @@ async def generate_seo_title_with_llm(
     primary_keyword: str,
     product_name: str = None,
     isCloud: bool = False,
-    platform: str = None
+    platform: str = None,
+    metrics=None                          # ← NEW: optional MetricsRecorder
 ) -> str | None:
     """
     Generate a new SEO title from scratch using LLM.
@@ -958,6 +629,7 @@ async def generate_seo_title_with_llm(
         product_name: Optional exact product name to include (e.g., "Aspose.HTML for Python via .NET")
         isCloud: If True, use "library/API" terminology; if False, use "SDK" terminology
         platform: Optional platform name (e.g., "Python via .NET", "Java", ".NET")
+        metrics: Optional MetricsRecorder instance to track token usage per attempt
         
     Returns:
         Generated title or None if all retries fail
@@ -975,10 +647,6 @@ async def generate_seo_title_with_llm(
     # Extract platform name (trim "via X" part if present)
     platform_for_title = None
     if platform:
-        # Extract platform before "via" if present
-        # "Python via .NET" → "Python"
-        # "JavaScript via C++" → "JavaScript"
-        # "Java" → "Java"
         if ' via ' in platform:
             platform_for_title = platform.split(' via ')[0].strip()
         else:
@@ -1119,6 +787,16 @@ Return ONLY the title text — no quotes, no labels, no explanation.
                 temperature=0.7,
                 max_turns=1
             )
+
+            # ── Record token usage for this attempt ──────────────────────────
+            if metrics is not None:
+                metrics.record_llm_usage(
+                    input_tokens=result.token_usage["input_tokens"],
+                    output_tokens=result.token_usage["output_tokens"]
+                )
+            print(f"seo llm---- {result.token_usage['output_tokens']}-- {result.token_usage['input_tokens']}", flush=True)
+
+            # ─────────────────────────────────────────────────────────────────
             
             candidate = result.final_output.strip().strip('"').strip("'")
             
@@ -1135,21 +813,15 @@ Return ONLY the title text — no quotes, no labels, no explanation.
                 product_in_candidate = product_name.lower() in candidate.lower()
                 
                 if product_in_candidate:
-                    # Product name IS in title - must be EXACT match
-                    if product_name not in candidate:  # Case-sensitive exact match
+                    if product_name not in candidate:
                         print(f"  [Attempt {attempt}/{MAX_RETRIES}] Product name present but modified")
                         print(f"      Expected: '{product_name}'")
                         print(f"      Retry...")
                         product_name_violated = True
                         continue
                 else:
-                    # Product name NOT in title - check for partial mentions
-                    # ONLY check for platform keywords if product name was provided
-                    
-                    # Extract platform keywords from product name
                     keywords_to_check = []
                     
-                    # Check for common platforms
                     if 'python' in product_name.lower():
                         keywords_to_check.append('python')
                     if '.net' in product_name.lower():
@@ -1159,7 +831,6 @@ Return ONLY the title text — no quotes, no labels, no explanation.
                     if 'c#' in product_name.lower():
                         keywords_to_check.append('c#')
                     
-                    # Check for product brand (e.g., "Aspose.HTML" from "Aspose.HTML for Python via .NET")
                     match = re.match(r'^(.+?)\s+(?:for|via)\s+', product_name)
                     if match:
                         product_brand = match.group(1)
@@ -1170,9 +841,6 @@ Return ONLY the title text — no quotes, no labels, no explanation.
                             product_name_violated = True
                             continue
                     
-                    # Check if platform keywords appear without product
-                    # BUT: If we're using the platform parameter (not from product), this is OK
-                    # We need to check if the platform keyword is from the standalone platform param
                     platform_keywords_from_param = []
                     if platform_for_title:
                         platform_keywords_from_param.append(platform_for_title.lower())
@@ -1180,8 +848,6 @@ Return ONLY the title text — no quotes, no labels, no explanation.
                     for keyword in keywords_to_check:
                         keyword_pattern = rf'\b{re.escape(keyword)}\b'
                         if re.search(keyword_pattern, candidate, re.IGNORECASE):
-                            # Check if this keyword is from standalone platform parameter
-                            # If yes, it's allowed; if no, it's a violation
                             if keyword.lower() not in platform_keywords_from_param:
                                 print(f"  [Attempt {attempt}/{MAX_RETRIES}] Platform keyword '{keyword}' found without product name")
                                 print(f"      Full product is: '{product_name}'")
@@ -1192,7 +858,7 @@ Return ONLY the title text — no quotes, no labels, no explanation.
             if product_name_violated:
                 continue
             
-            # Check for banned terms (online tool, online app, free, etc.)
+            # Check for banned terms
             banned_terms = [
                 'online tool', 'online app', 'web-based tool', 'web app',
                 'browser-based', 'web-based', 'no installation',
@@ -1200,7 +866,6 @@ Return ONLY the title text — no quotes, no labels, no explanation.
                 'free software', 'free download'
             ]
             
-            # Also check for standalone "free" word (case-insensitive, word boundary)
             if re.search(r'\bfree\b', candidate, re.IGNORECASE):
                 banned_found = 'free'
             else:
@@ -1216,7 +881,6 @@ Return ONLY the title text — no quotes, no labels, no explanation.
                 print(f"      Retrying...")
                 continue
             
-            # Check if the generated title is valid
             is_valid, reason = is_valid_seo_title(candidate, primary_keyword)
             
             print(f"  [Attempt {attempt}/{MAX_RETRIES}] Generated: '{candidate}' ({len(candidate)} chars)")
@@ -1243,7 +907,8 @@ async def validate_and_fix_seo_title(
     product_name: str = None,
     isCloud: bool = False,
     platform: str = None,
-    verbose: bool = True
+    verbose: bool = True,
+    metrics=None                          # ← NEW: optional MetricsRecorder
 ) -> str:
     """
     Validate existing title or generate new SEO-optimized title.
@@ -1255,6 +920,7 @@ async def validate_and_fix_seo_title(
         isCloud: If True, use "library/API" terminology; if False, use "SDK" terminology
         platform: Optional platform name (e.g., "Python via .NET", "Java", ".NET")
         verbose: If True, print detailed generation info
+        metrics: Optional MetricsRecorder instance to track token usage
         
     Returns:
         Validated existing title or newly generated SEO title
@@ -1297,20 +963,24 @@ async def validate_and_fix_seo_title(
             print(f"   Platform: '{platform_display}'")
         print(f"   Product type: {'Cloud (Library/API)' if isCloud else 'Non-Cloud (SDK)'}")
     
-    # Generate new title from scratch
-    generated_title = await generate_seo_title_with_llm(primary_keyword, product_name, isCloud, platform)
+    # Generate new title from scratch — pass metrics through
+    generated_title = await generate_seo_title_with_llm(
+        primary_keyword,
+        product_name,
+        isCloud,
+        platform,
+        metrics=metrics                   # ← pass it down
+    )
     
     if generated_title is None:
         if verbose:
             print("❌ Generation failed. Creating fallback title...")
         
-        # Create a simple fallback title
         if product_name:
             fallback = f"{primary_keyword.title()}: {product_name} Guide"
         else:
             fallback = f"{primary_keyword.title()}: Complete Guide"
         
-        # Truncate if too long
         if len(fallback) > SEO_TITLE_MAX:
             fallback = f"{primary_keyword.title()}: Tutorial"
         

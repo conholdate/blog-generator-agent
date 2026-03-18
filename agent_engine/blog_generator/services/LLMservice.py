@@ -6,7 +6,7 @@ Uses self-hosted LLM via OpenAI-compatible API (Professionalize).
 from openai import AsyncOpenAI
 from agents import Agent, Runner, OpenAIChatCompletionsModel, ModelSettings
 from config import settings
-from typing import Optional, Dict, Any, List
+from typing import Optional, Dict, Any, List, Tuple
 import asyncio
 import logging
 
@@ -73,7 +73,8 @@ class LLMService:
             model: Optional model override (uses default if None)
             
         Returns:
-            Runner result object with final_output
+            Runner result object with final_output and token_usage dict:
+            result.token_usage = {"input_tokens": int, "output_tokens": int, "total_tokens": int}
         """
         try:
             # Use custom model if provided, otherwise use default
@@ -92,6 +93,24 @@ class LLMService:
             )
             
             result = await Runner.run(agent, context, max_turns=max_turns)
+
+            # ── Aggregate token usage across all turns ──────────────────────
+            input_tokens = 0
+            output_tokens = 0
+            for raw in getattr(result, "raw_responses", []):
+                usage = getattr(raw, "usage", None)
+                if usage:
+                    input_tokens  += getattr(usage, "input_tokens",  0) or getattr(usage, "prompt_tokens",     0)
+                    output_tokens += getattr(usage, "output_tokens", 0) or getattr(usage, "completion_tokens", 0)
+
+            result.token_usage = {
+                "input_tokens":  input_tokens,
+                "output_tokens": output_tokens,
+                "total_tokens":  input_tokens + output_tokens
+            }
+            logger.debug(f"[{agent_name}] token_usage: {result.token_usage}")
+            # ───────────────────────────────────────────────────────────────
+
             return result
             
         except Exception as e:
@@ -109,7 +128,7 @@ class LLMService:
         temperature: float = 0.7,
         max_tokens: int = 4000,
         system: Optional[str] = None
-    ) -> str:
+    ) -> Tuple[str, Dict[str, int]]:
         """
         Simple completion call using self-hosted LLM (OpenAI-compatible API).
         Best for: Quick corrections, validations, simple generations.
@@ -122,7 +141,8 @@ class LLMService:
             system: Optional system message
 
         Returns:
-            The generated text response
+            Tuple of (generated_text, token_usage_dict)
+            token_usage = {"input_tokens": int, "output_tokens": int, "total_tokens": int}
         """
         try:
             messages = []
@@ -155,7 +175,17 @@ class LLMService:
                     logger.error(f"LLM returned None content. Full response: {response.model_dump() if hasattr(response, 'model_dump') else response}")
                     raise ValueError("LLM returned None content and no reasoning fallback")
 
-            return content.strip()
+            # ── Extract token usage from response ───────────────────────────
+            usage = getattr(response, "usage", None)
+            token_usage = {
+                "input_tokens":  getattr(usage, "prompt_tokens",     0) if usage else 0,
+                "output_tokens": getattr(usage, "completion_tokens", 0) if usage else 0,
+                "total_tokens":  getattr(usage, "total_tokens",      0) if usage else 0,
+            }
+            logger.debug(f"[complete] token_usage: {token_usage}")
+            # ───────────────────────────────────────────────────────────────
+
+            return content.strip(), token_usage
 
         except Exception as e:
             logger.error(f"Completion call failed: {e}")
@@ -170,7 +200,7 @@ class LLMService:
         prompt: str,
         max_retries: int = 3,
         **kwargs
-    ) -> Optional[str]:
+    ) -> Tuple[Optional[str], Dict[str, int]]:
         """
         Completion with automatic retry on failure.
         
@@ -180,7 +210,7 @@ class LLMService:
             **kwargs: Additional arguments passed to complete()
             
         Returns:
-            Generated text or None if all retries fail
+            Tuple of (generated_text_or_None, token_usage_dict)
         """
         for attempt in range(1, max_retries + 1):
             try:
@@ -189,7 +219,7 @@ class LLMService:
                 logger.warning(f"Attempt {attempt}/{max_retries} failed: {e}")
                 if attempt == max_retries:
                     logger.error(f"All {max_retries} attempts failed")
-                    return None
+                    return None, {"input_tokens": 0, "output_tokens": 0, "total_tokens": 0}
                 await asyncio.sleep(2 ** attempt)  # Exponential backoff
     
     # ─────────────────────────────────────────────────────────────────────────
@@ -231,11 +261,11 @@ async def run_agent(instructions: str, context: str, **kwargs) -> Any:
     return await llm_service.run_agent(instructions, context, **kwargs)
 
 
-async def complete(prompt: str, **kwargs) -> str:
+async def complete(prompt: str, **kwargs) -> Tuple[str, Dict[str, int]]:
     """Convenience function for simple completions"""
     return await llm_service.complete(prompt, **kwargs)
 
 
-async def complete_with_retry(prompt: str, **kwargs) -> Optional[str]:
+async def complete_with_retry(prompt: str, **kwargs) -> Tuple[Optional[str], Dict[str, int]]:
     """Convenience function for completions with retry"""
     return await llm_service.complete_with_retry(prompt, **kwargs)

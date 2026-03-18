@@ -74,16 +74,8 @@ class BlogOrchestrator:
         topics_raw_data = get_topic_by_index(topics_file, index)
       
         post_topic = topics_raw_data.pop("topic")
-       
         product_name = topics_raw_data.pop("product")
         platform = topics_raw_data.pop("platform")
-
-        # f_keywords = await fetch_keywords_auto(
-        #                     topic=post_topic, 
-        #                     product_name=product_name, 
-        #                     platform=platform
-        #                 )
-        # print(f"keywords ----- {f_keywords}", flush=True)
 
         # Get product info
         product_info = get_productInfo(product_name, platform, self.products, self.brand)
@@ -91,8 +83,16 @@ class BlogOrchestrator:
        
         isCloud = "cloud" in product_info["ProductName"].lower()
         post_topic = capitalize_file_formats_for_title(post_topic, FILE_FORMAT_MAPPINGS)
-     
-        seo_topic = await validate_and_fix_seo_title(post_topic, topics_raw_data.get("keywords", {}).get("primary")[0], product_info.get("ProductName"), isCloud, platform)
+
+        seo_topic = await validate_and_fix_seo_title(
+            post_topic,
+            topics_raw_data.get("keywords", {}).get("primary")[0],
+            product_info.get("ProductName"),
+            isCloud,
+            platform,
+            metrics=self.metrics          # tracks token usage per retry attempt
+        )
+        print(f"[METRICS DEBUG] After seo_title => api_call_count: {self.metrics.api_call_count}, token_usage: {self.metrics.token_usage['total_tokens']}", flush=True)
 
         # Start metrics tracking
         self.metrics.start_job(
@@ -112,6 +112,15 @@ class BlogOrchestrator:
                 product_info.get('BlogsURL'), 
                 3
             )
+            # ── Record HTTP calls made by the MCP scraper ────────────────────
+            scan_stats = related_links.get("scan_stats", {}) if isinstance(related_links, dict) else {}
+            http_calls = scan_stats.get("tier1_scanned", 0) + scan_stats.get("tier2_scanned", 0)
+            if http_calls:
+                self.metrics.record_http_call(
+                    count=http_calls,
+                    caller="fetch_category_related_articles"
+                )
+            # ─────────────────────────────────────────────────────────────────
     
             primary = topics_raw_data.get("keywords", {}).get("primary", [])
             secondary = topics_raw_data.get("keywords", {}).get("secondary", [])
@@ -123,8 +132,6 @@ class BlogOrchestrator:
             print(f"angle -- {angle}", flush=True)
             
             f_keywords = normalize_case_preserve_formats_in_keywords(primary + secondary, FILE_FORMAT_MAPPINGS)
-
-            # f_keywords = normalize_case_preserve_formats_in_keywords(primary + f_keywords, FILE_FORMAT_MAPPINGS)
             print(f"normalized f_keywords -- {f_keywords}")
 
             blog_outline = topics_raw_data.get("outline")
@@ -155,15 +162,22 @@ class BlogOrchestrator:
                 temperature=0.6,
                 max_turns=10
             )
+
+            # ── Record token usage from the main blog-writing agent call ────
+            self.metrics.record_llm_usage(
+                input_tokens=result.token_usage["input_tokens"],
+                output_tokens=result.token_usage["output_tokens"],
+                caller="blog-writer-agent"
+            )
+            # ─────────────────────────────────────────────────────────────────
             # ════════════════════════════════════════════════════════════════════
 
-         
             # Validate and fix if needed
-            fixed_content, was_fixed = await validate_and_fix_meta_description(result.final_output)
+            fixed_content, was_fixed = await validate_and_fix_meta_description(result.final_output, metrics=self.metrics)
+            print(f"[METRICS DEBUG] After meta_description => api_call_count: {self.metrics.api_call_count}, token_usage: {self.metrics.token_usage['total_tokens']}", flush=True)
             
             if was_fixed:
                 print(f"✅ Meta description was corrected and is now valid (140-160 chars)", flush=True)
-                # Update the result with fixed content
                 result.final_output = fixed_content
             else:
                 print(f"✅ Meta description is already valid", flush=True)
@@ -219,7 +233,6 @@ class BlogOrchestrator:
             self.metrics.print_summary()
             print("📊 Sending metrics to Google Script... ")
           
-        
             metrics_sent_for_team = await self.metrics.send_metrics_to_team()
             metrics_sent_for_pro = await self.metrics.send_metrics_to_prod()
             
@@ -242,6 +255,8 @@ class BlogOrchestrator:
                 "SEO_Score": report["score"],
                 "run_id": self.metrics.run_id,
                 "duration_ms": self.metrics.run_duration_ms,
+                "token_usage": self.metrics.token_usage["total_tokens"],
+                "api_call_count": self.metrics.api_call_count,
                 "status": "success"
             }
 
@@ -264,5 +279,7 @@ class BlogOrchestrator:
             return {
                 "status": "error", 
                 "message": str(e),
-                "run_id": self.metrics.run_id
+                "run_id": self.metrics.run_id,
+                "token_usage": self.metrics.token_usage["total_tokens"],
+                "api_call_count": self.metrics.api_call_count,
             }
