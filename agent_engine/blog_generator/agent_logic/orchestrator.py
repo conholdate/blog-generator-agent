@@ -244,11 +244,11 @@ class BlogOrchestrator:
             else:
                 print("Failed to send metrics (check logs)\n")
 
-            # self.log("---Execution started---")
-            # self.log(f"Keyword file index -> {topics_raw_data}")
-            # self.log(f"product info {product_info}")
-            # self.log(f" File path: {filepath}")
-            # self.log("---Execution ended---")
+            self.log("---Execution started---")
+            self.log(f"Keyword file index -> {topics_raw_data}")
+            self.log(f"product info {product_info}")
+            self.log(f" File path: {filepath}")
+            self.log("---Execution ended---")
 
             return {
                 "folder_name": folder_name,
