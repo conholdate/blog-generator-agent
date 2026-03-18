@@ -8,6 +8,11 @@ on:
         type: string
         required: true
 
+      platform:
+        description: "Target platform from the selected missing-topics row (e.g., net, java, python)."
+        type: string
+        required: true
+
       missing_topic_row:
         description: "1-based row number from the missing-topics table to process."
         type: string
@@ -237,6 +242,7 @@ jobs:
 
           brand = os.environ["BRAND"]
           product = os.environ["PRODUCT"]
+          platform = os.environ["INPUT_PLATFORM"]
           keyword_source = os.environ.get("INPUT_KEYWORD_SOURCE", "llm_keywords").strip().lower()
           use_serp_api = keyword_source == "serp_api"
           use_llm_keywords = keyword_source == "llm_keywords"
@@ -274,7 +280,7 @@ jobs:
               "\n"
               f"  brand: \"{brand}\"\n"
               f"  product: \"{product}\"\n"
-              "  platform: \"\"\n"
+              f"  platform: \"{platform}\"\n"
               f"  locale: \"{locale}\"\n"
               "\n"
               f"  top_clusters: {top_clusters}\n"
@@ -301,6 +307,7 @@ jobs:
           echo "KRA_CFG_PATH=${RUNNER_TEMP}/kra_run.generated.yaml" >> "$GITHUB_ENV"
         env:
           INPUT_MISSING_TOPICS_FILE: ${{ inputs.missing_topics_file }}
+          INPUT_PLATFORM: ${{ inputs.platform }}
           INPUT_MISSING_TOPIC_ROW: ${{ inputs.missing_topic_row }}
           INPUT_KEYWORD_SOURCE: ${{ inputs.keyword_source }}
           INPUT_TOP_CLUSTERS: ${{ inputs.top_clusters }}
