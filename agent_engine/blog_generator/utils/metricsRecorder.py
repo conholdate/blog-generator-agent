@@ -30,7 +30,7 @@ class MetricsRecorder:
         self, 
         agent_name: str = "Blog Post Generator",
         agent_owner: str = "Muhammad Mustafa",
-        job_type: str = "Blog Post Generation",
+        job_type: str = "Test",
         run_env: Literal["DEV", "PROD"] = None
     ):
         """

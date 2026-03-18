@@ -94,6 +94,9 @@ class BlogOrchestrator:
         )
         print(f"[METRICS DEBUG] After seo_title => api_call_count: {self.metrics.api_call_count}, token_usage: {self.metrics.token_usage['total_tokens']}", flush=True)
 
+        if isCloud:
+            product_name = product_name.split(' Cloud')[0]
+
         # Start metrics tracking
         self.metrics.start_job(
             product=product_name,
@@ -241,11 +244,11 @@ class BlogOrchestrator:
             else:
                 print("Failed to send metrics (check logs)\n")
 
-            self.log("---Execution started---")
-            self.log(f"Keyword file index -> {topics_raw_data}")
-            self.log(f"product info {product_info}")
-            self.log(f" File path: {filepath}")
-            self.log("---Execution ended---")
+            # self.log("---Execution started---")
+            # self.log(f"Keyword file index -> {topics_raw_data}")
+            # self.log(f"product info {product_info}")
+            # self.log(f" File path: {filepath}")
+            # self.log("---Execution ended---")
 
             return {
                 "folder_name": folder_name,
