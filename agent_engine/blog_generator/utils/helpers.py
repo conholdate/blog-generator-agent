@@ -1465,351 +1465,288 @@ def clean_ai_generated_markdown(content: str, verbose: bool = True) -> str:
 
 
 def find_malformed_links(content: str) -> List[Dict]:
-    """
-    Scan content for malformed markdown links and return detailed information.
-    
-    Returns:
-        List of dicts with: line_number, issue_type, original, suggestion, context
-    """
     issues = []
     lines = content.split('\n')
-    
-    # Patterns for different types of malformed links
+    inline_code_re = re.compile(r'`[^`]+`')
+    in_code_block = False
+
     patterns = [
-        # Missing opening bracket: ]text](url)
-        (r'\]([^\]]+)\]\(([^\)]+)\)', 'missing_opening_bracket', r'[\1](\2)'),
+        # ── 0. [text] (url)  →  [text](url)   (space between ] and open-paren)
+        (
+            re.compile(r'(?<!!)\[([^\[\]]{1,300})\]\s+\((https?://[^\s)]{1,500})\)'),
+            r'[\1](\2)',
+            'space_before_paren',
+        ),
+
+        # ── 1. [text (url)  →  [text](url)   (missing ] and space before open-paren)
+        (
+            re.compile(r'(?<!!)\[([^\[\]()]{1,300})\s+\((https?://[^\s)]{1,500})\)'),
+            r'[\1](\2)',
+            'missing_closing_bracket_space',
+        ),
+
+        # ── 2b. [text(url/  →  [text](url/)  (missing ] AND missing closing paren)
+        (
+            re.compile(
+                r'(?<!!)\[([^\[\]()]{1,300})\((https?://[^\s)\]]{1,500})(?=\s|$)'
+            ),
+            r'[\1](\2)',
+            'missing_closing_bracket_and_paren',
+        ),
+
+        # ── 3. [text(url)  →  [text](url)   (missing ] before open-paren, no space)
+        (
+            re.compile(r'(?<!!)\[([^\[\]()]{1,300})\((https?://[^\s)]{1,500})\)'),
+            r'[\1](\2)',
+            'missing_closing_bracket',
+        ),
+
+        # ── 4. [text](url  →  [text](url)   (missing closing paren)
+        (
+            re.compile(
+                r'(?<!!)\[([^\[\]]{1,300})\]\((https?://[^\s)\]]{1,500})(?<![/)])$',
+                re.MULTILINE
+            ),
+            r'[\1](\2)',
+            'missing_closing_paren',
+        ),
+
+        # ── 5. [text]url  →  [text](url)   (missing open-paren entirely)
+        (
+            re.compile(r'(?<!!)\[([^\[\]]{1,300})\](https?://[^\s)]{1,500})(?!\))'),
+            r'[\1](\2)',
+            'missing_opening_paren',
+        ),
+
+        # ── 6. text](url)  →  [text](url)   (missing open-bracket)
+        (
+            re.compile(r'(?<!\[)(?<!\])([A-Za-z0-9][A-Za-z0-9 \t\.\-\/]{1,80})\]\((https?://[^\s)]{1,500})\)'),
+            r'[\1](\2)',
+            'missing_opening_bracket',
+        ),
+
+        # ── 7. text] (url)  →  [text](url)   (missing open-bracket, space before paren)
+        (
+            re.compile(r'(?<!\[)(?<!\])([A-Za-z0-9][A-Za-z0-9 \t\.\-\/]{1,80})\]\s+\((https?://[^\s)]{1,500})\)'),
+            r'[\1](\2)',
+            'missing_opening_bracket_space',
+        ),
+
+        # ── 8. (url)[text]  →  [text](url)   (reversed structure)
+        (
+            re.compile(r'(?<!!)\((https?://[^\s)]{1,500})\)\[([^\[\]]{1,300})\]'),
+            r'[\2](\1)',
+            'reversed_structure',
+        ),
+
+        # ── 9. text (url)  →  [text](url)   (missing both brackets)
+        (
+            re.compile(
+                r'(?<!\])(?<!!)(?<!\[)'
+                r'(?:(?<=\s)|(?<=\n)|(?<=\>)|(?:^))'
+                r'([A-Za-z0-9][A-Za-z0-9 \t\.\-\/]{0,80}?)'
+                r'\s*\((https?://[^\s)]{1,500})\)',
+                re.MULTILINE
+            ),
+            r'[\1](\2)',
+            'missing_both_brackets',
+        ),
+
+        # ── 10. [](url)  →  flagged, no auto-fix
+        (
+            re.compile(r'(?<!!)\[\]\((https?://[^\s)]{1,500})\)'),
+            None,
+            'empty_link_text',
+        ),
+
+        # ── 11. [text]()  →  flagged, no auto-fix
+        (
+            re.compile(r'(?<!!)\[([^\[\]]{1,300})\]\(\s*\)'),
+            None,
+            'empty_url',
+        ),
         
-        # Missing closing bracket before parenthesis: [text(url)
-        (r'\[([^\]]+)\(([^\)]+)\)', 'missing_closing_bracket', r'[\1](\2)'),
-        
-        # Missing opening parenthesis: [text]url)
-        (r'\[([^\]]+)\]([^(\s][^\)]*)\)', 'missing_opening_paren', r'[\1](\2)'),
-        
-        # Missing closing parenthesis: [text](url
-        (r'\[([^\]]+)\]\(([^\)\s]+)(?!\))', 'missing_closing_paren', r'[\1](\2)'),
-        
-        # Reversed structure: (text[url] or (text)[url]
-        (r'\(([^\)]+)\)\[([^\]]+)\]', 'reversed_structure', r'[\1](\2)'),
-        (r'\(([^\)]+)\[([^\]]+)\]', 'reversed_structure_partial', r'[\1](\2)'),
-        
-        # Empty link text: [](url)
-        (r'\[\]\(([^\)]+)\)', 'empty_link_text', r'[link](\1)'),
-        
-        # Empty URL: [text]()
-        (r'\[([^\]]+)\]\(\)', 'empty_url', r'[\1](#)'),
-        
-        # Missing brackets entirely: text](url) or text(url)
-        (r'(?<!\[)(\w+)\]\(([^\)]+)\)', 'missing_both_brackets', r'[\1](\2)'),
     ]
-    
-    for line_idx, line in enumerate(lines, start=1):
-        for pattern, issue_type, replacement_pattern in patterns:
-            for match in re.finditer(pattern, line):
-                # Extract context (50 chars before and after)
-                start_pos = match.start()
-                end_pos = match.end()
-                context_start = max(0, start_pos - 30)
-                context_end = min(len(line), end_pos + 30)
-                context = line[context_start:context_end].strip()
-                
-                # Generate suggested fix
-                try:
-                    suggested = re.sub(pattern, replacement_pattern, match.group(0))
-                except:
-                    suggested = "[MANUAL_FIX_NEEDED]"
-                
+
+    for line_num, line in enumerate(lines, 1):
+        stripped = line.strip()
+
+        if stripped.startswith('```') or stripped.startswith('~~~'):
+            in_code_block = not in_code_block
+            continue
+
+        if in_code_block:
+            continue
+
+        if len(line) > 2000:
+            continue
+
+        searchable = inline_code_re.sub(lambda m: ' ' * len(m.group()), line)
+
+        for pattern_idx, (compiled_pattern, replacement, issue_type) in enumerate(patterns):
+            for match in compiled_pattern.finditer(searchable):
+                original = match.group(0)
+
+                if re.fullmatch(r'!?\[[^\]]*\]\([^)]*\)', original):
+                    continue
+
+                suggested = compiled_pattern.sub(replacement, original) \
+                    if replacement is not None else original
+
                 issues.append({
-                    'line_number': line_idx,
-                    'issue_type': issue_type,
-                    'original': match.group(0),
-                    'suggested': suggested,
-                    'context': f"...{context}...",
-                    'position': start_pos
+                    'original':            original,
+                    'suggested':           suggested,
+                    'line_number':         line_num,
+                    'context':             line.strip()[:80],
+                    'issue_type':          issue_type,
+                    'pattern':             compiled_pattern.pattern,
+                    'replacement_pattern': replacement,
+                    'pattern_index':       pattern_idx,
                 })
-    
+
     return issues
+
 def extract_protected_regions(content: str) -> Tuple[str, Dict[str, str]]:
-    """
-    Extract and protect regions that should not be modified.
-    Returns content with placeholders and dict of protected regions.
-    
-    Protected:
-    - YAML frontmatter (between --- delimiters)
-    - Code blocks (```...```)
-    - Inline code (`...`)
-    - HTML blocks and tags
-    - Autolinks <https://example.com>
-    - Reference-style link definitions [ref]: url
-    - Images ![alt](url)
-    - Existing valid markdown links (to avoid breaking them)
-    """
     protected = {}
-    placeholder_content = content
+    result = content
     counter = 0
-    
-    # 1. Protect YAML frontmatter (FIRST - highest priority)
+
+    def make_placeholder(kind: str) -> str:
+        nonlocal counter
+        key = f"___PROTECTED_{kind}_{counter}___"
+        counter += 1
+        return key
+
+    # 1. YAML frontmatter — must be first
     def protect_frontmatter(match):
-        nonlocal counter
-        placeholder = f"___PROTECTED_FRONTMATTER_{counter}___"
-        protected[placeholder] = match.group(0)
-        counter += 1
-        return placeholder
-    
-    # Match frontmatter between --- delimiters at start of document
-    placeholder_content = re.sub(
-        r'^---\s*\n.*?\n---\s*\n',
+        key = make_placeholder("FRONTMATTER")
+        protected[key] = match.group(0)
+        return key + "\n\n"
+
+    result = re.sub(
+        r'^---\s*\n.*?\n---\s*\n*',
         protect_frontmatter,
-        placeholder_content,
-        flags=re.DOTALL | re.MULTILINE,
-        count=1  # Only first occurrence
+        result,
+        count=1,
+        flags=re.DOTALL | re.MULTILINE
     )
-    
-    # 2. Protect HTML blocks (before code blocks to handle <script>, <style>)
-    def protect_html_block(match):
-        nonlocal counter
-        placeholder = f"___PROTECTED_HTML_BLOCK_{counter}___"
-        protected[placeholder] = match.group(0)
-        counter += 1
-        return placeholder
-    
-    # Multi-line HTML blocks
-    placeholder_content = re.sub(
-        r'<(?:script|style|pre|div|section|article|header|footer|nav)[\s\S]*?</(?:script|style|pre|div|section|article|header|footer|nav)>',
-        protect_html_block,
-        placeholder_content,
-        flags=re.IGNORECASE | re.MULTILINE
-    )
-    
-    # HTML comments
-    placeholder_content = re.sub(
-        r'<!--[\s\S]*?-->',
-        protect_html_block,
-        placeholder_content,
-        flags=re.MULTILINE
-    )
-    
-    # Single HTML tags
-    def protect_html_tag(match):
-        nonlocal counter
-        placeholder = f"___PROTECTED_HTML_TAG_{counter}___"
-        protected[placeholder] = match.group(0)
-        counter += 1
-        return placeholder
-    
-    placeholder_content = re.sub(
-        r'<[^>]+>',
-        protect_html_tag,
-        placeholder_content
-    )
-    
-    # 3. Protect code blocks
+
+    # 2. Fenced code blocks — before HTML so XML inside code is safe
     def protect_code_block(match):
-        nonlocal counter
-        placeholder = f"___PROTECTED_CODE_BLOCK_{counter}___"
-        protected[placeholder] = match.group(0)
-        counter += 1
-        return placeholder
-    
-    placeholder_content = re.sub(
-        r'```[\s\S]*?```',
+        key = make_placeholder("CODE_BLOCK")
+        protected[key] = match.group(0)
+        return key
+
+    result = re.sub(
+        r'```[\s\S]*?```|~~~[\s\S]*?~~~',
         protect_code_block,
-        placeholder_content,
-        flags=re.MULTILINE
+        result
     )
-    
-    # 4. Protect inline code
+
+    # 3. Inline code — before HTML tags
     def protect_inline_code(match):
-        nonlocal counter
-        placeholder = f"___PROTECTED_INLINE_CODE_{counter}___"
-        protected[placeholder] = match.group(0)
-        counter += 1
-        return placeholder
-    
-    placeholder_content = re.sub(
+        key = make_placeholder("INLINE_CODE")
+        protected[key] = match.group(0)
+        return key
+
+    result = re.sub(
         r'``[^`]+``|`[^`\n]+`',
         protect_inline_code,
-        placeholder_content
+        result
     )
-    
-    # 5. Protect autolinks <url>
+
+    # 4. HTML comments
+    def protect_html_block(match):
+        key = make_placeholder("HTML_BLOCK")
+        protected[key] = match.group(0)
+        return key
+
+    result = re.sub(r'<!--[\s\S]*?-->', protect_html_block, result)
+
+    # 5. Block-level HTML elements
+    result = re.sub(
+        r'<(?:script|style|pre|div|section|article|header|footer|nav)[\s\S]*?'
+        r'</(?:script|style|pre|div|section|article|header|footer|nav)>',
+        protect_html_block,
+        result,
+        flags=re.IGNORECASE
+    )
+
+    # 6. Single HTML tags
+    def protect_html_tag(match):
+        key = make_placeholder("HTML_TAG")
+        protected[key] = match.group(0)
+        return key
+
+    result = re.sub(r'<[^>]{1,500}>', protect_html_tag, result)
+
+    # 7. Autolinks <https://...>
     def protect_autolink(match):
-        nonlocal counter
-        placeholder = f"___PROTECTED_AUTOLINK_{counter}___"
-        protected[placeholder] = match.group(0)
-        counter += 1
-        return placeholder
-    
-    placeholder_content = re.sub(
-        r'<(?:https?://|mailto:)[^>]+>',
-        protect_autolink,
-        placeholder_content
-    )
-    
-    # 6. Protect reference-style link definitions [ref]: url "title"
+        key = make_placeholder("AUTOLINK")
+        protected[key] = match.group(0)
+        return key
+
+    result = re.sub(r'<(?:https?://|mailto:)[^>]{1,500}>', protect_autolink, result)
+
+    # 8. Reference-style link definitions [ref]: url
     def protect_reference_def(match):
-        nonlocal counter
-        placeholder = f"___PROTECTED_REFERENCE_DEF_{counter}___"
-        protected[placeholder] = match.group(0)
-        counter += 1
-        return placeholder
-    
-    # Match: [ref]: url or [ref]: url "title"
-    placeholder_content = re.sub(
-        r'^\s*\[[^\]]+\]:\s+\S+(?:\s+"[^"]*")?$',
+        key = make_placeholder("REFERENCE_DEF")
+        protected[key] = match.group(0)
+        return key
+
+    result = re.sub(
+        r'^\s*\[[^\]]{1,200}\]:\s+\S+(?:\s+"[^"]*")?$',
         protect_reference_def,
-        placeholder_content,
+        result,
         flags=re.MULTILINE
     )
-    
-    # 7. Protect images ![alt](url) - BEFORE protecting links
+
+    # 9. Images ![alt](url)
     def protect_image(match):
-        nonlocal counter
-        placeholder = f"___PROTECTED_IMAGE_{counter}___"
-        protected[placeholder] = match.group(0)
-        counter += 1
-        return placeholder
-    
-    placeholder_content = re.sub(
-        r'!\[[^\]]*\]\([^\)]+\)',
-        protect_image,
-        placeholder_content
+        key = make_placeholder("IMAGE")
+        protected[key] = match.group(0)
+        return key
+
+    result = re.sub(r'!\[[^\]]{0,500}\]\([^)]{1,500}\)', protect_image, result)
+ 
+    # 10. Valid markdown links
+    #     (?<![.\w]) — never match [ preceded by a dot or word char
+    #     This prevents [3D Cloud SDK](url) from being matched inside
+    #     the malformed [Aspose.3D Cloud SDK(url)
+    valid_link_re = re.compile(
+        r'(?<![.\w])(?<!!)\[([^\[\]]{1,500})\]\(([^)]{1,500})\)'
     )
-    
-    # 8. Protect valid markdown links with nested brackets [text [nested] text](url)
+
     def protect_valid_link(match):
-        nonlocal counter
-        placeholder = f"___PROTECTED_VALID_LINK_{counter}___"
-        protected[placeholder] = match.group(0)
-        counter += 1
-        return placeholder
-    
-    # Match properly formatted links (handles nested brackets)
-    # This regex handles: [text], [text [nested] more], etc.
-    placeholder_content = re.sub(
-        r'\[(?:[^\[\]]+|\[[^\]]*\])*\]\([^\)]+\)',
-        protect_valid_link,
-        placeholder_content
-    )
-    
-    # 9. Protect reference-style link usage [text][ref]
+        key = make_placeholder("VALID_LINK")
+        protected[key] = match.group(0)
+        return key
+
+    result = valid_link_re.sub(protect_valid_link, result)
+
+    # 11. Reference-style link usage [text][ref]
     def protect_reference_link(match):
-        nonlocal counter
-        placeholder = f"___PROTECTED_REFERENCE_LINK_{counter}___"
-        protected[placeholder] = match.group(0)
-        counter += 1
-        return placeholder
-    
-    placeholder_content = re.sub(
-        r'\[[^\]]+\]\[[^\]]+\]',
-        protect_reference_link,
-        placeholder_content
-    )
-    
-    return placeholder_content, protected
+        key = make_placeholder("REFERENCE_LINK")
+        protected[key] = match.group(0)
+        return key
+
+    result = re.sub(r'\[[^\]]{1,200}\]\[[^\]]{1,200}\]', protect_reference_link, result)
+
+    return result, protected
 
 
 def restore_protected_regions(content: str, protected: Dict[str, str]) -> str:
-    """Restore protected regions back into content."""
     for placeholder, original in protected.items():
         content = content.replace(placeholder, original)
     return content
 
 
-def find_malformed_links(content: str) -> List[Dict]:
-    """
-    Scan content for malformed markdown links and return detailed information.
-    Only scans unprotected regions.
-    
-    Returns:
-        List of dicts with: line_number, issue_type, original, suggestion, context
-    """
-    # Protect valid regions first
-    protected_content, protected_blocks = extract_protected_regions(content)
-    
-    issues = []
-    lines = protected_content.split('\n')
-    
-    # Patterns for different types of malformed links
-    patterns = [
-        # Missing opening bracket: ]text](url)
-        (r'\]([^\]]+)\]\(([^\)]+)\)', 'missing_opening_bracket', r'[\1](\2)'),
-        
-        # Missing closing bracket before parenthesis: [text(url)
-        (r'\[([^\]]+)\(([^\)]+)\)', 'missing_closing_bracket', r'[\1](\2)'),
-        
-        # Missing opening parenthesis: [text]url) - but not valid links already protected
-        (r'\[([^\]]+)\]([^(\s\[])[^\)]*\)', 'missing_opening_paren', r'[\1](\2)'),
-        
-        # Reversed structure: (text)[url] or (text[url]
-        (r'\(([^\)]+)\)\[([^\]]+)\]', 'reversed_structure', r'[\1](\2)'),
-        (r'\(([^\)]+)\[([^\)]+)\]', 'reversed_structure_partial', r'[\1](\2)'),
-        
-        # Missing both brackets: text (url) - COMMON PATTERN
-        # Match product names or text followed by (url)
-        # Examples: "Aspose.HTML for Python via .NET (https://...)"
-        (r'(?<!\])([A-Z][A-Za-z0-9]+(?:\.[A-Z][A-Za-z0-9]+)?(?:\s+for\s+|\s+via\s+|\s+by\s+)[A-Za-z0-9\s\.\-]+)\s+\((https?://[^\)]+)\)',
-         'missing_both_brackets_product', r'[\1](\2)'),
-        
-        # Simpler version: Any capitalized text (5+ chars) followed by (url)
-        (r'(?<!\])([A-Z][A-Za-z0-9\s\.\-]{5,?})\s+\((https?://[^\)]+)\)',
-         'missing_both_brackets', r'[\1](\2)'),
-        
-        # Empty link text: [](url)
-        (r'\[\]\(([^\)]+)\)', 'empty_link_text', r'[link](\1)'),
-        
-        # Empty URL: [text]()
-        (r'\[([^\]]+)\]\(\)', 'empty_url', r'[\1](#)'),
-    ]
-    
-    for line_idx, line in enumerate(lines, start=1):
-        for pattern, issue_type, replacement_pattern in patterns:
-            for match in re.finditer(pattern, line):
-                # Extract context (50 chars before and after)
-                start_pos = match.start()
-                end_pos = match.end()
-                context_start = max(0, start_pos - 30)
-                context_end = min(len(line), end_pos + 30)
-                context = line[context_start:context_end].strip()
-                
-                # Generate suggested fix
-                try:
-                    suggested = re.sub(pattern, replacement_pattern, match.group(0))
-                except:
-                    suggested = "[MANUAL_FIX_NEEDED]"
-                
-                issues.append({
-                    'line_number': line_idx,
-                    'issue_type': issue_type,
-                    'original': match.group(0),
-                    'suggested': suggested,
-                    'context': f"...{context}...",
-                    'pattern': pattern,
-                    'replacement_pattern': replacement_pattern
-                })
-    
-    return issues
-
 
 def fix_malformed_links(content: str, verbose: bool = True) -> Tuple[str, int, List[Dict]]:
-    """
-    Automatically fix malformed markdown links in content.
-    Uses regex substitution to avoid string replace issues.
-    Protects code blocks and valid links.
-    
-    Args:
-        content: Markdown content to fix
-        verbose: If True, print detailed report
-        
-    Returns:
-        Tuple of (fixed_content, count_fixed, issues_found)
-    """
-    # Protect code blocks and valid links
     protected_content, protected_blocks = extract_protected_regions(content)
-    
-    # Find all issues in protected content
-    issues = find_malformed_links(content)
-    
-    if len(issues) == 0:
+    issues = find_malformed_links(protected_content)
+
+    if not issues:
         if verbose:
             print("\n" + "=" * 70)
             print("MARKDOWN LINK VALIDATION")
@@ -1817,102 +1754,104 @@ def fix_malformed_links(content: str, verbose: bool = True) -> Tuple[str, int, L
             print("✅ No malformed links found - all links are properly formatted!")
             print("=" * 70 + "\n")
         return content, 0, []
-    
-    # Apply fixes using regex substitution (safer than .replace())
-    fixed_content = protected_content
+
+    lines = protected_content.split('\n')
     fixes_applied = 0
-    
-    # Group issues by pattern to apply fixes efficiently
-    pattern_groups = {}
+    in_code_block = False
+
+    # Per line, keep only the highest-priority (lowest pattern_index) fixable issue
+    line_fixes: Dict[int, Dict] = {}
     for issue in issues:
-        pattern_key = issue['pattern']
-        if pattern_key not in pattern_groups:
-            pattern_groups[pattern_key] = {
-                'pattern': issue['pattern'],
-                'replacement': issue['replacement_pattern'],
-                'count': 0
-            }
-        pattern_groups[pattern_key]['count'] += 1
-    
-    # Apply each pattern fix
-    for pattern_key, group in pattern_groups.items():
-        pattern = group['pattern']
-        replacement = group['replacement']
-        
-        # Use re.sub which handles overlapping issues better than .replace()
-        fixed_content, count = re.subn(pattern, replacement, fixed_content)
-        fixes_applied += count
-    
-    # Restore protected blocks
+        if issue['replacement_pattern'] is None:
+            continue
+        ln = issue['line_number']
+        if ln not in line_fixes:
+            line_fixes[ln] = issue
+        elif issue['pattern_index'] < line_fixes[ln]['pattern_index']:
+            line_fixes[ln] = issue
+
+    fixed_lines = []
+    for line_num, line in enumerate(lines, 1):
+        stripped = line.strip()
+
+        if stripped.startswith('```') or stripped.startswith('~~~'):
+            in_code_block = not in_code_block
+            fixed_lines.append(line)
+            continue
+
+        if in_code_block:
+            fixed_lines.append(line)
+            continue
+
+        if line_num in line_fixes:
+            issue = line_fixes[line_num]
+            new_line = line.replace(issue['original'], issue['suggested'], 1)
+            if new_line != line:
+                fixes_applied += 1
+                line = new_line
+
+        fixed_lines.append(line)
+
+    fixed_content = '\n'.join(fixed_lines)
     fixed_content = restore_protected_regions(fixed_content, protected_blocks)
-    
+
     if verbose:
+        issue_labels = {
+            'space_before_paren':                'Space between ] and (',
+            'missing_closing_bracket_space':     'Missing ] with space before (',
+            'missing_closing_bracket':           'Missing closing bracket ]',
+            'missing_closing_bracket_and_paren': 'Missing ] and closing )',
+            'missing_closing_paren':             'Missing closing parenthesis )',
+            'missing_opening_paren':             'Missing opening parenthesis (',
+            'missing_opening_bracket':           'Missing opening bracket [',
+            'missing_opening_bracket_space':     'Missing [ with space before (',
+            'reversed_structure':                'Reversed structure (url)[text]',
+            'missing_both_brackets':             'Missing both brackets — text + bare (url)',
+            'empty_link_text':                   'Empty link text []',
+            'empty_url':                         'Empty URL ()',
+        }
+
         print("\n" + "=" * 70)
         print("MARKDOWN LINK VALIDATION & REPAIR")
         print("=" * 70)
         print(f"⚠️  Found {len(issues)} malformed link(s)\n")
-        
-        # Group by issue type for reporting
-        by_type = {}
+
+        by_type: Dict[str, List[Dict]] = {}
         for issue in issues:
-            issue_type = issue['issue_type']
-            if issue_type not in by_type:
-                by_type[issue_type] = []
-            by_type[issue_type].append(issue)
-        
-        # Display grouped results
-        issue_labels = {
-            'missing_opening_bracket': 'Missing opening bracket [',
-            'missing_closing_bracket': 'Missing closing bracket ]',
-            'missing_opening_paren': 'Missing opening parenthesis (',
-            'missing_closing_paren': 'Missing closing parenthesis )',
-            'reversed_structure': 'Reversed structure (text)[url]',
-            'reversed_structure_partial': 'Partial reversed structure',
-            'missing_both_brackets_product': 'Missing brackets around product name',
-            'missing_both_brackets': 'Missing both brackets around text',
-            'empty_link_text': 'Empty link text []',
-            'empty_url': 'Empty URL ()',
-        }
-        
+            by_type.setdefault(issue['issue_type'], []).append(issue)
+
         for issue_type, type_issues in by_type.items():
             label = issue_labels.get(issue_type, issue_type)
             print(f"📍 {label}: {len(type_issues)} occurrence(s)")
-            
-            # Show first 3 examples
-            for i, issue in enumerate(type_issues[:3], 1):
-                print(f"   Line {issue['line_number']}: '{issue['original']}' → '{issue['suggested']}'")
+            for issue in type_issues[:3]:
+                print(f"   Line {issue['line_number']}: "
+                      f"'{issue['original']}' → '{issue['suggested']}'")
                 print(f"   Context: {issue['context']}")
-            
             if len(type_issues) > 3:
                 print(f"   ... and {len(type_issues) - 3} more occurrence(s)")
             print()
-        
-        print(f"🔧 Repair completed: Fixed {fixes_applied} malformed link(s)")
+
+        fixable   = sum(1 for i in issues if i['replacement_pattern'] is not None)
+        unfixable = len(issues) - fixable
+        print(f"🔧 Repair completed: Fixed {fixes_applied} of {fixable} fixable link(s)")
+        if unfixable:
+            print(f"⚠️  {unfixable} issue(s) require manual review")
         print("✅ Protected: Frontmatter, code blocks, inline code, HTML, autolinks,")
         print("              images, valid links, reference-style links")
         print("=" * 70 + "\n")
-    
+
     return fixed_content, fixes_applied, issues
 
 
+
 def validate_markdown_links(content: str, fix_automatically: bool = True, verbose: bool = True) -> str:
-    """
-    Main function to validate and optionally fix markdown links.
-    
-    Args:
-        content: Markdown content to validate
-        fix_automatically: If True, automatically fix issues; if False, just report
-        verbose: If True, print detailed report
-        
-    Returns:
-        Fixed content (or original if fix_automatically=False)
-    """
     if fix_automatically:
         fixed_content, count, issues = fix_malformed_links(content, verbose=verbose)
         return fixed_content
     else:
-        issues = find_malformed_links(content)
-        if verbose and len(issues) > 0:
+        protected_content, _ = extract_protected_regions(content)
+        issues = find_malformed_links(protected_content)
+        if verbose and issues:
             print(f"\n⚠️  Found {len(issues)} malformed links (not fixed)")
             for issue in issues[:5]:
                 print(f"   Line {issue['line_number']}: {issue['original']}")

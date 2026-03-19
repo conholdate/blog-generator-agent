@@ -188,6 +188,7 @@ class BlogOrchestrator:
             print(f"Meta description check done")
             result.final_output = clean_ai_generated_markdown(result.final_output)
             print(f"clean_ai_generated_markdown done ")
+            
             result.final_output = validate_markdown_links(result.final_output)
             print(f"validate_markdown_links done ")
             print(f" Content Generated, Performing SEO Audit Now --", flush=True)
