@@ -7,6 +7,7 @@ sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 from utils.helpers import format_related_posts
 from config import settings
 
+
 def get_blog_writer_prompt(
     title: str,
     seo_topic: str,
@@ -18,14 +19,17 @@ def get_blog_writer_prompt(
     platform: str = "",
     target_persona: str = "",
     angle: str = "",
-    isCloud: bool =False
-    
+    long_tail_keywords: str = "",
+    semantic_keywords: str = "",
+    other_important_and_relevant_things: str = "",
+    isCloud: bool = False,
 ) -> str:
     """
     Creates a full SEO blog-writing prompt with frontmatter, outline, and
     a final 'Read More' section using the provided related_links.
     """
     url = slugify(title)
+
     # Parse context fields
     data = {}
     for line in context.splitlines():
@@ -34,6 +38,7 @@ def get_blog_writer_prompt(
             data[key.strip()] = value.strip()
 
     category = data.get("Category", "General")
+
     # Outline formatting
     formatted_outline = "\n".join([f"   {item}" for item in outline])
 
@@ -43,9 +48,156 @@ def get_blog_writer_prompt(
     # Date
     current_date = datetime.utcnow().strftime("%a, %d %b %Y %H:%M:%S +0000")
     primary_keyword = keywords[0]
-    secondary_keywords = keywords[0]
- 
-    # FULL PROMPT.  /{data.get("urlPrefix")}/{url}/
+    secondary_keywords = keywords[1:]
+
+    # ------------------------------------------------------------------
+    # Normalise optional string parameters: callers may pass a list, None,
+    # or an empty string.  Convert everything to a plain str so that
+    # .strip() and f-string interpolation never raise AttributeError.
+    # ------------------------------------------------------------------
+    def _to_str(value) -> str:
+        if value is None:
+            return ""
+        if isinstance(value, list):
+            return "\n".join(str(item) for item in value)
+        return str(value)
+
+    long_tail_keywords               = _to_str(long_tail_keywords)
+    semantic_keywords                = _to_str(semantic_keywords)
+    other_important_and_relevant_things = _to_str(other_important_and_relevant_things)
+
+    print(f"primary_keyword -- {primary_keyword}")
+    print(f"secondary_keywords -- {secondary_keywords}")
+    print(f"long_tail_keywords -- {long_tail_keywords}", flush=True)
+    print(f"semantic_keywords -- {semantic_keywords}", flush=True)
+    print(f"blog_outline -- {outline}", flush=True)
+    print(f"other_important_and_relevant_things -- {other_important_and_relevant_things}", flush=True)
+    print(f"target persona -- {target_persona}", flush=True)
+    print(f"Blog post angle -- {angle}", flush=True)
+
+    # ------------------------------------------------------------------
+    # Detect whether the outline already covers Steps and Complete Code
+    # so we can inject an explicit notice when either is missing.
+    # ------------------------------------------------------------------
+    outline_lower = " ".join(outline).lower()
+    outline_has_steps = any(
+        kw in outline_lower
+        for kw in ["step-by-step", "step by step", "steps to", "steps for"]
+    )
+    outline_has_complete_code = any(
+        kw in outline_lower
+        for kw in ["complete code", "full code", "complete example", "code example"]
+    )
+
+    if not outline_has_steps and not outline_has_complete_code:
+        outline_addition_notice = (
+            "IMPORTANT: The provided outline does NOT include a Steps section or a "
+            "Complete Code Example section. You MUST add BOTH after all outline "
+            "sections, in this exact order:\n"
+            "  1. ## Steps to [Task Based on Title]\n"
+            "  2. ## [Task Based on Title] - Complete Code Example"
+        )
+    elif not outline_has_steps:
+        outline_addition_notice = (
+            "IMPORTANT: The provided outline does NOT include a Steps section. "
+            "You MUST add it immediately before the Complete Code Example section."
+        )
+    elif not outline_has_complete_code:
+        outline_addition_notice = (
+            "IMPORTANT: The provided outline does NOT include a Complete Code Example "
+            "section. You MUST add it immediately after the Steps section."
+        )
+    else:
+        outline_addition_notice = (
+            "The outline already includes Steps and Complete Code Example sections. "
+            "Preserve them in the correct order: Steps immediately before Complete "
+            "Code Example, with NO other heading between them."
+        )
+
+    # ------------------------------------------------------------------
+    # Optional blocks - only rendered when the values are non-empty
+    # ------------------------------------------------------------------
+    long_tail_block = (
+        f"""
+===============================================================================
+LONG-TAIL KEYWORDS (INCORPORATE NATURALLY - SEO)
+===============================================================================
+
+The following long-tail keyword phrases have been identified for this topic:
+
+{long_tail_keywords}
+
+RULES FOR LONG-TAIL KEYWORD USAGE:
+- Weave these phrases naturally into H2/H3 headings, body paragraphs, step
+  descriptions, and FAQ questions/answers wherever they fit contextually.
+- Do NOT force every phrase - use only those that genuinely improve the flow
+  and relevance of the surrounding text.
+- Long-tail phrases are especially effective in H3 subheadings, introductory
+  sentences for sections, and FAQ question text.
+- NEVER bold or italicise them purely for emphasis.
+- They contribute to overall keyword richness but do NOT replace the mandatory
+  occurrences of the primary keyword.
+- Aim to use at least 2-3 of these phrases somewhere in the blog body.
+"""
+        if long_tail_keywords.strip()
+        else ""
+    )
+
+    semantic_keywords_block = (
+        f"""
+===============================================================================
+SEMANTIC / LSI KEYWORDS (ENRICH CONTENT NATURALLY)
+===============================================================================
+
+The following semantically related keywords and phrases should be distributed
+naturally throughout the blog to improve topical depth and search relevance:
+
+{semantic_keywords}
+
+RULES FOR SEMANTIC KEYWORD USAGE:
+- Use these words and phrases naturally in body paragraphs, section
+  introductions, step descriptions, and explanatory sentences.
+- Do NOT cluster them together or list them artificially anywhere in the post.
+- They should appear only where they genuinely add meaning to the surrounding
+  text - never forced or out of context.
+- These are NOT replacements for the primary or secondary keywords.
+- Aim to use most of these terms at least once across the full blog body.
+- Their natural presence signals topical authority to search engines; forced
+  or unnatural use undermines that goal.
+"""
+        if semantic_keywords.strip()
+        else ""
+    )
+
+    other_notes_block = (
+        f"""
+===============================================================================
+OTHER IMPORTANT NOTES AND CONTEXT
+===============================================================================
+
+The following additional guidance, product-specific notes, or editorial context
+has been provided by the content team. Incorporate it naturally throughout the
+blog where relevant:
+
+{other_important_and_relevant_things}
+
+RULES:
+- Treat this as supplementary editorial guidance, not a section to reproduce
+  verbatim in the blog output.
+- Surface relevant points in the appropriate sections - Prerequisites, Steps,
+  Conclusion, FAQs, etc. - rather than grouping them all in one place.
+- Paraphrase and integrate naturally; do NOT copy-paste this block into the
+  blog output.
+- If any note here contradicts an earlier rule in this prompt, the earlier
+  rule takes precedence unless the note explicitly states otherwise.
+"""
+        if other_important_and_relevant_things.strip()
+        else ""
+    )
+
+    # ------------------------------------------------------------------
+    # FULL PROMPT
+    # ------------------------------------------------------------------
     return f"""
 You are an expert technical blog writer. Write a detailed, SEO-optimized blog post about "{title}" using keywords: {keywords}, target persona: {target_persona}, angle: {angle}
 
@@ -105,10 +257,10 @@ That means:
 5. The full URL
 6. Closing parenthesis  )
 
-**THERE MUST BE NO SPACE BETWEEN ] AND ( — EVER.**
+**THERE MUST BE NO SPACE BETWEEN ] AND ( - EVER.**
 
 -------------------------------------------------------------------------------
-COMPLETE LIST OF MALFORMED PATTERNS — NEVER PRODUCE ANY OF THESE
+COMPLETE LIST OF MALFORMED PATTERNS - NEVER PRODUCE ANY OF THESE
 -------------------------------------------------------------------------------
 
 Every pattern below is WRONG. Study each one so you never produce it:
@@ -118,7 +270,7 @@ WRONG: [Aspose.3D for Java (https://example.com/)
   FIX: [Aspose.3D for Java](https://example.com/)
 
 WRONG: [Aspose.3D for Java] (https://example.com/)
-  WHY: Space between ] and ( — no space is ever allowed here
+  WHY: Space between ] and ( - no space is ever allowed here
   FIX: [Aspose.3D for Java](https://example.com/)
 
 WRONG: Aspose.3D for Java](https://example.com/)
@@ -130,7 +282,7 @@ WRONG: Aspose.3D for Java] (https://example.com/)
   FIX: [Aspose.3D for Java](https://example.com/)
 
 WRONG: [Aspose.3D for Java(https://example.com/)
-  WHY: Missing closing bracket ] — ( must be preceded by ]
+  WHY: Missing closing bracket ] - ( must be preceded by ]
   FIX: [Aspose.3D for Java](https://example.com/)
 
 WRONG: Aspose.3D for Java (https://example.com/)
@@ -158,11 +310,11 @@ WRONG: [Aspose.3D for Java(https://example.com/
   FIX: [Aspose.3D for Java](https://example.com/)
 
 WRONG: [](https://example.com/)
-  WHY: Empty link text — always provide meaningful text
+  WHY: Empty link text - always provide meaningful text
   FIX: [Aspose.3D for Java](https://example.com/)
 
 WRONG: [Aspose.3D for Java]()
-  WHY: Empty URL — always provide the full URL
+  WHY: Empty URL - always provide the full URL
   FIX: [Aspose.3D for Java](https://example.com/)
 
 -------------------------------------------------------------------------------
@@ -176,7 +328,7 @@ CORRECT: [this page](https://releases.aspose.com/3d/java/)
 CORRECT: [temporary license page](https://purchase.aspose.com/temporary-license/)
 
 -------------------------------------------------------------------------------
-MANDATORY MENTAL CHECKLIST — RUN THIS BEFORE WRITING EVERY SINGLE LINK
+MANDATORY MENTAL CHECKLIST - RUN THIS BEFORE WRITING EVERY SINGLE LINK
 -------------------------------------------------------------------------------
 
 Before you type any hyperlink, ask yourself these five questions:
@@ -187,7 +339,7 @@ Before you type any hyperlink, ask yourself these five questions:
   4. Is the full URL between ( and )?
   5. Does the link end with a closing parenthesis )?
 
-If the answer to ANY question is NO — do not write the link until it is fixed.
+If the answer to ANY question is NO - do not write the link until it is fixed.
 
 -------------------------------------------------------------------------------
 SCAN BEFORE FINALIZING
@@ -201,7 +353,7 @@ Before you output the complete blog post, scan the entire document for:
 - Any [text( without a ] between the text and the URL
 - Any link missing its closing )
 
-If you find any of these patterns — fix them before outputting.
+If you find any of these patterns - fix them before outputting.
 
 **THIS RULE OVERRIDES ALL OTHER FORMATTING DECISIONS. A SINGLE MALFORMED LINK
 INVALIDATES THE ENTIRE OUTPUT.**
@@ -598,8 +750,96 @@ Follow the provided outline but SKIP any setup/installation/steps sections:
 - Skip: "Prerequisites"
 - Skip: ANY heading containing the word "Steps" or "Step-by-Step"
 
+**OUTLINE COMPLETION NOTICE:**
+{outline_addition_notice}
+
+===============================================================================
+HEADING UNIQUENESS RULE (APPLIES TO SECTIONS 4, 5, AND 5a)
+===============================================================================
+
+**THIS IS NON-NEGOTIABLE. READ BEFORE WRITING ANY HEADING.**
+
+Every H2 heading across the entire blog MUST be unique - no two headings may
+share the same keyword phrase. This is especially critical for sections 4, 5,
+and 5a which cover related material and are most prone to repetition.
+
+**THE CORE PROBLEM TO AVOID:**
+
+The same keyword phrase (e.g. "PDF to JSON Conversion") must NEVER appear in
+more than one heading. The following is a concrete example of what is WRONG:
+
+  WRONG: ## Steps to Convert PDF to JSON        <- "PDF to JSON" used here
+  WRONG: ## PDF to JSON Conversion - Complete Code Example  <- repeated
+  WRONG: ## PDF to JSON Conversion via REST API using cURL  <- repeated again
+
+**THE SOLUTION - KEYWORD BUDGET:**
+
+Think of the primary keyword, secondary keywords, semantic keywords, and
+long-tail keyword phrases as a shared budget. Each heading MUST draw from a
+DIFFERENT part of that budget. No keyword phrase may be spent twice.
+
+**MANDATORY HEADING ASSIGNMENT (follow this allocation exactly):**
+
+  Section 4 - Steps heading:
+    - Use the PRIMARY keyword + platform/language (e.g. "in Python", "in Java").
+    - Format: ## Steps to [Primary Keyword Action in Language/Platform]
+    - Example: ## Steps to Convert PDF to JSON in Python
+
+  Section 5 - Complete Code Example heading:
+    - MUST also contain the PRIMARY keyword - this is required for SEO.
+    - Differentiate from Section 4 by varying the ANGLE, not by dropping the
+      primary keyword. Use the language/platform, the output type, or a
+      qualifier that makes it distinct from the Section 4 heading.
+    - Format: ## [Primary Keyword + Differentiating Qualifier] - Complete Code Example
+    - Examples (the primary keyword "PDF to JSON" is kept, angle changes):
+        ## PDF to JSON in Java - Complete Code Example
+        ## PDF to JSON Conversion in C# - Complete Code Example
+        ## PDF File to JSON in Python - Complete Code Example
+        ## Converting PDF to JSON Programmatically - Complete Code Example
+
+  Section 5a - cURL heading (cloud only):
+    - The primary keyword phrase MUST NOT appear here (it was used in 4 and 5).
+    - MUST use a SECONDARY keyword, semantic term, or long-tail phrase
+      that has NOT been used in either Section 4 or Section 5 headings.
+    - DO NOT repeat any phrase used in Section 4 or Section 5.
+    - Format: ## [Distinct Secondary/Semantic/Long-tail Phrase] via REST API using cURL
+    - Examples (pick whichever fits the topic and has not been used above):
+        ## Cloud-Based Document Conversion via REST API using cURL
+        ## REST-Based PDF Processing via REST API using cURL
+        ## Remote File Transformation via REST API using cURL
+        ## API-Driven PDF Export via REST API using cURL
+
+**PRE-HEADING CHECKLIST (run before writing each of sections 4, 5, 5a):**
+
+  Before writing the Section 5 heading, ask:
+  - Does it contain the PRIMARY keyword? -> REQUIRED (add it if missing)
+  - Is the angle/qualifier different from Section 4's heading? -> REQUIRED (vary language, platform, or phrasing)
+  - Is it IDENTICAL to Section 4's heading word-for-word? -> REWRITE if yes
+
+  Before writing the Section 5a heading, ask:
+  - Does it contain the primary keyword phrase? -> REMOVE IT (5a must not repeat the primary keyword)
+  - Does it contain ANY phrase already used in the Section 4 heading? -> REWRITE
+  - Does it contain ANY phrase already used in the Section 5 heading? -> REWRITE
+
+  All three headings MUST pass this check before the blog is finalised.
+
+**WRONG examples (sections 4 and 5 share the identical phrase - never do this):**
+  ## Steps to Convert PDF to JSON in Python      <- primary keyword used here
+  ## PDF to JSON Conversion - Complete Code Example  <- same phrase repeated
+  ## PDF to JSON Conversion via REST API using cURL  <- same phrase repeated again
+
+**CORRECT examples (4 and 5 both contain the primary keyword but with different angles; 5a uses a distinct secondary/semantic phrase):**
+  ## Steps to Convert PDF to JSON in Python           <- primary keyword + language
+  ## PDF to JSON in Java - Complete Code Example      <- primary keyword + platform qualifier
+  ## Cloud-Based Document Export via REST API using cURL  <- secondary/semantic, no primary phrase
+
+===============================================================================
+
 ### 4. STEPS SECTION (MANDATORY)
-## Steps to [Task Name Based on Title]
+
+**HEADING RULE:** Use the PRIMARY keyword or its closest action variant.
+Format: ## Steps to [Primary Keyword Action]
+Example: ## Steps to Convert PDF to JSON in Python
 
 **PLACEMENT RULE (NON-NEGOTIABLE):**
 - This section MUST appear immediately after the last Outline section
@@ -624,8 +864,14 @@ CRITICAL: This section is MANDATORY and MUST ALWAYS be included. NO EXCEPTIONS.
 - This section MUST appear immediately after the Steps section
 - NEVER insert any heading between Steps and Complete Code Example
 
-**FORMAT (ALWAYS INCLUDE):**
-## [Specific Task from Title] - Complete Code Example
+**HEADING RULE:** MUST contain the PRIMARY keyword. Differentiate from the
+Section 4 heading by varying the angle - add the language/platform, a
+qualifier, or a slight rephrasing. DO NOT drop the primary keyword.
+Format: ## [Primary Keyword + Differentiating Qualifier] - Complete Code Example
+Examples:
+  ## PDF to JSON in Java - Complete Code Example
+  ## PDF to JSON Conversion in C# - Complete Code Example
+  ## Converting PDF to JSON Programmatically - Complete Code Example
 
 **INTRO SENTENCE (1-2 sentences before code block):**
 - NEVER use: "ready-to-run", "ready-to-use", "production-ready", "copy-paste ready"
@@ -659,29 +905,15 @@ CRITICAL: This section is MANDATORY and MUST ALWAYS be included. NO EXCEPTIONS.
 **IF isCloud = true - THIS SECTION IS MANDATORY. NEVER SKIP IT.**
 **IF isCloud = false - DO NOT include this section at all.**
 
-**HEADING CONSTRUCTION RULES (CRITICAL - READ CAREFULLY):**
-
-The cURL section heading MUST be meaningfully different from the Complete Code Example heading.
-
-**RULE: The cURL heading MUST use ONLY the core file formats or action - NEVER the product name, library name, platform, or language.**
-
-**Heading formula:**
-## [Core Action or Source Format to Target Format] via REST API using cURL
-
-**HEADING DERIVATION EXAMPLES:**
-
-Blog title: "Edit PowerPoint Files Using Java Library"
-- Core action: "Edit PowerPoint Files"
-- Correct cURL heading: "Edit PowerPoint Files via REST API using cURL"
-- Wrong: "Edit PowerPoint Files Using Java Library using cURL Commands"
-
-Blog title: "Convert PDF to PNG in C# Using Aspose.PDF for .NET"
-- Core action: "PDF to PNG Conversion"
-- Correct cURL heading: "PDF to PNG Conversion via REST API using cURL"
-- Wrong: "Convert PDF to PNG in C# using cURL Commands"
-
-**FORMAT:**
-## [Core Action] via REST API using cURL
+**HEADING RULE:** MUST use a keyword phrase that has NOT appeared in either the
+Section 4 heading or the Section 5 heading. Draw from secondary keywords,
+semantic terms, or long-tail phrases not yet used in any heading.
+Format: ## [Distinct Keyword/Phrase] via REST API using cURL
+Examples:
+  ## Cloud-Based Document Conversion via REST API using cURL
+  ## REST-Based PDF Processing via REST API using cURL
+  ## Remote File Transformation via REST API using cURL
+  ## API-Driven PDF Export via REST API using cURL
 
 **REQUIREMENTS:**
 - Place this section IMMEDIATELY after the Complete Code Example section
@@ -696,9 +928,9 @@ Blog title: "Convert PDF to PNG in C# Using Aspose.PDF for .NET"
 
 <!--[CODE_SNIPPET_START]-->
 ```bash
-curl -X POST "https://api.example.com/v1/endpoint" \
-     -H "Authorization: Bearer YOUR_ACCESS_TOKEN" \
-     -H "Content-Type: application/json" \
+curl -X POST "https://api.example.com/v1/endpoint" \\
+     -H "Authorization: Bearer YOUR_ACCESS_TOKEN" \\
+     -H "Content-Type: application/json" \\
      -d '{{"inputFile": "input.ext", "outputFormat": "target"}}'
 ```
 <!--[CODE_SNIPPET_END]-->
@@ -815,19 +1047,21 @@ PART 5: CODE SNIPPET REQUIREMENTS (CRITICAL)
 - NO license initialization code (License class, SetLicense, ApplyLicense)
 
 ===============================================================================
-PART 6: WRITING GUIDELINES
+PART 6: KEYWORD STRATEGY (SEO - CRITICAL)
 ===============================================================================
 
 ### WORD COUNT TARGET
 Introduction + Prerequisites + Outline sections + Conclusion = {settings.NUMBER_OF_BLOG_WORDS} words
 
-### PRIMARY KEYWORD USAGE (CRITICAL - SEO REQUIREMENT)
+### PRIMARY AND SECONDARY KEYWORDS
+
 The PRIMARY keyword is the first keyword in the list: {primary_keyword}
 The SECONDARY keywords are all remaining keywords in the list: {secondary_keywords}
 
 **MANDATORY PRIMARY KEYWORD PLACEMENT (STRICTLY ENFORCED):**
 
-The primary keyword MUST appear AT LEAST 3-5 times across the blog body content, EXCLUDING frontmatter fields. Occurrences must be distributed across specific sections:
+The primary keyword MUST appear AT LEAST 3-5 times across the blog body content,
+EXCLUDING frontmatter fields. Occurrences must be distributed across specific sections:
 
 | # | Location | Requirement |
 |---|----------|-------------|
@@ -846,6 +1080,15 @@ The primary keyword MUST appear AT LEAST 3-5 times across the blog body content,
 - NEVER surround the primary keyword with asterisks, bold, or italics
 - NEVER force the keyword awkwardly
 - NEVER place all occurrences in the same section
+
+Secondary keywords should appear naturally 1-2 times each, distributed across the blog body.
+
+{long_tail_block}
+{semantic_keywords_block}
+
+===============================================================================
+PART 7: WRITING GUIDELINES
+===============================================================================
 
 ### HUMAN-LIKE WRITING QUALITY (CRITICAL - NON-NEGOTIABLE)
 
@@ -885,14 +1128,17 @@ Before finalizing, verify:
 - PRIMARY KEYWORD - Occurrence 3: present in the Conclusion section?
 - PRIMARY KEYWORD - Occurrence 4: present in at least one FAQ question or answer?
 - PRIMARY KEYWORD - Total body occurrences (excluding frontmatter): at least 3, ideally 4-5?
+- LONG-TAIL KEYWORDS: At least 2-3 phrases from the long-tail list used naturally in the body?
+- SEMANTIC KEYWORDS: Most semantic/LSI terms appear at least once naturally in the body?
 - FINAL LINK SCAN: Have you checked every single link follows [text](url) with no space between ] and (?
 - PREREQUISITES HEADING: Does the heading follow "## [Topic] - Prerequisites and Setup" format with a keyword-rich topic prefix?
+- HEADING UNIQUENESS: Does the Complete Code Example heading contain the primary keyword? Does the cURL heading use a secondary/semantic phrase with NO repetition of the primary keyword phrase? Are all three headings (Steps, Complete Code, cURL) distinct from each other?
 
+{other_notes_block}
 ===============================================================================
 END OF PROMPT
 ===============================================================================
 """
-
 
 
 

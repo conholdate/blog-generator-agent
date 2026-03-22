@@ -45,79 +45,138 @@ def parse_markdown_topics(markdown_content: str) -> Dict[str, Any]:
     }
 
 
+# Shared helper to extract a keyword section and return a list
+def _extract_keyword_list(details: str, label_pattern: str) -> list:
+    match = re.search(
+        rf'\*\*{label_pattern}\*\*\s*(.+?)(?=\n\*\*|\Z)',
+        details,
+        re.DOTALL
+    )
+    if not match:
+        return []
+    text = match.group(1)
+    keywords = re.findall(r'`([^`]+)`', text)
+    if not keywords:
+        # Fallback: comma-separated plain text
+        keywords = [kw.strip() for kw in text.split(',') if kw.strip()]
+    return keywords
+
+
+# Shared helper to extract a keyword section and return a list
+def _extract_keyword_list(details: str, label_pattern: str) -> list:
+    match = re.search(
+        rf'\*\*{label_pattern}\*\*\s*(.+?)(?=\n\*\*|\Z)',
+        details,
+        re.DOTALL
+    )
+    if not match:
+        return []
+    text = match.group(1)
+    keywords = re.findall(r'`([^`]+)`', text)
+    if not keywords:
+        # Fallback: comma-separated plain text
+        keywords = [kw.strip() for kw in text.split(',') if kw.strip()]
+    return keywords
+
+
+def _extract_keyword_list(details: str, label_pattern: str) -> list:
+    match = re.search(
+        rf'(?:^-\s*)?\*\*{label_pattern}\*\*\s*(.+?)(?=\n-\s*\*\*|\n\*\*|\Z)',
+        details,
+        re.DOTALL | re.MULTILINE
+    )
+    if not match:
+        return []
+    text = match.group(1)
+    keywords = re.findall(r'`([^`]+)`', text)
+    if not keywords:
+        keywords = [kw.strip() for kw in text.split(',') if kw.strip()]
+    return keywords
+
+
 def parse_topic_details(
-    topic_title: str, 
-    details: str, 
+    topic_title: str,
+    details: str,
     metadata: Dict[str, Optional[str]]
 ) -> Dict[str, Any]:
-    """
-    Parse individual topic details into structured format.
-    
-    Args:
-        topic_title: Title of the topic
-        details: Details string containing persona, angle, keywords, and outline
-        metadata: Dictionary containing brand, product, platform info
-        
-    Returns:
-        Dictionary with topic, product, platform, keywords, and outline
-    """
     result = {
         "topic": topic_title.strip(),
         "product": metadata.get("product"),
         "platform": metadata.get("platform"),
         "keywords": {
             "primary": [],
-            "secondary": []
+            "secondary": [],
+            "long_tail": [],
+            "semantic": [],
         },
         "outline": []
     }
-    
-    # Extract cluster ID
-    cluster_match = re.search(r'\*\*Cluster ID:\*\*\s*`([^`]+)`', details)
+
+    # Shared lookahead that stops at the next label (with or without bullet prefix)
+    NEXT_LABEL = r'(?=\n-\s*\*\*|\n\*\*|\Z)'
+
+    # Cluster ID
+    cluster_match = re.search(r'(?:^-\s*)?\*\*Cluster ID:\*\*\s*`([^`]+)`', details, re.MULTILINE)
     if cluster_match:
         result["cluster_id"] = cluster_match.group(1).strip()
-    
-    # Extract target persona
-    persona_match = re.search(r'\*\*Target persona:\*\*\s*(.+?)(?=\n-|\n\*\*|$)', details)
+
+    # Target persona
+    persona_match = re.search(
+        rf'(?:^-\s*)?\*\*Target persona:\*\*\s*(.+?){NEXT_LABEL}',
+        details, re.DOTALL | re.MULTILINE
+    )
     if persona_match:
         result["target_persona"] = persona_match.group(1).strip()
-    
-    # Extract angle
-    angle_match = re.search(r'\*\*Angle:\*\*\s*(.+?)(?=\n-|\n\*\*|$)', details)
+
+    # Angle — supports "Angle:" and "Blog post angle:"
+    angle_match = re.search(
+        rf'(?:^-\s*)?\*\*(?:Blog post )?[Aa]ngle:\*\*\s*(.+?){NEXT_LABEL}',
+        details, re.DOTALL | re.MULTILINE
+    )
     if angle_match:
         result["angle"] = angle_match.group(1).strip()
-    
-    # Extract primary keyword
-    primary_match = re.search(r'\*\*Primary keyword:\*\*\s*`([^`]+)`', details)
+
+    # Primary keyword
+    primary_match = re.search(
+        r'(?:^-\s*)?\*\*Primary keyword:\*\*\s*`([^`]+)`',
+        details, re.MULTILINE
+    )
     if primary_match:
         result["keywords"]["primary"].append(primary_match.group(1).strip())
-    
-    # Extract supporting keywords
-    supporting_match = re.search(
-        r'\*\*Supporting keywords:\*\*\s*(.+?)(?=\n\n|\n\*\*|$)',
-        details,
-        re.DOTALL
+
+    # Secondary keywords
+    result["keywords"]["secondary"] = _extract_keyword_list(
+        details, r'(?:Supporting|Secondary) keywords[^:]*:'
     )
-    
-    if supporting_match:
-        keywords_text = supporting_match.group(1)
-        # Extract all keywords within backticks
-        keywords = re.findall(r'`([^`]+)`', keywords_text)
-        result["keywords"]["secondary"] = [kw.strip() for kw in keywords if kw.strip()]
-    
-    # Extract outline items
+
+    # Long-tail keywords
+    result["keywords"]["long_tail"] = _extract_keyword_list(
+        details, r'Long Tails? keywords:'
+    )
+
+    # Semantic SEO keywords
+    result["keywords"]["semantic"] = _extract_keyword_list(
+        details, r'Semantic SEO keywords:'
+    )
+
+    # Outline — supports "Suggested outline:" and "Outline for the article:"
     outline_match = re.search(
-        r'\*\*Suggested outline:\*\*\s*((?:^-\s*.+$\n?)+)',
-        details,
-        re.MULTILINE
+        r'(?:^-\s*)?\*\*(?:Suggested outline|Outline for the article):\*\*\s*((?:^-\s*.+$\n?)+)',
+        details, re.MULTILINE
     )
-    
     if outline_match:
-        outline_text = outline_match.group(1)
-        # Extract each bullet point
-        outline_items = re.findall(r'^-\s*(.+)$', outline_text, re.MULTILINE)
+        outline_items = re.findall(r'^-\s*(.+)$', outline_match.group(1), re.MULTILINE)
         result["outline"] = [item.strip() for item in outline_items if item.strip()]
-    
+
+    # Other notes
+    other_match = re.search(
+        r'(?:^-\s*)?\*\*Other important and relevant things:\*\*\s*((?:^-\s*.+$\n?)+)',
+        details, re.MULTILINE
+    )
+    if other_match:
+        other_items = re.findall(r'^-\s*(.+)$', other_match.group(1), re.MULTILINE)
+        result["other_notes"] = [item.strip() for item in other_items if item.strip()]
+
     return result
 
 def get_project_root() -> str:

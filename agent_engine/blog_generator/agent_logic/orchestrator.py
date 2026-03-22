@@ -72,7 +72,7 @@ class BlogOrchestrator:
         """Let the agent autonomously create a blog with metrics tracking"""
         set_tracing_disabled(disabled=True)
         topics_raw_data = get_topic_by_index(topics_file, index)
-      
+       
         post_topic = topics_raw_data.pop("topic")
         product_name = topics_raw_data.pop("product")
         platform = topics_raw_data.pop("platform")
@@ -124,20 +124,29 @@ class BlogOrchestrator:
                     caller="fetch_category_related_articles"
                 )
             # ─────────────────────────────────────────────────────────────────
-    
+        
             primary = topics_raw_data.get("keywords", {}).get("primary", [])
             secondary = topics_raw_data.get("keywords", {}).get("secondary", [])
             target_persona = topics_raw_data.get("target_persona", "")
-            angle = topics_raw_data.get("angle", "")
+            blog_post_angle = topics_raw_data.get("angle", "")
+            long_tail_keywords = topics_raw_data.get("keywords", {}).get("long_tail", [])
+            semantic_keywords = topics_raw_data.get("keywords", {}).get("semantic", [])
+            other_important_and_relevant_things = topics_raw_data.get("other_notes", "")
+            blog_outline = topics_raw_data.get("outline")
+
             print(f"primary -- {primary}", flush=True)
             print(f"secondary -- {secondary}", flush=True)
             print(f"target persona -- {target_persona}", flush=True)
-            print(f"angle -- {angle}", flush=True)
+            print(f"Blog post angle -- {blog_post_angle}", flush=True)
+            print(f"long_tail_keywords -- {long_tail_keywords}", flush=True)
+            print(f"semantic_keywords -- {semantic_keywords}", flush=True)
+            print(f"blog_outline -- {blog_outline}", flush=True)
+            print(f"other_important_and_relevant_things -- {other_important_and_relevant_things}", flush=True)
             
             f_keywords = normalize_case_preserve_formats_in_keywords(primary + secondary, FILE_FORMAT_MAPPINGS)
             print(f"normalized f_keywords -- {f_keywords}")
 
-            blog_outline = topics_raw_data.get("outline")
+         
             
             print(f" Generating content now.")
        
@@ -154,10 +163,13 @@ class BlogOrchestrator:
                 author,
                 platform,
                 target_persona,
-                angle,
+                blog_post_angle,
+                long_tail_keywords,
+                semantic_keywords,
+                other_important_and_relevant_things,
                 isCloud
             )
-            
+        
             result = await llm_service.run_agent(
                 instructions=instructions,
                 context=context,
@@ -237,19 +249,19 @@ class BlogOrchestrator:
             self.metrics.print_summary()
             print("📊 Sending metrics to Google Script... ")
           
-            metrics_sent_for_team = await self.metrics.send_metrics_to_team()
-            metrics_sent_for_pro = await self.metrics.send_metrics_to_prod()
+            # metrics_sent_for_team = await self.metrics.send_metrics_to_team()
+            # metrics_sent_for_pro = await self.metrics.send_metrics_to_prod()
             
-            if metrics_sent_for_team and metrics_sent_for_pro:
-                print("Metrics sent successfully\n")
-            else:
-                print("Failed to send metrics (check logs)\n")
+            # if metrics_sent_for_team and metrics_sent_for_pro:
+            #     print("Metrics sent successfully\n")
+            # else:
+            #     print("Failed to send metrics (check logs)\n")
 
-            self.log("---Execution started---")
-            self.log(f"Keyword file index -> {topics_raw_data}")
-            self.log(f"product info {product_info}")
-            self.log(f" File path: {filepath}")
-            self.log("---Execution ended---")
+            # self.log("---Execution started---")
+            # self.log(f"Keyword file index -> {topics_raw_data}")
+            # self.log(f"product info {product_info}")
+            # self.log(f" File path: {filepath}")
+            # self.log("---Execution ended---")
 
             return {
                 "folder_name": folder_name,

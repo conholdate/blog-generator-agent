@@ -8,7 +8,7 @@
 
 ---
 
-## 1. PDF to JSON in Java: a Complete Tutorial for Developers
+## 1. PDF to JSON in Java: A Complete Tutorial for Developers
 - **Cluster ID:** `c0`
 - **Target persona:** Java developers who need to extract structured data from PDF documents and convert it to JSON format.
 - **Blog post angle:** A complete, step‑by‑step guide for Java developers to convert PDFs to JSON using Aspose.OMR Cloud SDK.
