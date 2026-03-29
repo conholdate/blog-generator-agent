@@ -210,13 +210,30 @@ STEP 0 — MANDATORY HEADING PLAN (DO THIS BEFORE WRITING ANYTHING ELSE)
 Before writing a single word of content, you MUST complete this heading plan:
 
 1. Write down every H2 heading you intend to use across the entire blog
-2. For each heading, extract its core keyword phrase (2-4 words)
-3. Scan the list — if any core keyword phrase appears more than ONCE, rewrite that heading NOW
-4. Only proceed to write content after every heading in your plan is unique
+2. Apply Title Case to every heading — every major word must start with a capital letter
+3. For each heading, extract its core keyword phrase (2-4 words)
+4. Scan the list — if any core keyword phrase appears more than ONCE, rewrite that heading NOW
+5. Only proceed to write content after every heading in your plan is unique and Title Cased
+
+**TITLE CASE CHECK — APPLY TO EVERY HEADING BEFORE WRITING:**
+After writing your heading plan, scan every heading and verify Title Case is applied.
+Every major word MUST start with a capital letter — no exceptions.
+WRONG: ## Steps to CSV editor Development in Java
+CORRECT: ## Steps to CSV Editor Development in Java
+WRONG: ## CSV editor Development in Java - Complete Code Example
+CORRECT: ## CSV Editor Development in Java - Complete Code Example
+WRONG: ## Key features of GroupDocs.Editor Cloud SDK for Java
+CORRECT: ## Key Features of GroupDocs.Editor Cloud SDK for Java
+
+Title Case Rules:
+- Capitalize: First word, last word, and all major words
+- Major words: Nouns, verbs, adjectives, adverbs, pronouns
+- Lowercase only: Articles (a, an, the), short conjunctions (and, but, or), short prepositions (in, on, at, to, for, with, from)
+- EXCEPTION: Always capitalize prepositions of 5+ letters (Between, Through, Without, Against)
 
 **HEADING PLAN FORMAT (fill this out mentally before writing):**
 
-  H2-1: [Prerequisites heading]        -> core phrase: ___
+  H2-1: [Setup/Prerequisites heading]  -> core phrase: ___
   H2-2: [Outline heading 1]            -> core phrase: ___
   H2-3: [Outline heading 2]            -> core phrase: ___
   H2-4: [Steps heading]                -> core phrase: ___
@@ -620,8 +637,8 @@ PART 2: CONTENT STRUCTURE (MANDATORY SECTIONS)
 
 ### REQUIRED SECTIONS (IN ORDER)
 1. Introduction Content (NO H2 heading - direct paragraphs)
-2. Prerequisites and Setup (H2 heading - ALWAYS include - combines installation and environment setup)
-3. Outline Sections (Follow provided outline EXACTLY - SKIP only "Setting Up", "Installation", or "Steps/Step-by-Step" sections)
+2. Prerequisites and Setup (H2 heading - see rules below for when to add vs use outline heading)
+3. Outline Sections (Follow provided outline EXACTLY - SKIP only "Steps/Step-by-Step" sections)
 4. **Steps (H2 heading - ALWAYS include - MUST appear immediately before Complete Code Example with NO other heading between them)**
 5. **Complete Code Example(s) (H2 heading - MANDATORY - NEVER SKIP - MUST appear immediately after Steps with NO other heading between them)**
 6. **[CLOUD ONLY] [Core Action] via REST API using cURL (H2 heading - MANDATORY when isCloud = true - NEVER SKIP - heading must NOT copy the blog title keyword)**
@@ -631,25 +648,22 @@ PART 2: CONTENT STRUCTURE (MANDATORY SECTIONS)
 
 **CRITICAL: ALL HEADINGS MUST USE TITLE CASE**
 Every H2 and H3 heading MUST follow Title Case capitalization rules.
-Examples:
-- "Prerequisites and Setup" - CORRECT
-- "Steps to Convert PDF to PNG" - CORRECT
-- "Understanding File Compression" - CORRECT
+Every major word MUST start with a capital letter — no exceptions.
+WRONG: ## Steps to CSV editor Development in Java
+CORRECT: ## Steps to CSV Editor Development in Java
 
 **CRITICAL SECTION ORDERING RULES:**
-- [Topic] - Prerequisites and Setup MUST come immediately after Introduction
-- Outline sections MUST come immediately after Prerequisites and Setup
-- IMPORTANT: Skip any "Setting Up [Product]", "Installation", "Configuration", or "Steps/Step-by-Step" sections from the outline
+- Prerequisites/Setup section MUST come immediately after Introduction
+- Outline sections MUST come immediately after Prerequisites/Setup
 - Steps MUST come immediately after ALL Outline sections
 - Complete Code Example(s) MUST come immediately after Steps
 - [CLOUD ONLY] cURL Commands section MUST come immediately after Complete Code Example(s) when isCloud = true
 - Conclusion MUST come after Complete Code Example(s)
 - FAQs MUST come after Conclusion
-- Order (non-cloud): Intro -> [Topic] - Prerequisites and Setup -> Outline -> Steps -> Complete Code -> Conclusion -> FAQs -> Read More
-- Order (cloud): Intro -> [Topic] - Prerequisites and Setup -> Outline -> Steps -> Complete Code -> cURL Commands -> Conclusion -> FAQs -> Read More
+- Order (non-cloud): Intro -> Setup -> Outline -> Steps -> Complete Code -> Conclusion -> FAQs -> Read More
+- Order (cloud): Intro -> Setup -> Outline -> Steps -> Complete Code -> cURL Commands -> Conclusion -> FAQs -> Read More
 
 **LOGICAL FLOW ENFORCEMENT FOR OUTLINE SECTIONS:**
-- SKIP any sections about "Setting Up", "Installation", "Configuration", "Prerequisites"
 - SKIP any sections containing "Steps" or "Step-by-Step" in the heading
 - Include Understanding/Conceptual sections FIRST
 - Include Implementation/Usage/Advanced sections SECOND
@@ -665,8 +679,8 @@ ALL headings (H2, H3, etc.) MUST use Title Case capitalization.
 Title Case Rules:
 - Capitalize: First word, last word, and all major words
 - Major words: Nouns, verbs, adjectives, adverbs, pronouns
-- Lowercase: Articles (a, an, the), conjunctions (and, but, or), prepositions (in, on, at, to, for, with, from)
-- EXCEPTION: Always capitalize prepositions of 5+ letters (Between, Through, Without)
+- Lowercase only: Articles (a, an, the), short conjunctions (and, but, or), short prepositions (in, on, at, to, for, with, from)
+- EXCEPTION: Always capitalize prepositions of 5+ letters (Between, Through, Without, Against)
 
 ### 1. INTRODUCTION CONTENT (NO HEADING) - CRITICAL PRODUCT LINK REQUIREMENT
 
@@ -676,7 +690,7 @@ Title Case Rules:
 - The introduction MUST be EXACTLY ONE paragraph
 - NO second paragraph allowed
 - NO third paragraph allowed
-- After the single introductory paragraph, IMMEDIATELY start the next H2 heading ([Topic] - Prerequisites and Setup)
+- After the single introductory paragraph, IMMEDIATELY start the next H2 heading (Setup/Prerequisites)
 
 **SINGLE PARAGRAPH REQUIREMENTS:**
 - Must be 3-5 sentences long
@@ -709,59 +723,62 @@ Example 3 (cloud):
 - "[Aspose.PDF for .NET](ProductURL) enables developers to..." - WRONG: product link in first sentence
 - Two separate paragraphs in introduction - WRONG: must be exactly one paragraph
 
-### 2. PREREQUISITES AND SETUP (MANDATORY)
+### 2. PREREQUISITES AND SETUP (MANDATORY — READ RULES BEFORE ADDING)
 
-**HEADING FORMAT (CRITICAL - SEO ENFORCED):**
+**OUTLINE SETUP DETECTION — CHECK THIS FIRST BEFORE ADDING THIS SECTION:**
 
-The Prerequisites and Setup heading MUST include the primary keyword or a close semantic
-variant of it. NEVER use the plain generic heading "## Prerequisites and Setup" on its own.
+Scan the provided outline for any section containing these words:
+"Setup", "Installation", "Install", "Configure", "Prerequisites", "Environment", "Getting Started"
 
-**HEADING FORMULA:**
+- IF the outline ALREADY contains a setup/installation section:
+  * DO NOT add a separate "## [Topic] - Prerequisites and Setup" heading
+  * The outline's setup section IS the prerequisites section — they serve the same purpose
+  * Use the EXACT heading from the outline for this section
+  * Place it immediately after the Introduction as the first H2
+  * Include all prerequisites content (system requirements, installation, package manager commands) under that outline heading
+
+- IF the outline contains NO setup or installation section:
+  * ADD the "## [Topic] - Prerequisites and Setup" heading as described below
+
+**WRONG (outline has setup section but prompt adds another — creates duplicate):**
+  ## CSV Editing Solution - Prerequisites and Setup   <- added by prompt
+  ## Installation and Setup in Java                   <- from outline (same purpose, duplicate)
+
+**CORRECT (outline has setup section — use it as the single setup heading):**
+  ## Installation and Setup in Java                   <- outline heading used as the single setup section
+
+**CORRECT (outline has NO setup section — add the prompt-generated one):**
+  ## CSV Editor Development - Prerequisites and Setup  <- added by prompt since outline has none
+
+**HEADING FORMAT (when adding prompt-generated Prerequisites heading):**
+
 ## [Primary Keyword Topic] - Prerequisites and Setup
 
 **HOW TO DERIVE THE HEADING:**
 1. Take the primary keyword: {primary_keyword}
-2. Extract the core action or topic (strip platform/language if the result is too long)
-3. Append " - Prerequisites and Setup"
+2. Extract the core action or topic
+3. DO NOT include the platform/language name in this heading
+4. Append " - Prerequisites and Setup"
 
 **HEADING DERIVATION EXAMPLES:**
 
-Primary keyword: "convert HTML to Powerpoint in Java"
-- Core topic: "HTML to Powerpoint Conversion"
-- CORRECT: "## HTML to Powerpoint Conversion - Prerequisites and Setup"
-- WRONG:   "## Prerequisites and Setup"
-
 Primary keyword: "convert PDF to PNG in C#"
-- Core topic: "PDF to PNG Conversion"
 - CORRECT: "## PDF to PNG Conversion - Prerequisites and Setup"
-- WRONG:   "## Prerequisites and Setup"
-
-Primary keyword: "merge Excel files in Python"
-- Core topic: "Merging Excel Files"
-- CORRECT: "## Merging Excel Files - Prerequisites and Setup"
+- WRONG:   "## PDF to PNG Conversion in C# - Prerequisites and Setup" (has platform)
 - WRONG:   "## Prerequisites and Setup"
 
 Primary keyword: "CSV editor development in Java"
-- Core topic: "CSV Editor Development"
 - CORRECT: "## CSV Editor Development - Prerequisites and Setup"
-- WRONG:   "## CSV Editor Development in Java - Prerequisites and Setup" (too long, repeats platform)
+- WRONG:   "## CSV Editor Development in Java - Prerequisites and Setup" (has platform)
 - WRONG:   "## Prerequisites and Setup"
 
 **RULES:**
 - The core topic part MUST use Title Case
 - Keep the core topic concise - 3 to 6 words maximum
-- DO NOT include the platform/language name in the Prerequisites heading
+- DO NOT include the platform/language name — stripping it frees it for use in other headings
 - The separator between core topic and "Prerequisites and Setup" is " - " (space hyphen space)
-- This heading counts as a natural keyword occurrence for SEO
-- Stripping the platform from the Prerequisites heading frees it up for use in other headings
 
-**VALIDATION:**
-- Does the heading contain a keyword-rich topic before "Prerequisites and Setup"? - REQUIRED
-- Is it "## [Topic] - Prerequisites and Setup" format? - REQUIRED
-- Is it just "## Prerequisites and Setup" with no topic prefix? - INVALID - rewrite it
-- Does the heading include the platform/language name? - REMOVE IT from this heading
-
-Content MUST include:
+Content MUST include (whether using outline heading or prompt-generated heading):
 - System requirements (if applicable)
 - Product installation instructions
 - Environment/project setup if needed
@@ -801,13 +818,9 @@ skip list below. The outline is pre-approved — treat it as fixed, non-negotiab
 - If an outline heading is similar to a Steps or Complete Code heading,
   keep the outline heading as-is and differentiate the Steps/Code headings instead
 
-**SKIP THESE OUTLINE SECTIONS ONLY (already covered by dedicated prompt sections):**
-- Skip: "Setting Up [Product]"
-- Skip: "Installing [Product]"
-- Skip: "Configuring [Product]"
-- Skip: "Environment Setup"
-- Skip: "Prerequisites"
+**SKIP THESE OUTLINE SECTIONS ONLY:**
 - Skip: ANY heading containing the word "Steps" or "Step-by-Step"
+- If the outline has a setup/installation section — use it as the Prerequisites section (Section 2 above), do not skip it
 
 **OUTLINE COMPLETION NOTICE:**
 {outline_addition_notice}
@@ -819,13 +832,11 @@ HEADING UNIQUENESS RULE (APPLIES TO ALL HEADINGS ACROSS THE ENTIRE BLOG)
 **THIS IS NON-NEGOTIABLE. READ BEFORE WRITING ANY HEADING.**
 
 Every H2 heading across the entire blog MUST be unique — no two headings may
-share the same keyword phrase. This is especially critical for sections 4, 5,
-and 5a which cover related material and are most prone to repetition.
+share the same keyword phrase.
 
 **THE CORE PROBLEM TO AVOID:**
 
-The same keyword phrase (e.g. "CSV Editor Development in Java") must NEVER appear in
-more than one heading. The following is a concrete example of what is WRONG:
+The same keyword phrase must NEVER appear in more than one heading:
 
   WRONG: ## CSV Editor Development in Java - Prerequisites and Setup  <- phrase used
   WRONG: ## CSV Editor Development in Java                            <- same phrase
@@ -833,25 +844,23 @@ more than one heading. The following is a concrete example of what is WRONG:
 
 **THE SOLUTION - KEYWORD BUDGET:**
 
-Think of the primary keyword, secondary keywords, semantic keywords, and
-long-tail keyword phrases as a shared budget. Each heading MUST draw from a
-DIFFERENT part of that budget. No keyword phrase may be spent twice.
+Each heading MUST draw from a DIFFERENT part of the keyword budget.
+No keyword phrase may be spent twice.
 
-**MANDATORY HEADING ASSIGNMENT (follow this allocation exactly):**
+**MANDATORY HEADING ASSIGNMENT:**
 
-  Prerequisites heading:
-    - Use the core topic WITHOUT the platform/language name
-    - Format: ## [Core Topic] - Prerequisites and Setup
+  Prerequisites/Setup heading:
+    - If using outline heading: use it as-is
+    - If adding prompt heading: use core topic WITHOUT platform/language
     - Example: ## CSV Editor Development - Prerequisites and Setup (no "in Java")
 
   Section 4 - Steps heading:
-    - Use the PRIMARY keyword + platform/language (e.g. "in Python", "in Java")
+    - Use PRIMARY keyword + platform/language
     - Format: ## Steps to [Primary Keyword Action in Language/Platform]
     - Example: ## Steps to Build a CSV Editor in Java
 
   Section 5 - Complete Code Example heading:
-    - MUST also contain the PRIMARY keyword - this is required for SEO
-    - Differentiate from Section 4 by varying the ANGLE
+    - MUST contain PRIMARY keyword but with a DIFFERENT angle than Section 4
     - Format: ## [Primary Keyword + Differentiating Qualifier] - Complete Code Example
     - Examples:
         ## Java CSV Editor - Complete Code Example
@@ -859,32 +868,22 @@ DIFFERENT part of that budget. No keyword phrase may be spent twice.
         ## Building CSV Editor Programmatically - Complete Code Example
 
   Section 5a - cURL heading (cloud only):
-    - The primary keyword phrase MUST NOT appear here
-    - MUST use a SECONDARY keyword, semantic term, or long-tail phrase
-    - Format: ## [Distinct Secondary/Semantic/Long-tail Phrase] via REST API using cURL
+    - Primary keyword phrase MUST NOT appear here
+    - Use SECONDARY keyword, semantic term, or long-tail phrase
+    - Format: ## [Distinct Secondary/Semantic Phrase] via REST API using cURL
     - Examples:
         ## Cloud-Based Document Conversion via REST API using cURL
         ## REST-Based CSV Processing via REST API using cURL
-
-**PRE-HEADING CHECKLIST (run before writing each of sections 4, 5, 5a):**
-
-  Before writing the Section 5 heading, ask:
-  - Does it contain the PRIMARY keyword? -> REQUIRED (add it if missing)
-  - Is the angle/qualifier different from Section 4's heading? -> REQUIRED
-  - Is it IDENTICAL to Section 4's heading word-for-word? -> REWRITE if yes
-
-  Before writing the Section 5a heading, ask:
-  - Does it contain the primary keyword phrase? -> REMOVE IT
-  - Does it contain ANY phrase already used in Section 4 heading? -> REWRITE
-  - Does it contain ANY phrase already used in Section 5 heading? -> REWRITE
 
 ===============================================================================
 
 ### 4. STEPS SECTION (MANDATORY)
 
-**HEADING RULE:** Use the PRIMARY keyword + platform/language.
+**HEADING RULE:** Use PRIMARY keyword + platform/language. Apply Title Case strictly.
 Format: ## Steps to [Primary Keyword Action in Language/Platform]
 Example: ## Steps to Build a CSV Editor in Java
+WRONG: ## Steps to CSV editor Development in Java  (lowercase "editor" - INVALID)
+CORRECT: ## Steps to CSV Editor Development in Java  (Title Case - VALID)
 
 **PLACEMENT RULE (NON-NEGOTIABLE):**
 - This section MUST appear immediately after the last Outline section
@@ -909,13 +908,11 @@ CRITICAL: This section is MANDATORY and MUST ALWAYS be included. NO EXCEPTIONS.
 - This section MUST appear immediately after the Steps section
 - NEVER insert any heading between Steps and Complete Code Example
 
-**HEADING RULE:** MUST contain the PRIMARY keyword. Differentiate from the
-Section 4 heading by varying the angle. DO NOT drop the primary keyword.
+**HEADING RULE:** MUST contain PRIMARY keyword with a DIFFERENT angle than Steps heading.
+Apply Title Case strictly — every major word capitalized.
 Format: ## [Primary Keyword + Differentiating Qualifier] - Complete Code Example
-Examples:
-  ## Java CSV Editor - Complete Code Example
-  ## CSV Editing in Java - Complete Code Example
-  ## Building CSV Editor Programmatically - Complete Code Example
+WRONG: ## CSV editor Development in Java - Complete Code Example  (lowercase "editor")
+CORRECT: ## CSV Editor Development in Java - Complete Code Example  (Title Case)
 
 **INTRO SENTENCE (1-2 sentences before code block):**
 - NEVER use: "ready-to-run", "ready-to-use", "production-ready", "copy-paste ready"
@@ -949,9 +946,8 @@ Examples:
 **IF isCloud = true - THIS SECTION IS MANDATORY. NEVER SKIP IT.**
 **IF isCloud = false - DO NOT include this section at all.**
 
-**HEADING RULE:** MUST use a keyword phrase that has NOT appeared in either the
-Section 4 heading or the Section 5 heading. Draw from secondary keywords,
-semantic terms, or long-tail phrases not yet used in any heading.
+**HEADING RULE:** MUST use a keyword phrase NOT used in Section 4 or Section 5.
+Apply Title Case strictly.
 Format: ## [Distinct Keyword/Phrase] via REST API using cURL
 Examples:
   ## Cloud-Based Document Conversion via REST API using cURL
@@ -1162,7 +1158,7 @@ Before finalizing, verify:
 - All markdown links properly formatted as [text](url) with NO space between ] and (
 - Meta description is EXACTLY 140-160 characters (counted manually)
 - Summary is EXACTLY 200-260 characters (counted manually)
-- ALL headings (H2, H3) use Title Case capitalization
+- ALL headings (H2, H3) use Title Case — every major word starts with a capital letter
 - No duplicate Steps/Step-by-Step headings from outline
 - Steps section appears immediately after the last Outline section
 - Complete Code Example appears immediately after Steps with NO heading between them
@@ -1171,9 +1167,10 @@ Before finalizing, verify:
 - First sentence of introduction does NOT mention the product name or include a product link
 - Product link appears in the SECOND or THIRD sentence of the introduction
 - seoTitle is IDENTICAL to title - no changes, no shortening, no rephrasing
-- STEP 0 COMPLETED: Heading plan was created and all core phrases verified as unique before writing
+- STEP 0 COMPLETED: Heading plan was created, Title Case verified, all core phrases verified as unique before writing
+- SETUP SECTION DEDUPLICATION: If outline has a setup/installation section, only ONE setup heading exists — the outline heading. No prompt-generated Prerequisites heading was added.
 - GLOBAL HEADING DEDUPLICATION: No core phrase (3+ consecutive words) appears in more than one heading across the entire blog
-- Prerequisites heading does NOT include the platform/language name
+- Prerequisites heading does NOT include the platform/language name (if prompt-generated)
 - OUTLINE COMPLIANCE: All outline headings used word for word exactly as provided - none renamed, reordered, or skipped unless in skip list
 - PRIMARY KEYWORD - Occurrence 1: present in the Introduction paragraph?
 - PRIMARY KEYWORD - Occurrence 2: present in the Outline or Steps sections?
@@ -1183,14 +1180,14 @@ Before finalizing, verify:
 - LONG-TAIL KEYWORDS: At least 2-3 phrases from the long-tail list used naturally in the body?
 - SEMANTIC KEYWORDS: Most semantic/LSI terms appear at least once naturally in the body?
 - FINAL LINK SCAN: Have you checked every single link follows [text](url) with no space between ] and (?
-- PREREQUISITES HEADING: Does the heading follow "## [Topic] - Prerequisites and Setup" format WITHOUT platform/language name?
-- HEADING UNIQUENESS: Does the Complete Code Example heading contain the primary keyword? Does the cURL heading use a secondary/semantic phrase with NO repetition of the primary keyword phrase? Are all headings (Steps, Complete Code, cURL, Prerequisites, Outline) distinct from each other?
+- HEADING UNIQUENESS: Does the Complete Code Example heading contain the primary keyword? Does the cURL heading use a secondary/semantic phrase with NO repetition of the primary keyword phrase? Are all headings distinct from each other?
 
 {other_notes_block}
 ===============================================================================
 END OF PROMPT
 ===============================================================================
 """
+
 
 
 
