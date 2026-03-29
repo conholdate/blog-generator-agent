@@ -22,8 +22,8 @@
 - Key Features of GroupDocs.Editor Cloud SDK for Java
 - Installation and Setup in Java
 - Step-by-Step: CSV Editor Development in Java
-- Configuring GroupDocs.Editor Cloud GroupDocs.Editor Cloud SDK for CSV Handling
-- Performance Tuning and Troubleshooting with GroupDocs.Editor Cloud GroupDocs.Editor Cloud SDK
+- Configuring GroupDocs.Editor Cloud SDK for CSV Handling
+- Performance Tuning and Troubleshooting with GroupDocs.Editor Cloud SDK
 
 **Other important and relevant things:**
 - Highlight code snippets that demonstrate reading editing and saving CSV files with GroupDocs.Editor Cloud sdk.
