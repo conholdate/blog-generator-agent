@@ -391,31 +391,11 @@ PART 1: FRONTMATTER REQUIREMENTS
 - DO NOT remove brand names or product names from title
 - The title variable is pre-validated and must be used as-is
 
-**SEO Title Field (MUST CREATE):**
-- SEO Title: MUST be created using the primary keyword
-- SEO Title MUST be 50-60 characters (including spaces) - STRICTLY ENFORCED
-- SEO Title format should be compelling and click-worthy
-- MUST include the primary keyword naturally
-- Should focus on the action/benefit/solution
-- NO brand/product names in SEO Title
-- Count characters carefully before finalizing
-
-**SEO Title Examples:**
-Primary Keyword: "convert pdf to png"
-- "Convert PDF to PNG: Complete Step-by-Step Guide" (51 chars) - CORRECT
-- "How to Convert PDF to PNG Files Easily in Minutes" (51 chars) - CORRECT
-- "Convert PDF to PNG Images: Complete Developer Guide" (54 chars) - CORRECT
-
-Primary Keyword: "excel to pdf conversion"
-- "Excel to PDF Conversion: Developer's Complete Guide" (53 chars) - CORRECT
-- "Excel to PDF Conversion Tutorial for Developers" (50 chars) - CORRECT
-
-**Character Count Validation for SEO Title:**
-- Count EVERY character including spaces
-- Minimum: 50 characters (reject if less)
-- Maximum: 60 characters (reject if more)
-- Must include primary keyword naturally
-- Must be grammatically correct and compelling
+**SEO Title Field:**
+- seoTitle MUST be identical to the title field
+- Use the EXACT same value as title - do not modify, shorten, or rephrase
+- CORRECT: title: "How to Convert PDF to PNG in C#" and seoTitle: "How to Convert PDF to PNG in C#"
+- WRONG: seoTitle with any different value than title
 
 ### META DESCRIPTION - CHARACTER LIMITS (STRICTLY ENFORCED)
 META DESCRIPTION LENGTH: EXACTLY 140-160 CHARACTERS
@@ -560,7 +540,7 @@ CORRECT FORMAT (ALWAYS use this):
 ### FRONTMATTER TEMPLATE
 ---
 title: "{title}"
-seoTitle: "{seo_topic}"
+seoTitle: "{title}"
 description: "[MUST BE 140-160 chars - count every character including spaces before finalizing]"
 date: {current_date}
 lastmod: {current_date}
@@ -658,11 +638,34 @@ Title Case Rules:
 
 **SINGLE PARAGRAPH REQUIREMENTS:**
 - Must be 3-5 sentences long
-- First or second sentence MUST include the product page link: [BrandName.ProductName for Platform](ProductURL)
+- FIRST sentence MUST be a punchy, engaging hook about the topic, problem, or use case
+  * Hook must relate to the blog title and draw the reader in
+  * DO NOT mention the product in the first sentence
+  * GOOD: "Converting PDF files to PNG images is a common requirement in document processing applications, especially when you need to render pages for preview or display purposes."
+  * GOOD: "Working with 3MF files programmatically can be challenging without the right tools, particularly when you need to convert them to a widely supported format like STL."
+  * BAD: "Aspose.PDF for .NET is a powerful SDK that enables developers..." - starts with product, not topic
+- SECOND or THIRD sentence MUST introduce and link the product: [BrandName.ProductName for Platform](ProductURL)
 - MUST use FULL product name including platform
 - MUST use ProductURL from context dictionary
-- Explain what the product does and what this guide will cover
+- Remaining sentences explain what this guide will cover and what the reader will achieve
 - Use correct terminology based on isCloud variable (SDK for non-cloud, library/API for cloud)
+
+**CORRECT INTRODUCTION EXAMPLES:**
+
+Example 1 (non-cloud):
+"Converting PDF files to PNG images is a common requirement in document processing pipelines, especially for generating previews or thumbnails. [Aspose.PDF for .NET](ProductURL) is a powerful SDK that makes this conversion straightforward in C# applications. In this guide, you will learn how to implement PDF to PNG conversion step by step with complete working code examples."
+
+Example 2 (non-cloud):
+"Handling 3MF files programmatically requires a reliable solution that supports modern 3D file formats. [Aspose.3D for Java](ProductURL) provides a comprehensive SDK for working with 3D file formats, including converting 3MF to STL with just a few lines of code. This tutorial walks you through the entire process with prerequisites, implementation steps, and a complete code example."
+
+Example 3 (cloud):
+"Automating document conversion at scale is a challenge that many development teams face when building modern applications. [GroupDocs.Conversion Cloud](ProductURL) provides a powerful REST API that handles format conversion without any local installation. This guide shows you how to integrate PDF to Word conversion into your application using simple API calls."
+
+**WRONG INTRODUCTION EXAMPLES:**
+- "Aspose.PDF for .NET is a powerful SDK..." - WRONG: starts with product name, no hook
+- "In today's digital landscape, PDF conversion..." - WRONG: generic AI phrase
+- "[Aspose.PDF for .NET](ProductURL) enables developers to..." - WRONG: product link in first sentence
+- Two separate paragraphs in introduction - WRONG: must be exactly one paragraph
 
 ### 2. PREREQUISITES AND SETUP (MANDATORY)
 
@@ -1123,6 +1126,10 @@ Before finalizing, verify:
 - Steps section appears immediately after the last Outline section
 - Complete Code Example appears immediately after Steps with NO heading between them
 - [CLOUD ONLY] cURL Commands section is present when isCloud = true
+- Introduction is EXACTLY ONE paragraph with a punchy hook as the first sentence
+- First sentence of introduction does NOT mention the product name or include a product link
+- Product link appears in the SECOND or THIRD sentence of the introduction
+- seoTitle is IDENTICAL to title - no changes, no shortening, no rephrasing
 - PRIMARY KEYWORD - Occurrence 1: present in the Introduction paragraph?
 - PRIMARY KEYWORD - Occurrence 2: present in the Outline or Steps sections?
 - PRIMARY KEYWORD - Occurrence 3: present in the Conclusion section?
