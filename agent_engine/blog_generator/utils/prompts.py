@@ -204,6 +204,48 @@ You are an expert technical blog writer. Write a detailed, SEO-optimized blog po
 {context}
 
 ===============================================================================
+STEP 0 — MANDATORY HEADING PLAN (DO THIS BEFORE WRITING ANYTHING ELSE)
+===============================================================================
+
+Before writing a single word of content, you MUST complete this heading plan:
+
+1. Write down every H2 heading you intend to use across the entire blog
+2. For each heading, extract its core keyword phrase (2-4 words)
+3. Scan the list — if any core keyword phrase appears more than ONCE, rewrite that heading NOW
+4. Only proceed to write content after every heading in your plan is unique
+
+**HEADING PLAN FORMAT (fill this out mentally before writing):**
+
+  H2-1: [Prerequisites heading]        -> core phrase: ___
+  H2-2: [Outline heading 1]            -> core phrase: ___
+  H2-3: [Outline heading 2]            -> core phrase: ___
+  H2-4: [Steps heading]                -> core phrase: ___
+  H2-5: [Complete Code heading]        -> core phrase: ___
+  H2-6: [cURL heading if cloud]        -> core phrase: ___
+  H2-7: Conclusion                     -> core phrase: conclusion
+  H2-8: FAQs                           -> core phrase: faqs
+
+**DEDUPLICATION CHECK — STRICTLY ENFORCED:**
+- Extract the core 2-4 word phrase from each heading
+- If the SAME phrase appears in 2 or more headings — REWRITE one of them
+- A phrase is "the same" if it shares 3+ consecutive words with another heading
+- NO exceptions — every heading must have a unique core phrase
+
+**WRONG (CSV Editor Development in Java appears 3 times):**
+  ## CSV Editor Development in Java - Prerequisites and Setup  <- phrase used
+  ## CSV Editor Development in Java                            <- same phrase
+  ## CSV Editor Development in Java - Complete Code Example    <- same phrase again
+
+**CORRECT (each heading has a unique core phrase):**
+  ## CSV Editor Development - Prerequisites and Setup          <- "CSV Editor Development"
+  ## Building a CSV Editor in Java                             <- "Building CSV Editor"
+  ## Steps to Build a CSV Editor in Java                       <- "Build CSV Editor"
+  ## Java CSV Editing - Complete Code Example                  <- "Java CSV Editing"
+  ## CSV File Editing via REST API using cURL                  <- "CSV File Editing"
+
+**YOU MUST NOT PROCEED TO WRITE CONTENT UNTIL THIS CHECK IS COMPLETE.**
+
+===============================================================================
 CRITICAL REQUIREMENT - PRODUCT URL LINKING (READ THIS FIRST)
 ===============================================================================
 
@@ -579,7 +621,7 @@ PART 2: CONTENT STRUCTURE (MANDATORY SECTIONS)
 ### REQUIRED SECTIONS (IN ORDER)
 1. Introduction Content (NO H2 heading - direct paragraphs)
 2. Prerequisites and Setup (H2 heading - ALWAYS include - combines installation and environment setup)
-3. Outline Sections (Follow provided outline exactly - SKIP any "Setting Up", "Installation", or "Steps/Step-by-Step" sections as they are already covered by dedicated sections)
+3. Outline Sections (Follow provided outline EXACTLY - SKIP only "Setting Up", "Installation", or "Steps/Step-by-Step" sections)
 4. **Steps (H2 heading - ALWAYS include - MUST appear immediately before Complete Code Example with NO other heading between them)**
 5. **Complete Code Example(s) (H2 heading - MANDATORY - NEVER SKIP - MUST appear immediately after Steps with NO other heading between them)**
 6. **[CLOUD ONLY] [Core Action] via REST API using cURL (H2 heading - MANDATORY when isCloud = true - NEVER SKIP - heading must NOT copy the blog title keyword)**
@@ -699,27 +741,25 @@ Primary keyword: "merge Excel files in Python"
 - CORRECT: "## Merging Excel Files - Prerequisites and Setup"
 - WRONG:   "## Prerequisites and Setup"
 
-Primary keyword: "convert 3DS file to STL in Java"
-- Core topic: "3DS to STL Conversion"
-- CORRECT: "## 3DS to STL Conversion - Prerequisites and Setup"
-- WRONG:   "## Prerequisites and Setup"
-
-Primary keyword: "uncompress Z file in Python"
-- Core topic: "Z File Decompression"
-- CORRECT: "## Z File Decompression - Prerequisites and Setup"
+Primary keyword: "CSV editor development in Java"
+- Core topic: "CSV Editor Development"
+- CORRECT: "## CSV Editor Development - Prerequisites and Setup"
+- WRONG:   "## CSV Editor Development in Java - Prerequisites and Setup" (too long, repeats platform)
 - WRONG:   "## Prerequisites and Setup"
 
 **RULES:**
 - The core topic part MUST use Title Case
 - Keep the core topic concise - 3 to 6 words maximum
-- DO NOT include the full platform/language name if the heading becomes too long
+- DO NOT include the platform/language name in the Prerequisites heading
 - The separator between core topic and "Prerequisites and Setup" is " - " (space hyphen space)
 - This heading counts as a natural keyword occurrence for SEO
+- Stripping the platform from the Prerequisites heading frees it up for use in other headings
 
 **VALIDATION:**
 - Does the heading contain a keyword-rich topic before "Prerequisites and Setup"? - REQUIRED
 - Is it "## [Topic] - Prerequisites and Setup" format? - REQUIRED
 - Is it just "## Prerequisites and Setup" with no topic prefix? - INVALID - rewrite it
+- Does the heading include the platform/language name? - REMOVE IT from this heading
 
 Content MUST include:
 - System requirements (if applicable)
@@ -740,12 +780,28 @@ Content MUST include:
 - DO NOT include license code in any code examples
 - DO mention licensing AFTER Complete Code Example or in Conclusion
 
-### 3. OUTLINE SECTIONS
-Follow the provided outline but SKIP any setup/installation/steps sections:
+### 3. OUTLINE SECTIONS (STRICTLY ENFORCED)
+
+**CRITICAL: FOLLOW THE OUTLINE EXACTLY AS PROVIDED — THIS IS NON-NEGOTIABLE**
+
+Follow the provided outline EXACTLY as given. Use the EXACT heading text from the outline.
+DO NOT rename, reword, reorder, or skip any outline section unless it falls into the
+skip list below. The outline is pre-approved — treat it as fixed, non-negotiable input.
 
 {formatted_outline}
 
-**CRITICAL: SKIP THESE TOPICS FROM OUTLINE (already covered by dedicated prompt sections):**
+**OUTLINE COMPLIANCE RULES (STRICTLY ENFORCED):**
+- Use the EXACT heading text from the outline — word for word, character for character
+- DO NOT generate your own headings to replace outline headings
+- DO NOT reorder outline sections — preserve the exact order given
+- DO NOT merge two outline sections into one
+- DO NOT split one outline section into two
+- DO NOT add new headings that are not in the outline
+- ONLY skip sections that match the skip list below
+- If an outline heading is similar to a Steps or Complete Code heading,
+  keep the outline heading as-is and differentiate the Steps/Code headings instead
+
+**SKIP THESE OUTLINE SECTIONS ONLY (already covered by dedicated prompt sections):**
 - Skip: "Setting Up [Product]"
 - Skip: "Installing [Product]"
 - Skip: "Configuring [Product]"
@@ -757,23 +813,23 @@ Follow the provided outline but SKIP any setup/installation/steps sections:
 {outline_addition_notice}
 
 ===============================================================================
-HEADING UNIQUENESS RULE (APPLIES TO SECTIONS 4, 5, AND 5a)
+HEADING UNIQUENESS RULE (APPLIES TO ALL HEADINGS ACROSS THE ENTIRE BLOG)
 ===============================================================================
 
 **THIS IS NON-NEGOTIABLE. READ BEFORE WRITING ANY HEADING.**
 
-Every H2 heading across the entire blog MUST be unique - no two headings may
+Every H2 heading across the entire blog MUST be unique — no two headings may
 share the same keyword phrase. This is especially critical for sections 4, 5,
 and 5a which cover related material and are most prone to repetition.
 
 **THE CORE PROBLEM TO AVOID:**
 
-The same keyword phrase (e.g. "PDF to JSON Conversion") must NEVER appear in
+The same keyword phrase (e.g. "CSV Editor Development in Java") must NEVER appear in
 more than one heading. The following is a concrete example of what is WRONG:
 
-  WRONG: ## Steps to Convert PDF to JSON        <- "PDF to JSON" used here
-  WRONG: ## PDF to JSON Conversion - Complete Code Example  <- repeated
-  WRONG: ## PDF to JSON Conversion via REST API using cURL  <- repeated again
+  WRONG: ## CSV Editor Development in Java - Prerequisites and Setup  <- phrase used
+  WRONG: ## CSV Editor Development in Java                            <- same phrase
+  WRONG: ## CSV Editor Development in Java - Complete Code Example    <- same phrase again
 
 **THE SOLUTION - KEYWORD BUDGET:**
 
@@ -783,66 +839,52 @@ DIFFERENT part of that budget. No keyword phrase may be spent twice.
 
 **MANDATORY HEADING ASSIGNMENT (follow this allocation exactly):**
 
+  Prerequisites heading:
+    - Use the core topic WITHOUT the platform/language name
+    - Format: ## [Core Topic] - Prerequisites and Setup
+    - Example: ## CSV Editor Development - Prerequisites and Setup (no "in Java")
+
   Section 4 - Steps heading:
-    - Use the PRIMARY keyword + platform/language (e.g. "in Python", "in Java").
+    - Use the PRIMARY keyword + platform/language (e.g. "in Python", "in Java")
     - Format: ## Steps to [Primary Keyword Action in Language/Platform]
-    - Example: ## Steps to Convert PDF to JSON in Python
+    - Example: ## Steps to Build a CSV Editor in Java
 
   Section 5 - Complete Code Example heading:
-    - MUST also contain the PRIMARY keyword - this is required for SEO.
-    - Differentiate from Section 4 by varying the ANGLE, not by dropping the
-      primary keyword. Use the language/platform, the output type, or a
-      qualifier that makes it distinct from the Section 4 heading.
+    - MUST also contain the PRIMARY keyword - this is required for SEO
+    - Differentiate from Section 4 by varying the ANGLE
     - Format: ## [Primary Keyword + Differentiating Qualifier] - Complete Code Example
-    - Examples (the primary keyword "PDF to JSON" is kept, angle changes):
-        ## PDF to JSON in Java - Complete Code Example
-        ## PDF to JSON Conversion in C# - Complete Code Example
-        ## PDF File to JSON in Python - Complete Code Example
-        ## Converting PDF to JSON Programmatically - Complete Code Example
+    - Examples:
+        ## Java CSV Editor - Complete Code Example
+        ## CSV Editing in Java - Complete Code Example
+        ## Building CSV Editor Programmatically - Complete Code Example
 
   Section 5a - cURL heading (cloud only):
-    - The primary keyword phrase MUST NOT appear here (it was used in 4 and 5).
+    - The primary keyword phrase MUST NOT appear here
     - MUST use a SECONDARY keyword, semantic term, or long-tail phrase
-      that has NOT been used in either Section 4 or Section 5 headings.
-    - DO NOT repeat any phrase used in Section 4 or Section 5.
     - Format: ## [Distinct Secondary/Semantic/Long-tail Phrase] via REST API using cURL
-    - Examples (pick whichever fits the topic and has not been used above):
+    - Examples:
         ## Cloud-Based Document Conversion via REST API using cURL
-        ## REST-Based PDF Processing via REST API using cURL
-        ## Remote File Transformation via REST API using cURL
-        ## API-Driven PDF Export via REST API using cURL
+        ## REST-Based CSV Processing via REST API using cURL
 
 **PRE-HEADING CHECKLIST (run before writing each of sections 4, 5, 5a):**
 
   Before writing the Section 5 heading, ask:
   - Does it contain the PRIMARY keyword? -> REQUIRED (add it if missing)
-  - Is the angle/qualifier different from Section 4's heading? -> REQUIRED (vary language, platform, or phrasing)
+  - Is the angle/qualifier different from Section 4's heading? -> REQUIRED
   - Is it IDENTICAL to Section 4's heading word-for-word? -> REWRITE if yes
 
   Before writing the Section 5a heading, ask:
-  - Does it contain the primary keyword phrase? -> REMOVE IT (5a must not repeat the primary keyword)
-  - Does it contain ANY phrase already used in the Section 4 heading? -> REWRITE
-  - Does it contain ANY phrase already used in the Section 5 heading? -> REWRITE
-
-  All three headings MUST pass this check before the blog is finalised.
-
-**WRONG examples (sections 4 and 5 share the identical phrase - never do this):**
-  ## Steps to Convert PDF to JSON in Python      <- primary keyword used here
-  ## PDF to JSON Conversion - Complete Code Example  <- same phrase repeated
-  ## PDF to JSON Conversion via REST API using cURL  <- same phrase repeated again
-
-**CORRECT examples (4 and 5 both contain the primary keyword but with different angles; 5a uses a distinct secondary/semantic phrase):**
-  ## Steps to Convert PDF to JSON in Python           <- primary keyword + language
-  ## PDF to JSON in Java - Complete Code Example      <- primary keyword + platform qualifier
-  ## Cloud-Based Document Export via REST API using cURL  <- secondary/semantic, no primary phrase
+  - Does it contain the primary keyword phrase? -> REMOVE IT
+  - Does it contain ANY phrase already used in Section 4 heading? -> REWRITE
+  - Does it contain ANY phrase already used in Section 5 heading? -> REWRITE
 
 ===============================================================================
 
 ### 4. STEPS SECTION (MANDATORY)
 
-**HEADING RULE:** Use the PRIMARY keyword or its closest action variant.
-Format: ## Steps to [Primary Keyword Action]
-Example: ## Steps to Convert PDF to JSON in Python
+**HEADING RULE:** Use the PRIMARY keyword + platform/language.
+Format: ## Steps to [Primary Keyword Action in Language/Platform]
+Example: ## Steps to Build a CSV Editor in Java
 
 **PLACEMENT RULE (NON-NEGOTIABLE):**
 - This section MUST appear immediately after the last Outline section
@@ -868,13 +910,12 @@ CRITICAL: This section is MANDATORY and MUST ALWAYS be included. NO EXCEPTIONS.
 - NEVER insert any heading between Steps and Complete Code Example
 
 **HEADING RULE:** MUST contain the PRIMARY keyword. Differentiate from the
-Section 4 heading by varying the angle - add the language/platform, a
-qualifier, or a slight rephrasing. DO NOT drop the primary keyword.
+Section 4 heading by varying the angle. DO NOT drop the primary keyword.
 Format: ## [Primary Keyword + Differentiating Qualifier] - Complete Code Example
 Examples:
-  ## PDF to JSON in Java - Complete Code Example
-  ## PDF to JSON Conversion in C# - Complete Code Example
-  ## Converting PDF to JSON Programmatically - Complete Code Example
+  ## Java CSV Editor - Complete Code Example
+  ## CSV Editing in Java - Complete Code Example
+  ## Building CSV Editor Programmatically - Complete Code Example
 
 **INTRO SENTENCE (1-2 sentences before code block):**
 - NEVER use: "ready-to-run", "ready-to-use", "production-ready", "copy-paste ready"
@@ -1130,6 +1171,10 @@ Before finalizing, verify:
 - First sentence of introduction does NOT mention the product name or include a product link
 - Product link appears in the SECOND or THIRD sentence of the introduction
 - seoTitle is IDENTICAL to title - no changes, no shortening, no rephrasing
+- STEP 0 COMPLETED: Heading plan was created and all core phrases verified as unique before writing
+- GLOBAL HEADING DEDUPLICATION: No core phrase (3+ consecutive words) appears in more than one heading across the entire blog
+- Prerequisites heading does NOT include the platform/language name
+- OUTLINE COMPLIANCE: All outline headings used word for word exactly as provided - none renamed, reordered, or skipped unless in skip list
 - PRIMARY KEYWORD - Occurrence 1: present in the Introduction paragraph?
 - PRIMARY KEYWORD - Occurrence 2: present in the Outline or Steps sections?
 - PRIMARY KEYWORD - Occurrence 3: present in the Conclusion section?
@@ -1138,14 +1183,15 @@ Before finalizing, verify:
 - LONG-TAIL KEYWORDS: At least 2-3 phrases from the long-tail list used naturally in the body?
 - SEMANTIC KEYWORDS: Most semantic/LSI terms appear at least once naturally in the body?
 - FINAL LINK SCAN: Have you checked every single link follows [text](url) with no space between ] and (?
-- PREREQUISITES HEADING: Does the heading follow "## [Topic] - Prerequisites and Setup" format with a keyword-rich topic prefix?
-- HEADING UNIQUENESS: Does the Complete Code Example heading contain the primary keyword? Does the cURL heading use a secondary/semantic phrase with NO repetition of the primary keyword phrase? Are all three headings (Steps, Complete Code, cURL) distinct from each other?
+- PREREQUISITES HEADING: Does the heading follow "## [Topic] - Prerequisites and Setup" format WITHOUT platform/language name?
+- HEADING UNIQUENESS: Does the Complete Code Example heading contain the primary keyword? Does the cURL heading use a secondary/semantic phrase with NO repetition of the primary keyword phrase? Are all headings (Steps, Complete Code, cURL, Prerequisites, Outline) distinct from each other?
 
 {other_notes_block}
 ===============================================================================
 END OF PROMPT
 ===============================================================================
 """
+
 
 
 
