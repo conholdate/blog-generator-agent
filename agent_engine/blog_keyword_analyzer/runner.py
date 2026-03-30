@@ -277,6 +277,13 @@ def write_topics_markdown(
     lines.append("---")
     lines.append("")
 
+    if not result.topics:
+        lines.append("_No valid topics were generated for this run._")
+        lines.append("")
+        md_path.write_text("\n".join(lines), encoding="utf-8")
+        logger.info("Saved topics markdown to %s", md_path)
+        return md_path
+
     def _to_mapping(obj: Any) -> Dict[str, Any]:
         """Support dict topics + Pydantic v1/v2 models."""
         if isinstance(obj, Mapping):

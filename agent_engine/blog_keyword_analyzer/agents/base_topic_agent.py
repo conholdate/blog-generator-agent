@@ -1232,6 +1232,19 @@ class KeywordResearchAgent:
 
             return outline2[:10]
 
+        def _default_target_persona() -> str:
+            if platform_label:
+                return f"{platform_label} developers"
+            return "Software developers"
+
+        def _default_angle(primary_kw: str) -> str:
+            kw = " ".join((primary_kw or "").strip().split())
+            if not kw:
+                return f"Practical developer guide for {product}"
+            if platform_label:
+                return f"How to {kw.lower()} with {product} in {platform_label}"
+            return f"How to {kw.lower()} with {product}"
+
         # -------------------------
         # Parse + HARD title enforcement
         # -------------------------
@@ -1335,6 +1348,18 @@ class KeywordResearchAgent:
             else:
                 t["editorial_notes"] = []
 
+            angle = t.get("angle")
+            if not isinstance(angle, str) or not angle.strip():
+                t["angle"] = _default_angle(pk)
+            else:
+                t["angle"] = refiner.to_sentence_case(angle)
+
+            persona = t.get("target_persona")
+            if not isinstance(persona, str) or not persona.strip():
+                t["target_persona"] = _default_target_persona()
+            else:
+                t["target_persona"] = " ".join(persona.strip().split())
+
             # HARD: build title from primary keyword (guarantees pk appears verbatim)
             # 1) HARD: build title from primary keyword
             t["title"] = _build_title_from_primary(pk, cid)
@@ -1396,14 +1421,14 @@ class KeywordResearchAgent:
                     t["title"] = self._ensure_product_in_title(t["title"], product)
 
             # Outline enforcement
-            if "outline" in t:
-                t["outline"] = _force_first4_outline(_normalize_outline_items(t.get("outline")), pk)
+            t["outline"] = _force_first4_outline(_normalize_outline_items(t.get("outline")), pk)
 
             try:
                 out.append(TopicIdea(**t))
             except Exception as e:
                 invalid_count += 1
-                logger.debug("Failed to parse TopicIdea from entry %r: %s", t, e)
+                logger.warning("Failed to parse TopicIdea for cluster_id=%s primary_keyword=%r: %s", cid, pk, e)
+                logger.debug("Rejected topic payload: %r", t)
 
         logger.info(
             "Parsed %d valid topics from LLM (invalid_entries=%d, total=%d)",
