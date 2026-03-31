@@ -1,8 +1,8 @@
 # Blog Topics for Aspose.3D
 
 - **Brand:** Aspose
-- **Product:** Aspose.3D
-- **Platform:** Python via .NET
+- **Product:** Aspose.3D for Python via .net
+- **Platform:** Python
 - **Run ID:** 37a32da2
 - **Topics:** 1
 
