@@ -1,7 +1,7 @@
 # Blog Topics for Aspose.BarCode
 
 - **Brand:** Aspose
-- **Product:** Aspose.BarCode
+- **Product:** Aspose.BarCode for Python via .NET
 - **Platform:** Python
 - **Run ID:** feb90850
 - **Topics:** 1
