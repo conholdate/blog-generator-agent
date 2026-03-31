@@ -2,7 +2,7 @@
 
 - **Brand:** Aspose
 - **Product:** Aspose.3D
-- **Platform:** Python
+- **Platform:** Python via .NET
 - **Run ID:** 37a32da2
 - **Topics:** 1
 
