@@ -22,7 +22,7 @@
 - Key Features of Aspose.Cad Cloud SDK for Java
 - Installation and Setup in Java
 - Step-by-Step: Dwt to PDF Conversion using Rest in Java
-- Configuring Aspose.Cad Cloud Aspose.Cad Cloud SDK for Optimal Performance
+- Configuring Aspose.Cad Cloud SDK for Optimal Performance
 - Troubleshooting Common Conversion Errors
 
 **Other important and relevant things:**

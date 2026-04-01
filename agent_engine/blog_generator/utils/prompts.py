@@ -211,9 +211,10 @@ Before writing a single word of content, you MUST complete this heading plan:
 
 1. Write down every H2 heading you intend to use across the entire blog
 2. Apply Title Case to every heading — every major word must start with a capital letter
-3. For each heading, extract its core keyword phrase (2-4 words)
-4. Scan the list — if any core keyword phrase appears more than ONCE, rewrite that heading NOW
-5. Only proceed to write content after every heading in your plan is unique and Title Cased
+3. Apply file format and product name capitalization rules to every heading
+4. For each heading, extract its core keyword phrase (2-4 words)
+5. Scan the list — if any core keyword phrase appears more than ONCE, rewrite that heading NOW
+6. Only proceed to write content after every heading in your plan is unique, Title Cased, and has correct format/product casing
 
 **TITLE CASE CHECK — APPLY TO EVERY HEADING BEFORE WRITING:**
 After writing your heading plan, scan every heading and verify Title Case is applied.
@@ -230,6 +231,25 @@ Title Case Rules:
 - Major words: Nouns, verbs, adjectives, adverbs, pronouns
 - Lowercase only: Articles (a, an, the), short conjunctions (and, but, or), short prepositions (in, on, at, to, for, with, from)
 - EXCEPTION: Always capitalize prepositions of 5+ letters (Between, Through, Without, Against)
+
+**FILE FORMAT AND PRODUCT NAME CAPITALIZATION — APPLY TO ALL HEADINGS:**
+After Title Case verification, scan every heading for file format names and product abbreviations.
+
+FILE FORMATS must always be fully uppercase — no exceptions:
+- WRONG: Dwt, Pdf, Png, Html, Docx, Xlsx, Csv, Json, Xml, Svg, Dxf, Dwg, Stl, Obj, Fbx, Jpg, Jpeg, Bmp, Gif, Tiff, Psd, Ai, Eps, Zip, Rar, Mp4, Mp3, Doc, Xls, Ppt, Odt, Rtf, Txt, Msg, Eml
+- CORRECT: DWT, PDF, PNG, HTML, DOCX, XLSX, CSV, JSON, XML, SVG, DXF, DWG, STL, OBJ, FBX, JPG, JPEG, BMP, GIF, TIFF, PSD, AI, EPS, ZIP, RAR, MP4, MP3, DOC, XLS, PPT, ODT, RTF, TXT, MSG, EML
+
+PRODUCT NAME ABBREVIATIONS must use correct casing:
+- WRONG: Aspose.Cad, Aspose.Pdf, Aspose.Html, Aspose.Zip, Groupdocs, Conholdate
+- CORRECT: Aspose.CAD, Aspose.PDF, Aspose.HTML, Aspose.ZIP, GroupDocs, Conholdate
+
+EXAMPLES:
+- WRONG: ## Dwt to Pdf Conversion Using Rest in Java
+- CORRECT: ## DWT to PDF Conversion Using REST in Java
+- WRONG: ## Aspose.Cad for Java - Prerequisites and Setup
+- CORRECT: ## Aspose.CAD for Java - Prerequisites and Setup
+- WRONG: ## Convert Dwg to Stl in Python
+- CORRECT: ## Convert DWG to STL in Python
 
 **HEADING PLAN FORMAT (fill this out mentally before writing):**
 
@@ -1093,6 +1113,27 @@ PART 6: KEYWORD STRATEGY (SEO - CRITICAL)
 ### WORD COUNT TARGET
 Introduction + Prerequisites + Outline sections + Conclusion = {settings.NUMBER_OF_BLOG_WORDS} words
 
+**FILE FORMAT CAPITALIZATION IN KEYWORDS AND BODY CONTENT (STRICTLY ENFORCED):**
+All file format names appearing in keywords, outline headings, steps, body content, and FAQs
+MUST be fully uppercase regardless of how they appear in the input.
+
+Common formats to always uppercase:
+DWT, DWG, DXF, DWF, DGN, DWS, DWT, IFC, IGS, IGES, STL, OBJ, FBX, 3DS, GLTF, GLB,
+PDF, PNG, JPG, JPEG, BMP, GIF, TIFF, WEBP, SVG, PSD, AI, EPS, EMF, WMF,
+DOCX, DOC, XLSX, XLS, PPTX, PPT, ODT, ODS, ODP, RTF, TXT, CSV,
+HTML, HTM, MHTML, XML, JSON, YAML, MARKDOWN, MD,
+ZIP, RAR, TAR, GZ, 7Z, MSG, EML, MBOX, ICS, VCF,
+MP4, AVI, MOV, MP3, WAV, FLAC
+
+If a file format appears in lowercase or mixed case anywhere in the input — title, keywords,
+outline, or context — override it and write it in full uppercase in the output.
+
+WRONG: "convert dwt to pdf in java", "Dwt to Pdf", "dwt file conversion"
+CORRECT: "convert DWT to PDF in Java", "DWT to PDF", "DWT file conversion"
+
+WRONG: "Aspose.Cad for Java", "Aspose.Pdf for .NET", "Groupdocs.Conversion"
+CORRECT: "Aspose.CAD for Java", "Aspose.PDF for .NET", "GroupDocs.Conversion"
+
 ### PRIMARY AND SECONDARY KEYWORDS
 
 The PRIMARY keyword is the first keyword in the list: {primary_keyword}
@@ -1172,6 +1213,8 @@ Before finalizing, verify:
 - GLOBAL HEADING DEDUPLICATION: No core phrase (3+ consecutive words) appears in more than one heading across the entire blog
 - Prerequisites heading does NOT include the platform/language name (if prompt-generated)
 - OUTLINE COMPLIANCE: All outline headings used word for word exactly as provided - none renamed, reordered, or skipped unless in skip list
+- FILE FORMAT CAPITALIZATION: Scan every heading, keyword usage, and body sentence — all file format names must be fully uppercase (DWT not Dwt, PDF not Pdf, STL not Stl, DWG not Dwg). Fix any that are not.
+- PRODUCT NAME CASING: Verify correct product name casing throughout (Aspose.CAD not Aspose.Cad, Aspose.PDF not Aspose.Pdf, Aspose.HTML not Aspose.Html, GroupDocs not Groupdocs)
 - PRIMARY KEYWORD - Occurrence 1: present in the Introduction paragraph?
 - PRIMARY KEYWORD - Occurrence 2: present in the Outline or Steps sections?
 - PRIMARY KEYWORD - Occurrence 3: present in the Conclusion section?
@@ -1187,6 +1230,7 @@ Before finalizing, verify:
 END OF PROMPT
 ===============================================================================
 """
+
 
 
 
