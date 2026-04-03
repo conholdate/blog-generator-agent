@@ -14,6 +14,7 @@ from agent_engine.blog_keyword_analyzer.tools.normalization import (
     KeywordRefiner,
     canonical_platform_label,
     contains_platform_variant,
+    platform_base_display,
     platform_variant_pattern,
     strip_platform_mentions,
 )
@@ -881,6 +882,18 @@ class KeywordResearchAgent:
             # Clean malformed platform/preposition fragments like ".NET with in .NET"
             if pl:
                 platform_token_pattern = platform_variant_pattern(pl) or re.escape(pl)
+                platform_base = platform_base_display(pl)
+                if platform_base and platform_base != pl:
+                    t = re.sub(
+                        rf"(?i)\b(?:with|via|using|for|in)\s+{re.escape(platform_base)}\s+(?:in|via)\s+{re.escape(pl)}\b",
+                        f"in {pl}",
+                        t,
+                    ).strip()
+                    t = re.sub(
+                        rf"(?i)\b{re.escape(platform_base)}\s+(?:in|via)\s+{re.escape(pl)}\b",
+                        pl,
+                        t,
+                    ).strip()
 
                 t = re.sub(
                     rf"(?i)\s+{platform_token_pattern}\s+(?:with|via|using|for|in)\s+in\s+{re.escape(pl)}\b",
@@ -1164,6 +1177,32 @@ class KeywordResearchAgent:
         # -------------------------
         # Deterministic outline post-processing
         # -------------------------
+        def _dedupe_outline_product_mentions(text: str) -> str:
+            s = " ".join((text or "").strip().split())
+            if not s or not outline_library_name:
+                return s
+
+            full_variants = _safe_product_title_variants(outline_library_name)
+            reduced_variants = set()
+            for v in full_variants:
+                candidates = {
+                    re.sub(r"(?i)\s+(sdk|api)\s*$", "", v).strip(),
+                    re.sub(r"(?i)\s+(cloud\s+sdk|cloud\s+api)\s*$", "", v).strip(),
+                }
+                for candidate in candidates:
+                    if candidate and candidate.lower() != outline_library_name.lower():
+                        reduced_variants.add(candidate)
+
+            for full in full_variants:
+                pat = rf"(?i)(?<!\w){re.escape(full)}(?!\w)\s+(?<!\w){re.escape(full)}(?!\w)"
+                s = re.sub(pat, outline_library_name, s)
+
+            for reduced in sorted(reduced_variants, key=len, reverse=True):
+                pat = rf"(?i)(?<!\w){re.escape(reduced)}(?!\w)\s+(?<!\w){re.escape(outline_library_name)}(?!\w)"
+                s = re.sub(pat, outline_library_name, s)
+
+            return re.sub(r"\s{2,}", " ", s).strip()
+
         def _normalize_outline_items(items: Any) -> List[str]:
             if not isinstance(items, list):
                 return []
@@ -1181,6 +1220,7 @@ class KeywordResearchAgent:
 
                 # NEW: enforce spacing after colon (fixes "Step-by-Step:Save" -> "Step-by-Step: Save")
                 s2 = re.sub(r"\s*:\s*", ": ", s2)
+                s2 = _dedupe_outline_product_mentions(s2)
 
                 # NEW: collapse any double spaces introduced
                 s2 = re.sub(r"\s{2,}", " ", s2).strip()

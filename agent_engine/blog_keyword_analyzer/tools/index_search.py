@@ -9,7 +9,7 @@ from pathlib import Path
 from typing import Any, Dict, List, Optional
 
 from ..config import settings
-from agent_engine.blog_keyword_analyzer.tools.normalization import canonical_blog_platform_key
+from agent_engine.blog_keyword_analyzer.tools.normalization import canonical_blog_platform_key, supported_platform_options_text
 
 def _get_index_path() -> Path:
     """
@@ -62,7 +62,7 @@ def search_blog_index(
 
     Args:
         product: product code / folder (e.g. "cells", "words", "pdf").
-        platform: optional canonical platform name (e.g. "python", "java", "csharp").
+        platform: optional supported platform name.
                    If None, no platform filtering is applied.
 
     Returns:
@@ -100,11 +100,11 @@ def main() -> None:
         # All 'cells' posts
         python -m agent_engine.blog_keyword_analyzer.tools.index_search --product cells
 
-        # Only 'cells' + 'python'
-        python -m agent_engine.blog_keyword_analyzer.tools.index_search --product cells --platform python
+        # Only 'cells' + '.NET'
+        python -m agent_engine.blog_keyword_analyzer.tools.index_search --product cells --platform ".NET"
 
-        # Only 'cells' + 'java'
-        python -m agent_engine.blog_keyword_analyzer.tools.index_search --product cells --platform java
+        # Only 'cells' + 'Java'
+        python -m agent_engine.blog_keyword_analyzer.tools.index_search --product cells --platform Java
     """
     parser = argparse.ArgumentParser(
         description="Test blog index search by product and optional platform."
@@ -117,7 +117,7 @@ def main() -> None:
     parser.add_argument(
         "--platform",
         required=False,
-        help="Optional platform filter, e.g. python, java, csharp"
+        help=f"Optional platform filter. Allowed values: {supported_platform_options_text()}"
     )
 
     args = parser.parse_args()

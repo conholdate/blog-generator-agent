@@ -9,7 +9,11 @@ from typing import Any, Dict, List, Optional
 import yaml  # pip install pyyaml
 
 from ..config import settings
-from agent_engine.blog_keyword_analyzer.tools.normalization import canonical_blog_platform_key, detect_blog_platform_keys_in_text
+from agent_engine.blog_keyword_analyzer.tools.normalization import (
+    canonical_blog_platform_key,
+    detect_blog_platform_keys_in_text,
+    supported_platform_options_text,
+)
 
 
 class FrontMatterError(Exception):
@@ -213,8 +217,8 @@ def main() -> None:
         # All Cells posts (any platform), sorted by date ascending
         python -m agent_engine.blog_keyword_analyzer.tools.directory_search --product cells
 
-        # Cells + Python only
-        python -m agent_engine.blog_keyword_analyzer.tools.directory_search --product cells --platform python
+        # Cells + .NET only
+        python -m agent_engine.blog_keyword_analyzer.tools.directory_search --product cells --platform ".NET"
     """
     parser = argparse.ArgumentParser(
         description="Search blog posts directly from directory based on front matter."
@@ -227,7 +231,7 @@ def main() -> None:
     parser.add_argument(
         "--platform",
         required=False,
-        help="Optional platform filter, e.g. python, java, csharp",
+        help=f"Optional platform filter. Allowed values: {supported_platform_options_text()}",
     )
 
     args = parser.parse_args()

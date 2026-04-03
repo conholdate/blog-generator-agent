@@ -87,13 +87,6 @@ PLATFORM_REGISTRY: Dict[str, PlatformSpec] = {
         blog_key="cpp",
         aliases=("c++", "cpp", "cplusplus", "c plus plus"),
     ),
-    # Python variants
-    "python": PlatformSpec(
-        family="python",
-        display="Python",
-        blog_key="python",
-        aliases=("python", "py"),
-    ),
     "python_via_net": PlatformSpec(
         family="python_via_net",
         display="Python via .NET",
@@ -106,19 +99,7 @@ PLATFORM_REGISTRY: Dict[str, PlatformSpec] = {
         blog_key="python",
         aliases=("python via java", "python-java", "python_java"),
     ),
-    "python_via_cpp": PlatformSpec(
-        family="python_via_cpp",
-        display="Python via C++",
-        blog_key="python",
-        aliases=("python via c++", "python via cpp", "python-cpp", "python_cpp", "python via c"),
-    ),
     # Node.js variants
-    "nodejs": PlatformSpec(
-        family="nodejs",
-        display="Node.js",
-        blog_key="nodejs",
-        aliases=("node.js", "nodejs", "node js"),
-    ),
     "nodejs_via_java": PlatformSpec(
         family="nodejs_via_java",
         display="Node.js via Java",
@@ -195,49 +176,6 @@ PLATFORM_REGISTRY: Dict[str, PlatformSpec] = {
         display="Rust via C++",
         blog_key="rust",
         aliases=("rust via c++", "rust via c", "rust-cpp", "rust_cpp"),
-    ),
-    # Standalone direct languages for more general normalization utility
-    "javascript": PlatformSpec(
-        family="javascript",
-        display="JavaScript",
-        blog_key="javascript",
-        aliases=("javascript",),
-    ),
-    "typescript": PlatformSpec(
-        family="typescript",
-        display="TypeScript",
-        blog_key="typescript",
-        aliases=("typescript",),
-    ),
-    "go": PlatformSpec(
-        family="go",
-        display="Go",
-        blog_key="go",
-        aliases=("go", "golang"),
-    ),
-    "rust": PlatformSpec(
-        family="rust",
-        display="Rust",
-        blog_key="rust",
-        aliases=("rust",),
-    ),
-    "ruby": PlatformSpec(
-        family="ruby",
-        display="Ruby",
-        blog_key="ruby",
-        aliases=("ruby",),
-    ),
-    "swift": PlatformSpec(
-        family="swift",
-        display="Swift",
-        blog_key="swift",
-        aliases=("swift",),
-    ),
-    "kotlin": PlatformSpec(
-        family="kotlin",
-        display="Kotlin",
-        blog_key="kotlin",
-        aliases=("kotlin",),
     ),
 }
 
@@ -329,6 +267,7 @@ FILE_FORMAT_REGISTRY: Dict[str, FileFormatSpec] = {
     "drc": FileFormatSpec("drc", "DRC", ("drc",)),
     "dxf": FileFormatSpec("dxf", "DXF", ("dxf",)),
     "dwg": FileFormatSpec("dwg", "DWG", ("dwg",)),
+    "dwt": FileFormatSpec("dwt", "DWT", ("dwt",)),
     "dgn": FileFormatSpec("dgn", "DGN", ("dgn",)),
     "fbx": FileFormatSpec("fbx", "FBX", ("fbx",)),
     "glb": FileFormatSpec("glb", "GLB", ("glb",)),
@@ -612,7 +551,41 @@ def normalize_platform_family(value: Optional[str]) -> str:
     for alias, family in sorted(PLATFORM_ALIAS_TO_FAMILY.items(), key=lambda kv: len(kv[0]), reverse=True):
         if alias and alias in raw:
             return family
-    return raw.replace(" ", "_")
+    return ""
+
+
+def supported_platform_families() -> Tuple[str, ...]:
+    return tuple(PLATFORM_REGISTRY.keys())
+
+
+def supported_platform_labels() -> Tuple[str, ...]:
+    return tuple(spec.display for spec in PLATFORM_REGISTRY.values())
+
+
+def supported_platform_error(value: Optional[str]) -> str:
+    provided = (value or "").strip()
+    allowed = supported_platform_options_text()
+    return f"Unsupported platform '{provided}'. Allowed platforms: {allowed}."
+
+
+def require_supported_platform(value: Optional[str]) -> str:
+    family = normalize_platform_family(value)
+    if not family:
+        raise ValueError(supported_platform_error(value))
+    return family
+
+
+def supported_platform_options_text() -> str:
+    return ", ".join(supported_platform_labels())
+
+
+def platform_base_display(value: Optional[str]) -> str:
+    label = canonical_platform_label(value)
+    if not label:
+        return ""
+    if " via " in label:
+        return label.split(" via ", 1)[0].strip()
+    return label
 
 
 # Convenience alias normalizers for specific downstream expectations
@@ -666,8 +639,10 @@ def platform_aliases(value: Optional[str]) -> Tuple[str, ...]:
 
 
 def normalize_missing_platform(value: Optional[str]) -> Optional[str]:
-    family = normalize_platform_family(value)
-    return family or None
+    try:
+        return require_supported_platform(value)
+    except ValueError:
+        return None
 
 
 def nor_platform_key(platform_key: Optional[str]) -> str:
@@ -952,7 +927,7 @@ def normalize_product_short_name(full_name: str) -> str:
     if not full_name:
         return ""
 
-    name = " ".join(str(full_name).strip().split())
+    name = normalize_display_text(" ".join(str(full_name).strip().split()))
 
     for pattern in _PRODUCT_SUFFIX_PATTERNS:
         updated = pattern.sub("", name).strip()
@@ -1011,8 +986,9 @@ def _canon_groupdocs_products(text: str) -> str:
 
 def _canon_aspose_dotted_prefix(text: str) -> str:
     def repl(m: re.Match[str]) -> str:
-        tail = m.group(1)
-        return f"Aspose.{tail[:1].upper()}{tail[1:]}" if tail else "Aspose"
+        tail = (m.group(1) or "").lower()
+        canon = ASPOSE_PRODUCT_REGISTRY.get(tail)
+        return canon if canon else (f"Aspose.{tail[:1].upper()}{tail[1:]}" if tail else "Aspose")
 
     text = _ASPOSE_PREFIX_RE.sub(repl, text)
     return re.sub(r"\baspose\b", "Aspose", text, flags=re.IGNORECASE)
@@ -1038,6 +1014,13 @@ def _canonicalize_dotted_product_token(tok: str) -> Optional[str]:
     if not re.match(r"^[A-Za-z][A-Za-z0-9]*(?:\.[A-Za-z][A-Za-z0-9]*)+$", tok):
         return None
 
+    if tok.lower().startswith("aspose."):
+        parts = tok.split(".")
+        if len(parts) == 2:
+            canon = ASPOSE_PRODUCT_REGISTRY.get(parts[1].lower())
+            if canon:
+                return canon
+
     brand_map = {
         "aspose": "Aspose",
         "groupdocs": "GroupDocs",
@@ -1045,6 +1028,7 @@ def _canonicalize_dotted_product_token(tok: str) -> Optional[str]:
     }
 
     parts = tok.split(".")
+
     canon_parts: List[str] = []
     for idx, part in enumerate(parts):
         low = part.lower()
@@ -1066,8 +1050,6 @@ def _canonicalize_dotted_product_token(tok: str) -> Optional[str]:
 
 def _sentencecase_token(tok: str, is_first: bool) -> str:
     low = tok.lower()
-    if _MIXED_CASE_RE.match(tok):
-        return tok
     dotted = _canonicalize_dotted_product_token(tok)
     if dotted:
         return dotted
@@ -1081,6 +1063,8 @@ def _sentencecase_token(tok: str, is_first: bool) -> str:
         return "LaTeX"
     if low in ACRONYMS:
         return low.upper()
+    if _MIXED_CASE_RE.match(tok):
+        return tok
     if is_first:
         return low[:1].upper() + low[1:]
     return low
@@ -1088,8 +1072,6 @@ def _sentencecase_token(tok: str, is_first: bool) -> str:
 
 def _titlecase_token(tok: str, is_first: bool, is_last: bool) -> str:
     low = tok.lower()
-    if _MIXED_CASE_RE.match(tok):
-        return tok
     dotted = _canonicalize_dotted_product_token(tok)
     if dotted:
         return dotted
@@ -1103,6 +1085,8 @@ def _titlecase_token(tok: str, is_first: bool, is_last: bool) -> str:
         return "LaTeX"
     if low in ACRONYMS:
         return low.upper()
+    if _MIXED_CASE_RE.match(tok):
+        return tok
     if low in _SMALL_WORDS and not is_first and not is_last:
         return low
     return low[:1].upper() + low[1:]
@@ -1197,6 +1181,7 @@ __all__ = [
     "normalize_missing_platform_value",
     "normalize_platform_family",
     "normalize_platform_mentions",
+    "require_supported_platform",
     "normalize_sentence_text",
     "normalize_text",
     "normalize_title_text",
@@ -1207,6 +1192,7 @@ __all__ = [
     "nor_website_domain",
     "nor_website_section_from_case",
     "platform_aliases",
+    "platform_base_display",
     "platform_header_display",
     "platform_to_csharp",
     "platform_to_display",
@@ -1214,6 +1200,10 @@ __all__ = [
     "refine_keyword",
     "sentence_case",
     "strip_platform_mentions",
+    "supported_platform_error",
+    "supported_platform_families",
+    "supported_platform_labels",
+    "supported_platform_options_text",
     "title_case",
 ]
 

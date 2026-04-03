@@ -19,6 +19,9 @@ from agent_engine.blog_keyword_analyzer.tools.normalization import (
     KeywordRefiner,
     normalize_missing_platform,
     platform_header_display,
+    require_supported_platform,
+    supported_platform_error,
+    supported_platform_options_text,
 )
 
 logger = logging.getLogger(__name__)
@@ -91,6 +94,7 @@ def _parse_missing_topics_selection(path: Path, row_index: int) -> MissingTopicS
     )
     selected_topic: Optional[str] = None
     selected_platforms: List[str] = []
+    invalid_platforms: List[str] = []
 
     for match in table_row_re.finditer(text):
         current_row = int(match.group(1))
@@ -101,13 +105,23 @@ def _parse_missing_topics_selection(path: Path, row_index: int) -> MissingTopicS
         platform_tokens = [p.strip() for p in match.group(3).split(",")]
         selected_platforms = []
         for token in platform_tokens:
+            if not token:
+                continue
             normalized = normalize_missing_platform(token)
             if normalized and normalized not in selected_platforms:
                 selected_platforms.append(normalized)
+            elif not normalized and token.upper() != "GENERAL":
+                invalid_platforms.append(token)
         break
 
     if not selected_topic:
         raise ValueError(f"Row #{row_index} was not found in missing topics table: {path}")
+    if invalid_platforms:
+        invalid = ", ".join(invalid_platforms)
+        raise ValueError(
+            f"Row #{row_index} contains unsupported platform value(s): {invalid}. "
+            f"{supported_platform_error(invalid_platforms[0])}"
+        )
 
     return MissingTopicSelection(
         brand=brand_match.group(1).strip(),
@@ -700,7 +714,7 @@ def main() -> None:
         "--platform",
         dest="platform",
         default="",
-        help="Optional target platform, e.g. python, java, csharp (used to avoid duplicates).",
+        help=f"Optional target platform. Allowed values: {supported_platform_options_text()}",
     )
     parser.add_argument("--locale", default="en-US")
     parser.add_argument("--k", dest="clustering_k", type=int, default=None, help="Force number of clusters.")
@@ -753,12 +767,21 @@ def main() -> None:
     if args.use_serp_api and args.use_llm_keywords:
         raise SystemExit("Use only one of --use-serp-api or --use-llm-keywords.")
 
+    selected_platform: Optional[str] = None
+    if args.platform:
+        try:
+            selected_platform = require_supported_platform(args.platform)
+        except ValueError as e:
+            raise SystemExit(str(e))
+
     if args.missing_topics_file:
         try:
             missing_topics_path = _resolve_input_file(args.missing_topics_file)
         except FileNotFoundError as e:
             print(f"\n{e}")
             raise SystemExit(1)
+        except ValueError as e:
+            raise SystemExit(str(e))
 
         if args.missing_topic_row < 1:
             raise SystemExit("--missing-topic-row must be a positive table row index.")
@@ -771,7 +794,6 @@ def main() -> None:
             )
             raise SystemExit(0)
 
-        selected_platform = normalize_missing_platform(args.platform)
         if not selected_platform:
             raise SystemExit(
                 "--platform is required in missing-topics mode and must target one supported platform."
@@ -874,14 +896,14 @@ def main() -> None:
         req.brand,
         req.product,
         req.locale,
-        args.platform or None,
+        selected_platform,
         req.file_path,
     )
 
     # Orchestrate
     result, metrics = run_sync(
         req,
-        platform=args.platform or None,
+        platform=selected_platform,
         use_content_index=args.use_content_index,
         seed_topic=(args.serp_topic.strip() or args.product) if (args.use_serp_api or args.use_llm_keywords) else None,
         include_product_in_title=args.include_product_in_title,
@@ -906,7 +928,7 @@ def main() -> None:
 
     # New: derived artifacts
     try:
-        platform = args.platform or None
+        platform = selected_platform
         brand_out_dir = _resolve_brand_output_dir(result.brand)
         print(brand_out_dir)
         # Save the generated topics in MD file

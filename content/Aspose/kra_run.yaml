@@ -12,21 +12,22 @@ engine:
   # input_file: "content/Aspose/keywords.csv"
 
   # use-serp-api: true
-  use-llm-keywords: true
-  serp-topic: "convert CSV to Excel"
+  # use-llm-keywords: true
+  # serp-topic: "convert CSV to Excel"
 
-  # missing_topics_file: "content/Aspose/aspose-3d_all_missing_topics.md"
-  # missing_topic_row: 5
+  missing_topics_file: "content/Aspose/aspose-3d_all_missing_topics.md"
+  missing_topic_row: 7
 
   brand: "Aspose"
-  product: "Aspose.3d"
-  # platform: "java"           # used as --platform; also passed into prompt as fw_label
+  product: "Aspose.3D"
+  platform: "Python via .NET"           # used as --platform; also passed into prompt as fw_label
   # locale: "en-US"
 
   # === KRA behavior tuning ===
   top_clusters: 15              # --top
   max_rows: 50000               # --max-rows
   use_content_index: false       # if false, we skip existing_topics lookup
+  include_product_in_title: false
   debug: false                  # optional, you can map this to LOG_LEVEL/DEBUG flag
   output_dir: "content//Aspose/output"
 
