@@ -231,7 +231,7 @@ class BlogOrchestrator:
          
             filepath = file_res.get("output", {}).get("filepath")
             folder_name = file_res.get("output", {}).get("folder_name")
-            banner_location = f"../../content/blogPosts/{file_res['output']['brand_folder']}/{file_res['output']['folder_name']}/images/{slugify(post_topic)}.png"
+            banner_location = f"../../content/blogPosts/{file_res['output']['brand_folder']}/{file_res['output']['folder_name']}/images/{slugify(post_topic)}.jpg"
             banner = await generate_blog_image(product_name, post_topic, "Left", banner_location)
             print(f"banner generated -- {banner}", flush=True)
 
