@@ -17,7 +17,9 @@ from .config import settings
 from .tools.metrics import RunMetrics
 from agent_engine.blog_keyword_analyzer.tools.normalization import (
     KeywordRefiner,
+    canonical_platform_label,
     normalize_missing_platform,
+    platform_base_display,
     platform_header_display,
     require_supported_platform,
     supported_platform_error,
@@ -209,6 +211,15 @@ def _normalize_topic_key(text: str) -> str:
     s = re.sub(r"-+", "-", s).strip("-")
     return s
 
+
+def _topic_title_platform_display(title: str, platform: Optional[str]) -> str:
+    out = " ".join((title or "").strip().split())
+    canonical = canonical_platform_label(platform)
+    base = platform_base_display(platform)
+    if not out or not canonical or not base or canonical == base:
+        return out
+    return re.sub(re.escape(canonical), base, out, flags=re.IGNORECASE)
+
 def _brand_slug(brand: str) -> str:
     return _normalize_topic_key(brand or "unknown")
 
@@ -364,7 +375,7 @@ def write_topics_markdown(
         keyword_groups = _keyword_groups_to_mapping(pick("keyword_groups", {}) or {})
         editorial_notes = pick("editorial_notes", []) or []
 
-        topic_title = refiner.to_title_case(title)
+        topic_title = refiner.to_title_case(_topic_title_platform_display(title, platform))
         lines.append(f"## {idx}. {topic_title}")
         if cluster_id is not None:
             lines.append(f"- **Cluster ID:** `{cluster_id}`")
@@ -448,7 +459,7 @@ def write_missing_topics_markdown(
         lines.append(f"## {platform}")
         lines.append("")
         for idx, topic in enumerate(result.topics, start=1):
-            lines.append(f"### {idx}. {refiner.to_title_case(topic.title)}")
+            lines.append(f"### {idx}. {refiner.to_title_case(_topic_title_platform_display(topic.title, platform))}")
             lines.append(f"- **Cluster ID:** `{topic.cluster_id}`")
             lines.append(f"- **Target persona:** {topic.target_persona}")
             lines.append(f"- **Blog post angle:** {topic.angle}")
