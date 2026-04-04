@@ -55,13 +55,13 @@ on:
         description: "If true, clone the matching blog repo and dedupe topics against existing posts."
         type: boolean
         required: false
-        default: true
+        default: false
 
       include_product_in_title:
         description: "If true, enforce product name in generated topic titles. If false, ensure product name is NOT used in titles."
         type: boolean
         required: false
-        default: true
+        default: false
 
 permissions:
   contents: write

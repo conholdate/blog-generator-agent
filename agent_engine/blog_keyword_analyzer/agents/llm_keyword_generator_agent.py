@@ -19,6 +19,7 @@ from ..prompt_loader import load_prompt
 from agent_engine.blog_keyword_analyzer.tools.normalization import (
     normalize_display_text,
     normalize_platform_mentions,
+    platform_aliases,
 )
 from ..schemas import KeywordRecord
 from ..tools.metrics import RunMetrics
@@ -77,7 +78,6 @@ def _platform_contamination(phrase: str, platform: Optional[str]) -> bool:
     if not platform:
         return False
 
-    p = platform.strip().lower()
     t = phrase.lower()
 
     other_tokens = [
@@ -90,19 +90,9 @@ def _platform_contamination(phrase: str, platform: Optional[str]) -> bool:
         "golang",
     ]
 
-    allow = set()
-    if p == "java":
-        allow.update(["java", "jvm"])
-    elif p == "net":
-        allow.update([".net", "dotnet", "c#", "csharp"])
-    elif p in ("cpp", "c++"):
-        allow.update(["c++", "cpp"])
-    elif p == "python":
-        allow.update(["python"])
-    elif p == "node":
-        allow.update(["node", "node.js", "javascript", "typescript"])
-    else:
-        allow.add(p)
+    allow = {alias.strip().lower() for alias in platform_aliases(platform) if alias and alias.strip()}
+    if not allow:
+        allow.add(platform.strip().lower())
 
     for tok in other_tokens:
         if tok in allow:
@@ -276,6 +266,11 @@ def _extract_json_payload(raw_text: str) -> Any:
             return json.loads(list_match.group(0).strip())
         except Exception:
             pass
+
+    # Last-resort salvage for near-JSON lists with minor punctuation damage.
+    quoted = re.findall(r'"([^"\\]*(?:\\.[^"\\]*)*)"', txt)
+    if quoted:
+        return [bytes(item, "utf-8").decode("unicode_escape") for item in quoted]
 
     return None
 
