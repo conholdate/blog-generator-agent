@@ -194,7 +194,7 @@ async def generate_blog_image(product_family: str, main_Heading: str, product_la
 
     params = StdioServerParameters(
         command="python",
-        args=["../../mcp-servers/blog-banner-generator/tools/public-release-post-cover/mcp.py"]
+        args=["../../mcp-servers/blog-banner-generator/tools/public-release-post-cover/banner_mcp_server.py"]
     )
 
     print(f" Connecting to MCP server blog_banner_generator...")
