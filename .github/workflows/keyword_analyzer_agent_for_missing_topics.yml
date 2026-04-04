@@ -10,8 +10,26 @@ on:
 
       platform:
         description: "Target platform from the selected missing-topics row (e.g., net, java, python)."
-        type: string
         required: true
+        type: choice
+        options:
+          - 'Java'
+          - '.NET'
+          - 'C++'
+          - 'PHP'
+          - 'SharePoint'
+          - 'JasperReports'
+          - 'Reporting Services'
+          - 'JavaScript via C++'
+          - 'Go via C++'
+          - 'Rust via C++'
+          - 'Node.js via C++'
+          - 'Node.js via Java'
+          - 'Node.js via .NET'
+          - 'PHP via Java'
+          - 'Python via .NET'
+          - 'Python via Java'
+          - 'Android via Java'
 
       missing_topic_row:
         description: "1-based row number from the missing-topics table to process."
