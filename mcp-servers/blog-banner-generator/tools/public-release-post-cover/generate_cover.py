@@ -1,4 +1,5 @@
 import argparse
+import sys
 
 from cover_generator import generate_cover_image
 
@@ -32,7 +33,7 @@ def main() -> None:
         product_label_alignment=args.alignment,
         output_path=args.output,
     )
-    print(f"Saved: {output_path}")
+    print(f"Saved: {output_path}", file=sys.stderr)
 
 
 if __name__ == "__main__":
