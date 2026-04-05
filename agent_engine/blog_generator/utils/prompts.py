@@ -212,9 +212,10 @@ Before writing a single word of content, you MUST complete this heading plan:
 1. Write down every H2 heading you intend to use across the entire blog
 2. Apply Title Case to every heading — every major word must start with a capital letter
 3. Apply file format and product name capitalization rules to every heading
-4. For each heading, extract its core keyword phrase (2-4 words)
-5. Scan the list — if any core keyword phrase appears more than ONCE, rewrite that heading NOW
-6. Only proceed to write content after every heading in your plan is unique, Title Cased, and has correct format/product casing
+4. Categorize each outline section and assign it to the correct position in the flow
+5. For each heading, extract its core keyword phrase (2-4 words)
+6. Scan the list — if any core keyword phrase appears more than ONCE, rewrite that heading NOW
+7. Only proceed to write content after every heading in your plan is unique, Title Cased, correctly ordered, and has correct format/product casing
 
 **TITLE CASE CHECK — APPLY TO EVERY HEADING BEFORE WRITING:**
 After writing your heading plan, scan every heading and verify Title Case is applied.
@@ -253,14 +254,17 @@ EXAMPLES:
 
 **HEADING PLAN FORMAT (fill this out mentally before writing):**
 
-  H2-1: [Setup/Prerequisites heading]  -> core phrase: ___
-  H2-2: [Outline heading 1]            -> core phrase: ___
-  H2-3: [Outline heading 2]            -> core phrase: ___
-  H2-4: [Steps heading]                -> core phrase: ___
-  H2-5: [Complete Code heading]        -> core phrase: ___
-  H2-6: [cURL heading if cloud]        -> core phrase: ___
-  H2-7: Conclusion                     -> core phrase: conclusion
-  H2-8: FAQs                           -> core phrase: faqs
+  H2-1: [Steps heading]                -> category: STEPS    -> core phrase: ___
+  H2-2: [Complete Code heading]        -> category: CODE     -> core phrase: ___
+  H2-3: [cURL heading if cloud]        -> category: CURL     -> core phrase: ___
+  H2-4: [Setup/Installation heading]   -> category: SETUP    -> core phrase: ___
+  H2-5: [Conceptual outline heading]   -> category: CONCEPT  -> core phrase: ___
+  H2-6: [Config outline heading]       -> category: CONFIG   -> core phrase: ___
+  H2-7: [Optimization heading]         -> category: OPTIMIZE -> core phrase: ___
+  H2-8: [Error handling heading]       -> category: ERRORS   -> core phrase: ___
+  H2-9: [Best practices heading]       -> category: BEST     -> core phrase: ___
+  H2-10: Conclusion                    -> core phrase: conclusion
+  H2-11: FAQs                          -> core phrase: faqs
 
 **DEDUPLICATION CHECK — STRICTLY ENFORCED:**
 - Extract the core 2-4 word phrase from each heading
@@ -274,10 +278,10 @@ EXAMPLES:
   ## CSV Editor Development in Java - Complete Code Example    <- same phrase again
 
 **CORRECT (each heading has a unique core phrase):**
-  ## CSV Editor Development - Prerequisites and Setup          <- "CSV Editor Development"
-  ## Building a CSV Editor in Java                             <- "Building CSV Editor"
   ## Steps to Build a CSV Editor in Java                       <- "Build CSV Editor"
   ## Java CSV Editing - Complete Code Example                  <- "Java CSV Editing"
+  ## CSV Editor Development - Prerequisites and Setup          <- "CSV Editor Development"
+  ## Key Features of the CSV Editor SDK                        <- "CSV Editor SDK"
   ## CSV File Editing via REST API using cURL                  <- "CSV File Editing"
 
 **YOU MUST NOT PROCEED TO WRITE CONTENT UNTIL THIS CHECK IS COMPLETE.**
@@ -631,7 +635,7 @@ tags: {json.dumps(keywords[:3])}
 categories: ["{category}"]
 showtoc: true
 cover:
-   image: images/{url}.png
+   image: images/{url}.jpg
    alt: "{title}"
    caption: "{title}"
 steps:
@@ -657,14 +661,13 @@ PART 2: CONTENT STRUCTURE (MANDATORY SECTIONS)
 
 ### REQUIRED SECTIONS (IN ORDER)
 1. Introduction Content (NO H2 heading - direct paragraphs)
-2. Prerequisites and Setup (H2 heading - see rules below for when to add vs use outline heading)
-3. Outline Sections (Follow provided outline EXACTLY - SKIP only "Steps/Step-by-Step" sections)
-4. **Steps (H2 heading - ALWAYS include - MUST appear immediately before Complete Code Example with NO other heading between them)**
-5. **Complete Code Example(s) (H2 heading - MANDATORY - NEVER SKIP - MUST appear immediately after Steps with NO other heading between them)**
-6. **[CLOUD ONLY] [Core Action] via REST API using cURL (H2 heading - MANDATORY when isCloud = true - NEVER SKIP - heading must NOT copy the blog title keyword)**
-7. Conclusion (H2 heading - ALWAYS include)
-8. FAQs (H2 heading - ALWAYS include)
-{'9. Read More (H2 heading - ALWAYS include last)' if formatted_related else ''}
+2. Steps (H2 heading - FIRST H2, immediately after Introduction — NO other section before this)
+3. Complete Code Example(s) (H2 heading - immediately after Steps)
+4. [CLOUD ONLY] cURL Commands (H2 heading - immediately after Complete Code Example)
+5. Remaining Outline Sections in this order: Setup/Installation, Conceptual, Configuration, Optimization, Error Handling, Best Practices
+6. Conclusion (H2 heading)
+7. FAQs (H2 heading)
+{'8. Read More (H2 heading - always last)' if formatted_related else ''}
 
 **CRITICAL: ALL HEADINGS MUST USE TITLE CASE**
 Every H2 and H3 heading MUST follow Title Case capitalization rules.
@@ -672,21 +675,100 @@ Every major word MUST start with a capital letter — no exceptions.
 WRONG: ## Steps to CSV editor Development in Java
 CORRECT: ## Steps to CSV Editor Development in Java
 
-**CRITICAL SECTION ORDERING RULES:**
-- Prerequisites/Setup section MUST come immediately after Introduction
-- Outline sections MUST come immediately after Prerequisites/Setup
-- Steps MUST come immediately after ALL Outline sections
-- Complete Code Example(s) MUST come immediately after Steps
-- [CLOUD ONLY] cURL Commands section MUST come immediately after Complete Code Example(s) when isCloud = true
-- Conclusion MUST come after Complete Code Example(s)
-- FAQs MUST come after Conclusion
-- Order (non-cloud): Intro -> Setup -> Outline -> Steps -> Complete Code -> Conclusion -> FAQs -> Read More
-- Order (cloud): Intro -> Setup -> Outline -> Steps -> Complete Code -> cURL Commands -> Conclusion -> FAQs -> Read More
+**MANDATORY CONTENT FLOW (STRICTLY ENFORCED):**
+The blog MUST follow this exact logical reading order — no exceptions:
 
-**LOGICAL FLOW ENFORCEMENT FOR OUTLINE SECTIONS:**
-- SKIP any sections containing "Steps" or "Step-by-Step" in the heading
-- Include Understanding/Conceptual sections FIRST
-- Include Implementation/Usage/Advanced sections SECOND
+```
+Introduction (no heading)
+      |
+      v
+Steps to [Action]           <- FIRST H2, immediately after introduction
+                               NO other section allowed before this
+      |
+      v
+Complete Code Example       <- full working code immediately after steps
+      |
+      v
+[CLOUD ONLY] cURL Commands  <- only if isCloud = true
+      |
+      v
+Setup / Installation        <- environment setup comes AFTER code example
+      |
+      v
+Conceptual / Feature sections  <- Key Features, Overview, What is, Architecture
+      |
+      v
+Configuration / Parameter sections  <- Configuring, Options, Settings, Customization
+      |
+      v
+Optimization / Performance sections  <- Optimizing, Speed, Efficiency, Performance
+      |
+      v
+Error Handling / Troubleshooting  <- Errors, Debugging, Common Issues, Exceptions
+      |
+      v
+Best Practices              <- Tips, Recommendations, Guidelines
+      |
+      v
+Conclusion
+      |
+      v
+FAQs
+      |
+      v
+Read More
+```
+
+**WRONG ORDER — NEVER DO THIS:**
+```
+Introduction
+## Installation and Setup    <- WRONG: Setup before Steps
+## Key Features              <- WRONG: Conceptual before Steps
+## Steps to Generate
+## Complete Code Example
+```
+
+**CORRECT ORDER — ALWAYS DO THIS:**
+```
+Introduction
+## Steps to Generate         <- Steps is ALWAYS first H2
+## Complete Code Example     <- Code immediately after Steps
+## Installation and Setup    <- Setup comes after Code
+## Key Features              <- Conceptual after Setup
+## Configuring Parameters    <- Config after Conceptual
+## Optimizing Performance    <- Optimization after Config
+## Handling Errors           <- Errors after Optimization
+## Best Practices            <- Best Practices last before Conclusion
+## Conclusion
+## FAQs
+```
+
+**OUTLINE SECTION PLACEMENT RULES:**
+When placing outline sections, categorize each one and insert it at the correct position:
+
+- STEPS category (Steps, Step-by-Step, How to)
+  -> SKIP from outline — use dedicated Steps section (Section 2) instead
+  -> The dedicated Steps section is ALWAYS the first H2
+
+- SETUP category (Installation, Setup, Getting Started, Prerequisites, Environment)
+  -> Place AFTER Complete Code Example (and cURL section if cloud)
+  -> Place BEFORE all Conceptual sections
+  -> NEVER place before Steps or Complete Code Example
+
+- CONCEPTUAL category (Key Features, Overview, Introduction to X, What is X, Architecture, Benefits, Why Use)
+  -> Place AFTER Setup section
+
+- CONFIGURATION category (Configuring X, Parameters, Options, Settings, Customization, Advanced)
+  -> Place AFTER all Conceptual sections
+
+- OPTIMIZATION category (Optimizing, Performance, Speed, Efficiency, Tuning)
+  -> Place AFTER all Configuration sections
+
+- ERROR HANDLING category (Errors, Troubleshooting, Debugging, Common Issues, Exceptions)
+  -> Place AFTER all Optimization sections
+
+- BEST PRACTICES category (Best Practices, Tips, Recommendations, Guidelines)
+  -> Place LAST among outline sections, immediately before Conclusion
 
 **GRAMMAR RULES FOR HEADINGS:**
 - Product names: NEVER use articles (a/an) before product names
@@ -710,7 +792,8 @@ Title Case Rules:
 - The introduction MUST be EXACTLY ONE paragraph
 - NO second paragraph allowed
 - NO third paragraph allowed
-- After the single introductory paragraph, IMMEDIATELY start the next H2 heading (Setup/Prerequisites)
+- After the single introductory paragraph, IMMEDIATELY start the Steps H2 heading
+- DO NOT start with Setup, Installation, or any other section before Steps
 
 **SINGLE PARAGRAPH REQUIREMENTS:**
 - Must be 3-5 sentences long
@@ -743,104 +826,38 @@ Example 3 (cloud):
 - "[Aspose.PDF for .NET](ProductURL) enables developers to..." - WRONG: product link in first sentence
 - Two separate paragraphs in introduction - WRONG: must be exactly one paragraph
 
-### 2. PREREQUISITES AND SETUP (MANDATORY — READ RULES BEFORE ADDING)
-
-**OUTLINE SETUP DETECTION — CHECK THIS FIRST BEFORE ADDING THIS SECTION:**
-
-Scan the provided outline for any section containing these words:
-"Setup", "Installation", "Install", "Configure", "Prerequisites", "Environment", "Getting Started"
-
-- IF the outline ALREADY contains a setup/installation section:
-  * DO NOT add a separate "## [Topic] - Prerequisites and Setup" heading
-  * The outline's setup section IS the prerequisites section — they serve the same purpose
-  * Use the EXACT heading from the outline for this section
-  * Place it immediately after the Introduction as the first H2
-  * Include all prerequisites content (system requirements, installation, package manager commands) under that outline heading
-
-- IF the outline contains NO setup or installation section:
-  * ADD the "## [Topic] - Prerequisites and Setup" heading as described below
-
-**WRONG (outline has setup section but prompt adds another — creates duplicate):**
-  ## CSV Editing Solution - Prerequisites and Setup   <- added by prompt
-  ## Installation and Setup in Java                   <- from outline (same purpose, duplicate)
-
-**CORRECT (outline has setup section — use it as the single setup heading):**
-  ## Installation and Setup in Java                   <- outline heading used as the single setup section
-
-**CORRECT (outline has NO setup section — add the prompt-generated one):**
-  ## CSV Editor Development - Prerequisites and Setup  <- added by prompt since outline has none
-
-**HEADING FORMAT (when adding prompt-generated Prerequisites heading):**
-
-## [Primary Keyword Topic] - Prerequisites and Setup
-
-**HOW TO DERIVE THE HEADING:**
-1. Take the primary keyword: {primary_keyword}
-2. Extract the core action or topic
-3. DO NOT include the platform/language name in this heading
-4. Append " - Prerequisites and Setup"
-
-**HEADING DERIVATION EXAMPLES:**
-
-Primary keyword: "convert PDF to PNG in C#"
-- CORRECT: "## PDF to PNG Conversion - Prerequisites and Setup"
-- WRONG:   "## PDF to PNG Conversion in C# - Prerequisites and Setup" (has platform)
-- WRONG:   "## Prerequisites and Setup"
-
-Primary keyword: "CSV editor development in Java"
-- CORRECT: "## CSV Editor Development - Prerequisites and Setup"
-- WRONG:   "## CSV Editor Development in Java - Prerequisites and Setup" (has platform)
-- WRONG:   "## Prerequisites and Setup"
-
-**RULES:**
-- The core topic part MUST use Title Case
-- Keep the core topic concise - 3 to 6 words maximum
-- DO NOT include the platform/language name — stripping it frees it for use in other headings
-- The separator between core topic and "Prerequisites and Setup" is " - " (space hyphen space)
-
-Content MUST include (whether using outline heading or prompt-generated heading):
-- System requirements (if applicable)
-- Product installation instructions
-- Environment/project setup if needed
-- MUST link Download URL: "Download the latest version from [this page](download_url)"
-- Package manager command (NuGet, Maven, pip, npm, etc.)
-- Installation code wrapped in tags:
-
-<!--[CODE_SNIPPET_START]-->
-```language
-// Installation command
-```
-<!--[CODE_SNIPPET_END]-->
-
-**IMPORTANT: LICENSE HANDLING**
-- DO NOT mention license setup in Prerequisites section
-- DO NOT include license code in any code examples
-- DO mention licensing AFTER Complete Code Example or in Conclusion
-
-### 3. OUTLINE SECTIONS (STRICTLY ENFORCED)
+### 2. OUTLINE SECTIONS (STRICTLY ENFORCED)
 
 **CRITICAL: FOLLOW THE OUTLINE EXACTLY AS PROVIDED — THIS IS NON-NEGOTIABLE**
 
 Follow the provided outline EXACTLY as given. Use the EXACT heading text from the outline.
-DO NOT rename, reword, reorder, or skip any outline section unless it falls into the
-skip list below. The outline is pre-approved — treat it as fixed, non-negotiable input.
+DO NOT rename, reword, or skip any outline section unless it falls into the skip list below.
+The outline is pre-approved — treat it as fixed, non-negotiable input.
 
 {formatted_outline}
 
 **OUTLINE COMPLIANCE RULES (STRICTLY ENFORCED):**
 - Use the EXACT heading text from the outline — word for word, character for character
 - DO NOT generate your own headings to replace outline headings
-- DO NOT reorder outline sections — preserve the exact order given
+- DO NOT reorder outline sections among themselves — preserve the relative order given
 - DO NOT merge two outline sections into one
 - DO NOT split one outline section into two
 - DO NOT add new headings that are not in the outline
 - ONLY skip sections that match the skip list below
-- If an outline heading is similar to a Steps or Complete Code heading,
-  keep the outline heading as-is and differentiate the Steps/Code headings instead
 
 **SKIP THESE OUTLINE SECTIONS ONLY:**
 - Skip: ANY heading containing the word "Steps" or "Step-by-Step"
-- If the outline has a setup/installation section — use it as the Prerequisites section (Section 2 above), do not skip it
+
+**PLACEMENT OF OUTLINE SECTIONS BY CATEGORY:**
+Place outline sections at the correct position based on their category:
+1. SETUP sections (Installation, Setup, Getting Started, Prerequisites) -> After Complete Code Example
+2. CONCEPTUAL sections (Key Features, Overview, What is, Architecture) -> After Setup
+3. CONFIGURATION sections (Configuring, Parameters, Options, Settings) -> After Conceptual
+4. OPTIMIZATION sections (Optimizing, Performance, Speed, Tuning) -> After Configuration
+5. ERROR HANDLING sections (Errors, Troubleshooting, Debugging) -> After Optimization
+6. BEST PRACTICES sections (Best Practices, Tips, Recommendations) -> After Error Handling
+
+If two outline sections fall in the same category, preserve their relative order from the outline.
 
 **OUTLINE COMPLETION NOTICE:**
 {outline_addition_notice}
@@ -869,23 +886,23 @@ No keyword phrase may be spent twice.
 
 **MANDATORY HEADING ASSIGNMENT:**
 
-  Prerequisites/Setup heading:
-    - If using outline heading: use it as-is
-    - If adding prompt heading: use core topic WITHOUT platform/language
-    - Example: ## CSV Editor Development - Prerequisites and Setup (no "in Java")
-
-  Section 4 - Steps heading:
+  Section 2 - Steps heading (FIRST H2):
     - Use PRIMARY keyword + platform/language
     - Format: ## Steps to [Primary Keyword Action in Language/Platform]
     - Example: ## Steps to Build a CSV Editor in Java
 
-  Section 5 - Complete Code Example heading:
-    - MUST contain PRIMARY keyword but with a DIFFERENT angle than Section 4
+  Section 3 - Complete Code Example heading:
+    - MUST contain PRIMARY keyword but with a DIFFERENT angle than Steps heading
     - Format: ## [Primary Keyword + Differentiating Qualifier] - Complete Code Example
     - Examples:
         ## Java CSV Editor - Complete Code Example
         ## CSV Editing in Java - Complete Code Example
         ## Building CSV Editor Programmatically - Complete Code Example
+
+  Setup/Prerequisites heading (from outline or prompt-generated):
+    - If using outline heading: use it as-is
+    - If adding prompt heading: use core topic WITHOUT platform/language
+    - Example: ## CSV Editor Development - Prerequisites and Setup (no "in Java")
 
   Section 5a - cURL heading (cloud only):
     - Primary keyword phrase MUST NOT appear here
@@ -897,7 +914,9 @@ No keyword phrase may be spent twice.
 
 ===============================================================================
 
-### 4. STEPS SECTION (MANDATORY)
+### 3. STEPS SECTION (MANDATORY — FIRST H2 AFTER INTRODUCTION)
+
+**THIS IS ALWAYS THE FIRST H2. NOTHING COMES BETWEEN INTRODUCTION AND THIS SECTION.**
 
 **HEADING RULE:** Use PRIMARY keyword + platform/language. Apply Title Case strictly.
 Format: ## Steps to [Primary Keyword Action in Language/Platform]
@@ -906,7 +925,8 @@ WRONG: ## Steps to CSV editor Development in Java  (lowercase "editor" - INVALID
 CORRECT: ## Steps to CSV Editor Development in Java  (Title Case - VALID)
 
 **PLACEMENT RULE (NON-NEGOTIABLE):**
-- This section MUST appear immediately after the last Outline section
+- This section MUST appear immediately after the Introduction paragraph
+- NO Setup, Installation, Key Features, or any other section before this
 - This section MUST be immediately followed by the Complete Code Example section
 - NO other heading is allowed between Steps and Complete Code Example
 
@@ -920,7 +940,7 @@ Format:
 3-6 steps total, each actionable and technical
 MUST include at least 1 Documentation or API Reference link in this section
 
-### 5. COMPLETE CODE EXAMPLE(S) - MANDATORY (NON-NEGOTIABLE)
+### 4. COMPLETE CODE EXAMPLE(S) - MANDATORY (NON-NEGOTIABLE)
 CRITICAL: This section is MANDATORY and MUST ALWAYS be included. NO EXCEPTIONS.
 
 **ABSOLUTE REQUIREMENT:**
@@ -958,7 +978,7 @@ CORRECT: ## CSV Editor Development in Java - Complete Code Example  (Title Case)
 > **Note:** This code example demonstrates the core functionality. Before using it in your project, make sure to update the file paths (`input.pdf`, `output.png`, etc.) to match your actual file locations, verify that all required dependencies are properly installed, and test thoroughly in your development environment. If you encounter any issues, please refer to the [official documentation](documentation_url) or reach out to the [support team](forums_url) for assistance.
 
 ===============================================================================
-### 5a. [CLOUD ONLY] CURL COMMANDS SECTION - MANDATORY WHEN isCloud = true
+### 4a. [CLOUD ONLY] CURL COMMANDS SECTION - MANDATORY WHEN isCloud = true
 ===============================================================================
 
 **CONDITION: Include this section ONLY when isCloud = {isCloud}**
@@ -966,7 +986,7 @@ CORRECT: ## CSV Editor Development in Java - Complete Code Example  (Title Case)
 **IF isCloud = true - THIS SECTION IS MANDATORY. NEVER SKIP IT.**
 **IF isCloud = false - DO NOT include this section at all.**
 
-**HEADING RULE:** MUST use a keyword phrase NOT used in Section 4 or Section 5.
+**HEADING RULE:** MUST use a keyword phrase NOT used in Steps or Complete Code headings.
 Apply Title Case strictly.
 Format: ## [Distinct Keyword/Phrase] via REST API using cURL
 Examples:
@@ -1005,7 +1025,7 @@ curl -X POST "https://api.example.com/v1/endpoint" \\
 
 ===============================================================================
 
-### 6. CONCLUSION (MANDATORY)
+### 5. CONCLUSION (MANDATORY)
 ## Conclusion
 
 - 2-3 paragraphs summarizing key points
@@ -1016,7 +1036,7 @@ curl -X POST "https://api.example.com/v1/endpoint" \\
 - Natural closing, encourage next steps
 - NEVER mention "free" or "online tool"
 
-### 7. FAQS (MANDATORY)
+### 6. FAQS (MANDATORY)
 ## FAQs
 
 Requirements:
@@ -1026,7 +1046,7 @@ Requirements:
 - Use product page URL with full product name: [Product Name](url)
 - NEVER mention "free" or "online"
 
-{'### 8. READ MORE (MANDATORY)' if formatted_related else '### NO READ MORE SECTION'}
+{'### 7. READ MORE (MANDATORY)' if formatted_related else '### NO READ MORE SECTION'}
 {'## Read More' if formatted_related else 'Do NOT include - no related links provided.'}
 {formatted_related if formatted_related else 'Blog MUST end after FAQs.'}
 {'Use EXACT titles and URLs provided.' if formatted_related else ''}
@@ -1056,7 +1076,7 @@ PART 4: LINKING REQUIREMENTS (CRITICAL)
 2. MUST link product page URL EVERY TIME product name is mentioned
 3. MUST link Documentation URL at least once
 4. MUST link API Reference URL when mentioning any class, method, or property
-5. MUST link Download URL in Prerequisites/Installation section
+5. MUST link Download URL in Setup/Installation section
 6. MUST link License URL at least once
 7. CRITICAL: Only use links explicitly provided in context
 8. NEVER construct or guess URLs
@@ -1078,7 +1098,7 @@ Format: [ZIP](https://docs.fileformat.com/compression/zip/)
 PART 5: CODE SNIPPET REQUIREMENTS (CRITICAL)
 ===============================================================================
 
-**For Regular Code Snippets (Prerequisites, Steps, Outline, cURL Commands):**
+**For Regular Code Snippets (Setup, Steps, Outline, cURL Commands):**
 <!--[CODE_SNIPPET_START]-->
 ```language
 // Your code here
@@ -1111,14 +1131,14 @@ PART 6: KEYWORD STRATEGY (SEO - CRITICAL)
 ===============================================================================
 
 ### WORD COUNT TARGET
-Introduction + Prerequisites + Outline sections + Conclusion = {settings.NUMBER_OF_BLOG_WORDS} words
+Introduction + Steps + Code + Outline sections + Conclusion = {settings.NUMBER_OF_BLOG_WORDS} words
 
 **FILE FORMAT CAPITALIZATION IN KEYWORDS AND BODY CONTENT (STRICTLY ENFORCED):**
 All file format names appearing in keywords, outline headings, steps, body content, and FAQs
 MUST be fully uppercase regardless of how they appear in the input.
 
 Common formats to always uppercase:
-DWT, DWG, DXF, DWF, DGN, DWS, DWT, IFC, IGS, IGES, STL, OBJ, FBX, 3DS, GLTF, GLB,
+DWT, DWG, DXF, DWF, DGN, DWS, IFC, IGS, IGES, STL, OBJ, FBX, 3DS, GLTF, GLB,
 PDF, PNG, JPG, JPEG, BMP, GIF, TIFF, WEBP, SVG, PSD, AI, EPS, EMF, WMF,
 DOCX, DOC, XLSX, XLS, PPTX, PPT, ODT, ODS, ODP, RTF, TXT, CSV,
 HTML, HTM, MHTML, XML, JSON, YAML, MARKDOWN, MD,
@@ -1200,23 +1220,23 @@ Before finalizing, verify:
 - Meta description is EXACTLY 140-160 characters (counted manually)
 - Summary is EXACTLY 200-260 characters (counted manually)
 - ALL headings (H2, H3) use Title Case — every major word starts with a capital letter
-- No duplicate Steps/Step-by-Step headings from outline
-- Steps section appears immediately after the last Outline section
+- Steps section is the FIRST H2 immediately after the Introduction — nothing before it
 - Complete Code Example appears immediately after Steps with NO heading between them
-- [CLOUD ONLY] cURL Commands section is present when isCloud = true
+- Setup/Installation section appears AFTER Complete Code Example — never before Steps
+- [CLOUD ONLY] cURL Commands section is present when isCloud = true, placed after Complete Code
+- After Complete Code Example (and cURL if cloud), remaining outline sections appear in correct category order: Setup -> Conceptual -> Configuration -> Optimization -> Error Handling -> Best Practices
 - Introduction is EXACTLY ONE paragraph with a punchy hook as the first sentence
 - First sentence of introduction does NOT mention the product name or include a product link
 - Product link appears in the SECOND or THIRD sentence of the introduction
 - seoTitle is IDENTICAL to title - no changes, no shortening, no rephrasing
-- STEP 0 COMPLETED: Heading plan was created, Title Case verified, all core phrases verified as unique before writing
-- SETUP SECTION DEDUPLICATION: If outline has a setup/installation section, only ONE setup heading exists — the outline heading. No prompt-generated Prerequisites heading was added.
-- GLOBAL HEADING DEDUPLICATION: No core phrase (3+ consecutive words) appears in more than one heading across the entire blog
-- Prerequisites heading does NOT include the platform/language name (if prompt-generated)
-- OUTLINE COMPLIANCE: All outline headings used word for word exactly as provided - none renamed, reordered, or skipped unless in skip list
-- FILE FORMAT CAPITALIZATION: Scan every heading, keyword usage, and body sentence — all file format names must be fully uppercase (DWT not Dwt, PDF not Pdf, STL not Stl, DWG not Dwg). Fix any that are not.
-- PRODUCT NAME CASING: Verify correct product name casing throughout (Aspose.CAD not Aspose.Cad, Aspose.PDF not Aspose.Pdf, Aspose.HTML not Aspose.Html, GroupDocs not Groupdocs)
+- STEP 0 COMPLETED: Heading plan created, Title Case verified, section order verified, all core phrases unique
+- GLOBAL HEADING DEDUPLICATION: No core phrase (3+ consecutive words) appears in more than one heading
+- Setup heading does NOT include the platform/language name (if prompt-generated)
+- OUTLINE COMPLIANCE: All outline headings used word for word exactly as provided
+- FILE FORMAT CAPITALIZATION: All file format names fully uppercase (DWT not Dwt, PDF not Pdf, STL not Stl)
+- PRODUCT NAME CASING: Aspose.CAD not Aspose.Cad, Aspose.PDF not Aspose.Pdf, GroupDocs not Groupdocs
 - PRIMARY KEYWORD - Occurrence 1: present in the Introduction paragraph?
-- PRIMARY KEYWORD - Occurrence 2: present in the Outline or Steps sections?
+- PRIMARY KEYWORD - Occurrence 2: present in the Steps or Outline sections?
 - PRIMARY KEYWORD - Occurrence 3: present in the Conclusion section?
 - PRIMARY KEYWORD - Occurrence 4: present in at least one FAQ question or answer?
 - PRIMARY KEYWORD - Total body occurrences (excluding frontmatter): at least 3, ideally 4-5?
@@ -1230,6 +1250,7 @@ Before finalizing, verify:
 END OF PROMPT
 ===============================================================================
 """
+
 
 
 
