@@ -1246,10 +1246,81 @@ Before finalizing, verify:
 - HEADING UNIQUENESS: Does the Complete Code Example heading contain the primary keyword? Does the cURL heading use a secondary/semantic phrase with NO repetition of the primary keyword phrase? Are all headings distinct from each other?
 
 {other_notes_block}
+
+===============================================================================
+PART 8: FLUENCY, CLARITY AND ENGAGEMENT (TARGET: HIGH QUALITY READABLE CONTENT)
+===============================================================================
+
+**FLUENCY — Write Like a Human Expert, Not a Machine**
+
+- Vary sentence length throughout — mix short punchy sentences with longer explanatory ones
+- Never write three sentences of the same length in a row
+- Use natural transitions between sentences: "This means...", "As a result...", "In practice...", "For example..."
+- Avoid starting consecutive sentences with the same word or phrase
+- Read each paragraph aloud mentally — if it sounds robotic, rewrite it
+- Use contractions naturally where appropriate: "you'll", "it's", "don't", "here's"
+- WRONG: "The method initializes the object. The object is then configured. The configuration is applied."
+- CORRECT: "The method initializes the object and applies your configuration in a single call, keeping the setup minimal."
+
+**CLARITY — Make Every Sentence Earn Its Place**
+
+- One idea per sentence — never pack two unrelated thoughts into one sentence
+- Define technical terms the first time they appear, briefly and naturally
+- Use concrete examples instead of vague descriptions
+  * WRONG: "The API provides various options for configuration"
+  * CORRECT: "The API lets you set the output resolution, color mode, and compression level before saving"
+- Lead with the most important information — put the key point at the start of a sentence, not the end
+- Avoid noun stacking: "document conversion output file format" — break it up into readable phrases
+- Cut filler words: "basically", "essentially", "actually", "in order to", "it is important to note that"
+- Replace weak verbs with strong ones:
+  * WRONG: "is used to convert", "can be utilized for"
+  * CORRECT: "converts", "processes", "generates", "extracts"
+
+**ENGAGEMENT — Keep the Reader Moving Forward**
+
+- Open every section with a sentence that tells the reader WHY this section matters to them
+  * WRONG: "Aspose.PDF has many features."
+  * CORRECT: "Understanding these features helps you choose the right approach for your use case."
+- Use second person "you" to speak directly to the reader
+  * WRONG: "Developers can use this method to..."
+  * CORRECT: "You can use this method to..."
+- Add brief real-world context to technical steps
+  * WRONG: "Set the resolution to 300 DPI."
+  * CORRECT: "Set the resolution to 300 DPI, the standard for print-quality output."
+- End sections with a forward-looking sentence that connects to the next section
+  * WRONG: [section just stops abruptly]
+  * CORRECT: "With the conversion complete, you can now explore the configuration options to fine-tune your output."
+- Use occasional rhetorical questions to keep the reader engaged
+  * "Why does this matter? Because..."
+  * "What happens if the file path is wrong? The SDK throws a..."
+- Break up long technical paragraphs — no paragraph should exceed 4 sentences
+- Use parallel structure in lists and steps for easy scanning
+
+**PARAGRAPH QUALITY RULES:**
+- Every paragraph must have a clear topic sentence
+- Every paragraph must have 2-4 sentences — never 1, never more than 5
+- No two consecutive paragraphs should start with the same word
+- The last sentence of each paragraph should either summarize or lead into the next idea
+
+**BEFORE FINALIZING — SELF-REVIEW CHECKLIST:**
+Read the entire blog and verify:
+- Does every section open with a sentence that gives context or value to the reader?
+- Are sentences varied in length — not all short, not all long?
+- Is "you" used throughout to speak directly to the developer?
+- Are there concrete examples rather than vague descriptions?
+- Does each paragraph have exactly 2-4 sentences?
+- Are there natural transitions between paragraphs and sections?
+- Have filler words been removed?
+- Do strong verbs replace weak passive constructions?
+- Does every section end with a connecting or summarizing sentence?
+
+If any answer is NO — rewrite those sections before outputting.
+
 ===============================================================================
 END OF PROMPT
 ===============================================================================
 """
+
 
 
 
