@@ -8,7 +8,7 @@
 
 ---
 
-## 1. How to Perform DWT to PDF Conversion using REST in Java
+## 1. How to Perform DWT to PDF Conversion using REST
 - **Cluster ID:** `c9`
 - **Target persona:** Java developers who need to automate DWT to PDF conversion in enterprise or SaaS applications.
 - **Blog post angle:** Step by STEP guide for Java developers to convert dwt cad drawings to PDF via Aspose.Cad Cloud REST api.
