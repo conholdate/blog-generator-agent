@@ -167,11 +167,55 @@ jobs:
           mkdir -p "${KRA_OUTPUT_DIR}"
           python scripts/run_kra_from_config.py --config "${KRA_CFG_PATH}"
 
+      - name: Verify generated outputs
+        id: verify_outputs
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          if [ ! -d "${KRA_OUTPUT_DIR}" ]; then
+            echo "Expected output directory not found: ${KRA_OUTPUT_DIR}" >&2
+            exit 1
+          fi
+
+          mapfile -t generated_files < <(find "${KRA_OUTPUT_DIR}" -maxdepth 1 -type f \( -name '*_topics.md' -o -name 'kra_result_*.json' \) | sort)
+
+          if [ "${#generated_files[@]}" -eq 0 ]; then
+            echo "No generated files found under ${KRA_OUTPUT_DIR}" >&2
+            find "${KRA_OUTPUT_DIR}" -maxdepth 2 -print || true
+            exit 1
+          fi
+
+          printf 'Generated files:\n%s\n' "${generated_files[@]}"
+          {
+            echo 'generated<<EOF'
+            printf '%s\n' "${generated_files[@]}"
+            echo 'EOF'
+          } >> "$GITHUB_OUTPUT"
+
       - name: Upload Familiarize outputs
+        if: ${{ steps.verify_outputs.outcome == 'success' }}
         uses: actions/upload-artifact@v4
         with:
           name: kra-output-Familiarize
-          path: |
-            content/Familiarize/output/**
-            content/familiarize/output/**
-          if-no-files-found: warn
+          path: content/Familiarize/output/
+          if-no-files-found: error
+
+      - name: Commit generated outputs
+        if: ${{ steps.verify_outputs.outcome == 'success' }}
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add "${KRA_OUTPUT_DIR}"
+
+          if git diff --cached --quiet; then
+            echo "No output changes to commit."
+            exit 0
+          fi
+
+          git commit -m "Add Familiarize keyword analyzer outputs"
+          git push origin "HEAD:${GITHUB_REF_NAME}"
