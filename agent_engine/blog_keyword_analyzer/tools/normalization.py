@@ -87,6 +87,12 @@ PLATFORM_REGISTRY: Dict[str, PlatformSpec] = {
         blog_key="cpp",
         aliases=("c++", "cpp", "cplusplus", "c plus plus"),
     ),
+    "python": PlatformSpec(
+        family="python",
+        display="Python",
+        blog_key="python",
+        aliases=("python", "py"),
+    ),
     "python_via_net": PlatformSpec(
         family="python_via_net",
         display="Python via .NET",
@@ -100,6 +106,12 @@ PLATFORM_REGISTRY: Dict[str, PlatformSpec] = {
         aliases=("python via java", "python-java", "python_java"),
     ),
     # Node.js variants
+    "nodejs": PlatformSpec(
+        family="nodejs",
+        display="Node.js",
+        blog_key="nodejs",
+        aliases=("node.js", "nodejs", "node"),
+    ),
     "nodejs_via_java": PlatformSpec(
         family="nodejs_via_java",
         display="Node.js via Java",
@@ -132,6 +144,12 @@ PLATFORM_REGISTRY: Dict[str, PlatformSpec] = {
         aliases=("php via java", "php-java", "php_java"),
     ),
     # Mobile / reporting / server platforms
+    "android": PlatformSpec(
+        family="android",
+        display="Android",
+        blog_key="android",
+        aliases=("android",),
+    ),
     "android_via_java": PlatformSpec(
         family="android_via_java",
         display="Android via Java",
@@ -159,17 +177,35 @@ PLATFORM_REGISTRY: Dict[str, PlatformSpec] = {
         aliases=("jasperreports", "jasper reports", "jasperreport"),
     ),
     # Emerging / wrapper families visible in Aspose docs family listings
+    "javascript": PlatformSpec(
+        family="javascript",
+        display="JavaScript",
+        blog_key="javascript",
+        aliases=("javascript", "js"),
+    ),
     "javascript_via_cpp": PlatformSpec(
         family="javascript_via_cpp",
         display="JavaScript via C++",
         blog_key="javascript",
         aliases=("javascript via c++", "javascript via c", "javascript-cpp", "javascript_cpp"),
     ),
+    "go": PlatformSpec(
+        family="go",
+        display="Go",
+        blog_key="go",
+        aliases=("go", "golang"),
+    ),
     "go_via_cpp": PlatformSpec(
         family="go_via_cpp",
         display="Go via C++",
         blog_key="go",
         aliases=("go via c++", "go via c", "golang via c++", "golang via c", "go-cpp", "go_cpp"),
+    ),
+    "rust": PlatformSpec(
+        family="rust",
+        display="Rust",
+        blog_key="rust",
+        aliases=("rust",),
     ),
     "rust_via_cpp": PlatformSpec(
         family="rust_via_cpp",
@@ -670,7 +706,6 @@ def detect_platform_families_in_text(text: str) -> List[str]:
         return []
 
     found: List[str] = []
-    blocked_bases: Set[str] = set()
 
     for family in PLATFORM_FAMILY_MATCH_PRIORITY:
         pattern = PLATFORM_REGEX_BY_FAMILY[family]
@@ -689,6 +724,8 @@ def detect_platform_families_in_text(text: str) -> List[str]:
         if family == "rust" and "rust_via_cpp" in found:
             continue
         if family == "javascript" and "javascript_via_cpp" in found:
+            continue
+        if family == "android" and "android_via_java" in found:
             continue
 
         found.append(family)

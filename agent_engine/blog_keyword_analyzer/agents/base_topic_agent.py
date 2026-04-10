@@ -1258,6 +1258,42 @@ class KeywordResearchAgent:
 
             return re.sub(r"\s{2,}", " ", s).strip()
 
+        def _collapse_duplicate_words(text: str) -> str:
+            parts = " ".join((text or "").strip().split()).split(" ")
+            if not parts:
+                return ""
+            out: List[str] = []
+            for part in parts:
+                if out and out[-1].lower() == part.lower():
+                    continue
+                out.append(part)
+            return " ".join(out).strip()
+
+        def _outline_semantic_key(text: str) -> str:
+            s = " ".join((text or "").strip().split()).lower()
+            if not s:
+                return ""
+            for token in sorted(_safe_product_title_variants(outline_library_name), key=len, reverse=True):
+                s = re.sub(rf"(?i)(?<!\w){re.escape(token)}(?!\w)", " ", s)
+            if platform_label:
+                pattern = platform_variant_pattern(platform_label)
+                if pattern:
+                    s = re.sub(rf"(?i)\b(?:in|for|with|via|using)\s+{pattern}\b", " ", s)
+                    s = re.sub(rf"(?i)\b{pattern}\b", " ", s)
+            s = re.sub(r"(?i)\bstep\s*-\s*by\s*-\s*step\b", "implementation", s)
+            s = re.sub(r"(?i)\bfeatures?\b", "feature", s)
+            s = re.sub(r"(?i)\bsetup\b", "installation", s)
+            s = re.sub(r"(?i)\busing\b", "use", s)
+            s = re.sub(r"(?i)\bimplementation\b", "implement", s)
+            s = re.sub(r"(?i)\bfor this task\b", " ", s)
+            s = re.sub(r"[^a-z0-9+#]+", " ", s)
+            stop = {
+                "a", "an", "and", "for", "in", "of", "the", "to", "with", "via", "using",
+                "use", "that", "this", "task",
+            }
+            tokens = [tok for tok in s.split() if tok and tok not in stop]
+            return " ".join(tokens)
+
         def _normalize_outline_items(items: Any) -> List[str]:
             if not isinstance(items, list):
                 return []
@@ -1277,6 +1313,7 @@ class KeywordResearchAgent:
                 s2 = re.sub(r"\s*:\s*", ": ", s2)
                 s2 = _dedupe_outline_product_mentions(s2)
                 s2 = _collapse_duplicate_platform_phrases(s2, platform_label)
+                s2 = _collapse_duplicate_words(s2)
 
                 # NEW: collapse any double spaces introduced
                 s2 = re.sub(r"\s{2,}", " ", s2).strip()
@@ -1286,27 +1323,33 @@ class KeywordResearchAgent:
             return fixed
 
         def _force_first4_outline(outline: List[str], primary_kw: str) -> List[str]:
-            kw = " ".join((primary_kw or "").strip().split())
-            kw_has_product = self._contains_product(kw, self._product_variants(outline_library_name))
-            kw_has_platform = self._contains_platform_variant(kw, platform_label)
-
             if platform_label:
                 base = [
-                    kw if kw_has_platform else (f"{kw} in {platform_label}" if kw_has_product else f"{kw} with {outline_library_name} in {platform_label}"),
-                    f"Key Features of {outline_library_name} for {platform_label}",
+                    f"Using {outline_library_name} in {platform_label}",
+                    f"{outline_library_name} features that matter for this task",
                     f"Installation and Setup in {platform_label}",
-                    f"Step-by-Step: {kw}",
+                    f"Step-by-Step Implementation in {platform_label}",
                 ]
             else:
                 base = [
-                    kw if kw_has_product else f"{kw} with {outline_library_name}",
-                    f"Key Features of {outline_library_name}",
+                    f"Using {outline_library_name}",
+                    f"{outline_library_name} features that matter for this task",
                     "Installation and Setup",
-                    f"Step-by-Step: {kw}",
+                    "Step-by-Step Implementation",
                 ]
-            base = [s.replace("{PRIMARY_KEYWORD}", kw) for s in base]
+            base = [_collapse_duplicate_words(s) for s in base]
+            base_keys = {_outline_semantic_key(s) for s in base}
             rest = outline[4:] if len(outline) > 4 else []
-            outline2 = base + rest
+            filtered_rest: List[str] = []
+            seen_keys = set(base_keys)
+            for item in rest:
+                cleaned = _collapse_duplicate_words(item)
+                key = _outline_semantic_key(cleaned)
+                if not cleaned or not key or key in seen_keys:
+                    continue
+                filtered_rest.append(cleaned)
+                seen_keys.add(key)
+            outline2 = base + filtered_rest
 
             fillers = [
                 "Configuration options and output quality",
@@ -1478,6 +1521,7 @@ class KeywordResearchAgent:
             )
             if include_product_in_title:
                 t["title"] = self._ensure_product_in_title(t["title"], product)
+            t["title"] = _collapse_duplicate_words(t["title"])
             # 4) OPTIONAL: LLM second-pass polish (Agents SDK) with hard fallback
             polished = polish_title(
                 SeoTitlePolishRequest(
@@ -1515,6 +1559,7 @@ class KeywordResearchAgent:
                 )
                 if include_product_in_title:
                     t["title"] = self._ensure_product_in_title(t["title"], product)
+                t["title"] = _collapse_duplicate_words(t["title"])
 
             # Outline enforcement
             t["outline"] = _force_first4_outline(_normalize_outline_items(t.get("outline")), pk)
