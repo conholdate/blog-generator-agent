@@ -19,6 +19,7 @@ from agent_engine.blog_keyword_analyzer.tools.normalization import (
     KeywordRefiner,
     canonical_platform_label,
     normalize_missing_platform,
+    normalize_product_short_name,
     platform_base_display,
     platform_header_display,
     require_supported_platform,
@@ -40,6 +41,17 @@ def _dedupe_keywords(values: List[str]) -> List[str]:
         seen.add(key)
         out.append(value)
     return out
+
+
+def _display_keyword(value: Any, product: str) -> str:
+    text = refiner.refine(value)
+    if not text:
+        return ""
+    short_product = normalize_product_short_name(product)
+    if short_product:
+        text = re.sub(r"(?i)\bAsp(?:\.{3}|…)\b", short_product, text)
+        text = re.sub(r"(?i)\bGroup(?:\.{3}|…)\b", short_product, text)
+    return re.sub(r"\s{2,}", " ", text).strip(" -,:;")
 
 
 def _keyword_groups_to_mapping(value: Any) -> Dict[str, Any]:
@@ -284,6 +296,7 @@ def write_topics_markdown(
 
     safe_product = _brand_slug(result.product)
     safe_platform = _brand_slug(platform or "all")
+    product_name = result.product
 
     run_suffix = result.run_id[:8] if result.run_id else "run"
     md_path = output_dir / (file_name or f"{run_suffix}_{safe_product}_{safe_platform}_topics.md")
@@ -340,7 +353,7 @@ def write_topics_markdown(
 
         # Refine Keywords
         primary_kw_r = pick("primary_keyword")
-        primary_kw = refiner.refine(primary_kw_r)
+        primary_kw = _display_keyword(primary_kw_r, product_name)
 
         supporting_kws_r = pick("supporting_keywords", []) or []
 
@@ -361,7 +374,7 @@ def write_topics_markdown(
             supporting_kws_r = _flatten(supporting_kws_r)
 
         # Refine each keyword
-        supporting_kws = [refiner.refine(k) for k in supporting_kws_r]
+        supporting_kws = [_display_keyword(k, product_name) for k in supporting_kws_r]
         supporting_kws = [k for k in supporting_kws if k]
         primary_intent_key = _keyword_intent_key(primary_kw)
         supporting_kws = [k for k in supporting_kws if _keyword_intent_key(k) != primary_intent_key]
@@ -387,9 +400,9 @@ def write_topics_markdown(
             lines.append(f"- **Primary keyword:** `{primary_kw}`")
 
         if keyword_groups:
-            core = [refiner.refine(k) for k in (keyword_groups.get("core_seo_keywords") or []) if k]
-            long_tail = [refiner.refine(k) for k in (keyword_groups.get("long_tail_keywords") or []) if k]
-            context = [refiner.refine(k) for k in (keyword_groups.get("context_keywords") or []) if k]
+            core = [_display_keyword(k, product_name) for k in (keyword_groups.get("core_seo_keywords") or []) if k]
+            long_tail = [_display_keyword(k, product_name) for k in (keyword_groups.get("long_tail_keywords") or []) if k]
+            context = [_display_keyword(k, product_name) for k in (keyword_groups.get("context_keywords") or []) if k]
             core = [k for k in core if _keyword_intent_key(k) != primary_intent_key]
             long_tail = [k for k in long_tail if _keyword_intent_key(k) != primary_intent_key]
             context = [k for k in context if _keyword_intent_key(k) != primary_intent_key]
@@ -463,16 +476,16 @@ def write_missing_topics_markdown(
             lines.append(f"- **Cluster ID:** `{topic.cluster_id}`")
             lines.append(f"- **Target persona:** {topic.target_persona}")
             lines.append(f"- **Blog post angle:** {topic.angle}")
-            lines.append(f"- **Primary keyword:** `{refiner.refine(topic.primary_keyword)}`")
+            lines.append(f"- **Primary keyword:** `{_display_keyword(topic.primary_keyword, selection.product)}`")
 
-            supporting = [refiner.refine(k) for k in topic.supporting_keywords or []]
+            supporting = [_display_keyword(k, selection.product) for k in topic.supporting_keywords or []]
             supporting = [k for k in supporting if k]
 
             keyword_groups = _keyword_groups_to_mapping(getattr(topic, "keyword_groups", None))
             if keyword_groups:
-                core = [refiner.refine(k) for k in (keyword_groups.get("core_seo_keywords") or []) if k]
-                long_tail = [refiner.refine(k) for k in (keyword_groups.get("long_tail_keywords") or []) if k]
-                context = [refiner.refine(k) for k in (keyword_groups.get("context_keywords") or []) if k]
+                core = [_display_keyword(k, selection.product) for k in (keyword_groups.get("core_seo_keywords") or []) if k]
+                long_tail = [_display_keyword(k, selection.product) for k in (keyword_groups.get("long_tail_keywords") or []) if k]
+                context = [_display_keyword(k, selection.product) for k in (keyword_groups.get("context_keywords") or []) if k]
                 core = _dedupe_keywords(core)
                 long_tail = _dedupe_keywords(long_tail)
                 context = _dedupe_keywords(context)

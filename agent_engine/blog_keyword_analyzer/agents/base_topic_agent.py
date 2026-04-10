@@ -14,6 +14,7 @@ from agent_engine.blog_keyword_analyzer.tools.normalization import (
     KeywordRefiner,
     canonical_platform_label,
     contains_platform_variant,
+    normalize_product_short_name,
     platform_base_display,
     platform_variant_pattern,
     strip_platform_mentions,
@@ -319,9 +320,9 @@ class KeywordResearchAgent:
         return refiner.refine(out)
 
     def _normalize_primary_keyword_phrase(
-            self,
-            keyword: str,
-            platform_label: Optional[str],
+        self,
+        keyword: str,
+        platform_label: Optional[str],
     ) -> str:
         out = " ".join((keyword or "").strip().split())
         if not out:
@@ -355,6 +356,14 @@ class KeywordResearchAgent:
         out = re.sub(r"(?i)\b(with|via|using|for|in)\s*$", "", out).strip()
         out = re.sub(r"(?i)\b([a-z0-9.+#]+)(?:\s+\1\b)+", r"\1", out)
         out = re.sub(r"\s{2,}", " ", out).strip(" -,:;")
+        if platform_label:
+            canonical_pattern = platform_variant_pattern(platform_label) or re.escape(platform_label)
+            prep = r"(?:with|via|using|for|in)"
+            out = re.sub(
+                rf"(?i)\b{prep}\s+{canonical_pattern}\s+{prep}\s+{canonical_pattern}\b",
+                f"in {platform_label}",
+                out,
+            )
 
         if platform_label and had_platform and not self._contains_platform_variant(out, platform_label):
             out = f"{out} in {platform_label}".strip()
@@ -539,6 +548,9 @@ class KeywordResearchAgent:
             s = " ".join(kw.strip().split())
             low = s.lower()
 
+            if "..." in s or "…" in s:
+                return False
+
             if low.startswith("to "):
                 return False
             if low.endswith(" to") or re.search(r"\bto\s*$", low):
@@ -556,6 +568,47 @@ class KeywordResearchAgent:
 
             # Accept "x to y" and "convert x to y"
             return (" to " in low and len(low.split()) >= 3) or (len(low.split()) >= 3)
+
+        def _repair_truncated_keyword(value: str) -> str:
+            s = " ".join((value or "").strip().split())
+            if not s:
+                return ""
+            short_product = normalize_product_short_name(product)
+            if short_product:
+                s = re.sub(r"(?i)\bAsp(?:\.{3}|…)\b", short_product, s)
+                s = re.sub(r"(?i)\bGroup(?:\.{3}|…)\b", short_product, s)
+            return re.sub(r"\s{2,}", " ", s).strip(" -,:;")
+
+        def _collapse_duplicate_platform_phrases(text: str, platform_value: Optional[str]) -> str:
+            s = " ".join((text or "").strip().split())
+            if not s or not platform_value:
+                return s
+
+            canonical = platform_value.strip()
+            canonical_pattern = platform_variant_pattern(canonical) or re.escape(canonical)
+            base = platform_base_display(canonical)
+            prep = r"(?:with|via|using|for|in)"
+
+            s = re.sub(
+                rf"(?i)\b{prep}\s+{canonical_pattern}\s+{prep}\s+{canonical_pattern}\b",
+                f"in {canonical}",
+                s,
+            )
+            if base and base != canonical:
+                s = re.sub(
+                    rf"(?i)\b{prep}\s+{re.escape(base)}\s+{prep}\s+{re.escape(canonical)}\b",
+                    f"in {canonical}",
+                    s,
+                )
+                s = re.sub(
+                    rf"(?i)\b{prep}\s+{re.escape(base)}\b(?=.*\b(?:in|via)\s+{re.escape(canonical)}\b)",
+                    "",
+                    s,
+                    count=1,
+                )
+
+            s = re.sub(r"\s{2,}", " ", s).strip(" -,:;")
+            return s
 
         def _best_allowed_primary_keyword(candidates: List[str]) -> str:
             cleaned = [" ".join((x or "").strip().split()) for x in candidates if isinstance(x, str) and x.strip()]
@@ -878,6 +931,7 @@ class KeywordResearchAgent:
             # 2) Remove any parenthetical suffixes like "(GroupDocs.Conversion Cloud)"
             # (keeps the left part, which typically contains keyword)
             t = re.sub(r"\s*\([^)]*\)\s*$", "", t).strip()
+            t = _collapse_duplicate_platform_phrases(t, pl)
 
             # Clean malformed platform/preposition fragments like ".NET with in .NET"
             if pl:
@@ -955,6 +1009,7 @@ class KeywordResearchAgent:
                         prod,
                         t,
                     )
+                t = _collapse_duplicate_platform_phrases(t, pl)
 
             # 5) Length clamp (40ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Å“60): remove filler first, keep kw verbatim
             def _clean(x: str) -> str:
@@ -1221,6 +1276,7 @@ class KeywordResearchAgent:
                 # NEW: enforce spacing after colon (fixes "Step-by-Step:Save" -> "Step-by-Step: Save")
                 s2 = re.sub(r"\s*:\s*", ": ", s2)
                 s2 = _dedupe_outline_product_mentions(s2)
+                s2 = _collapse_duplicate_platform_phrases(s2, platform_label)
 
                 # NEW: collapse any double spaces introduced
                 s2 = re.sub(r"\s{2,}", " ", s2).strip()
@@ -1334,7 +1390,7 @@ class KeywordResearchAgent:
             for key in ("core_seo_keywords", "long_tail_keywords", "context_keywords"):
                 vals = keyword_groups.get(key) or []
                 if isinstance(vals, list):
-                    refined_vals = [refiner.refine(v) for v in vals if isinstance(v, str)]
+                    refined_vals = [refiner.refine(_repair_truncated_keyword(v)) for v in vals if isinstance(v, str)]
                     refined_vals = [
                         v for v in refined_vals
                         if v and _kw_is_complete(v) and self._keyword_intent_key(v) != pk_intent_key and not self._contains_product(v, product_variants)
@@ -1348,7 +1404,7 @@ class KeywordResearchAgent:
             if not isinstance(supporting_keywords, list):
                 supporting_keywords = []
             supporting_keywords = [
-                refiner.refine(v) for v in supporting_keywords if isinstance(v, str)
+                refiner.refine(_repair_truncated_keyword(v)) for v in supporting_keywords if isinstance(v, str)
             ]
             supporting_keywords = [
                 v for v in supporting_keywords

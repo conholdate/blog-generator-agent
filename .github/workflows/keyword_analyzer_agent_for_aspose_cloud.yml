@@ -46,11 +46,15 @@ on:
         required: true
         default: "content/Aspose.Cloud/keywords.csv"
 
-      use_serp_api:
-        description: "If true, ingest keywords via SerpAPI instead of file."
-        type: boolean
-        required: false
-        default: false
+      keyword_source:
+        description: "Keyword source."
+        type: choice
+        required: true
+        options:
+          - 'file'
+          - 'serp_api'
+          - 'llm_keywords'
+        default: 'file'
 
       serp_topic:
         description: "SerpAPI topic seed (used only if use_serp_api=true)."
@@ -68,7 +72,7 @@ on:
         description: "If true, clone blog repo and dedupe topics against existing posts."
         type: boolean
         required: false
-        default: true
+        default: false
 
       include_product_in_title:
         description: "If true, enforce product name in generated topic titles. If false, ensure product name is NOT used in titles."
@@ -140,13 +144,15 @@ jobs:
 
           brand = os.environ["BRAND"]
 
-          product = os.environ.get("INPUT_PRODUCT", "Aspose.PDF Cloud")
-          platform = os.environ.get("INPUT_PLATFORM", "Java")
+          product = os.environ.get("INPUT_PRODUCT", "Aspose.PDF Cloud SDK")
+          platform = os.environ.get("INPUT_PLATFORM", "REST")
           keywords_file = os.environ.get("INPUT_KEYWORDS_FILE", "content/Aspose.Cloud/keywords.csv")
-          use_serp_api = as_bool(os.environ.get("INPUT_USE_SERP_API", "false"))
+          keyword_source = os.environ.get("INPUT_KEYWORD_SOURCE", "file").strip().lower()
+          use_serp_api = keyword_source == "serp_api"
+          use_llm_keywords = keyword_source == "llm_keywords"
           serp_topic = os.environ.get("INPUT_SERP_TOPIC", "")
           top_clusters = int(os.environ.get("INPUT_TOP_CLUSTERS", "15"))
-          use_content_index = as_bool(os.environ.get("INPUT_USE_CONTENT_INDEX", "true"))
+          use_content_index = as_bool(os.environ.get("INPUT_USE_CONTENT_INDEX", "false"))
           include_product_in_title = as_bool(os.environ.get("INPUT_INCLUDE_PRODUCT_IN_TITLE", "true"))
 
           # Defaults (not exposed as workflow inputs)
@@ -156,12 +162,9 @@ jobs:
 
           cfg_path = Path(os.environ["RUNNER_TEMP"]) / "kra_run.generated.yaml"
 
-          blog_name = "aspose.cloud"
-          blog_root = os.environ.get("BLOG_CONTENT_ROOT", "")
-
           cfg_text = (
               "meta:\n"
-              f"  blog_name: \"{blog_name}\"\n"
+              "  blog_name: \"\"\n"
               f"  brand: \"{brand}\"\n"
               "  created_at: \"\"\n"
               "  owner: \"content-team\"\n"
@@ -169,6 +172,7 @@ jobs:
               "engine:\n"
               f"  input_file: \"{keywords_file}\"\n"
               f"  use_serp_api: {b(use_serp_api)}\n"
+              f"  use_llm_keywords: {b(use_llm_keywords)}\n"
               f"  serp_topic: \"{serp_topic}\"\n"
               "\n"
               f"  brand: \"{brand}\"\n"
@@ -181,15 +185,10 @@ jobs:
               f"  use_content_index: {b(use_content_index)}\n"
               f"  include_product_in_title: {b(include_product_in_title)}\n"
               f"  debug: {b(debug)}\n"
-              f"  output_dir: \"content/Aspose.Cloud/output\"\n"
               "\n"
               "content_index:\n"
-              f"  local_root: \"{blog_root}\"\n"
               "  index_file_name: \"index.md\"\n"
               "  file_glob: \"**/index.md\"\n"
-              "  repo_url: \"https://github.com/aspose-cloud/aspose-cloud-blog\"\n"
-              "  branch: \"master\"\n"
-              "  subdir: \"/content\"\n"
           )
 
           cfg_path.write_text(cfg_text, encoding="utf-8")
@@ -202,7 +201,7 @@ jobs:
           INPUT_PRODUCT: ${{ inputs.product }}
           INPUT_PLATFORM: ${{ inputs.platform }}
           INPUT_KEYWORDS_FILE: ${{ inputs.keywords_file }}
-          INPUT_USE_SERP_API: ${{ inputs.use_serp_api }}
+          INPUT_KEYWORD_SOURCE: ${{ inputs.keyword_source }}
           INPUT_SERP_TOPIC: ${{ inputs.serp_topic }}
           INPUT_TOP_CLUSTERS: ${{ inputs.top_clusters }}
           INPUT_USE_CONTENT_INDEX: ${{ inputs.use_content_index }}
