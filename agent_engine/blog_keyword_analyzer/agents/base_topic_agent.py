@@ -14,6 +14,7 @@ from agent_engine.blog_keyword_analyzer.tools.normalization import (
     KeywordRefiner,
     canonical_platform_label,
     contains_platform_variant,
+    normalize_product_short_name,
     platform_base_display,
     platform_variant_pattern,
     strip_platform_mentions,
@@ -319,9 +320,9 @@ class KeywordResearchAgent:
         return refiner.refine(out)
 
     def _normalize_primary_keyword_phrase(
-            self,
-            keyword: str,
-            platform_label: Optional[str],
+        self,
+        keyword: str,
+        platform_label: Optional[str],
     ) -> str:
         out = " ".join((keyword or "").strip().split())
         if not out:
@@ -355,6 +356,14 @@ class KeywordResearchAgent:
         out = re.sub(r"(?i)\b(with|via|using|for|in)\s*$", "", out).strip()
         out = re.sub(r"(?i)\b([a-z0-9.+#]+)(?:\s+\1\b)+", r"\1", out)
         out = re.sub(r"\s{2,}", " ", out).strip(" -,:;")
+        if platform_label:
+            canonical_pattern = platform_variant_pattern(platform_label) or re.escape(platform_label)
+            prep = r"(?:with|via|using|for|in)"
+            out = re.sub(
+                rf"(?i)\b{prep}\s+{canonical_pattern}\s+{prep}\s+{canonical_pattern}\b",
+                f"in {platform_label}",
+                out,
+            )
 
         if platform_label and had_platform and not self._contains_platform_variant(out, platform_label):
             out = f"{out} in {platform_label}".strip()
@@ -539,6 +548,9 @@ class KeywordResearchAgent:
             s = " ".join(kw.strip().split())
             low = s.lower()
 
+            if "..." in s or "…" in s:
+                return False
+
             if low.startswith("to "):
                 return False
             if low.endswith(" to") or re.search(r"\bto\s*$", low):
@@ -556,6 +568,47 @@ class KeywordResearchAgent:
 
             # Accept "x to y" and "convert x to y"
             return (" to " in low and len(low.split()) >= 3) or (len(low.split()) >= 3)
+
+        def _repair_truncated_keyword(value: str) -> str:
+            s = " ".join((value or "").strip().split())
+            if not s:
+                return ""
+            short_product = normalize_product_short_name(product)
+            if short_product:
+                s = re.sub(r"(?i)\bAsp(?:\.{3}|…)\b", short_product, s)
+                s = re.sub(r"(?i)\bGroup(?:\.{3}|…)\b", short_product, s)
+            return re.sub(r"\s{2,}", " ", s).strip(" -,:;")
+
+        def _collapse_duplicate_platform_phrases(text: str, platform_value: Optional[str]) -> str:
+            s = " ".join((text or "").strip().split())
+            if not s or not platform_value:
+                return s
+
+            canonical = platform_value.strip()
+            canonical_pattern = platform_variant_pattern(canonical) or re.escape(canonical)
+            base = platform_base_display(canonical)
+            prep = r"(?:with|via|using|for|in)"
+
+            s = re.sub(
+                rf"(?i)\b{prep}\s+{canonical_pattern}\s+{prep}\s+{canonical_pattern}\b",
+                f"in {canonical}",
+                s,
+            )
+            if base and base != canonical:
+                s = re.sub(
+                    rf"(?i)\b{prep}\s+{re.escape(base)}\s+{prep}\s+{re.escape(canonical)}\b",
+                    f"in {canonical}",
+                    s,
+                )
+                s = re.sub(
+                    rf"(?i)\b{prep}\s+{re.escape(base)}\b(?=.*\b(?:in|via)\s+{re.escape(canonical)}\b)",
+                    "",
+                    s,
+                    count=1,
+                )
+
+            s = re.sub(r"\s{2,}", " ", s).strip(" -,:;")
+            return s
 
         def _best_allowed_primary_keyword(candidates: List[str]) -> str:
             cleaned = [" ".join((x or "").strip().split()) for x in candidates if isinstance(x, str) and x.strip()]
@@ -878,6 +931,7 @@ class KeywordResearchAgent:
             # 2) Remove any parenthetical suffixes like "(GroupDocs.Conversion Cloud)"
             # (keeps the left part, which typically contains keyword)
             t = re.sub(r"\s*\([^)]*\)\s*$", "", t).strip()
+            t = _collapse_duplicate_platform_phrases(t, pl)
 
             # Clean malformed platform/preposition fragments like ".NET with in .NET"
             if pl:
@@ -955,6 +1009,7 @@ class KeywordResearchAgent:
                         prod,
                         t,
                     )
+                t = _collapse_duplicate_platform_phrases(t, pl)
 
             # 5) Length clamp (40ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Å“60): remove filler first, keep kw verbatim
             def _clean(x: str) -> str:
@@ -1203,6 +1258,42 @@ class KeywordResearchAgent:
 
             return re.sub(r"\s{2,}", " ", s).strip()
 
+        def _collapse_duplicate_words(text: str) -> str:
+            parts = " ".join((text or "").strip().split()).split(" ")
+            if not parts:
+                return ""
+            out: List[str] = []
+            for part in parts:
+                if out and out[-1].lower() == part.lower():
+                    continue
+                out.append(part)
+            return " ".join(out).strip()
+
+        def _outline_semantic_key(text: str) -> str:
+            s = " ".join((text or "").strip().split()).lower()
+            if not s:
+                return ""
+            for token in sorted(_safe_product_title_variants(outline_library_name), key=len, reverse=True):
+                s = re.sub(rf"(?i)(?<!\w){re.escape(token)}(?!\w)", " ", s)
+            if platform_label:
+                pattern = platform_variant_pattern(platform_label)
+                if pattern:
+                    s = re.sub(rf"(?i)\b(?:in|for|with|via|using)\s+{pattern}\b", " ", s)
+                    s = re.sub(rf"(?i)\b{pattern}\b", " ", s)
+            s = re.sub(r"(?i)\bstep\s*-\s*by\s*-\s*step\b", "implementation", s)
+            s = re.sub(r"(?i)\bfeatures?\b", "feature", s)
+            s = re.sub(r"(?i)\bsetup\b", "installation", s)
+            s = re.sub(r"(?i)\busing\b", "use", s)
+            s = re.sub(r"(?i)\bimplementation\b", "implement", s)
+            s = re.sub(r"(?i)\bfor this task\b", " ", s)
+            s = re.sub(r"[^a-z0-9+#]+", " ", s)
+            stop = {
+                "a", "an", "and", "for", "in", "of", "the", "to", "with", "via", "using",
+                "use", "that", "this", "task",
+            }
+            tokens = [tok for tok in s.split() if tok and tok not in stop]
+            return " ".join(tokens)
+
         def _normalize_outline_items(items: Any) -> List[str]:
             if not isinstance(items, list):
                 return []
@@ -1221,6 +1312,8 @@ class KeywordResearchAgent:
                 # NEW: enforce spacing after colon (fixes "Step-by-Step:Save" -> "Step-by-Step: Save")
                 s2 = re.sub(r"\s*:\s*", ": ", s2)
                 s2 = _dedupe_outline_product_mentions(s2)
+                s2 = _collapse_duplicate_platform_phrases(s2, platform_label)
+                s2 = _collapse_duplicate_words(s2)
 
                 # NEW: collapse any double spaces introduced
                 s2 = re.sub(r"\s{2,}", " ", s2).strip()
@@ -1230,27 +1323,33 @@ class KeywordResearchAgent:
             return fixed
 
         def _force_first4_outline(outline: List[str], primary_kw: str) -> List[str]:
-            kw = " ".join((primary_kw or "").strip().split())
-            kw_has_product = self._contains_product(kw, self._product_variants(outline_library_name))
-            kw_has_platform = self._contains_platform_variant(kw, platform_label)
-
             if platform_label:
                 base = [
-                    kw if kw_has_platform else (f"{kw} in {platform_label}" if kw_has_product else f"{kw} with {outline_library_name} in {platform_label}"),
-                    f"Key Features of {outline_library_name} for {platform_label}",
+                    f"Using {outline_library_name} in {platform_label}",
+                    f"{outline_library_name} features that matter for this task",
                     f"Installation and Setup in {platform_label}",
-                    f"Step-by-Step: {kw}",
+                    f"Step-by-Step Implementation in {platform_label}",
                 ]
             else:
                 base = [
-                    kw if kw_has_product else f"{kw} with {outline_library_name}",
-                    f"Key Features of {outline_library_name}",
+                    f"Using {outline_library_name}",
+                    f"{outline_library_name} features that matter for this task",
                     "Installation and Setup",
-                    f"Step-by-Step: {kw}",
+                    "Step-by-Step Implementation",
                 ]
-            base = [s.replace("{PRIMARY_KEYWORD}", kw) for s in base]
+            base = [_collapse_duplicate_words(s) for s in base]
+            base_keys = {_outline_semantic_key(s) for s in base}
             rest = outline[4:] if len(outline) > 4 else []
-            outline2 = base + rest
+            filtered_rest: List[str] = []
+            seen_keys = set(base_keys)
+            for item in rest:
+                cleaned = _collapse_duplicate_words(item)
+                key = _outline_semantic_key(cleaned)
+                if not cleaned or not key or key in seen_keys:
+                    continue
+                filtered_rest.append(cleaned)
+                seen_keys.add(key)
+            outline2 = base + filtered_rest
 
             fillers = [
                 "Configuration options and output quality",
@@ -1334,7 +1433,7 @@ class KeywordResearchAgent:
             for key in ("core_seo_keywords", "long_tail_keywords", "context_keywords"):
                 vals = keyword_groups.get(key) or []
                 if isinstance(vals, list):
-                    refined_vals = [refiner.refine(v) for v in vals if isinstance(v, str)]
+                    refined_vals = [refiner.refine(_repair_truncated_keyword(v)) for v in vals if isinstance(v, str)]
                     refined_vals = [
                         v for v in refined_vals
                         if v and _kw_is_complete(v) and self._keyword_intent_key(v) != pk_intent_key and not self._contains_product(v, product_variants)
@@ -1348,7 +1447,7 @@ class KeywordResearchAgent:
             if not isinstance(supporting_keywords, list):
                 supporting_keywords = []
             supporting_keywords = [
-                refiner.refine(v) for v in supporting_keywords if isinstance(v, str)
+                refiner.refine(_repair_truncated_keyword(v)) for v in supporting_keywords if isinstance(v, str)
             ]
             supporting_keywords = [
                 v for v in supporting_keywords
@@ -1422,6 +1521,7 @@ class KeywordResearchAgent:
             )
             if include_product_in_title:
                 t["title"] = self._ensure_product_in_title(t["title"], product)
+            t["title"] = _collapse_duplicate_words(t["title"])
             # 4) OPTIONAL: LLM second-pass polish (Agents SDK) with hard fallback
             polished = polish_title(
                 SeoTitlePolishRequest(
@@ -1459,6 +1559,7 @@ class KeywordResearchAgent:
                 )
                 if include_product_in_title:
                     t["title"] = self._ensure_product_in_title(t["title"], product)
+                t["title"] = _collapse_duplicate_words(t["title"])
 
             # Outline enforcement
             t["outline"] = _force_first4_outline(_normalize_outline_items(t.get("outline")), pk)
