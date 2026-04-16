@@ -43,12 +43,20 @@ class Settings(BaseSettings):
     W_BRAND: float = 0.15
     W_INTENT: float = 0.10
     TOP_CLUSTERS: int = 15
-    MAX_ROWS: int = 50000
+    MAX_ROWS: int = 50000    
     KRA_DATA_DIR: str = "./content"
     KRA_OUTPUT_DIR: str = "./content"
     BLOG_CONTENT_ROOT: str = ""
     KRA_METRICS_DB_PATH: str = "./src/data/kra_metrics_db.json"
     DEBUG: bool = False
+    GOOGLE_SERVICE_ACCOUNT_FILE: str = ""
+    KRA_SHEET_ASPOSE_URL: str = "https://docs.google.com/spreadsheets/d/1WlOELtuKaWSRlkm799m_IBMC1mI2gBcimhmmQ0kjQyg/edit?gid=1078453049"
+    KRA_SHEET_CONHOLDATE_URL: str = ""
+    KRA_SHEET_FAMILIARIZE_URL: str = ""
+    KRA_SHEET_GROUPDOCS_URL: str = ""
+    KRA_SHEET_ASPOSE_CLOUD_URL: str = ""
+    KRA_SHEET_CONHOLDATE_CLOUD_URL: str = ""
+    KRA_SHEET_GROUPDOCS_CLOUD_URL: str = ""
 
     # --- NEW: Metrics / Google Apps Script webhook ---
     METRICS_WEBHOOK_URL: str = "https://script.google.com/macros/s/AKfycbyCHwElrM6RcYLi0JNQAkJmzGrBjAhf28mKXVyub_6SdaZ2ITvzCwfM5xCLE7rmuxio/exec"

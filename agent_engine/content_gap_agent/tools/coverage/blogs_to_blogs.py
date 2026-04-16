@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import re
 from collections import defaultdict
+from datetime import date
 from pathlib import Path
 from time import perf_counter
 from typing import Dict, List, Optional, Tuple, Set
@@ -15,6 +16,8 @@ from .filters import is_release_update_record
 logger = get_logger("cg-cover.agent")
 
 GENERAL_PLATFORM_KEY = "general"
+MIN_BLOG_DATE = date(2020, 1, 1)
+_BLOG_DATE_RE = re.compile(r"^(?P<year>\d{4})-(?P<month>\d{2})-(?P<day>\d{2})$")
 
 # -----------------------------
 # KEY-BASED GROUPING + MATCHING
@@ -47,6 +50,26 @@ def record_gap_key(r: IndexRecord) -> str:
 
 def _normalize_platform_key(s: Optional[str]) -> str:
     return nor_platform_key(s) if s else ""
+
+
+def _record_blog_date(record: IndexRecord) -> Optional[date]:
+    raw = str(getattr(record, "published_date", "") or "").strip()
+    match = _BLOG_DATE_RE.match(raw)
+    if not match:
+        return None
+    try:
+        return date(
+            int(match.group("year")),
+            int(match.group("month")),
+            int(match.group("day")),
+        )
+    except ValueError:
+        return None
+
+
+def _is_recent_blog_record(record: IndexRecord) -> bool:
+    blog_date = _record_blog_date(record)
+    return bool(blog_date and blog_date >= MIN_BLOG_DATE)
 
 
 def infer_platforms(
@@ -102,9 +125,18 @@ def compute_blogs_to_blogs(
     total_records = len(records)
     records = [r for r in records if not is_release_update_record(r)]
     excluded_release = total_records - len(records)
+    pre_date_filter_count = len(records)
+    records = [r for r in records if _is_recent_blog_record(r)]
+    excluded_old_or_undated = pre_date_filter_count - len(records)
     logger.info("Loaded blog index records: %d (%.2f ms)", len(records), (perf_counter() - t_load) * 1000.0)
     if excluded_release:
         logger.info("Excluded release/update records from coverage map: %d", excluded_release)
+    if excluded_old_or_undated:
+        logger.info(
+            "Excluded blog records dated before %s or without parseable date: %d",
+            MIN_BLOG_DATE.isoformat(),
+            excluded_old_or_undated,
+        )
 
     # Allowed platform set (normalized)
     allowed_set: Optional[Set[str]] = None

@@ -1,0 +1,32 @@
+engine:
+  # Each brand can point to its own spreadsheet here.
+  google_sheet_input_id: "https://docs.google.com/spreadsheets/d/1WlOELtuKaWSRlkm799m_IBMC1mI2gBcimhmmQ0kjQyg/edit?gid=1078453049"
+  google_sheet_input_worksheet: "All Missing Topics"
+  google_sheet_row: 5
+  # Optional. If omitted, output is written to the same spreadsheet as input.
+  # google_sheet_output_id: "https://docs.google.com/spreadsheets/d/1WlOELtuKaWSRlkm799m_IBMC1mI2gBcimhmmQ0kjQyg/edit"
+  # Output worksheet selection:
+  # product_suffix -> Aspose.Cells => Cells, GroupDocs.Editor => Editor
+  # product_full   -> Aspose.Cells => Aspose.Cells
+  # fixed          -> always use google_sheet_output_worksheet
+  google_sheet_output_mode: "product_suffix"
+  # Required only when google_sheet_output_mode = fixed
+  # google_sheet_output_worksheet: "Generated Topics"
+
+  # Optional in live-sheet mode. If omitted, brand/product come from the selected sheet row.
+  # brand: "Aspose"
+  # product: "Aspose.Cells"
+
+  # Exactly one of these should be true.
+  use_serp_api: false
+  use_llm_keywords: true
+
+  platform: "Python"
+  locale: "en-US"
+  top_clusters: 10
+  max_rows: 50
+  use_content_index: false
+  include_product_in_title: false
+
+content_index:
+  local_root: "C:\\GitHub\\your-blog-repo\\content"

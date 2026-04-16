@@ -10,12 +10,20 @@ from typing import Any, Dict
 
 import yaml  # make sure pyyaml is in requirements.txt
 
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
+if str(PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(PROJECT_ROOT))
+
+from agent_engine.blog_keyword_analyzer.tools.normalization import normalize_display_text
+
 
 def build_command(engine: Dict[str, Any]) -> list[str]:
     """
     Build the CLI command to run the KRA runner.
 
-    - If engine.missing_topics_file is set:
+    - If live Google Sheet input is configured:
+        - process one live sheet row via input/output sheet arguments
+    - Else if engine.missing_topics_file is set:
         - process a missing-topics markdown row via --missing-topics-file and --missing-topic-row
     - Else if engine.use_llm_keywords / use-llm-keywords is truthy:
         - skip SerpAPI and use the built-in LLM keyword generator
@@ -32,15 +40,90 @@ def build_command(engine: Dict[str, Any]) -> list[str]:
 
     missing_topics_file = engine.get("missing_topics_file") or engine.get("missing-topics-file")
     missing_topic_row = engine.get("missing_topic_row") or engine.get("missing-topic-row")
+    google_sheet_input_id = (
+        engine.get("google_sheet_input_id")
+        or engine.get("google-sheet-input-id")
+        or engine.get("google_sheet_input_spreadsheet_id")
+        or engine.get("google-sheet-input-spreadsheet-id")
+        or ""
+    )
+    google_sheet_input_worksheet = (
+        engine.get("google_sheet_input_worksheet")
+        or engine.get("google-sheet-input-worksheet")
+        or ""
+    )
+    google_sheet_row = engine.get("google_sheet_row") or engine.get("google-sheet-row")
+    google_sheet_output_id = (
+        engine.get("google_sheet_output_id")
+        or engine.get("google-sheet-output-id")
+        or engine.get("google_sheet_output_spreadsheet_id")
+        or engine.get("google-sheet-output-spreadsheet-id")
+        or ""
+    )
+    google_sheet_output_worksheet = (
+        engine.get("google_sheet_output_worksheet")
+        or engine.get("google-sheet-output-worksheet")
+        or ""
+    )
+    google_sheet_output_mode = (
+        engine.get("google_sheet_output_mode")
+        or engine.get("google-sheet-output-mode")
+        or "product_suffix"
+    )
     use_llm_keywords = bool(engine.get("use_llm_keywords") or engine.get("use-llm-keywords"))
     use_serp_api = bool(engine.get("use_serp_api") or engine.get("use-serp-api"))
+    live_sheet_mode = bool(
+        google_sheet_input_id
+        or google_sheet_input_worksheet
+        or google_sheet_row
+        or google_sheet_output_id
+        or google_sheet_output_worksheet
+    )
 
     if use_llm_keywords and use_serp_api:
         raise SystemExit(
             "Use only one of engine.use_llm_keywords or engine.use_serp_api in kra_run.yaml."
         )
+    if live_sheet_mode and missing_topics_file:
+        raise SystemExit(
+            "Use only one of live Google Sheet mode or missing-topics mode in kra_run.yaml."
+        )
 
-    if missing_topics_file:
+    product_raw = str(engine.get("product", "")).strip()
+    product_canonical = normalize_display_text(product_raw) if product_raw else ""
+    if product_raw and product_raw != product_canonical:
+        raise SystemExit(
+            f"engine.product must use the canonical product name. "
+            f"Provided: '{product_raw}'. Expected: '{product_canonical}'."
+        )
+
+    if live_sheet_mode:
+        if not google_sheet_input_id:
+            raise SystemExit(
+                "engine.google_sheet_input_id is required in kra_run.yaml for live Google Sheet mode."
+            )
+        if not google_sheet_input_worksheet:
+            raise SystemExit(
+                "engine.google_sheet_input_worksheet is required in kra_run.yaml for live Google Sheet mode."
+            )
+        if not google_sheet_row:
+            raise SystemExit(
+                "engine.google_sheet_row is required in kra_run.yaml for live Google Sheet mode."
+            )
+        cmd.extend(["--google-sheet-input-id", str(google_sheet_input_id)])
+        cmd.extend(["--google-sheet-input-worksheet", str(google_sheet_input_worksheet)])
+        cmd.extend(["--google-sheet-row", str(google_sheet_row)])
+        if google_sheet_output_id:
+            cmd.extend(["--google-sheet-output-id", str(google_sheet_output_id)])
+        if google_sheet_output_worksheet:
+            cmd.extend(["--google-sheet-output-worksheet", str(google_sheet_output_worksheet)])
+        if google_sheet_output_mode:
+            cmd.extend(["--google-sheet-output-mode", str(google_sheet_output_mode)])
+        if use_llm_keywords:
+            cmd.append("--use-llm-keywords")
+        elif use_serp_api:
+            cmd.append("--use-serp-api")
+    elif missing_topics_file:
         cmd.extend(["--missing-topics-file", str(missing_topics_file)])
         if not missing_topic_row:
             raise SystemExit(
@@ -80,13 +163,15 @@ def build_command(engine: Dict[str, Any]) -> list[str]:
             )
         cmd.extend(["--file", input_file])
 
-    # Required / common arguments
+    if not live_sheet_mode:
+        brand = engine.get("brand")
+        if brand:
+            cmd.extend(["--brand", brand])
+        if product_canonical:
+            cmd.extend(["--product", product_canonical])
+
     cmd.extend(
         [
-            "--brand",
-            engine["brand"],
-            "--product",
-            engine["product"],
             "--locale",
             engine.get("locale", "en-US"),
             "--top",

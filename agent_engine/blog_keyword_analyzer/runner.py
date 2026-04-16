@@ -26,6 +26,13 @@ from agent_engine.blog_keyword_analyzer.tools.normalization import (
     supported_platform_error,
     supported_platform_options_text,
 )
+from agent_engine.blog_keyword_analyzer.tools.google_sheets import (
+    append_output_row,
+    build_output_row,
+    ensure_output_headers,
+    fetch_topic_sheet_selection,
+    normalize_spreadsheet_id,
+)
 
 logger = logging.getLogger(__name__)
 refiner = KeywordRefiner()
@@ -234,6 +241,43 @@ def _topic_title_platform_display(title: str, platform: Optional[str]) -> str:
 
 def _brand_slug(brand: str) -> str:
     return _normalize_topic_key(brand or "unknown")
+
+
+def _derive_output_sheet_name(product: str) -> str:
+    short_name = normalize_product_short_name(product)
+    if "." in short_name:
+        return short_name.split(".", 1)[1].strip() or short_name
+    return short_name or product
+
+
+def _resolve_output_sheet_name(
+    *,
+    product: str,
+    configured_name: str,
+    mode: str,
+) -> str:
+    configured = (configured_name or "").strip()
+    normalized_mode = (mode or "product_suffix").strip().lower()
+    short_name = normalize_product_short_name(product)
+
+    if normalized_mode == "fixed":
+        if not configured:
+            raise ValueError(
+                "--google-sheet-output-worksheet is required when "
+                "--google-sheet-output-mode is 'fixed'."
+            )
+        return configured
+
+    if normalized_mode == "product_full":
+        return short_name or product
+
+    if normalized_mode == "product_suffix":
+        return _derive_output_sheet_name(product)
+
+    raise ValueError(
+        "Unsupported google sheet output mode "
+        f"'{mode}'. Allowed values: product_suffix, product_full, fixed."
+    )
 
 def _print_run_title(
     *,
@@ -732,6 +776,43 @@ def main() -> None:
         default=0,
         help="1-based row number from the missing-topics table to process.",
     )
+    parser.add_argument(
+        "--google-sheet-input-id",
+        dest="google_sheet_input_id",
+        default="",
+        help="Google Sheets spreadsheet ID for the live topic-input sheet.",
+    )
+    parser.add_argument(
+        "--google-sheet-input-worksheet",
+        dest="google_sheet_input_worksheet",
+        default="",
+        help="Worksheet/tab name in the live topic-input sheet.",
+    )
+    parser.add_argument(
+        "--google-sheet-row",
+        dest="google_sheet_row",
+        type=int,
+        default=0,
+        help="1-based sheet row to process from the live topic-input sheet.",
+    )
+    parser.add_argument(
+        "--google-sheet-output-id",
+        dest="google_sheet_output_id",
+        default="",
+        help="Google Sheets spreadsheet ID for appending generated topic results.",
+    )
+    parser.add_argument(
+        "--google-sheet-output-worksheet",
+        dest="google_sheet_output_worksheet",
+        default="",
+        help="Worksheet/tab name in the live topic-output sheet.",
+    )
+    parser.add_argument(
+        "--google-sheet-output-mode",
+        dest="google_sheet_output_mode",
+        default="product_suffix",
+        help="How to choose the output worksheet: product_suffix, product_full, or fixed.",
+    )
     parser.add_argument("--brand", default="Aspose")
     parser.add_argument("--product", default="Aspose.Cells")
     parser.add_argument(
@@ -791,12 +872,142 @@ def main() -> None:
     if args.use_serp_api and args.use_llm_keywords:
         raise SystemExit("Use only one of --use-serp-api or --use-llm-keywords.")
 
+    live_sheet_mode = bool(args.google_sheet_input_id or args.google_sheet_input_worksheet or args.google_sheet_row)
+    missing_topics_mode = bool(args.missing_topics_file)
+    if live_sheet_mode and missing_topics_mode:
+        raise SystemExit(
+            "Use only one of missing-topics mode or live Google Sheet mode in the same run."
+        )
+
     selected_platform: Optional[str] = None
     if args.platform:
         try:
             selected_platform = require_supported_platform(args.platform)
         except ValueError as e:
             raise SystemExit(str(e))
+
+    if live_sheet_mode:
+        if not settings.GOOGLE_SERVICE_ACCOUNT_FILE:
+            raise SystemExit(
+                "GOOGLE_SERVICE_ACCOUNT_FILE must be set to use live Google Sheet mode."
+            )
+        if not args.google_sheet_input_id:
+            raise SystemExit("--google-sheet-input-id is required in live Google Sheet mode.")
+        if not args.google_sheet_input_worksheet:
+            raise SystemExit("--google-sheet-input-worksheet is required in live Google Sheet mode.")
+        if args.google_sheet_row < 2:
+            raise SystemExit("--google-sheet-row must be >= 2 because row 1 contains headers.")
+        if not selected_platform:
+            raise SystemExit(
+                "--platform is required in live Google Sheet mode and must target one supported platform."
+            )
+
+        try:
+            selection = fetch_topic_sheet_selection(
+                credentials_file=settings.GOOGLE_SERVICE_ACCOUNT_FILE,
+                spreadsheet_id=args.google_sheet_input_id,
+                worksheet_name=args.google_sheet_input_worksheet,
+                row_index=args.google_sheet_row,
+            )
+        except Exception as e:
+            raise SystemExit(str(e))
+
+        if not selection.platforms:
+            raise SystemExit(
+                f"Row #{selection.row_index} has no missing supported platform columns marked as NO."
+            )
+        if selected_platform not in selection.platforms:
+            available = ", ".join(platform_header_display(p) for p in selection.platforms)
+            raise SystemExit(
+                f"Row #{selection.row_index} does not include the selected platform "
+                f"'{platform_header_display(selected_platform)}'. Available platforms: {available}."
+            )
+
+        req = RunRequest(
+            brand=selection.brand,
+            product=selection.product,
+            locale=args.locale,
+            file_path="",
+            clustering_k=args.clustering_k,
+            top_clusters=args.top_clusters,
+            max_rows=args.max_rows,
+        )
+
+        logger.info(
+            "CLI invoked in live-sheet mode: brand=%s product=%s row=%s topic=%s platform=%s",
+            selection.brand,
+            selection.product,
+            selection.row_index,
+            selection.topic,
+            selected_platform,
+        )
+
+        output_spreadsheet_id = normalize_spreadsheet_id(
+            args.google_sheet_output_id or args.google_sheet_input_id
+        )
+        output_worksheet_name = _resolve_output_sheet_name(
+            product=selection.product,
+            configured_name=args.google_sheet_output_worksheet,
+            mode=args.google_sheet_output_mode,
+        )
+        logger.info(
+            "Live-sheet output target resolved: spreadsheet=%s worksheet=%s mode=%s",
+            output_spreadsheet_id,
+            output_worksheet_name,
+            args.google_sheet_output_mode,
+        )
+
+        result, metrics = run_sync(
+            req,
+            platform=selected_platform,
+            use_content_index=args.use_content_index,
+            seed_topic=selection.topic,
+            include_product_in_title=args.include_product_in_title,
+            source="llm" if args.use_llm_keywords else "serp",
+        )
+
+        _print_summary(result)
+        print()
+        print(metrics.as_cli_summary())
+        print()
+
+        safe_product = _brand_slug(selection.product)
+        safe_topic = _brand_slug(selection.topic)[:60] or f"row-{selection.row_index}"
+        file_name = (
+            f"sheet-topic-{selection.row_index}_{safe_product}_{selected_platform}_{safe_topic}_topics.md"
+        )
+
+        brand_out_dir = _resolve_brand_output_dir(selection.brand)
+        md_path = write_topics_markdown(
+            result,
+            output_dir=brand_out_dir,
+            platform=selected_platform,
+            file_name=file_name,
+        )
+
+        try:
+            ensure_output_headers(
+                credentials_file=settings.GOOGLE_SERVICE_ACCOUNT_FILE,
+                spreadsheet_id=output_spreadsheet_id,
+                worksheet_name=output_worksheet_name,
+            )
+            append_output_row(
+                credentials_file=settings.GOOGLE_SERVICE_ACCOUNT_FILE,
+                spreadsheet_id=output_spreadsheet_id,
+                worksheet_name=output_worksheet_name,
+                row_payload=build_output_row(
+                    selection=selection,
+                    selected_platform=selected_platform,
+                    result=result,
+                    markdown_path=str(md_path),
+                ),
+            )
+        except Exception as e:
+            logger.warning("Google Sheet output append failed: %s", e, exc_info=True)
+            raise SystemExit(f"Run completed but failed to append output row: {e}")
+
+        print(md_path)
+        return
 
     if args.missing_topics_file:
         try:

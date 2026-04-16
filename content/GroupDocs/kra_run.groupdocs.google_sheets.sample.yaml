@@ -1,0 +1,18 @@
+engine:
+  google_sheet_input_id: "https://docs.google.com/spreadsheets/d/<groupdocs-brand-sheet-id>/edit"
+  google_sheet_input_worksheet: "All Missing Topics"
+  google_sheet_row: 14
+  google_sheet_output_mode: "product_suffix"
+
+  use_serp_api: true
+  use_llm_keywords: false
+
+  platform: "net"
+  locale: "en-US"
+  top_clusters: 10
+  max_rows: 50
+  use_content_index: true
+  include_product_in_title: false
+
+content_index:
+  local_root: "C:\\GitHub\\groupdocs-blog\\content"

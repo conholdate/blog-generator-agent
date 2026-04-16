@@ -98,6 +98,7 @@ class KeywordResearchAgent:
                 f"- Target platform is '{platform_label}'.\n"
                 f"- '{platform_label}' MUST appear in EVERY title.\n"
                 "- Do NOT mention other platforms.\n"
+                f"- If a title or heading already contains an 'in <target>' phrase like 'in Excel', express the platform as 'using {platform_label}' or 'with {platform_label}', not a second 'in {platform_label}'.\n"
             )
 
         if include_product_in_title:
@@ -108,8 +109,8 @@ class KeywordResearchAgent:
         if platform_label:
             outline_structure = (
                 "- Outline MUST be 6-10 items.\n"
-                "- First 4 items MUST be exactly:\n"
-                f"  1) 'Using {outline_library_name} in {platform_label}'\n"
+                "- First 4 items MUST follow this structure:\n"
+                f"  1) A topic-led H2 based on the primary keyword, with the library mentioned naturally, e.g. '<primary keyword> with {outline_library_name}'\n"
                 f"  2) '{outline_library_name} features that matter for this task'\n"
                 f"  3) 'Installation and setup in {platform_label}'\n"
                 f"  4) 'Step-by-step implementation in {platform_label}'\n"
@@ -118,8 +119,8 @@ class KeywordResearchAgent:
         else:
             outline_structure = (
                 "- Outline MUST be 6-10 items.\n"
-                "- First 4 items MUST be exactly:\n"
-                f"  1) 'Using {outline_library_name}'\n"
+                "- First 4 items MUST follow this structure:\n"
+                f"  1) A topic-led H2 based on the primary keyword, with the library mentioned naturally, e.g. '<primary keyword> with {outline_library_name}'\n"
                 f"  2) '{outline_library_name} features that matter for this task'\n"
                 "  3) 'Installation and setup'\n"
                 "  4) 'Step-by-step implementation'\n"
@@ -155,6 +156,38 @@ class KeywordResearchAgent:
         if match:
             return match.group(0)
         return None
+
+    @staticmethod
+    def _rewrite_nested_platform_phrase(text: str, platform_label: Optional[str]) -> str:
+        out = " ".join((text or "").strip().split())
+        pl = (platform_label or "").strip()
+        if not out or not pl:
+            return out
+
+        platform_pattern = platform_variant_pattern(pl) or re.escape(pl)
+        out = re.sub(
+            rf"(?i)\bin\s+([^,:;()]+?)\s+in\s+{platform_pattern}\b",
+            lambda m: f"in {m.group(1).strip()} using {pl}",
+            out,
+        )
+        return re.sub(r"\s{2,}", " ", out).strip(" -,:;")
+
+    def _platform_suffix_phrase(self, text: str, platform_label: Optional[str]) -> str:
+        pl = (platform_label or "").strip()
+        if not pl:
+            return ""
+
+        base = " ".join((text or "").strip().split())
+        if not base:
+            return f"in {pl}"
+
+        nested_candidate = f"{base} in {pl}"
+        rewritten = self._rewrite_nested_platform_phrase(nested_candidate, pl)
+        if rewritten != nested_candidate and rewritten.startswith(base):
+            suffix = rewritten[len(base):].strip()
+            if suffix:
+                return suffix
+        return f"in {pl}"
 
     @staticmethod
     def _platform_label(fw: Optional[str]) -> Optional[str]:
@@ -364,9 +397,10 @@ class KeywordResearchAgent:
                 f"in {platform_label}",
                 out,
             )
+            out = self._rewrite_nested_platform_phrase(out, platform_label)
 
         if platform_label and had_platform and not self._contains_platform_variant(out, platform_label):
-            out = f"{out} in {platform_label}".strip()
+            out = f"{out} {self._platform_suffix_phrase(out, platform_label)}".strip()
 
         out = re.sub(r"\s{2,}", " ", out).strip(" -,:;")
         return refiner.refine(out)
@@ -804,6 +838,26 @@ class KeywordResearchAgent:
             def _in_range(s: str) -> bool:
                 return MIN_LEN <= len(s) <= MAX_LEN
 
+            def _action_title_candidates(keyword: str, has_platform: bool) -> List[str]:
+                if platform_label:
+                    platform_suffix = self._platform_suffix_phrase(keyword, platform_label)
+                    if has_platform:
+                        return [
+                            f"How to {keyword}",
+                            f"{keyword}: A Complete Tutorial",
+                            keyword,
+                        ]
+                    return [
+                        f"How to {keyword} {platform_suffix}",
+                        f"{keyword}: A Complete Tutorial {platform_suffix}",
+                        f"{keyword} {platform_suffix}",
+                    ]
+                return [
+                    f"How to {keyword}",
+                    f"{keyword}: A Complete Tutorial",
+                    keyword,
+                ]
+
             # Detect if keyword is already phrased as an action ("Convert ...", "Create ...", etc.)
             verb_prefixes = (
                 "convert ", "create ", "generate ", "merge ", "split ", "compress ",
@@ -815,31 +869,24 @@ class KeywordResearchAgent:
             )
             if platform_label:
                 if kw_low.startswith("how to "):
+                    platform_suffix = self._platform_suffix_phrase(kw, platform_label)
                     candidates = [
-                        kw if kw_has_platform else f"{kw} in {platform_label}",
-                        f"{kw}: A Complete Tutorial" if kw_has_platform else f"{kw}: A Complete Tutorial in {platform_label}",
-                        f"{kw} Guide" if kw_has_platform else f"{kw} Guide in {platform_label}",
+                        kw if kw_has_platform else f"{kw} {platform_suffix}",
+                        f"{kw}: A Complete Tutorial" if kw_has_platform else f"{kw}: A Complete Tutorial {platform_suffix}",
+                        f"{kw} Guide" if kw_has_platform else f"{kw} Guide {platform_suffix}",
                     ]
                 elif kw_low.startswith(verb_prefixes):
-                    # Keyword already contains the verb -> do NOT add another action verb
-                    candidates = [
-                        kw if kw_has_platform else f"{kw} in {platform_label}",
-                        f"How to {kw}" if kw_has_platform else f"How to {kw} in {platform_label}",
-                        f"{kw}: A Complete Tutorial" if kw_has_platform else f"{kw}: A Complete Tutorial in {platform_label}",
-                    ]
+                    candidates = _action_title_candidates(kw, kw_has_platform)
                 else:
                     if action_intent_re.search(kw):
-                        candidates = [
-                            kw if kw_has_platform else f"{kw} in {platform_label}",
-                            f"How to {kw}" if kw_has_platform else f"How to {kw} in {platform_label}",
-                            f"{kw}: A Complete Tutorial" if kw_has_platform else f"{kw}: A Complete Tutorial in {platform_label}",
-                        ]
+                        candidates = _action_title_candidates(kw, kw_has_platform)
                     else:
                         # Noun phrase keywords like "HTML to PDF Converter"
+                        platform_suffix = self._platform_suffix_phrase(kw, platform_label)
                         candidates = [
-                            kw if kw_has_platform else f"{kw} in {platform_label}",
-                            f"{kw}: A Complete Tutorial" if kw_has_platform else f"{kw}: A Complete Tutorial in {platform_label}",
-                            f"How to Convert {kw}" if kw_has_platform else f"How to Convert {kw} in {platform_label}",
+                            kw if kw_has_platform else f"{kw} {platform_suffix}",
+                            f"{kw}: A Complete Tutorial" if kw_has_platform else f"{kw}: A Complete Tutorial {platform_suffix}",
+                            f"How to Convert {kw}" if kw_has_platform else f"How to Convert {kw} {platform_suffix}",
                         ]
             else:
                 if kw_low.startswith("how to "):
@@ -849,18 +896,10 @@ class KeywordResearchAgent:
                         f"{kw} Guide",
                     ]
                 elif kw_low.startswith(verb_prefixes):
-                    candidates = [
-                        kw,
-                        f"How to {kw}",
-                        f"{kw}: A Complete Tutorial",
-                    ]
+                    candidates = _action_title_candidates(kw, False)
                 else:
                     if action_intent_re.search(kw):
-                        candidates = [
-                            kw,
-                            f"How to {kw}",
-                            f"{kw}: A Complete Tutorial",
-                        ]
+                        candidates = _action_title_candidates(kw, False)
                     else:
                         candidates = [
                             kw,
@@ -889,7 +928,7 @@ class KeywordResearchAgent:
                 title = candidates[0]
 
             if len(title) > MAX_LEN:
-                title = kw if kw_has_platform else (_clean(f"{kw} in {platform_label}") if platform_label else kw)
+                title = kw if kw_has_platform else (_clean(f"{kw} {self._platform_suffix_phrase(kw, platform_label)}") if platform_label else kw)
 
             if len(title) < MIN_LEN:
                 pad = " Guide"
@@ -897,7 +936,7 @@ class KeywordResearchAgent:
                     title = _clean(title + pad)
 
             if kw not in title:
-                title = kw if kw_has_platform else (_clean(f"{kw} in {platform_label}") if platform_label else kw)
+                title = kw if kw_has_platform else (_clean(f"{kw} {self._platform_suffix_phrase(kw, platform_label)}") if platform_label else kw)
 
             return title
 
@@ -971,6 +1010,7 @@ class KeywordResearchAgent:
             if pl:
                 has_csharp = bool(re.search(r"(?i)\bC#\b", t))
                 has_platform_already = _mentions_platform_label(t, pl)
+                platform_suffix = self._platform_suffix_phrase(t, pl)
 
                 if pl == ".NET" and has_csharp:
                     # Remove a trailing "in .NET" if present
@@ -979,8 +1019,9 @@ class KeywordResearchAgent:
                     # Normal enforcement for other cases/platforms
                     t = re.sub(rf"(?i)\s+(?:in|via)\s+{re.escape(pl)}\s+(?:in|via)\s+{re.escape(pl)}\b", f" in {pl}", t).strip()
                     t = re.sub(r"(?i)\bin\s+[A-Za-z0-9\.\+#/ ]+$", f"in {pl}", t).strip()
-                    if not has_platform_already and f"in {pl}" not in t:
-                        t = f"{t} in {pl}".strip()
+                    t = self._rewrite_nested_platform_phrase(t, pl)
+                    if not has_platform_already and not _mentions_platform_label(t, pl):
+                        t = f"{t} {platform_suffix}".strip()
 
             # 4) Product mode (title only)
             if not include_product_in_title and prod:
@@ -1016,18 +1057,20 @@ class KeywordResearchAgent:
                 return re.sub(r"\s{2,}", " ", x).strip(" -ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Å“ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â,:; ")
 
             if pl:
+                platform_suffix = self._platform_suffix_phrase(kw, pl) if kw else f"in {pl}"
                 t = re.sub(
                     rf"(?i)\b(?:in|for|via|using|with)\s+{re.escape(pl)}\s+"
                     rf"(?:in|for|via|using|with)\s+{re.escape(pl)}\b",
                     f"in {pl}",
                     t,
                 ).strip()
+                t = self._rewrite_nested_platform_phrase(t, pl)
 
             action_lead_re = re.compile(
                 r"(?i)^(convert|create|generate|merge|split|compress|extract|edit|render|export|import|watermark|sign|ocr|update|delete|remove|add|insert|replace|modify)\b"
             )
             if kw and action_lead_re.search(kw):
-                simple_title = kw if (not pl or _mentions_platform_label(kw, pl)) else _clean(f"{kw} in {pl}")
+                simple_title = kw if (not pl or _mentions_platform_label(kw, pl)) else _clean(f"{kw} {platform_suffix}")
                 if re.search(r"(?i)\b(how to|guide|tutorial)\b", t):
                     t = simple_title
                 elif not include_product_in_title and prod and self._contains_product(t, self._product_variants(prod)):
@@ -1046,20 +1089,27 @@ class KeywordResearchAgent:
 
             # If still too long, prefer shortest core: "<kw> in <pl>"
             if len(t) > max_len and kw and pl:
-                core = _clean(f"{kw} in {pl}")
+                core = _clean(f"{kw} {platform_suffix}")
                 t = core
 
             # If still too long (very long kw), last resort: keep kw + platform even if > max
             if max_len is not None and len(t) > max_len:
                 if len(t) > max_len and kw:
-                    t = _clean(f"{kw} in {pl}") if pl else kw
+                    t = _clean(f"{kw} {platform_suffix}") if pl else kw
 
             # If too short, add a short suffix (if room)
             if min_len is not None and len(t) < min_len:
                 if len(t) < min_len:
-                    suffix = " Guide"
-                    if len(t) + len(suffix) <= max_len:
-                        t = _clean(t + suffix)
+                    if kw and action_lead_re.search(kw):
+                        action_fallback = kw if (not pl or _mentions_platform_label(kw, pl)) else _clean(f"{kw} {platform_suffix}")
+                        if not re.search(r"(?i)^how to\b", action_fallback):
+                            how_to_title = _clean(f"How to {action_fallback}")
+                            if len(how_to_title) <= max_len:
+                                t = how_to_title
+                    if len(t) < min_len:
+                        suffix = " Guide"
+                        if len(t) + len(suffix) <= max_len:
+                            t = _clean(t + suffix)
 
             return t
 
@@ -1308,11 +1358,17 @@ class KeywordResearchAgent:
                 s2 = re.sub(r"(?i)\bthis\s+library\b", outline_library_name, s2)
                 s2 = re.sub(r"(?i)\bstep\s*-\s*by\s*-\s*step\b", "Step-by-Step", s2)
                 s2 = re.sub(r"(?i)\bstep\s*by\s*step\b", "Step-by-Step", s2)
+                s2 = re.sub(
+                    rf"(?i)^Using\s+{re.escape(outline_library_name)}\s+in\s+{re.escape(platform_label or '')}$",
+                    f"Using {outline_library_name} with {platform_label}" if platform_label else f"Using {outline_library_name}",
+                    s2,
+                )
 
                 # NEW: enforce spacing after colon (fixes "Step-by-Step:Save" -> "Step-by-Step: Save")
                 s2 = re.sub(r"\s*:\s*", ": ", s2)
                 s2 = _dedupe_outline_product_mentions(s2)
                 s2 = _collapse_duplicate_platform_phrases(s2, platform_label)
+                s2 = self._rewrite_nested_platform_phrase(s2, platform_label)
                 s2 = _collapse_duplicate_words(s2)
 
                 # NEW: collapse any double spaces introduced
@@ -1322,17 +1378,34 @@ class KeywordResearchAgent:
                 fixed.append(s2)
             return fixed
 
+        def _outline_topic_lead(primary_kw: str) -> str:
+            kw = " ".join((primary_kw or "").strip().split())
+            if not kw:
+                return (
+                    f"Using {outline_library_name} with {platform_label}"
+                    if platform_label
+                    else f"Using {outline_library_name}"
+                )
+
+            lead = kw
+            if platform_label and not self._contains_platform_variant(lead, platform_label):
+                lead = f"{lead} {self._platform_suffix_phrase(lead, platform_label)}".strip()
+            lead = self._rewrite_nested_platform_phrase(lead, platform_label)
+            lead = f"{lead} with {outline_library_name}".strip()
+            lead = _collapse_duplicate_words(lead)
+            return refiner.to_title_case(lead)
+
         def _force_first4_outline(outline: List[str], primary_kw: str) -> List[str]:
             if platform_label:
                 base = [
-                    f"Using {outline_library_name} in {platform_label}",
+                    _outline_topic_lead(primary_kw),
                     f"{outline_library_name} features that matter for this task",
                     f"Installation and Setup in {platform_label}",
                     f"Step-by-Step Implementation in {platform_label}",
                 ]
             else:
                 base = [
-                    f"Using {outline_library_name}",
+                    _outline_topic_lead(primary_kw),
                     f"{outline_library_name} features that matter for this task",
                     "Installation and Setup",
                     "Step-by-Step Implementation",

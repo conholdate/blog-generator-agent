@@ -107,6 +107,12 @@ def _platform_suffix_ok(title: str, platform_label: Optional[str]) -> bool:
         return True
     return contains_platform_variant(title, platform_label)
 
+def _has_nested_in_platform_phrase(title: str, platform_label: Optional[str]) -> bool:
+    if not platform_label:
+        return False
+    pattern = platform_variant_pattern(platform_label) or re.escape(platform_label)
+    return bool(re.search(rf"(?i)\bin\s+[^,:;()]+?\s+in\s+{pattern}\b", title))
+
 def _contains_verbatim(haystack: str, needle: str) -> bool:
     return bool(needle) and (needle in (haystack or ""))
 
@@ -198,6 +204,8 @@ def polish_title(req: SeoTitlePolishRequest, metrics: Optional[RunMetrics] = Non
         if not _platform_suffix_ok(title, req.platform_label):
             return None
         if _too_many_platform_mentions(title, req.platform_label):
+            return None
+        if _has_nested_in_platform_phrase(title, req.platform_label):
             return None
 
     prod = (req.product or "").strip()

@@ -14,6 +14,7 @@ from .tools.normalization import (
 )
 from .tools.prerequisites import ensure_prerequisites
 from .tools.io import write_json, write_text
+from .tools.sheets_export import build_payload, post_payload, resolve_sheet_config, write_payload
 from .tools.render.md_render import render_md_matrix
 from .tools.render.gap_render import render_gaps_md
 from .tools.coverage.blogs_to_blogs import compute_blogs_to_blogs
@@ -144,6 +145,42 @@ def _render_missing_topics_md(
     out.append("---")
     out.append("")
     return "\n".join(out)
+
+
+def _send_missing_topics_to_sheet(
+    *,
+    settings: CoverageSettings,
+    req: CoverageRunRequest,
+    coverage_json_path: Path,
+) -> None:
+    brand_cfg = resolve_sheet_config(settings, req.brand_key)
+    webhook_url = str(brand_cfg.get("webhook_url") or "").strip()
+    if not webhook_url:
+        log.info("Skipping Google Sheets export: no TOPICS_SHEETS webhook configured for brand=%s", req.brand_key)
+        return
+
+    token = str(brand_cfg.get("token") or "").strip()
+    sheet_name = str(brand_cfg.get("sheet_name") or "All Missing Topics").strip() or "All Missing Topics"
+    output_json_cfg = brand_cfg.get("output_json") or (
+        settings.outputs_root / "google_sheets" / f"{req.brand_key}_{req.product_key}_missing_topics.json"
+    )
+    output_json = Path(str(output_json_cfg)).expanduser()
+    if not output_json.is_absolute():
+        output_json = (settings.repo_root / output_json).resolve()
+
+    payload = build_payload(
+        coverage_json=coverage_json_path,
+        sheet_name=sheet_name,
+        replace=True,
+    )
+    write_payload(payload, output_json)
+    log.info("Wrote Google Sheets payload: %s rows=%d", output_json, payload["meta"]["row_count"])
+
+    status, text = post_payload(payload, webhook_url, token)
+    if status != 200:
+        log.warning("Google Sheets POST returned status=%s body=%s", status, text[:500])
+        return
+    log.info("Google Sheets POST succeeded for brand=%s product=%s: %s", req.brand_key, req.product_key, text[:500])
 
 
 def run_coverage(settings: CoverageSettings, req: CoverageRunRequest) -> Dict[str, Any]:
@@ -313,7 +350,8 @@ def run_coverage(settings: CoverageSettings, req: CoverageRunRequest) -> Dict[st
             log.info("Serializing coverage result to JSON")
             t_json = perf_counter()
             coverage_json = result.to_json()
-            write_json(out_dir / "coverage.json", coverage_json)
+            coverage_json_path = out_dir / "coverage.json"
+            write_json(coverage_json_path, coverage_json)
             log.info("Wrote coverage.json (%.2f ms)", (perf_counter() - t_json) * 1000.0)
 
             # Compute stats once and reuse for logs + metrics
@@ -378,6 +416,11 @@ def run_coverage(settings: CoverageSettings, req: CoverageRunRequest) -> Dict[st
             )
             write_text(missing_topics_path, missing_topics_md)
             log.info("Wrote missing topics markdown: %s", missing_topics_path)
+            _send_missing_topics_to_sheet(
+                settings=settings,
+                req=req,
+                coverage_json_path=coverage_json_path,
+            )
 
             # Metrics counts for Coverage Map
             coverage_discovered = int(stats["total_topics"])

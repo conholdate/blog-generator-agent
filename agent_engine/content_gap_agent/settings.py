@@ -87,6 +87,53 @@ class CoverageSettings:
     INT_METRICS_WEBHOOK_URL: str = "https://script.google.com/macros/s/AKfycbwYyPBs3ox6xhYfznVpu4Gh8T4l7cXrAIj1m_y1g-vWn6tyP_LAkv3eo6W2EZYAeHgLag/exec"
     INT_METRICS_TOKEN: str = "blog_team_agent-2026"
 
+    TOPICS_ASPOSE_COM_WEBHOOK_URL: str = "https://script.google.com/macros/s/AKfycbxqNoDyBuxTZwD7DooYANTWXN43e2WTJSRt0bR2CPqvlKrbS0XXqhEKlZGvjZyecdt32w/exec"
+    TOPICS_ASPOSE_COM_TOKEN: str = "MISSING_TOPICS_BY_CONTENT_GAP_AGENT"
+    DEPLYMENT_ID: str = "AKfycbxqNoDyBuxTZwD7DooYANTWXN43e2WTJSRt0bR2CPqvlKrbS0XXqhEKlZGvjZyecdt32w"
+
+    # Per-brand Google Sheets config, keyed by brand_key.
+    # Fill each webhook_url with the Apps Script web app URL for that brand's sheet.
+    TOPICS_SHEETS: dict[str, dict[str, str]] = field(
+        default_factory=lambda: {
+            "aspose": {
+                "webhook_url": "https://script.google.com/macros/s/AKfycbxqNoDyBuxTZwD7DooYANTWXN43e2WTJSRt0bR2CPqvlKrbS0XXqhEKlZGvjZyecdt32w/exec",
+                "token": "MISSING_TOPICS_BY_CONTENT_GAP_AGENT",
+                "sheet_name": "All Missing Topics",
+                "output_json": "outputs/google_sheets/aspose_missing_topics.json",
+            },
+            "groupdocs": {
+                "webhook_url": "https://script.google.com/macros/s/AKfycbz0LHk_NgxGf_UyaCZtMC9bF1w6t0bjJZEdj3lC6RdxUOy-1oZaUehWuVb4-xkzNl6n_g/exec",
+                "token": "MISSING_TOPICS_BY_CONTENT_GAP_AGENT",
+                "sheet_name": "All Missing Topics",
+                "output_json": "outputs/google_sheets/groupdocs_missing_topics.json",
+            },
+            "conholdate": {
+                "webhook_url": "https://script.google.com/macros/s/AKfycbzToAGRBmMHhXXPczAbfeExDYD-g6uqacIYmy5KwUi7D0xklwQHQpun0HF88fpKVe0RnQ/exec",
+                "token": "MISSING_TOPICS_BY_CONTENT_GAP_AGENT",
+                "sheet_name": "All Missing Topics",
+                "output_json": "outputs/google_sheets/conholdate_missing_topics.json",
+            },
+            "aspose_cloud": {
+                "webhook_url": "https://script.google.com/macros/s/AKfycbzHVEKbFeVJXSNfX9LxF4iPQbCcPh0SdOkyo-xKS_Pin3NktuJG9qaxopXyIMiTK6kXMg/exec",
+                "token": "MISSING_TOPICS_BY_CONTENT_GAP_AGENT",
+                "sheet_name": "All Missing Topics",
+                "output_json": "outputs/google_sheets/aspose_cloud_missing_topics.json",
+            },
+            "groupdocs_cloud": {
+                "webhook_url": "https://script.google.com/macros/s/AKfycbxtzNWPUXEPklcek4BjzUaFRhLNcSmT9Ulji-hc5ezW6pQwdut9tYlAlNKP4rg0UIfmaQ/exec",
+                "token": "MISSING_TOPICS_BY_CONTENT_GAP_AGENT",
+                "sheet_name": "All Missing Topics",
+                "output_json": "outputs/google_sheets/groupdocs_cloud_missing_topics.json",
+            },
+            "conholdate_cloud": {
+                "webhook_url": "https://script.google.com/macros/s/AKfycbw9uUFNop0x2x9_r4B6J3PQ0KTGrJ2JCsLTtjN0r98Q4jPzcbJ101MeY_6w7yorwJsNCQ/exec",
+                "token": "MISSING_TOPICS_BY_CONTENT_GAP_AGENT",
+                "sheet_name": "All Missing Topics",
+                "output_json": "outputs/google_sheets/conholdate_cloud_missing_topics.json",
+            },
+        }
+    )
+
     @staticmethod
     def from_env() -> "CoverageSettings":
         # Dataclass reads env via default_factory; .env already loaded above.

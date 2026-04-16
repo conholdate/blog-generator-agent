@@ -18,6 +18,7 @@ HARD CONSTRAINTS:
 2) title MUST contain primary_keyword EXACTLY as provided (verbatim substring).
 3) If platform_label is provided, title MUST mention that platform exactly once.
    Treat equivalent forms as the same platform, e.g. '.NET' and 'C#'.
+   If the phrase already contains an 'in <target>' clause like 'in Excel', express the platform as 'using <platform_label>' or 'with <platform_label>', not 'in Excel in <platform_label>'.
 4) If include_product_in_title is True, title MUST contain product (verbatim substring).
    If include_product_in_title is False, title MUST NOT contain product.
 5) Avoid duplicate verbs (e.g., 'Convert Convert').
