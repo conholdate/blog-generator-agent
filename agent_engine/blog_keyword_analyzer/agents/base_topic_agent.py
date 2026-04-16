@@ -90,6 +90,8 @@ class KeywordResearchAgent:
                 "- Keep the topic tightly aligned to the seed topic, not an adjacent or broader area.\n"
                 "- Choose the most relevant primary_keyword for the seed topic.\n"
                 "- Supporting keywords must be directly relevant variations of the same seed topic.\n"
+                "- Do NOT narrow a multi-action seed topic into a single-action subtopic.\n"
+                "- Do NOT introduce extra scope like batch, bulk, multiple sheets, or automation unless the seed topic explicitly asks for it.\n"
             )
 
         platform_rules = "- No platform constraint.\n"
@@ -533,6 +535,26 @@ class KeywordResearchAgent:
                 token for token in re.findall(r"[a-z0-9.+#]+", (text or "").lower())
                 if len(token) > 1 and token not in seed_stopwords
             }
+
+        def _multi_action_seed_topic(text: str) -> bool:
+            tokens = re.findall(r"[a-z0-9.+#]+", (text or "").lower())
+            action_verbs = {
+                "add", "edit", "update", "delete", "remove", "insert", "replace",
+                "modify", "convert", "export", "import", "merge", "split",
+            }
+            return len({tok for tok in tokens if tok in action_verbs}) >= 2
+
+        def _seed_topic_should_override_primary(seed_text: str, primary_kw: str) -> bool:
+            seed_norm = " ".join((seed_text or "").strip().split())
+            pk_norm = " ".join((primary_kw or "").strip().split())
+            if not seed_norm or not pk_norm or not _multi_action_seed_topic(seed_norm):
+                return False
+            seed_tokens = _seed_anchor_tokens(seed_norm)
+            pk_tokens = _seed_anchor_tokens(pk_norm)
+            if not seed_tokens or not pk_tokens:
+                return False
+            overlap = len(seed_tokens.intersection(pk_tokens))
+            return overlap >= max(2, min(len(seed_tokens), len(pk_tokens)) // 2)
 
         def _seed_relevance(cluster: Cluster) -> float:
             anchors = _seed_anchor_tokens(seed_topic_clean)
@@ -1393,7 +1415,7 @@ class KeywordResearchAgent:
             lead = self._rewrite_nested_platform_phrase(lead, platform_label)
             lead = f"{lead} with {outline_library_name}".strip()
             lead = _collapse_duplicate_words(lead)
-            return refiner.to_title_case(lead)
+            return refiner.to_sentence_case(lead)
 
         def _force_first4_outline(outline: List[str], primary_kw: str) -> List[str]:
             if platform_label:
@@ -1497,6 +1519,11 @@ class KeywordResearchAgent:
                 if not pk or not _kw_is_complete(pk):
                     invalid_count += 1
                     continue
+            if _seed_topic_should_override_primary(seed_topic_clean, pk):
+                seed_pk = self._normalize_primary_keyword_phrase(seed_topic_clean, platform_label)
+                if seed_pk and _kw_is_complete(seed_pk):
+                    pk = seed_pk
+                    t["primary_keyword"] = pk
             pk_intent_key = self._keyword_intent_key(pk)
 
             keyword_groups = t.get("keyword_groups") or {}
