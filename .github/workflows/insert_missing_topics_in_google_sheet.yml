@@ -1,0 +1,144 @@
+name: Missing Topics In Google Sheet
+
+on:
+  workflow_dispatch:
+    inputs:
+      brand_key:
+        description: "Brand key used to resolve Google Sheets config from settings.py."
+        required: true
+        default: "aspose"
+        type: choice
+        options:
+          - aspose
+          - groupdocs
+          - conholdate
+          - aspose_cloud
+          - groupdocs_cloud
+          - conholdate_cloud
+
+      coverage_json:
+        description: "Optional repo-relative or absolute coverage.json path. Leave empty to use settings.py."
+        required: false
+        default: ""
+        type: string
+
+      sheet_name:
+        description: "Optional Google Sheets tab name override."
+        required: false
+        default: ""
+        type: string
+
+      append:
+        description: "Append rows instead of replacing the sheet."
+        required: false
+        default: false
+        type: boolean
+
+      python_version:
+        description: "Python version."
+        required: true
+        default: "3.11"
+        type: string
+
+      push_results:
+        description: "Commit and push generated payload JSON back to the repo."
+        required: false
+        default: true
+        type: boolean
+
+      commit_message:
+        description: "Commit message when push_results=true."
+        required: false
+        default: "chore: update missing topics Google Sheets payload"
+        type: string
+
+permissions:
+  contents: write
+
+jobs:
+  export-missing-topics:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+
+    env:
+      CG_REPO_ROOT: ${{ github.workspace }}
+      CG_OUTPUTS_ROOT: ${{ github.workspace }}/outputs
+      GIT_TERMINAL_PROMPT: "0"
+
+    steps:
+      - name: Checkout this repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ inputs.python_version }}
+          cache: "pip"
+
+      - name: Install dependencies
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install --upgrade pip
+          if [ -f requirements.txt ]; then
+            pip install -r requirements.txt
+          elif [ -f pyproject.toml ]; then
+            pip install -e .
+          else
+            echo "No requirements.txt or pyproject.toml found. Add one for CI installs."
+            exit 1
+          fi
+
+      - name: Run missing topics export to Google Sheets
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          ARGS=(scripts/export_missing_topics_to_sheets.py
+            --brand "${{ inputs.brand_key }}"
+          )
+
+          if [ -n "${{ inputs.coverage_json }}" ]; then
+            ARGS+=(--coverage-json "${{ inputs.coverage_json }}")
+          fi
+
+          if [ -n "${{ inputs.sheet_name }}" ]; then
+            ARGS+=(--sheet-name "${{ inputs.sheet_name }}")
+          fi
+
+          if [ "${{ inputs.append }}" = "true" ]; then
+            ARGS+=(--append)
+          fi
+
+          python "${ARGS[@]}"
+
+      - name: Upload Google Sheets payload artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: missing-topics-google-sheets-payload
+          path: |
+            outputs/google_sheets/**
+          if-no-files-found: warn
+
+      - name: Commit and push payloads
+        if: ${{ inputs.push_results }}
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          git add outputs/google_sheets || true
+
+          if git diff --cached --quiet; then
+            echo "No Google Sheets payload changes to commit."
+            exit 0
+          fi
+
+          git commit -m "${{ inputs.commit_message }}"
+          git push
