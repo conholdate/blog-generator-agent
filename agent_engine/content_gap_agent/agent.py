@@ -153,6 +153,10 @@ def _send_missing_topics_to_sheet(
     req: CoverageRunRequest,
     coverage_json_path: Path,
 ) -> None:
+    if os.getenv("CG_SKIP_SHEETS_AUTO_POST", "").strip().lower() in {"1", "true", "yes", "on"}:
+        log.info("Skipping Google Sheets export: CG_SKIP_SHEETS_AUTO_POST is enabled.")
+        return
+
     brand_cfg = resolve_sheet_config(settings, req.brand_key)
     webhook_url = str(brand_cfg.get("webhook_url") or "").strip()
     if not webhook_url:

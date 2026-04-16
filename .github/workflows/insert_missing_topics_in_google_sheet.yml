@@ -135,12 +135,6 @@ on:
         default: ""
         type: string
 
-      append:
-        description: "Append rows instead of replacing the sheet."
-        required: false
-        default: false
-        type: boolean
-
       python_version:
         description: "Python version."
         required: true
@@ -186,6 +180,7 @@ jobs:
       PROFESSIONALIZE_API_KEY: ${{ secrets.PROFESSIONALIZE_API_KEY_1 }}
       OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
       ASPOSE_BLOG_TOKEN: ${{ secrets.ASPOSE_BLOG_TOKEN }}
+      CG_SKIP_SHEETS_AUTO_POST: "true"
 
     steps:
       - name: Checkout this repo
@@ -367,14 +362,11 @@ jobs:
           ARGS=(scripts/export_missing_topics_to_sheets.py
             --brand "${CG_BRAND_KEY}"
             --coverage-json "${CG_COVERAGE_JSON}"
+            --append
           )
 
           if [ -n "${{ inputs.sheet_name }}" ]; then
             ARGS+=(--sheet-name "${{ inputs.sheet_name }}")
-          fi
-
-          if [ "${{ inputs.append }}" = "true" ]; then
-            ARGS+=(--append)
           fi
 
           python "${ARGS[@]}"
