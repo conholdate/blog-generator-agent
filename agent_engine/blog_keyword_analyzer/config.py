@@ -1,10 +1,10 @@
 from typing import Tuple
-from dotenv import load_dotenv
+# from dotenv import load_dotenv
 from pathlib import Path
 from pydantic import Field, SecretStr
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
-load_dotenv()  # loads .env from project root by default
+# load_dotenv()  # loads .env from project root by default
 
 
 class Settings(BaseSettings):
