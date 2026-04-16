@@ -1,0 +1,11 @@
+{
+  "case": "blogs_to_blogs",
+  "brand_key": "aspose",
+  "product_key": "3d",
+  "baseline_platform": "net",
+  "platforms": [
+    "net",
+    "general"
+  ],
+  "rows": []
+}

@@ -1,5 +1,5 @@
 {
-  "repo_head": "aa00f14745066dbc978639bf2da01e3bbc8a0e6f",
+  "repo_head": "c765b65d3c805662c0c74a51bbe53aedee75010b",
   "file_fingerprints": {
     "3d/2015-10-28-introducing-aspose.3d-for-.net-a-flexible-and-feature-rich-api-to-work-with-3d-file-formats/index.md": "4155576efc498ca483fe1c0705cbf91b6d33508c741da66215fea0057c2ff87e",
     "3d/2015-11-23-.net-3d-modeing-and-file-manipulation-api-read-write-convert-3d-files/index.md": "600c64a872172cfc53bafd01d1f049d83147ef43c6d8af491af2c7c9b8817778",
@@ -69,8 +69,8 @@
     "3d/2022-02-01-convert-obj-usdz-java/index.md": "1e0d9bec14292e7522eae3f5a478fa8e9fc9669bc1122690c6602228c0331ff1",
     "3d/2022-02-11-convert-fbx-to-stl-csharp/index.md": "f98cc68da73871c358de9ed7812500f3d9bbd23663621c27e6e75aa4cc3af121",
     "3d/2022-02-18-convert-usdz-obj-csharp/index.md": "4c895422aaba0b651541c75358737aa6c3c125b66790d908d43b8691790d6064",
-    "3d/2022-02-28-usdz-to-stl-java/index.md": "746f7f9d681e53d09ff3aa7df6008f8b514abbda1bede52835bc3fbd4f3c9248",
-    "3d/2022-03-01-convert-obj-usdz-csharp/index.md": "027694a187add60f5245e2a728b01f26e86786a0d3f44191e8b41485a9257971",
+    "3d/2022-02-28-usdz-to-stl-java/index.md": "28db0f267752e0d98b64ba896a983bf7e4c8212c832750a4d805b9132fa5601a",
+    "3d/2022-03-01-convert-obj-usdz-csharp/index.md": "942942b14b26b91e888f2dbcac692bf4ebfd7e0bd114b5939d8198952896e142",
     "3d/2022-03-12-convert-usdz-to-fbx-java/index.md": "454a404a13887f9e84ff7208205db2b22b148d2398d5ca8f3d6f93f1c83c272e",
     "3d/2022-03-27-usdz-to-stl-csharp/index.md": "2b42ab87d357d996783b0584a04b5f4cfbf2248c4ef49b458aaa820d17519c8e",
     "3d/2022-03-28-convert-stl-to-usdz-csharp/index.md": "1f9763ba68acbce00e6bce26dec054af2b8ddd544565f73a8c4542fc7bce4a50",
@@ -103,7 +103,7 @@
     "3d/2023-02-17-convert-usdz-to-glb-online/index.md": "3b00af83236d223b66e4d4dceff4bc13d8b2bd38a1e974729e44761e3878f24a",
     "3d/2023-02-20-convert-usdz-to-html-online/index.md": "c92540cc1f2cf2767b8cc3e4094e51d2afbaf658e5e44a0c5934b0b5f1b21e40",
     "3d/2023-03-02-convert-jpg-to-3ds-online/index.md": "ab0daa62e61f5b3e168609436436a13e13c431405c57a155d85129b6b911aae8",
-    "3d/2023-03-15-convert-obj-to-usdz-online/index.md": "4dae4de393f65177102922e2aaae7a8213669f1491188351213fc0761cfe77ef",
+    "3d/2023-03-15-convert-obj-to-usdz-online/index.md": "4bf626bd32a4dc54896f6a88fbb395c9726ee904f6aa2c94a506658c01b4d5a2",
     "3d/2023-03-31-convert-3mf-to-stl-online/index.md": "9180a92e98595adcf59b158cf55dd0d73ecfde49a6ba1d7769e7be12265b2e86",
     "3d/2023-04-10-convert-obj-to-fbx-python/index.md": "59d836a0f99e5abd6744f217ae6de2993350995c3055f3d2ef07935934a76885",
     "3d/2023-04-12-3d-in-python/index.md": "378a4590909ab018394659e4ea27f79850f0946b45cb4c9e03df03f1b17b82f0",
@@ -120,7 +120,7 @@
     "3d/2024-04-16-convert-3ds-to-usdz-in-csharp-using-3d-modeling-librar/index.md": "31c10b041a4a9dd7108e98f0738de57cd47d1ef799dc9d7f70b8ef54a06d23da",
     "3d/2024-04-17-lets-repair-3d-models-online/index.md": "ee6dd56e01a9a9e4d1fd5832867a238d86d7e3a98fb305202d56037268139288",
     "3d/2024-05-14-convert-ply-to-usdz-in-csharp/index.md": "f11566d3bbde948734b61c756cd530f621d5029e32426b57da502ab3e62c46cc",
-    "3d/2024-06-21-convert-obj-to-ply-in-csharp/index.md": "dae85c2243711dd5c294ed5d638178d5198d4dc4e21d44b37accb968bf7d707f",
+    "3d/2024-06-21-convert-obj-to-ply-in-csharp/index.md": "55cbef6354a86b64357ed90556e23884534b740e476600833d234ce4d94eb64a",
     "3d/2024-08-15-convert-obj-to-ply-in-python/index.md": "b62ba7d8c695ccaa04ce6e5f80c5939382b979568bfebc3a4e8d8493dcc15e27",
     "3d/2024-08-20-convert-obj-to-stl-in-python-3d-modeling-software/index.md": "c3b068e6922e02982b6e7ef920e0b7c26da1445de36fb9df1c01e2c5d8821d15",
     "3d/2024-12-30-convert-obj-to-u3d-in-python/index.md": "5a465ef0f3f103eba9a78031fc2b5de7e7ac9340c3b0b26403cd7ee82f1df5f7",
@@ -130,6 +130,11 @@
     "3d/2025-04-30-convert-usdz-to-stl-online/index.md": "e6d5061c2c9512fe478668ed2b7bcecbc49be2c83d5b11c0bd3d7bd0d2e8f719",
     "3d/2025-08-11-convert-3mf-file-to-stl-in-csharp/index.md": "fd9cd7be8341c718b5c50de09e09e6bfa96d4e51a1ed3ee0cc63b0d472067402",
     "3d/2025-08-12-build-an-obj-to-u3d-converter-in-csharp/index.md": "19bf7d5809c9bda11d5a1ecd9ca7edf9ebc1eb1ebdf25c43609f457649368d27",
-    "3d/2025-08-14-convert-dae-file-to-obj-in-csharp/index.md": "597c2e6022cf6e6545ce5151e984cdf01dd76fa30486992102fd50a517a32c81"
+    "3d/2025-08-14-convert-dae-file-to-obj-in-csharp/index.md": "597c2e6022cf6e6545ce5151e984cdf01dd76fa30486992102fd50a517a32c81",
+    "3d/2026-03-18-convert-3d-scene-to-html-in-java/index.md": "0039af0134d307ef43770c73c75f60aeaff5c13424d83244008b6b38d6f927c0",
+    "3d/2026-03-19-convert-3mf-to-stl-in-python/index.md": "a67a907061429eccb4b787849b6d3213bd59e82b31e688c2db7427776a0c32d0",
+    "3d/2026-03-25-create-3d-cylinder-in-python/index.md": "f903999157302716fca16ac9b9a76cede4340c0c64438c2f16fdaee3b7b94824",
+    "3d/2026-03-27-convert-fbx-to-stl-in-python/index.md": "3bbff8edbe9e62522884ac5a2c22926ad860498e64d8f6fd631ad12393a75389",
+    "3d/2026-03-27-convert-glb-to-fbx-in-python/index.md": "dd103c4f236ddf3a140dcf31672bf1032dd2fc824dcd7256ef62aab6be2a4a4d"
   }
 }

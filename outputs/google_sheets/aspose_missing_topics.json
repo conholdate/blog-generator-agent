@@ -1,0 +1,22 @@
+{
+  "sheet_name": "All Missing Topics",
+  "mode": "append",
+  "headers": [
+    "Brand",
+    "Product",
+    "Baseline Platform",
+    "Category",
+    "Sub Category",
+    "Topic",
+    "NET",
+    "GENERAL"
+  ],
+  "rows": [],
+  "meta": {
+    "source_count": 1,
+    "row_count": 0,
+    "sources": [
+      "/home/runner/work/blog-generator-agent/blog-generator-agent/outputs/aspose/3d/coverage/blogs_to_blogs/net/coverage.json"
+    ]
+  }
+}
