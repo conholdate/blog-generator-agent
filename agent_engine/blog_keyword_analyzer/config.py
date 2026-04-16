@@ -1,10 +1,10 @@
 from typing import Tuple
-# from dotenv import load_dotenv
+from dotenv import load_dotenv
 from pathlib import Path
 from pydantic import Field, SecretStr
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
-# load_dotenv()  # loads .env from project root by default
+load_dotenv()  # loads .env from project root by default
 
 
 class Settings(BaseSettings):
@@ -24,7 +24,7 @@ class Settings(BaseSettings):
     )
     PROFESSIONALIZE_BASE_URL: str ="https://llm.professionalize.com/v1"
     PROFESSIONALIZE_API_KEY_1: SecretStr | None = None
-    PROFESSIONALIZE_API_KEY: str = PROFESSIONALIZE_API_KEY_1
+    PROFESSIONALIZE_API_KEY: str = "sk-etp8ZujXM8fJYQ8ApV6a-Q" # PROFESSIONALIZE_API_KEY_1
 
     # Standard OpenAI key (used when no custom base URL is set)
     OPENAI_API_KEY: str | None = None
