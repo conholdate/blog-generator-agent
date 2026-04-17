@@ -1,6 +1,6 @@
 {
   "sheet_name": "All Missing Topics",
-  "mode": "replace",
+  "mode": "append",
   "headers": [
     "Brand",
     "Product",
@@ -9,7 +9,18 @@
     "Sub Category",
     "Topic",
     "NET",
-    "GENERAL"
+    "JAVA",
+    "CPP",
+    "PHP",
+    "SHAREPOINT",
+    "JASPERREPORTS",
+    "REPORTING SERVICES",
+    "JAVASCRIPT",
+    "GO",
+    "RUST",
+    "NODEJS",
+    "PYTHON",
+    "ANDROID"
   ],
   "rows": [],
   "meta": {
