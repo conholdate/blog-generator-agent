@@ -1,11 +1,10 @@
 from __future__ import annotations
 
 import json
-import urllib.error
-import urllib.parse
-import urllib.request
 from pathlib import Path
 from typing import Any
+
+import requests
 
 BASE_HEADER_KEYS = [
     "brand_key",
@@ -25,9 +24,75 @@ HEADER_LABELS = {
     "topic": "Topic",
 }
 
+PLATFORM_COLUMNS = [
+    "NET",
+    "JAVA",
+    "CPP",
+    "PHP",
+    "SHAREPOINT",
+    "JASPERREPORTS",
+    "REPORTING SERVICES",
+    "JAVASCRIPT",
+    "GO",
+    "RUST",
+    "NODEJS",
+    "PYTHON",
+    "ANDROID",
+]
+
+PLATFORM_HEADER_ALIASES = {
+    "net": "NET",
+    ".net": "NET",
+    "java": "JAVA",
+    "cpp": "CPP",
+    "c++": "CPP",
+    "php": "PHP",
+    "sharepoint": "SHAREPOINT",
+    "jasperreports": "JASPERREPORTS",
+    "reporting services": "REPORTING SERVICES",
+    "reporting_services": "REPORTING SERVICES",
+    "javascript via c++": "JAVASCRIPT",
+    "javascript_cpp": "JAVASCRIPT",
+    "go via c++": "GO",
+    "go_cpp": "GO",
+    "rust via c++": "RUST",
+    "rust_cpp": "RUST",
+    "nodejs": "NODEJS",
+    "node.js": "NODEJS",
+    "node.js via c++": "NODEJS",
+    "nodejs via c++": "NODEJS",
+    "nodejs_cpp": "NODEJS",
+    "node.js via java": "NODEJS",
+    "nodejs via java": "NODEJS",
+    "nodejs_java": "NODEJS",
+    "node.js via .net": "NODEJS",
+    "nodejs via .net": "NODEJS",
+    "nodejs_net": "NODEJS",
+    "php via java": "PHP",
+    "php_java": "PHP",
+    "python": "PYTHON",
+    "python via .net": "PYTHON",
+    "python via java": "PYTHON",
+    "python_net": "PYTHON",
+    "python_java": "PYTHON",
+    "android": "ANDROID",
+    "android via java": "ANDROID",
+    "android_java": "ANDROID",
+}
+
 
 def _sanitize_brand_key(brand_key: str) -> str:
     return str(brand_key or "").strip().lower()
+
+
+def _canonical_platform_header(platform: str) -> str:
+    raw = str(platform or "").strip()
+    if not raw:
+        return ""
+    lowered = raw.lower()
+    if lowered in PLATFORM_HEADER_ALIASES:
+        return PLATFORM_HEADER_ALIASES[lowered]
+    return raw.upper()
 
 
 def _default_output_json(brand_key: str) -> str:
@@ -88,28 +153,7 @@ def _sheet_hyperlink(url: str, label: str) -> str:
 
 
 def _collect_platforms(payload: dict[str, Any], rows: list[dict[str, Any]]) -> list[str]:
-    configured = payload.get("platforms") or []
-    ordered: list[str] = []
-    seen: set[str] = set()
-
-    if isinstance(configured, list):
-        for item in configured:
-            platform = str(item or "").strip()
-            if platform and platform not in seen:
-                ordered.append(platform)
-                seen.add(platform)
-
-    for row in rows:
-        coverage = row.get("coverage") or {}
-        if not isinstance(coverage, dict):
-            continue
-        for platform in coverage.keys():
-            platform = str(platform or "").strip()
-            if platform and platform not in seen:
-                ordered.append(platform)
-                seen.add(platform)
-
-    return ordered
+    return list(PLATFORM_COLUMNS)
 
 
 def _extract_rows(coverage_path: Path) -> tuple[list[dict[str, Any]], list[str]]:
@@ -139,11 +183,15 @@ def _extract_rows(coverage_path: Path) -> tuple[list[dict[str, Any]], list[str]]
         if not missing_platforms:
             continue
 
-        matched_platforms = {
-            platform: str((cell or {}).get("url") or "")
-            for platform, cell in coverage.items()
-            if bool((cell or {}).get("matched"))
-        }
+        matched_platforms: dict[str, str] = {}
+        present_platforms: set[str] = set()
+        for platform, cell in coverage.items():
+            header = _canonical_platform_header(platform)
+            if not header:
+                continue
+            present_platforms.add(header)
+            if bool((cell or {}).get("matched")):
+                matched_platforms[header] = str((cell or {}).get("url") or "")
 
         item = {
             "brand_key": brand_key,
@@ -154,8 +202,12 @@ def _extract_rows(coverage_path: Path) -> tuple[list[dict[str, Any]], list[str]]
             "topic": row.get("topic") or "",
         }
         for platform in platform_keys:
+            if platform not in present_platforms:
+                item[platform] = ""
+                continue
+
             matched_url = matched_platforms.get(platform) or ""
-            item[platform.upper()] = _sheet_hyperlink(matched_url, "YES") if matched_url else "NO"
+            item[platform] = _sheet_hyperlink(matched_url, "YES") if matched_url else "NO"
 
         extracted.append(item)
 
@@ -201,26 +253,35 @@ def write_payload(payload: dict[str, Any], output_path: Path) -> None:
         fh.write("\n")
 
 
+def should_post_payload(payload: dict[str, Any]) -> tuple[bool, str]:
+    mode = str(payload.get("mode") or "").strip().lower()
+    meta = payload.get("meta") or {}
+    row_count = int(meta.get("row_count") or 0)
+    if mode == "append" and row_count == 0:
+        return False, "Skipping POST for empty append payload."
+    return True, ""
+
+
 def post_payload(payload: dict[str, Any], url: str, token: str | None) -> tuple[int, str]:
-    query = {}
+    query: dict[str, str] = {}
     if token:
         query["token"] = token
 
-    endpoint = url
-    if query:
-        endpoint = f"{url}?{urllib.parse.urlencode(query)}"
-
-    body = json.dumps(payload, ensure_ascii=False).encode("utf-8")
-    req = urllib.request.Request(
-        endpoint,
-        data=body,
-        headers={"Content-Type": "application/json; charset=utf-8"},
-        method="POST",
-    )
+    print("[sheets] headers before POST:")
+    print(json.dumps(payload.get("headers") or [], ensure_ascii=False, indent=2))
 
     try:
-        with urllib.request.urlopen(req, timeout=30) as resp:
-            return resp.status, resp.read().decode("utf-8", errors="replace")
-    except urllib.error.HTTPError as exc:
-        text = exc.read().decode("utf-8", errors="replace")
-        return exc.code, text
+        resp = requests.post(
+            url,
+            params=query,
+            json=payload,
+            headers={"Content-Type": "application/json; charset=utf-8"},
+            timeout=30,
+            allow_redirects=True,
+        )
+        return resp.status_code, resp.text
+    except requests.RequestException as exc:
+        response = getattr(exc, "response", None)
+        if response is not None:
+            return response.status_code, response.text
+        return 0, str(exc)

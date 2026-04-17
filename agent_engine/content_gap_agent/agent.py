@@ -15,7 +15,7 @@ from .tools.normalization import (
 )
 from .tools.prerequisites import ensure_prerequisites
 from .tools.io import write_json, write_text
-from .tools.sheets_export import build_payload, post_payload, resolve_sheet_config, write_payload
+from .tools.sheets_export import build_payload, post_payload, resolve_sheet_config, should_post_payload, write_payload
 from .tools.render.md_render import render_md_matrix
 from .tools.render.gap_render import render_gaps_md
 from .tools.coverage.blogs_to_blogs import compute_blogs_to_blogs
@@ -180,6 +180,11 @@ def _send_missing_topics_to_sheet(
     )
     write_payload(payload, output_json)
     log.info("Wrote Google Sheets payload: %s rows=%d", output_json, payload["meta"]["row_count"])
+
+    should_post, reason = should_post_payload(payload)
+    if not should_post:
+        log.info(reason)
+        return
 
     status, text = post_payload(payload, webhook_url, token)
     if status != 200:

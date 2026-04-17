@@ -28,6 +28,7 @@ class IndexRecord(BaseModel):
     source_path: str
     excerpt: Optional[str] = None
     keywords: List[str] = Field(default_factory=list)
+    published_date: Optional[str] = None
 
     embedding_key: Optional[str] = None
     embedding_model: Optional[str] = None

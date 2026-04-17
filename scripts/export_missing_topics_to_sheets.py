@@ -13,6 +13,7 @@ from agent_engine.content_gap_agent.tools.sheets_export import (
     build_payload,
     post_payload,
     resolve_sheet_config,
+    should_post_payload,
     write_payload,
 )
 
@@ -71,9 +72,13 @@ def main() -> None:
     print(f"Missing topic rows: {payload['meta']['row_count']}")
 
     if post_url:
-        status, text = post_payload(payload, post_url, token)
-        print(f"POST status: {status}")
-        print(text[:1000])
+        should_post, reason = should_post_payload(payload)
+        if not should_post:
+            print(reason)
+        else:
+            status, text = post_payload(payload, post_url, token)
+            print(f"POST status: {status}")
+            print(text[:1000])
     else:
         print("POST skipped: no Apps Script URL configured.")
 

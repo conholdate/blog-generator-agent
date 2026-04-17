@@ -272,69 +272,36 @@ jobs:
           BASELINE_PLATFORM: ${{ inputs.platform }}
           COVERAGE_CASE: ${{ inputs.case }}
 
-      - name: Run content indexing
+      - name: Run missing-topics workflow
         shell: bash
         run: |
           set -euo pipefail
 
-          DELETE_FLAG=""
-          if [ "${{ inputs.delete_missing }}" = "true" ]; then
-            DELETE_FLAG="--delete-missing"
-          fi
-
-          AGENT_FLAG="--no-agent"
-          if [ "${{ inputs.use_agent }}" = "true" ]; then
-            AGENT_FLAG="--use-agent"
-          fi
-
-          NORMALIZE_FLAG="--no-normalize-topics"
-          if [ "${{ inputs.normalize_topics }}" = "true" ]; then
-            NORMALIZE_FLAG="--normalize-topics"
-          fi
-
-          echo "Running indexing for ${{ inputs.product_yaml }} on ${{ inputs.platform }}"
-
-          python -m agent_engine.content_indexer_agent.cli \
-            --log-level "${{ inputs.log_level }}" \
-            run \
-            --brand "${{ inputs.brand_yaml }}" \
-            --product "${{ inputs.product_yaml }}" \
-            --platform "${{ inputs.platform }}" \
-            --steps "${{ inputs.steps }}" \
-            $DELETE_FLAG \
-            $AGENT_FLAG \
-            $NORMALIZE_FLAG
-
-      - name: Debug indexing outputs
-        if: always()
-        shell: bash
-        run: |
-          set -euo pipefail
-          echo "== outputs tree (top levels) =="
-          ls -la outputs || true
-          echo "== outputs tree under CG_OUTPUTS_ROOT =="
-          find "${CG_OUTPUTS_ROOT}" -maxdepth 3 -type d -print 2>/dev/null || true
-          echo "== output file count =="
-          find "${CG_OUTPUTS_ROOT}" -type f 2>/dev/null | wc -l || true
-          echo "== git status =="
-          git status --porcelain=v1 || true
-
-      - name: Run content gap coverage
-        shell: bash
-        run: |
-          set -euo pipefail
-
-          ARGS=(run
-            --brand "${{ inputs.brand_yaml }}"
-            --product "${{ inputs.product_yaml }}"
+          ARGS=(scripts/run_missing_topics_workflow_local.py
+            --brand-yaml "${{ inputs.brand_yaml }}"
+            --product-yaml "${{ inputs.product_yaml }}"
+            --index-platform "${{ inputs.platform }}"
+            --steps "${{ inputs.steps }}"
             --case "${{ inputs.case }}"
             --threshold-strict "${{ inputs.threshold_strict }}"
             --threshold-loose "${{ inputs.threshold_loose }}"
             --top-k "${{ inputs.top_k }}"
+            --log-level "${{ inputs.log_level }}"
+            --append
+            --post
+            --workflow-compatible
           )
 
-          if [ -n "${{ inputs.platform }}" ]; then
-            ARGS+=(--platform "${{ inputs.platform }}")
+          if [ "${{ inputs.delete_missing }}" = "true" ]; then
+            ARGS+=(--delete-missing)
+          fi
+
+          if [ "${{ inputs.use_agent }}" = "true" ]; then
+            ARGS+=(--use-agent)
+          fi
+
+          if [ "${{ inputs.normalize_topics }}" = "false" ]; then
+            ARGS+=(--no-normalize-topics)
           fi
 
           if [ -n "${{ inputs.platforms }}" ]; then
@@ -345,7 +312,11 @@ jobs:
             ARGS+=(--no-embeddings)
           fi
 
-          python -m agent_engine.content_gap_agent.cli "${ARGS[@]}"
+          if [ -n "${{ inputs.sheet_name }}" ]; then
+            ARGS+=(--sheet-name "${{ inputs.sheet_name }}")
+          fi
+
+          python "${ARGS[@]}"
 
       - name: Verify coverage output exists
         shell: bash
@@ -353,23 +324,6 @@ jobs:
           set -euo pipefail
           echo "Expected coverage file: ${CG_COVERAGE_JSON}"
           test -f "${CG_COVERAGE_JSON}"
-
-      - name: Export missing topics to Google Sheets
-        shell: bash
-        run: |
-          set -euo pipefail
-
-          ARGS=(scripts/export_missing_topics_to_sheets.py
-            --brand "${CG_BRAND_KEY}"
-            --coverage-json "${CG_COVERAGE_JSON}"
-            --append
-          )
-
-          if [ -n "${{ inputs.sheet_name }}" ]; then
-            ARGS+=(--sheet-name "${{ inputs.sheet_name }}")
-          fi
-
-          python "${ARGS[@]}"
 
       - name: Upload combined outputs artifact
         if: always()

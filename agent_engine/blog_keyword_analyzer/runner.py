@@ -16,6 +16,7 @@ from .agents import build_keyword_workflow_agent
 from .config import settings
 from .tools.metrics import RunMetrics
 from agent_engine.blog_keyword_analyzer.tools.normalization import (
+    canonical_blog_platform_key,
     KeywordRefiner,
     canonical_platform_label,
     normalize_missing_platform,
@@ -36,6 +37,20 @@ from agent_engine.blog_keyword_analyzer.tools.google_sheets import (
 
 logger = logging.getLogger(__name__)
 refiner = KeywordRefiner()
+
+
+def _platform_matches_selection(selected_platform: str, available_platforms: List[str]) -> bool:
+    if selected_platform in available_platforms:
+        return True
+
+    selected_blog_key = canonical_blog_platform_key(selected_platform)
+    if not selected_blog_key:
+        return False
+
+    for platform in available_platforms:
+        if canonical_blog_platform_key(platform) == selected_blog_key:
+            return True
+    return False
 
 
 def _dedupe_keywords(values: List[str]) -> List[str]:
@@ -916,7 +931,7 @@ def main() -> None:
             raise SystemExit(
                 f"Row #{selection.row_index} has no missing supported platform columns marked as NO."
             )
-        if selected_platform not in selection.platforms:
+        if not _platform_matches_selection(selected_platform, selection.platforms):
             available = ", ".join(platform_header_display(p) for p in selection.platforms)
             raise SystemExit(
                 f"Row #{selection.row_index} does not include the selected platform "
@@ -1033,7 +1048,7 @@ def main() -> None:
             raise SystemExit(
                 "--platform is required in missing-topics mode and must target one supported platform."
             )
-        if selected_platform not in selection.platforms:
+        if not _platform_matches_selection(selected_platform, selection.platforms):
             available = ", ".join(platform_header_display(p) for p in selection.platforms)
             raise SystemExit(
                 f"Row #{selection.row_index} does not include the selected platform "

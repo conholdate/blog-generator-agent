@@ -1,6 +1,8 @@
 from __future__ import annotations
 
 import re
+from datetime import date, datetime
+from email.utils import parsedate_to_datetime
 from pathlib import Path
 from typing import Any, Dict, List, Sequence, Tuple, Optional, Set
 
@@ -95,6 +97,33 @@ def _build_url(frontmatter: Dict[str, Any], brand_site: Optional[str]) -> Option
     if brand_site:
         return brand_site.rstrip("/") + "/" + slug_s.lstrip("/")
     return slug_s
+
+
+def _normalize_published_date(value: Any) -> Optional[str]:
+    if value is None:
+        return None
+    if isinstance(value, datetime):
+        return value.date().isoformat()
+    if isinstance(value, date):
+        return value.isoformat()
+
+    raw = str(value).strip()
+    if not raw:
+        return None
+
+    for parser in (
+        lambda s: datetime.fromisoformat(s.replace("Z", "+00:00")),
+        parsedate_to_datetime,
+    ):
+        try:
+            return parser(raw).date().isoformat()
+        except Exception:
+            continue
+
+    m = re.match(r"^(?P<ymd>\d{4}-\d{2}-\d{2})", raw)
+    if m:
+        return m.group("ymd")
+    return None
 
 
 def _normalize_token(s: str) -> str:
@@ -347,16 +376,21 @@ def _apply_single_platform_policy(
     allowed = set([_map_python_variants(x) for x in allowed_platforms if x])
     allowed.add(GENERAL_PLATFORM)
 
+    title_signals = _detect_platform_signals(title, "")
+    title_signals = {s for s in title_signals if s in allowed and s != GENERAL_PLATFORM}
+    if len(title_signals) == 1:
+        return next(iter(title_signals))
+
     signals = _detect_platform_signals(title, excerpt)
     signals = {s for s in signals if s in allowed and s != GENERAL_PLATFORM}
-
-    # Multi-language => general
-    if len(signals) >= 2:
-        return GENERAL_PLATFORM
 
     # Python wins if present
     if "python" in signals:
         return "python"
+
+    # Multi-language => general
+    if len(signals) >= 2:
+        return GENERAL_PLATFORM
 
     # If exactly one strong signal (non-python), use it
     if len(signals) == 1:
@@ -455,6 +489,9 @@ class BlogsHandler(MarkdownRepoHandler):
 
         fm = parsed.frontmatter or {}
         headings = extract_subheadings(parsed.body, max_items=30)
+        published_date = _normalize_published_date(
+            fm.get("date") or fm.get("published") or fm.get("publishdate") or fm.get("pubdate")
+        )
 
         # Keywords = tags + headings only (NO platform keys)
         tags = fm.get("tags") or fm.get("tag") or []
@@ -503,6 +540,7 @@ class BlogsHandler(MarkdownRepoHandler):
                 source_path=relpath,
                 excerpt=normalize_ws(parsed.body[:400]),
                 keywords=keywords,
+                published_date=published_date,
             )
 
         # Non-LLM fallback (still enforces single-platform policy)
@@ -539,4 +577,5 @@ class BlogsHandler(MarkdownRepoHandler):
             source_path=relpath,
             excerpt=normalize_ws(parsed.body[:400]),
             keywords=keywords,
+            published_date=published_date,
         )
