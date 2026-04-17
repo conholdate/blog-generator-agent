@@ -1,6 +1,6 @@
 {
   "sheet_name": "All Missing Topics",
-  "mode": "append",
+  "mode": "replace",
   "headers": [
     "Brand",
     "Product",
