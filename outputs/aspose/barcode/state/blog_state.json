@@ -1,5 +1,5 @@
 {
-  "repo_head": "7ee50b0c03543d47056ee8ef4eb228b631b6dc19",
+  "repo_head": "cd614ccbaea3f55b1df052d2ebcab2a5e7bf4d27",
   "file_fingerprints": {
     "barcode/2005-05-10-announcing-aspose.barcode-for-.net/index.md": "3b82af011e37373d06f1f1cd8fedd8b311b2779a42a3bbe084374d748f645378",
     "barcode/2008-09-18-how-to-use-aspose-barcode-in-sql-server-2000-reporting-services/index.md": "4cfa17e23d14c46a8d3ecc067f3dccd1a6170405221fd82c047d90cdd9d90d0f",
@@ -286,11 +286,11 @@
     "barcode/2023-01-20-python-qr-code-generator/index.md": "919ac01b49ecb4e5adcc3f93253baddcfd1114ccb8b38a09875d08b01d8c8ef4",
     "barcode/2023-01-24-generate-datamatrix-using-python/index.md": "9445878730ae3f080c52693c503fd9bdf09969e1c6ccd5d5a881c5a389ba5319",
     "barcode/2023-01-24-generate-dotcode-barcodes-in-csharp/index.md": "17b99322f354d236358a4b7ca3a4275fda572692031d9841339f08e29ce00058",
-    "barcode/2023-01-25-python-barcode-generator/index.md": "4227cd09d003cc1846c5416daf8eecbe01812de9ed3fbb06a7626e87587b7b74",
+    "barcode/2023-01-25-python-barcode-generator/index.md": "4d31be78d6d1f9c4bad77ff6b297a9e52b837cffd7d15183d9de647d0c298553",
     "barcode/2023-01-26-generate-pdf417-using-python/index.md": "8d80d62e1fdd4175a669644a8e557ef2915214bb6d964228821daa376688cc1a",
     "barcode/2023-01-27-aspose-barcode/index.md": "4c07f57293ae26cef927267770ad53e470cbfa2c1570f8196ba8a4c36cd1eeaf",
     "barcode/2023-01-27-python-qr-code-reader/index.md": "1401031836e981e16bc904b5259d634eb63592ea64771e69b0ea99604fbf812f",
-    "barcode/2023-01-30-generate-ean-python/index.md": "af87ba9b0a96b5ecaeb002b0aed6907a87c27c505afd029da739ef40bf88dca2",
+    "barcode/2023-01-30-generate-ean-python/index.md": "c695b1fb53b8f2721eb57bc61cb84a30056ba0aea2a0e5cf694eb0f09624cdb5",
     "barcode/2023-01-31-barcode-128-generator/index.md": "c48c74c2355df928af03ba44740b11cdc66e6430764f2c573b7f3d3827af827e",
     "barcode/2023-02-07-qr-code-scanner/index.md": "d3fe38f9e23fe6cc257ae321afd1371a5e5e0d5db490b9ec6a982c864eeaf92c",
     "barcode/2023-02-10-ean-barcode-generator/index.md": "99a4a3b9cf570622de97163380a4bcbf0e11e649a162c2ad3a86c238658cb26c",
@@ -317,8 +317,10 @@
     "barcode/2025-04-04-free-barcode-generator/index.md": "f65000ddce056a8c461be338ce32bfced149cc080f7c20af9ec42d5910273dbe",
     "barcode/2025-07-01-generate-a-pdf417-barcode-in-java-using-asposebarcode/index.md": "46c4e58665ab4b30de921537b983e54566cda2e6f1eba26f0d665a767d58d30a",
     "barcode/2025-07-02-develop-a-datamatrix-barcode-generator-in-csharp/index.md": "ce9031e5d56377ea0554a1d8228486ce29c03d5e0b0f391045f8c13d2bf84f4a",
-    "barcode/2025-09-09-code11-barcode-generator-in-csharp/index.md": "6169a4a928ca1467715395e80a4b24de757236db63fb65d88eabe6fd2e123005",
-    "barcode/2025-09-10-generate-royal-mail-4-state-customer-code-in-csharp/index.md": "408a3fbee4c897da7045de4048c33f8d2d0f56089be8939e08896ad6bbd58e61",
-    "barcode/2025-09-11-dotcode-barcode-generation-in-java/index.md": "5c8a8c45e685861c618e42cc00ad9e2e2ddf7a7ecb63477400edbb9845c3c4dd"
+    "barcode/2025-09-09-code11-barcode-generator-in-csharp/index.md": "3892830cd13ee0a296b8bc1271ac59f7f09d6239eb3e7efcc1dfaeb3f9525a7f",
+    "barcode/2025-09-10-generate-royal-mail-4-state-customer-code-in-csharp/index.md": "78db5f06e1fe959d9534a19c46659b9aee85626fb0c83b7e25c9ad7854789a5a",
+    "barcode/2025-09-11-dotcode-barcode-generation-in-java/index.md": "5c8a8c45e685861c618e42cc00ad9e2e2ddf7a7ecb63477400edbb9845c3c4dd",
+    "barcode/2026-03-31-generate-aztec-barcode-in-python/index.md": "7c8711c250795e38e2c9bbd7550a7040e10b8889b1d48a77c2c119ea3da2829a",
+    "barcode/2026-04-03-generate-swiss-barcode-in-python/index.md": "80ea69299d7be9083f3fa838a2e0077995dc1814d2d97df960a50462bb6f8856"
   }
 }
