@@ -18,6 +18,7 @@ from .tools.metrics import RunMetrics
 from agent_engine.blog_keyword_analyzer.tools.normalization import (
     canonical_blog_platform_key,
     KeywordRefiner,
+    canonical_product_name,
     canonical_platform_label,
     normalize_missing_platform,
     normalize_product_short_name,
@@ -161,7 +162,10 @@ def _parse_missing_topics_selection(path: Path, row_index: int) -> MissingTopicS
 
     return MissingTopicSelection(
         brand=brand_match.group(1).strip(),
-        product=product_match.group(1).strip(),
+        product=canonical_product_name(
+            brand_match.group(1).strip(),
+            product_match.group(1).strip(),
+        ),
         topic=selected_topic,
         row_index=row_index,
         platforms=selected_platforms,

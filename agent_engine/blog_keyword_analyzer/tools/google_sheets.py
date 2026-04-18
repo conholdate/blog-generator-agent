@@ -9,7 +9,7 @@ from google.oauth2 import service_account
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
 
-from .normalization import normalize_missing_platform
+from .normalization import canonical_product_name, normalize_missing_platform
 
 GOOGLE_SHEETS_SCOPES = ("https://www.googleapis.com/auth/spreadsheets",)
 
@@ -196,7 +196,7 @@ def fetch_topic_sheet_selection(
 
     return TopicSheetSelection(
         brand=row.get("Brand", "").strip(),
-        product=row.get("Product", "").strip(),
+        product=canonical_product_name(row.get("Brand", "").strip(), row.get("Product", "").strip()),
         baseline_platform=row.get("Baseline Platform", "").strip(),
         category=row.get("Category", "").strip(),
         sub_category=row.get("Sub Category", "").strip(),
