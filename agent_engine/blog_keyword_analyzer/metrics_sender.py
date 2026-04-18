@@ -19,17 +19,17 @@ def _post_json_best_effort(url: str, token: str, payload: dict[str, Any], debug:
     if not url or not token:
         return
     try:
-        payload_data = asdict(payload)
+        payload_data = dict(payload)
 
         print("[metrics] payload before send:")
         print(json.dumps(payload_data, ensure_ascii=False, indent=2))
 
-        resp = requests.post(url, params={"token": token}, json=payload, timeout=5)
+        # resp = requests.post(url, params={"token": token}, json=payload, timeout=5)
         if debug:
-            print(f"[metrics:{payload.get('stage','')}] {resp.status_code} {resp.text[:200]!r}")
+            # print(f"[metrics:{payload.get('stage','')}] {resp.status_code} {resp.text[:200]!r}")
+            print("[metrics] payload after send:")
     except Exception as exc:
-        if debug:
-            print(f"[metrics:{payload.get('stage','')}] Failed to send: {exc!r}")
+        print(f"[metrics:{payload.get('stage','')}] Failed to send: {exc!r}")
 
 
 def send_stage_metrics(
