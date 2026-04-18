@@ -376,6 +376,9 @@ def _apply_single_platform_policy(
     allowed = set([_map_python_variants(x) for x in allowed_platforms if x])
     allowed.add(GENERAL_PLATFORM)
 
+    if re.search(r"(?i)\bonline\b", title or ""):
+        return GENERAL_PLATFORM
+
     title_signals = _detect_platform_signals(title, "")
     title_signals = {s for s in title_signals if s in allowed and s != GENERAL_PLATFORM}
     if len(title_signals) == 1:
