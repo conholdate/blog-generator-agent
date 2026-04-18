@@ -38,6 +38,7 @@ PLATFORM_COLUMNS = [
     "NODEJS",
     "PYTHON",
     "ANDROID",
+    "GENERAL",
 ]
 
 PLATFORM_HEADER_ALIASES = {
@@ -78,6 +79,7 @@ PLATFORM_HEADER_ALIASES = {
     "android": "ANDROID",
     "android via java": "ANDROID",
     "android_java": "ANDROID",
+    "general": "GENERAL",
 }
 
 
