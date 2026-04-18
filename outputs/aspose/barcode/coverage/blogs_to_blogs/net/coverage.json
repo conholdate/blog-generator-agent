@@ -1,0 +1,79 @@
+{
+  "case": "blogs_to_blogs",
+  "brand_key": "aspose",
+  "product_key": "barcode",
+  "baseline_platform": "net",
+  "platforms": [
+    "net",
+    "python",
+    "general"
+  ],
+  "rows": [
+    {
+      "category": "Barcode",
+      "sub_category": "Generation",
+      "topic": "build code11 barcode generator",
+      "key": "build code11 barcode generator",
+      "baseline_record_id": "blog::barcode/2025-09-09-code11-barcode-generator-in-csharp/index.md",
+      "coverage": {
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::barcode/2025-09-09-code11-barcode-generator-in-csharp/index.md",
+          "title": "Build a Code11 Barcode Generator in C#",
+          "topic": "Build code11 barcode generator",
+          "url": "https://blog.aspose.com/barcode/code11-barcode-generator-in-csharp/"
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Barcode",
+      "sub_category": "Generation",
+      "topic": "generate royal mail 4 state customer code",
+      "key": "generate royal mail 4 state customer code",
+      "baseline_record_id": "blog::barcode/2025-09-10-generate-royal-mail-4-state-customer-code-in-csharp/index.md",
+      "coverage": {
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::barcode/2025-09-10-generate-royal-mail-4-state-customer-code-in-csharp/index.md",
+          "title": "Generate Royal Mail 4-State Customer Code in C#",
+          "topic": "Generate royal mail 4 state customer code",
+          "url": "https://blog.aspose.com/barcode/generate-royal-mail-4-state-customer-code-in-csharp/"
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    }
+  ]
+}
