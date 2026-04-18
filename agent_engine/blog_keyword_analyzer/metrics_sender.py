@@ -24,10 +24,10 @@ def _post_json_best_effort(url: str, token: str, payload: dict[str, Any], debug:
         print("[metrics] payload before send:")
         print(json.dumps(payload_data, ensure_ascii=False, indent=2))
 
-        # resp = requests.post(url, params={"token": token}, json=payload, timeout=5)
+        resp = requests.post(url, params={"token": token}, json=payload, timeout=5)
         if debug:
-            # print(f"[metrics:{payload.get('stage','')}] {resp.status_code} {resp.text[:200]!r}")
-            print("[metrics] payload after send:")
+            print(f"[metrics:{payload.get('stage','')}] {resp.status_code} {resp.text[:200]!r}")
+            print("[metrics] debug payload after send:")
     except Exception as exc:
         print(f"[metrics:{payload.get('stage','')}] Failed to send: {exc!r}")
 
