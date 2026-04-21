@@ -1,47 +1,23 @@
-name: Identify Blog Content Gap
+name: Identify Conholdate Blog Content Gap
 
 on:
   workflow_dispatch:
     inputs:
       brand_yaml:
-        description: "Path to brand YAML (repo-relative), e.g. configs/aspose.yaml"
+        description: "Path to Conholdate brand YAML."
         required: true
-        default: "configs/aspose.yaml"
+        default: "configs/conholdate.yaml"
         type: choice
         options:
-          - configs/aspose.yaml
+          - configs/conholdate.yaml
 
       product_yaml:
-        description: "Path to product YAML (repo-relative), e.g. configs/aspose/cells.yaml"
+        description: "Path to Conholdate product YAML."
         required: true
-        default: "configs/aspose/cells.yaml"
+        default: "configs/conholdate/total.yaml"
         type: choice
         options:
-          - configs/aspose/cells.yaml
-          - configs/aspose/words.yaml
-          - configs/aspose/pdf.yaml
-          - configs/aspose/slides.yaml
-          - configs/aspose/imaging.yaml
-          - configs/aspose/barcode.yaml
-          - configs/aspose/email.yaml
-          - configs/aspose/tasks.yaml
-          - configs/aspose/cad.yaml
-          - configs/aspose/diagram.yaml
-          - configs/aspose/note.yaml
-          - configs/aspose/3d.yaml
-          - configs/aspose/html.yaml
-          - configs/aspose/zip.yaml
-          - configs/aspose/ocr.yaml
-          - configs/aspose/omr.yaml
-          - configs/aspose/svg.yaml
-          - configs/aspose/gis.yaml
-          - configs/aspose/tex.yaml
-          - configs/aspose/page.yaml
-          - configs/aspose/font.yaml
-          - configs/aspose/psd.yaml
-          - configs/aspose/pub.yaml
-          - configs/aspose/drawing.yaml
-          - configs/aspose/finance.yaml
+          - configs/conholdate/total.yaml
 
       platform:
         description: "Target platform for indexing and baseline platform for gap analysis."
@@ -143,7 +119,7 @@ on:
         description: "Commit message when push_results=true."
         required: false
         type: string
-        default: "chore: update indexing and cg-cover outputs"
+        default: "chore: update Conholdate indexing and cg-cover outputs"
 
       log_level:
         description: "Python log level."
@@ -171,7 +147,7 @@ jobs:
       PROFESSIONALIZE_BASE_URL: "https://llm.professionalize.com/v1"
       PROFESSIONALIZE_API_KEY: ${{ secrets.PROFESSIONALIZE_API_KEY_1 }}
       OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-      ASPOSE_BLOG_TOKEN: ${{ secrets.ASPOSE_BLOG_TOKEN }}
+      CONHOLDATE_BLOG_TOKEN: ${{ secrets.ASPOSE_BLOG_TOKEN }}
 
     steps:
       - name: Checkout this repo
@@ -180,12 +156,13 @@ jobs:
           fetch-depth: 0
           persist-credentials: true
 
-      - name: Configure git auth for cloning Aspose org repos
-        if: ${{ env.ASPOSE_BLOG_TOKEN != '' }}
+      - name: Configure git auth for cloning Conholdate org repos
+        if: ${{ env.CONHOLDATE_BLOG_TOKEN != '' }}
         shell: bash
         run: |
           set -euo pipefail
-          git config --global url."https://x-access-token:${ASPOSE_BLOG_TOKEN}@github.com/Aspose/".insteadOf "https://github.com/Aspose/"
+          git config --global url."https://x-access-token:${CONHOLDATE_BLOG_TOKEN}@github.com/conholdate/".insteadOf "https://github.com/conholdate/"
+          git config --global url."https://x-access-token:${CONHOLDATE_BLOG_TOKEN}@github.com/Conholdate/".insteadOf "https://github.com/Conholdate/"
           git config --global advice.detachedHead false
           git --version
 
@@ -318,7 +295,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: content-indexing-and-gap-outputs
+          name: conholdate-content-indexing-and-gap-outputs
           path: |
             outputs/**
           if-no-files-found: warn
