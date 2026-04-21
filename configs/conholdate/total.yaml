@@ -1,0 +1,43 @@
+# Conholdate.Total
+blog: conholdate
+key: total
+# Reusable platform definitions
+platform_definitions:
+  net:
+    display_name: ".NET"
+    keywords: ["c#", "csharp", ".net", "dotnet", "vb.net", "visual basic"]
+
+  java:
+    display_name: "Java"
+    keywords: ["java", "j2se", "j2ee", "jsp"]
+
+
+# Product: Aspose.3D
+display_name: "Conholdate.Total"
+description: "Perform document processing tasks on Word, Excel, PDF, PowerPoint, Outlook and more than 100 other file formats, using our native APIs for .NET & Java."
+enabled: true
+
+# Common repo URLs for all platforms
+doc_repo: "https://github.com/conholdate/conholdatenet-docs"
+doc_branch: "master"
+
+api_repo: "https://github.com/conholdate/reference.conholdate.com"
+api_branch: "main"
+
+tut_repo: "https://github.com/conholdate/Conholdate-Reference-Tutorials"
+tut_branch: "main"
+
+platforms:
+  - net:
+      definition: net
+      doc_path: "net/groupdocs-total-for-net"
+      api_path: "content/english/net"
+      # tut_path: "3d"
+      enabled: true
+
+  - java:
+      definition: java
+      doc_path: "english/java"
+      api_path: "content/english/java"
+      # tut_path: "3d"
+      enabled: true

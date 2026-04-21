@@ -1,0 +1,21 @@
+key: conholdate
+display_name: Conholdate
+website: https://blog.conholdate.com
+enabled: true
+
+# outputs_root: outputs  # optional; can be absolute too
+
+search_patterns:
+  - "conholdate.{product}"
+  - "{product} for {platform}"
+  - "Conholdate {product}"
+
+repositories:
+  - repo_key: "blog"
+    repo_type: "blog"
+    repo_url: "https://github.com/conholdate/conholdate-blog"
+    branch: "main"
+    scope: "all"
+    root_subdir: "content/Conholdate.Total"
+    include_globs:
+      - "**/index.md"
