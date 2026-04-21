@@ -10,6 +10,5 @@ __pycache__/
 .env
 /.bta_state
 /repo_cache
-/outputs/
 /outputs/_repos
 outputs/aspose/tex/cache/embeddings.sqlite
