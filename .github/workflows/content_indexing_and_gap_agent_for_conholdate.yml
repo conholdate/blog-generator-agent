@@ -143,6 +143,7 @@ jobs:
     env:
       CG_REPO_ROOT: ${{ github.workspace }}
       CG_OUTPUTS_ROOT: ${{ github.workspace }}/outputs
+      OUTPUTS_DIR: ${{ github.workspace }}/outputs
       GIT_TERMINAL_PROMPT: "0"
       PROFESSIONALIZE_BASE_URL: "https://llm.professionalize.com/v1"
       PROFESSIONALIZE_API_KEY: ${{ secrets.PROFESSIONALIZE_API_KEY_1 }}
@@ -211,6 +212,7 @@ jobs:
               p = (brand_yaml.parent / p).resolve()
 
           print(f"CG_OUTPUTS_ROOT={p}")
+          print(f"OUTPUTS_DIR={p}")
           print(f"CG_REPO_ROOT={Path.cwd().resolve()}")
           PY
         env:
@@ -263,6 +265,31 @@ jobs:
           echo "== git status =="
           git status --porcelain=v1 || true
 
+      - name: Commit and push indexing outputs
+        if: ${{ inputs.push_results }}
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          if [ -d "${CG_OUTPUTS_ROOT}/_repos" ]; then
+            rm -rf "${CG_OUTPUTS_ROOT}/_repos"
+          fi
+
+          find "${CG_OUTPUTS_ROOT}" -name "*.sqlite" -delete 2>/dev/null || true
+
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          git add "${CG_OUTPUTS_ROOT}" || true
+
+          if git diff --cached --quiet; then
+            echo "No indexing output changes to commit."
+            exit 0
+          fi
+
+          git commit -m "chore: update Conholdate indexing outputs"
+          git push
+
       - name: Run content gap coverage
         shell: bash
         run: |
@@ -300,7 +327,7 @@ jobs:
             outputs/**
           if-no-files-found: warn
 
-      - name: Commit and push outputs
+      - name: Commit and push gap outputs
         if: ${{ inputs.push_results }}
         shell: bash
         run: |
@@ -315,10 +342,10 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-          git add outputs || true
+          git add "${CG_OUTPUTS_ROOT}" || true
 
           if git diff --cached --quiet; then
-            echo "No output changes to commit."
+            echo "No gap output changes to commit."
             exit 0
           fi
 

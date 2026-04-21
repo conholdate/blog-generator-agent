@@ -3,7 +3,7 @@ display_name: Conholdate
 website: https://blog.conholdate.com
 enabled: true
 
-# outputs_root: outputs  # optional; can be absolute too
+outputs_root: ../outputs
 
 search_patterns:
   - "conholdate.{product}"
