@@ -3,36 +3,137 @@ name: Missing Topics In Google Sheet
 on:
   workflow_dispatch:
     inputs:
-      brand_key:
-        description: "Brand key used to resolve Google Sheets config from settings.py."
+      brand_yaml:
+        description: "Path to brand YAML (repo-relative), e.g. configs/aspose.yaml"
         required: true
-        default: "aspose"
+        default: "configs/aspose.yaml"
         type: choice
         options:
-          - aspose
-          - groupdocs
-          - conholdate
-          - aspose_cloud
-          - groupdocs_cloud
-          - conholdate_cloud
+          - configs/aspose.yaml
+          - configs/groupdocs.yaml
+          - configs/conholdate.yaml
 
-      coverage_json:
-        description: "Optional repo-relative or absolute coverage.json path. Leave empty to use settings.py."
-        required: false
-        default: ""
+      product_yaml:
+        description: "Path to product YAML (repo-relative), e.g. configs/aspose/cells.yaml"
+        required: true
+        default: "configs/aspose/cells.yaml"
+        type: choice
+        options:
+          - configs/aspose/cells.yaml
+          - configs/aspose/words.yaml
+          - configs/aspose/pdf.yaml
+          - configs/aspose/slides.yaml
+          - configs/aspose/imaging.yaml
+          - configs/aspose/barcode.yaml
+          - configs/aspose/email.yaml
+          - configs/aspose/tasks.yaml
+          - configs/aspose/cad.yaml
+          - configs/aspose/diagram.yaml
+          - configs/aspose/note.yaml
+          - configs/aspose/3d.yaml
+          - configs/aspose/html.yaml
+          - configs/aspose/zip.yaml
+          - configs/aspose/ocr.yaml
+          - configs/aspose/omr.yaml
+          - configs/aspose/svg.yaml
+          - configs/aspose/gis.yaml
+          - configs/aspose/tex.yaml
+          - configs/aspose/page.yaml
+          - configs/aspose/font.yaml
+          - configs/aspose/psd.yaml
+          - configs/aspose/pub.yaml
+          - configs/aspose/drawing.yaml
+          - configs/aspose/finance.yaml
+
+      platform:
+        description: "Target platform for indexing and baseline platform for gap analysis."
+        required: true
+        default: "net"
+        type: choice
+        options:
+          - net
+          - java
+          - python
+          - cpp
+          - nodejs
+          - php
+          - android
+          - general
+
+      steps:
+        description: "CSV repo keys to index (matches content indexer CLI --steps)."
+        required: true
+        default: "blog"
+        type: choice
+        options:
+          - blog
+          - docs
+          - tutorials
+          - api
+
+      delete_missing:
+        description: "If true, remove entries that no longer exist in source repos."
+        required: true
+        default: false
+        type: boolean
+
+      use_agent:
+        description: "If true, run indexing via Agents SDK triage+handoff (--use-agent)."
+        required: true
+        default: false
+        type: boolean
+
+      normalize_topics:
+        description: "If true, enable LLM topic normalization for blogs (--normalize-topics)."
+        required: true
+        default: true
+        type: boolean
+
+      case:
+        description: "Coverage case."
+        required: true
+        type: choice
+        options:
+          - blogs_to_blogs
+          - docs_to_blogs
+          - docs_to_tutorials
+        default: "blogs_to_blogs"
+
+      threshold_strict:
+        description: "Strict threshold."
+        required: true
         type: string
+        default: "0.86"
+
+      threshold_loose:
+        description: "Loose threshold."
+        required: true
+        type: string
+        default: "0.80"
+
+      top_k:
+        description: "Top-K matches."
+        required: true
+        type: string
+        default: "5"
+
+      platforms:
+        description: "Optional comma-separated platform limit for blogs_to_blogs. Example: net,java,python"
+        required: false
+        type: string
+        default: ""
+
+      no_embeddings:
+        description: "Force lexical-only fallback for gap analysis."
+        required: false
+        type: boolean
+        default: false
 
       sheet_name:
         description: "Optional Google Sheets tab name override."
         required: false
         default: ""
         type: string
-
-      append:
-        description: "Append rows instead of replacing the sheet."
-        required: false
-        default: false
-        type: boolean
 
       python_version:
         description: "Python version."
@@ -41,29 +142,45 @@ on:
         type: string
 
       push_results:
-        description: "Commit and push generated payload JSON back to the repo."
+        description: "Commit and push generated outputs back to the repo."
         required: false
-        default: true
         type: boolean
+        default: true
 
       commit_message:
         description: "Commit message when push_results=true."
         required: false
-        default: "chore: update missing topics Google Sheets payload"
         type: string
+        default: "chore: update indexing, cg-cover, and missing topics Google Sheets payload"
+
+      log_level:
+        description: "Python log level."
+        required: true
+        default: "INFO"
+        type: choice
+        options:
+          - DEBUG
+          - INFO
+          - WARNING
+          - ERROR
 
 permissions:
   contents: write
 
 jobs:
-  export-missing-topics:
+  run-index-gap-and-export:
     runs-on: ubuntu-latest
-    timeout-minutes: 60
+    timeout-minutes: 360
 
     env:
       CG_REPO_ROOT: ${{ github.workspace }}
       CG_OUTPUTS_ROOT: ${{ github.workspace }}/outputs
       GIT_TERMINAL_PROMPT: "0"
+      PROFESSIONALIZE_BASE_URL: "https://llm.professionalize.com/v1"
+      PROFESSIONALIZE_API_KEY: ${{ secrets.PROFESSIONALIZE_API_KEY_1 }}
+      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+      ASPOSE_BLOG_TOKEN: ${{ secrets.ASPOSE_BLOG_TOKEN }}
+      CG_SKIP_SHEETS_AUTO_POST: "true"
 
     steps:
       - name: Checkout this repo
@@ -71,6 +188,15 @@ jobs:
         with:
           fetch-depth: 0
           persist-credentials: true
+
+      - name: Configure git auth for cloning Aspose org repos
+        if: ${{ env.ASPOSE_BLOG_TOKEN != '' }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config --global url."https://x-access-token:${ASPOSE_BLOG_TOKEN}@github.com/Aspose/".insteadOf "https://github.com/Aspose/"
+          git config --global advice.detachedHead false
+          git --version
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -92,51 +218,141 @@ jobs:
             exit 1
           fi
 
-      - name: Run missing topics export to Google Sheets
+      - name: Restore SQLite cache
+        uses: actions/cache@v4
+        with:
+          path: "**/cache/*.sqlite"
+          key: ${{ runner.os }}-sqlite-${{ github.run_id }}
+          restore-keys: |
+            ${{ runner.os }}-sqlite-
+
+      - name: Export CG env vars from brand and product yaml
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - << 'PY' >> "$GITHUB_ENV"
+          import os
+          from pathlib import Path
+          import yaml
+
+          brand_yaml = Path(os.environ["BRAND_YAML"])
+          product_yaml = Path(os.environ["PRODUCT_YAML"])
+
+          brand_data = yaml.safe_load(brand_yaml.read_text(encoding="utf-8")) or {}
+          product_data = yaml.safe_load(product_yaml.read_text(encoding="utf-8")) or {}
+
+          raw_outputs_root = brand_data.get("outputs_root") or "outputs"
+          outputs_root = Path(str(raw_outputs_root))
+          if not outputs_root.is_absolute():
+              outputs_root = (brand_yaml.parent / outputs_root).resolve()
+
+          brand_key = str(brand_data.get("key") or "").strip()
+          product_key = str(product_data.get("key") or "").strip()
+          if not brand_key:
+              raise SystemExit(f"Missing 'key' in brand YAML: {brand_yaml}")
+          if not product_key:
+              raise SystemExit(f"Missing 'key' in product YAML: {product_yaml}")
+
+          baseline_platform = os.environ.get("BASELINE_PLATFORM", "").strip() or "all"
+          coverage_case = os.environ.get("COVERAGE_CASE", "").strip()
+          if not coverage_case:
+              raise SystemExit("COVERAGE_CASE is required.")
+
+          coverage_json = outputs_root / brand_key / product_key / "coverage" / coverage_case / baseline_platform / "coverage.json"
+
+          print(f"CG_OUTPUTS_ROOT={outputs_root}")
+          print(f"CG_REPO_ROOT={Path.cwd().resolve()}")
+          print(f"CG_BRAND_KEY={brand_key}")
+          print(f"CG_PRODUCT_KEY={product_key}")
+          print(f"CG_COVERAGE_JSON={coverage_json}")
+          PY
+        env:
+          BRAND_YAML: ${{ inputs.brand_yaml }}
+          PRODUCT_YAML: ${{ inputs.product_yaml }}
+          BASELINE_PLATFORM: ${{ inputs.platform }}
+          COVERAGE_CASE: ${{ inputs.case }}
+
+      - name: Run missing-topics workflow
         shell: bash
         run: |
           set -euo pipefail
 
-          ARGS=(scripts/export_missing_topics_to_sheets.py
-            --brand "${{ inputs.brand_key }}"
+          ARGS=(scripts/run_missing_topics_workflow_local.py
+            --brand-yaml "${{ inputs.brand_yaml }}"
+            --product-yaml "${{ inputs.product_yaml }}"
+            --index-platform "${{ inputs.platform }}"
+            --steps "${{ inputs.steps }}"
+            --case "${{ inputs.case }}"
+            --threshold-strict "${{ inputs.threshold_strict }}"
+            --threshold-loose "${{ inputs.threshold_loose }}"
+            --top-k "${{ inputs.top_k }}"
+            --log-level "${{ inputs.log_level }}"
+            --append
+            --post
+            --workflow-compatible
           )
 
-          if [ -n "${{ inputs.coverage_json }}" ]; then
-            ARGS+=(--coverage-json "${{ inputs.coverage_json }}")
+          if [ "${{ inputs.delete_missing }}" = "true" ]; then
+            ARGS+=(--delete-missing)
+          fi
+
+          if [ "${{ inputs.use_agent }}" = "true" ]; then
+            ARGS+=(--use-agent)
+          fi
+
+          if [ "${{ inputs.normalize_topics }}" = "false" ]; then
+            ARGS+=(--no-normalize-topics)
+          fi
+
+          if [ -n "${{ inputs.platforms }}" ]; then
+            ARGS+=(--platforms "${{ inputs.platforms }}")
+          fi
+
+          if [ "${{ inputs.no_embeddings }}" = "true" ]; then
+            ARGS+=(--no-embeddings)
           fi
 
           if [ -n "${{ inputs.sheet_name }}" ]; then
             ARGS+=(--sheet-name "${{ inputs.sheet_name }}")
           fi
 
-          if [ "${{ inputs.append }}" = "true" ]; then
-            ARGS+=(--append)
-          fi
-
           python "${ARGS[@]}"
 
-      - name: Upload Google Sheets payload artifact
+      - name: Verify coverage output exists
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo "Expected coverage file: ${CG_COVERAGE_JSON}"
+          test -f "${CG_COVERAGE_JSON}"
+
+      - name: Upload combined outputs artifact
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: missing-topics-google-sheets-payload
+          name: content-indexing-gap-and-sheets-outputs
           path: |
-            outputs/google_sheets/**
+            outputs/**
           if-no-files-found: warn
 
-      - name: Commit and push payloads
+      - name: Commit and push outputs
         if: ${{ inputs.push_results }}
         shell: bash
         run: |
           set -euo pipefail
 
+          if [ -d "${CG_OUTPUTS_ROOT}/_repos" ]; then
+            rm -rf "${CG_OUTPUTS_ROOT}/_repos"
+          fi
+
+          find "${CG_OUTPUTS_ROOT}" -name "*.sqlite" -delete 2>/dev/null || true
+
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-          git add outputs/google_sheets || true
+          git add outputs || true
 
           if git diff --cached --quiet; then
-            echo "No Google Sheets payload changes to commit."
+            echo "No output changes to commit."
             exit 0
           fi
 

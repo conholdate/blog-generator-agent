@@ -3,9 +3,11 @@ from __future__ import annotations
 import logging
 import os
 import re
+import shutil
 import subprocess
 from dataclasses import dataclass
 from pathlib import Path
+from time import perf_counter
 from typing import Iterable, Optional, Sequence
 
 log = logging.getLogger(__name__)
@@ -33,6 +35,10 @@ class GitNetworkError(RuntimeError):
     """Raised when git fails due to network/DNS/proxy/TLS issues."""
 
 
+class GitTimeoutError(RuntimeError):
+    """Raised when a git command exceeds the configured timeout."""
+
+
 # -----------------------------
 # Public API
 # -----------------------------
@@ -45,14 +51,20 @@ def ensure_repo_cloned(repo_url: str, branch: str, dest_dir: Path) -> Path:
     """
     dest_dir.parent.mkdir(parents=True, exist_ok=True)
 
-    if dest_dir.exists() and (dest_dir / ".git").exists():
+    if _has_healthy_repo(dest_dir):
         log.info("Updating repo: %s", dest_dir)
-        _run(["git", "-C", str(dest_dir), "fetch", "--all", "--prune"])
-        _run(["git", "-C", str(dest_dir), "checkout", branch])
-        _run(["git", "-C", str(dest_dir), "pull", "--ff-only"])
+        _run(["git", "-C", str(dest_dir), "fetch", "--all", "--prune"], timeout_s=300)
+        _run(["git", "-C", str(dest_dir), "checkout", branch], timeout_s=120)
+        _run(["git", "-C", str(dest_dir), "pull", "--ff-only"], timeout_s=300)
     else:
+        if dest_dir.exists():
+            log.warning("Removing incomplete repo clone before retry: %s", dest_dir)
+            _remove_incomplete_repo(dest_dir)
         log.info("Cloning repo: %s -> %s", repo_url, dest_dir)
-        _run(["git", "clone", "--depth", "1", "--branch", branch, repo_url, str(dest_dir)])
+        _run(
+            ["git", "clone", "--depth", "1", "--branch", branch, repo_url, str(dest_dir)],
+            timeout_s=600,
+        )
 
     return dest_dir
 
@@ -70,17 +82,26 @@ def get_head_commit(repo_dir: Path) -> str:
 # -----------------------------
 # Internals
 # -----------------------------
-def _run(cmd: list[str]) -> None:
-    log.debug("RUN: %s", " ".join(cmd))
+def _run(cmd: list[str], *, timeout_s: int) -> None:
+    log.info("Running git command: %s", " ".join(cmd))
+    t0 = perf_counter()
 
-    p = subprocess.run(
-        cmd,
-        capture_output=True,
-        text=True,
-        env=_git_env(),
-    )
+    try:
+        p = subprocess.run(
+            cmd,
+            capture_output=True,
+            text=True,
+            env=_git_env(),
+            timeout=timeout_s,
+        )
+    except subprocess.TimeoutExpired as exc:
+        elapsed_ms = (perf_counter() - t0) * 1000.0
+        raise GitTimeoutError(
+            f"Git command timed out after {timeout_s}s ({elapsed_ms:.0f} ms): {' '.join(cmd)}"
+        ) from exc
 
     if p.returncode == 0:
+        log.info("Git command completed in %.0f ms: %s", (perf_counter() - t0) * 1000.0, " ".join(cmd))
         return
 
     err = CommandError(
@@ -98,13 +119,58 @@ def _run(cmd: list[str]) -> None:
     raise err
 
 
+def _has_healthy_repo(dest_dir: Path) -> bool:
+    git_dir = dest_dir / ".git"
+    if not dest_dir.exists() or not git_dir.exists():
+        return False
+    if (git_dir / "shallow.lock").exists():
+        return False
+
+    head = _git_stdout(["git", "-C", str(dest_dir), "rev-parse", "HEAD"])
+    if not head:
+        return False
+
+    is_work_tree = _git_stdout(["git", "-C", str(dest_dir), "rev-parse", "--is-inside-work-tree"])
+    if is_work_tree.strip().lower() != "true":
+        return False
+
+    return True
+
+
+def _git_stdout(cmd: list[str]) -> str:
+    p = subprocess.run(
+        cmd,
+        capture_output=True,
+        text=True,
+        env=_git_env(),
+    )
+    if p.returncode != 0:
+        return ""
+    return (p.stdout or "").strip()
+
+
+def _remove_incomplete_repo(dest_dir: Path) -> None:
+    if not dest_dir.exists():
+        return
+    shutil.rmtree(dest_dir)
+
+
 def _git_env() -> dict[str, str]:
     """
     Provide a controlled environment for git.
     - Respects existing process env.
     - Optionally supports proxy env vars if set (common in CI/corp networks).
+    - Forces non-interactive behavior so indexing jobs fail fast instead of
+      hanging on credential-manager or askpass flows.
+    - Skips Git LFS smudge downloads since the indexer only needs the repo
+      contents on disk, not hydrated large binary assets during clone.
     """
     env = dict(os.environ)
+    env.setdefault("GIT_TERMINAL_PROMPT", "0")
+    env.setdefault("GCM_INTERACTIVE", "Never")
+    env.setdefault("GIT_ASKPASS", "")
+    env.setdefault("SSH_ASKPASS", "")
+    env.setdefault("GIT_LFS_SKIP_SMUDGE", "1")
 
     # If callers set these env vars, git/curl will use them automatically.
     # Examples:

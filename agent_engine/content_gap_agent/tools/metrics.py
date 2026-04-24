@@ -221,6 +221,12 @@ class MetricsRun:
             api_calls_count=self.api_calls_count,
             extra=self.extra,
         )
+
+        payload_data = asdict(payload)
+
+        print("[metrics] payload before send:")
+        print(json.dumps(payload_data, ensure_ascii=False, indent=2))
+
         self._sender.send(payload)
 
         # Do not swallow exceptions

@@ -1,8 +1,8 @@
 from __future__ import annotations
-
+import json
 from datetime import datetime, timezone, timedelta
 from typing import Any, Optional
-
+from dataclasses import dataclass, asdict
 import requests
 
 from agent_engine.blog_keyword_analyzer.tools.normalization import canonical_platform_label, normalize_platform_family
@@ -19,12 +19,17 @@ def _post_json_best_effort(url: str, token: str, payload: dict[str, Any], debug:
     if not url or not token:
         return
     try:
+        payload_data = dict(payload)
+
+        print("[metrics] payload before send:")
+        print(json.dumps(payload_data, ensure_ascii=False, indent=2))
+
         resp = requests.post(url, params={"token": token}, json=payload, timeout=5)
         if debug:
             print(f"[metrics:{payload.get('stage','')}] {resp.status_code} {resp.text[:200]!r}")
+            print("[metrics] debug payload after send:")
     except Exception as exc:
-        if debug:
-            print(f"[metrics:{payload.get('stage','')}] Failed to send: {exc!r}")
+        print(f"[metrics:{payload.get('stage','')}] Failed to send: {exc!r}")
 
 
 def send_stage_metrics(

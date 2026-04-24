@@ -29,16 +29,13 @@ on:
           - 'SharePoint'
           - 'JasperReports'
           - 'Reporting Services'
-          - 'JavaScript via C++'
-          - 'Go via C++'
-          - 'Rust via C++'
-          - 'Node.js via C++'
-          - 'Node.js via Java'
-          - 'Node.js via .NET'
-          - 'PHP via Java'
-          - 'Python via .NET'
-          - 'Python via Java'
-          - 'Android via Java'
+          - 'JavaScript'
+          - 'Go'
+          - 'Rust'
+          - 'Node.js'
+          - 'PHP'
+          - 'Python'
+          - 'Android'
 
       google_sheet_row:
         description: "1-based Google Sheet row number to process from the brand's All Missing Topics sheet."
@@ -107,6 +104,16 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
 
       - name: Resolve brand config
         run: |
@@ -270,16 +277,6 @@ jobs:
           cred_path="${RUNNER_TEMP}/google-service-account.json"
           printf '%s' "${GOOGLE_SERVICE_ACCOUNT_JSON}" > "${cred_path}"
           echo "GOOGLE_SERVICE_ACCOUNT_FILE=${cred_path}" >> "$GITHUB_ENV"
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
-
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
 
       - name: Build kra_run.generated.yaml
         run: |

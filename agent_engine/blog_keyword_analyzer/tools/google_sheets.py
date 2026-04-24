@@ -9,7 +9,7 @@ from google.oauth2 import service_account
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
 
-from .normalization import normalize_missing_platform
+from .normalization import canonical_product_name, normalize_missing_platform
 
 GOOGLE_SHEETS_SCOPES = ("https://www.googleapis.com/auth/spreadsheets",)
 
@@ -20,7 +20,13 @@ SOURCE_REQUIRED_HEADERS = (
     "Category",
     "Sub Category",
     "Topic",
-    "ANDROID_VIA_JAVA",
+    "PHP",
+    "SHAREPOINT",
+    "JASPERREPORTS",
+    "REPORTING SERVICES",
+    "JAVASCRIPT",
+    "GO",
+    "RUST",
     "CPP",
     "GENERAL",
     "JAVA",
@@ -29,14 +35,26 @@ SOURCE_REQUIRED_HEADERS = (
     "PYTHON",
 )
 
+SOURCE_REQUIRED_HEADER_ALIASES: Dict[str, tuple[str, ...]] = {
+    "ANDROID": ("ANDROID", "ANDROID_VIA_JAVA"),
+}
+
 SHEET_PLATFORM_COLUMNS: Dict[str, Optional[str]] = {
+    "ANDROID": "android_via_java",
     "ANDROID_VIA_JAVA": "android_via_java",
     "CPP": "cpp",
     "GENERAL": None,
+    "GO": "go_via_cpp",
     "JAVA": "java",
+    "JASPERREPORTS": "jasperreports",
+    "JAVASCRIPT": "javascript_via_cpp",
     "NET": "net",
     "NODEJS": "nodejs",
+    "PHP": "php",
     "PYTHON": "python",
+    "REPORTING SERVICES": "reporting_services",
+    "RUST": "rust_via_cpp",
+    "SHAREPOINT": "sharepoint",
 }
 
 OUTPUT_HEADERS = [
@@ -99,6 +117,19 @@ def _row_to_mapping(headers: List[str], values: List[str]) -> Dict[str, str]:
     return {header: (padded[idx] if idx < len(padded) else "") for idx, header in enumerate(headers)}
 
 
+def _find_missing_source_headers(headers: List[str]) -> List[str]:
+    missing: List[str] = []
+    for header in SOURCE_REQUIRED_HEADERS:
+        if header not in headers:
+            missing.append(header)
+
+    for canonical, aliases in SOURCE_REQUIRED_HEADER_ALIASES.items():
+        if not any(alias in headers for alias in aliases):
+            missing.append(canonical)
+
+    return missing
+
+
 def _sheet_cell_is_missing(value: Any) -> bool:
     text = str(value or "").strip().upper()
     return text == "NO"
@@ -141,7 +172,7 @@ def fetch_topic_sheet_selection(
     row_values = (value_ranges[1].get("values") or [[]])[0] if len(value_ranges) > 1 else []
 
     headers = [str(v).strip() for v in header_values if str(v).strip()]
-    missing_headers = [header for header in SOURCE_REQUIRED_HEADERS if header not in headers]
+    missing_headers = _find_missing_source_headers(headers)
     if missing_headers:
         raise ValueError(
             f"Google Sheet is missing required headers: {', '.join(missing_headers)}."
@@ -165,7 +196,7 @@ def fetch_topic_sheet_selection(
 
     return TopicSheetSelection(
         brand=row.get("Brand", "").strip(),
-        product=row.get("Product", "").strip(),
+        product=canonical_product_name(row.get("Brand", "").strip(), row.get("Product", "").strip()),
         baseline_platform=row.get("Baseline Platform", "").strip(),
         category=row.get("Category", "").strip(),
         sub_category=row.get("Sub Category", "").strip(),

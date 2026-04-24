@@ -10,8 +10,6 @@ on:
         type: choice
         options:
           - configs/aspose.yaml
-          - configs/groupdocs.yaml
-          - configs/conholdate.yaml
 
       product_yaml:
         description: "Path to product YAML (repo-relative), e.g. configs/aspose/cells.yaml"

@@ -974,6 +974,37 @@ def normalize_product_short_name(full_name: str) -> str:
 
     return name
 
+
+def canonical_product_name(brand: Optional[str], product: str) -> str:
+    """
+    Normalize a product name and expand short brand-local product tokens.
+
+    Examples:
+        brand=Aspose, product=Cells -> Aspose.Cells
+        brand=Aspose, product=3D -> Aspose.3D
+        brand=GroupDocs, product=Editor -> GroupDocs.Editor
+        brand=Aspose, product=Aspose.Cells -> Aspose.Cells
+    """
+    name = normalize_display_text(" ".join(str(product or "").strip().split()))
+    if not name:
+        return ""
+
+    if "." in name or " " in name:
+        return name
+
+    brand_name = normalize_display_text(" ".join(str(brand or "").strip().split()))
+    brand_key = brand_name.lower()
+    token = name.lower()
+
+    if brand_key == "aspose":
+        return ASPOSE_PRODUCT_REGISTRY.get(token, f"Aspose.{name}")
+    if brand_key == "groupdocs":
+        return f"GroupDocs.{name}"
+    if brand_key == "conholdate":
+        return f"Conholdate.{name}"
+
+    return name
+
 # =============================================================================
 # Internal helpers
 # =============================================================================

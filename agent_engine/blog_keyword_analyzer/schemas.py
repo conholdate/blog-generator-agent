@@ -3,7 +3,7 @@ from __future__ import annotations
 from typing import List, Optional, Literal, Dict
 
 from pydantic import BaseModel, Field, validator
-from agent_engine.blog_keyword_analyzer.tools.normalization import normalize_display_text
+from agent_engine.blog_keyword_analyzer.tools.normalization import canonical_product_name, normalize_display_text
 
 
 class KeywordRecord(BaseModel):
@@ -106,8 +106,8 @@ class RunRequest(BaseModel):
     )
 
     @validator("product")
-    def norm_product(cls, v: str) -> str:
-        return normalize_display_text(v.strip())
+    def norm_product(cls, v: str, values: Dict[str, str]) -> str:
+        return canonical_product_name(values.get("brand"), v.strip())
 
 
 class RunResult(BaseModel):

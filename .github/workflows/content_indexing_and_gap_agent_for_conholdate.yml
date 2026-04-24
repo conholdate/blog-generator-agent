@@ -1,0 +1,353 @@
+name: Identify Conholdate Blog Content Gap
+
+on:
+  workflow_dispatch:
+    inputs:
+      brand_yaml:
+        description: "Path to Conholdate brand YAML."
+        required: true
+        default: "configs/conholdate.yaml"
+        type: choice
+        options:
+          - configs/conholdate.yaml
+
+      product_yaml:
+        description: "Path to Conholdate product YAML."
+        required: true
+        default: "configs/conholdate/total.yaml"
+        type: choice
+        options:
+          - configs/conholdate/total.yaml
+
+      platform:
+        description: "Target platform for indexing and baseline platform for gap analysis."
+        required: true
+        default: "net"
+        type: choice
+        options:
+          - net
+          - java
+          - python
+          - cpp
+          - nodejs
+          - php
+          - android
+          - general
+
+      steps:
+        description: "CSV repo keys to index (matches content indexer CLI --steps)."
+        required: true
+        default: "blog"
+        type: choice
+        options:
+          - blog
+          - docs
+          - tutorials
+          - api
+
+      delete_missing:
+        description: "If true, remove entries that no longer exist in source repos."
+        required: true
+        default: false
+        type: boolean
+
+      use_agent:
+        description: "If true, run indexing via Agents SDK triage+handoff (--use-agent)."
+        required: true
+        default: false
+        type: boolean
+
+      normalize_topics:
+        description: "If true, enable LLM topic normalization for blogs (--normalize-topics)."
+        required: true
+        default: true
+        type: boolean
+
+      case:
+        description: "Coverage case."
+        required: true
+        type: choice
+        options:
+          - blogs_to_blogs
+          - docs_to_blogs
+          - docs_to_tutorials
+        default: "blogs_to_blogs"
+
+      threshold_strict:
+        description: "Strict threshold."
+        required: true
+        type: string
+        default: "0.86"
+
+      threshold_loose:
+        description: "Loose threshold."
+        required: true
+        type: string
+        default: "0.80"
+
+      top_k:
+        description: "Top-K matches."
+        required: true
+        type: string
+        default: "5"
+
+      platforms:
+        description: "Optional comma-separated platform limit for blogs_to_blogs. Example: net,java,python"
+        required: false
+        type: string
+        default: ""
+
+      no_embeddings:
+        description: "Force lexical-only fallback for gap analysis."
+        required: false
+        type: boolean
+        default: false
+
+      python_version:
+        description: "Python version."
+        required: true
+        type: string
+        default: "3.11"
+
+      push_results:
+        description: "Commit and push generated outputs back to the repo."
+        required: false
+        type: boolean
+        default: true
+
+      commit_message:
+        description: "Commit message when push_results=true."
+        required: false
+        type: string
+        default: "chore: update Conholdate indexing and cg-cover outputs"
+
+      log_level:
+        description: "Python log level."
+        required: true
+        default: "INFO"
+        type: choice
+        options:
+          - DEBUG
+          - INFO
+          - WARNING
+          - ERROR
+
+permissions:
+  contents: write
+
+jobs:
+  run-index-and-gap:
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+
+    env:
+      CG_REPO_ROOT: ${{ github.workspace }}
+      CG_OUTPUTS_ROOT: ${{ github.workspace }}/outputs
+      OUTPUTS_DIR: ${{ github.workspace }}/outputs
+      GIT_TERMINAL_PROMPT: "0"
+      PROFESSIONALIZE_BASE_URL: "https://llm.professionalize.com/v1"
+      PROFESSIONALIZE_API_KEY: ${{ secrets.PROFESSIONALIZE_API_KEY_1 }}
+      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+      CONHOLDATE_BLOG_TOKEN: ${{ secrets.ASPOSE_BLOG_TOKEN }}
+
+    steps:
+      - name: Checkout this repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+
+      - name: Configure git auth for cloning Conholdate org repos
+        if: ${{ env.CONHOLDATE_BLOG_TOKEN != '' }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config --global url."https://x-access-token:${CONHOLDATE_BLOG_TOKEN}@github.com/conholdate/".insteadOf "https://github.com/conholdate/"
+          git config --global url."https://x-access-token:${CONHOLDATE_BLOG_TOKEN}@github.com/Conholdate/".insteadOf "https://github.com/Conholdate/"
+          git config --global advice.detachedHead false
+          git --version
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ inputs.python_version }}
+          cache: "pip"
+
+      - name: Install dependencies
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install --upgrade pip
+          if [ -f requirements.txt ]; then
+            pip install -r requirements.txt
+          elif [ -f pyproject.toml ]; then
+            pip install -e .
+          else
+            echo "No requirements.txt or pyproject.toml found. Add one for CI installs."
+            exit 1
+          fi
+
+      - name: Restore SQLite cache
+        uses: actions/cache@v4
+        with:
+          path: "**/cache/*.sqlite"
+          key: ${{ runner.os }}-sqlite-${{ github.run_id }}
+          restore-keys: |
+            ${{ runner.os }}-sqlite-
+
+      - name: Export CG env vars from brand yaml
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - << 'PY' >> "$GITHUB_ENV"
+          import os
+          from pathlib import Path
+          import yaml
+
+          brand_yaml = Path(os.environ["BRAND_YAML"])
+          data = yaml.safe_load(brand_yaml.read_text(encoding="utf-8"))
+          raw = (data.get("outputs_root") or "outputs")
+          p = Path(str(raw))
+          if not p.is_absolute():
+              p = (brand_yaml.parent / p).resolve()
+
+          print(f"CG_OUTPUTS_ROOT={p}")
+          print(f"OUTPUTS_DIR={p}")
+          print(f"CG_REPO_ROOT={Path.cwd().resolve()}")
+          PY
+        env:
+          BRAND_YAML: ${{ inputs.brand_yaml }}
+
+      - name: Run content indexing
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          DELETE_FLAG=""
+          if [ "${{ inputs.delete_missing }}" = "true" ]; then
+            DELETE_FLAG="--delete-missing"
+          fi
+
+          AGENT_FLAG="--no-agent"
+          if [ "${{ inputs.use_agent }}" = "true" ]; then
+            AGENT_FLAG="--use-agent"
+          fi
+
+          NORMALIZE_FLAG="--no-normalize-topics"
+          if [ "${{ inputs.normalize_topics }}" = "true" ]; then
+            NORMALIZE_FLAG="--normalize-topics"
+          fi
+
+          echo "Running indexing for ${{ inputs.product_yaml }} on ${{ inputs.platform }}"
+
+          python -m agent_engine.content_indexer_agent.cli \
+            --log-level "${{ inputs.log_level }}" \
+            run \
+            --brand "${{ inputs.brand_yaml }}" \
+            --product "${{ inputs.product_yaml }}" \
+            --platform "${{ inputs.platform }}" \
+            --steps "${{ inputs.steps }}" \
+            $DELETE_FLAG \
+            $AGENT_FLAG \
+            $NORMALIZE_FLAG
+
+      - name: Debug indexing outputs
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo "== outputs tree (top levels) =="
+          ls -la outputs || true
+          echo "== outputs tree under CG_OUTPUTS_ROOT =="
+          find "${CG_OUTPUTS_ROOT}" -maxdepth 3 -type d -print 2>/dev/null || true
+          echo "== output file count =="
+          find "${CG_OUTPUTS_ROOT}" -type f 2>/dev/null | wc -l || true
+          echo "== git status =="
+          git status --porcelain=v1 || true
+
+      - name: Commit and push indexing outputs
+        if: ${{ inputs.push_results }}
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          if [ -d "${CG_OUTPUTS_ROOT}/_repos" ]; then
+            rm -rf "${CG_OUTPUTS_ROOT}/_repos"
+          fi
+
+          find "${CG_OUTPUTS_ROOT}" -name "*.sqlite" -delete 2>/dev/null || true
+
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          git add "${CG_OUTPUTS_ROOT}" || true
+
+          if git diff --cached --quiet; then
+            echo "No indexing output changes to commit."
+            exit 0
+          fi
+
+          git commit -m "chore: update Conholdate indexing outputs"
+          git push
+
+      - name: Run content gap coverage
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          ARGS=(run
+            --brand "${{ inputs.brand_yaml }}"
+            --product "${{ inputs.product_yaml }}"
+            --case "${{ inputs.case }}"
+            --threshold-strict "${{ inputs.threshold_strict }}"
+            --threshold-loose "${{ inputs.threshold_loose }}"
+            --top-k "${{ inputs.top_k }}"
+          )
+
+          if [ -n "${{ inputs.platform }}" ]; then
+            ARGS+=(--platform "${{ inputs.platform }}")
+          fi
+
+          if [ -n "${{ inputs.platforms }}" ]; then
+            ARGS+=(--platforms "${{ inputs.platforms }}")
+          fi
+
+          if [ "${{ inputs.no_embeddings }}" = "true" ]; then
+            ARGS+=(--no-embeddings)
+          fi
+
+          python -m agent_engine.content_gap_agent.cli "${ARGS[@]}"
+
+      - name: Upload combined outputs artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: conholdate-content-indexing-and-gap-outputs
+          path: |
+            outputs/**
+          if-no-files-found: warn
+
+      - name: Commit and push gap outputs
+        if: ${{ inputs.push_results }}
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          if [ -d "${CG_OUTPUTS_ROOT}/_repos" ]; then
+            rm -rf "${CG_OUTPUTS_ROOT}/_repos"
+          fi
+
+          find "${CG_OUTPUTS_ROOT}" -name "*.sqlite" -delete 2>/dev/null || true
+
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          git add "${CG_OUTPUTS_ROOT}" || true
+
+          if git diff --cached --quiet; then
+            echo "No gap output changes to commit."
+            exit 0
+          fi
+
+          git commit -m "${{ inputs.commit_message }}"
+          git push

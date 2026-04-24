@@ -904,7 +904,7 @@ def nor_website_domain(site: str) -> str:
 
 def nor_section_label(step: str) -> str:
     step = (step or "").strip().lower()
-    mapping = {"blog": "blog", "docs": "Docs", "tutorials": "Tutorials", "api": "API", "kb": "KB"}
+    mapping = {"blog": "Blog", "docs": "Docs", "tutorials": "Tutorials", "api": "API", "kb": "KB"}
     return mapping.get(step, step.capitalize() if step else "")
 
 

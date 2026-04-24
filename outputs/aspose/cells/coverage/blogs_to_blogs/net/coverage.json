@@ -14,202 +14,7 @@
   ],
   "rows": [
     {
-      "category": "File Conversion",
-      "sub_category": "Excel to PDF",
-      "topic": "12th wonder uses aspose cells to extract pdf from excel",
-      "key": "12th wonder uses aspose cells to extract pdf from excel",
-      "baseline_record_id": "blog::cells/2018-09-06-12th-wonder-uses-aspose.cells-to-extract-pdf-from-excel-file/index.md",
-      "coverage": {
-        "net": {
-          "matched": true,
-          "score": 1.0,
-          "record_id": "blog::cells/2018-09-06-12th-wonder-uses-aspose.cells-to-extract-pdf-from-excel-file/index.md",
-          "title": "12th Wonder Uses Aspose.Cells to Extract PDF from Excel File",
-          "topic": "12th wonder uses aspose cells to extract PDF from excel",
-          "url": "https://blog.aspose.com/cells/12th-wonder-uses-aspose.cells-to-extract-pdf-from-excel-file/"
-        },
-        "android_via_java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "cpp": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "general": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "nodejs": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "python": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        }
-      }
-    },
-    {
-      "category": "File Formats",
-      "sub_category": "Excel To PDF",
-      "topic": "abbottsfield reports pending notifications from performance improvement and regulatory compliance system",
-      "key": "abbottsfield reports pending notifications from performance improvement and regulatory compliance system",
-      "baseline_record_id": "blog::cells/2018-04-19-using-excel-apis-for-report-pending-notifications/index.md",
-      "coverage": {
-        "net": {
-          "matched": true,
-          "score": 1.0,
-          "record_id": "blog::cells/2018-04-19-using-excel-apis-for-report-pending-notifications/index.md",
-          "title": "Abbottsfield Reports Pending Notifications from a Performance Improvement and Regulatory Compliance System",
-          "topic": "Abbottsfield reports pending notifications from performance improvement and regulatory compliance system",
-          "url": "https://blog.aspose.com/cells/using-excel-apis-for-report-pending-notifications/"
-        },
-        "android_via_java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "cpp": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "general": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "nodejs": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "python": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        }
-      }
-    },
-    {
-      "category": "Office Integration",
-      "sub_category": "Word and Excel Export",
-      "topic": "acumen fuse exports project analysis data into microsoft word and excel with aspose components",
-      "key": "acumen fuse exports project analysis data into microsoft word and excel with aspose components",
-      "baseline_record_id": "blog::cells/2018-12-26-directly-export-data-to-microsoft-office-using-aspose-apis/index.md",
-      "coverage": {
-        "net": {
-          "matched": true,
-          "score": 1.0,
-          "record_id": "blog::cells/2018-12-26-directly-export-data-to-microsoft-office-using-aspose-apis/index.md",
-          "title": "Acumen Fuse Exports Project Analysis Data into Microsoft Word and Excel with Aspose Components",
-          "topic": "Acumen fuse exports project analysis data into microsoft word and excel with aspose components",
-          "url": "https://blog.aspose.com/cells/directly-export-data-to-microsoft-office-using-aspose-apis/"
-        },
-        "android_via_java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "cpp": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "general": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "nodejs": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "python": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        }
-      }
-    },
-    {
-      "category": "Spreadsheets",
+      "category": "Spreadsheet",
       "sub_category": "Pivot Table",
       "topic": "add calculated field in pivot table",
       "key": "add calculated field in pivot table",
@@ -274,7 +79,7 @@
       }
     },
     {
-      "category": "Spreadsheets",
+      "category": "Documents",
       "sub_category": "Comments",
       "topic": "add comments in excel worksheets",
       "key": "add comments in excel worksheets",
@@ -305,107 +110,42 @@
           "url": "https://blog.aspose.com/cells/add-comments-in-excel-worksheets-using-cpp/"
         },
         "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "nodejs": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
           "matched": true,
           "score": 1.0,
           "record_id": "blog::cells/2021-06-15-add-comments-in-excel-worksheets-using-python/index.md",
           "title": "Add Comments in Excel Worksheets using Python",
           "topic": "Add comments in excel worksheets",
           "url": "https://blog.aspose.com/cells/add-comments-in-excel-worksheets-using-python/"
-        },
-        "java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "nodejs": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "python": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
         }
       }
     },
     {
-      "category": "Spreadsheet",
-      "sub_category": "Worksheet Controls",
-      "topic": "add different type of controls to worksheet",
-      "key": "add different type of controls to worksheet",
-      "baseline_record_id": "blog::cells/2009-05-12-how-to-add-different-type-of-controls-to-a-worksheet/index.md",
-      "coverage": {
-        "net": {
-          "matched": true,
-          "score": 1.0,
-          "record_id": "blog::cells/2009-05-12-how-to-add-different-type-of-controls-to-a-worksheet/index.md",
-          "title": "How To: Add different type of controls to a worksheet",
-          "topic": "Add different type of controls to worksheet",
-          "url": "https://blog.aspose.com/cells/how-to-add-different-type-of-controls-to-a-worksheet/"
-        },
-        "android_via_java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "cpp": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "general": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "nodejs": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "python": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        }
-      }
-    },
-    {
-      "category": "Spreadsheet",
-      "sub_category": "Slicers",
+      "category": "Office Automation",
+      "sub_category": "Excel Slicers",
       "topic": "add edit and update slicers in excel",
       "key": "add edit and update slicers in excel",
       "baseline_record_id": "blog::cells/2025-11-06-add-slicer-in-excel-using-csharp/index.md",
@@ -469,8 +209,8 @@
       }
     },
     {
-      "category": "Spreadsheet",
-      "sub_category": "Row and Column Manipulation",
+      "category": "Office",
+      "sub_category": "Spreadsheet Editing",
       "topic": "add or delete rows and columns in excel",
       "key": "add or delete rows and columns in excel",
       "baseline_record_id": "blog::cells/2022-08-05-insert-delete-rows-and-columns-in-excel-csharp/index.md",
@@ -534,8 +274,8 @@
       }
     },
     {
-      "category": "Spreadsheet",
-      "sub_category": "Macro Management",
+      "category": "Spreadsheet Processing",
+      "sub_category": "VBA Macro Management",
       "topic": "add or modify vba macros in excel",
       "key": "add or modify vba macros in excel",
       "baseline_record_id": "blog::cells/2020-12-21-add-modify-vba-macros-in-excel-using-csharp/index.md",
@@ -599,8 +339,8 @@
       }
     },
     {
-      "category": "Spreadsheet",
-      "sub_category": "Data Filtering",
+      "category": "Office",
+      "sub_category": "Excel",
       "topic": "add or remove autofilter in excel xlsx xls",
       "key": "add or remove autofilter in excel xlsx xls",
       "baseline_record_id": "blog::cells/2020-09-16-add-remove-autofilter-in-excel-file-csharp/index.md",
@@ -665,7 +405,7 @@
     },
     {
       "category": "Spreadsheets",
-      "sub_category": "Insert Images",
+      "sub_category": "Images",
       "topic": "add picture to excel",
       "key": "add picture to excel",
       "baseline_record_id": "blog::cells/2024-11-20-add-picture-to-excel-in-csharp/index.md",
@@ -729,8 +469,8 @@
       }
     },
     {
-      "category": "Spreadsheet",
-      "sub_category": "Watermark",
+      "category": "Office",
+      "sub_category": "Excel",
       "topic": "add watermark to excel worksheets",
       "key": "add watermark to excel worksheets",
       "baseline_record_id": "blog::cells/2021-07-06-add-watermark-to-excel-worksheets-using-csharp/index.md",
@@ -794,73 +534,8 @@
       }
     },
     {
-      "category": "Document Processing",
-      "sub_category": "Mail Merge",
-      "topic": "addatech clinicmaster uses aspose words to dynamically generate microsoft word from database",
-      "key": "addatech clinicmaster uses aspose words to dynamically generate microsoft word from database",
-      "baseline_record_id": "blog::cells/2007-02-28-generate-dynamic-microsoft-word-files-with-database-data-using-apis/index.md",
-      "coverage": {
-        "net": {
-          "matched": true,
-          "score": 1.0,
-          "record_id": "blog::cells/2007-02-28-generate-dynamic-microsoft-word-files-with-database-data-using-apis/index.md",
-          "title": "Addatech ClinicMaster Uses Aspose.Words to Dynamically Generate Microsoft Word Files from Database",
-          "topic": "Addatech clinicmaster uses aspose words to dynamically generate microsoft word from database",
-          "url": "https://blog.aspose.com/cells/generate-dynamic-microsoft-word-files-with-database-data-using-apis/"
-        },
-        "android_via_java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "cpp": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "general": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "nodejs": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "python": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        }
-      }
-    },
-    {
-      "category": "Office",
-      "sub_category": "Spreadsheet Formatting",
+      "category": "Spreadsheet",
+      "sub_category": "Formatting",
       "topic": "adjust row height and column width in excel",
       "key": "adjust row height and column width in excel",
       "baseline_record_id": "blog::cells/2022-10-12-adjust-excel-row-height-column-width-csharp/index.md",
@@ -924,73 +599,8 @@
       }
     },
     {
-      "category": "Spreadsheet",
-      "sub_category": "Feature Updates",
-      "topic": "announcing aspose cells comparison features with vsto excel now with added features",
-      "key": "announcing aspose cells comparison features with vsto excel now with added features",
-      "baseline_record_id": "blog::cells/2015-06-05-announcing-aspose.cells-for-.net-comparison-features-with-vsto-excel-now-with-added-features/index.md",
-      "coverage": {
-        "net": {
-          "matched": true,
-          "score": 1.0,
-          "record_id": "blog::cells/2015-06-05-announcing-aspose.cells-for-.net-comparison-features-with-vsto-excel-now-with-added-features/index.md",
-          "title": "Announcing Aspose.Cells for .NET comparison features with VSTO Excel - Now with Added Features",
-          "topic": "Announcing aspose cells comparison features with VSTO excel now with added features",
-          "url": "https://blog.aspose.com/cells/announcing-aspose.cells-for-.net-comparison-features-with-vsto-excel-now-with-added-features/"
-        },
-        "android_via_java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "cpp": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "general": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "nodejs": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "python": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        }
-      }
-    },
-    {
       "category": "Office",
-      "sub_category": "Excel Data Validation",
+      "sub_category": "Data Validation",
       "topic": "apply data validation in excel",
       "key": "apply data validation in excel",
       "baseline_record_id": "blog::cells/2025-06-05-data-validation-in-excel-using-csharp/index.md",
@@ -1054,268 +664,8 @@
       }
     },
     {
-      "category": "Conversion",
-      "sub_category": "Excel To PDF",
-      "topic": "apply security options in excel to pdf conversion",
-      "key": "apply security options in excel to pdf conversion",
-      "baseline_record_id": "blog::cells/2010-10-22-apply-security-options-in-excel-to-pdf-conversion-in-csharp/index.md",
-      "coverage": {
-        "net": {
-          "matched": true,
-          "score": 1.0,
-          "record_id": "blog::cells/2010-10-22-apply-security-options-in-excel-to-pdf-conversion-in-csharp/index.md",
-          "title": "Apply Security Options in Excel to PDF Conversion in C#",
-          "topic": "Apply security options in excel to PDF conversion",
-          "url": "https://blog.aspose.com/cells/apply-security-options-in-excel-to-pdf-conversion-in-csharp/"
-        },
-        "android_via_java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "cpp": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "general": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "nodejs": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "python": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        }
-      }
-    },
-    {
-      "category": "Product Comparison",
-      "sub_category": "Performance Benchmarks",
-      "topic": "aspose cells performance metrics and benchmarks",
-      "key": "aspose cells performance metrics and benchmarks",
-      "baseline_record_id": "blog::cells/2007-12-17-aspose-cells-performance-metrics-and-benchmarks-2/index.md",
-      "coverage": {
-        "net": {
-          "matched": true,
-          "score": 1.0,
-          "record_id": "blog::cells/2007-12-17-aspose-cells-performance-metrics-and-benchmarks-2/index.md",
-          "title": "Aspose.Cells - Performance Metrics and Benchmarks",
-          "topic": "Aspose cells performance metrics and benchmarks",
-          "url": "https://blog.aspose.com/cells/aspose-cells-performance-metrics-and-benchmarks-2/"
-        },
-        "android_via_java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "cpp": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "general": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "nodejs": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "python": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        }
-      }
-    },
-    {
-      "category": "Document Processing",
-      "sub_category": "Spreadsheet",
-      "topic": "aspose cells vs npoi hwpf and xwpf code examples",
-      "key": "aspose cells vs npoi hwpf and xwpf code examples",
-      "baseline_record_id": "blog::cells/2016-04-28-more-code-examples-of-aspose.cells-for-.net-in-comparison-with-npoi-hwpf-and-xwpf-3/index.md",
-      "coverage": {
-        "net": {
-          "matched": true,
-          "score": 1.0,
-          "record_id": "blog::cells/2016-04-28-more-code-examples-of-aspose.cells-for-.net-in-comparison-with-npoi-hwpf-and-xwpf-3/index.md",
-          "title": "Aspose.Cells for .NET vs NPOI HWPF and XWPF - Code Examples",
-          "topic": "Aspose cells vs NPOI HWPF and XWPF code examples",
-          "url": "https://blog.aspose.com/cells/more-code-examples-of-aspose.cells-for-.net-in-comparison-with-npoi-hwpf-and-xwpf-3/"
-        },
-        "android_via_java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "cpp": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "general": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "nodejs": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "python": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        }
-      }
-    },
-    {
       "category": "Spreadsheet",
-      "sub_category": "API Comparison",
-      "topic": "aspose cells vs openxml sdk deal with microsoft excel documents",
-      "key": "aspose cells vs openxml sdk deal with microsoft excel documents",
-      "baseline_record_id": "blog::cells/2015-12-28-more-examples-of-aspose.cells-for-.net-features-missing-in-openxml-sdk-to-deal-with-microsoft-excel-documents/index.md",
-      "coverage": {
-        "net": {
-          "matched": true,
-          "score": 1.0,
-          "record_id": "blog::cells/2015-12-28-more-examples-of-aspose.cells-for-.net-features-missing-in-openxml-sdk-to-deal-with-microsoft-excel-documents/index.md",
-          "title": "Aspose.Cells for .NET VS OpenXML SDK - Deal with Microsoft Excel Documents",
-          "topic": "Aspose cells VS openxml SDK deal with microsoft excel documents",
-          "url": "https://blog.aspose.com/cells/more-examples-of-aspose.cells-for-.net-features-missing-in-openxml-sdk-to-deal-with-microsoft-excel-documents/"
-        },
-        "android_via_java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "cpp": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "general": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "nodejs": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "python": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        }
-      }
-    },
-    {
-      "category": "Spreadsheets",
-      "sub_category": "Formatting",
+      "sub_category": "Auto Fit",
       "topic": "auto fit rows and columns in excel",
       "key": "auto fit rows and columns in excel",
       "baseline_record_id": "blog::cells/2022-10-06-autofit-rows-coulmns-in-excel-csharp/index.md",
@@ -1379,593 +729,8 @@
       }
     },
     {
-      "category": "Spreadsheet",
-      "sub_category": "Chart Conversion",
-      "topic": "c convert chart to pdf and set shadow as text effect for shapes in excel",
-      "key": "c convert chart to pdf and set shadow as text effect for shapes in excel",
-      "baseline_record_id": "blog::cells/2016-05-31-convert-excel-chart-to-pdf-set-shadow-as-text-effect-for-shapes/index.md",
-      "coverage": {
-        "net": {
-          "matched": true,
-          "score": 1.0,
-          "record_id": "blog::cells/2016-05-31-convert-excel-chart-to-pdf-set-shadow-as-text-effect-for-shapes/index.md",
-          "title": "C#: Convert Chart to PDF and Set Shadow as Text Effect for Shapes in Excel",
-          "topic": "C convert chart to PDF and set shadow as text effect for shapes in excel",
-          "url": "https://blog.aspose.com/cells/convert-excel-chart-to-pdf-set-shadow-as-text-effect-for-shapes/"
-        },
-        "android_via_java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "cpp": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "general": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "nodejs": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "python": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        }
-      }
-    },
-    {
-      "category": "Document Conversion",
-      "sub_category": "Spreadsheet to PDF",
-      "topic": "c excel to pdf fit all worksheet columns onto single pdf page",
-      "key": "c excel to pdf fit all worksheet columns onto single pdf page",
-      "baseline_record_id": "blog::cells/2013-12-18-convert-excel-to-pdf-using-csharp-fit-all-worksheet-columns-onto-single-pdf-page/index.md",
-      "coverage": {
-        "net": {
-          "matched": true,
-          "score": 1.0,
-          "record_id": "blog::cells/2013-12-18-convert-excel-to-pdf-using-csharp-fit-all-worksheet-columns-onto-single-pdf-page/index.md",
-          "title": "C# Excel to PDF - Fit All Worksheet Columns onto Single PDF Page",
-          "topic": "C excel to PDF fit all worksheet columns onto single PDF page",
-          "url": "https://blog.aspose.com/cells/convert-excel-to-pdf-using-csharp-fit-all-worksheet-columns-onto-single-pdf-page/"
-        },
-        "android_via_java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "cpp": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "general": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "nodejs": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "python": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        }
-      }
-    },
-    {
-      "category": "Spreadsheet",
-      "sub_category": "Cell Styling",
-      "topic": "cell style property vs cell getstyle setstyle method",
-      "key": "cell style property vs cell getstyle setstyle method",
-      "baseline_record_id": "blog::cells/2008-04-10-cell-style-property-vs-cell-getstyle-setstyle-method/index.md",
-      "coverage": {
-        "net": {
-          "matched": true,
-          "score": 1.0,
-          "record_id": "blog::cells/2008-04-10-cell-style-property-vs-cell-getstyle-setstyle-method/index.md",
-          "title": "Cell.Style property vs Cell.GetStyle/SetStyle method",
-          "topic": "Cell style property vs cell getstyle setstyle method",
-          "url": "https://blog.aspose.com/cells/cell-style-property-vs-cell-getstyle-setstyle-method/"
-        },
-        "android_via_java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "cpp": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "general": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "nodejs": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "python": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        }
-      }
-    },
-    {
-      "category": "File Formats",
-      "sub_category": "Spreadsheet Comparison",
-      "topic": "code examples of aspose cells comparison with npoi hssf and xssf",
-      "key": "code examples of aspose cells comparison with npoi hssf and xssf",
-      "baseline_record_id": "blog::cells/2015-08-18-code-examples-of-aspose.cells-for-.net-comparison-with-npoi-hssf-and-xssf/index.md",
-      "coverage": {
-        "net": {
-          "matched": true,
-          "score": 1.0,
-          "record_id": "blog::cells/2015-08-18-code-examples-of-aspose.cells-for-.net-comparison-with-npoi-hssf-and-xssf/index.md",
-          "title": "Code Examples of Aspose.Cells for .NET Comparison with NPOI HSSF and XSSF",
-          "topic": "Code examples of aspose cells comparison with NPOI HSSF and XSSF",
-          "url": "https://blog.aspose.com/cells/code-examples-of-aspose.cells-for-.net-comparison-with-npoi-hssf-and-xssf/"
-        },
-        "android_via_java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "cpp": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "general": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "nodejs": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "python": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        }
-      }
-    },
-    {
-      "category": "Spreadsheet",
-      "sub_category": "Feature Comparison",
-      "topic": "code examples of aspose cells features missing in npoi",
-      "key": "code examples of aspose cells features missing in npoi",
-      "baseline_record_id": "blog::cells/2015-09-04-code-examples-of-aspose.cells-features-missing-in-npoi/index.md",
-      "coverage": {
-        "net": {
-          "matched": true,
-          "score": 1.0,
-          "record_id": "blog::cells/2015-09-04-code-examples-of-aspose.cells-features-missing-in-npoi/index.md",
-          "title": "Code Examples of Aspose.Cells Features Missing in NPOI",
-          "topic": "Code examples of aspose cells features missing in NPOI",
-          "url": "https://blog.aspose.com/cells/code-examples-of-aspose.cells-features-missing-in-npoi/"
-        },
-        "android_via_java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "cpp": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "general": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "nodejs": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "python": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        }
-      }
-    },
-    {
-      "category": "Spreadsheet",
-      "sub_category": "Conditional Formatting",
-      "topic": "compute microsoft excel selected color for colorscale conditional formatting",
-      "key": "compute microsoft excel selected color for colorscale conditional formatting",
-      "baseline_record_id": "blog::cells/2013-11-22-compute-selected-color-for-colorscale-conditional-formatting-in-excel/index.md",
-      "coverage": {
-        "net": {
-          "matched": true,
-          "score": 1.0,
-          "record_id": "blog::cells/2013-11-22-compute-selected-color-for-colorscale-conditional-formatting-in-excel/index.md",
-          "title": "Compute Microsoft Excel Selected Color for ColorScale Conditional Formatting using C#",
-          "topic": "Compute microsoft excel selected color for colorscale conditional formatting",
-          "url": "https://blog.aspose.com/cells/compute-selected-color-for-colorscale-conditional-formatting-in-excel/"
-        },
-        "android_via_java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "cpp": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "general": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "nodejs": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "python": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        }
-      }
-    },
-    {
-      "category": "Office",
-      "sub_category": "Excel",
-      "topic": "configure fonts when rendering excel spreadsheets",
-      "key": "configure fonts when rendering excel spreadsheets",
-      "baseline_record_id": "blog::cells/2016-08-24-configure-fonts-when-rendering-excel-spreadsheets-using-csharp/index.md",
-      "coverage": {
-        "net": {
-          "matched": true,
-          "score": 1.0,
-          "record_id": "blog::cells/2016-08-24-configure-fonts-when-rendering-excel-spreadsheets-using-csharp/index.md",
-          "title": "Configure Fonts when Rendering Excel Spreadsheets using C#",
-          "topic": "Configure fonts when rendering excel spreadsheets",
-          "url": "https://blog.aspose.com/cells/configure-fonts-when-rendering-excel-spreadsheets-using-csharp/"
-        },
-        "android_via_java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "cpp": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "general": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "nodejs": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "python": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        }
-      }
-    },
-    {
-      "category": "Spreadsheet",
-      "sub_category": "External Resource Management",
-      "topic": "control external resources embedded in excel spreadsheets",
-      "key": "control external resources embedded in excel spreadsheets",
-      "baseline_record_id": "blog::cells/2018-02-19-control-external-resources-embedded-in-excel-spreadsheet-in-csharp-asp.net/index.md",
-      "coverage": {
-        "net": {
-          "matched": true,
-          "score": 1.0,
-          "record_id": "blog::cells/2018-02-19-control-external-resources-embedded-in-excel-spreadsheet-in-csharp-asp.net/index.md",
-          "title": "Control External Resources Embedded in Excel Spreadsheets using C# .NET",
-          "topic": "Control external resources embedded in excel spreadsheets",
-          "url": "https://blog.aspose.com/cells/control-external-resources-embedded-in-excel-spreadsheet-in-csharp-asp.net/"
-        },
-        "android_via_java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "cpp": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "general": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "nodejs": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "python": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        }
-      }
-    },
-    {
-      "category": "Spreadsheet",
-      "sub_category": "Chart Export",
-      "topic": "convert excel chart to",
-      "key": "convert excel chart to",
-      "baseline_record_id": "blog::cells/2007-05-17-convert-an-excel-chart-to-image/index.md",
-      "coverage": {
-        "net": {
-          "matched": true,
-          "score": 1.0,
-          "record_id": "blog::cells/2007-05-17-convert-an-excel-chart-to-image/index.md",
-          "title": "Convert an Excel Chart To Image",
-          "topic": "Convert excel chart to",
-          "url": "https://blog.aspose.com/cells/convert-an-excel-chart-to-image/"
-        },
-        "android_via_java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "cpp": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "general": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "nodejs": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "python": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        }
-      }
-    },
-    {
       "category": "Conversion",
-      "sub_category": "Excel to Image",
+      "sub_category": "Excel To Image",
       "topic": "convert excel xlsx or xls to",
       "key": "convert excel xlsx or xls to",
       "baseline_record_id": "blog::cells/2021-01-01-convert-excel-files-to-images-in-csharp/index.md",
@@ -2095,7 +860,7 @@
     },
     {
       "category": "Spreadsheet",
-      "sub_category": "Data Manipulation",
+      "sub_category": "Copy Range",
       "topic": "copy range in excel",
       "key": "copy range in excel",
       "baseline_record_id": "blog::cells/2025-06-30-copy-range-in-excel-dotnet/index.md",
@@ -2159,73 +924,8 @@
       }
     },
     {
-      "category": "Spreadsheet",
-      "sub_category": "Row Height and Page Setup",
-      "topic": "copy row heights and calculate page setup scaling factor in excel",
-      "key": "copy row heights and calculate page setup scaling factor in excel",
-      "baseline_record_id": "blog::cells/2015-06-29-c-copy-row-heights-and-calculate-page-setup-scaling-factor-in-excel/index.md",
-      "coverage": {
-        "net": {
-          "matched": true,
-          "score": 1.0,
-          "record_id": "blog::cells/2015-06-29-c-copy-row-heights-and-calculate-page-setup-scaling-factor-in-excel/index.md",
-          "title": "Copy Row Heights and Calculate Page Setup Scaling Factor in Excel using C#",
-          "topic": "Copy row heights and calculate page setup scaling factor in excel",
-          "url": "https://blog.aspose.com/cells/c-copy-row-heights-and-calculate-page-setup-scaling-factor-in-excel/"
-        },
-        "android_via_java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "cpp": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "general": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "nodejs": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "python": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        }
-      }
-    },
-    {
-      "category": "Spreadsheet",
-      "sub_category": "Data Manipulation",
+      "category": "Spreadsheets",
+      "sub_category": "Copy Data",
       "topic": "copy rows and columns in excel",
       "key": "copy rows and columns in excel",
       "baseline_record_id": "blog::cells/2021-07-15-copy-rows-and-columns-in-excel-using-csharp/index.md",
@@ -2289,8 +989,8 @@
       }
     },
     {
-      "category": "Charts",
-      "sub_category": "Stacked Area Charts",
+      "category": "Spreadsheet",
+      "sub_category": "Area Chart",
       "topic": "create 100 stacked area chart in excel",
       "key": "create 100 stacked area chart in excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-area100percentstacked-chart/index.md",
@@ -2354,8 +1054,8 @@
       }
     },
     {
-      "category": "Spreadsheets",
-      "sub_category": "Shared Workbook",
+      "category": "Office",
+      "sub_category": "Excel",
       "topic": "create and protect shared excel workbook",
       "key": "create and protect shared excel workbook",
       "baseline_record_id": "blog::cells/2023-01-16-create-shared-excel-workbook-csharp/index.md",
@@ -2419,8 +1119,8 @@
       }
     },
     {
-      "category": "Spreadsheet",
-      "sub_category": "Charts",
+      "category": "Data Visualization",
+      "sub_category": "Area Chart",
       "topic": "create area chart in excel",
       "key": "create area chart in excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-area-chart/index.md",
@@ -2484,8 +1184,8 @@
       }
     },
     {
-      "category": "Data Visualization",
-      "sub_category": "Area Stacked Chart",
+      "category": "Spreadsheet",
+      "sub_category": "Charts",
       "topic": "create area stacked chart in excel",
       "key": "create area stacked chart in excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-areastacked-chart/index.md",
@@ -2549,8 +1249,8 @@
       }
     },
     {
-      "category": "Data Visualization",
-      "sub_category": "Charts",
+      "category": "Charts",
+      "sub_category": "3D Charts",
       "topic": "create area3d chart in excel",
       "key": "create area3d chart in excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-area3d-chart/index.md",
@@ -2614,8 +1314,8 @@
       }
     },
     {
-      "category": "Spreadsheet",
-      "sub_category": "Chart Creation",
+      "category": "Data Visualization",
+      "sub_category": "Excel Charts",
       "topic": "create area3d100percentstacked chart in excel",
       "key": "create area3d100percentstacked chart in excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-area3d100percentstacked-chart/index.md",
@@ -2680,7 +1380,7 @@
     },
     {
       "category": "Data Visualization",
-      "sub_category": "Area Charts",
+      "sub_category": "Charts",
       "topic": "create area3dstacked chart in excel",
       "key": "create area3dstacked chart in excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-area3dstacked-chart/index.md",
@@ -2745,7 +1445,7 @@
     },
     {
       "category": "Data Visualization",
-      "sub_category": "Charts",
+      "sub_category": "Bar Chart",
       "topic": "create bar chart in excel",
       "key": "create bar chart in excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-bar-chart/index.md",
@@ -2809,8 +1509,8 @@
       }
     },
     {
-      "category": "Spreadsheet",
-      "sub_category": "Charting",
+      "category": "Data Visualization",
+      "sub_category": "Charts",
       "topic": "create bar stacked chart in excel",
       "key": "create bar stacked chart in excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-barstacked-chart/index.md",
@@ -2874,8 +1574,8 @@
       }
     },
     {
-      "category": "Spreadsheets",
-      "sub_category": "Charting",
+      "category": "Spreadsheet",
+      "sub_category": "Bar Chart",
       "topic": "create bar100percentstacked chart in excel",
       "key": "create bar100percentstacked chart in excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-bar100percentstacked-chart/index.md",
@@ -2940,7 +1640,7 @@
     },
     {
       "category": "Data Visualization",
-      "sub_category": "Charts",
+      "sub_category": "3D Bar Chart",
       "topic": "create bar3d100percentstacked chart in excel",
       "key": "create bar3d100percentstacked chart in excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-bar3d100percentstacked-chart/index.md",
@@ -3004,8 +1704,8 @@
       }
     },
     {
-      "category": "Spreadsheet",
-      "sub_category": "Charting",
+      "category": "Charts",
+      "sub_category": "Bar Chart",
       "topic": "create bar3dclustered chart in excel",
       "key": "create bar3dclustered chart in excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-bar3dclustered-chart/index.md",
@@ -3070,7 +1770,7 @@
     },
     {
       "category": "Data Visualization",
-      "sub_category": "Bar Charts",
+      "sub_category": "Excel Bar Charts",
       "topic": "create bar3dstacked chart in excel",
       "key": "create bar3dstacked chart in excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-bar3dstacked-chart/index.md",
@@ -3134,8 +1834,8 @@
       }
     },
     {
-      "category": "Excel",
-      "sub_category": "Charting",
+      "category": "Data Visualization",
+      "sub_category": "Charts",
       "topic": "create boxwhisker chart in excel",
       "key": "create boxwhisker chart in excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-boxwhisker-chart/index.md",
@@ -3265,7 +1965,7 @@
     },
     {
       "category": "Data Visualization",
-      "sub_category": "Excel Charting",
+      "sub_category": "Excel Charts",
       "topic": "create bubble3d chart in excel",
       "key": "create bubble3d chart in excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-bubble3d-chart/index.md",
@@ -3329,7 +2029,7 @@
       }
     },
     {
-      "category": "Spreadsheet",
+      "category": "Data Visualization",
       "sub_category": "Charts",
       "topic": "create charts in excel spreadsheets",
       "key": "create charts in excel spreadsheets",
@@ -3395,7 +2095,7 @@
     },
     {
       "category": "Data Visualization",
-      "sub_category": "Charts",
+      "sub_category": "Excel Charts",
       "topic": "create column chart in excel",
       "key": "create column chart in excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-column-chart/index.md",
@@ -3459,7 +2159,7 @@
       }
     },
     {
-      "category": "Spreadsheet",
+      "category": "Data Visualization",
       "sub_category": "Charts",
       "topic": "create column stacked chart in excel",
       "key": "create column stacked chart in excel",
@@ -3524,8 +2224,8 @@
       }
     },
     {
-      "category": "Spreadsheet",
-      "sub_category": "Chart Creation",
+      "category": "Data Visualization",
+      "sub_category": "Charts",
       "topic": "create column100percentstacked chart in excel",
       "key": "create column100percentstacked chart in excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-column100percentstacked-chart/index.md",
@@ -3589,7 +2289,7 @@
       }
     },
     {
-      "category": "Data Visualization",
+      "category": "Excel",
       "sub_category": "Charts",
       "topic": "create column3d chart in excel",
       "key": "create column3d chart in excel",
@@ -3655,7 +2355,7 @@
     },
     {
       "category": "Data Visualization",
-      "sub_category": "Chart Generation",
+      "sub_category": "Excel Charts",
       "topic": "create column3d100percentstacked chart in excel",
       "key": "create column3d100percentstacked chart in excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-column3d100percentstacked-chart/index.md",
@@ -3784,8 +2484,8 @@
       }
     },
     {
-      "category": "Charts",
-      "sub_category": "3D Stacked Column",
+      "category": "Spreadsheet",
+      "sub_category": "Charting",
       "topic": "create column3dstacked chart in excel",
       "key": "create column3dstacked chart in excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-column3dstacked-chart/index.md",
@@ -3849,8 +2549,8 @@
       }
     },
     {
-      "category": "Spreadsheets",
-      "sub_category": "Combo Chart",
+      "category": "Data Visualization",
+      "sub_category": "Excel Charting",
       "topic": "create combo chart in excel",
       "key": "create combo chart in excel",
       "baseline_record_id": "blog::cells/2025-06-05-create-combo-chart-in-excel-dotnet/index.md",
@@ -3915,7 +2615,7 @@
     },
     {
       "category": "Data Visualization",
-      "sub_category": "Charts",
+      "sub_category": "Excel Charts",
       "topic": "create cone chart in excel",
       "key": "create cone chart in excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-cone-chart/index.md",
@@ -3979,8 +2679,8 @@
       }
     },
     {
-      "category": "Spreadsheets",
-      "sub_category": "Charting",
+      "category": "Data Visualization",
+      "sub_category": "Charts",
       "topic": "create cone stacked chart in excel",
       "key": "create cone stacked chart in excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-conestacked-chart/index.md",
@@ -4110,7 +2810,7 @@
     },
     {
       "category": "Data Visualization",
-      "sub_category": "Charts",
+      "sub_category": "Excel Charts",
       "topic": "create conical bar stacked chart in excel",
       "key": "create conical bar stacked chart in excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-conicalbarstacked-chart/index.md",
@@ -4175,7 +2875,7 @@
     },
     {
       "category": "Data Visualization",
-      "sub_category": "Charting",
+      "sub_category": "Charts",
       "topic": "create conicalbar 100 stacked chart in excel",
       "key": "create conicalbar 100 stacked chart in excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-conicalbar100percentstacked-chart/index.md",
@@ -4304,8 +3004,8 @@
       }
     },
     {
-      "category": "Data Visualization",
-      "sub_category": "Excel Charts",
+      "category": "Charts",
+      "sub_category": "3D Column Chart",
       "topic": "create conicalcolumn3d chart in excel",
       "key": "create conicalcolumn3d chart in excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-conicalcolumn3d-chart/index.md",
@@ -4369,8 +3069,8 @@
       }
     },
     {
-      "category": "Data Visualization",
-      "sub_category": "Charts",
+      "category": "Charts",
+      "sub_category": "Three Dimensional Charts",
       "topic": "create cylinder chart in excel",
       "key": "create cylinder chart in excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-cylinder-chart/index.md",
@@ -4435,7 +3135,7 @@
     },
     {
       "category": "Data Visualization",
-      "sub_category": "Excel Charts",
+      "sub_category": "Charts",
       "topic": "create cylinder100percentstacked chart in excel",
       "key": "create cylinder100percentstacked chart in excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-cylinder100percentstacked-chart/index.md",
@@ -4499,8 +3199,8 @@
       }
     },
     {
-      "category": "Data Visualization",
-      "sub_category": "3‑D Charts",
+      "category": "Spreadsheet",
+      "sub_category": "Charts",
       "topic": "create cylinderstacked chart in excel",
       "key": "create cylinderstacked chart in excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-cylinderstacked-chart/index.md",
@@ -4565,7 +3265,7 @@
     },
     {
       "category": "Data Visualization",
-      "sub_category": "Excel Chart Generation",
+      "sub_category": "Excel Charts",
       "topic": "create cylindrical bar chart in excel",
       "key": "create cylindrical bar chart in excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-cylindricalbar-chart/index.md",
@@ -4629,8 +3329,8 @@
       }
     },
     {
-      "category": "Excel",
-      "sub_category": "Charts",
+      "category": "Data Visualization",
+      "sub_category": "Excel Charts",
       "topic": "create cylindricalbar100percentstacked chart in excel",
       "key": "create cylindricalbar100percentstacked chart in excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-cylindricalbar100percentstacked-chart/index.md",
@@ -4695,7 +3395,7 @@
     },
     {
       "category": "Data Visualization",
-      "sub_category": "Charts",
+      "sub_category": "Chart Creation",
       "topic": "create cylindricalbarstacked chart in excel",
       "key": "create cylindricalbarstacked chart in excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-cylindricalbarstacked-chart/index.md",
@@ -4825,7 +3525,7 @@
     },
     {
       "category": "Data Visualization",
-      "sub_category": "Excel Charts",
+      "sub_category": "Charts",
       "topic": "create doughnut chart in excel",
       "key": "create doughnut chart in excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-doughnut-chart/index.md",
@@ -4889,8 +3589,8 @@
       }
     },
     {
-      "category": "Spreadsheet",
-      "sub_category": "Charts",
+      "category": "Data Visualization",
+      "sub_category": "Excel Charts",
       "topic": "create doughnutexploded chart in excel",
       "key": "create doughnutexploded chart in excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-doughnutexploded-chart/index.md",
@@ -4954,8 +3654,8 @@
       }
     },
     {
-      "category": "Development",
-      "sub_category": "Spreadsheets",
+      "category": "Spreadsheets",
+      "sub_category": "File Generation",
       "topic": "create excel xls without ms office",
       "key": "create excel xls without ms office",
       "baseline_record_id": "blog::cells/2020-01-21-create-excel-xls-xlsx-programmatically-in-csharp-net/index.md",
@@ -5019,8 +3719,8 @@
       }
     },
     {
-      "category": "Spreadsheet",
-      "sub_category": "Charting",
+      "category": "Data Visualization",
+      "sub_category": "Funnel Chart",
       "topic": "create funnel chart in excel",
       "key": "create funnel chart in excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-funnel-chart/index.md",
@@ -5085,7 +3785,7 @@
     },
     {
       "category": "Data Visualization",
-      "sub_category": "Excel Charts",
+      "sub_category": "Gantt Chart",
       "topic": "create gantt chart in excel",
       "key": "create gantt chart in excel",
       "baseline_record_id": "blog::cells/2025-04-15-create-gantt-chart-in-excel-using-csharp/index.md",
@@ -5115,12 +3815,12 @@
           "url": null
         },
         "general": {
-          "matched": true,
-          "score": 1.0,
-          "record_id": "blog::cells/2025-07-14-create-gantt-chart-in-excel-using-python/index.md",
-          "title": "Create Gantt Chart in Excel using Python",
-          "topic": "Create gantt chart in excel",
-          "url": "https://blog.aspose.com/cells/create-gantt-chart-in-excel-using-python/"
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
         },
         "java": {
           "matched": false,
@@ -5139,18 +3839,18 @@
           "url": null
         },
         "python": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::cells/2025-07-14-create-gantt-chart-in-excel-using-python/index.md",
+          "title": "Create Gantt Chart in Excel using Python",
+          "topic": "Create gantt chart in excel",
+          "url": "https://blog.aspose.com/cells/create-gantt-chart-in-excel-using-python/"
         }
       }
     },
     {
       "category": "Data Visualization",
-      "sub_category": "Histogram Charts",
+      "sub_category": "Histogram",
       "topic": "create histogram chart in excel",
       "key": "create histogram chart in excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-histogram-chart/index.md",
@@ -5214,7 +3914,7 @@
       }
     },
     {
-      "category": "Data Visualization",
+      "category": "Spreadsheets",
       "sub_category": "Charts",
       "topic": "create line chart in excel",
       "key": "create line chart in excel",
@@ -5280,7 +3980,7 @@
     },
     {
       "category": "Data Visualization",
-      "sub_category": "Charts",
+      "sub_category": "Stacked Line Charts",
       "topic": "create line100percentstacked chart in excel",
       "key": "create line100percentstacked chart in excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-line100percentstacked-chart/index.md",
@@ -5344,8 +4044,8 @@
       }
     },
     {
-      "category": "Spreadsheet",
-      "sub_category": "Charting",
+      "category": "Charts",
+      "sub_category": "Excel Chart Creation",
       "topic": "create line100percentstackedwithdatamarkers chart in excel",
       "key": "create line100percentstackedwithdatamarkers chart in excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-line100percentstackedwithdatamarkers-chart/index.md",
@@ -5410,7 +4110,7 @@
     },
     {
       "category": "Data Visualization",
-      "sub_category": "Charts",
+      "sub_category": "3D Charts",
       "topic": "create line3d chart in excel",
       "key": "create line3d chart in excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-line3d-chart/index.md",
@@ -5475,7 +4175,7 @@
     },
     {
       "category": "Data Visualization",
-      "sub_category": "Line Stacked Chart",
+      "sub_category": "Charts",
       "topic": "create linestacked chart in excel",
       "key": "create linestacked chart in excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-linestacked-chart/index.md",
@@ -5540,7 +4240,7 @@
     },
     {
       "category": "Data Visualization",
-      "sub_category": "Line Charts",
+      "sub_category": "Charts",
       "topic": "create linestackedwithdatamarkers chart in excel",
       "key": "create linestackedwithdatamarkers chart in excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-linestackedwithdatamarkers-chart/index.md",
@@ -5604,8 +4304,8 @@
       }
     },
     {
-      "category": "Charts",
-      "sub_category": "Line With Data Markers",
+      "category": "Data Visualization",
+      "sub_category": "Line Charts",
       "topic": "create linewithdatamarkers chart in excel",
       "key": "create linewithdatamarkers chart in excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-linewithdatamarkers-chart/index.md",
@@ -5734,72 +4434,7 @@
       }
     },
     {
-      "category": "Spreadsheet",
-      "sub_category": "Named Ranges",
-      "topic": "create named ranges",
-      "key": "create named ranges",
-      "baseline_record_id": "blog::cells/2009-05-12-how-do-i-create-named-ranges/index.md",
-      "coverage": {
-        "net": {
-          "matched": true,
-          "score": 1.0,
-          "record_id": "blog::cells/2009-05-12-how-do-i-create-named-ranges/index.md",
-          "title": "How Do I: Create Named Ranges",
-          "topic": "Create named ranges",
-          "url": "https://blog.aspose.com/cells/how-do-i-create-named-ranges/"
-        },
-        "android_via_java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "cpp": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "general": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "nodejs": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "python": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        }
-      }
-    },
-    {
-      "category": "Document",
+      "category": "Development",
       "sub_category": "Spreadsheet",
       "topic": "create or edit excel on linux",
       "key": "create or edit excel on linux",
@@ -5865,7 +4500,7 @@
     },
     {
       "category": "Data Visualization",
-      "sub_category": "Charts",
+      "sub_category": "Excel Charts",
       "topic": "create paretoline chart in excel",
       "key": "create paretoline chart in excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-paretoline-chart/index.md",
@@ -5929,7 +4564,7 @@
       }
     },
     {
-      "category": "Excel",
+      "category": "Data Visualization",
       "sub_category": "Charts",
       "topic": "create pie chart in excel",
       "key": "create pie chart in excel",
@@ -5995,7 +4630,7 @@
     },
     {
       "category": "Data Visualization",
-      "sub_category": "Excel",
+      "sub_category": "Excel Charts",
       "topic": "create pie of pie chart in excel",
       "key": "create pie of pie chart in excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-piepie-chart/index.md",
@@ -6060,7 +4695,7 @@
     },
     {
       "category": "Data Visualization",
-      "sub_category": "Pie3D Chart",
+      "sub_category": "Pie Charts",
       "topic": "create pie3d chart in excel",
       "key": "create pie3d chart in excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-pie3d-chart/index.md",
@@ -6125,7 +4760,7 @@
     },
     {
       "category": "Data Visualization",
-      "sub_category": "Charts",
+      "sub_category": "Charts and Graphs",
       "topic": "create pie3dexploded chart in excel",
       "key": "create pie3dexploded chart in excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-pie3dexploded-chart/index.md",
@@ -6189,7 +4824,7 @@
       }
     },
     {
-      "category": "Spreadsheet",
+      "category": "Data Visualization",
       "sub_category": "Charts",
       "topic": "create piebar chart in excel",
       "key": "create piebar chart in excel",
@@ -6254,8 +4889,8 @@
       }
     },
     {
-      "category": "Spreadsheet",
-      "sub_category": "Chart Creation",
+      "category": "Data Visualization",
+      "sub_category": "Charts",
       "topic": "create pieexploded chart in excel",
       "key": "create pieexploded chart in excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-pieexploded-chart/index.md",
@@ -6319,7 +4954,7 @@
       }
     },
     {
-      "category": "Spreadsheet",
+      "category": "Office",
       "sub_category": "Pivot Tables",
       "topic": "create pivot tables in excel",
       "key": "create pivot tables in excel",
@@ -6350,12 +4985,12 @@
           "url": null
         },
         "general": {
-          "matched": true,
-          "score": 1.0,
-          "record_id": "blog::cells/2022-08-15-create-pivot-tables-in-excel-in-python/index.md",
-          "title": "Create Pivot Tables in Excel using Python",
-          "topic": "Create pivot tables in excel",
-          "url": "https://blog.aspose.com/cells/create-pivot-tables-in-excel-using-python/"
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
         },
         "java": {
           "matched": true,
@@ -6374,18 +5009,18 @@
           "url": null
         },
         "python": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::cells/2022-08-15-create-pivot-tables-in-excel-in-python/index.md",
+          "title": "Create Pivot Tables in Excel using Python",
+          "topic": "Create pivot tables in excel",
+          "url": "https://blog.aspose.com/cells/create-pivot-tables-in-excel-using-python/"
         }
       }
     },
     {
       "category": "Data Visualization",
-      "sub_category": "Charts",
+      "sub_category": "Excel Charts",
       "topic": "create pyramid bar chart in excel",
       "key": "create pyramid bar chart in excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-pyramidbar-chart/index.md",
@@ -6449,8 +5084,8 @@
       }
     },
     {
-      "category": "Excel",
-      "sub_category": "Chart Creation",
+      "category": "Data Visualization",
+      "sub_category": "Excel Charts",
       "topic": "create pyramid bar stacked chart in excel",
       "key": "create pyramid bar stacked chart in excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-pyramidbarstacked-chart/index.md",
@@ -6515,7 +5150,7 @@
     },
     {
       "category": "Data Visualization",
-      "sub_category": "Charts",
+      "sub_category": "Excel Charts",
       "topic": "create pyramid chart in excel",
       "key": "create pyramid chart in excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-pyramid-chart/index.md",
@@ -6580,7 +5215,7 @@
     },
     {
       "category": "Data Visualization",
-      "sub_category": "Charts",
+      "sub_category": "Excel Charts",
       "topic": "create pyramid stacked chart in excel",
       "key": "create pyramid stacked chart in excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-pyramidstacked-chart/index.md",
@@ -6645,7 +5280,7 @@
     },
     {
       "category": "Data Visualization",
-      "sub_category": "Pyramid Chart",
+      "sub_category": "Excel Charts",
       "topic": "create pyramid100percentstacked chart in excel",
       "key": "create pyramid100percentstacked chart in excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-pyramid100percentstacked-chart/index.md",
@@ -6710,7 +5345,7 @@
     },
     {
       "category": "Data Visualization",
-      "sub_category": "Excel",
+      "sub_category": "Excel Chart",
       "topic": "create pyramidbar100percentstacked chart in excel",
       "key": "create pyramidbar100percentstacked chart in excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-pyramidbar100percentstacked-chart/index.md",
@@ -6774,7 +5409,7 @@
       }
     },
     {
-      "category": "Data Visualization",
+      "category": "Spreadsheet",
       "sub_category": "Charts",
       "topic": "create pyramidcolumn3d chart in excel",
       "key": "create pyramidcolumn3d chart in excel",
@@ -6840,7 +5475,7 @@
     },
     {
       "category": "Data Visualization",
-      "sub_category": "Charts",
+      "sub_category": "Radar Chart",
       "topic": "create radar chart in excel",
       "key": "create radar chart in excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-radar-chart/index.md",
@@ -6904,8 +5539,8 @@
       }
     },
     {
-      "category": "Spreadsheets",
-      "sub_category": "Charts",
+      "category": "Data Visualization",
+      "sub_category": "Radar chart",
       "topic": "create radarfilled chart in excel",
       "key": "create radarfilled chart in excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-radarfilled-chart/index.md",
@@ -6969,8 +5604,8 @@
       }
     },
     {
-      "category": "Charting",
-      "sub_category": "Excel Chart Creation",
+      "category": "Data Visualization",
+      "sub_category": "Charts",
       "topic": "create radarwithdatamarkers chart in excel",
       "key": "create radarwithdatamarkers chart in excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-radarwithdatamarkers-chart/index.md",
@@ -7034,8 +5669,8 @@
       }
     },
     {
-      "category": "Office",
-      "sub_category": "Excel",
+      "category": "Data Management",
+      "sub_category": "Excel Integration",
       "topic": "create read and edit excel spreadsheets in mvc",
       "key": "create read and edit excel spreadsheets in mvc",
       "baseline_record_id": "blog::cells/2021-08-25-create-read-edit-excel-spreadsheet-in-asp-net-mvc/index.md",
@@ -7164,8 +5799,8 @@
       }
     },
     {
-      "category": "Data Visualization",
-      "sub_category": "Scatter Charts",
+      "category": "Spreadsheet",
+      "sub_category": "Chart Creation",
       "topic": "create scatterconnectedbycurveswithdatamarker chart in excel",
       "key": "create scatterconnectedbycurveswithdatamarker chart in excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-scatterconnectedbycurveswithdatamarker-chart/index.md",
@@ -7229,7 +5864,7 @@
       }
     },
     {
-      "category": "Data Visualization",
+      "category": "Spreadsheets",
       "sub_category": "Charts",
       "topic": "create scatterconnectedbycurveswithoutdatamarker chart in excel",
       "key": "create scatterconnectedbycurveswithoutdatamarker chart in excel",
@@ -7360,7 +5995,7 @@
     },
     {
       "category": "Data Visualization",
-      "sub_category": "Excel Chart Creation",
+      "sub_category": "Charts",
       "topic": "create scatterconnectedbylineswithoutdatamarker chart in excel",
       "key": "create scatterconnectedbylineswithoutdatamarker chart in excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-scatterconnectedbylineswithoutdatamarker-chart/index.md",
@@ -7424,73 +6059,8 @@
       }
     },
     {
-      "category": "Spreadsheet",
-      "sub_category": "Features",
-      "topic": "create signature line and specify absolute pivotitem position in excel",
-      "key": "create signature line and specify absolute pivotitem position in excel",
-      "baseline_record_id": "blog::cells/2015-01-27-create-signature-line-in-excel-and-specify-absolute-pivotitem-position/index.md",
-      "coverage": {
-        "net": {
-          "matched": true,
-          "score": 1.0,
-          "record_id": "blog::cells/2015-01-27-create-signature-line-in-excel-and-specify-absolute-pivotitem-position/index.md",
-          "title": "Create Signature Line and Specify Absolute PivotItem Position in Excel Files using C#",
-          "topic": "Create signature line and specify absolute pivotitem position in excel",
-          "url": "https://blog.aspose.com/cells/create-signature-line-in-excel-and-specify-absolute-pivotitem-position/"
-        },
-        "android_via_java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "cpp": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "general": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "java": {
-          "matched": true,
-          "score": 1.0,
-          "record_id": "blog::cells/2015-01-27-java-create-signature-line-in-spreadsheets/index.md",
-          "title": "Java: Create Signature Line and Specify Absolute PivotItem Position in Excel Files",
-          "topic": "Create signature line and specify absolute pivotitem position in excel",
-          "url": "https://blog.aspose.com/cells/java-create-signature-line-in-spreadsheets/"
-        },
-        "nodejs": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "python": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        }
-      }
-    },
-    {
-      "category": "Office",
-      "sub_category": "Charts",
+      "category": "Data Visualization",
+      "sub_category": "Sparklines",
       "topic": "create sparklines in excel",
       "key": "create sparklines in excel",
       "baseline_record_id": "blog::cells/2024-09-25-create-sparklines-in-excel-using-csharp/index.md",
@@ -7620,7 +6190,7 @@
     },
     {
       "category": "Data Visualization",
-      "sub_category": "Excel Charts",
+      "sub_category": "Charts",
       "topic": "create stockhighlowclose chart in excel",
       "key": "create stockhighlowclose chart in excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-stockhighlowclose-chart/index.md",
@@ -7685,7 +6255,7 @@
     },
     {
       "category": "Data Visualization",
-      "sub_category": "Financial Charts",
+      "sub_category": "Charts",
       "topic": "create stockvolumehighlowclose chart in excel",
       "key": "create stockvolumehighlowclose chart in excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-stockvolumehighlowclose-chart/index.md",
@@ -7749,8 +6319,8 @@
       }
     },
     {
-      "category": "Spreadsheet",
-      "sub_category": "Charting",
+      "category": "Data Visualization",
+      "sub_category": "Financial Charts",
       "topic": "create stockvolumeopenhighlowclose chart in excel",
       "key": "create stockvolumeopenhighlowclose chart in excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-stockvolumeopenhighlowclose-chart/index.md",
@@ -7815,7 +6385,7 @@
     },
     {
       "category": "Data Visualization",
-      "sub_category": "Charts",
+      "sub_category": "Sunburst Chart",
       "topic": "create sunburst chart in excel",
       "key": "create sunburst chart in excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-sunburst-chart/index.md",
@@ -7879,7 +6449,7 @@
       }
     },
     {
-      "category": "Data Visualization",
+      "category": "Charts",
       "sub_category": "3D Surface Chart",
       "topic": "create surface3d chart in excel",
       "key": "create surface3d chart in excel",
@@ -7945,7 +6515,7 @@
     },
     {
       "category": "Data Visualization",
-      "sub_category": "SurfaceContour Chart",
+      "sub_category": "Surface Contour Chart",
       "topic": "create surfacecontour chart in excel",
       "key": "create surfacecontour chart in excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-surfacecontour-chart/index.md",
@@ -8010,7 +6580,7 @@
     },
     {
       "category": "Data Visualization",
-      "sub_category": "3‑D Surface Charts",
+      "sub_category": "3D Surface Charts",
       "topic": "create surfacecontourwireframe chart in excel",
       "key": "create surfacecontourwireframe chart in excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-surfacecontourwireframe-chart/index.md",
@@ -8140,7 +6710,7 @@
     },
     {
       "category": "Data Visualization",
-      "sub_category": "Tornado Chart",
+      "sub_category": "Charts",
       "topic": "create tornado charts in excel",
       "key": "create tornado charts in excel",
       "baseline_record_id": "blog::cells/2024-04-19-tornado-charts-in-excel-using-csharp/index.md",
@@ -8205,7 +6775,7 @@
     },
     {
       "category": "Data Visualization",
-      "sub_category": "Treemap Chart",
+      "sub_category": "Charts",
       "topic": "create treemap chart in excel",
       "key": "create treemap chart in excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-treemap-chart/index.md",
@@ -8269,8 +6839,8 @@
       }
     },
     {
-      "category": "Spreadsheets",
-      "sub_category": "Charts",
+      "category": "Data Visualization",
+      "sub_category": "Excel Charts",
       "topic": "create waterfall chart in excel",
       "key": "create waterfall chart in excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-waterfall-chart/index.md",
@@ -8334,8 +6904,8 @@
       }
     },
     {
-      "category": "File Conversion",
-      "sub_category": "CSV and Excel",
+      "category": "Data Conversion",
+      "sub_category": "File Format Conversion",
       "topic": "csv to excel or excel to csv on linux",
       "key": "csv to excel or excel to csv on linux",
       "baseline_record_id": "blog::cells/2021-10-21-csv-to-excel-or-excel-to-csv-on-linux/index.md",
@@ -8399,8 +6969,8 @@
       }
     },
     {
-      "category": "Data Management",
-      "sub_category": "File Conversion",
+      "category": "Data Conversion",
+      "sub_category": "Csv To Excel",
       "topic": "csv to excel xls",
       "key": "csv to excel xls",
       "baseline_record_id": "blog::cells/2020-11-17-csv-excel-csharp-vb-net/index.md",
@@ -8412,71 +6982,6 @@
           "title": "Convert CSV to Excel XLS in C# .NET",
           "topic": "CSV to excel XLS",
           "url": "https://blog.aspose.com/cells/csv-excel-csharp-vb-net/"
-        },
-        "android_via_java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "cpp": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "general": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "nodejs": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "python": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        }
-      }
-    },
-    {
-      "category": "Spreadsheet",
-      "sub_category": "PDF Export",
-      "topic": "custom document properties in excel to pdf",
-      "key": "custom document properties in excel to pdf",
-      "baseline_record_id": "blog::cells/2018-09-27-export-custom-document-properties-in-excel-to-pdf-using-csharp-excel-library/index.md",
-      "coverage": {
-        "net": {
-          "matched": true,
-          "score": 1.0,
-          "record_id": "blog::cells/2018-09-27-export-custom-document-properties-in-excel-to-pdf-using-csharp-excel-library/index.md",
-          "title": "Export Custom Document Properties in Excel to PDF using C#",
-          "topic": "Custom document properties in excel to PDF",
-          "url": "https://blog.aspose.com/cells/export-custom-document-properties-in-excel-to-pdf-using-csharp-excel-library/"
         },
         "android_via_java": {
           "matched": false,
@@ -8594,138 +7099,8 @@
       }
     },
     {
-      "category": "Spreadsheet",
-      "sub_category": "Pivot Table Customization",
-      "topic": "customize pivot tables in excel and call client side scripts for gridweb",
-      "key": "customize pivot tables in excel and call client side scripts for gridweb",
-      "baseline_record_id": "blog::cells/2017-03-23-customize-pivot-tables-in-excel-files-and-call-client-side-scripts-for-gridweb-in-.net/index.md",
-      "coverage": {
-        "net": {
-          "matched": true,
-          "score": 1.0,
-          "record_id": "blog::cells/2017-03-23-customize-pivot-tables-in-excel-files-and-call-client-side-scripts-for-gridweb-in-.net/index.md",
-          "title": "Customize Pivot Tables in Excel Files and Call Client-side Scripts for GridWeb in .NET",
-          "topic": "Customize pivot tables in excel and call client side scripts for gridweb",
-          "url": "https://blog.aspose.com/cells/customize-pivot-tables-in-excel-files-and-call-client-side-scripts-for-gridweb-in-.net/"
-        },
-        "android_via_java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "cpp": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "general": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "nodejs": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "python": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        }
-      }
-    },
-    {
-      "category": "Data Export",
-      "sub_category": "Spreadsheet Formats",
-      "topic": "data to excel text csv and opendocument spreadsheet using aspose cells for umbraco",
-      "key": "data to excel text csv and opendocument spreadsheet using aspose cells for umbraco",
-      "baseline_record_id": "blog::cells/2015-12-10-export-data-to-excel-text-csv-and-opendocument-spreadsheet-using-aspose.cells-.net-for-umbraco/index.md",
-      "coverage": {
-        "net": {
-          "matched": true,
-          "score": 1.0,
-          "record_id": "blog::cells/2015-12-10-export-data-to-excel-text-csv-and-opendocument-spreadsheet-using-aspose.cells-.net-for-umbraco/index.md",
-          "title": "Export Data to Excel, Text, CSV and OpenDocument Spreadsheet using Aspose.Cells .NET for Umbraco",
-          "topic": "Data to excel text CSV and opendocument spreadsheet using aspose cells for umbraco",
-          "url": "https://blog.aspose.com/cells/export-data-to-excel-text-csv-and-opendocument-spreadsheet-using-aspose.cells-.net-for-umbraco/"
-        },
-        "android_via_java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "cpp": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "general": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "nodejs": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "python": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        }
-      }
-    },
-    {
-      "category": "Data Manipulation",
-      "sub_category": "Excel Cleanup",
+      "category": "Data Processing",
+      "sub_category": "Excel Manipulation",
       "topic": "delete blank rows and columns in excel",
       "key": "delete blank rows and columns in excel",
       "baseline_record_id": "blog::cells/2024-11-01-delete-blank-rows-and-columns-in-excel-using-csharp/index.md",
@@ -8755,236 +7130,41 @@
           "url": null
         },
         "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "nodejs": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
           "matched": true,
           "score": 1.0,
           "record_id": "blog::cells/2024-01-15-delete-blank-rows-and-columns-in-excel-using-python/index.md",
           "title": "Delete Blank Rows and Columns in Excel using Python",
           "topic": "Delete blank rows and columns in excel",
           "url": "https://blog.aspose.com/cells/delete-blank-rows-and-columns-in-excel-using-python/"
-        },
-        "java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "nodejs": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "python": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
         }
       }
     },
     {
-      "category": "Data Processing",
-      "sub_category": "Excel Reader Configuration",
-      "topic": "digital synergy solutions is using aspose cells to create configurable excel reader",
-      "key": "digital synergy solutions is using aspose cells to create configurable excel reader",
-      "baseline_record_id": "blog::cells/2011-02-03-create-a-configurable-excel-reader-using-spreadsheet-api/index.md",
-      "coverage": {
-        "net": {
-          "matched": true,
-          "score": 1.0,
-          "record_id": "blog::cells/2011-02-03-create-a-configurable-excel-reader-using-spreadsheet-api/index.md",
-          "title": "Digital Synergy Solutions is using Aspose.Cells to create a configurable Excel Reader",
-          "topic": "Digital synergy solutions is using aspose cells to create configurable excel reader",
-          "url": "https://blog.aspose.com/cells/create-a-configurable-excel-reader-using-spreadsheet-api/"
-        },
-        "android_via_java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "cpp": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "general": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "nodejs": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "python": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        }
-      }
-    },
-    {
-      "category": "Document Processing",
-      "sub_category": "Excel to PDF Conversion",
-      "topic": "directly converting excel to pdf with aspose cells",
-      "key": "directly converting excel to pdf with aspose cells",
-      "baseline_record_id": "blog::cells/2009-02-27-directly-converting-excel-files-to-pdf-with-aspose-cells/index.md",
-      "coverage": {
-        "net": {
-          "matched": true,
-          "score": 1.0,
-          "record_id": "blog::cells/2009-02-27-directly-converting-excel-files-to-pdf-with-aspose-cells/index.md",
-          "title": "Directly Converting Excel Files to Pdf with Aspose.Cells",
-          "topic": "Directly converting excel to PDF with aspose cells",
-          "url": "https://blog.aspose.com/cells/directly-converting-excel-files-to-pdf-with-aspose-cells/"
-        },
-        "android_via_java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "cpp": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "general": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "nodejs": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "python": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        }
-      }
-    },
-    {
-      "category": "Data Export",
-      "sub_category": "Spreadsheet Formats",
-      "topic": "dnn export data to excel text csv and opendocument spreadsheet using aspose cells",
-      "key": "dnn export data to excel text csv and opendocument spreadsheet using aspose cells",
-      "baseline_record_id": "blog::cells/2015-11-08-dnn-export-data-to-excel-text-csv-and-opendocument-spreadsheet-using-aspose-cells/index.md",
-      "coverage": {
-        "net": {
-          "matched": true,
-          "score": 1.0,
-          "record_id": "blog::cells/2015-11-08-dnn-export-data-to-excel-text-csv-and-opendocument-spreadsheet-using-aspose-cells/index.md",
-          "title": "DNN Export Data to Excel Text CSV and OpenDocument Spreadsheet using Aspose.Cells",
-          "topic": "DNN export data to excel text CSV and opendocument spreadsheet using aspose cells",
-          "url": "https://blog.aspose.com/cells/dnn-export-data-to-excel-text-csv-and-opendocument-spreadsheet-using-aspose-cells/"
-        },
-        "android_via_java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "cpp": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "general": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "nodejs": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "python": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        }
-      }
-    },
-    {
-      "category": "Data Security",
+      "category": "Spreadsheet",
       "sub_category": "Encryption",
       "topic": "encrypt and decrypt excel",
       "key": "encrypt and decrypt excel",
@@ -9049,7 +7229,7 @@
       }
     },
     {
-      "category": "Development",
+      "category": "Data Processing",
       "sub_category": "Excel Automation",
       "topic": "excel automation in the aspose cells lowcode advantage",
       "key": "excel automation in the aspose cells lowcode advantage",
@@ -9114,72 +7294,7 @@
       }
     },
     {
-      "category": "Data Export",
-      "sub_category": "Excel to DataTable",
-      "topic": "excel cells to datatable or",
-      "key": "excel cells to datatable or",
-      "baseline_record_id": "blog::cells/2018-09-04-export-excel-cells-to-datatable-using-csharp-or-vb.net/index.md",
-      "coverage": {
-        "net": {
-          "matched": true,
-          "score": 1.0,
-          "record_id": "blog::cells/2018-09-04-export-excel-cells-to-datatable-using-csharp-or-vb.net/index.md",
-          "title": "Export Excel Cells to DataTable using C# or VB.NET",
-          "topic": "Excel cells to datatable or",
-          "url": "https://blog.aspose.com/cells/export-excel-cells-to-datatable-using-csharp-or-vb.net/"
-        },
-        "android_via_java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "cpp": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "general": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "nodejs": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "python": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        }
-      }
-    },
-    {
-      "category": "Data Integration",
+      "category": "Data Management",
       "sub_category": "Excel to DataTable",
       "topic": "excel data to datatables",
       "key": "excel data to datatables",
@@ -9244,8 +7359,8 @@
       }
     },
     {
-      "category": "Data Conversion",
-      "sub_category": "Excel to Google Sheets",
+      "category": "Conversion",
+      "sub_category": "Spreadsheet",
       "topic": "excel to google sheets",
       "key": "excel to google sheets",
       "baseline_record_id": "blog::cells/2022-03-10-convert-excel-to-google-sheets-in-csharp/index.md",
@@ -9309,8 +7424,8 @@
       }
     },
     {
-      "category": "File Conversion",
-      "sub_category": "Spreadsheet to PDF",
+      "category": "Document Conversion",
+      "sub_category": "Excel To PDF",
       "topic": "excel to pdf on linux",
       "key": "excel to pdf on linux",
       "baseline_record_id": "blog::cells/2021-10-12-convert-excel-files-to-pdf-on-linux/index.md",
@@ -9374,8 +7489,8 @@
       }
     },
     {
-      "category": "Spreadsheet",
-      "sub_category": "Export to Stream",
+      "category": "Spreadsheets",
+      "sub_category": "Export to stream",
       "topic": "excel to stream",
       "key": "excel to stream",
       "baseline_record_id": "blog::cells/2021-10-18-export-excel-to-stream-csharp/index.md",
@@ -9440,7 +7555,7 @@
     },
     {
       "category": "File Conversion",
-      "sub_category": "Spreadsheet to SVG",
+      "sub_category": "Spreadsheet to Image",
       "topic": "excel to svg",
       "key": "excel to svg",
       "baseline_record_id": "blog::cells/2021-10-15-convert-excel-to-svg-using-csharp/index.md",
@@ -9505,7 +7620,7 @@
     },
     {
       "category": "Web Development",
-      "sub_category": "Document Viewer",
+      "sub_category": "ASP.NET MVC",
       "topic": "excel viewer view excel in mvc",
       "key": "excel viewer view excel in mvc",
       "baseline_record_id": "blog::cells/2020-01-31-view-excel-files-in-asp-net-mvc-csharp-excel-viewer/index.md",
@@ -9569,73 +7684,8 @@
       }
     },
     {
-      "category": "Data Conversion",
-      "sub_category": "Spreadsheet to Markup",
-      "topic": "excel workbook to markdown",
-      "key": "excel workbook to markdown",
-      "baseline_record_id": "blog::cells/2019-05-27-convert-excel-to-markdown-xls-xlsx-to-md-in-csharp-asp.net/index.md",
-      "coverage": {
-        "net": {
-          "matched": true,
-          "score": 1.0,
-          "record_id": "blog::cells/2019-05-27-convert-excel-to-markdown-xls-xlsx-to-md-in-csharp-asp.net/index.md",
-          "title": "Convert Excel Workbook to Markdown in C#",
-          "topic": "Excel workbook to markdown",
-          "url": "https://blog.aspose.com/cells/convert-excel-to-markdown-xls-xlsx-to-md-in-csharp-asp.net/"
-        },
-        "android_via_java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "cpp": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "general": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "nodejs": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "python": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        }
-      }
-    },
-    {
-      "category": "Office",
-      "sub_category": "Excel to PowerPoint",
+      "category": "Conversion",
+      "sub_category": "Spreadsheet to Presentation",
       "topic": "excel xls to powerpoint ppt",
       "key": "excel xls to powerpoint ppt",
       "baseline_record_id": "blog::cells/2023-10-12-excel-to-ppt-csharp/index.md",
@@ -9699,137 +7749,7 @@
       }
     },
     {
-      "category": "Development Tools",
-      "sub_category": "IDE Extensions",
-      "topic": "explore aspose cells api examples using visual studio plugin",
-      "key": "explore aspose cells api examples using visual studio plugin",
-      "baseline_record_id": "blog::cells/2016-02-23-explore-aspose.cells-for-.net-api-examples-using-visual-studio-plugin/index.md",
-      "coverage": {
-        "net": {
-          "matched": true,
-          "score": 1.0,
-          "record_id": "blog::cells/2016-02-23-explore-aspose.cells-for-.net-api-examples-using-visual-studio-plugin/index.md",
-          "title": "Explore Aspose.Cells for .NET API Examples using Visual Studio Plugin",
-          "topic": "Explore aspose cells API examples using visual studio plugin",
-          "url": "https://blog.aspose.com/cells/explore-aspose.cells-for-.net-api-examples-using-visual-studio-plugin/"
-        },
-        "android_via_java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "cpp": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "general": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "nodejs": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "python": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        }
-      }
-    },
-    {
-      "category": "Data Export",
-      "sub_category": "Excel Export",
-      "topic": "export excel data excluding hidden rows using aspose cells",
-      "key": "export excel data excluding hidden rows using aspose cells",
-      "baseline_record_id": "blog::cells/2014-03-31-export-excel-data-excluding-hidden-rows-in-c-asp.net/index.md",
-      "coverage": {
-        "net": {
-          "matched": true,
-          "score": 1.0,
-          "record_id": "blog::cells/2014-03-31-export-excel-data-excluding-hidden-rows-in-c-asp.net/index.md",
-          "title": "Export Excel Data Excluding Hidden Rows in C# using Aspose.Cells for .NET",
-          "topic": "Export excel data excluding hidden rows using aspose cells",
-          "url": "https://blog.aspose.com/cells/export-excel-data-excluding-hidden-rows-in-c-asp.net/"
-        },
-        "android_via_java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "cpp": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "general": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "nodejs": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "python": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        }
-      }
-    },
-    {
-      "category": "Spreadsheet",
+      "category": "Data Processing",
       "sub_category": "Filtering",
       "topic": "filter blank and non blank cells in excel",
       "key": "filter blank and non blank cells in excel",
@@ -9960,7 +7880,7 @@
     },
     {
       "category": "Spreadsheet",
-      "sub_category": "Image Formatting",
+      "sub_category": "Image Manipulation",
       "topic": "fit to cell width and height",
       "key": "fit to cell width and height",
       "baseline_record_id": "blog::cells/2025-10-24-fit-image-to-cell-width-and-height-in-excel-dotnet/index.md",
@@ -10024,73 +7944,8 @@
       }
     },
     {
-      "category": "Product",
-      "sub_category": "Excel Export",
-      "topic": "gain theory implemented excel export capabilities including charts and tables using aspose cells",
-      "key": "gain theory implemented excel export capabilities including charts and tables using aspose cells",
-      "baseline_record_id": "blog::cells/2008-03-17-complete-excel-export-capabilities-using-apis/index.md",
-      "coverage": {
-        "net": {
-          "matched": true,
-          "score": 1.0,
-          "record_id": "blog::cells/2008-03-17-complete-excel-export-capabilities-using-apis/index.md",
-          "title": "Gain Theory implemented Excel export capabilities including charts and tables using Aspose.Cells for .NET",
-          "topic": "Gain theory implemented excel export capabilities including charts and tables using aspose cells",
-          "url": "https://blog.aspose.com/cells/complete-excel-export-capabilities-using-apis/"
-        },
-        "android_via_java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "cpp": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "general": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "nodejs": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "python": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        }
-      }
-    },
-    {
-      "category": "Office",
-      "sub_category": "Excel",
+      "category": "Spreadsheet",
+      "sub_category": "Barcode Generation",
       "topic": "generate barcode in excel",
       "key": "generate barcode in excel",
       "baseline_record_id": "blog::cells/2022-05-26-generate-barcode-in-excel-using-csharp/index.md",
@@ -10154,268 +8009,8 @@
       }
     },
     {
-      "category": "Documentation",
-      "sub_category": "Forms and Export",
-      "topic": "generate dynamic questionnaire and surveys and export results into excel text csv and opendocument using aspose cells forms for dnn",
-      "key": "generate dynamic questionnaire and surveys and export results into excel text csv and opendocument using aspose cells forms for dnn",
-      "baseline_record_id": "blog::cells/2016-02-15-generate-dynamic-questionnaire-and-surveys-save-user-input-into-excel-spreahsheet-and-export-the-results-into-excel-text-csv-and-opendocument-spreadsheet/index.md",
-      "coverage": {
-        "net": {
-          "matched": true,
-          "score": 1.0,
-          "record_id": "blog::cells/2016-02-15-generate-dynamic-questionnaire-and-surveys-save-user-input-into-excel-spreahsheet-and-export-the-results-into-excel-text-csv-and-opendocument-spreadsheet/index.md",
-          "title": "Generate Dynamic Questionnaire and Surveys and Export Results into Excel, Text, CSV and OpenDocument using Aspose.Cells Forms for DNN",
-          "topic": "Generate dynamic questionnaire and surveys and export results into excel text CSV and opendocument using aspose cells forms for DNN",
-          "url": "https://blog.aspose.com/cells/generate-dynamic-questionnaire-and-surveys-save-user-input-into-excel-spreahsheet-and-export-the-results-into-excel-text-csv-and-opendocument-spreadsheet/"
-        },
-        "android_via_java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "cpp": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "general": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "nodejs": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "python": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        }
-      }
-    },
-    {
-      "category": "Spreadsheet",
-      "sub_category": "Data Validation",
-      "topic": "get data validation rules applied to cells in excel",
-      "key": "get data validation rules applied to cells in excel",
-      "baseline_record_id": "blog::cells/2014-09-23-get-cell-data-validation-rules-in-excel-verify-cell-validation-rules-csharp-asp.net/index.md",
-      "coverage": {
-        "net": {
-          "matched": true,
-          "score": 1.0,
-          "record_id": "blog::cells/2014-09-23-get-cell-data-validation-rules-in-excel-verify-cell-validation-rules-csharp-asp.net/index.md",
-          "title": "Get Data Validation Rules Applied to Cells in Excel using C#",
-          "topic": "Get data validation rules applied to cells in excel",
-          "url": "https://blog.aspose.com/cells/get-cell-data-validation-rules-in-excel-verify-cell-validation-rules-csharp-asp.net/"
-        },
-        "android_via_java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "cpp": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "general": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "nodejs": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "python": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        }
-      }
-    },
-    {
-      "category": "Data Processing",
-      "sub_category": "SAS to Excel",
-      "topic": "gjensidige supported highly advanced data export from sas to excel using aspose cells",
-      "key": "gjensidige supported highly advanced data export from sas to excel using aspose cells",
-      "baseline_record_id": "blog::cells/2012-08-24-using-spreadsheet-api-to-write-data-from-sas-to-excel/index.md",
-      "coverage": {
-        "net": {
-          "matched": true,
-          "score": 1.0,
-          "record_id": "blog::cells/2012-08-24-using-spreadsheet-api-to-write-data-from-sas-to-excel/index.md",
-          "title": "Gjensidige supported highly advanced Data Export from SAS to Excel using Aspose.Cells for .NET",
-          "topic": "Gjensidige supported highly advanced data export from SAS to excel using aspose cells",
-          "url": "https://blog.aspose.com/cells/using-spreadsheet-api-to-write-data-from-sas-to-excel/"
-        },
-        "android_via_java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "cpp": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "general": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "nodejs": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "python": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        }
-      }
-    },
-    {
-      "category": "Data Export",
-      "sub_category": "Excel Export",
-      "topic": "gridview to excel worksheet visual studio control",
-      "key": "gridview to excel worksheet visual studio control",
-      "baseline_record_id": "blog::cells/2015-09-18-export-gridview-data-to-excel-using-asp.net-csharp/index.md",
-      "coverage": {
-        "net": {
-          "matched": true,
-          "score": 1.0,
-          "record_id": "blog::cells/2015-09-18-export-gridview-data-to-excel-using-asp.net-csharp/index.md",
-          "title": "Export GridView To Excel Worksheet in .NET - Visual Studio Control",
-          "topic": "Gridview to excel worksheet visual studio control",
-          "url": "https://blog.aspose.com/cells/export-gridview-data-to-excel-using-asp.net-csharp/"
-        },
-        "android_via_java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "cpp": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "general": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "nodejs": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "python": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        }
-      }
-    },
-    {
       "category": "Data Conversion",
-      "sub_category": "Html To Json",
+      "sub_category": "HTML to JSON",
       "topic": "html to json",
       "key": "html to json",
       "baseline_record_id": "blog::cells/2022-06-16-convert-html-to-json-using-csharp/index.md",
@@ -10479,73 +8074,8 @@
       }
     },
     {
-      "category": "Data Processing",
-      "sub_category": "Excel Generation",
-      "topic": "ignite technologies used aspose cells within right90 for intuitive sales forecasting",
-      "key": "ignite technologies used aspose cells within right90 for intuitive sales forecasting",
-      "baseline_record_id": "blog::cells/2013-12-22-generating-excel-files-within-right90-sales-forecasting-using-apis/index.md",
-      "coverage": {
-        "net": {
-          "matched": true,
-          "score": 1.0,
-          "record_id": "blog::cells/2013-12-22-generating-excel-files-within-right90-sales-forecasting-using-apis/index.md",
-          "title": "Ignite Technologies used Aspose.Cells for .NET within Right90 for intuitive Sales Forecasting",
-          "topic": "Ignite technologies used aspose cells within right90 for intuitive sales forecasting",
-          "url": "https://blog.aspose.com/cells/generating-excel-files-within-Right90-sales-forecasting-using-apis/"
-        },
-        "android_via_java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "cpp": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "general": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "nodejs": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "python": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        }
-      }
-    },
-    {
       "category": "Data Conversion",
-      "sub_category": "JSON to Excel",
+      "sub_category": "JSON To Excel",
       "topic": "import data from json to excel on linux",
       "key": "import data from json to excel on linux",
       "baseline_record_id": "blog::cells/2021-09-16-import-data-from-json-to-excel-on-linux/index.md",
@@ -10674,138 +8204,8 @@
       }
     },
     {
-      "category": "Spreadsheet",
-      "sub_category": "Image Insertion",
-      "topic": "insert picture based on cell reference in excel",
-      "key": "insert picture based on cell reference in excel",
-      "baseline_record_id": "blog::cells/2013-06-07-insert-a-picture-based-on-cell-reference-in-excel-xlsx/index.md",
-      "coverage": {
-        "net": {
-          "matched": true,
-          "score": 1.0,
-          "record_id": "blog::cells/2013-06-07-insert-a-picture-based-on-cell-reference-in-excel-xlsx/index.md",
-          "title": "Insert a Picture Based on Cell Reference in Excel using C#",
-          "topic": "Insert picture based on cell reference in excel",
-          "url": "https://blog.aspose.com/cells/insert-a-picture-based-on-cell-reference-in-excel-xlsx/"
-        },
-        "android_via_java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "cpp": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "general": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "nodejs": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "python": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        }
-      }
-    },
-    {
-      "category": "Data Export",
-      "sub_category": "Excel Generation",
-      "topic": "insightsoftware exports data to microsoft excel using aspose cells",
-      "key": "insightsoftware exports data to microsoft excel using aspose cells",
-      "baseline_record_id": "blog::cells/2009-07-28-export-of-data-to-microsoft-excel-through-apis/index.md",
-      "coverage": {
-        "net": {
-          "matched": true,
-          "score": 1.0,
-          "record_id": "blog::cells/2009-07-28-export-of-data-to-microsoft-excel-through-apis/index.md",
-          "title": "InsightSoftware exports data to Microsoft Excel using Aspose.Cells for .NET",
-          "topic": "Insightsoftware exports data to microsoft excel using aspose cells",
-          "url": "https://blog.aspose.com/cells/export-of-data-to-microsoft-excel-through-apis/"
-        },
-        "android_via_java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "cpp": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "general": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "nodejs": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "python": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        }
-      }
-    },
-    {
       "category": "Data Conversion",
-      "sub_category": "JSON and CSV",
+      "sub_category": "JSON and CSV Formats",
       "topic": "json to csv",
       "key": "json to csv",
       "baseline_record_id": "blog::cells/2020-11-24-convert-csv-json-charp-vb-net/index.md",
@@ -10869,7 +8269,7 @@
       }
     },
     {
-      "category": "Conversion",
+      "category": "File Format Conversion",
       "sub_category": "JSON to GIF",
       "topic": "json to gif",
       "key": "json to gif",
@@ -10935,7 +8335,7 @@
     },
     {
       "category": "Data Conversion",
-      "sub_category": "Json To Pdf",
+      "sub_category": "JSON to PDF",
       "topic": "json to pdf",
       "key": "json to pdf",
       "baseline_record_id": "blog::cells/2021-06-21-convert-json-to-pdf-using-csharp/index.md",
@@ -10965,6 +8365,14 @@
           "url": null
         },
         "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
           "matched": true,
           "score": 1.0,
           "record_id": "blog::cells/2021-05-22-convert-json-to-pdf-using-java/index.md",
@@ -10972,14 +8380,6 @@
           "topic": "JSON to PDF",
           "url": "https://blog.aspose.com/cells/convert-json-to-pdf-using-java/"
         },
-        "java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
         "nodejs": {
           "matched": false,
           "score": 0.0,
@@ -10989,142 +8389,12 @@
           "url": null
         },
         "python": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        }
-      }
-    },
-    {
-      "category": "Product",
-      "sub_category": "Case Study",
-      "topic": "lambodar inc resolved import data truncation issue with aspose cells",
-      "key": "lambodar inc resolved import data truncation issue with aspose cells",
-      "baseline_record_id": "blog::cells/2009-07-30-solution-for-net-import-data-truncation-issue-using-excel-apis/index.md",
-      "coverage": {
-        "net": {
           "matched": true,
           "score": 1.0,
-          "record_id": "blog::cells/2009-07-30-solution-for-net-import-data-truncation-issue-using-excel-apis/index.md",
-          "title": "Lambodar Inc. resolved Import Data Truncation Issue with Aspose.Cells",
-          "topic": "Lambodar inc resolved import data truncation issue with aspose cells",
-          "url": "https://blog.aspose.com/cells/solution-for-net-import-data-truncation-issue-using-excel-apis/"
-        },
-        "android_via_java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "cpp": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "general": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "nodejs": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "python": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        }
-      }
-    },
-    {
-      "category": "Spreadsheet",
-      "sub_category": "Data Formatting",
-      "topic": "large numeric values to exponential notation in excel",
-      "key": "large numeric values to exponential notation in excel",
-      "baseline_record_id": "blog::cells/2016-04-29-c-convert-large-numeric-values-to-exponential-notation-in-excel/index.md",
-      "coverage": {
-        "net": {
-          "matched": true,
-          "score": 1.0,
-          "record_id": "blog::cells/2016-04-29-c-convert-large-numeric-values-to-exponential-notation-in-excel/index.md",
-          "title": "Convert Large Numeric Values to Exponential Notation in Excel using C#",
-          "topic": "Large numeric values to exponential notation in excel",
-          "url": "https://blog.aspose.com/cells/c-convert-large-numeric-values-to-exponential-notation-in-excel/"
-        },
-        "android_via_java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "cpp": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "general": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "nodejs": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "python": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
+          "record_id": "blog::cells/2022-06-20-convert-json-to-pdf-in-python/index.md",
+          "title": "Convert JSON Files to PDF in Python",
+          "topic": "JSON to PDF",
+          "url": "https://blog.aspose.com/cells/convert-json-to-pdf-in-python/"
         }
       }
     },
@@ -11195,7 +8465,7 @@
     },
     {
       "category": "Office",
-      "sub_category": "Excel",
+      "sub_category": "Mail Merge",
       "topic": "mail merge from excel",
       "key": "mail merge from excel",
       "baseline_record_id": "blog::cells/2025-06-03-mail-merge-from-excel-in-csharp/index.md",
@@ -11259,7 +8529,7 @@
       }
     },
     {
-      "category": "Data Management",
+      "category": "Office",
       "sub_category": "Excel",
       "topic": "merge multiple excel",
       "key": "merge multiple excel",
@@ -11324,8 +8594,8 @@
       }
     },
     {
-      "category": "Spreadsheet",
-      "sub_category": "Cell Merging",
+      "category": "Office",
+      "sub_category": "Excel",
       "topic": "merge or unmerge cells in excel worksheet",
       "key": "merge or unmerge cells in excel worksheet",
       "baseline_record_id": "blog::cells/2020-06-24-merge-unmerge-cells-excel-csharp/index.md",
@@ -11390,7 +8660,7 @@
     },
     {
       "category": "Conversion",
-      "sub_category": "Units",
+      "sub_category": "Unit Conversion",
       "topic": "ml to oz free unit",
       "key": "ml to oz free unit",
       "baseline_record_id": "blog::cells/2025-01-09-convert-ml-to-oz-online/index.md",
@@ -11454,398 +8724,8 @@
       }
     },
     {
-      "category": "Data Management",
-      "sub_category": "Spreadsheet Modeling",
-      "topic": "modelsheet authoring and customizable templates using aspose cells to build and maintain complex spreadsheet models",
-      "key": "modelsheet authoring and customizable templates using aspose cells to build and maintain complex spreadsheet models",
-      "baseline_record_id": "blog::cells/2009-08-06-build-and-maintain-model-based-spreadsheets-and-customizable-templates-using-apis/index.md",
-      "coverage": {
-        "net": {
-          "matched": true,
-          "score": 1.0,
-          "record_id": "blog::cells/2009-08-06-build-and-maintain-model-based-spreadsheets-and-customizable-templates-using-apis/index.md",
-          "title": "ModelSheet Authoring and Customizable Templates using Aspose.Cells to build and maintain complex Spreadsheet Models",
-          "topic": "Modelsheet authoring and customizable templates using aspose cells to build and maintain complex spreadsheet models",
-          "url": "https://blog.aspose.com/cells/build-and-maintain-model-based-spreadsheets-and-customizable-templates-using-apis/"
-        },
-        "android_via_java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "cpp": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "general": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "nodejs": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "python": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        }
-      }
-    },
-    {
-      "category": "Development",
-      "sub_category": "Code Samples",
-      "topic": "more code examples of aspose cells in comparison with npoi hwpf and xwpf",
-      "key": "more code examples of aspose cells in comparison with npoi hwpf and xwpf",
-      "baseline_record_id": "blog::cells/2015-11-06-more-code-examples-of-aspose.cells-for-.net-in-comparison-with-npoi-hwpf-and-xwpf/index.md",
-      "coverage": {
-        "net": {
-          "matched": true,
-          "score": 1.0,
-          "record_id": "blog::cells/2015-11-06-more-code-examples-of-aspose.cells-for-.net-in-comparison-with-npoi-hwpf-and-xwpf/index.md",
-          "title": "More Code Examples of Aspose.Cells for .NET in Comparison with NPOI HWPF and XWPF",
-          "topic": "More code examples of aspose cells in comparison with NPOI HWPF and XWPF",
-          "url": "https://blog.aspose.com/cells/more-code-examples-of-aspose.cells-for-.net-in-comparison-with-npoi-hwpf-and-xwpf/"
-        },
-        "android_via_java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "cpp": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "general": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "nodejs": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "python": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        }
-      }
-    },
-    {
-      "category": "Document Processing",
-      "sub_category": "Spreadsheet",
-      "topic": "more examples of aspose cells features missing in vsto to deal with microsoft excel documents",
-      "key": "more examples of aspose cells features missing in vsto to deal with microsoft excel documents",
-      "baseline_record_id": "blog::cells/2015-11-20-more-examples-of-aspose.cells-for-.net-features-missing-in-vsto-to-deal-with-microsoft-excel-documents/index.md",
-      "coverage": {
-        "net": {
-          "matched": true,
-          "score": 1.0,
-          "record_id": "blog::cells/2015-11-20-more-examples-of-aspose.cells-for-.net-features-missing-in-vsto-to-deal-with-microsoft-excel-documents/index.md",
-          "title": "More examples of Aspose.Cells for .NET features missing in VSTO to deal with Microsoft Excel Documents",
-          "topic": "More examples of aspose cells features missing in VSTO to deal with microsoft excel documents",
-          "url": "https://blog.aspose.com/cells/more-examples-of-aspose.cells-for-.net-features-missing-in-vsto-to-deal-with-microsoft-excel-documents/"
-        },
-        "android_via_java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "cpp": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "general": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "nodejs": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "python": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        }
-      }
-    },
-    {
-      "category": "Spreadsheets",
-      "sub_category": "Pdf Export",
-      "topic": "optimize excel to pdf size and add digital signatures for vba projects",
-      "key": "optimize excel to pdf size and add digital signatures for vba projects",
-      "baseline_record_id": "blog::cells/2016-02-02-optimize-excel-to-pdf-file-size-and-add-digital-signatures-to-excel-vba-project-in-csharp/index.md",
-      "coverage": {
-        "net": {
-          "matched": true,
-          "score": 1.0,
-          "record_id": "blog::cells/2016-02-02-optimize-excel-to-pdf-file-size-and-add-digital-signatures-to-excel-vba-project-in-csharp/index.md",
-          "title": "Optimize Excel to PDF File Size and Add Digital Signatures for VBA Projects using C#",
-          "topic": "Optimize excel to PDF size and add digital signatures for VBA projects",
-          "url": "https://blog.aspose.com/cells/optimize-excel-to-pdf-file-size-and-add-digital-signatures-to-excel-vba-project-in-csharp/"
-        },
-        "android_via_java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "cpp": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "general": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "nodejs": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "python": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        }
-      }
-    },
-    {
       "category": "Spreadsheet",
-      "sub_category": "Data Import",
-      "topic": "parse html tags while importing data to excel",
-      "key": "parse html tags while importing data to excel",
-      "baseline_record_id": "blog::cells/2016-01-04-parse-html-tags-while-importing-data-to-excel-using-csharp/index.md",
-      "coverage": {
-        "net": {
-          "matched": true,
-          "score": 1.0,
-          "record_id": "blog::cells/2016-01-04-parse-html-tags-while-importing-data-to-excel-using-csharp/index.md",
-          "title": "Parse HTML Tags while Importing Data to Excel using C#",
-          "topic": "Parse HTML tags while importing data to excel",
-          "url": "https://blog.aspose.com/cells/parse-html-tags-while-importing-data-to-excel-using-csharp/"
-        },
-        "android_via_java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "cpp": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "general": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "nodejs": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "python": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        }
-      }
-    },
-    {
-      "category": "Business Intelligence",
-      "sub_category": "Financial Modeling",
-      "topic": "previso added economic modelling capability to its gas forecasting application with aspose cells",
-      "key": "previso added economic modelling capability to its gas forecasting application with aspose cells",
-      "baseline_record_id": "blog::cells/2019-06-06-economic-modeling-capability-within-forecasting-application/index.md",
-      "coverage": {
-        "net": {
-          "matched": true,
-          "score": 1.0,
-          "record_id": "blog::cells/2019-06-06-economic-modeling-capability-within-forecasting-application/index.md",
-          "title": "Previso Added Economic Modelling Capability to its Gas Forecasting Application with Aspose.Cells",
-          "topic": "Previso added economic modelling capability to its gas forecasting application with aspose cells",
-          "url": "https://blog.aspose.com/cells/economic-modeling-capability-within-forecasting-application/"
-        },
-        "android_via_java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "cpp": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "general": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "nodejs": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "python": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        }
-      }
-    },
-    {
-      "category": "Spreadsheet",
-      "sub_category": "File Protection",
+      "sub_category": "Protection",
       "topic": "protect and unprotect excel",
       "key": "protect and unprotect excel",
       "baseline_record_id": "blog::cells/2020-12-14-protect-or-unprotect-excel-files-using-csharp/index.md",
@@ -11909,8 +8789,8 @@
       }
     },
     {
-      "category": "Office",
-      "sub_category": "Excel VBA",
+      "category": "Spreadsheet",
+      "sub_category": "VBA Security",
       "topic": "protect vba macros in excel",
       "key": "protect vba macros in excel",
       "baseline_record_id": "blog::cells/2021-04-06-protect-vba-macros-in-excel-using-csharp/index.md",
@@ -11974,72 +8854,7 @@
       }
     },
     {
-      "category": "Spreadsheets",
-      "sub_category": "VBA Project Protection",
-      "topic": "protect vba project in excel workbook and lock it for viewing",
-      "key": "protect vba project in excel workbook and lock it for viewing",
-      "baseline_record_id": "blog::cells/2017-05-01-protect-vba-project-in-excel-workbook-lock-vba-macro-using-csharp-asp.net/index.md",
-      "coverage": {
-        "net": {
-          "matched": true,
-          "score": 1.0,
-          "record_id": "blog::cells/2017-05-01-protect-vba-project-in-excel-workbook-lock-vba-macro-using-csharp-asp.net/index.md",
-          "title": "Protect VBA Project in Excel Workbook and Lock it for Viewing using C# .NET",
-          "topic": "Protect VBA project in excel workbook and lock it for viewing",
-          "url": "https://blog.aspose.com/cells/protect-vba-project-in-excel-workbook-lock-vba-macro-using-csharp-asp.net/"
-        },
-        "android_via_java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "cpp": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "general": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "nodejs": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "python": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        }
-      }
-    },
-    {
-      "category": "Spreadsheet",
+      "category": "Office",
       "sub_category": "Threaded Comments",
       "topic": "read add and edit threaded comments in excel",
       "key": "read add and edit threaded comments in excel",
@@ -12070,12 +8885,12 @@
           "url": null
         },
         "general": {
-          "matched": true,
-          "score": 1.0,
-          "record_id": "blog::cells/2024-02-01-threaded-comments-in-excel-using-python/index.md",
-          "title": "Read, Add, and Edit Threaded Comments in Excel using Python",
-          "topic": "Read add and edit threaded comments in excel",
-          "url": "https://blog.aspose.com/cells/threaded-comments-in-excel-using-python/"
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
         },
         "java": {
           "matched": false,
@@ -12094,18 +8909,18 @@
           "url": null
         },
         "python": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::cells/2024-02-01-threaded-comments-in-excel-using-python/index.md",
+          "title": "Read, Add, and Edit Threaded Comments in Excel using Python",
+          "topic": "Read add and edit threaded comments in excel",
+          "url": "https://blog.aspose.com/cells/threaded-comments-in-excel-using-python/"
         }
       }
     },
     {
       "category": "Data Processing",
-      "sub_category": "Spreadsheet Import",
+      "sub_category": "Excel",
       "topic": "read excel",
       "key": "read excel",
       "baseline_record_id": "blog::cells/2021-10-10-how-to-read-excel-files-in-csharp/index.md",
@@ -12169,203 +8984,8 @@
       }
     },
     {
-      "category": "Product",
-      "sub_category": "Aspose Cells",
-      "topic": "render ms excel worksheet to graphics context",
-      "key": "render ms excel worksheet to graphics context",
-      "baseline_record_id": "blog::cells/2015-08-24-render-ms-excel-worksheet-to-graphics-context-using-c/index.md",
-      "coverage": {
-        "net": {
-          "matched": true,
-          "score": 1.0,
-          "record_id": "blog::cells/2015-08-24-render-ms-excel-worksheet-to-graphics-context-using-c/index.md",
-          "title": "Render MS Excel Worksheet to Graphics Context using C#",
-          "topic": "Render MS excel worksheet to graphics context",
-          "url": "https://blog.aspose.com/cells/render-ms-excel-worksheet-to-graphics-context-using-c/"
-        },
-        "android_via_java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "cpp": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "general": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "nodejs": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "python": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        }
-      }
-    },
-    {
-      "category": "Spreadsheet",
-      "sub_category": "Chart",
-      "topic": "retrieve excel worksheet instance from chart",
-      "key": "retrieve excel worksheet instance from chart",
-      "baseline_record_id": "blog::cells/2014-10-21-retrieve-excel-worksheet-instance-from-chart-using-csharp/index.md",
-      "coverage": {
-        "net": {
-          "matched": true,
-          "score": 1.0,
-          "record_id": "blog::cells/2014-10-21-retrieve-excel-worksheet-instance-from-chart-using-csharp/index.md",
-          "title": "Retrieve Excel Worksheet Instance from Chart using C#",
-          "topic": "Retrieve excel worksheet instance from chart",
-          "url": "https://blog.aspose.com/cells/retrieve-excel-worksheet-instance-from-chart-using-csharp/"
-        },
-        "android_via_java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "cpp": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "general": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "nodejs": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "python": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        }
-      }
-    },
-    {
-      "category": "Spreadsheet",
-      "sub_category": "Page Setup",
-      "topic": "retrieve paper size of worksheets in excel",
-      "key": "retrieve paper size of worksheets in excel",
-      "baseline_record_id": "blog::cells/2017-01-19-retrieve-paper-size-of-worksheets-in-excel-using-csharp/index.md",
-      "coverage": {
-        "net": {
-          "matched": true,
-          "score": 1.0,
-          "record_id": "blog::cells/2017-01-19-retrieve-paper-size-of-worksheets-in-excel-using-csharp/index.md",
-          "title": "Retrieve Paper Size of Worksheets in Excel using C#",
-          "topic": "Retrieve paper size of worksheets in excel",
-          "url": "https://blog.aspose.com/cells/retrieve-paper-size-of-worksheets-in-excel-using-csharp/"
-        },
-        "android_via_java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "cpp": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "general": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "nodejs": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "python": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        }
-      }
-    },
-    {
       "category": "Email",
-      "sub_category": "Embedding Excel Content",
+      "sub_category": "Embedding Content",
       "topic": "send excel data in email body",
       "key": "send excel data in email body",
       "baseline_record_id": "blog::cells/2022-05-11-send-excel-data-in-email-body-using-csharp-net/index.md",
@@ -12429,398 +9049,8 @@
       }
     },
     {
-      "category": "Spreadsheet Processing",
-      "sub_category": "Rendering Settings",
-      "topic": "set default font for rendering spreadsheets to and html",
-      "key": "set default font for rendering spreadsheets to and html",
-      "baseline_record_id": "blog::cells/2016-07-25-set-default-font-for-rendering-spreadsheets-to-image-and-html-using-csharp/index.md",
-      "coverage": {
-        "net": {
-          "matched": true,
-          "score": 1.0,
-          "record_id": "blog::cells/2016-07-25-set-default-font-for-rendering-spreadsheets-to-image-and-html-using-csharp/index.md",
-          "title": "Set Default Font for Rendering Spreadsheets to Image and HTML using C#",
-          "topic": "Set default font for rendering spreadsheets to and HTML",
-          "url": "https://blog.aspose.com/cells/set-default-font-for-rendering-spreadsheets-to-image-and-html-using-csharp/"
-        },
-        "android_via_java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "cpp": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "general": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "nodejs": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "python": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        }
-      }
-    },
-    {
-      "category": "Spreadsheet",
-      "sub_category": "Conversion",
-      "topic": "set default font in excel to pdf and read apple numbers spreadsheet",
-      "key": "set default font in excel to pdf and read apple numbers spreadsheet",
-      "baseline_record_id": "blog::cells/2017-07-31-set-default-font-in-excel-to-pdf-and-read-apple-numbers-spreadsheet-in-csharp-asp.net/index.md",
-      "coverage": {
-        "net": {
-          "matched": true,
-          "score": 1.0,
-          "record_id": "blog::cells/2017-07-31-set-default-font-in-excel-to-pdf-and-read-apple-numbers-spreadsheet-in-csharp-asp.net/index.md",
-          "title": "Set Default Font in Excel to PDF and Read Apple Numbers Spreadsheet in C# .NET",
-          "topic": "Set default font in excel to PDF and read apple numbers spreadsheet",
-          "url": "https://blog.aspose.com/cells/set-default-font-in-excel-to-pdf-and-read-apple-numbers-spreadsheet-in-csharp-asp.net/"
-        },
-        "android_via_java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "cpp": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "general": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "nodejs": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "python": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        }
-      }
-    },
-    {
-      "category": "Spreadsheet",
-      "sub_category": "Image Rendering",
-      "topic": "set pixel for worksheet to conversion",
-      "key": "set pixel for worksheet to conversion",
-      "baseline_record_id": "blog::cells/2014-04-23-set-pixel-format-for-worksheet-to-image-conversion-using-csharp/index.md",
-      "coverage": {
-        "net": {
-          "matched": true,
-          "score": 1.0,
-          "record_id": "blog::cells/2014-04-23-set-pixel-format-for-worksheet-to-image-conversion-using-csharp/index.md",
-          "title": "Set Pixel Format for Worksheet to Image Conversion using C#",
-          "topic": "Set pixel for worksheet to conversion",
-          "url": "https://blog.aspose.com/cells/set-pixel-format-for-worksheet-to-image-conversion-using-csharp/"
-        },
-        "android_via_java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "cpp": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "general": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "nodejs": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "python": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        }
-      }
-    },
-    {
-      "category": "Conversion",
-      "sub_category": "Excel to HTML",
-      "topic": "single sheet excel workbook to html",
-      "key": "single sheet excel workbook to html",
-      "baseline_record_id": "blog::cells/2019-01-08-export-single-sheet-excel-workbook-to-html-using-csharp/index.md",
-      "coverage": {
-        "net": {
-          "matched": true,
-          "score": 1.0,
-          "record_id": "blog::cells/2019-01-08-export-single-sheet-excel-workbook-to-html-using-csharp/index.md",
-          "title": "Export Single Sheet Excel Workbook to HTML using C#",
-          "topic": "Single sheet excel workbook to HTML",
-          "url": "https://blog.aspose.com/cells/export-single-sheet-excel-workbook-to-html-using-csharp/"
-        },
-        "android_via_java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "cpp": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "general": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "nodejs": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "python": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        }
-      }
-    },
-    {
-      "category": "Spreadsheet",
-      "sub_category": "Form Builder and Data Export",
-      "topic": "sitefinity dynamic forms builder with data export to excel csv text and opendocument spreadsheet using aspose cells",
-      "key": "sitefinity dynamic forms builder with data export to excel csv text and opendocument spreadsheet using aspose cells",
-      "baseline_record_id": "blog::cells/2016-03-11-generate-dynamic-questionnaire-and-surveys-save-user-input-into-excel-spreahsheet-and-export-the-results-into-excel-text-csv-and-opendocument-spreadsheet/index.md",
-      "coverage": {
-        "net": {
-          "matched": true,
-          "score": 1.0,
-          "record_id": "blog::cells/2016-03-11-generate-dynamic-questionnaire-and-surveys-save-user-input-into-excel-spreahsheet-and-export-the-results-into-excel-text-csv-and-opendocument-spreadsheet/index.md",
-          "title": "Sitefinity Dynamic Forms Builder with Data Export to Excel, CSV, Text and OpenDocument Spreadsheet using Aspose.Cells for .NET",
-          "topic": "Sitefinity dynamic forms builder with data export to excel CSV text and opendocument spreadsheet using aspose cells",
-          "url": "https://blog.aspose.com/cells/generate-dynamic-questionnaire-and-surveys-save-user-input-into-excel-spreahsheet-and-export-the-results-into-excel-text-csv-and-opendocument-spreadsheet/"
-        },
-        "android_via_java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "cpp": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "general": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "nodejs": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "python": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        }
-      }
-    },
-    {
-      "category": "Data Export",
-      "sub_category": "User Export",
-      "topic": "sitefinity module to export users to excel text csv and openoffice spreadsheet using aspose cells",
-      "key": "sitefinity module to export users to excel text csv and openoffice spreadsheet using aspose cells",
-      "baseline_record_id": "blog::cells/2015-11-21-sitefinity-export-users-to-excel-text-csv-and-openoffice-spreadsheet-using-aspose.cells/index.md",
-      "coverage": {
-        "net": {
-          "matched": true,
-          "score": 1.0,
-          "record_id": "blog::cells/2015-11-21-sitefinity-export-users-to-excel-text-csv-and-openoffice-spreadsheet-using-aspose.cells/index.md",
-          "title": "Sitefinity Module to Export Users to Excel, Text, CSV and OpenOffice Spreadsheet using Aspose.Cells",
-          "topic": "Sitefinity module to export users to excel text CSV and openoffice spreadsheet using aspose cells",
-          "url": "https://blog.aspose.com/cells/sitefinity-export-users-to-excel-text-csv-and-openoffice-spreadsheet-using-aspose.cells/"
-        },
-        "android_via_java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "cpp": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "general": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "nodejs": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "python": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        }
-      }
-    },
-    {
-      "category": "Spreadsheet",
-      "sub_category": "Text to Columns",
+      "category": "Spreadsheets",
+      "sub_category": "Data Transformation",
       "topic": "split text to columns in excel",
       "key": "split text to columns in excel",
       "baseline_record_id": "blog::cells/2021-04-24-split-text-to-columns-in-excel-using-csharp/index.md",
@@ -12850,20 +9080,20 @@
           "url": null
         },
         "general": {
-          "matched": true,
-          "score": 1.0,
-          "record_id": "blog::cells/2021-05-25-split-text-to-columns-in-excel-using-java/index.md",
-          "title": "Split Text to Columns in Excel using Java",
-          "topic": "Split text to columns in excel",
-          "url": "https://blog.aspose.com/cells/split-text-to-columns-in-excel-using-java/"
-        },
-        "java": {
           "matched": false,
           "score": 0.0,
           "record_id": null,
           "title": null,
           "topic": null,
           "url": null
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::cells/2021-05-25-split-text-to-columns-in-excel-using-java/index.md",
+          "title": "Split Text to Columns in Excel using Java",
+          "topic": "Split text to columns in excel",
+          "url": "https://blog.aspose.com/cells/split-text-to-columns-in-excel-using-java/"
         },
         "nodejs": {
           "matched": false,
@@ -12884,8 +9114,8 @@
       }
     },
     {
-      "category": "Data Processing",
-      "sub_category": "Excel Conversion",
+      "category": "Data Conversion",
+      "sub_category": "Text to Number in Excel",
       "topic": "text to number in excel",
       "key": "text to number in excel",
       "baseline_record_id": "blog::cells/2024-10-24-convert-text-to-number-in-excel-using-csharp/index.md",
@@ -12949,72 +9179,7 @@
       }
     },
     {
-      "category": "Automation",
-      "sub_category": "Spreadsheet Generation",
-      "topic": "the digital group automated the creation of complex financial reports in excel using aspose cells",
-      "key": "the digital group automated the creation of complex financial reports in excel using aspose cells",
-      "baseline_record_id": "blog::cells/2013-09-04-automate-the-creation-of-complex-financial-reports-in-excel-format/index.md",
-      "coverage": {
-        "net": {
-          "matched": true,
-          "score": 1.0,
-          "record_id": "blog::cells/2013-09-04-automate-the-creation-of-complex-financial-reports-in-excel-format/index.md",
-          "title": "The Digital Group Automated the creation of complex financial reports in Excel format using Aspose.Cells for .NET",
-          "topic": "The digital group automated the creation of complex financial reports in excel using aspose cells",
-          "url": "https://blog.aspose.com/cells/automate-the-creation-of-complex-financial-reports-in-excel-format/"
-        },
-        "android_via_java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "cpp": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "general": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "nodejs": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "python": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        }
-      }
-    },
-    {
-      "category": "Data Conversion",
+      "category": "File Conversion",
       "sub_category": "Text to JSON",
       "topic": "txt to json",
       "key": "txt to json",
@@ -13047,18 +9212,18 @@
         "general": {
           "matched": true,
           "score": 1.0,
+          "record_id": "blog::cells/2023-02-08-txt-to-json-online-free/index.md",
+          "title": "Convert TXT to JSON Online - Free Converter",
+          "topic": "TXT to JSON",
+          "url": "https://blog.aspose.com/cells/convert-txt-to-json-online/"
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
           "record_id": "blog::cells/2022-06-22-convert-txt-to-json-in-java/index.md",
           "title": "Convert TXT to JSON in Java",
           "topic": "TXT to JSON",
           "url": "https://blog.aspose.com/cells/convert-txt-to-json-in-java/"
-        },
-        "java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
         },
         "nodejs": {
           "matched": false,
@@ -13080,7 +9245,7 @@
     },
     {
       "category": "Data Conversion",
-      "sub_category": "Text to Database",
+      "sub_category": "Text To Sql",
       "topic": "txt to sql",
       "key": "txt to sql",
       "baseline_record_id": "blog::cells/2024-02-14-txt-to-sql-csharp/index.md",
@@ -13144,7 +9309,7 @@
       }
     },
     {
-      "category": "Data Conversion",
+      "category": "File Conversion",
       "sub_category": "Text to XML",
       "topic": "txt to xml",
       "key": "txt to xml",
@@ -13205,266 +9370,6 @@
           "title": "Convert TXT to XML in Python",
           "topic": "TXT to XML",
           "url": "https://blog.aspose.com/cells/convert-txt-to-xml-in-python/"
-        }
-      }
-    },
-    {
-      "category": "Content Management",
-      "sub_category": "Member Export",
-      "topic": "umbraco export members to excel text csv and opendocument spreadsheet",
-      "key": "umbraco export members to excel text csv and opendocument spreadsheet",
-      "baseline_record_id": "blog::cells/2015-07-16-umbraco-export-members-to-excel-text-csv-and-opendocument-spreadsheet-using-aspose.cells/index.md",
-      "coverage": {
-        "net": {
-          "matched": true,
-          "score": 1.0,
-          "record_id": "blog::cells/2015-07-16-umbraco-export-members-to-excel-text-csv-and-opendocument-spreadsheet-using-aspose.cells/index.md",
-          "title": "Umbraco Export Members to Excel, Text, CSV, and OpenDocument Spreadsheet",
-          "topic": "Umbraco export members to excel text CSV and opendocument spreadsheet",
-          "url": "https://blog.aspose.com/cells/umbraco-export-members-to-excel-text-csv-and-opendocument-spreadsheet-using-aspose.cells/"
-        },
-        "android_via_java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "cpp": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "general": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "nodejs": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "python": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        }
-      }
-    },
-    {
-      "category": "Development",
-      "sub_category": "File Export",
-      "topic": "verge consulting implemented performance optimistic excel export solution using aspose cells",
-      "key": "verge consulting implemented performance optimistic excel export solution using aspose cells",
-      "baseline_record_id": "blog::cells/2008-10-17-export-microsoft-excel-word-and-powerpoint-documents-using-apis/index.md",
-      "coverage": {
-        "net": {
-          "matched": true,
-          "score": 1.0,
-          "record_id": "blog::cells/2008-10-17-export-microsoft-excel-word-and-powerpoint-documents-using-apis/index.md",
-          "title": "Verge Consulting implemented a Performance Optimistic Excel Export solution using Aspose.Cells for .NET",
-          "topic": "Verge consulting implemented performance optimistic excel export solution using aspose cells",
-          "url": "https://blog.aspose.com/cells/export-microsoft-excel-word-and-powerpoint-documents-using-apis/"
-        },
-        "android_via_java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "cpp": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "general": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "nodejs": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "python": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        }
-      }
-    },
-    {
-      "category": "Data Management",
-      "sub_category": "Excel Export/Import",
-      "topic": "worldmap used aspose cells to collect global data at local level",
-      "key": "worldmap used aspose cells to collect global data at local level",
-      "baseline_record_id": "blog::cells/2008-04-09-export-and-import-data-in-excel-formats-within-partners-worldmap/index.md",
-      "coverage": {
-        "net": {
-          "matched": true,
-          "score": 1.0,
-          "record_id": "blog::cells/2008-04-09-export-and-import-data-in-excel-formats-within-partners-worldmap/index.md",
-          "title": "WorldMap used Aspose.Cells for .NET to collect Global data at a local level",
-          "topic": "Worldmap used aspose cells to collect global data at local level",
-          "url": "https://blog.aspose.com/cells/export-and-import-data-in-excel-formats-within-partners-worldmap/"
-        },
-        "android_via_java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "cpp": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "general": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "nodejs": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "python": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        }
-      }
-    },
-    {
-      "category": "Documents",
-      "sub_category": "Spreadsheet Generation",
-      "topic": "xceptor generated accurate output spreadsheets with embedded formulas using aspose cells",
-      "key": "xceptor generated accurate output spreadsheets with embedded formulas using aspose cells",
-      "baseline_record_id": "blog::cells/2014-09-09-generate-output-spreadsheets-with-embedded-formulas-using-apis/index.md",
-      "coverage": {
-        "net": {
-          "matched": true,
-          "score": 1.0,
-          "record_id": "blog::cells/2014-09-09-generate-output-spreadsheets-with-embedded-formulas-using-apis/index.md",
-          "title": "Xceptor generated accurate output spreadsheets with embedded formulas using Aspose.Cells for .NET",
-          "topic": "Xceptor generated accurate output spreadsheets with embedded formulas using aspose cells",
-          "url": "https://blog.aspose.com/cells/generate-output-spreadsheets-with-embedded-formulas-using-apis/"
-        },
-        "android_via_java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "cpp": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "general": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "nodejs": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "python": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
         }
       }
     },
@@ -13599,8 +9504,8 @@
       }
     },
     {
-      "category": "File Formats",
-      "sub_category": "Excel to Word",
+      "category": "Conversion",
+      "sub_category": "Spreadsheet to Document",
       "topic": "xlsx to docx",
       "key": "xlsx to docx",
       "baseline_record_id": "blog::cells/2020-10-15-convert-excel-xlsx-to-docx-using-csharp/index.md",
@@ -13664,8 +9569,8 @@
       }
     },
     {
-      "category": "File Conversion",
-      "sub_category": "Excel to HTML",
+      "category": "Conversion",
+      "sub_category": "Spreadsheet to HTML",
       "topic": "xlsx to html",
       "key": "xlsx to html",
       "baseline_record_id": "blog::cells/2020-10-07-convert-excel-xls-xlsx-to-html-csharp/index.md",
@@ -13730,7 +9635,7 @@
     },
     {
       "category": "Data Conversion",
-      "sub_category": "Spreadsheet to JSON",
+      "sub_category": "Excel to Json",
       "topic": "xlsx to json",
       "key": "xlsx to json",
       "baseline_record_id": "blog::cells/2022-08-03-convert-xlsx-to-json-in-csharp/index.md",
@@ -13774,71 +9679,6 @@
           "title": "Convert XLSX to JSON in Java",
           "topic": "XLSX to JSON",
           "url": "https://blog.aspose.com/cells/convert-xlsx-to-json-in-java/"
-        },
-        "nodejs": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "python": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        }
-      }
-    },
-    {
-      "category": "Document Processing",
-      "sub_category": "Excel to PDF Conversion",
-      "topic": "xlsx to pdf",
-      "key": "xlsx to pdf",
-      "baseline_record_id": "blog::cells/2019-11-29-convert-xls-and-xlsx-to-pdf-in-csharp/index.md",
-      "coverage": {
-        "net": {
-          "matched": true,
-          "score": 1.0,
-          "record_id": "blog::cells/2019-11-29-convert-xls-and-xlsx-to-pdf-in-csharp/index.md",
-          "title": "Convert Excel XLS and XLSX to PDF in C#",
-          "topic": "XLSX to PDF",
-          "url": "https://blog.aspose.com/cells/convert-xls-and-xlsx-to-pdf-in-csharp/"
-        },
-        "android_via_java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "cpp": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "general": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
         },
         "nodejs": {
           "matched": false,
@@ -13914,77 +9754,12 @@
           "url": null
         },
         "python": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        }
-      }
-    },
-    {
-      "category": "Document Management",
-      "sub_category": "Export Formats",
-      "topic": "xpand it created powerful xporter for jira plugin using aspose cells",
-      "key": "xpand it created powerful xporter for jira plugin using aspose cells",
-      "baseline_record_id": "blog::cells/2015-10-07-export-content-to-several-formats-of-microsoft-excel-using-apis/index.md",
-      "coverage": {
-        "net": {
           "matched": true,
           "score": 1.0,
-          "record_id": "blog::cells/2015-10-07-export-content-to-several-formats-of-microsoft-excel-using-apis/index.md",
-          "title": "Xpand IT created powerful Xporter for JIRA plugin using Aspose.Cells for .NET",
-          "topic": "Xpand IT created powerful xporter for JIRA plugin using aspose cells",
-          "url": "https://blog.aspose.com/cells/export-content-to-several-formats-of-microsoft-excel-using-apis/"
-        },
-        "android_via_java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "cpp": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "general": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "nodejs": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "python": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
+          "record_id": "blog::cells/2024-03-15-convert-xml-to-excel-in-python/index.md",
+          "title": "Convert XML to Excel in Python",
+          "topic": "XML to excel",
+          "url": "https://blog.aspose.com/cells/convert-xml-to-excel-in-python/"
         }
       }
     }
