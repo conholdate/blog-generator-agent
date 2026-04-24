@@ -12,6 +12,13 @@ from agent_engine.config_loader import load_agent_metrics_config, load_json_obje
 
 def _load_topics_sheets_config(repo_root: Path, config_path: Path) -> dict[str, dict[str, str]]:
     resolved_path = config_path if config_path.is_absolute() else (repo_root / config_path)
+    if not resolved_path.exists():
+        legacy_parts = resolved_path.parts
+        if "config" in legacy_parts:
+            replaced_parts = tuple("configs" if part == "config" else part for part in legacy_parts)
+            candidate = Path(*replaced_parts)
+            if candidate.exists():
+                resolved_path = candidate
     data = load_json_object(resolved_path)
 
     loaded: dict[str, dict[str, str]] = {}
@@ -146,13 +153,21 @@ class CoverageSettings(BaseSettings):
         ).strip()
         if not self.METRICS_WEBHOOK_URL:
             self.METRICS_WEBHOOK_URL = str(primary_cfg.get("url") or "").strip() or None
+        if not self.METRICS_TOKEN:
+            self.METRICS_TOKEN = str(primary_cfg.get("token") or "").strip() or None
         if not self.INT_METRICS_WEBHOOK_URL:
             self.INT_METRICS_WEBHOOK_URL = str(internal_cfg.get("url") or "").strip() or None
+        if not self.INT_METRICS_TOKEN:
+            self.INT_METRICS_TOKEN = str(internal_cfg.get("token") or "").strip() or None
         self.METRICS_STAGES = [str(stage).strip() for stage in (metrics_cfg.get("stages") or []) if str(stage).strip()]
 
         config_path = self.TOPICS_SHEETS_CONFIG_PATH
         if not config_path.is_absolute():
             config_path = (self.repo_root / config_path).resolve()
+        if not config_path.exists():
+            candidate = (self.repo_root / "configs" / "topics_sheets.json").resolve()
+            if candidate.exists():
+                config_path = candidate
         self.TOPICS_SHEETS_CONFIG_PATH = config_path
 
         file_topics_sheets = _load_topics_sheets_config(self.repo_root, self.TOPICS_SHEETS_CONFIG_PATH)

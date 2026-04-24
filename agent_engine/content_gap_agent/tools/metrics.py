@@ -27,6 +27,11 @@ def _utc_now_z() -> str:
     return dt.strftime("%Y-%m-%dT%H:%M:%S.") + f"{int(dt.microsecond/1000):03d}Z"
 
 
+def _looks_like_invalid_token_response(body: str) -> bool:
+    text = str(body or "").strip().lower()
+    return "invalid token" in text or "unauthorized" in text
+
+
 def new_run_id(prefix: str = "run") -> str:
     # Example: kb_article_writer_7f2a91c0
     return f"{prefix}_{uuid.uuid4().hex[:8]}"
@@ -100,6 +105,8 @@ class MetricsSender:
             raise RuntimeError(message) from exc
 
     def _post_metric(self, url: str, token: str, data: Dict[str, Any]) -> None:
+        if not token:
+            raise RuntimeError("Metrics token is empty.")
         resp = requests.post(
             url,
             params={"token": token},
@@ -111,6 +118,8 @@ class MetricsSender:
         print("[metrics] response text =", resp.text[:500])
         if resp.status_code < 200 or resp.status_code >= 300:
             raise RuntimeError(f"Metrics webhook returned status={resp.status_code}: {resp.text[:500]}")
+        if _looks_like_invalid_token_response(resp.text):
+            raise RuntimeError(f"Metrics webhook rejected token: {resp.text[:500]}")
 
     def send(self, payload: MetricsPayload) -> None:
         if not self.enabled:

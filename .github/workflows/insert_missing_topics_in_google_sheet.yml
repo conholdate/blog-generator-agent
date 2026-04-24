@@ -172,6 +172,8 @@ jobs:
       OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
       ASPOSE_BLOG_TOKEN: ${{ secrets.ASPOSE_BLOG_TOKEN }}
       CONHOLDATE_BLOG_TOKEN: ${{ secrets.CONHOLDATE_BLOG_TOKEN || secrets.ASPOSE_BLOG_TOKEN }}
+      TOPICS_SHEETS_CONFIG_PATH: configs/topics_sheets.json
+      TOPICS_SHEETS_TOKEN: ${{ secrets.TOPICS_SHEETS_TOKEN }}
       CG_SKIP_SHEETS_AUTO_POST: "true"
 
     steps:

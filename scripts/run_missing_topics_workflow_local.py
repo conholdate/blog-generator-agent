@@ -16,6 +16,7 @@ if str(REPO_ROOT) not in sys.path:
 
 from agent_engine.content_gap_agent.tools.sheets_export import (  # noqa: E402
     build_payload,
+    is_successful_sheet_response,
     post_payload,
     should_post_payload,
     write_payload,
@@ -236,6 +237,9 @@ def main() -> None:
             status, text = post_payload(payload, post_url, token)
             print(f"[local-workflow] POST status: {status}")
             print(text[:1000])
+            ok, reason = is_successful_sheet_response(status, text)
+            if not ok:
+                raise SystemExit(reason)
     else:
         print("[local-workflow] POST skipped. Use --post to send to Google Sheets.")
 

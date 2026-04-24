@@ -72,8 +72,12 @@ class Settings(BaseSettings):
         ).strip()
         if not self.METRICS_WEBHOOK_URL:
             self.METRICS_WEBHOOK_URL = str(primary_cfg.get("url") or "").strip() or None
+        if not self.METRICS_TOKEN:
+            self.METRICS_TOKEN = str(primary_cfg.get("token") or "").strip() or None
         if not self.INT_METRICS_WEBHOOK_URL:
             self.INT_METRICS_WEBHOOK_URL = str(internal_cfg.get("url") or "").strip() or None
+        if not self.INT_METRICS_TOKEN:
+            self.INT_METRICS_TOKEN = str(internal_cfg.get("token") or "").strip() or None
         self.METRICS_STAGES = [str(stage).strip() for stage in (metrics_cfg.get("stages") or []) if str(stage).strip()]
 
 

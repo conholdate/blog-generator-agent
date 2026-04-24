@@ -282,6 +282,18 @@ def should_post_payload(payload: dict[str, Any]) -> tuple[bool, str]:
     return True, ""
 
 
+def is_successful_sheet_response(status: int, text: str) -> tuple[bool, str]:
+    body = str(text or "").strip()
+    lowered = body.lower()
+    if status < 200 or status >= 300:
+        return False, f"Google Sheets webhook returned status={status}: {body[:500]}"
+    if "invalid token" in lowered or "unauthorized" in lowered:
+        return False, f"Google Sheets webhook rejected token: {body[:500]}"
+    if lowered.startswith("error:") or '"error"' in lowered:
+        return False, f"Google Sheets webhook returned an error body: {body[:500]}"
+    return True, ""
+
+
 def post_payload(payload: dict[str, Any], url: str, token: str | None) -> tuple[int, str]:
     query: dict[str, str] = {}
     if token:
