@@ -1,0 +1,23 @@
+{
+  "repo_head": "529b6c7eb8d021fc7e3557ed841e151a1b7d1322",
+  "file_fingerprints": {
+    "finance/2020-04-29-create-xbrl-instances-and-parse-and-validate-xbrl-and-ixbrl-files-in-csharp-asp.net/index.md": "4dea929a5ba2bd8d8e02c172aef46c15b22b9c3f6470b2affdd1048e59ef727d",
+    "finance/2021-02-15-convert-xbrl-xlsx-excel-ixbrl-inline-csharp/index.md": "eb017fa94f9260d2c722d2c9005ac1e7a59126f9149f7c60d30c7c553ca52bd0",
+    "finance/2021-02-23-create-parse-ofx-request-or-response-programmatically-csharp-api/index.md": "eb163628ecc134acbf51a4f851ac2ead27ef24eda65c9c84ab1481c293ec0d9a",
+    "finance/2022-03-20-convert-xbrl-to-pdf-using-csharp/index.md": "fbe42985c0a8523a5b5875f91ebb31ccb04d0c22af84651b8b6151ef4f09abb3",
+    "finance/2022-04-14-add-objects-to-xbrl-documents-using-csharp/index.md": "e61d354273c387a6e7b30029a31b1154a5fd4b8f05ed78080df32f4615b3ec73",
+    "finance/2022-04-29-convert-xbrl-to-html-using-csharp/index.md": "366da553a451302f4019ea9d8f3e642276c779d1b700b18d948534745b490b17",
+    "finance/2022-05-22-add-footnote-links-and-role-reference-objects-to-xbrl-using-csharp/index.md": "d602bf39d14f871b584468a4897c650f183a57a9b4d35bf2a069b0b43000e46b",
+    "finance/2022-07-26-create-xbrl-file-using-python/index.md": "73ca66c8b748a1ba8a55a8fda9e49adbbc5cf0c8c7801ef2005a0e4061f3cf02",
+    "finance/2022-08-19-parse-xbrl-in-python/index.md": "125bdc5fcd5abd8221ab00ef7ac038f6e0371c155be9d4939f426fc9d5db9be5",
+    "finance/2022-10-25-validate-xbrl-document-in-python/index.md": "b0610a5eed7d793cc856519e37a03a4ec203fe519931c6d3c7e88efddd95779f",
+    "finance/2022-11-25-read-xbrl-files-in-python/index.md": "ae02d4ba4a6ab344cda24653dfc720b52c43a43ce9fde8ae6f220d1ea8d9ab5d",
+    "finance/2023-02-01-xbrl-to-excel-converter/index.md": "e2ffa8ec02e720410260c223ae545b7d2a88f5fd2b39867353f491ec44e9ec9c",
+    "finance/2023-02-03-xbrl-to-ixbrl-converter/index.md": "d9cbe7c255ec0cb45cc5578bcd055675d692a6da9f899228d195a29d35352743",
+    "finance/2023-03-20-xbrl-to-pdf-converter/index.md": "04ca99ae4aabd6b406beb5c64f4263f8d271b88cbadcb95b1ea57779521a140c",
+    "finance/2023-05-02-convert-xbrl-to-excel-in-python/index.md": "bff9a9dbc58793e1677ecf02c90b4909fb862fefede20ce2f7818b0beb4845a9",
+    "finance/2023-11-02-xbrl-viewer-online/index.md": "0c18089bad85fa8db1b32e0a950c59ce9bd978597fd668ca1e26fda902ea9faf",
+    "finance/2024-04-03-convert-xbrl-to-pdf-in-python/index.md": "a4658f541dff124e8f5880ebb5644db55c090f8acf66f35406336e0d076a93a4",
+    "finance/2024-05-07-convert-xbrl-to-html-in-python/index.md": "530c0d569d24e6ae6d90880f303b4e819e9672f2f323cdbde53e4f71d64034e0"
+  }
+}
