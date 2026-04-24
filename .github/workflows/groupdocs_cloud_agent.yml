@@ -242,7 +242,13 @@ jobs:
             echo "✅ Blog committed and pushed successfully to this repository"
             echo "   Location: $BLOG_FOLDER_PATH"
           fi
-
+      - name: Commit logs
+        run: |
+          git config --global user.email "action@github.com"
+          git config --global user.name "GitHub Action"
+          git add content/logs/logs.txt
+          git commit -m "Update logs [Run #${{ github.run_number }}]" || echo "No changes to commit"
+          git push origin HEAD
       - name: Upload Generated Blog as Artifact
         uses: actions/upload-artifact@v4
         with:
