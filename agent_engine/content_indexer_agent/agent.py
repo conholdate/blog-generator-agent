@@ -436,6 +436,7 @@ def execute_plan(plan: IndexPlan, *, s: Settings) -> Dict[str, Any]:
         brand_key=plan.brand_key,
         product_key=plan.product_key,
     )
+    item_name = "Articles"
     platform_name = _platform_display_name(product, plan.platform)
 
     log.info("Resolved labels: website=%s product_name=%s platform_name=%s", website, product_name, platform_name)
@@ -481,7 +482,7 @@ def execute_plan(plan: IndexPlan, *, s: Settings) -> Dict[str, Any]:
             platform=platform_name,
             website=website,
             website_section=website_section,
-            item_name=product_name,
+            item_name=item_name,
             extra={
                 "brand_key": plan.brand_key,
                 "product_key": plan.product_key,
