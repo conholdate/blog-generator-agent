@@ -2032,7 +2032,7 @@ def setup_logger():
     BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
     LOG_FILE = os.path.join(BASE_DIR, "content", "logs", "logs.txt")
     os.makedirs(os.path.dirname(LOG_FILE), exist_ok=True)
-
+    print(f"Log file path: {LOG_FILE}")
     def log(message: str):
         timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         line = f"[{timestamp}] {message}\n"

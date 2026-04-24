@@ -6,3 +6,4 @@ openai-agents==0.4.2
 bs4
 aiohttp
 python-frontmatter
+gspread

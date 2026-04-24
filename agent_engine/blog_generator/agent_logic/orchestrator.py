@@ -258,7 +258,9 @@ class BlogOrchestrator:
                 print("Failed to send metrics (check logs)\n")
 
             self.log("---Execution started---")
-            self.log(f"Keyword file index -> {topics_raw_data}")
+            self.log(f" Brand-> {post_topic}")
+            self.log(f" Brand-> {self.brand}")
+            self.log(f"Keywords -> {topics_raw_data}")
             self.log(f"product info {product_info}")
             self.log(f" File path: {filepath}")
             self.log("---Execution ended---")
