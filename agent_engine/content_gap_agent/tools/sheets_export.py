@@ -8,7 +8,7 @@ import requests
 
 BASE_HEADER_KEYS = [
     "brand_key",
-    "product_key",
+    "product_name",
     "baseline_platform",
     "category",
     "sub_category",
@@ -17,7 +17,7 @@ BASE_HEADER_KEYS = [
 
 HEADER_LABELS = {
     "brand_key": "Brand",
-    "product_key": "Product",
+    "product_name": "Product",
     "baseline_platform": "Baseline Platform",
     "category": "Category",
     "sub_category": "Sub Category",
@@ -112,29 +112,46 @@ def _normalize_sheet_config(brand_key: str, raw_cfg: dict[str, Any] | None) -> d
     return cfg
 
 
+def _legacy_sheet_config(settings: Any, brand_key: str) -> dict[str, str]:
+    attr_prefixes = {
+        "aspose": "TOPICS_ASPOSE_COM",
+        "groupdocs": "TOPICS_GROUPDOCS_COM",
+        "conholdate": "TOPICS_CONHOLDATE_COM",
+        "aspose_cloud": "TOPICS_ASPOSE_CLOUD",
+        "groupdocs_cloud": "TOPICS_GROUPDOCS_CLOUD",
+        "conholdate_cloud": "TOPICS_CONHOLDATE_CLOUD",
+    }
+    prefix = attr_prefixes.get(_sanitize_brand_key(brand_key))
+    if not prefix:
+        return {}
+
+    raw_cfg = {
+        "webhook_url": str(getattr(settings, f"{prefix}_WEBHOOK_URL", "") or "").strip(),
+        "token": str(
+            getattr(settings, "TOPICS_SHEETS_TOKEN", None)
+            or getattr(settings, f"{prefix}_TOKEN", "")
+            or ""
+        ).strip(),
+        "coverage_json": str(getattr(settings, f"{prefix}_COVERAGE_JSON", "") or "").strip(),
+    }
+    return {key: value for key, value in raw_cfg.items() if value}
+
+
 def resolve_sheet_config(settings: Any, brand_key: str) -> dict[str, str]:
     normalized_brand = _sanitize_brand_key(brand_key)
     sheets = getattr(settings, "TOPICS_SHEETS", {}) or {}
-    brand_cfg = None
+    brand_cfg: dict[str, Any] = {}
     if isinstance(sheets, dict):
         for key, value in sheets.items():
             if _sanitize_brand_key(str(key)) == normalized_brand:
-                brand_cfg = value
+                if isinstance(value, dict):
+                    brand_cfg = value
                 break
-    if isinstance(brand_cfg, dict):
-        return _normalize_sheet_config(normalized_brand, brand_cfg)
 
-    # Backward compatibility for the original Aspose env var names.
-    if normalized_brand == "aspose":
-        return _normalize_sheet_config(
-            normalized_brand,
-            {
-                "webhook_url": str(getattr(settings, "TOPICS_ASPOSE_COM_WEBHOOK_URL", "") or "").strip(),
-                "token": str(getattr(settings, "TOPICS_ASPOSE_COM_TOKEN", "") or "").strip(),
-                "coverage_json": str(getattr(settings, "TOPICS_ASPOSE_COM_COVERAGE_JSON", "") or "").strip(),
-                "output_json": "outputs/google_sheets/topics_blog_aspose_com_missing_topics.json",
-            },
-        )
+    legacy_cfg = _legacy_sheet_config(settings, normalized_brand)
+    if brand_cfg or legacy_cfg:
+        return _normalize_sheet_config(normalized_brand, {**brand_cfg, **legacy_cfg})
+
     return {}
 
 
@@ -162,6 +179,7 @@ def _extract_rows(coverage_path: Path) -> tuple[list[dict[str, Any]], list[str]]
     payload = _load_json(coverage_path)
     brand_key = str(payload.get("brand_key") or "").strip()
     product_key = str(payload.get("product_key") or "").strip()
+    product_name = str(payload.get("product_name") or product_key).strip()
     baseline_platform = str(payload.get("baseline_platform") or "all").strip() or "all"
     rows = payload.get("rows") or []
     if not isinstance(rows, list):
@@ -197,7 +215,7 @@ def _extract_rows(coverage_path: Path) -> tuple[list[dict[str, Any]], list[str]]
 
         item = {
             "brand_key": brand_key,
-            "product_key": product_key,
+            "product_name": product_name,
             "baseline_platform": baseline_platform,
             "category": row.get("category") or "",
             "sub_category": row.get("sub_category") or "",
@@ -230,7 +248,7 @@ def build_payload(
     all_rows.sort(
         key=lambda row: (
             str(row["brand_key"]),
-            str(row["product_key"]),
+            str(row["product_name"]),
             str(row["topic"]),
         )
     )

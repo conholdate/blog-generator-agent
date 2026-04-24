@@ -37,6 +37,16 @@ def _resolve_outputs_root(brand_yaml: Path, brand_data: dict[str, Any]) -> Path:
     return out
 
 
+def _resolve_brand_yaml_from_product(product_yaml: Path, product_data: dict[str, Any]) -> Path:
+    blog_key = str(product_data.get("blog") or "").strip()
+    if not blog_key:
+        raise SystemExit(f"Missing 'blog' in product YAML: {product_yaml}")
+    brand_yaml = (REPO_ROOT / "configs" / f"{blog_key}.yaml").resolve()
+    if not brand_yaml.exists():
+        raise SystemExit(f"Resolved brand YAML not found for blog={blog_key}: {brand_yaml}")
+    return brand_yaml
+
+
 def _run(cmd: list[str], *, env: dict[str, str]) -> None:
     print("[local-workflow] Running:")
     print("  " + " ".join(cmd))
@@ -54,7 +64,11 @@ def main() -> None:
             "indexer -> gap agent -> Google Sheets payload export."
         )
     )
-    parser.add_argument("--brand-yaml", required=True, help="Path to brand YAML, e.g. configs/aspose.yaml")
+    parser.add_argument(
+        "--brand-yaml",
+        default="",
+        help="Optional brand YAML path. If omitted, it is resolved from product_yaml.blog.",
+    )
     parser.add_argument("--product-yaml", required=True, help="Path to product YAML, e.g. configs/aspose/3d.yaml")
     parser.add_argument("--index-platform", required=True, help="Indexer platform, e.g. net")
     parser.add_argument(
@@ -78,6 +92,7 @@ def main() -> None:
     parser.add_argument("--use-agent", action="store_true")
     parser.add_argument("--no-normalize-topics", action="store_true")
     parser.add_argument("--no-embeddings", action="store_true")
+    parser.add_argument("--no-metrics", action="store_true", help="Disable metrics for indexer and gap subprocesses.")
     parser.add_argument("--append", action="store_true", help="Append mode for payload/post. Recommended.")
     parser.add_argument("--post", action="store_true", help="Actually POST to Google Sheets. Default is payload-only.")
     parser.add_argument(
@@ -90,21 +105,31 @@ def main() -> None:
     )
     args = parser.parse_args()
 
-    brand_yaml = (REPO_ROOT / args.brand_yaml).resolve() if not Path(args.brand_yaml).is_absolute() else Path(args.brand_yaml).resolve()
     product_yaml = (REPO_ROOT / args.product_yaml).resolve() if not Path(args.product_yaml).is_absolute() else Path(args.product_yaml).resolve()
-    if not brand_yaml.exists():
-        raise SystemExit(f"Brand YAML not found: {brand_yaml}")
     if not product_yaml.exists():
         raise SystemExit(f"Product YAML not found: {product_yaml}")
 
-    brand_data = _read_yaml(brand_yaml)
     product_data = _read_yaml(product_yaml)
+    if args.brand_yaml:
+        brand_yaml = (REPO_ROOT / args.brand_yaml).resolve() if not Path(args.brand_yaml).is_absolute() else Path(args.brand_yaml).resolve()
+        if not brand_yaml.exists():
+            raise SystemExit(f"Brand YAML not found: {brand_yaml}")
+    else:
+        brand_yaml = _resolve_brand_yaml_from_product(product_yaml, product_data)
+
+    brand_data = _read_yaml(brand_yaml)
     brand_key = str(brand_data.get("key") or "").strip()
     product_key = str(product_data.get("key") or "").strip()
     if not brand_key:
         raise SystemExit(f"Missing key in brand YAML: {brand_yaml}")
     if not product_key:
         raise SystemExit(f"Missing key in product YAML: {product_yaml}")
+
+    expected_brand_yaml = _resolve_brand_yaml_from_product(product_yaml, product_data)
+    if brand_yaml != expected_brand_yaml:
+        raise SystemExit(
+            f"Brand/product mismatch: product YAML expects brand file {expected_brand_yaml}, got {brand_yaml}"
+        )
 
     outputs_root = _resolve_outputs_root(brand_yaml, brand_data)
     gap_platform = (args.gap_platform or "").strip()
@@ -118,6 +143,8 @@ def main() -> None:
     env["CG_OUTPUTS_ROOT"] = str(outputs_root)
     env["GIT_TERMINAL_PROMPT"] = "0"
     env["CG_SKIP_SHEETS_AUTO_POST"] = "true"
+    if args.no_metrics:
+        env["METRICS_ENABLED"] = "false"
 
     index_cmd = [
         sys.executable,
@@ -137,6 +164,7 @@ def main() -> None:
         _bool_flag(args.delete_missing, "--delete-missing", ""),
         _bool_flag(args.use_agent, "--use-agent", "--no-agent"),
         _bool_flag(not args.no_normalize_topics, "--normalize-topics", "--no-normalize-topics"),
+        _bool_flag(args.no_metrics, "--no-metrics", ""),
     ]
     index_cmd = [part for part in index_cmd if part]
     _run(index_cmd, env=env)
@@ -165,6 +193,8 @@ def main() -> None:
         gap_cmd.extend(["--platforms", args.platforms.strip()])
     if args.no_embeddings:
         gap_cmd.append("--no-embeddings")
+    if args.no_metrics:
+        gap_cmd.append("--no-metrics")
     _run(gap_cmd, env=env)
 
     if not coverage_json.exists():
@@ -182,6 +212,8 @@ def main() -> None:
     write_payload(payload, output_json)
 
     print(f"[local-workflow] Wrote payload JSON: {output_json}")
+    print(f"[local-workflow] Brand YAML: {brand_yaml}")
+    print(f"[local-workflow] Product YAML: {product_yaml}")
     print(f"[local-workflow] Coverage JSON: {coverage_json}")
     print(f"[local-workflow] Coverage sources: {payload['meta']['source_count']}")
     print(f"[local-workflow] Missing topic rows: {payload['meta']['row_count']}")

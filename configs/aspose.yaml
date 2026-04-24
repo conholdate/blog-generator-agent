@@ -3,7 +3,7 @@ display_name: Aspose
 website: https://blog.aspose.com
 enabled: true
 
-# outputs_root: outputs  # optional; can be absolute too
+outputs_root: ../outputs
 
 search_patterns:
   - "aspose.{product}"
@@ -19,5 +19,3 @@ repositories:
     root_subdir: "content/Aspose.Blog"
     include_globs:
       - "**/index.md"
-
-outputs_root: ../outputs
