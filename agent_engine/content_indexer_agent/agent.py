@@ -11,7 +11,7 @@ from agents import Agent, Runner, function_tool, handoff
 from openai import OpenAI
 
 from .settings import Settings
-from .tools.normalization import nor_website_domain, nor_section_label, normalize_product_display_name
+from .tools.normalization import nor_website_domain, nor_section_label
 from .types import IndexRecord, RepoTarget
 from .tools.embeddings import EmbeddingStore
 from .tools.git_ops import ensure_repo_cloned, get_head_commit
@@ -431,11 +431,7 @@ def execute_plan(plan: IndexPlan, *, s: Settings) -> Dict[str, Any]:
 
     brand_site = getattr(brand, "site", "") or getattr(brand, "website", "") or ""
     website = nor_website_domain(str(brand_site))
-    product_name = normalize_product_display_name(
-        getattr(product, "display_name", "") or plan.product_key,
-        brand_key=plan.brand_key,
-        product_key=plan.product_key,
-    )
+    product_name = (getattr(product, "display_name", "") or plan.product_key).strip()
     platform_name = _platform_display_name(product, plan.platform)
 
     log.info("Resolved labels: website=%s product_name=%s platform_name=%s", website, product_name, platform_name)

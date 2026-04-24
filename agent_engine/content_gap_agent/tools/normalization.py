@@ -412,37 +412,6 @@ ASPOSE_PRODUCT_REGISTRY: Dict[str, str] = {
     "zip": "Aspose.ZIP",
 }
 
-GROUPDOCS_PRODUCT_REGISTRY: Dict[str, str] = {
-    "annotation": "GroupDocs.Annotation",
-    "assembly": "GroupDocs.Assembly",
-    "classification": "GroupDocs.Classification",
-    "comparison": "GroupDocs.Comparison",
-    "conversion": "GroupDocs.Conversion",
-    "editor": "GroupDocs.Editor",
-    "merger": "GroupDocs.Merger",
-    "metadata": "GroupDocs.Metadata",
-    "parser": "GroupDocs.Parser",
-    "redaction": "GroupDocs.Redaction",
-    "search": "GroupDocs.Search",
-    "signature": "GroupDocs.Signature",
-    "total": "GroupDocs.Total",
-    "viewer": "GroupDocs.Viewer",
-    "watermark": "GroupDocs.Watermark",
-}
-
-CONHOLDATE_PRODUCT_REGISTRY: Dict[str, str] = {
-    "total": "Conholdate.Total",
-}
-
-PRODUCT_REGISTRIES_BY_BRAND: Dict[str, Dict[str, str]] = {
-    "aspose": ASPOSE_PRODUCT_REGISTRY,
-    "aspose_cloud": ASPOSE_PRODUCT_REGISTRY,
-    "groupdocs": GROUPDOCS_PRODUCT_REGISTRY,
-    "groupdocs_cloud": GROUPDOCS_PRODUCT_REGISTRY,
-    "conholdate": CONHOLDATE_PRODUCT_REGISTRY,
-    "conholdate_cloud": CONHOLDATE_PRODUCT_REGISTRY,
-}
-
 
 # =============================================================================
 # Derived lookup maps (no second source of truth)
@@ -913,7 +882,8 @@ def canonical_topic_key(text: str) -> str:
     t = _TRAILING_PREPOSITION_RE.sub(" ", t)
     t = _WS_RE.sub(" ", t).strip()
 
-    for m in _CONVERSION_PAIR_RE.finditer(t):
+    m = _CONVERSION_PAIR_RE.search(t)
+    if m:
         src = canonical_file_format(m.group(1))
         dst = canonical_file_format(m.group(2))
         if src in FORMAT_TOKEN_SET and dst in FORMAT_TOKEN_SET:
@@ -991,56 +961,6 @@ def normalize_product_short_name(full_name: str) -> str:
             break
 
     return name
-
-
-def _product_registry_lookup_key(value: str) -> str:
-    text = normalize_product_short_name(value)
-    text = re.sub(r"(?i)^(?:aspose|groupdocs|conholdate)[.\s]+", "", text).strip()
-    return _condense_token(text)
-
-
-def _normalized_brand_registry_key(brand_key: str | None) -> str:
-    return re.sub(r"[^a-z0-9]+", "_", str(brand_key or "").strip().lower()).strip("_")
-
-
-def normalize_product_display_name(
-    full_name: str,
-    *,
-    brand_key: str | None = None,
-    product_key: str | None = None,
-) -> str:
-    """
-    Normalize a product label into the branded product name used in outputs.
-
-    Examples:
-        Cells + aspose -> Aspose.Cells
-        3D + aspose -> Aspose.3D
-        Total + conholdate -> Conholdate.Total
-    """
-    short_name = normalize_product_short_name(full_name)
-    candidates = [
-        _product_registry_lookup_key(value)
-        for value in (product_key, short_name)
-        if value
-    ]
-
-    brand_registry = PRODUCT_REGISTRIES_BY_BRAND.get(_normalized_brand_registry_key(brand_key))
-    if brand_registry:
-        for candidate in candidates:
-            canonical = brand_registry.get(candidate)
-            if canonical:
-                return canonical
-
-    matches = {
-        registry[candidate]
-        for registry in PRODUCT_REGISTRIES_BY_BRAND.values()
-        for candidate in candidates
-        if candidate in registry
-    }
-    if len(matches) == 1:
-        return next(iter(matches))
-
-    return short_name
 
 # =============================================================================
 # Internal helpers
@@ -1247,12 +1167,10 @@ title_case = normalize_title_text
 
 __all__ = [
     "ASPOSE_PRODUCT_REGISTRY",
-    "CONHOLDATE_PRODUCT_REGISTRY",
     "FILE_FORMAT_REGISTRY",
     "FORMAT_ALIAS_TO_CANONICAL",
     "FORMAT_CANONICAL_TO_ALIASES",
     "FORMAT_CANONICAL_TO_UPPER",
-    "GROUPDOCS_PRODUCT_REGISTRY",
     "KeywordRefiner",
     "PLATFORM_ALIAS_TO_FAMILY",
     "PLATFORM_FAMILY_TO_ALIASES",
@@ -1260,7 +1178,6 @@ __all__ = [
     "PLATFORM_FAMILY_TO_BLOG_KEY",
     "PLATFORM_FAMILY_TO_DISPLAY",
     "PLATFORM_REGISTRY",
-    "PRODUCT_REGISTRIES_BY_BRAND",
     "canonical_blog_platform_key",
     "canonical_file_format",
     "canonical_platform_label",
@@ -1280,7 +1197,6 @@ __all__ = [
     "normalize_missing_platform_value",
     "normalize_platform_family",
     "normalize_platform_mentions",
-    "normalize_product_display_name",
     "normalize_sentence_text",
     "normalize_text",
     "normalize_title_text",

@@ -12,13 +12,9 @@ from urllib.parse import urlparse
 import requests
 
 from .logging_utils import get_logger
-from .normalization import normalize_product_display_name
+from .normalization import normalize_product_short_name
 
 log = get_logger("cg.metrics")
-
-
-def _clean_optional(value: Any) -> str:
-    return str(value or "").strip()
 
 
 def _utc_now_z() -> str:
@@ -79,47 +75,22 @@ class MetricsSender:
 
     def __init__(self, *, settings: Any) -> None:
         self.enabled: bool = bool(getattr(settings, "METRICS_ENABLED", True))
-        self.required: bool = bool(getattr(settings, "METRICS_REQUIRED", False))
         self.timeout_s: float = float(getattr(settings, "METRICS_TIMEOUT_S", 2.0))
 
-        self.webhook_url: str = _clean_optional(getattr(settings, "METRICS_WEBHOOK_URL", ""))
-        self.token: str = _clean_optional(getattr(settings, "METRICS_TOKEN", ""))
+        self.webhook_url: str = str(getattr(settings, "METRICS_WEBHOOK_URL", "")).strip()
+        self.token: str = str(getattr(settings, "METRICS_TOKEN", "")).strip()
 
-        self.agent_name: str = _clean_optional(getattr(settings, "METRICS_AGENT_NAME", ""))
-        self.agent_owner: str = _clean_optional(getattr(settings, "METRICS_AGENT_OWNER", ""))
+        self.agent_name: str = str(getattr(settings, "METRICS_AGENT_NAME", "")).strip()
+        self.agent_owner: str = str(getattr(settings, "METRICS_AGENT_OWNER", "")).strip()
 
-        self.int_webhook_url: str = _clean_optional(getattr(settings, "INT_METRICS_WEBHOOK_URL", ""))
-        self.int_token: str = _clean_optional(getattr(settings, "INT_METRICS_TOKEN", ""))
-
-    def _handle_send_failure(self, message: str, exc: Exception | None = None) -> None:
-        if exc is not None:
-            log.warning("%s: %s", message, exc)
-        else:
-            log.warning("%s", message)
-        if self.required:
-            raise RuntimeError(message) from exc
-
-    def _post_metric(self, url: str, token: str, data: Dict[str, Any]) -> None:
-        resp = requests.post(
-            url,
-            params={"token": token},
-            headers={"Content-Type": "application/json"},
-            data=json.dumps(data, ensure_ascii=False),
-            timeout=self.timeout_s,
-        )
-        print("[metrics] response status =", resp.status_code)
-        print("[metrics] response text =", resp.text[:500])
-        if resp.status_code < 200 or resp.status_code >= 300:
-            raise RuntimeError(f"Metrics webhook returned status={resp.status_code}: {resp.text[:500]}")
+        self.int_webhook_url: str = str(getattr(settings, "INT_METRICS_WEBHOOK_URL", "")).strip()
+        self.int_token: str = str(getattr(settings, "INT_METRICS_TOKEN", "")).strip()
 
     def send(self, payload: MetricsPayload) -> None:
         if not self.enabled:
             print("[metrics] disabled (METRICS_ENABLED=False). Not sending.")
             return
 
-        if not self.webhook_url and not self.int_webhook_url:
-            self._handle_send_failure("Metrics enabled, but no metrics webhooks are configured. Not sending.")
-            return
 
         data = asdict(payload)
         if data.get("extra") is None:
@@ -136,8 +107,16 @@ class MetricsSender:
         try:
             log.info("Metrics payload (about to send):\n%s", json.dumps(data, ensure_ascii=False, indent=2))
             # Aspose Metrics
-            if self.webhook_url:
-                self._post_metric(self.webhook_url, self.token, data)
+            resp1 = requests.post(
+                self.webhook_url,
+                params={"token": self.token},
+                headers={"Content-Type": "application/json"},
+                data=json.dumps(data, ensure_ascii=False),
+                timeout=self.timeout_s,
+            )
+            
+            print("[metrics] response status =", resp1.status_code)
+            print("[metrics] response text =", resp1.text[:500])
 
             # Ensure run_env is present (default to PROD if missing/None)
             data.setdefault("run_env", "PROD")
@@ -145,12 +124,20 @@ class MetricsSender:
                 data["run_env"] = "PROD"
 
             # Blog metrics
-            if self.int_webhook_url:
-                self._post_metric(self.int_webhook_url, self.int_token, data)
+            resp2 = requests.post(
+                self.int_webhook_url,
+                params={"token": self.int_token},
+                headers={"Content-Type": "application/json"},
+                data=json.dumps(data, ensure_ascii=False),
+                timeout=self.timeout_s,
+            )
+            
+            print("[metrics] response status =", resp2.status_code)
+            print("[metrics] response text =", resp2.text[:500])
 
         except Exception as e:
             print("[metrics] send failed:", repr(e))
-            self._handle_send_failure("Metrics send failed", e)
+            log.debug("Metrics send failed: %s", e)
 
 
 class MetricsRun:
@@ -182,7 +169,8 @@ class MetricsRun:
         self.run_id = run_id
         self.job_type = job_type
 
-        self.product = normalize_product_display_name(product)
+        # self.product = product
+        self.product = normalize_product_short_name(product)
         self.platform = platform
         self.website = website
         self.website_section = website_section

@@ -1,13 +1,12 @@
 from __future__ import annotations
 
 import argparse
-import os
 from pathlib import Path
 from typing import Any, Dict, Optional
 
 import yaml
 
-from .tools.normalization import nor_website_domain, normalize_product_display_name
+from .tools.normalization import nor_website_domain
 from .settings import CoverageSettings
 from .agent import CoverageRunRequest, run_sync
 from .tools.logging_utils import get_logger
@@ -45,8 +44,7 @@ def build_parser() -> argparse.ArgumentParser:
     run.add_argument("--threshold-loose", type=float, default=0.80)
     run.add_argument("--top-k", type=int, default=5)
     run.add_argument("--platforms", default="", help="Optional comma-separated platform limit (blogs_to_blogs)")
-    run.add_argument("--no-embeddings", action="store_true", help="Use deterministic lexical matching only")
-    run.add_argument("--no-metrics", action="store_true", help="Disable metrics for this run")
+    run.add_argument("--no-embeddings", action="store_true", help="Force lexical-only fallback (Step 2 will use this)")
 
     return p
 
@@ -69,10 +67,6 @@ def main(argv: Optional[list[str]] = None) -> int:
 
     if args.command != "run":
         return 1
-
-    if args.no_metrics:
-        os.environ["METRICS_ENABLED"] = "false"
-        logger.info("Metrics disabled for this coverage run (--no-metrics).")
 
     # Load brand config
     brand_yaml_path: Path = args.brand
@@ -104,11 +98,7 @@ def main(argv: Optional[list[str]] = None) -> int:
     website = str(brand_data["website"]).strip()
     brand_site = nor_website_domain(str(website))
 
-    product_name = normalize_product_display_name(
-        str(product_data.get("display_name") or product_key),
-        brand_key=brand_key,
-        product_key=product_key,
-    )
+    product_name = str(product_data["display_name"]).strip()
 
     # Apply outputs_root from brand yaml (repos under outputs/_repos; products under outputs/{brand}/{product})
     outputs_root = _resolve_outputs_root(brand_data, brand_yaml_path)

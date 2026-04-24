@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import logging
-import os
 from pathlib import Path
 from typing import Optional
 
@@ -73,7 +72,6 @@ def run(
         "--normalize-topics/--no-normalize-topics",
         help="If enabled, blogs use LLM normalization; otherwise use frontmatter + subheadings only.",
     ),
-    no_metrics: bool = typer.Option(False, "--no-metrics", help="Disable metrics for this run."),
 ) -> None:
     """
     Run incremental indexing.
@@ -86,7 +84,7 @@ def run(
     """
     log.info(
         "run invoked: brand_yaml=%s platform=%s steps=%s product_yaml=%s products_dir=%s brand_hint=%s "
-        "delete_missing=%s use_agent=%s normalize_topics=%s no_metrics=%s",
+        "delete_missing=%s use_agent=%s normalize_topics=%s",
         brand_yaml,
         platform,
         steps,
@@ -96,12 +94,7 @@ def run(
         delete_missing,
         use_agent,
         normalize_topics,
-        no_metrics,
     )
-
-    if no_metrics:
-        os.environ["METRICS_ENABLED"] = "false"
-        log.info("Metrics disabled for this indexing run (--no-metrics).")
 
     # Instantiate settings early (ensures env/config loaded)
     _ = Settings()

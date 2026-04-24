@@ -49,9 +49,6 @@ def record_gap_key(r: IndexRecord) -> str:
 
 
 def _normalize_platform_key(s: Optional[str]) -> str:
-    raw = (s or "").strip().lower()
-    if raw == GENERAL_PLATFORM_KEY:
-        return GENERAL_PLATFORM_KEY
     return nor_platform_key(s) if s else ""
 
 
@@ -321,17 +318,4 @@ def compute_blogs_to_blogs(
         baseline_platform=baseline_label,
         platforms=platforms_out,
         rows=rows,
-        meta={
-            "matching_mode": "key_exact",
-            "total_input_records": total_records,
-            "records_after_filters": len(records),
-            "excluded_release_update_records": excluded_release,
-            "excluded_old_or_undated_records": excluded_old_or_undated,
-            "baseline_records": len(baseline_records),
-            "total_cells": total_cells,
-            "matched_cells": matched_cells,
-            "missing_cells": max(0, total_cells - matched_cells),
-            "match_rate": (matched_cells / total_cells) if total_cells else 0.0,
-            "skipped_empty_keys": skipped_empty_keys,
-        },
     )

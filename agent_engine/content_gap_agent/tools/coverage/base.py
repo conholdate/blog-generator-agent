@@ -24,7 +24,6 @@ class CoverageResult:
     baseline_platform: str
     platforms: List[str]
     rows: List[CoverageRow]
-    meta: Dict[str, Any] | None = None
 
     def to_json(self) -> Dict[str, Any]:
         return {
@@ -33,7 +32,6 @@ class CoverageResult:
             "product_key": self.product_key,
             "baseline_platform": self.baseline_platform,
             "platforms": self.platforms,
-            "meta": self.meta or {},
             "rows": [
                 {
                     "category": r.category,
