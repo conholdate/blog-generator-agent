@@ -7,7 +7,7 @@ from typing import Dict, List, Optional
 from ..io import IndexRecord, read_jsonl
 from ..logging_utils import get_logger
 from ..normalization import normalize_text
-from ..similarity import lexical_fast_match
+from ..similarity import MatchConfig, best_lexical_record_match
 from .base import CoverageResult, CoverageRow
 from .filters import is_release_update_record
 
@@ -38,6 +38,10 @@ def compute_docs_to_tutorials(
     product_key: str,
     outputs_product_root: Path,
     baseline_platform: Optional[str],
+    threshold_strict: float = 0.86,
+    threshold_loose: float = 0.80,
+    top_k: int = 5,
+    no_embeddings: bool = False,
 ) -> CoverageResult:
     """
     docs_to_tutorials (Step 1 lexical):
@@ -52,16 +56,26 @@ def compute_docs_to_tutorials(
     baseline_platform_n = normalize_text(baseline_platform or "")
     if not baseline_platform_n:
         raise ValueError("docs_to_tutorials requires baseline_platform (e.g., net, java).")
+    match_config = MatchConfig(
+        threshold_strict=threshold_strict,
+        threshold_loose=threshold_loose,
+        top_k=top_k,
+        no_embeddings=no_embeddings,
+    ).normalized()
 
     indexes_root = outputs_product_root / "indexes"
     docs_path = indexes_root / "docs" / f"{baseline_platform_n}.jsonl"
     tuts_path = indexes_root / "tutorials" / f"{baseline_platform_n}.jsonl"
 
     logger.info(
-        "compute_docs_to_tutorials started: brand=%s product=%s baseline_platform=%s docs_path=%s tutorials_path=%s",
+        "compute_docs_to_tutorials started: brand=%s product=%s baseline_platform=%s threshold_strict=%.4f threshold_loose=%.4f top_k=%d no_embeddings=%s docs_path=%s tutorials_path=%s",
         brand_key,
         product_key,
         baseline_platform_n,
+        match_config.threshold_strict,
+        match_config.threshold_loose,
+        match_config.top_k,
+        match_config.no_embeddings,
         docs_path,
         tuts_path,
     )
@@ -146,19 +160,23 @@ def compute_docs_to_tutorials(
 
         base_text = (d.topic or d.title or "").strip()
 
-        # Find best tutorial match for this docs topic
-        for t in tutorial_records:
-            cand_text = (t.topic or t.title or "").strip()
-            m = lexical_fast_match(base_text, cand_text)
-            if m.matched and m.score >= float(best["score"]):
-                best = {
-                    "matched": True,
-                    "score": float(m.score),
-                    "record_id": t.id,
-                    "title": t.title,
-                    "topic": t.topic,
-                    "url": t.url,
-                }
+        m = best_lexical_record_match(base_text, tutorial_records, config=match_config)
+        if m.matched:
+            best = {
+                "matched": True,
+                "score": float(m.score),
+                "record_id": m.candidate_id,
+                "title": m.candidate_title,
+                "topic": m.candidate_topic,
+                "url": m.candidate_url,
+                "match_type": m.match_type,
+                "match_band": m.match_band,
+                "candidate_rank": m.candidate_rank,
+            }
+        else:
+            best["score"] = float(m.score)
+            best["match_type"] = m.match_type
+            best["match_band"] = m.match_band
 
         if bool(best["matched"]):
             matched_cells += 1
@@ -170,7 +188,7 @@ def compute_docs_to_tutorials(
                 category=cat,
                 sub_category=sub,
                 topic=topic_text,
-                topic_key=topic_key,
+                key=topic_key,
                 baseline_record_id=d.id,
                 coverage=row_cov,
             )
@@ -209,4 +227,21 @@ def compute_docs_to_tutorials(
         baseline_platform=baseline_platform_n,
         platforms=platforms_out,
         rows=rows,
+        meta={
+            "matching_mode": "lexical_ranked",
+            "threshold_strict": match_config.threshold_strict,
+            "threshold_loose": match_config.threshold_loose,
+            "top_k": match_config.top_k,
+            "no_embeddings": match_config.no_embeddings,
+            "docs_input_records": docs_total,
+            "tutorial_input_records": tuts_total,
+            "excluded_release_update_docs": docs_total - len(docs_records),
+            "excluded_release_update_tutorials": tuts_total - len(tutorial_records),
+            "baseline_records": len(baseline_docs),
+            "candidate_records": len(tutorial_records),
+            "total_cells": total_topics,
+            "matched_cells": matched_cells,
+            "missing_cells": max(0, total_topics - matched_cells),
+            "match_rate": (matched_cells / total_topics) if total_topics else 0.0,
+        },
     )
