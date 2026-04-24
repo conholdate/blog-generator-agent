@@ -81,8 +81,8 @@ class CoverageSettings(BaseSettings):
     DEBUG: bool = False
     INT_METRICS_WEBHOOK_URL: Optional[str] = None
     INT_METRICS_TOKEN: Optional[str] = None
-    METRICS_CONFIG_PATH: Path = Path("config/metrics.json")
-    TOPICS_SHEETS_CONFIG_PATH: Path = Path("config/topics_sheets.json")
+    METRICS_CONFIG_PATH: Path = Path("configs/metrics.json")
+    TOPICS_SHEETS_CONFIG_PATH: Path = Path("configs/topics_sheets.json")
     TOPICS_SHEETS_TOKEN: Optional[str] = None
 
     # Legacy single-brand env vars retained for compatibility.

@@ -45,7 +45,7 @@ class Settings(BaseSettings):
 
     INT_METRICS_WEBHOOK_URL: Optional[str] = None
     INT_METRICS_TOKEN: Optional[str] = None
-    METRICS_CONFIG_PATH: Path = Path("config/metrics.json")
+    METRICS_CONFIG_PATH: Path = Path("configs/metrics.json")
 
     def resolved_openai_api_key(self) -> Optional[str]:
         return self.PROFESSIONALIZE_API_KEY or self.PROFESSIONALIZE_API_KEY_1 or self.OPENAI_API_KEY
