@@ -1,0 +1,23 @@
+key: conholdate_cloud
+display_name: Conholdate.Cloud
+website: https://blog.conholdate.cloud
+enabled: true
+
+outputs_root: ../outputs
+
+search_patterns:
+  - "conholdate.cloud"
+  - "conholdate total cloud"
+  - "conholdate total cloud sdk"
+  - "{product} cloud"
+  - "{product} for {platform}"
+
+repositories:
+  - repo_key: "blog"
+    repo_type: "blog"
+    repo_url: "https://github.com/conholdate-cloud/blog.conholdate.cloud"
+    branch: "main"
+    scope: "all"
+    root_subdir: "content/Conholdate.Cloud/total"
+    include_globs:
+      - "**/index.md"

@@ -1,0 +1,44 @@
+# Conholdate.Total Cloud SDK
+blog: conholdate_cloud
+key: total
+
+display_name: "Conholdate.Total Cloud SDK"
+description: "Cloud SDKs and REST APIs for document and image processing across PDF, Word, Excel, PowerPoint, email, OCR, and more."
+enabled: true
+
+platform_definitions:
+  net:
+    display_name: ".NET"
+    keywords: ["c#", "csharp", ".net", "dotnet", "vb.net", "asp.net"]
+
+  java:
+    display_name: "Java"
+    keywords: ["java", "j2se", "j2ee", "jsp"]
+
+  python:
+    display_name: "Python"
+    keywords: ["python", "py"]
+
+  nodejs:
+    display_name: "Node.js"
+    keywords: ["node.js", "nodejs", "javascript", "js"]
+
+  php:
+    display_name: "PHP"
+    keywords: ["php"]
+
+  ruby:
+    display_name: "Ruby"
+    keywords: ["ruby"]
+
+  go:
+    display_name: "Go"
+    keywords: ["go", "golang"]
+
+  rest:
+    display_name: "REST"
+    keywords: ["rest", "rest api", "cloud api", "curl", "http api"]
+
+  general:
+    display_name: "General"
+    keywords: ["conholdate.cloud", "conholdate total cloud", "document processing api"]
