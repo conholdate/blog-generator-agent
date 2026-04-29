@@ -51,7 +51,7 @@ class Settings(BaseSettings):
     DEBUG: bool = False
     GOOGLE_SERVICE_ACCOUNT_FILE: str = ""
     KRA_SHEET_ASPOSE_URL: str = "https://docs.google.com/spreadsheets/d/1WlOELtuKaWSRlkm799m_IBMC1mI2gBcimhmmQ0kjQyg/edit?gid=1078453049"
-    KRA_SHEET_CONHOLDATE_URL: str = ""
+    KRA_SHEET_CONHOLDATE_URL: str = "https://docs.google.com/spreadsheets/d/1XfpgO6ffnjUH6bnRSpKz-V575tmc3V1qepRKg5snK7E/edit?gid=0"
     KRA_SHEET_FAMILIARIZE_URL: str = ""
     KRA_SHEET_GROUPDOCS_URL: str = ""
     KRA_SHEET_ASPOSE_CLOUD_URL: str = ""
