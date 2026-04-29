@@ -258,6 +258,20 @@ def _topic_title_platform_display(title: str, platform: Optional[str]) -> str:
         return out
     return re.sub(re.escape(canonical), base, out, flags=re.IGNORECASE)
 
+
+def _content_platform_display(text: str, platform: Optional[str]) -> str:
+    out = " ".join((text or "").strip().split())
+    canonical = canonical_platform_label(platform)
+    header = platform_header_display(platform)
+    base = platform_base_display(platform)
+    if not out or not canonical or not base or canonical == base:
+        return out
+
+    for value in {canonical, header}:
+        if value and value != base:
+            out = re.sub(re.escape(value), base, out, flags=re.IGNORECASE)
+    return re.sub(r"\s{2,}", " ", out).strip(" -,:;")
+
 def _brand_slug(brand: str) -> str:
     return _normalize_topic_key(brand or "unknown")
 
@@ -456,11 +470,11 @@ def write_topics_markdown(
         if cluster_id is not None:
             lines.append(f"- **Cluster ID:** `{cluster_id}`")
         if persona:
-            lines.append(f"- **Target persona:** {persona}")
+            lines.append(f"- **Target persona:** {_content_platform_display(persona, platform)}")
         if angle:
-            lines.append(f"- **Blog post angle:** {angle}")
+            lines.append(f"- **Blog post angle:** {_content_platform_display(angle, platform)}")
         if primary_kw:
-            lines.append(f"- **Primary keyword:** `{primary_kw}`")
+            lines.append(f"- **Primary keyword:** `{_content_platform_display(primary_kw, platform)}`")
 
         if keyword_groups:
             core = [_display_keyword(k, product_name) for k in (keyword_groups.get("core_seo_keywords") or []) if k]
@@ -478,26 +492,31 @@ def write_topics_markdown(
         secondary_keywords = _dedupe_keywords(core or supporting_kws)
         if secondary_keywords:
             lines.append(
-                f"- **Secondary keywords (Core SEO Keywords):** {', '.join(f'`{kw}`' for kw in secondary_keywords)}"
+                "- **Secondary keywords (Core SEO Keywords):** "
+                + ", ".join(f'`{_content_platform_display(kw, platform)}`' for kw in secondary_keywords)
             )
 
         if long_tail:
-            lines.append(f"- **Long Tails keywords:** {', '.join(f'`{k}`' for k in long_tail)}")
+            lines.append(
+                f"- **Long Tails keywords:** {', '.join(f'`{_content_platform_display(k, platform)}`' for k in long_tail)}"
+            )
         if context:
-            lines.append(f"- **Semantic SEO keywords:** {', '.join(f'`{k}`' for k in context)}")
+            lines.append(
+                f"- **Semantic SEO keywords:** {', '.join(f'`{_content_platform_display(k, platform)}`' for k in context)}"
+            )
 
         if outline:
             lines.append("")
             lines.append("**Outline for the article:**")
             for bullet in outline:
-                line_item = refiner.to_title_case(bullet)
+                line_item = refiner.to_title_case(_content_platform_display(bullet, platform))
                 lines.append(f"- {line_item}")
 
         if editorial_notes:
             lines.append("")
             lines.append("**Other important and relevant things:**")
             for note in editorial_notes:
-                lines.append(f"- {refiner.to_sentence_case(note)}")
+                lines.append(f"- {refiner.to_sentence_case(_content_platform_display(note, platform))}")
 
         lines.append("")
         lines.append("---")
@@ -537,9 +556,11 @@ def write_missing_topics_markdown(
         for idx, topic in enumerate(result.topics, start=1):
             lines.append(f"### {idx}. {refiner.to_title_case(_topic_title_platform_display(topic.title, platform))}")
             lines.append(f"- **Cluster ID:** `{topic.cluster_id}`")
-            lines.append(f"- **Target persona:** {topic.target_persona}")
-            lines.append(f"- **Blog post angle:** {topic.angle}")
-            lines.append(f"- **Primary keyword:** `{_display_keyword(topic.primary_keyword, selection.product)}`")
+            lines.append(f"- **Target persona:** {_content_platform_display(topic.target_persona, platform)}")
+            lines.append(f"- **Blog post angle:** {_content_platform_display(topic.angle, platform)}")
+            lines.append(
+                f"- **Primary keyword:** `{_content_platform_display(_display_keyword(topic.primary_keyword, selection.product), platform)}`"
+            )
 
             supporting = [_display_keyword(k, selection.product) for k in topic.supporting_keywords or []]
             supporting = [k for k in supporting if k]
@@ -558,25 +579,30 @@ def write_missing_topics_markdown(
             secondary_keywords = _dedupe_keywords(core or supporting)
             if secondary_keywords:
                 lines.append(
-                    f"- **Secondary keywords (Core SEO Keywords):** {', '.join(f'`{k}`' for k in secondary_keywords)}"
+                    "- **Secondary keywords (Core SEO Keywords):** "
+                    + ", ".join(f'`{_content_platform_display(k, platform)}`' for k in secondary_keywords)
                 )
             if long_tail:
-                lines.append(f"- **Long Tails keywords:** {', '.join(f'`{k}`' for k in long_tail)}")
+                lines.append(
+                    f"- **Long Tails keywords:** {', '.join(f'`{_content_platform_display(k, platform)}`' for k in long_tail)}"
+                )
             if context:
-                lines.append(f"- **Semantic SEO keywords:** {', '.join(f'`{k}`' for k in context)}")
+                lines.append(
+                    f"- **Semantic SEO keywords:** {', '.join(f'`{_content_platform_display(k, platform)}`' for k in context)}"
+                )
 
             if topic.outline:
                 lines.append("")
                 lines.append("**Outline for the article:**")
                 for bullet in topic.outline:
-                    lines.append(f"- {refiner.to_title_case(bullet)}")
+                    lines.append(f"- {refiner.to_title_case(_content_platform_display(bullet, platform))}")
 
             editorial_notes = getattr(topic, "editorial_notes", []) or []
             if editorial_notes:
                 lines.append("")
                 lines.append("**Other important and relevant things:**")
                 for note in editorial_notes:
-                    lines.append(f"- {refiner.to_sentence_case(note)}")
+                    lines.append(f"- {refiner.to_sentence_case(_content_platform_display(note, platform))}")
 
             lines.append("")
         lines.append("---")
