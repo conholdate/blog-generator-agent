@@ -1,0 +1,34 @@
+{
+  "sheet_name": "All Missing Topics",
+  "mode": "replace",
+  "headers": [
+    "Brand",
+    "Product",
+    "Baseline Platform",
+    "Category",
+    "Sub Category",
+    "Topic",
+    "NET",
+    "JAVA",
+    "CPP",
+    "PHP",
+    "SHAREPOINT",
+    "JASPERREPORTS",
+    "REPORTING SERVICES",
+    "JAVASCRIPT",
+    "GO",
+    "RUST",
+    "NODEJS",
+    "PYTHON",
+    "ANDROID",
+    "GENERAL"
+  ],
+  "rows": [],
+  "meta": {
+    "source_count": 1,
+    "row_count": 0,
+    "sources": [
+      "/home/runner/work/blog-generator-agent/blog-generator-agent/outputs/conholdate_cloud/total/coverage/blogs_to_blogs/java/coverage.json"
+    ]
+  }
+}
