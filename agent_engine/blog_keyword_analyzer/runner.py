@@ -186,9 +186,33 @@ def _project_root(start: Optional[Path] = None) -> Path:
         p = p.parent
     return Path.cwd().resolve()
 
+def _canonical_brand_folder(brand: str) -> str:
+    key = " ".join((brand or "").strip().split()).lower()
+    brand_map = {
+        "aspose": "Aspose",
+        "aspose.cloud": "Aspose.Cloud",
+        "aspose-cloud": "Aspose.Cloud",
+        "conholdate": "Conholdate",
+        "conholdate.cloud": "Conholdate.Cloud",
+        "conholdate-cloud": "Conholdate.Cloud",
+        "groupdocs": "GroupDocs",
+        "groupdocs.cloud": "GroupDocs.Cloud",
+        "groupdocs-cloud": "GroupDocs.Cloud",
+        "familiarize": "Familiarize",
+    }
+    return brand_map.get(key, brand)
+
 def _resolve_brand_output_dir(brand_folder: str) -> Path:
+    configured = Path(settings.KRA_OUTPUT_DIR)
+    if settings.KRA_OUTPUT_DIR:
+        if not configured.is_absolute():
+            configured = (_project_root() / configured).resolve()
+        if configured.name.lower() == "output":
+            configured.mkdir(parents=True, exist_ok=True)
+            return configured
+
     root = _project_root()
-    out_dir = (root / "content" / brand_folder / "output").resolve()
+    out_dir = (root / "content" / _canonical_brand_folder(brand_folder) / "output").resolve()
     out_dir.mkdir(parents=True, exist_ok=True)
     return out_dir
 
