@@ -1,0 +1,27 @@
+# Aspose.OCR Cloud SDK
+blog: aspose_cloud
+key: ocr
+display_name: "Aspose.OCR Cloud SDK"
+description: "Perform OCR in cloud applications with Aspose.OCR Cloud."
+enabled: true
+
+platform_definitions:
+  net:
+    display_name: ".NET"
+    keywords: ["c#", "csharp", ".net", "dotnet", "aspose.ocr cloud sdk for .net"]
+  java:
+    display_name: "Java"
+    keywords: ["java", "aspose.ocr cloud sdk for java"]
+  android:
+    display_name: "Android"
+    keywords: ["android", "aspose.ocr cloud sdk for android"]
+  python:
+    display_name: "Python"
+    keywords: ["python", "py", "aspose.ocr cloud sdk for python"]
+  nodejs:
+    display_name: "Node.js"
+    keywords: ["node.js", "nodejs", "javascript", "js", "aspose.ocr cloud sdk for node.js"]
+  general:
+    display_name: "General"
+    keywords: ["aspose.ocr cloud", "ocr cloud api"]
+

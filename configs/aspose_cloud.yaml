@@ -1,0 +1,24 @@
+key: aspose_cloud
+display_name: Aspose.Cloud
+website: https://blog.aspose.cloud
+enabled: true
+
+outputs_root: ../outputs
+
+search_patterns:
+  - "aspose.cloud"
+  - "aspose cloud"
+  - "{product}"
+  - "{product} sdk"
+  - "{product} for {platform}"
+
+repositories:
+  - repo_key: "blog"
+    repo_type: "blog"
+    repo_url: "https://github.com/aspose-cloud/aspose-cloud-blog"
+    branch: "master"
+    scope: "all"
+    root_subdir: "content"
+    include_globs:
+      - "**/index.md"
+

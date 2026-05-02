@@ -1,0 +1,30 @@
+# Aspose.3D Cloud SDK
+blog: aspose_cloud
+key: 3d
+display_name: "Aspose.3D Cloud SDK"
+description: "Create, modify, transform, and convert 3D file formats with Aspose.3D Cloud."
+enabled: true
+
+platform_definitions:
+  net:
+    display_name: ".NET"
+    keywords: ["c#", "csharp", ".net", "dotnet", "aspose.3d cloud sdk for .net"]
+  java:
+    display_name: "Java"
+    keywords: ["java", "aspose.3d cloud sdk for java"]
+  php:
+    display_name: "PHP"
+    keywords: ["php", "aspose.3d cloud sdk for php"]
+  python:
+    display_name: "Python"
+    keywords: ["python", "py", "aspose.3d cloud sdk for python"]
+  nodejs:
+    display_name: "Node.js"
+    keywords: ["node.js", "nodejs", "javascript", "js", "aspose.3d cloud sdk for node.js"]
+  go:
+    display_name: "Go"
+    keywords: ["go", "golang", "aspose.3d cloud sdk for go"]
+  general:
+    display_name: "General"
+    keywords: ["aspose.3d cloud", "3d cloud api"]
+

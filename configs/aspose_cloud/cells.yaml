@@ -1,0 +1,33 @@
+# Aspose.Cells Cloud SDK
+blog: aspose_cloud
+key: cells
+display_name: "Aspose.Cells Cloud SDK"
+description: "Create, edit, and convert Excel spreadsheets in cloud applications with Aspose.Cells Cloud."
+enabled: true
+
+platform_definitions:
+  net:
+    display_name: ".NET"
+    keywords: ["c#", "csharp", ".net", "dotnet", "aspose.cells cloud sdk for .net"]
+  java:
+    display_name: "Java"
+    keywords: ["java", "aspose.cells cloud sdk for java"]
+  php:
+    display_name: "PHP"
+    keywords: ["php", "aspose.cells cloud sdk for php"]
+  android:
+    display_name: "Android"
+    keywords: ["android", "aspose.cells cloud sdk for android"]
+  python:
+    display_name: "Python"
+    keywords: ["python", "py", "aspose.cells cloud sdk for python"]
+  nodejs:
+    display_name: "Node.js"
+    keywords: ["node.js", "nodejs", "javascript", "js", "aspose.cells cloud sdk for node.js"]
+  go:
+    display_name: "Go"
+    keywords: ["go", "golang", "aspose.cells cloud sdk for go"]
+  general:
+    display_name: "General"
+    keywords: ["aspose.cells cloud", "excel cloud api", "spreadsheet cloud api"]
+

@@ -1,0 +1,36 @@
+# Aspose.Slides Cloud SDK
+blog: aspose_cloud
+key: slides
+display_name: "Aspose.Slides Cloud SDK"
+description: "Create, edit, and convert PowerPoint presentations with Aspose.Slides Cloud."
+enabled: true
+
+platform_definitions:
+  net:
+    display_name: ".NET"
+    keywords: ["c#", "csharp", ".net", "dotnet", "aspose.slides cloud sdk for .net"]
+  java:
+    display_name: "Java"
+    keywords: ["java", "aspose.slides cloud sdk for java"]
+  cpp:
+    display_name: "C++"
+    keywords: ["c++", "cpp", "cplusplus", "aspose.slides cloud sdk for c++"]
+  php:
+    display_name: "PHP"
+    keywords: ["php", "aspose.slides cloud sdk for php"]
+  android:
+    display_name: "Android"
+    keywords: ["android", "aspose.slides cloud sdk for android"]
+  python:
+    display_name: "Python"
+    keywords: ["python", "py", "aspose.slides cloud sdk for python"]
+  nodejs:
+    display_name: "Node.js"
+    keywords: ["node.js", "nodejs", "javascript", "js", "aspose.slides cloud sdk for node.js"]
+  go:
+    display_name: "Go"
+    keywords: ["go", "golang", "aspose.slides cloud sdk for go"]
+  general:
+    display_name: "General"
+    keywords: ["aspose.slides cloud", "powerpoint cloud api", "presentation cloud api"]
+
