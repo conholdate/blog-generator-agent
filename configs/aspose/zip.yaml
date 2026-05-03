@@ -1,0 +1,44 @@
+# Aspose.ZIP
+blog: aspose
+key: zip
+platform_definitions:
+  net:
+    display_name: ".NET"
+    keywords: ["c#", "csharp", ".net", "dotnet", "vb.net", "visual basic"]
+  java:
+    display_name: "Java"
+    keywords: ["java", "j2se", "j2ee", "jsp"]
+  python_net:
+    display_name: "Python via .NET"
+    keywords: ["python", "python-net", "py", "python .net", "python via .net"]
+
+display_name: "Aspose.ZIP"
+description: "Archive compression, extraction, and encryption APIs"
+enabled: true
+
+doc_repo: "https://github.com/aspose-zip/Aspose.ZIP-Documentation"
+doc_branch: "master"
+api_repo: "https://github.com/aspose-zip/Aspose.ZIP-API-References"
+api_branch: "main"
+tut_repo: "https://github.com/aspose-zip/aspose-zip-reference-tutorials"
+tut_branch: "main"
+
+platforms:
+  - net:
+      definition: net
+      doc_path: "en/net"
+      api_path: "english/net"
+      tut_path: "zip"
+      enabled: true
+  - java:
+      definition: java
+      doc_path: "en/java"
+      api_path: "english/java"
+      tut_path: "zip"
+      enabled: true
+  - python_net:
+      definition: python_net
+      doc_path: "en/python-via-net"
+      api_path: "english/python-via-net"
+      tut_path: "zip"
+      enabled: true

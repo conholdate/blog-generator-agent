@@ -1,0 +1,30 @@
+# Aspose.Diagram Cloud SDK
+blog: aspose_cloud
+key: diagram
+display_name: "Aspose.Diagram Cloud SDK"
+description: "Create, edit, convert, and print Visio diagrams with Aspose.Diagram Cloud."
+enabled: true
+
+platform_definitions:
+  net:
+    display_name: ".NET"
+    keywords: ["c#", "csharp", ".net", "dotnet", "aspose.diagram cloud sdk for .net"]
+  java:
+    display_name: "Java"
+    keywords: ["java", "aspose.diagram cloud sdk for java"]
+  php:
+    display_name: "PHP"
+    keywords: ["php", "aspose.diagram cloud sdk for php"]
+  android:
+    display_name: "Android"
+    keywords: ["android", "aspose.diagram cloud sdk for android"]
+  python:
+    display_name: "Python"
+    keywords: ["python", "py", "aspose.diagram cloud sdk for python"]
+  nodejs:
+    display_name: "Node.js"
+    keywords: ["node.js", "nodejs", "javascript", "js", "aspose.diagram cloud sdk for node.js"]
+  general:
+    display_name: "General"
+    keywords: ["aspose.diagram cloud", "visio cloud api", "diagram cloud api"]
+

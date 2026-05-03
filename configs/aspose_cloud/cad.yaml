@@ -1,0 +1,27 @@
+# Aspose.CAD Cloud SDK
+blog: aspose_cloud
+key: cad
+display_name: "Aspose.CAD Cloud SDK"
+description: "Convert and process CAD drawings in cloud applications with Aspose.CAD Cloud."
+enabled: true
+
+platform_definitions:
+  net:
+    display_name: ".NET"
+    keywords: ["c#", "csharp", ".net", "dotnet", "aspose.cad cloud sdk for .net"]
+  java:
+    display_name: "Java"
+    keywords: ["java", "aspose.cad cloud sdk for java"]
+  php:
+    display_name: "PHP"
+    keywords: ["php", "aspose.cad cloud sdk for php"]
+  python:
+    display_name: "Python"
+    keywords: ["python", "py", "aspose.cad cloud sdk for python"]
+  nodejs:
+    display_name: "Node.js"
+    keywords: ["node.js", "nodejs", "javascript", "js", "aspose.cad cloud sdk for node.js"]
+  general:
+    display_name: "General"
+    keywords: ["aspose.cad cloud", "cad cloud api"]
+

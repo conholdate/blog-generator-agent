@@ -1,150 +1,150 @@
-# Content Indexing Agent (Incremental Indexer)
+# Content Indexing Agent (`cg-index`)
 
-## 1) What it is
+## 1. Purpose
 
-The **Content Indexing Agent** is a CLI-driven indexing pipeline that **clones content repositories** for a selected **brand → product → platform** and produces **incremental JSONL indexes** that can be reused by downstream coverage / gap-analysis agents. 
+`cg-index` is a CLI-driven indexing pipeline. It clones configured content repositories for a selected brand, product, and platform, then writes incremental JSONL indexes used by `cg-cover`.
 
-It is designed for:
+It is intended for:
 
-* **Local development** (fast reruns while iterating)
-* **CI/CD (GitHub Actions)** (incremental updates instead of re-indexing everything) 
+- local development
+- repeatable CI runs
+- downstream coverage and gap analysis
 
----
+## 2. Outputs
 
-## 2) What it produces
+Indexes are written under:
 
-All outputs are written under:
-
-```
+```text
 outputs/<brand>/<product>/
   indexes/<repo_key>/
-    all.jsonl            # for scope=all repos (e.g., blogs)
-    <platform>.jsonl     # for scope=platform repos (e.g., docs/api/tutorials)
+    all.jsonl
+    <platform>.jsonl
   state/
     <repo_key>_state.json
     <repo_key>__<platform>.json
   cache/
-    embeddings.sqlite    # embedding cache (text hash -> embedding vector)
+    embeddings.sqlite
 ```
 
-Repositories are cloned under:
+Repository clones are stored under:
 
+```text
+outputs/_repos/<brand>__<product>__<repo_key>/
 ```
-outputs/_repos/<brand>**<product>**<repo_key>/
+
+## 3. Incremental Behavior
+
+On each run, the indexer:
+
+1. Loads brand and product YAML configuration.
+2. Clones or updates configured repositories.
+3. Discovers eligible Markdown files.
+4. Computes SHA-256 fingerprints.
+5. Reprocesses only new or changed files.
+6. Reuses cached embeddings for identical text.
+7. Optionally deletes index records for removed files with `--delete-missing`.
+8. Writes JSONL index and state files.
+
+## 4. Configuration
+
+Preferred API key:
+
+```env
+PROFESSIONALIZE_API_KEY=
 ```
 
+Backward-compatible key:
 
+```env
+PROFESSIONALIZE_API_KEY_1=
+```
 
----
+Fallback:
 
-## 3) How it works (incremental indexing)
+```env
+OPENAI_API_KEY=
+```
 
-On every run, the agent:
+Optional provider/model settings:
 
-1. **Discovers eligible files** (based on configured include globs / repo rules).
-2. **Fingerprints each file** (SHA-256).
-3. Reprocesses **only new or changed files** (incremental).
-4. Reuses an **embedding cache** to avoid re-embedding identical text.
-5. Optionally deletes index records for removed files using `--delete-missing`. 
+```env
+PROFESSIONALIZE_BASE_URL=https://llm.professionalize.com/v1
+PROFESSIONALIZE_LLM_MODEL=gpt-oss
+PROFESSIONALIZE_EMBEDDING_MODEL=qwen3-embedding-8b
+OPENAI_BASE_URL=
+```
 
-This makes reruns efficient, especially in CI where content updates are typically small between runs. 
+Metrics are enabled by default and optional by default. Agent metadata, stages, and webhook URLs are loaded from `configs/metrics.json`, while metrics tokens remain in `.env`.
 
----
+If `METRICS_REQUIRED=true`, metrics send failures fail the run.
 
-## 4) Requirements
-
-* Python **3.11+**
-* Git installed (repo cloning)
-* API credentials (see Environment Variables below) 
-
----
-
-## 5) Install
-
-From repo root:
+## 5. Install
 
 ```bash
 python -m pip install --upgrade pip
 pip install -e .
 ```
 
-This registers the CLI:
+For tests and evaluation:
 
 ```bash
-cg-index --help
+pip install -e ".[dev]"
 ```
 
----
+## 6. Commands
 
-## 6) Environment variables
-
-Preferred:
-
-* `PROFESSIONALIZE_API_KEY`
-* `PROFESSIONALIZE_BASE_URL` (optional)
-* `PROFESSIONALIZE_LLM_MODEL` (optional; default in project)
-* `PROFESSIONALIZE_EMBEDDING_MODEL` (optional; default in project)
-
-Local fallback:
-
-* `OPENAI_API_KEY`
-* `OPENAI_BASE_URL` (optional)
-
-Output directory override:
-
-* `CG_OUTPUTS_DIR` (optional; default: `outputs/`) 
-
-The CLI also loads a local `.env` automatically. 
-
----
-
-## 7) How to run
-
-### A) Deterministic (recommended for CI)
+Deterministic run:
 
 ```bash
 cg-index run \
-  --brand path/to/blogs.yaml \
-  --product path/to/cells.yaml \
+  --brand configs/aspose.yaml \
+  --product configs/aspose/cells.yaml \
   --platform net \
   --steps blog,docs,tutorials,api
 ```
 
-* `--steps` is a CSV list of repo keys (defaults to `blog,docs,tutorials,api`).
-
-### B) Run a single step (example: only blogs)
+Run only blogs:
 
 ```bash
 cg-index run \
-  --brand path/to/aspose.yaml \
-  --product path/to/cells.yaml \
+  --brand configs/aspose.yaml \
+  --product configs/aspose/cells.yaml \
   --platform net \
   --steps blog
 ```
 
-### C) Delete missing content from the index
+Delete missing content from the index:
 
 ```bash
 cg-index run \
-  --brand path/to/aspose.yaml \
-  --product path/to/cells.yaml \
+  --brand configs/aspose.yaml \
+  --product configs/aspose/cells.yaml \
   --platform net \
   --steps blog,docs \
   --delete-missing
 ```
 
-### D) Interactive selection (local dev convenience)
-
-If you have a directory of product YAMLs:
+Interactive product selection:
 
 ```bash
 cg-index run \
-  --brand path/to/aspose.yaml \
-  --products-dir path/to/products \
+  --brand configs/aspose.yaml \
+  --products-dir configs/aspose \
   --platform net
 ```
----
 
-## 8) What to do next
+## 7. Validation
 
-This indexer is intended to feed **coverage and gap analysis agents**, which consume the generated JSONL indexes under `outputs/<brand>/<product>/indexes/...`. 
+Run the test suite:
+
+```bash
+python -m pytest tests
+```
+
+Run coverage matching evaluation:
+
+```bash
+python scripts/evaluate_coverage.py --fixtures tests/fixtures/evaluation
+```
+
+The evaluator is offline and disables metrics and Sheets posting.

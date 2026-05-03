@@ -1,0 +1,27 @@
+# Aspose.OMR Cloud SDK
+blog: aspose_cloud
+key: omr
+display_name: "Aspose.OMR Cloud SDK"
+description: "Capture human-marked data from tests, questionnaires, and surveys with Aspose.OMR Cloud."
+enabled: true
+
+platform_definitions:
+  net:
+    display_name: ".NET"
+    keywords: ["c#", "csharp", ".net", "dotnet", "aspose.omr cloud sdk for .net"]
+  java:
+    display_name: "Java"
+    keywords: ["java", "aspose.omr cloud sdk for java"]
+  php:
+    display_name: "PHP"
+    keywords: ["php", "aspose.omr cloud sdk for php"]
+  python:
+    display_name: "Python"
+    keywords: ["python", "py", "aspose.omr cloud sdk for python"]
+  nodejs:
+    display_name: "Node.js"
+    keywords: ["node.js", "nodejs", "javascript", "js", "aspose.omr cloud sdk for node.js"]
+  general:
+    display_name: "General"
+    keywords: ["aspose.omr cloud", "omr cloud api"]
+

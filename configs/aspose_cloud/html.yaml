@@ -1,0 +1,36 @@
+# Aspose.HTML Cloud SDK
+blog: aspose_cloud
+key: html
+display_name: "Aspose.HTML Cloud SDK"
+description: "Manipulate HTML, CSS, and render HTML to PDF or images with Aspose.HTML Cloud."
+enabled: true
+
+platform_definitions:
+  net:
+    display_name: ".NET"
+    keywords: ["c#", "csharp", ".net", "dotnet", "aspose.html cloud sdk for .net"]
+  java:
+    display_name: "Java"
+    keywords: ["java", "aspose.html cloud sdk for java"]
+  cpp:
+    display_name: "C++"
+    keywords: ["c++", "cpp", "cplusplus", "aspose.html cloud sdk for c++"]
+  php:
+    display_name: "PHP"
+    keywords: ["php", "aspose.html cloud sdk for php"]
+  android:
+    display_name: "Android"
+    keywords: ["android", "aspose.html cloud sdk for android"]
+  python:
+    display_name: "Python"
+    keywords: ["python", "py", "aspose.html cloud sdk for python"]
+  nodejs:
+    display_name: "Node.js"
+    keywords: ["node.js", "nodejs", "javascript", "js", "aspose.html cloud sdk for node.js"]
+  go:
+    display_name: "Go"
+    keywords: ["go", "golang", "aspose.html cloud sdk for go"]
+  general:
+    display_name: "General"
+    keywords: ["aspose.html cloud", "html cloud api"]
+

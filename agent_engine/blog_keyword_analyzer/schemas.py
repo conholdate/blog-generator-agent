@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from typing import List, Optional, Literal, Dict
 
-from pydantic import BaseModel, Field, validator
+from pydantic import BaseModel, Field, ValidationInfo, field_validator
 from agent_engine.blog_keyword_analyzer.tools.normalization import canonical_product_name, normalize_display_text
 
 
@@ -23,7 +23,8 @@ class KeywordRecord(BaseModel):
     competition: Optional[float] = None
     competition_label: Optional[str] = None
 
-    @validator("keyword")
+    @field_validator("keyword")
+    @classmethod
     def norm_kw(cls, v: str) -> str:
         # Normalize for clustering & deduplication
         return v.strip().lower()
@@ -76,7 +77,7 @@ class TopicIdea(BaseModel):
     supporting_keywords: List[str]
     keyword_groups: SupportingKeywordGroups = Field(default_factory=SupportingKeywordGroups)
     editorial_notes: List[str] = Field(default_factory=list)
-    internal_links: List[str] = []
+    internal_links: List[str] = Field(default_factory=list)
 
 
 class RunRequest(BaseModel):
@@ -105,9 +106,11 @@ class RunRequest(BaseModel):
         }
     )
 
-    @validator("product")
-    def norm_product(cls, v: str, values: Dict[str, str]) -> str:
-        return canonical_product_name(values.get("brand"), v.strip())
+    @field_validator("product")
+    @classmethod
+    def norm_product(cls, v: str, info: ValidationInfo) -> str:
+        brand = info.data.get("brand") if info.data else None
+        return canonical_product_name(brand, v.strip())
 
 
 class RunResult(BaseModel):
@@ -125,7 +128,8 @@ class RunResult(BaseModel):
     clusters: List[Cluster]
     topics: List[TopicIdea]
 
-    @validator("product")
+    @field_validator("product")
+    @classmethod
     def norm_product(cls, v: str) -> str:
         return normalize_display_text(v.strip())
 

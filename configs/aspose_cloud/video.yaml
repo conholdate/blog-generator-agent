@@ -1,0 +1,15 @@
+# Aspose.Video Cloud SDK
+blog: aspose_cloud
+key: video
+display_name: "Aspose.Video Cloud SDK"
+description: "Manipulate and convert video files with Aspose.Video Cloud."
+enabled: true
+
+platform_definitions:
+  net:
+    display_name: ".NET"
+    keywords: ["c#", "csharp", ".net", "dotnet", "aspose.video cloud sdk for .net"]
+  general:
+    display_name: "General"
+    keywords: ["aspose.video cloud", "video cloud api"]
+

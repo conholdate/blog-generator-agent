@@ -1,0 +1,30 @@
+# Aspose.Imaging Cloud SDK
+blog: aspose_cloud
+key: imaging
+display_name: "Aspose.Imaging Cloud SDK"
+description: "Create, edit, compare, and convert images in cloud applications with Aspose.Imaging Cloud."
+enabled: true
+
+platform_definitions:
+  net:
+    display_name: ".NET"
+    keywords: ["c#", "csharp", ".net", "dotnet", "aspose.imaging cloud sdk for .net"]
+  java:
+    display_name: "Java"
+    keywords: ["java", "aspose.imaging cloud sdk for java"]
+  php:
+    display_name: "PHP"
+    keywords: ["php", "aspose.imaging cloud sdk for php"]
+  android:
+    display_name: "Android"
+    keywords: ["android", "aspose.imaging cloud sdk for android"]
+  python:
+    display_name: "Python"
+    keywords: ["python", "py", "aspose.imaging cloud sdk for python"]
+  nodejs:
+    display_name: "Node.js"
+    keywords: ["node.js", "nodejs", "javascript", "js", "aspose.imaging cloud sdk for node.js"]
+  general:
+    display_name: "General"
+    keywords: ["aspose.imaging cloud", "image cloud api", "imaging cloud api"]
+

@@ -1,0 +1,32 @@
+# Aspose.Words Cloud SDK
+blog: aspose_cloud
+key: words
+display_name: "Aspose.Words Cloud SDK"
+description: "Create, edit, convert, and print Word documents with Aspose.Words Cloud."
+enabled: true
+
+platform_definitions:
+  net:
+    display_name: ".NET"
+    keywords: ["c#", "csharp", ".net", "dotnet", "aspose.words cloud sdk for .net"]
+  java:
+    display_name: "Java"
+    keywords: ["java", "aspose.words cloud sdk for java"]
+  cpp:
+    display_name: "C++"
+    keywords: ["c++", "cpp", "cplusplus", "aspose.words cloud sdk for c++"]
+  php:
+    display_name: "PHP"
+    keywords: ["php", "aspose.words cloud sdk for php"]
+  python:
+    display_name: "Python"
+    keywords: ["python", "py", "aspose.words cloud sdk for python"]
+  nodejs:
+    display_name: "Node.js"
+    keywords: ["node.js", "nodejs", "javascript", "js", "aspose.words cloud sdk for node.js"]
+  go:
+    display_name: "Go"
+    keywords: ["go", "golang", "aspose.words cloud sdk for go"]
+  general:
+    display_name: "General"
+    keywords: ["aspose.words cloud", "word cloud api", "document cloud api"]

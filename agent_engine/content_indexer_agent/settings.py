@@ -1,52 +1,84 @@
+from __future__ import annotations
 
-from dotenv import load_dotenv
 from pathlib import Path
-from pydantic import Field, SecretStr
+from typing import Optional
+
+from pydantic import Field
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
-load_dotenv()  # loads .env from project root by default
+from agent_engine.config_loader import load_agent_metrics_config
 
 
 class Settings(BaseSettings):
     """
-        Settings are loaded in this order (typical):
-        1) Environment variables (CI/CD / repo secrets / container env)
-        2) .env file (local dev)
-        3) Defaults (non-secret safe defaults only)
-        """
+    Settings are loaded from environment variables first, then `.env`, then
+    non-secret defaults. Do not put webhook URLs, API keys, or tokens here.
+    """
 
-    # Tell pydantic-settings where to look for .env
     model_config = SettingsConfigDict(
         env_file=Path(".env"),
         env_file_encoding="utf-8",
         extra="ignore",
     )
-    PROFESSIONALIZE_BASE_URL: str ="https://llm.professionalize.com/v1"
-    PROFESSIONALIZE_API_KEY_1: SecretStr | None = None
-    PROFESSIONALIZE_API_KEY: str = PROFESSIONALIZE_API_KEY_1
 
-    # Standard OpenAI key (used when no custom base URL is set)
-    OPENAI_API_KEY: str | None = None
+    PROFESSIONALIZE_BASE_URL: Optional[str] = "https://llm.professionalize.com/v1"
+    PROFESSIONALIZE_API_KEY: Optional[str] = None
+    PROFESSIONALIZE_API_KEY_1: Optional[str] = None
 
-    # --- Model defaults ---
+    OPENAI_API_KEY: Optional[str] = None
+    OPENAI_BASE_URL: Optional[str] = None
+
     PROFESSIONALIZE_LLM_MODEL: str = "gpt-oss"
     PROFESSIONALIZE_EMBEDDING_MODEL: str = "qwen3-embedding-8b"
 
-    # Output root
-    OUTPUTS_DIR: Path = Path("outputs")  # ✅ Path, supports `/`
+    OUTPUTS_DIR: Path = Path("outputs")
 
-    # Metrics
     METRICS_ENABLED: bool = True
+    METRICS_REQUIRED: bool = False
     METRICS_TIMEOUT_S: float = 10.0
+    METRICS_AGENT_KEY: str = "content_indexer_agent"
+    METRICS_WEBHOOK_URL: Optional[str] = None
+    METRICS_TOKEN: Optional[str] = None
+    METRICS_AGENT_NAME: Optional[str] = None
+    METRICS_AGENT_OWNER: Optional[str] = None
+    METRICS_STAGES: list[str] = Field(default_factory=list)
 
-    # --- NEW: Metrics / Google Apps Script webhook ---
-    METRICS_WEBHOOK_URL: str = "https://script.google.com/macros/s/AKfycbyCHwElrM6RcYLi0JNQAkJmzGrBjAhf28mKXVyub_6SdaZ2ITvzCwfM5xCLE7rmuxio/exec"
-    METRICS_TOKEN: str = "lM6iU2mW0gV1eZ"
-    METRICS_AGENT_NAME: str = "Content Indexer Agent"   # or whatever run-level name you want
-    METRICS_AGENT_OWNER: str = "Muzammil Khan"
+    INT_METRICS_WEBHOOK_URL: Optional[str] = None
+    INT_METRICS_TOKEN: Optional[str] = None
+    METRICS_CONFIG_PATH: Path = Path("configs/metrics.json")
 
-    # --- Internal Blog Teams Metrics / Google Apps Script webhook ---
-    INT_METRICS_WEBHOOK_URL: str = "https://script.google.com/macros/s/AKfycbwYyPBs3ox6xhYfznVpu4Gh8T4l7cXrAIj1m_y1g-vWn6tyP_LAkv3eo6W2EZYAeHgLag/exec"
-    INT_METRICS_TOKEN: str = "blog_team_agent-2026"
+    def resolved_openai_api_key(self) -> Optional[str]:
+        return self.PROFESSIONALIZE_API_KEY or self.PROFESSIONALIZE_API_KEY_1 or self.OPENAI_API_KEY
+
+    def resolved_openai_base_url(self) -> Optional[str]:
+        return self.PROFESSIONALIZE_BASE_URL or self.OPENAI_BASE_URL
+
+    def model_post_init(self, __context: object) -> None:
+        metrics_config_path = self.METRICS_CONFIG_PATH
+        repo_root = Path.cwd().resolve()
+        if not metrics_config_path.is_absolute():
+            metrics_config_path = (repo_root / metrics_config_path).resolve()
+        self.METRICS_CONFIG_PATH = metrics_config_path
+
+        metrics_cfg = load_agent_metrics_config(self.METRICS_CONFIG_PATH, self.METRICS_AGENT_KEY)
+        webhooks = metrics_cfg.get("webhooks") or {}
+        primary_cfg = webhooks.get("primary") or {}
+        internal_cfg = webhooks.get("internal") or {}
+        self.METRICS_AGENT_NAME = str(
+            self.METRICS_AGENT_NAME or metrics_cfg.get("agent_name") or "Content Indexer Agent"
+        ).strip()
+        self.METRICS_AGENT_OWNER = str(
+            self.METRICS_AGENT_OWNER or metrics_cfg.get("agent_owner") or "Muzammil Khan"
+        ).strip()
+        if not self.METRICS_WEBHOOK_URL:
+            self.METRICS_WEBHOOK_URL = str(primary_cfg.get("url") or "").strip() or None
+        if not self.METRICS_TOKEN:
+            self.METRICS_TOKEN = str(primary_cfg.get("token") or "").strip() or None
+        if not self.INT_METRICS_WEBHOOK_URL:
+            self.INT_METRICS_WEBHOOK_URL = str(internal_cfg.get("url") or "").strip() or None
+        if not self.INT_METRICS_TOKEN:
+            self.INT_METRICS_TOKEN = str(internal_cfg.get("token") or "").strip() or None
+        self.METRICS_STAGES = [str(stage).strip() for stage in (metrics_cfg.get("stages") or []) if str(stage).strip()]
+
 
 settings = Settings()

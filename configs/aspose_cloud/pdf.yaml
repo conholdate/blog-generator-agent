@@ -1,0 +1,30 @@
+# Aspose.PDF Cloud SDK
+blog: aspose_cloud
+key: pdf
+display_name: "Aspose.PDF Cloud SDK"
+description: "Create, edit, convert, sign, and render PDF documents with Aspose.PDF Cloud."
+enabled: true
+
+platform_definitions:
+  net:
+    display_name: ".NET"
+    keywords: ["c#", "csharp", ".net", "dotnet", "aspose.pdf cloud sdk for .net"]
+  java:
+    display_name: "Java"
+    keywords: ["java", "aspose.pdf cloud sdk for java"]
+  php:
+    display_name: "PHP"
+    keywords: ["php", "aspose.pdf cloud sdk for php"]
+  android:
+    display_name: "Android"
+    keywords: ["android", "aspose.pdf cloud sdk for android"]
+  python:
+    display_name: "Python"
+    keywords: ["python", "py", "aspose.pdf cloud sdk for python"]
+  nodejs:
+    display_name: "Node.js"
+    keywords: ["node.js", "nodejs", "javascript", "js", "aspose.pdf cloud sdk for node.js"]
+  general:
+    display_name: "General"
+    keywords: ["aspose.pdf cloud", "pdf cloud api"]
+

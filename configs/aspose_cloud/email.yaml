@@ -1,0 +1,27 @@
+# Aspose.Email Cloud SDK
+blog: aspose_cloud
+key: email
+display_name: "Aspose.Email Cloud SDK"
+description: "Manipulate email messages and archives with Aspose.Email Cloud SDKs and REST APIs."
+enabled: true
+
+platform_definitions:
+  net:
+    display_name: ".NET"
+    keywords: ["c#", "csharp", ".net", "dotnet", "aspose.email cloud sdk for .net"]
+  java:
+    display_name: "Java"
+    keywords: ["java", "aspose.email cloud sdk for java"]
+  php:
+    display_name: "PHP"
+    keywords: ["php", "aspose.email cloud sdk for php"]
+  python:
+    display_name: "Python"
+    keywords: ["python", "py", "aspose.email cloud sdk for python"]
+  nodejs:
+    display_name: "Node.js"
+    keywords: ["node.js", "nodejs", "javascript", "js", "aspose.email cloud sdk for node.js"]
+  general:
+    display_name: "General"
+    keywords: ["aspose.email cloud", "email cloud api", "mail cloud api"]
+

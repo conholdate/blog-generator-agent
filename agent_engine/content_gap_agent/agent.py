@@ -11,11 +11,19 @@ from .tools.logging_utils import get_logger
 from .tools.normalization import (
     nor_platform_display_name,
     nor_website_section_from_case,
+    normalize_product_display_name,
     normalize_sentence_text,
 )
 from .tools.prerequisites import ensure_prerequisites
 from .tools.io import write_json, write_text
-from .tools.sheets_export import build_payload, post_payload, resolve_sheet_config, should_post_payload, write_payload
+from .tools.sheets_export import (
+    build_payload,
+    is_successful_sheet_response,
+    post_payload,
+    resolve_sheet_config,
+    should_post_payload,
+    write_payload,
+)
 from .tools.render.md_render import render_md_matrix
 from .tools.render.gap_render import render_gaps_md
 from .tools.coverage.blogs_to_blogs import compute_blogs_to_blogs
@@ -187,8 +195,9 @@ def _send_missing_topics_to_sheet(
         return
 
     status, text = post_payload(payload, webhook_url, token)
-    if status != 200:
-        log.warning("Google Sheets POST returned status=%s body=%s", status, text[:500])
+    ok, reason = is_successful_sheet_response(status, text)
+    if not ok:
+        log.warning(reason)
         return
     log.info("Google Sheets POST succeeded for brand=%s product=%s: %s", req.brand_key, req.product_key, text[:500])
 
@@ -238,7 +247,11 @@ def run_coverage(settings: CoverageSettings, req: CoverageRunRequest) -> Dict[st
     )
 
     # Stable metric fields
-    product_name = req.product_name
+    product_name = normalize_product_display_name(
+        req.product_name,
+        brand_key=req.brand_key,
+        product_key=req.product_key,
+    )
     platform_name = nor_platform_display_name(req.baseline_platform)
 
     website = req.brand_site
@@ -267,6 +280,7 @@ def run_coverage(settings: CoverageSettings, req: CoverageRunRequest) -> Dict[st
                 "correlation_id": correlation_id,
                 "brand_key": req.brand_key,
                 "product_key": req.product_key,
+                "product_name": product_name,
                 "case": req.case,
                 "baseline_platform": req.baseline_platform or "all",
                 "threshold_strict": req.threshold_strict,
@@ -324,6 +338,10 @@ def run_coverage(settings: CoverageSettings, req: CoverageRunRequest) -> Dict[st
                     outputs_product_root=outputs_product_root,
                     baseline_platform=req.baseline_platform,
                     platforms_limit=req.platforms,
+                    threshold_strict=req.threshold_strict,
+                    threshold_loose=req.threshold_loose,
+                    top_k=req.top_k,
+                    no_embeddings=req.no_embeddings,
                 )
                 platforms = list(result.platforms)
                 headers = ["Category", "Subcategory", "Topic"] + platforms
@@ -340,6 +358,10 @@ def run_coverage(settings: CoverageSettings, req: CoverageRunRequest) -> Dict[st
                     product_key=req.product_key,
                     outputs_product_root=outputs_product_root,
                     baseline_platform=req.baseline_platform,
+                    threshold_strict=req.threshold_strict,
+                    threshold_loose=req.threshold_loose,
+                    top_k=req.top_k,
+                    no_embeddings=req.no_embeddings,
                 )
                 platforms = list(result.platforms)
                 headers = ["Category", "Subcategory", "Topic"] + platforms
@@ -360,12 +382,15 @@ def run_coverage(settings: CoverageSettings, req: CoverageRunRequest) -> Dict[st
             log.info("Serializing coverage result to JSON")
             t_json = perf_counter()
             coverage_json = result.to_json()
+            coverage_json["brand_name"] = req.brand_name
+            coverage_json["product_name"] = product_name
             coverage_json_path = out_dir / "coverage.json"
             write_json(coverage_json_path, coverage_json)
             log.info("Wrote coverage.json (%.2f ms)", (perf_counter() - t_json) * 1000.0)
 
             # Compute stats once and reuse for logs + metrics
             stats = _compute_gap_stats(result)
+            result_meta = dict(getattr(result, "meta", {}) or {})
 
             log.info(
                 "Coverage summary counts: total_topics=%d fully_covered_all_platforms=%d partially_or_uncovered=%d missing_pairs=%d",
@@ -385,7 +410,11 @@ def run_coverage(settings: CoverageSettings, req: CoverageRunRequest) -> Dict[st
                 f"Fully covered across all platforms: {stats['fully_covered_topics']}",
                 f"Topics with gaps (missing at least one platform): {stats['topics_with_any_gap']}",
                 f"Missing topic×platform pairs: {stats['missing_pairs']}",
-                "Matching mode: lexical-fast (Step 1). Embeddings-based matching will be added in Step 2.",
+                (
+                    "Matching mode: deterministic lexical ranking; "
+                    f"strict={req.threshold_strict:.2f}, loose={req.threshold_loose:.2f}, top_k={req.top_k}, "
+                    f"no_embeddings={req.no_embeddings}."
+                ),
             ]
 
 
@@ -406,7 +435,7 @@ def run_coverage(settings: CoverageSettings, req: CoverageRunRequest) -> Dict[st
                 md_rows.append(row)
 
             coverage_md = render_md_matrix(
-                title=f"{req.brand_key}.{req.product_key} — {req.case} ({req.baseline_platform or 'all'})",
+                title=f"{product_name} — {req.case} ({req.baseline_platform or 'all'})",
                 summary_lines=summary_lines,
                 headers=headers,
                 rows=md_rows,
@@ -416,7 +445,7 @@ def run_coverage(settings: CoverageSettings, req: CoverageRunRequest) -> Dict[st
 
             missing_topics_md = _render_missing_topics_md(
                 brand_name=req.brand_name,
-                product_name=req.product_name,
+                product_name=product_name,
                 platform_name=(req.baseline_platform or "all").upper(),
                 platforms=platforms,
                 rows=list(result.rows),
@@ -462,6 +491,7 @@ def run_coverage(settings: CoverageSettings, req: CoverageRunRequest) -> Dict[st
             "correlation_id": correlation_id,
             "brand_key": req.brand_key,
             "product_key": req.product_key,
+            "product_name": product_name,
             "case": req.case,
             "baseline_platform": req.baseline_platform or "all",
             "out_dir": str(out_dir),
@@ -471,7 +501,8 @@ def run_coverage(settings: CoverageSettings, req: CoverageRunRequest) -> Dict[st
             "partially_covered_topics": int(stats["partially_covered_topics"]),
             "fully_uncovered_topics": int(stats["fully_uncovered_topics"]),
             "topics_with_any_gap": int(stats["topics_with_any_gap"]),
-            "missing_pairs": int(stats["missing_pairs"]),
+                "missing_pairs": int(stats["missing_pairs"]),
+                "coverage_meta": result_meta,
         }
 
         with MetricsRun(
@@ -487,7 +518,7 @@ def run_coverage(settings: CoverageSettings, req: CoverageRunRequest) -> Dict[st
         ) as m2:
             t_gaps = perf_counter()
             gaps_md = render_gaps_md(
-                title=f"{req.brand_key}.{req.product_key} — Gaps ({req.case}, baseline={req.baseline_platform or 'all'})",
+                title=f"{product_name} — Gaps ({req.case}, baseline={req.baseline_platform or 'all'})",
                 coverage_json=coverage_json,
             )
             write_text(out_dir / "gaps.md", gaps_md)
@@ -517,6 +548,7 @@ def run_coverage(settings: CoverageSettings, req: CoverageRunRequest) -> Dict[st
         return {
             "case": req.case,
             "baseline_platform": req.baseline_platform,
+            "product_name": product_name,
             "out_dir": str(out_dir),
             "topics": int(stats["total_topics"]),
             "platforms": list(result.platforms),
@@ -526,6 +558,7 @@ def run_coverage(settings: CoverageSettings, req: CoverageRunRequest) -> Dict[st
                 "gap_analysis": gap_run_id,
             },
             "coverage_stats": stats,
+            "coverage_meta": result_meta,
         }
 
     except Exception:

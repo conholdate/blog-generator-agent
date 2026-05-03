@@ -1,0 +1,28 @@
+{
+  "case": "blogs_to_blogs",
+  "brand_key": "conholdate_cloud",
+  "product_key": "total",
+  "baseline_platform": "java",
+  "platforms": [
+    "java",
+    "python",
+    "rest",
+    "general"
+  ],
+  "meta": {
+    "matching_mode": "key_exact",
+    "total_input_records": 3,
+    "records_after_filters": 3,
+    "excluded_release_update_records": 0,
+    "excluded_old_or_undated_records": 0,
+    "baseline_records": 0,
+    "total_cells": 0,
+    "matched_cells": 0,
+    "missing_cells": 0,
+    "match_rate": 0.0,
+    "skipped_empty_keys": 0
+  },
+  "rows": [],
+  "brand_name": "Conholdate.Cloud",
+  "product_name": "Conholdate.Total"
+}

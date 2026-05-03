@@ -1,0 +1,30 @@
+# Aspose.BarCode Cloud SDK
+blog: aspose_cloud
+key: barcode
+display_name: "Aspose.BarCode Cloud SDK"
+description: "Generate and recognize 1D, 2D, and postal barcodes with Aspose.BarCode Cloud."
+enabled: true
+
+platform_definitions:
+  net:
+    display_name: ".NET"
+    keywords: ["c#", "csharp", ".net", "dotnet", "aspose.barcode cloud sdk for .net"]
+  java:
+    display_name: "Java"
+    keywords: ["java", "aspose.barcode cloud sdk for java"]
+  php:
+    display_name: "PHP"
+    keywords: ["php", "aspose.barcode cloud sdk for php"]
+  python:
+    display_name: "Python"
+    keywords: ["python", "py", "aspose.barcode cloud sdk for python"]
+  nodejs:
+    display_name: "Node.js"
+    keywords: ["node.js", "nodejs", "javascript", "js", "aspose.barcode cloud sdk for node.js"]
+  go:
+    display_name: "Go"
+    keywords: ["go", "golang", "aspose.barcode cloud sdk for go"]
+  general:
+    display_name: "General"
+    keywords: ["aspose.barcode cloud", "barcode cloud api"]
+

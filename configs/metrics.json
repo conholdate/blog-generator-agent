@@ -1,0 +1,37 @@
+{
+  "content_gap_agent": {
+    "agent_name": "Content Gap Agent",
+    "agent_owner": "Muzammil Khan",
+    "stages": [
+      "Content Coverage Map",
+      "Content Gap Analysis"
+    ],
+    "webhooks": {
+      "primary": {
+        "url": "https://script.google.com/macros/s/AKfycbyCHwElrM6RcYLi0JNQAkJmzGrBjAhf28mKXVyub_6SdaZ2ITvzCwfM5xCLE7rmuxio/exec",
+        "token": "lM6iU2mW0gV1eZ"
+      },
+      "internal": {
+        "url": "https://script.google.com/macros/s/AKfycbwYyPBs3ox6xhYfznVpu4Gh8T4l7cXrAIj1m_y1g-vWn6tyP_LAkv3eo6W2EZYAeHgLag/exec",
+        "token": "blog_team_agent-2026"
+      }
+    }
+  },
+  "content_indexer_agent": {
+    "agent_name": "Content Indexer Agent",
+    "agent_owner": "Muzammil Khan",
+    "stages": [
+      "Content Indexing"
+    ],
+    "webhooks": {
+      "primary": {
+        "url": "https://script.google.com/macros/s/AKfycbyCHwElrM6RcYLi0JNQAkJmzGrBjAhf28mKXVyub_6SdaZ2ITvzCwfM5xCLE7rmuxio/exec",
+        "token": "lM6iU2mW0gV1eZ"
+      },
+      "internal": {
+        "url": "https://script.google.com/macros/s/AKfycbwYyPBs3ox6xhYfznVpu4Gh8T4l7cXrAIj1m_y1g-vWn6tyP_LAkv3eo6W2EZYAeHgLag/exec",
+        "token": "blog_team_agent-2026"
+      }
+    }
+  }
+}

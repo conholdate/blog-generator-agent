@@ -1,0 +1,27 @@
+# Aspose.Tasks Cloud SDK
+blog: aspose_cloud
+key: tasks
+display_name: "Aspose.Tasks Cloud SDK"
+description: "Create, edit, convert, and print Microsoft Project files with Aspose.Tasks Cloud."
+enabled: true
+
+platform_definitions:
+  net:
+    display_name: ".NET"
+    keywords: ["c#", "csharp", ".net", "dotnet", "aspose.tasks cloud sdk for .net"]
+  php:
+    display_name: "PHP"
+    keywords: ["php", "aspose.tasks cloud sdk for php"]
+  python:
+    display_name: "Python"
+    keywords: ["python", "py", "aspose.tasks cloud sdk for python"]
+  nodejs:
+    display_name: "Node.js"
+    keywords: ["node.js", "nodejs", "javascript", "js", "aspose.tasks cloud sdk for node.js"]
+  go:
+    display_name: "Go"
+    keywords: ["go", "golang", "aspose.tasks cloud sdk for go"]
+  general:
+    display_name: "General"
+    keywords: ["aspose.tasks cloud", "project cloud api", "mpp cloud api"]
+
