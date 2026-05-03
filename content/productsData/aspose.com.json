@@ -1426,8 +1426,41 @@
   "urlPrefix" : "tex",
   "license":"https://purchase.aspose.com/temporary-license/",
   "pricing": "https://purchase.aspose.com/pricing/tex/family/"
+},
+  {
+  "ProductName" : "Aspose.Finance for .NET",
+  "Category" : "Aspose.Finance Product Family",
+  "ProgrammingLanguage" : "C#",
+  "ProductURL" : "https://products.aspose.com/finance/net/",
+  "DownloadURL" : "https://releases.aspose.com/finance/net/",
+  "ExternalDownloadURL" : "https://github.com/aspose-finance",
+  "DocumentationURL" : "https://docs.aspose.com/finance/net/",
+  "BlogsURL" : "https://blog.aspose.com/categories/aspose.finance-product-family/",
+  "APIReferenceURL" : "https://reference.aspose.com/finance/net/",
+  "FreeAppsURL" : "https://products.aspose.app/finance",
+  "ForumsURL" : "https://forum.aspose.com/c/finance",
+  "InstallCommand" : "\n\nInstall-Package Aspose.Finance\n\n",
+  "urlPrefix" : "finance",
+  "license":"https://purchase.aspose.com/temporary-license/",
+  "pricing": "https://purchase.aspose.com/pricing/finance/family/"
+},
+{
+  "ProductName" : "Aspose.Finance for Python via .NET",
+  "Category" : "Aspose.Finance Product Family",
+  "ProgrammingLanguage" : "Python",
+  "ProductURL" : "https://products.aspose.com/finance/python-net/",
+  "DownloadURL" : "https://releases.aspose.com/finance/python-net/",
+  "ExternalDownloadURL" : "https://github.com/aspose-finance",
+  "DocumentationURL" : "https://docs.aspose.com/finance/python-net/",
+  "BlogsURL" : "https://blog.aspose.com/categories/aspose.finance-product-family/",
+  "APIReferenceURL" : "https://reference.aspose.com/finance/python-net/",
+  "FreeAppsURL" : "https://products.aspose.app/finance",
+  "ForumsURL" : "https://forum.aspose.com/c/finance",
+  "InstallCommand" : "\n\npip install aspose-finance\n\n",
+  "urlPrefix" : "finance",
+  "license":"https://purchase.aspose.com/temporary-license/",
+  "pricing": "https://purchase.aspose.com/pricing/finance/family/"
 }
 ]
-
 
 

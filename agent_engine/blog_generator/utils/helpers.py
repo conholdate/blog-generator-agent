@@ -5,6 +5,7 @@ from datetime import datetime
 import requests
 from typing import Dict, Any, Optional, List, Tuple
 
+
 def parse_markdown_topics(markdown_content: str) -> Dict[str, Any]:
     """
     Parse markdown file containing blog topics and extract metadata.
@@ -2041,3 +2042,90 @@ def setup_logger():
             f.write(line)
 
     return log
+
+
+
+async def generate_tags_with_llm(
+    post_topic: str,
+    keywords: list[str],
+    blog_outline: str,
+    metrics=None
+) -> list[str] | None:
+    """
+    Generate 3 relevant Hugo tags for a blog post using LLM.
+    Returns a list of 3 tag strings, or None if all retries fail.
+    """
+    from services.LLMservice import llm_service
+    MAX_RETRIES = 3
+
+    keywords_str = ", ".join(keywords) if keywords else "none provided"
+
+    instructions = f"""
+You are a Hugo blog tag generator.
+
+Your task:
+- Generate exactly 3 relevant tags for the blog post described below
+- Tags must be lowercase, hyphen-separated if multi-word (e.g. "leather-jackets")
+- Tags must be specific, searchable, and relevant to the topic
+- Do NOT use generic tags like "blog", "post", "article"
+- Return ONLY the 3 tags as a comma-separated list — no explanations, no numbering, no extra text
+
+Blog Topic: {post_topic}
+Keywords: {keywords_str}
+Outline:
+{blog_outline}
+
+Example output format:
+gymwear, sweatsuit-design, streetwear-trends
+"""
+
+    for attempt in range(1, MAX_RETRIES + 1):
+        print(f"  [Attempt {attempt}/{MAX_RETRIES}] Generating Hugo tags for topic: '{post_topic}'...")
+
+        try:
+            result = await llm_service.run_agent(
+                instructions=instructions,
+                context="Generate 3 Hugo tags for the blog post above.",
+                agent_name="hugo-tag-generator",
+                temperature=0.5,
+                max_turns=1
+            )
+
+            if metrics is not None:
+                metrics.record_llm_usage(
+                    input_tokens=result.token_usage["input_tokens"],
+                    output_tokens=result.token_usage["output_tokens"]
+                )
+
+            print(f"  tags---- {result.token_usage['output_tokens']}-- {result.token_usage['input_tokens']}", flush=True)
+
+            raw = result.final_output.strip().strip('"').strip("'")
+
+            if not raw or len(raw.strip()) == 0:
+                print(f"  [Attempt {attempt}/{MAX_RETRIES}] LLM returned empty response")
+                if attempt == MAX_RETRIES:
+                    return None
+                continue
+
+            tags = [tag.strip().lower().replace("-", " ").replace("_", " ") for tag in raw.split(",")]
+            tags = [tag for tag in tags if tag]  # remove empty strings
+
+            if len(tags) == 3:
+                print(f"  ✅ Valid tags generated on attempt {attempt}: {tags}")
+                return tags
+            else:
+                print(f"  [Attempt {attempt}/{MAX_RETRIES}] Expected 3 tags, got {len(tags)}: {tags}")
+                if attempt == MAX_RETRIES:
+                    return None
+                continue
+
+        except Exception as e:
+            print(f"  [Attempt {attempt}/{MAX_RETRIES}] LLM call failed: {e}")
+            import traceback
+            traceback.print_exc()
+            if attempt == MAX_RETRIES:
+                return None
+            continue
+
+    print(f"  ❌ Could not generate tags after {MAX_RETRIES} attempts.")
+    return None

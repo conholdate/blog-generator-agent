@@ -8,7 +8,7 @@ from tools.mcp_tools import generate_markdown_file, fetch_category_related_artic
 from utils import prompts
 from utils.seo_validator import validate_seo_content, validate_and_fix_meta_description, validate_and_fix_seo_title
 from utils.file_format_mappings import FILE_FORMAT_MAPPINGS, BASE_URL
-from utils.helpers import prepare_context, get_productInfo, get_topic_by_index, inject_file_format_links, slugify, normalize_case_preserve_formats_in_keywords, clean_ai_generated_markdown, validate_markdown_links, capitalize_file_formats_for_title, setup_logger
+from utils.helpers import prepare_context, get_productInfo, get_topic_by_index, inject_file_format_links, slugify, normalize_case_preserve_formats_in_keywords, clean_ai_generated_markdown, validate_markdown_links, capitalize_file_formats_for_title, setup_logger, generate_tags_with_llm
 from utils.metricsRecorder import MetricsRecorder
 from services.LLMservice import llm_service
 import json
@@ -36,7 +36,7 @@ class BlogOrchestrator:
             run_env=run_env
         )
         
-        print(f"🤖 Orchestrator initialized")
+        print(f" Orchestrator initialized")
         print(f"   Run ID: {self.metrics.run_id}")
         print(f"   Environment: {self.metrics.run_env}")
         print(f"   Owner: {self.metrics.agent_owner}")
@@ -149,7 +149,9 @@ class BlogOrchestrator:
          
             
             print(f" Generating content now.")
-       
+            tags = await generate_tags_with_llm(post_topic,f_keywords, blog_outline, self.metrics )
+            print(f"tags are -- {tags}")
+
             # ════════════════════════════════════════════════════════════════════
             # UPDATED: Using centralized LLM service instead of direct Agent creation
             # ════════════════════════════════════════════════════════════════════
@@ -167,6 +169,7 @@ class BlogOrchestrator:
                 long_tail_keywords,
                 semantic_keywords,
                 other_important_and_relevant_things,
+                tags,
                 isCloud
             )
         

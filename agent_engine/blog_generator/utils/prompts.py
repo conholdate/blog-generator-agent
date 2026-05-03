@@ -22,6 +22,7 @@ def get_blog_writer_prompt(
     long_tail_keywords: str = "",
     semantic_keywords: str = "",
     other_important_and_relevant_things: str = "",
+    tags: List[str]=[],
     isCloud: bool = False,
 ) -> str:
     """
@@ -631,7 +632,7 @@ draft: false
 url: /{data.get("urlPrefix")}/{url}/
 author: "{author}"
 summary: "[MUST BE 200-260 chars - count every character including spaces before finalizing]"
-tags: {json.dumps(keywords[:3])}
+tags: {tags}
 categories: ["{category}"]
 showtoc: true
 cover:
