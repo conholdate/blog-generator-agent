@@ -1,0 +1,23 @@
+# GroupDocs.Search
+blog: groupdocs
+key: search
+display_name: "GroupDocs.Search"
+description: "Full-text search and indexing APIs for building fast search experiences across document collections."
+enabled: true
+
+platform_definitions:
+  net:
+    display_name: ".NET"
+    keywords: ["c#", "csharp", ".net", "dotnet", "groupdocs.search for .net"]
+  java:
+    display_name: "Java"
+    keywords: ["java", "groupdocs.search for java"]
+  python:
+    display_name: "Python via .NET"
+    keywords: ["python", "py", "python via .net", "python-net", "groupdocs.search for python via .net"]
+  nodejs:
+    display_name: "Node.js via Java"
+    keywords: ["node.js", "nodejs", "javascript", "js", "node.js via java", "groupdocs.search for node.js via java"]
+  general:
+    display_name: "General"
+    keywords: ["groupdocs.search", "document search api", "full text search library"]

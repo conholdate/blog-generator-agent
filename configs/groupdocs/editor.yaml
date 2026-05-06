@@ -1,0 +1,23 @@
+# GroupDocs.Editor
+blog: groupdocs
+key: editor
+display_name: "GroupDocs.Editor"
+description: "Document editing APIs for loading, modifying, and saving office and text-based file formats."
+enabled: true
+
+platform_definitions:
+  net:
+    display_name: ".NET"
+    keywords: ["c#", "csharp", ".net", "dotnet", "groupdocs.editor for .net"]
+  java:
+    display_name: "Java"
+    keywords: ["java", "groupdocs.editor for java"]
+  python:
+    display_name: "Python via .NET"
+    keywords: ["python", "py", "python via .net", "python-net", "groupdocs.editor for python via .net"]
+  nodejs:
+    display_name: "Node.js via Java"
+    keywords: ["node.js", "nodejs", "javascript", "js", "node.js via java", "groupdocs.editor for node.js via java"]
+  general:
+    display_name: "General"
+    keywords: ["groupdocs.editor", "document editor api", "edit documents library"]

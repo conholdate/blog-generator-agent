@@ -1,4 +1,4 @@
-name: Missing Topics In Google Sheet For Conholdate
+name: Missing Topics For Conholdate.com
 
 on:
   workflow_dispatch:

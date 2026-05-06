@@ -1,0 +1,23 @@
+# GroupDocs.Assembly
+blog: groupdocs
+key: assembly
+display_name: "GroupDocs.Assembly"
+description: "Document automation APIs for assembling reports and templates from structured data sources."
+enabled: true
+
+platform_definitions:
+  net:
+    display_name: ".NET"
+    keywords: ["c#", "csharp", ".net", "dotnet", "groupdocs.assembly for .net"]
+  java:
+    display_name: "Java"
+    keywords: ["java", "groupdocs.assembly for java"]
+  python:
+    display_name: "Python via .NET"
+    keywords: ["python", "py", "python via .net", "python-net", "groupdocs.assembly for python via .net"]
+  nodejs:
+    display_name: "Node.js via Java"
+    keywords: ["node.js", "nodejs", "javascript", "js", "node.js via java", "groupdocs.assembly for node.js via java"]
+  general:
+    display_name: "General"
+    keywords: ["groupdocs.assembly", "document automation api", "document assembly library"]

@@ -1,0 +1,23 @@
+# GroupDocs.Parser
+blog: groupdocs
+key: parser
+display_name: "GroupDocs.Parser"
+description: "Document parsing APIs for extracting text, metadata, images, and structured data from files."
+enabled: true
+
+platform_definitions:
+  net:
+    display_name: ".NET"
+    keywords: ["c#", "csharp", ".net", "dotnet", "groupdocs.parser for .net"]
+  java:
+    display_name: "Java"
+    keywords: ["java", "groupdocs.parser for java"]
+  python:
+    display_name: "Python via .NET"
+    keywords: ["python", "py", "python via .net", "python-net", "groupdocs.parser for python via .net"]
+  nodejs:
+    display_name: "Node.js via Java"
+    keywords: ["node.js", "nodejs", "javascript", "js", "node.js via java", "groupdocs.parser for node.js via java"]
+  general:
+    display_name: "General"
+    keywords: ["groupdocs.parser", "document parser api", "extract text from files library"]

@@ -1,0 +1,23 @@
+# GroupDocs.Watermark
+blog: groupdocs
+key: watermark
+display_name: "GroupDocs.Watermark"
+description: "Watermarking APIs for adding, editing, searching, and removing text or image watermarks in documents."
+enabled: true
+
+platform_definitions:
+  net:
+    display_name: ".NET"
+    keywords: ["c#", "csharp", ".net", "dotnet", "groupdocs.watermark for .net"]
+  java:
+    display_name: "Java"
+    keywords: ["java", "groupdocs.watermark for java"]
+  python:
+    display_name: "Python via .NET"
+    keywords: ["python", "py", "python via .net", "python-net", "groupdocs.watermark for python via .net"]
+  nodejs:
+    display_name: "Node.js via Java"
+    keywords: ["node.js", "nodejs", "javascript", "js", "node.js via java", "groupdocs.watermark for node.js via java"]
+  general:
+    display_name: "General"
+    keywords: ["groupdocs.watermark", "document watermark api", "watermark library"]

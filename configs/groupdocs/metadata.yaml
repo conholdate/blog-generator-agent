@@ -1,0 +1,23 @@
+# GroupDocs.Metadata
+blog: groupdocs
+key: metadata
+display_name: "GroupDocs.Metadata"
+description: "Metadata management APIs for reading, updating, searching, and removing metadata from documents and media files."
+enabled: true
+
+platform_definitions:
+  net:
+    display_name: ".NET"
+    keywords: ["c#", "csharp", ".net", "dotnet", "groupdocs.metadata for .net"]
+  java:
+    display_name: "Java"
+    keywords: ["java", "groupdocs.metadata for java"]
+  python:
+    display_name: "Python via .NET"
+    keywords: ["python", "py", "python via .net", "python-net", "groupdocs.metadata for python via .net"]
+  nodejs:
+    display_name: "Node.js via Java"
+    keywords: ["node.js", "nodejs", "javascript", "js", "node.js via java", "groupdocs.metadata for node.js via java"]
+  general:
+    display_name: "General"
+    keywords: ["groupdocs.metadata", "metadata api", "document metadata library"]

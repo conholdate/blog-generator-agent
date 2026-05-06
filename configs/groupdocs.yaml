@@ -1,0 +1,21 @@
+key: groupdocs
+display_name: GroupDocs
+website: https://blog.groupdocs.com
+enabled: true
+
+outputs_root: ../outputs
+
+search_patterns:
+  - "groupdocs.{product}"
+  - "{product} for {platform}"
+  - "groupdocs {product}"
+
+repositories:
+  - repo_key: "blog"
+    repo_type: "blog"
+    repo_url: "https://github.com/groupdocs/groupdocs-blog.git"
+    branch: "master"
+    scope: "all"
+    root_subdir: "content/GroupDocs.Blog"
+    include_globs:
+      - "**/index.md"
