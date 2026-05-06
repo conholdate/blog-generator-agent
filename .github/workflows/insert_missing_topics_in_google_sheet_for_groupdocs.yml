@@ -159,7 +159,7 @@ jobs:
       PROFESSIONALIZE_BASE_URL: "https://llm.professionalize.com/v1"
       PROFESSIONALIZE_API_KEY: ${{ secrets.PROFESSIONALIZE_API_KEY_1 }}
       OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-      GROUPDOCS_BLOG_TOKEN: ${{ secrets.GROUPDOCS_BLOG_TOKEN || secrets.GISTS_PAT_GROUPDOCS_COM }}
+      GROUPDOCS_BLOG_TOKEN: ${{ secrets.GROUPDOCS_BLOG_TOKEN || secrets.ASPOSE_BLOG_TOKEN }}
       TOPICS_SHEETS_CONFIG_PATH: configs/topics_sheets.json
       TOPICS_SHEETS_TOKEN: ${{ secrets.TOPICS_SHEETS_TOKEN }}
       CG_SKIP_SHEETS_AUTO_POST: "true"

@@ -16,6 +16,6 @@ repositories:
     repo_url: "https://github.com/groupdocs/groupdocs-blog.git"
     branch: "master"
     scope: "all"
-    root_subdir: "content/GroupDocs.Blog"
+    root_subdir: "content/Groupdocs.Blog"
     include_globs:
       - "**/index.md"
