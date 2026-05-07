@@ -1,0 +1,32 @@
+# GroupDocs.Merger Cloud SDK
+blog: groupdocs_cloud
+key: merger
+display_name: "GroupDocs.Merger Cloud SDK"
+description: "Cloud SDK for merging, splitting, moving, and extracting document pages."
+enabled: true
+
+platform_definitions:
+  net:
+    display_name: ".NET"
+    keywords: ["c#", "csharp", ".net", "dotnet", "groupdocs.merger cloud sdk for .net"]
+  java:
+    display_name: "Java"
+    keywords: ["java", "groupdocs.merger cloud sdk for java"]
+  php:
+    display_name: "PHP"
+    keywords: ["php", "groupdocs.merger cloud sdk for php"]
+  python:
+    display_name: "Python"
+    keywords: ["python", "py", "groupdocs.merger cloud sdk for python"]
+  ruby:
+    display_name: "Ruby"
+    keywords: ["ruby", "groupdocs.merger cloud sdk for ruby"]
+  nodejs:
+    display_name: "Node.js"
+    keywords: ["node.js", "nodejs", "javascript", "js", "groupdocs.merger cloud sdk for node.js"]
+  android:
+    display_name: "Android"
+    keywords: ["android", "groupdocs.merger cloud sdk for android"]
+  general:
+    display_name: "General"
+    keywords: ["groupdocs merger cloud", "merge documents cloud api"]

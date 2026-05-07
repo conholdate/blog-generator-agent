@@ -1,0 +1,29 @@
+# GroupDocs.Parser Cloud SDK
+blog: groupdocs_cloud
+key: parser
+display_name: "GroupDocs.Parser Cloud SDK"
+description: "Cloud SDK for extracting text, data, metadata, and images from documents."
+enabled: true
+
+platform_definitions:
+  net:
+    display_name: ".NET"
+    keywords: ["c#", "csharp", ".net", "dotnet", "groupdocs.parser cloud sdk for .net"]
+  java:
+    display_name: "Java"
+    keywords: ["java", "groupdocs.parser cloud sdk for java"]
+  php:
+    display_name: "PHP"
+    keywords: ["php", "groupdocs.parser cloud sdk for php"]
+  python:
+    display_name: "Python"
+    keywords: ["python", "py", "groupdocs.parser cloud sdk for python"]
+  ruby:
+    display_name: "Ruby"
+    keywords: ["ruby", "groupdocs.parser cloud sdk for ruby"]
+  nodejs:
+    display_name: "Node.js"
+    keywords: ["node.js", "nodejs", "javascript", "js", "groupdocs.parser cloud sdk for node.js"]
+  general:
+    display_name: "General"
+    keywords: ["groupdocs parser cloud", "document parser cloud api"]

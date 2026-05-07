@@ -1,0 +1,32 @@
+# GroupDocs.Signature Cloud SDK
+blog: groupdocs_cloud
+key: signature
+display_name: "GroupDocs.Signature Cloud SDK"
+description: "Cloud SDK for signing, verifying, and searching electronic signatures in documents."
+enabled: true
+
+platform_definitions:
+  net:
+    display_name: ".NET"
+    keywords: ["c#", "csharp", ".net", "dotnet", "groupdocs.signature cloud sdk for .net"]
+  java:
+    display_name: "Java"
+    keywords: ["java", "groupdocs.signature cloud sdk for java"]
+  php:
+    display_name: "PHP"
+    keywords: ["php", "groupdocs.signature cloud sdk for php"]
+  python:
+    display_name: "Python"
+    keywords: ["python", "py", "groupdocs.signature cloud sdk for python"]
+  ruby:
+    display_name: "Ruby"
+    keywords: ["ruby", "groupdocs.signature cloud sdk for ruby"]
+  nodejs:
+    display_name: "Node.js"
+    keywords: ["node.js", "nodejs", "javascript", "js", "groupdocs.signature cloud sdk for node.js"]
+  android:
+    display_name: "Android"
+    keywords: ["android", "groupdocs.signature cloud sdk for android"]
+  general:
+    display_name: "General"
+    keywords: ["groupdocs signature cloud", "electronic signature cloud api"]

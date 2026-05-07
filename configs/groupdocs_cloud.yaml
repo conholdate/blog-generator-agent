@@ -1,0 +1,22 @@
+key: groupdocs_cloud
+display_name: GroupDocs.Cloud
+website: https://blog.groupdocs.cloud
+enabled: true
+
+outputs_root: ../outputs
+
+search_patterns:
+  - "groupdocs cloud"
+  - "{product} cloud"
+  - "{product} cloud sdk"
+  - "{product} for {platform}"
+
+repositories:
+  - repo_key: "blog"
+    repo_type: "blog"
+    repo_url: "https://github.com/groupdocs-cloud/groupdocs-cloud-blog.git"
+    branch: "master"
+    scope: "all"
+    root_subdir: "content/GroupDocs.Cloud"
+    include_globs:
+      - "**/index.md"

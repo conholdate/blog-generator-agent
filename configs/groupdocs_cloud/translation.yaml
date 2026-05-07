@@ -1,0 +1,23 @@
+# GroupDocs.Translation Cloud SDK
+blog: groupdocs_cloud
+key: translation
+display_name: "GroupDocs.Translation Cloud SDK"
+description: "Cloud SDK for translating text and documents across supported languages."
+enabled: true
+
+platform_definitions:
+  net:
+    display_name: ".NET"
+    keywords: ["c#", "csharp", ".net", "dotnet", "groupdocs.translation cloud sdk for .net"]
+  java:
+    display_name: "Java"
+    keywords: ["java", "groupdocs.translation cloud sdk for java"]
+  python:
+    display_name: "Python"
+    keywords: ["python", "py", "groupdocs.translation cloud sdk for python"]
+  android:
+    display_name: "Android"
+    keywords: ["android", "groupdocs.translation cloud sdk for android"]
+  general:
+    display_name: "General"
+    keywords: ["groupdocs translation cloud", "translation cloud api"]

@@ -1,0 +1,35 @@
+# GroupDocs.Conversion Cloud SDK
+blog: groupdocs_cloud
+key: conversion
+display_name: "GroupDocs.Conversion Cloud SDK"
+description: "Cloud SDK for converting documents, images, and office files between popular formats."
+enabled: true
+
+platform_definitions:
+  net:
+    display_name: ".NET"
+    keywords: ["c#", "csharp", ".net", "dotnet", "groupdocs.conversion cloud sdk for .net"]
+  java:
+    display_name: "Java"
+    keywords: ["java", "groupdocs.conversion cloud sdk for java"]
+  php:
+    display_name: "PHP"
+    keywords: ["php", "groupdocs.conversion cloud sdk for php"]
+  python:
+    display_name: "Python"
+    keywords: ["python", "py", "groupdocs.conversion cloud sdk for python"]
+  ruby:
+    display_name: "Ruby"
+    keywords: ["ruby", "groupdocs.conversion cloud sdk for ruby"]
+  nodejs:
+    display_name: "Node.js"
+    keywords: ["node.js", "nodejs", "javascript", "js", "groupdocs.conversion cloud sdk for node.js"]
+  android:
+    display_name: "Android"
+    keywords: ["android", "groupdocs.conversion cloud sdk for android"]
+  go:
+    display_name: "Go"
+    keywords: ["go", "golang", "groupdocs.conversion cloud sdk for go"]
+  general:
+    display_name: "General"
+    keywords: ["groupdocs conversion cloud", "file conversion cloud api"]

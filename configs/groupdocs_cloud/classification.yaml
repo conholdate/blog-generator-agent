@@ -1,0 +1,14 @@
+# GroupDocs.Classification Cloud SDK
+blog: groupdocs_cloud
+key: classification
+display_name: "GroupDocs.Classification Cloud SDK"
+description: "Cloud SDK for classifying text and documents using machine-learning based categorization APIs."
+enabled: true
+
+platform_definitions:
+  net:
+    display_name: ".NET"
+    keywords: ["c#", "csharp", ".net", "dotnet", "groupdocs.classification cloud sdk for .net"]
+  general:
+    display_name: "General"
+    keywords: ["groupdocs classification cloud", "classification cloud api"]

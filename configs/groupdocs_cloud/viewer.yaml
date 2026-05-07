@@ -1,0 +1,35 @@
+# GroupDocs.Viewer Cloud SDK
+blog: groupdocs_cloud
+key: viewer
+display_name: "GroupDocs.Viewer Cloud SDK"
+description: "Cloud SDK for rendering documents as HTML, images, and PDF across devices and applications."
+enabled: true
+
+platform_definitions:
+  net:
+    display_name: ".NET"
+    keywords: ["c#", "csharp", ".net", "dotnet", "groupdocs.viewer cloud sdk for .net"]
+  java:
+    display_name: "Java"
+    keywords: ["java", "groupdocs.viewer cloud sdk for java"]
+  php:
+    display_name: "PHP"
+    keywords: ["php", "groupdocs.viewer cloud sdk for php"]
+  python:
+    display_name: "Python"
+    keywords: ["python", "py", "groupdocs.viewer cloud sdk for python"]
+  ruby:
+    display_name: "Ruby"
+    keywords: ["ruby", "groupdocs.viewer cloud sdk for ruby"]
+  nodejs:
+    display_name: "Node.js"
+    keywords: ["node.js", "nodejs", "javascript", "js", "groupdocs.viewer cloud sdk for node.js"]
+  android:
+    display_name: "Android"
+    keywords: ["android", "groupdocs.viewer cloud sdk for android"]
+  go:
+    display_name: "Go"
+    keywords: ["go", "golang", "groupdocs.viewer cloud sdk for go"]
+  general:
+    display_name: "General"
+    keywords: ["groupdocs viewer cloud", "document viewer cloud api"]

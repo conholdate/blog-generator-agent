@@ -1,0 +1,11 @@
+# GroupDocs.Total Cloud SDK
+blog: groupdocs_cloud
+key: total
+display_name: "GroupDocs.Total Cloud SDK"
+description: "All-in-one cloud document processing suite covering conversion, viewing, editing, parsing, signatures, and more."
+enabled: true
+
+platform_definitions:
+  general:
+    display_name: "General"
+    keywords: ["groupdocs total cloud", "groupdocs total cloud sdk", "document processing cloud suite"]
