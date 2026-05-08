@@ -1,0 +1,589 @@
+{
+  "case": "blogs_to_blogs",
+  "brand_key": "aspose",
+  "product_key": "finance",
+  "baseline_platform": "all",
+  "platforms": [
+    "general",
+    "net",
+    "python"
+  ],
+  "meta": {
+    "matching_mode": "key_exact",
+    "total_input_records": 19,
+    "records_after_filters": 19,
+    "excluded_release_update_records": 0,
+    "excluded_old_or_undated_records": 0,
+    "baseline_records": 19,
+    "total_cells": 51,
+    "matched_cells": 19,
+    "missing_cells": 32,
+    "match_rate": 0.37254901960784315,
+    "skipped_empty_keys": 0
+  },
+  "rows": [
+    {
+      "category": "Finance",
+      "sub_category": "Xbrl",
+      "topic": "add-footnote-links-and-role-reference-objects-to-xbrl",
+      "key": "add-footnote-links-and-role-reference-objects-to-xbrl",
+      "baseline_record_id": "blog::finance/2022-05-22-add-footnote-links-and-role-reference-objects-to-xbrl-using-csharp/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::finance/2022-05-22-add-footnote-links-and-role-reference-objects-to-xbrl-using-csharp/index.md",
+          "title": "Add Footnote Links and Role Reference Objects to XBRL using C#",
+          "topic": "Add footnote links and role reference objects to XBRL",
+          "url": "https://blog.aspose.com/finance/add-footnote-links-and-role-reference-objects-to-xbrl-using-csharp/"
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Finance",
+      "sub_category": "OFX",
+      "topic": "create-ofx-request-or-response-programmatically",
+      "key": "create-ofx-request-or-response-programmatically",
+      "baseline_record_id": "blog::finance/2021-02-23-create-parse-ofx-request-or-response-programmatically-csharp-api/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::finance/2021-02-23-create-parse-ofx-request-or-response-programmatically-csharp-api/index.md",
+          "title": "Create OFX Request or Response Programmatically with C# API",
+          "topic": "Create OFX request or response programmatically API",
+          "url": "https://blog.aspose.com/finance/create-parse-ofx-request-or-response-programmatically-csharp-api/"
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Finance",
+      "sub_category": "XBRL Processing",
+      "topic": "create-parse-and-validate-xbrl-and-ixbrl-financial-reports",
+      "key": "create-parse-and-validate-xbrl-and-ixbrl-financial-reports",
+      "baseline_record_id": "blog::finance/2020-04-29-create-xbrl-instances-and-parse-and-validate-xbrl-and-ixbrl-files-in-csharp-asp.net/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::finance/2020-04-29-create-xbrl-instances-and-parse-and-validate-xbrl-and-ixbrl-files-in-csharp-asp.net/index.md",
+          "title": "Create, Parse and Validate XBRL and iXBRL Financial Reports using C#",
+          "topic": "Create parse and validate XBRL and ixbrl financial reports",
+          "url": "https://blog.aspose.com/finance/create-xbrl-instances-and-parse-and-validate-xbrl-and-ixbrl-files-in-csharp-asp.net/"
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Finance",
+      "sub_category": "XBRL",
+      "topic": "create-xbrl",
+      "key": "create-xbrl",
+      "baseline_record_id": "blog::finance/2022-07-26-create-xbrl-file-using-python/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::finance/2022-07-26-create-xbrl-file-using-python/index.md",
+          "title": "Create XBRL File using Python",
+          "topic": "Create XBRL",
+          "url": "https://blog.aspose.com/finance/create-xbrl-file-using-python/"
+        }
+      }
+    },
+    {
+      "category": "Finance",
+      "sub_category": "Xbrl",
+      "topic": "create-xbrl-instance-document-and-add-objects",
+      "key": "create-xbrl-instance-document-and-add-objects",
+      "baseline_record_id": "blog::finance/2022-04-14-add-objects-to-xbrl-documents-using-csharp/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::finance/2022-04-14-add-objects-to-xbrl-documents-using-csharp/index.md",
+          "title": "Create XBRL Instance Document and Add Objects in C#",
+          "topic": "Create XBRL instance document and add objects",
+          "url": "https://blog.aspose.com/finance/add-objects-to-xbrl-documents-using-csharp/"
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Finance",
+      "sub_category": "Data Parsing",
+      "topic": "parse-xbrl",
+      "key": "parse-xbrl",
+      "baseline_record_id": "blog::finance/2022-08-19-parse-xbrl-in-python/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::finance/2022-08-19-parse-xbrl-in-python/index.md",
+          "title": "Parse XBRL in Python",
+          "topic": "Parse XBRL",
+          "url": "https://blog.aspose.com/finance/parse-xbrl-in-python/"
+        }
+      }
+    },
+    {
+      "category": "Finance",
+      "sub_category": "XBRL",
+      "topic": "read-xbrl",
+      "key": "read-xbrl",
+      "baseline_record_id": "blog::finance/2022-11-25-read-xbrl-files-in-python/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::finance/2022-11-25-read-xbrl-files-in-python/index.md",
+          "title": "Read XBRL Files in Python",
+          "topic": "Read XBRL",
+          "url": "https://blog.aspose.com/finance/read-xbrl-files-in-python/"
+        }
+      }
+    },
+    {
+      "category": "Finance",
+      "sub_category": "XBRL Validation",
+      "topic": "validate-xbrl-document",
+      "key": "validate-xbrl-document",
+      "baseline_record_id": "blog::finance/2022-10-25-validate-xbrl-document-in-python/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::finance/2022-10-25-validate-xbrl-document-in-python/index.md",
+          "title": "Validate XBRL Document in Python",
+          "topic": "Validate XBRL document",
+          "url": "https://blog.aspose.com/finance/validate-xbrl-document-in-python/"
+        }
+      }
+    },
+    {
+      "category": "Finance",
+      "sub_category": "File Conversion",
+      "topic": "xbrl-to-excel",
+      "key": "xbrl-to-excel",
+      "baseline_record_id": "blog::finance/2023-05-02-convert-xbrl-to-excel-in-python/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::finance/2023-05-02-convert-xbrl-to-excel-in-python/index.md",
+          "title": "Convert XBRL to Excel in Python",
+          "topic": "XBRL to excel",
+          "url": "https://blog.aspose.com/finance/convert-xbrl-to-excel-in-python/"
+        }
+      }
+    },
+    {
+      "category": "Finance",
+      "sub_category": "File Conversion",
+      "topic": "xbrl-to-excel-converter",
+      "key": "xbrl-to-excel-converter",
+      "baseline_record_id": "blog::finance/2023-02-01-xbrl-to-excel-converter/index.md",
+      "coverage": {
+        "general": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::finance/2023-02-01-xbrl-to-excel-converter/index.md",
+          "title": "Convert XBRL to Excel Online Converter Free",
+          "topic": "XBRL to excel converter",
+          "url": "https://blog.aspose.com/finance/xbrl-to-excel-converter/"
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Finance",
+      "sub_category": "XBRL Conversion",
+      "topic": "xbrl-to-html",
+      "key": "xbrl-to-html",
+      "baseline_record_id": "blog::finance/2022-04-29-convert-xbrl-to-html-using-csharp/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::finance/2022-04-29-convert-xbrl-to-html-using-csharp/index.md",
+          "title": "Convert XBRL to HTML in C#",
+          "topic": "XBRL to HTML",
+          "url": "https://blog.aspose.com/finance/convert-xbrl-to-html-using-csharp/"
+        },
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::finance/2024-05-07-convert-xbrl-to-html-in-python/index.md",
+          "title": "Convert XBRL to HTML in Python",
+          "topic": "XBRL to HTML",
+          "url": "https://blog.aspose.com/finance/convert-xbrl-to-html-in-python/"
+        }
+      }
+    },
+    {
+      "category": "Finance",
+      "sub_category": "File Conversion",
+      "topic": "xbrl-to-ixbrl",
+      "key": "xbrl-to-ixbrl",
+      "baseline_record_id": "blog::finance/2023-02-03-xbrl-to-ixbrl-converter/index.md",
+      "coverage": {
+        "general": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::finance/2023-02-03-xbrl-to-ixbrl-converter/index.md",
+          "title": "Convert XBRL to iXBRL with Free Online Converter",
+          "topic": "XBRL to ixbrl with",
+          "url": "https://blog.aspose.com/finance/xbrl-to-ixbrl-converter/"
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Document Conversion",
+      "sub_category": "XBRL to PDF",
+      "topic": "xbrl-to-pdf",
+      "key": "xbrl-to-pdf",
+      "baseline_record_id": "blog::finance/2022-03-20-convert-xbrl-to-pdf-using-csharp/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::finance/2022-03-20-convert-xbrl-to-pdf-using-csharp/index.md",
+          "title": "Convert XBRL to PDF in C#",
+          "topic": "XBRL to PDF",
+          "url": "https://blog.aspose.com/finance/convert-xbrl-to-pdf-using-csharp/"
+        },
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::finance/2024-04-03-convert-xbrl-to-pdf-in-python/index.md",
+          "title": "Convert XBRL to PDF in Python",
+          "topic": "XBRL to PDF",
+          "url": "https://blog.aspose.com/finance/convert-xbrl-to-pdf-in-python/"
+        }
+      }
+    },
+    {
+      "category": "Finance",
+      "sub_category": "File Conversion",
+      "topic": "xbrl-to-pdf-converter-free-and",
+      "key": "xbrl-to-pdf-converter-free-and",
+      "baseline_record_id": "blog::finance/2023-03-20-xbrl-to-pdf-converter/index.md",
+      "coverage": {
+        "general": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::finance/2023-03-20-xbrl-to-pdf-converter/index.md",
+          "title": "XBRL to PDF Converter - Free & Online",
+          "topic": "XBRL to PDF converter free and",
+          "url": "https://blog.aspose.com/finance/xbrl-to-pdf-converter/"
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Finance",
+      "sub_category": "File Format Conversion",
+      "topic": "xbrl-to-xlsx",
+      "key": "xbrl-to-xlsx",
+      "baseline_record_id": "blog::finance/2026-04-28-convert-xbrl-to-xlsx-in-python/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::finance/2026-04-28-convert-xbrl-to-xlsx-in-python/index.md",
+          "title": "How to Convert XBRL to XLSX in Python",
+          "topic": "XBRL to XLSX",
+          "url": "https://blog.aspose.com/finance/convert-xbrl-to-xlsx-in-python/"
+        }
+      }
+    },
+    {
+      "category": "Finance",
+      "sub_category": "File Conversion",
+      "topic": "xbrl-to-xlsx-or-ixbrl",
+      "key": "xbrl-to-xlsx-or-ixbrl",
+      "baseline_record_id": "blog::finance/2021-02-15-convert-xbrl-xlsx-excel-ixbrl-inline-csharp/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::finance/2021-02-15-convert-xbrl-xlsx-excel-ixbrl-inline-csharp/index.md",
+          "title": "Convert XBRL to XLSX or iXBRL Programmatically in C#",
+          "topic": "XBRL to XLSX or ixbrl",
+          "url": "https://blog.aspose.com/finance/convert-xbrl-xlsx-excel-ixbrl-inline-csharp/"
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Finance",
+      "sub_category": "Viewer",
+      "topic": "xbrl-viewer",
+      "key": "xbrl-viewer",
+      "baseline_record_id": "blog::finance/2023-11-02-xbrl-viewer-online/index.md",
+      "coverage": {
+        "general": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::finance/2023-11-02-xbrl-viewer-online/index.md",
+          "title": "XBRL Viewer Online",
+          "topic": "XBRL viewer",
+          "url": "https://blog.aspose.com/finance/xbrl-viewer-online/"
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    }
+  ],
+  "brand_name": "Aspose",
+  "product_name": "Aspose.Finance"
+}
