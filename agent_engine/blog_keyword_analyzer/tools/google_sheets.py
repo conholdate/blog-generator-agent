@@ -301,6 +301,8 @@ def build_output_row(
     core_keywords = getattr(keyword_groups, "core_seo_keywords", []) if keyword_groups else []
     long_tail_keywords = getattr(keyword_groups, "long_tail_keywords", []) if keyword_groups else []
     context_keywords = getattr(keyword_groups, "context_keywords", []) if keyword_groups else []
+    analysis_secondary = getattr(keyword_analysis, "secondary_keywords", []) if keyword_analysis else []
+    analysis_long_tail = getattr(keyword_analysis, "long_tail_keywords", []) if keyword_analysis else []
     question_keywords = getattr(keyword_analysis, "question_keywords", []) if keyword_analysis else []
     entity_keywords = getattr(keyword_analysis, "entities", []) if keyword_analysis else []
     rejected_keywords = getattr(keyword_analysis, "rejected_keywords", []) if keyword_analysis else []
@@ -312,6 +314,11 @@ def build_output_row(
     clusters = getattr(keyword_analysis, "keyword_clusters", []) if keyword_analysis else []
     editorial_notes = getattr(topic, "editorial_notes", []) if topic is not None else []
     outline = getattr(topic, "outline", []) if topic is not None else []
+
+    if not core_keywords and analysis_secondary:
+        core_keywords = [getattr(item, "keyword", "") for item in analysis_secondary if getattr(item, "keyword", "")]
+    if not long_tail_keywords and analysis_long_tail:
+        long_tail_keywords = [getattr(item, "keyword", "") for item in analysis_long_tail if getattr(item, "keyword", "")]
 
     cluster_lines: list[str] = []
     for cluster in clusters:
