@@ -62,6 +62,58 @@ class SupportingKeywordGroups(BaseModel):
     context_keywords: List[str] = Field(default_factory=list)
 
 
+class TopicProfile(BaseModel):
+    original_topic: str = ""
+    normalized_topic: str = ""
+    core_topic: str = ""
+    modifiers: List[str] = Field(default_factory=list)
+    industry_context: List[str] = Field(default_factory=list)
+    audience: List[str] = Field(default_factory=list)
+    implied_intent: List[str] = Field(default_factory=list)
+    search_type: List[str] = Field(default_factory=list)
+
+
+class KeywordInsight(BaseModel):
+    keyword: str
+    keyword_type: Literal[
+        "primary",
+        "secondary",
+        "long_tail",
+        "semantic",
+        "question",
+        "entity",
+        "intent_based",
+        "aio_aeo",
+    ]
+    intent: Literal["informational", "commercial", "transactional", "navigational", "local"] = "informational"
+    funnel_stage: Literal["awareness", "consideration", "decision", "retention"] = "awareness"
+    specificity: Literal["broad", "mid", "specific"] = "mid"
+    placement: List[str] = Field(default_factory=list)
+    score: float = 0.0
+    aeo_score: float = 0.0
+
+
+class KeywordClusterGroup(BaseModel):
+    cluster_name: str
+    keywords: List[str] = Field(default_factory=list)
+
+
+class KeywordAnalysis(BaseModel):
+    topic: str = ""
+    topic_profile: TopicProfile = Field(default_factory=TopicProfile)
+    primary_keyword: Optional[KeywordInsight] = None
+    secondary_keywords: List[KeywordInsight] = Field(default_factory=list)
+    long_tail_keywords: List[KeywordInsight] = Field(default_factory=list)
+    semantic_keywords: List[str] = Field(default_factory=list)
+    question_keywords: List[str] = Field(default_factory=list)
+    entities: List[str] = Field(default_factory=list)
+    intent_based_keywords: List[KeywordInsight] = Field(default_factory=list)
+    aio_aeo_keywords: List[KeywordInsight] = Field(default_factory=list)
+    keyword_clusters: List[KeywordClusterGroup] = Field(default_factory=list)
+    rejected_keywords: List[str] = Field(default_factory=list)
+    keyword_inventory: List[KeywordInsight] = Field(default_factory=list)
+
+
 class TopicIdea(BaseModel):
     """
     Final topic proposal produced by the LLM.
@@ -78,6 +130,7 @@ class TopicIdea(BaseModel):
     keyword_groups: SupportingKeywordGroups = Field(default_factory=SupportingKeywordGroups)
     editorial_notes: List[str] = Field(default_factory=list)
     internal_links: List[str] = Field(default_factory=list)
+    keyword_analysis: KeywordAnalysis = Field(default_factory=KeywordAnalysis)
 
 
 class RunRequest(BaseModel):

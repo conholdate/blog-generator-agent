@@ -186,33 +186,9 @@ def _project_root(start: Optional[Path] = None) -> Path:
         p = p.parent
     return Path.cwd().resolve()
 
-def _canonical_brand_folder(brand: str) -> str:
-    key = " ".join((brand or "").strip().split()).lower()
-    brand_map = {
-        "aspose": "Aspose",
-        "aspose.cloud": "Aspose.Cloud",
-        "aspose-cloud": "Aspose.Cloud",
-        "conholdate": "Conholdate",
-        "conholdate.cloud": "Conholdate.Cloud",
-        "conholdate-cloud": "Conholdate.Cloud",
-        "groupdocs": "GroupDocs",
-        "groupdocs.cloud": "GroupDocs.Cloud",
-        "groupdocs-cloud": "GroupDocs.Cloud",
-        "familiarize": "Familiarize",
-    }
-    return brand_map.get(key, brand)
-
 def _resolve_brand_output_dir(brand_folder: str) -> Path:
-    configured = Path(settings.KRA_OUTPUT_DIR)
-    if settings.KRA_OUTPUT_DIR:
-        if not configured.is_absolute():
-            configured = (_project_root() / configured).resolve()
-        if configured.name.lower() == "output":
-            configured.mkdir(parents=True, exist_ok=True)
-            return configured
-
     root = _project_root()
-    out_dir = (root / "content" / _canonical_brand_folder(brand_folder) / "output").resolve()
+    out_dir = (root / "content" / brand_folder / "output").resolve()
     out_dir.mkdir(parents=True, exist_ok=True)
     return out_dir
 
@@ -488,6 +464,7 @@ def write_topics_markdown(
         persona = pick("target_persona")
         keyword_groups = _keyword_groups_to_mapping(pick("keyword_groups", {}) or {})
         editorial_notes = pick("editorial_notes", []) or []
+        keyword_analysis = _keyword_groups_to_mapping(pick("keyword_analysis", {}) or {})
 
         topic_title = refiner.to_title_case(_topic_title_platform_display(title, platform))
         lines.append(f"## {idx}. {topic_title}")
@@ -528,6 +505,38 @@ def write_topics_markdown(
             lines.append(
                 f"- **Semantic SEO keywords:** {', '.join(f'`{_content_platform_display(k, platform)}`' for k in context)}"
             )
+        question_keywords = keyword_analysis.get("question_keywords") or []
+        entities = keyword_analysis.get("entities") or []
+        clusters_data = keyword_analysis.get("keyword_clusters") or []
+        if question_keywords:
+            lines.append(
+                f"- **Question keywords:** {', '.join(f'`{_content_platform_display(q, platform)}`' for q in question_keywords[:5])}"
+            )
+        if entities:
+            lines.append(
+                f"- **Entity keywords:** {', '.join(f'`{_content_platform_display(e, platform)}`' for e in entities[:5])}"
+            )
+        primary_analysis = keyword_analysis.get("primary_keyword") or {}
+        if isinstance(primary_analysis, Mapping) and primary_analysis.get("placement"):
+            placements = primary_analysis.get("placement") or []
+            if placements:
+                lines.append(
+                    "- **Primary keyword placement:** "
+                    + ", ".join(f"`{_content_platform_display(str(p), platform)}`" for p in placements)
+                )
+        if clusters_data:
+            lines.append("")
+            lines.append("**Keyword clusters:**")
+            for cluster in clusters_data[:5]:
+                if not isinstance(cluster, Mapping):
+                    continue
+                cluster_name = str(cluster.get("cluster_name") or "").strip()
+                cluster_keywords = cluster.get("keywords") or []
+                if cluster_name and cluster_keywords:
+                    lines.append(
+                        f"- {cluster_name}: "
+                        + ", ".join(f'`{_content_platform_display(str(k), platform)}`' for k in cluster_keywords[:5])
+                    )
 
         if outline:
             lines.append("")

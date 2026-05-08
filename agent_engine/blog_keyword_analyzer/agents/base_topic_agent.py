@@ -21,6 +21,7 @@ from agent_engine.blog_keyword_analyzer.tools.normalization import (
 )
 from ..schemas import Cluster, TopicIdea
 from ..tools.metrics import RunMetrics
+from ..tools.keyword_analysis import analyze_keywords
 from ..tools.seo_title_polisher import SeoTitlePolishRequest, polish_title
 
 logger = logging.getLogger(__name__)
@@ -1576,6 +1577,36 @@ class KeywordResearchAgent:
                 allowed_primary_keywords,
                 product_variants,
             )
+            analysis_pool = (
+                [pk]
+                + list(allowed_primary_keywords)
+                + list(t["supporting_keywords"])
+                + list(t["keyword_groups"].get("core_seo_keywords", []))
+                + list(t["keyword_groups"].get("long_tail_keywords", []))
+                + list(t["keyword_groups"].get("context_keywords", []))
+            )
+            topic_for_analysis = seed_topic_clean or pk
+            keyword_analysis = analyze_keywords(
+                topic=topic_for_analysis,
+                candidate_keywords=analysis_pool,
+                product=product,
+                platform=platform,
+                preferred_primary=pk,
+            )
+            t["keyword_analysis"] = keyword_analysis.model_dump()
+            if keyword_analysis.secondary_keywords:
+                t["supporting_keywords"] = [
+                    item.keyword for item in keyword_analysis.secondary_keywords[:5]
+                ]
+            if keyword_analysis.primary_keyword and keyword_analysis.primary_keyword.keyword:
+                t["primary_keyword"] = keyword_analysis.primary_keyword.keyword
+                pk = t["primary_keyword"]
+                pk_intent_key = self._keyword_intent_key(pk)
+            t["keyword_groups"] = {
+                "core_seo_keywords": [item.keyword for item in keyword_analysis.secondary_keywords[:5]],
+                "long_tail_keywords": [item.keyword for item in keyword_analysis.long_tail_keywords[:5]],
+                "context_keywords": list(keyword_analysis.semantic_keywords[:5]),
+            }
 
             editorial_notes = t.get("editorial_notes") or []
             if isinstance(editorial_notes, list):
@@ -1586,6 +1617,15 @@ class KeywordResearchAgent:
                 ][:6]
             else:
                 t["editorial_notes"] = []
+            if keyword_analysis.question_keywords:
+                t["editorial_notes"].append(
+                    f"Answer questions such as {keyword_analysis.question_keywords[0]}"
+                )
+            if keyword_analysis.entities:
+                t["editorial_notes"].append(
+                    "Reference entities like " + ", ".join(keyword_analysis.entities[:3])
+                )
+            t["editorial_notes"] = self._dedupe_keep_order(t["editorial_notes"])[:6]
 
             angle = t.get("angle")
             if not isinstance(angle, str) or not angle.strip():
