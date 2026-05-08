@@ -9,7 +9,7 @@ from typing import Dict, List, Optional, Tuple, Set
 
 from ..io import IndexRecord, read_jsonl
 from ..logging_utils import get_logger
-from ..normalization import canonical_topic_key, nor_platform_key, normalize_text
+from ..normalization import canonical_topic_key, nor_platform_key, normalize_sentence_text, normalize_text
 from .base import CoverageResult, CoverageRow
 from .filters import is_release_update_record
 
@@ -240,6 +240,7 @@ def compute_blogs_to_blogs(
     for key_norm, b in sorted(grouped.items(), key=lambda x: x[0]):
         cat = b.category or ""
         sub = b.sub_category or ""
+        display_topic = normalize_sentence_text(canonical_topic_key(b.topic or b.title or key_norm) or key_norm.replace("-", " "))
         row_cov: Dict[str, Dict[str, object]] = {}
 
         # If baseline platform explicitly provided, mark it as covered by definition.
@@ -289,7 +290,7 @@ def compute_blogs_to_blogs(
             CoverageRow(
                 category=cat,
                 sub_category=sub,
-                topic=key_norm,
+                topic=display_topic,
                 key=key_norm,
                 baseline_record_id=b.id,
                 coverage=row_cov,
