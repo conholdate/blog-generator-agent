@@ -186,9 +186,27 @@ def _project_root(start: Optional[Path] = None) -> Path:
         p = p.parent
     return Path.cwd().resolve()
 
+def _canonical_brand_folder(brand: str) -> str:
+    normalized = " ".join(str(brand or "").strip().split())
+    brand_key = normalized.lower().replace(" ", "")
+    folder_map = {
+        "aspose": "Aspose",
+        "conholdate": "Conholdate",
+        "familiarize": "Familiarize",
+        "groupdocs": "GroupDocs",
+        "aspose.cloud": "Aspose.Cloud",
+        "aspose-cloud": "Aspose.Cloud",
+        "conholdate.cloud": "Conholdate.Cloud",
+        "conholdate-cloud": "Conholdate.Cloud",
+        "groupdocs.cloud": "GroupDocs.Cloud",
+        "groupdocs-cloud": "GroupDocs.Cloud",
+    }
+    return folder_map.get(brand_key, normalized or "unknown")
+
 def _resolve_brand_output_dir(brand_folder: str) -> Path:
     root = _project_root()
-    out_dir = (root / "content" / brand_folder / "output").resolve()
+    canonical_folder = _canonical_brand_folder(brand_folder)
+    out_dir = (root / "content" / canonical_folder / "output").resolve()
     out_dir.mkdir(parents=True, exist_ok=True)
     return out_dir
 

@@ -74,6 +74,14 @@ OUTPUT_HEADERS = [
     "secondary_keywords",
     "long_tail_keywords",
     "semantic_keywords",
+    "question_keywords",
+    "entity_keywords",
+    "primary_keyword_intent",
+    "primary_keyword_score",
+    "primary_keyword_aeo_score",
+    "primary_keyword_placement",
+    "keyword_clusters",
+    "rejected_keywords",
     "target_persona",
     "angle",
     "outline",
@@ -289,11 +297,28 @@ def build_output_row(
 
     topic = result.topics[0] if getattr(result, "topics", None) else None
     keyword_groups = getattr(topic, "keyword_groups", None) if topic is not None else None
+    keyword_analysis = getattr(topic, "keyword_analysis", None) if topic is not None else None
     core_keywords = getattr(keyword_groups, "core_seo_keywords", []) if keyword_groups else []
     long_tail_keywords = getattr(keyword_groups, "long_tail_keywords", []) if keyword_groups else []
     context_keywords = getattr(keyword_groups, "context_keywords", []) if keyword_groups else []
+    question_keywords = getattr(keyword_analysis, "question_keywords", []) if keyword_analysis else []
+    entity_keywords = getattr(keyword_analysis, "entities", []) if keyword_analysis else []
+    rejected_keywords = getattr(keyword_analysis, "rejected_keywords", []) if keyword_analysis else []
+    primary_analysis = getattr(keyword_analysis, "primary_keyword", None) if keyword_analysis else None
+    primary_intent = getattr(primary_analysis, "intent", "") if primary_analysis is not None else ""
+    primary_score = getattr(primary_analysis, "score", "") if primary_analysis is not None else ""
+    primary_aeo_score = getattr(primary_analysis, "aeo_score", "") if primary_analysis is not None else ""
+    primary_placement = getattr(primary_analysis, "placement", []) if primary_analysis is not None else []
+    clusters = getattr(keyword_analysis, "keyword_clusters", []) if keyword_analysis else []
     editorial_notes = getattr(topic, "editorial_notes", []) if topic is not None else []
     outline = getattr(topic, "outline", []) if topic is not None else []
+
+    cluster_lines: list[str] = []
+    for cluster in clusters:
+        cluster_name = getattr(cluster, "cluster_name", "") if cluster is not None else ""
+        cluster_keywords = getattr(cluster, "keywords", []) if cluster is not None else []
+        if cluster_name and cluster_keywords:
+            cluster_lines.append(f"{cluster_name}: {', '.join(str(v).strip() for v in cluster_keywords if str(v).strip())}")
 
     return {
         "generated_at_utc": datetime.now(timezone.utc).isoformat(),
@@ -312,6 +337,14 @@ def build_output_row(
         "secondary_keywords": _multiline(core_keywords),
         "long_tail_keywords": _multiline(long_tail_keywords),
         "semantic_keywords": _multiline(context_keywords),
+        "question_keywords": _multiline(question_keywords),
+        "entity_keywords": _multiline(entity_keywords),
+        "primary_keyword_intent": str(primary_intent or ""),
+        "primary_keyword_score": str(primary_score or ""),
+        "primary_keyword_aeo_score": str(primary_aeo_score or ""),
+        "primary_keyword_placement": _multiline(primary_placement),
+        "keyword_clusters": _multiline(cluster_lines),
+        "rejected_keywords": _multiline(rejected_keywords),
         "target_persona": getattr(topic, "target_persona", "") if topic is not None else "",
         "angle": getattr(topic, "angle", "") if topic is not None else "",
         "outline": _multiline(outline),
