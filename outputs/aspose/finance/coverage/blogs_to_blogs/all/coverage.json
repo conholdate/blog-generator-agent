@@ -25,7 +25,7 @@
     {
       "category": "Finance",
       "sub_category": "Xbrl",
-      "topic": "add-footnote-links-and-role-reference-objects-to-xbrl",
+      "topic": "Add footnote links and role reference objects to xbrl",
       "key": "add-footnote-links-and-role-reference-objects-to-xbrl",
       "baseline_record_id": "blog::finance/2022-05-22-add-footnote-links-and-role-reference-objects-to-xbrl-using-csharp/index.md",
       "coverage": {
@@ -58,7 +58,7 @@
     {
       "category": "Finance",
       "sub_category": "OFX",
-      "topic": "create-ofx-request-or-response-programmatically",
+      "topic": "Create OFX request or response programmatically",
       "key": "create-ofx-request-or-response-programmatically",
       "baseline_record_id": "blog::finance/2021-02-23-create-parse-ofx-request-or-response-programmatically-csharp-api/index.md",
       "coverage": {
@@ -91,7 +91,7 @@
     {
       "category": "Finance",
       "sub_category": "XBRL Processing",
-      "topic": "create-parse-and-validate-xbrl-and-ixbrl-financial-reports",
+      "topic": "Create parse and validate xbrl and ixbrl financial reports",
       "key": "create-parse-and-validate-xbrl-and-ixbrl-financial-reports",
       "baseline_record_id": "blog::finance/2020-04-29-create-xbrl-instances-and-parse-and-validate-xbrl-and-ixbrl-files-in-csharp-asp.net/index.md",
       "coverage": {
@@ -124,7 +124,7 @@
     {
       "category": "Finance",
       "sub_category": "XBRL",
-      "topic": "create-xbrl",
+      "topic": "Create xbrl",
       "key": "create-xbrl",
       "baseline_record_id": "blog::finance/2022-07-26-create-xbrl-file-using-python/index.md",
       "coverage": {
@@ -157,7 +157,7 @@
     {
       "category": "Finance",
       "sub_category": "Xbrl",
-      "topic": "create-xbrl-instance-document-and-add-objects",
+      "topic": "Create xbrl instance document and add objects",
       "key": "create-xbrl-instance-document-and-add-objects",
       "baseline_record_id": "blog::finance/2022-04-14-add-objects-to-xbrl-documents-using-csharp/index.md",
       "coverage": {
@@ -190,7 +190,7 @@
     {
       "category": "Finance",
       "sub_category": "Data Parsing",
-      "topic": "parse-xbrl",
+      "topic": "Parse xbrl",
       "key": "parse-xbrl",
       "baseline_record_id": "blog::finance/2022-08-19-parse-xbrl-in-python/index.md",
       "coverage": {
@@ -223,7 +223,7 @@
     {
       "category": "Finance",
       "sub_category": "XBRL",
-      "topic": "read-xbrl",
+      "topic": "Read xbrl",
       "key": "read-xbrl",
       "baseline_record_id": "blog::finance/2022-11-25-read-xbrl-files-in-python/index.md",
       "coverage": {
@@ -256,7 +256,7 @@
     {
       "category": "Finance",
       "sub_category": "XBRL Validation",
-      "topic": "validate-xbrl-document",
+      "topic": "Validate xbrl document",
       "key": "validate-xbrl-document",
       "baseline_record_id": "blog::finance/2022-10-25-validate-xbrl-document-in-python/index.md",
       "coverage": {
@@ -289,7 +289,7 @@
     {
       "category": "Finance",
       "sub_category": "File Conversion",
-      "topic": "xbrl-to-excel",
+      "topic": "Xbrl to excel",
       "key": "xbrl-to-excel",
       "baseline_record_id": "blog::finance/2023-05-02-convert-xbrl-to-excel-in-python/index.md",
       "coverage": {
@@ -322,7 +322,7 @@
     {
       "category": "Finance",
       "sub_category": "File Conversion",
-      "topic": "xbrl-to-excel-converter",
+      "topic": "Xbrl to excel converter",
       "key": "xbrl-to-excel-converter",
       "baseline_record_id": "blog::finance/2023-02-01-xbrl-to-excel-converter/index.md",
       "coverage": {
@@ -355,7 +355,7 @@
     {
       "category": "Finance",
       "sub_category": "XBRL Conversion",
-      "topic": "xbrl-to-html",
+      "topic": "Xbrl to HTML",
       "key": "xbrl-to-html",
       "baseline_record_id": "blog::finance/2022-04-29-convert-xbrl-to-html-using-csharp/index.md",
       "coverage": {
@@ -388,7 +388,7 @@
     {
       "category": "Finance",
       "sub_category": "File Conversion",
-      "topic": "xbrl-to-ixbrl",
+      "topic": "Xbrl to ixbrl",
       "key": "xbrl-to-ixbrl",
       "baseline_record_id": "blog::finance/2023-02-03-xbrl-to-ixbrl-converter/index.md",
       "coverage": {
@@ -421,7 +421,7 @@
     {
       "category": "Document Conversion",
       "sub_category": "XBRL to PDF",
-      "topic": "xbrl-to-pdf",
+      "topic": "Xbrl to PDF",
       "key": "xbrl-to-pdf",
       "baseline_record_id": "blog::finance/2022-03-20-convert-xbrl-to-pdf-using-csharp/index.md",
       "coverage": {
@@ -454,7 +454,7 @@
     {
       "category": "Finance",
       "sub_category": "File Conversion",
-      "topic": "xbrl-to-pdf-converter-free-and",
+      "topic": "Xbrl to PDF converter free and",
       "key": "xbrl-to-pdf-converter-free-and",
       "baseline_record_id": "blog::finance/2023-03-20-xbrl-to-pdf-converter/index.md",
       "coverage": {
@@ -487,7 +487,7 @@
     {
       "category": "Finance",
       "sub_category": "File Format Conversion",
-      "topic": "xbrl-to-xlsx",
+      "topic": "Xbrl to XLSX",
       "key": "xbrl-to-xlsx",
       "baseline_record_id": "blog::finance/2026-04-28-convert-xbrl-to-xlsx-in-python/index.md",
       "coverage": {
@@ -520,7 +520,7 @@
     {
       "category": "Finance",
       "sub_category": "File Conversion",
-      "topic": "xbrl-to-xlsx-or-ixbrl",
+      "topic": "Xbrl to XLSX or ixbrl",
       "key": "xbrl-to-xlsx-or-ixbrl",
       "baseline_record_id": "blog::finance/2021-02-15-convert-xbrl-xlsx-excel-ixbrl-inline-csharp/index.md",
       "coverage": {
@@ -553,7 +553,7 @@
     {
       "category": "Finance",
       "sub_category": "Viewer",
-      "topic": "xbrl-viewer",
+      "topic": "Xbrl viewer",
       "key": "xbrl-viewer",
       "baseline_record_id": "blog::finance/2023-11-02-xbrl-viewer-online/index.md",
       "coverage": {

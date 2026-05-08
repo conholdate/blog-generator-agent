@@ -49,17 +49,17 @@
 
 | # | Cluster | Representative topic | Missing platforms (high-impact) | Suggested new titles (examples) |
 | --- | --- | --- | --- | --- |
-| 1 | **Finance / File Conversion** | Xbrl-to-excel | GENERAL, NET | Xbrl-to-excel — GENERAL; Xbrl-to-excel — NET |
-| 2 | **Finance / File Conversion** | Xbrl-to-excel-converter | NET, PYTHON | Xbrl-to-excel-converter — NET; Xbrl-to-excel-converter — PYTHON |
-| 3 | **Finance / Xbrl** | Add-footnote-links-and-role-reference-objects-to-xbrl | GENERAL, PYTHON | Add-footnote-links-and-role-reference-objects-to-xbrl — GENERAL; Add-footnote-links-and-role-reference-objects-to-xbrl — PYTHON |
-| 4 | **Finance / Xbrl** | Create-xbrl-instance-document-and-add-objects | GENERAL, PYTHON | Create-xbrl-instance-document-and-add-objects — GENERAL; Create-xbrl-instance-document-and-add-objects — PYTHON |
-| 5 | **Finance / XBRL** | Create-xbrl | GENERAL, NET | Create-xbrl — GENERAL; Create-xbrl — NET |
-| 6 | **Finance / XBRL** | Read-xbrl | GENERAL, NET | Read-xbrl — GENERAL; Read-xbrl — NET |
-| 7 | **Finance / OFX** | Create-ofx-request-or-response-programmatically | GENERAL, PYTHON | Create-ofx-request-or-response-programmatically — GENERAL; Create-ofx-request-or-response-programmatically — PYTHON |
-| 8 | **Finance / XBRL Processing** | Create-parse-and-validate-xbrl-and-ixbrl-financial-reports | GENERAL, PYTHON | Create-parse-and-validate-xbrl-and-ixbrl-financial-reports — GENERAL; Create-parse-and-validate-xbrl-and-ixbrl-financial-reports — PYTHON |
-| 9 | **Finance / Data Parsing** | Parse-xbrl | GENERAL, NET | Parse-xbrl — GENERAL; Parse-xbrl — NET |
-| 10 | **Finance / XBRL Validation** | Validate-xbrl-document | GENERAL, NET | Validate-xbrl-document — GENERAL; Validate-xbrl-document — NET |
-| 11 | **Finance / File Format Conversion** | Xbrl-to-XLSX | GENERAL, NET | Xbrl-to-XLSX — GENERAL; Xbrl-to-XLSX — NET |
+| 1 | **Finance / File Conversion** | Xbrl to excel | GENERAL, NET | Xbrl to excel — GENERAL; Xbrl to excel — NET |
+| 2 | **Finance / File Conversion** | Xbrl to excel converter | NET, PYTHON | Xbrl to excel converter — NET; Xbrl to excel converter — PYTHON |
+| 3 | **Finance / Xbrl** | Add footnote links and role reference objects to xbrl | GENERAL, PYTHON | Add footnote links and role reference objects to xbrl — GENERAL; Add footnote links and role reference objects to xbrl — PYTHON |
+| 4 | **Finance / Xbrl** | Create xbrl instance document and add objects | GENERAL, PYTHON | Create xbrl instance document and add objects — GENERAL; Create xbrl instance document and add objects — PYTHON |
+| 5 | **Finance / XBRL** | Create xbrl | GENERAL, NET | Create xbrl — GENERAL; Create xbrl — NET |
+| 6 | **Finance / XBRL** | Read xbrl | GENERAL, NET | Read xbrl — GENERAL; Read xbrl — NET |
+| 7 | **Finance / OFX** | Create OFX request or response programmatically | GENERAL, PYTHON | Create OFX request or response programmatically — GENERAL; Create OFX request or response programmatically — PYTHON |
+| 8 | **Finance / XBRL Processing** | Create parse and validate xbrl and ixbrl financial reports | GENERAL, PYTHON | Create parse and validate xbrl and ixbrl financial reports — GENERAL; Create parse and validate xbrl and ixbrl financial reports — PYTHON |
+| 9 | **Finance / Data Parsing** | Parse xbrl | GENERAL, NET | Parse xbrl — GENERAL; Parse xbrl — NET |
+| 10 | **Finance / XBRL Validation** | Validate xbrl document | GENERAL, NET | Validate xbrl document — GENERAL; Validate xbrl document — NET |
+| 11 | **Finance / File Format Conversion** | Xbrl to XLSX | GENERAL, NET | Xbrl to XLSX — GENERAL; Xbrl to XLSX — NET |
 
 *These recommendations are derived from topics missing across the largest number of platforms and clustered by category/subcategory.*
 
