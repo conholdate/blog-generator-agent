@@ -289,6 +289,30 @@ def build_output_row(
     result: Any,
     markdown_path: str,
 ) -> Dict[str, str]:
+    def _mapping(value: Any) -> Dict[str, Any]:
+        if isinstance(value, Mapping):
+            return dict(value)
+        if hasattr(value, "model_dump"):
+            try:
+                dumped = value.model_dump()
+                if isinstance(dumped, Mapping):
+                    return dict(dumped)
+            except Exception:
+                return {}
+        if hasattr(value, "dict"):
+            try:
+                dumped = value.dict()
+                if isinstance(dumped, Mapping):
+                    return dict(dumped)
+            except Exception:
+                return {}
+        return {}
+
+    def _field(value: Any, key: str, default: Any = "") -> Any:
+        if isinstance(value, Mapping):
+            return value.get(key, default)
+        return getattr(value, key, default)
+
     def _multiline(values: Any) -> str:
         if not isinstance(values, list):
             return str(values or "")
@@ -296,34 +320,34 @@ def build_output_row(
         return "\n".join(items)
 
     topic = result.topics[0] if getattr(result, "topics", None) else None
-    keyword_groups = getattr(topic, "keyword_groups", None) if topic is not None else None
-    keyword_analysis = getattr(topic, "keyword_analysis", None) if topic is not None else None
-    core_keywords = getattr(keyword_groups, "core_seo_keywords", []) if keyword_groups else []
-    long_tail_keywords = getattr(keyword_groups, "long_tail_keywords", []) if keyword_groups else []
-    context_keywords = getattr(keyword_groups, "context_keywords", []) if keyword_groups else []
-    analysis_secondary = getattr(keyword_analysis, "secondary_keywords", []) if keyword_analysis else []
-    analysis_long_tail = getattr(keyword_analysis, "long_tail_keywords", []) if keyword_analysis else []
-    question_keywords = getattr(keyword_analysis, "question_keywords", []) if keyword_analysis else []
-    entity_keywords = getattr(keyword_analysis, "entities", []) if keyword_analysis else []
-    rejected_keywords = getattr(keyword_analysis, "rejected_keywords", []) if keyword_analysis else []
-    primary_analysis = getattr(keyword_analysis, "primary_keyword", None) if keyword_analysis else None
-    primary_intent = getattr(primary_analysis, "intent", "") if primary_analysis is not None else ""
-    primary_score = getattr(primary_analysis, "score", "") if primary_analysis is not None else ""
-    primary_aeo_score = getattr(primary_analysis, "aeo_score", "") if primary_analysis is not None else ""
-    primary_placement = getattr(primary_analysis, "placement", []) if primary_analysis is not None else []
-    clusters = getattr(keyword_analysis, "keyword_clusters", []) if keyword_analysis else []
-    editorial_notes = getattr(topic, "editorial_notes", []) if topic is not None else []
-    outline = getattr(topic, "outline", []) if topic is not None else []
+    keyword_groups = _mapping(_field(topic, "keyword_groups", None)) if topic is not None else {}
+    keyword_analysis = _mapping(_field(topic, "keyword_analysis", None)) if topic is not None else {}
+    core_keywords = keyword_groups.get("core_seo_keywords") or []
+    long_tail_keywords = keyword_groups.get("long_tail_keywords") or []
+    context_keywords = keyword_groups.get("context_keywords") or []
+    analysis_secondary = keyword_analysis.get("secondary_keywords") or []
+    analysis_long_tail = keyword_analysis.get("long_tail_keywords") or []
+    question_keywords = keyword_analysis.get("question_keywords") or []
+    entity_keywords = keyword_analysis.get("entities") or []
+    rejected_keywords = keyword_analysis.get("rejected_keywords") or []
+    primary_analysis = _mapping(keyword_analysis.get("primary_keyword"))
+    primary_intent = primary_analysis.get("intent", "")
+    primary_score = primary_analysis.get("score", "")
+    primary_aeo_score = primary_analysis.get("aeo_score", "")
+    primary_placement = primary_analysis.get("placement") or []
+    clusters = keyword_analysis.get("keyword_clusters") or []
+    editorial_notes = _field(topic, "editorial_notes", []) if topic is not None else []
+    outline = _field(topic, "outline", []) if topic is not None else []
 
     if not core_keywords and analysis_secondary:
-        core_keywords = [getattr(item, "keyword", "") for item in analysis_secondary if getattr(item, "keyword", "")]
+        core_keywords = [_field(item, "keyword", "") for item in analysis_secondary if _field(item, "keyword", "")]
     if not long_tail_keywords and analysis_long_tail:
-        long_tail_keywords = [getattr(item, "keyword", "") for item in analysis_long_tail if getattr(item, "keyword", "")]
+        long_tail_keywords = [_field(item, "keyword", "") for item in analysis_long_tail if _field(item, "keyword", "")]
 
     cluster_lines: list[str] = []
     for cluster in clusters:
-        cluster_name = getattr(cluster, "cluster_name", "") if cluster is not None else ""
-        cluster_keywords = getattr(cluster, "keywords", []) if cluster is not None else []
+        cluster_name = _field(cluster, "cluster_name", "") if cluster is not None else ""
+        cluster_keywords = _field(cluster, "keywords", []) if cluster is not None else []
         if cluster_name and cluster_keywords:
             cluster_lines.append(f"{cluster_name}: {', '.join(str(v).strip() for v in cluster_keywords if str(v).strip())}")
 
