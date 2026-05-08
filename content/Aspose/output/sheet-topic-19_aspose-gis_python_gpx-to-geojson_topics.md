@@ -2,7 +2,7 @@
 
 - **Brand:** aspose
 - **Product:** Aspose.GIS
-- **Platform:** Python
+- **Platform:** Python via .NET
 - **Run ID:** 8321916a
 - **Topics:** 1
 
