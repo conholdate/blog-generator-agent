@@ -5,6 +5,7 @@ from pathlib import Path
 from typing import Any
 
 import requests
+from .normalization import canonical_topic_key
 
 BASE_HEADER_KEYS = [
     "brand_key",
@@ -13,6 +14,7 @@ BASE_HEADER_KEYS = [
     "category",
     "sub_category",
     "topic",
+    "status",
 ]
 
 HEADER_LABELS = {
@@ -22,6 +24,7 @@ HEADER_LABELS = {
     "category": "Category",
     "sub_category": "Sub Category",
     "topic": "Topic",
+    "status": "Status",
 }
 
 PLATFORM_COLUMNS = [
@@ -186,7 +189,7 @@ def _extract_rows(coverage_path: Path) -> tuple[list[dict[str, Any]], list[str]]
         raise ValueError(f"Expected rows array in {coverage_path}")
 
     platform_keys = _collect_platforms(payload, rows)
-    extracted: list[dict[str, Any]] = []
+    extracted_by_topic: dict[str, dict[str, Any]] = {}
     for row in rows:
         if not isinstance(row, dict):
             continue
@@ -220,6 +223,7 @@ def _extract_rows(coverage_path: Path) -> tuple[list[dict[str, Any]], list[str]]
             "category": row.get("category") or "",
             "sub_category": row.get("sub_category") or "",
             "topic": row.get("topic") or "",
+            "status": "Queued",
         }
         for platform in platform_keys:
             if platform not in present_platforms:
@@ -229,9 +233,31 @@ def _extract_rows(coverage_path: Path) -> tuple[list[dict[str, Any]], list[str]]
             matched_url = matched_platforms.get(platform) or ""
             item[platform] = _sheet_hyperlink(matched_url, "YES") if matched_url else "NO"
 
-        extracted.append(item)
+        topic_key = canonical_topic_key(str(item.get("topic") or ""))
+        if not topic_key:
+            topic_key = str(item.get("topic") or "").strip().lower()
 
-    return extracted, platform_keys
+        existing = extracted_by_topic.get(topic_key)
+        if existing is None:
+            extracted_by_topic[topic_key] = item
+            continue
+
+        if not existing.get("category") and item.get("category"):
+            existing["category"] = item["category"]
+        if not existing.get("sub_category") and item.get("sub_category"):
+            existing["sub_category"] = item["sub_category"]
+        if len(str(item.get("topic") or "")) < len(str(existing.get("topic") or "")):
+            existing["topic"] = item["topic"]
+
+        for platform in platform_keys:
+            current = str(existing.get(platform) or "")
+            incoming = str(item.get(platform) or "")
+            if current.startswith("=HYPERLINK("):
+                continue
+            if incoming.startswith("=HYPERLINK(") or (not current and incoming):
+                existing[platform] = incoming
+
+    return list(extracted_by_topic.values()), platform_keys
 
 
 def build_payload(

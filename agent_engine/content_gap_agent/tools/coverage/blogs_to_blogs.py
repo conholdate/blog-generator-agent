@@ -9,7 +9,7 @@ from typing import Dict, List, Optional, Tuple, Set
 
 from ..io import IndexRecord, read_jsonl
 from ..logging_utils import get_logger
-from ..normalization import nor_platform_key, normalize_text
+from ..normalization import canonical_topic_key, nor_platform_key, normalize_text
 from .base import CoverageResult, CoverageRow
 from .filters import is_release_update_record
 
@@ -34,6 +34,9 @@ def normalize_gap_key(k: str) -> str:
     k = (k or "").strip()
     if not k:
         return ""
+    canonical = canonical_topic_key(k)
+    if canonical:
+        k = canonical
     parts = [p.lower() for p in _KEY_SPLIT_RE.split(k) if p]
     return "-".join(parts)
 
@@ -45,7 +48,7 @@ def record_gap_key(r: IndexRecord) -> str:
     """
     if getattr(r, "key", None):
         return normalize_gap_key(str(r.key))
-    return normalize_text(r.topic or r.title)
+    return normalize_gap_key(r.topic or r.title)
 
 
 def _normalize_platform_key(s: Optional[str]) -> str:

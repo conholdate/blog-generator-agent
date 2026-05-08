@@ -387,7 +387,7 @@ def build_output_row(
     return {
         "generated_at_utc": datetime.now(timezone.utc).isoformat(),
         "run_id": getattr(result, "run_id", ""),
-        "status": "ok" if topic is not None else "no_topics_generated",
+        "status": "Queued" if topic is not None else "no_topics_generated",
         "source_sheet_row": str(selection.row_index),
         "brand": selection.brand,
         "product": selection.product,
