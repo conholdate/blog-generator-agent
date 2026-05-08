@@ -29,13 +29,16 @@ on:
           - 'SharePoint'
           - 'JasperReports'
           - 'Reporting Services'
-          - 'JavaScript'
-          - 'Go'
-          - 'Rust'
-          - 'Node.js'
-          - 'PHP'
-          - 'Python'
-          - 'Android'
+          - 'JavaScript via C++'
+          - 'Go via C++'
+          - 'Rust via C++'
+          - 'Node.js via C++'
+          - 'Node.js via Java'
+          - 'Node.js via .NET'
+          - 'PHP via Java'
+          - 'Python via .NET'
+          - 'Python via Java'
+          - 'Android via Java'
 
       google_sheet_row:
         description: "1-based Google Sheet row number to process from the brand's All Missing Topics sheet."

@@ -236,7 +236,25 @@ def ensure_output_headers(
             .execute()
         )
         existing_values = existing.get("values") or []
-        if existing_values and existing_values[0]:
+        existing_headers = [str(v).strip() for v in (existing_values[0] if existing_values else [])]
+        if existing_headers:
+            merged_headers = list(existing_headers)
+            for header in OUTPUT_HEADERS:
+                if header not in merged_headers:
+                    merged_headers.append(header)
+            if merged_headers == existing_headers:
+                return
+            (
+                service.spreadsheets()
+                .values()
+                .update(
+                    spreadsheetId=spreadsheet_id,
+                    range=header_range,
+                    valueInputOption="RAW",
+                    body={"values": [merged_headers]},
+                )
+                .execute()
+            )
             return
 
         (
@@ -263,9 +281,24 @@ def append_output_row(
 ) -> None:
     spreadsheet_id = normalize_spreadsheet_id(spreadsheet_id)
     service = _build_sheets_service(credentials_file)
-    ordered = [str(row_payload.get(header, "") or "") for header in OUTPUT_HEADERS]
+    header_range = f"'{worksheet_name}'!1:1"
     append_range = f"'{worksheet_name}'!A:A"
     try:
+        existing = (
+            service.spreadsheets()
+            .values()
+            .get(
+                spreadsheetId=spreadsheet_id,
+                range=header_range,
+                majorDimension="ROWS",
+                valueRenderOption="FORMATTED_VALUE",
+            )
+            .execute()
+        )
+        header_values = existing.get("values") or []
+        active_headers = [str(v).strip() for v in (header_values[0] if header_values else []) if str(v).strip()]
+        ordered_headers = active_headers or OUTPUT_HEADERS
+        ordered = [str(row_payload.get(header, "") or "") for header in ordered_headers]
         (
             service.spreadsheets()
             .values()
