@@ -37,7 +37,7 @@ on:
           - configs/aspose/zip.yaml
 
       platform:
-        description: "Target platform for indexing and baseline platform for gap analysis."
+        description: "Target platform for indexing."
         required: true
         default: "net"
         type: choice
@@ -50,6 +50,12 @@ on:
           - php
           - android
           - general
+
+      baseline_platform:
+        description: "Baseline platform for gap analysis. Ignored for blogs_to_blogs, which always runs in all-platform mode."
+        required: false
+        default: ""
+        type: string
 
       steps:
         description: "CSV repo keys to index (matches content indexer CLI --steps)."
@@ -203,6 +209,15 @@ jobs:
             exit 1
           fi
 
+      - name: Validate workflow inputs
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ "${{ inputs.case }}" != "blogs_to_blogs" ] && [ -z "${{ inputs.baseline_platform }}" ]; then
+            echo "baseline_platform is required for case '${{ inputs.case }}'."
+            exit 1
+          fi
+
       - name: Restore SQLite cache
         uses: actions/cache@v4
         with:
@@ -246,10 +261,11 @@ jobs:
           if not product_key:
               raise SystemExit(f"Missing 'key' in product YAML: {product_yaml}")
 
-          baseline_platform = os.environ.get("BASELINE_PLATFORM", "").strip() or "all"
           coverage_case = os.environ.get("COVERAGE_CASE", "").strip()
           if not coverage_case:
               raise SystemExit("COVERAGE_CASE is required.")
+          raw_baseline_platform = os.environ.get("BASELINE_PLATFORM", "").strip()
+          baseline_platform = "all" if coverage_case == "blogs_to_blogs" else (raw_baseline_platform or "all")
 
           coverage_json = outputs_root / brand_key / product_key / "coverage" / coverage_case / baseline_platform / "coverage.json"
           sheets_payload_json = outputs_root / "google_sheets" / f"{brand_key}_missing_topics.json"
@@ -264,7 +280,7 @@ jobs:
           PY
         env:
           PRODUCT_YAML: ${{ inputs.product_yaml }}
-          BASELINE_PLATFORM: ${{ inputs.platform }}
+          BASELINE_PLATFORM: ${{ inputs.baseline_platform }}
           COVERAGE_CASE: ${{ inputs.case }}
 
       - name: Configure git auth for source repos
@@ -298,8 +314,11 @@ jobs:
             --log-level "${{ inputs.log_level }}"
             --append
             --post
-            --workflow-compatible
           )
+
+          if [ "${{ inputs.case }}" != "blogs_to_blogs" ] && [ -n "${{ inputs.baseline_platform }}" ]; then
+            ARGS+=(--gap-platform "${{ inputs.baseline_platform }}")
+          fi
 
           if [ "${{ inputs.delete_missing }}" = "true" ]; then
             ARGS+=(--delete-missing)
