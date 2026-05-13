@@ -9,6 +9,7 @@ from typing import Any, Dict, List, Sequence, Tuple, Optional, Set
 from ...types import IndexRecord, RepoTarget
 from ..key_maker import build_content_topic, extract_seo_title
 from ..llm import classify_blog_with_llm
+from ..normalization import canonical_topic_key
 from ..record_id import RecordId
 from ..text_utils import ParsedMarkdown, normalize_ws, extract_subheadings
 from .base import HandlerContext, MarkdownRepoHandler
@@ -528,6 +529,8 @@ class BlogsHandler(MarkdownRepoHandler):
                 allowed_platforms=allowed_platforms,
             )
 
+            topic_text = build_content_topic(title=parsed.title, url=url, seo_title=seo_title, llm_topic=str(topic))[:200]
+
             return IndexRecord(
                 id=RecordId.for_markdown(repo_key=repo_target.repo_key, relpath=relpath),
                 brand=ctx.brand_key,
@@ -536,7 +539,7 @@ class BlogsHandler(MarkdownRepoHandler):
                 repo_type=repo_target.repo_type,
                 platform=primary_platform,
                 title=parsed.title[:300],
-                topic=build_content_topic(title=parsed.title, url=url, seo_title=seo_title, llm_topic=str(topic))[:200],
+                topic=topic_text,
                 category=str(cat)[:100],
                 sub_category=str(subcat)[:100],
                 url=url,
@@ -544,6 +547,7 @@ class BlogsHandler(MarkdownRepoHandler):
                 excerpt=normalize_ws(parsed.body[:400]),
                 keywords=keywords,
                 published_date=published_date,
+                key=canonical_topic_key(topic_text),
             )
 
         # Non-LLM fallback (still enforces single-platform policy)
@@ -565,6 +569,8 @@ class BlogsHandler(MarkdownRepoHandler):
             allowed_platforms=allowed_platforms,
         )
 
+        topic_text = build_content_topic(title=parsed.title, url=url, seo_title=seo_title, llm_topic=str(topic))[:200]
+
         return IndexRecord(
             id=RecordId.for_markdown(repo_key=repo_target.repo_key, relpath=relpath),
             brand=ctx.brand_key,
@@ -573,7 +579,7 @@ class BlogsHandler(MarkdownRepoHandler):
             repo_type=repo_target.repo_type,
             platform=primary_platform,
             title=parsed.title[:300],
-            topic=build_content_topic(title=parsed.title, url=url, seo_title=seo_title, llm_topic=str(topic))[:200],
+            topic=topic_text,
             category=str(category)[:100],
             sub_category=str(sub_category)[:100],
             url=url,
@@ -581,4 +587,5 @@ class BlogsHandler(MarkdownRepoHandler):
             excerpt=normalize_ws(parsed.body[:400]),
             keywords=keywords,
             published_date=published_date,
+            key=canonical_topic_key(topic_text),
         )

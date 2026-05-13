@@ -28,10 +28,18 @@ def main() -> None:
     parser.add_argument("--coverage-json", help="Explicit path to the coverage.json file to export.")
     parser.add_argument("--sheet-name", help="Target tab name inside the spreadsheet.")
     parser.add_argument("--output-json", help="Path to write the generated payload JSON.")
-    parser.add_argument("--append", action="store_true", help="Append rows in Sheets instead of replacing the entire sheet.")
+    parser.add_argument("--append", action="store_true", help="Append rows in Sheets. This is the default.")
+    parser.add_argument(
+        "--replace",
+        action="store_true",
+        help="Replace the target sheet contents instead of appending. Use only for intentional full refreshes.",
+    )
     parser.add_argument("--post-url", help="Override the configured Apps Script web app URL.")
     parser.add_argument("--token", help="Override the configured Apps Script token.")
+    parser.add_argument("--post", action="store_true", help="Actually POST to Google Sheets. Default is payload-only.")
     args = parser.parse_args()
+    if args.append and args.replace:
+        raise SystemExit("Use only one of --append or --replace.")
 
     brand_key = str(args.brand or "").strip().lower()
     brand_cfg = resolve_sheet_config(settings, brand_key)
@@ -63,7 +71,7 @@ def main() -> None:
     payload = build_payload(
         coverage_json=coverage_json,
         sheet_name=sheet_name or "All Missing Topics",
-        replace=not args.append,
+        replace=args.replace,
     )
     write_payload(payload, output_json)
 
@@ -71,7 +79,7 @@ def main() -> None:
     print(f"Coverage sources: {payload['meta']['source_count']}")
     print(f"Missing topic rows: {payload['meta']['row_count']}")
 
-    if post_url:
+    if args.post and post_url:
         should_post, reason = should_post_payload(payload)
         if not should_post:
             print(reason)
@@ -79,8 +87,10 @@ def main() -> None:
             status, text = post_payload(payload, post_url, token)
             print(f"POST status: {status}")
             print(text[:1000])
-    else:
+    elif args.post:
         print("POST skipped: no Apps Script URL configured.")
+    else:
+        print("POST skipped. Use --post to send to Google Sheets.")
 
 
 if __name__ == "__main__":

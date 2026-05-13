@@ -1,0 +1,8682 @@
+{
+  "pdf": {
+    "upper": "PDF",
+    "aliases": [
+      "pdf",
+      "portable document format"
+    ]
+  },
+  "doc": {
+    "upper": "DOC",
+    "aliases": [
+      "doc",
+      "word doc",
+      "ms word doc"
+    ]
+  },
+  "docx": {
+    "upper": "DOCX",
+    "aliases": [
+      "docx",
+      "word",
+      "ms word",
+      "microsoft word",
+      "word document"
+    ]
+  },
+  "docm": {
+    "upper": "DOCM",
+    "aliases": [
+      "docm"
+    ]
+  },
+  "dot": {
+    "upper": "DOT",
+    "aliases": [
+      "dot"
+    ]
+  },
+  "dotx": {
+    "upper": "DOTX",
+    "aliases": [
+      "dotx"
+    ]
+  },
+  "dotm": {
+    "upper": "DOTM",
+    "aliases": [
+      "dotm"
+    ]
+  },
+  "rtf": {
+    "upper": "RTF",
+    "aliases": [
+      "rtf",
+      "rich text format"
+    ]
+  },
+  "txt": {
+    "upper": "TXT",
+    "aliases": [
+      "txt",
+      "text",
+      "plain text",
+      "text file"
+    ]
+  },
+  "odt": {
+    "upper": "ODT",
+    "aliases": [
+      "odt",
+      "open document text",
+      "opendocument text"
+    ]
+  },
+  "ott": {
+    "upper": "OTT",
+    "aliases": [
+      "ott"
+    ]
+  },
+  "wps": {
+    "upper": "WPS",
+    "aliases": [
+      "wps"
+    ]
+  },
+  "md": {
+    "upper": "MD",
+    "aliases": [
+      "md",
+      "markdown"
+    ]
+  },
+  "tex": {
+    "upper": "TEX",
+    "aliases": [
+      "tex",
+      "latex",
+      "la tex",
+      "latex source"
+    ]
+  },
+  "ltx": {
+    "upper": "LTX",
+    "aliases": [
+      "ltx"
+    ]
+  },
+  "xps": {
+    "upper": "XPS",
+    "aliases": [
+      "xps"
+    ]
+  },
+  "oxps": {
+    "upper": "OXPS",
+    "aliases": [
+      "oxps"
+    ]
+  },
+  "epub": {
+    "upper": "EPUB",
+    "aliases": [
+      "epub"
+    ]
+  },
+  "mobi": {
+    "upper": "MOBI",
+    "aliases": [
+      "mobi"
+    ]
+  },
+  "azw3": {
+    "upper": "AZW3",
+    "aliases": [
+      "azw3"
+    ]
+  },
+  "xml": {
+    "upper": "XML",
+    "aliases": [
+      "xml"
+    ]
+  },
+  "json": {
+    "upper": "JSON",
+    "aliases": [
+      "json"
+    ]
+  },
+  "yaml": {
+    "upper": "YAML",
+    "aliases": [
+      "yaml",
+      "yml"
+    ]
+  },
+  "csv": {
+    "upper": "CSV",
+    "aliases": [
+      "csv",
+      "comma separated values"
+    ]
+  },
+  "tsv": {
+    "upper": "TSV",
+    "aliases": [
+      "tsv",
+      "tab separated values"
+    ]
+  },
+  "html": {
+    "upper": "HTML",
+    "aliases": [
+      "html",
+      "htm",
+      "hypertext markup language"
+    ]
+  },
+  "mhtml": {
+    "upper": "MHTML",
+    "aliases": [
+      "mhtml",
+      "mht",
+      "mime html"
+    ]
+  },
+  "xhtml": {
+    "upper": "XHTML",
+    "aliases": [
+      "xhtml"
+    ]
+  },
+  "svg": {
+    "upper": "SVG",
+    "aliases": [
+      "svg",
+      "scalable vector graphics"
+    ]
+  },
+  "ps": {
+    "upper": "PS",
+    "aliases": [
+      "ps",
+      "postscript"
+    ]
+  },
+  "eps": {
+    "upper": "EPS",
+    "aliases": [
+      "eps",
+      "encapsulated postscript"
+    ]
+  },
+  "pcl": {
+    "upper": "PCL",
+    "aliases": [
+      "pcl"
+    ]
+  },
+  "psd": {
+    "upper": "PSD",
+    "aliases": [
+      "psd",
+      "photoshop"
+    ]
+  },
+  "xls": {
+    "upper": "XLS",
+    "aliases": [
+      "xls",
+      "excel xls"
+    ]
+  },
+  "xlsx": {
+    "upper": "XLSX",
+    "aliases": [
+      "xlsx",
+      "excel",
+      "excel workbook",
+      "spreadsheet",
+      "spreadsheet file"
+    ]
+  },
+  "xlsm": {
+    "upper": "XLSM",
+    "aliases": [
+      "xlsm"
+    ]
+  },
+  "xlsb": {
+    "upper": "XLSB",
+    "aliases": [
+      "xlsb"
+    ]
+  },
+  "xlt": {
+    "upper": "XLT",
+    "aliases": [
+      "xlt"
+    ]
+  },
+  "xltx": {
+    "upper": "XLTX",
+    "aliases": [
+      "xltx"
+    ]
+  },
+  "xltm": {
+    "upper": "XLTM",
+    "aliases": [
+      "xltm"
+    ]
+  },
+  "ods": {
+    "upper": "ODS",
+    "aliases": [
+      "ods",
+      "open document spreadsheet",
+      "opendocument spreadsheet"
+    ]
+  },
+  "ots": {
+    "upper": "OTS",
+    "aliases": [
+      "ots"
+    ]
+  },
+  "numbers": {
+    "upper": "NUMBERS",
+    "aliases": [
+      "numbers",
+      "apple numbers"
+    ]
+  },
+  "sxc": {
+    "upper": "SXC",
+    "aliases": [
+      "sxc"
+    ]
+  },
+  "fods": {
+    "upper": "FODS",
+    "aliases": [
+      "fods"
+    ]
+  },
+  "ppt": {
+    "upper": "PPT",
+    "aliases": [
+      "ppt",
+      "powerpoint"
+    ]
+  },
+  "pptx": {
+    "upper": "PPTX",
+    "aliases": [
+      "pptx",
+      "powerpoint presentation"
+    ]
+  },
+  "pptm": {
+    "upper": "PPTM",
+    "aliases": [
+      "pptm"
+    ]
+  },
+  "pps": {
+    "upper": "PPS",
+    "aliases": [
+      "pps"
+    ]
+  },
+  "ppsx": {
+    "upper": "PPSX",
+    "aliases": [
+      "ppsx"
+    ]
+  },
+  "ppsm": {
+    "upper": "PPSM",
+    "aliases": [
+      "ppsm"
+    ]
+  },
+  "pot": {
+    "upper": "POT",
+    "aliases": [
+      "pot"
+    ]
+  },
+  "potx": {
+    "upper": "POTX",
+    "aliases": [
+      "potx"
+    ]
+  },
+  "potm": {
+    "upper": "POTM",
+    "aliases": [
+      "potm"
+    ]
+  },
+  "odp": {
+    "upper": "ODP",
+    "aliases": [
+      "odp",
+      "open document presentation",
+      "opendocument presentation"
+    ]
+  },
+  "otp": {
+    "upper": "OTP",
+    "aliases": [
+      "otp"
+    ]
+  },
+  "png": {
+    "upper": "PNG",
+    "aliases": [
+      "png"
+    ]
+  },
+  "jpg": {
+    "upper": "JPG",
+    "aliases": [
+      "jpg",
+      "jpeg",
+      "jpe",
+      "joint photographic experts group"
+    ]
+  },
+  "jpeg": {
+    "upper": "JPEG",
+    "aliases": [
+      "jpeg",
+      "jpe"
+    ]
+  },
+  "gif": {
+    "upper": "GIF",
+    "aliases": [
+      "gif"
+    ]
+  },
+  "bmp": {
+    "upper": "BMP",
+    "aliases": [
+      "bmp",
+      "bitmap"
+    ]
+  },
+  "tif": {
+    "upper": "TIF",
+    "aliases": [
+      "tif",
+      "tiff"
+    ]
+  },
+  "tiff": {
+    "upper": "TIFF",
+    "aliases": [
+      "tiff"
+    ]
+  },
+  "webp": {
+    "upper": "WEBP",
+    "aliases": [
+      "webp"
+    ]
+  },
+  "emf": {
+    "upper": "EMF",
+    "aliases": [
+      "emf"
+    ]
+  },
+  "wmf": {
+    "upper": "WMF",
+    "aliases": [
+      "wmf"
+    ]
+  },
+  "ico": {
+    "upper": "ICO",
+    "aliases": [
+      "ico",
+      "icon"
+    ]
+  },
+  "apng": {
+    "upper": "APNG",
+    "aliases": [
+      "apng"
+    ]
+  },
+  "dng": {
+    "upper": "DNG",
+    "aliases": [
+      "dng"
+    ]
+  },
+  "cdr": {
+    "upper": "CDR",
+    "aliases": [
+      "cdr",
+      "coreldraw"
+    ]
+  },
+  "cmx": {
+    "upper": "CMX",
+    "aliases": [
+      "cmx"
+    ]
+  },
+  "otg": {
+    "upper": "OTG",
+    "aliases": [
+      "otg"
+    ]
+  },
+  "djvu": {
+    "upper": "DJVU",
+    "aliases": [
+      "djvu",
+      "djv"
+    ]
+  },
+  "3d": {
+    "upper": "3D",
+    "aliases": [
+      "3d"
+    ]
+  },
+  "3ds": {
+    "upper": "3DS",
+    "aliases": [
+      "3ds"
+    ]
+  },
+  "3mf": {
+    "upper": "3MF",
+    "aliases": [
+      "3mf"
+    ]
+  },
+  "amf": {
+    "upper": "AMF",
+    "aliases": [
+      "amf"
+    ]
+  },
+  "dae": {
+    "upper": "DAE",
+    "aliases": [
+      "dae",
+      "collada"
+    ]
+  },
+  "drc": {
+    "upper": "DRC",
+    "aliases": [
+      "drc"
+    ]
+  },
+  "dxf": {
+    "upper": "DXF",
+    "aliases": [
+      "dxf"
+    ]
+  },
+  "dwg": {
+    "upper": "DWG",
+    "aliases": [
+      "dwg"
+    ]
+  },
+  "dgn": {
+    "upper": "DGN",
+    "aliases": [
+      "dgn"
+    ]
+  },
+  "fbx": {
+    "upper": "FBX",
+    "aliases": [
+      "fbx"
+    ]
+  },
+  "glb": {
+    "upper": "GLB",
+    "aliases": [
+      "glb"
+    ]
+  },
+  "gltf": {
+    "upper": "GLTF",
+    "aliases": [
+      "gltf",
+      "gltf2"
+    ]
+  },
+  "iges": {
+    "upper": "IGES",
+    "aliases": [
+      "iges"
+    ]
+  },
+  "igs": {
+    "upper": "IGS",
+    "aliases": [
+      "igs"
+    ]
+  },
+  "jt": {
+    "upper": "JT",
+    "aliases": [
+      "jt"
+    ]
+  },
+  "ma": {
+    "upper": "MA",
+    "aliases": [
+      "ma",
+      "maya ascii"
+    ]
+  },
+  "mb": {
+    "upper": "MB",
+    "aliases": [
+      "mb",
+      "maya binary"
+    ]
+  },
+  "obj": {
+    "upper": "OBJ",
+    "aliases": [
+      "obj",
+      "wavefront obj"
+    ]
+  },
+  "ply": {
+    "upper": "PLY",
+    "aliases": [
+      "ply"
+    ]
+  },
+  "rvm": {
+    "upper": "RVM",
+    "aliases": [
+      "rvm"
+    ]
+  },
+  "stl": {
+    "upper": "STL",
+    "aliases": [
+      "stl"
+    ]
+  },
+  "u3d": {
+    "upper": "U3D",
+    "aliases": [
+      "u3d"
+    ]
+  },
+  "usd": {
+    "upper": "USD",
+    "aliases": [
+      "usd"
+    ]
+  },
+  "usdz": {
+    "upper": "USDZ",
+    "aliases": [
+      "usdz"
+    ]
+  },
+  "step": {
+    "upper": "STEP",
+    "aliases": [
+      "step",
+      "stp"
+    ]
+  },
+  "stp": {
+    "upper": "STP",
+    "aliases": [
+      "stp"
+    ]
+  },
+  "ifc": {
+    "upper": "IFC",
+    "aliases": [
+      "ifc"
+    ]
+  },
+  "x": {
+    "upper": "X",
+    "aliases": [
+      "x",
+      "directx"
+    ]
+  },
+  "vrml": {
+    "upper": "VRML",
+    "aliases": [
+      "vrml",
+      "wrl"
+    ]
+  },
+  "wrl": {
+    "upper": "WRL",
+    "aliases": [
+      "wrl"
+    ]
+  },
+  "eml": {
+    "upper": "EML",
+    "aliases": [
+      "eml",
+      "email"
+    ]
+  },
+  "msg": {
+    "upper": "MSG",
+    "aliases": [
+      "msg",
+      "outlook msg"
+    ]
+  },
+  "mbox": {
+    "upper": "MBOX",
+    "aliases": [
+      "mbox"
+    ]
+  },
+  "pst": {
+    "upper": "PST",
+    "aliases": [
+      "pst",
+      "outlook pst"
+    ]
+  },
+  "ost": {
+    "upper": "OST",
+    "aliases": [
+      "ost",
+      "outlook ost"
+    ]
+  },
+  "vcf": {
+    "upper": "VCF",
+    "aliases": [
+      "vcf",
+      "vcard"
+    ]
+  },
+  "ics": {
+    "upper": "ICS",
+    "aliases": [
+      "ics",
+      "ical",
+      "icalendar"
+    ]
+  },
+  "oft": {
+    "upper": "OFT",
+    "aliases": [
+      "oft"
+    ]
+  },
+  "zip": {
+    "upper": "ZIP",
+    "aliases": [
+      "zip"
+    ]
+  },
+  "7z": {
+    "upper": "7Z",
+    "aliases": [
+      "7z",
+      "7zip"
+    ]
+  },
+  "tar": {
+    "upper": "TAR",
+    "aliases": [
+      "tar"
+    ]
+  },
+  "gz": {
+    "upper": "GZ",
+    "aliases": [
+      "gz",
+      "gzip"
+    ]
+  },
+  "bz2": {
+    "upper": "BZ2",
+    "aliases": [
+      "bz2",
+      "bzip2"
+    ]
+  },
+  "rar": {
+    "upper": "RAR",
+    "aliases": [
+      "rar"
+    ]
+  },
+  "vsd": {
+    "upper": "VSD",
+    "aliases": [
+      "vsd",
+      "visio"
+    ]
+  },
+  "vsdx": {
+    "upper": "VSDX",
+    "aliases": [
+      "vsdx"
+    ]
+  },
+  "vss": {
+    "upper": "VSS",
+    "aliases": [
+      "vss"
+    ]
+  },
+  "vst": {
+    "upper": "VST",
+    "aliases": [
+      "vst"
+    ]
+  },
+  "mpp": {
+    "upper": "MPP",
+    "aliases": [
+      "mpp",
+      "microsoft project"
+    ]
+  },
+  "mpx": {
+    "upper": "MPX",
+    "aliases": [
+      "mpx"
+    ]
+  },
+  "xer": {
+    "upper": "XER",
+    "aliases": [
+      "xer"
+    ]
+  },
+  "pub": {
+    "upper": "PUB",
+    "aliases": [
+      "pub",
+      "publisher",
+      "microsoft publisher"
+    ]
+  },
+  "one": {
+    "upper": "ONE",
+    "aliases": [
+      "one",
+      "onenote"
+    ]
+  },
+  "ofx": {
+    "upper": "OFX",
+    "aliases": [
+      "ofx"
+    ]
+  },
+  "qfx": {
+    "upper": "QFX",
+    "aliases": [
+      "qfx"
+    ]
+  },
+  "qr": {
+    "upper": "QR",
+    "aliases": [
+      "qr",
+      "qr code"
+    ]
+  },
+  "ocr": {
+    "upper": "OCR",
+    "aliases": [
+      "ocr"
+    ]
+  },
+  "geojson": {
+    "upper": "GeoJSON",
+    "aliases": [
+      "geojson",
+      "geo json"
+    ]
+  },
+  "topojson": {
+    "upper": "TopoJSON",
+    "aliases": [
+      "topojson",
+      "topo json"
+    ]
+  },
+  "gpx": {
+    "upper": "GPX",
+    "aliases": [
+      "gpx",
+      "gps exchange format"
+    ]
+  },
+  "kml": {
+    "upper": "KML",
+    "aliases": [
+      "kml",
+      "keyhole markup language"
+    ]
+  },
+  "kmz": {
+    "upper": "KMZ",
+    "aliases": [
+      "kmz"
+    ]
+  },
+  "shapefile": {
+    "upper": "Shapefile",
+    "aliases": [
+      "shapefile",
+      "shape file",
+      "shp"
+    ]
+  },
+  "shp": {
+    "upper": "SHP",
+    "aliases": [
+      "shp"
+    ]
+  },
+  "000": {
+    "upper": "000",
+    "aliases": [
+      "000"
+    ]
+  },
+  "1": {
+    "upper": "1",
+    "aliases": [
+      "1"
+    ]
+  },
+  "123": {
+    "upper": "123",
+    "aliases": [
+      "123"
+    ]
+  },
+  "12m": {
+    "upper": "12M",
+    "aliases": [
+      "12m"
+    ]
+  },
+  "3d2": {
+    "upper": "3D2",
+    "aliases": [
+      "3d2"
+    ]
+  },
+  "3dc": {
+    "upper": "3DC",
+    "aliases": [
+      "3dc"
+    ]
+  },
+  "3dd": {
+    "upper": "3DD",
+    "aliases": [
+      "3dd"
+    ]
+  },
+  "3dl": {
+    "upper": "3DL",
+    "aliases": [
+      "3dl"
+    ]
+  },
+  "3dm": {
+    "upper": "3DM",
+    "aliases": [
+      "3dm"
+    ]
+  },
+  "3dsx": {
+    "upper": "3DSX",
+    "aliases": [
+      "3dsx"
+    ]
+  },
+  "3g2": {
+    "upper": "3G2",
+    "aliases": [
+      "3g2"
+    ]
+  },
+  "3gp": {
+    "upper": "3GP",
+    "aliases": [
+      "3gp"
+    ]
+  },
+  "3gpp": {
+    "upper": "3GPP",
+    "aliases": [
+      "3gpp"
+    ]
+  },
+  "4db": {
+    "upper": "4DB",
+    "aliases": [
+      "4db"
+    ]
+  },
+  "4dd": {
+    "upper": "4DD",
+    "aliases": [
+      "4dd"
+    ]
+  },
+  "4dl": {
+    "upper": "4DL",
+    "aliases": [
+      "4dl"
+    ]
+  },
+  "4th": {
+    "upper": "4TH",
+    "aliases": [
+      "4th"
+    ]
+  },
+  "8bi8": {
+    "upper": "8BI8",
+    "aliases": [
+      "8bi8"
+    ]
+  },
+  "8ck": {
+    "upper": "8CK",
+    "aliases": [
+      "8ck"
+    ]
+  },
+  "8svx": {
+    "upper": "8SVX",
+    "aliases": [
+      "8svx"
+    ]
+  },
+  "a": {
+    "upper": "A",
+    "aliases": [
+      "a"
+    ]
+  },
+  "a4p": {
+    "upper": "A4P",
+    "aliases": [
+      "a4p"
+    ]
+  },
+  "a5w": {
+    "upper": "A5W",
+    "aliases": [
+      "a5w"
+    ]
+  },
+  "aa": {
+    "upper": "AA",
+    "aliases": [
+      "aa"
+    ]
+  },
+  "aac": {
+    "upper": "AAC",
+    "aliases": [
+      "aac"
+    ]
+  },
+  "aae": {
+    "upper": "AAE",
+    "aliases": [
+      "aae"
+    ]
+  },
+  "aax": {
+    "upper": "AAX",
+    "aliases": [
+      "aax"
+    ]
+  },
+  "aba": {
+    "upper": "ABA",
+    "aliases": [
+      "aba"
+    ]
+  },
+  "abc": {
+    "upper": "ABC",
+    "aliases": [
+      "abc"
+    ]
+  },
+  "abcddb": {
+    "upper": "ABCDDB",
+    "aliases": [
+      "abcddb"
+    ]
+  },
+  "abs": {
+    "upper": "ABS",
+    "aliases": [
+      "abs"
+    ]
+  },
+  "abx": {
+    "upper": "ABX",
+    "aliases": [
+      "abx"
+    ]
+  },
+  "ac": {
+    "upper": "AC",
+    "aliases": [
+      "ac"
+    ]
+  },
+  "ac3": {
+    "upper": "AC3",
+    "aliases": [
+      "ac3"
+    ]
+  },
+  "accdb": {
+    "upper": "ACCDB",
+    "aliases": [
+      "accdb"
+    ]
+  },
+  "accdc": {
+    "upper": "ACCDC",
+    "aliases": [
+      "accdc"
+    ]
+  },
+  "accde": {
+    "upper": "ACCDE",
+    "aliases": [
+      "accde"
+    ]
+  },
+  "accdr": {
+    "upper": "ACCDR",
+    "aliases": [
+      "accdr"
+    ]
+  },
+  "accdt": {
+    "upper": "ACCDT",
+    "aliases": [
+      "accdt"
+    ]
+  },
+  "accdw": {
+    "upper": "ACCDW",
+    "aliases": [
+      "accdw"
+    ]
+  },
+  "accft": {
+    "upper": "ACCFT",
+    "aliases": [
+      "accft"
+    ]
+  },
+  "acd": {
+    "upper": "ACD",
+    "aliases": [
+      "acd"
+    ]
+  },
+  "ace": {
+    "upper": "ACE",
+    "aliases": [
+      "ace"
+    ]
+  },
+  "aco": {
+    "upper": "ACO",
+    "aliases": [
+      "aco"
+    ]
+  },
+  "acroplugin": {
+    "upper": "ACROPLUGIN",
+    "aliases": [
+      "acroplugin"
+    ]
+  },
+  "acsm": {
+    "upper": "ACSM",
+    "aliases": [
+      "acsm"
+    ]
+  },
+  "act": {
+    "upper": "ACT",
+    "aliases": [
+      "act"
+    ]
+  },
+  "adb": {
+    "upper": "ADB",
+    "aliases": [
+      "adb"
+    ]
+  },
+  "addin": {
+    "upper": "ADDIN",
+    "aliases": [
+      "addin"
+    ]
+  },
+  "ade": {
+    "upper": "ADE",
+    "aliases": [
+      "ade"
+    ]
+  },
+  "adf": {
+    "upper": "ADF",
+    "aliases": [
+      "adf"
+    ]
+  },
+  "adm": {
+    "upper": "ADM",
+    "aliases": [
+      "adm"
+    ]
+  },
+  "admx": {
+    "upper": "ADMX",
+    "aliases": [
+      "admx"
+    ]
+  },
+  "adn": {
+    "upper": "ADN",
+    "aliases": [
+      "adn"
+    ]
+  },
+  "adp": {
+    "upper": "ADP",
+    "aliases": [
+      "adp"
+    ]
+  },
+  "adr": {
+    "upper": "ADR",
+    "aliases": [
+      "adr"
+    ]
+  },
+  "ads": {
+    "upper": "ADS",
+    "aliases": [
+      "ads"
+    ]
+  },
+  "aep": {
+    "upper": "AEP",
+    "aliases": [
+      "aep"
+    ]
+  },
+  "aex": {
+    "upper": "AEX",
+    "aliases": [
+      "aex"
+    ]
+  },
+  "afphoto": {
+    "upper": "AFPHOTO",
+    "aliases": [
+      "afphoto"
+    ]
+  },
+  "afs": {
+    "upper": "AFS",
+    "aliases": [
+      "afs"
+    ]
+  },
+  "afx": {
+    "upper": "AFX",
+    "aliases": [
+      "afx"
+    ]
+  },
+  "agi": {
+    "upper": "AGI",
+    "aliases": [
+      "agi"
+    ]
+  },
+  "agif": {
+    "upper": "AGIF",
+    "aliases": [
+      "agif"
+    ]
+  },
+  "agp": {
+    "upper": "AGP",
+    "aliases": [
+      "agp"
+    ]
+  },
+  "ahk": {
+    "upper": "AHK",
+    "aliases": [
+      "ahk"
+    ]
+  },
+  "ai": {
+    "upper": "AI",
+    "aliases": [
+      "ai"
+    ]
+  },
+  "aia": {
+    "upper": "AIA",
+    "aliases": [
+      "aia"
+    ]
+  },
+  "aidl": {
+    "upper": "AIDL",
+    "aliases": [
+      "aidl"
+    ]
+  },
+  "aif": {
+    "upper": "AIF",
+    "aliases": [
+      "aif"
+    ]
+  },
+  "aiff": {
+    "upper": "AIFF",
+    "aliases": [
+      "aiff"
+    ]
+  },
+  "air": {
+    "upper": "AIR",
+    "aliases": [
+      "air"
+    ]
+  },
+  "alac": {
+    "upper": "ALAC",
+    "aliases": [
+      "alac"
+    ]
+  },
+  "alb": {
+    "upper": "ALB",
+    "aliases": [
+      "alb"
+    ]
+  },
+  "alf": {
+    "upper": "ALF",
+    "aliases": [
+      "alf"
+    ]
+  },
+  "alx": {
+    "upper": "ALX",
+    "aliases": [
+      "alx"
+    ]
+  },
+  "alz": {
+    "upper": "ALZ",
+    "aliases": [
+      "alz"
+    ]
+  },
+  "aml": {
+    "upper": "AML",
+    "aliases": [
+      "aml"
+    ]
+  },
+  "amr": {
+    "upper": "AMR",
+    "aliases": [
+      "amr"
+    ]
+  },
+  "amv": {
+    "upper": "AMV",
+    "aliases": [
+      "amv"
+    ]
+  },
+  "amx": {
+    "upper": "AMX",
+    "aliases": [
+      "amx"
+    ]
+  },
+  "amxx": {
+    "upper": "AMXX",
+    "aliases": [
+      "amxx"
+    ]
+  },
+  "an": {
+    "upper": "AN",
+    "aliases": [
+      "an"
+    ]
+  },
+  "anb": {
+    "upper": "ANB",
+    "aliases": [
+      "anb"
+    ]
+  },
+  "ane": {
+    "upper": "ANE",
+    "aliases": [
+      "ane"
+    ]
+  },
+  "ani": {
+    "upper": "ANI",
+    "aliases": [
+      "ani"
+    ]
+  },
+  "ap": {
+    "upper": "AP",
+    "aliases": [
+      "ap"
+    ]
+  },
+  "apa": {
+    "upper": "APA",
+    "aliases": [
+      "apa"
+    ]
+  },
+  "ape": {
+    "upper": "APE",
+    "aliases": [
+      "ape"
+    ]
+  },
+  "apk": {
+    "upper": "APK",
+    "aliases": [
+      "apk"
+    ]
+  },
+  "apkg": {
+    "upper": "APKG",
+    "aliases": [
+      "apkg"
+    ]
+  },
+  "apks": {
+    "upper": "APKS",
+    "aliases": [
+      "apks"
+    ]
+  },
+  "apl": {
+    "upper": "APL",
+    "aliases": [
+      "apl"
+    ]
+  },
+  "aplg": {
+    "upper": "APLG",
+    "aliases": [
+      "aplg"
+    ]
+  },
+  "apm": {
+    "upper": "APM",
+    "aliases": [
+      "apm"
+    ]
+  },
+  "apnx": {
+    "upper": "APNX",
+    "aliases": [
+      "apnx"
+    ]
+  },
+  "app": {
+    "upper": "APP",
+    "aliases": [
+      "app"
+    ]
+  },
+  "appcache": {
+    "upper": "APPCACHE",
+    "aliases": [
+      "appcache"
+    ]
+  },
+  "appx": {
+    "upper": "APPX",
+    "aliases": [
+      "appx"
+    ]
+  },
+  "appxbundle": {
+    "upper": "APPXBUNDLE",
+    "aliases": [
+      "appxbundle"
+    ]
+  },
+  "appxupload": {
+    "upper": "APPXUPLOAD",
+    "aliases": [
+      "appxupload"
+    ]
+  },
+  "apr": {
+    "upper": "APR",
+    "aliases": [
+      "apr"
+    ]
+  },
+  "aps": {
+    "upper": "APS",
+    "aliases": [
+      "aps"
+    ]
+  },
+  "apz": {
+    "upper": "APZ",
+    "aliases": [
+      "apz"
+    ]
+  },
+  "aq": {
+    "upper": "AQ",
+    "aliases": [
+      "aq"
+    ]
+  },
+  "arc": {
+    "upper": "ARC",
+    "aliases": [
+      "arc"
+    ]
+  },
+  "arf": {
+    "upper": "ARF",
+    "aliases": [
+      "arf"
+    ]
+  },
+  "arj": {
+    "upper": "ARJ",
+    "aliases": [
+      "arj"
+    ]
+  },
+  "aro": {
+    "upper": "ARO",
+    "aliases": [
+      "aro"
+    ]
+  },
+  "arsc": {
+    "upper": "ARSC",
+    "aliases": [
+      "arsc"
+    ]
+  },
+  "art": {
+    "upper": "ART",
+    "aliases": [
+      "art"
+    ]
+  },
+  "arw": {
+    "upper": "ARW",
+    "aliases": [
+      "arw"
+    ]
+  },
+  "as": {
+    "upper": "AS",
+    "aliases": [
+      "as"
+    ]
+  },
+  "as2proj": {
+    "upper": "AS2PROJ",
+    "aliases": [
+      "as2proj"
+    ]
+  },
+  "as3proj": {
+    "upper": "AS3PROJ",
+    "aliases": [
+      "as3proj"
+    ]
+  },
+  "asa": {
+    "upper": "ASA",
+    "aliases": [
+      "asa"
+    ]
+  },
+  "asax": {
+    "upper": "ASAX",
+    "aliases": [
+      "asax"
+    ]
+  },
+  "asc": {
+    "upper": "ASC",
+    "aliases": [
+      "asc"
+    ]
+  },
+  "ascx": {
+    "upper": "ASCX",
+    "aliases": [
+      "ascx"
+    ]
+  },
+  "asd": {
+    "upper": "ASD",
+    "aliases": [
+      "asd"
+    ]
+  },
+  "ase": {
+    "upper": "ASE",
+    "aliases": [
+      "ase"
+    ]
+  },
+  "asf": {
+    "upper": "ASF",
+    "aliases": [
+      "asf"
+    ]
+  },
+  "ashx": {
+    "upper": "ASHX",
+    "aliases": [
+      "ashx"
+    ]
+  },
+  "asi": {
+    "upper": "ASI",
+    "aliases": [
+      "asi"
+    ]
+  },
+  "ask": {
+    "upper": "ASK",
+    "aliases": [
+      "ask"
+    ]
+  },
+  "asl": {
+    "upper": "ASL",
+    "aliases": [
+      "asl"
+    ]
+  },
+  "asm": {
+    "upper": "ASM",
+    "aliases": [
+      "asm"
+    ]
+  },
+  "asmx": {
+    "upper": "ASMX",
+    "aliases": [
+      "asmx"
+    ]
+  },
+  "asp": {
+    "upper": "ASP",
+    "aliases": [
+      "asp"
+    ]
+  },
+  "aspx": {
+    "upper": "ASPX",
+    "aliases": [
+      "aspx"
+    ]
+  },
+  "asr": {
+    "upper": "ASR",
+    "aliases": [
+      "asr"
+    ]
+  },
+  "ass": {
+    "upper": "ASS",
+    "aliases": [
+      "ass"
+    ]
+  },
+  "asset": {
+    "upper": "ASSET",
+    "aliases": [
+      "asset"
+    ]
+  },
+  "ast": {
+    "upper": "AST",
+    "aliases": [
+      "ast"
+    ]
+  },
+  "asv": {
+    "upper": "ASV",
+    "aliases": [
+      "asv"
+    ]
+  },
+  "asvf": {
+    "upper": "ASVF",
+    "aliases": [
+      "asvf"
+    ]
+  },
+  "atom": {
+    "upper": "ATOM",
+    "aliases": [
+      "atom"
+    ]
+  },
+  "att": {
+    "upper": "ATT",
+    "aliases": [
+      "att"
+    ]
+  },
+  "atx": {
+    "upper": "ATX",
+    "aliases": [
+      "atx"
+    ]
+  },
+  "au3": {
+    "upper": "AU3",
+    "aliases": [
+      "au3"
+    ]
+  },
+  "aux_gis": {
+    "upper": "AUX_GIS",
+    "aliases": [
+      "aux_gis",
+      "aux gis"
+    ]
+  },
+  "ava": {
+    "upper": "AVA",
+    "aliases": [
+      "ava"
+    ]
+  },
+  "avchd": {
+    "upper": "AVCHD",
+    "aliases": [
+      "avchd"
+    ]
+  },
+  "avery": {
+    "upper": "AVERY",
+    "aliases": [
+      "avery"
+    ]
+  },
+  "avi": {
+    "upper": "AVI",
+    "aliases": [
+      "avi"
+    ]
+  },
+  "avif": {
+    "upper": "AVIF",
+    "aliases": [
+      "avif"
+    ]
+  },
+  "avl": {
+    "upper": "AVL",
+    "aliases": [
+      "avl"
+    ]
+  },
+  "avx": {
+    "upper": "AVX",
+    "aliases": [
+      "avx"
+    ]
+  },
+  "awk": {
+    "upper": "AWK",
+    "aliases": [
+      "awk"
+    ]
+  },
+  "awm": {
+    "upper": "AWM",
+    "aliases": [
+      "awm"
+    ]
+  },
+  "aws": {
+    "upper": "AWS",
+    "aliases": [
+      "aws"
+    ]
+  },
+  "axd": {
+    "upper": "AXD",
+    "aliases": [
+      "axd"
+    ]
+  },
+  "axe": {
+    "upper": "AXE",
+    "aliases": [
+      "axe"
+    ]
+  },
+  "axm": {
+    "upper": "AXM",
+    "aliases": [
+      "axm"
+    ]
+  },
+  "azw": {
+    "upper": "AZW",
+    "aliases": [
+      "azw"
+    ]
+  },
+  "azw1": {
+    "upper": "AZW1",
+    "aliases": [
+      "azw1"
+    ]
+  },
+  "azw4": {
+    "upper": "AZW4",
+    "aliases": [
+      "azw4"
+    ]
+  },
+  "b1": {
+    "upper": "B1",
+    "aliases": [
+      "b1"
+    ]
+  },
+  "b3d": {
+    "upper": "B3D",
+    "aliases": [
+      "b3d"
+    ]
+  },
+  "b6z": {
+    "upper": "B6Z",
+    "aliases": [
+      "b6z"
+    ]
+  },
+  "bak": {
+    "upper": "BAK",
+    "aliases": [
+      "bak"
+    ]
+  },
+  "bak-act": {
+    "upper": "BAK-ACT",
+    "aliases": [
+      "bak-act",
+      "bak act"
+    ]
+  },
+  "bak-backup": {
+    "upper": "BAK-BACKUP",
+    "aliases": [
+      "bak-backup",
+      "bak backup"
+    ]
+  },
+  "bak-chromium": {
+    "upper": "BAK-CHROMIUM",
+    "aliases": [
+      "bak-chromium",
+      "bak chromium"
+    ]
+  },
+  "bak-finale": {
+    "upper": "BAK-FINALE",
+    "aliases": [
+      "bak-finale",
+      "bak finale"
+    ]
+  },
+  "bak-holo": {
+    "upper": "BAK-HOLO",
+    "aliases": [
+      "bak-holo",
+      "bak holo"
+    ]
+  },
+  "bak-mobiletrans": {
+    "upper": "BAK-MOBILETRANS",
+    "aliases": [
+      "bak-mobiletrans",
+      "bak mobiletrans"
+    ]
+  },
+  "bak-sqlserver": {
+    "upper": "BAK-SQLSERVER",
+    "aliases": [
+      "bak-sqlserver",
+      "bak sqlserver"
+    ]
+  },
+  "bak-terraria": {
+    "upper": "BAK-TERRARIA",
+    "aliases": [
+      "bak-terraria",
+      "bak terraria"
+    ]
+  },
+  "bak-vegas": {
+    "upper": "BAK-VEGAS",
+    "aliases": [
+      "bak-vegas",
+      "bak vegas"
+    ]
+  },
+  "bat": {
+    "upper": "BAT",
+    "aliases": [
+      "bat"
+    ]
+  },
+  "bav": {
+    "upper": "BAV",
+    "aliases": [
+      "bav"
+    ]
+  },
+  "bay": {
+    "upper": "BAY",
+    "aliases": [
+      "bay"
+    ]
+  },
+  "bc3": {
+    "upper": "BC3",
+    "aliases": [
+      "bc3"
+    ]
+  },
+  "bcp": {
+    "upper": "BCP",
+    "aliases": [
+      "bcp"
+    ]
+  },
+  "bdc": {
+    "upper": "BDC",
+    "aliases": [
+      "bdc"
+    ]
+  },
+  "bdf": {
+    "upper": "BDF",
+    "aliases": [
+      "bdf"
+    ]
+  },
+  "bdmv": {
+    "upper": "BDMV",
+    "aliases": [
+      "bdmv"
+    ]
+  },
+  "bhv": {
+    "upper": "BHV",
+    "aliases": [
+      "bhv"
+    ]
+  },
+  "bib": {
+    "upper": "BIB",
+    "aliases": [
+      "bib"
+    ]
+  },
+  "bif": {
+    "upper": "BIF",
+    "aliases": [
+      "bif"
+    ]
+  },
+  "bik": {
+    "upper": "BIK",
+    "aliases": [
+      "bik"
+    ]
+  },
+  "bin": {
+    "upper": "BIN",
+    "aliases": [
+      "bin"
+    ]
+  },
+  "bin-pcsx": {
+    "upper": "BIN-PCSX",
+    "aliases": [
+      "bin-pcsx",
+      "bin pcsx"
+    ]
+  },
+  "bip": {
+    "upper": "BIP",
+    "aliases": [
+      "bip"
+    ]
+  },
+  "bkf": {
+    "upper": "BKF",
+    "aliases": [
+      "bkf"
+    ]
+  },
+  "bkk": {
+    "upper": "BKK",
+    "aliases": [
+      "bkk"
+    ]
+  },
+  "bks": {
+    "upper": "BKS",
+    "aliases": [
+      "bks"
+    ]
+  },
+  "bkup": {
+    "upper": "BKUP",
+    "aliases": [
+      "bkup"
+    ]
+  },
+  "blend": {
+    "upper": "BLEND",
+    "aliases": [
+      "blend"
+    ]
+  },
+  "bml": {
+    "upper": "BML",
+    "aliases": [
+      "bml"
+    ]
+  },
+  "bms": {
+    "upper": "BMS",
+    "aliases": [
+      "bms"
+    ]
+  },
+  "bmz": {
+    "upper": "BMZ",
+    "aliases": [
+      "bmz"
+    ]
+  },
+  "bndl": {
+    "upper": "BNDL",
+    "aliases": [
+      "bndl"
+    ]
+  },
+  "bnp": {
+    "upper": "BNP",
+    "aliases": [
+      "bnp"
+    ]
+  },
+  "bns": {
+    "upper": "BNS",
+    "aliases": [
+      "bns"
+    ]
+  },
+  "bo2": {
+    "upper": "BO2",
+    "aliases": [
+      "bo2"
+    ]
+  },
+  "bok": {
+    "upper": "BOK",
+    "aliases": [
+      "bok"
+    ]
+  },
+  "bpg": {
+    "upper": "BPG",
+    "aliases": [
+      "bpg"
+    ]
+  },
+  "bpnueb": {
+    "upper": "BPNUEB",
+    "aliases": [
+      "bpnueb"
+    ]
+  },
+  "bps": {
+    "upper": "BPS",
+    "aliases": [
+      "bps"
+    ]
+  },
+  "bps-malware": {
+    "upper": "BPS-MALWARE",
+    "aliases": [
+      "bps-malware",
+      "bps malware"
+    ]
+  },
+  "bps-works": {
+    "upper": "BPS-WORKS",
+    "aliases": [
+      "bps-works",
+      "bps works"
+    ]
+  },
+  "br": {
+    "upper": "BR",
+    "aliases": [
+      "br"
+    ]
+  },
+  "brd": {
+    "upper": "BRD",
+    "aliases": [
+      "brd"
+    ]
+  },
+  "browser": {
+    "upper": "BROWSER",
+    "aliases": [
+      "browser"
+    ]
+  },
+  "bsp": {
+    "upper": "BSP",
+    "aliases": [
+      "bsp"
+    ]
+  },
+  "bt": {
+    "upper": "BT",
+    "aliases": [
+      "bt"
+    ]
+  },
+  "btapp": {
+    "upper": "BTAPP",
+    "aliases": [
+      "btapp"
+    ]
+  },
+  "btr": {
+    "upper": "BTR",
+    "aliases": [
+      "btr"
+    ]
+  },
+  "bup": {
+    "upper": "BUP",
+    "aliases": [
+      "bup"
+    ]
+  },
+  "bwp": {
+    "upper": "BWP",
+    "aliases": [
+      "bwp"
+    ]
+  },
+  "c": {
+    "upper": "C",
+    "aliases": [
+      "c"
+    ]
+  },
+  "c3": {
+    "upper": "C3",
+    "aliases": [
+      "c3"
+    ]
+  },
+  "c4d": {
+    "upper": "C4D",
+    "aliases": [
+      "c4d"
+    ]
+  },
+  "cab": {
+    "upper": "CAB",
+    "aliases": [
+      "cab"
+    ]
+  },
+  "caf": {
+    "upper": "CAF",
+    "aliases": [
+      "caf"
+    ]
+  },
+  "caf-cal3d": {
+    "upper": "CAF-CAL3D",
+    "aliases": [
+      "caf-cal3d",
+      "caf cal3d"
+    ]
+  },
+  "caf-cryengine": {
+    "upper": "CAF-CRYENGINE",
+    "aliases": [
+      "caf-cryengine",
+      "caf cryengine"
+    ]
+  },
+  "cat": {
+    "upper": "CAT",
+    "aliases": [
+      "cat"
+    ]
+  },
+  "catpart": {
+    "upper": "CATPART",
+    "aliases": [
+      "catpart"
+    ]
+  },
+  "cb7": {
+    "upper": "CB7",
+    "aliases": [
+      "cb7"
+    ]
+  },
+  "cba": {
+    "upper": "CBA",
+    "aliases": [
+      "cba"
+    ]
+  },
+  "cbc": {
+    "upper": "CBC",
+    "aliases": [
+      "cbc"
+    ]
+  },
+  "cbr": {
+    "upper": "CBR",
+    "aliases": [
+      "cbr"
+    ]
+  },
+  "cbz": {
+    "upper": "CBZ",
+    "aliases": [
+      "cbz"
+    ]
+  },
+  "cbz-chessbase": {
+    "upper": "CBZ-CHESSBASE",
+    "aliases": [
+      "cbz-chessbase",
+      "cbz chessbase"
+    ]
+  },
+  "cc": {
+    "upper": "CC",
+    "aliases": [
+      "cc"
+    ]
+  },
+  "ccbjs": {
+    "upper": "CCBJS",
+    "aliases": [
+      "ccbjs"
+    ]
+  },
+  "ccd": {
+    "upper": "CCD",
+    "aliases": [
+      "ccd"
+    ]
+  },
+  "ccip": {
+    "upper": "CCIP",
+    "aliases": [
+      "ccip"
+    ]
+  },
+  "cd": {
+    "upper": "CD",
+    "aliases": [
+      "cd"
+    ]
+  },
+  "cda": {
+    "upper": "CDA",
+    "aliases": [
+      "cda"
+    ]
+  },
+  "cdb": {
+    "upper": "CDB",
+    "aliases": [
+      "cdb"
+    ]
+  },
+  "cdf": {
+    "upper": "CDF",
+    "aliases": [
+      "cdf"
+    ]
+  },
+  "cdr-crash": {
+    "upper": "CDR-CRASH",
+    "aliases": [
+      "cdr-crash",
+      "cdr crash"
+    ]
+  },
+  "cdx": {
+    "upper": "CDX",
+    "aliases": [
+      "cdx"
+    ]
+  },
+  "cdx-chemdraw": {
+    "upper": "CDX-CHEMDRAW",
+    "aliases": [
+      "cdx-chemdraw",
+      "cdx chemdraw"
+    ]
+  },
+  "ceb": {
+    "upper": "CEB",
+    "aliases": [
+      "ceb"
+    ]
+  },
+  "cebx": {
+    "upper": "CEBX",
+    "aliases": [
+      "cebx"
+    ]
+  },
+  "cell": {
+    "upper": "CELL",
+    "aliases": [
+      "cell"
+    ]
+  },
+  "cer": {
+    "upper": "CER",
+    "aliases": [
+      "cer"
+    ]
+  },
+  "cf2": {
+    "upper": "CF2",
+    "aliases": [
+      "cf2"
+    ]
+  },
+  "cff": {
+    "upper": "CFF",
+    "aliases": [
+      "cff"
+    ]
+  },
+  "cff2": {
+    "upper": "CFF2",
+    "aliases": [
+      "cff2"
+    ]
+  },
+  "cfg": {
+    "upper": "CFG",
+    "aliases": [
+      "cfg"
+    ]
+  },
+  "cfg-cal3d": {
+    "upper": "CFG-CAL3D",
+    "aliases": [
+      "cfg-cal3d",
+      "cfg cal3d"
+    ]
+  },
+  "cfg-celestia": {
+    "upper": "CFG-CELESTIA",
+    "aliases": [
+      "cfg-celestia",
+      "cfg celestia"
+    ]
+  },
+  "cfg-citrix": {
+    "upper": "CFG-CITRIX",
+    "aliases": [
+      "cfg-citrix",
+      "cfg citrix"
+    ]
+  },
+  "cfg-lightwave": {
+    "upper": "CFG-LIGHTWAVE",
+    "aliases": [
+      "cfg-lightwave",
+      "cfg lightwave"
+    ]
+  },
+  "cfg-mame": {
+    "upper": "CFG-MAME",
+    "aliases": [
+      "cfg-mame",
+      "cfg mame"
+    ]
+  },
+  "cfg-mugen": {
+    "upper": "CFG-MUGEN",
+    "aliases": [
+      "cfg-mugen",
+      "cfg mugen"
+    ]
+  },
+  "cfg-sourceengine": {
+    "upper": "CFG-SOURCEENGINE",
+    "aliases": [
+      "cfg-sourceengine",
+      "cfg sourceengine"
+    ]
+  },
+  "cfg-wesnoth": {
+    "upper": "CFG-WESNOTH",
+    "aliases": [
+      "cfg-wesnoth",
+      "cfg wesnoth"
+    ]
+  },
+  "cfm": {
+    "upper": "CFM",
+    "aliases": [
+      "cfm"
+    ]
+  },
+  "cfml": {
+    "upper": "CFML",
+    "aliases": [
+      "cfml"
+    ]
+  },
+  "cgi": {
+    "upper": "CGI",
+    "aliases": [
+      "cgi"
+    ]
+  },
+  "cgm": {
+    "upper": "CGM",
+    "aliases": [
+      "cgm"
+    ]
+  },
+  "cha": {
+    "upper": "CHA",
+    "aliases": [
+      "cha"
+    ]
+  },
+  "chat": {
+    "upper": "CHAT",
+    "aliases": [
+      "chat"
+    ]
+  },
+  "chck": {
+    "upper": "CHCK",
+    "aliases": [
+      "chck"
+    ]
+  },
+  "cheat": {
+    "upper": "CHEAT",
+    "aliases": [
+      "cheat"
+    ]
+  },
+  "chip": {
+    "upper": "CHIP",
+    "aliases": [
+      "chip"
+    ]
+  },
+  "chm": {
+    "upper": "CHM",
+    "aliases": [
+      "chm"
+    ]
+  },
+  "chr": {
+    "upper": "CHR",
+    "aliases": [
+      "chr"
+    ]
+  },
+  "chr-3ds": {
+    "upper": "CHR-3DS",
+    "aliases": [
+      "chr-3ds",
+      "chr 3ds"
+    ]
+  },
+  "chr-cryengine": {
+    "upper": "CHR-CRYENGINE",
+    "aliases": [
+      "chr-cryengine",
+      "chr cryengine"
+    ]
+  },
+  "chr-doki": {
+    "upper": "CHR-DOKI",
+    "aliases": [
+      "chr-doki",
+      "chr doki"
+    ]
+  },
+  "cir": {
+    "upper": "CIR",
+    "aliases": [
+      "cir"
+    ]
+  },
+  "cit": {
+    "upper": "CIT",
+    "aliases": [
+      "cit"
+    ]
+  },
+  "cjs": {
+    "upper": "CJS",
+    "aliases": [
+      "cjs"
+    ]
+  },
+  "class": {
+    "upper": "CLASS",
+    "aliases": [
+      "class"
+    ]
+  },
+  "cleo": {
+    "upper": "CLEO",
+    "aliases": [
+      "cleo"
+    ]
+  },
+  "clip": {
+    "upper": "CLIP",
+    "aliases": [
+      "clip"
+    ]
+  },
+  "cmake": {
+    "upper": "CMAKE",
+    "aliases": [
+      "cmake"
+    ]
+  },
+  "cmd": {
+    "upper": "CMD",
+    "aliases": [
+      "cmd"
+    ]
+  },
+  "cmp": {
+    "upper": "CMP",
+    "aliases": [
+      "cmp"
+    ]
+  },
+  "cms": {
+    "upper": "CMS",
+    "aliases": [
+      "cms"
+    ]
+  },
+  "cnf": {
+    "upper": "CNF",
+    "aliases": [
+      "cnf"
+    ]
+  },
+  "codasite": {
+    "upper": "CODASITE",
+    "aliases": [
+      "codasite"
+    ]
+  },
+  "com": {
+    "upper": "COM",
+    "aliases": [
+      "com"
+    ]
+  },
+  "compressed": {
+    "upper": "COMPRESSED",
+    "aliases": [
+      "compressed"
+    ]
+  },
+  "con": {
+    "upper": "CON",
+    "aliases": [
+      "con"
+    ]
+  },
+  "conf": {
+    "upper": "CONF",
+    "aliases": [
+      "conf"
+    ]
+  },
+  "config": {
+    "upper": "CONFIG",
+    "aliases": [
+      "config"
+    ]
+  },
+  "cpa": {
+    "upper": "CPA",
+    "aliases": [
+      "cpa"
+    ]
+  },
+  "cpc": {
+    "upper": "CPC",
+    "aliases": [
+      "cpc"
+    ]
+  },
+  "cpg": {
+    "upper": "CPG",
+    "aliases": [
+      "cpg"
+    ]
+  },
+  "cphd": {
+    "upper": "CPHD",
+    "aliases": [
+      "cphd"
+    ]
+  },
+  "cpi": {
+    "upper": "CPI",
+    "aliases": [
+      "cpi"
+    ]
+  },
+  "cpio": {
+    "upper": "CPIO",
+    "aliases": [
+      "cpio"
+    ]
+  },
+  "cpl": {
+    "upper": "CPL",
+    "aliases": [
+      "cpl"
+    ]
+  },
+  "cpp": {
+    "upper": "CPP",
+    "aliases": [
+      "cpp"
+    ]
+  },
+  "cr": {
+    "upper": "CR",
+    "aliases": [
+      "cr"
+    ]
+  },
+  "cr2": {
+    "upper": "CR2",
+    "aliases": [
+      "cr2"
+    ]
+  },
+  "cr3": {
+    "upper": "CR3",
+    "aliases": [
+      "cr3"
+    ]
+  },
+  "crdownload": {
+    "upper": "CRDOWNLOAD",
+    "aliases": [
+      "crdownload"
+    ]
+  },
+  "crl": {
+    "upper": "CRL",
+    "aliases": [
+      "crl"
+    ]
+  },
+  "crt": {
+    "upper": "CRT",
+    "aliases": [
+      "crt"
+    ]
+  },
+  "crx": {
+    "upper": "CRX",
+    "aliases": [
+      "crx"
+    ]
+  },
+  "crypt10": {
+    "upper": "CRYPT10",
+    "aliases": [
+      "crypt10"
+    ]
+  },
+  "crypt12": {
+    "upper": "CRYPT12",
+    "aliases": [
+      "crypt12"
+    ]
+  },
+  "crypt13": {
+    "upper": "CRYPT13",
+    "aliases": [
+      "crypt13"
+    ]
+  },
+  "crypt14": {
+    "upper": "CRYPT14",
+    "aliases": [
+      "crypt14"
+    ]
+  },
+  "crypt15": {
+    "upper": "CRYPT15",
+    "aliases": [
+      "crypt15"
+    ]
+  },
+  "cs": {
+    "upper": "CS",
+    "aliases": [
+      "cs"
+    ]
+  },
+  "cs-cleo": {
+    "upper": "CS-CLEO",
+    "aliases": [
+      "cs-cleo",
+      "cs cleo"
+    ]
+  },
+  "cs-colorschemer": {
+    "upper": "CS-COLORSCHEMER",
+    "aliases": [
+      "cs-colorschemer",
+      "cs colorschemer"
+    ]
+  },
+  "csd": {
+    "upper": "CSD",
+    "aliases": [
+      "csd"
+    ]
+  },
+  "csf": {
+    "upper": "CSF",
+    "aliases": [
+      "csf"
+    ]
+  },
+  "cshtml": {
+    "upper": "CSHTML",
+    "aliases": [
+      "cshtml"
+    ]
+  },
+  "csl": {
+    "upper": "CSL",
+    "aliases": [
+      "csl"
+    ]
+  },
+  "cso": {
+    "upper": "CSO",
+    "aliases": [
+      "cso"
+    ]
+  },
+  "csp": {
+    "upper": "CSP",
+    "aliases": [
+      "csp"
+    ]
+  },
+  "csproj": {
+    "upper": "CSPROJ",
+    "aliases": [
+      "csproj"
+    ]
+  },
+  "csr": {
+    "upper": "CSR",
+    "aliases": [
+      "csr"
+    ]
+  },
+  "css": {
+    "upper": "CSS",
+    "aliases": [
+      "css"
+    ]
+  },
+  "csx": {
+    "upper": "CSX",
+    "aliases": [
+      "csx"
+    ]
+  },
+  "ct": {
+    "upper": "CT",
+    "aliases": [
+      "ct"
+    ]
+  },
+  "ctg": {
+    "upper": "CTG",
+    "aliases": [
+      "ctg"
+    ]
+  },
+  "cts": {
+    "upper": "CTS",
+    "aliases": [
+      "cts"
+    ]
+  },
+  "cube": {
+    "upper": "CUBE",
+    "aliases": [
+      "cube"
+    ]
+  },
+  "cue": {
+    "upper": "CUE",
+    "aliases": [
+      "cue"
+    ]
+  },
+  "cue-cdrwin": {
+    "upper": "CUE-CDRWIN",
+    "aliases": [
+      "cue-cdrwin",
+      "cue cdrwin"
+    ]
+  },
+  "cur": {
+    "upper": "CUR",
+    "aliases": [
+      "cur"
+    ]
+  },
+  "cxarchive": {
+    "upper": "CXARCHIVE",
+    "aliases": [
+      "cxarchive"
+    ]
+  },
+  "cxf": {
+    "upper": "CXF",
+    "aliases": [
+      "cxf"
+    ]
+  },
+  "cxx": {
+    "upper": "CXX",
+    "aliases": [
+      "cxx"
+    ]
+  },
+  "daa": {
+    "upper": "DAA",
+    "aliases": [
+      "daa"
+    ]
+  },
+  "dacpac": {
+    "upper": "DACPAC",
+    "aliases": [
+      "dacpac"
+    ]
+  },
+  "dap": {
+    "upper": "DAP",
+    "aliases": [
+      "dap"
+    ]
+  },
+  "dar": {
+    "upper": "DAR",
+    "aliases": [
+      "dar"
+    ]
+  },
+  "dart": {
+    "upper": "DART",
+    "aliases": [
+      "dart"
+    ]
+  },
+  "dat": {
+    "upper": "DAT",
+    "aliases": [
+      "dat"
+    ]
+  },
+  "database_uuid": {
+    "upper": "DATABASE_UUID",
+    "aliases": [
+      "database_uuid",
+      "database uuid"
+    ]
+  },
+  "dav": {
+    "upper": "DAV",
+    "aliases": [
+      "dav"
+    ]
+  },
+  "db": {
+    "upper": "DB",
+    "aliases": [
+      "db"
+    ]
+  },
+  "db-wal": {
+    "upper": "DB-WAL",
+    "aliases": [
+      "db-wal",
+      "db wal"
+    ]
+  },
+  "db3": {
+    "upper": "DB3",
+    "aliases": [
+      "db3"
+    ]
+  },
+  "dbc": {
+    "upper": "DBC",
+    "aliases": [
+      "dbc"
+    ]
+  },
+  "dbf": {
+    "upper": "DBF",
+    "aliases": [
+      "dbf"
+    ]
+  },
+  "dbm": {
+    "upper": "DBM",
+    "aliases": [
+      "dbm"
+    ]
+  },
+  "dbs": {
+    "upper": "DBS",
+    "aliases": [
+      "dbs"
+    ]
+  },
+  "dc3": {
+    "upper": "DC3",
+    "aliases": [
+      "dc3"
+    ]
+  },
+  "dce": {
+    "upper": "DCE",
+    "aliases": [
+      "dce"
+    ]
+  },
+  "dcm": {
+    "upper": "DCM",
+    "aliases": [
+      "dcm"
+    ]
+  },
+  "dcr": {
+    "upper": "DCR",
+    "aliases": [
+      "dcr"
+    ]
+  },
+  "dcx": {
+    "upper": "DCX",
+    "aliases": [
+      "dcx"
+    ]
+  },
+  "ddl": {
+    "upper": "DDL",
+    "aliases": [
+      "ddl"
+    ]
+  },
+  "dds": {
+    "upper": "DDS",
+    "aliases": [
+      "dds"
+    ]
+  },
+  "ddt": {
+    "upper": "DDT",
+    "aliases": [
+      "ddt"
+    ]
+  },
+  "deb": {
+    "upper": "DEB",
+    "aliases": [
+      "deb"
+    ]
+  },
+  "def": {
+    "upper": "DEF",
+    "aliases": [
+      "def"
+    ]
+  },
+  "dek": {
+    "upper": "DEK",
+    "aliases": [
+      "dek"
+    ]
+  },
+  "dem": {
+    "upper": "DEM",
+    "aliases": [
+      "dem"
+    ]
+  },
+  "dep": {
+    "upper": "DEP",
+    "aliases": [
+      "dep"
+    ]
+  },
+  "der": {
+    "upper": "DER",
+    "aliases": [
+      "der"
+    ]
+  },
+  "deskthemepack": {
+    "upper": "DESKTHEMEPACK",
+    "aliases": [
+      "deskthemepack"
+    ]
+  },
+  "desktop": {
+    "upper": "DESKTOP",
+    "aliases": [
+      "desktop"
+    ]
+  },
+  "dex": {
+    "upper": "DEX",
+    "aliases": [
+      "dex"
+    ]
+  },
+  "dfg": {
+    "upper": "DFG",
+    "aliases": [
+      "dfg"
+    ]
+  },
+  "dhtml": {
+    "upper": "DHTML",
+    "aliases": [
+      "dhtml"
+    ]
+  },
+  "dib": {
+    "upper": "DIB",
+    "aliases": [
+      "dib"
+    ]
+  },
+  "dicom": {
+    "upper": "DICOM",
+    "aliases": [
+      "dicom"
+    ]
+  },
+  "dif": {
+    "upper": "DIF",
+    "aliases": [
+      "dif"
+    ]
+  },
+  "diff": {
+    "upper": "DIFF",
+    "aliases": [
+      "diff"
+    ]
+  },
+  "dis": {
+    "upper": "DIS",
+    "aliases": [
+      "dis"
+    ]
+  },
+  "disco": {
+    "upper": "DISCO",
+    "aliases": [
+      "disco"
+    ]
+  },
+  "discomap": {
+    "upper": "DISCOMAP",
+    "aliases": [
+      "discomap"
+    ]
+  },
+  "div": {
+    "upper": "DIV",
+    "aliases": [
+      "div"
+    ]
+  },
+  "dix": {
+    "upper": "DIX",
+    "aliases": [
+      "dix"
+    ]
+  },
+  "dlc": {
+    "upper": "DLC",
+    "aliases": [
+      "dlc"
+    ]
+  },
+  "dlg": {
+    "upper": "DLG",
+    "aliases": [
+      "dlg"
+    ]
+  },
+  "dlis": {
+    "upper": "DLIS",
+    "aliases": [
+      "dlis"
+    ]
+  },
+  "dll": {
+    "upper": "DLL",
+    "aliases": [
+      "dll"
+    ]
+  },
+  "dlo": {
+    "upper": "DLO",
+    "aliases": [
+      "dlo"
+    ]
+  },
+  "dlr": {
+    "upper": "DLR",
+    "aliases": [
+      "dlr"
+    ]
+  },
+  "dmg": {
+    "upper": "DMG",
+    "aliases": [
+      "dmg"
+    ]
+  },
+  "dml": {
+    "upper": "DML",
+    "aliases": [
+      "dml"
+    ]
+  },
+  "dmp": {
+    "upper": "DMP",
+    "aliases": [
+      "dmp"
+    ]
+  },
+  "dnl": {
+    "upper": "DNL",
+    "aliases": [
+      "dnl"
+    ]
+  },
+  "do": {
+    "upper": "DO",
+    "aliases": [
+      "do"
+    ]
+  },
+  "dochtml": {
+    "upper": "DOCHTML",
+    "aliases": [
+      "dochtml"
+    ]
+  },
+  "docmhtml": {
+    "upper": "DOCMHTML",
+    "aliases": [
+      "docmhtml"
+    ]
+  },
+  "docx-viewer": {
+    "upper": "DOCX-VIEWER",
+    "aliases": [
+      "docx-viewer",
+      "docx viewer"
+    ]
+  },
+  "dothtml": {
+    "upper": "DOTHTML",
+    "aliases": [
+      "dothtml"
+    ]
+  },
+  "download": {
+    "upper": "DOWNLOAD",
+    "aliases": [
+      "download"
+    ]
+  },
+  "downloading": {
+    "upper": "DOWNLOADING",
+    "aliases": [
+      "downloading"
+    ]
+  },
+  "drawio": {
+    "upper": "DRAWIO",
+    "aliases": [
+      "drawio"
+    ]
+  },
+  "drp": {
+    "upper": "DRP",
+    "aliases": [
+      "drp"
+    ]
+  },
+  "drv": {
+    "upper": "DRV",
+    "aliases": [
+      "drv"
+    ]
+  },
+  "dsc": {
+    "upper": "DSC",
+    "aliases": [
+      "dsc"
+    ]
+  },
+  "dsd": {
+    "upper": "DSD",
+    "aliases": [
+      "dsd"
+    ]
+  },
+  "dsn": {
+    "upper": "DSN",
+    "aliases": [
+      "dsn"
+    ]
+  },
+  "dss": {
+    "upper": "DSS",
+    "aliases": [
+      "dss"
+    ]
+  },
+  "dst": {
+    "upper": "DST",
+    "aliases": [
+      "dst"
+    ]
+  },
+  "dsv": {
+    "upper": "DSV",
+    "aliases": [
+      "dsv"
+    ]
+  },
+  "dt0": {
+    "upper": "DT0",
+    "aliases": [
+      "dt0"
+    ]
+  },
+  "dt1": {
+    "upper": "DT1",
+    "aliases": [
+      "dt1"
+    ]
+  },
+  "dt2": {
+    "upper": "DT2",
+    "aliases": [
+      "dt2"
+    ]
+  },
+  "dtsx": {
+    "upper": "DTSX",
+    "aliases": [
+      "dtsx"
+    ]
+  },
+  "dv": {
+    "upper": "DV",
+    "aliases": [
+      "dv"
+    ]
+  },
+  "dvd-dos": {
+    "upper": "DVD-DOS",
+    "aliases": [
+      "dvd-dos",
+      "dvd dos"
+    ]
+  },
+  "dwf": {
+    "upper": "DWF",
+    "aliases": [
+      "dwf"
+    ]
+  },
+  "dwfx": {
+    "upper": "DWFX",
+    "aliases": [
+      "dwfx"
+    ]
+  },
+  "dwt": {
+    "upper": "DWT",
+    "aliases": [
+      "dwt"
+    ]
+  },
+  "dxb": {
+    "upper": "DXB",
+    "aliases": [
+      "dxb"
+    ]
+  },
+  "dxl": {
+    "upper": "DXL",
+    "aliases": [
+      "dxl"
+    ]
+  },
+  "dz": {
+    "upper": "DZ",
+    "aliases": [
+      "dz"
+    ]
+  },
+  "e": {
+    "upper": "E",
+    "aliases": [
+      "e"
+    ]
+  },
+  "e00": {
+    "upper": "E00",
+    "aliases": [
+      "e00"
+    ]
+  },
+  "e57": {
+    "upper": "E57",
+    "aliases": [
+      "e57"
+    ]
+  },
+  "ea": {
+    "upper": "EA",
+    "aliases": [
+      "ea"
+    ]
+  },
+  "eal": {
+    "upper": "EAL",
+    "aliases": [
+      "eal"
+    ]
+  },
+  "eaz": {
+    "upper": "EAZ",
+    "aliases": [
+      "eaz"
+    ]
+  },
+  "ebk": {
+    "upper": "EBK",
+    "aliases": [
+      "ebk"
+    ]
+  },
+  "ec3": {
+    "upper": "EC3",
+    "aliases": [
+      "ec3"
+    ]
+  },
+  "ece": {
+    "upper": "ECE",
+    "aliases": [
+      "ece"
+    ]
+  },
+  "ecf": {
+    "upper": "ECF",
+    "aliases": [
+      "ecf"
+    ]
+  },
+  "ecm": {
+    "upper": "ECM",
+    "aliases": [
+      "ecm"
+    ]
+  },
+  "eco": {
+    "upper": "ECO",
+    "aliases": [
+      "eco"
+    ]
+  },
+  "ecs": {
+    "upper": "ECS",
+    "aliases": [
+      "ecs"
+    ]
+  },
+  "ecw": {
+    "upper": "ECW",
+    "aliases": [
+      "ecw"
+    ]
+  },
+  "edb": {
+    "upper": "EDB",
+    "aliases": [
+      "edb"
+    ]
+  },
+  "edge": {
+    "upper": "EDGE",
+    "aliases": [
+      "edge"
+    ]
+  },
+  "edn": {
+    "upper": "EDN",
+    "aliases": [
+      "edn"
+    ]
+  },
+  "efs": {
+    "upper": "EFS",
+    "aliases": [
+      "efs"
+    ]
+  },
+  "efu": {
+    "upper": "EFU",
+    "aliases": [
+      "efu"
+    ]
+  },
+  "egg": {
+    "upper": "EGG",
+    "aliases": [
+      "egg"
+    ]
+  },
+  "elf": {
+    "upper": "ELF",
+    "aliases": [
+      "elf"
+    ]
+  },
+  "embr": {
+    "upper": "EMBR",
+    "aliases": [
+      "embr"
+    ]
+  },
+  "emlx": {
+    "upper": "EMLX",
+    "aliases": [
+      "emlx"
+    ]
+  },
+  "emz": {
+    "upper": "EMZ",
+    "aliases": [
+      "emz"
+    ]
+  },
+  "enc": {
+    "upper": "ENC",
+    "aliases": [
+      "enc"
+    ]
+  },
+  "enl": {
+    "upper": "ENL",
+    "aliases": [
+      "enl"
+    ]
+  },
+  "eot": {
+    "upper": "EOT",
+    "aliases": [
+      "eot"
+    ]
+  },
+  "epibrw": {
+    "upper": "EPIBRW",
+    "aliases": [
+      "epibrw"
+    ]
+  },
+  "epim": {
+    "upper": "EPIM",
+    "aliases": [
+      "epim"
+    ]
+  },
+  "epk": {
+    "upper": "EPK",
+    "aliases": [
+      "epk"
+    ]
+  },
+  "erb": {
+    "upper": "ERB",
+    "aliases": [
+      "erb"
+    ]
+  },
+  "err": {
+    "upper": "ERR",
+    "aliases": [
+      "err"
+    ]
+  },
+  "esp": {
+    "upper": "ESP",
+    "aliases": [
+      "esp"
+    ]
+  },
+  "esproj": {
+    "upper": "ESPROJ",
+    "aliases": [
+      "esproj"
+    ]
+  },
+  "ess": {
+    "upper": "ESS",
+    "aliases": [
+      "ess"
+    ]
+  },
+  "esx": {
+    "upper": "ESX",
+    "aliases": [
+      "esx"
+    ]
+  },
+  "eta": {
+    "upper": "ETA",
+    "aliases": [
+      "eta"
+    ]
+  },
+  "etd": {
+    "upper": "ETD",
+    "aliases": [
+      "etd"
+    ]
+  },
+  "etl": {
+    "upper": "ETL",
+    "aliases": [
+      "etl"
+    ]
+  },
+  "etx": {
+    "upper": "ETX",
+    "aliases": [
+      "etx"
+    ]
+  },
+  "ewp": {
+    "upper": "EWP",
+    "aliases": [
+      "ewp"
+    ]
+  },
+  "ex": {
+    "upper": "EX",
+    "aliases": [
+      "ex"
+    ]
+  },
+  "exe": {
+    "upper": "EXE",
+    "aliases": [
+      "exe"
+    ]
+  },
+  "exif": {
+    "upper": "EXIF",
+    "aliases": [
+      "exif"
+    ]
+  },
+  "exo": {
+    "upper": "EXO",
+    "aliases": [
+      "exo"
+    ]
+  },
+  "exp": {
+    "upper": "EXP",
+    "aliases": [
+      "exp"
+    ]
+  },
+  "f3d": {
+    "upper": "F3D",
+    "aliases": [
+      "f3d"
+    ]
+  },
+  "f4v": {
+    "upper": "F4V",
+    "aliases": [
+      "f4v"
+    ]
+  },
+  "f95": {
+    "upper": "F95",
+    "aliases": [
+      "f95"
+    ]
+  },
+  "faq": {
+    "upper": "FAQ",
+    "aliases": [
+      "faq"
+    ]
+  },
+  "fb2": {
+    "upper": "FB2",
+    "aliases": [
+      "fb2"
+    ]
+  },
+  "fcgi": {
+    "upper": "FCGI",
+    "aliases": [
+      "fcgi"
+    ]
+  },
+  "fcs": {
+    "upper": "FCS",
+    "aliases": [
+      "fcs"
+    ]
+  },
+  "fdb": {
+    "upper": "FDB",
+    "aliases": [
+      "fdb"
+    ]
+  },
+  "fdf": {
+    "upper": "FDF",
+    "aliases": [
+      "fdf"
+    ]
+  },
+  "fic": {
+    "upper": "FIC",
+    "aliases": [
+      "fic"
+    ]
+  },
+  "fig": {
+    "upper": "FIG",
+    "aliases": [
+      "fig"
+    ]
+  },
+  "file": {
+    "upper": "FILE",
+    "aliases": [
+      "file"
+    ]
+  },
+  "fit": {
+    "upper": "FIT",
+    "aliases": [
+      "fit"
+    ]
+  },
+  "fkb": {
+    "upper": "FKB",
+    "aliases": [
+      "fkb"
+    ]
+  },
+  "fla": {
+    "upper": "FLA",
+    "aliases": [
+      "fla"
+    ]
+  },
+  "flac": {
+    "upper": "FLAC",
+    "aliases": [
+      "flac"
+    ]
+  },
+  "flh": {
+    "upper": "FLH",
+    "aliases": [
+      "flh"
+    ]
+  },
+  "flif": {
+    "upper": "FLIF",
+    "aliases": [
+      "flif"
+    ]
+  },
+  "flipanim": {
+    "upper": "FLIPANIM",
+    "aliases": [
+      "flipanim"
+    ]
+  },
+  "flp": {
+    "upper": "FLP",
+    "aliases": [
+      "flp"
+    ]
+  },
+  "flv": {
+    "upper": "FLV",
+    "aliases": [
+      "flv"
+    ]
+  },
+  "fm": {
+    "upper": "FM",
+    "aliases": [
+      "fm"
+    ]
+  },
+  "fmp": {
+    "upper": "FMP",
+    "aliases": [
+      "fmp"
+    ]
+  },
+  "fmp12": {
+    "upper": "FMP12",
+    "aliases": [
+      "fmp12"
+    ]
+  },
+  "fmpsl": {
+    "upper": "FMPSL",
+    "aliases": [
+      "fmpsl"
+    ]
+  },
+  "fmw": {
+    "upper": "FMW",
+    "aliases": [
+      "fmw"
+    ]
+  },
+  "fnt": {
+    "upper": "FNT",
+    "aliases": [
+      "fnt"
+    ]
+  },
+  "fodg": {
+    "upper": "FODG",
+    "aliases": [
+      "fodg"
+    ]
+  },
+  "fodt": {
+    "upper": "FODT",
+    "aliases": [
+      "fodt"
+    ]
+  },
+  "fomod": {
+    "upper": "FOMOD",
+    "aliases": [
+      "fomod"
+    ]
+  },
+  "fon": {
+    "upper": "FON",
+    "aliases": [
+      "fon"
+    ]
+  },
+  "fot": {
+    "upper": "FOT",
+    "aliases": [
+      "fot"
+    ]
+  },
+  "fp": {
+    "upper": "FP",
+    "aliases": [
+      "fp"
+    ]
+  },
+  "fp5": {
+    "upper": "FP5",
+    "aliases": [
+      "fp5"
+    ]
+  },
+  "fp7": {
+    "upper": "FP7",
+    "aliases": [
+      "fp7"
+    ]
+  },
+  "fpt": {
+    "upper": "FPT",
+    "aliases": [
+      "fpt"
+    ]
+  },
+  "fpt-alphafive": {
+    "upper": "FPT-ALPHAFIVE",
+    "aliases": [
+      "fpt-alphafive",
+      "fpt alphafive"
+    ]
+  },
+  "fpt-foxpro": {
+    "upper": "FPT-FOXPRO",
+    "aliases": [
+      "fpt-foxpro",
+      "fpt foxpro"
+    ]
+  },
+  "freeway": {
+    "upper": "FREEWAY",
+    "aliases": [
+      "freeway"
+    ]
+  },
+  "fs": {
+    "upper": "FS",
+    "aliases": [
+      "fs"
+    ]
+  },
+  "fst": {
+    "upper": "FST",
+    "aliases": [
+      "fst"
+    ]
+  },
+  "fwp": {
+    "upper": "FWP",
+    "aliases": [
+      "fwp"
+    ]
+  },
+  "fwtemplate": {
+    "upper": "FWTEMPLATE",
+    "aliases": [
+      "fwtemplate"
+    ]
+  },
+  "fwtemplateb": {
+    "upper": "FWTEMPLATEB",
+    "aliases": [
+      "fwtemplateb"
+    ]
+  },
+  "fzp": {
+    "upper": "FZP",
+    "aliases": [
+      "fzp"
+    ]
+  },
+  "fzpz": {
+    "upper": "FZPZ",
+    "aliases": [
+      "fzpz"
+    ]
+  },
+  "fzz": {
+    "upper": "FZZ",
+    "aliases": [
+      "fzz"
+    ]
+  },
+  "g4": {
+    "upper": "G4",
+    "aliases": [
+      "g4"
+    ]
+  },
+  "gadget": {
+    "upper": "GADGET",
+    "aliases": [
+      "gadget"
+    ]
+  },
+  "gam": {
+    "upper": "GAM",
+    "aliases": [
+      "gam"
+    ]
+  },
+  "gb": {
+    "upper": "GB",
+    "aliases": [
+      "gb"
+    ]
+  },
+  "gbr": {
+    "upper": "GBR",
+    "aliases": [
+      "gbr"
+    ]
+  },
+  "gbx": {
+    "upper": "GBX",
+    "aliases": [
+      "gbx"
+    ]
+  },
+  "gcf": {
+    "upper": "GCF",
+    "aliases": [
+      "gcf"
+    ]
+  },
+  "gcode": {
+    "upper": "GCODE",
+    "aliases": [
+      "gcode"
+    ]
+  },
+  "gdb": {
+    "upper": "GDB",
+    "aliases": [
+      "gdb"
+    ]
+  },
+  "gdoc": {
+    "upper": "GDOC",
+    "aliases": [
+      "gdoc"
+    ]
+  },
+  "gdocx": {
+    "upper": "GDOCX",
+    "aliases": [
+      "gdocx"
+    ]
+  },
+  "ged": {
+    "upper": "GED",
+    "aliases": [
+      "ged"
+    ]
+  },
+  "gma": {
+    "upper": "GMA",
+    "aliases": [
+      "gma"
+    ]
+  },
+  "gmap": {
+    "upper": "GMAP",
+    "aliases": [
+      "gmap"
+    ]
+  },
+  "gmd": {
+    "upper": "GMD",
+    "aliases": [
+      "gmd"
+    ]
+  },
+  "gml": {
+    "upper": "GML",
+    "aliases": [
+      "gml"
+    ]
+  },
+  "gne": {
+    "upper": "GNE",
+    "aliases": [
+      "gne"
+    ]
+  },
+  "gnm": {
+    "upper": "GNM",
+    "aliases": [
+      "gnm"
+    ]
+  },
+  "gnumeric": {
+    "upper": "GNUMERIC",
+    "aliases": [
+      "gnumeric"
+    ]
+  },
+  "go": {
+    "upper": "GO",
+    "aliases": [
+      "go"
+    ]
+  },
+  "gp": {
+    "upper": "GP",
+    "aliases": [
+      "gp"
+    ]
+  },
+  "gpg": {
+    "upper": "GPG",
+    "aliases": [
+      "gpg"
+    ]
+  },
+  "gpkg": {
+    "upper": "GPKG",
+    "aliases": [
+      "gpkg"
+    ]
+  },
+  "groovy": {
+    "upper": "GROOVY",
+    "aliases": [
+      "groovy"
+    ]
+  },
+  "gsheet": {
+    "upper": "GSHEET",
+    "aliases": [
+      "gsheet"
+    ]
+  },
+  "gsm": {
+    "upper": "GSM",
+    "aliases": [
+      "gsm"
+    ]
+  },
+  "gsp": {
+    "upper": "GSP",
+    "aliases": [
+      "gsp"
+    ]
+  },
+  "gst": {
+    "upper": "GST",
+    "aliases": [
+      "gst"
+    ]
+  },
+  "gxf": {
+    "upper": "GXF",
+    "aliases": [
+      "gxf"
+    ]
+  },
+  "gxt": {
+    "upper": "GXT",
+    "aliases": [
+      "gxt"
+    ]
+  },
+  "gzip": {
+    "upper": "GZIP",
+    "aliases": [
+      "gzip"
+    ]
+  },
+  "h": {
+    "upper": "H",
+    "aliases": [
+      "h"
+    ]
+  },
+  "h264": {
+    "upper": "H264",
+    "aliases": [
+      "h264"
+    ]
+  },
+  "h265": {
+    "upper": "H265",
+    "aliases": [
+      "h265"
+    ]
+  },
+  "h4": {
+    "upper": "H4",
+    "aliases": [
+      "h4"
+    ]
+  },
+  "h5": {
+    "upper": "H5",
+    "aliases": [
+      "h5"
+    ]
+  },
+  "haml": {
+    "upper": "HAML",
+    "aliases": [
+      "haml"
+    ]
+  },
+  "han": {
+    "upper": "HAN",
+    "aliases": [
+      "han"
+    ]
+  },
+  "har": {
+    "upper": "HAR",
+    "aliases": [
+      "har"
+    ]
+  },
+  "hdm": {
+    "upper": "HDM",
+    "aliases": [
+      "hdm"
+    ]
+  },
+  "hdml": {
+    "upper": "HDML",
+    "aliases": [
+      "hdml"
+    ]
+  },
+  "hdmp": {
+    "upper": "HDMP",
+    "aliases": [
+      "hdmp"
+    ]
+  },
+  "hdr": {
+    "upper": "HDR",
+    "aliases": [
+      "hdr"
+    ]
+  },
+  "heic": {
+    "upper": "HEIC",
+    "aliases": [
+      "heic"
+    ]
+  },
+  "heif": {
+    "upper": "HEIF",
+    "aliases": [
+      "heif"
+    ]
+  },
+  "hh": {
+    "upper": "HH",
+    "aliases": [
+      "hh"
+    ]
+  },
+  "hpgl": {
+    "upper": "HPGL",
+    "aliases": [
+      "hpgl"
+    ]
+  },
+  "hpp": {
+    "upper": "HPP",
+    "aliases": [
+      "hpp"
+    ]
+  },
+  "hs": {
+    "upper": "HS",
+    "aliases": [
+      "hs"
+    ]
+  },
+  "hta": {
+    "upper": "HTA",
+    "aliases": [
+      "hta"
+    ]
+  },
+  "htaccess": {
+    "upper": "HTACCESS",
+    "aliases": [
+      "htaccess"
+    ]
+  },
+  "htc": {
+    "upper": "HTC",
+    "aliases": [
+      "htc"
+    ]
+  },
+  "htm": {
+    "upper": "HTM",
+    "aliases": [
+      "htm"
+    ]
+  },
+  "html0": {
+    "upper": "HTML0",
+    "aliases": [
+      "html0"
+    ]
+  },
+  "htmlz": {
+    "upper": "HTMLZ",
+    "aliases": [
+      "htmlz"
+    ]
+  },
+  "htt": {
+    "upper": "HTT",
+    "aliases": [
+      "htt"
+    ]
+  },
+  "htx": {
+    "upper": "HTX",
+    "aliases": [
+      "htx"
+    ]
+  },
+  "htxt": {
+    "upper": "HTXT",
+    "aliases": [
+      "htxt"
+    ]
+  },
+  "htz4": {
+    "upper": "HTZ4",
+    "aliases": [
+      "htz4"
+    ]
+  },
+  "htz5": {
+    "upper": "HTZ5",
+    "aliases": [
+      "htz5"
+    ]
+  },
+  "hxs": {
+    "upper": "HXS",
+    "aliases": [
+      "hxs"
+    ]
+  },
+  "hype": {
+    "upper": "HYPE",
+    "aliases": [
+      "hype"
+    ]
+  },
+  "iba": {
+    "upper": "IBA",
+    "aliases": [
+      "iba"
+    ]
+  },
+  "ibooks": {
+    "upper": "IBOOKS",
+    "aliases": [
+      "ibooks"
+    ]
+  },
+  "ica": {
+    "upper": "ICA",
+    "aliases": [
+      "ica"
+    ]
+  },
+  "ice": {
+    "upper": "ICE",
+    "aliases": [
+      "ice"
+    ]
+  },
+  "ici": {
+    "upper": "ICI",
+    "aliases": [
+      "ici"
+    ]
+  },
+  "icns": {
+    "upper": "ICNS",
+    "aliases": [
+      "icns"
+    ]
+  },
+  "idx": {
+    "upper": "IDX",
+    "aliases": [
+      "idx"
+    ]
+  },
+  "ifo": {
+    "upper": "IFO",
+    "aliases": [
+      "ifo"
+    ]
+  },
+  "img": {
+    "upper": "IMG",
+    "aliases": [
+      "img"
+    ]
+  },
+  "imp": {
+    "upper": "IMP",
+    "aliases": [
+      "imp"
+    ]
+  },
+  "in": {
+    "upper": "IN",
+    "aliases": [
+      "in"
+    ]
+  },
+  "inc": {
+    "upper": "INC",
+    "aliases": [
+      "inc"
+    ]
+  },
+  "indd": {
+    "upper": "INDD",
+    "aliases": [
+      "indd"
+    ]
+  },
+  "indt": {
+    "upper": "INDT",
+    "aliases": [
+      "indt"
+    ]
+  },
+  "ini": {
+    "upper": "INI",
+    "aliases": [
+      "ini"
+    ]
+  },
+  "ink": {
+    "upper": "INK",
+    "aliases": [
+      "ink"
+    ]
+  },
+  "ino": {
+    "upper": "INO",
+    "aliases": [
+      "ino"
+    ]
+  },
+  "ins": {
+    "upper": "INS",
+    "aliases": [
+      "ins"
+    ]
+  },
+  "insv": {
+    "upper": "INSV",
+    "aliases": [
+      "insv"
+    ]
+  },
+  "inx": {
+    "upper": "INX",
+    "aliases": [
+      "inx"
+    ]
+  },
+  "io": {
+    "upper": "IO",
+    "aliases": [
+      "io"
+    ]
+  },
+  "ip": {
+    "upper": "IP",
+    "aliases": [
+      "ip"
+    ]
+  },
+  "ipa": {
+    "upper": "IPA",
+    "aliases": [
+      "ipa"
+    ]
+  },
+  "ipr": {
+    "upper": "IPR",
+    "aliases": [
+      "ipr"
+    ]
+  },
+  "ips": {
+    "upper": "IPS",
+    "aliases": [
+      "ips"
+    ]
+  },
+  "ips-ps2": {
+    "upper": "IPS-PS2",
+    "aliases": [
+      "ips-ps2",
+      "ips ps2"
+    ]
+  },
+  "ipsw": {
+    "upper": "IPSW",
+    "aliases": [
+      "ipsw"
+    ]
+  },
+  "ipt": {
+    "upper": "IPT",
+    "aliases": [
+      "ipt"
+    ]
+  },
+  "ipynb": {
+    "upper": "IPYNB",
+    "aliases": [
+      "ipynb"
+    ]
+  },
+  "isn": {
+    "upper": "ISN",
+    "aliases": [
+      "isn"
+    ]
+  },
+  "iso": {
+    "upper": "ISO",
+    "aliases": [
+      "iso"
+    ]
+  },
+  "iss": {
+    "upper": "ISS",
+    "aliases": [
+      "iss"
+    ]
+  },
+  "isz": {
+    "upper": "ISZ",
+    "aliases": [
+      "isz"
+    ]
+  },
+  "it": {
+    "upper": "IT",
+    "aliases": [
+      "it"
+    ]
+  },
+  "itw": {
+    "upper": "ITW",
+    "aliases": [
+      "itw"
+    ]
+  },
+  "ixbrl": {
+    "upper": "IXBRL",
+    "aliases": [
+      "ixbrl"
+    ]
+  },
+  "j2c": {
+    "upper": "J2C",
+    "aliases": [
+      "j2c"
+    ]
+  },
+  "j2k": {
+    "upper": "J2K",
+    "aliases": [
+      "j2k"
+    ]
+  },
+  "jar": {
+    "upper": "JAR",
+    "aliases": [
+      "jar"
+    ]
+  },
+  "jav": {
+    "upper": "JAV",
+    "aliases": [
+      "jav"
+    ]
+  },
+  "java": {
+    "upper": "JAVA",
+    "aliases": [
+      "java"
+    ]
+  },
+  "jet": {
+    "upper": "JET",
+    "aliases": [
+      "jet"
+    ]
+  },
+  "jfif": {
+    "upper": "JFIF",
+    "aliases": [
+      "jfif"
+    ]
+  },
+  "jfproj": {
+    "upper": "JFPROJ",
+    "aliases": [
+      "jfproj"
+    ]
+  },
+  "jhtml": {
+    "upper": "JHTML",
+    "aliases": [
+      "jhtml"
+    ]
+  },
+  "jnlp": {
+    "upper": "JNLP",
+    "aliases": [
+      "jnlp"
+    ]
+  },
+  "jp2": {
+    "upper": "JP2",
+    "aliases": [
+      "jp2"
+    ]
+  },
+  "jpc": {
+    "upper": "JPC",
+    "aliases": [
+      "jpc"
+    ]
+  },
+  "jpf": {
+    "upper": "JPF",
+    "aliases": [
+      "jpf"
+    ]
+  },
+  "jpg_large": {
+    "upper": "JPG_LARGE",
+    "aliases": [
+      "jpg_large",
+      "jpg large"
+    ]
+  },
+  "jpm": {
+    "upper": "JPM",
+    "aliases": [
+      "jpm"
+    ]
+  },
+  "jpx": {
+    "upper": "JPX",
+    "aliases": [
+      "jpx"
+    ]
+  },
+  "jrxml": {
+    "upper": "JRXML",
+    "aliases": [
+      "jrxml"
+    ]
+  },
+  "js": {
+    "upper": "JS",
+    "aliases": [
+      "js"
+    ]
+  },
+  "jsf": {
+    "upper": "JSF",
+    "aliases": [
+      "jsf"
+    ]
+  },
+  "jsp": {
+    "upper": "JSP",
+    "aliases": [
+      "jsp"
+    ]
+  },
+  "jspa": {
+    "upper": "JSPA",
+    "aliases": [
+      "jspa"
+    ]
+  },
+  "jspf": {
+    "upper": "JSPF",
+    "aliases": [
+      "jspf"
+    ]
+  },
+  "jvsg": {
+    "upper": "JVSG",
+    "aliases": [
+      "jvsg"
+    ]
+  },
+  "jwpub": {
+    "upper": "JWPUB",
+    "aliases": [
+      "jwpub"
+    ]
+  },
+  "jxl": {
+    "upper": "JXL",
+    "aliases": [
+      "jxl"
+    ]
+  },
+  "jxr": {
+    "upper": "JXR",
+    "aliases": [
+      "jxr"
+    ]
+  },
+  "key": {
+    "upper": "KEY",
+    "aliases": [
+      "key"
+    ]
+  },
+  "kfx": {
+    "upper": "KFX",
+    "aliases": [
+      "kfx"
+    ]
+  },
+  "kgb": {
+    "upper": "KGB",
+    "aliases": [
+      "kgb"
+    ]
+  },
+  "kine": {
+    "upper": "KINE",
+    "aliases": [
+      "kine"
+    ]
+  },
+  "kit": {
+    "upper": "KIT",
+    "aliases": [
+      "kit"
+    ]
+  },
+  "klq": {
+    "upper": "KLQ",
+    "aliases": [
+      "klq"
+    ]
+  },
+  "kodu": {
+    "upper": "KODU",
+    "aliases": [
+      "kodu"
+    ]
+  },
+  "koob": {
+    "upper": "KOOB",
+    "aliases": [
+      "koob"
+    ]
+  },
+  "kt": {
+    "upper": "KT",
+    "aliases": [
+      "kt"
+    ]
+  },
+  "lan": {
+    "upper": "LAN",
+    "aliases": [
+      "lan"
+    ]
+  },
+  "lang": {
+    "upper": "LANG",
+    "aliases": [
+      "lang"
+    ]
+  },
+  "las": {
+    "upper": "LAS",
+    "aliases": [
+      "las"
+    ]
+  },
+  "latex": {
+    "upper": "LATEX",
+    "aliases": [
+      "latex"
+    ]
+  },
+  "laz": {
+    "upper": "LAZ",
+    "aliases": [
+      "laz"
+    ]
+  },
+  "lbr": {
+    "upper": "LBR",
+    "aliases": [
+      "lbr"
+    ]
+  },
+  "ldb": {
+    "upper": "LDB",
+    "aliases": [
+      "ldb"
+    ]
+  },
+  "ldf": {
+    "upper": "LDF",
+    "aliases": [
+      "ldf"
+    ]
+  },
+  "less": {
+    "upper": "LESS",
+    "aliases": [
+      "less"
+    ]
+  },
+  "lgo": {
+    "upper": "LGO",
+    "aliases": [
+      "lgo"
+    ]
+  },
+  "lic": {
+    "upper": "LIC",
+    "aliases": [
+      "lic"
+    ]
+  },
+  "lit": {
+    "upper": "LIT",
+    "aliases": [
+      "lit"
+    ]
+  },
+  "litemod": {
+    "upper": "LITEMOD",
+    "aliases": [
+      "litemod"
+    ]
+  },
+  "lng": {
+    "upper": "LNG",
+    "aliases": [
+      "lng"
+    ]
+  },
+  "lnk": {
+    "upper": "LNK",
+    "aliases": [
+      "lnk"
+    ]
+  },
+  "loc": {
+    "upper": "LOC",
+    "aliases": [
+      "loc"
+    ]
+  },
+  "lock": {
+    "upper": "LOCK",
+    "aliases": [
+      "lock"
+    ]
+  },
+  "log": {
+    "upper": "LOG",
+    "aliases": [
+      "log"
+    ]
+  },
+  "lqr": {
+    "upper": "LQR",
+    "aliases": [
+      "lqr"
+    ]
+  },
+  "lrc": {
+    "upper": "LRC",
+    "aliases": [
+      "lrc"
+    ]
+  },
+  "lrf": {
+    "upper": "LRF",
+    "aliases": [
+      "lrf"
+    ]
+  },
+  "lrs": {
+    "upper": "LRS",
+    "aliases": [
+      "lrs"
+    ]
+  },
+  "lrv": {
+    "upper": "LRV",
+    "aliases": [
+      "lrv"
+    ]
+  },
+  "lrx": {
+    "upper": "LRX",
+    "aliases": [
+      "lrx"
+    ]
+  },
+  "lst": {
+    "upper": "LST",
+    "aliases": [
+      "lst"
+    ]
+  },
+  "lua": {
+    "upper": "LUA",
+    "aliases": [
+      "lua"
+    ]
+  },
+  "lz": {
+    "upper": "LZ",
+    "aliases": [
+      "lz"
+    ]
+  },
+  "lz4": {
+    "upper": "LZ4",
+    "aliases": [
+      "lz4"
+    ]
+  },
+  "lzh": {
+    "upper": "LZH",
+    "aliases": [
+      "lzh"
+    ]
+  },
+  "lzma": {
+    "upper": "LZMA",
+    "aliases": [
+      "lzma"
+    ]
+  },
+  "lzo": {
+    "upper": "LZO",
+    "aliases": [
+      "lzo"
+    ]
+  },
+  "lzx": {
+    "upper": "LZX",
+    "aliases": [
+      "lzx"
+    ]
+  },
+  "m": {
+    "upper": "M",
+    "aliases": [
+      "m"
+    ]
+  },
+  "m2ts": {
+    "upper": "M2TS",
+    "aliases": [
+      "m2ts"
+    ]
+  },
+  "m2v": {
+    "upper": "M2V",
+    "aliases": [
+      "m2v"
+    ]
+  },
+  "m3u": {
+    "upper": "M3U",
+    "aliases": [
+      "m3u"
+    ]
+  },
+  "m3u8": {
+    "upper": "M3U8",
+    "aliases": [
+      "m3u8"
+    ]
+  },
+  "m4a": {
+    "upper": "M4A",
+    "aliases": [
+      "m4a"
+    ]
+  },
+  "m4b": {
+    "upper": "M4B",
+    "aliases": [
+      "m4b"
+    ]
+  },
+  "m4p": {
+    "upper": "M4P",
+    "aliases": [
+      "m4p"
+    ]
+  },
+  "m4r": {
+    "upper": "M4R",
+    "aliases": [
+      "m4r"
+    ]
+  },
+  "m4s": {
+    "upper": "M4S",
+    "aliases": [
+      "m4s"
+    ]
+  },
+  "m4v": {
+    "upper": "M4V",
+    "aliases": [
+      "m4v"
+    ]
+  },
+  "mabk": {
+    "upper": "MABK",
+    "aliases": [
+      "mabk"
+    ]
+  },
+  "make": {
+    "upper": "MAKE",
+    "aliases": [
+      "make"
+    ]
+  },
+  "man": {
+    "upper": "MAN",
+    "aliases": [
+      "man"
+    ]
+  },
+  "manifest": {
+    "upper": "MANIFEST",
+    "aliases": [
+      "manifest"
+    ]
+  },
+  "map": {
+    "upper": "MAP",
+    "aliases": [
+      "map"
+    ]
+  },
+  "mar": {
+    "upper": "MAR",
+    "aliases": [
+      "mar"
+    ]
+  },
+  "mart": {
+    "upper": "MART",
+    "aliases": [
+      "mart"
+    ]
+  },
+  "master": {
+    "upper": "MASTER",
+    "aliases": [
+      "master"
+    ]
+  },
+  "max": {
+    "upper": "MAX",
+    "aliases": [
+      "max"
+    ]
+  },
+  "mbp": {
+    "upper": "MBP",
+    "aliases": [
+      "mbp"
+    ]
+  },
+  "mbw": {
+    "upper": "MBW",
+    "aliases": [
+      "mbw"
+    ]
+  },
+  "mca": {
+    "upper": "MCA",
+    "aliases": [
+      "mca"
+    ]
+  },
+  "mcpack": {
+    "upper": "MCPACK",
+    "aliases": [
+      "mcpack"
+    ]
+  },
+  "mcr": {
+    "upper": "MCR",
+    "aliases": [
+      "mcr"
+    ]
+  },
+  "mcstructure": {
+    "upper": "MCSTRUCTURE",
+    "aliases": [
+      "mcstructure"
+    ]
+  },
+  "mcworld": {
+    "upper": "MCWORLD",
+    "aliases": [
+      "mcworld"
+    ]
+  },
+  "md5": {
+    "upper": "MD5",
+    "aliases": [
+      "md5"
+    ]
+  },
+  "mda": {
+    "upper": "MDA",
+    "aliases": [
+      "mda"
+    ]
+  },
+  "mdb": {
+    "upper": "MDB",
+    "aliases": [
+      "mdb"
+    ]
+  },
+  "mde": {
+    "upper": "MDE",
+    "aliases": [
+      "mde"
+    ]
+  },
+  "mdf": {
+    "upper": "MDF",
+    "aliases": [
+      "mdf"
+    ]
+  },
+  "mdmp": {
+    "upper": "MDMP",
+    "aliases": [
+      "mdmp"
+    ]
+  },
+  "mds": {
+    "upper": "MDS",
+    "aliases": [
+      "mds"
+    ]
+  },
+  "mdx": {
+    "upper": "MDX",
+    "aliases": [
+      "mdx"
+    ]
+  },
+  "media-files": {
+    "upper": "MEDIA-FILES",
+    "aliases": [
+      "media-files",
+      "media files"
+    ]
+  },
+  "mel": {
+    "upper": "MEL",
+    "aliases": [
+      "mel"
+    ]
+  },
+  "meta": {
+    "upper": "META",
+    "aliases": [
+      "meta"
+    ]
+  },
+  "mf": {
+    "upper": "MF",
+    "aliases": [
+      "mf"
+    ]
+  },
+  "mfx": {
+    "upper": "MFX",
+    "aliases": [
+      "mfx"
+    ]
+  },
+  "mgx": {
+    "upper": "MGX",
+    "aliases": [
+      "mgx"
+    ]
+  },
+  "mht": {
+    "upper": "MHT",
+    "aliases": [
+      "mht"
+    ]
+  },
+  "mid": {
+    "upper": "MID",
+    "aliases": [
+      "mid"
+    ]
+  },
+  "mif": {
+    "upper": "MIF",
+    "aliases": [
+      "mif"
+    ]
+  },
+  "mii": {
+    "upper": "MII",
+    "aliases": [
+      "mii"
+    ]
+  },
+  "milk": {
+    "upper": "MILK",
+    "aliases": [
+      "milk"
+    ]
+  },
+  "mint": {
+    "upper": "MINT",
+    "aliases": [
+      "mint"
+    ]
+  },
+  "mis": {
+    "upper": "MIS",
+    "aliases": [
+      "mis"
+    ]
+  },
+  "mix": {
+    "upper": "MIX",
+    "aliases": [
+      "mix"
+    ]
+  },
+  "mjp": {
+    "upper": "MJP",
+    "aliases": [
+      "mjp"
+    ]
+  },
+  "mjpeg": {
+    "upper": "MJPEG",
+    "aliases": [
+      "mjpeg"
+    ]
+  },
+  "mjs": {
+    "upper": "MJS",
+    "aliases": [
+      "mjs"
+    ]
+  },
+  "mk3d": {
+    "upper": "MK3D",
+    "aliases": [
+      "mk3d"
+    ]
+  },
+  "mka": {
+    "upper": "MKA",
+    "aliases": [
+      "mka"
+    ]
+  },
+  "mks": {
+    "upper": "MKS",
+    "aliases": [
+      "mks"
+    ]
+  },
+  "mkv": {
+    "upper": "MKV",
+    "aliases": [
+      "mkv"
+    ]
+  },
+  "ml": {
+    "upper": "ML",
+    "aliases": [
+      "ml"
+    ]
+  },
+  "mlt": {
+    "upper": "MLT",
+    "aliases": [
+      "mlt"
+    ]
+  },
+  "mlx": {
+    "upper": "MLX",
+    "aliases": [
+      "mlx"
+    ]
+  },
+  "mm": {
+    "upper": "MM",
+    "aliases": [
+      "mm"
+    ]
+  },
+  "mmf": {
+    "upper": "MMF",
+    "aliases": [
+      "mmf"
+    ]
+  },
+  "mng": {
+    "upper": "MNG",
+    "aliases": [
+      "mng"
+    ]
+  },
+  "mod": {
+    "upper": "MOD",
+    "aliases": [
+      "mod"
+    ]
+  },
+  "mov": {
+    "upper": "MOV",
+    "aliases": [
+      "mov"
+    ]
+  },
+  "mp": {
+    "upper": "MP",
+    "aliases": [
+      "mp"
+    ]
+  },
+  "mp2": {
+    "upper": "MP2",
+    "aliases": [
+      "mp2"
+    ]
+  },
+  "mp3": {
+    "upper": "MP3",
+    "aliases": [
+      "mp3"
+    ]
+  },
+  "mp4": {
+    "upper": "MP4",
+    "aliases": [
+      "mp4"
+    ]
+  },
+  "mp5": {
+    "upper": "MP5",
+    "aliases": [
+      "mp5"
+    ]
+  },
+  "mpc": {
+    "upper": "MPC",
+    "aliases": [
+      "mpc"
+    ]
+  },
+  "mpe": {
+    "upper": "MPE",
+    "aliases": [
+      "mpe"
+    ]
+  },
+  "mpeg": {
+    "upper": "MPEG",
+    "aliases": [
+      "mpeg"
+    ]
+  },
+  "mpg": {
+    "upper": "MPG",
+    "aliases": [
+      "mpg"
+    ]
+  },
+  "mpj": {
+    "upper": "MPJ",
+    "aliases": [
+      "mpj"
+    ]
+  },
+  "mpk": {
+    "upper": "MPK",
+    "aliases": [
+      "mpk"
+    ]
+  },
+  "mpkg": {
+    "upper": "MPKG",
+    "aliases": [
+      "mpkg"
+    ]
+  },
+  "mpo": {
+    "upper": "MPO",
+    "aliases": [
+      "mpo"
+    ]
+  },
+  "mpq": {
+    "upper": "MPQ",
+    "aliases": [
+      "mpq"
+    ]
+  },
+  "mps": {
+    "upper": "MPS",
+    "aliases": [
+      "mps"
+    ]
+  },
+  "mpt": {
+    "upper": "MPT",
+    "aliases": [
+      "mpt"
+    ]
+  },
+  "mpv": {
+    "upper": "MPV",
+    "aliases": [
+      "mpv"
+    ]
+  },
+  "mrc": {
+    "upper": "MRC",
+    "aliases": [
+      "mrc"
+    ]
+  },
+  "mscz": {
+    "upper": "MSCZ",
+    "aliases": [
+      "mscz"
+    ]
+  },
+  "msd": {
+    "upper": "MSD",
+    "aliases": [
+      "msd"
+    ]
+  },
+  "msi": {
+    "upper": "MSI",
+    "aliases": [
+      "msi"
+    ]
+  },
+  "msix": {
+    "upper": "MSIX",
+    "aliases": [
+      "msix"
+    ]
+  },
+  "mso": {
+    "upper": "MSO",
+    "aliases": [
+      "mso"
+    ]
+  },
+  "mst": {
+    "upper": "MST",
+    "aliases": [
+      "mst"
+    ]
+  },
+  "mswmm": {
+    "upper": "MSWMM",
+    "aliases": [
+      "mswmm"
+    ]
+  },
+  "mtl": {
+    "upper": "MTL",
+    "aliases": [
+      "mtl"
+    ]
+  },
+  "mtm": {
+    "upper": "MTM",
+    "aliases": [
+      "mtm"
+    ]
+  },
+  "mts": {
+    "upper": "MTS",
+    "aliases": [
+      "mts"
+    ]
+  },
+  "mui": {
+    "upper": "MUI",
+    "aliases": [
+      "mui"
+    ]
+  },
+  "mus": {
+    "upper": "MUS",
+    "aliases": [
+      "mus"
+    ]
+  },
+  "mus-minecraft": {
+    "upper": "MUS-MINECRAFT",
+    "aliases": [
+      "mus-minecraft",
+      "mus minecraft"
+    ]
+  },
+  "musx": {
+    "upper": "MUSX",
+    "aliases": [
+      "musx"
+    ]
+  },
+  "mxd": {
+    "upper": "MXD",
+    "aliases": [
+      "mxd"
+    ]
+  },
+  "mxf": {
+    "upper": "MXF",
+    "aliases": [
+      "mxf"
+    ]
+  },
+  "mxl": {
+    "upper": "MXL",
+    "aliases": [
+      "mxl"
+    ]
+  },
+  "mxt": {
+    "upper": "MXT",
+    "aliases": [
+      "mxt"
+    ]
+  },
+  "myi": {
+    "upper": "MYI",
+    "aliases": [
+      "myi"
+    ]
+  },
+  "n64": {
+    "upper": "N64",
+    "aliases": [
+      "n64"
+    ]
+  },
+  "nb": {
+    "upper": "NB",
+    "aliases": [
+      "nb"
+    ]
+  },
+  "nbt": {
+    "upper": "NBT",
+    "aliases": [
+      "nbt"
+    ]
+  },
+  "nc": {
+    "upper": "NC",
+    "aliases": [
+      "nc"
+    ]
+  },
+  "ncx": {
+    "upper": "NCX",
+    "aliases": [
+      "ncx"
+    ]
+  },
+  "ndf": {
+    "upper": "NDF",
+    "aliases": [
+      "ndf"
+    ]
+  },
+  "nds": {
+    "upper": "NDS",
+    "aliases": [
+      "nds"
+    ]
+  },
+  "nef": {
+    "upper": "NEF",
+    "aliases": [
+      "nef"
+    ]
+  },
+  "nes": {
+    "upper": "NES",
+    "aliases": [
+      "nes"
+    ]
+  },
+  "nfo": {
+    "upper": "NFO",
+    "aliases": [
+      "nfo"
+    ]
+  },
+  "nkit": {
+    "upper": "NKIT",
+    "aliases": [
+      "nkit"
+    ]
+  },
+  "nm2": {
+    "upper": "NM2",
+    "aliases": [
+      "nm2"
+    ]
+  },
+  "nmc": {
+    "upper": "NMC",
+    "aliases": [
+      "nmc"
+    ]
+  },
+  "nmoney": {
+    "upper": "NMONEY",
+    "aliases": [
+      "nmoney"
+    ]
+  },
+  "nomedia": {
+    "upper": "NOMEDIA",
+    "aliases": [
+      "nomedia"
+    ]
+  },
+  "npa": {
+    "upper": "NPA",
+    "aliases": [
+      "npa"
+    ]
+  },
+  "npk": {
+    "upper": "NPK",
+    "aliases": [
+      "npk"
+    ]
+  },
+  "nrg": {
+    "upper": "NRG",
+    "aliases": [
+      "nrg"
+    ]
+  },
+  "nri": {
+    "upper": "NRI",
+    "aliases": [
+      "nri"
+    ]
+  },
+  "nsa": {
+    "upper": "NSA",
+    "aliases": [
+      "nsa"
+    ]
+  },
+  "nsf": {
+    "upper": "NSF",
+    "aliases": [
+      "nsf"
+    ]
+  },
+  "nsp": {
+    "upper": "NSP",
+    "aliases": [
+      "nsp"
+    ]
+  },
+  "nsv": {
+    "upper": "NSV",
+    "aliases": [
+      "nsv"
+    ]
+  },
+  "nsz": {
+    "upper": "NSZ",
+    "aliases": [
+      "nsz"
+    ]
+  },
+  "ntf": {
+    "upper": "NTF",
+    "aliases": [
+      "ntf"
+    ]
+  },
+  "numbers-tef": {
+    "upper": "NUMBERS-TEF",
+    "aliases": [
+      "numbers-tef",
+      "numbers tef"
+    ]
+  },
+  "nupkg": {
+    "upper": "NUPKG",
+    "aliases": [
+      "nupkg"
+    ]
+  },
+  "nut": {
+    "upper": "NUT",
+    "aliases": [
+      "nut"
+    ]
+  },
+  "nva": {
+    "upper": "NVA",
+    "aliases": [
+      "nva"
+    ]
+  },
+  "nwc": {
+    "upper": "NWC",
+    "aliases": [
+      "nwc"
+    ]
+  },
+  "nwd": {
+    "upper": "NWD",
+    "aliases": [
+      "nwd"
+    ]
+  },
+  "nwdb": {
+    "upper": "NWDB",
+    "aliases": [
+      "nwdb"
+    ]
+  },
+  "nwf": {
+    "upper": "NWF",
+    "aliases": [
+      "nwf"
+    ]
+  },
+  "nx": {
+    "upper": "NX",
+    "aliases": [
+      "nx"
+    ]
+  },
+  "oam": {
+    "upper": "OAM",
+    "aliases": [
+      "oam"
+    ]
+  },
+  "oar": {
+    "upper": "OAR",
+    "aliases": [
+      "oar"
+    ]
+  },
+  "obb": {
+    "upper": "OBB",
+    "aliases": [
+      "obb"
+    ]
+  },
+  "obi": {
+    "upper": "OBI",
+    "aliases": [
+      "obi"
+    ]
+  },
+  "obml": {
+    "upper": "OBML",
+    "aliases": [
+      "obml"
+    ]
+  },
+  "obml15": {
+    "upper": "OBML15",
+    "aliases": [
+      "obml15"
+    ]
+  },
+  "obml16": {
+    "upper": "OBML16",
+    "aliases": [
+      "obml16"
+    ]
+  },
+  "odf": {
+    "upper": "ODF",
+    "aliases": [
+      "odf"
+    ]
+  },
+  "odg": {
+    "upper": "ODG",
+    "aliases": [
+      "odg"
+    ]
+  },
+  "odm": {
+    "upper": "ODM",
+    "aliases": [
+      "odm"
+    ]
+  },
+  "odttf": {
+    "upper": "ODTTF",
+    "aliases": [
+      "odttf"
+    ]
+  },
+  "oeb": {
+    "upper": "OEB",
+    "aliases": [
+      "oeb"
+    ]
+  },
+  "oebzip": {
+    "upper": "OEBZIP",
+    "aliases": [
+      "oebzip"
+    ]
+  },
+  "ogg": {
+    "upper": "OGG",
+    "aliases": [
+      "ogg"
+    ]
+  },
+  "ogv": {
+    "upper": "OGV",
+    "aliases": [
+      "ogv"
+    ]
+  },
+  "oiv": {
+    "upper": "OIV",
+    "aliases": [
+      "oiv"
+    ]
+  },
+  "olm": {
+    "upper": "OLM",
+    "aliases": [
+      "olm"
+    ]
+  },
+  "onetoc2": {
+    "upper": "ONETOC2",
+    "aliases": [
+      "onetoc2"
+    ]
+  },
+  "opdownload": {
+    "upper": "OPDOWNLOAD",
+    "aliases": [
+      "opdownload"
+    ]
+  },
+  "opf": {
+    "upper": "OPF",
+    "aliases": [
+      "opf"
+    ]
+  },
+  "opt": {
+    "upper": "OPT",
+    "aliases": [
+      "opt"
+    ]
+  },
+  "opus": {
+    "upper": "OPUS",
+    "aliases": [
+      "opus"
+    ]
+  },
+  "orb": {
+    "upper": "ORB",
+    "aliases": [
+      "orb"
+    ]
+  },
+  "osb": {
+    "upper": "OSB",
+    "aliases": [
+      "osb"
+    ]
+  },
+  "osc": {
+    "upper": "OSC",
+    "aliases": [
+      "osc"
+    ]
+  },
+  "osk": {
+    "upper": "OSK",
+    "aliases": [
+      "osk"
+    ]
+  },
+  "osm": {
+    "upper": "OSM",
+    "aliases": [
+      "osm"
+    ]
+  },
+  "osr": {
+    "upper": "OSR",
+    "aliases": [
+      "osr"
+    ]
+  },
+  "oss": {
+    "upper": "OSS",
+    "aliases": [
+      "oss"
+    ]
+  },
+  "osu": {
+    "upper": "OSU",
+    "aliases": [
+      "osu"
+    ]
+  },
+  "osz": {
+    "upper": "OSZ",
+    "aliases": [
+      "osz"
+    ]
+  },
+  "otf": {
+    "upper": "OTF",
+    "aliases": [
+      "otf"
+    ]
+  },
+  "out": {
+    "upper": "OUT",
+    "aliases": [
+      "out"
+    ]
+  },
+  "ova": {
+    "upper": "OVA",
+    "aliases": [
+      "ova"
+    ]
+  },
+  "ovf": {
+    "upper": "OVF",
+    "aliases": [
+      "ovf"
+    ]
+  },
+  "ovpn": {
+    "upper": "OVPN",
+    "aliases": [
+      "ovpn"
+    ]
+  },
+  "p3t": {
+    "upper": "P3T",
+    "aliases": [
+      "p3t"
+    ]
+  },
+  "p6xml": {
+    "upper": "P6XML",
+    "aliases": [
+      "p6xml"
+    ]
+  },
+  "p7b": {
+    "upper": "P7B",
+    "aliases": [
+      "p7b"
+    ]
+  },
+  "p7c": {
+    "upper": "P7C",
+    "aliases": [
+      "p7c"
+    ]
+  },
+  "p7s": {
+    "upper": "P7S",
+    "aliases": [
+      "p7s"
+    ]
+  },
+  "p7z": {
+    "upper": "P7Z",
+    "aliases": [
+      "p7z"
+    ]
+  },
+  "pac": {
+    "upper": "PAC",
+    "aliases": [
+      "pac"
+    ]
+  },
+  "package": {
+    "upper": "PACKAGE",
+    "aliases": [
+      "package"
+    ]
+  },
+  "pages": {
+    "upper": "PAGES",
+    "aliases": [
+      "pages"
+    ]
+  },
+  "pak": {
+    "upper": "PAK",
+    "aliases": [
+      "pak"
+    ]
+  },
+  "pan": {
+    "upper": "PAN",
+    "aliases": [
+      "pan"
+    ]
+  },
+  "par": {
+    "upper": "PAR",
+    "aliases": [
+      "par"
+    ]
+  },
+  "part": {
+    "upper": "PART",
+    "aliases": [
+      "part"
+    ]
+  },
+  "pas": {
+    "upper": "PAS",
+    "aliases": [
+      "pas"
+    ]
+  },
+  "pat": {
+    "upper": "PAT",
+    "aliases": [
+      "pat"
+    ]
+  },
+  "pat-coreldraw": {
+    "upper": "PAT-CORELDRAW",
+    "aliases": [
+      "pat-coreldraw",
+      "pat coreldraw"
+    ]
+  },
+  "pat-diskstation": {
+    "upper": "PAT-DISKSTATION",
+    "aliases": [
+      "pat-diskstation",
+      "pat diskstation"
+    ]
+  },
+  "pat-pattern": {
+    "upper": "PAT-PATTERN",
+    "aliases": [
+      "pat-pattern",
+      "pat pattern"
+    ]
+  },
+  "pc": {
+    "upper": "PC",
+    "aliases": [
+      "pc"
+    ]
+  },
+  "pc3": {
+    "upper": "PC3",
+    "aliases": [
+      "pc3"
+    ]
+  },
+  "pcb": {
+    "upper": "PCB",
+    "aliases": [
+      "pcb"
+    ]
+  },
+  "pcc": {
+    "upper": "PCC",
+    "aliases": [
+      "pcc"
+    ]
+  },
+  "pck": {
+    "upper": "PCK",
+    "aliases": [
+      "pck"
+    ]
+  },
+  "pct": {
+    "upper": "PCT",
+    "aliases": [
+      "pct"
+    ]
+  },
+  "pcx": {
+    "upper": "PCX",
+    "aliases": [
+      "pcx"
+    ]
+  },
+  "pdb": {
+    "upper": "PDB",
+    "aliases": [
+      "pdb"
+    ]
+  },
+  "pde": {
+    "upper": "PDE",
+    "aliases": [
+      "pde"
+    ]
+  },
+  "pdm": {
+    "upper": "PDM",
+    "aliases": [
+      "pdm"
+    ]
+  },
+  "pdn": {
+    "upper": "PDN",
+    "aliases": [
+      "pdn"
+    ]
+  },
+  "pdo": {
+    "upper": "PDO",
+    "aliases": [
+      "pdo"
+    ]
+  },
+  "pds": {
+    "upper": "PDS",
+    "aliases": [
+      "pds"
+    ]
+  },
+  "pea": {
+    "upper": "PEA",
+    "aliases": [
+      "pea"
+    ]
+  },
+  "pef": {
+    "upper": "PEF",
+    "aliases": [
+      "pef"
+    ]
+  },
+  "pem": {
+    "upper": "PEM",
+    "aliases": [
+      "pem"
+    ]
+  },
+  "pes": {
+    "upper": "PES",
+    "aliases": [
+      "pes"
+    ]
+  },
+  "pet": {
+    "upper": "PET",
+    "aliases": [
+      "pet"
+    ]
+  },
+  "pf": {
+    "upper": "PF",
+    "aliases": [
+      "pf"
+    ]
+  },
+  "pfa": {
+    "upper": "PFA",
+    "aliases": [
+      "pfa"
+    ]
+  },
+  "pfb": {
+    "upper": "PFB",
+    "aliases": [
+      "pfb"
+    ]
+  },
+  "pfm": {
+    "upper": "PFM",
+    "aliases": [
+      "pfm"
+    ]
+  },
+  "pfx": {
+    "upper": "PFX",
+    "aliases": [
+      "pfx"
+    ]
+  },
+  "pgn": {
+    "upper": "PGN",
+    "aliases": [
+      "pgn"
+    ]
+  },
+  "phj": {
+    "upper": "PHJ",
+    "aliases": [
+      "phj"
+    ]
+  },
+  "phl": {
+    "upper": "PHL",
+    "aliases": [
+      "phl"
+    ]
+  },
+  "php": {
+    "upper": "PHP",
+    "aliases": [
+      "php"
+    ]
+  },
+  "pict": {
+    "upper": "PICT",
+    "aliases": [
+      "pict"
+    ]
+  },
+  "pif": {
+    "upper": "PIF",
+    "aliases": [
+      "pif"
+    ]
+  },
+  "piv": {
+    "upper": "PIV",
+    "aliases": [
+      "piv"
+    ]
+  },
+  "pk3-quake3": {
+    "upper": "PK3-QUAKE3",
+    "aliases": [
+      "pk3-quake3",
+      "pk3 quake3"
+    ]
+  },
+  "pkf": {
+    "upper": "PKF",
+    "aliases": [
+      "pkf"
+    ]
+  },
+  "pkg": {
+    "upper": "PKG",
+    "aliases": [
+      "pkg"
+    ]
+  },
+  "pkpass": {
+    "upper": "PKPASS",
+    "aliases": [
+      "pkpass"
+    ]
+  },
+  "pl": {
+    "upper": "PL",
+    "aliases": [
+      "pl"
+    ]
+  },
+  "plt": {
+    "upper": "PLT",
+    "aliases": [
+      "plt"
+    ]
+  },
+  "pmd": {
+    "upper": "PMD",
+    "aliases": [
+      "pmd"
+    ]
+  },
+  "pmdx": {
+    "upper": "PMDX",
+    "aliases": [
+      "pmdx"
+    ]
+  },
+  "pmf": {
+    "upper": "PMF",
+    "aliases": [
+      "pmf"
+    ]
+  },
+  "pml": {
+    "upper": "PML",
+    "aliases": [
+      "pml"
+    ]
+  },
+  "pmlz": {
+    "upper": "PMLZ",
+    "aliases": [
+      "pmlz"
+    ]
+  },
+  "pmp": {
+    "upper": "PMP",
+    "aliases": [
+      "pmp"
+    ]
+  },
+  "pmvx": {
+    "upper": "PMVX",
+    "aliases": [
+      "pmvx"
+    ]
+  },
+  "pnj": {
+    "upper": "PNJ",
+    "aliases": [
+      "pnj"
+    ]
+  },
+  "pobi": {
+    "upper": "POBI",
+    "aliases": [
+      "pobi"
+    ]
+  },
+  "pov": {
+    "upper": "POV",
+    "aliases": [
+      "pov"
+    ]
+  },
+  "ppf": {
+    "upper": "PPF",
+    "aliases": [
+      "ppf"
+    ]
+  },
+  "ppp": {
+    "upper": "PPP",
+    "aliases": [
+      "ppp"
+    ]
+  },
+  "prc": {
+    "upper": "PRC",
+    "aliases": [
+      "prc"
+    ]
+  },
+  "presto": {
+    "upper": "PRESTO",
+    "aliases": [
+      "presto"
+    ]
+  },
+  "pro": {
+    "upper": "PRO",
+    "aliases": [
+      "pro"
+    ]
+  },
+  "prproj": {
+    "upper": "PRPROJ",
+    "aliases": [
+      "prproj"
+    ]
+  },
+  "prt-cadkey": {
+    "upper": "PRT-CADKEY",
+    "aliases": [
+      "prt-cadkey",
+      "prt cadkey"
+    ]
+  },
+  "prt-creo": {
+    "upper": "PRT-CREO",
+    "aliases": [
+      "prt-creo",
+      "prt creo"
+    ]
+  },
+  "prt-template": {
+    "upper": "PRT-TEMPLATE",
+    "aliases": [
+      "prt-template",
+      "prt template"
+    ]
+  },
+  "ps1": {
+    "upper": "PS1",
+    "aliases": [
+      "ps1"
+    ]
+  },
+  "ps2-bios": {
+    "upper": "PS2-BIOS",
+    "aliases": [
+      "ps2-bios",
+      "ps2 bios"
+    ]
+  },
+  "psb": {
+    "upper": "PSB",
+    "aliases": [
+      "psb"
+    ]
+  },
+  "psm": {
+    "upper": "PSM",
+    "aliases": [
+      "psm"
+    ]
+  },
+  "psp": {
+    "upper": "PSP",
+    "aliases": [
+      "psp"
+    ]
+  },
+  "pspimage": {
+    "upper": "PSPIMAGE",
+    "aliases": [
+      "pspimage"
+    ]
+  },
+  "pss": {
+    "upper": "PSS",
+    "aliases": [
+      "pss"
+    ]
+  },
+  "psv": {
+    "upper": "PSV",
+    "aliases": [
+      "psv"
+    ]
+  },
+  "psx-bios": {
+    "upper": "PSX-BIOS",
+    "aliases": [
+      "psx-bios",
+      "psx bios"
+    ]
+  },
+  "ptk": {
+    "upper": "PTK",
+    "aliases": [
+      "ptk"
+    ]
+  },
+  "ptm": {
+    "upper": "PTM",
+    "aliases": [
+      "ptm"
+    ]
+  },
+  "ptx": {
+    "upper": "PTX",
+    "aliases": [
+      "ptx"
+    ]
+  },
+  "pup": {
+    "upper": "PUP",
+    "aliases": [
+      "pup"
+    ]
+  },
+  "puz": {
+    "upper": "PUZ",
+    "aliases": [
+      "puz"
+    ]
+  },
+  "pvt": {
+    "upper": "PVT",
+    "aliases": [
+      "pvt"
+    ]
+  },
+  "pwa": {
+    "upper": "PWA",
+    "aliases": [
+      "pwa"
+    ]
+  },
+  "pwf": {
+    "upper": "PWF",
+    "aliases": [
+      "pwf"
+    ]
+  },
+  "pxp": {
+    "upper": "PXP",
+    "aliases": [
+      "pxp"
+    ]
+  },
+  "py": {
+    "upper": "PY",
+    "aliases": [
+      "py"
+    ]
+  },
+  "pyc": {
+    "upper": "PYC",
+    "aliases": [
+      "pyc"
+    ]
+  },
+  "pyd": {
+    "upper": "PYD",
+    "aliases": [
+      "pyd"
+    ]
+  },
+  "pyi": {
+    "upper": "PYI",
+    "aliases": [
+      "pyi"
+    ]
+  },
+  "pym": {
+    "upper": "PYM",
+    "aliases": [
+      "pym"
+    ]
+  },
+  "pyw": {
+    "upper": "PYW",
+    "aliases": [
+      "pyw"
+    ]
+  },
+  "pyx": {
+    "upper": "PYX",
+    "aliases": [
+      "pyx"
+    ]
+  },
+  "pz": {
+    "upper": "PZ",
+    "aliases": [
+      "pz"
+    ]
+  },
+  "pzz": {
+    "upper": "PZZ",
+    "aliases": [
+      "pzz"
+    ]
+  },
+  "q1q": {
+    "upper": "Q1Q",
+    "aliases": [
+      "q1q"
+    ]
+  },
+  "qbl": {
+    "upper": "QBL",
+    "aliases": [
+      "qbl"
+    ]
+  },
+  "qcp": {
+    "upper": "QCP",
+    "aliases": [
+      "qcp"
+    ]
+  },
+  "qdf": {
+    "upper": "QDF",
+    "aliases": [
+      "qdf"
+    ]
+  },
+  "qgd": {
+    "upper": "QGD",
+    "aliases": [
+      "qgd"
+    ]
+  },
+  "qgs": {
+    "upper": "QGS",
+    "aliases": [
+      "qgs"
+    ]
+  },
+  "qgz": {
+    "upper": "QGZ",
+    "aliases": [
+      "qgz"
+    ]
+  },
+  "qlr": {
+    "upper": "QLR",
+    "aliases": [
+      "qlr"
+    ]
+  },
+  "qmk": {
+    "upper": "QMK",
+    "aliases": [
+      "qmk"
+    ]
+  },
+  "qml": {
+    "upper": "QML",
+    "aliases": [
+      "qml"
+    ]
+  },
+  "qpf": {
+    "upper": "QPF",
+    "aliases": [
+      "qpf"
+    ]
+  },
+  "qpw": {
+    "upper": "QPW",
+    "aliases": [
+      "qpw"
+    ]
+  },
+  "qt": {
+    "upper": "QT",
+    "aliases": [
+      "qt"
+    ]
+  },
+  "qtif": {
+    "upper": "QTIF",
+    "aliases": [
+      "qtif"
+    ]
+  },
+  "r": {
+    "upper": "R",
+    "aliases": [
+      "r"
+    ]
+  },
+  "r2": {
+    "upper": "R2",
+    "aliases": [
+      "r2"
+    ]
+  },
+  "ra": {
+    "upper": "RA",
+    "aliases": [
+      "ra"
+    ]
+  },
+  "raf": {
+    "upper": "RAF",
+    "aliases": [
+      "raf"
+    ]
+  },
+  "raw": {
+    "upper": "RAW",
+    "aliases": [
+      "raw"
+    ]
+  },
+  "rb": {
+    "upper": "RB",
+    "aliases": [
+      "rb"
+    ]
+  },
+  "rbxl": {
+    "upper": "RBXL",
+    "aliases": [
+      "rbxl"
+    ]
+  },
+  "rbxm": {
+    "upper": "RBXM",
+    "aliases": [
+      "rbxm"
+    ]
+  },
+  "rbz": {
+    "upper": "RBZ",
+    "aliases": [
+      "rbz"
+    ]
+  },
+  "rdf": {
+    "upper": "RDF",
+    "aliases": [
+      "rdf"
+    ]
+  },
+  "rdl": {
+    "upper": "RDL",
+    "aliases": [
+      "rdl"
+    ]
+  },
+  "rdlc": {
+    "upper": "RDLC",
+    "aliases": [
+      "rdlc"
+    ]
+  },
+  "rdp": {
+    "upper": "RDP",
+    "aliases": [
+      "rdp"
+    ]
+  },
+  "reg": {
+    "upper": "REG",
+    "aliases": [
+      "reg"
+    ]
+  },
+  "regtrans-ms": {
+    "upper": "REGTRANS-MS",
+    "aliases": [
+      "regtrans-ms",
+      "regtrans ms"
+    ]
+  },
+  "rel": {
+    "upper": "REL",
+    "aliases": [
+      "rel"
+    ]
+  },
+  "rep": {
+    "upper": "REP",
+    "aliases": [
+      "rep"
+    ]
+  },
+  "res": {
+    "upper": "RES",
+    "aliases": [
+      "res"
+    ]
+  },
+  "rez": {
+    "upper": "REZ",
+    "aliases": [
+      "rez"
+    ]
+  },
+  "rf64": {
+    "upper": "RF64",
+    "aliases": [
+      "rf64"
+    ]
+  },
+  "rfa": {
+    "upper": "RFA",
+    "aliases": [
+      "rfa"
+    ]
+  },
+  "rft": {
+    "upper": "RFT",
+    "aliases": [
+      "rft"
+    ]
+  },
+  "rhtml": {
+    "upper": "RHTML",
+    "aliases": [
+      "rhtml"
+    ]
+  },
+  "rip": {
+    "upper": "RIP",
+    "aliases": [
+      "rip"
+    ]
+  },
+  "ris": {
+    "upper": "RIS",
+    "aliases": [
+      "ris"
+    ]
+  },
+  "rjs": {
+    "upper": "RJS",
+    "aliases": [
+      "rjs"
+    ]
+  },
+  "rm": {
+    "upper": "RM",
+    "aliases": [
+      "rm"
+    ]
+  },
+  "rmd": {
+    "upper": "RMD",
+    "aliases": [
+      "rmd"
+    ]
+  },
+  "rml": {
+    "upper": "RML",
+    "aliases": [
+      "rml"
+    ]
+  },
+  "rmt": {
+    "upper": "RMT",
+    "aliases": [
+      "rmt"
+    ]
+  },
+  "rmvb": {
+    "upper": "RMVB",
+    "aliases": [
+      "rmvb"
+    ]
+  },
+  "rom": {
+    "upper": "ROM",
+    "aliases": [
+      "rom"
+    ]
+  },
+  "rpd": {
+    "upper": "RPD",
+    "aliases": [
+      "rpd"
+    ]
+  },
+  "rpd-roleplay": {
+    "upper": "RPD-ROLEPLAY",
+    "aliases": [
+      "rpd-roleplay",
+      "rpd roleplay"
+    ]
+  },
+  "rpf": {
+    "upper": "RPF",
+    "aliases": [
+      "rpf"
+    ]
+  },
+  "rpl": {
+    "upper": "RPL",
+    "aliases": [
+      "rpl"
+    ]
+  },
+  "rpln": {
+    "upper": "RPLN",
+    "aliases": [
+      "rpln"
+    ]
+  },
+  "rpm": {
+    "upper": "RPM",
+    "aliases": [
+      "rpm"
+    ]
+  },
+  "rpmsg": {
+    "upper": "RPMSG",
+    "aliases": [
+      "rpmsg"
+    ]
+  },
+  "rpt": {
+    "upper": "RPT",
+    "aliases": [
+      "rpt"
+    ]
+  },
+  "rpx": {
+    "upper": "RPX",
+    "aliases": [
+      "rpx"
+    ]
+  },
+  "rpy": {
+    "upper": "RPY",
+    "aliases": [
+      "rpy"
+    ]
+  },
+  "rpyc": {
+    "upper": "RPYC",
+    "aliases": [
+      "rpyc"
+    ]
+  },
+  "rs": {
+    "upper": "RS",
+    "aliases": [
+      "rs"
+    ]
+  },
+  "rss": {
+    "upper": "RSS",
+    "aliases": [
+      "rss"
+    ]
+  },
+  "rst": {
+    "upper": "RST",
+    "aliases": [
+      "rst"
+    ]
+  },
+  "rte": {
+    "upper": "RTE",
+    "aliases": [
+      "rte"
+    ]
+  },
+  "run": {
+    "upper": "RUN",
+    "aliases": [
+      "run"
+    ]
+  },
+  "rv": {
+    "upper": "RV",
+    "aliases": [
+      "rv"
+    ]
+  },
+  "rvt": {
+    "upper": "RVT",
+    "aliases": [
+      "rvt"
+    ]
+  },
+  "rvz": {
+    "upper": "RVZ",
+    "aliases": [
+      "rvz"
+    ]
+  },
+  "rwplugin": {
+    "upper": "RWPLUGIN",
+    "aliases": [
+      "rwplugin"
+    ]
+  },
+  "rzb": {
+    "upper": "RZB",
+    "aliases": [
+      "rzb"
+    ]
+  },
+  "rzs": {
+    "upper": "RZS",
+    "aliases": [
+      "rzs"
+    ]
+  },
+  "s00": {
+    "upper": "S00",
+    "aliases": [
+      "s00"
+    ]
+  },
+  "saf": {
+    "upper": "SAF",
+    "aliases": [
+      "saf"
+    ]
+  },
+  "safetensors": {
+    "upper": "SAFETENSORS",
+    "aliases": [
+      "safetensors"
+    ]
+  },
+  "sami": {
+    "upper": "SAMI",
+    "aliases": [
+      "sami"
+    ]
+  },
+  "sass": {
+    "upper": "SASS",
+    "aliases": [
+      "sass"
+    ]
+  },
+  "sav": {
+    "upper": "SAV",
+    "aliases": [
+      "sav"
+    ]
+  },
+  "sb3": {
+    "upper": "SB3",
+    "aliases": [
+      "sb3"
+    ]
+  },
+  "sbn": {
+    "upper": "SBN",
+    "aliases": [
+      "sbn"
+    ]
+  },
+  "sbv": {
+    "upper": "SBV",
+    "aliases": [
+      "sbv"
+    ]
+  },
+  "scala": {
+    "upper": "SCALA",
+    "aliases": [
+      "scala"
+    ]
+  },
+  "scc": {
+    "upper": "SCC",
+    "aliases": [
+      "scc"
+    ]
+  },
+  "scm": {
+    "upper": "SCM",
+    "aliases": [
+      "scm"
+    ]
+  },
+  "scr": {
+    "upper": "SCR",
+    "aliases": [
+      "scr"
+    ]
+  },
+  "script": {
+    "upper": "SCRIPT",
+    "aliases": [
+      "script"
+    ]
+  },
+  "scss": {
+    "upper": "SCSS",
+    "aliases": [
+      "scss"
+    ]
+  },
+  "scworld": {
+    "upper": "SCWORLD",
+    "aliases": [
+      "scworld"
+    ]
+  },
+  "sdc": {
+    "upper": "SDC",
+    "aliases": [
+      "sdc"
+    ]
+  },
+  "sdf": {
+    "upper": "SDF",
+    "aliases": [
+      "sdf"
+    ]
+  },
+  "sdi": {
+    "upper": "SDI",
+    "aliases": [
+      "sdi"
+    ]
+  },
+  "sdocx": {
+    "upper": "SDOCX",
+    "aliases": [
+      "sdocx"
+    ]
+  },
+  "sdt": {
+    "upper": "SDT",
+    "aliases": [
+      "sdt"
+    ]
+  },
+  "seam": {
+    "upper": "SEAM",
+    "aliases": [
+      "seam"
+    ]
+  },
+  "sec": {
+    "upper": "SEC",
+    "aliases": [
+      "sec"
+    ]
+  },
+  "sesx": {
+    "upper": "SESX",
+    "aliases": [
+      "sesx"
+    ]
+  },
+  "set": {
+    "upper": "SET",
+    "aliases": [
+      "set"
+    ]
+  },
+  "settings": {
+    "upper": "SETTINGS",
+    "aliases": [
+      "settings"
+    ]
+  },
+  "sf2": {
+    "upper": "SF2",
+    "aliases": [
+      "sf2"
+    ]
+  },
+  "sfar": {
+    "upper": "SFAR",
+    "aliases": [
+      "sfar"
+    ]
+  },
+  "sfc": {
+    "upper": "SFC",
+    "aliases": [
+      "sfc"
+    ]
+  },
+  "sfd": {
+    "upper": "SFD",
+    "aliases": [
+      "sfd"
+    ]
+  },
+  "sfg": {
+    "upper": "SFG",
+    "aliases": [
+      "sfg"
+    ]
+  },
+  "sfv": {
+    "upper": "SFV",
+    "aliases": [
+      "sfv"
+    ]
+  },
+  "sh": {
+    "upper": "SH",
+    "aliases": [
+      "sh"
+    ]
+  },
+  "shader-godot": {
+    "upper": "SHADER-GODOT",
+    "aliases": [
+      "shader-godot",
+      "shader godot"
+    ]
+  },
+  "shader-quake": {
+    "upper": "SHADER-QUAKE",
+    "aliases": [
+      "shader-quake",
+      "shader quake"
+    ]
+  },
+  "shader-unity": {
+    "upper": "SHADER-UNITY",
+    "aliases": [
+      "shader-unity",
+      "shader unity"
+    ]
+  },
+  "shell-script": {
+    "upper": "SHELL-SCRIPT",
+    "aliases": [
+      "shell-script",
+      "shell script"
+    ]
+  },
+  "shsh": {
+    "upper": "SHSH",
+    "aliases": [
+      "shsh"
+    ]
+  },
+  "shsh2": {
+    "upper": "SHSH2",
+    "aliases": [
+      "shsh2"
+    ]
+  },
+  "shtml": {
+    "upper": "SHTML",
+    "aliases": [
+      "shtml"
+    ]
+  },
+  "shx": {
+    "upper": "SHX",
+    "aliases": [
+      "shx"
+    ]
+  },
+  "sid": {
+    "upper": "SID",
+    "aliases": [
+      "sid"
+    ]
+  },
+  "sifz": {
+    "upper": "SIFZ",
+    "aliases": [
+      "sifz"
+    ]
+  },
+  "sims3pack": {
+    "upper": "SIMS3PACK",
+    "aliases": [
+      "sims3pack"
+    ]
+  },
+  "sit": {
+    "upper": "SIT",
+    "aliases": [
+      "sit"
+    ]
+  },
+  "site": {
+    "upper": "SITE",
+    "aliases": [
+      "site"
+    ]
+  },
+  "sitx": {
+    "upper": "SITX",
+    "aliases": [
+      "sitx"
+    ]
+  },
+  "skp": {
+    "upper": "SKP",
+    "aliases": [
+      "skp"
+    ]
+  },
+  "slddrw": {
+    "upper": "SLDDRW",
+    "aliases": [
+      "slddrw"
+    ]
+  },
+  "sldprt": {
+    "upper": "SLDPRT",
+    "aliases": [
+      "sldprt"
+    ]
+  },
+  "sln": {
+    "upper": "SLN",
+    "aliases": [
+      "sln"
+    ]
+  },
+  "smc": {
+    "upper": "SMC",
+    "aliases": [
+      "smc"
+    ]
+  },
+  "smd": {
+    "upper": "SMD",
+    "aliases": [
+      "smd"
+    ]
+  },
+  "smpf": {
+    "upper": "SMPF",
+    "aliases": [
+      "smpf"
+    ]
+  },
+  "snb": {
+    "upper": "SNB",
+    "aliases": [
+      "snb"
+    ]
+  },
+  "so": {
+    "upper": "SO",
+    "aliases": [
+      "so"
+    ]
+  },
+  "sp3": {
+    "upper": "SP3",
+    "aliases": [
+      "sp3"
+    ]
+  },
+  "sparc": {
+    "upper": "SPARC",
+    "aliases": [
+      "sparc"
+    ]
+  },
+  "spc": {
+    "upper": "SPC",
+    "aliases": [
+      "spc"
+    ]
+  },
+  "spp": {
+    "upper": "SPP",
+    "aliases": [
+      "spp"
+    ]
+  },
+  "sps": {
+    "upper": "SPS",
+    "aliases": [
+      "sps"
+    ]
+  },
+  "sql": {
+    "upper": "SQL",
+    "aliases": [
+      "sql"
+    ]
+  },
+  "sqlite": {
+    "upper": "SQLITE",
+    "aliases": [
+      "sqlite"
+    ]
+  },
+  "sqx": {
+    "upper": "SQX",
+    "aliases": [
+      "sqx"
+    ]
+  },
+  "srm": {
+    "upper": "SRM",
+    "aliases": [
+      "srm"
+    ]
+  },
+  "srt": {
+    "upper": "SRT",
+    "aliases": [
+      "srt"
+    ]
+  },
+  "ssf": {
+    "upper": "SSF",
+    "aliases": [
+      "ssf"
+    ]
+  },
+  "ssp": {
+    "upper": "SSP",
+    "aliases": [
+      "ssp"
+    ]
+  },
+  "stap": {
+    "upper": "STAP",
+    "aliases": [
+      "stap"
+    ]
+  },
+  "stc": {
+    "upper": "STC",
+    "aliases": [
+      "stc"
+    ]
+  },
+  "stml": {
+    "upper": "STML",
+    "aliases": [
+      "stml"
+    ]
+  },
+  "str": {
+    "upper": "STR",
+    "aliases": [
+      "str"
+    ]
+  },
+  "sty": {
+    "upper": "STY",
+    "aliases": [
+      "sty"
+    ]
+  },
+  "sub": {
+    "upper": "SUB",
+    "aliases": [
+      "sub"
+    ]
+  },
+  "svgz": {
+    "upper": "SVGZ",
+    "aliases": [
+      "svgz"
+    ]
+  },
+  "svr": {
+    "upper": "SVR",
+    "aliases": [
+      "svr"
+    ]
+  },
+  "svs": {
+    "upper": "SVS",
+    "aliases": [
+      "svs"
+    ]
+  },
+  "swf": {
+    "upper": "SWF",
+    "aliases": [
+      "swf"
+    ]
+  },
+  "swift": {
+    "upper": "SWIFT",
+    "aliases": [
+      "swift"
+    ]
+  },
+  "sy_": {
+    "upper": "SY_",
+    "aliases": [
+      "sy_",
+      "sy "
+    ]
+  },
+  "sys": {
+    "upper": "SYS",
+    "aliases": [
+      "sys"
+    ]
+  },
+  "tbz": {
+    "upper": "TBZ",
+    "aliases": [
+      "tbz"
+    ]
+  },
+  "tcl": {
+    "upper": "TCL",
+    "aliases": [
+      "tcl"
+    ]
+  },
+  "tcr": {
+    "upper": "TCR",
+    "aliases": [
+      "tcr"
+    ]
+  },
+  "tcx": {
+    "upper": "TCX",
+    "aliases": [
+      "tcx"
+    ]
+  },
+  "te": {
+    "upper": "TE",
+    "aliases": [
+      "te"
+    ]
+  },
+  "teacher": {
+    "upper": "TEACHER",
+    "aliases": [
+      "teacher"
+    ]
+  },
+  "text-formats": {
+    "upper": "TEXT-FORMATS",
+    "aliases": [
+      "text-formats",
+      "text formats"
+    ]
+  },
+  "tfrd": {
+    "upper": "TFRD",
+    "aliases": [
+      "tfrd"
+    ]
+  },
+  "tg": {
+    "upper": "TG",
+    "aliases": [
+      "tg"
+    ]
+  },
+  "tga": {
+    "upper": "TGA",
+    "aliases": [
+      "tga"
+    ]
+  },
+  "tgc": {
+    "upper": "TGC",
+    "aliases": [
+      "tgc"
+    ]
+  },
+  "tgp": {
+    "upper": "TGP",
+    "aliases": [
+      "tgp"
+    ]
+  },
+  "tgs": {
+    "upper": "TGS",
+    "aliases": [
+      "tgs"
+    ]
+  },
+  "tgz": {
+    "upper": "TGZ",
+    "aliases": [
+      "tgz"
+    ]
+  },
+  "theme": {
+    "upper": "THEME",
+    "aliases": [
+      "theme"
+    ]
+  },
+  "themepack": {
+    "upper": "THEMEPACK",
+    "aliases": [
+      "themepack"
+    ]
+  },
+  "thm": {
+    "upper": "THM",
+    "aliases": [
+      "thm"
+    ]
+  },
+  "tib": {
+    "upper": "TIB",
+    "aliases": [
+      "tib"
+    ]
+  },
+  "time": {
+    "upper": "TIME",
+    "aliases": [
+      "time"
+    ]
+  },
+  "tk3": {
+    "upper": "TK3",
+    "aliases": [
+      "tk3"
+    ]
+  },
+  "tmp": {
+    "upper": "TMP",
+    "aliases": [
+      "tmp"
+    ]
+  },
+  "tmv": {
+    "upper": "TMV",
+    "aliases": [
+      "tmv"
+    ]
+  },
+  "tmvt": {
+    "upper": "TMVT",
+    "aliases": [
+      "tmvt"
+    ]
+  },
+  "tnef": {
+    "upper": "TNEF",
+    "aliases": [
+      "tnef"
+    ]
+  },
+  "toast": {
+    "upper": "TOAST",
+    "aliases": [
+      "toast"
+    ]
+  },
+  "toml": {
+    "upper": "TOML",
+    "aliases": [
+      "toml"
+    ]
+  },
+  "torrent": {
+    "upper": "TORRENT",
+    "aliases": [
+      "torrent"
+    ]
+  },
+  "tpf": {
+    "upper": "TPF",
+    "aliases": [
+      "tpf"
+    ]
+  },
+  "tpi": {
+    "upper": "TPI",
+    "aliases": [
+      "tpi"
+    ]
+  },
+  "tpl": {
+    "upper": "TPL",
+    "aliases": [
+      "tpl"
+    ]
+  },
+  "tpsr": {
+    "upper": "TPSR",
+    "aliases": [
+      "tpsr"
+    ]
+  },
+  "tpz": {
+    "upper": "TPZ",
+    "aliases": [
+      "tpz"
+    ]
+  },
+  "tr": {
+    "upper": "TR",
+    "aliases": [
+      "tr"
+    ]
+  },
+  "tr3": {
+    "upper": "TR3",
+    "aliases": [
+      "tr3"
+    ]
+  },
+  "trc": {
+    "upper": "TRC",
+    "aliases": [
+      "trc"
+    ]
+  },
+  "trf": {
+    "upper": "TRF",
+    "aliases": [
+      "trf"
+    ]
+  },
+  "trm": {
+    "upper": "TRM",
+    "aliases": [
+      "trm"
+    ]
+  },
+  "ts": {
+    "upper": "TS",
+    "aliases": [
+      "ts"
+    ]
+  },
+  "tsx": {
+    "upper": "TSX",
+    "aliases": [
+      "tsx"
+    ]
+  },
+  "ttc": {
+    "upper": "TTC",
+    "aliases": [
+      "ttc"
+    ]
+  },
+  "ttf": {
+    "upper": "TTF",
+    "aliases": [
+      "ttf"
+    ]
+  },
+  "ttml2": {
+    "upper": "TTML2",
+    "aliases": [
+      "ttml2"
+    ]
+  },
+  "ttr": {
+    "upper": "TTR",
+    "aliases": [
+      "ttr"
+    ]
+  },
+  "tvdb": {
+    "upper": "TVDB",
+    "aliases": [
+      "tvdb"
+    ]
+  },
+  "txd": {
+    "upper": "TXD",
+    "aliases": [
+      "txd"
+    ]
+  },
+  "type1": {
+    "upper": "TYPE1",
+    "aliases": [
+      "type1"
+    ]
+  },
+  "tz": {
+    "upper": "TZ",
+    "aliases": [
+      "tz"
+    ]
+  },
+  "u8": {
+    "upper": "U8",
+    "aliases": [
+      "u8"
+    ]
+  },
+  "ua": {
+    "upper": "UA",
+    "aliases": [
+      "ua"
+    ]
+  },
+  "uasset": {
+    "upper": "UASSET",
+    "aliases": [
+      "uasset"
+    ]
+  },
+  "udb": {
+    "upper": "UDB",
+    "aliases": [
+      "udb"
+    ]
+  },
+  "udf": {
+    "upper": "UDF",
+    "aliases": [
+      "udf"
+    ]
+  },
+  "udl": {
+    "upper": "UDL",
+    "aliases": [
+      "udl"
+    ]
+  },
+  "umx": {
+    "upper": "UMX",
+    "aliases": [
+      "umx"
+    ]
+  },
+  "unity": {
+    "upper": "UNITY",
+    "aliases": [
+      "unity"
+    ]
+  },
+  "unity3d": {
+    "upper": "UNITY3D",
+    "aliases": [
+      "unity3d"
+    ]
+  },
+  "unitypackage": {
+    "upper": "UNITYPACKAGE",
+    "aliases": [
+      "unitypackage"
+    ]
+  },
+  "ups": {
+    "upper": "UPS",
+    "aliases": [
+      "ups"
+    ]
+  },
+  "url": {
+    "upper": "URL",
+    "aliases": [
+      "url"
+    ]
+  },
+  "usr": {
+    "upper": "USR",
+    "aliases": [
+      "usr"
+    ]
+  },
+  "usx": {
+    "upper": "USX",
+    "aliases": [
+      "usx"
+    ]
+  },
+  "vb": {
+    "upper": "VB",
+    "aliases": [
+      "vb"
+    ]
+  },
+  "vbk": {
+    "upper": "VBK",
+    "aliases": [
+      "vbk"
+    ]
+  },
+  "vbproj": {
+    "upper": "VBPROJ",
+    "aliases": [
+      "vbproj"
+    ]
+  },
+  "vbs": {
+    "upper": "VBS",
+    "aliases": [
+      "vbs"
+    ]
+  },
+  "vcd": {
+    "upper": "VCD",
+    "aliases": [
+      "vcd"
+    ]
+  },
+  "vce": {
+    "upper": "VCE",
+    "aliases": [
+      "vce"
+    ]
+  },
+  "vcproj": {
+    "upper": "VCPROJ",
+    "aliases": [
+      "vcproj"
+    ]
+  },
+  "vcs": {
+    "upper": "VCS",
+    "aliases": [
+      "vcs"
+    ]
+  },
+  "vcxproj": {
+    "upper": "VCXPROJ",
+    "aliases": [
+      "vcxproj"
+    ]
+  },
+  "vdf": {
+    "upper": "VDF",
+    "aliases": [
+      "vdf"
+    ]
+  },
+  "vdf-gothic": {
+    "upper": "VDF-GOTHIC",
+    "aliases": [
+      "vdf-gothic",
+      "vdf gothic"
+    ]
+  },
+  "vdi": {
+    "upper": "VDI",
+    "aliases": [
+      "vdi"
+    ]
+  },
+  "vdisco": {
+    "upper": "VDISCO",
+    "aliases": [
+      "vdisco"
+    ]
+  },
+  "vdw": {
+    "upper": "VDW",
+    "aliases": [
+      "vdw"
+    ]
+  },
+  "vdx": {
+    "upper": "VDX",
+    "aliases": [
+      "vdx"
+    ]
+  },
+  "veg": {
+    "upper": "VEG",
+    "aliases": [
+      "veg"
+    ]
+  },
+  "vfb": {
+    "upper": "VFB",
+    "aliases": [
+      "vfb"
+    ]
+  },
+  "vga": {
+    "upper": "VGA",
+    "aliases": [
+      "vga"
+    ]
+  },
+  "vhd": {
+    "upper": "VHD",
+    "aliases": [
+      "vhd"
+    ]
+  },
+  "vhdx": {
+    "upper": "VHDX",
+    "aliases": [
+      "vhdx"
+    ]
+  },
+  "vid": {
+    "upper": "VID",
+    "aliases": [
+      "vid"
+    ]
+  },
+  "video-converter": {
+    "upper": "VIDEO-CONVERTER",
+    "aliases": [
+      "video-converter",
+      "video converter"
+    ]
+  },
+  "vim": {
+    "upper": "VIM",
+    "aliases": [
+      "vim"
+    ]
+  },
+  "vimrc": {
+    "upper": "VIMRC",
+    "aliases": [
+      "vimrc"
+    ]
+  },
+  "vlw": {
+    "upper": "VLW",
+    "aliases": [
+      "vlw"
+    ]
+  },
+  "vmf": {
+    "upper": "VMF",
+    "aliases": [
+      "vmf"
+    ]
+  },
+  "vmx": {
+    "upper": "VMX",
+    "aliases": [
+      "vmx"
+    ]
+  },
+  "vob": {
+    "upper": "VOB",
+    "aliases": [
+      "vob"
+    ]
+  },
+  "voc": {
+    "upper": "VOC",
+    "aliases": [
+      "voc"
+    ]
+  },
+  "vox": {
+    "upper": "VOX",
+    "aliases": [
+      "vox"
+    ]
+  },
+  "vp6": {
+    "upper": "VP6",
+    "aliases": [
+      "vp6"
+    ]
+  },
+  "vp8": {
+    "upper": "VP8",
+    "aliases": [
+      "vp8"
+    ]
+  },
+  "vp9": {
+    "upper": "VP9",
+    "aliases": [
+      "vp9"
+    ]
+  },
+  "vpk": {
+    "upper": "VPK",
+    "aliases": [
+      "vpk"
+    ]
+  },
+  "vqf": {
+    "upper": "VQF",
+    "aliases": [
+      "vqf"
+    ]
+  },
+  "vrca": {
+    "upper": "VRCA",
+    "aliases": [
+      "vrca"
+    ]
+  },
+  "vrcw": {
+    "upper": "VRCW",
+    "aliases": [
+      "vrcw"
+    ]
+  },
+  "vrt": {
+    "upper": "VRT",
+    "aliases": [
+      "vrt"
+    ]
+  },
+  "vsdm": {
+    "upper": "VSDM",
+    "aliases": [
+      "vsdm"
+    ]
+  },
+  "vssm": {
+    "upper": "VSSM",
+    "aliases": [
+      "vssm"
+    ]
+  },
+  "vssx": {
+    "upper": "VSSX",
+    "aliases": [
+      "vssx"
+    ]
+  },
+  "vstm": {
+    "upper": "VSTM",
+    "aliases": [
+      "vstm"
+    ]
+  },
+  "vstx": {
+    "upper": "VSTX",
+    "aliases": [
+      "vstx"
+    ]
+  },
+  "vsx": {
+    "upper": "VSX",
+    "aliases": [
+      "vsx"
+    ]
+  },
+  "vt": {
+    "upper": "VT",
+    "aliases": [
+      "vt"
+    ]
+  },
+  "vtt": {
+    "upper": "VTT",
+    "aliases": [
+      "vtt"
+    ]
+  },
+  "vtx": {
+    "upper": "VTX",
+    "aliases": [
+      "vtx"
+    ]
+  },
+  "w3n": {
+    "upper": "W3N",
+    "aliases": [
+      "w3n"
+    ]
+  },
+  "w3x": {
+    "upper": "W3X",
+    "aliases": [
+      "w3x"
+    ]
+  },
+  "wav": {
+    "upper": "WAV",
+    "aliases": [
+      "wav"
+    ]
+  },
+  "wbfs": {
+    "upper": "WBFS",
+    "aliases": [
+      "wbfs"
+    ]
+  },
+  "wbk": {
+    "upper": "WBK",
+    "aliases": [
+      "wbk"
+    ]
+  },
+  "wbs": {
+    "upper": "WBS",
+    "aliases": [
+      "wbs"
+    ]
+  },
+  "wdb": {
+    "upper": "WDB",
+    "aliases": [
+      "wdb"
+    ]
+  },
+  "weba": {
+    "upper": "WEBA",
+    "aliases": [
+      "weba"
+    ]
+  },
+  "webbookmark": {
+    "upper": "WEBBOOKMARK",
+    "aliases": [
+      "webbookmark"
+    ]
+  },
+  "webloc": {
+    "upper": "WEBLOC",
+    "aliases": [
+      "webloc"
+    ]
+  },
+  "webm": {
+    "upper": "WEBM",
+    "aliases": [
+      "webm"
+    ]
+  },
+  "website": {
+    "upper": "WEBSITE",
+    "aliases": [
+      "website"
+    ]
+  },
+  "webvtt": {
+    "upper": "WEBVTT",
+    "aliases": [
+      "webvtt"
+    ]
+  },
+  "webz": {
+    "upper": "WEBZ",
+    "aliases": [
+      "webz"
+    ]
+  },
+  "wfp": {
+    "upper": "WFP",
+    "aliases": [
+      "wfp"
+    ]
+  },
+  "whl": {
+    "upper": "WHL",
+    "aliases": [
+      "whl"
+    ]
+  },
+  "whtt": {
+    "upper": "WHTT",
+    "aliases": [
+      "whtt"
+    ]
+  },
+  "wim": {
+    "upper": "WIM",
+    "aliases": [
+      "wim"
+    ]
+  },
+  "wlmp": {
+    "upper": "WLMP",
+    "aliases": [
+      "wlmp"
+    ]
+  },
+  "wlx": {
+    "upper": "WLX",
+    "aliases": [
+      "wlx"
+    ]
+  },
+  "wma": {
+    "upper": "WMA",
+    "aliases": [
+      "wma"
+    ]
+  },
+  "wmv": {
+    "upper": "WMV",
+    "aliases": [
+      "wmv"
+    ]
+  },
+  "wmz": {
+    "upper": "WMZ",
+    "aliases": [
+      "wmz"
+    ]
+  },
+  "woff": {
+    "upper": "WOFF",
+    "aliases": [
+      "woff"
+    ]
+  },
+  "woff2": {
+    "upper": "WOFF2",
+    "aliases": [
+      "woff2"
+    ]
+  },
+  "wor": {
+    "upper": "WOR",
+    "aliases": [
+      "wor"
+    ]
+  },
+  "wpd": {
+    "upper": "WPD",
+    "aliases": [
+      "wpd"
+    ]
+  },
+  "wpl": {
+    "upper": "WPL",
+    "aliases": [
+      "wpl"
+    ]
+  },
+  "wproj": {
+    "upper": "WPROJ",
+    "aliases": [
+      "wproj"
+    ]
+  },
+  "wps-kingsoft": {
+    "upper": "WPS-KINGSOFT",
+    "aliases": [
+      "wps-kingsoft",
+      "wps kingsoft"
+    ]
+  },
+  "wq2": {
+    "upper": "WQ2",
+    "aliases": [
+      "wq2"
+    ]
+  },
+  "ws": {
+    "upper": "WS",
+    "aliases": [
+      "ws"
+    ]
+  },
+  "wsdl": {
+    "upper": "WSDL",
+    "aliases": [
+      "wsdl"
+    ]
+  },
+  "wsf": {
+    "upper": "WSF",
+    "aliases": [
+      "wsf"
+    ]
+  },
+  "wsh": {
+    "upper": "WSH",
+    "aliases": [
+      "wsh"
+    ]
+  },
+  "wud": {
+    "upper": "WUD",
+    "aliases": [
+      "wud"
+    ]
+  },
+  "wux": {
+    "upper": "WUX",
+    "aliases": [
+      "wux"
+    ]
+  },
+  "wv": {
+    "upper": "WV",
+    "aliases": [
+      "wv"
+    ]
+  },
+  "x3d": {
+    "upper": "X3D",
+    "aliases": [
+      "x3d"
+    ]
+  },
+  "xaml": {
+    "upper": "XAML",
+    "aliases": [
+      "xaml"
+    ]
+  },
+  "xap": {
+    "upper": "XAP",
+    "aliases": [
+      "xap"
+    ]
+  },
+  "xapk": {
+    "upper": "XAPK",
+    "aliases": [
+      "xapk"
+    ]
+  },
+  "xar": {
+    "upper": "XAR",
+    "aliases": [
+      "xar"
+    ]
+  },
+  "xbe": {
+    "upper": "XBE",
+    "aliases": [
+      "xbe"
+    ]
+  },
+  "xbrl": {
+    "upper": "XBRL",
+    "aliases": [
+      "xbrl"
+    ]
+  },
+  "xci": {
+    "upper": "XCI",
+    "aliases": [
+      "xci"
+    ]
+  },
+  "xcode": {
+    "upper": "XCODE",
+    "aliases": [
+      "xcode"
+    ]
+  },
+  "xd": {
+    "upper": "XD",
+    "aliases": [
+      "xd"
+    ]
+  },
+  "xdelta": {
+    "upper": "XDELTA",
+    "aliases": [
+      "xdelta"
+    ]
+  },
+  "xem": {
+    "upper": "XEM",
+    "aliases": [
+      "xem"
+    ]
+  },
+  "xex": {
+    "upper": "XEX",
+    "aliases": [
+      "xex"
+    ]
+  },
+  "xfdf": {
+    "upper": "XFDF",
+    "aliases": [
+      "xfdf"
+    ]
+  },
+  "xht": {
+    "upper": "XHT",
+    "aliases": [
+      "xht"
+    ]
+  },
+  "xhtm": {
+    "upper": "XHTM",
+    "aliases": [
+      "xhtm"
+    ]
+  },
+  "xip": {
+    "upper": "XIP",
+    "aliases": [
+      "xip"
+    ]
+  },
+  "xl": {
+    "upper": "XL",
+    "aliases": [
+      "xl"
+    ]
+  },
+  "xla": {
+    "upper": "XLA",
+    "aliases": [
+      "xla"
+    ]
+  },
+  "xlam": {
+    "upper": "XLAM",
+    "aliases": [
+      "xlam"
+    ]
+  },
+  "xlm": {
+    "upper": "XLM",
+    "aliases": [
+      "xlm"
+    ]
+  },
+  "xlr": {
+    "upper": "XLR",
+    "aliases": [
+      "xlr"
+    ]
+  },
+  "xlsmhtml": {
+    "upper": "XLSMHTML",
+    "aliases": [
+      "xlsmhtml"
+    ]
+  },
+  "xlthtml": {
+    "upper": "XLTHTML",
+    "aliases": [
+      "xlthtml"
+    ]
+  },
+  "xmdx": {
+    "upper": "XMDX",
+    "aliases": [
+      "xmdx"
+    ]
+  },
+  "xmp": {
+    "upper": "XMP",
+    "aliases": [
+      "xmp"
+    ]
+  },
+  "xmzx": {
+    "upper": "XMZX",
+    "aliases": [
+      "xmzx"
+    ]
+  },
+  "xoj": {
+    "upper": "XOJ",
+    "aliases": [
+      "xoj"
+    ]
+  },
+  "xoml": {
+    "upper": "XOML",
+    "aliases": [
+      "xoml"
+    ]
+  },
+  "xpd": {
+    "upper": "XPD",
+    "aliases": [
+      "xpd"
+    ]
+  },
+  "xpi": {
+    "upper": "XPI",
+    "aliases": [
+      "xpi"
+    ]
+  },
+  "xpm": {
+    "upper": "XPM",
+    "aliases": [
+      "xpm"
+    ]
+  },
+  "xpr": {
+    "upper": "XPR",
+    "aliases": [
+      "xpr"
+    ]
+  },
+  "xs": {
+    "upper": "XS",
+    "aliases": [
+      "xs"
+    ]
+  },
+  "xsd": {
+    "upper": "XSD",
+    "aliases": [
+      "xsd"
+    ]
+  },
+  "xslfo": {
+    "upper": "XSLFO",
+    "aliases": [
+      "xslfo"
+    ]
+  },
+  "xslt": {
+    "upper": "XSLT",
+    "aliases": [
+      "xslt"
+    ]
+  },
+  "xsmx": {
+    "upper": "XSMX",
+    "aliases": [
+      "xsmx"
+    ]
+  },
+  "xul": {
+    "upper": "XUL",
+    "aliases": [
+      "xul"
+    ]
+  },
+  "xvid": {
+    "upper": "XVID",
+    "aliases": [
+      "xvid"
+    ]
+  },
+  "xz": {
+    "upper": "XZ",
+    "aliases": [
+      "xz"
+    ]
+  },
+  "ybk": {
+    "upper": "YBK",
+    "aliases": [
+      "ybk"
+    ]
+  },
+  "yml": {
+    "upper": "YML",
+    "aliases": [
+      "yml"
+    ]
+  },
+  "ypr": {
+    "upper": "YPR",
+    "aliases": [
+      "ypr"
+    ]
+  },
+  "z": {
+    "upper": "Z",
+    "aliases": [
+      "z"
+    ]
+  },
+  "z64": {
+    "upper": "Z64",
+    "aliases": [
+      "z64"
+    ]
+  },
+  "zim": {
+    "upper": "ZIM",
+    "aliases": [
+      "zim"
+    ]
+  },
+  "zipx": {
+    "upper": "ZIPX",
+    "aliases": [
+      "zipx"
+    ]
+  },
+  "zl": {
+    "upper": "ZL",
+    "aliases": [
+      "zl"
+    ]
+  },
+  "zoo": {
+    "upper": "ZOO",
+    "aliases": [
+      "zoo"
+    ]
+  },
+  "zst": {
+    "upper": "ZST",
+    "aliases": [
+      "zst"
+    ]
+  },
+  "zul": {
+    "upper": "ZUL",
+    "aliases": [
+      "zul"
+    ]
+  },
+  "zxp": {
+    "upper": "ZXP",
+    "aliases": [
+      "zxp"
+    ]
+  }
+}

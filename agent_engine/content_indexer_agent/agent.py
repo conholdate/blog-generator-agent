@@ -11,7 +11,7 @@ from agents import Agent, Runner, function_tool, handoff
 from openai import OpenAI
 
 from .settings import Settings
-from .tools.normalization import nor_website_domain, nor_section_label, normalize_product_display_name
+from .tools.normalization import canonical_topic_key, nor_website_domain, nor_section_label, normalize_product_display_name
 from .types import IndexRecord, RepoTarget
 from .tools.embeddings import EmbeddingStore
 from .tools.git_ops import ensure_repo_cloned, get_head_commit
@@ -159,6 +159,11 @@ def _refresh_blog_topics_in_store(store: JsonlIndexStore) -> int:
         new_topic = build_content_topic(title=rec.title, url=rec.url, llm_topic=rec.topic)[:200]
         if new_topic and new_topic != rec.topic:
             rec.topic = new_topic
+            rec.updated_at = datetime.utcnow().isoformat()
+            updated += 1
+        new_key = canonical_topic_key(new_topic or rec.topic or rec.title)
+        if new_key and getattr(rec, "key", None) != new_key:
+            rec.key = new_key
             rec.updated_at = datetime.utcnow().isoformat()
             updated += 1
     return updated

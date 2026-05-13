@@ -9,7 +9,14 @@ from typing import Dict, List, Optional, Tuple, Set
 
 from ..io import IndexRecord, read_jsonl
 from ..logging_utils import get_logger
-from ..normalization import canonical_topic_key, nor_platform_key, normalize_sentence_text, normalize_text
+from ..normalization import (
+    FORMAT_TOKEN_SET,
+    canonical_file_format,
+    canonical_topic_key,
+    nor_platform_key,
+    normalize_sentence_text,
+    normalize_text,
+)
 from .base import CoverageResult, CoverageRow
 from .filters import is_release_update_record
 
@@ -24,6 +31,7 @@ _BLOG_DATE_RE = re.compile(r"^(?P<year>\d{4})-(?P<month>\d{2})-(?P<day>\d{2})$")
 # -----------------------------
 
 _KEY_SPLIT_RE = re.compile(r"[^a-z0-9]+", re.I)
+_CONVERSION_PAIR_RE = re.compile(r"\b([a-z0-9]{1,20})\s*(?:to|into|in2|->|→)\s*([a-z0-9]{1,20})\b", re.IGNORECASE)
 
 
 def normalize_gap_key(k: str) -> str:
@@ -49,6 +57,45 @@ def record_gap_key(r: IndexRecord) -> str:
     if getattr(r, "key", None):
         return normalize_gap_key(str(r.key))
     return normalize_gap_key(r.topic or r.title)
+
+
+def _conversion_gap_keys(text: str) -> List[str]:
+    keys: List[str] = []
+    normalized = re.sub(r"[-_/]+", " ", str(text or ""))
+    for match in _CONVERSION_PAIR_RE.finditer(normalized):
+        src = canonical_file_format(match.group(1))
+        dst = canonical_file_format(match.group(2))
+        if src in FORMAT_TOKEN_SET and dst in FORMAT_TOKEN_SET:
+            key = normalize_gap_key(f"{src} to {dst}")
+            if key and key not in keys:
+                keys.append(key)
+    return keys
+
+
+def record_gap_keys(r: IndexRecord) -> List[str]:
+    """
+    Return every conversion key a record can satisfy.
+
+    Baseline grouping still uses record_gap_key() so bidirectional articles do
+    not create extra reverse-direction rows. Matching uses this list so a title
+    like "KML to GPX and GPX to KML" can satisfy both existing rows.
+    """
+    keys: List[str] = []
+    primary = record_gap_key(r)
+    if primary:
+        keys.append(primary)
+
+    searchable_parts = [
+        str(getattr(r, "key", "") or ""),
+        str(getattr(r, "topic", "") or ""),
+        str(getattr(r, "title", "") or ""),
+    ]
+    for part in searchable_parts:
+        for key in _conversion_gap_keys(part):
+            if key and key not in keys:
+                keys.append(key)
+
+    return keys
 
 
 def _normalize_platform_key(s: Optional[str]) -> str:
@@ -269,8 +316,7 @@ def compute_blogs_to_blogs(
                 continue
 
             for c in candidates:
-                cand_key = record_gap_key(c)
-                if cand_key and cand_key == key_norm:
+                if key_norm in record_gap_keys(c):
                     best = {
                         "matched": True,
                         "score": 1.0,

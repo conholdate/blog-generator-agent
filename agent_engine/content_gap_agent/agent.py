@@ -184,7 +184,7 @@ def _send_missing_topics_to_sheet(
     payload = build_payload(
         coverage_json=coverage_json_path,
         sheet_name=sheet_name,
-        replace=True,
+        replace=False,
     )
     write_payload(payload, output_json)
     log.info("Wrote Google Sheets payload: %s rows=%d", output_json, payload["meta"]["row_count"])

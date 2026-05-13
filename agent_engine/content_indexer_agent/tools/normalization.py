@@ -913,12 +913,35 @@ def canonical_topic_key(text: str) -> str:
     t = _TRAILING_PREPOSITION_RE.sub(" ", t)
     t = _WS_RE.sub(" ", t).strip()
 
+    alt_match = re.search(
+        r"\b([a-z0-9]{1,12})\s*(?:to|into|in2|->|â†’)\s*([a-z0-9]{1,12})\s+or\s+([a-z0-9]{1,12})\b",
+        t,
+        re.IGNORECASE,
+    )
+    if alt_match:
+        src = canonical_file_format(alt_match.group(1))
+        dst = canonical_file_format(alt_match.group(2))
+        alt = canonical_file_format(alt_match.group(3))
+        if src in FORMAT_TOKEN_SET and dst in FORMAT_TOKEN_SET and alt in FORMAT_TOKEN_SET:
+            return _final_topic_cleanup(normalize_text(f"{src} to {dst}"))
+
     m = _CONVERSION_PAIR_RE.search(t)
     if m:
         src = canonical_file_format(m.group(1))
         dst = canonical_file_format(m.group(2))
         if src in FORMAT_TOKEN_SET and dst in FORMAT_TOKEN_SET:
             return _final_topic_cleanup(normalize_text(f"{src} to {dst}"))
+
+    action_match = re.match(
+        r"^(create|read|parse|validate)\s+([a-z0-9]{1,12})(?:\b.*)?$",
+        t,
+        re.IGNORECASE,
+    )
+    if action_match:
+        action = action_match.group(1).lower()
+        target = canonical_file_format(action_match.group(2))
+        if target in FORMAT_TOKEN_SET:
+            return _final_topic_cleanup(normalize_text(f"{action} {target}"))
 
     return _final_topic_cleanup(normalize_text(t))
 

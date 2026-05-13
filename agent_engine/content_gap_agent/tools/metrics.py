@@ -248,7 +248,7 @@ class MetricsRun:
         print("[metrics] payload before send:")
         print(json.dumps(payload_data, ensure_ascii=False, indent=2))
 
-        self._sender.send(payload)
+        # self._sender.send(payload)
 
         # Do not swallow exceptions
         return False
