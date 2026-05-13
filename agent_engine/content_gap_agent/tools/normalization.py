@@ -481,7 +481,13 @@ _LANG_QUALIFIER_RE = re.compile(
 
 _TRAILING_LANG_TOKEN_RE = re.compile(rf"\b({LANG_QUALIFIER_PATTERN})\b\s*$", re.IGNORECASE)
 _LANG_TOKEN_ANYWHERE_RE = re.compile(rf"\b({LANG_QUALIFIER_PATTERN})\b", re.IGNORECASE)
+_SYMBOL_LANG_QUALIFIER_RE = re.compile(
+    r"(\(|\[)?\b(using|in|with|for)\s+(c#|c\+\+|\.net)(?![A-Za-z0-9])(\)|\])?",
+    re.IGNORECASE,
+)
+_SYMBOL_LANG_TOKEN_RE = re.compile(r"(?<![A-Za-z0-9])(c#|c\+\+|\.net)(?![A-Za-z0-9])", re.IGNORECASE)
 _TOPIC_NOISE_WORDS_RE = re.compile(r"\b(file|files|format|formats|library|libraries|sdk|api|apis)\b", re.IGNORECASE)
+_IMAGE_CALLOUT_RE = re.compile(r"\bimages?\s+callouts?\b|\bcallouts?\s+to\s+images?\b", re.IGNORECASE)
 _TRAILING_PREPOSITION_RE = re.compile(r"\b(in|with|using|for)\b\s*$", re.IGNORECASE)
 _C_NET_NOISE_RE = re.compile(r"\bc\s+net\b", re.IGNORECASE)
 _FROM_TO_NOISE_RE = re.compile(r"\bfrom\s+to\b", re.IGNORECASE)
@@ -807,6 +813,9 @@ def canonical_topic_key(text: str) -> str:
     t = _LANG_QUALIFIER_RE.sub(" ", t)
     t = _TRAILING_LANG_TOKEN_RE.sub(" ", t)
     t = _LANG_TOKEN_ANYWHERE_RE.sub(" ", t)
+    t = _SYMBOL_LANG_QUALIFIER_RE.sub(" ", t)
+    t = _SYMBOL_LANG_TOKEN_RE.sub(" ", t)
+    t = _IMAGE_CALLOUT_RE.sub("image callout", t)
     t = _TOPIC_NOISE_WORDS_RE.sub(" ", t)
     t = _C_NET_NOISE_RE.sub(" ", t)
     t = _FROM_TO_NOISE_RE.sub(" ", t)

@@ -5,6 +5,7 @@ from agent_engine.content_gap_agent.tools.normalization import (
 )
 from agent_engine.content_gap_agent.tools.coverage.blogs_to_blogs import record_gap_key, record_gap_keys
 from agent_engine.content_gap_agent.tools.io import IndexRecord
+from agent_engine.content_indexer_agent.tools.key_maker import build_content_topic
 
 
 def test_gis_conversion_topic_keys_collapse_to_primary_pair() -> None:
@@ -45,3 +46,16 @@ def test_file_format_registry_loads_gis_formats_from_config() -> None:
     assert "kml" in FILE_FORMAT_REGISTRY
     assert "shapefile" in FILE_FORMAT_REGISTRY
     assert canonical_file_format("shape file") == "shapefile"
+
+
+def test_image_callout_topic_keys_collapse_to_same_key() -> None:
+    titles = [
+        "Add Image Callouts in Java",
+        "Add Callout to images in C#",
+    ]
+    topics = [build_content_topic(title=title) for title in titles]
+
+    assert topics == ["Add image callout", "Add image callout"]
+    assert {canonical_topic_key(topic) for topic in topics} == {"add image callout"}
+    assert canonical_topic_key("Add Image Callouts in Java") == "add image callout"
+    assert canonical_topic_key("Add Callout to images in C#") == "add image callout"
