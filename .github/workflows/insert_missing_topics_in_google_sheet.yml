@@ -4,12 +4,11 @@ on:
   workflow_dispatch:
     inputs:
       product_yaml:
-        description: "Path to product YAML (repo-relative). Brand YAML is resolved automatically from this file."
+        description: "Select Aspose product."
         required: true
         default: "configs/aspose/cells.yaml"
         type: choice
         options:
-          - configs/conholdate/total.yaml
           - configs/aspose/3d.yaml
           - configs/aspose/barcode.yaml
           - configs/aspose/cad.yaml
@@ -52,13 +51,13 @@ on:
           - general
 
       baseline_platform:
-        description: "Baseline platform for gap analysis. Ignored for blogs_to_blogs, which always runs in all-platform mode."
+        description: "Baseline platform for gap analysis."
         required: false
         default: ""
         type: string
 
       steps:
-        description: "CSV repo keys to index (matches content indexer CLI --steps)."
+        description: "Indexing Key."
         required: true
         default: "blog"
         type: choice
@@ -69,25 +68,25 @@ on:
           - api
 
       delete_missing:
-        description: "If true, remove entries that no longer exist in source repos."
+        description: "Remove entries that no longer exist in source repos."
         required: true
         default: false
         type: boolean
 
       use_agent:
-        description: "If true, run indexing via Agents SDK triage+handoff (--use-agent)."
+        description: "Run indexing via Agents SDK triage+handoff."
         required: true
         default: false
         type: boolean
 
       normalize_topics:
-        description: "If true, enable LLM topic normalization for blogs (--normalize-topics)."
+        description: "Enable LLM topic normalization for blogs."
         required: true
         default: true
         type: boolean
 
       case:
-        description: "Coverage case."
+        description: "Coverage type."
         required: true
         type: choice
         options:

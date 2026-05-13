@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       brand:
-        description: "Brand whose spreadsheet and blog repo config should be used."
+        description: "Select Blog."
         type: choice
         required: true
         options:
@@ -18,7 +18,7 @@ on:
         default: 'Aspose'
 
       platform:
-        description: "Target platform from the selected Google Sheet row."
+        description: "Target platform."
         required: true
         type: choice
         options:
@@ -41,7 +41,7 @@ on:
           - 'Android via Java'
 
       google_sheet_row:
-        description: "1-based Google Sheet row number to process from the brand's All Missing Topics sheet."
+        description: "Google Sheet row number to process from the brand's All Missing Topics sheet."
         type: string
         required: true
 
@@ -77,13 +77,13 @@ on:
         default: "15"
 
       use_content_index:
-        description: "If true, clone the matching blog repo and dedupe topics against existing posts."
+        description: "Clone the matching blog repo and dedupe topics against existing posts."
         type: boolean
         required: false
         default: false
 
       include_product_in_title:
-        description: "If true, enforce product name in generated topic titles. If false, ensure product name is NOT used in titles."
+        description: "Enforce product name in generated topic titles. If false, ensure product name is NOT used in titles."
         type: boolean
         required: false
         default: false
