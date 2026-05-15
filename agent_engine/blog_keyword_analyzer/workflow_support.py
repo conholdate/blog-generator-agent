@@ -10,6 +10,7 @@ from .tools.content_index import get_existing_posts
 from agent_engine.blog_keyword_analyzer.tools.normalization import (
     canonical_blog_platform_key,
     canonical_platform_label,
+    detect_file_formats_in_text,
 )
 
 logger = logging.getLogger(__name__)
@@ -24,6 +25,22 @@ def keyword_intent_key(text: str) -> str:
     return s
 
 
+def clean_keyword_phrase(text: str) -> str:
+    out = " ".join((text or "").strip().split())
+    if not out:
+        return ""
+    out = re.sub(r"(?i)\busing\s+in\s+([a-z0-9.+#]+)\b", r"in \1", out)
+    out = re.sub(r"(?i)\bwith\s+in\s+([a-z0-9.+#]+)\b", r"in \1", out)
+    out = re.sub(r"(?i)\bvia\s+in\s+([a-z0-9.+#]+)\b", r"in \1", out)
+    out = re.sub(r"(?i)\binsert\s+pages?\s+to\s+pdf\b", "insert pages into PDF", out)
+    out = re.sub(r"(?i)\badd\s+pages?\s+in\s+pdf\b", "add pages to PDF", out)
+    out = re.sub(r"(?i)\badd\s+pages?\s+into\s+pdf\b", "add pages to PDF", out)
+    out = re.sub(r"(?i)\bremove\s+pages?\s+from\s+pdf\b", "remove pages from PDF", out)
+    out = re.sub(r"(?i)\bextract\s+ranges?\s+of\s+pages?\s+from\s+pdf\b", "extract page ranges from PDF", out)
+    out = re.sub(r"(?i)\bstep\s*[- ]\s*by\s*[- ]\s*step\b", "Step-by-Step", out)
+    return re.sub(r"\s{2,}", " ", out).strip(" -,:;")
+
+
 def _seed_anchor_tokens(text: str) -> set[str]:
     stopwords = {
         "a", "an", "and", "api", "best", "by", "file", "files", "for", "from", "guide",
@@ -33,6 +50,17 @@ def _seed_anchor_tokens(text: str) -> set[str]:
         token for token in re.findall(r"[a-z0-9.+#]+", (text or "").lower())
         if len(token) > 1 and token not in stopwords
     }
+
+
+def _seed_format_tokens(text: str) -> set[str]:
+    return {fmt.lower() for fmt in detect_file_formats_in_text(text)}
+
+
+def _off_scope_seed_modifier(text: str, seed_topic: str) -> bool:
+    seed_lower = (seed_topic or "").lower()
+    text_lower = (text or "").lower()
+    strict_modifiers = {"searchable", "ocr"}
+    return any(mod in text_lower and mod not in seed_lower for mod in strict_modifiers)
 
 
 def _platform_phrase(platform: Optional[str]) -> str:
@@ -49,23 +77,32 @@ def focus_records_for_seed_topic(
     if not seed_topic:
         return records
 
-    anchors = _seed_anchor_tokens(seed_topic)
+    seed_clean = clean_keyword_phrase(seed_topic)
+    anchors = _seed_anchor_tokens(seed_clean)
     if not anchors:
         return records
 
     required_overlap = 2 if len(anchors) >= 3 else 1
+    seed_formats = _seed_format_tokens(seed_clean)
     focused: List[KeywordRecord] = []
     for record in records:
-        text = " ".join((record.keyword or "").strip().split())
+        text = clean_keyword_phrase(record.keyword)
         tokens = set(re.findall(r"[a-z0-9.+#]+", text.lower()))
-        if len(tokens.intersection(anchors)) >= required_overlap:
-            focused.append(record)
+        if len(tokens.intersection(anchors)) < required_overlap:
+            continue
+        record_formats = _seed_format_tokens(text)
+        # For conversion-style seeds with explicit formats, keep candidates on the same
+        # format pair. This prevents "HTML to PDF" from leaking into "DOCX to PDF" runs.
+        if len(seed_formats) >= 2 and not seed_formats.issubset(record_formats):
+            continue
+        if _off_scope_seed_modifier(text, seed_clean):
+            continue
+        focused.append(KeywordRecord(**{**record.model_dump(), "keyword": text}))
 
     if len(focused) >= 3:
         return focused
 
     label = _platform_phrase(platform)
-    seed_clean = " ".join((seed_topic or "").strip().split())
     synthetic_keywords = [seed_clean]
     if label and label.lower() not in seed_clean.lower():
         synthetic_keywords.extend([

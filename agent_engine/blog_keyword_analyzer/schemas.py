@@ -30,6 +30,42 @@ class KeywordRecord(BaseModel):
         return v.strip().lower()
 
 
+class KeywordOpportunity(BaseModel):
+    """
+    Local SEO strategy decision for one keyword candidate.
+
+    This sits between raw KeywordRecord inputs and final TopicIdea generation.
+    It lets the workflow decide whether a keyword is suitable for a blog post
+    before spending an LLM call on a topic brief.
+    """
+
+    keyword: str
+    source: str = ""
+    formats: List[str] = Field(default_factory=list)
+    action: Optional[str] = None
+    language: Optional[str] = None
+    product_family: Optional[str] = None
+    strategic_cluster: Optional[str] = None
+    intent: Literal["informational", "commercial", "transactional", "navigational"] = "informational"
+    funnel_stage: Literal["awareness", "consideration", "decision", "retention"] = "awareness"
+    best_page_type: str = "blog_tutorial"
+    recommended_action: str = "new_blog_tutorial"
+    internal_link_target: Optional[str] = None
+    conversion_cta: Optional[str] = None
+    business_fit_score: int = 1
+    developer_intent_score: int = 1
+    conversion_potential_score: int = 1
+    cluster_value_score: int = 1
+    specificity_score: int = 1
+    blog_suitability_score: int = 1
+    genericness_penalty: int = 0
+    duplicate_penalty: int = 0
+    final_priority_score: float = 0.0
+    priority_label: Literal["Very High", "High", "Medium", "Low", "Reject"] = "Low"
+    duplicate_status: str = "safe_to_generate"
+    rationale: List[str] = Field(default_factory=list)
+
+
 class ClusterMetrics(BaseModel):
     """
     Aggregated metrics for a cluster of keywords.
@@ -180,6 +216,7 @@ class RunResult(BaseModel):
     locale: str
     clusters: List[Cluster]
     topics: List[TopicIdea]
+    keyword_opportunities: List[KeywordOpportunity] = Field(default_factory=list)
 
     @field_validator("product")
     @classmethod

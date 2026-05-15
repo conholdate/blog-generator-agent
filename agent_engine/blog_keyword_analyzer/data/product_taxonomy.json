@@ -1,0 +1,88 @@
+{
+  "Aspose.Words": {
+    "strategic_cluster": "Word / DOCX Automation",
+    "formats": ["DOC", "DOCX", "RTF", "ODT", "Word", "PDF", "HTML", "Markdown"],
+    "actions": ["convert", "create", "edit", "merge", "compare", "protect", "extract", "render"],
+    "languages": ["java", "net", "python", "nodejs"],
+    "money_pages": {
+      "java": "https://products.aspose.com/words/java/",
+      "net": "https://products.aspose.com/words/net/",
+      "python": "https://products.aspose.com/words/python-net/",
+      "nodejs": "https://products.aspose.com/words/nodejs-java/"
+    },
+    "docs_pages": {
+      "java": "https://docs.aspose.com/words/java/",
+      "net": "https://docs.aspose.com/words/net/",
+      "python": "https://docs.aspose.com/words/python-net/",
+      "nodejs": "https://docs.aspose.com/words/nodejs-java/"
+    }
+  },
+  "Aspose.PDF": {
+    "strategic_cluster": "PDF Processing",
+    "formats": ["PDF", "PDF/A", "DOCX", "HTML", "Image", "PNG", "JPG"],
+    "actions": ["convert", "merge", "split", "extract", "protect", "sign", "compress", "create", "edit"],
+    "languages": ["java", "net", "python", "nodejs"],
+    "money_pages": {
+      "java": "https://products.aspose.com/pdf/java/",
+      "net": "https://products.aspose.com/pdf/net/",
+      "python": "https://products.aspose.com/pdf/python-net/"
+    },
+    "docs_pages": {
+      "java": "https://docs.aspose.com/pdf/java/",
+      "net": "https://docs.aspose.com/pdf/net/",
+      "python": "https://docs.aspose.com/pdf/python-net/"
+    }
+  },
+  "Aspose.Cells": {
+    "strategic_cluster": "Excel / Spreadsheet Automation",
+    "formats": ["XLS", "XLSX", "CSV", "ODS", "Excel", "PDF", "HTML", "JSON"],
+    "actions": ["convert", "create", "read", "write", "edit", "export", "import", "merge", "protect", "generate"],
+    "languages": ["java", "net", "python", "nodejs"],
+    "money_pages": {
+      "java": "https://products.aspose.com/cells/java/",
+      "net": "https://products.aspose.com/cells/net/",
+      "python": "https://products.aspose.com/cells/python-net/",
+      "nodejs": "https://products.aspose.com/cells/nodejs-java/"
+    },
+    "docs_pages": {
+      "java": "https://docs.aspose.com/cells/java/",
+      "net": "https://docs.aspose.com/cells/net/",
+      "python": "https://docs.aspose.com/cells/python-net/",
+      "nodejs": "https://docs.aspose.com/cells/nodejs-java/"
+    }
+  },
+  "Aspose.Slides": {
+    "strategic_cluster": "PowerPoint / Presentation Automation",
+    "formats": ["PPT", "PPTX", "PowerPoint", "PDF", "Image", "PNG", "JPG", "HTML"],
+    "actions": ["convert", "create", "edit", "merge", "extract", "render", "generate", "protect"],
+    "languages": ["java", "net", "python", "nodejs"],
+    "money_pages": {
+      "java": "https://products.aspose.com/slides/java/",
+      "net": "https://products.aspose.com/slides/net/",
+      "python": "https://products.aspose.com/slides/python-net/",
+      "nodejs": "https://products.aspose.com/slides/nodejs-java/"
+    },
+    "docs_pages": {
+      "java": "https://docs.aspose.com/slides/java/",
+      "net": "https://docs.aspose.com/slides/net/",
+      "python": "https://docs.aspose.com/slides/python-net/",
+      "nodejs": "https://docs.aspose.com/slides/nodejs-java/"
+    }
+  },
+  "Aspose.HTML": {
+    "strategic_cluster": "HTML / Web Format Automation",
+    "formats": ["HTML", "XHTML", "MHTML", "PDF", "Image", "PNG", "JPG", "Markdown"],
+    "actions": ["convert", "create", "edit", "render", "extract", "export"],
+    "languages": ["java", "net", "python"],
+    "money_pages": {
+      "java": "https://products.aspose.com/html/java/",
+      "net": "https://products.aspose.com/html/net/",
+      "python": "https://products.aspose.com/html/python-net/"
+    },
+    "docs_pages": {
+      "java": "https://docs.aspose.com/html/java/",
+      "net": "https://docs.aspose.com/html/net/",
+      "python": "https://docs.aspose.com/html/python-net/"
+    }
+  }
+}

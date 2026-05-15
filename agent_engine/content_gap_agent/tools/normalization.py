@@ -486,7 +486,7 @@ _SYMBOL_LANG_QUALIFIER_RE = re.compile(
     re.IGNORECASE,
 )
 _SYMBOL_LANG_TOKEN_RE = re.compile(r"(?<![A-Za-z0-9])(c#|c\+\+|\.net)(?![A-Za-z0-9])", re.IGNORECASE)
-_TOPIC_NOISE_WORDS_RE = re.compile(r"\b(file|files|format|formats|library|libraries|sdk|api|apis)\b", re.IGNORECASE)
+_TOPIC_NOISE_WORDS_RE = re.compile(r"\b(file|files|library|libraries|sdk|api|apis)\b", re.IGNORECASE)
 _IMAGE_CALLOUT_RE = re.compile(r"\bimages?\s+callouts?\b|\bcallouts?\s+to\s+images?\b", re.IGNORECASE)
 _TRAILING_PREPOSITION_RE = re.compile(r"\b(in|with|using|for)\b\s*$", re.IGNORECASE)
 _C_NET_NOISE_RE = re.compile(r"\bc\s+net\b", re.IGNORECASE)

@@ -92,11 +92,11 @@ def send_stage_metrics(
     metrics_url = getattr(settings, "METRICS_WEBHOOK_URL", "")
     metrics_token = getattr(settings, "METRICS_TOKEN", "")
 
-    _post_json_best_effort(metrics_url, metrics_token, payload, debug=bool(getattr(settings, "DEBUG", False)))
+    # _post_json_best_effort(metrics_url, metrics_token, payload, debug=bool(getattr(settings, "DEBUG", False)))
 
     int_url = getattr(settings, "INT_METRICS_WEBHOOK_URL", "")
     int_token = getattr(settings, "INT_METRICS_TOKEN", "")
     if int_url and int_token:
         payload_internal = dict(payload)
         payload_internal["run_env"] = "PROD"
-        _post_json_best_effort(int_url, int_token, payload_internal, debug=bool(getattr(settings, "DEBUG", False)))
+        # _post_json_best_effort(int_url, int_token, payload_internal, debug=bool(getattr(settings, "DEBUG", False)))

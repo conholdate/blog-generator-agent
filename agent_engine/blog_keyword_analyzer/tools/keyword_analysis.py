@@ -24,6 +24,11 @@ _COMMERCIAL_MARKERS = {"best", "top", "review", "reviews", "comparison", "compar
 _TRANSACTIONAL_MARKERS = {"buy", "hire", "demo", "trial", "pricing", "coupon", "download", "template", "service", "agency", "consultant"}
 _NAV_MARKERS = {"login", "dashboard", "official", "support", "app", "account", "docs", "documentation"}
 _LONG_TAIL_MARKERS = {"example", "examples", "tutorial", "guide", "workflow", "automation", "strategy", "template", "checklist"}
+_SPECIFIC_LONG_TAIL_MARKERS = {
+    "2007", "all", "batch", "byte array", "embedded", "high fidelity", "in memory",
+    "large", "multiple", "performance", "preserve", "settings", "stream", "streams",
+    "blank", "page range", "specific position", "another pdf",
+}
 _SEMANTIC_MARKERS = {"automation", "workflow", "integration", "processing", "conversion", "editing", "rendering", "export", "import", "format", "file"}
 _SECONDARY_MARKERS = {"strategy", "campaign", "campaigns", "automation", "tools", "software", "benefits", "examples", "retention", "segmentation"}
 _ENTITY_MARKERS = {
@@ -106,6 +111,19 @@ def _is_entity(keyword: str) -> bool:
 def _is_long_tail(keyword: str) -> bool:
     lower = keyword.lower()
     return len(keyword.split()) >= 4 or _is_question(keyword) or any(marker in lower for marker in _LONG_TAIL_MARKERS)
+
+
+def _is_explicit_long_tail(keyword: str) -> bool:
+    lower = keyword.lower()
+    if _is_question(keyword):
+        return True
+    if any(marker in lower for marker in _LONG_TAIL_MARKERS):
+        return True
+    if any(marker in lower for marker in _SPECIFIC_LONG_TAIL_MARKERS):
+        return True
+    if len(keyword.split()) >= 8:
+        return True
+    return False
 
 
 def _specificity(keyword: str) -> str:
@@ -324,21 +342,155 @@ def _question_variants(topic: str, primary_keyword: str) -> list[str]:
     base = _clean_text(primary_keyword or topic)
     if not base:
         return []
+    convert_match = re.search(
+        r"(?i)\bconvert\s+([a-z0-9.+#]+)\s+to\s+([a-z0-9.+#]+)(?:\s+in\s+([a-z0-9.+#]+))?",
+        base,
+    )
+    if convert_match:
+        src = convert_match.group(1).upper()
+        dst = convert_match.group(2).upper()
+        platform = convert_match.group(3)
+        platform_phrase = f" in {platform}" if platform else ""
+        source_label = "Word documents" if src in {"DOC", "DOCX", "WORD"} else f"{src} files"
+        variants = [
+            f"How do I convert {src} to {dst}{platform_phrase}?",
+            f"Can I convert {source_label} to {dst} without Microsoft Word?",
+            f"How do I preserve formatting when converting {src} to {dst}{platform_phrase}?",
+            f"How do I convert {src} to {dst} from a stream{platform_phrase}?",
+        ]
+        return _dedupe_preserve_order(variants)
+    extract_match = re.search(
+        r"(?i)\bextract\s+(.+?)\s+from\s+(.+?)(?:\s+in\s+([a-z0-9.+#]+))?$",
+        base,
+    )
+    if extract_match:
+        thing = extract_match.group(1).strip()
+        source = extract_match.group(2).strip()
+        platform = extract_match.group(3)
+        platform_phrase = f" in {platform}" if platform else ""
+        source_lower = source.lower()
+        thing_lower = thing.lower()
+        if "page" in thing_lower and "pdf" in source_lower:
+            variants = [
+                f"How do I extract specific pages from a PDF{platform_phrase}?",
+                f"How do I extract a range of pages from a PDF{platform_phrase}?",
+                f"Can I split a PDF into separate pages{platform_phrase}?",
+                f"How do I save extracted PDF pages as a new PDF{platform_phrase}?",
+            ]
+        elif "text" in thing_lower and "pdf" in source_lower:
+            variants = [
+                f"How do I extract text from a PDF{platform_phrase}?",
+                f"How do I extract text from every page of a PDF{platform_phrase}?",
+                f"Can I search extracted PDF text{platform_phrase}?",
+                f"How do I handle encoded or missing text when extracting from PDF{platform_phrase}?",
+            ]
+        elif any(token in thing_lower for token in ("image", "images", "picture", "pictures")) and "pdf" in source_lower:
+            variants = [
+                f"How do I extract images from a PDF{platform_phrase}?",
+                f"How do I save extracted PDF images as PNG or JPEG{platform_phrase}?",
+                f"Can I extract images from every page of a PDF{platform_phrase}?",
+                f"How do I extract images from large PDF files efficiently{platform_phrase}?",
+            ]
+        elif "pdf" in source_lower:
+            thing_display = thing[:1].lower() + thing[1:]
+            variants = [
+                f"How do I extract {thing_display} from a PDF{platform_phrase}?",
+                f"How do I extract {thing_display} from every page of a PDF{platform_phrase}?",
+                f"How do I save extracted PDF {thing_display}{platform_phrase}?",
+                f"How do I handle large PDFs when extracting {thing_display}{platform_phrase}?",
+            ]
+        else:
+            thing_display = thing[:1].lower() + thing[1:]
+            variants = [
+                f"How do I extract {thing_display} from a {source}{platform_phrase}?",
+                f"How do I extract embedded {thing_display} from DOCX{platform_phrase}?",
+                f"Can I save extracted Word {thing_display} as PNG or JPEG{platform_phrase}?",
+                f"How do I extract {thing_display} from DOC and DOCX files{platform_phrase}?",
+            ]
+        return _dedupe_preserve_order(variants)
+    add_pages_match = re.search(
+        r"(?i)\b(add|insert)\s+pages?\s+(?:to|into)\s+pdf(?:\s+in\s+([a-z0-9.+#]+))?",
+        base,
+    )
+    if add_pages_match:
+        platform = add_pages_match.group(2)
+        platform_phrase = f" in {platform}" if platform else ""
+        variants = [
+            f"How do I add a new page to a PDF{platform_phrase}?",
+            f"How do I insert pages into an existing PDF{platform_phrase}?",
+            f"How do I add multiple pages to a PDF{platform_phrase}?",
+            f"How do I control page order after adding pages to a PDF{platform_phrase}?",
+        ]
+        return _dedupe_preserve_order(variants)
+    remove_pages_match = re.search(
+        r"(?i)\b(remove|delete)\s+pages?\s+from\s+pdf(?:\s+in\s+([a-z0-9.+#]+))?",
+        base,
+    )
+    if remove_pages_match:
+        platform = remove_pages_match.group(2)
+        platform_phrase = f" in {platform}" if platform else ""
+        variants = [
+            f"How do I remove pages from a PDF{platform_phrase}?",
+            f"How do I delete a page range from a PDF{platform_phrase}?",
+            f"Can I remove blank pages from a PDF{platform_phrase}?",
+            f"How do I save the PDF after removing pages{platform_phrase}?",
+        ]
+        return _dedupe_preserve_order(variants)
+    split_match = re.search(
+        r"(?i)\bsplit\s+pdf(?:\s+pages?)?(?:\s+in\s+([a-z0-9.+#]+))?",
+        base,
+    )
+    if split_match:
+        platform = split_match.group(1)
+        platform_phrase = f" in {platform}" if platform else ""
+        variants = [
+            f"How do I split a PDF into separate pages{platform_phrase}?",
+            f"How do I split a PDF by page range{platform_phrase}?",
+            f"Can I split large PDF files efficiently{platform_phrase}?",
+            f"How do I save each split PDF page as a separate file{platform_phrase}?",
+        ]
+        return _dedupe_preserve_order(variants)
     variants = [
-        f"What is {base}?",
-        f"How to use {base}?",
-        f"Why is {base} important?",
-        f"What are the best ways to implement {base}?",
+        f"How do I implement {base}?",
+        f"What is the best way to handle {base}?",
+        f"What should developers check before using {base}?",
+        f"How can I troubleshoot {base}?",
     ]
     return _dedupe_preserve_order(variants)
 
 
+def _mentions_platform(keyword: str, platform_label: Optional[str]) -> bool:
+    if not platform_label:
+        return True
+    lower = keyword.lower()
+    platform_lower = platform_label.lower()
+    if platform_lower in lower:
+        return True
+    if platform_lower == ".net":
+        return any(token in lower for token in (".net", "c#", "csharp", "dotnet"))
+    if platform_lower == "node.js":
+        return any(token in lower for token in ("node.js", "nodejs", "node "))
+    return False
+
+
 def _semantic_terms(topic: str, candidates: list[str], platform: Optional[str]) -> list[str]:
     items: list[str] = []
+    topic_lower = topic.lower()
     for candidate in candidates:
         lower = candidate.lower()
         if any(marker in lower for marker in _SEMANTIC_MARKERS) or len(candidate.split()) <= 3:
             items.append(candidate)
+    if re.search(r"(?i)\b(add|insert)\s+pages?\s+(?:to|into)\s+pdf\b", topic_lower):
+        items.extend(
+            [
+                "PDF page insertion",
+                "add pages to PDF",
+                "PDF editing workflow",
+                "PDF document modification",
+                "page order management",
+                "blank PDF pages",
+            ]
+        )
     profile = _topic_profile(topic, platform)
     if profile.core_topic:
         items.extend(
@@ -419,10 +571,12 @@ def analyze_keywords(
         elif _is_entity(keyword):
             keyword_type = "entity"
             entities.append(keyword)
+        elif platform_label and not _mentions_platform(keyword, platform_label):
+            keyword_type = "semantic"
+        elif _is_explicit_long_tail(keyword):
+            keyword_type = "long_tail"
         elif any(marker in keyword.lower() for marker in _SECONDARY_MARKERS):
             keyword_type = "secondary"
-        elif _is_long_tail(keyword):
-            keyword_type = "long_tail"
         elif len(keyword.split()) <= 3:
             keyword_type = "semantic"
 
@@ -440,7 +594,7 @@ def analyze_keywords(
 
         if keyword_type == "secondary" and len(secondary) < 15:
             secondary.append(insight)
-        if (keyword_type == "long_tail" or _is_long_tail(keyword)) and len(long_tail) < 25:
+        if keyword_type == "long_tail" and len(long_tail) < 25:
             long_tail.append(insight)
         if intent in {"commercial", "transactional", "navigational", "local"} and len(intent_based) < 15:
             intent_based.append(
@@ -450,6 +604,35 @@ def analyze_keywords(
             aio_aeo.append(
                 insight.model_copy(update={"keyword_type": "aio_aeo", "placement": _placement("aio_aeo", intent)})
             )
+
+    if re.search(r"(?i)\b(add|insert)\s+pages?\s+(?:to|into)\s+pdf\b", primary_text):
+        page_long_tail = [
+            f"Add Multiple Pages to PDF in {platform_label}" if platform_label else "Add Multiple Pages to PDF",
+            f"Add Blank Page to PDF in {platform_label}" if platform_label else "Add Blank Page to PDF",
+            f"Insert Page at Specific Position in PDF {platform_label}" if platform_label else "Insert Page at Specific Position in PDF",
+            f"Add Pages from Another PDF in {platform_label}" if platform_label else "Add Pages from Another PDF",
+        ]
+        existing_long = {item.keyword.lower() for item in long_tail}
+        for keyword in _dedupe_preserve_order(page_long_tail):
+            if keyword.lower() in existing_long or keyword == primary_text:
+                continue
+            intent = _classify_intent(keyword)
+            score, aeo_score = _keyword_score(keyword, topic_clean, intent)
+            long_tail.append(
+                KeywordInsight(
+                    keyword=keyword,
+                    keyword_type="long_tail",
+                    intent=intent,  # type: ignore[arg-type]
+                    funnel_stage=_funnel_stage(intent),  # type: ignore[arg-type]
+                    specificity=_specificity(keyword),  # type: ignore[arg-type]
+                    placement=_placement("long_tail", intent),
+                    score=score,
+                    aeo_score=aeo_score,
+                )
+            )
+            existing_long.add(keyword.lower())
+            if len(long_tail) >= 25:
+                break
 
     if not questions:
         questions = _question_variants(topic_clean, primary_text)

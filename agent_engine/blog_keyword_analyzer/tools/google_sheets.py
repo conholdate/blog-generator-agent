@@ -43,7 +43,7 @@ SHEET_PLATFORM_COLUMNS: Dict[str, Optional[str]] = {
     "ANDROID": "android_via_java",
     "ANDROID_VIA_JAVA": "android_via_java",
     "CPP": "cpp",
-    "GENERAL": None,
+    "GENERAL": "general",
     "GO": "go_via_cpp",
     "JAVA": "java",
     "JASPERREPORTS": "jasperreports",
@@ -191,10 +191,8 @@ def fetch_topic_sheet_selection(
     row = _row_to_mapping(headers, [str(v).strip() for v in row_values])
     platforms: List[str] = []
     for column_name, platform_key in SHEET_PLATFORM_COLUMNS.items():
-        if not platform_key:
-            continue
         if _sheet_cell_is_missing(row.get(column_name)):
-            normalized = normalize_missing_platform(platform_key)
+            normalized = "general" if platform_key == "general" else normalize_missing_platform(platform_key)
             if normalized and normalized not in platforms:
                 platforms.append(normalized)
 

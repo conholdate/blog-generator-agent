@@ -59,3 +59,11 @@ def test_image_callout_topic_keys_collapse_to_same_key() -> None:
     assert {canonical_topic_key(topic) for topic in topics} == {"add image callout"}
     assert canonical_topic_key("Add Image Callouts in Java") == "add image callout"
     assert canonical_topic_key("Add Callout to images in C#") == "add image callout"
+
+
+def test_format_is_preserved_when_used_as_action() -> None:
+    title = "Draw and Format Text in Java Using Aspose.Drawing for Java"
+    topic = build_content_topic(title=title)
+
+    assert topic == "Draw and format text using aspose drawing"
+    assert canonical_topic_key(topic) == "draw and format text using aspose drawing"
