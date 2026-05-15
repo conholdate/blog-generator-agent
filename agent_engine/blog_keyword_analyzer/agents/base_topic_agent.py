@@ -23,6 +23,7 @@ from ..schemas import Cluster, TopicIdea
 from ..tools.metrics import RunMetrics
 from ..tools.keyword_analysis import analyze_keywords
 from ..tools.seo_title_polisher import SeoTitlePolishRequest, polish_title
+from ..tools.topic_acceptance import finalize_topic_acceptance, optimize_primary_keyword
 
 logger = logging.getLogger(__name__)
 refiner = KeywordRefiner()
@@ -1525,6 +1526,11 @@ class KeywordResearchAgent:
                 if seed_pk and _kw_is_complete(seed_pk):
                     pk = seed_pk
                     t["primary_keyword"] = pk
+
+            accepted_pk = optimize_primary_keyword(pk, platform_label)
+            if accepted_pk and accepted_pk != pk:
+                pk = self._normalize_primary_keyword_phrase(accepted_pk, platform_label)
+                t["primary_keyword"] = pk
             pk_intent_key = self._keyword_intent_key(pk)
 
             keyword_groups = t.get("keyword_groups") or {}
@@ -1700,6 +1706,34 @@ class KeywordResearchAgent:
                 if include_product_in_title:
                     t["title"] = self._ensure_product_in_title(t["title"], product)
                 t["title"] = _collapse_duplicate_words(t["title"])
+
+            acceptance = finalize_topic_acceptance(
+                title=t.get("title", ""),
+                primary_keyword=t.get("primary_keyword", ""),
+                platform=platform_label,
+            )
+            if acceptance.primary_keyword and acceptance.primary_keyword != t.get("primary_keyword"):
+                t["primary_keyword"] = acceptance.primary_keyword
+                pk = acceptance.primary_keyword
+            if acceptance.title and acceptance.title != t.get("title"):
+                t["title"] = normalize_title(
+                    title=acceptance.title,
+                    primary_keyword=t.get("primary_keyword", ""),
+                    platform_label=platform_label,
+                    product=product,
+                    include_product_in_title=include_product_in_title,
+                    min_len=0,
+                    max_len=100,
+                )
+                if include_product_in_title:
+                    t["title"] = self._ensure_product_in_title(t["title"], product)
+                else:
+                    t["title"] = _remove_product_safely(t["title"], product)
+                t["title"] = _collapse_duplicate_words(t["title"])
+            if acceptance.notes:
+                t["editorial_notes"] = self._dedupe_keep_order(
+                    list(t.get("editorial_notes") or []) + acceptance.notes
+                )[:6]
 
             # Outline enforcement
             t["outline"] = _force_first4_outline(_normalize_outline_items(t.get("outline")), pk)
