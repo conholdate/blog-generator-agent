@@ -1,0 +1,32 @@
+# GroupDocs.Editor Cloud SDK
+blog: groupdocs_cloud
+key: editor
+display_name: "GroupDocs.Editor Cloud SDK"
+description: "Cloud SDK for editing office and text documents in server-side and web workflows."
+enabled: true
+
+platform_definitions:
+  net:
+    display_name: ".NET"
+    keywords: ["c#", "csharp", ".net", "dotnet", "groupdocs.editor cloud sdk for .net"]
+  java:
+    display_name: "Java"
+    keywords: ["java", "groupdocs.editor cloud sdk for java"]
+  php:
+    display_name: "PHP"
+    keywords: ["php", "groupdocs.editor cloud sdk for php"]
+  python:
+    display_name: "Python"
+    keywords: ["python", "py", "groupdocs.editor cloud sdk for python"]
+  ruby:
+    display_name: "Ruby"
+    keywords: ["ruby", "groupdocs.editor cloud sdk for ruby"]
+  nodejs:
+    display_name: "Node.js"
+    keywords: ["node.js", "nodejs", "javascript", "js", "groupdocs.editor cloud sdk for node.js"]
+  android:
+    display_name: "Android"
+    keywords: ["android", "groupdocs.editor cloud sdk for android"]
+  general:
+    display_name: "General"
+    keywords: ["groupdocs editor cloud", "document editor cloud api"]

@@ -1,0 +1,536 @@
+name: Keyword Analyzer for Queued Google Sheets Rows
+
+on:
+  workflow_dispatch:
+    inputs:
+      brand:
+        description: "Brand whose queued rows should be processed from All Missing Topics."
+        type: choice
+        required: true
+        options:
+          - 'Aspose'
+          - 'Conholdate'
+          - 'Familiarize'
+          - 'GroupDocs'
+          - 'Aspose.Cloud'
+          - 'Conholdate.Cloud'
+          - 'GroupDocs.Cloud'
+        default: 'Aspose'
+
+      include_general:
+        description: "If true, process General when the GENERAL column is marked NO."
+        type: boolean
+        required: false
+        default: false
+
+      keyword_source:
+        description: "Keyword source for expanding each selected sheet topic."
+        type: choice
+        required: true
+        options:
+          - 'serp_api'
+          - 'llm_keywords'
+        default: 'llm_keywords'
+
+      output_worksheet_mode:
+        description: "How to choose the output worksheet in the brand spreadsheet."
+        type: choice
+        required: true
+        options:
+          - 'product_suffix'
+          - 'product_full'
+          - 'fixed'
+        default: 'product_suffix'
+
+      output_worksheet_name:
+        description: "Worksheet to use only when output_worksheet_mode=fixed."
+        type: string
+        required: false
+        default: ""
+
+      top_clusters:
+        description: "How many top clusters to keep (number as text)."
+        type: string
+        required: false
+        default: "15"
+
+      use_content_index:
+        description: "If true, clone the matching blog repo and dedupe topics against existing posts."
+        type: boolean
+        required: false
+        default: false
+
+      include_product_in_title:
+        description: "If true, enforce product name in generated topic titles. If false, ensure product name is NOT used in titles."
+        type: boolean
+        required: false
+        default: false
+
+permissions:
+  contents: write
+
+jobs:
+  run-kra-queue:
+    runs-on: ubuntu-latest
+
+    env:
+      KRA_METRICS_DB_PATH: "content/kra_metrics_db.json"
+      PROFESSIONALIZE_BASE_URL: "https://llm.professionalize.com/v1"
+      PROFESSIONALIZE_API_KEY: ${{ secrets.PROFESSIONALIZE_API_KEY_1 }}
+      OPENAI_API_KEY: ${{ secrets.PROFESSIONALIZE_API_KEY_1 }}
+      GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
+
+    steps:
+      - name: Checkout this repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Resolve brand config
+        run: |
+          python - <<'PY'
+          from __future__ import annotations
+
+          import os
+          from pathlib import Path
+
+          from agent_engine.blog_keyword_analyzer.config import settings
+
+          brand = os.environ["INPUT_BRAND"]
+          brand_map = {
+              "Aspose": {
+                  "brand_folder": "Aspose",
+                  "blog_repo": "Aspose/aspose-blog",
+                  "blog_root": "blog_content/content/Aspose.Blog",
+                  "blog_name": "aspose.com",
+                  "repo_url": "https://github.com/Aspose/aspose-blog",
+                  "branch": "master",
+                  "subdir": "/content/Aspose.Blog",
+                  "token_kind": "default",
+                  "sheet_url": settings.KRA_SHEET_ASPOSE_URL,
+              },
+              "Conholdate": {
+                  "brand_folder": "Conholdate",
+                  "blog_repo": "Conholdate/conholdate-blog",
+                  "blog_root": "blog_content/content/Conholdate.Blog",
+                  "blog_name": "conholdate.com",
+                  "repo_url": "https://github.com/conholdate/conholdate-blog",
+                  "branch": "master",
+                  "subdir": "/content/Conholdate.Blog",
+                  "token_kind": "default",
+                  "sheet_url": settings.KRA_SHEET_CONHOLDATE_URL,
+              },
+              "Familiarize": {
+                  "brand_folder": "Familiarize",
+                  "blog_repo": "Familiarize/familiarize-blog",
+                  "blog_root": "blog_content/content/Familiarize.Blog",
+                  "blog_name": "familiarize.com",
+                  "repo_url": "https://github.com/Familiarize/familiarize-blog",
+                  "branch": "master",
+                  "subdir": "/content/Familiarize.Blog",
+                  "token_kind": "default",
+                  "sheet_url": settings.KRA_SHEET_FAMILIARIZE_URL,
+              },
+              "GroupDocs": {
+                  "brand_folder": "GroupDocs",
+                  "blog_repo": "GroupDocs/groupdocs-blog",
+                  "blog_root": "blog_content/content/GroupDocs.Blog",
+                  "blog_name": "groupdocs.com",
+                  "repo_url": "https://github.com/GroupDocs/groupdocs-blog",
+                  "branch": "master",
+                  "subdir": "/content/GroupDocs.Blog",
+                  "token_kind": "default",
+                  "sheet_url": settings.KRA_SHEET_GROUPDOCS_URL,
+              },
+              "Aspose.Cloud": {
+                  "brand_folder": "Aspose.Cloud",
+                  "blog_repo": "aspose-cloud/aspose-cloud-blog",
+                  "blog_root": "blog_content/content",
+                  "blog_name": "aspose.cloud",
+                  "repo_url": "https://github.com/aspose-cloud/aspose-cloud-blog",
+                  "branch": "master",
+                  "subdir": "/content",
+                  "token_kind": "default",
+                  "sheet_url": settings.KRA_SHEET_ASPOSE_CLOUD_URL,
+              },
+              "Conholdate.Cloud": {
+                  "brand_folder": "Conholdate.Cloud",
+                  "blog_repo": "conholdate-cloud/blog.conholdate.cloud",
+                  "blog_root": "blog_content/content/Conholdate.Cloud/total",
+                  "blog_name": "conholdate.cloud",
+                  "repo_url": "https://github.com/conholdate-cloud/blog.conholdate.cloud",
+                  "branch": "main",
+                  "subdir": "/content/Conholdate.Cloud/total",
+                  "token_kind": "keyword",
+                  "sheet_url": settings.KRA_SHEET_CONHOLDATE_CLOUD_URL,
+              },
+              "GroupDocs.Cloud": {
+                  "brand_folder": "GroupDocs.Cloud",
+                  "blog_repo": "groupdocs-cloud/groupdocs-cloud-blog",
+                  "blog_root": "blog_content/content",
+                  "blog_name": "groupdocs.cloud",
+                  "repo_url": "https://github.com/groupdocs-cloud/groupdocs-cloud-blog",
+                  "branch": "master",
+                  "subdir": "/content",
+                  "token_kind": "default",
+                  "sheet_url": settings.KRA_SHEET_GROUPDOCS_CLOUD_URL,
+              },
+          }
+
+          if brand not in brand_map:
+              supported = ", ".join(sorted(brand_map))
+              raise SystemExit(f"Unsupported brand {brand!r}. Supported brands: {supported}")
+
+          cfg = brand_map[brand]
+          sheet_url = str(cfg["sheet_url"] or "").strip()
+          if not sheet_url:
+              raise SystemExit(
+                  f"Missing Google Sheet URL in config.py for brand: {brand}"
+              )
+
+          output_dir = f"content/{cfg['brand_folder']}/output"
+
+          env_lines = {
+              "BRAND": brand,
+              "BLOG_NAME": cfg["blog_name"],
+              "BLOG_CONTENT_REPO": cfg["blog_repo"],
+              "BLOG_CONTENT_ROOT": cfg["blog_root"],
+              "BLOG_REPO_URL": cfg["repo_url"],
+              "BLOG_REPO_BRANCH": cfg["branch"],
+              "BLOG_REPO_SUBDIR": cfg["subdir"],
+              "BLOG_TOKEN_KIND": cfg["token_kind"],
+              "GOOGLE_SHEET_INPUT_ID": sheet_url,
+              "GOOGLE_SHEET_INPUT_WORKSHEET": "All Missing Topics",
+              "KRA_OUTPUT_DIR": output_dir,
+          }
+
+          github_env = Path(os.environ["GITHUB_ENV"])
+          with github_env.open("a", encoding="utf-8") as fh:
+              for key, value in env_lines.items():
+                  fh.write(f"{key}={value}\n")
+
+          print(f"Resolved brand: {brand}")
+          print(f"Resolved blog repo: {cfg['blog_repo']}")
+          print(f"Resolved sheet url: {sheet_url}")
+          print(f"Resolved output dir: {output_dir}")
+          PY
+        env:
+          INPUT_BRAND: ${{ inputs.brand }}
+
+      - name: Checkout matching blog content repo with default PAT
+        if: ${{ inputs.use_content_index && env.BLOG_TOKEN_KIND == 'default' }}
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ env.BLOG_CONTENT_REPO }}
+          path: blog_content
+          token: ${{ secrets.ASPOSE_BLOG_TOKEN }}
+
+      - name: Checkout matching blog content repo with keyword analyzer PAT
+        if: ${{ inputs.use_content_index && env.BLOG_TOKEN_KIND == 'keyword' }}
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ env.BLOG_CONTENT_REPO }}
+          path: blog_content
+          token: ${{ secrets['keyword-analyzer-token'] }}
+
+      - name: Export BLOG_CONTENT_ROOT (only if use_content_index=true)
+        if: ${{ inputs.use_content_index }}
+        run: |
+          echo "BLOG_CONTENT_ROOT=${BLOG_CONTENT_ROOT}" >> "$GITHUB_ENV"
+
+      - name: Write Google service account credentials
+        run: |
+          set -euo pipefail
+          if [ -z "${GOOGLE_SERVICE_ACCOUNT_JSON}" ]; then
+            echo "GOOGLE_SERVICE_ACCOUNT_JSON secret is required."
+            exit 1
+          fi
+          cred_path="${RUNNER_TEMP}/google-service-account.json"
+          printf '%s' "${GOOGLE_SERVICE_ACCOUNT_JSON}" > "${cred_path}"
+          echo "GOOGLE_SERVICE_ACCOUNT_FILE=${cred_path}" >> "$GITHUB_ENV"
+
+      - name: Discover queued rows
+        run: |
+          python - <<'PY'
+          from __future__ import annotations
+
+          import json
+          import os
+          from pathlib import Path
+
+          from agent_engine.blog_keyword_analyzer.tools.google_sheets import (
+              SHEET_PLATFORM_COLUMNS,
+              _build_sheets_service,
+              normalize_spreadsheet_id,
+          )
+          from agent_engine.blog_keyword_analyzer.tools.normalization import (
+              normalize_missing_platform,
+              platform_header_display,
+          )
+
+          def as_bool(value: str) -> bool:
+              return (value or "false").strip().lower() == "true"
+
+          def cell(row: list[str], index: int) -> str:
+              return str(row[index]).strip() if index < len(row) else ""
+
+          brand = os.environ["BRAND"]
+          include_general = as_bool(os.environ.get("INPUT_INCLUDE_GENERAL", "false"))
+          spreadsheet_id = normalize_spreadsheet_id(os.environ["GOOGLE_SHEET_INPUT_ID"])
+          worksheet_name = os.environ["GOOGLE_SHEET_INPUT_WORKSHEET"]
+          credentials_file = os.environ["GOOGLE_SERVICE_ACCOUNT_FILE"]
+
+          service = _build_sheets_service(credentials_file)
+          response = (
+              service.spreadsheets()
+              .values()
+              .get(
+                  spreadsheetId=spreadsheet_id,
+                  range=f"'{worksheet_name}'!1:10000",
+                  majorDimension="ROWS",
+                  valueRenderOption="FORMATTED_VALUE",
+              )
+              .execute()
+          )
+          rows = response.get("values") or []
+          if not rows:
+              raise SystemExit(f"Worksheet '{worksheet_name}' is empty.")
+
+          headers = [str(value).strip() for value in rows[0]]
+          header_indexes = {header.strip().upper(): idx for idx, header in enumerate(headers) if header.strip()}
+          for required in ("BRAND", "STATUS"):
+              if required not in header_indexes:
+                  raise SystemExit(f"Worksheet '{worksheet_name}' is missing required header: {required}")
+
+          brand_index = header_indexes["BRAND"]
+          status_index = header_indexes["STATUS"]
+          platform_indexes = [
+              (header, idx)
+              for header, idx in header_indexes.items()
+              if header in SHEET_PLATFORM_COLUMNS
+          ]
+
+          queue = []
+          for row_index, row in enumerate(rows[1:], start=2):
+              if cell(row, brand_index).casefold() != brand.casefold():
+                  continue
+              if cell(row, status_index).casefold() != "queued":
+                  continue
+
+              platforms: list[str] = []
+              for header, col_index in platform_indexes:
+                  if cell(row, col_index).upper() != "NO":
+                      continue
+                  if header == "GENERAL":
+                      if include_general:
+                          platforms.append("General")
+                      continue
+                  platform_key = SHEET_PLATFORM_COLUMNS[header]
+                  normalized = normalize_missing_platform(platform_key)
+                  if normalized:
+                      platforms.append(platform_header_display(normalized) or normalized)
+
+              queue.append(
+                  {
+                      "row_index": row_index,
+                      "platforms": platforms,
+                      "status_col_index": status_index + 1,
+                  }
+              )
+
+          queue_path = Path(os.environ["RUNNER_TEMP"]) / "kra_google_sheets_queue.json"
+          queue_path.write_text(json.dumps(queue, indent=2), encoding="utf-8")
+
+          with Path(os.environ["GITHUB_ENV"]).open("a", encoding="utf-8") as fh:
+              fh.write(f"KRA_QUEUE_PATH={queue_path}\n")
+              fh.write(f"KRA_QUEUE_COUNT={len(queue)}\n")
+
+          print(f"Queued rows discovered for {brand}: {len(queue)}")
+          for item in queue:
+              platforms = ", ".join(item["platforms"]) if item["platforms"] else "(no NO platform columns)"
+              print(f"Row {item['row_index']}: {platforms}")
+          PY
+        env:
+          INPUT_INCLUDE_GENERAL: ${{ inputs.include_general }}
+
+      - name: Process queued rows one at a time
+        if: ${{ env.KRA_QUEUE_COUNT != '0' }}
+        run: |
+          python - <<'PY'
+          from __future__ import annotations
+
+          import json
+          import os
+          import subprocess
+          import sys
+          from pathlib import Path
+
+          import yaml
+
+          from agent_engine.blog_keyword_analyzer.tools.google_sheets import (
+              _build_sheets_service,
+              normalize_spreadsheet_id,
+          )
+
+          def as_bool(value: str) -> bool:
+              return (value or "false").strip().lower() == "true"
+
+          def column_letter(index: int) -> str:
+              if index < 1:
+                  raise ValueError("Column index must be 1-based.")
+              letters = ""
+              while index:
+                  index, rem = divmod(index - 1, 26)
+                  letters = chr(65 + rem) + letters
+              return letters
+
+          def build_config(row_index: int, platform: str) -> dict:
+              keyword_source = os.environ.get("INPUT_KEYWORD_SOURCE", "llm_keywords").strip().lower()
+              output_worksheet_name = os.environ.get("INPUT_OUTPUT_WORKSHEET_NAME", "").strip()
+              engine = {
+                  "google_sheet_input_id": os.environ["GOOGLE_SHEET_INPUT_ID"],
+                  "google_sheet_input_worksheet": os.environ["GOOGLE_SHEET_INPUT_WORKSHEET"],
+                  "google_sheet_row": row_index,
+                  "google_sheet_output_mode": os.environ.get("INPUT_OUTPUT_WORKSHEET_MODE", "product_suffix").strip(),
+                  "use_serp_api": keyword_source == "serp_api",
+                  "use_llm_keywords": keyword_source == "llm_keywords",
+                  "platform": platform,
+                  "locale": "en-US",
+                  "top_clusters": int(os.environ.get("INPUT_TOP_CLUSTERS", "15")),
+                  "max_rows": 50000,
+                  "use_content_index": as_bool(os.environ.get("INPUT_USE_CONTENT_INDEX", "false")),
+                  "include_product_in_title": as_bool(os.environ.get("INPUT_INCLUDE_PRODUCT_IN_TITLE", "false")),
+                  "debug": False,
+              }
+              if output_worksheet_name:
+                  engine["google_sheet_output_worksheet"] = output_worksheet_name
+
+              return {
+                  "meta": {
+                      "blog_name": os.environ.get("BLOG_NAME", ""),
+                      "brand": os.environ["BRAND"],
+                      "created_at": "",
+                      "owner": "content-team",
+                  },
+                  "engine": engine,
+                  "content_index": {
+                      "local_root": os.environ.get("BLOG_CONTENT_ROOT", ""),
+                      "index_file_name": "index.md",
+                      "file_glob": "**/index.md",
+                      "repo_url": os.environ.get("BLOG_REPO_URL", ""),
+                      "branch": os.environ.get("BLOG_REPO_BRANCH", ""),
+                      "subdir": os.environ.get("BLOG_REPO_SUBDIR", ""),
+                  },
+              }
+
+          queue = json.loads(Path(os.environ["KRA_QUEUE_PATH"]).read_text(encoding="utf-8"))
+          spreadsheet_id = normalize_spreadsheet_id(os.environ["GOOGLE_SHEET_INPUT_ID"])
+          worksheet_name = os.environ["GOOGLE_SHEET_INPUT_WORKSHEET"]
+          service = _build_sheets_service(os.environ["GOOGLE_SERVICE_ACCOUNT_FILE"])
+
+          for item in queue:
+              row_index = int(item["row_index"])
+              platforms = list(item.get("platforms") or [])
+              print(f"Processing row {row_index} with {len(platforms)} platform(s): {platforms}")
+
+              for platform in platforms:
+                  safe_platform = platform.lower().replace(" ", "-").replace(".", "dot").replace("+", "plus")
+                  cfg_path = Path(os.environ["RUNNER_TEMP"]) / f"kra_row_{row_index}_{safe_platform}.yaml"
+                  cfg_path.write_text(
+                      yaml.safe_dump(build_config(row_index, platform), sort_keys=False),
+                      encoding="utf-8",
+                  )
+                  print(f"Running KRA for row {row_index}, platform {platform}")
+                  subprocess.run(
+                      [sys.executable, "scripts/run_kra_from_config.py", "--config", str(cfg_path)],
+                      check=True,
+                  )
+
+              status_col = column_letter(int(item["status_col_index"]))
+              status_range = f"'{worksheet_name}'!{status_col}{row_index}"
+              print(f"Marking row {row_index} Status as Done")
+              (
+                  service.spreadsheets()
+                  .values()
+                  .update(
+                      spreadsheetId=spreadsheet_id,
+                      range=status_range,
+                      valueInputOption="RAW",
+                      body={"values": [["Done"]]},
+                  )
+                  .execute()
+              )
+          PY
+        env:
+          INPUT_KEYWORD_SOURCE: ${{ inputs.keyword_source }}
+          INPUT_OUTPUT_WORKSHEET_MODE: ${{ inputs.output_worksheet_mode }}
+          INPUT_OUTPUT_WORKSHEET_NAME: ${{ inputs.output_worksheet_name }}
+          INPUT_TOP_CLUSTERS: ${{ inputs.top_clusters }}
+          INPUT_USE_CONTENT_INDEX: ${{ inputs.use_content_index }}
+          INPUT_INCLUDE_PRODUCT_IN_TITLE: ${{ inputs.include_product_in_title }}
+
+      - name: Upload outputs
+        uses: actions/upload-artifact@v4
+        with:
+          name: kra-output-queued-google-sheets-${{ github.run_number }}
+          path: |
+            ${{ env.KRA_OUTPUT_DIR }}/**
+            content/kra_metrics_db.json
+          if-no-files-found: warn
+
+      - name: Commit outputs (with ignore-safe staging)
+        run: |
+          set -euo pipefail
+
+          echo "=== workspace ==="
+          pwd
+          echo "GITHUB_REF_NAME=${GITHUB_REF_NAME}"
+          echo "GITHUB_SHA=${GITHUB_SHA}"
+          echo "BRAND=${BRAND}"
+          echo "KRA_OUTPUT_DIR=${KRA_OUTPUT_DIR}"
+          echo "KRA_QUEUE_COUNT=${KRA_QUEUE_COUNT}"
+
+          echo "=== list output ==="
+          ls -la "${KRA_OUTPUT_DIR}" || true
+
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          echo "=== git status (before add) ==="
+          git status --porcelain=v1 || true
+
+          echo "=== check ignore rules for KRA output ==="
+          git check-ignore -v "${KRA_OUTPUT_DIR}"/** 2>/dev/null || true
+
+          git add -A content
+
+          echo "=== staged diff (after add -A content) ==="
+          git diff --cached --name-status || true
+
+          if git diff --cached --quiet; then
+            echo "No staged changes after 'git add -A content'. Trying force-add on KRA outputs..."
+            git add -f "${KRA_OUTPUT_DIR}" || true
+            git add -f "${KRA_METRICS_DB_PATH}" || true
+          fi
+
+          echo "=== staged diff (final) ==="
+          git diff --cached --name-status || true
+
+          if git diff --cached --quiet; then
+            echo "No staged changes, skipping commit & push"
+            exit 0
+          fi
+
+          git commit -m "Update ${BRAND} queued Google Sheets KRA results [skip ci]"
+          git pull --rebase origin "${GITHUB_REF_NAME}"
+          git push origin HEAD:"${GITHUB_REF_NAME}"

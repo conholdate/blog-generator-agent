@@ -1,0 +1,38 @@
+# GroupDocs.Assembly Cloud SDK
+blog: groupdocs_cloud
+key: assembly
+display_name: "GroupDocs.Assembly Cloud SDK"
+description: "Cloud SDK for generating reports and documents from templates and structured data."
+enabled: true
+
+platform_definitions:
+  net:
+    display_name: ".NET"
+    keywords: ["c#", "csharp", ".net", "dotnet", "groupdocs.assembly cloud sdk for .net"]
+  java:
+    display_name: "Java"
+    keywords: ["java", "groupdocs.assembly cloud sdk for java"]
+  php:
+    display_name: "PHP"
+    keywords: ["php", "groupdocs.assembly cloud sdk for php"]
+  python:
+    display_name: "Python"
+    keywords: ["python", "py", "groupdocs.assembly cloud sdk for python"]
+  ruby:
+    display_name: "Ruby"
+    keywords: ["ruby", "groupdocs.assembly cloud sdk for ruby"]
+  nodejs:
+    display_name: "Node.js"
+    keywords: ["node.js", "nodejs", "javascript", "js", "groupdocs.assembly cloud sdk for node.js"]
+  swift:
+    display_name: "Swift"
+    keywords: ["swift", "groupdocs.assembly cloud sdk for swift"]
+  go:
+    display_name: "Go"
+    keywords: ["go", "golang", "groupdocs.assembly cloud sdk for go"]
+  cpp:
+    display_name: "C++"
+    keywords: ["c++", "cpp", "cplusplus", "groupdocs.assembly cloud sdk for c++"]
+  general:
+    display_name: "General"
+    keywords: ["groupdocs assembly cloud", "document assembly cloud api"]

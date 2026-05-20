@@ -1,0 +1,644 @@
+{
+  "case": "blogs_to_blogs",
+  "brand_key": "groupdocs",
+  "product_key": "conversion",
+  "baseline_platform": "net",
+  "platforms": [
+    "net",
+    "general",
+    "java",
+    "nodejs"
+  ],
+  "meta": {
+    "matching_mode": "key_exact",
+    "total_input_records": 115,
+    "records_after_filters": 44,
+    "excluded_release_update_records": 53,
+    "excluded_old_or_undated_records": 18,
+    "baseline_records": 15,
+    "total_cells": 60,
+    "matched_cells": 31,
+    "missing_cells": 29,
+    "match_rate": 0.5166666666666667,
+    "skipped_empty_keys": 0
+  },
+  "rows": [
+    {
+      "category": "Conversion",
+      "sub_category": "Presentation to Image",
+      "topic": "convert presentations to",
+      "key": "convert presentations to",
+      "baseline_record_id": "blog::conversion/2022-01-10-convert-presentations-to-images-using-csharp/index.md",
+      "coverage": {
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::conversion/2022-01-10-convert-presentations-to-images-using-csharp/index.md",
+          "title": "Convert Presentations to Images using C#",
+          "topic": "Convert presentations to",
+          "url": "https://blog.groupdocs.com/conversion/convert-presentations-to-images-using-csharp/"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::conversion/2022-01-18-convert-presentations-to-images-in-java/index.md",
+          "title": "Convert Presentations to Images in Java",
+          "topic": "Convert presentations to",
+          "url": "https://blog.groupdocs.com/conversion/convert-presentations-to-images-in-java/"
+        },
+        "nodejs": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Conversion",
+      "sub_category": "Image to PDF",
+      "topic": "convert to pdf",
+      "key": "convert to pdf",
+      "baseline_record_id": "blog::conversion/2021-05-19-convert-images-to-pdf-in-csharp/index.md",
+      "coverage": {
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::conversion/2021-05-19-convert-images-to-pdf-in-csharp/index.md",
+          "title": "Convert Images to PDF in C#",
+          "topic": "Convert to PDF",
+          "url": "https://blog.groupdocs.com/conversion/convert-images-to-pdf-in-csharp/"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::conversion/2021-04-21-convert-images-to-pdf-in-java/index.md",
+          "title": "Convert Images to PDF in Java",
+          "topic": "Convert to PDF",
+          "url": "https://blog.groupdocs.com/conversion/convert-images-to-pdf-in-java/"
+        },
+        "nodejs": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Conversion",
+      "sub_category": "File Format Conversion",
+      "topic": "csv to xml",
+      "key": "csv to xml",
+      "baseline_record_id": "blog::conversion/2021-09-27-convert-csv-to-xml-in-csharp/index.md",
+      "coverage": {
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::conversion/2021-09-27-convert-csv-to-xml-in-csharp/index.md",
+          "title": "Convert CSV to XML in C#",
+          "topic": "CSV to XML",
+          "url": "https://blog.groupdocs.com/conversion/convert-csv-to-xml-in-csharp/"
+        },
+        "general": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::conversion/2023-02-16-csv-to-xml-online/index.md",
+          "title": "CSV to XML – Free Online Converter",
+          "topic": "CSV to XML",
+          "url": "https://blog.groupdocs.com/conversion/convert-csv-to-xml/"
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "nodejs": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Conversion",
+      "sub_category": "Document to Spreadsheet",
+      "topic": "documents to excel xls xlsx",
+      "key": "documents to excel xls xlsx",
+      "baseline_record_id": "blog::conversion/2021-04-13-convert-document-to-excel-xls-xlsx-in-csharp/index.md",
+      "coverage": {
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::conversion/2021-04-13-convert-document-to-excel-xls-xlsx-in-csharp/index.md",
+          "title": "Convert Documents to Excel XLS, XLSX in C#",
+          "topic": "Documents to excel XLS XLSX",
+          "url": "https://blog.groupdocs.com/conversion/convert-document-to-excel-xls-xlsx-in-csharp/"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::conversion/2021-05-22-convert-documents-to-excel-xls-xlsx-in-java/index.md",
+          "title": "Convert Documents to Excel XLS, XLSX in Java",
+          "topic": "Documents to excel XLS XLSX",
+          "url": "https://blog.groupdocs.com/conversion/convert-documents-to-excel-xls-xlsx-in-java/"
+        },
+        "nodejs": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Conversion",
+      "sub_category": "Spreadsheet to PDF",
+      "topic": "excel spreadsheets to pdf",
+      "key": "excel spreadsheets to pdf",
+      "baseline_record_id": "blog::conversion/2021-11-14-convert-excel-spreadsheets-to-pdf-using-csharp/index.md",
+      "coverage": {
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::conversion/2021-11-14-convert-excel-spreadsheets-to-pdf-using-csharp/index.md",
+          "title": "Convert Excel Spreadsheets to PDF using C#",
+          "topic": "Excel spreadsheets to PDF",
+          "url": "https://blog.groupdocs.com/conversion/convert-excel-spreadsheets-to-pdf-using-csharp/"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::conversion/2021-11-21-convert-excel-spreadsheets-to-pdf-in-java/index.md",
+          "title": "Convert Excel Spreadsheets to PDF in Java",
+          "topic": "Excel spreadsheets to PDF",
+          "url": "https://blog.groupdocs.com/conversion/convert-excel-spreadsheets-to-pdf-in-java/"
+        },
+        "nodejs": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Conversion",
+      "sub_category": "Spreadsheet Conversion",
+      "topic": "excel to csv and csv to excel",
+      "key": "excel to csv and csv to excel",
+      "baseline_record_id": "blog::conversion/2021-08-18-convert-excel-xls-xlsx-and-csv-in-csharp/index.md",
+      "coverage": {
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::conversion/2021-08-18-convert-excel-xls-xlsx-and-csv-in-csharp/index.md",
+          "title": "Convert Excel to CSV and CSV to Excel Formats in C#",
+          "topic": "Excel to CSV and CSV to excel",
+          "url": "https://blog.groupdocs.com/conversion/convert-excel-xls-xlsx-and-csv-in-csharp/"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "nodejs": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Conversion",
+      "sub_category": "Data Format",
+      "topic": "json to csv",
+      "key": "json to csv",
+      "baseline_record_id": "blog::conversion/2021-06-18-convert-json-and-csv-in-csharp/index.md",
+      "coverage": {
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::conversion/2021-06-18-convert-json-and-csv-in-csharp/index.md",
+          "title": "Convert JSON to CSV and CSV to JSON using C#",
+          "topic": "JSON to CSV",
+          "url": "https://blog.groupdocs.com/conversion/convert-json-and-csv-in-csharp/"
+        },
+        "general": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::conversion/2023-02-14-json-to-csv-online/index.md",
+          "title": "JSON to CSV – Free Online Converter",
+          "topic": "JSON to CSV",
+          "url": "https://blog.groupdocs.com/conversion/convert-json-to-csv/"
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "nodejs": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Conversion",
+      "sub_category": "Data Format Conversion",
+      "topic": "json to xml",
+      "key": "json to xml",
+      "baseline_record_id": "blog::conversion/2024-05-16-convert-json-to-xml-in-csharp/index.md",
+      "coverage": {
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::conversion/2024-05-16-convert-json-to-xml-in-csharp/index.md",
+          "title": "Convert JSON to XML in C#",
+          "topic": "JSON to XML",
+          "url": "https://blog.groupdocs.com/conversion/convert-json-to-xml-in-csharp/"
+        },
+        "general": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::conversion/2023-02-17-json-to-xml-online/index.md",
+          "title": "JSON to XML – Free Online Converter",
+          "topic": "JSON to XML",
+          "url": "https://blog.groupdocs.com/conversion/convert-json-to-xml/"
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "nodejs": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Conversion",
+      "sub_category": "Document Conversion",
+      "topic": "markdown to pdf",
+      "key": "markdown to pdf",
+      "baseline_record_id": "blog::conversion/2022-10-06-convert-markdown-to-pdf-in-csharp/index.md",
+      "coverage": {
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::conversion/2022-10-06-convert-markdown-to-pdf-in-csharp/index.md",
+          "title": "Convert Markdown Files to PDF using C#",
+          "topic": "Markdown to PDF",
+          "url": "https://blog.groupdocs.com/conversion/convert-markdown-to-pdf-in-csharp/"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::conversion/2022-10-10-convert-markdown-to-pdf-in-java/index.md",
+          "title": "Convert Markdown Files to PDF in Java",
+          "topic": "Markdown to PDF",
+          "url": "https://blog.groupdocs.com/conversion/convert-markdown-to-pdf-in-java/"
+        },
+        "nodejs": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Conversion",
+      "sub_category": "Pdf To Html",
+      "topic": "pdf documents to html",
+      "key": "pdf documents to html",
+      "baseline_record_id": "blog::conversion/2023-01-16-convert-pdf-to-html-using-csharp/index.md",
+      "coverage": {
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::conversion/2023-01-16-convert-pdf-to-html-using-csharp/index.md",
+          "title": "Convert PDF documents to HTML using C#",
+          "topic": "PDF documents to HTML",
+          "url": "https://blog.groupdocs.com/conversion/convert-a-pdf-document-to-html-using-csharp/"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "nodejs": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Conversion",
+      "sub_category": "Image Conversion",
+      "topic": "pdf to grayscale",
+      "key": "pdf to grayscale",
+      "baseline_record_id": "blog::conversion/2022-03-16-convert-pdf-to-grayscale-jpg-png-images-in-csharp/index.md",
+      "coverage": {
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::conversion/2022-03-16-convert-pdf-to-grayscale-jpg-png-images-in-csharp/index.md",
+          "title": "Convert PDF to Grayscale using C#",
+          "topic": "PDF to grayscale",
+          "url": "https://blog.groupdocs.com/conversion/convert-pdf-to-grayscale-jpg-png-images-in-csharp/"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::conversion/2022-03-02-convert-pdf-to-grayscale-jpg-png-images-in-java/index.md",
+          "title": "Convert PDF to Grayscale in Java",
+          "topic": "PDF to grayscale",
+          "url": "https://blog.groupdocs.com/conversion/convert-pdf-to-grayscale-jpg-png-images-in-java/"
+        },
+        "nodejs": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Conversion",
+      "sub_category": "Document Conversion",
+      "topic": "show and hide page borders while converting documents to html",
+      "key": "show and hide page borders while converting documents to html",
+      "baseline_record_id": "blog::conversion/2020-04-29-convert-doc-docx-to-html-in-csharp-and-show-or-hide-page-borders/index.md",
+      "coverage": {
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::conversion/2020-04-29-convert-doc-docx-to-html-in-csharp-and-show-or-hide-page-borders/index.md",
+          "title": "Show and Hide Page Borders while Converting Documents to HTML in C#",
+          "topic": "Show and hide page borders while converting documents to HTML",
+          "url": "https://blog.groupdocs.com/conversion/convert-doc-docx-to-html-in-csharp-and-show-or-hide-page-borders/"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "nodejs": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Conversion",
+      "sub_category": "Image Format Conversion",
+      "topic": "svg to jpg",
+      "key": "svg to jpg",
+      "baseline_record_id": "blog::conversion/2022-07-23-convert-svg-to-jpg-using-csharp/index.md",
+      "coverage": {
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::conversion/2022-07-23-convert-svg-to-jpg-using-csharp/index.md",
+          "title": "Convert SVG to JPG using C#",
+          "topic": "SVG to JPG",
+          "url": "https://blog.groupdocs.com/conversion/convert-svg-to-jpg-using-csharp/"
+        },
+        "general": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::conversion/2023-02-07-svg-to-jpg-online/index.md",
+          "title": "Convert SVG to JPG",
+          "topic": "SVG to JPG",
+          "url": "https://blog.groupdocs.com/conversion/convert-svg-to-jpg/"
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::conversion/2022-08-03-convert-svg-to-jpg-in-java/index.md",
+          "title": "Convert SVG to JPG in Java",
+          "topic": "SVG to JPG",
+          "url": "https://blog.groupdocs.com/conversion/convert-svg-to-jpg-in-java/"
+        },
+        "nodejs": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Conversion",
+      "sub_category": "Image Conversion",
+      "topic": "svg to png",
+      "key": "svg to png",
+      "baseline_record_id": "blog::conversion/2022-08-19-convert-svg-to-png-in-csharp/index.md",
+      "coverage": {
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::conversion/2022-08-19-convert-svg-to-png-in-csharp/index.md",
+          "title": "Convert SVG to PNG using C#",
+          "topic": "SVG to PNG",
+          "url": "https://blog.groupdocs.com/conversion/convert-svg-to-png-using-csharp/"
+        },
+        "general": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::conversion/2023-02-09-svg-to-png-online/index.md",
+          "title": "Convert SVG to PNG",
+          "topic": "SVG to PNG",
+          "url": "https://blog.groupdocs.com/conversion/convert-svg-to-png/"
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::conversion/2022-07-18-convert-svg-to-png-in-java/index.md",
+          "title": "Convert SVG to PNG in Java",
+          "topic": "SVG to PNG",
+          "url": "https://blog.groupdocs.com/conversion/convert-svg-to-png-in-java/"
+        },
+        "nodejs": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::conversion/2024-12-26-convert-svg-to-png-in-nodejs/index.md",
+          "title": "Convert SVG to PNG using Node.js",
+          "topic": "SVG to PNG",
+          "url": "https://blog.groupdocs.com/conversion/convert-svg-to-png-using-nodejs/"
+        }
+      }
+    },
+    {
+      "category": "Document Conversion",
+      "sub_category": "Word to PDF",
+      "topic": "word documents to pdf",
+      "key": "word documents to pdf",
+      "baseline_record_id": "blog::conversion/2023-01-04-convert-word-to-pdf-using-csharp/index.md",
+      "coverage": {
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::conversion/2023-01-04-convert-word-to-pdf-using-csharp/index.md",
+          "title": "Convert Word Documents to PDF using C#",
+          "topic": "Word documents to PDF",
+          "url": "https://blog.groupdocs.com/conversion/convert-word-doc-docx-to-pdf-using-csharp/"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::conversion/2023-01-06-convert-word-to-pdf-in-java/index.md",
+          "title": "Convert Word Documents to PDF in Java",
+          "topic": "Word documents to PDF",
+          "url": "https://blog.groupdocs.com/conversion/convert-word-doc-docx-to-pdf-in-java/"
+        },
+        "nodejs": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::conversion/2024-06-18-word-to-pdf-node-js/index.md",
+          "title": "Convert Word Documents to PDF in Node.js",
+          "topic": "Word documents to PDF",
+          "url": "https://blog.groupdocs.com/conversion/convert-word-doc-docx-to-pdf-in-nodejs/"
+        }
+      }
+    }
+  ],
+  "brand_name": "GroupDocs",
+  "product_name": "GroupDocs.Conversion"
+}

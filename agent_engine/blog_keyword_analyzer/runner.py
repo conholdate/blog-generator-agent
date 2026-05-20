@@ -35,12 +35,15 @@ from agent_engine.blog_keyword_analyzer.tools.google_sheets import (
     fetch_topic_sheet_selection,
     normalize_spreadsheet_id,
 )
+from agent_engine.blog_keyword_analyzer.workflow_support import clean_keyword_phrase
 
 logger = logging.getLogger(__name__)
 refiner = KeywordRefiner()
 
 
 def _platform_matches_selection(selected_platform: str, available_platforms: List[str]) -> bool:
+    if selected_platform == "general":
+        return any(str(platform).strip().lower() == "general" for platform in available_platforms)
     if selected_platform in available_platforms:
         return True
 
@@ -70,10 +73,12 @@ def _display_keyword(value: Any, product: str) -> str:
     text = refiner.refine(value)
     if not text:
         return ""
+    text = clean_keyword_phrase(text)
     short_product = normalize_product_short_name(product)
     if short_product:
         text = re.sub(r"(?i)\bAsp(?:\.{3}|…)\b", short_product, text)
         text = re.sub(r"(?i)\bGroup(?:\.{3}|…)\b", short_product, text)
+    text = _sanitize_display_text(text)
     return re.sub(r"\s{2,}", " ", text).strip(" -,:;")
 
 
@@ -187,32 +192,26 @@ def _project_root(start: Optional[Path] = None) -> Path:
     return Path.cwd().resolve()
 
 def _canonical_brand_folder(brand: str) -> str:
-    key = " ".join((brand or "").strip().split()).lower()
-    brand_map = {
+    normalized = " ".join(str(brand or "").strip().split())
+    brand_key = normalized.lower().replace(" ", "")
+    folder_map = {
         "aspose": "Aspose",
+        "conholdate": "Conholdate",
+        "familiarize": "Familiarize",
+        "groupdocs": "GroupDocs",
         "aspose.cloud": "Aspose.Cloud",
         "aspose-cloud": "Aspose.Cloud",
-        "conholdate": "Conholdate",
         "conholdate.cloud": "Conholdate.Cloud",
         "conholdate-cloud": "Conholdate.Cloud",
-        "groupdocs": "GroupDocs",
         "groupdocs.cloud": "GroupDocs.Cloud",
         "groupdocs-cloud": "GroupDocs.Cloud",
-        "familiarize": "Familiarize",
     }
-    return brand_map.get(key, brand)
+    return folder_map.get(brand_key, normalized or "unknown")
 
 def _resolve_brand_output_dir(brand_folder: str) -> Path:
-    configured = Path(settings.KRA_OUTPUT_DIR)
-    if settings.KRA_OUTPUT_DIR:
-        if not configured.is_absolute():
-            configured = (_project_root() / configured).resolve()
-        if configured.name.lower() == "output":
-            configured.mkdir(parents=True, exist_ok=True)
-            return configured
-
     root = _project_root()
-    out_dir = (root / "content" / _canonical_brand_folder(brand_folder) / "output").resolve()
+    canonical_folder = _canonical_brand_folder(brand_folder)
+    out_dir = (root / "content" / canonical_folder / "output").resolve()
     out_dir.mkdir(parents=True, exist_ok=True)
     return out_dir
 
@@ -280,7 +279,29 @@ def _topic_title_platform_display(title: str, platform: Optional[str]) -> str:
     base = platform_base_display(platform)
     if not out or not canonical or not base or canonical == base:
         return out
-    return re.sub(re.escape(canonical), base, out, flags=re.IGNORECASE)
+    return _sanitize_display_text(re.sub(re.escape(canonical), base, out, flags=re.IGNORECASE), platform)
+
+
+def _sanitize_display_text(text: str, platform: Optional[str] = None) -> str:
+    out = " ".join((text or "").strip().split())
+    if not out:
+        return ""
+    out = out.replace("â€‘", "-").replace("â€“", "-").replace("â€”", "-")
+    out = out.replace("\u2011", "-").replace("\u2013", "-").replace("\u2014", "-")
+    out = re.sub(r"(?i)\bwith\s+in\s+\.net\b", "in .NET", out)
+    out = re.sub(r"(?i)\bwith\s+for\s+\.net\b", "for .NET", out)
+    out = re.sub(r"(?i)\bin\s+in\s+\.net\b", "in .NET", out)
+    out = re.sub(r"(?i)\bwith\s+in\s+([A-Za-z0-9.+#]+)\b", r"in \1", out)
+    out = re.sub(r"(?i)\badd\s+pages\s+to\s+PDF\s+with\s+for\s+in\s+\.NET\b", "add pages to PDF in .NET", out)
+    out = re.sub(r"(?i)\badd\s+pages\s+to\s+PDF\s+with\s+for\s+in\s+([A-Za-z0-9.+#]+)\b", r"add pages to PDF in \1", out)
+    out = re.sub(r"(?i)\bfor[-\s]?in\s+loop\b", "foreach loop", out)
+    out = re.sub(r"(?i)\bfor\s+in\s+loop\b", "foreach loop", out)
+    out = re.sub(r"(?i)\busing\s+a\s+for\s+in\s+loop\b", "using a loop", out)
+    out = re.sub(r"(?i)\bfor\s+in\s+syntax\b", "foreach syntax", out)
+    out = re.sub(r"(?i)\busing\s+a\s+foreach\s+loop\b", "using a loop", out)
+    out = re.sub(r"(?i)\s+with\s+Aspose\.PDF\s+with\s+Aspose\.PDF\b", " with Aspose.PDF", out)
+    out = re.sub(r"\s{2,}", " ", out).strip(" -,:;")
+    return out
 
 
 def _content_platform_display(text: str, platform: Optional[str]) -> str:
@@ -294,7 +315,60 @@ def _content_platform_display(text: str, platform: Optional[str]) -> str:
     for value in {canonical, header}:
         if value and value != base:
             out = re.sub(re.escape(value), base, out, flags=re.IGNORECASE)
-    return re.sub(r"\s{2,}", " ", out).strip(" -,:;")
+    return _sanitize_display_text(out, platform)
+
+
+def _fix_step_by_step_case(text: str) -> str:
+    return re.sub(r"(?i)\bSTEP\s*[- ]\s*by\s*[- ]\s*STEP\b", "Step-by-Step", text or "")
+
+
+def _display_question(text: str, platform: Optional[str]) -> str:
+    had_question_mark = str(text or "").strip().endswith("?")
+    out = _content_platform_display(text, platform)
+    out = _fix_step_by_step_case(refiner.to_sentence_case(out))
+    out = re.sub(r"\bi\b", "I", out)
+    out = re.sub(r"(?i)\bextract\s+Pages\b", "extract pages", out)
+    out = re.sub(r"(?i)\bextract\s+Images\b", "extract images", out)
+    out = re.sub(r"(?i)\bextract\s+Text\b", "extract text", out)
+    out = re.sub(r"(?i)\bPDF\s+Pages\b", "PDF pages", out)
+    out = re.sub(r"(?i)\bPDF\s+Images\b", "PDF images", out)
+    canonical = platform_base_display(platform) or canonical_platform_label(platform)
+    if canonical and canonical.lower() not in out.lower():
+        out = out.rstrip("?")
+        out = f"{out} in {canonical}"
+    if had_question_mark and not out.endswith("?"):
+        out = out.rstrip(".") + "?"
+    return out
+
+
+def _display_editorial_note(text: str, platform: Optional[str]) -> str:
+    out = _content_platform_display(text, platform)
+    def _clean_note(value: str) -> str:
+        value = re.sub(
+            r"(?i)creating\s+a\s+Document\s+inserting\s+pages\s+and\s+saving\s+the\s+result",
+            "creating a Document, inserting pages, and saving the result",
+            value,
+        )
+        value = re.sub(r"(?i)\bAspose\.PDF\s+s\b", "Aspose.PDF's", value)
+        value = re.sub(r"(?i)\blarge\s+pdfs\b", "large PDFs", value)
+        value = re.sub(r"(?i)\bseo\b", "SEO", value)
+        value = re.sub(r"(?i)\bserp\b", "SERP", value)
+        value = re.sub(r"(?i)\bfaq\b", "FAQ", value)
+        value = re.sub(r"(?i)\bc#\b", "C#", value)
+        value = re.sub(r"(?i)\bfor\s+in\s+loop\s+syntax\b", "foreach syntax", value)
+        value = re.sub(r"(?i)\bfor\s+in\s+loop\b", "foreach loop", value)
+        return value
+
+    out = _clean_note(out)
+    out = re.sub(
+        r"(?i)(answer questions such as)\s+(.+)$",
+        lambda m: f"{m.group(1)} {_display_question(m.group(2), platform).rstrip('?')}",
+        out,
+    )
+    out = _fix_step_by_step_case(refiner.to_sentence_case(out))
+    out = _clean_note(out)
+    out = re.sub(r"\bi\b", "I", out)
+    return out
 
 def _brand_slug(brand: str) -> str:
     return _normalize_topic_key(brand or "unknown")
@@ -379,6 +453,122 @@ def _summarize_cluster_scores(clusters: List[Cluster]) -> dict:
         "max": max(scores),
         "avg": mean(scores),
     }
+
+
+def _opportunity_group_key(opportunity: Any) -> str:
+    formats = sorted(str(fmt).lower() for fmt in (getattr(opportunity, "formats", []) or []))
+    action = (getattr(opportunity, "action", None) or "").lower()
+    language = (getattr(opportunity, "language", None) or "").lower()
+    page_type = (getattr(opportunity, "best_page_type", "") or "").lower()
+    recommendation = (getattr(opportunity, "recommended_action", "") or "").lower()
+    if formats or action or language:
+        return "|".join([",".join(formats), action, language, page_type, recommendation])
+    return _keyword_intent_key(getattr(opportunity, "keyword", "") or "")
+
+
+def _group_keyword_opportunities(opportunities: List[Any]) -> List[dict[str, Any]]:
+    groups: dict[str, dict[str, Any]] = {}
+    for opportunity in opportunities:
+        key = _opportunity_group_key(opportunity)
+        if not key:
+            continue
+        group = groups.setdefault(key, {"primary": opportunity, "variants": []})
+        primary = group["primary"]
+        if getattr(opportunity, "final_priority_score", 0) > getattr(primary, "final_priority_score", 0):
+            group["variants"].append(primary)
+            group["primary"] = opportunity
+        else:
+            group["variants"].append(opportunity)
+    return sorted(
+        groups.values(),
+        key=lambda item: getattr(item["primary"], "final_priority_score", 0),
+        reverse=True,
+    )
+
+
+def _product_page_opportunities(result: RunResult, product_name: str, platform: Optional[str]) -> List[str]:
+    values: List[str] = []
+    for opportunity in result.keyword_opportunities or []:
+        if getattr(opportunity, "recommended_action", "") != "product_page":
+            continue
+        keyword = _content_platform_display(_display_keyword(opportunity.keyword, product_name), platform)
+        if keyword:
+            values.append(keyword)
+    return _dedupe_keywords(values)[:5]
+
+
+def _keyword_group_key(text: str) -> str:
+    return _keyword_intent_key(text)
+
+
+def _platform_specific(text: str, platform: Optional[str]) -> bool:
+    if not platform:
+        return True
+    canonical = canonical_platform_label(platform)
+    if not canonical:
+        return True
+    lower = (text or "").lower()
+    canonical_lower = canonical.lower()
+    if canonical_lower in lower:
+        return True
+    if canonical_lower == ".net":
+        return any(token in lower for token in (".net", "c#", "csharp", "dotnet"))
+    if canonical_lower == "node.js":
+        return any(token in lower for token in ("node.js", "nodejs", "node "))
+    return False
+
+
+def _normalize_keyword_groups_for_display(
+    *,
+    core: List[str],
+    long_tail: List[str],
+    context: List[str],
+    primary_intent_key: str,
+    platform: Optional[str],
+) -> tuple[List[str], List[str], List[str]]:
+    core_out: List[str] = []
+    long_out: List[str] = []
+    context_out: List[str] = list(context)
+    seen: set[str] = {primary_intent_key}
+
+    for kw in _dedupe_keywords(core):
+        key = _keyword_group_key(kw)
+        if not key or key in seen:
+            continue
+        if platform and not _platform_specific(kw, platform):
+            context_out.append(kw)
+            continue
+        core_out.append(kw)
+        seen.add(key)
+
+    for kw in _dedupe_keywords(long_tail):
+        key = _keyword_group_key(kw)
+        if not key or key in seen:
+            continue
+        long_out.append(kw)
+        seen.add(key)
+
+    if re.search(r"(?i)\b(add|insert)\s+pages?\s+(?:to|into)\s+pdf\b", " ".join([*core, *long_tail, *context])):
+        context_out.extend(
+            [
+                "PDF page insertion",
+                "PDF editing workflow",
+                "PDF document modification",
+                "page order management",
+                "blank PDF pages",
+            ]
+        )
+
+    context_clean: List[str] = []
+    context_seen: set[str] = set(seen)
+    for kw in _dedupe_keywords(context_out):
+        key = _keyword_group_key(kw)
+        if not key or key in context_seen:
+            continue
+        context_clean.append(kw)
+        context_seen.add(key)
+
+    return core_out, long_out, context_clean
 
 def write_topics_markdown(
     result: RunResult,
@@ -488,15 +678,18 @@ def write_topics_markdown(
         persona = pick("target_persona")
         keyword_groups = _keyword_groups_to_mapping(pick("keyword_groups", {}) or {})
         editorial_notes = pick("editorial_notes", []) or []
+        keyword_analysis = _keyword_groups_to_mapping(pick("keyword_analysis", {}) or {})
+        product_page_opportunities = _product_page_opportunities(result, product_name, platform)
 
-        topic_title = refiner.to_title_case(_topic_title_platform_display(title, platform))
+        topic_title = _fix_step_by_step_case(refiner.to_title_case(_topic_title_platform_display(title, platform)))
+        topic_title = _sanitize_display_text(topic_title, platform)
         lines.append(f"## {idx}. {topic_title}")
         if cluster_id is not None:
             lines.append(f"- **Cluster ID:** `{cluster_id}`")
         if persona:
-            lines.append(f"- **Target persona:** {_content_platform_display(persona, platform)}")
+            lines.append(f"- **Target persona:** {_sanitize_display_text(_content_platform_display(persona, platform), platform)}")
         if angle:
-            lines.append(f"- **Blog post angle:** {_content_platform_display(angle, platform)}")
+            lines.append(f"- **Blog post angle:** {_sanitize_display_text(_fix_step_by_step_case(_content_platform_display(angle, platform)), platform)}")
         if primary_kw:
             lines.append(f"- **Primary keyword:** `{_content_platform_display(primary_kw, platform)}`")
 
@@ -507,9 +700,13 @@ def write_topics_markdown(
             core = [k for k in core if _keyword_intent_key(k) != primary_intent_key]
             long_tail = [k for k in long_tail if _keyword_intent_key(k) != primary_intent_key]
             context = [k for k in context if _keyword_intent_key(k) != primary_intent_key]
-            core = _dedupe_keywords(core)
-            long_tail = _dedupe_keywords(long_tail)
-            context = _dedupe_keywords(context)
+            core, long_tail, context = _normalize_keyword_groups_for_display(
+                core=core,
+                long_tail=long_tail,
+                context=context,
+                primary_intent_key=primary_intent_key,
+                platform=platform,
+            )
         else:
             core, long_tail, context = [], [], []
 
@@ -528,19 +725,53 @@ def write_topics_markdown(
             lines.append(
                 f"- **Semantic SEO keywords:** {', '.join(f'`{_content_platform_display(k, platform)}`' for k in context)}"
             )
-
+        if product_page_opportunities:
+            lines.append(
+                "- **Product-page opportunities:** "
+                + ", ".join(f"`{kw}`" for kw in product_page_opportunities)
+            )
+        question_keywords = keyword_analysis.get("question_keywords") or []
+        entities = keyword_analysis.get("entities") or []
+        if question_keywords:
+            lines.append(
+                f"- **Question keywords:** {', '.join(f'`{_display_question(q, platform)}`' for q in question_keywords[:5])}"
+            )
+        if entities:
+            display_entities = []
+            for entity in entities:
+                entity_text = _content_platform_display(str(entity), platform)
+                if not entity_text or re.search(r"(?i)\b(with\s+in|for\s+in|with\s+for|for[-\s]?in)\b", entity_text):
+                    continue
+                if len(entity_text.split()) > 4 and not re.search(r"(?i)\b(Aspose|Java|Python|\.NET|C#|PDF|DOCX|XLSX|PPTX)\b", entity_text):
+                    continue
+                display_entities.append(entity_text)
+            display_entities = _dedupe_keywords(display_entities)[:5]
+        else:
+            display_entities = []
+        if display_entities:
+            lines.append(
+                f"- **Entity keywords:** {', '.join(f'`{e}`' for e in display_entities)}"
+            )
+        primary_analysis = keyword_analysis.get("primary_keyword") or {}
+        if isinstance(primary_analysis, Mapping) and primary_analysis.get("placement"):
+            placements = primary_analysis.get("placement") or []
+            if placements:
+                lines.append(
+                    "- **Primary keyword placement:** "
+                    + ", ".join(f"`{_content_platform_display(str(p), platform)}`" for p in placements)
+                )
         if outline:
             lines.append("")
             lines.append("**Outline for the article:**")
             for bullet in outline:
-                line_item = refiner.to_title_case(_content_platform_display(bullet, platform))
+                line_item = _sanitize_display_text(_fix_step_by_step_case(refiner.to_title_case(_content_platform_display(bullet, platform))), platform)
                 lines.append(f"- {line_item}")
 
         if editorial_notes:
             lines.append("")
             lines.append("**Other important and relevant things:**")
             for note in editorial_notes:
-                lines.append(f"- {refiner.to_sentence_case(_content_platform_display(note, platform))}")
+                lines.append(f"- {_display_editorial_note(note, platform)}")
 
         lines.append("")
         lines.append("---")
@@ -575,13 +806,14 @@ def write_missing_topics_markdown(
     lines.append("")
 
     for platform, result in runs:
+        product_page_opportunities = _product_page_opportunities(result, selection.product, platform)
         lines.append(f"## {platform}")
         lines.append("")
         for idx, topic in enumerate(result.topics, start=1):
-            lines.append(f"### {idx}. {refiner.to_title_case(_topic_title_platform_display(topic.title, platform))}")
+            lines.append(f"### {idx}. {_sanitize_display_text(refiner.to_title_case(_topic_title_platform_display(topic.title, platform)), platform)}")
             lines.append(f"- **Cluster ID:** `{topic.cluster_id}`")
-            lines.append(f"- **Target persona:** {_content_platform_display(topic.target_persona, platform)}")
-            lines.append(f"- **Blog post angle:** {_content_platform_display(topic.angle, platform)}")
+            lines.append(f"- **Target persona:** {_sanitize_display_text(_content_platform_display(topic.target_persona, platform), platform)}")
+            lines.append(f"- **Blog post angle:** {_sanitize_display_text(_fix_step_by_step_case(_content_platform_display(topic.angle, platform)), platform)}")
             lines.append(
                 f"- **Primary keyword:** `{_content_platform_display(_display_keyword(topic.primary_keyword, selection.product), platform)}`"
             )
@@ -590,13 +822,18 @@ def write_missing_topics_markdown(
             supporting = [k for k in supporting if k]
 
             keyword_groups = _keyword_groups_to_mapping(getattr(topic, "keyword_groups", None))
+            primary_intent_key = _keyword_intent_key(_display_keyword(topic.primary_keyword, selection.product))
             if keyword_groups:
                 core = [_display_keyword(k, selection.product) for k in (keyword_groups.get("core_seo_keywords") or []) if k]
                 long_tail = [_display_keyword(k, selection.product) for k in (keyword_groups.get("long_tail_keywords") or []) if k]
                 context = [_display_keyword(k, selection.product) for k in (keyword_groups.get("context_keywords") or []) if k]
-                core = _dedupe_keywords(core)
-                long_tail = _dedupe_keywords(long_tail)
-                context = _dedupe_keywords(context)
+                core, long_tail, context = _normalize_keyword_groups_for_display(
+                    core=core,
+                    long_tail=long_tail,
+                    context=context,
+                    primary_intent_key=primary_intent_key,
+                    platform=platform,
+                )
             else:
                 core, long_tail, context = [], [], []
 
@@ -614,19 +851,24 @@ def write_missing_topics_markdown(
                 lines.append(
                     f"- **Semantic SEO keywords:** {', '.join(f'`{_content_platform_display(k, platform)}`' for k in context)}"
                 )
+            if product_page_opportunities:
+                lines.append(
+                    "- **Product-page opportunities:** "
+                    + ", ".join(f"`{_content_platform_display(k, platform)}`" for k in product_page_opportunities)
+                )
 
             if topic.outline:
                 lines.append("")
                 lines.append("**Outline for the article:**")
                 for bullet in topic.outline:
-                    lines.append(f"- {refiner.to_title_case(_content_platform_display(bullet, platform))}")
+                    lines.append(f"- {_sanitize_display_text(refiner.to_title_case(_content_platform_display(bullet, platform)), platform)}")
 
             editorial_notes = getattr(topic, "editorial_notes", []) or []
             if editorial_notes:
                 lines.append("")
                 lines.append("**Other important and relevant things:**")
                 for note in editorial_notes:
-                    lines.append(f"- {refiner.to_sentence_case(_content_platform_display(note, platform))}")
+                    lines.append(f"- {_display_editorial_note(note, platform)}")
 
             lines.append("")
         lines.append("---")
@@ -950,10 +1192,13 @@ def main() -> None:
 
     selected_platform: Optional[str] = None
     if args.platform:
-        try:
-            selected_platform = require_supported_platform(args.platform)
-        except ValueError as e:
-            raise SystemExit(str(e))
+        if args.platform.strip().lower() == "general":
+            selected_platform = "general"
+        else:
+            try:
+                selected_platform = require_supported_platform(args.platform)
+            except ValueError as e:
+                raise SystemExit(str(e))
 
     if live_sheet_mode:
         if not settings.GOOGLE_SERVICE_ACCOUNT_FILE:
@@ -966,9 +1211,9 @@ def main() -> None:
             raise SystemExit("--google-sheet-input-worksheet is required in live Google Sheet mode.")
         if args.google_sheet_row < 2:
             raise SystemExit("--google-sheet-row must be >= 2 because row 1 contains headers.")
-        if not selected_platform:
+        if not args.platform:
             raise SystemExit(
-                "--platform is required in live Google Sheet mode and must target one supported platform."
+                "--platform is required in live Google Sheet mode and must target one supported platform or General."
             )
 
         try:
@@ -986,10 +1231,16 @@ def main() -> None:
                 f"Row #{selection.row_index} has no missing supported platform columns marked as NO."
             )
         if not _platform_matches_selection(selected_platform, selection.platforms):
-            available = ", ".join(platform_header_display(p) for p in selection.platforms)
+            available = ", ".join(
+                "General" if str(p).strip().lower() == "general" else platform_header_display(p)
+                for p in selection.platforms
+            )
+            selected_platform_display = (
+                "General" if selected_platform == "general" else platform_header_display(selected_platform)
+            )
             raise SystemExit(
                 f"Row #{selection.row_index} does not include the selected platform "
-                f"'{platform_header_display(selected_platform)}'. Available platforms: {available}."
+                f"'{selected_platform_display}'. Available platforms: {available}."
             )
 
         req = RunRequest(
@@ -1008,8 +1259,10 @@ def main() -> None:
             selection.product,
             selection.row_index,
             selection.topic,
-            selected_platform,
+            "General" if selected_platform == "general" else selected_platform,
         )
+
+        run_platform = None if selected_platform == "general" else selected_platform
 
         output_spreadsheet_id = normalize_spreadsheet_id(
             args.google_sheet_output_id or args.google_sheet_input_id
@@ -1028,7 +1281,7 @@ def main() -> None:
 
         result, metrics = run_sync(
             req,
-            platform=selected_platform,
+            platform=run_platform,
             use_content_index=args.use_content_index,
             seed_topic=selection.topic,
             include_product_in_title=args.include_product_in_title,
@@ -1050,7 +1303,7 @@ def main() -> None:
         md_path = write_topics_markdown(
             result,
             output_dir=brand_out_dir,
-            platform=selected_platform,
+            platform=run_platform,
             file_name=file_name,
         )
 
@@ -1066,7 +1319,7 @@ def main() -> None:
                 worksheet_name=output_worksheet_name,
                 row_payload=build_output_row(
                     selection=selection,
-                    selected_platform=selected_platform,
+                    selected_platform="General" if selected_platform == "general" else selected_platform,
                     result=result,
                     markdown_path=str(md_path),
                 ),

@@ -21,7 +21,9 @@ from agent_engine.blog_keyword_analyzer.tools.normalization import (
 )
 from ..schemas import Cluster, TopicIdea
 from ..tools.metrics import RunMetrics
+from ..tools.keyword_analysis import analyze_keywords
 from ..tools.seo_title_polisher import SeoTitlePolishRequest, polish_title
+from ..tools.topic_acceptance import finalize_topic_acceptance, optimize_primary_keyword
 
 logger = logging.getLogger(__name__)
 refiner = KeywordRefiner()
@@ -1524,6 +1526,11 @@ class KeywordResearchAgent:
                 if seed_pk and _kw_is_complete(seed_pk):
                     pk = seed_pk
                     t["primary_keyword"] = pk
+
+            accepted_pk = optimize_primary_keyword(pk, platform_label)
+            if accepted_pk and accepted_pk != pk:
+                pk = self._normalize_primary_keyword_phrase(accepted_pk, platform_label)
+                t["primary_keyword"] = pk
             pk_intent_key = self._keyword_intent_key(pk)
 
             keyword_groups = t.get("keyword_groups") or {}
@@ -1576,6 +1583,36 @@ class KeywordResearchAgent:
                 allowed_primary_keywords,
                 product_variants,
             )
+            analysis_pool = (
+                [pk]
+                + list(allowed_primary_keywords)
+                + list(t["supporting_keywords"])
+                + list(t["keyword_groups"].get("core_seo_keywords", []))
+                + list(t["keyword_groups"].get("long_tail_keywords", []))
+                + list(t["keyword_groups"].get("context_keywords", []))
+            )
+            topic_for_analysis = seed_topic_clean or pk
+            keyword_analysis = analyze_keywords(
+                topic=topic_for_analysis,
+                candidate_keywords=analysis_pool,
+                product=product,
+                platform=platform,
+                preferred_primary=pk,
+            )
+            t["keyword_analysis"] = keyword_analysis.model_dump()
+            if keyword_analysis.secondary_keywords:
+                t["supporting_keywords"] = [
+                    item.keyword for item in keyword_analysis.secondary_keywords[:5]
+                ]
+            if keyword_analysis.primary_keyword and keyword_analysis.primary_keyword.keyword:
+                t["primary_keyword"] = keyword_analysis.primary_keyword.keyword
+                pk = t["primary_keyword"]
+                pk_intent_key = self._keyword_intent_key(pk)
+            t["keyword_groups"] = {
+                "core_seo_keywords": [item.keyword for item in keyword_analysis.secondary_keywords[:5]],
+                "long_tail_keywords": [item.keyword for item in keyword_analysis.long_tail_keywords[:5]],
+                "context_keywords": list(keyword_analysis.semantic_keywords[:5]),
+            }
 
             editorial_notes = t.get("editorial_notes") or []
             if isinstance(editorial_notes, list):
@@ -1586,6 +1623,15 @@ class KeywordResearchAgent:
                 ][:6]
             else:
                 t["editorial_notes"] = []
+            if keyword_analysis.question_keywords:
+                t["editorial_notes"].append(
+                    f"Answer questions such as {keyword_analysis.question_keywords[0]}"
+                )
+            if keyword_analysis.entities:
+                t["editorial_notes"].append(
+                    "Reference entities like " + ", ".join(keyword_analysis.entities[:3])
+                )
+            t["editorial_notes"] = self._dedupe_keep_order(t["editorial_notes"])[:6]
 
             angle = t.get("angle")
             if not isinstance(angle, str) or not angle.strip():
@@ -1660,6 +1706,34 @@ class KeywordResearchAgent:
                 if include_product_in_title:
                     t["title"] = self._ensure_product_in_title(t["title"], product)
                 t["title"] = _collapse_duplicate_words(t["title"])
+
+            acceptance = finalize_topic_acceptance(
+                title=t.get("title", ""),
+                primary_keyword=t.get("primary_keyword", ""),
+                platform=platform_label,
+            )
+            if acceptance.primary_keyword and acceptance.primary_keyword != t.get("primary_keyword"):
+                t["primary_keyword"] = acceptance.primary_keyword
+                pk = acceptance.primary_keyword
+            if acceptance.title and acceptance.title != t.get("title"):
+                t["title"] = normalize_title(
+                    title=acceptance.title,
+                    primary_keyword=t.get("primary_keyword", ""),
+                    platform_label=platform_label,
+                    product=product,
+                    include_product_in_title=include_product_in_title,
+                    min_len=0,
+                    max_len=100,
+                )
+                if include_product_in_title:
+                    t["title"] = self._ensure_product_in_title(t["title"], product)
+                else:
+                    t["title"] = _remove_product_safely(t["title"], product)
+                t["title"] = _collapse_duplicate_words(t["title"])
+            if acceptance.notes:
+                t["editorial_notes"] = self._dedupe_keep_order(
+                    list(t.get("editorial_notes") or []) + acceptance.notes
+                )[:6]
 
             # Outline enforcement
             t["outline"] = _force_first4_outline(_normalize_outline_items(t.get("outline")), pk)

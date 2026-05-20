@@ -1,0 +1,17 @@
+# GroupDocs.Metadata Cloud SDK
+blog: groupdocs_cloud
+key: metadata
+display_name: "GroupDocs.Metadata Cloud SDK"
+description: "Cloud SDK for reading, updating, and removing metadata from documents and media files."
+enabled: true
+
+platform_definitions:
+  net:
+    display_name: ".NET"
+    keywords: ["c#", "csharp", ".net", "dotnet", "groupdocs.metadata cloud sdk for .net"]
+  java:
+    display_name: "Java"
+    keywords: ["java", "groupdocs.metadata cloud sdk for java"]
+  general:
+    display_name: "General"
+    keywords: ["groupdocs metadata cloud", "metadata cloud api"]

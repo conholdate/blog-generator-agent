@@ -43,7 +43,7 @@ SHEET_PLATFORM_COLUMNS: Dict[str, Optional[str]] = {
     "ANDROID": "android_via_java",
     "ANDROID_VIA_JAVA": "android_via_java",
     "CPP": "cpp",
-    "GENERAL": None,
+    "GENERAL": "general",
     "GO": "go_via_cpp",
     "JAVA": "java",
     "JASPERREPORTS": "jasperreports",
@@ -74,6 +74,14 @@ OUTPUT_HEADERS = [
     "secondary_keywords",
     "long_tail_keywords",
     "semantic_keywords",
+    "question_keywords",
+    "entity_keywords",
+    "primary_keyword_intent",
+    "primary_keyword_score",
+    "primary_keyword_aeo_score",
+    "primary_keyword_placement",
+    "keyword_clusters",
+    "rejected_keywords",
     "target_persona",
     "angle",
     "outline",
@@ -183,10 +191,8 @@ def fetch_topic_sheet_selection(
     row = _row_to_mapping(headers, [str(v).strip() for v in row_values])
     platforms: List[str] = []
     for column_name, platform_key in SHEET_PLATFORM_COLUMNS.items():
-        if not platform_key:
-            continue
         if _sheet_cell_is_missing(row.get(column_name)):
-            normalized = normalize_missing_platform(platform_key)
+            normalized = "general" if platform_key == "general" else normalize_missing_platform(platform_key)
             if normalized and normalized not in platforms:
                 platforms.append(normalized)
 
@@ -228,7 +234,25 @@ def ensure_output_headers(
             .execute()
         )
         existing_values = existing.get("values") or []
-        if existing_values and existing_values[0]:
+        existing_headers = [str(v).strip() for v in (existing_values[0] if existing_values else [])]
+        if existing_headers:
+            merged_headers = list(existing_headers)
+            for header in OUTPUT_HEADERS:
+                if header not in merged_headers:
+                    merged_headers.append(header)
+            if merged_headers == existing_headers:
+                return
+            (
+                service.spreadsheets()
+                .values()
+                .update(
+                    spreadsheetId=spreadsheet_id,
+                    range=header_range,
+                    valueInputOption="RAW",
+                    body={"values": [merged_headers]},
+                )
+                .execute()
+            )
             return
 
         (
@@ -255,9 +279,24 @@ def append_output_row(
 ) -> None:
     spreadsheet_id = normalize_spreadsheet_id(spreadsheet_id)
     service = _build_sheets_service(credentials_file)
-    ordered = [str(row_payload.get(header, "") or "") for header in OUTPUT_HEADERS]
+    header_range = f"'{worksheet_name}'!1:1"
     append_range = f"'{worksheet_name}'!A:A"
     try:
+        existing = (
+            service.spreadsheets()
+            .values()
+            .get(
+                spreadsheetId=spreadsheet_id,
+                range=header_range,
+                majorDimension="ROWS",
+                valueRenderOption="FORMATTED_VALUE",
+            )
+            .execute()
+        )
+        header_values = existing.get("values") or []
+        active_headers = [str(v).strip() for v in (header_values[0] if header_values else []) if str(v).strip()]
+        ordered_headers = active_headers or OUTPUT_HEADERS
+        ordered = [str(row_payload.get(header, "") or "") for header in ordered_headers]
         (
             service.spreadsheets()
             .values()
@@ -281,6 +320,30 @@ def build_output_row(
     result: Any,
     markdown_path: str,
 ) -> Dict[str, str]:
+    def _mapping(value: Any) -> Dict[str, Any]:
+        if isinstance(value, Mapping):
+            return dict(value)
+        if hasattr(value, "model_dump"):
+            try:
+                dumped = value.model_dump()
+                if isinstance(dumped, Mapping):
+                    return dict(dumped)
+            except Exception:
+                return {}
+        if hasattr(value, "dict"):
+            try:
+                dumped = value.dict()
+                if isinstance(dumped, Mapping):
+                    return dict(dumped)
+            except Exception:
+                return {}
+        return {}
+
+    def _field(value: Any, key: str, default: Any = "") -> Any:
+        if isinstance(value, Mapping):
+            return value.get(key, default)
+        return getattr(value, key, default)
+
     def _multiline(values: Any) -> str:
         if not isinstance(values, list):
             return str(values or "")
@@ -288,17 +351,41 @@ def build_output_row(
         return "\n".join(items)
 
     topic = result.topics[0] if getattr(result, "topics", None) else None
-    keyword_groups = getattr(topic, "keyword_groups", None) if topic is not None else None
-    core_keywords = getattr(keyword_groups, "core_seo_keywords", []) if keyword_groups else []
-    long_tail_keywords = getattr(keyword_groups, "long_tail_keywords", []) if keyword_groups else []
-    context_keywords = getattr(keyword_groups, "context_keywords", []) if keyword_groups else []
-    editorial_notes = getattr(topic, "editorial_notes", []) if topic is not None else []
-    outline = getattr(topic, "outline", []) if topic is not None else []
+    keyword_groups = _mapping(_field(topic, "keyword_groups", None)) if topic is not None else {}
+    keyword_analysis = _mapping(_field(topic, "keyword_analysis", None)) if topic is not None else {}
+    core_keywords = keyword_groups.get("core_seo_keywords") or []
+    long_tail_keywords = keyword_groups.get("long_tail_keywords") or []
+    context_keywords = keyword_groups.get("context_keywords") or []
+    analysis_secondary = keyword_analysis.get("secondary_keywords") or []
+    analysis_long_tail = keyword_analysis.get("long_tail_keywords") or []
+    question_keywords = keyword_analysis.get("question_keywords") or []
+    entity_keywords = keyword_analysis.get("entities") or []
+    rejected_keywords = keyword_analysis.get("rejected_keywords") or []
+    primary_analysis = _mapping(keyword_analysis.get("primary_keyword"))
+    primary_intent = primary_analysis.get("intent", "")
+    primary_score = primary_analysis.get("score", "")
+    primary_aeo_score = primary_analysis.get("aeo_score", "")
+    primary_placement = primary_analysis.get("placement") or []
+    clusters = keyword_analysis.get("keyword_clusters") or []
+    editorial_notes = _field(topic, "editorial_notes", []) if topic is not None else []
+    outline = _field(topic, "outline", []) if topic is not None else []
+
+    if not core_keywords and analysis_secondary:
+        core_keywords = [_field(item, "keyword", "") for item in analysis_secondary if _field(item, "keyword", "")]
+    if not long_tail_keywords and analysis_long_tail:
+        long_tail_keywords = [_field(item, "keyword", "") for item in analysis_long_tail if _field(item, "keyword", "")]
+
+    cluster_lines: list[str] = []
+    for cluster in clusters:
+        cluster_name = _field(cluster, "cluster_name", "") if cluster is not None else ""
+        cluster_keywords = _field(cluster, "keywords", []) if cluster is not None else []
+        if cluster_name and cluster_keywords:
+            cluster_lines.append(f"{cluster_name}: {', '.join(str(v).strip() for v in cluster_keywords if str(v).strip())}")
 
     return {
         "generated_at_utc": datetime.now(timezone.utc).isoformat(),
         "run_id": getattr(result, "run_id", ""),
-        "status": "ok" if topic is not None else "no_topics_generated",
+        "status": "Queued" if topic is not None else "no_topics_generated",
         "source_sheet_row": str(selection.row_index),
         "brand": selection.brand,
         "product": selection.product,
@@ -312,6 +399,14 @@ def build_output_row(
         "secondary_keywords": _multiline(core_keywords),
         "long_tail_keywords": _multiline(long_tail_keywords),
         "semantic_keywords": _multiline(context_keywords),
+        "question_keywords": _multiline(question_keywords),
+        "entity_keywords": _multiline(entity_keywords),
+        "primary_keyword_intent": str(primary_intent or ""),
+        "primary_keyword_score": str(primary_score or ""),
+        "primary_keyword_aeo_score": str(primary_aeo_score or ""),
+        "primary_keyword_placement": _multiline(primary_placement),
+        "keyword_clusters": _multiline(cluster_lines),
+        "rejected_keywords": _multiline(rejected_keywords),
         "target_persona": getattr(topic, "target_persona", "") if topic is not None else "",
         "angle": getattr(topic, "angle", "") if topic is not None else "",
         "outline": _multiline(outline),

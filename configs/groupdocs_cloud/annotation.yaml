@@ -1,0 +1,29 @@
+# GroupDocs.Annotation Cloud SDK
+blog: groupdocs_cloud
+key: annotation
+display_name: "GroupDocs.Annotation Cloud SDK"
+description: "Cloud SDK for annotating and managing document comments, highlights, and markups across common formats."
+enabled: true
+
+platform_definitions:
+  net:
+    display_name: ".NET"
+    keywords: ["c#", "csharp", ".net", "dotnet", "groupdocs.annotation cloud sdk for .net"]
+  java:
+    display_name: "Java"
+    keywords: ["java", "groupdocs.annotation cloud sdk for java"]
+  php:
+    display_name: "PHP"
+    keywords: ["php", "groupdocs.annotation cloud sdk for php"]
+  python:
+    display_name: "Python"
+    keywords: ["python", "py", "groupdocs.annotation cloud sdk for python"]
+  ruby:
+    display_name: "Ruby"
+    keywords: ["ruby", "groupdocs.annotation cloud sdk for ruby"]
+  nodejs:
+    display_name: "Node.js"
+    keywords: ["node.js", "nodejs", "javascript", "js", "groupdocs.annotation cloud sdk for node.js"]
+  general:
+    display_name: "General"
+    keywords: ["groupdocs annotation cloud", "annotation cloud api"]

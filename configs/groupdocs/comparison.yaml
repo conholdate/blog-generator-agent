@@ -1,0 +1,23 @@
+# GroupDocs.Comparison
+blog: groupdocs
+key: comparison
+display_name: "GroupDocs.Comparison"
+description: "File comparison APIs for detecting content differences across documents, spreadsheets, presentations, and more."
+enabled: true
+
+platform_definitions:
+  net:
+    display_name: ".NET"
+    keywords: ["c#", "csharp", ".net", "dotnet", "groupdocs.comparison for .net"]
+  java:
+    display_name: "Java"
+    keywords: ["java", "groupdocs.comparison for java"]
+  python:
+    display_name: "Python via .NET"
+    keywords: ["python", "py", "python via .net", "python-net", "groupdocs.comparison for python via .net"]
+  nodejs:
+    display_name: "Node.js via Java"
+    keywords: ["node.js", "nodejs", "javascript", "js", "node.js via java", "groupdocs.comparison for node.js via java"]
+  general:
+    display_name: "General"
+    keywords: ["groupdocs.comparison", "document comparison api", "compare documents library"]

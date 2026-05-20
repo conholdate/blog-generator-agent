@@ -1,0 +1,2953 @@
+{
+  "case": "blogs_to_blogs",
+  "brand_key": "groupdocs_cloud",
+  "product_key": "conversion",
+  "baseline_platform": "net",
+  "platforms": [
+    "net",
+    "general",
+    "go_via_cpp",
+    "java",
+    "nodejs",
+    "php",
+    "python",
+    "ruby"
+  ],
+  "meta": {
+    "matching_mode": "key_exact",
+    "total_input_records": 233,
+    "records_after_filters": 221,
+    "excluded_release_update_records": 6,
+    "excluded_old_or_undated_records": 6,
+    "baseline_records": 43,
+    "total_cells": 320,
+    "matched_cells": 71,
+    "missing_cells": 249,
+    "match_rate": 0.221875,
+    "skipped_empty_keys": 0
+  },
+  "rows": [
+    {
+      "category": "Conversion",
+      "sub_category": "Spreadsheet Conversion",
+      "topic": "boost productivity by converting excel to jpg",
+      "key": "boost productivity by converting excel to jpg",
+      "baseline_record_id": "blog::conversion/2024-04-08-convert-excel-to-jpg-in-csharp/index.md",
+      "coverage": {
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::conversion/2024-04-08-convert-excel-to-jpg-in-csharp/index.md",
+          "title": "Boost Productivity by Converting Excel to JPG in C# .NET",
+          "topic": "Boost productivity by converting excel to JPG",
+          "url": "https://blog.groupdocs.cloud/conversion/convert-excel-to-jpg-in-csharp"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "go_via_cpp": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "nodejs": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "php": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "ruby": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "File Conversion",
+      "sub_category": "CSV to HTML",
+      "topic": "csv to html",
+      "key": "csv to html",
+      "baseline_record_id": "blog::conversion/2024-04-18-convert-csv-to-html-in-csharp/index.md",
+      "coverage": {
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::conversion/2024-04-18-convert-csv-to-html-in-csharp/index.md",
+          "title": "Easily Convert CSV Files to HTML in C# .NET",
+          "topic": "CSV to HTML",
+          "url": "https://blog.groupdocs.cloud/conversion/convert-csv-to-html-in-csharp"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "go_via_cpp": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "nodejs": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "php": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "ruby": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Conversion",
+      "sub_category": "Document to Image",
+      "topic": "csv to jpeg",
+      "key": "csv to jpeg",
+      "baseline_record_id": "blog::conversion/2024-04-30-convert-csv-to-jpg-in-csharp/index.md",
+      "coverage": {
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::conversion/2024-04-30-convert-csv-to-jpg-in-csharp/index.md",
+          "title": "Convert CSV to JPEG using C# .NET - CSV to JPG",
+          "topic": "CSV to JPEG",
+          "url": "https://blog.groupdocs.cloud/conversion/convert-csv-to-jpg-in-csharp"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "go_via_cpp": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "nodejs": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "php": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "ruby": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Conversion",
+      "sub_category": "Csv To Json",
+      "topic": "csv to json",
+      "key": "csv to json",
+      "baseline_record_id": "blog::conversion/2024-05-03-convert-csv-to-json-in-csharp/index.md",
+      "coverage": {
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::conversion/2024-05-03-convert-csv-to-json-in-csharp/index.md",
+          "title": "Effortless CSV to JSON Conversion - CSV to JSON in C#",
+          "topic": "CSV to JSON",
+          "url": "https://blog.groupdocs.cloud/conversion/convert-csv-to-json-with-csharp"
+        },
+        "general": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::conversion/2022-10-10-how-to-convert-csv-to-json-file-online-in-node.js/index.md",
+          "title": "How to Convert CSV to JSON File Online in Node.js",
+          "topic": "CSV to JSON",
+          "url": "https://blog.groupdocs.cloud/conversion/how-to-convert-csv-to-json-file-online-in-node.js/"
+        },
+        "go_via_cpp": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::conversion/2022-11-21-convert-csv-to-json-and-json-to-csv-in-java/index.md",
+          "title": "Convert CSV to JSON and JSON to CSV in Java",
+          "topic": "CSV to JSON",
+          "url": "https://blog.groupdocs.cloud/conversion/convert-csv-to-json-and-json-to-csv-in-java/"
+        },
+        "nodejs": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "php": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::conversion/2022-08-20-convert-csv-to-json-and-json-to-csv-in-python/index.md",
+          "title": "Convert CSV to JSON and JSON to CSV in Python",
+          "topic": "CSV to JSON",
+          "url": "https://blog.groupdocs.cloud/conversion/convert-csv-to-json-and-json-to-csv-in-python/"
+        },
+        "ruby": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Conversion",
+      "sub_category": "Document Conversion",
+      "topic": "csv to pdf",
+      "key": "csv to pdf",
+      "baseline_record_id": "blog::conversion/2024-05-08-convert-csv-to-pdf-in-csharp/index.md",
+      "coverage": {
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::conversion/2024-05-08-convert-csv-to-pdf-in-csharp/index.md",
+          "title": "A Comprehensive guide for CSV to PDF in C# .NET",
+          "topic": "CSV to PDF",
+          "url": "https://blog.groupdocs.cloud/conversion/convert-csv-to-pdf-with-csharp"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "go_via_cpp": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "nodejs": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "php": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "ruby": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Conversion",
+      "sub_category": "Project Management",
+      "topic": "develop ms project viewer mpp viewer",
+      "key": "develop ms project viewer mpp viewer",
+      "baseline_record_id": "blog::conversion/2024-08-21-convert-mpp-to-html-in-csharp/index.md",
+      "coverage": {
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::conversion/2024-08-21-convert-mpp-to-html-in-csharp/index.md",
+          "title": "Develop MS Project Viewer in C# - MPP File Viewer",
+          "topic": "Develop MS project viewer MPP viewer",
+          "url": "https://blog.groupdocs.cloud/conversion/convert-mpp-to-html-in-csharp"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "go_via_cpp": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "nodejs": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "php": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "ruby": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Conversion",
+      "sub_category": "File Format Conversion",
+      "topic": "effortless csv to excel workbook conversion",
+      "key": "effortless csv to excel workbook conversion",
+      "baseline_record_id": "blog::conversion/2024-04-16-convert-csv-to-excel-in-csharp/index.md",
+      "coverage": {
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::conversion/2024-04-16-convert-csv-to-excel-in-csharp/index.md",
+          "title": "Effortless CSV to Excel Workbook Conversion with C# .NET",
+          "topic": "Effortless CSV to excel workbook conversion",
+          "url": "https://blog.groupdocs.cloud/conversion/convert-csv-to-excel-in-csharp"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "go_via_cpp": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "nodejs": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "php": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "ruby": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Conversion",
+      "sub_category": "Pdf to Excel",
+      "topic": "effortless pdf to excel conversion",
+      "key": "effortless pdf to excel conversion",
+      "baseline_record_id": "blog::conversion/2024-04-25-convert-pdf-to-xls-in-csharp/index.md",
+      "coverage": {
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::conversion/2024-04-25-convert-pdf-to-xls-in-csharp/index.md",
+          "title": "Effortless PDF to Excel Conversion with C# .NET",
+          "topic": "Effortless PDF to excel conversion",
+          "url": "https://blog.groupdocs.cloud/conversion/convert-pdf-to-xls-in-csharp"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "go_via_cpp": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "nodejs": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "php": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "ruby": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Conversion",
+      "sub_category": "Document Conversion",
+      "topic": "effortlessly convert excel to pdf step by step guide",
+      "key": "effortlessly convert excel to pdf step by step guide",
+      "baseline_record_id": "blog::conversion/2024-03-27-convert-excel-to-pdf-in-csharp/index.md",
+      "coverage": {
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::conversion/2024-03-27-convert-excel-to-pdf-in-csharp/index.md",
+          "title": "Effortlessly Convert Excel to PDF with C# .NET - Step-by-Step Guide",
+          "topic": "Effortlessly convert excel to PDF step by step guide",
+          "url": "https://blog.groupdocs.cloud/conversion/convert-excel-to-pdf-in-csharp"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "go_via_cpp": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "nodejs": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "php": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "ruby": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Document Conversion",
+      "sub_category": "Spreadsheet To Html",
+      "topic": "excel spreadsheets to html tables",
+      "key": "excel spreadsheets to html tables",
+      "baseline_record_id": "blog::conversion/2024-03-29-convert-excel-to-html-in-csharp/index.md",
+      "coverage": {
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::conversion/2024-03-29-convert-excel-to-html-in-csharp/index.md",
+          "title": "Transform Excel Spreadsheets to HTML Tables with C# .NET",
+          "topic": "Excel spreadsheets to HTML tables",
+          "url": "https://blog.groupdocs.cloud/conversion/convert-excel-to-html-in-csharp"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "go_via_cpp": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "nodejs": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "php": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "ruby": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Conversion",
+      "sub_category": "File Format",
+      "topic": "excel to json xls to json",
+      "key": "excel to json xls to json",
+      "baseline_record_id": "blog::conversion/2024-04-04-convert-excel-to-json-in-csharp/index.md",
+      "coverage": {
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::conversion/2024-04-04-convert-excel-to-json-in-csharp/index.md",
+          "title": "Convert Excel to JSON Using C# .NET - XLS to JSON Converter",
+          "topic": "Excel to JSON XLS to JSON",
+          "url": "https://blog.groupdocs.cloud/conversion/convert-excel-to-json-in-csharp"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "go_via_cpp": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "nodejs": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "php": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "ruby": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Document Conversion",
+      "sub_category": "Excel to Text",
+      "topic": "excel workbook to text rest api",
+      "key": "excel workbook to text rest api",
+      "baseline_record_id": "blog::conversion/2025-10-03-convert-excel-to-txt-using-csharp/index.md",
+      "coverage": {
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::conversion/2025-10-03-convert-excel-to-txt-using-csharp/index.md",
+          "title": "Convert Excel Workbook to Text File using .NET REST API",
+          "topic": "Excel workbook to text REST API",
+          "url": "https://blog.groupdocs.cloud/conversion/convert-excel-to-txt-using-csharp"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "go_via_cpp": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "nodejs": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "php": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "ruby": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Conversion",
+      "sub_category": "Html To Excel",
+      "topic": "html to excel conversion convert html tables to excel spreadsheets",
+      "key": "html to excel conversion convert html tables to excel spreadsheets",
+      "baseline_record_id": "blog::conversion/2024-04-09-convert-html-to-excel-in-csharp/index.md",
+      "coverage": {
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::conversion/2024-04-09-convert-html-to-excel-in-csharp/index.md",
+          "title": "HTML to Excel Conversion with C# .NET - Convert HTML Tables to Excel Spreadsheets",
+          "topic": "HTML to excel conversion convert HTML tables to excel spreadsheets",
+          "url": "https://blog.groupdocs.cloud/conversion/convert-html-to-excel-in-csharp"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "go_via_cpp": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "nodejs": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "php": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "ruby": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Conversion",
+      "sub_category": "Document Conversion",
+      "topic": "html to pdf",
+      "key": "html to pdf",
+      "baseline_record_id": "blog::conversion/2024-03-02-convert-html-to-pdf-in-csharp/index.md",
+      "coverage": {
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::conversion/2024-03-02-convert-html-to-pdf-in-csharp/index.md",
+          "title": "Effortless HTML to PDF Conversion in C# - Web to PDF Converter",
+          "topic": "HTML to PDF",
+          "url": "https://blog.groupdocs.cloud/conversion/convert-html-to-pdf-in-csharp"
+        },
+        "general": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::conversion/2022-09-20-convert-html-to-pdf-online-using-node.js-api/index.md",
+          "title": "Convert HTML to PDF Online using Node.js API",
+          "topic": "HTML to PDF",
+          "url": "https://blog.groupdocs.cloud/conversion/convert-html-to-pdf-online-using-node.js-api/"
+        },
+        "go_via_cpp": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::conversion/2022-11-18-convert-html-to-pdf-in-java-using-rest-api/index.md",
+          "title": "Convert HTML to PDF in Java using REST API",
+          "topic": "HTML to PDF",
+          "url": "https://blog.groupdocs.cloud/conversion/convert-html-to-pdf-in-java-using-rest-api/"
+        },
+        "nodejs": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::conversion/2025-04-30-convert-html-to-pdf-in-nodejs/index.md",
+          "title": "Convert HTML to PDF using Node.js | DOC Export via GroupDocs REST API",
+          "topic": "HTML to PDF",
+          "url": "https://blog.groupdocs.cloud/conversion/html-to-pdf-online-nodejs/"
+        },
+        "php": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::conversion/2021-09-24-convert-html-to-pdf-using-rest-api-in-python/index.md",
+          "title": "Convert HTML to PDF using REST API in Python",
+          "topic": "HTML to PDF",
+          "url": "https://blog.groupdocs.cloud/conversion/convert-html-to-pdf-using-rest-api-in-python/"
+        },
+        "ruby": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::conversion/2022-05-31-convert-html-to-pdf-using-rest-api-in-ruby/index.md",
+          "title": "Convert HTML to PDF using REST API in Ruby",
+          "topic": "HTML to PDF",
+          "url": "https://blog.groupdocs.cloud/conversion/convert-html-to-pdf-using-rest-api-in-ruby/"
+        }
+      }
+    },
+    {
+      "category": "Conversion",
+      "sub_category": "Html To Powerpoint",
+      "topic": "html to powerpoint embed webpage into powerpoint",
+      "key": "html to powerpoint embed webpage into powerpoint",
+      "baseline_record_id": "blog::conversion/2024-08-01-convert-html-to-powerpoint-in-csharp/index.md",
+      "coverage": {
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::conversion/2024-08-01-convert-html-to-powerpoint-in-csharp/index.md",
+          "title": "Convert HTML to PowerPoint in C# - Embed Webpage into PowerPoint",
+          "topic": "HTML to powerpoint embed webpage into powerpoint",
+          "url": "https://blog.groupdocs.cloud/conversion/convert-html-to-powerpoint-in-csharp"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "go_via_cpp": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "nodejs": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "php": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "ruby": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Conversion",
+      "sub_category": "Html To Word",
+      "topic": "html to word document html to docx",
+      "key": "html to word document html to docx",
+      "baseline_record_id": "blog::conversion/2024-08-13-convert-html-to-word-in-csharp/index.md",
+      "coverage": {
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::conversion/2024-08-13-convert-html-to-word-in-csharp/index.md",
+          "title": "Convert HTML to Word Document Using .NET - HTML to DOCX Converter",
+          "topic": "HTML to word document HTML to DOCX",
+          "url": "https://blog.groupdocs.cloud/conversion/convert-html-to-word-in-csharp"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "go_via_cpp": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "nodejs": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "php": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "ruby": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Conversion",
+      "sub_category": "Image To PDF",
+      "topic": "jpg to pdf",
+      "key": "jpg to pdf",
+      "baseline_record_id": "blog::conversion/2025-10-07-convert-jpg-to-pdf-csharp/index.md",
+      "coverage": {
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::conversion/2025-10-07-convert-jpg-to-pdf-csharp/index.md",
+          "title": "Convert JPG to PDF in C# | JPG or JPEG to PDF using .NET REST API",
+          "topic": "JPG to PDF",
+          "url": "https://blog.groupdocs.cloud/conversion/convert-jpg-to-pdf-using-csharp"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "go_via_cpp": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "nodejs": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::conversion/2025-05-16-convert-jpg-to-pdf-nodejs/index.md",
+          "title": "Convert JPG to PDF using Node.js | Image to PDF Conversion",
+          "topic": "JPG to PDF",
+          "url": "https://blog.groupdocs.cloud/conversion/convert-jpg-to-pdf-with-nodejs"
+        },
+        "php": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::conversion/2023-10-18-convert-jpg-to-pdf-using-image-to-pdf-converter/index.md",
+          "title": "Convert JPG to PDF using Image to PDF Converter",
+          "topic": "JPG to PDF",
+          "url": "https://blog.groupdocs.cloud/conversion/convert-jpg-to-pdf-using-image-to-pdf-converter"
+        },
+        "ruby": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "File Conversion",
+      "sub_category": "Image to Document",
+      "topic": "jpg to word document docx jpg to doc",
+      "key": "jpg to word document docx jpg to doc",
+      "baseline_record_id": "blog::conversion/2024-08-23-convert-jpg-to-word-in-csharp/index.md",
+      "coverage": {
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::conversion/2024-08-23-convert-jpg-to-word-in-csharp/index.md",
+          "title": "Convert JPG to Word Document (DOCX) in C# .NET - JPG to DOC",
+          "topic": "JPG to word document DOCX JPG to DOC",
+          "url": "https://blog.groupdocs.cloud/conversion/convert-jpg-to-doc-in-csharp"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "go_via_cpp": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "nodejs": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "php": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "ruby": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Data Conversion",
+      "sub_category": "Json to Csv",
+      "topic": "json to csv",
+      "key": "json to csv",
+      "baseline_record_id": "blog::conversion/2024-03-07-convert-json-to-csv-in-csharp/index.md",
+      "coverage": {
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::conversion/2024-03-07-convert-json-to-csv-in-csharp/index.md",
+          "title": "Simplify Data Conversion - Convert JSON to CSV with C# .NET",
+          "topic": "JSON to CSV",
+          "url": "https://blog.groupdocs.cloud/conversion/convert-json-to-csv-in-csharp"
+        },
+        "general": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::conversion/2023-03-23-convert-json-to-csv-file-free-online-converter/index.md",
+          "title": "Convert JSON to CSV File – Free Online Converter",
+          "topic": "JSON to CSV",
+          "url": "https://blog.groupdocs.cloud/conversion/convert-json-to-csv-file-free-online-converter/"
+        },
+        "go_via_cpp": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "nodejs": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::conversion/2022-08-30-convert-json-file-to-csv-in-node.js/index.md",
+          "title": "Convert JSON file to CSV in Node.js",
+          "topic": "JSON to CSV",
+          "url": "https://blog.groupdocs.cloud/conversion/convert-json-file-to-csv-in-node.js/"
+        },
+        "php": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "ruby": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Conversion",
+      "sub_category": "Document Conversion",
+      "topic": "json to html",
+      "key": "json to html",
+      "baseline_record_id": "blog::conversion/2024-07-08-convert-json-to-html-in-csharp/index.md",
+      "coverage": {
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::conversion/2024-07-08-convert-json-to-html-in-csharp/index.md",
+          "title": "Convert JSON to HTML in C# .NET - JSON to HTML Converter",
+          "topic": "JSON to HTML",
+          "url": "https://blog.groupdocs.cloud/conversion/convert-json-to-html-with-csharp"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "go_via_cpp": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::conversion/2025-03-26-convert-json-to-html-in-java/index.md",
+          "title": "Convert JSON to HTML in Java - JSON to HTML Converter",
+          "topic": "JSON to HTML",
+          "url": "https://blog.groupdocs.cloud/conversion/convert-json-to-html-in-java"
+        },
+        "nodejs": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::conversion/2023-10-10-convert-json-to-html-using-a-json-converter/index.md",
+          "title": "Convert JSON to HTML using a JSON Converter",
+          "topic": "JSON to HTML",
+          "url": "https://blog.groupdocs.cloud/conversion/convert-json-to-html-using-a-json-converter/"
+        },
+        "php": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "ruby": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Conversion",
+      "sub_category": "Markdown to Html",
+      "topic": "markdown to html markdown conversion api",
+      "key": "markdown to html markdown conversion api",
+      "baseline_record_id": "blog::conversion/2023-11-15-convert-markdown-to-html-in-csharp-markdown-conversion-api/index.md",
+      "coverage": {
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::conversion/2023-11-15-convert-markdown-to-html-in-csharp-markdown-conversion-api/index.md",
+          "title": "Convert Markdown to HTML in C# - Markdown Conversion API",
+          "topic": "Markdown to HTML markdown conversion API",
+          "url": "https://blog.groupdocs.cloud/conversion/convert-markdown-to-html-in-csharp-markdown-conversion-api"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "go_via_cpp": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "nodejs": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "php": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "ruby": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "File Conversion",
+      "sub_category": "Document Formats",
+      "topic": "markdown to pdf md to pdf",
+      "key": "markdown to pdf md to pdf",
+      "baseline_record_id": "blog::conversion/2023-12-15-convert-markdown-to-pdf-in-csharp-md-to-pdf-converter/index.md",
+      "coverage": {
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::conversion/2023-12-15-convert-markdown-to-pdf-in-csharp-md-to-pdf-converter/index.md",
+          "title": "Convert Markdown to PDF in C# - MD to PDF Converter",
+          "topic": "Markdown to PDF MD to PDF",
+          "url": "https://blog.groupdocs.cloud/conversion/convert-markdown-to-pdf-in-csharp-md-to-pdf-converter"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "go_via_cpp": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "nodejs": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "php": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "ruby": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Conversion",
+      "sub_category": "Document Formats",
+      "topic": "mpp to excel export ms project to xls xlsx using rest api",
+      "key": "mpp to excel export ms project to xls xlsx using rest api",
+      "baseline_record_id": "blog::conversion/2024-09-06-convert-mpp-to-excel-in-csharp/index.md",
+      "coverage": {
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::conversion/2024-09-06-convert-mpp-to-excel-in-csharp/index.md",
+          "title": "Convert MPP to Excel | Export MS Project to XLS/XLSX Using REST API",
+          "topic": "MPP to excel export MS project to XLS XLSX using REST API",
+          "url": "https://blog.groupdocs.cloud/conversion/convert-mpp-to-excel-in-csharp"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "go_via_cpp": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "nodejs": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "php": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "ruby": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Conversion",
+      "sub_category": "Document Conversion",
+      "topic": "mpp to excel rest api seamless ms project to xlsx conversion",
+      "key": "mpp to excel rest api seamless ms project to xlsx conversion",
+      "baseline_record_id": "blog::conversion/2025-08-12-convert-mpp-to-excel-in-csharp/index.md",
+      "coverage": {
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::conversion/2025-08-12-convert-mpp-to-excel-in-csharp/index.md",
+          "title": "Convert MPP to Excel using .NET REST API – Seamless MS Project to XLSX Conversion",
+          "topic": "MPP to excel REST API seamless MS project to XLSX conversion",
+          "url": "https://blog.groupdocs.cloud/conversion/convert-mpp-to-excel-with-csharp"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "go_via_cpp": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "nodejs": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "php": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "ruby": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Conversion",
+      "sub_category": "Document Conversion",
+      "topic": "mpp to pdf rest api export ms project with ease",
+      "key": "mpp to pdf rest api export ms project with ease",
+      "baseline_record_id": "blog::conversion/2025-08-14-convert-mpp-to-pdf-with-csharp/index.md",
+      "coverage": {
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::conversion/2025-08-14-convert-mpp-to-pdf-with-csharp/index.md",
+          "title": "Convert MPP to PDF using .NET REST API – Export MS Project Files with Ease",
+          "topic": "MPP to PDF REST API export MS project with ease",
+          "url": "https://blog.groupdocs.cloud/conversion/convert-mpp-to-pdf-with-csharp"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "go_via_cpp": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "nodejs": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "php": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "ruby": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Conversion",
+      "sub_category": "Project Files",
+      "topic": "ms project mpp to pdf easy mpp to pdf conversion",
+      "key": "ms project mpp to pdf easy mpp to pdf conversion",
+      "baseline_record_id": "blog::conversion/2024-09-04-convert-mpp-to-pdf-in-csharp/index.md",
+      "coverage": {
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::conversion/2024-09-04-convert-mpp-to-pdf-in-csharp/index.md",
+          "title": "Convert MS Project MPP to PDF in C# .NET – Easy MPP to PDF Conversion",
+          "topic": "MS project MPP to PDF easy MPP to PDF conversion",
+          "url": "https://blog.groupdocs.cloud/conversion/convert-mpp-to-pdf-in-csharp"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "go_via_cpp": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "nodejs": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "php": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "ruby": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Conversion",
+      "sub_category": "Spreadsheet Conversion",
+      "topic": "ods to excel workbook using rest api easy and fast",
+      "key": "ods to excel workbook using rest api easy and fast",
+      "baseline_record_id": "blog::conversion/2025-01-30-convert-ods-to-excel-in-csharp/index.md",
+      "coverage": {
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::conversion/2025-01-30-convert-ods-to-excel-in-csharp/index.md",
+          "title": "Convert ODS to Excel Workbook Using REST API – Easy & Fast",
+          "topic": "ODS to excel workbook using REST API easy and fast",
+          "url": "https://blog.groupdocs.cloud/conversion/convert-ods-to-excel-using-csharp"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "go_via_cpp": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "nodejs": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "php": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "ruby": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Conversion",
+      "sub_category": "Pdf To Html",
+      "topic": "pdf to html",
+      "key": "pdf to html",
+      "baseline_record_id": "blog::conversion/2024-03-21-convert-pdf-to-html-in-csharp/index.md",
+      "coverage": {
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::conversion/2024-03-21-convert-pdf-to-html-in-csharp/index.md",
+          "title": "Easy and Simple PDF to HTML Conversion in C# - PDF to HTML",
+          "topic": "PDF to HTML",
+          "url": "https://blog.groupdocs.cloud/conversion/convert-pdf-to-html-in-csharp"
+        },
+        "general": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::conversion/2022-10-12-how-to-convert-pdf-to-html-online-in-node.js/index.md",
+          "title": "How to Convert PDF to HTML Online in Node.js",
+          "topic": "PDF to HTML",
+          "url": "https://blog.groupdocs.cloud/conversion/how-to-convert-pdf-to-html-online-in-node.js/"
+        },
+        "go_via_cpp": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::conversion/2022-12-19-convert-pdf-to-html-in-java-using-rest-api/index.md",
+          "title": "Convert PDF to HTML in Java using REST API",
+          "topic": "PDF to HTML",
+          "url": "https://blog.groupdocs.cloud/conversion/convert-pdf-to-html-in-java-using-rest-api/"
+        },
+        "nodejs": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::conversion/2025-04-18-convert-pdf-to-html-in-nodejs/index.md",
+          "title": "Convert PDF to HTML using Node.js | PDF to Webpage via REST API",
+          "topic": "PDF to HTML",
+          "url": "https://blog.groupdocs.cloud/conversion/pdf-to-html-online-nodejs/"
+        },
+        "php": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::conversion/2022-07-26-how-to-convert-pdf-files-to-html-in-python/index.md",
+          "title": "How to Convert PDF Files to HTML in Python",
+          "topic": "PDF to HTML",
+          "url": "https://blog.groupdocs.cloud/conversion/how-to-convert-pdf-files-to-html-in-python/"
+        },
+        "ruby": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::conversion/2022-06-12-convert-pdf-to-html-using-rest-api-in-ruby/index.md",
+          "title": "Convert PDF to HTML using REST API in Ruby",
+          "topic": "PDF to HTML",
+          "url": "https://blog.groupdocs.cloud/conversion/convert-pdf-to-html-using-rest-api-in-ruby/"
+        }
+      }
+    },
+    {
+      "category": "Conversion",
+      "sub_category": "Pdf To Image",
+      "topic": "pdf to jpg",
+      "key": "pdf to jpg",
+      "baseline_record_id": "blog::conversion/2024-03-26-convert-pdf-to-jpg-in-csharp/index.md",
+      "coverage": {
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::conversion/2024-03-26-convert-pdf-to-jpg-in-csharp/index.md",
+          "title": "How to Convert PDF to JPG with C# .NET - PDF to Image",
+          "topic": "PDF to JPG",
+          "url": "https://blog.groupdocs.cloud/conversion/convert-pdf-to-jpg-in-csharp"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "go_via_cpp": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::conversion/2022-12-02-convert-pdf-to-jpg-and-jpg-to-pdf-programmatically-in-java/index.md",
+          "title": "Convert PDF to JPG and JPG to PDF Programmatically in Java",
+          "topic": "PDF to JPG",
+          "url": "https://blog.groupdocs.cloud/conversion/convert-pdf-to-jpg-and-jpg-to-pdf-programmatically-in-java/"
+        },
+        "nodejs": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::conversion/2022-09-02-convert-pdf-to-jpg-image-in-node.js-using-rest-api/index.md",
+          "title": "Convert PDF to JPG Image in Node.js using REST API",
+          "topic": "PDF to JPG",
+          "url": "https://blog.groupdocs.cloud/conversion/convert-pdf-to-jpg-image-in-node.js-using-rest-api/"
+        },
+        "php": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::conversion/2022-07-28-convert-pdf-to-jpeg-png-and-gif-images-in-python/index.md",
+          "title": "Convert PDF to JPG, PNG, and GIF Images in Python",
+          "topic": "PDF to JPG",
+          "url": "https://blog.groupdocs.cloud/conversion/convert-pdf-to-jpg-png-and-gif-images-in-python/"
+        },
+        "ruby": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Conversion",
+      "sub_category": "Document Formats",
+      "topic": "pdf to powerpoint pdf to ppt",
+      "key": "pdf to powerpoint pdf to ppt",
+      "baseline_record_id": "blog::conversion/2024-04-24-convert-pdf-to-ppt-in-csharp/index.md",
+      "coverage": {
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::conversion/2024-04-24-convert-pdf-to-ppt-in-csharp/index.md",
+          "title": "Convert PDF to PowerPoint with C# .NET - PDF to PPT",
+          "topic": "PDF to powerpoint PDF to PPT",
+          "url": "https://blog.groupdocs.cloud/conversion/convert-pdf-to-ppt-in-csharp"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "go_via_cpp": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::conversion/2025-03-20-convert-pdf-to-ppt-in-java/index.md",
+          "title": "Convert PDF to PowerPoint with Java - PDF to PPT in Java",
+          "topic": "PDF to powerpoint PDF to PPT",
+          "url": "https://blog.groupdocs.cloud/conversion/pdf-to-ppt-java"
+        },
+        "nodejs": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "php": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "ruby": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Conversion",
+      "sub_category": "Document conversion",
+      "topic": "pdf to word using rest api",
+      "key": "pdf to word using rest api",
+      "baseline_record_id": "blog::conversion/2022-11-17-convert-pdf-to-word-in-csharp-net-using-rest-api/index.md",
+      "coverage": {
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::conversion/2022-11-17-convert-pdf-to-word-in-csharp-net-using-rest-api/index.md",
+          "title": "Convert PDF to Word in C# .NET using REST API",
+          "topic": "PDF to word using REST API",
+          "url": "https://blog.groupdocs.cloud/conversion/convert-pdf-to-word-in-csharp-net-using-rest-api/"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "go_via_cpp": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "nodejs": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "php": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "ruby": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Conversion",
+      "sub_category": "Image to PowerPoint",
+      "topic": "png to pptx",
+      "key": "png to pptx",
+      "baseline_record_id": "blog::conversion/2023-11-30-convert-png-to-pptx-in-csharp-image-to-powerpoint-converter/index.md",
+      "coverage": {
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::conversion/2023-11-30-convert-png-to-pptx-in-csharp-image-to-powerpoint-converter/index.md",
+          "title": "Convert PNG to PPTX in C# - Image to PowerPoint Converter",
+          "topic": "PNG to PPTX",
+          "url": "https://blog.groupdocs.cloud/conversion/convert-png-to-pptx-in-csharp-image-to-powerpoint-converter"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "go_via_cpp": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "nodejs": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "php": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "ruby": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "File Conversion",
+      "sub_category": "Archive To Image",
+      "topic": "rar to jpg rar",
+      "key": "rar to jpg rar",
+      "baseline_record_id": "blog::conversion/2023-11-08-convert-rar-file-to-jpg-in-csharp-rar-file-converter/index.md",
+      "coverage": {
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::conversion/2023-11-08-convert-rar-file-to-jpg-in-csharp-rar-file-converter/index.md",
+          "title": "Convert RAR File to JPG in C# - RAR File Converter",
+          "topic": "RAR to JPG RAR",
+          "url": "https://blog.groupdocs.cloud/conversion/convert-rar-file-to-jpg-in-csharp-rar-file-converter"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "go_via_cpp": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "nodejs": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "php": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "ruby": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Conversion",
+      "sub_category": "Image Conversion",
+      "topic": "svg to jpg",
+      "key": "svg to jpg",
+      "baseline_record_id": "blog::conversion/2024-07-19-convert-svg-to-jpg-in-csharp/index.md",
+      "coverage": {
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::conversion/2024-07-19-convert-svg-to-jpg-in-csharp/index.md",
+          "title": "Convert SVG to JPG in C# .NET - Scalable Vector Graphics Converter",
+          "topic": "SVG to JPG",
+          "url": "https://blog.groupdocs.cloud/conversion/convert-svg-to-jpg-in-csharp"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "go_via_cpp": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::conversion/2023-03-14-convert-svg-files-to-jpg-images-in-java-using-rest-api/index.md",
+          "title": "Convert SVG Files to JPG Images in Java using REST API",
+          "topic": "SVG to JPG",
+          "url": "https://blog.groupdocs.cloud/conversion/convert-svg-files-to-jpg-images-in-java-using-rest-api/"
+        },
+        "nodejs": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::conversion/2023-11-24-convert-svg-to-jpg-in-nodejs-svg-to-jpg-converter/index.md",
+          "title": "Convert SVG to JPG in Node.js - SVG to JPG Converter",
+          "topic": "SVG to JPG",
+          "url": "https://blog.groupdocs.cloud/conversion/convert-svg-to-jpg-in-nodejs-svg-to-jpg-converter"
+        },
+        "php": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::conversion/2022-10-27-convert-svg-to-jpg-and-jpg-to-svg-in-python/index.md",
+          "title": "Convert SVG to JPG and JPG to SVG in Python",
+          "topic": "SVG to JPG",
+          "url": "https://blog.groupdocs.cloud/conversion/convert-svg-to-jpg-and-jpg-to-svg-in-python/"
+        },
+        "ruby": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Conversion",
+      "sub_category": "Image Conversion",
+      "topic": "svg to png",
+      "key": "svg to png",
+      "baseline_record_id": "blog::conversion/2023-10-12-convert-svg-to-png-using-svg-to-png-converter/index.md",
+      "coverage": {
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::conversion/2023-10-12-convert-svg-to-png-using-svg-to-png-converter/index.md",
+          "title": "Convert SVG to PNG using SVG to PNG Converter",
+          "topic": "SVG to PNG",
+          "url": "https://blog.groupdocs.cloud/conversion/convert-svg-to-png-using-svg-to-png-converter"
+        },
+        "general": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::conversion/2022-10-15-how-to-convert-svg-to-png-online-in-node.js/index.md",
+          "title": "How to Convert SVG to PNG Online in Node.js",
+          "topic": "SVG to PNG",
+          "url": "https://blog.groupdocs.cloud/conversion/how-to-convert-svg-to-png-online-in-node.js/"
+        },
+        "go_via_cpp": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::conversion/2023-01-26-how-to-convert-svg-to-png-in-java-using-rest-api/index.md",
+          "title": "How to Convert SVG to PNG in Java using REST API",
+          "topic": "SVG to PNG",
+          "url": "https://blog.groupdocs.cloud/conversion/how-to-convert-svg-to-png-in-java-using-rest-api/"
+        },
+        "nodejs": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "php": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::conversion/2022-10-19-convert-svg-to-png-high-quality-in-python/index.md",
+          "title": "Convert SVG to PNG High Quality in Python",
+          "topic": "SVG to PNG",
+          "url": "https://blog.groupdocs.cloud/conversion/convert-svg-to-png-high-quality-in-python/"
+        },
+        "ruby": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Document Conversion",
+      "sub_category": "Word to Html",
+      "topic": "word documents to html",
+      "key": "word documents to html",
+      "baseline_record_id": "blog::conversion/2024-05-09-convert-doc-to-html-in-csharp/index.md",
+      "coverage": {
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::conversion/2024-05-09-convert-doc-to-html-in-csharp/index.md",
+          "title": "How to Convert Word Documents to HTML in C# .NET",
+          "topic": "Word documents to HTML",
+          "url": "https://blog.groupdocs.cloud/conversion/convert-doc-to-html-with-csharp"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "go_via_cpp": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "nodejs": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::conversion/2025-04-09-convert-doc-to-html-with-nodejs/index.md",
+          "title": "How to Convert Word Documents to HTML in Node.js",
+          "topic": "Word documents to HTML",
+          "url": "https://blog.groupdocs.cloud/conversion/convert-doc-to-html-with-nodejs"
+        },
+        "php": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "ruby": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Conversion",
+      "sub_category": "Document Conversion",
+      "topic": "word to html docx to html cloud sdk",
+      "key": "word to html docx to html cloud sdk",
+      "baseline_record_id": "blog::conversion/2025-12-24-convert-doc-to-html-with-csharp/index.md",
+      "coverage": {
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::conversion/2025-12-24-convert-doc-to-html-with-csharp/index.md",
+          "title": "Convert Word to HTML in C# - DOCX to HTML using .NET Cloud SDK",
+          "topic": "Word to HTML DOCX to HTML cloud SDK",
+          "url": "https://blog.groupdocs.cloud/conversion/convert-word-to-html-using-csharp"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "go_via_cpp": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "nodejs": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "php": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "ruby": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Document Conversion",
+      "sub_category": "Word to Markdown",
+      "topic": "word to markdown markdown generator",
+      "key": "word to markdown markdown generator",
+      "baseline_record_id": "blog::conversion/2023-11-03-convert-word-to-markdown-in-c-markdown-generator/index.md",
+      "coverage": {
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::conversion/2023-11-03-convert-word-to-markdown-in-c-markdown-generator/index.md",
+          "title": "Convert Word to Markdown in C# - Markdown Generator",
+          "topic": "Word to markdown markdown generator",
+          "url": "https://blog.groupdocs.cloud/conversion/convert-word-to-markdown-in-csharp-markdown-generator"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "go_via_cpp": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "nodejs": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "php": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "ruby": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Conversion",
+      "sub_category": "Word to PDF",
+      "topic": "word to pdf docx to pdf rest api",
+      "key": "word to pdf docx to pdf rest api",
+      "baseline_record_id": "blog::conversion/2025-07-09-convert-doc-to-pdf-with-csharp/index.md",
+      "coverage": {
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::conversion/2025-07-09-convert-doc-to-pdf-with-csharp/index.md",
+          "title": "Convert Word to PDF in C# - DOCX to PDF using .NET REST API",
+          "topic": "Word to PDF DOCX to PDF REST API",
+          "url": "https://blog.groupdocs.cloud/conversion/convert-doc-to-pdf-with-csharp"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "go_via_cpp": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "nodejs": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "php": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "ruby": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Conversion",
+      "sub_category": "Excel to CSV",
+      "topic": "xlsx to csv",
+      "key": "xlsx to csv",
+      "baseline_record_id": "blog::conversion/2024-03-16-convert-excel-to-csv-in-csharp/index.md",
+      "coverage": {
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::conversion/2024-03-16-convert-excel-to-csv-in-csharp/index.md",
+          "title": "Effortless Excel (XLS, XLSX) to CSV Conversion in C# .NET",
+          "topic": "XLSX to CSV",
+          "url": "https://blog.groupdocs.cloud/conversion/convert-excel-to-csv-in-csharp"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "go_via_cpp": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::conversion/2023-03-30-convert-excel-to-csv-in-java-using-rest-api/index.md",
+          "title": "Convert Excel (XLS/XLSX) to CSV in Java using REST API",
+          "topic": "XLSX to CSV",
+          "url": "https://blog.groupdocs.cloud/conversion/convert-excel-xlsxlsx-to-csv-in-java-using-rest-api/"
+        },
+        "nodejs": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "php": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "ruby": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    }
+  ],
+  "brand_name": "GroupDocs.Cloud",
+  "product_name": "GroupDocs.Conversion"
+}

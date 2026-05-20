@@ -1,0 +1,23 @@
+# GroupDocs.Signature
+blog: groupdocs
+key: signature
+display_name: "GroupDocs.Signature"
+description: "Electronic signature APIs for signing, verifying, and searching digital signatures in documents."
+enabled: true
+
+platform_definitions:
+  net:
+    display_name: ".NET"
+    keywords: ["c#", "csharp", ".net", "dotnet", "groupdocs.signature for .net"]
+  java:
+    display_name: "Java"
+    keywords: ["java", "groupdocs.signature for java"]
+  python:
+    display_name: "Python via .NET"
+    keywords: ["python", "py", "python via .net", "python-net", "groupdocs.signature for python via .net"]
+  nodejs:
+    display_name: "Node.js via Java"
+    keywords: ["node.js", "nodejs", "javascript", "js", "node.js via java", "groupdocs.signature for node.js via java"]
+  general:
+    display_name: "General"
+    keywords: ["groupdocs.signature", "electronic signature api", "document signing library"]

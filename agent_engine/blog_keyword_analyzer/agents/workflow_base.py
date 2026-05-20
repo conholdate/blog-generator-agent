@@ -21,7 +21,12 @@ from agent_engine.blog_keyword_analyzer.schemas import (
 )
 from agent_engine.blog_keyword_analyzer.tools.cluster import cluster_records
 from agent_engine.blog_keyword_analyzer.tools.intent_brand import annotate_intent_brand
+from agent_engine.blog_keyword_analyzer.tools.keyword_matrix import generate_local_matrix_records
 from agent_engine.blog_keyword_analyzer.tools.metrics import RunMetrics, timed_step
+from agent_engine.blog_keyword_analyzer.tools.opportunity_scoring import (
+    build_keyword_opportunities,
+    is_blog_suitable,
+)
 from agent_engine.blog_keyword_analyzer.tools.preprocess import preprocess
 from agent_engine.blog_keyword_analyzer.tools.scoring import score_clusters
 from agent_engine.blog_keyword_analyzer.workflow_support import (
@@ -62,7 +67,39 @@ class KeywordWorkflowAgent:
                 platform=platform,
                 locale=req.locale,
             )
+        if self.source in {"serp", "llm"}:
+            matrix_records = generate_local_matrix_records(
+                topic=seed_topic,
+                product=req.product,
+                brand=req.brand,
+                platform=platform,
+                locale=req.locale,
+                max_keywords=min(max(req.max_rows, 10), 40),
+            )
+            records = self._merge_records(records, matrix_records)
+            if seed_topic:
+                records = focus_records_for_seed_topic(
+                    records,
+                    seed_topic=seed_topic,
+                    platform=platform,
+                    locale=req.locale,
+                )
         return records
+
+    @staticmethod
+    def _merge_records(
+        primary_records: List[KeywordRecord],
+        secondary_records: List[KeywordRecord],
+    ) -> List[KeywordRecord]:
+        merged: List[KeywordRecord] = []
+        seen: set[str] = set()
+        for record in list(primary_records or []) + list(secondary_records or []):
+            key = " ".join((record.keyword or "").strip().lower().split())
+            if not key or key in seen:
+                continue
+            seen.add(key)
+            merged.append(record)
+        return merged
 
     def fetch_records(
         self,
@@ -107,6 +144,7 @@ class KeywordWorkflowAgent:
         stage_start = time.perf_counter()
         clusters: List[Cluster] = []
         topics = []
+        keyword_opportunities = []
 
         try:
             with timed_step(metrics, "import"):
@@ -122,6 +160,49 @@ class KeywordWorkflowAgent:
             with timed_step(metrics, "preprocess"):
                 records = preprocess(records)
             metrics.keywords_after_preprocess = len(records)
+
+            with timed_step(metrics, "content_index"):
+                existing_topics = load_existing_topics_for_prompt(
+                    product=req.product,
+                    platform=platform,
+                    use_content_index=use_content_index,
+                )
+
+            if use_content_index:
+                metrics.existing_topics_loaded = len(existing_topics)
+                metrics.content_index_requests += 1
+            else:
+                metrics.existing_topics_loaded = 0
+                metrics.add_event(
+                    "CONTENT_INDEX_SKIPPED",
+                    "Content index lookup disabled for this run (use_content_index=False).",
+                )
+
+            with timed_step(metrics, "keyword_opportunity_scoring"):
+                keyword_opportunities = build_keyword_opportunities(
+                    records,
+                    product=req.product,
+                    brand=req.brand,
+                    platform=platform,
+                    existing_topics=existing_topics,
+                )
+                if self.source in {"serp", "llm"}:
+                    blog_keywords = {
+                        opportunity.keyword.lower()
+                        for opportunity in keyword_opportunities
+                        if is_blog_suitable(opportunity)
+                    }
+                    filtered_records = [
+                        record for record in records if record.keyword.lower() in blog_keywords
+                    ]
+                    if filtered_records:
+                        records = filtered_records[: max(1, req.max_rows)]
+                        metrics.add_event(
+                            "KEYWORD_OPPORTUNITIES_FILTERED",
+                            "Filtered records to blog-suitable keyword opportunities.",
+                            opportunities=len(keyword_opportunities),
+                            records_for_topics=len(records),
+                        )
 
             with timed_step(metrics, "cluster"):
                 n_samples = len(records)
@@ -191,23 +272,6 @@ class KeywordWorkflowAgent:
 
             current_stage = settings.METRICS_TOPIC_GENERATION_JOB
             stage_start = time.perf_counter()
-
-            with timed_step(metrics, "content_index"):
-                existing_topics = load_existing_topics_for_prompt(
-                    product=req.product,
-                    platform=platform,
-                    use_content_index=use_content_index,
-                )
-
-            if use_content_index:
-                metrics.existing_topics_loaded = len(existing_topics)
-                metrics.content_index_requests += 1
-            else:
-                metrics.existing_topics_loaded = 0
-                metrics.add_event(
-                    "CONTENT_INDEX_SKIPPED",
-                    "Content index lookup disabled for this run (use_content_index=False).",
-                )
 
             topic_agent = self.build_topic_agent(seed_topic=seed_topic)
             t0_llm = time.perf_counter()
@@ -325,6 +389,7 @@ class KeywordWorkflowAgent:
             locale=req.locale,
             clusters=clusters[: req.top_clusters],
             topics=topics,
+            keyword_opportunities=keyword_opportunities,
         )
         return result, metrics
 

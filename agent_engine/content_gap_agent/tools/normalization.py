@@ -1,7 +1,9 @@
 from __future__ import annotations
 
+import json
 import re
 import unicodedata
+from pathlib import Path
 from dataclasses import dataclass, field
 from functools import lru_cache
 from typing import Any, Dict, Iterable, List, Mapping, Optional, Sequence, Set, Tuple, Union
@@ -242,146 +244,44 @@ PLATFORM_REGISTRY: Dict[str, PlatformSpec] = {
 }
 
 
-FILE_FORMAT_REGISTRY: Dict[str, FileFormatSpec] = {
-    # Document / office
-    "pdf": FileFormatSpec("pdf", "PDF", ("pdf", "portable document format")),
-    "doc": FileFormatSpec("doc", "DOC", ("doc", "word doc", "ms word doc")),
-    "docx": FileFormatSpec("docx", "DOCX", ("docx", "word", "ms word", "microsoft word", "word document")),
-    "docm": FileFormatSpec("docm", "DOCM", ("docm",)),
-    "dot": FileFormatSpec("dot", "DOT", ("dot",)),
-    "dotx": FileFormatSpec("dotx", "DOTX", ("dotx",)),
-    "dotm": FileFormatSpec("dotm", "DOTM", ("dotm",)),
-    "rtf": FileFormatSpec("rtf", "RTF", ("rtf", "rich text format")),
-    "txt": FileFormatSpec("txt", "TXT", ("txt", "text", "plain text", "text file")),
-    "odt": FileFormatSpec("odt", "ODT", ("odt", "open document text", "opendocument text")),
-    "ott": FileFormatSpec("ott", "OTT", ("ott",)),
-    "wps": FileFormatSpec("wps", "WPS", ("wps",)),
-    "md": FileFormatSpec("md", "MD", ("md", "markdown")),
-    "tex": FileFormatSpec("tex", "TEX", ("tex", "latex", "la tex", "latex source")),
-    "ltx": FileFormatSpec("ltx", "LTX", ("ltx",)),
-    "xps": FileFormatSpec("xps", "XPS", ("xps",)),
-    "oxps": FileFormatSpec("oxps", "OXPS", ("oxps",)),
-    "epub": FileFormatSpec("epub", "EPUB", ("epub",)),
-    "mobi": FileFormatSpec("mobi", "MOBI", ("mobi",)),
-    "azw3": FileFormatSpec("azw3", "AZW3", ("azw3",)),
-    "xml": FileFormatSpec("xml", "XML", ("xml",)),
-    "json": FileFormatSpec("json", "JSON", ("json",)),
-    "yaml": FileFormatSpec("yaml", "YAML", ("yaml", "yml")),
-    "csv": FileFormatSpec("csv", "CSV", ("csv", "comma separated values")),
-    "tsv": FileFormatSpec("tsv", "TSV", ("tsv", "tab separated values")),
-    "html": FileFormatSpec("html", "HTML", ("html", "htm", "hypertext markup language")),
-    "mhtml": FileFormatSpec("mhtml", "MHTML", ("mhtml", "mht", "mime html")),
-    "xhtml": FileFormatSpec("xhtml", "XHTML", ("xhtml",)),
-    "svg": FileFormatSpec("svg", "SVG", ("svg", "scalable vector graphics")),
-    "ps": FileFormatSpec("ps", "PS", ("ps", "postscript")),
-    "eps": FileFormatSpec("eps", "EPS", ("eps", "encapsulated postscript")),
-    "pcl": FileFormatSpec("pcl", "PCL", ("pcl",)),
-    "psd": FileFormatSpec("psd", "PSD", ("psd", "photoshop")),
-    # Spreadsheet
-    "xls": FileFormatSpec("xls", "XLS", ("xls", "excel xls")),
-    "xlsx": FileFormatSpec("xlsx", "XLSX", ("xlsx", "excel", "excel workbook", "spreadsheet", "spreadsheet file")),
-    "xlsm": FileFormatSpec("xlsm", "XLSM", ("xlsm",)),
-    "xlsb": FileFormatSpec("xlsb", "XLSB", ("xlsb",)),
-    "xlt": FileFormatSpec("xlt", "XLT", ("xlt",)),
-    "xltx": FileFormatSpec("xltx", "XLTX", ("xltx",)),
-    "xltm": FileFormatSpec("xltm", "XLTM", ("xltm",)),
-    "ods": FileFormatSpec("ods", "ODS", ("ods", "open document spreadsheet", "opendocument spreadsheet")),
-    "ots": FileFormatSpec("ots", "OTS", ("ots",)),
-    "numbers": FileFormatSpec("numbers", "NUMBERS", ("numbers", "apple numbers")),
-    "sxc": FileFormatSpec("sxc", "SXC", ("sxc",)),
-    "fods": FileFormatSpec("fods", "FODS", ("fods",)),
-    # Presentation
-    "ppt": FileFormatSpec("ppt", "PPT", ("ppt", "powerpoint")),
-    "pptx": FileFormatSpec("pptx", "PPTX", ("pptx", "powerpoint presentation")),
-    "pptm": FileFormatSpec("pptm", "PPTM", ("pptm",)),
-    "pps": FileFormatSpec("pps", "PPS", ("pps",)),
-    "ppsx": FileFormatSpec("ppsx", "PPSX", ("ppsx",)),
-    "ppsm": FileFormatSpec("ppsm", "PPSM", ("ppsm",)),
-    "pot": FileFormatSpec("pot", "POT", ("pot",)),
-    "potx": FileFormatSpec("potx", "POTX", ("potx",)),
-    "potm": FileFormatSpec("potm", "POTM", ("potm",)),
-    "odp": FileFormatSpec("odp", "ODP", ("odp", "open document presentation", "opendocument presentation")),
-    "otp": FileFormatSpec("otp", "OTP", ("otp",)),
-    # Image / imaging
-    "png": FileFormatSpec("png", "PNG", ("png",)),
-    "jpg": FileFormatSpec("jpg", "JPG", ("jpg", "jpeg", "jpe", "joint photographic experts group")),
-    "jpeg": FileFormatSpec("jpeg", "JPEG", ("jpeg", "jpe")),
-    "gif": FileFormatSpec("gif", "GIF", ("gif",)),
-    "bmp": FileFormatSpec("bmp", "BMP", ("bmp", "bitmap")),
-    "tif": FileFormatSpec("tif", "TIF", ("tif", "tiff")),
-    "tiff": FileFormatSpec("tiff", "TIFF", ("tiff",)),
-    "webp": FileFormatSpec("webp", "WEBP", ("webp",)),
-    "emf": FileFormatSpec("emf", "EMF", ("emf",)),
-    "wmf": FileFormatSpec("wmf", "WMF", ("wmf",)),
-    "ico": FileFormatSpec("ico", "ICO", ("ico", "icon")),
-    "apng": FileFormatSpec("apng", "APNG", ("apng",)),
-    "dng": FileFormatSpec("dng", "DNG", ("dng",)),
-    "cdr": FileFormatSpec("cdr", "CDR", ("cdr", "coreldraw")),
-    "cmx": FileFormatSpec("cmx", "CMX", ("cmx",)),
-    "otg": FileFormatSpec("otg", "OTG", ("otg",)),
-    "djvu": FileFormatSpec("djvu", "DJVU", ("djvu", "djv")),
-    # 3D / CAD / model
-    "3d": FileFormatSpec("3d", "3D", ("3d",)),
-    "3ds": FileFormatSpec("3ds", "3DS", ("3ds",)),
-    "3mf": FileFormatSpec("3mf", "3MF", ("3mf",)),
-    "amf": FileFormatSpec("amf", "AMF", ("amf",)),
-    "dae": FileFormatSpec("dae", "DAE", ("dae", "collada")),
-    "drc": FileFormatSpec("drc", "DRC", ("drc",)),
-    "dxf": FileFormatSpec("dxf", "DXF", ("dxf",)),
-    "dwg": FileFormatSpec("dwg", "DWG", ("dwg",)),
-    "dgn": FileFormatSpec("dgn", "DGN", ("dgn",)),
-    "fbx": FileFormatSpec("fbx", "FBX", ("fbx",)),
-    "glb": FileFormatSpec("glb", "GLB", ("glb",)),
-    "gltf": FileFormatSpec("gltf", "GLTF", ("gltf", "gltf2")),
-    "iges": FileFormatSpec("iges", "IGES", ("iges",)),
-    "igs": FileFormatSpec("igs", "IGS", ("igs",)),
-    "jt": FileFormatSpec("jt", "JT", ("jt",)),
-    "ma": FileFormatSpec("ma", "MA", ("ma", "maya ascii")),
-    "mb": FileFormatSpec("mb", "MB", ("mb", "maya binary")),
-    "obj": FileFormatSpec("obj", "OBJ", ("obj", "wavefront obj")),
-    "ply": FileFormatSpec("ply", "PLY", ("ply",)),
-    "rvm": FileFormatSpec("rvm", "RVM", ("rvm",)),
-    "stl": FileFormatSpec("stl", "STL", ("stl",)),
-    "u3d": FileFormatSpec("u3d", "U3D", ("u3d",)),
-    "usd": FileFormatSpec("usd", "USD", ("usd",)),
-    "usdz": FileFormatSpec("usdz", "USDZ", ("usdz",)),
-    "step": FileFormatSpec("step", "STEP", ("step", "stp")),
-    "stp": FileFormatSpec("stp", "STP", ("stp",)),
-    "ifc": FileFormatSpec("ifc", "IFC", ("ifc",)),
-    "x": FileFormatSpec("x", "X", ("x", "directx")),
-    "vrml": FileFormatSpec("vrml", "VRML", ("vrml", "wrl")),
-    "wrl": FileFormatSpec("wrl", "WRL", ("wrl",)),
-    # Email / archive / misc
-    "eml": FileFormatSpec("eml", "EML", ("eml", "email")),
-    "msg": FileFormatSpec("msg", "MSG", ("msg", "outlook msg")),
-    "mbox": FileFormatSpec("mbox", "MBOX", ("mbox",)),
-    "pst": FileFormatSpec("pst", "PST", ("pst", "outlook pst")),
-    "ost": FileFormatSpec("ost", "OST", ("ost", "outlook ost")),
-    "vcf": FileFormatSpec("vcf", "VCF", ("vcf", "vcard")),
-    "ics": FileFormatSpec("ics", "ICS", ("ics", "ical", "icalendar")),
-    "oft": FileFormatSpec("oft", "OFT", ("oft",)),
-    "zip": FileFormatSpec("zip", "ZIP", ("zip",)),
-    "7z": FileFormatSpec("7z", "7Z", ("7z", "7zip")),
-    "tar": FileFormatSpec("tar", "TAR", ("tar",)),
-    "gz": FileFormatSpec("gz", "GZ", ("gz", "gzip")),
-    "bz2": FileFormatSpec("bz2", "BZ2", ("bz2", "bzip2")),
-    "rar": FileFormatSpec("rar", "RAR", ("rar",)),
-    # Diagram / project / pub / finance / note-ish
-    "vsd": FileFormatSpec("vsd", "VSD", ("vsd", "visio")),
-    "vsdx": FileFormatSpec("vsdx", "VSDX", ("vsdx",)),
-    "vss": FileFormatSpec("vss", "VSS", ("vss",)),
-    "vst": FileFormatSpec("vst", "VST", ("vst",)),
-    "mpp": FileFormatSpec("mpp", "MPP", ("mpp", "microsoft project")),
-    "mpx": FileFormatSpec("mpx", "MPX", ("mpx",)),
-    "xer": FileFormatSpec("xer", "XER", ("xer",)),
-    "pub": FileFormatSpec("pub", "PUB", ("pub", "publisher", "microsoft publisher")),
-    "one": FileFormatSpec("one", "ONE", ("one", "onenote")),
-    "ofx": FileFormatSpec("ofx", "OFX", ("ofx",)),
-    "qfx": FileFormatSpec("qfx", "QFX", ("qfx",)),
-    # Barcode / OCR convenience tokens
-    "qr": FileFormatSpec("qr", "QR", ("qr", "qr code")),
-    "ocr": FileFormatSpec("ocr", "OCR", ("ocr",)),
-}
+_FILE_FORMATS_CONFIG_PATH = Path(__file__).resolve().parents[3] / "configs" / "file_formats.json"
+
+
+def _load_file_format_registry(config_path: Path = _FILE_FORMATS_CONFIG_PATH) -> Dict[str, FileFormatSpec]:
+    if not config_path.exists():
+        raise FileNotFoundError(f"File format registry config not found: {config_path}")
+
+    with config_path.open("r", encoding="utf-8") as fh:
+        raw = json.load(fh)
+
+    if not isinstance(raw, dict):
+        raise ValueError(f"File format registry must be a JSON object: {config_path}")
+
+    registry: Dict[str, FileFormatSpec] = {}
+    for raw_key, raw_spec in raw.items():
+        canonical = str(raw_key or "").strip().lower()
+        if not canonical:
+            raise ValueError(f"File format registry contains an empty canonical key: {config_path}")
+        if not re.fullmatch(r"[a-z0-9][a-z0-9_+-]*", canonical):
+            raise ValueError(f"Invalid file format canonical key '{raw_key}' in {config_path}")
+        if not isinstance(raw_spec, dict):
+            raise ValueError(f"File format '{canonical}' must be an object in {config_path}")
+
+        upper = str(raw_spec.get("upper") or "").strip()
+        if not upper:
+            raise ValueError(f"File format '{canonical}' is missing required 'upper' in {config_path}")
+
+        raw_aliases = raw_spec.get("aliases") or []
+        if not isinstance(raw_aliases, list):
+            raise ValueError(f"File format '{canonical}' aliases must be a list in {config_path}")
+        aliases = tuple(dict.fromkeys(str(alias).strip() for alias in raw_aliases if str(alias).strip()))
+
+        registry[canonical] = FileFormatSpec(canonical=canonical, upper=upper, aliases=aliases)
+
+    return registry
+
+
+FILE_FORMAT_REGISTRY: Dict[str, FileFormatSpec] = _load_file_format_registry()
 
 
 ASPOSE_PRODUCT_REGISTRY: Dict[str, str] = {
@@ -581,7 +481,13 @@ _LANG_QUALIFIER_RE = re.compile(
 
 _TRAILING_LANG_TOKEN_RE = re.compile(rf"\b({LANG_QUALIFIER_PATTERN})\b\s*$", re.IGNORECASE)
 _LANG_TOKEN_ANYWHERE_RE = re.compile(rf"\b({LANG_QUALIFIER_PATTERN})\b", re.IGNORECASE)
-_TOPIC_NOISE_WORDS_RE = re.compile(r"\b(file|files|format|formats|library|libraries|sdk|api|apis)\b", re.IGNORECASE)
+_SYMBOL_LANG_QUALIFIER_RE = re.compile(
+    r"(\(|\[)?\b(using|in|with|for)\s+(c#|c\+\+|\.net)(?![A-Za-z0-9])(\)|\])?",
+    re.IGNORECASE,
+)
+_SYMBOL_LANG_TOKEN_RE = re.compile(r"(?<![A-Za-z0-9])(c#|c\+\+|\.net)(?![A-Za-z0-9])", re.IGNORECASE)
+_TOPIC_NOISE_WORDS_RE = re.compile(r"\b(file|files|library|libraries|sdk|api|apis)\b", re.IGNORECASE)
+_IMAGE_CALLOUT_RE = re.compile(r"\bimages?\s+callouts?\b|\bcallouts?\s+to\s+images?\b", re.IGNORECASE)
 _TRAILING_PREPOSITION_RE = re.compile(r"\b(in|with|using|for)\b\s*$", re.IGNORECASE)
 _C_NET_NOISE_RE = re.compile(r"\bc\s+net\b", re.IGNORECASE)
 _FROM_TO_NOISE_RE = re.compile(r"\bfrom\s+to\b", re.IGNORECASE)
@@ -907,17 +813,43 @@ def canonical_topic_key(text: str) -> str:
     t = _LANG_QUALIFIER_RE.sub(" ", t)
     t = _TRAILING_LANG_TOKEN_RE.sub(" ", t)
     t = _LANG_TOKEN_ANYWHERE_RE.sub(" ", t)
+    t = _SYMBOL_LANG_QUALIFIER_RE.sub(" ", t)
+    t = _SYMBOL_LANG_TOKEN_RE.sub(" ", t)
+    t = _IMAGE_CALLOUT_RE.sub("image callout", t)
     t = _TOPIC_NOISE_WORDS_RE.sub(" ", t)
     t = _C_NET_NOISE_RE.sub(" ", t)
     t = _FROM_TO_NOISE_RE.sub(" ", t)
     t = _TRAILING_PREPOSITION_RE.sub(" ", t)
     t = _WS_RE.sub(" ", t).strip()
 
+    alt_match = re.search(
+        r"\b([a-z0-9]{1,12})\s*(?:to|into|in2|->|â†’)\s*([a-z0-9]{1,12})\s+or\s+([a-z0-9]{1,12})\b",
+        t,
+        re.IGNORECASE,
+    )
+    if alt_match:
+        src = canonical_file_format(alt_match.group(1))
+        dst = canonical_file_format(alt_match.group(2))
+        alt = canonical_file_format(alt_match.group(3))
+        if src in FORMAT_TOKEN_SET and dst in FORMAT_TOKEN_SET and alt in FORMAT_TOKEN_SET:
+            return _final_topic_cleanup(normalize_text(f"{src} to {dst}"))
+
     for m in _CONVERSION_PAIR_RE.finditer(t):
         src = canonical_file_format(m.group(1))
         dst = canonical_file_format(m.group(2))
         if src in FORMAT_TOKEN_SET and dst in FORMAT_TOKEN_SET:
             return _final_topic_cleanup(normalize_text(f"{src} to {dst}"))
+
+    action_match = re.match(
+        r"^(create|read|parse|validate)\s+([a-z0-9]{1,12})(?:\b.*)?$",
+        t,
+        re.IGNORECASE,
+    )
+    if action_match:
+        action = action_match.group(1).lower()
+        target = canonical_file_format(action_match.group(2))
+        if target in FORMAT_TOKEN_SET:
+            return _final_topic_cleanup(normalize_text(f"{action} {target}"))
 
     return _final_topic_cleanup(normalize_text(t))
 

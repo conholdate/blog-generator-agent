@@ -1,0 +1,23 @@
+# GroupDocs.Conversion
+blog: groupdocs
+key: conversion
+display_name: "GroupDocs.Conversion"
+description: "Document conversion APIs for transforming files between PDF, Office, image, and other popular formats."
+enabled: true
+
+platform_definitions:
+  net:
+    display_name: ".NET"
+    keywords: ["c#", "csharp", ".net", "dotnet", "groupdocs.conversion for .net"]
+  java:
+    display_name: "Java"
+    keywords: ["java", "groupdocs.conversion for java"]
+  python:
+    display_name: "Python via .NET"
+    keywords: ["python", "py", "python via .net", "python-net", "groupdocs.conversion for python via .net"]
+  nodejs:
+    display_name: "Node.js via Java"
+    keywords: ["node.js", "nodejs", "javascript", "js", "node.js via java", "groupdocs.conversion for node.js via java"]
+  general:
+    display_name: "General"
+    keywords: ["groupdocs.conversion", "document conversion api", "file conversion library"]

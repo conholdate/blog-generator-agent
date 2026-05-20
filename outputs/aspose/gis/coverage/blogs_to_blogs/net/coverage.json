@@ -1,0 +1,1150 @@
+{
+  "case": "blogs_to_blogs",
+  "brand_key": "aspose",
+  "product_key": "gis",
+  "baseline_platform": "net",
+  "platforms": [
+    "net",
+    "general",
+    "python"
+  ],
+  "meta": {
+    "matching_mode": "key_exact",
+    "total_input_records": 63,
+    "records_after_filters": 46,
+    "excluded_release_update_records": 13,
+    "excluded_old_or_undated_records": 4,
+    "baseline_records": 34,
+    "total_cells": 102,
+    "matched_cells": 36,
+    "missing_cells": 66,
+    "match_rate": 0.35294117647058826,
+    "skipped_empty_keys": 0
+  },
+  "rows": [
+    {
+      "category": "GIS",
+      "sub_category": "Shapefile",
+      "topic": "create and read shapefile",
+      "key": "create and read shapefile",
+      "baseline_record_id": "blog::gis/2022-07-07-create-and-read-shapefile-in-csharp/index.md",
+      "coverage": {
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::gis/2022-07-07-create-and-read-shapefile-in-csharp/index.md",
+          "title": "Create and Read Shapefile in C#",
+          "topic": "Create and read shapefile",
+          "url": "https://blog.aspose.com/gis/create-and-read-shapefile-in-csharp/"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Geographic Information Systems",
+      "sub_category": "KML Files",
+      "topic": "create kml or read its features",
+      "key": "create kml or read its features",
+      "baseline_record_id": "blog::gis/2021-01-18-create-kml-read-features-csharp/index.md",
+      "coverage": {
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::gis/2021-01-18-create-kml-read-features-csharp/index.md",
+          "title": "Create KML File or Read its Features Programmatically using C#",
+          "topic": "Create KML or read its features",
+          "url": "https://blog.aspose.com/gis/create-kml-read-features-csharp/"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Geographic Information Systems",
+      "sub_category": "Coordinate Conversion",
+      "topic": "decimal degrees to degrees minutes seconds dms",
+      "key": "decimal degrees to degrees minutes seconds dms",
+      "baseline_record_id": "blog::gis/2022-11-03-convert-degrees-to-minutes-seconds-in-csharp/index.md",
+      "coverage": {
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::gis/2022-11-03-convert-degrees-to-minutes-seconds-in-csharp/index.md",
+          "title": "Convert Decimal Degrees to Degrees Minutes Seconds DMS in C#",
+          "topic": "Decimal degrees to degrees minutes seconds DMS",
+          "url": "https://blog.aspose.com/gis/convert-degrees-to-minutes-seconds-in-csharp/"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Data Conversion",
+      "sub_category": "GIS Formats",
+      "topic": "gdb to csv",
+      "key": "gdb to csv",
+      "baseline_record_id": "blog::gis/2022-10-20-convert-gdb-to-csv-in-csharp/index.md",
+      "coverage": {
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::gis/2022-10-20-convert-gdb-to-csv-in-csharp/index.md",
+          "title": "Convert GDB to CSV in C#",
+          "topic": "GDB to CSV",
+          "url": "https://blog.aspose.com/gis/convert-gdb-to-csv-in-csharp/"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Development",
+      "sub_category": "File Conversion",
+      "topic": "geojson to jpg using aspose gis",
+      "key": "geojson to jpg using aspose gis",
+      "baseline_record_id": "blog::gis/2025-07-15-convert-geojson-to-jpg-in-csharp/index.md",
+      "coverage": {
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::gis/2025-07-15-convert-geojson-to-jpg-in-csharp/index.md",
+          "title": "Convert GeoJSON to JPG in C# using Aspose.GIS",
+          "topic": "Geojson to JPG using aspose GIS",
+          "url": "https://blog.aspose.com/gis/convert-geojson-to-jpg-in-csharp/"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "GIS",
+      "sub_category": "Data Conversion",
+      "topic": "geojson to raster",
+      "key": "geojson to raster",
+      "baseline_record_id": "blog::gis/2025-07-17-convert-geojson-to-raster-images-in-csharp/index.md",
+      "coverage": {
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::gis/2025-07-17-convert-geojson-to-raster-images-in-csharp/index.md",
+          "title": "Convert GeoJSON to Raster Images in C#",
+          "topic": "Geojson to raster",
+          "url": "https://blog.aspose.com/gis/convert-geojson-to-raster-images-in-csharp/"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "GIS",
+      "sub_category": "File Format Conversion",
+      "topic": "geojson to svg",
+      "key": "geojson to svg",
+      "baseline_record_id": "blog::gis/2022-12-02-convert-geojson-to-svg-in-csharp/index.md",
+      "coverage": {
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::gis/2022-12-02-convert-geojson-to-svg-in-csharp/index.md",
+          "title": "Convert GeoJSON to SVG in C#",
+          "topic": "Geojson to SVG",
+          "url": "https://blog.aspose.com/gis/convert-geojson-to-svg-in-csharp/"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Geographic Information Systems",
+      "sub_category": "File Format Conversion",
+      "topic": "geojson to topojson and vice versa",
+      "key": "geojson to topojson and vice versa",
+      "baseline_record_id": "blog::gis/2021-03-02-convert-geojson-topojson-csharp/index.md",
+      "coverage": {
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::gis/2021-03-02-convert-geojson-topojson-csharp/index.md",
+          "title": "Convert GeoJson to TopoJson and vice versa using C#",
+          "topic": "Geojson to topojson and vice versa",
+          "url": "https://blog.aspose.com/gis/convert-geojson-topojson-csharp/"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Data Conversion",
+      "sub_category": "GIS Formats",
+      "topic": "gpx to csv",
+      "key": "gpx to csv",
+      "baseline_record_id": "blog::gis/2022-11-18-convert-gpx-to-csv-in-csharp/index.md",
+      "coverage": {
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::gis/2022-11-18-convert-gpx-to-csv-in-csharp/index.md",
+          "title": "Convert GPX to CSV in C#",
+          "topic": "GPX to CSV",
+          "url": "https://blog.aspose.com/gis/convert-gpx-to-csv-in-csharp/"
+        },
+        "general": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::gis/2023-06-01-convert-gpx-to-csv-online/index.md",
+          "title": "GPX to CSV Online Converter",
+          "topic": "GPX to CSV",
+          "url": "https://blog.aspose.com/gis/convert-gpx-to-csv-online/"
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "GIS",
+      "sub_category": "File Format Conversion",
+      "topic": "gpx to geojson",
+      "key": "gpx to geojson",
+      "baseline_record_id": "blog::gis/2022-11-11-convert-gpx-to-geojson-in-csharp/index.md",
+      "coverage": {
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::gis/2022-11-11-convert-gpx-to-geojson-in-csharp/index.md",
+          "title": "Convert GPX to GeoJSON in C#",
+          "topic": "GPX to geojson",
+          "url": "https://blog.aspose.com/gis/convert-gpx-to-geojson-in-csharp/"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "GIS",
+      "sub_category": "File Conversion",
+      "topic": "gpx to json gpx",
+      "key": "gpx to json gpx",
+      "baseline_record_id": "blog::gis/2024-02-23-convert-gpx-to-json-in-csharp-gpx-file-converter/index.md",
+      "coverage": {
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::gis/2024-02-23-convert-gpx-to-json-in-csharp-gpx-file-converter/index.md",
+          "title": "Convert GPX to JSON in C# - GPX File Converter",
+          "topic": "GPX to JSON GPX",
+          "url": "https://blog.aspose.com/gis/convert-gpx-to-json-in-csharp-gpx-file-converter"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "GIS",
+      "sub_category": "Data Conversion",
+      "topic": "json to geojson",
+      "key": "json to geojson",
+      "baseline_record_id": "blog::gis/2021-11-13-convert-json-to-geojson-using-csharp/index.md",
+      "coverage": {
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::gis/2021-11-13-convert-json-to-geojson-using-csharp/index.md",
+          "title": "Convert JSON to GeoJSON using C#",
+          "topic": "JSON to geojson",
+          "url": "https://blog.aspose.com/gis/convert-json-to-geojson-using-csharp/"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "GIS",
+      "sub_category": "File Conversion",
+      "topic": "kml to csv and csv to kml",
+      "key": "kml to csv and csv to kml",
+      "baseline_record_id": "blog::gis/2021-11-16-convert-kml-to-csv-and-csv-to-kml-using-csharp/index.md",
+      "coverage": {
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::gis/2021-11-16-convert-kml-to-csv-and-csv-to-kml-using-csharp/index.md",
+          "title": "Convert KML to CSV and CSV to KML using C#",
+          "topic": "KML to CSV and CSV to KML",
+          "url": "https://blog.aspose.com/gis/convert-kml-to-csv-and-csv-to-kml-using-csharp/"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Geospatial",
+      "sub_category": "File Conversion",
+      "topic": "kml to geojson and geojson to kml",
+      "key": "kml to geojson and geojson to kml",
+      "baseline_record_id": "blog::gis/2021-11-18-convert-kml-to-geojson-and-geojson-to-kml-using-csharp/index.md",
+      "coverage": {
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::gis/2021-11-18-convert-kml-to-geojson-and-geojson-to-kml-using-csharp/index.md",
+          "title": "Convert KML to GeoJSON and GeoJSON to KML using C#",
+          "topic": "KML to geojson and geojson to KML",
+          "url": "https://blog.aspose.com/gis/convert-kml-to-geojson-and-geojson-to-kml-using-csharp/"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "GIS",
+      "sub_category": "File Conversion",
+      "topic": "kml to gpx and gpx to kml",
+      "key": "kml to gpx and gpx to kml",
+      "baseline_record_id": "blog::gis/2021-11-19-convert-kml-to-gpx-and-gpx-to-kml-using-csharp/index.md",
+      "coverage": {
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::gis/2021-11-19-convert-kml-to-gpx-and-gpx-to-kml-using-csharp/index.md",
+          "title": "Convert KML to GPX and GPX to KML using C#",
+          "topic": "KML to GPX and GPX to KML",
+          "url": "https://blog.aspose.com/gis/convert-kml-to-gpx-and-gpx-to-kml-using-csharp/"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "GIS",
+      "sub_category": "File Format Conversion",
+      "topic": "kml to shp",
+      "key": "kml to shp",
+      "baseline_record_id": "blog::gis/2022-11-28-convert-kml-to-shp-in-csharp/index.md",
+      "coverage": {
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::gis/2022-11-28-convert-kml-to-shp-in-csharp/index.md",
+          "title": "Convert KML to SHP in C#",
+          "topic": "KML to SHP",
+          "url": "https://blog.aspose.com/gis/convert-kml-to-shp-in-csharp/"
+        },
+        "general": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::gis/2023-02-17-convert-kml-to-shp-online/index.md",
+          "title": "Convert KML to SHP Online - Free Converter",
+          "topic": "KML to SHP",
+          "url": "https://blog.aspose.com/gis/convert-kml-to-shp-online/"
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "GIS",
+      "sub_category": "Coordinate Conversion",
+      "topic": "lat long to utm",
+      "key": "lat long to utm",
+      "baseline_record_id": "blog::gis/2023-09-06-convert-lat-long-to-utm-in-csharp/index.md",
+      "coverage": {
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::gis/2023-09-06-convert-lat-long-to-utm-in-csharp/index.md",
+          "title": "Convert LAT LONG to UTM in C#",
+          "topic": "LAT LONG to UTM",
+          "url": "https://blog.aspose.com/gis/convert-lat-long-to-utm-in-csharp/"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "GIS",
+      "sub_category": "Geometric Shapes",
+      "topic": "make geometric shapes using c gis library",
+      "key": "make geometric shapes using c gis library",
+      "baseline_record_id": "blog::gis/2024-06-28-make-geometric-shapes-in-csharp/index.md",
+      "coverage": {
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::gis/2024-06-28-make-geometric-shapes-in-csharp/index.md",
+          "title": "Make Geometric Shapes using a C# GIS Library",
+          "topic": "Make geometric shapes using c GIS library",
+          "url": "https://blog.aspose.com/gis/make-geometric-shapes-in-csharp/"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Geographic Information Systems",
+      "sub_category": "Map Rendering",
+      "topic": "map rendering to svg jpg or png",
+      "key": "map rendering to svg jpg or png",
+      "baseline_record_id": "blog::gis/2021-05-04-map-rendering-csharp/index.md",
+      "coverage": {
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::gis/2021-05-04-map-rendering-csharp/index.md",
+          "title": "Map Rendering to SVG, JPG, or PNG Image using C#",
+          "topic": "Map rendering to SVG JPG or PNG",
+          "url": "https://blog.aspose.com/gis/map-rendering-csharp/"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "GIS",
+      "sub_category": "File Format Conversion",
+      "topic": "osm to kml",
+      "key": "osm to kml",
+      "baseline_record_id": "blog::gis/2022-11-01-convert-osm-to-kml-in-csharp/index.md",
+      "coverage": {
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::gis/2022-11-01-convert-osm-to-kml-in-csharp/index.md",
+          "title": "Convert OSM to KML in C#",
+          "topic": "OSM to KML",
+          "url": "https://blog.aspose.com/gis/convert-osm-to-kml-in-csharp/"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "GIS",
+      "sub_category": "Reading OSM Files",
+      "topic": "read features from openstreetmap osm",
+      "key": "read features from openstreetmap osm",
+      "baseline_record_id": "blog::gis/2021-08-23-read-features-from-open-street-map-osm-files-using-csharp/index.md",
+      "coverage": {
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::gis/2021-08-23-read-features-from-open-street-map-osm-files-using-csharp/index.md",
+          "title": "Read Features from OpenStreetMap (OSM) Files using C#",
+          "topic": "Read features from openstreetmap OSM",
+          "url": "https://blog.aspose.com/gis/read-features-from-open-street-map-osm-files-using-csharp/"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "GIS",
+      "sub_category": "File Reading",
+      "topic": "read gpx",
+      "key": "read gpx",
+      "baseline_record_id": "blog::gis/2022-05-06-read-gpx-files-using-csharp/index.md",
+      "coverage": {
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::gis/2022-05-06-read-gpx-files-using-csharp/index.md",
+          "title": "Read GPX Files in C#",
+          "topic": "Read GPX",
+          "url": "https://blog.aspose.com/gis/read-gpx-files-using-csharp/"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "GIS",
+      "sub_category": "Data Import",
+      "topic": "read vector layer features points and geometries from csv",
+      "key": "read vector layer features points and geometries from csv",
+      "baseline_record_id": "blog::gis/2021-11-05-read-vector-layer-features-points-and-geometries-from-csv-files/index.md",
+      "coverage": {
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::gis/2021-11-05-read-vector-layer-features-points-and-geometries-from-csv-files/index.md",
+          "title": "Read Vector Layer Features, Points, and Geometries from CSV Files",
+          "topic": "Read vector layer features points and geometries from CSV",
+          "url": "https://blog.aspose.com/gis/read-vector-layer-features-points-and-geometries-from-csv-files/"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "GIS",
+      "sub_category": "Map Rendering",
+      "topic": "render map to bmp",
+      "key": "render map to bmp",
+      "baseline_record_id": "blog::gis/2021-11-04-render-map-to-bmp-format-using-csharp/index.md",
+      "coverage": {
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::gis/2021-11-04-render-map-to-bmp-format-using-csharp/index.md",
+          "title": "Render Map to BMP Format using C#",
+          "topic": "Render map to BMP",
+          "url": "https://blog.aspose.com/gis/render-map-to-bmp-format-using-csharp/"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Data Conversion",
+      "sub_category": "GIS Formats",
+      "topic": "shapefile to csv using c gis solution",
+      "key": "shapefile to csv using c gis solution",
+      "baseline_record_id": "blog::gis/2024-08-27-convert-shapefile-to-csv-in-csharp/index.md",
+      "coverage": {
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::gis/2024-08-27-convert-shapefile-to-csv-in-csharp/index.md",
+          "title": "Convert Shapefile to CSV using a C# GIS Solution",
+          "topic": "Shapefile to CSV using c GIS solution",
+          "url": "https://blog.aspose.com/gis/convert-shapefile-to-csv-in-csharp/"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "GIS",
+      "sub_category": "File Format Conversion",
+      "topic": "shapefile to geojson and geojson to shapefile",
+      "key": "shapefile to geojson and geojson to shapefile",
+      "baseline_record_id": "blog::gis/2021-11-11-convert-shapefile-to-geojson-and-geojson-to-shapefile-using-csharp/index.md",
+      "coverage": {
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::gis/2021-11-11-convert-shapefile-to-geojson-and-geojson-to-shapefile-using-csharp/index.md",
+          "title": "Convert Shapefile to GeoJSON and GeoJSON to Shapefile using C#",
+          "topic": "Shapefile to geojson and geojson to shapefile",
+          "url": "https://blog.aspose.com/gis/convert-shapefile-to-geojson-and-geojson-to-shapefile-using-csharp/"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "GIS",
+      "sub_category": "File Conversion",
+      "topic": "shapefile to json geospatial library",
+      "key": "shapefile to json geospatial library",
+      "baseline_record_id": "blog::gis/2024-04-09-convert-shapefile-to-json-in-csharp-using-csharp-geospatial-library/index.md",
+      "coverage": {
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::gis/2024-04-09-convert-shapefile-to-json-in-csharp-using-csharp-geospatial-library/index.md",
+          "title": "Convert Shapefile to JSON in C# using C# Geospatial Library",
+          "topic": "Shapefile to JSON geospatial library",
+          "url": "https://blog.aspose.com/gis/convert-shapefile-to-json-in-csharp-using-csharp-geospatial-library/"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "GIS",
+      "sub_category": "File Conversion",
+      "topic": "shapefile to kml",
+      "key": "shapefile to kml",
+      "baseline_record_id": "blog::gis/2022-08-29-convert-shapefile-to-kml-in-csharp/index.md",
+      "coverage": {
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::gis/2022-08-29-convert-shapefile-to-kml-in-csharp/index.md",
+          "title": "Convert Shapefile to KML in C#",
+          "topic": "Shapefile to KML",
+          "url": "https://blog.aspose.com/gis/convert-shapefile-to-kml-in-csharp/"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "GIS",
+      "sub_category": "File Conversion",
+      "topic": "shapefile to png map renderer",
+      "key": "shapefile to png map renderer",
+      "baseline_record_id": "blog::gis/2024-08-30-convert-shapefile-to-png-in-csharp/index.md",
+      "coverage": {
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::gis/2024-08-30-convert-shapefile-to-png-in-csharp/index.md",
+          "title": "Convert Shapefile to PNG in C# - Map Renderer",
+          "topic": "Shapefile to PNG map renderer",
+          "url": "https://blog.aspose.com/gis/convert-shapefile-to-png-in-csharp/"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "GIS",
+      "sub_category": "File Conversion",
+      "topic": "shapefile to svg",
+      "key": "shapefile to svg",
+      "baseline_record_id": "blog::gis/2022-09-29-convert-shapefile-to-svg-in-csharp/index.md",
+      "coverage": {
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::gis/2022-09-29-convert-shapefile-to-svg-in-csharp/index.md",
+          "title": "Convert Shapefile to SVG in C#",
+          "topic": "Shapefile to SVG",
+          "url": "https://blog.aspose.com/gis/convert-shapefile-to-svg-in-csharp/"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Geospatial",
+      "sub_category": "Data Conversion",
+      "topic": "shapefile to svg gis library",
+      "key": "shapefile to svg gis library",
+      "baseline_record_id": "blog::gis/2024-12-12-convert-shapefile-to-svg-in-csharp-net-gis-library/index.md",
+      "coverage": {
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::gis/2024-12-12-convert-shapefile-to-svg-in-csharp-net-gis-library/index.md",
+          "title": "Convert Shapefile to SVG in C# - .Net GIS Library",
+          "topic": "Shapefile to SVG GIS library",
+          "url": "https://blog.aspose.com/gis/convert-shapefile-to-svg-in-csharp-net-gis-library/"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "GIS",
+      "sub_category": "File Conversion",
+      "topic": "shp shapefile to svg",
+      "key": "shp shapefile to svg",
+      "baseline_record_id": "blog::gis/2022-11-29-convert-shp-to-svg-in-csharp/index.md",
+      "coverage": {
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::gis/2022-11-29-convert-shp-to-svg-in-csharp/index.md",
+          "title": "Convert SHP Shapefile to SVG in C#",
+          "topic": "SHP shapefile to SVG",
+          "url": "https://blog.aspose.com/gis/convert-shp-to-svg-in-csharp/"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Geospatial",
+      "sub_category": "File Conversion",
+      "topic": "shp to jpg c geospatial library",
+      "key": "shp to jpg c geospatial library",
+      "baseline_record_id": "blog::gis/2024-08-29-convert-shapefile-to-csv-in-csharp/index.md",
+      "coverage": {
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::gis/2024-08-29-convert-shapefile-to-csv-in-csharp/index.md",
+          "title": "Convert SHP to JPG in C# - C# Geospatial Library",
+          "topic": "SHP to JPG c geospatial library",
+          "url": "https://blog.aspose.com/gis/convert-shapefile-to-jpg-in-csharp/"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Geospatial",
+      "sub_category": "Data Export",
+      "topic": "vector layer to csv",
+      "key": "vector layer to csv",
+      "baseline_record_id": "blog::gis/2021-11-09-export-features-to-a-csv-file-using-csharp/index.md",
+      "coverage": {
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::gis/2021-11-09-export-features-to-a-csv-file-using-csharp/index.md",
+          "title": "Export Vector Layer to CSV in C#",
+          "topic": "Vector layer to CSV",
+          "url": "https://blog.aspose.com/gis/export-features-to-a-csv-file-using-csharp/"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    }
+  ],
+  "brand_name": "Aspose",
+  "product_name": "Aspose.GIS"
+}

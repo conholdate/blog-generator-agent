@@ -1,4 +1,4 @@
-name: Missing Topics In Google Sheet For Conholdate
+name: Missing Topics For Conholdate.com
 
 on:
   workflow_dispatch:
@@ -12,7 +12,7 @@ on:
           - configs/conholdate.yaml
 
       product_yaml:
-        description: "Path to Conholdate product YAML."
+        description: "Select product YAML."
         required: true
         default: "configs/conholdate/total.yaml"
         type: choice
@@ -20,7 +20,7 @@ on:
           - configs/conholdate/total.yaml
 
       platform:
-        description: "Target platform for indexing and baseline platform for gap analysis."
+        description: "Target platform for indexing."
         required: true
         default: "net"
         type: choice
@@ -35,7 +35,7 @@ on:
           - general
 
       steps:
-        description: "CSV repo keys to index (matches content indexer CLI --steps)."
+        description: "Indexing key."
         required: true
         default: "blog"
         type: choice
@@ -46,19 +46,19 @@ on:
           - api
 
       delete_missing:
-        description: "If true, remove entries that no longer exist in source repos."
+        description: "Remove entries that no longer exist in source repos."
         required: true
         default: false
         type: boolean
 
       use_agent:
-        description: "If true, run indexing via Agents SDK triage+handoff (--use-agent)."
+        description: "Run indexing via Agents SDK triage+handoff."
         required: true
         default: false
         type: boolean
 
       normalize_topics:
-        description: "If true, enable LLM topic normalization for blogs (--normalize-topics)."
+        description: "Enable LLM topic normalization for blogs."
         required: true
         default: true
         type: boolean

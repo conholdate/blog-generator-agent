@@ -1,0 +1,23 @@
+# GroupDocs.Total
+blog: groupdocs
+key: total
+display_name: "GroupDocs.Total"
+description: "Complete suite of document processing APIs covering conversion, viewing, editing, signing, search, and more."
+enabled: true
+
+platform_definitions:
+  net:
+    display_name: ".NET"
+    keywords: ["c#", "csharp", ".net", "dotnet", "groupdocs.total for .net"]
+  java:
+    display_name: "Java"
+    keywords: ["java", "groupdocs.total for java"]
+  python:
+    display_name: "Python via .NET"
+    keywords: ["python", "py", "python via .net", "python-net", "groupdocs.total for python via .net"]
+  nodejs:
+    display_name: "Node.js via Java"
+    keywords: ["node.js", "nodejs", "javascript", "js", "node.js via java", "groupdocs.total for node.js via java"]
+  general:
+    display_name: "General"
+    keywords: ["groupdocs.total", "document processing suite", "groupdocs api family"]

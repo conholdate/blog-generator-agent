@@ -1,0 +1,1150 @@
+{
+  "case": "blogs_to_blogs",
+  "brand_key": "aspose",
+  "product_key": "drawing",
+  "baseline_platform": "all",
+  "platforms": [
+    "general",
+    "java",
+    "net"
+  ],
+  "meta": {
+    "matching_mode": "key_exact",
+    "total_input_records": 37,
+    "records_after_filters": 37,
+    "excluded_release_update_records": 0,
+    "excluded_old_or_undated_records": 0,
+    "baseline_records": 37,
+    "total_cells": 102,
+    "matched_cells": 37,
+    "missing_cells": 65,
+    "match_rate": 0.3627450980392157,
+    "skipped_empty_keys": 0
+  },
+  "rows": [
+    {
+      "category": "Imaging",
+      "sub_category": "Image Annotation",
+      "topic": "Add callout to",
+      "key": "add-callout-to",
+      "baseline_record_id": "blog::drawing/2024-04-08-add-callout-to-image-in-csharp/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::drawing/2024-04-08-add-callout-to-image-in-csharp/index.md",
+          "title": "Add Callout to Image in C#",
+          "topic": "Add callout to",
+          "url": "https://blog.aspose.com/drawing/add-callout-to-image-in-csharp/"
+        }
+      }
+    },
+    {
+      "category": "Drawing",
+      "sub_category": "Image Callouts",
+      "topic": "Add callouts",
+      "key": "add-callouts",
+      "baseline_record_id": "blog::drawing/2024-09-16-add-image-callouts-in-java/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::drawing/2024-09-16-add-image-callouts-in-java/index.md",
+          "title": "Add Image Callouts in Java",
+          "topic": "Add callouts",
+          "url": "https://blog.aspose.com/drawing/add-image-callouts-in-java/"
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Imaging",
+      "sub_category": "Text Overlay",
+      "topic": "Add insert or draw text on PNG JPEG TIFF icon GIF",
+      "key": "add-insert-or-draw-text-on-png-jpeg-tiff-icon-gif",
+      "baseline_record_id": "blog::drawing/2021-02-28-draw-text-image-csharp/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::drawing/2021-02-28-draw-text-image-csharp/index.md",
+          "title": "Add, Insert, or Draw Text on PNG, JPEG, TIFF, Icon, GIF Image using C#",
+          "topic": "Add insert or draw text on PNG JPEG TIFF icon GIF",
+          "url": "https://blog.aspose.com/drawing/draw-text-image-csharp/"
+        }
+      }
+    },
+    {
+      "category": "Graphics",
+      "sub_category": "Image Editing",
+      "topic": "Add text to",
+      "key": "add-text-to",
+      "baseline_record_id": "blog::drawing/2023-08-28-add-text-to-image-in-csharp/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::drawing/2023-08-28-add-text-to-image-in-csharp/index.md",
+          "title": "Add Text to Image in C#",
+          "topic": "Add text to",
+          "url": "https://blog.aspose.com/drawing/add-text-to-image-in-csharp/"
+        }
+      }
+    },
+    {
+      "category": "Image Editing",
+      "sub_category": "Add Text to Image",
+      "topic": "Add text to photo free photo text editor",
+      "key": "add-text-to-photo-free-photo-text-editor",
+      "baseline_record_id": "blog::drawing/2025-05-14-add-text-to-photo-online/index.md",
+      "coverage": {
+        "general": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::drawing/2025-05-14-add-text-to-photo-online/index.md",
+          "title": "Add Text to Photo Online - Free Photo Text Editor",
+          "topic": "Add text to photo free photo text editor",
+          "url": "https://blog.aspose.com/drawing/add-text-to-photo-online/"
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Graphics",
+      "sub_category": "Alpha Blending",
+      "topic": "Alpha blending",
+      "key": "alpha-blending",
+      "baseline_record_id": "blog::drawing/2022-10-17-alpha-blending-in-csharp/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::drawing/2024-06-05-alpha-blending-in-java/index.md",
+          "title": "Alpha Blending in Java",
+          "topic": "Alpha blending",
+          "url": "https://blog.aspose.com/drawing/alpha-blending-in-java/"
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::drawing/2022-10-17-alpha-blending-in-csharp/index.md",
+          "title": "Alpha Blending in C#",
+          "topic": "Alpha blending",
+          "url": "https://blog.aspose.com/drawing/alpha-blending-in-csharp/"
+        }
+      }
+    },
+    {
+      "category": "Graphics",
+      "sub_category": "Antialiasing",
+      "topic": "Antialiasing IN computer graphics",
+      "key": "antialiasing-in-computer-graphics",
+      "baseline_record_id": "blog::drawing/2022-11-18-antialiasing-in-csharp/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::drawing/2022-11-18-antialiasing-in-csharp/index.md",
+          "title": "Antialiasing in Computer Graphics using C#",
+          "topic": "Antialiasing in computer graphics",
+          "url": "https://blog.aspose.com/drawing/antialiasing-in-csharp/"
+        }
+      }
+    },
+    {
+      "category": "Graphics",
+      "sub_category": "Antialiasing",
+      "topic": "Antialiasing STEP by STEP guide with Aspose.Drawing",
+      "key": "antialiasing-step-by-step-guide-with-aspose-drawing",
+      "baseline_record_id": "blog::drawing/2024-06-28-antialiasing-in-java/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::drawing/2024-06-28-antialiasing-in-java/index.md",
+          "title": "Antialiasing in Java - A Step-by-Step Guide with Aspose.Drawing",
+          "topic": "Antialiasing step by step guide with aspose drawing",
+          "url": "https://blog.aspose.com/drawing/antialiasing-in-java/"
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Graphics",
+      "sub_category": "Transformations",
+      "topic": "Apply matrix global local world coordinate transformation",
+      "key": "apply-matrix-global-local-world-coordinate-transformation",
+      "baseline_record_id": "blog::drawing/2021-03-04-matrix-global-local-world-transformation-csharp/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::drawing/2021-03-04-matrix-global-local-world-transformation-csharp/index.md",
+          "title": "Apply Matrix, Global, Local, World Coordinate Transformation in C#",
+          "topic": "Apply matrix global local world coordinate transformation",
+          "url": "https://blog.aspose.com/drawing/matrix-global-local-world-transformation-csharp/"
+        }
+      }
+    },
+    {
+      "category": "Graphics",
+      "sub_category": "2D Drawing",
+      "topic": "Aspose.Drawing the best alternative to the system drawing",
+      "key": "aspose-drawing-the-best-alternative-to-the-system-drawing",
+      "baseline_record_id": "blog::drawing/2023-10-27-aspose-drawing-best-alternative-to-system-drawing/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::drawing/2023-10-27-aspose-drawing-best-alternative-to-system-drawing/index.md",
+          "title": "Aspose.Drawing: The Best Alternative to the System.Drawing",
+          "topic": "Aspose drawing the best alternative to the system drawing",
+          "url": "https://blog.aspose.com/drawing/aspose-drawing-best-alternative-to-system-drawing/"
+        }
+      }
+    },
+    {
+      "category": "Graphics",
+      "sub_category": "Image Processing",
+      "topic": "Clipping",
+      "key": "clipping",
+      "baseline_record_id": "blog::drawing/2023-05-22-image-clipping-in-csharp/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::drawing/2024-05-09-image-clipping-in-java/index.md",
+          "title": "Image Clipping in Java",
+          "topic": "Clipping",
+          "url": "https://blog.aspose.com/drawing/image-clipping-in-java/"
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::drawing/2023-05-22-image-clipping-in-csharp/index.md",
+          "title": "Image Clipping in C#",
+          "topic": "Clipping",
+          "url": "https://blog.aspose.com/drawing/image-clipping-in-csharp/"
+        }
+      }
+    },
+    {
+      "category": "Graphics",
+      "sub_category": "Bitmap Manipulation",
+      "topic": "Create and draw on bitmaps with Aspose.Drawing",
+      "key": "create-and-draw-on-bitmaps-with-aspose-drawing",
+      "baseline_record_id": "blog::drawing/2025-07-21-create-bitmap-in-java/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::drawing/2025-07-21-create-bitmap-in-java/index.md",
+          "title": "How to Create and Draw on Bitmaps in Java with Aspose.Drawing",
+          "topic": "Create and draw on bitmaps with aspose drawing",
+          "url": "https://blog.aspose.com/drawing/create-load-fill-and-draw-bitmap-in-java/"
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Graphics",
+      "sub_category": "Bitmap Creation",
+      "topic": "Create BMP",
+      "key": "create-bmp",
+      "baseline_record_id": "blog::drawing/2020-06-27-create-images-and-graphics-using-csharp-or-vb.net/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::drawing/2020-06-27-create-images-and-graphics-using-csharp-or-vb.net/index.md",
+          "title": "Create Bitmap Images and Graphics from Scratch in C# .NET",
+          "topic": "Create bitmap and graphics from scratch",
+          "url": "https://blog.aspose.com/drawing/create-images-and-graphics-using-csharp-or-vb.net/"
+        }
+      }
+    },
+    {
+      "category": "Imaging",
+      "sub_category": "Bitmap Manipulation",
+      "topic": "Create load fill and draw bitmap",
+      "key": "create-load-fill-and-draw-bitmap",
+      "baseline_record_id": "blog::drawing/2022-08-16-create-bitmap-in-csharp/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::drawing/2022-08-16-create-bitmap-in-csharp/index.md",
+          "title": "Create, Load, Fill, and Draw Bitmap in C#",
+          "topic": "Create load fill and draw bitmap",
+          "url": "https://blog.aspose.com/drawing/create-load-fill-and-draw-bitmap-in-csharp/"
+        }
+      }
+    },
+    {
+      "category": "Graphics",
+      "sub_category": "Text Rendering",
+      "topic": "Draw and text using Aspose.Drawing",
+      "key": "draw-and-text-using-aspose-drawing",
+      "baseline_record_id": "blog::drawing/2025-06-15-draw-text-in-java/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::drawing/2025-06-15-draw-text-in-java/index.md",
+          "title": "Draw and Format Text in Java Using Aspose.Drawing for Java",
+          "topic": "Draw and text using aspose drawing",
+          "url": "https://blog.aspose.com/drawing/draw-text-in-java/"
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Graphics",
+      "sub_category": "Arcs and Curves",
+      "topic": "Draw arcs and curves",
+      "key": "draw-arcs-and-curves",
+      "baseline_record_id": "blog::drawing/2024-12-02-draw-arc-and-curve-in-csharp/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::drawing/2024-12-02-draw-arc-and-curve-in-csharp/index.md",
+          "title": "Draw Arcs and Curves in C#",
+          "topic": "Draw arcs and curves",
+          "url": "https://blog.aspose.com/drawing/draw-arc-and-curve-in-csharp/"
+        }
+      }
+    },
+    {
+      "category": "Graphics",
+      "sub_category": "Shape Drawing",
+      "topic": "Draw circle",
+      "key": "draw-circle",
+      "baseline_record_id": "blog::drawing/2023-10-09-draw-circle-in-csharp/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::drawing/2023-10-09-draw-circle-in-csharp/index.md",
+          "title": "Draw Circle in C#",
+          "topic": "Draw circle",
+          "url": "https://blog.aspose.com/drawing/draw-circle-in-csharp/"
+        }
+      }
+    },
+    {
+      "category": "Graphics",
+      "sub_category": "Ellipse",
+      "topic": "Draw ellipse",
+      "key": "draw-ellipse",
+      "baseline_record_id": "blog::drawing/2022-07-22-draw-ellipse-in-csharp/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::drawing/2022-07-22-draw-ellipse-in-csharp/index.md",
+          "title": "Draw an Ellipse in C#",
+          "topic": "Draw ellipse",
+          "url": "https://blog.aspose.com/drawing/draw-an-ellipse-csharp/"
+        }
+      }
+    },
+    {
+      "category": "Graphics",
+      "sub_category": "2D Drawing",
+      "topic": "Draw graphics and create 2d drawings or",
+      "key": "draw-graphics-and-create-2d-drawings-or",
+      "baseline_record_id": "blog::drawing/2020-06-30-draw-graphics-and-create-2d-drawings-using-csharp-or-vb.net/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::drawing/2020-06-30-draw-graphics-and-create-2d-drawings-using-csharp-or-vb.net/index.md",
+          "title": "Draw Graphics and Create 2D Drawings using C# or VB.NET",
+          "topic": "Draw graphics and create 2D drawings or",
+          "url": "https://blog.aspose.com/drawing/draw-graphics-and-create-2d-drawings-using-csharp-or-vb.net/"
+        }
+      }
+    },
+    {
+      "category": "Graphics",
+      "sub_category": "Line Drawing",
+      "topic": "Draw lines",
+      "key": "draw-lines",
+      "baseline_record_id": "blog::drawing/2024-02-06-draw-lines-in-csharp/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::drawing/2024-02-06-draw-lines-in-csharp/index.md",
+          "title": "Draw Lines in C#",
+          "topic": "Draw lines",
+          "url": "https://blog.aspose.com/drawing/draw-lines-in-csharp/"
+        }
+      }
+    },
+    {
+      "category": "Graphics",
+      "sub_category": "Shape Drawing",
+      "topic": "Draw pentagon",
+      "key": "draw-pentagon",
+      "baseline_record_id": "blog::drawing/2024-11-12-draw-pentagon-in-csharp/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::drawing/2024-11-12-draw-pentagon-in-csharp/index.md",
+          "title": "Draw Pentagon in C#",
+          "topic": "Draw pentagon",
+          "url": "https://blog.aspose.com/drawing/draw-pentagon-in-csharp/"
+        }
+      }
+    },
+    {
+      "category": "Graphics",
+      "sub_category": "Shapes",
+      "topic": "Draw rectangle",
+      "key": "draw-rectangle",
+      "baseline_record_id": "blog::drawing/2022-07-22-draw-rectangle-in-csharp/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::drawing/2022-07-22-draw-rectangle-in-csharp/index.md",
+          "title": "Draw a Rectangle in C#",
+          "topic": "Draw rectangle",
+          "url": "https://blog.aspose.com/drawing/draw-rectangle-csharp/"
+        }
+      }
+    },
+    {
+      "category": "Graphics",
+      "sub_category": "Text Rendering",
+      "topic": "Draw text",
+      "key": "draw-text",
+      "baseline_record_id": "blog::drawing/2024-10-08-draw-text-in-csharp/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::drawing/2024-10-08-draw-text-in-csharp/index.md",
+          "title": "How to Draw Text in C#",
+          "topic": "Draw text",
+          "url": "https://blog.aspose.com/drawing/draw-text-in-csharp/"
+        }
+      }
+    },
+    {
+      "category": "Tools",
+      "sub_category": "Digital Ruler",
+      "topic": "Free ruler digital solution for accurate measurements",
+      "key": "free-ruler-digital-solution-for-accurate-measurements",
+      "baseline_record_id": "blog::drawing/2023-03-31-online-ruler/index.md",
+      "coverage": {
+        "general": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::drawing/2023-03-31-online-ruler/index.md",
+          "title": "Free Online Ruler - A Digital Solution for Accurate Measurements",
+          "topic": "Free ruler digital solution for accurate measurements",
+          "url": "https://blog.aspose.com/drawing/online-ruler-cm-scale/"
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Graphics",
+      "sub_category": "Vector Graphics Programming",
+      "topic": "Graphics programming",
+      "key": "graphics-programming",
+      "baseline_record_id": "blog::drawing/2022-09-20-graphics-programming-in-csharp/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::drawing/2024-03-04-graphics-programming-in-java/index.md",
+          "title": "Graphics Programming in Java",
+          "topic": "Graphics programming",
+          "url": "https://blog.aspose.com/drawing/graphics-programming-in-java/"
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::drawing/2022-09-20-graphics-programming-in-csharp/index.md",
+          "title": "Graphics Programming in C#",
+          "topic": "Graphics programming",
+          "url": "https://blog.aspose.com/drawing/graphics-programming-in-csharp/"
+        }
+      }
+    },
+    {
+      "category": "Graphics",
+      "sub_category": "Image Editing",
+      "topic": "TXT to JPG",
+      "key": "txt-to-jpg",
+      "baseline_record_id": "blog::drawing/2023-03-06-add-text-to-jpg/index.md",
+      "coverage": {
+        "general": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::drawing/2023-03-06-add-text-to-jpg/index.md",
+          "title": "How to Add Text to a JPEG/JPG - Online & Free",
+          "topic": "Add text to JPEG JPG and",
+          "url": "https://blog.aspose.com/drawing/add-text-to-jpg-write-on-jpg/"
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Image Processing",
+      "sub_category": "Text Overlay",
+      "topic": "TXT to PNG",
+      "key": "txt-to-png",
+      "baseline_record_id": "blog::drawing/2023-03-06-add-text-to-png/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::drawing/2023-03-06-add-text-to-png/index.md",
+          "title": "Add Text to PNG Image",
+          "topic": "Add text to PNG",
+          "url": "https://blog.aspose.com/drawing/add-text-to-png-image/"
+        }
+      }
+    },
+    {
+      "category": "Cloud Development",
+      "sub_category": "Serverless Functions",
+      "topic": "Using Aspose.Drawing IN azure functions",
+      "key": "using-aspose-drawing-in-azure-functions",
+      "baseline_record_id": "blog::drawing/2021-09-22-use-system-drawing-in-azure-functions/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::drawing/2021-09-22-use-system-drawing-in-azure-functions/index.md",
+          "title": "Using Aspose.Drawing in Azure Functions with C#",
+          "topic": "Using aspose drawing in azure functions",
+          "url": "https://blog.aspose.com/drawing/use-system-drawing-in-azure-functions/"
+        }
+      }
+    },
+    {
+      "category": "Graphics",
+      "sub_category": "Cross‑Platform Rendering",
+      "topic": "Using system drawing 6 on non windows platform",
+      "key": "using-system-drawing-6-on-non-windows-platform",
+      "baseline_record_id": "blog::drawing/2022-03-09-system.drawing-with-dotnet6-non-windows/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::drawing/2022-03-09-system.drawing-with-dotnet6-non-windows/index.md",
+          "title": "Using System.Drawing with .NET 6 on non-Windows Platform",
+          "topic": "Using system drawing 6 on non windows platform",
+          "url": "https://blog.aspose.com/drawing/system.drawing-with-dotnet6-non-windows/"
+        }
+      }
+    },
+    {
+      "category": "Graphics",
+      "sub_category": "Web Development",
+      "topic": "Using system drawing IN blazor webassembly",
+      "key": "using-system-drawing-in-blazor-webassembly",
+      "baseline_record_id": "blog::drawing/2022-05-21-use-system-drawing-blazor-webassembly-app-csharp/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::drawing/2022-05-21-use-system-drawing-blazor-webassembly-app-csharp/index.md",
+          "title": "Using System.Drawing in Blazor WebAssembly App in C#",
+          "topic": "Using system drawing in blazor webassembly",
+          "url": "https://blog.aspose.com/drawing/use-system-drawing-blazor-webassembly-app-csharp/"
+        }
+      }
+    },
+    {
+      "category": "Development",
+      "sub_category": "Graphics",
+      "topic": "Using system drawing IN linux without libgdiplus",
+      "key": "using-system-drawing-in-linux-without-libgdiplus",
+      "baseline_record_id": "blog::drawing/2020-12-13-using-system-drawing-in-linux/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::drawing/2020-12-13-using-system-drawing-in-linux/index.md",
+          "title": "Using System.Drawing in Linux without libgdiplus",
+          "topic": "Using system drawing in linux without libgdiplus",
+          "url": "https://blog.aspose.com/drawing/using-system-drawing-in-linux/"
+        }
+      }
+    },
+    {
+      "category": "Graphics",
+      "sub_category": "Image Processing",
+      "topic": "Using system drawing with core or service",
+      "key": "using-system-drawing-with-core-or-service",
+      "baseline_record_id": "blog::drawing/2021-05-20-using-system-drawing-in-asp-net-core-or-asp-net-service/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::drawing/2021-05-20-using-system-drawing-in-asp-net-core-or-asp-net-service/index.md",
+          "title": "Using System.Drawing with ASP.NET Core or ASP.NET Service",
+          "topic": "Using system drawing with core or service",
+          "url": "https://blog.aspose.com/drawing/using-system-drawing-in-asp-net-core-or-asp-net-service/"
+        }
+      }
+    },
+    {
+      "category": "Graphics",
+      "sub_category": "Vector Graphics",
+      "topic": "Working with Aspose.Drawing IN core web",
+      "key": "working-with-aspose-drawing-in-core-web",
+      "baseline_record_id": "blog::drawing/2023-07-17-working-with-aspose-drawing-in-asp-net-core-web-app/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::drawing/2023-07-17-working-with-aspose-drawing-in-asp-net-core-web-app/index.md",
+          "title": "Working with Aspose.Drawing in ASP.NET Core Web App",
+          "topic": "Working with aspose drawing in core web",
+          "url": "https://blog.aspose.com/drawing/working-with-aspose-drawing-in-asp-net-core-web-app/"
+        }
+      }
+    },
+    {
+      "category": "Graphics",
+      "sub_category": "Text Overlay",
+      "topic": "Write text on JPG",
+      "key": "write-text-on-jpg",
+      "baseline_record_id": "blog::drawing/2024-08-19-write-text-on-jpg-in-java/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::drawing/2024-08-19-write-text-on-jpg-in-java/index.md",
+          "title": "Write Text on JPG Images in Java",
+          "topic": "Write text on JPG",
+          "url": "https://blog.aspose.com/drawing/write-text-on-jpg-in-java/"
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    }
+  ],
+  "brand_name": "Aspose",
+  "product_name": "Aspose.Drawing"
+}

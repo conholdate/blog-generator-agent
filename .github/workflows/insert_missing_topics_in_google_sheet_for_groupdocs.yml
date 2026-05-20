@@ -1,0 +1,355 @@
+name: Missing Topics For GroupDocs.com
+
+on:
+  workflow_dispatch:
+    inputs:
+      brand_yaml:
+        description: "Path to GroupDocs brand YAML."
+        required: true
+        default: "configs/groupdocs.yaml"
+        type: choice
+        options:
+          - configs/groupdocs.yaml
+
+      product_yaml:
+        description: "Select product YAML."
+        required: true
+        default: "configs/groupdocs/conversion.yaml"
+        type: choice
+        options:
+          - configs/groupdocs/annotation.yaml
+          - configs/groupdocs/assembly.yaml
+          - configs/groupdocs/classification.yaml
+          - configs/groupdocs/comparison.yaml
+          - configs/groupdocs/conversion.yaml
+          - configs/groupdocs/editor.yaml
+          - configs/groupdocs/merger.yaml
+          - configs/groupdocs/metadata.yaml
+          - configs/groupdocs/parser.yaml
+          - configs/groupdocs/redaction.yaml
+          - configs/groupdocs/search.yaml
+          - configs/groupdocs/signature.yaml
+          - configs/groupdocs/total.yaml
+          - configs/groupdocs/viewer.yaml
+          - configs/groupdocs/watermark.yaml
+
+      platform:
+        description: "Target platform for indexing."
+        required: true
+        default: "net"
+        type: choice
+        options:
+          - net
+          - java
+          - python
+          - nodejs
+          - general
+
+      steps:
+        description: "Indexing key."
+        required: true
+        default: "blog"
+        type: choice
+        options:
+          - blog
+
+      delete_missing:
+        description: "Remove entries that no longer exist in source repos."
+        required: true
+        default: false
+        type: boolean
+
+      use_agent:
+        description: "Run indexing via Agents SDK triage+handoff (--use-agent)."
+        required: true
+        default: false
+        type: boolean
+
+      normalize_topics:
+        description: "Enable LLM topic normalization for blogs (--normalize-topics)."
+        required: true
+        default: true
+        type: boolean
+
+      case:
+        description: "Coverage case."
+        required: true
+        type: choice
+        options:
+          - blogs_to_blogs
+        default: "blogs_to_blogs"
+
+      threshold_strict:
+        description: "Strict threshold."
+        required: true
+        type: string
+        default: "0.86"
+
+      threshold_loose:
+        description: "Loose threshold."
+        required: true
+        type: string
+        default: "0.80"
+
+      top_k:
+        description: "Top-K matches."
+        required: true
+        type: string
+        default: "5"
+
+      platforms:
+        description: "Optional comma-separated platform limit for blogs_to_blogs. Example: net,java,python"
+        required: false
+        type: string
+        default: ""
+
+      no_embeddings:
+        description: "Force lexical-only fallback for gap analysis."
+        required: false
+        type: boolean
+        default: false
+
+      sheet_name:
+        description: "Optional Google Sheets tab name override."
+        required: false
+        default: ""
+        type: string
+
+      python_version:
+        description: "Python version."
+        required: true
+        default: "3.11"
+        type: string
+
+      push_results:
+        description: "Commit and push generated outputs back to the repo."
+        required: false
+        type: boolean
+        default: true
+
+      commit_message:
+        description: "Commit message when push_results=true."
+        required: false
+        type: string
+        default: "chore: update GroupDocs.com indexing, cg-cover, and missing topics Google Sheets payload"
+
+      log_level:
+        description: "Python log level."
+        required: true
+        default: "INFO"
+        type: choice
+        options:
+          - DEBUG
+          - INFO
+          - WARNING
+          - ERROR
+
+permissions:
+  contents: write
+
+jobs:
+  run-index-gap-and-export:
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+
+    env:
+      CG_REPO_ROOT: ${{ github.workspace }}
+      CG_OUTPUTS_ROOT: ${{ github.workspace }}/outputs
+      GIT_TERMINAL_PROMPT: "0"
+      PROFESSIONALIZE_BASE_URL: "https://llm.professionalize.com/v1"
+      PROFESSIONALIZE_API_KEY: ${{ secrets.PROFESSIONALIZE_API_KEY_1 }}
+      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+      GROUPDOCS_BLOG_TOKEN: ${{ secrets.GROUPDOCS_BLOG_TOKEN || secrets.ASPOSE_BLOG_TOKEN }}
+      TOPICS_SHEETS_CONFIG_PATH: configs/topics_sheets.json
+      TOPICS_SHEETS_TOKEN: ${{ secrets.TOPICS_SHEETS_TOKEN }}
+      CG_SKIP_SHEETS_AUTO_POST: "true"
+
+    steps:
+      - name: Checkout this repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ inputs.python_version }}
+          cache: "pip"
+
+      - name: Install dependencies
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install --upgrade pip
+          if [ -f requirements.txt ]; then
+            pip install -r requirements.txt
+          elif [ -f pyproject.toml ]; then
+            pip install -e .
+          else
+            echo "No requirements.txt or pyproject.toml found. Add one for CI installs."
+            exit 1
+          fi
+
+      - name: Restore SQLite cache
+        uses: actions/cache@v4
+        with:
+          path: "**/cache/*.sqlite"
+          key: ${{ runner.os }}-sqlite-${{ github.run_id }}
+          restore-keys: |
+            ${{ runner.os }}-sqlite-
+
+      - name: Resolve GroupDocs workflow paths
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - << 'PY' >> "$GITHUB_ENV"
+          import os
+          from pathlib import Path
+          import yaml
+
+          brand_yaml = Path(os.environ["BRAND_YAML"]).resolve()
+          product_yaml = Path(os.environ["PRODUCT_YAML"]).resolve()
+          repo_root = Path.cwd().resolve()
+
+          brand_data = yaml.safe_load(brand_yaml.read_text(encoding="utf-8")) or {}
+          product_data = yaml.safe_load(product_yaml.read_text(encoding="utf-8")) or {}
+
+          brand_key = str(brand_data.get("key") or "").strip()
+          product_key = str(product_data.get("key") or "").strip()
+          if brand_key != "groupdocs":
+              raise SystemExit(f"Expected brand key 'groupdocs', got: {brand_key!r}")
+          if not product_key:
+              raise SystemExit(f"Missing 'key' in product YAML: {product_yaml}")
+
+          raw_outputs_root = brand_data.get("outputs_root") or "outputs"
+          outputs_root = Path(str(raw_outputs_root))
+          if not outputs_root.is_absolute():
+              outputs_root = (brand_yaml.parent / raw_outputs_root).resolve()
+
+          baseline_platform = os.environ.get("BASELINE_PLATFORM", "").strip() or "all"
+          coverage_case = os.environ.get("COVERAGE_CASE", "").strip()
+          if not coverage_case:
+              raise SystemExit("COVERAGE_CASE is required.")
+
+          coverage_json = outputs_root / brand_key / product_key / "coverage" / coverage_case / baseline_platform / "coverage.json"
+          sheets_payload_json = outputs_root / "google_sheets" / f"{brand_key}_missing_topics.json"
+
+          print(f"CG_BRAND_YAML={brand_yaml}")
+          print(f"CG_OUTPUTS_ROOT={outputs_root}")
+          print(f"CG_REPO_ROOT={repo_root}")
+          print(f"CG_BRAND_KEY={brand_key}")
+          print(f"CG_PRODUCT_KEY={product_key}")
+          print(f"CG_COVERAGE_JSON={coverage_json}")
+          print(f"CG_SHEETS_PAYLOAD_JSON={sheets_payload_json}")
+          PY
+        env:
+          BRAND_YAML: ${{ inputs.brand_yaml }}
+          PRODUCT_YAML: ${{ inputs.product_yaml }}
+          BASELINE_PLATFORM: ${{ inputs.platform }}
+          COVERAGE_CASE: ${{ inputs.case }}
+
+      - name: Configure git auth for GroupDocs source repos
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ -n "${GROUPDOCS_BLOG_TOKEN}" ]; then
+            git config --global url."https://x-access-token:${GROUPDOCS_BLOG_TOKEN}@github.com/groupdocs/".insteadOf "https://github.com/groupdocs/"
+            git config --global url."https://x-access-token:${GROUPDOCS_BLOG_TOKEN}@github.com/GroupDocs/".insteadOf "https://github.com/GroupDocs/"
+          fi
+          git config --global advice.detachedHead false
+          git --version
+
+      - name: Run missing-topics workflow
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          ARGS=(scripts/run_missing_topics_workflow_local.py
+            --brand-yaml "${CG_BRAND_YAML}"
+            --product-yaml "${{ inputs.product_yaml }}"
+            --index-platform "${{ inputs.platform }}"
+            --steps "${{ inputs.steps }}"
+            --case "${{ inputs.case }}"
+            --threshold-strict "${{ inputs.threshold_strict }}"
+            --threshold-loose "${{ inputs.threshold_loose }}"
+            --top-k "${{ inputs.top_k }}"
+            --log-level "${{ inputs.log_level }}"
+            --append
+            --post
+            --workflow-compatible
+          )
+
+          if [ "${{ inputs.delete_missing }}" = "true" ]; then
+            ARGS+=(--delete-missing)
+          fi
+
+          if [ "${{ inputs.use_agent }}" = "true" ]; then
+            ARGS+=(--use-agent)
+          fi
+
+          if [ "${{ inputs.normalize_topics }}" = "false" ]; then
+            ARGS+=(--no-normalize-topics)
+          fi
+
+          if [ -n "${{ inputs.platforms }}" ]; then
+            ARGS+=(--platforms "${{ inputs.platforms }}")
+          fi
+
+          if [ "${{ inputs.no_embeddings }}" = "true" ]; then
+            ARGS+=(--no-embeddings)
+          fi
+
+          if [ -n "${{ inputs.sheet_name }}" ]; then
+            ARGS+=(--sheet-name "${{ inputs.sheet_name }}")
+          fi
+
+          python "${ARGS[@]}"
+
+      - name: Verify coverage output exists
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo "Expected coverage file: ${CG_COVERAGE_JSON}"
+          test -f "${CG_COVERAGE_JSON}"
+
+      - name: Verify Google Sheets payload exists
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo "Expected payload file: ${CG_SHEETS_PAYLOAD_JSON}"
+          test -f "${CG_SHEETS_PAYLOAD_JSON}"
+
+      - name: Upload combined outputs artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: groupdocs-content-indexing-gap-and-sheets-outputs
+          path: |
+            ${{ env.CG_OUTPUTS_ROOT }}/**
+          if-no-files-found: warn
+
+      - name: Commit and push outputs
+        if: ${{ inputs.push_results }}
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          if [ -d "${CG_OUTPUTS_ROOT}/_repos" ]; then
+            rm -rf "${CG_OUTPUTS_ROOT}/_repos"
+          fi
+
+          find "${CG_OUTPUTS_ROOT}" -name "*.sqlite" -delete 2>/dev/null || true
+
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          git add "${CG_OUTPUTS_ROOT}" || true
+
+          if git diff --cached --quiet; then
+            echo "No output changes to commit."
+            exit 0
+          fi
+
+          git commit -m "${{ inputs.commit_message }}"
+          git push

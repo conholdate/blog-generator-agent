@@ -1,0 +1,17 @@
+# GroupDocs.Watermark Cloud SDK
+blog: groupdocs_cloud
+key: watermark
+display_name: "GroupDocs.Watermark Cloud SDK"
+description: "Cloud SDK for adding, finding, and removing watermarks in documents and images."
+enabled: true
+
+platform_definitions:
+  net:
+    display_name: ".NET"
+    keywords: ["c#", "csharp", ".net", "dotnet", "groupdocs.watermark cloud sdk for .net"]
+  java:
+    display_name: "Java"
+    keywords: ["java", "groupdocs.watermark cloud sdk for java"]
+  general:
+    display_name: "General"
+    keywords: ["groupdocs watermark cloud", "watermark cloud api"]

@@ -1,0 +1,23 @@
+# GroupDocs.Viewer
+blog: groupdocs
+key: viewer
+display_name: "GroupDocs.Viewer"
+description: "Document viewing APIs for rendering files as HTML, images, and PDF in web and desktop applications."
+enabled: true
+
+platform_definitions:
+  net:
+    display_name: ".NET"
+    keywords: ["c#", "csharp", ".net", "dotnet", "groupdocs.viewer for .net"]
+  java:
+    display_name: "Java"
+    keywords: ["java", "groupdocs.viewer for java"]
+  python:
+    display_name: "Python via .NET"
+    keywords: ["python", "py", "python via .net", "python-net", "groupdocs.viewer for python via .net"]
+  nodejs:
+    display_name: "Node.js via Java"
+    keywords: ["node.js", "nodejs", "javascript", "js", "node.js via java", "groupdocs.viewer for node.js via java"]
+  general:
+    display_name: "General"
+    keywords: ["groupdocs.viewer", "document viewer api", "render documents library"]

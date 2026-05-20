@@ -94,7 +94,12 @@ def main() -> None:
     parser.add_argument("--no-normalize-topics", action="store_true")
     parser.add_argument("--no-embeddings", action="store_true")
     parser.add_argument("--no-metrics", action="store_true", help="Disable metrics for indexer and gap subprocesses.")
-    parser.add_argument("--append", action="store_true", help="Append mode for payload/post. Recommended.")
+    parser.add_argument("--append", action="store_true", help="Append rows in Sheets. This is the default.")
+    parser.add_argument(
+        "--replace",
+        action="store_true",
+        help="Replace the target sheet contents instead of appending. Use only for intentional full refreshes.",
+    )
     parser.add_argument("--post", action="store_true", help="Actually POST to Google Sheets. Default is payload-only.")
     parser.add_argument(
         "--workflow-compatible",
@@ -105,6 +110,8 @@ def main() -> None:
         ),
     )
     args = parser.parse_args()
+    if args.append and args.replace:
+        raise SystemExit("Use only one of --append or --replace.")
 
     product_yaml = (REPO_ROOT / args.product_yaml).resolve() if not Path(args.product_yaml).is_absolute() else Path(args.product_yaml).resolve()
     if not product_yaml.exists():
@@ -204,7 +211,7 @@ def main() -> None:
     payload = build_payload(
         coverage_json=coverage_json,
         sheet_name=(args.sheet_name or "All Missing Topics").strip() or "All Missing Topics",
-        replace=not args.append,
+        replace=args.replace,
     )
 
     output_json = Path(args.output_json).expanduser() if args.output_json else outputs_root / "google_sheets" / f"{brand_key}_missing_topics.json"
@@ -218,7 +225,7 @@ def main() -> None:
     print(f"[local-workflow] Coverage JSON: {coverage_json}")
     print(f"[local-workflow] Coverage sources: {payload['meta']['source_count']}")
     print(f"[local-workflow] Missing topic rows: {payload['meta']['row_count']}")
-    print(f"[local-workflow] Mode: {'append' if args.append else 'replace'}")
+    print(f"[local-workflow] Mode: {'replace' if args.replace else 'append'}")
 
     if args.post:
         from agent_engine.content_gap_agent.settings import CoverageSettings  # noqa: E402

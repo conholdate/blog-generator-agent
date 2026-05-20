@@ -1,0 +1,35 @@
+# GroupDocs.Comparison Cloud SDK
+blog: groupdocs_cloud
+key: comparison
+display_name: "GroupDocs.Comparison Cloud SDK"
+description: "Cloud SDK for comparing documents and detecting differences across multiple file types."
+enabled: true
+
+platform_definitions:
+  net:
+    display_name: ".NET"
+    keywords: ["c#", "csharp", ".net", "dotnet", "groupdocs.comparison cloud sdk for .net"]
+  java:
+    display_name: "Java"
+    keywords: ["java", "groupdocs.comparison cloud sdk for java"]
+  php:
+    display_name: "PHP"
+    keywords: ["php", "groupdocs.comparison cloud sdk for php"]
+  python:
+    display_name: "Python"
+    keywords: ["python", "py", "groupdocs.comparison cloud sdk for python"]
+  ruby:
+    display_name: "Ruby"
+    keywords: ["ruby", "groupdocs.comparison cloud sdk for ruby"]
+  nodejs:
+    display_name: "Node.js"
+    keywords: ["node.js", "nodejs", "javascript", "js", "groupdocs.comparison cloud sdk for node.js"]
+  android:
+    display_name: "Android"
+    keywords: ["android", "groupdocs.comparison cloud sdk for android"]
+  apex:
+    display_name: "Apex"
+    keywords: ["apex", "groupdocs.comparison cloud sdk for apex"]
+  general:
+    display_name: "General"
+    keywords: ["groupdocs comparison cloud", "document comparison cloud api"]

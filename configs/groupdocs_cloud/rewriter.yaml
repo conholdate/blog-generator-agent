@@ -1,0 +1,17 @@
+# GroupDocs.Rewriter Cloud SDK
+blog: groupdocs_cloud
+key: rewriter
+display_name: "GroupDocs.Rewriter Cloud SDK"
+description: "Cloud SDK for AI-powered text rewriting and language transformation workflows."
+enabled: true
+
+platform_definitions:
+  net:
+    display_name: ".NET"
+    keywords: ["c#", "csharp", ".net", "dotnet", "groupdocs.rewriter cloud sdk for .net"]
+  python:
+    display_name: "Python"
+    keywords: ["python", "py", "groupdocs.rewriter cloud sdk for python"]
+  general:
+    display_name: "General"
+    keywords: ["groupdocs rewriter cloud", "rewriter cloud api"]
