@@ -8,6 +8,7 @@ __pycache__/
 .idea/
 .vscode/
 .env
+keys/
 /.bta_state
 /repo_cache
 /outputs/_repos

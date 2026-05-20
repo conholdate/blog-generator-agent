@@ -17,80 +17,67 @@ load_dotenv()
 # Initialize MCP
 mcp = FastMCP("gist-injector")
 
+def prepend_backlink_comment(code: str, filename: str, summary: str, url: str) -> str:
+    """Prepend a backlink comment to a code snippet based on file extension."""
+    ext = filename.split(".")[-1].lower()
+    
+    if ext in ("py",):
+        comment = f"# {summary}\n# Read the full guide here: {url}\n\n"
+    elif ext in ("java", "cs", "cpp", "c", "js", "ts", "go"):
+        comment = f"// {summary}\n// Read the full guide here: {url}\n\n"
+    elif ext in ("sh", "bash"):
+        comment = f"# {summary}\n# Read the full guide here: {url}\n\n"
+    else:
+        comment = f"# {summary}\n# Read the full guide here: {url}\n\n"
+    
+    return comment + code
+
+
 @mcp.tool()
-async def gist_injector(content: str, title: str) -> dict:
+async def gist_injector(content: str, title: str, summary: str = "", url: str = "") -> dict:
 
     try:
-        snippets = extract_all_complete_code_snippets(content)
+        snippets = extract_all_complete_code_snippets(content,title)
         if len(snippets) == 0:
-            print("No complete code snippets foundee!", flush=True, file=sys.stderr)
-            return {"jistified_content":content}
-        elif len(snippets) == 1:
-            # Prepare for gist upload
-            code_for_gist = {
-                data['filename']: data['code'] 
-                for data in snippets.values()
-            }
-            # print(f"Repo Token - {settings.REPO_PAT}", flush=True, file=sys.stderr)
-            # Step 3: Upload to gist
-            gist_result = await upload_to_gist(
-                code_for_gist,
-                description=title,
-                token=settings.REPO_PAT,
-                gist_name=settings.GIST_NAME
-            )
-            print(f"gist result --- {gist_result}",flush=True, file=sys.stderr)
-            if gist_result.get("success"):
-                shortcodes_map = gist_result['shortcodes']
-                
-                # Step 4: Replace in markdown
-                updated_content = replace_code_snippets_with_gists(
-                    content,
-                    snippets,
-                    shortcodes_map
+            print("No complete code snippets found!", flush=True, file=sys.stderr)
+            return {"jistified_content": content}
+        
+        # Prepend backlink comment to each snippet
+        if summary or url:
+            for key in snippets:
+                snippets[key]["code"] = prepend_backlink_comment(
+                    snippets[key]["code"],
+                    snippets[key]["filename"],
+                    summary,
+                    url
                 )
-                
-                print(f" code snippet replaced with gist.  {updated_content}", flush=True, file=sys.stderr)
-                return {"jistified_content":updated_content}
-                # Now 'updated_content' has all gist shortcodes
-            else:
-                print(f"❌ Gist upload failed: {gist_result['error']}", flush=True, file=sys.stderr)
-                return {"jistified_content":content}
+
+        code_for_gist = {
+            data['filename']: data['code']
+            for data in snippets.values()
+        }
+
+        gist_result = await upload_to_gist(
+            code_for_gist,
+            description=title,
+            token=settings.REPO_PAT,
+            gist_name=settings.GIST_NAME
+        )
+
+        print(f"gist result --- {gist_result}", flush=True, file=sys.stderr)
+
+        if gist_result.get("success"):
+            shortcodes_map = gist_result['shortcodes']
+            updated_content = replace_code_snippets_with_gists(content, snippets, shortcodes_map)
+            print(f"Code snippets replaced with gists.", flush=True, file=sys.stderr)
+            return {"jistified_content": updated_content, "gist_url": gist_result.get("gist_url", "")}
         else:
-            print(f"Multi-task detected", flush=True, file=sys.stderr)
-            code_for_gist = {
-                data['filename']: data['code'] 
-                for data in snippets.values()
-            }
-            
-            # Step 3: Upload to gist
-            gist_result = await upload_to_gist(
-                code_for_gist,
-                description=title,
-                token=settings.REPO_PAT,
-                gist_name=settings.GIST_NAME
-            )
-            
-            if gist_result.get("success"):
-                shortcodes_map = gist_result['shortcodes']
-                
-                # Step 4: Replace in markdown
-                updated_content = replace_code_snippets_with_gists(
-                    content,
-                    snippets,
-                    shortcodes_map
-                )
-                
-                print(f" All code snippets replaced with gists.  {updated_content}", flush=True, file=sys.stderr)
-                return {"jistified_content":updated_content}
-                # Now 'updated_content' has all gist shortcodes
-            else:
-                print(f"❌ Gist upload failed: {gist_result['error']}", flush=True, file=sys.stderr)
-                return {"jistified_content":content}
-    
+            print(f"❌ Gist upload failed: {gist_result['error']}", flush=True, file=sys.stderr)
+            return {"jistified_content": "content"}
+
     except Exception as e:
-        print(f"LLM error, using fallback: {e}", file=sys.stderr)
-        return {"jistified_content":content}
+        print(f"Error in gist_injector: {e}", file=sys.stderr)
+        return {"jistified_content": content}
 
 if __name__ == "__main__":
     mcp.run()

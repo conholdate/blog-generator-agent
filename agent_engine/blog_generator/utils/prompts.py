@@ -245,6 +245,34 @@ PRODUCT NAME ABBREVIATIONS must use correct casing:
 - WRONG: Aspose.Cad, Aspose.Pdf, Aspose.Html, Aspose.Zip, Groupdocs, Conholdate
 - CORRECT: Aspose.CAD, Aspose.PDF, Aspose.HTML, Aspose.ZIP, GroupDocs, Conholdate
 
+MICROSOFT AND THIRD-PARTY BRAND NAMES must use correct casing everywhere — headings, body, FAQs, frontmatter:
+- WRONG: Powerpoint, powerpoint, Power Point
+- CORRECT: PowerPoint
+- WRONG: Sharepoint, Share Point
+- CORRECT: SharePoint
+- WRONG: Github, Git Hub
+- CORRECT: GitHub
+- WRONG: Javascript, java script
+- CORRECT: JavaScript
+- WRONG: Typescript, Type Script
+- CORRECT: TypeScript
+- WRONG: Dotnet, dot net, .net (when used as a brand name)
+- CORRECT: .NET
+- WRONG: Csharp, c sharp, C#  (as "csharp" in text)
+- CORRECT: C#
+- WRONG: Nuget, Nu Get
+- CORRECT: NuGet
+- WRONG: Macos, Mac Os, MAC OS
+- CORRECT: macOS
+- WRONG: Ios, IOS (when referring to Apple's OS)
+- CORRECT: iOS
+- WRONG: Api, rest api (when used as acronym)
+- CORRECT: API, REST API
+- WRONG: Sdk, sdk
+- CORRECT: SDK
+- WRONG: Json, Xml, Html (when used as acronym in body text)
+- CORRECT: JSON, XML, HTML
+
 EXAMPLES:
 - WRONG: ## Dwt to Pdf Conversion Using Rest in Java
 - CORRECT: ## DWT to PDF Conversion Using REST in Java
@@ -262,10 +290,9 @@ EXAMPLES:
   H2-5: [Conceptual outline heading]   -> category: CONCEPT  -> core phrase: ___
   H2-6: [Config outline heading]       -> category: CONFIG   -> core phrase: ___
   H2-7: [Optimization heading]         -> category: OPTIMIZE -> core phrase: ___
-  H2-8: [Error handling heading]       -> category: ERRORS   -> core phrase: ___
-  H2-9: [Best practices heading]       -> category: BEST     -> core phrase: ___
-  H2-10: Conclusion                    -> core phrase: conclusion
-  H2-11: FAQs                          -> core phrase: faqs
+  H2-8: [Best practices heading]       -> category: BEST     -> core phrase: ___
+  H2-9: Conclusion                     -> core phrase: conclusion
+  H2-10: FAQs                          -> core phrase: faqs
 
 **DEDUPLICATION CHECK — STRICTLY ENFORCED:**
 - Extract the core 2-4 word phrase from each heading
@@ -665,7 +692,7 @@ PART 2: CONTENT STRUCTURE (MANDATORY SECTIONS)
 2. Steps (H2 heading - FIRST H2, immediately after Introduction — NO other section before this)
 3. Complete Code Example(s) (H2 heading - immediately after Steps)
 4. [CLOUD ONLY] cURL Commands (H2 heading - immediately after Complete Code Example)
-5. Remaining Outline Sections in this order: Setup/Installation, Conceptual, Configuration, Optimization, Error Handling, Best Practices
+5. Remaining Outline Sections in this order: Setup/Installation, Conceptual, Configuration, Optimization, Best Practices
 6. Conclusion (H2 heading)
 7. FAQs (H2 heading)
 {'8. Read More (H2 heading - always last)' if formatted_related else ''}
@@ -705,9 +732,6 @@ Configuration / Parameter sections  <- Configuring, Options, Settings, Customiza
 Optimization / Performance sections  <- Optimizing, Speed, Efficiency, Performance
       |
       v
-Error Handling / Troubleshooting  <- Errors, Debugging, Common Issues, Exceptions
-      |
-      v
 Best Practices              <- Tips, Recommendations, Guidelines
       |
       v
@@ -738,7 +762,6 @@ Introduction
 ## Key Features              <- Conceptual after Setup
 ## Configuring Parameters    <- Config after Conceptual
 ## Optimizing Performance    <- Optimization after Config
-## Handling Errors           <- Errors after Optimization
 ## Best Practices            <- Best Practices last before Conclusion
 ## Conclusion
 ## FAQs
@@ -765,11 +788,11 @@ When placing outline sections, categorize each one and insert it at the correct 
 - OPTIMIZATION category (Optimizing, Performance, Speed, Efficiency, Tuning)
   -> Place AFTER all Configuration sections
 
-- ERROR HANDLING category (Errors, Troubleshooting, Debugging, Common Issues, Exceptions)
-  -> Place AFTER all Optimization sections
-
 - BEST PRACTICES category (Best Practices, Tips, Recommendations, Guidelines)
   -> Place LAST among outline sections, immediately before Conclusion
+
+- ERROR HANDLING category (Errors, Troubleshooting, Debugging, Common Issues, Exceptions)
+  -> SKIP entirely — do not include this section
 
 **GRAMMAR RULES FOR HEADINGS:**
 - Product names: NEVER use articles (a/an) before product names
@@ -846,8 +869,9 @@ The outline is pre-approved — treat it as fixed, non-negotiable input.
 - DO NOT add new headings that are not in the outline
 - ONLY skip sections that match the skip list below
 
-**SKIP THESE OUTLINE SECTIONS ONLY:**
+**SKIP THESE OUTLINE SECTIONS:**
 - Skip: ANY heading containing the word "Steps" or "Step-by-Step"
+- Skip: ANY heading containing "Error", "Troubleshooting", "Debugging", or "Common Issues"
 
 **PLACEMENT OF OUTLINE SECTIONS BY CATEGORY:**
 Place outline sections at the correct position based on their category:
@@ -855,8 +879,7 @@ Place outline sections at the correct position based on their category:
 2. CONCEPTUAL sections (Key Features, Overview, What is, Architecture) -> After Setup
 3. CONFIGURATION sections (Configuring, Parameters, Options, Settings) -> After Conceptual
 4. OPTIMIZATION sections (Optimizing, Performance, Speed, Tuning) -> After Configuration
-5. ERROR HANDLING sections (Errors, Troubleshooting, Debugging) -> After Optimization
-6. BEST PRACTICES sections (Best Practices, Tips, Recommendations) -> After Error Handling
+5. BEST PRACTICES sections (Best Practices, Tips, Recommendations) -> After Optimization
 
 If two outline sections fall in the same category, preserve their relative order from the outline.
 
@@ -969,7 +992,6 @@ CORRECT: ## CSV Editor Development in Java - Complete Code Example  (Title Case)
 // All necessary imports at the top
 // Complete initialization
 // Full implementation logic
-// Error handling where applicable
 // Resource cleanup
 ```
 <!--[COMPLETE_CODE_SNIPPET_END]-->
@@ -1123,7 +1145,6 @@ PART 5: CODE SNIPPET REQUIREMENTS (CRITICAL)
 - Syntactically correct
 - Executable
 - Complete with all imports
-- Include error handling
 - No placeholder comments like "// ... rest of code"
 - NO license initialization code (License class, SetLicense, ApplyLicense)
 
@@ -1210,6 +1231,44 @@ PART 7: WRITING GUIDELINES
 - "Enterprise-ready" / "Battle-tested"
 - "In conclusion, it's clear that"
 
+===============================================================================
+MANDATORY HEADING SCAN — DO THIS BEFORE OUTPUTTING ANYTHING
+===============================================================================
+
+After writing the entire blog, you MUST perform this heading scan before producing final output.
+This is NON-NEGOTIABLE. Skipping this step makes the output INVALID.
+
+STEP 1: List every single H2 and H3 heading you wrote, in order.
+STEP 2: For each heading, apply this checklist:
+  - Is the first word capitalized? If NO — fix it.
+  - Is the last word capitalized? If NO — fix it.
+  - Are all nouns, verbs, adjectives, adverbs capitalized? If NO — fix them.
+  - Are articles (a, an, the) lowercase unless first/last word? If NO — fix them.
+  - Are short prepositions (in, on, at, to, for, with, from) lowercase unless first/last? If NO — fix them.
+  - Are file formats fully uppercase (PDF not Pdf, PNG not Png, DOCX not Docx)? If NO — fix them.
+  - Are brand names correctly cased (PowerPoint not Powerpoint, GitHub not Github)? If NO — fix them.
+  - Are Aspose product names correctly cased (Aspose.CAD not Aspose.Cad)? If NO — fix them.
+STEP 3: Rewrite any heading that failed any check above.
+STEP 4: Only after ALL headings pass — proceed to output the blog.
+
+WRONG HEADINGS — NEVER OUTPUT THESE:
+  ## steps to add animation to powerpoint in java
+  ## key features of aspose.slides cloud sdk
+  ## installation and setup in java
+  ## configuring animation settings for powerpoint
+  ## best practices for powerpoint animation via rest
+
+CORRECT HEADINGS — ALWAYS OUTPUT THESE:
+  ## Steps to Add Animation to PowerPoint in Java
+  ## Key Features of Aspose.Slides Cloud SDK
+  ## Installation and Setup in Java
+  ## Configuring Animation Settings for PowerPoint
+  ## Best Practices for PowerPoint Animation via REST
+
+**IF YOU OUTPUT A HEADING IN LOWERCASE OR MIXED CASE — THE ENTIRE OUTPUT IS INVALID.**
+
+===============================================================================
+
 **CONTENT AUTHENTICITY CHECKS:**
 Before finalizing, verify:
 - No em dashes or en dashes anywhere
@@ -1220,12 +1279,12 @@ Before finalizing, verify:
 - All markdown links properly formatted as [text](url) with NO space between ] and (
 - Meta description is EXACTLY 140-160 characters (counted manually)
 - Summary is EXACTLY 200-260 characters (counted manually)
-- ALL headings (H2, H3) use Title Case — every major word starts with a capital letter
+- ALL headings (H2, H3) use Title Case — every major word starts with a capital letter — VERIFIED via MANDATORY HEADING SCAN above
 - Steps section is the FIRST H2 immediately after the Introduction — nothing before it
 - Complete Code Example appears immediately after Steps with NO heading between them
 - Setup/Installation section appears AFTER Complete Code Example — never before Steps
 - [CLOUD ONLY] cURL Commands section is present when isCloud = true, placed after Complete Code
-- After Complete Code Example (and cURL if cloud), remaining outline sections appear in correct category order: Setup -> Conceptual -> Configuration -> Optimization -> Error Handling -> Best Practices
+- After Complete Code Example (and cURL if cloud), remaining outline sections appear in correct category order: Setup -> Conceptual -> Configuration -> Optimization -> Best Practices
 - Introduction is EXACTLY ONE paragraph with a punchy hook as the first sentence
 - First sentence of introduction does NOT mention the product name or include a product link
 - Product link appears in the SECOND or THIRD sentence of the introduction
@@ -1233,9 +1292,10 @@ Before finalizing, verify:
 - STEP 0 COMPLETED: Heading plan created, Title Case verified, section order verified, all core phrases unique
 - GLOBAL HEADING DEDUPLICATION: No core phrase (3+ consecutive words) appears in more than one heading
 - Setup heading does NOT include the platform/language name (if prompt-generated)
-- OUTLINE COMPLIANCE: All outline headings used word for word exactly as provided
+- OUTLINE COMPLIANCE: All outline headings used word for word exactly as provided (except skipped ones)
 - FILE FORMAT CAPITALIZATION: All file format names fully uppercase (DWT not Dwt, PDF not Pdf, STL not Stl)
 - PRODUCT NAME CASING: Aspose.CAD not Aspose.Cad, Aspose.PDF not Aspose.Pdf, GroupDocs not Groupdocs
+- THIRD-PARTY BRAND CASING: PowerPoint not Powerpoint, SharePoint not Sharepoint, GitHub not Github, JavaScript not Javascript, NuGet not Nuget, .NET not dotnet, macOS not MacOS, iOS not IOS
 - PRIMARY KEYWORD - Occurrence 1: present in the Introduction paragraph?
 - PRIMARY KEYWORD - Occurrence 2: present in the Steps or Outline sections?
 - PRIMARY KEYWORD - Occurrence 3: present in the Conclusion section?
@@ -1245,6 +1305,7 @@ Before finalizing, verify:
 - SEMANTIC KEYWORDS: Most semantic/LSI terms appear at least once naturally in the body?
 - FINAL LINK SCAN: Have you checked every single link follows [text](url) with no space between ] and (?
 - HEADING UNIQUENESS: Does the Complete Code Example heading contain the primary keyword? Does the cURL heading use a secondary/semantic phrase with NO repetition of the primary keyword phrase? Are all headings distinct from each other?
+- ERROR HANDLING SECTIONS SKIPPED: No section with "Error", "Troubleshooting", "Debugging", or "Common Issues" in heading included?
 
 {other_notes_block}
 
@@ -1321,12 +1382,6 @@ If any answer is NO — rewrite those sections before outputting.
 END OF PROMPT
 ===============================================================================
 """
-
-
-
-
-
-
 
 
 

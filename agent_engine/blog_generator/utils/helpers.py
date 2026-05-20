@@ -1,10 +1,14 @@
 
-from datetime import datetime
-import re, sys, os, json
-from datetime import datetime
+from datetime import datetime, timedelta
+import re, sys, os, json, logging
 import requests
 from typing import Dict, Any, Optional, List, Tuple
 
+import gspread
+from google.oauth2.service_account import Credentials
+sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
+from config import settings
+logger = logging.getLogger(__name__)
 
 def parse_markdown_topics(markdown_content: str) -> Dict[str, Any]:
     """
@@ -303,8 +307,9 @@ def get_productInfo(product_name: str, platform: str, products, brand) -> str:
     
     print(f"DEBUG: base_name='{base_name}', platform='{platform_clean}', brand='{brand_clean}'")
     
-    # Normalize platform capitalization
-    if platform_clean == "net":
+    if brand_clean == "aspose.com" and platform_clean == "python":
+        platform_clean = "Python via .NET"
+    elif platform_clean == "net":
         platform_clean = ".NET"
     elif platform_clean == "python-via-net":
         platform_clean = "Python via .NET"
@@ -313,7 +318,6 @@ def get_productInfo(product_name: str, platform: str, products, brand) -> str:
     elif platform_clean == "python":
         platform_clean = "Python"
     else:
-        # Capitalize first letter for other platforms
         platform_clean = platform_clean.capitalize()
     
     # Check if base_name already contains "Cloud SDK" or "Cloud"
@@ -421,57 +425,82 @@ def sanitize_for_hugo(text):
     
     return result
 
-def extract_all_complete_code_snippets(markdown_content: str) -> dict:
+def generate_snippet_filename(title: str, language: str, section_heading: str, index: int, total_snippets: int) -> str:
+    """Generate a clean, meaningful filename from title + language + section keyword."""
+    
+    noise_words = {
+        "complete", "code", "example", "step", "by", "via", "rest", "api",
+        "implementation", "snippet", "sample", "the", "a", "an", "and", "or",
+        "for", "to", "in", "with", "using", "how", "guide", "tutorial"
+    }
+    
+    # Slugify title
+    title_slug = re.sub(r'[^\w\s]', '', title.lower())
+    title_words = [w for w in title_slug.split() if w not in noise_words][:4]
+    title_part = "_".join(title_words)
+    
+    # Extract keyword from section heading
+    section_slug = re.sub(r'[^\w\s]', '', section_heading.lower())
+    section_words = [w for w in section_slug.split() if w not in noise_words][:3]
+    section_part = "_".join(section_words)
+    
+    extension = get_file_extension(language)
+    
+    if total_snippets == 1:
+        # No index for single snippets
+        filename = f"{title_part}_{section_part}.{extension}"
+    else:
+        # Use section keyword only, index as fallback for collisions
+        filename = f"{title_part}_{section_part}.{extension}"
+    
+    # Clean up double underscores
+    filename = re.sub(r'_+', '_', filename).strip('_')
+    
+    # Handle collisions for multiple snippets with same section keyword
+    return filename
+
+
+def extract_all_complete_code_snippets(markdown_content: str, title: str = "") -> dict:
     """
     Extract ALL complete code snippets marked with COMPLETE_CODE_SNIPPET tags
-    
-    Searches for tags anywhere in the document, not just in specific section headers
     """
     import re
     import sys
     
-    # Normalize line endings
     markdown_content = markdown_content.replace('\r\n', '\n').replace('\r', '\n')
     
     snippets = {}
     snippet_index = 1
+    used_filenames = {}
     
     print("\n" + "="*60, file=sys.stderr, flush=True)
     print("Searching for COMPLETE_CODE_SNIPPET tags in entire document...", file=sys.stderr, flush=True)
     print("="*60, file=sys.stderr, flush=True)
     
-    # =========================================================================
-    # Strategy: Find ALL occurrences of COMPLETE_CODE_SNIPPET tags
-    # anywhere in the document, regardless of section headers
-    # =========================================================================
-    
-    # Pattern 1: COMPLETE_CODE_SNIPPET_START/END
     code_pattern_1 = (
-        r'<!--\s*\[COMPLETE_CODE_SNIPPET_START\]\s*-->'  # Opening tag
-        r'\s*'                                              # Optional whitespace
-        r'```(\w*)'                                         # Opening code fence with language
-        r'\s*'                                              # Optional whitespace
-        r'(.*?)'                                            # Code content (non-greedy)
-        r'```'                                              # Closing code fence
-        r'\s*'                                              # Optional whitespace
-        r'<!--\s*\[COMPLETE_CODE_SNIPPET_END\]\s*-->'     # Closing tag
+        r'<!--\s*\[COMPLETE_CODE_SNIPPET_START\]\s*-->'
+        r'\s*'
+        r'```(\w*)'
+        r'\s*'
+        r'(.*?)'
+        r'```'
+        r'\s*'
+        r'<!--\s*\[COMPLETE_CODE_SNIPPET_END\]\s*-->'
     )
     
     matches = list(re.finditer(code_pattern_1, markdown_content, re.DOTALL))
     
     if matches:
-        print(f"✓ Found {len(matches)} COMPLETE_CODE_SNIPPET tag pairs", file=sys.stderr, flush=True)
+        total_snippets = len(matches)
+        print(f"✓ Found {total_snippets} COMPLETE_CODE_SNIPPET tag pairs", file=sys.stderr, flush=True)
         
         for match in matches:
             matched_text = match.group(0)
             language = match.group(1).strip() or 'text'
             code = match.group(2).strip()
             
-            # Find the section this code belongs to (look backwards for nearest H2)
             match_start = match.start()
             text_before = markdown_content[:match_start]
-            
-            # Find the most recent ## heading
             section_match = re.findall(r'##\s+([^\n]+)', text_before)
             task_name = section_match[-1].strip() if section_match else f"Code Example {snippet_index}"
             
@@ -480,55 +509,46 @@ def extract_all_complete_code_snippets(markdown_content: str) -> dict:
             print(f"  Language: {language}", flush=True, file=sys.stderr)
             print(f"  Code length: {len(code)} chars", flush=True, file=sys.stderr)
             
-            # Validate code
             if not code or len(code.strip()) == 0:
                 print(f"  ❌ Code is empty, skipping", flush=True, file=sys.stderr)
                 continue
             
             if len(code) < 50:
-                print(f"  ⚠ Code is short ({len(code)} chars), but extracting anyway", 
-                      flush=True, file=sys.stderr)
+                print(f"  ⚠ Code is short ({len(code)} chars), but extracting anyway", flush=True, file=sys.stderr)
             
-            # Create safe filename
-            safe_task_name = re.sub(r'[^\w\s-]', '', task_name)
-            safe_task_name = re.sub(r'[-\s]+', '_', safe_task_name)
-            safe_task_name = safe_task_name.lower().strip('_')[:50]
+            filename = generate_snippet_filename(title, language, task_name, snippet_index, total_snippets)
             
-            if not safe_task_name:
-                safe_task_name = f"code_example_{snippet_index}"
+            # Handle collisions
+            if filename in used_filenames.values():
+                base, ext = filename.rsplit(".", 1)
+                filename = f"{base}_{snippet_index}.{ext}"
             
-            extension = get_file_extension(language)
-            key = f"snippet_{snippet_index}_{safe_task_name}"
-            filename = f"{safe_task_name}.{extension}"
+            used_filenames[snippet_index] = filename
+            key = f"snippet_{snippet_index}_{filename.split('.')[0]}"
             
-            # Count lines
             code_lines = [line for line in code.split('\n') if line.strip()]
-            total_lines = len(code.split('\n'))
             
             snippets[key] = {
                 "language": language,
-                "extension": extension,
+                "extension": get_file_extension(language),
                 "code": code,
                 "task_name": task_name,
                 "matched_text": matched_text,
                 "filename": filename,
-                "code_lines": total_lines,
+                "code_lines": len(code.split('\n')),
                 "code_lines_non_empty": len(code_lines),
                 "code_length": len(code),
                 "has_tags": True
             }
             
-            print(f"  ✅ Extracted: {filename} ({len(code)} chars, {len(code_lines)} non-empty lines)", 
-                  flush=True, file=sys.stderr)
-            
+            print(f"  ✅ Extracted: {filename} ({len(code)} chars, {len(code_lines)} non-empty lines)", flush=True, file=sys.stderr)
             snippet_index += 1
     
     # =========================================================================
     # Pattern 2: CODE_SNIPPET_START_COMPLETE (alternative tag format)
     # =========================================================================
     if not snippets:
-        print("\nNo COMPLETE_CODE_SNIPPET tags found, trying CODE_SNIPPET_START_COMPLETE...", 
-              file=sys.stderr, flush=True)
+        print("\nNo COMPLETE_CODE_SNIPPET tags found, trying CODE_SNIPPET_START_COMPLETE...", file=sys.stderr, flush=True)
         
         code_pattern_2 = (
             r'<!--\s*\[CODE_SNIPPET_START_COMPLETE\]\s*-->'
@@ -541,15 +561,14 @@ def extract_all_complete_code_snippets(markdown_content: str) -> dict:
         matches = list(re.finditer(code_pattern_2, markdown_content, re.DOTALL))
         
         if matches:
-            print(f"✓ Found {len(matches)} CODE_SNIPPET_START_COMPLETE tag pairs", 
-                  file=sys.stderr, flush=True)
+            total_snippets = len(matches)
+            print(f"✓ Found {total_snippets} CODE_SNIPPET_START_COMPLETE tag pairs", file=sys.stderr, flush=True)
             
             for match in matches:
                 matched_text = match.group(0)
                 language = match.group(1).strip() or 'text'
                 code = match.group(2).strip()
                 
-                # Find section
                 match_start = match.start()
                 text_before = markdown_content[:match_start]
                 section_match = re.findall(r'##\s+([^\n]+)', text_before)
@@ -558,21 +577,19 @@ def extract_all_complete_code_snippets(markdown_content: str) -> dict:
                 if not code or len(code.strip()) == 0:
                     continue
                 
-                safe_task_name = re.sub(r'[^\w\s-]', '', task_name)
-                safe_task_name = re.sub(r'[-\s]+', '_', safe_task_name).lower().strip('_')[:50]
+                filename = generate_snippet_filename(title, language, task_name, snippet_index, total_snippets)
                 
-                if not safe_task_name:
-                    safe_task_name = f"code_example_{snippet_index}"
+                if filename in used_filenames.values():
+                    base, ext = filename.rsplit(".", 1)
+                    filename = f"{base}_{snippet_index}.{ext}"
                 
-                extension = get_file_extension(language)
-                key = f"snippet_{snippet_index}_{safe_task_name}"
-                filename = f"{safe_task_name}.{extension}"
-                
+                used_filenames[snippet_index] = filename
+                key = f"snippet_{snippet_index}_{filename.split('.')[0]}"
                 code_lines = [line for line in code.split('\n') if line.strip()]
                 
                 snippets[key] = {
                     "language": language,
-                    "extension": extension,
+                    "extension": get_file_extension(language),
                     "code": code,
                     "task_name": task_name,
                     "matched_text": matched_text,
@@ -583,49 +600,44 @@ def extract_all_complete_code_snippets(markdown_content: str) -> dict:
                     "has_tags": True
                 }
                 
-                print(f"  ✅ Extracted snippet {snippet_index}: {filename}", 
-                      flush=True, file=sys.stderr)
-                
+                print(f"  ✅ Extracted snippet {snippet_index}: {filename}", flush=True, file=sys.stderr)
                 snippet_index += 1
     
     # =========================================================================
     # Fallback: Look for "Complete Code Example" sections with any code
     # =========================================================================
     if not snippets:
-        print("\nNo tagged snippets found, searching for 'Complete Code Example' sections...", 
-              file=sys.stderr, flush=True)
+        print("\nNo tagged snippets found, searching for 'Complete Code Example' sections...", file=sys.stderr, flush=True)
         
         section_pattern = r'##\s+([^#\n]+?)\s*-?\s*Complete\s+Code\s+Example[^\n]*\n(.*?)(?=\n##|\Z)'
-        sections = re.finditer(section_pattern, markdown_content, re.DOTALL | re.IGNORECASE)
+        sections = list(re.finditer(section_pattern, markdown_content, re.DOTALL | re.IGNORECASE))
+        total_snippets = len(sections)
         
         for section in sections:
             task_name = section.group(1).strip()
             section_content = section.group(2)
             
-            # Find any code block
             code_pattern = r'```(\w*)\s*(.*?)```'
-            matches = list(re.finditer(code_pattern, section_content, re.DOTALL))
+            code_matches = list(re.finditer(code_pattern, section_content, re.DOTALL))
             
-            if matches:
-                # Use largest code block
-                largest = max(matches, key=lambda m: len(m.group(2)))
+            if code_matches:
+                largest = max(code_matches, key=lambda m: len(m.group(2)))
                 language = largest.group(1).strip() or 'text'
                 code = largest.group(2).strip()
                 
                 if code and len(code) > 0:
-                    safe_task_name = re.sub(r'[^\w\s-]', '', task_name)
-                    safe_task_name = re.sub(r'[-\s]+', '_', safe_task_name).lower().strip('_')[:50]
+                    filename = generate_snippet_filename(title, language, task_name, snippet_index, total_snippets)
                     
-                    if not safe_task_name:
-                        safe_task_name = f"code_example_{snippet_index}"
+                    if filename in used_filenames.values():
+                        base, ext = filename.rsplit(".", 1)
+                        filename = f"{base}_{snippet_index}.{ext}"
                     
-                    extension = get_file_extension(language)
-                    key = f"snippet_{snippet_index}_{safe_task_name}"
-                    filename = f"{safe_task_name}.{extension}"
+                    used_filenames[snippet_index] = filename
+                    key = f"snippet_{snippet_index}_{filename.split('.')[0]}"
                     
                     snippets[key] = {
                         "language": language,
-                        "extension": extension,
+                        "extension": get_file_extension(language),
                         "code": code,
                         "task_name": task_name,
                         "matched_text": largest.group(0),
@@ -639,18 +651,14 @@ def extract_all_complete_code_snippets(markdown_content: str) -> dict:
                     print(f"  ✅ Extracted from section: {filename}", flush=True, file=sys.stderr)
                     snippet_index += 1
     
-    # Final summary
     separator = "=" * 60
     print(f"\n{separator}", file=sys.stderr, flush=True)
     if snippets:
         print(f"✅ Successfully extracted {len(snippets)} code snippet(s)", file=sys.stderr, flush=True)
         for key, data in snippets.items():
-            print(f"   - {data['filename']}: {data['code_length']} chars, "
-                  f"{data['code_lines_non_empty']} lines of code", 
-                  file=sys.stderr, flush=True)
+            print(f"   - {data['filename']}: {data['code_length']} chars, {data['code_lines_non_empty']} lines of code", file=sys.stderr, flush=True)
     else:
-        print("⚠️ WARNING: No code snippets found with COMPLETE_CODE_SNIPPET tags or in Complete Code Example sections", 
-              file=sys.stderr, flush=True)
+        print("⚠️ WARNING: No code snippets found", file=sys.stderr, flush=True)
     print(f"{separator}\n", file=sys.stderr, flush=True)
     
     return snippets
@@ -2129,3 +2137,214 @@ gymwear, sweatsuit-design, streetwear-trends
 
     print(f"  ❌ Could not generate tags after {MAX_RETRIES} attempts.")
     return None
+
+
+
+
+def get_weekly_sheet_name() -> str:
+    now = datetime.utcnow()
+    # Get the Monday of the current week
+    monday = now - timedelta(days=now.weekday())
+    return monday.strftime("%Y-%m-%d")
+
+def get_or_create_weekly_sheet(spreadsheet, sheet_name: str, headers: list):
+    existing_sheets = [ws.title for ws in spreadsheet.worksheets()]
+    
+    if sheet_name in existing_sheets:
+        return spreadsheet.worksheet(sheet_name)
+    else:
+        worksheet = spreadsheet.add_worksheet(title=sheet_name, rows=1000, cols=10)
+        # Move weekly sheet to index 1 (right after consolidated at index 0)
+        spreadsheet.reorder_worksheets([
+            spreadsheet.worksheet(settings.CONSOLIDATED_SHEET_NAME_FOR_BLOGPOST_METADATA),
+            worksheet,
+            *[spreadsheet.worksheet(ws) for ws in existing_sheets if ws != settings.CONSOLIDATED_SHEET_NAME_FOR_BLOGPOST_METADATA]
+        ])
+        worksheet.append_row(headers)
+        print(f"Created new weekly sheet: {sheet_name}")
+        return worksheet
+     
+
+def convert_sheet_row_to_file_format(row: dict) -> dict:
+    return {
+        "topic": row.get("generated_title", ""),
+        "product": row.get("product", ""),
+        "platform": row.get("selected_platform", ""),
+        "keywords": {
+            "primary": [row.get("primary_keyword", "")],
+            "secondary": [kw.strip() for kw in row.get("secondary_keywords", "").split("|")],
+            "long_tail": [kw.strip() for kw in row.get("long_tail_keywords", "").split("|")],
+            "semantic": [kw.strip() for kw in row.get("semantic_keywords", "").split("|")]
+        },
+        "outline": [item.strip() for item in row.get("outline", "").split("|")],
+        "cluster_id": row.get("run_id", ""),
+        "target_persona": row.get("target_persona", ""),
+        "angle": row.get("angle", ""),
+        "other_notes": [note.strip() for note in row.get("editorial_notes", "").split("|")]
+    }
+
+def extract_blog_metadata(markdown_content: str) -> dict:
+    def get_field(pattern, text):
+        match = re.search(pattern, text, re.MULTILINE)
+        return match.group(1).strip() if match else ""
+
+    frontmatter = re.search(r"^---\n(.*?)\n---", markdown_content, re.DOTALL)
+    if not frontmatter:
+        return {}
+
+    fm = frontmatter.group(1)
+
+    return {
+        "title": get_field(r'^title:\s*"(.+?)"', fm),
+        "url": get_field(r'^url:\s*(.+)', fm),
+        "date": get_field(r'^date:\s*(.+)', fm),
+        "author": get_field(r'^author:\s*"(.+?)"', fm),
+    }
+
+
+
+
+# sheet automation functions
+
+def get_last_processed_product() -> str:
+    base_dir = get_project_root()
+    key_path = os.path.join(base_dir, "keys", settings.GOOGLE_KEY)
+
+    scopes = ["https://www.googleapis.com/auth/spreadsheets.readonly"]
+    creds = Credentials.from_service_account_file(key_path, scopes=scopes)
+    client = gspread.authorize(creds)
+
+    spreadsheet = client.open_by_key(settings.SPREADSHEET_ID_FOR_BLOGPOST_METADATA)
+    worksheet = spreadsheet.worksheet(settings.CONSOLIDATED_SHEET_NAME_FOR_BLOGPOST_METADATA)
+
+    all_rows = worksheet.get_all_records()
+    print(f"Headers detected: {all_rows[0].keys() if all_rows else 'empty'}")
+    print(f"Last row: {all_rows[-1] if all_rows else 'empty'}")
+    if not all_rows:
+        print("Metadata sheet is empty, no last product found.")
+        return None
+
+    last_row = all_rows[-1]
+    return last_row.get("Product", None)
+
+
+def get_next_tab() -> str:
+    try:
+        base_dir = get_project_root()
+        key_path = os.path.join(base_dir, "keys", settings.GOOGLE_KEY)
+
+        scopes = ["https://www.googleapis.com/auth/spreadsheets.readonly"]
+        creds = Credentials.from_service_account_file(key_path, scopes=scopes)
+        client = gspread.authorize(creds)
+
+        spreadsheet = client.open_by_key(settings.SPREADSHEET_ID_FOR_KEYWORDS)
+
+        excluded_tabs = {"tracker", "sheet1", "template", "all missing topics"}
+        all_tabs = [ws.title for ws in spreadsheet.worksheets() if ws.title.lower() not in excluded_tabs]
+
+        print(f"Available tabs: {all_tabs}")
+
+        last_product = get_last_processed_product()
+        print(f"last_product returned: '{last_product}'")
+
+        if not last_product or last_product not in all_tabs:
+            start_index = 0
+        else:
+            start_index = (all_tabs.index(last_product) + 1) % len(all_tabs)
+
+        for i in range(len(all_tabs)):
+            index = (start_index + i) % len(all_tabs)
+            tab_name = all_tabs[index]
+            print(f"Checking tab: {tab_name}")
+
+            result = get_topic_from_sheet(tab_name)
+            if result:
+                print(f"✅ Found approved topic in tab: {tab_name}")
+                return tab_name
+
+        print("❌ No approved topics found in any tab")
+        return None
+
+    except Exception as e:
+        print(f"❌ Failed to get next tab: {e}")
+        return None
+
+
+def get_topic_from_sheet(sheet_name: str) -> tuple[dict, int] | None:
+    base_dir = get_project_root()
+    key_path = os.path.join(base_dir, "keys", settings.GOOGLE_KEY)
+
+    scopes = ["https://www.googleapis.com/auth/spreadsheets.readonly"]
+    creds = Credentials.from_service_account_file(key_path, scopes=scopes)
+    client = gspread.authorize(creds)
+
+    worksheet = client.open_by_key(settings.SPREADSHEET_ID_FOR_KEYWORDS).worksheet(sheet_name)
+
+    all_rows = worksheet.get_all_records()
+
+    if not all_rows:
+        print(f"No rows found in tab: {sheet_name}")
+        return None
+
+    for i, row in enumerate(all_rows):
+        if row.get("status", "").strip().lower() == "approved":
+            row_number = i + 2  # +1 for 0-index, +1 for header row
+            print(f"Found approved row at index {row_number}: {row}")
+            formatted_data = convert_sheet_row_to_file_format(row)
+            return formatted_data, row_number
+
+    print(f"No approved rows found in tab: {sheet_name}")
+    return None
+
+
+def mark_topic_as_generated(sheet_name: str, row_number: int) -> None:
+    base_dir = get_project_root()
+    key_path = os.path.join(base_dir, "keys", settings.GOOGLE_KEY)
+
+    scopes = ["https://www.googleapis.com/auth/spreadsheets"]
+    creds = Credentials.from_service_account_file(key_path, scopes=scopes)
+    client = gspread.authorize(creds)
+
+    worksheet = client.open_by_key(settings.SPREADSHEET_ID_FOR_KEYWORDS).worksheet(sheet_name)
+
+    # Find the status column index
+    headers = worksheet.row_values(1)
+    if "status" not in [h.lower() for h in headers]:
+        print("❌ Status column not found in sheet")
+        return
+
+    status_col = [h.lower() for h in headers].index("status") + 1  # 1-based
+
+    worksheet.update_cell(row_number, status_col, "Generated")
+    print(f"✅ Row {row_number} in '{sheet_name}' marked as Generated")
+
+
+def save_blog_metadata_to_sheet(brand: str, url: str, title: str, author: str, gist_url: str, published_date: str, product: str = "") -> None:
+    base_dir = get_project_root()
+    key_path = os.path.join(base_dir, "keys", settings.GOOGLE_KEY)
+
+    spreadsheet_id = settings.SPREADSHEET_ID_FOR_BLOGPOST_METADATA
+    if not spreadsheet_id:
+        print(f"❌ No spreadsheet configured for brand: {brand}")
+        return
+
+    scopes = ["https://www.googleapis.com/auth/spreadsheets"]
+    creds = Credentials.from_service_account_file(key_path, scopes=scopes)
+    client = gspread.authorize(creds)
+
+    spreadsheet = client.open_by_key(spreadsheet_id)
+    headers = ["Published Date", "Brand", "Product", "Blog Title", "Author", "Gist URL", "Blog URL"]
+    row = [published_date, brand, product, title, author, gist_url, url]
+
+    # Save to consolidated sheet
+    consolidated = spreadsheet.worksheet(settings.CONSOLIDATED_SHEET_NAME_FOR_BLOGPOST_METADATA)
+    if consolidated.row_count == 0 or not consolidated.row_values(1):
+        consolidated.append_row(headers)
+    consolidated.append_row(row)
+    print(f"Saved to consolidated sheet: {row}")
+
+    # Save to weekly sheet
+    weekly_sheet_name = get_weekly_sheet_name()
+    weekly = get_or_create_weekly_sheet(spreadsheet, weekly_sheet_name, headers)
+    weekly.append_row(row)
+    print(f"Saved to weekly sheet '{weekly_sheet_name}': {row}")

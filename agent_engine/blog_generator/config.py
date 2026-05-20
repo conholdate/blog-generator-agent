@@ -30,7 +30,16 @@ class Settings(BaseSettings):
     TOKEN_FOR_TEAM: str = ""
     GOOGLE_SCRIPT_URL_FOR_PROD: str = ""
     TOKEN_FOR_PROD: str = ""
-    
+
+
+    CONSOLIDATED_SHEET_NAME_FOR_BLOGPOST_METADATA:str=""
+    GOOGLE_KEY:str=""
+    SPREADSHEET_ID_FOR_KEYWORDS:str=""
+    SPREADSHEET_ID_FOR_BLOGPOST_METADATA:str=""
+    ASPOSE_COM_AUTHOR:str=""
+    ASPOSE_CLOUD_AUTHOR:str=""
+    GROUPDOCS_CLOUD_AUTHOR:str=""
+
     # Agent Settings
     NUMBER_OF_BLOG_WORDS: int = 0  
     ENVIRONMENT: str = ""

@@ -174,7 +174,7 @@ async def generate_markdown_file(title, content, brand) -> dict:
                 "status": "success"
             }
                 
-async def gist_injector(content: str, res_title: str) -> str:
+async def gist_injector(content: str, res_title: str, summary: str, url:str) -> str:
     
     params = StdioServerParameters(
         command="python",
@@ -186,7 +186,9 @@ async def gist_injector(content: str, res_title: str) -> str:
             await session.initialize()
             result = await session.call_tool("gist_injector", {
                 "content": content,
-                "title": res_title
+                "title": res_title,
+                "summary": summary,
+                "url": url
             })
             return result
         

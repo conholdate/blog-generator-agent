@@ -8,7 +8,7 @@ from tools.mcp_tools import generate_markdown_file, fetch_category_related_artic
 from utils import prompts
 from utils.seo_validator import validate_seo_content, validate_and_fix_meta_description, validate_and_fix_seo_title
 from utils.file_format_mappings import FILE_FORMAT_MAPPINGS, BASE_URL
-from utils.helpers import prepare_context, get_productInfo, get_topic_by_index, inject_file_format_links, slugify, normalize_case_preserve_formats_in_keywords, clean_ai_generated_markdown, validate_markdown_links, capitalize_file_formats_for_title, setup_logger, generate_tags_with_llm
+from utils.helpers import mark_topic_as_generated, prepare_context, get_productInfo, get_topic_by_index, inject_file_format_links, slugify, normalize_case_preserve_formats_in_keywords, clean_ai_generated_markdown, validate_markdown_links, capitalize_file_formats_for_title, setup_logger, generate_tags_with_llm, save_blog_metadata_to_sheet, extract_blog_metadata, get_topic_from_sheet, get_next_tab
 from utils.metricsRecorder import MetricsRecorder
 from services.LLMservice import llm_service
 import json
@@ -65,14 +65,23 @@ class BlogOrchestrator:
 
     async def create_blog_autonomously(
         self, 
-        topics_file: str, 
         author: str = "",
-        index: int = 1
     ):
         """Let the agent autonomously create a blog with metrics tracking"""
         set_tracing_disabled(disabled=True)
-        topics_raw_data = get_topic_by_index(topics_file, index)
-       
+        # topics_raw_data = get_topic_by_index(topics_file, index)
+        
+        # topics_raw_data = get_topic_from_sheet(sheet_name="PDF")
+        sheet_name = get_next_tab()
+
+        # Get first approved topic from that tab
+        result = get_topic_from_sheet(sheet_name)
+        if not result:
+            print(f"No approved topics in {sheet_name}, skipping.")
+            return
+        topics_raw_data, row_number = result
+        print(f"sheet data {topics_raw_data}")
+
         post_topic = topics_raw_data.pop("topic")
         product_name = topics_raw_data.pop("product")
         platform = topics_raw_data.pop("platform")
@@ -148,7 +157,7 @@ class BlogOrchestrator:
 
          
             
-            print(f" Generating content now.")
+            print(f" Generating content now. ")
             tags = await generate_tags_with_llm(post_topic,f_keywords, blog_outline, self.metrics )
             print(f"tags are -- {tags}")
 
@@ -217,13 +226,15 @@ class BlogOrchestrator:
             print(f" Audit completed -- {report}", flush=True)
              
             print(f" Injecting gists now -- ", flush=True)
-            
-            jistified = await gist_injector(result.final_output, post_topic)
-
+            blog_post_metadata = extract_blog_metadata(result.final_output)
+            jistified = await gist_injector(result.final_output, post_topic, blog_post_metadata['title'], f'https://blog.{self.brand}{blog_post_metadata["url"]}')
             text_output = jistified.content[0].text
             data = json.loads(text_output)
-            final_content = data["jistified_content"]
-            final_content = inject_file_format_links(final_content, FILE_FORMAT_MAPPINGS, BASE_URL)
+            # final_content = data["jistified_content"]
+            gist_url = data.get("gist_url", "")
+           
+           
+            final_content = inject_file_format_links(result.final_output, FILE_FORMAT_MAPPINGS, BASE_URL)
             
             print(f" Generating markdown file")
             file_res = await generate_markdown_file(
@@ -252,22 +263,33 @@ class BlogOrchestrator:
             self.metrics.print_summary()
             print("📊 Sending metrics to Google Script... ")
           
-            metrics_sent_for_team = await self.metrics.send_metrics_to_team()
-            metrics_sent_for_pro = await self.metrics.send_metrics_to_prod()
+            # metrics_sent_for_team = await self.metrics.send_metrics_to_team()
+            # metrics_sent_for_pro = await self.metrics.send_metrics_to_prod()
             
-            if metrics_sent_for_team and metrics_sent_for_pro:
-                print("Metrics sent successfully\n")
-            else:
-                print("Failed to send metrics (check logs)\n")
+            # if metrics_sent_for_team and metrics_sent_for_pro:
+            #     print("Metrics sent successfully\n")
+            # else:
+            #     print("Failed to send metrics (check logs)\n")
+            
 
-            self.log("---Execution started---")
-            self.log(f" Brand-> {post_topic}")
-            self.log(f" Brand-> {self.brand}")
-            self.log(f"Keywords -> {topics_raw_data}")
-            self.log(f"product info {product_info}")
-            self.log(f" File path: {filepath}")
-            self.log("---Execution ended---")
-
+            # self.log("---Execution started---")
+            # self.log(f"Topic-> {post_topic}")
+            # self.log(f"Brand-> {self.brand}")
+            # self.log(f"Keywords -> {topics_raw_data}")
+            # self.log(f"product info {product_info}")
+            # self.log(f" File path: {filepath}")
+            # self.log("---Execution ended---")
+            mark_topic_as_generated(sheet_name, row_number)
+            save_blog_metadata_to_sheet(
+                brand=self.brand,
+                url= f'https://blog.{self.brand}{blog_post_metadata["url"]}',
+                title=blog_post_metadata['title'],
+                author=blog_post_metadata['author'],
+                gist_url=gist_url,
+                published_date=blog_post_metadata['date'],
+                product=sheet_name
+                )
+            
             return {
                 "folder_name": folder_name,
                 "product": product_name,
