@@ -429,7 +429,7 @@ PHRASE_CANON: Dict[str, str] = {
 
 ACRONYMS: Set[str] = {
     *FORMAT_CANONICAL_TO_UPPER.keys(),
-    "api", "sdk", "cli", "url", "http", "https", "sql", "vsd", "vsdx", "ssrs",
+    "api", "sdk", "cli", "url", "http", "https", "sql", "vsd", "vsdx", "ssrs", "omr", "ocr", "cgpa",
 }
 
 PRESERVE_TOKENS: Set[str] = {

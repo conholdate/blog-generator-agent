@@ -2,6 +2,7 @@ from agent_engine.content_gap_agent.tools.normalization import (
     FILE_FORMAT_REGISTRY,
     canonical_file_format,
     canonical_topic_key,
+    normalize_sentence_text,
 )
 from agent_engine.content_gap_agent.tools.coverage.blogs_to_blogs import record_gap_key, record_gap_keys
 from agent_engine.content_gap_agent.tools.io import IndexRecord
@@ -67,3 +68,22 @@ def test_format_is_preserved_when_used_as_action() -> None:
 
     assert topic == "Draw and format text using aspose drawing"
     assert canonical_topic_key(topic) == "draw and format text using aspose drawing"
+
+
+def test_omr_topics_drop_platform_and_seo_noise() -> None:
+    assert build_content_topic(title="C# Optical Mark Recognition (OMR) Software in .NET") == "Optical mark recognition OMR"
+    assert build_content_topic(title="Create OMR sheet in PDF free and") == "Create OMR sheet in PDF"
+    assert build_content_topic(title="Omr sheet reader omr sheet PNG") == "Read OMR sheet from PNG"
+    assert build_content_topic(title="Omr scanner the ultimate free answer scanner") == "OMR answer scanner"
+    assert build_content_topic(title="Scan survey free omr") == "Scan survey OMR"
+
+
+def test_non_omr_grade_calculator_topics_are_rejected() -> None:
+    assert build_content_topic(title="Calculate cgpa online grades calculator") == ""
+    assert build_content_topic(title="Grade calculator free letter grading calculator") == ""
+
+
+def test_omr_acronym_survives_coverage_display_normalization() -> None:
+    key = canonical_topic_key("Optical mark recognition OMR")
+    assert key == "optical mark recognition omr"
+    assert normalize_sentence_text(key) == "Optical mark recognition OMR"
