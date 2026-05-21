@@ -2266,7 +2266,9 @@ def get_next_tab() -> str:
         return None
 
     except Exception as e:
+        import traceback
         print(f"❌ Failed to get next tab: {e}")
+        traceback.print_exc()
         return None
 
 
