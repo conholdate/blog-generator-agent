@@ -52,7 +52,7 @@
 | 1 | **Document Processing / Optical Mark Recognition** | Create and read OMR sheet with barcode | GENERAL, JAVA | Create and read OMR sheet with barcode — GENERAL; Create and read OMR sheet with barcode — JAVA |
 | 2 | **Document Processing / Optical Mark Recognition** | Create OMR sheet in PDF | JAVA, NET | Create OMR sheet in PDF — JAVA; Create OMR sheet in PDF — NET |
 | 3 | **Imaging / Optical Mark Recognition** | Data extraction from images | GENERAL, NET | Data extraction from images — GENERAL; Data extraction from images — NET |
-| 4 | **Imaging / Optical Mark Recognition** | Recognize OMR image from memorystream | GENERAL, JAVA | Recognize OMR image from memorystream — GENERAL; Recognize OMR image from memorystream — JAVA |
+| 4 | **Imaging / Optical Mark Recognition** | Recognize OMR image from MemoryStream | GENERAL, JAVA | Recognize OMR image from MemoryStream — GENERAL; Recognize OMR image from MemoryStream — JAVA |
 | 5 | **Document Processing / OMR Sheet Generation** | Create OMR answer sheet | JAVA, NET | Create OMR answer sheet — JAVA; Create OMR answer sheet — NET |
 | 6 | **Document Processing / OMR Templates** | Create OMR survey and answer sheet | GENERAL, NET | Create OMR survey and answer sheet — GENERAL; Create OMR survey and answer sheet — NET |
 | 7 | **Data Collection / Online Survey Maker** | Create survey | JAVA, NET | Create survey — JAVA; Create survey — NET |
