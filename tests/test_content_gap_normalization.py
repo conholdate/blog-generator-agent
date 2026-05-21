@@ -71,11 +71,11 @@ def test_format_is_preserved_when_used_as_action() -> None:
 
 
 def test_omr_topics_drop_platform_and_seo_noise() -> None:
-    assert build_content_topic(title="C# Optical Mark Recognition (OMR) Software in .NET") == "Optical mark recognition OMR"
+    assert build_content_topic(title="C# Optical Mark Recognition (OMR) Software in .NET") == "Optical mark recognition"
     assert build_content_topic(title="Create OMR sheet in PDF free and") == "Create OMR sheet in PDF"
     assert build_content_topic(title="Omr sheet reader omr sheet PNG") == "Read OMR sheet from PNG"
     assert build_content_topic(title="Omr scanner the ultimate free answer scanner") == "OMR answer scanner"
-    assert build_content_topic(title="Scan survey free omr") == "Scan survey OMR"
+    assert build_content_topic(title="Scan survey free omr") == "Scan OMR survey"
 
 
 def test_non_omr_grade_calculator_topics_are_rejected() -> None:
@@ -85,5 +85,18 @@ def test_non_omr_grade_calculator_topics_are_rejected() -> None:
 
 def test_omr_acronym_survives_coverage_display_normalization() -> None:
     key = canonical_topic_key("Optical mark recognition OMR")
-    assert key == "optical mark recognition omr"
-    assert normalize_sentence_text(key) == "Optical mark recognition OMR"
+    assert key == "optical mark recognition"
+    assert normalize_sentence_text("Create OMR sheet in PDF") == "Create OMR sheet in PDF"
+
+
+def test_omr_topics_are_canonicalized_to_readable_developer_titles() -> None:
+    cases = {
+        "OMR": "",
+        "OMR answer scanner": "OMR answer scanner",
+        "Create answer sheet OMR sheet": "Create OMR answer sheet",
+        "Create OMR survey or answer sheet": "Create OMR survey and answer sheet",
+        "Recognize image from memorystream using OMR": "Recognize OMR image from MemoryStream",
+        "Scan bubble answer sheet OMR sheet JPG": "Scan OMR bubble answer sheet from JPG",
+    }
+    for raw, expected in cases.items():
+        assert build_content_topic(title=raw) == expected

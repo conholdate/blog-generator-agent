@@ -59,6 +59,16 @@ _ONLINE_GRADING_RE = re.compile(r"\b(?:cgpa|grades?|letter)\s+calculator\b|\bcal
 _OMR_SHEET_READER_FORMAT_RE = re.compile(r"^omr-sheet-reader-omr-sheet-(?P<fmt>[a-z0-9]+)$")
 _OMR_SCANNER_ANSWER_RE = re.compile(r"^omr-scanner-answer$")
 _SURVEY_MAKER_RE = re.compile(r"^survey-maker-create-survey$")
+_OMR_TOPIC_REWRITES = {
+    "omr": "",
+    "omr-answer": "omr-answer-scanner",
+    "optical-mark-recognition-omr": "optical-mark-recognition",
+    "create-answer-sheet-omr-sheet": "create-omr-answer-sheet",
+    "create-omr-survey-or-answer-sheet": "create-omr-survey-and-answer-sheet",
+    "recognize-image-from-memorystream-using-omr": "recognize-omr-image-from-memorystream",
+    "scan-bubble-answer-sheet-omr-sheet-jpg": "scan-omr-bubble-answer-sheet-from-jpg",
+    "scan-survey-omr": "scan-omr-survey",
+}
 
 _UPPERCASE_FORMATS = {
     "pdf",
@@ -217,6 +227,8 @@ def _normalize_candidate(text: str) -> str:
         return "omr-answer-scanner"
     if _SURVEY_MAKER_RE.match(slug):
         return "create-survey"
+    if slug in _OMR_TOPIC_REWRITES:
+        return _OMR_TOPIC_REWRITES[slug]
     return slug
 
 
@@ -246,6 +258,9 @@ def _to_sentence_case(slug: str, preserve_upper: set[str]) -> str:
     for i, word in enumerate(words):
         if word in _ACRONYM_TOKENS or word in preserve_upper:
             rendered.append(word.upper())
+            continue
+        if word == "memorystream":
+            rendered.append("MemoryStream")
             continue
         if i == 0:
             rendered.append(word.capitalize())

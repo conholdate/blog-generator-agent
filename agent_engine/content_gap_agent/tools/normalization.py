@@ -819,6 +819,7 @@ def canonical_topic_key(text: str) -> str:
     t = _TOPIC_NOISE_WORDS_RE.sub(" ", t)
     t = _C_NET_NOISE_RE.sub(" ", t)
     t = _FROM_TO_NOISE_RE.sub(" ", t)
+    t = re.sub(r"\boptical\s+mark\s+recognition\s+omr\b", "optical mark recognition", t, flags=re.IGNORECASE)
     t = _TRAILING_PREPOSITION_RE.sub(" ", t)
     t = _WS_RE.sub(" ", t).strip()
 
@@ -1087,6 +1088,8 @@ def _sentencecase_token(tok: str, is_first: bool) -> str:
         return tok
     if tok in PRESERVE_TOKENS:
         return tok
+    if low in _SMALL_WORDS and not is_first:
+        return low
     if low in FORMAT_CANONICAL_TO_UPPER:
         return FORMAT_CANONICAL_TO_UPPER[low]
     if low == "latex":
@@ -1109,14 +1112,14 @@ def _titlecase_token(tok: str, is_first: bool, is_last: bool) -> str:
         return tok
     if tok in PRESERVE_TOKENS:
         return tok
+    if low in _SMALL_WORDS and not is_first and not is_last:
+        return low
     if low in FORMAT_CANONICAL_TO_UPPER:
         return FORMAT_CANONICAL_TO_UPPER[low]
     if low == "latex":
         return "LaTeX"
     if low in ACRONYMS:
         return low.upper()
-    if low in _SMALL_WORDS and not is_first and not is_last:
-        return low
     return low[:1].upper() + low[1:]
 
 
