@@ -1,5 +1,6 @@
 from __future__ import annotations
 import json
+import os
 from datetime import datetime, timezone, timedelta
 from typing import Any, Optional
 import requests
@@ -14,6 +15,16 @@ def canonicalize_platform(value: Optional[str]) -> str:
 def platform_display(value: Optional[str]) -> str:
     return canonical_platform_label(value)
 
+def _metrics_timeout_seconds() -> float:
+    raw = str(os.getenv("METRICS_TIMEOUT_S") or "").strip()
+    if not raw:
+        return 30.0
+    try:
+        timeout = float(raw)
+    except ValueError:
+        return 30.0
+    return max(1.0, timeout)
+
 def _post_json_best_effort(url: str, token: str, payload: dict[str, Any], debug: bool = False) -> None:
     """Best-effort POST; never raises."""
     if not url or not token:
@@ -24,7 +35,7 @@ def _post_json_best_effort(url: str, token: str, payload: dict[str, Any], debug:
         print("[metrics] payload before send:")
         print(json.dumps(payload_data, ensure_ascii=False, indent=2))
 
-        resp = requests.post(url, params={"token": token}, json=payload, timeout=5)
+        resp = requests.post(url, params={"token": token}, json=payload, timeout=_metrics_timeout_seconds())
         if debug:
             print(f"[metrics:{payload.get('stage','')}] {resp.status_code} {resp.text[:200]!r}")
             print("[metrics] debug payload after send:")
