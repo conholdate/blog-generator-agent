@@ -2,22 +2,6 @@ name: Generate Blog Post for aspose.cloud
 
 on:
   workflow_dispatch:
-    inputs:
-      keywords_file:
-        description: 'Keywords File (e.g., content/Aspose.Cloud/output/449388a2_aspose-words-cloud_java_topics.md)'
-        required: true
-        type: string
-
-      index:
-        description: 'Index in Keyword File (e.g. 1,2,3..) - Default is 1'
-        required: false
-        type: number
-        default: 1
-
-      author:
-        description: 'Author Name'
-        required: true
-        type: string
 
 jobs:
   generate:
@@ -25,40 +9,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-
-      - name: Extract product name from keywords file
-        id: extract_product
-        run: |
-          KEYWORDS_FILE="${{ inputs.keywords_file }}"
-
-          echo "=== Extracting product name from keywords file ==="
-          echo "Keywords file: $KEYWORDS_FILE"
-
-          if [ ! -f "$KEYWORDS_FILE" ]; then
-            echo "❌ Keywords file not found: $KEYWORDS_FILE"
-            exit 1
-          fi
-
-          PRODUCT_LINE=$(grep -i "\*\*Product:\*\*" "$KEYWORDS_FILE" | head -1)
-
-          if [ -z "$PRODUCT_LINE" ]; then
-            echo "❌ Product line not found in keywords file"
-            echo "File contents:"
-            cat "$KEYWORDS_FILE"
-            exit 1
-          fi
-
-          echo "Found product line: $PRODUCT_LINE"
-
-          FULL_PRODUCT=$(echo "$PRODUCT_LINE" | sed 's/.*Product:\*\*[ ]*//' | sed 's/^[ ]*//' | xargs)
-          echo "Full product name: $FULL_PRODUCT"
-
-          PRODUCT_NAME=$(echo "$FULL_PRODUCT" | sed 's/^Aspose\.//' | sed 's/[ ]*Cloud.*$//' | tr '[:upper:]' '[:lower:]')
-
-          echo "✅ Extracted product name for folder: $PRODUCT_NAME"
-          echo "   Full product: $FULL_PRODUCT"
-          echo "   Folder name: $PRODUCT_NAME"
-          echo "product_name=$PRODUCT_NAME" >> $GITHUB_OUTPUT
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -84,6 +34,11 @@ jobs:
           find . -name ".env" -type f -delete
           echo "Removed all .env files"
 
+      - name: Create Google service account key
+        run: |
+          mkdir -p keys
+          echo '${{ secrets.GOOGLE_SERVICE_ACCOUNT_KEY }}' > keys/sheet-reader-494108-bd5e61ef812c.json
+
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
@@ -105,6 +60,10 @@ jobs:
           GOOGLE_SCRIPT_URL_FOR_TEAM=${{ vars.GOOGLE_SCRIPT_URL_FOR_TEAM }}
           REPO_PAT=${{ secrets.GISTS_PAT_ASPOSE_CLOUD }}
           GIST_NAME=${{ vars.ASPOSE_CLOUD_GIST }}
+          SPREADSHEET_ID_FOR_BLOGPOST_METADATA=${{ secrets.ASPOSE_CLOUD_SPREADSHEET_ID_FOR_BLOGPOST_METADATA }}
+          SPREADSHEET_ID_FOR_KEYWORDS=${{ secrets.ASPOSE_CLOUD_SPREADSHEET_ID_FOR_KEYWORDS }}
+          GOOGLE_KEY=sheet-reader-494108-bd5e61ef812c.json
+          CONSOLIDATED_SHEET_NAME_FOR_BLOGPOST_METADATA=Consolidated
           EOF
           echo ".env file created"
 
@@ -114,16 +73,19 @@ jobs:
           cd agent_engine/blog_generator
           echo "=== Starting blog generation ==="
           echo "Brand: aspose.cloud"
-          echo "Product: ${{ steps.extract_product.outputs.product_name }}"
-          echo "Keywords file: ${{ inputs.keywords_file }}"
 
           python main.py \
-            --keywords_file "${{ inputs.keywords_file }}" \
-            --brand "aspose.cloud" \
-            --author "${{ inputs.author }}" \
-            --index "${{ inputs.index }}"
+            --author "Muhammad Mustafa" \
+            --brand "aspose.cloud"
 
           echo "✅ Blog generation completed"
+
+      - name: Read product name
+        id: read_product
+        run: |
+          PRODUCT_NAME=$(cat agent_engine/blog_generator/product_name.txt)
+          echo "product_name=$PRODUCT_NAME" >> $GITHUB_OUTPUT
+          echo "✅ Product name: $PRODUCT_NAME"
 
       - name: Find generated blog folder
         id: find_blog
@@ -131,7 +93,6 @@ jobs:
           echo "=== Searching for generated blog folder ==="
 
           BRAND_DIR="content/blogPosts/aspose_cloud"
-          PRODUCT_NAME="${{ steps.extract_product.outputs.product_name }}"
 
           if [ ! -d "$BRAND_DIR" ]; then
             echo "❌ Brand directory not found: $BRAND_DIR"
@@ -139,7 +100,6 @@ jobs:
           fi
 
           echo "Searching in: $BRAND_DIR"
-          echo "Product: $PRODUCT_NAME"
 
           blog_folder=$(find "$BRAND_DIR" -mindepth 1 -maxdepth 1 -type d -name "20??-??-??-*" -mmin -10 -printf '%T@ %p\n' | sort -nr | head -1 | cut -d' ' -f2-)
 
@@ -168,10 +128,8 @@ jobs:
 
           echo "blog_folder_name=$blog_folder_name" >> $GITHUB_OUTPUT
           echo "blog_folder_path=$blog_folder" >> $GITHUB_OUTPUT
-          echo "product_name=$PRODUCT_NAME" >> $GITHUB_OUTPUT
 
           echo "✅ Found: $blog_folder_name with index.md"
-          echo "✅ Product: $PRODUCT_NAME"
           echo "=== Folder contents ==="
           ls -la "$blog_folder"
 
@@ -182,7 +140,6 @@ jobs:
 
           echo "Blog folder: $BLOG_PATH"
           echo "Expected brand: aspose.cloud"
-          echo "Product folder: ${{ steps.find_blog.outputs.product_name }}"
 
           if [ -f "$BLOG_PATH/index.md" ]; then
             echo "--- Frontmatter excerpt ---"
@@ -197,7 +154,6 @@ jobs:
         env:
           BLOG_FOLDER_NAME: ${{ steps.find_blog.outputs.blog_folder_name }}
           BLOG_FOLDER_PATH: ${{ steps.find_blog.outputs.blog_folder_path }}
-          PRODUCT_NAME: ${{ steps.find_blog.outputs.product_name }}
         run: |
           git config --global user.email "action@github.com"
           git config --global user.name "GitHub Action"
@@ -205,7 +161,6 @@ jobs:
           echo "=== Committing blog to this repository ==="
           echo "Blog folder: $BLOG_FOLDER_PATH"
           echo "Blog folder name: $BLOG_FOLDER_NAME"
-          echo "Product: $PRODUCT_NAME"
 
           if [ ! -d "$BLOG_FOLDER_PATH" ]; then
             echo "❌ Blog folder does not exist: $BLOG_FOLDER_PATH"
@@ -231,8 +186,6 @@ jobs:
 
             git commit -m "Add generated blog post: $BLOG_FOLDER_NAME
 
-          Product: $PRODUCT_NAME
-          Author: ${{ inputs.author }}
           Path: $BLOG_FOLDER_PATH
           Generated: $(date -u +'%Y-%m-%d %H:%M:%S UTC')
           Workflow Run: ${{ github.run_number }}"
@@ -242,6 +195,7 @@ jobs:
             echo "✅ Blog committed and pushed successfully to this repository"
             echo "   Location: $BLOG_FOLDER_PATH"
           fi
+
       - name: Commit logs
         run: |
           git config --global user.email "action@github.com"
@@ -249,6 +203,7 @@ jobs:
           git add content/logs/logs.txt
           git commit -m "Update logs [Run #${{ github.run_number }}]" || echo "No changes to commit"
           git push origin HEAD
+
       - name: Upload Generated Blog as Artifact
         uses: actions/upload-artifact@v4
         with:
@@ -264,7 +219,6 @@ jobs:
         env:
           BLOG_FOLDER_NAME: ${{ steps.find_blog.outputs.blog_folder_name }}
           BLOG_FOLDER_PATH: ${{ steps.find_blog.outputs.blog_folder_path }}
-          PRODUCT_NAME: ${{ steps.find_blog.outputs.product_name }}
           GH_TOKEN: ${{ secrets.REPO_PAT }}
         run: |
           git config --global user.email "action@github.com"
@@ -286,6 +240,8 @@ jobs:
           git checkout master
           git pull origin master
 
+          # Extract product name from file written by Python
+          PRODUCT_NAME="${{ steps.read_product.outputs.product_name }}"
           TARGET_DIR="content/Aspose.Cloud/$PRODUCT_NAME"
 
           echo "=== Target directory information ==="
@@ -391,7 +347,6 @@ jobs:
 
           **Folder:** $BLOG_FOLDER_NAME
           **Product:** Aspose.$PRODUCT_NAME Cloud SDK
-          **Author:** ${{ inputs.author }}
           **Target Path:** \`content/Aspose.Cloud/$PRODUCT_NAME/$BLOG_FOLDER_NAME\`
 
           **Generated by:** GitHub Actions (Run #${{ github.run_number }})
@@ -401,15 +356,6 @@ jobs:
           ---
 
           This pull request adds a new blog post generated by the autonomous blog agent.
-
-          ### Contents:
-          - Folder: \`$BLOG_FOLDER_NAME\`
-          - File: \`index.md\`
-          - Location: \`content/Aspose.Cloud/$PRODUCT_NAME/\`
-
-          ### Product Details:
-          - Product category: $PRODUCT_NAME
-          - Target folder: \`content/Aspose.Cloud/$PRODUCT_NAME/\`
 
           Auto-merged by GitHub Actions." || {
               echo "❌ Failed to create pull request."
