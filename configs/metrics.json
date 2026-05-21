@@ -8,12 +8,12 @@
     ],
     "webhooks": {
       "primary": {
-        "url": "https://script.google.com/macros/s/AKfycbyCHwElrM6RcYLi0JNQAkJmzGrBjAhf28mKXVyub_6SdaZ2ITvzCwfM5xCLE7rmuxio/exec",
-        "token": "lM6iU2mW0gV1eZ"
+        "url": "${METRICS_PRIMARY_WEBHOOK_URL}",
+        "token": "${METRICS_PRIMARY_WEBHOOK_TOKEN}"
       },
       "internal": {
-        "url": "https://script.google.com/macros/s/AKfycbwYyPBs3ox6xhYfznVpu4Gh8T4l7cXrAIj1m_y1g-vWn6tyP_LAkv3eo6W2EZYAeHgLag/exec",
-        "token": "blog_team_agent-2026"
+        "url": "${METRICS_INTERNAL_WEBHOOK_URL}",
+        "token": "${METRICS_INTERNAL_WEBHOOK_TOKEN}"
       }
     }
   },
@@ -25,12 +25,30 @@
     ],
     "webhooks": {
       "primary": {
-        "url": "https://script.google.com/macros/s/AKfycbyCHwElrM6RcYLi0JNQAkJmzGrBjAhf28mKXVyub_6SdaZ2ITvzCwfM5xCLE7rmuxio/exec",
-        "token": "lM6iU2mW0gV1eZ"
+        "url": "${METRICS_PRIMARY_WEBHOOK_URL}",
+        "token": "${METRICS_PRIMARY_WEBHOOK_TOKEN}"
       },
       "internal": {
-        "url": "https://script.google.com/macros/s/AKfycbwYyPBs3ox6xhYfznVpu4Gh8T4l7cXrAIj1m_y1g-vWn6tyP_LAkv3eo6W2EZYAeHgLag/exec",
-        "token": "blog_team_agent-2026"
+        "url": "${METRICS_INTERNAL_WEBHOOK_URL}",
+        "token": "${METRICS_INTERNAL_WEBHOOK_TOKEN}"
+      }
+    }
+  },
+  "blog_keyword_analyzer": {
+    "agent_name": "Blog Keyword Analyzer",
+    "agent_owner": "Muzammil Khan",
+    "stages": [
+      "Keyword Clustering",
+      "Topics Generation"
+    ],
+    "webhooks": {
+      "primary": {
+        "url": "${METRICS_PRIMARY_WEBHOOK_URL}",
+        "token": "${METRICS_PRIMARY_WEBHOOK_TOKEN}"
+      },
+      "internal": {
+        "url": "${METRICS_INTERNAL_WEBHOOK_URL}",
+        "token": "${METRICS_INTERNAL_WEBHOOK_TOKEN}"
       }
     }
   }

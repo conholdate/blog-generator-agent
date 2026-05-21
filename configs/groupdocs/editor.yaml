@@ -21,3 +21,32 @@ platform_definitions:
   general:
     display_name: "General"
     keywords: ["groupdocs.editor", "document editor api", "edit documents library"]
+
+strategic_cluster: Document Editing Automation
+formats:
+- DOC
+- DOCX
+- PDF
+- XLSX
+- PPTX
+- HTML
+- RTF
+- TXT
+actions:
+- edit
+- load
+- save
+- convert
+- extract
+- export
+
+money_pages:
+  net: https://products.groupdocs.com/editor/net/
+  java: https://products.groupdocs.com/editor/java/
+  python_net: https://products.groupdocs.com/editor/python-net/
+  nodejs_java: https://products.groupdocs.com/editor/nodejs-java/
+docs_pages:
+  net: https://docs.groupdocs.com/editor/net/
+  java: https://docs.groupdocs.com/editor/java/
+  python_net: https://docs.groupdocs.com/editor/python-net/
+  nodejs_java: https://docs.groupdocs.com/editor/nodejs-java/

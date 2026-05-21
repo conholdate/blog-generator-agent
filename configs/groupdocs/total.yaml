@@ -21,3 +21,38 @@ platform_definitions:
   general:
     display_name: "General"
     keywords: ["groupdocs.total", "document processing suite", "groupdocs api family"]
+
+strategic_cluster: Document Automation Suite
+formats:
+- DOC
+- DOCX
+- PDF
+- XLS
+- XLSX
+- PPT
+- PPTX
+- HTML
+- PNG
+- JPG
+- MSG
+actions:
+- convert
+- create
+- edit
+- merge
+- compare
+- extract
+- render
+- protect
+- sign
+
+money_pages:
+  net: https://products.groupdocs.com/total/net/
+  java: https://products.groupdocs.com/total/java/
+  python_net: https://products.groupdocs.com/total/python-net/
+  nodejs_java: https://products.groupdocs.com/total/nodejs-java/
+docs_pages:
+  net: https://docs.groupdocs.com/total/net/
+  java: https://docs.groupdocs.com/total/java/
+  python_net: https://docs.groupdocs.com/total/python-net/
+  nodejs_java: https://docs.groupdocs.com/total/nodejs-java/

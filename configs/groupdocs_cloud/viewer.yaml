@@ -33,3 +33,25 @@ platform_definitions:
   general:
     display_name: "General"
     keywords: ["groupdocs viewer cloud", "document viewer cloud api"]
+
+strategic_cluster: Document Viewing and Rendering
+formats:
+- PDF
+- DOC
+- DOCX
+- XLS
+- XLSX
+- PPT
+- PPTX
+- Image
+- HTML
+actions:
+- view
+- render
+- convert
+- export
+- preview
+money_pages:
+  cloud: https://products.groupdocs.cloud/viewer/
+docs_pages:
+  cloud: https://docs.groupdocs.cloud/viewer/

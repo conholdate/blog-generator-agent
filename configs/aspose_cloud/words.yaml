@@ -30,3 +30,27 @@ platform_definitions:
   general:
     display_name: "General"
     keywords: ["aspose.words cloud", "word cloud api", "document cloud api"]
+
+strategic_cluster: Word / DOCX Automation
+formats:
+- DOC
+- DOCX
+- RTF
+- ODT
+- Word
+- PDF
+- HTML
+- Markdown
+actions:
+- convert
+- create
+- edit
+- merge
+- compare
+- protect
+- extract
+- render
+money_pages:
+  cloud: https://products.aspose.cloud/words/
+docs_pages:
+  cloud: https://docs.aspose.cloud/words/

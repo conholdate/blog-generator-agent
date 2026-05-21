@@ -21,3 +21,32 @@ platform_definitions:
   general:
     display_name: "General"
     keywords: ["groupdocs.parser", "document parser api", "extract text from files library"]
+
+strategic_cluster: Document Parsing and Extraction
+formats:
+- PDF
+- DOC
+- DOCX
+- XLS
+- XLSX
+- PPT
+- PPTX
+- Email
+- TXT
+actions:
+- parse
+- extract
+- read
+- search
+- export
+
+money_pages:
+  net: https://products.groupdocs.com/parser/net/
+  java: https://products.groupdocs.com/parser/java/
+  python_net: https://products.groupdocs.com/parser/python-net/
+  nodejs_java: https://products.groupdocs.com/parser/nodejs-java/
+docs_pages:
+  net: https://docs.groupdocs.com/parser/net/
+  java: https://docs.groupdocs.com/parser/java/
+  python_net: https://docs.groupdocs.com/parser/python-net/
+  nodejs_java: https://docs.groupdocs.com/parser/nodejs-java/

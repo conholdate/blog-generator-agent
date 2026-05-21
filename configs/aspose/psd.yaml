@@ -42,3 +42,31 @@ platforms:
       api_path: "english/python-via-net"
       tut_path: "psd"
       enabled: true
+
+strategic_cluster: PSD / Photoshop Automation
+formats:
+- PSD
+- PSB
+- PNG
+- JPG
+- JPEG
+- TIFF
+- GIF
+- BMP
+- PDF
+actions:
+- convert
+- edit
+- render
+- resize
+- crop
+- export
+- extract
+money_pages:
+  net: https://products.aspose.com/psd/net/
+  java: https://products.aspose.com/psd/java/
+  python_net: https://products.aspose.com/psd/python-net/
+docs_pages:
+  net: https://docs.aspose.com/psd/net/
+  java: https://docs.aspose.com/psd/java/
+  python_net: https://docs.aspose.com/psd/python-net/

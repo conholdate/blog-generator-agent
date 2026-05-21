@@ -9,3 +9,31 @@ platform_definitions:
   general:
     display_name: "General"
     keywords: ["groupdocs total cloud", "groupdocs total cloud sdk", "document processing cloud suite"]
+
+strategic_cluster: Document Automation Suite
+formats:
+- DOC
+- DOCX
+- PDF
+- XLS
+- XLSX
+- PPT
+- PPTX
+- HTML
+- PNG
+- JPG
+- MSG
+actions:
+- convert
+- create
+- edit
+- merge
+- compare
+- extract
+- render
+- protect
+- sign
+money_pages:
+  cloud: https://products.groupdocs.cloud/total/
+docs_pages:
+  cloud: https://docs.groupdocs.cloud/total/

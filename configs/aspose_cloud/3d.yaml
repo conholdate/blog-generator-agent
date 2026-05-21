@@ -28,3 +28,27 @@ platform_definitions:
     display_name: "General"
     keywords: ["aspose.3d cloud", "3d cloud api"]
 
+strategic_cluster: 3D Model Automation
+formats:
+- FBX
+- OBJ
+- GLTF
+- GLB
+- STL
+- 3DS
+- DAE
+- DXF
+- USD
+- USDZ
+actions:
+- convert
+- create
+- edit
+- render
+- import
+- export
+- transform
+money_pages:
+  cloud: https://products.aspose.cloud/3d/
+docs_pages:
+  cloud: https://docs.aspose.cloud/3d/

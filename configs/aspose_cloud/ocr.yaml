@@ -25,3 +25,23 @@ platform_definitions:
     display_name: "General"
     keywords: ["aspose.ocr cloud", "ocr cloud api"]
 
+strategic_cluster: OCR / Text Recognition
+formats:
+- PNG
+- JPG
+- JPEG
+- BMP
+- TIFF
+- PDF
+- Image
+actions:
+- recognize
+- extract
+- read
+- convert
+- scan
+- export
+money_pages:
+  cloud: https://products.aspose.cloud/ocr/
+docs_pages:
+  cloud: https://docs.aspose.cloud/ocr/

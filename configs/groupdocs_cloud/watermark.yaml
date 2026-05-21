@@ -15,3 +15,25 @@ platform_definitions:
   general:
     display_name: "General"
     keywords: ["groupdocs watermark cloud", "watermark cloud api"]
+
+strategic_cluster: Document Watermark Automation
+formats:
+- PDF
+- DOC
+- DOCX
+- XLS
+- XLSX
+- PPT
+- PPTX
+- Image
+actions:
+- watermark
+- add
+- remove
+- search
+- edit
+- export
+money_pages:
+  cloud: https://products.groupdocs.cloud/watermark/
+docs_pages:
+  cloud: https://docs.groupdocs.cloud/watermark/

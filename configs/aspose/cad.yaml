@@ -42,3 +42,32 @@ platforms:
       api_path: "english/python-via-net"
       tut_path: "cad"
       enabled: true
+
+strategic_cluster: CAD / DWG Automation
+formats:
+- DWG
+- DXF
+- DWF
+- DGN
+- IFC
+- STL
+- OBJ
+- PDF
+- PNG
+- JPG
+- SVG
+actions:
+- convert
+- render
+- export
+- read
+- edit
+- extract
+money_pages:
+  net: https://products.aspose.com/cad/net/
+  java: https://products.aspose.com/cad/java/
+  python_net: https://products.aspose.com/cad/python-net/
+docs_pages:
+  net: https://docs.aspose.com/cad/net/
+  java: https://docs.aspose.com/cad/java/
+  python_net: https://docs.aspose.com/cad/python-net/

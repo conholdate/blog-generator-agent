@@ -27,3 +27,27 @@ platform_definitions:
   general:
     display_name: "General"
     keywords: ["groupdocs annotation cloud", "annotation cloud api"]
+
+strategic_cluster: Document Annotation Automation
+formats:
+- PDF
+- DOC
+- DOCX
+- XLS
+- XLSX
+- PPT
+- PPTX
+- Image
+- PNG
+- JPG
+actions:
+- annotate
+- add
+- edit
+- remove
+- extract
+- export
+money_pages:
+  cloud: https://products.groupdocs.cloud/annotation/
+docs_pages:
+  cloud: https://docs.groupdocs.cloud/annotation/

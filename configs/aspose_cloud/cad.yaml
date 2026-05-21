@@ -25,3 +25,27 @@ platform_definitions:
     display_name: "General"
     keywords: ["aspose.cad cloud", "cad cloud api"]
 
+strategic_cluster: CAD / DWG Automation
+formats:
+- DWG
+- DXF
+- DWF
+- DGN
+- IFC
+- STL
+- OBJ
+- PDF
+- PNG
+- JPG
+- SVG
+actions:
+- convert
+- render
+- export
+- read
+- edit
+- extract
+money_pages:
+  cloud: https://products.aspose.cloud/cad/
+docs_pages:
+  cloud: https://docs.aspose.cloud/cad/

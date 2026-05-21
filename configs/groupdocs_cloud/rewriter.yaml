@@ -15,3 +15,21 @@ platform_definitions:
   general:
     display_name: "General"
     keywords: ["groupdocs rewriter cloud", "rewriter cloud api"]
+
+strategic_cluster: AI Text Rewriting Automation
+formats:
+- TXT
+- DOC
+- DOCX
+- PDF
+- HTML
+actions:
+- rewrite
+- paraphrase
+- summarize
+- translate
+- process
+money_pages:
+  cloud: https://products.groupdocs.cloud/rewriter/
+docs_pages:
+  cloud: https://docs.groupdocs.cloud/rewriter/

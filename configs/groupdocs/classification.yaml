@@ -21,3 +21,30 @@ platform_definitions:
   general:
     display_name: "General"
     keywords: ["groupdocs.classification", "document classification api", "text classification library"]
+
+strategic_cluster: Document Classification Automation
+formats:
+- DOC
+- DOCX
+- PDF
+- TXT
+- RTF
+- HTML
+- Email
+actions:
+- classify
+- analyze
+- detect
+- extract
+- process
+
+money_pages:
+  net: https://products.groupdocs.com/classification/net/
+  java: https://products.groupdocs.com/classification/java/
+  python_net: https://products.groupdocs.com/classification/python-net/
+  nodejs_java: https://products.groupdocs.com/classification/nodejs-java/
+docs_pages:
+  net: https://docs.groupdocs.com/classification/net/
+  java: https://docs.groupdocs.com/classification/java/
+  python_net: https://docs.groupdocs.com/classification/python-net/
+  nodejs_java: https://docs.groupdocs.com/classification/nodejs-java/

@@ -13,3 +13,25 @@ platform_definitions:
     display_name: "General"
     keywords: ["aspose.video cloud", "video cloud api"]
 
+strategic_cluster: Video Processing Automation
+formats:
+- MP4
+- AVI
+- MOV
+- MKV
+- WEBM
+- WMV
+- FLV
+- GIF
+actions:
+- convert
+- encode
+- decode
+- trim
+- merge
+- extract
+- export
+money_pages:
+  cloud: https://products.aspose.cloud/video/
+docs_pages:
+  cloud: https://docs.aspose.cloud/video/

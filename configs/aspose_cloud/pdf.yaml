@@ -28,3 +28,26 @@ platform_definitions:
     display_name: "General"
     keywords: ["aspose.pdf cloud", "pdf cloud api"]
 
+strategic_cluster: PDF Processing
+formats:
+- PDF
+- PDF/A
+- DOCX
+- HTML
+- Image
+- PNG
+- JPG
+actions:
+- convert
+- merge
+- split
+- extract
+- protect
+- sign
+- compress
+- create
+- edit
+money_pages:
+  cloud: https://products.aspose.cloud/pdf/
+docs_pages:
+  cloud: https://docs.aspose.cloud/pdf/

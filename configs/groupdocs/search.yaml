@@ -21,3 +21,32 @@ platform_definitions:
   general:
     display_name: "General"
     keywords: ["groupdocs.search", "document search api", "full text search library"]
+
+strategic_cluster: Document Search Automation
+formats:
+- PDF
+- DOC
+- DOCX
+- XLS
+- XLSX
+- PPT
+- PPTX
+- TXT
+- Email
+actions:
+- search
+- index
+- find
+- extract
+- highlight
+
+money_pages:
+  net: https://products.groupdocs.com/search/net/
+  java: https://products.groupdocs.com/search/java/
+  python_net: https://products.groupdocs.com/search/python-net/
+  nodejs_java: https://products.groupdocs.com/search/nodejs-java/
+docs_pages:
+  net: https://docs.groupdocs.com/search/net/
+  java: https://docs.groupdocs.com/search/java/
+  python_net: https://docs.groupdocs.com/search/python-net/
+  nodejs_java: https://docs.groupdocs.com/search/nodejs-java/

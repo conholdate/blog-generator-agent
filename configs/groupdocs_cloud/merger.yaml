@@ -30,3 +30,25 @@ platform_definitions:
   general:
     display_name: "General"
     keywords: ["groupdocs merger cloud", "merge documents cloud api"]
+
+strategic_cluster: Document Merge and Split Automation
+formats:
+- PDF
+- DOC
+- DOCX
+- XLS
+- XLSX
+- PPT
+- PPTX
+- Image
+actions:
+- merge
+- split
+- join
+- reorder
+- remove
+- extract
+money_pages:
+  cloud: https://products.groupdocs.cloud/merger/
+docs_pages:
+  cloud: https://docs.groupdocs.cloud/merger/

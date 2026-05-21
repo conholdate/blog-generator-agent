@@ -42,3 +42,28 @@ platforms:
       api_path: "content"
       tut_path: "svg"
       enabled: true
+
+strategic_cluster: SVG / Vector Graphics Automation
+formats:
+- SVG
+- PNG
+- JPG
+- PDF
+- XPS
+- TIFF
+- BMP
+actions:
+- convert
+- create
+- edit
+- render
+- optimize
+- export
+money_pages:
+  net: https://products.aspose.com/svg/net/
+  java: https://products.aspose.com/svg/java/
+  python_net: https://products.aspose.com/svg/python-net/
+docs_pages:
+  net: https://docs.aspose.com/svg/net/
+  java: https://docs.aspose.com/svg/java/
+  python_net: https://docs.aspose.com/svg/python-net/

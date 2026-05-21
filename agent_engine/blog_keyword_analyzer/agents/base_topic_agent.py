@@ -1600,18 +1600,37 @@ class KeywordResearchAgent:
                 preferred_primary=pk,
             )
             t["keyword_analysis"] = keyword_analysis.model_dump()
+            analyzed_core = [item.keyword for item in keyword_analysis.secondary_keywords[:5]]
+            analyzed_long_tail = [item.keyword for item in keyword_analysis.long_tail_keywords[:5]]
+            analyzed_context = list(keyword_analysis.semantic_keywords[:5])
             if keyword_analysis.secondary_keywords:
-                t["supporting_keywords"] = [
-                    item.keyword for item in keyword_analysis.secondary_keywords[:5]
-                ]
+                t["supporting_keywords"] = analyzed_core
             if keyword_analysis.primary_keyword and keyword_analysis.primary_keyword.keyword:
                 t["primary_keyword"] = keyword_analysis.primary_keyword.keyword
                 pk = t["primary_keyword"]
                 pk_intent_key = self._keyword_intent_key(pk)
+
+            existing_groups = t.get("keyword_groups") or {}
+            if not isinstance(existing_groups, dict):
+                existing_groups = {}
+            if not analyzed_core:
+                analyzed_core = list(existing_groups.get("core_seo_keywords") or [])[:5]
+            if not analyzed_core:
+                analyzed_core = list(t.get("supporting_keywords") or [])[:2]
+            if not analyzed_long_tail:
+                analyzed_long_tail = list(existing_groups.get("long_tail_keywords") or [])[:5]
+            if not analyzed_long_tail:
+                core_keys = {self._keyword_intent_key(v) for v in analyzed_core}
+                analyzed_long_tail = [
+                    kw for kw in list(t.get("supporting_keywords") or [])
+                    if self._keyword_intent_key(kw) not in core_keys
+                ][:5]
+            if not analyzed_context:
+                analyzed_context = list(existing_groups.get("context_keywords") or [])[:5]
             t["keyword_groups"] = {
-                "core_seo_keywords": [item.keyword for item in keyword_analysis.secondary_keywords[:5]],
-                "long_tail_keywords": [item.keyword for item in keyword_analysis.long_tail_keywords[:5]],
-                "context_keywords": list(keyword_analysis.semantic_keywords[:5]),
+                "core_seo_keywords": analyzed_core[:5],
+                "long_tail_keywords": analyzed_long_tail[:5],
+                "context_keywords": analyzed_context[:5],
             }
 
             editorial_notes = t.get("editorial_notes") or []

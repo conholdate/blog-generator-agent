@@ -63,3 +63,28 @@ platforms:
       api_path: "english/net"
       tut_path: "tex"
       enabled: true
+
+strategic_cluster: TeX / LaTeX Automation
+formats:
+- TEX
+- LaTeX
+- PDF
+- XPS
+- PNG
+- SVG
+actions:
+- convert
+- render
+- compile
+- create
+- export
+money_pages:
+  net: https://products.aspose.com/tex/net/
+  java: https://products.aspose.com/tex/java/
+  cpp: https://products.aspose.com/tex/cpp/
+  python_net: https://products.aspose.com/tex/python-net/
+docs_pages:
+  net: https://docs.aspose.com/tex/net/
+  java: https://docs.aspose.com/tex/java/
+  cpp: https://docs.aspose.com/tex/cpp/
+  python_net: https://docs.aspose.com/tex/python-net/

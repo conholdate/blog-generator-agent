@@ -7,7 +7,15 @@ from typing import Any, Optional
 from pydantic import Field
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
-from agent_engine.config_loader import load_agent_metrics_config, load_json_object
+from agent_engine.config_sources import load_agent_metrics_config, load_json_object, resolve_config_env_value
+
+
+def _config_value(raw_cfg: dict[str, Any], key: str, *, env_file: Path) -> str | None:
+    from_env = resolve_config_env_value(raw_cfg, key, env_file=env_file)
+    if from_env:
+        return from_env
+    value = str(raw_cfg.get(key) or "").strip()
+    return value or None
 
 
 def _load_topics_sheets_config(repo_root: Path, config_path: Path) -> dict[str, dict[str, str]]:
@@ -25,11 +33,18 @@ def _load_topics_sheets_config(repo_root: Path, config_path: Path) -> dict[str, 
     for key, value in data.items():
         if not isinstance(value, dict):
             continue
-        loaded[str(key)] = {
+        cfg = {
             str(inner_key): str(inner_value)
             for inner_key, inner_value in value.items()
             if inner_value is not None
         }
+        webhook_url = _config_value(value, "webhook_url", env_file=repo_root / ".env")
+        token = _config_value(value, "token", env_file=repo_root / ".env")
+        if webhook_url:
+            cfg["webhook_url"] = webhook_url
+        if token:
+            cfg["token"] = token
+        loaded[str(key)] = cfg
     return loaded
 
 
@@ -152,13 +167,13 @@ class CoverageSettings(BaseSettings):
             self.METRICS_AGENT_OWNER or metrics_cfg.get("agent_owner") or "Muzammil Khan"
         ).strip()
         if not self.METRICS_WEBHOOK_URL:
-            self.METRICS_WEBHOOK_URL = str(primary_cfg.get("url") or "").strip() or None
+            self.METRICS_WEBHOOK_URL = _config_value(primary_cfg, "url", env_file=self.repo_root / ".env")
         if not self.METRICS_TOKEN:
-            self.METRICS_TOKEN = str(primary_cfg.get("token") or "").strip() or None
+            self.METRICS_TOKEN = _config_value(primary_cfg, "token", env_file=self.repo_root / ".env")
         if not self.INT_METRICS_WEBHOOK_URL:
-            self.INT_METRICS_WEBHOOK_URL = str(internal_cfg.get("url") or "").strip() or None
+            self.INT_METRICS_WEBHOOK_URL = _config_value(internal_cfg, "url", env_file=self.repo_root / ".env")
         if not self.INT_METRICS_TOKEN:
-            self.INT_METRICS_TOKEN = str(internal_cfg.get("token") or "").strip() or None
+            self.INT_METRICS_TOKEN = _config_value(internal_cfg, "token", env_file=self.repo_root / ".env")
         self.METRICS_STAGES = [str(stage).strip() for stage in (metrics_cfg.get("stages") or []) if str(stage).strip()]
 
         config_path = self.TOPICS_SHEETS_CONFIG_PATH

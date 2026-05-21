@@ -73,3 +73,31 @@ platforms:
       api_path: "english/java"
       tut_path: "diagram/english/java"
       enabled: false  # Enable when needed
+
+strategic_cluster: Visio / Diagram Automation
+formats:
+- VSD
+- VSDX
+- VSS
+- VST
+- VDX
+- PDF
+- PNG
+- JPG
+- SVG
+- HTML
+actions:
+- convert
+- create
+- edit
+- render
+- export
+- extract
+money_pages:
+  net: https://products.aspose.com/diagram/net/
+  java: https://products.aspose.com/diagram/java/
+  python_net: https://products.aspose.com/diagram/python-net/
+docs_pages:
+  net: https://docs.aspose.com/diagram/net/
+  java: https://docs.aspose.com/diagram/java/
+  python_net: https://docs.aspose.com/diagram/python-net/

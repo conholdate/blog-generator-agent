@@ -42,3 +42,28 @@ platforms:
       api_path: "english/python-via-net"
       tut_path: "font"
       enabled: false
+
+strategic_cluster: Font Conversion and Inspection
+formats:
+- TTF
+- OTF
+- WOFF
+- WOFF2
+- Type1
+- CFF
+- SVG
+actions:
+- convert
+- load
+- read
+- extract
+- render
+- save
+money_pages:
+  net: https://products.aspose.com/font/net/
+  java: https://products.aspose.com/font/java/
+  python_net: https://products.aspose.com/font/python-net/
+docs_pages:
+  net: https://docs.aspose.com/font/net/
+  java: https://docs.aspose.com/font/java/
+  python_net: https://docs.aspose.com/font/python-net/

@@ -12,3 +12,23 @@ platform_definitions:
   general:
     display_name: "General"
     keywords: ["groupdocs classification cloud", "classification cloud api"]
+
+strategic_cluster: Document Classification Automation
+formats:
+- DOC
+- DOCX
+- PDF
+- TXT
+- RTF
+- HTML
+- Email
+actions:
+- classify
+- analyze
+- detect
+- extract
+- process
+money_pages:
+  cloud: https://products.groupdocs.cloud/classification/
+docs_pages:
+  cloud: https://docs.groupdocs.cloud/classification/

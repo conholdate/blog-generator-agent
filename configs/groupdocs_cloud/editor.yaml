@@ -30,3 +30,25 @@ platform_definitions:
   general:
     display_name: "General"
     keywords: ["groupdocs editor cloud", "document editor cloud api"]
+
+strategic_cluster: Document Editing Automation
+formats:
+- DOC
+- DOCX
+- PDF
+- XLSX
+- PPTX
+- HTML
+- RTF
+- TXT
+actions:
+- edit
+- load
+- save
+- convert
+- extract
+- export
+money_pages:
+  cloud: https://products.groupdocs.cloud/editor/
+docs_pages:
+  cloud: https://docs.groupdocs.cloud/editor/

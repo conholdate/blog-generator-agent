@@ -117,3 +117,36 @@ platforms:
       api_path: "english/javascript-cpp"
       tut_path: "barcode"
       enabled: false  # Enable when needed
+
+strategic_cluster: Barcode Generation and Recognition
+formats:
+- QR
+- Code128
+- Code39
+- EAN
+- UPC
+- PDF417
+- DataMatrix
+- Aztec
+- PNG
+- JPG
+- SVG
+- PDF
+actions:
+- generate
+- read
+- recognize
+- scan
+- create
+- export
+- render
+money_pages:
+  net: https://products.aspose.com/barcode/net/
+  java: https://products.aspose.com/barcode/java/
+  cpp: https://products.aspose.com/barcode/cpp/
+  python_net: https://products.aspose.com/barcode/python-net/
+docs_pages:
+  net: https://docs.aspose.com/barcode/net/
+  java: https://docs.aspose.com/barcode/java/
+  cpp: https://docs.aspose.com/barcode/cpp/
+  python_net: https://docs.aspose.com/barcode/python-net/

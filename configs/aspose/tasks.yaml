@@ -65,3 +65,32 @@ platforms:
       api_path: "english/net"
       tut_path: "tasks"
       enabled: false  # Enable when you add Python-via-.NET content sources
+
+strategic_cluster: Project / Task Management Automation
+formats:
+- MPP
+- MPX
+- XML
+- XER
+- Primavera
+- PDF
+- HTML
+- CSV
+actions:
+- convert
+- create
+- read
+- edit
+- export
+- import
+- render
+money_pages:
+  net: https://products.aspose.com/tasks/net/
+  java: https://products.aspose.com/tasks/java/
+  cpp: https://products.aspose.com/tasks/cpp/
+  python_net: https://products.aspose.com/tasks/python-net/
+docs_pages:
+  net: https://docs.aspose.com/tasks/net/
+  java: https://docs.aspose.com/tasks/java/
+  cpp: https://docs.aspose.com/tasks/cpp/
+  python_net: https://docs.aspose.com/tasks/python-net/

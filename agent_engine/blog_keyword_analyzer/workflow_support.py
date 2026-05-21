@@ -4,7 +4,7 @@ import logging
 import re
 from typing import Any, List, Mapping, Optional, Tuple
 
-from .config import BRAND_METRICS
+from agent_engine.config_sources import get_metric_context
 from .schemas import Cluster, KeywordRecord
 from .tools.content_index import get_existing_posts
 from agent_engine.blog_keyword_analyzer.tools.normalization import (
@@ -244,17 +244,11 @@ def filter_duplicate_topics(topics: list[Any], existing_topics: List[dict]) -> l
 
 
 def resolve_metric_context(brand: str) -> Tuple[str, str]:
-    key = brand_slug(brand)
-    try:
-        website, section = BRAND_METRICS[key]
-    except KeyError as e:
-        raise ValueError(
-            f"Unknown brand '{brand}'. Add it to BRAND_METRICS in config.py with (website, section)."
-        ) from e
+    website, section = get_metric_context(brand)
 
     if not website or not section:
         raise ValueError(
-            f"Invalid BRAND_METRICS mapping for '{brand}': website/section cannot be empty."
+            f"Invalid brand config for '{brand}': website/section cannot be empty."
         )
 
     return website, section

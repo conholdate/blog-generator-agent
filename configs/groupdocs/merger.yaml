@@ -21,3 +21,32 @@ platform_definitions:
   general:
     display_name: "General"
     keywords: ["groupdocs.merger", "document merge api", "split and merge files library"]
+
+strategic_cluster: Document Merge and Split Automation
+formats:
+- PDF
+- DOC
+- DOCX
+- XLS
+- XLSX
+- PPT
+- PPTX
+- Image
+actions:
+- merge
+- split
+- join
+- reorder
+- remove
+- extract
+
+money_pages:
+  net: https://products.groupdocs.com/merger/net/
+  java: https://products.groupdocs.com/merger/java/
+  python_net: https://products.groupdocs.com/merger/python-net/
+  nodejs_java: https://products.groupdocs.com/merger/nodejs-java/
+docs_pages:
+  net: https://docs.groupdocs.com/merger/net/
+  java: https://docs.groupdocs.com/merger/java/
+  python_net: https://docs.groupdocs.com/merger/python-net/
+  nodejs_java: https://docs.groupdocs.com/merger/nodejs-java/

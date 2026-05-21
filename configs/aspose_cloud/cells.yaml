@@ -31,3 +31,28 @@ platform_definitions:
     display_name: "General"
     keywords: ["aspose.cells cloud", "excel cloud api", "spreadsheet cloud api"]
 
+strategic_cluster: Excel / Spreadsheet Automation
+formats:
+- XLS
+- XLSX
+- CSV
+- ODS
+- Excel
+- PDF
+- HTML
+- JSON
+actions:
+- convert
+- create
+- read
+- write
+- edit
+- export
+- import
+- merge
+- protect
+- generate
+money_pages:
+  cloud: https://products.aspose.cloud/cells/
+docs_pages:
+  cloud: https://docs.aspose.cloud/cells/

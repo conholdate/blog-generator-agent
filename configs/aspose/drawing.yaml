@@ -42,3 +42,28 @@ platforms:
       api_path: "english/python-via-net"
       tut_path: "drawing"
       enabled: false
+
+strategic_cluster: Drawing / Graphics Automation
+formats:
+- PNG
+- JPG
+- BMP
+- GIF
+- TIFF
+- SVG
+- PDF
+actions:
+- draw
+- create
+- render
+- export
+- edit
+- convert
+money_pages:
+  net: https://products.aspose.com/drawing/net/
+  java: https://products.aspose.com/drawing/java/
+  python_net: https://products.aspose.com/drawing/python-net/
+docs_pages:
+  net: https://docs.aspose.com/drawing/net/
+  java: https://docs.aspose.com/drawing/java/
+  python_net: https://docs.aspose.com/drawing/python-net/

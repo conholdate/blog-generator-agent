@@ -28,3 +28,26 @@ platform_definitions:
     display_name: "General"
     keywords: ["aspose.diagram cloud", "visio cloud api", "diagram cloud api"]
 
+strategic_cluster: Visio / Diagram Automation
+formats:
+- VSD
+- VSDX
+- VSS
+- VST
+- VDX
+- PDF
+- PNG
+- JPG
+- SVG
+- HTML
+actions:
+- convert
+- create
+- edit
+- render
+- export
+- extract
+money_pages:
+  cloud: https://products.aspose.cloud/diagram/
+docs_pages:
+  cloud: https://docs.aspose.cloud/diagram/

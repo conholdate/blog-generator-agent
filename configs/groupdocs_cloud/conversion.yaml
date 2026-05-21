@@ -33,3 +33,26 @@ platform_definitions:
   general:
     display_name: "General"
     keywords: ["groupdocs conversion cloud", "file conversion cloud api"]
+
+strategic_cluster: Document Conversion Automation
+formats:
+- PDF
+- DOC
+- DOCX
+- XLS
+- XLSX
+- PPT
+- PPTX
+- HTML
+- PNG
+- JPG
+actions:
+- convert
+- export
+- render
+- transform
+- save
+money_pages:
+  cloud: https://products.groupdocs.cloud/conversion/
+docs_pages:
+  cloud: https://docs.groupdocs.cloud/conversion/

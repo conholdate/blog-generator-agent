@@ -1,9 +1,11 @@
 from __future__ import annotations
 
+import json
 import re
 import unicodedata
 from dataclasses import dataclass, field
 from functools import lru_cache
+from pathlib import Path
 from typing import Any, Dict, Iterable, List, Mapping, Optional, Sequence, Set, Tuple, Union
 from urllib.parse import urlparse
 
@@ -357,6 +359,52 @@ FILE_FORMAT_REGISTRY: Dict[str, FileFormatSpec] = {
     "qr": FileFormatSpec("qr", "QR", ("qr", "qr code")),
     "ocr": FileFormatSpec("ocr", "OCR", ("ocr",)),
 }
+
+
+def _load_config_file_formats() -> Dict[str, FileFormatSpec]:
+    def compact(text: str) -> str:
+        s = unicodedata.normalize("NFKC", text or "").strip().lower()
+        s = s.replace("_", " ").replace("-", " ")
+        s = re.sub(r"\s+", " ", s)
+        return s.strip()
+
+    config_path = Path(__file__).resolve().parents[3] / "configs" / "file_formats.json"
+    if not config_path.is_file():
+        return {}
+    try:
+        raw = json.loads(config_path.read_text(encoding="utf-8"))
+    except Exception:
+        return {}
+    if not isinstance(raw, dict):
+        return {}
+
+    out: Dict[str, FileFormatSpec] = {}
+    for key, value in raw.items():
+        canonical = compact(str(key)).replace(" ", "-")
+        if not canonical:
+            continue
+        # Avoid config entries like "a" or "1" becoming matches in nearly every topic.
+        if len(canonical) < 2 and canonical not in FILE_FORMAT_REGISTRY:
+            continue
+        if canonical in _SMALL_WORDS and canonical not in FILE_FORMAT_REGISTRY:
+            continue
+        if not isinstance(value, Mapping):
+            continue
+        upper = str(value.get("upper") or canonical.upper()).strip()
+        aliases_raw = value.get("aliases") or []
+        aliases = tuple(
+            dict.fromkeys(
+                str(alias).strip()
+                for alias in aliases_raw
+                if str(alias or "").strip() and len(compact(str(alias))) >= 2
+                and compact(str(alias)) not in _SMALL_WORDS
+            )
+        )
+        out[canonical] = FileFormatSpec(canonical, upper, aliases)
+    return out
+
+
+FILE_FORMAT_REGISTRY = {**FILE_FORMAT_REGISTRY, **_load_config_file_formats()}
 
 
 ASPOSE_PRODUCT_REGISTRY: Dict[str, str] = {

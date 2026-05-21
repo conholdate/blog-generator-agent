@@ -21,3 +21,32 @@ platform_definitions:
   general:
     display_name: "General"
     keywords: ["groupdocs.signature", "electronic signature api", "document signing library"]
+
+strategic_cluster: Electronic Signature Automation
+formats:
+- PDF
+- DOC
+- DOCX
+- XLS
+- XLSX
+- PPT
+- PPTX
+- Image
+actions:
+- sign
+- verify
+- search
+- remove
+- generate
+- export
+
+money_pages:
+  net: https://products.groupdocs.com/signature/net/
+  java: https://products.groupdocs.com/signature/java/
+  python_net: https://products.groupdocs.com/signature/python-net/
+  nodejs_java: https://products.groupdocs.com/signature/nodejs-java/
+docs_pages:
+  net: https://docs.groupdocs.com/signature/net/
+  java: https://docs.groupdocs.com/signature/java/
+  python_net: https://docs.groupdocs.com/signature/python-net/
+  nodejs_java: https://docs.groupdocs.com/signature/nodejs-java/

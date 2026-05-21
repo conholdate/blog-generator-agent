@@ -9,7 +9,7 @@ from google.oauth2 import service_account
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
 
-from .normalization import canonical_product_name, normalize_missing_platform
+from .normalization import KeywordRefiner, canonical_product_name, normalize_missing_platform
 
 GOOGLE_SHEETS_SCOPES = ("https://www.googleapis.com/auth/spreadsheets",)
 
@@ -88,6 +88,8 @@ OUTPUT_HEADERS = [
     "editorial_notes",
     "markdown_path",
 ]
+
+refiner = KeywordRefiner()
 
 
 @dataclass(frozen=True)
@@ -350,14 +352,72 @@ def build_output_row(
         items = [str(v).strip() for v in values if str(v or "").strip()]
         return "\n".join(items)
 
+    def _keyword_multiline(values: Any) -> str:
+        if not isinstance(values, list):
+            return _display_keyword(str(values or ""))
+        items = [_display_keyword(str(v)) for v in values if str(v or "").strip()]
+        return "\n".join(items)
+
+    def _display_keyword(value: str) -> str:
+        text = str(value or "").strip()
+        if not text:
+            return ""
+        if text.endswith("?"):
+            return text
+        text = refiner.to_title_case(text)
+        text = re.sub(r"(?i)\b2d\b", "2D", text)
+        text = re.sub(r"(?i)\b3d\b", "3D", text)
+        text = re.sub(r"(?i)\bgis\b", "GIS", text)
+        return text
+
+    def _keyword_values(values: Any) -> List[str]:
+        if values is None:
+            return []
+        if isinstance(values, str):
+            return [values.strip()] if values.strip() else []
+        if not isinstance(values, list):
+            value = _field(values, "keyword", "")
+            return [str(value).strip()] if str(value or "").strip() else []
+
+        keywords: List[str] = []
+        for item in values:
+            if isinstance(item, str):
+                keyword = item
+            else:
+                keyword = _field(item, "keyword", "")
+            keyword = str(keyword or "").strip()
+            if keyword:
+                keywords.append(keyword)
+        return keywords
+
+    def _keyword_key(value: str) -> str:
+        return re.sub(r"\s+", " ", str(value or "").strip().lower())
+
+    def _dedupe_keywords(values: Any, *, exclude: Any = None) -> List[str]:
+        excluded = {_keyword_key(v) for v in _keyword_values(exclude)}
+        seen: set[str] = set()
+        keywords: List[str] = []
+        for value in _keyword_values(values):
+            key = _keyword_key(value)
+            if not key or key in excluded or key in seen:
+                continue
+            seen.add(key)
+            keywords.append(value)
+        return keywords
+
     topic = result.topics[0] if getattr(result, "topics", None) else None
     keyword_groups = _mapping(_field(topic, "keyword_groups", None)) if topic is not None else {}
     keyword_analysis = _mapping(_field(topic, "keyword_analysis", None)) if topic is not None else {}
-    core_keywords = keyword_groups.get("core_seo_keywords") or []
-    long_tail_keywords = keyword_groups.get("long_tail_keywords") or []
-    context_keywords = keyword_groups.get("context_keywords") or []
+    primary_keyword = _field(topic, "primary_keyword", "") if topic is not None else ""
+    supporting_keywords = _keyword_values(_field(topic, "supporting_keywords", [])) if topic is not None else []
+    core_keywords = _dedupe_keywords(keyword_groups.get("core_seo_keywords") or [])
+    long_tail_keywords = _dedupe_keywords(keyword_groups.get("long_tail_keywords") or [], exclude=[primary_keyword])
+    context_keywords = _dedupe_keywords(keyword_groups.get("context_keywords") or [], exclude=[primary_keyword])
     analysis_secondary = keyword_analysis.get("secondary_keywords") or []
     analysis_long_tail = keyword_analysis.get("long_tail_keywords") or []
+    analysis_inventory = keyword_analysis.get("keyword_inventory") or []
+    analysis_aio_aeo = keyword_analysis.get("aio_aeo_keywords") or []
+    analysis_semantic = keyword_analysis.get("semantic_keywords") or []
     question_keywords = keyword_analysis.get("question_keywords") or []
     entity_keywords = keyword_analysis.get("entities") or []
     rejected_keywords = keyword_analysis.get("rejected_keywords") or []
@@ -370,17 +430,32 @@ def build_output_row(
     editorial_notes = _field(topic, "editorial_notes", []) if topic is not None else []
     outline = _field(topic, "outline", []) if topic is not None else []
 
-    if not core_keywords and analysis_secondary:
-        core_keywords = [_field(item, "keyword", "") for item in analysis_secondary if _field(item, "keyword", "")]
-    if not long_tail_keywords and analysis_long_tail:
-        long_tail_keywords = [_field(item, "keyword", "") for item in analysis_long_tail if _field(item, "keyword", "")]
+    if not core_keywords:
+        core_keywords = _dedupe_keywords(analysis_secondary, exclude=[primary_keyword])
+    if not core_keywords:
+        core_keywords = _dedupe_keywords(supporting_keywords[:1], exclude=[primary_keyword])
+    if not core_keywords:
+        core_keywords = _dedupe_keywords(analysis_inventory, exclude=[primary_keyword])[:5]
+
+    if not long_tail_keywords:
+        long_tail_keywords = _dedupe_keywords(analysis_long_tail, exclude=[primary_keyword] + core_keywords)
+    if not long_tail_keywords:
+        supporting_tail = [kw for kw in supporting_keywords if len(str(kw).split()) >= 4]
+        long_tail_keywords = _dedupe_keywords(supporting_tail, exclude=[primary_keyword] + core_keywords)
+    if not long_tail_keywords:
+        long_tail_keywords = _dedupe_keywords(analysis_aio_aeo, exclude=[primary_keyword] + core_keywords)[:5]
+    if not long_tail_keywords:
+        long_tail_keywords = _dedupe_keywords(analysis_inventory, exclude=[primary_keyword] + core_keywords)[:5]
+
+    if not context_keywords:
+        context_keywords = _dedupe_keywords(analysis_semantic, exclude=[primary_keyword] + core_keywords + long_tail_keywords)
 
     cluster_lines: list[str] = []
     for cluster in clusters:
         cluster_name = _field(cluster, "cluster_name", "") if cluster is not None else ""
         cluster_keywords = _field(cluster, "keywords", []) if cluster is not None else []
         if cluster_name and cluster_keywords:
-            cluster_lines.append(f"{cluster_name}: {', '.join(str(v).strip() for v in cluster_keywords if str(v).strip())}")
+            cluster_lines.append(f"{cluster_name}: {', '.join(_display_keyword(str(v)) for v in cluster_keywords if str(v).strip())}")
 
     return {
         "generated_at_utc": datetime.now(timezone.utc).isoformat(),
@@ -395,18 +470,18 @@ def build_output_row(
         "seed_topic": selection.topic,
         "selected_platform": selected_platform,
         "generated_title": getattr(topic, "title", "") if topic is not None else "",
-        "primary_keyword": getattr(topic, "primary_keyword", "") if topic is not None else "",
-        "secondary_keywords": _multiline(core_keywords),
-        "long_tail_keywords": _multiline(long_tail_keywords),
-        "semantic_keywords": _multiline(context_keywords),
-        "question_keywords": _multiline(question_keywords),
-        "entity_keywords": _multiline(entity_keywords),
+        "primary_keyword": _display_keyword(primary_keyword),
+        "secondary_keywords": _keyword_multiline(core_keywords),
+        "long_tail_keywords": _keyword_multiline(long_tail_keywords),
+        "semantic_keywords": _keyword_multiline(context_keywords),
+        "question_keywords": _keyword_multiline(question_keywords),
+        "entity_keywords": _keyword_multiline(entity_keywords),
         "primary_keyword_intent": str(primary_intent or ""),
         "primary_keyword_score": str(primary_score or ""),
         "primary_keyword_aeo_score": str(primary_aeo_score or ""),
         "primary_keyword_placement": _multiline(primary_placement),
         "keyword_clusters": _multiline(cluster_lines),
-        "rejected_keywords": _multiline(rejected_keywords),
+        "rejected_keywords": _keyword_multiline(rejected_keywords),
         "target_persona": getattr(topic, "target_persona", "") if topic is not None else "",
         "angle": getattr(topic, "angle", "") if topic is not None else "",
         "outline": _multiline(outline),

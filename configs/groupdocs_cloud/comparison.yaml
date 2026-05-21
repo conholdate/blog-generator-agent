@@ -33,3 +33,24 @@ platform_definitions:
   general:
     display_name: "General"
     keywords: ["groupdocs comparison cloud", "document comparison cloud api"]
+
+strategic_cluster: Document Comparison Automation
+formats:
+- DOC
+- DOCX
+- PDF
+- XLS
+- XLSX
+- PPT
+- PPTX
+- Image
+actions:
+- compare
+- diff
+- merge
+- review
+- export
+money_pages:
+  cloud: https://products.groupdocs.cloud/comparison/
+docs_pages:
+  cloud: https://docs.groupdocs.cloud/comparison/

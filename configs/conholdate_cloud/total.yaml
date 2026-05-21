@@ -42,3 +42,32 @@ platform_definitions:
   general:
     display_name: "General"
     keywords: ["conholdate.cloud", "conholdate total cloud", "document processing api"]
+
+strategic_cluster: Document Automation Suite
+formats:
+- DOC
+- DOCX
+- PDF
+- XLS
+- XLSX
+- PPT
+- PPTX
+- HTML
+- PNG
+- JPG
+- MSG
+actions:
+- convert
+- create
+- edit
+- merge
+- compare
+- extract
+- render
+- protect
+- sign
+
+money_pages:
+  cloud: https://products.conholdate.cloud/total/
+docs_pages:
+  cloud: https://docs.conholdate.cloud/total/

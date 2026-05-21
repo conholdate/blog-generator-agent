@@ -21,3 +21,32 @@ platform_definitions:
   general:
     display_name: "General"
     keywords: ["groupdocs.redaction", "document redaction api", "remove sensitive data library"]
+
+strategic_cluster: Document Redaction Automation
+formats:
+- PDF
+- DOC
+- DOCX
+- XLS
+- XLSX
+- PPT
+- PPTX
+- Image
+actions:
+- redact
+- remove
+- sanitize
+- search
+- replace
+- export
+
+money_pages:
+  net: https://products.groupdocs.com/redaction/net/
+  java: https://products.groupdocs.com/redaction/java/
+  python_net: https://products.groupdocs.com/redaction/python-net/
+  nodejs_java: https://products.groupdocs.com/redaction/nodejs-java/
+docs_pages:
+  net: https://docs.groupdocs.com/redaction/net/
+  java: https://docs.groupdocs.com/redaction/java/
+  python_net: https://docs.groupdocs.com/redaction/python-net/
+  nodejs_java: https://docs.groupdocs.com/redaction/nodejs-java/

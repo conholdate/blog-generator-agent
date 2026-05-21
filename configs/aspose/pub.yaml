@@ -42,3 +42,27 @@ platforms:
       api_path: "english/python-via-net"
       tut_path: "pub"
       enabled: false
+
+strategic_cluster: Publisher Document Automation
+formats:
+- PUB
+- PDF
+- DOCX
+- HTML
+- PNG
+- JPG
+- Image
+actions:
+- convert
+- read
+- extract
+- render
+- export
+money_pages:
+  net: https://products.aspose.com/pub/net/
+  java: https://products.aspose.com/pub/java/
+  python_net: https://products.aspose.com/pub/python-net/
+docs_pages:
+  net: https://docs.aspose.com/pub/net/
+  java: https://docs.aspose.com/pub/java/
+  python_net: https://docs.aspose.com/pub/python-net/

@@ -36,3 +36,25 @@ platform_definitions:
   general:
     display_name: "General"
     keywords: ["groupdocs assembly cloud", "document assembly cloud api"]
+
+strategic_cluster: Document Assembly Automation
+formats:
+- DOC
+- DOCX
+- PDF
+- XLSX
+- PPTX
+- HTML
+- XML
+- JSON
+actions:
+- generate
+- assemble
+- merge
+- populate
+- create
+- export
+money_pages:
+  cloud: https://products.groupdocs.cloud/assembly/
+docs_pages:
+  cloud: https://docs.groupdocs.cloud/assembly/
