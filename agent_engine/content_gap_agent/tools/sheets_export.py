@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import os
 from pathlib import Path
 from typing import Any
 
@@ -43,6 +44,8 @@ PLATFORM_COLUMNS = [
     "ANDROID",
     "GENERAL",
 ]
+
+DEFAULT_SHEETS_POST_TIMEOUT_SECONDS = 180.0
 
 PLATFORM_HEADER_ALIASES = {
     "net": "NET",
@@ -320,7 +323,18 @@ def is_successful_sheet_response(status: int, text: str) -> tuple[bool, str]:
     return True, ""
 
 
-def post_payload(payload: dict[str, Any], url: str, token: str | None) -> tuple[int, str]:
+def _sheet_post_timeout_seconds() -> float:
+    raw = str(os.getenv("TOPICS_SHEETS_TIMEOUT_SECONDS") or "").strip()
+    if not raw:
+        return DEFAULT_SHEETS_POST_TIMEOUT_SECONDS
+    try:
+        timeout = float(raw)
+    except ValueError:
+        return DEFAULT_SHEETS_POST_TIMEOUT_SECONDS
+    return max(1.0, timeout)
+
+
+def post_payload(payload: dict[str, Any], url: str, token: str | None, timeout_seconds: float | None = None) -> tuple[int, str]:
     query: dict[str, str] = {}
     if token:
         query["token"] = token
@@ -328,13 +342,16 @@ def post_payload(payload: dict[str, Any], url: str, token: str | None) -> tuple[
     print("[sheets] headers before POST:")
     print(json.dumps(payload.get("headers") or [], ensure_ascii=False, indent=2))
 
+    timeout = timeout_seconds if timeout_seconds is not None else _sheet_post_timeout_seconds()
+    print(f"[sheets] POST timeout: {timeout:g}s")
+
     try:
         resp = requests.post(
             url,
             params=query,
             json=payload,
             headers={"Content-Type": "application/json; charset=utf-8"},
-            timeout=30,
+            timeout=timeout,
             allow_redirects=True,
         )
         return resp.status_code, resp.text
