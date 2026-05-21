@@ -21,3 +21,22 @@ platform_definitions:
   general:
     display_name: "General"
     keywords: ["groupdocs translation cloud", "translation cloud api"]
+
+strategic_cluster: Document Translation Automation
+formats:
+- DOC
+- DOCX
+- PDF
+- PPTX
+- XLSX
+- HTML
+- TXT
+actions:
+- translate
+- convert
+- process
+- export
+money_pages:
+  cloud: https://products.groupdocs.cloud/translation/
+docs_pages:
+  cloud: https://docs.groupdocs.cloud/translation/

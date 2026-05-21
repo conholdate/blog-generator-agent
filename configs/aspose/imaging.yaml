@@ -42,3 +42,34 @@ platforms:
       api_path: "english/python-via-net"
       tut_path: "imaging"
       enabled: true
+
+strategic_cluster: Image Processing and Conversion
+formats:
+- PNG
+- JPG
+- JPEG
+- BMP
+- GIF
+- TIFF
+- WEBP
+- PSD
+- SVG
+- PDF
+- DICOM
+actions:
+- convert
+- resize
+- crop
+- compress
+- edit
+- render
+- export
+- filter
+money_pages:
+  net: https://products.aspose.com/imaging/net/
+  java: https://products.aspose.com/imaging/java/
+  python_net: https://products.aspose.com/imaging/python-net/
+docs_pages:
+  net: https://docs.aspose.com/imaging/net/
+  java: https://docs.aspose.com/imaging/java/
+  python_net: https://docs.aspose.com/imaging/python-net/

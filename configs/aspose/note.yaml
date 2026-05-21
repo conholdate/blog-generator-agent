@@ -42,3 +42,29 @@ platforms:
       api_path: "english/python-via-net"
       tut_path: "note"
       enabled: false
+
+strategic_cluster: OneNote Automation
+formats:
+- ONE
+- OneNote
+- PDF
+- HTML
+- Image
+- PNG
+- JPG
+actions:
+- convert
+- create
+- read
+- edit
+- extract
+- export
+- render
+money_pages:
+  net: https://products.aspose.com/note/net/
+  java: https://products.aspose.com/note/java/
+  python_net: https://products.aspose.com/note/python-net/
+docs_pages:
+  net: https://docs.aspose.com/note/net/
+  java: https://docs.aspose.com/note/java/
+  python_net: https://docs.aspose.com/note/python-net/

@@ -27,3 +27,25 @@ platform_definitions:
   general:
     display_name: "General"
     keywords: ["groupdocs parser cloud", "document parser cloud api"]
+
+strategic_cluster: Document Parsing and Extraction
+formats:
+- PDF
+- DOC
+- DOCX
+- XLS
+- XLSX
+- PPT
+- PPTX
+- Email
+- TXT
+actions:
+- parse
+- extract
+- read
+- search
+- export
+money_pages:
+  cloud: https://products.groupdocs.cloud/parser/
+docs_pages:
+  cloud: https://docs.groupdocs.cloud/parser/

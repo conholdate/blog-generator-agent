@@ -21,3 +21,33 @@ platform_definitions:
   general:
     display_name: "General"
     keywords: ["groupdocs.metadata", "metadata api", "document metadata library"]
+
+strategic_cluster: Document Metadata Automation
+formats:
+- PDF
+- DOC
+- DOCX
+- XLS
+- XLSX
+- PPT
+- PPTX
+- Image
+- Email
+actions:
+- read
+- write
+- edit
+- remove
+- extract
+- clean
+
+money_pages:
+  net: https://products.groupdocs.com/metadata/net/
+  java: https://products.groupdocs.com/metadata/java/
+  python_net: https://products.groupdocs.com/metadata/python-net/
+  nodejs_java: https://products.groupdocs.com/metadata/nodejs-java/
+docs_pages:
+  net: https://docs.groupdocs.com/metadata/net/
+  java: https://docs.groupdocs.com/metadata/java/
+  python_net: https://docs.groupdocs.com/metadata/python-net/
+  nodejs_java: https://docs.groupdocs.com/metadata/nodejs-java/

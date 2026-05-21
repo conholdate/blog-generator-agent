@@ -42,3 +42,27 @@ platforms:
       api_path: "english/python-via-net"
       tut_path: "zip"
       enabled: true
+
+strategic_cluster: Archive / Compression Automation
+formats:
+- ZIP
+- RAR
+- 7Z
+- TAR
+- GZ
+- BZ2
+actions:
+- compress
+- decompress
+- extract
+- create
+- encrypt
+- convert
+money_pages:
+  net: https://products.aspose.com/zip/net/
+  java: https://products.aspose.com/zip/java/
+  python_net: https://products.aspose.com/zip/python-net/
+docs_pages:
+  net: https://docs.aspose.com/zip/net/
+  java: https://docs.aspose.com/zip/java/
+  python_net: https://docs.aspose.com/zip/python-net/

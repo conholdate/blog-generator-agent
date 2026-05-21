@@ -6,7 +6,15 @@ from typing import Optional
 from pydantic import Field
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
-from agent_engine.config_loader import load_agent_metrics_config
+from agent_engine.config_sources import load_agent_metrics_config, resolve_config_env_value
+
+
+def _config_value(raw_cfg: dict[str, object], key: str, *, env_file: Path) -> str | None:
+    from_env = resolve_config_env_value(raw_cfg, key, env_file=env_file)
+    if from_env:
+        return from_env
+    value = str(raw_cfg.get(key) or "").strip()
+    return value or None
 
 
 class Settings(BaseSettings):
@@ -71,13 +79,13 @@ class Settings(BaseSettings):
             self.METRICS_AGENT_OWNER or metrics_cfg.get("agent_owner") or "Muzammil Khan"
         ).strip()
         if not self.METRICS_WEBHOOK_URL:
-            self.METRICS_WEBHOOK_URL = str(primary_cfg.get("url") or "").strip() or None
+            self.METRICS_WEBHOOK_URL = _config_value(primary_cfg, "url", env_file=repo_root / ".env")
         if not self.METRICS_TOKEN:
-            self.METRICS_TOKEN = str(primary_cfg.get("token") or "").strip() or None
+            self.METRICS_TOKEN = _config_value(primary_cfg, "token", env_file=repo_root / ".env")
         if not self.INT_METRICS_WEBHOOK_URL:
-            self.INT_METRICS_WEBHOOK_URL = str(internal_cfg.get("url") or "").strip() or None
+            self.INT_METRICS_WEBHOOK_URL = _config_value(internal_cfg, "url", env_file=repo_root / ".env")
         if not self.INT_METRICS_TOKEN:
-            self.INT_METRICS_TOKEN = str(internal_cfg.get("token") or "").strip() or None
+            self.INT_METRICS_TOKEN = _config_value(internal_cfg, "token", env_file=repo_root / ".env")
         self.METRICS_STAGES = [str(stage).strip() for stage in (metrics_cfg.get("stages") or []) if str(stage).strip()]
 
 

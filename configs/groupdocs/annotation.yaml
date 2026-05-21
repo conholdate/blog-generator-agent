@@ -21,3 +21,34 @@ platform_definitions:
   general:
     display_name: "General"
     keywords: ["groupdocs.annotation", "document annotation api", "annotation library"]
+
+strategic_cluster: Document Annotation Automation
+formats:
+- PDF
+- DOC
+- DOCX
+- XLS
+- XLSX
+- PPT
+- PPTX
+- Image
+- PNG
+- JPG
+actions:
+- annotate
+- add
+- edit
+- remove
+- extract
+- export
+
+money_pages:
+  net: https://products.groupdocs.com/annotation/net/
+  java: https://products.groupdocs.com/annotation/java/
+  python_net: https://products.groupdocs.com/annotation/python-net/
+  nodejs_java: https://products.groupdocs.com/annotation/nodejs-java/
+docs_pages:
+  net: https://docs.groupdocs.com/annotation/net/
+  java: https://docs.groupdocs.com/annotation/java/
+  python_net: https://docs.groupdocs.com/annotation/python-net/
+  nodejs_java: https://docs.groupdocs.com/annotation/nodejs-java/

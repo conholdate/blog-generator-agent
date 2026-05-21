@@ -21,3 +21,32 @@ platform_definitions:
   general:
     display_name: "General"
     keywords: ["groupdocs.viewer", "document viewer api", "render documents library"]
+
+strategic_cluster: Document Viewing and Rendering
+formats:
+- PDF
+- DOC
+- DOCX
+- XLS
+- XLSX
+- PPT
+- PPTX
+- Image
+- HTML
+actions:
+- view
+- render
+- convert
+- export
+- preview
+
+money_pages:
+  net: https://products.groupdocs.com/viewer/net/
+  java: https://products.groupdocs.com/viewer/java/
+  python_net: https://products.groupdocs.com/viewer/python-net/
+  nodejs_java: https://products.groupdocs.com/viewer/nodejs-java/
+docs_pages:
+  net: https://docs.groupdocs.com/viewer/net/
+  java: https://docs.groupdocs.com/viewer/java/
+  python_net: https://docs.groupdocs.com/viewer/python-net/
+  nodejs_java: https://docs.groupdocs.com/viewer/nodejs-java/

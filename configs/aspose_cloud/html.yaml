@@ -34,3 +34,24 @@ platform_definitions:
     display_name: "General"
     keywords: ["aspose.html cloud", "html cloud api"]
 
+strategic_cluster: HTML / Web Format Automation
+formats:
+- HTML
+- XHTML
+- MHTML
+- PDF
+- Image
+- PNG
+- JPG
+- Markdown
+actions:
+- convert
+- create
+- edit
+- render
+- extract
+- export
+money_pages:
+  cloud: https://products.aspose.cloud/html/
+docs_pages:
+  cloud: https://docs.aspose.cloud/html/

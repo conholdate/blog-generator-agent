@@ -21,3 +21,31 @@ platform_definitions:
   general:
     display_name: "General"
     keywords: ["groupdocs.comparison", "document comparison api", "compare documents library"]
+
+strategic_cluster: Document Comparison Automation
+formats:
+- DOC
+- DOCX
+- PDF
+- XLS
+- XLSX
+- PPT
+- PPTX
+- Image
+actions:
+- compare
+- diff
+- merge
+- review
+- export
+
+money_pages:
+  net: https://products.groupdocs.com/comparison/net/
+  java: https://products.groupdocs.com/comparison/java/
+  python_net: https://products.groupdocs.com/comparison/python-net/
+  nodejs_java: https://products.groupdocs.com/comparison/nodejs-java/
+docs_pages:
+  net: https://docs.groupdocs.com/comparison/net/
+  java: https://docs.groupdocs.com/comparison/java/
+  python_net: https://docs.groupdocs.com/comparison/python-net/
+  nodejs_java: https://docs.groupdocs.com/comparison/nodejs-java/

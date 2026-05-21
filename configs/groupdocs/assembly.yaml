@@ -21,3 +21,32 @@ platform_definitions:
   general:
     display_name: "General"
     keywords: ["groupdocs.assembly", "document automation api", "document assembly library"]
+
+strategic_cluster: Document Assembly Automation
+formats:
+- DOC
+- DOCX
+- PDF
+- XLSX
+- PPTX
+- HTML
+- XML
+- JSON
+actions:
+- generate
+- assemble
+- merge
+- populate
+- create
+- export
+
+money_pages:
+  net: https://products.groupdocs.com/assembly/net/
+  java: https://products.groupdocs.com/assembly/java/
+  python_net: https://products.groupdocs.com/assembly/python-net/
+  nodejs_java: https://products.groupdocs.com/assembly/nodejs-java/
+docs_pages:
+  net: https://docs.groupdocs.com/assembly/net/
+  java: https://docs.groupdocs.com/assembly/java/
+  python_net: https://docs.groupdocs.com/assembly/python-net/
+  nodejs_java: https://docs.groupdocs.com/assembly/nodejs-java/

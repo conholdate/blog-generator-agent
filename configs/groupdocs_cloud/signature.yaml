@@ -30,3 +30,25 @@ platform_definitions:
   general:
     display_name: "General"
     keywords: ["groupdocs signature cloud", "electronic signature cloud api"]
+
+strategic_cluster: Electronic Signature Automation
+formats:
+- PDF
+- DOC
+- DOCX
+- XLS
+- XLSX
+- PPT
+- PPTX
+- Image
+actions:
+- sign
+- verify
+- search
+- remove
+- generate
+- export
+money_pages:
+  cloud: https://products.groupdocs.cloud/signature/
+docs_pages:
+  cloud: https://docs.groupdocs.cloud/signature/

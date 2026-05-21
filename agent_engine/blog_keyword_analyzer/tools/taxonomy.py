@@ -1,10 +1,9 @@
 from __future__ import annotations
 
-import json
 from functools import lru_cache
-from pathlib import Path
 from typing import Any, Optional
 
+from agent_engine.config_sources import list_product_configs
 from agent_engine.blog_keyword_analyzer.tools.normalization import (
     canonical_blog_platform_key,
     canonical_product_name,
@@ -12,18 +11,41 @@ from agent_engine.blog_keyword_analyzer.tools.normalization import (
 )
 
 
-_TAXONOMY_PATH = Path(__file__).resolve().parents[1] / "data" / "product_taxonomy.json"
+def _brand_config_key(brand: str) -> str:
+    return (brand or "").strip().lower().replace(".", "_").replace("-", "_").replace(" ", "_")
 
 
-@lru_cache(maxsize=1)
-def load_product_taxonomy() -> dict[str, dict[str, Any]]:
-    if not _TAXONOMY_PATH.exists():
-        return {}
-    return json.loads(_TAXONOMY_PATH.read_text(encoding="utf-8"))
+@lru_cache(maxsize=None)
+def load_product_taxonomy(brand: str = "Aspose") -> dict[str, dict[str, Any]]:
+    taxonomy: dict[str, dict[str, Any]] = {}
+    for cfg in list_product_configs(_brand_config_key(brand)):
+        display_name = str(cfg.get("display_name") or "").strip()
+        key = str(cfg.get("key") or "").strip()
+        if not display_name and not key:
+            continue
+        product_name = display_name or canonical_product_name(brand, key)
+        data = dict(cfg)
+        data["product"] = product_name
+        if "languages" not in data:
+            languages: list[str] = []
+            for item in data.get("platforms") or []:
+                if not isinstance(item, dict):
+                    continue
+                for platform_key, platform_data in item.items():
+                    if isinstance(platform_data, dict) and platform_data.get("enabled") is False:
+                        continue
+                    languages.append(str(platform_key))
+            if languages:
+                data["languages"] = languages
+        taxonomy[product_name] = data
+        if key:
+            taxonomy[key] = data
+            taxonomy[canonical_product_name(brand, key)] = data
+    return taxonomy
 
 
 def resolve_product_taxonomy(product: str, brand: str = "Aspose") -> dict[str, Any]:
-    taxonomy = load_product_taxonomy()
+    taxonomy = load_product_taxonomy(brand)
     short_name = normalize_product_short_name(product)
     candidates = [
         product,
@@ -94,4 +116,3 @@ def page_target(
     if pages:
         return str(next(iter(pages.values())))
     return ""
-

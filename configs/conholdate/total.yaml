@@ -41,3 +41,34 @@ platforms:
       api_path: "content/english/java"
       # tut_path: "3d"
       enabled: true
+
+strategic_cluster: Document Automation Suite
+formats:
+- DOC
+- DOCX
+- PDF
+- XLS
+- XLSX
+- PPT
+- PPTX
+- HTML
+- PNG
+- JPG
+- MSG
+actions:
+- convert
+- create
+- edit
+- merge
+- compare
+- extract
+- render
+- protect
+- sign
+
+money_pages:
+  net: https://products.conholdate.com/total/net/
+  java: https://products.conholdate.com/total/java/
+docs_pages:
+  net: https://docs.conholdate.com/total/net/
+  java: https://docs.conholdate.com/total/java/

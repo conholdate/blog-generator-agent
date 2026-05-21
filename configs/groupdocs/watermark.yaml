@@ -21,3 +21,32 @@ platform_definitions:
   general:
     display_name: "General"
     keywords: ["groupdocs.watermark", "document watermark api", "watermark library"]
+
+strategic_cluster: Document Watermark Automation
+formats:
+- PDF
+- DOC
+- DOCX
+- XLS
+- XLSX
+- PPT
+- PPTX
+- Image
+actions:
+- watermark
+- add
+- remove
+- search
+- edit
+- export
+
+money_pages:
+  net: https://products.groupdocs.com/watermark/net/
+  java: https://products.groupdocs.com/watermark/java/
+  python_net: https://products.groupdocs.com/watermark/python-net/
+  nodejs_java: https://products.groupdocs.com/watermark/nodejs-java/
+docs_pages:
+  net: https://docs.groupdocs.com/watermark/net/
+  java: https://docs.groupdocs.com/watermark/java/
+  python_net: https://docs.groupdocs.com/watermark/python-net/
+  nodejs_java: https://docs.groupdocs.com/watermark/nodejs-java/

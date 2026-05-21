@@ -34,3 +34,26 @@ platform_definitions:
     display_name: "General"
     keywords: ["aspose.slides cloud", "powerpoint cloud api", "presentation cloud api"]
 
+strategic_cluster: PowerPoint / Presentation Automation
+formats:
+- PPT
+- PPTX
+- PowerPoint
+- PDF
+- Image
+- PNG
+- JPG
+- HTML
+actions:
+- convert
+- create
+- edit
+- merge
+- extract
+- render
+- generate
+- protect
+money_pages:
+  cloud: https://products.aspose.cloud/slides/
+docs_pages:
+  cloud: https://docs.aspose.cloud/slides/

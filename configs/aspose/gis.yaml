@@ -42,3 +42,30 @@ platforms:
       api_path: "english/python-via-net"
       tut_path: "gis"
       enabled: false
+
+strategic_cluster: GIS / Geospatial Automation
+formats:
+- SHP
+- GeoJSON
+- KML
+- GPX
+- GDB
+- CSV
+- PNG
+- SVG
+actions:
+- convert
+- read
+- write
+- render
+- analyze
+- export
+- import
+money_pages:
+  net: https://products.aspose.com/gis/net/
+  java: https://products.aspose.com/gis/java/
+  python_net: https://products.aspose.com/gis/python-net/
+docs_pages:
+  net: https://docs.aspose.com/gis/net/
+  java: https://docs.aspose.com/gis/java/
+  python_net: https://docs.aspose.com/gis/python-net/

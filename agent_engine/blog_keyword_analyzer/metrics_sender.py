@@ -2,9 +2,9 @@ from __future__ import annotations
 import json
 from datetime import datetime, timezone, timedelta
 from typing import Any, Optional
-from dataclasses import dataclass, asdict
 import requests
 
+from agent_engine.config_sources import get_agent_metrics_config
 from agent_engine.blog_keyword_analyzer.tools.normalization import canonical_platform_label, normalize_platform_family
 
 def canonicalize_platform(value: Optional[str]) -> str:
@@ -57,16 +57,26 @@ def send_stage_metrics(
     """
     Sends ONE stage payload to BOTH external + internal webhook URLs (best-effort).
     """
-    if not (getattr(settings, "METRICS_WEBHOOK_URL", "") and getattr(settings, "METRICS_TOKEN", "")):
+    metrics_cfg = get_agent_metrics_config("blog_keyword_analyzer")
+    webhooks = metrics_cfg.get("webhooks") or {}
+    primary = webhooks.get("primary") or {}
+    internal = webhooks.get("internal") or {}
+    metrics_url = str(primary.get("url") or "").strip()
+    metrics_token = str(primary.get("token") or "").strip()
+    int_url = str(internal.get("url") or "").strip()
+    int_token = str(internal.get("token") or "").strip()
+    if not (metrics_url and metrics_token):
         return
 
     platform_label = platform_display(platform)
     PKT_TZ = timezone(timedelta(hours=5))
+    agent_name = str(metrics_cfg.get("agent_name") or getattr(settings, "METRICS_AGENT_NAME", "Keyword Analyzer"))
+    agent_owner = str(metrics_cfg.get("agent_owner") or getattr(settings, "METRICS_AGENT_OWNER", ""))
 
     payload: dict[str, Any] = {
         "timestamp": datetime.now(PKT_TZ).isoformat(),
-        "agent_name": settings.METRICS_AGENT_NAME,
-        "agent_owner": settings.METRICS_AGENT_OWNER,
+        "agent_name": agent_name,
+        "agent_owner": agent_owner,
         "job_type": stage,
         "run_id": run_id,
         "status": stage_status,     # stage-level
@@ -89,13 +99,8 @@ def send_stage_metrics(
     if extra_fields:
         payload.update(extra_fields)
 
-    metrics_url = getattr(settings, "METRICS_WEBHOOK_URL", "")
-    metrics_token = getattr(settings, "METRICS_TOKEN", "")
-
     _post_json_best_effort(metrics_url, metrics_token, payload, debug=bool(getattr(settings, "DEBUG", False)))
 
-    int_url = getattr(settings, "INT_METRICS_WEBHOOK_URL", "")
-    int_token = getattr(settings, "INT_METRICS_TOKEN", "")
     if int_url and int_token:
         payload_internal = dict(payload)
         payload_internal["run_env"] = "PROD"

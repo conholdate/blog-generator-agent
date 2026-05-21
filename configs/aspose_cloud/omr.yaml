@@ -25,3 +25,24 @@ platform_definitions:
     display_name: "General"
     keywords: ["aspose.omr cloud", "omr cloud api"]
 
+strategic_cluster: OMR / Form Recognition
+formats:
+- OMR
+- PNG
+- JPG
+- JPEG
+- TIFF
+- PDF
+- CSV
+- JSON
+actions:
+- recognize
+- generate
+- read
+- extract
+- process
+- export
+money_pages:
+  cloud: https://products.aspose.cloud/omr/
+docs_pages:
+  cloud: https://docs.aspose.cloud/omr/

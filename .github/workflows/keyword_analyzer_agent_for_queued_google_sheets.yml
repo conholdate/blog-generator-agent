@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       brand:
-        description: "Brand whose queued rows should be processed from All Missing Topics."
+        description: "Select Blog."
         type: choice
         required: true
         options:
@@ -18,13 +18,13 @@ on:
         default: 'Aspose'
 
       include_general:
-        description: "If true, process General when the GENERAL column is marked NO."
+        description: "Process General when the GENERAL column is marked NO."
         type: boolean
         required: false
         default: false
 
       keyword_source:
-        description: "Keyword source for expanding each selected sheet topic."
+        description: "Keyword source."
         type: choice
         required: true
         options:
@@ -33,7 +33,7 @@ on:
         default: 'llm_keywords'
 
       output_worksheet_mode:
-        description: "How to choose the output worksheet in the brand spreadsheet."
+        description: "How to choose the output worksheet."
         type: choice
         required: true
         options:
@@ -55,13 +55,13 @@ on:
         default: "15"
 
       use_content_index:
-        description: "If true, clone the matching blog repo and dedupe topics against existing posts."
+        description: "Clone the matching blog repo and dedupe topics against existing posts."
         type: boolean
         required: false
         default: false
 
       include_product_in_title:
-        description: "If true, enforce product name in generated topic titles. If false, ensure product name is NOT used in titles."
+        description: "Enforce product name in generated topic titles. If false, ensure product name is NOT used in titles."
         type: boolean
         required: false
         default: false

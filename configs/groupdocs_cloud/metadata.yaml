@@ -15,3 +15,26 @@ platform_definitions:
   general:
     display_name: "General"
     keywords: ["groupdocs metadata cloud", "metadata cloud api"]
+
+strategic_cluster: Document Metadata Automation
+formats:
+- PDF
+- DOC
+- DOCX
+- XLS
+- XLSX
+- PPT
+- PPTX
+- Image
+- Email
+actions:
+- read
+- write
+- edit
+- remove
+- extract
+- clean
+money_pages:
+  cloud: https://products.groupdocs.cloud/metadata/
+docs_pages:
+  cloud: https://docs.groupdocs.cloud/metadata/

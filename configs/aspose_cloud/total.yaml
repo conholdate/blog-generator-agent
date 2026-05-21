@@ -34,3 +34,30 @@ platform_definitions:
     display_name: "General"
     keywords: ["aspose.total cloud", "aspose cloud", "file format cloud api"]
 
+strategic_cluster: Document Automation Suite
+formats:
+- DOC
+- DOCX
+- PDF
+- XLS
+- XLSX
+- PPT
+- PPTX
+- HTML
+- PNG
+- JPG
+- MSG
+actions:
+- convert
+- create
+- edit
+- merge
+- compare
+- extract
+- render
+- protect
+- sign
+money_pages:
+  cloud: https://products.aspose.cloud/total/
+docs_pages:
+  cloud: https://docs.aspose.cloud/total/

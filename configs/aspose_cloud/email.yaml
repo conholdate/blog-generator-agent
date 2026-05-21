@@ -25,3 +25,27 @@ platform_definitions:
     display_name: "General"
     keywords: ["aspose.email cloud", "email cloud api", "mail cloud api"]
 
+strategic_cluster: Email / Outlook Automation
+formats:
+- MSG
+- EML
+- MBOX
+- PST
+- OST
+- ICS
+- VCF
+- HTML
+- PDF
+actions:
+- convert
+- create
+- read
+- extract
+- send
+- merge
+- export
+- import
+money_pages:
+  cloud: https://products.aspose.cloud/email/
+docs_pages:
+  cloud: https://docs.aspose.cloud/email/

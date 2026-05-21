@@ -63,3 +63,34 @@ platforms:
       api_path: "english/net"
       tut_path: "3d"
       enabled: false  # Enable when needed
+
+strategic_cluster: 3D Model Automation
+formats:
+- FBX
+- OBJ
+- GLTF
+- GLB
+- STL
+- 3DS
+- DAE
+- DXF
+- USD
+- USDZ
+actions:
+- convert
+- create
+- edit
+- render
+- import
+- export
+- transform
+money_pages:
+  net: https://products.aspose.com/3d/net/
+  java: https://products.aspose.com/3d/java/
+  python_net: https://products.aspose.com/3d/python-net/
+  nodejs: https://products.aspose.com/3d/nodejs/
+docs_pages:
+  net: https://docs.aspose.com/3d/net/
+  java: https://docs.aspose.com/3d/java/
+  python_net: https://docs.aspose.com/3d/python-net/
+  nodejs: https://docs.aspose.com/3d/nodejs/

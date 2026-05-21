@@ -42,3 +42,29 @@ platforms:
       api_path: "english/python-via-net"
       tut_path: "omr"
       enabled: false
+
+strategic_cluster: OMR / Form Recognition
+formats:
+- OMR
+- PNG
+- JPG
+- JPEG
+- TIFF
+- PDF
+- CSV
+- JSON
+actions:
+- recognize
+- generate
+- read
+- extract
+- process
+- export
+money_pages:
+  net: https://products.aspose.com/omr/net/
+  java: https://products.aspose.com/omr/java/
+  python_net: https://products.aspose.com/omr/python-net/
+docs_pages:
+  net: https://docs.aspose.com/omr/net/
+  java: https://docs.aspose.com/omr/java/
+  python_net: https://docs.aspose.com/omr/python-net/

@@ -2,31 +2,40 @@
   "aspose": {
     "webhook_url": "https://script.google.com/macros/s/AKfycbxqNoDyBuxTZwD7DooYANTWXN43e2WTJSRt0bR2CPqvlKrbS0XXqhEKlZGvjZyecdt32w/exec",
     "sheet_name": "All Missing Topics",
-    "output_json": "outputs/google_sheets/aspose_missing_topics.json"
+    "output_json": "outputs/google_sheets/aspose_missing_topics.json",
+    "spreadsheet_url": "${KRA_SHEET_ASPOSE_URL}"
   },
   "groupdocs": {
     "webhook_url": "https://script.google.com/macros/s/AKfycbz0LHk_NgxGf_UyaCZtMC9bF1w6t0bjJZEdj3lC6RdxUOy-1oZaUehWuVb4-xkzNl6n_g/exec",
     "sheet_name": "All Missing Topics",
-    "output_json": "outputs/google_sheets/groupdocs_missing_topics.json"
+    "output_json": "outputs/google_sheets/groupdocs_missing_topics.json",
+    "spreadsheet_url": "${KRA_SHEET_GROUPDOCS_URL}"
   },
   "conholdate": {
     "webhook_url": "https://script.google.com/macros/s/AKfycbzToAGRBmMHhXXPczAbfeExDYD-g6uqacIYmy5KwUi7D0xklwQHQpun0HF88fpKVe0RnQ/exec",
     "sheet_name": "All Missing Topics",
-    "output_json": "outputs/google_sheets/conholdate_missing_topics.json"
+    "output_json": "outputs/google_sheets/conholdate_missing_topics.json",
+    "spreadsheet_url": "${KRA_SHEET_CONHOLDATE_URL}"
   },
   "aspose_cloud": {
     "webhook_url": "https://script.google.com/macros/s/AKfycbzHVEKbFeVJXSNfX9LxF4iPQbCcPh0SdOkyo-xKS_Pin3NktuJG9qaxopXyIMiTK6kXMg/exec",
     "sheet_name": "All Missing Topics",
-    "output_json": "outputs/google_sheets/aspose_cloud_missing_topics.json"
+    "output_json": "outputs/google_sheets/aspose_cloud_missing_topics.json",
+    "spreadsheet_url": "${KRA_SHEET_ASPOSE_CLOUD_URL}"
   },
   "groupdocs_cloud": {
     "webhook_url": "https://script.google.com/macros/s/AKfycbxtzNWPUXEPklcek4BjzUaFRhLNcSmT9Ulji-hc5ezW6pQwdut9tYlAlNKP4rg0UIfmaQ/exec",
     "sheet_name": "All Missing Topics",
-    "output_json": "outputs/google_sheets/groupdocs_cloud_missing_topics.json"
+    "output_json": "outputs/google_sheets/groupdocs_cloud_missing_topics.json",
+    "spreadsheet_url": "${KRA_SHEET_GROUPDOCS_CLOUD_URL}"
   },
   "conholdate_cloud": {
     "webhook_url": "https://script.google.com/macros/s/AKfycbw9uUFNop0x2x9_r4B6J3PQ0KTGrJ2JCsLTtjN0r98Q4jPzcbJ101MeY_6w7yorwJsNCQ/exec",
     "sheet_name": "All Missing Topics",
-    "output_json": "outputs/google_sheets/conholdate_cloud_missing_topics.json"
+    "output_json": "outputs/google_sheets/conholdate_cloud_missing_topics.json",
+    "spreadsheet_url": "${KRA_SHEET_CONHOLDATE_CLOUD_URL}"
+  },
+  "familiarize": {
+    "spreadsheet_url": "${KRA_SHEET_FAMILIARIZE_URL}"
   }
 }

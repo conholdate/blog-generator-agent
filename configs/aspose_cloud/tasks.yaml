@@ -25,3 +25,25 @@ platform_definitions:
     display_name: "General"
     keywords: ["aspose.tasks cloud", "project cloud api", "mpp cloud api"]
 
+strategic_cluster: Project / Task Management Automation
+formats:
+- MPP
+- MPX
+- XML
+- XER
+- Primavera
+- PDF
+- HTML
+- CSV
+actions:
+- convert
+- create
+- read
+- edit
+- export
+- import
+- render
+money_pages:
+  cloud: https://products.aspose.cloud/tasks/
+docs_pages:
+  cloud: https://docs.aspose.cloud/tasks/

@@ -84,3 +84,34 @@ platforms:
       api_path: "english/net"   # usually aligns with .NET API
       tut_path: "email"
       enabled: false  # Enable when needed
+
+strategic_cluster: Email / Outlook Automation
+formats:
+- MSG
+- EML
+- MBOX
+- PST
+- OST
+- ICS
+- VCF
+- HTML
+- PDF
+actions:
+- convert
+- create
+- read
+- extract
+- send
+- merge
+- export
+- import
+money_pages:
+  net: https://products.aspose.com/email/net/
+  java: https://products.aspose.com/email/java/
+  cpp: https://products.aspose.com/email/cpp/
+  python_net: https://products.aspose.com/email/python-net/
+docs_pages:
+  net: https://docs.aspose.com/email/net/
+  java: https://docs.aspose.com/email/java/
+  cpp: https://docs.aspose.com/email/cpp/
+  python_net: https://docs.aspose.com/email/python-net/

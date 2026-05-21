@@ -28,3 +28,29 @@ platform_definitions:
     display_name: "General"
     keywords: ["aspose.imaging cloud", "image cloud api", "imaging cloud api"]
 
+strategic_cluster: Image Processing and Conversion
+formats:
+- PNG
+- JPG
+- JPEG
+- BMP
+- GIF
+- TIFF
+- WEBP
+- PSD
+- SVG
+- PDF
+- DICOM
+actions:
+- convert
+- resize
+- crop
+- compress
+- edit
+- render
+- export
+- filter
+money_pages:
+  cloud: https://products.aspose.cloud/imaging/
+docs_pages:
+  cloud: https://docs.aspose.cloud/imaging/

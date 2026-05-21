@@ -70,8 +70,12 @@ def main() -> None:
         default="",
         help="Optional brand YAML path. If omitted, it is resolved from product_yaml.blog.",
     )
-    parser.add_argument("--product-yaml", required=True, help="Path to product YAML, e.g. configs/aspose/3d.yaml")
-    parser.add_argument("--index-platform", required=True, help="Indexer platform, e.g. net")
+    parser.add_argument(
+        "--product-yaml",
+        default="configs/aspose/3d.yaml",
+        help="Path to product YAML. Defaults to configs/aspose/3d.yaml.",
+    )
+    parser.add_argument("--index-platform", default="net", help="Indexer platform. Defaults to net.")
     parser.add_argument(
         "--gap-platform",
         default="",

@@ -21,3 +21,33 @@ platform_definitions:
   general:
     display_name: "General"
     keywords: ["groupdocs.conversion", "document conversion api", "file conversion library"]
+
+strategic_cluster: Document Conversion Automation
+formats:
+- PDF
+- DOC
+- DOCX
+- XLS
+- XLSX
+- PPT
+- PPTX
+- HTML
+- PNG
+- JPG
+actions:
+- convert
+- export
+- render
+- transform
+- save
+
+money_pages:
+  net: https://products.groupdocs.com/conversion/net/
+  java: https://products.groupdocs.com/conversion/java/
+  python_net: https://products.groupdocs.com/conversion/python-net/
+  nodejs_java: https://products.groupdocs.com/conversion/nodejs-java/
+docs_pages:
+  net: https://docs.groupdocs.com/conversion/net/
+  java: https://docs.groupdocs.com/conversion/java/
+  python_net: https://docs.groupdocs.com/conversion/python-net/
+  nodejs_java: https://docs.groupdocs.com/conversion/nodejs-java/

@@ -28,3 +28,29 @@ platform_definitions:
     display_name: "General"
     keywords: ["aspose.barcode cloud", "barcode cloud api"]
 
+strategic_cluster: Barcode Generation and Recognition
+formats:
+- QR
+- Code128
+- Code39
+- EAN
+- UPC
+- PDF417
+- DataMatrix
+- Aztec
+- PNG
+- JPG
+- SVG
+- PDF
+actions:
+- generate
+- read
+- recognize
+- scan
+- create
+- export
+- render
+money_pages:
+  cloud: https://products.aspose.cloud/barcode/
+docs_pages:
+  cloud: https://docs.aspose.cloud/barcode/

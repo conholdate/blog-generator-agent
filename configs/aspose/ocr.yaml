@@ -42,3 +42,28 @@ platforms:
       api_path: "english/python-via-net"
       tut_path: "ocr"
       enabled: true
+
+strategic_cluster: OCR / Text Recognition
+formats:
+- PNG
+- JPG
+- JPEG
+- BMP
+- TIFF
+- PDF
+- Image
+actions:
+- recognize
+- extract
+- read
+- convert
+- scan
+- export
+money_pages:
+  net: https://products.aspose.com/ocr/net/
+  java: https://products.aspose.com/ocr/java/
+  python_net: https://products.aspose.com/ocr/python-net/
+docs_pages:
+  net: https://docs.aspose.com/ocr/net/
+  java: https://docs.aspose.com/ocr/java/
+  python_net: https://docs.aspose.com/ocr/python-net/
