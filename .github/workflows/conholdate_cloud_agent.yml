@@ -2,22 +2,6 @@ name: Generate Blog Post for conholdate.cloud
 
 on:
   workflow_dispatch:
-    inputs:
-      keywords_file:
-        description: 'Keywords File (e.g., content/Conholdate-cloud/output/449388a2_aspose-cells_java_topics.md)'
-        required: true
-        type: string
-
-      index:
-        description: 'Index in Keyword File (e.g. 1,2,3..) - Default is 1'
-        required: false
-        type: number
-        default: 1
-
-      author:
-        description: 'Author Name'
-        required: true
-        type: string
 
 jobs:
   generate:
@@ -50,6 +34,11 @@ jobs:
           find . -name ".env" -type f -delete
           echo "Removed all .env files"
 
+      - name: Create Google service account key
+        run: |
+          mkdir -p keys
+          echo '${{ secrets.GOOGLE_SERVICE_ACCOUNT_KEY }}' > keys/sheet-reader-494108-bd5e61ef812c.json
+
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
@@ -61,15 +50,21 @@ jobs:
 
       - name: Create runtime .env file with secrets
         run: |
-          echo "PROFESSIONALIZE_API_KEY_2=${{ secrets.PROFESSIONALIZE_API_KEY_2 }}" >> .env
-          echo "PROFESSIONALIZE_BASE_URL=${{ secrets.PROFESSIONALIZE_BASE_URL }}" >> .env
-          echo "PROFESSIONALIZE_LLM_MODEL=${{ secrets.PROFESSIONALIZE_LLM_MODEL }}" >> .env
-          echo "TOKEN_FOR_TEAM=${{ secrets.TOKEN_FOR_TEAM }}" >> .env
-          echo "TOKEN_FOR_PROD=${{ secrets.TOKEN_FOR_PROD }}" >> .env
-          echo "GOOGLE_SCRIPT_URL_FOR_PROD=${{ vars.GOOGLE_SCRIPT_URL_FOR_PROD }}" >> .env
-          echo "GOOGLE_SCRIPT_URL_FOR_TEAM=${{ vars.GOOGLE_SCRIPT_URL_FOR_TEAM }}" >> .env
-          echo "REPO_PAT=${{ secrets.GISTS_PAT_CONHOLDATE_CLOUD }}" >> .env
-          echo "GIST_NAME=${{ vars.CONHOLDATE_CLOUD_GIST }}" >> .env
+          cat > .env << EOF
+          PROFESSIONALIZE_API_KEY_2=${{ secrets.PROFESSIONALIZE_API_KEY_2 }}
+          PROFESSIONALIZE_BASE_URL=${{ secrets.PROFESSIONALIZE_BASE_URL }}
+          PROFESSIONALIZE_LLM_MODEL=${{ secrets.PROFESSIONALIZE_LLM_MODEL }}
+          TOKEN_FOR_TEAM=${{ secrets.TOKEN_FOR_TEAM }}
+          TOKEN_FOR_PROD=${{ secrets.TOKEN_FOR_PROD }}
+          GOOGLE_SCRIPT_URL_FOR_PROD=${{ vars.GOOGLE_SCRIPT_URL_FOR_PROD }}
+          GOOGLE_SCRIPT_URL_FOR_TEAM=${{ vars.GOOGLE_SCRIPT_URL_FOR_TEAM }}
+          REPO_PAT=${{ secrets.GISTS_PAT_CONHOLDATE_CLOUD }}
+          GIST_NAME=${{ vars.CONHOLDATE_CLOUD_GIST }}
+          SPREADSHEET_ID_FOR_BLOGPOST_METADATA=${{ secrets.CONHOLDATE_CLOUD_SPREADSHEET_ID_FOR_BLOGPOST_METADATA }}
+          SPREADSHEET_ID_FOR_KEYWORDS=${{ secrets.CONHOLDATE_CLOUD_SPREADSHEET_ID_FOR_KEYWORDS }}
+          GOOGLE_KEY=sheet-reader-494108-bd5e61ef812c.json
+          CONSOLIDATED_SHEET_NAME_FOR_BLOGPOST_METADATA=Consolidated
+          EOF
           echo ".env file created"
 
       - name: Generate Blog
@@ -80,12 +75,17 @@ jobs:
           echo "Brand: conholdate.cloud"
 
           python main.py \
-            --keywords_file "${{ inputs.keywords_file }}" \
-            --brand "conholdate.cloud" \
-            --author "${{ inputs.author }}" \
-            --index "${{ inputs.index }}"
+            --author "Muhammad Mustafa" \
+            --brand "conholdate.cloud"
 
           echo "✅ Blog generation completed"
+
+      - name: Read product name
+        id: read_product
+        run: |
+          PRODUCT_NAME=$(cat agent_engine/blog_generator/product_name.txt)
+          echo "product_name=$PRODUCT_NAME" >> $GITHUB_OUTPUT
+          echo "✅ Product name: $PRODUCT_NAME"
 
       - name: Find generated blog folder
         id: find_blog
@@ -103,14 +103,25 @@ jobs:
 
           if [ -z "$blog_folder" ]; then
             echo "❌ No blog folder found in $BRAND_DIR"
+            echo "Contents of $BRAND_DIR:"
+            ls -la "$BRAND_DIR" || echo "Directory is empty"
             exit 1
           fi
 
           echo "✅ Found: $(basename $blog_folder)"
 
           blog_folder_name=$(basename "$blog_folder")
+
+          if [ ! -f "$blog_folder/index.md" ]; then
+            echo "❌ index.md not found in $blog_folder"
+            exit 1
+          fi
+
           echo "blog_folder_name=$blog_folder_name" >> $GITHUB_OUTPUT
           echo "blog_folder_path=$blog_folder" >> $GITHUB_OUTPUT
+
+          echo "=== Folder contents ==="
+          ls -la "$blog_folder"
 
       - name: Verify blog content before upload
         run: |
@@ -162,7 +173,6 @@ jobs:
 
             git commit -m "Add generated blog post: $BLOG_FOLDER_NAME
 
-          Author: ${{ inputs.author }}
           Path: $BLOG_FOLDER_PATH
           Generated: $(date -u +'%Y-%m-%d %H:%M:%S UTC')
           Workflow Run: ${{ github.run_number }}"
@@ -172,6 +182,7 @@ jobs:
             echo "✅ Blog committed and pushed successfully to this repository"
             echo "   Location: $BLOG_FOLDER_PATH"
           fi
+
       - name: Commit logs
         run: |
           git config --global user.email "action@github.com"
@@ -179,6 +190,7 @@ jobs:
           git add content/logs/logs.txt
           git commit -m "Update logs [Run #${{ github.run_number }}]" || echo "No changes to commit"
           git push origin HEAD
+
       - name: Upload Generated Blog as Artifact
         uses: actions/upload-artifact@v4
         with:
@@ -215,9 +227,12 @@ jobs:
           git checkout main
           git pull origin main
 
+          # Extract product name from file written by Python
+          PRODUCT_NAME="${{ steps.read_product.outputs.product_name }}"
           TARGET_DIR="content/Conholdate.Total/total"
           mkdir -p "$TARGET_DIR"
           echo "✅ Target directory: $TARGET_DIR"
+          echo "✅ Product name: $PRODUCT_NAME"
 
           BRANCH_NAME="blog/total/$BLOG_FOLDER_NAME"
 
@@ -278,7 +293,7 @@ jobs:
           echo "=== Commit summary ==="
           git diff --staged --stat
 
-          git commit -m "Add generated blog: $BLOG_FOLDER_NAME" || {
+          git commit -m "Add generated blog for $PRODUCT_NAME: $BLOG_FOLDER_NAME" || {
             echo "❌ Failed to commit changes"
             exit 1
           }
@@ -310,7 +325,7 @@ jobs:
               --body "## Generated Blog Post
 
           **Folder:** $BLOG_FOLDER_NAME
-          **Author:** ${{ inputs.author }}
+          **Product:** $PRODUCT_NAME
           **Target Path:** \`content/Conholdate.Total/total/$BLOG_FOLDER_NAME\`
 
           **Generated by:** GitHub Actions (Run #${{ github.run_number }})
@@ -320,11 +335,6 @@ jobs:
           ---
 
           This pull request adds a new blog post generated by the autonomous blog agent.
-
-          ### Contents:
-          - Folder: \`$BLOG_FOLDER_NAME\`
-          - File: \`index.md\`
-          - Location: \`content/Conholdate.Total/total/\`
 
           Auto-merged by GitHub Actions." || {
               echo "❌ Failed to create pull request."
