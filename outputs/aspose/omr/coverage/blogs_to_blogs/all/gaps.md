@@ -6,8 +6,8 @@
 
 | 🧩 Metric | Value | Status |
 | --- | --- | --- |
-| **Total Canonical Topics** | **17** | — |
-| **Topics with Gaps** | **17** | ⚠️ |
+| **Total Canonical Topics** | **16** | — |
+| **Topics with Gaps** | **16** | ⚠️ |
 | **Fully Covered Topics** | 0 | — |
 | **Excluded (Release / Updates)** | 0 | ℹ️ |
 | **Baseline Scope** | ALL | — |
@@ -30,16 +30,16 @@
 
 | Platform | # Covered | # Missing | Coverage |
 | --- | --- | --- | --- |
-| **GENERAL** | 6 | 11 | 🔴 Weak (35.3%) |
-| **JAVA** | 6 | 11 | 🔴 Weak (35.3%) |
-| **NET** | 6 | 11 | 🔴 Weak (35.3%) |
+| **GENERAL** | 6 | 10 | 🔴 Weak (37.5%) |
+| **JAVA** | 6 | 10 | 🔴 Weak (37.5%) |
+| **NET** | 6 | 10 | 🔴 Weak (37.5%) |
 
 ---
 
 ### 🔎 Executive Insights
 
 - **100.0%** of canonical topics are missing on at least one platform (after exclusions).
-- Highest gap density: **GENERAL** (11 missing), **JAVA** (11 missing), **NET** (11 missing).
+- Highest gap density: **GENERAL** (10 missing), **JAVA** (10 missing), **NET** (10 missing).
 - Gaps are concentrated in **8** major category/subcategory clusters (see Section 4).
 - Release notes, product updates, and version announcements are intentionally excluded from this report.
 
@@ -50,11 +50,11 @@
 | # | Cluster | Representative topic | Missing platforms (high-impact) | Suggested new titles (examples) |
 | --- | --- | --- | --- | --- |
 | 1 | **Document Processing / Optical Mark Recognition** | Create and read OMR sheet with barcode | GENERAL, JAVA | Create and read OMR sheet with barcode — GENERAL; Create and read OMR sheet with barcode — JAVA |
-| 2 | **Document Processing / Optical Mark Recognition** | Create OMR sheet IN PDF | JAVA, NET | Create OMR sheet IN PDF — JAVA; Create OMR sheet IN PDF — NET |
+| 2 | **Document Processing / Optical Mark Recognition** | Create OMR sheet in PDF | JAVA, NET | Create OMR sheet in PDF — JAVA; Create OMR sheet in PDF — NET |
 | 3 | **Imaging / Optical Mark Recognition** | Data extraction from images | GENERAL, NET | Data extraction from images — GENERAL; Data extraction from images — NET |
-| 4 | **Imaging / Optical Mark Recognition** | Recognize image from memorystream using OMR | GENERAL, JAVA | Recognize image from memorystream using OMR — GENERAL; Recognize image from memorystream using OMR — JAVA |
-| 5 | **Document Processing / OMR Sheet Generation** | Create answer sheet OMR sheet | JAVA, NET | Create answer sheet OMR sheet — JAVA; Create answer sheet OMR sheet — NET |
-| 6 | **Document Processing / OMR Templates** | Create OMR survey or answer sheet | GENERAL, NET | Create OMR survey or answer sheet — GENERAL; Create OMR survey or answer sheet — NET |
+| 4 | **Imaging / Optical Mark Recognition** | Recognize OMR image from memorystream | GENERAL, JAVA | Recognize OMR image from memorystream — GENERAL; Recognize OMR image from memorystream — JAVA |
+| 5 | **Document Processing / OMR Sheet Generation** | Create OMR answer sheet | JAVA, NET | Create OMR answer sheet — JAVA; Create OMR answer sheet — NET |
+| 6 | **Document Processing / OMR Templates** | Create OMR survey and answer sheet | GENERAL, NET | Create OMR survey and answer sheet — GENERAL; Create OMR survey and answer sheet — NET |
 | 7 | **Data Collection / Online Survey Maker** | Create survey | JAVA, NET | Create survey — JAVA; Create survey — NET |
 | 8 | **Forms / OMR Survey Creation** | Create survey form from JSON | GENERAL, JAVA | Create survey form from JSON — GENERAL; Create survey form from JSON — JAVA |
 | 9 | **Education / Grading** | OMR | JAVA, NET | OMR — JAVA; OMR — NET |
@@ -68,9 +68,9 @@
 
 | Platform | # topics covered | % of baseline rows | # topics missing |
 | --- | --- | --- | --- |
-| **GENERAL** | 6 | 35.3% | 11 |
-| **JAVA** | 6 | 35.3% | 11 |
-| **NET** | 6 | 35.3% | 11 |
+| **GENERAL** | 6 | 37.5% | 10 |
+| **JAVA** | 6 | 37.5% | 10 |
+| **NET** | 6 | 37.5% | 10 |
 
 **Takeaway:** Focus first on platforms with the highest missing counts and lowest coverage percentage; port high-impact topics from the best-covered platform first.
 
@@ -80,7 +80,7 @@
 
 | Cluster | # gap topics | Missing signals | Most-missed platforms |
 | --- | --- | --- | --- |
-| **Document Processing / Optical Mark Recognition** | 8 | 15 | GENERAL, JAVA, NET |
+| **Document Processing / Optical Mark Recognition** | 7 | 12 | GENERAL, JAVA, NET |
 | **Imaging / Optical Mark Recognition** | 2 | 4 | GENERAL, NET, JAVA |
 | **Document Processing / OMR Sheet Generation** | 1 | 2 | JAVA, NET |
 | **Document Processing / OMR Templates** | 1 | 2 | GENERAL, NET |
