@@ -422,6 +422,7 @@ PHRASE_CANON: Dict[str, str] = {
     "python": "Python",
     "java": "Java",
     "php": "PHP",
+    "memorystream": "MemoryStream",
     "vscode": "VS Code",
     "visual studio code": "VS Code",
     "latex": "LaTeX",

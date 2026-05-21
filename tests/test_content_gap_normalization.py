@@ -6,7 +6,9 @@ from agent_engine.content_gap_agent.tools.normalization import (
 )
 from agent_engine.content_gap_agent.tools.coverage.blogs_to_blogs import record_gap_key, record_gap_keys
 from agent_engine.content_gap_agent.tools.io import IndexRecord
+from agent_engine.content_gap_agent.tools.sheets_export import build_payload
 from agent_engine.content_indexer_agent.tools.key_maker import build_content_topic
+import json
 
 
 def test_gis_conversion_topic_keys_collapse_to_primary_pair() -> None:
@@ -87,6 +89,7 @@ def test_omr_acronym_survives_coverage_display_normalization() -> None:
     key = canonical_topic_key("Optical mark recognition OMR")
     assert key == "optical mark recognition"
     assert normalize_sentence_text("Create OMR sheet in PDF") == "Create OMR sheet in PDF"
+    assert normalize_sentence_text("Recognize OMR image from memorystream") == "Recognize OMR image from MemoryStream"
 
 
 def test_omr_topics_are_canonicalized_to_readable_developer_titles() -> None:
@@ -100,3 +103,37 @@ def test_omr_topics_are_canonicalized_to_readable_developer_titles() -> None:
     }
     for raw, expected in cases.items():
         assert build_content_topic(title=raw) == expected
+
+
+def test_omr_sheet_export_skips_generic_acronym_topic(tmp_path) -> None:
+    coverage_json = tmp_path / "coverage.json"
+    coverage_json.write_text(
+        json.dumps(
+            {
+                "brand_key": "aspose",
+                "product_key": "omr",
+                "product_name": "Aspose.OMR",
+                "baseline_platform": "all",
+                "rows": [
+                    {
+                        "category": "",
+                        "sub_category": "",
+                        "topic": "OMR",
+                        "coverage": {"net": {"matched": True}, "java": {"matched": False}},
+                    },
+                    {
+                        "category": "",
+                        "sub_category": "",
+                        "topic": "Recognize OMR image from MemoryStream",
+                        "coverage": {"net": {"matched": True}, "java": {"matched": False}},
+                    },
+                ],
+            }
+        ),
+        encoding="utf-8",
+    )
+
+    payload = build_payload(coverage_json=coverage_json, sheet_name="All Missing Topics", replace=False)
+
+    assert payload["meta"]["row_count"] == 1
+    assert payload["rows"][0][5] == "Recognize OMR image from MemoryStream"
