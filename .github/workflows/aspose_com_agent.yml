@@ -63,6 +63,7 @@ jobs:
           SPREADSHEET_ID_FOR_BLOGPOST_METADATA=${{ secrets.ASPOSE_COM_SPREADSHEET_ID_FOR_BLOGPOST_METADATA }}
           SPREADSHEET_ID_FOR_KEYWORDS=${{ secrets.ASPOSE_COM_SPREADSHEET_ID_FOR_KEYWORDS }}
           GOOGLE_KEY=sheet-reader-494108-bd5e61ef812c.json
+          CONSOLIDATED_SHEET_NAME_FOR_BLOGPOST_METADATA=Consolidated
           EOF
           echo ".env file created"
 
