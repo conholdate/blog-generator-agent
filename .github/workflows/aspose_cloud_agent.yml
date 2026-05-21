@@ -2,6 +2,8 @@ name: Generate Blog Post for aspose.cloud
 
 on:
   workflow_dispatch:
+  schedule:
+    - cron: '44 11 * * *'
 
 jobs:
   generate:
