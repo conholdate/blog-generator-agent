@@ -280,6 +280,12 @@ class BlogOrchestrator:
             # self.log(f" File path: {filepath}")
             # self.log("---Execution ended---")
             mark_topic_as_generated(sheet_name, row_number)
+
+            # Write product name for GitHub Actions to read
+            base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+            with open(os.path.join(base_dir, "product_name.txt"), "w") as f:
+                f.write(sheet_name)
+
             save_blog_metadata_to_sheet(
                 brand=self.brand,
                 url= f'https://blog.{self.brand}{blog_post_metadata["url"]}',
