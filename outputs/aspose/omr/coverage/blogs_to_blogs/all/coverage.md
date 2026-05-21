@@ -33,6 +33,6 @@
 | Optical mark recognition | — | [✅ (1.00)](https://blog.aspose.com/omr/java-api-for-optical-mark-recognition-and-processing-in-images/) | [✅ (1.00)](https://blog.aspose.com/omr/csharp-optical-mark-recognition-omr-software-in-net/) |
 | Perform OMR and extract data from image | — | — | [✅ (1.00)](https://blog.aspose.com/omr/perform-omr-and-extract-data-using-csharp/) |
 | Read OMR sheet from PNG | — | [✅ (1.00)](https://blog.aspose.com/omr/omr-sheet-reader-in-java-omr-sheet-png/) | — |
-| Recognize OMR image from memorystream | — | — | [✅ (1.00)](https://blog.aspose.com/omr/recognize-images-from-memorystream-using-omr-in-csharp/) |
+| Recognize OMR image from MemoryStream | — | — | [✅ (1.00)](https://blog.aspose.com/omr/recognize-images-from-memorystream-using-omr-in-csharp/) |
 | Scan OMR bubble answer sheet from JPG | — | [✅ (1.00)](https://blog.aspose.com/omr/scan-bubble-answer-sheet-in-java-omr-sheet-jpg) | — |
 | Scan OMR survey | [✅ (1.00)](https://blog.aspose.com/omr/scan-survey-online/) | — | — |

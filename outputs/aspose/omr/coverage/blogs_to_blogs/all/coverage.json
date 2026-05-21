@@ -454,7 +454,7 @@
     {
       "category": "Imaging",
       "sub_category": "Optical Mark Recognition",
-      "topic": "Recognize OMR image from memorystream",
+      "topic": "Recognize OMR image from MemoryStream",
       "key": "recognize-omr-image-from-memorystream",
       "baseline_record_id": "blog::omr/2021-06-10-recognize-images-from-memorystream-using-omr-in-csharp/index.md",
       "coverage": {

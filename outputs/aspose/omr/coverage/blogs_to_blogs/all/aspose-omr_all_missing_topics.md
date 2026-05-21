@@ -23,7 +23,7 @@
 | 11 | Optical mark recognition | GENERAL |
 | 12 | Perform OMR and extract data from image | GENERAL, JAVA |
 | 13 | Read OMR sheet from PNG | GENERAL, NET |
-| 14 | Recognize OMR image from memorystream | GENERAL, JAVA |
+| 14 | Recognize OMR image from MemoryStream | GENERAL, JAVA |
 | 15 | Scan OMR bubble answer sheet from JPG | GENERAL, NET |
 | 16 | Scan OMR survey | JAVA, NET |
 

@@ -214,29 +214,6 @@
       "Aspose.OMR",
       "all",
       "Education",
-      "Grading",
-      "OMR",
-      "Queued",
-      "NO",
-      "NO",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "=HYPERLINK(\"https://blog.aspose.com/omr/grade-calculator-online/\",\"YES\")"
-    ],
-    [
-      "aspose",
-      "Aspose.OMR",
-      "all",
-      "Education",
       "Assessment Tools",
       "OMR answer scanner",
       "Queued",
@@ -330,7 +307,7 @@
       "all",
       "Imaging",
       "Optical Mark Recognition",
-      "Recognize OMR image from memorystream",
+      "Recognize OMR image from MemoryStream",
       "Queued",
       "=HYPERLINK(\"https://blog.aspose.com/omr/recognize-images-from-memorystream-using-omr-in-csharp/\",\"YES\")",
       "NO",
@@ -396,7 +373,7 @@
   ],
   "meta": {
     "source_count": 1,
-    "row_count": 16,
+    "row_count": 15,
     "sources": [
       "/home/runner/work/blog-generator-agent/blog-generator-agent/outputs/aspose/omr/coverage/blogs_to_blogs/all/coverage.json"
     ]
