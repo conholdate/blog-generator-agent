@@ -8,12 +8,12 @@
     ],
     "webhooks": {
       "primary": {
-        "url": "${METRICS_PRIMARY_WEBHOOK_URL}",
-        "token": "${METRICS_PRIMARY_WEBHOOK_TOKEN}"
+        "url": "${METRICS_WEBHOOK_URL_PROD}",
+        "token": "${TOKEN_FOR_PROD}"
       },
       "internal": {
-        "url": "${METRICS_INTERNAL_WEBHOOK_URL}",
-        "token": "${METRICS_INTERNAL_WEBHOOK_TOKEN}"
+        "url": "${METRICS_WEBHOOK_URL_TEAM}",
+        "token": "${TOKEN_FOR_TEAM}"
       }
     }
   },
@@ -25,12 +25,12 @@
     ],
     "webhooks": {
       "primary": {
-        "url": "${METRICS_PRIMARY_WEBHOOK_URL}",
-        "token": "${METRICS_PRIMARY_WEBHOOK_TOKEN}"
+        "url": "${METRICS_WEBHOOK_URL_PROD}",
+        "token": "${TOKEN_FOR_PROD}"
       },
       "internal": {
-        "url": "${METRICS_INTERNAL_WEBHOOK_URL}",
-        "token": "${METRICS_INTERNAL_WEBHOOK_TOKEN}"
+        "url": "${METRICS_WEBHOOK_URL_TEAM}",
+        "token": "${TOKEN_FOR_TEAM}"
       }
     }
   },
@@ -43,12 +43,12 @@
     ],
     "webhooks": {
       "primary": {
-        "url": "${METRICS_PRIMARY_WEBHOOK_URL}",
-        "token": "${METRICS_PRIMARY_WEBHOOK_TOKEN}"
+        "url": "${METRICS_WEBHOOK_URL_PROD}",
+        "token": "${TOKEN_FOR_PROD}"
       },
       "internal": {
-        "url": "${METRICS_INTERNAL_WEBHOOK_URL}",
-        "token": "${METRICS_INTERNAL_WEBHOOK_TOKEN}"
+        "url": "${METRICS_WEBHOOK_URL_TEAM}",
+        "token": "${TOKEN_FOR_TEAM}"
       }
     }
   }
