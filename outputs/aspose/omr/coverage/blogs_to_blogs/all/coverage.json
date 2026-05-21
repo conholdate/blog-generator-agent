@@ -1,0 +1,556 @@
+{
+  "case": "blogs_to_blogs",
+  "brand_key": "aspose",
+  "product_key": "omr",
+  "baseline_platform": "all",
+  "platforms": [
+    "general",
+    "java",
+    "net"
+  ],
+  "meta": {
+    "matching_mode": "key_exact",
+    "total_input_records": 23,
+    "records_after_filters": 19,
+    "excluded_release_update_records": 0,
+    "excluded_old_or_undated_records": 4,
+    "baseline_records": 19,
+    "total_cells": 48,
+    "matched_cells": 18,
+    "missing_cells": 30,
+    "match_rate": 0.375,
+    "skipped_empty_keys": 0
+  },
+  "rows": [
+    {
+      "category": "Document Processing",
+      "sub_category": "Optical Mark Recognition",
+      "topic": "Create and read OMR sheet with barcode",
+      "key": "create-and-read-omr-sheet-with-barcode",
+      "baseline_record_id": "blog::omr/2023-09-25-omr-with-barcode-in-csharp/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::omr/2023-09-25-omr-with-barcode-in-csharp/index.md",
+          "title": "Create and Read OMR Sheet with Barcode in C#",
+          "topic": "Create and read OMR sheet with barcode",
+          "url": "https://blog.aspose.com/omr/create-and-read-omr-with-barcode-in-csharp/"
+        }
+      }
+    },
+    {
+      "category": "Document Processing",
+      "sub_category": "OMR Sheet Generation",
+      "topic": "Create OMR answer sheet",
+      "key": "create-omr-answer-sheet",
+      "baseline_record_id": "blog::omr/2023-02-28-answer-sheet-online/index.md",
+      "coverage": {
+        "general": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::omr/2023-02-28-answer-sheet-online/index.md",
+          "title": "Create Answer Sheet Online - OMR Sheet Maker",
+          "topic": "Create OMR answer sheet",
+          "url": "https://blog.aspose.com/omr/answer-sheet-online/"
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Document Processing",
+      "sub_category": "Optical Mark Recognition",
+      "topic": "Create OMR sheet",
+      "key": "create-omr-sheet",
+      "baseline_record_id": "blog::omr/2020-08-25-create-omr-question-answer-sheet-csharp/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::omr/2021-08-05-create-omr-sheet-checker-or-scanner-with-java/index.md",
+          "title": "Create OMR Sheet Checker or Scanner with Java",
+          "topic": "Create OMR sheet",
+          "url": "https://blog.aspose.com/omr/create-omr-sheet-checker-or-scanner-with-java/"
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::omr/2020-08-25-create-omr-question-answer-sheet-csharp/index.md",
+          "title": "Create OMR Sheet Checker or Scanner Software in C#",
+          "topic": "Create OMR sheet",
+          "url": "https://blog.aspose.com/omr/create-omr-question-answer-sheet-csharp/"
+        }
+      }
+    },
+    {
+      "category": "Document Processing",
+      "sub_category": "Optical Mark Recognition",
+      "topic": "Create OMR sheet in PDF",
+      "key": "create-omr-sheet-in-pdf",
+      "baseline_record_id": "blog::omr/2023-05-08-omr-sheet-in-pdf/index.md",
+      "coverage": {
+        "general": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::omr/2023-05-08-omr-sheet-in-pdf/index.md",
+          "title": "Create OMR Sheet in PDF - Free & Online",
+          "topic": "Create OMR sheet in PDF",
+          "url": "https://blog.aspose.com/omr/omr-sheet-in-pdf/"
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Document Processing",
+      "sub_category": "OMR Templates",
+      "topic": "Create OMR survey and answer sheet",
+      "key": "create-omr-survey-and-answer-sheet",
+      "baseline_record_id": "blog::omr/2022-03-31-create-omr-template-from-text-markup-using-java/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::omr/2022-03-31-create-omr-template-from-text-markup-using-java/index.md",
+          "title": "Create OMR Survey or Answer Sheet in Java",
+          "topic": "Create OMR survey and answer sheet",
+          "url": "https://blog.aspose.com/omr/create-omr-template-from-text-markup-using-java/"
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Data Collection",
+      "sub_category": "Online Survey Maker",
+      "topic": "Create survey",
+      "key": "create-survey",
+      "baseline_record_id": "blog::omr/2025-04-25-free-online-survey-maker/index.md",
+      "coverage": {
+        "general": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::omr/2025-04-25-free-online-survey-maker/index.md",
+          "title": "Free Online Survey Maker - Make Your Own Survey",
+          "topic": "Create survey",
+          "url": "https://blog.aspose.com/omr/free-online-survey-maker/"
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Forms",
+      "sub_category": "OMR Survey Creation",
+      "topic": "Create survey form from JSON",
+      "key": "create-survey-form-from-json",
+      "baseline_record_id": "blog::omr/2022-02-26-create-survey-form-from-json-markup-using-csharp/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::omr/2022-02-26-create-survey-form-from-json-markup-using-csharp/index.md",
+          "title": "Create Survey Form from JSON in C#",
+          "topic": "Create survey form from JSON",
+          "url": "https://blog.aspose.com/omr/create-survey-form-from-json-markup-using-csharp/"
+        }
+      }
+    },
+    {
+      "category": "Imaging",
+      "sub_category": "Optical Mark Recognition",
+      "topic": "Data extraction from images",
+      "key": "data-extraction-from-images",
+      "baseline_record_id": "blog::omr/2022-09-16-extract-data-from-image-in-java/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::omr/2022-09-16-extract-data-from-image-in-java/index.md",
+          "title": "Data Extraction From Images in Java",
+          "topic": "Data extraction from images",
+          "url": "https://blog.aspose.com/omr/extract-data-from-image-in-java/"
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Education",
+      "sub_category": "Grading",
+      "topic": "OMR",
+      "key": "omr",
+      "baseline_record_id": "blog::omr/2023-02-24-grade-calculator-online/index.md",
+      "coverage": {
+        "general": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::omr/2023-02-24-grade-calculator-online/index.md",
+          "title": "Grade Calculator Online - Free Letter Grading Calculator",
+          "topic": "OMR",
+          "url": "https://blog.aspose.com/omr/grade-calculator-online/"
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Education",
+      "sub_category": "Assessment Tools",
+      "topic": "OMR answer scanner",
+      "key": "omr-answer-scanner",
+      "baseline_record_id": "blog::omr/2023-03-27-answer-scanner-online/index.md",
+      "coverage": {
+        "general": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::omr/2023-03-27-answer-scanner-online/index.md",
+          "title": "OMR Scanner Online - The Ultimate Free Answer Scanner",
+          "topic": "OMR answer scanner",
+          "url": "https://blog.aspose.com/omr/answer-scanner-omr-scanner-online/"
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Document Processing",
+      "sub_category": "Optical Mark Recognition",
+      "topic": "Optical mark recognition",
+      "key": "optical-mark-recognition",
+      "baseline_record_id": "blog::omr/2020-01-10-java-api-for-optical-mark-recognition-and-processing-in-images/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::omr/2020-01-10-java-api-for-optical-mark-recognition-and-processing-in-images/index.md",
+          "title": "Optical Mark Recognition SDK in Java",
+          "topic": "Optical mark recognition SDK",
+          "url": "https://blog.aspose.com/omr/java-api-for-optical-mark-recognition-and-processing-in-images/"
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::omr/2022-07-01-csharp-optical-mark-recognition-omr-software-in-net/index.md",
+          "title": "C# Optical Mark Recognition (OMR) Software in .NET",
+          "topic": "Optical mark recognition",
+          "url": "https://blog.aspose.com/omr/csharp-optical-mark-recognition-omr-software-in-net/"
+        }
+      }
+    },
+    {
+      "category": "Document Processing",
+      "sub_category": "Optical Mark Recognition",
+      "topic": "Perform OMR and extract data from image",
+      "key": "perform-omr-and-extract-data-from-image",
+      "baseline_record_id": "blog::omr/2022-04-21-perform-omr-and-extract-data-using-csharp/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::omr/2022-04-21-perform-omr-and-extract-data-using-csharp/index.md",
+          "title": "Perform OMR and Extract Data from Image in C#",
+          "topic": "Perform OMR and extract data from image",
+          "url": "https://blog.aspose.com/omr/perform-omr-and-extract-data-using-csharp/"
+        }
+      }
+    },
+    {
+      "category": "Document Processing",
+      "sub_category": "Optical Mark Recognition",
+      "topic": "Read OMR sheet from PNG",
+      "key": "read-omr-sheet-from-png",
+      "baseline_record_id": "blog::omr/2024-04-26-omr-sheet-reader-in-java-omr-sheet-png/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::omr/2024-04-26-omr-sheet-reader-in-java-omr-sheet-png/index.md",
+          "title": "OMR Sheet Reader in Java - OMR Sheet PNG",
+          "topic": "Read OMR sheet from PNG",
+          "url": "https://blog.aspose.com/omr/omr-sheet-reader-in-java-omr-sheet-png/"
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Imaging",
+      "sub_category": "Optical Mark Recognition",
+      "topic": "Recognize OMR image from MemoryStream",
+      "key": "recognize-omr-image-from-memorystream",
+      "baseline_record_id": "blog::omr/2021-06-10-recognize-images-from-memorystream-using-omr-in-csharp/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::omr/2021-06-10-recognize-images-from-memorystream-using-omr-in-csharp/index.md",
+          "title": "Recognize Image from MemoryStream using OMR in C#",
+          "topic": "Recognize OMR image from MemoryStream",
+          "url": "https://blog.aspose.com/omr/recognize-images-from-memorystream-using-omr-in-csharp/"
+        }
+      }
+    },
+    {
+      "category": "Optical Mark Recognition",
+      "sub_category": "Scanning and Data Export",
+      "topic": "Scan OMR bubble answer sheet from JPG",
+      "key": "scan-omr-bubble-answer-sheet-from-jpg",
+      "baseline_record_id": "blog::omr/2024-02-15-scan-bubble-answer-sheet-in-java-omr-sheet-jpg/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::omr/2024-02-15-scan-bubble-answer-sheet-in-java-omr-sheet-jpg/index.md",
+          "title": "Scan Bubble Answer Sheet in Java - OMR Sheet JPG",
+          "topic": "Scan OMR bubble answer sheet from JPG",
+          "url": "https://blog.aspose.com/omr/scan-bubble-answer-sheet-in-java-omr-sheet-jpg"
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Document Processing",
+      "sub_category": "Optical Mark Recognition",
+      "topic": "Scan OMR survey",
+      "key": "scan-omr-survey",
+      "baseline_record_id": "blog::omr/2025-04-28-scan-survey-online/index.md",
+      "coverage": {
+        "general": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::omr/2025-04-28-scan-survey-online/index.md",
+          "title": "Scan Survey Online - Free OMR Software",
+          "topic": "Scan OMR survey",
+          "url": "https://blog.aspose.com/omr/scan-survey-online/"
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    }
+  ],
+  "brand_name": "Aspose",
+  "product_name": "Aspose.OMR"
+}

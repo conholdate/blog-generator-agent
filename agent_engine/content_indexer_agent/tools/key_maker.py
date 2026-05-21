@@ -28,16 +28,24 @@ _CONVERSION_PREFIX_RE = re.compile(r"^(?:convert|export|save|transform|change)-(
 _LEADING_NOISE_RE = re.compile(r"^(how-to|how-do-i|tutorial|guide)-")
 _LEADING_PHRASE_RE = re.compile(r"^(let-s|lets|let-us)-")
 _FORMAT_FILLER_RE = re.compile(r"\b(file|files)\b", re.IGNORECASE)
-_ARTICLE_NOISE_RE = re.compile(r"\b(a|an)\b", re.IGNORECASE)
+_ARTICLE_NOISE_RE = re.compile(r"\b(a|an|the)\b", re.IGNORECASE)
 _IMAGE_CALLOUT_RE = re.compile(r"\bimages?\s+callouts?\b|\bcallouts?\s+to\s+images?\b", re.IGNORECASE)
+_SEO_WORD_RE = re.compile(r"\b(free|online|ultimate)\b", re.IGNORECASE)
+_MAKE_YOUR_OWN_RE = re.compile(r"\bmake\s+your\s+own\b", re.IGNORECASE)
 _TRAILING_NOISE_RE = re.compile(r"-(programmatically|converter|converters)$")
 _CONVERSION_CORE_RE = re.compile(r"([a-z0-9]+)-to-([a-z0-9]+)")
-_GENERIC_TRAILING_RE = re.compile(r"-(online|free|software|application|app|tool|tools)$")
+_GENERIC_TRAILING_RE = re.compile(
+    r"-(online|free|software|application|app|tool|tools|maker|scanner|checker|reader|ultimate)$"
+)
 _ACTION_ARTICLE_RE = re.compile(r"^(create|read|build|repair|merge|split|convert|export|import)-(?:a|an|the)-")
 _ACTION_START_RE = re.compile(r"(create|read|build|repair|merge|split|convert|export|import)-")
 _MODEL_SCENE_RE = re.compile(r"-model-scenes?$")
 _PLATFORM_ANYWHERE_RE = re.compile(
-    r"\b(c\#|csharp|vb\.net|vbnet|vb|\.net|dotnet|java|python|node\.js|nodejs|javascript|js|c\+\+|cpp|cplusplus|android|php|ruby|go|golang|swift|kotlin|asp\.net|aspnet)\b",
+    r"\b(csharp|vb\.net|vbnet|vb|dotnet|java|python|node\.js|nodejs|javascript|js|cpp|cplusplus|android|php|ruby|go|golang|swift|kotlin|aspnet)\b",
+    re.IGNORECASE,
+)
+_SYMBOL_PLATFORM_ANYWHERE_RE = re.compile(
+    r"(?<![A-Za-z0-9])(c#|c\+\+|\.net|asp\.net)(?![A-Za-z0-9])",
     re.IGNORECASE,
 )
 _PLATFORM_SLUG_TOKEN_RE = re.compile(
@@ -46,7 +54,21 @@ _PLATFORM_SLUG_TOKEN_RE = re.compile(
 )
 _FROM_TO_RE = re.compile(r"\bfrom\s+to\b", re.IGNORECASE)
 _TRAILING_PREPOSITION_RE = re.compile(r"\b(in|with|using|for|via|on)\b\s*$", re.IGNORECASE)
-_TRAILING_CONNECTOR_RE = re.compile(r"-(?:in|with|using|for|via|on)$", re.IGNORECASE)
+_TRAILING_CONNECTOR_RE = re.compile(r"-(?:and|or|in|with|using|for|via|on)$", re.IGNORECASE)
+_ONLINE_GRADING_RE = re.compile(r"\b(?:cgpa|grades?|letter)\s+calculator\b|\bcalculator\b.*\b(?:cgpa|grades?|letter)\b", re.IGNORECASE)
+_OMR_SHEET_READER_FORMAT_RE = re.compile(r"^omr-sheet-reader-omr-sheet-(?P<fmt>[a-z0-9]+)$")
+_OMR_SCANNER_ANSWER_RE = re.compile(r"^omr-scanner-answer$")
+_SURVEY_MAKER_RE = re.compile(r"^survey-maker-create-survey$")
+_OMR_TOPIC_REWRITES = {
+    "omr": "",
+    "omr-answer": "omr-answer-scanner",
+    "optical-mark-recognition-omr": "optical-mark-recognition",
+    "create-answer-sheet-omr-sheet": "create-omr-answer-sheet",
+    "create-omr-survey-or-answer-sheet": "create-omr-survey-and-answer-sheet",
+    "recognize-image-from-memorystream-using-omr": "recognize-omr-image-from-memorystream",
+    "scan-bubble-answer-sheet-omr-sheet-jpg": "scan-omr-bubble-answer-sheet-from-jpg",
+    "scan-survey-omr": "scan-omr-survey",
+}
 
 _UPPERCASE_FORMATS = {
     "pdf",
@@ -100,6 +122,7 @@ _UPPERCASE_FORMATS = {
     "usdz",
 }
 _FORMAT_TOKENS = set(_UPPERCASE_FORMATS) | {"iges", "igs", "3mf", "u3d", "x"}
+_ACRONYM_TOKENS = _FORMAT_TOKENS | {"omr", "ocr", "cgpa"}
 
 
 def extract_seo_title(frontmatter: Dict[str, Any]) -> Optional[str]:
@@ -146,6 +169,9 @@ def _normalize_candidate(text: str) -> str:
     text = re.sub(r"[-_/]+", " ", text)
     text = _strip_platform_qualifiers(text)
     text = _IMAGE_CALLOUT_RE.sub("image callout", text)
+    text = _MAKE_YOUR_OWN_RE.sub("create", text)
+    text = _SEO_WORD_RE.sub(" ", text)
+    text = _SYMBOL_PLATFORM_ANYWHERE_RE.sub(" ", text)
     text = _PLATFORM_ANYWHERE_RE.sub(" ", text)
     text = _FORMAT_FILLER_RE.sub(" ", text)
     text = _ARTICLE_NOISE_RE.sub(" ", text)
@@ -183,7 +209,26 @@ def _normalize_candidate(text: str) -> str:
             break
         slug = next_slug
     slug = _MODEL_SCENE_RE.sub("-model", slug)
+    if _ONLINE_GRADING_RE.search(text) and "omr" not in slug:
+        return ""
     slug = _MULTI_DASH_RE.sub("-", slug).strip("-")
+    while True:
+        next_slug = _TRAILING_CONNECTOR_RE.sub("", slug)
+        next_slug = _GENERIC_TRAILING_RE.sub("", next_slug)
+        next_slug = _MULTI_DASH_RE.sub("-", next_slug).strip("-")
+        if next_slug == slug:
+            break
+        slug = next_slug
+
+    omr_reader_match = _OMR_SHEET_READER_FORMAT_RE.match(slug)
+    if omr_reader_match:
+        return f"read-omr-sheet-from-{omr_reader_match.group('fmt')}"
+    if _OMR_SCANNER_ANSWER_RE.match(slug):
+        return "omr-answer-scanner"
+    if _SURVEY_MAKER_RE.match(slug):
+        return "create-survey"
+    if slug in _OMR_TOPIC_REWRITES:
+        return _OMR_TOPIC_REWRITES[slug]
     return slug
 
 
@@ -211,8 +256,11 @@ def _to_sentence_case(slug: str, preserve_upper: set[str]) -> str:
 
     rendered = []
     for i, word in enumerate(words):
-        if word in _UPPERCASE_FORMATS or word in preserve_upper:
+        if word in _ACRONYM_TOKENS or word in preserve_upper:
             rendered.append(word.upper())
+            continue
+        if word == "memorystream":
+            rendered.append("MemoryStream")
             continue
         if i == 0:
             rendered.append(word.capitalize())
