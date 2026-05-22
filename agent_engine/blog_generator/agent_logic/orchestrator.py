@@ -74,6 +74,13 @@ class BlogOrchestrator:
         # topics_raw_data = get_topic_from_sheet(sheet_name="PDF")
         sheet_name = get_next_tab()
 
+        if not sheet_name:
+            print("No approved topics found in any tab. Exiting gracefully.")
+            return {
+                "status": "skipped",
+                "message": "No approved topics found in any tab"
+            }
+        print("going down further")
         # Get first approved topic from that tab
         result = get_topic_from_sheet(sheet_name)
         if not result:
@@ -87,7 +94,15 @@ class BlogOrchestrator:
         platform = topics_raw_data.pop("platform")
 
         # Get product info
-        product_info = get_productInfo(product_name, platform, self.products, self.brand)
+        try:
+            product_info = get_productInfo(product_name, platform, self.products, self.brand)
+        except ValueError as e:
+            print(f"❌ Product info error: {e}. Skipping.")
+            return {
+                "status": "skipped",
+                "message": str(e)
+            }
+        
         print(f"product info -- {product_info}")
        
         isCloud = "cloud" in product_info["ProductName"].lower()
@@ -266,19 +281,19 @@ class BlogOrchestrator:
             metrics_sent_for_team = await self.metrics.send_metrics_to_team()
             metrics_sent_for_pro = await self.metrics.send_metrics_to_prod()
             
-            if metrics_sent_for_team and metrics_sent_for_pro:
-                print("Metrics sent successfully\n")
-            else:
-                print("Failed to send metrics (check logs)\n")
+            # if metrics_sent_for_team and metrics_sent_for_pro:
+            #     print("Metrics sent successfully\n")
+            # else:
+            #     print("Failed to send metrics (check logs)\n")
             
 
-            self.log("---Execution started---")
-            self.log(f"Topic-> {post_topic}")
-            self.log(f"Brand-> {self.brand}")
-            self.log(f"Keywords -> {topics_raw_data}")
-            self.log(f"product info {product_info}")
-            self.log(f" File path: {filepath}")
-            self.log("---Execution ended---")
+            # self.log("---Execution started---")
+            # self.log(f"Topic-> {post_topic}")
+            # self.log(f"Brand-> {self.brand}")
+            # self.log(f"Keywords -> {topics_raw_data}")
+            # self.log(f"product info {product_info}")
+            # self.log(f" File path: {filepath}")
+            # self.log("---Execution ended---")
             mark_topic_as_generated(sheet_name, row_number)
 
             # Write product name for GitHub Actions to read
