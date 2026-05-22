@@ -276,6 +276,7 @@ jobs:
 
           import json
           import os
+          import re
           from pathlib import Path
 
           from agent_engine.blog_keyword_analyzer.tools.google_sheets import (
@@ -294,7 +295,14 @@ jobs:
           def cell(row: list[str], index: int) -> str:
               return str(row[index]).strip() if index < len(row) else ""
 
+          def brand_key(value: str) -> str:
+              text = str(value or "").strip().lower()
+              text = text.replace(".", "_").replace("-", "_")
+              text = re.sub(r"[^a-z0-9]+", "_", text)
+              return re.sub(r"_+", "_", text).strip("_")
+
           brand = os.environ["BRAND"]
+          selected_brand_key = brand_key(brand)
           include_general = as_bool(os.environ.get("INPUT_INCLUDE_GENERAL", "false"))
           spreadsheet_id = normalize_spreadsheet_id(os.environ["GOOGLE_SHEET_INPUT_ID"])
           worksheet_name = os.environ["GOOGLE_SHEET_INPUT_WORKSHEET"]
@@ -332,7 +340,7 @@ jobs:
 
           queue = []
           for row_index, row in enumerate(rows[1:], start=2):
-              if cell(row, brand_index).casefold() != brand.casefold():
+              if brand_key(cell(row, brand_index)) != selected_brand_key:
                   continue
               if cell(row, status_index).casefold() != "queued":
                   continue

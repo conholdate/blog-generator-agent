@@ -137,3 +137,30 @@ def test_omr_sheet_export_skips_generic_acronym_topic(tmp_path) -> None:
 
     assert payload["meta"]["row_count"] == 1
     assert payload["rows"][0][5] == "Recognize OMR image from MemoryStream"
+
+
+def test_cloud_brand_key_is_exported_as_display_name(tmp_path) -> None:
+    coverage_json = tmp_path / "coverage.json"
+    coverage_json.write_text(
+        json.dumps(
+            {
+                "brand_key": "aspose_cloud",
+                "product_key": "pdf",
+                "product_name": "Aspose.PDF",
+                "baseline_platform": "net",
+                "rows": [
+                    {
+                        "category": "Documents",
+                        "sub_category": "PDF",
+                        "topic": "Convert PDF to DOCX",
+                        "coverage": {"net": {"matched": True}, "java": {"matched": False}},
+                    },
+                ],
+            }
+        ),
+        encoding="utf-8",
+    )
+
+    payload = build_payload(coverage_json=coverage_json, sheet_name="All Missing Topics", replace=False)
+
+    assert payload["rows"][0][0] == "Aspose.Cloud"
