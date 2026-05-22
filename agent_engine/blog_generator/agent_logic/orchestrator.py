@@ -281,19 +281,19 @@ class BlogOrchestrator:
             metrics_sent_for_team = await self.metrics.send_metrics_to_team()
             metrics_sent_for_pro = await self.metrics.send_metrics_to_prod()
             
-            # if metrics_sent_for_team and metrics_sent_for_pro:
-            #     print("Metrics sent successfully\n")
-            # else:
-            #     print("Failed to send metrics (check logs)\n")
+            if metrics_sent_for_team and metrics_sent_for_pro:
+                print("Metrics sent successfully\n")
+            else:
+                print("Failed to send metrics (check logs)\n")
             
 
-            # self.log("---Execution started---")
-            # self.log(f"Topic-> {post_topic}")
-            # self.log(f"Brand-> {self.brand}")
-            # self.log(f"Keywords -> {topics_raw_data}")
-            # self.log(f"product info {product_info}")
-            # self.log(f" File path: {filepath}")
-            # self.log("---Execution ended---")
+            self.log("---Execution started---")
+            self.log(f"Topic-> {post_topic}")
+            self.log(f"Brand-> {self.brand}")
+            self.log(f"Keywords -> {topics_raw_data}")
+            self.log(f"product info {product_info}")
+            self.log(f" File path: {filepath}")
+            self.log("---Execution ended---")
             mark_topic_as_generated(sheet_name, row_number)
 
             # Write product name for GitHub Actions to read
