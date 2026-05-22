@@ -25,12 +25,6 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-pip-
 
-      - name: Clean up old blog folders
-        run: |
-          echo "=== Cleaning up old blog folders ==="
-          find content/blogPosts -type d -name "20??-??-??-*" -exec rm -rf {} + 2>/dev/null || true
-          echo "✅ Cleanup completed"
-
       - name: Remove any .env files that could interfere
         run: |
           find . -name ".env" -type f -delete
