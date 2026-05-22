@@ -131,6 +131,15 @@ on:
         default: ""
         type: string
 
+      sheet_write_mode:
+        description: "How to write rows to the Google Sheets tab. Use replace once when tab headers need migration."
+        required: false
+        default: "append"
+        type: choice
+        options:
+          - append
+          - replace
+
       python_version:
         description: "Python version."
         required: true
@@ -317,9 +326,14 @@ jobs:
             --threshold-loose "${{ inputs.threshold_loose }}"
             --top-k "${{ inputs.top_k }}"
             --log-level "${{ inputs.log_level }}"
-            --append
             --post
           )
+
+          if [ "${{ inputs.sheet_write_mode }}" = "replace" ]; then
+            ARGS+=(--replace)
+          else
+            ARGS+=(--append)
+          fi
 
           if [ "${{ inputs.case }}" != "blogs_to_blogs" ] && [ -n "${{ inputs.baseline_platform }}" ]; then
             ARGS+=(--gap-platform "${{ inputs.baseline_platform }}")
