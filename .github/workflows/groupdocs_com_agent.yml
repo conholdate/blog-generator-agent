@@ -2,418 +2,351 @@ name: Generate Blog Post for groupdocs.com
 
 on:
   workflow_dispatch:
-    inputs:
-      keywords_file:
-        description: 'Keywords File (e.g., content/GroupDocs/output/449388a2_groupdocs-conversion_java_topics.md)'
-        required: true
-        type: string
-      
-      index:
-        description: 'Index in Keyword File (e.g. 1,2,3..) - Default is 1'
-        required: false
-        type: number
-        default: 1
-
-      author:
-        description: 'Author Name'
-        required: true
-        type: string
+  # schedule:
+  #   - cron: '0 6 * * *'
 
 jobs:
   generate:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-    - name: Extract product name from keywords file
-      id: extract_product
-      run: |
-        KEYWORDS_FILE="${{ inputs.keywords_file }}"
-        
-        echo "=== Extracting product name from keywords file ==="
-        echo "Keywords file: $KEYWORDS_FILE"
-        
-        if [ ! -f "$KEYWORDS_FILE" ]; then
-          echo "❌ Keywords file not found: $KEYWORDS_FILE"
-          exit 1
-        fi
-        
-        # Extract product name from the file content
-        # Format: - **Product:** GroupDocs.Conversion or GroupDocs.Viewer (with or without leading dash/spaces)
-        PRODUCT_LINE=$(grep -i "\*\*Product:\*\*" "$KEYWORDS_FILE" | head -1)
-        
-        if [ -z "$PRODUCT_LINE" ]; then
-          echo "❌ Product line not found in keywords file"
-          echo "File contents:"
-          cat "$KEYWORDS_FILE"
-          exit 1
-        fi
-        
-        echo "Found product line: $PRODUCT_LINE"
-        
-        # Extract product name and convert to lowercase folder name
-        # From "- **Product:** GroupDocs.Conversion" to "conversion"
-        FULL_PRODUCT=$(echo "$PRODUCT_LINE" | sed 's/.*Product:\*\*[ ]*//' | sed 's/^[ ]*//' | xargs)
-        echo "Full product name: $FULL_PRODUCT"
-        
-        # Remove "GroupDocs." prefix and convert to lowercase
-        PRODUCT_NAME=$(echo "$FULL_PRODUCT" | sed 's/^GroupDocs\.//' | tr '[:upper:]' '[:lower:]')
-        
-        echo "✅ Extracted product name: $PRODUCT_NAME"
-        echo "product_name=$PRODUCT_NAME" >> $GITHUB_OUTPUT
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
 
-    - name: Set up Python
-      uses: actions/setup-python@v5
-      with:
-        python-version: '3.10'
+      - name: Cache pip packages
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
 
-    - name: Cache pip packages
-      uses: actions/cache@v4
-      with:
-        path: ~/.cache/pip
-        key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
-        restore-keys: |
-          ${{ runner.os }}-pip-
+      - name: Remove any .env files that could interfere
+        run: |
+          find . -name ".env" -type f -delete
+          echo "Removed all .env files"
 
-    - name: Remove any .env files that could interfere
-      run: |
-        find . -name ".env" -type f -delete
-        echo "Removed all .env files"
+      - name: Create Google service account key
+        run: |
+          mkdir -p keys
+          echo '${{ secrets.GOOGLE_SERVICE_ACCOUNT_KEY }}' > keys/sheet-reader-494108-bd5e61ef812c.json
 
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        cd agent_engine
-        cd blog_generator
-        pip install -r requirements.txt
-        cd ..
-        cd ..
-        cd mcp-servers
-        pip install -r requirements.txt
-        cd ..
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          cd agent_engine/blog_generator
+          pip install -r requirements.txt
+          cd ../../mcp-servers
+          pip install -r requirements.txt
+          cd ..
 
-    - name: Create runtime .env file with secrets
-      run: |
-        cat > .env << EOF
-        PROFESSIONALIZE_API_KEY_2=${{ secrets.PROFESSIONALIZE_API_KEY_2 }}
-        PROFESSIONALIZE_BASE_URL=${{ secrets.PROFESSIONALIZE_BASE_URL }}
-        PROFESSIONALIZE_LLM_MODEL=${{ secrets.PROFESSIONALIZE_LLM_MODEL }}
-        TOKEN_FOR_TEAM=${{ secrets.TOKEN_FOR_TEAM }}
-        TOKEN_FOR_PROD=${{ secrets.TOKEN_FOR_PROD }}
-        GOOGLE_SCRIPT_URL_FOR_PROD=${{ vars.GOOGLE_SCRIPT_URL_FOR_PROD }}
-        GOOGLE_SCRIPT_URL_FOR_TEAM=${{ vars.GOOGLE_SCRIPT_URL_FOR_TEAM }}
-        REPO_PAT=${{ secrets.GISTS_PAT_GROUPDOCS_COM }}
-        GIST_NAME=${{ vars.GROUPDOCS_COM_GIST }}
-        EOF
-        echo ".env file created"
+      - name: Create runtime .env file with secrets
+        run: |
+          cat > .env << EOF
+          PROFESSIONALIZE_API_KEY_2=${{ secrets.PROFESSIONALIZE_API_KEY_2 }}
+          PROFESSIONALIZE_BASE_URL=${{ secrets.PROFESSIONALIZE_BASE_URL }}
+          PROFESSIONALIZE_LLM_MODEL=${{ secrets.PROFESSIONALIZE_LLM_MODEL }}
+          TOKEN_FOR_TEAM=${{ secrets.TOKEN_FOR_TEAM }}
+          TOKEN_FOR_PROD=${{ secrets.TOKEN_FOR_PROD }}
+          GOOGLE_SCRIPT_URL_FOR_PROD=${{ vars.GOOGLE_SCRIPT_URL_FOR_PROD }}
+          GOOGLE_SCRIPT_URL_FOR_TEAM=${{ vars.GOOGLE_SCRIPT_URL_FOR_TEAM }}
+          REPO_PAT=${{ secrets.GISTS_PAT_GROUPDOCS_COM }}
+          GIST_NAME=${{ vars.GROUPDOCS_COM_GIST }}
+          SPREADSHEET_ID_FOR_BLOGPOST_METADATA=${{ secrets.GROUPDOCS_COM_SPREADSHEET_ID_FOR_BLOGPOST_METADATA }}
+          SPREADSHEET_ID_FOR_KEYWORDS=${{ secrets.GROUPDOCS_COM_SPREADSHEET_ID_FOR_KEYWORDS }}
+          GOOGLE_KEY=sheet-reader-494108-bd5e61ef812c.json
+          CONSOLIDATED_SHEET_NAME_FOR_BLOGPOST_METADATA=Consolidated
+          EOF
+          echo ".env file created"
 
-    - name: Generate Blog
-      id: generate_blog
-      run: |
-        cd agent_engine
-        cd blog_generator
-        echo "=== Starting blog generation ==="
-        echo "Brand: groupdocs.com"
-        echo "Product: ${{ steps.extract_product.outputs.product_name }}"
-        echo "Keywords file: ${{ inputs.keywords_file }}"
-        
-        python main.py \
-          --keywords_file "${{ inputs.keywords_file }}" \
-          --brand "groupdocs.com" \
-          --author "${{ inputs.author }}" \
-          --index "${{ inputs.index }}"
-        
-        echo "✅ Blog generation completed"
+      - name: Generate Blog
+        id: generate_blog
+        run: |
+          cd agent_engine/blog_generator
+          echo "=== Starting blog generation ==="
+          echo "Brand: groupdocs.com"
 
-    - name: Find generated blog folder
-      id: find_blog
-      run: |
-        echo "=== Searching for generated blog folder ==="
-        
-        BRAND_DIR="content/blogPosts/groupdocs_com"
-        PRODUCT_NAME="${{ steps.extract_product.outputs.product_name }}"
-        
-        if [ ! -d "$BRAND_DIR" ]; then
-          echo "❌ Brand directory not found: $BRAND_DIR"
-          exit 1
-        fi
-        
-        echo "Searching in: $BRAND_DIR"
-        echo "Product: $PRODUCT_NAME"
-        
-        # Find the most recently created folder (within last 10 minutes)
-        blog_folder=$(find "$BRAND_DIR" -mindepth 1 -maxdepth 1 -type d -name "20??-??-??-*" -mmin -10 -printf '%T@ %p\n' | sort -nr | head -1 | cut -d' ' -f2-)
-        
-        if [ -z "$blog_folder" ]; then
-          echo "❌ No blog folder found with pattern YYYY-MM-DD-* in $BRAND_DIR"
-          echo "Contents of $BRAND_DIR:"
-          ls -la "$BRAND_DIR" || echo "Directory is empty"
-          exit 1
-        fi
-        
-        echo "Found blog folder: $blog_folder"
-        
-        blog_folder_name=$(basename "$blog_folder")
-        echo "Blog folder name: $blog_folder_name"
-        
-        # Verify index.md exists
-        if [ ! -f "$blog_folder/index.md" ]; then
-          echo "❌ index.md not found in $blog_folder"
-          exit 1
-        fi
-        
-        # Verify the brand in frontmatter
-        if grep -q "groupdocs" "$blog_folder/index.md" 2>/dev/null; then
-          echo "✅ Verified: Blog is for groupdocs.com"
-        else
-          echo "⚠️  Warning: Could not verify brand in frontmatter"
-        fi
-        
-        echo "blog_folder_name=$blog_folder_name" >> $GITHUB_OUTPUT
-        echo "blog_folder_path=$blog_folder" >> $GITHUB_OUTPUT
-        echo "product_name=$PRODUCT_NAME" >> $GITHUB_OUTPUT
-        
-        echo "✅ Found: $blog_folder_name with index.md"
-        echo "✅ Product: $PRODUCT_NAME"
-        echo "=== Folder contents ==="
-        ls -la "$blog_folder"
+          python main.py \
+            --author "Muhammad Mustafa" \
+            --brand "groupdocs.com"
 
-    - name: Verify blog content before upload
-      run: |
-        echo "=== Verifying blog content ==="
-        BLOG_PATH="${{ steps.find_blog.outputs.blog_folder_path }}"
-        
-        echo "Blog folder: $BLOG_PATH"
-        echo "Expected brand: groupdocs.com"
-        echo "Product: ${{ steps.find_blog.outputs.product_name }}"
-        
-        # Check frontmatter for brand indicators
-        if [ -f "$BLOG_PATH/index.md" ]; then
-          echo "--- Frontmatter excerpt ---"
-          head -20 "$BLOG_PATH/index.md"
-          echo "--- End excerpt ---"
-        fi
-    ###################################################################
-    # NEW: Commit to THIS repository (content/blogPosts/aspose_cloud)
-    ###################################################################
-    - name: Commit generated blog to this repository
-      env:
-        BLOG_FOLDER_NAME: ${{ steps.find_blog.outputs.blog_folder_name }}
-        BLOG_FOLDER_PATH: ${{ steps.find_blog.outputs.blog_folder_path }}
-        PRODUCT_NAME: ${{ steps.find_blog.outputs.product_name }}
-      run: |
-        git config --global user.email "action@github.com"
-        git config --global user.name "GitHub Action"
-        
-        echo "=== Committing blog to this repository ==="
-        echo "Blog folder: $BLOG_FOLDER_PATH"
-        echo "Blog folder name: $BLOG_FOLDER_NAME"
-        echo "Product: $PRODUCT_NAME"
-        
-        # Verify the blog folder exists
-        if [ ! -d "$BLOG_FOLDER_PATH" ]; then
-          echo "❌ Blog folder does not exist: $BLOG_FOLDER_PATH"
-          exit 1
-        fi
-        
-        # Verify index.md exists
-        if [ ! -f "$BLOG_FOLDER_PATH/index.md" ]; then
-          echo "❌ index.md not found in $BLOG_FOLDER_PATH"
-          exit 1
-        fi
-        
-        echo "=== Files to be committed ==="
-        ls -la "$BLOG_FOLDER_PATH"
-        
-        # Add the generated blog folder
-        git add "$BLOG_FOLDER_PATH"
-        
-        # Check if there are changes to commit
-        if git diff --staged --quiet; then
-          echo "ℹ️  No changes to commit - blog may already exist"
-        else
-          echo "=== Changes to be committed ==="
-          git status --short
-          git diff --staged --stat
-          
-          # Commit the changes
-          git commit -m "Add generated blog post: $BLOG_FOLDER_NAME
+          echo "✅ Blog generation completed"
 
-          Product: $PRODUCT_NAME
-          Author: ${{ inputs.author }}
+      - name: Read product name
+        id: read_product
+        run: |
+          PRODUCT_NAME=$(cat agent_engine/blog_generator/product_name.txt)
+          echo "product_name=$PRODUCT_NAME" >> $GITHUB_OUTPUT
+          echo "✅ Product name: $PRODUCT_NAME"
+
+      - name: Find generated blog folder
+        id: find_blog
+        run: |
+          echo "=== Searching for generated blog folder ==="
+
+          BRAND_DIR="content/blogPosts/groupdocs_com"
+
+          if [ ! -d "$BRAND_DIR" ]; then
+            echo "❌ Brand directory not found: $BRAND_DIR"
+            exit 1
+          fi
+
+          echo "Searching in: $BRAND_DIR"
+
+          blog_folder=$(find "$BRAND_DIR" -mindepth 1 -maxdepth 1 -type d -name "20??-??-??-*" -mmin -10 -printf '%T@ %p\n' | sort -nr | head -1 | cut -d' ' -f2-)
+
+          if [ -z "$blog_folder" ]; then
+            echo "❌ No blog folder found with pattern YYYY-MM-DD-* in $BRAND_DIR"
+            echo "Contents of $BRAND_DIR:"
+            ls -la "$BRAND_DIR" || echo "Directory is empty"
+            exit 1
+          fi
+
+          echo "Found blog folder: $blog_folder"
+
+          blog_folder_name=$(basename "$blog_folder")
+          echo "Blog folder name: $blog_folder_name"
+
+          if [ ! -f "$blog_folder/index.md" ]; then
+            echo "❌ index.md not found in $blog_folder"
+            exit 1
+          fi
+
+          if grep -q "groupdocs" "$blog_folder/index.md" 2>/dev/null; then
+            echo "✅ Verified: Blog is for groupdocs.com"
+          else
+            echo "⚠️  Warning: Could not verify brand in frontmatter"
+          fi
+
+          echo "blog_folder_name=$blog_folder_name" >> $GITHUB_OUTPUT
+          echo "blog_folder_path=$blog_folder" >> $GITHUB_OUTPUT
+
+          echo "✅ Found: $blog_folder_name with index.md"
+          echo "=== Folder contents ==="
+          ls -la "$blog_folder"
+
+      - name: Verify blog content before upload
+        run: |
+          echo "=== Verifying blog content ==="
+          BLOG_PATH="${{ steps.find_blog.outputs.blog_folder_path }}"
+
+          echo "Blog folder: $BLOG_PATH"
+          echo "Expected brand: groupdocs.com"
+
+          if [ -f "$BLOG_PATH/index.md" ]; then
+            echo "--- Frontmatter excerpt ---"
+            head -20 "$BLOG_PATH/index.md"
+            echo "--- End excerpt ---"
+          fi
+
+      ###################################################################
+      # Commit to THIS repository (content/blogPosts/groupdocs_com)
+      ###################################################################
+      - name: Commit generated blog to this repository
+        env:
+          BLOG_FOLDER_NAME: ${{ steps.find_blog.outputs.blog_folder_name }}
+          BLOG_FOLDER_PATH: ${{ steps.find_blog.outputs.blog_folder_path }}
+        run: |
+          git config --global user.email "action@github.com"
+          git config --global user.name "GitHub Action"
+
+          echo "=== Committing blog to this repository ==="
+          echo "Blog folder: $BLOG_FOLDER_PATH"
+          echo "Blog folder name: $BLOG_FOLDER_NAME"
+
+          if [ ! -d "$BLOG_FOLDER_PATH" ]; then
+            echo "❌ Blog folder does not exist: $BLOG_FOLDER_PATH"
+            exit 1
+          fi
+
+          if [ ! -f "$BLOG_FOLDER_PATH/index.md" ]; then
+            echo "❌ index.md not found in $BLOG_FOLDER_PATH"
+            exit 1
+          fi
+
+          echo "=== Files to be committed ==="
+          ls -la "$BLOG_FOLDER_PATH"
+
+          git add "$BLOG_FOLDER_PATH"
+
+          if git diff --staged --quiet; then
+            echo "ℹ️  No changes to commit - blog may already exist"
+          else
+            echo "=== Changes to be committed ==="
+            git status --short
+            git diff --staged --stat
+
+            git commit -m "Add generated blog post: $BLOG_FOLDER_NAME
+
           Path: $BLOG_FOLDER_PATH
           Generated: $(date -u +'%Y-%m-%d %H:%M:%S UTC')
           Workflow Run: ${{ github.run_number }}"
-                    
-                    # Push to the current branch
-                    git push origin HEAD
-                    
-                    echo "✅ Blog committed and pushed successfully to this repository"
-                    echo "   Location: $BLOG_FOLDER_PATH"
-                  fi
-    - name: Commit logs
-      run: |
-        git config --global user.email "action@github.com"
-        git config --global user.name "GitHub Action"
-        git add content/logs/logs.txt
-        git commit -m "Update logs [Run #${{ github.run_number }}]" || echo "No changes to commit"
-        git push origin HEAD
-    - name: Upload Generated Blog as Artifact
-      uses: actions/upload-artifact@v4
-      with:
-        name: generated-blog-groupdocs-${{ github.run_number }}
-        path: ${{ steps.find_blog.outputs.blog_folder_path }}
-        if-no-files-found: error
 
-    ###################################################################
-    # Create Pull Request in groupdocs-blog repo
-    ###################################################################
-    - name: Create Pull Request in blog.groupdocs.com repo
-      if: success()
-      env:
-        BLOG_FOLDER_NAME: ${{ steps.find_blog.outputs.blog_folder_name }}
-        BLOG_FOLDER_PATH: ${{ steps.find_blog.outputs.blog_folder_path }}
-        PRODUCT_NAME: ${{ steps.find_blog.outputs.product_name }}
-        GH_TOKEN: ${{ secrets.REPO_PAT }}
-      run: |
-        git config --global user.email "action@github.com"
-        git config --global user.name "GitHub Action"
+            git push origin HEAD
 
-        if [ -z "${{ secrets.REPO_PAT }}" ]; then
-          echo "❌ REPO_PAT is EMPTY! Fix your repo secret."
-          exit 1
-        fi
+            echo "✅ Blog committed and pushed successfully to this repository"
+            echo "   Location: $BLOG_FOLDER_PATH"
+          fi
 
-        echo "Cloning groupdocs-blog repo..."
-        git clone https://x-access-token:${{ secrets.REPO_PAT }}@github.com/groupdocs/groupdocs-blog.git groupdocs-blog || {
-          echo "❌ Failed to clone repo — invalid PAT or wrong GitHub account."
-          exit 1
-        }
+      - name: Commit logs
+        run: |
+          git config --global user.email "action@github.com"
+          git config --global user.name "GitHub Action"
+          git add content/logs/logs.txt
+          git commit -m "Update logs [Run #${{ github.run_number }}]" || echo "No changes to commit"
+          git push origin HEAD
 
-        cd groupdocs-blog
-        
-        # Ensure we're on the correct base branch
-        git checkout master
-        git pull origin master
-        
-        # Create the target directory structure with product subfolder
-        TARGET_DIR="content/Groupdocs.Blog/$PRODUCT_NAME"
-        mkdir -p "$TARGET_DIR"
-        echo "✅ Target directory: $TARGET_DIR"
-        echo "✅ Product: $PRODUCT_NAME"
-        
-        # Create a new branch for this blog post
-        BRANCH_NAME="blog/$BLOG_FOLDER_NAME"
-        
-        # Check if branch exists remotely and delete it
-        if git ls-remote --heads origin "$BRANCH_NAME" | grep -q "$BRANCH_NAME"; then
-          echo "⚠️  Branch $BRANCH_NAME already exists remotely. Deleting..."
-          git push origin --delete "$BRANCH_NAME" || echo "Could not delete remote branch (may not exist)"
-        fi
-        
-        # Delete local branch if it exists
-        git branch -D "$BRANCH_NAME" 2>/dev/null || true
-        
-        # Create fresh branch from master
-        git checkout -b "$BRANCH_NAME" master
-        
-        echo "Copying blog folder: $BLOG_FOLDER_NAME to $TARGET_DIR"
-        
-        # Get absolute path to blog folder correctly
-        WORKFLOW_DIR=$(pwd)
-        cd ..
-        REPO_ROOT=$(pwd)
-        BLOG_ABS_PATH="$REPO_ROOT/$BLOG_FOLDER_PATH"
-        
-        echo "Repository root: $REPO_ROOT"
-        echo "Blog relative path: $BLOG_FOLDER_PATH"
-        echo "Blog absolute path: $BLOG_ABS_PATH"
-        
-        # Verify source exists before copying
-        if [ ! -d "$BLOG_ABS_PATH" ]; then
-          echo "❌ Source blog folder does not exist: $BLOG_ABS_PATH"
-          echo "Checking what exists in content/blogPosts/groupdocs_com:"
-          ls -la "$REPO_ROOT/content/blogPosts/groupdocs_com/" || echo "Directory doesn't exist"
-          exit 1
-        fi
-        
-        cd "$WORKFLOW_DIR"
-        
-        # Copy the blog folder to the product-specific directory
-        cp -r "$BLOG_ABS_PATH" "$TARGET_DIR/" || {
-          echo "❌ Failed to copy folder from $BLOG_ABS_PATH to $TARGET_DIR"
-          exit 1
-        }
-        
-        # Verify the copy was successful
-        if [ ! -d "$TARGET_DIR/$BLOG_FOLDER_NAME" ]; then
-          echo "❌ Blog folder was not copied successfully"
-          echo "Target contents:"
-          ls -la "$TARGET_DIR"
-          exit 1
-        fi
-        
-        echo "✅ Blog folder copied successfully to content/Groupdocs.Blog/$PRODUCT_NAME/"
-        echo "=== Target folder contents ==="
-        ls -la "$TARGET_DIR/$BLOG_FOLDER_NAME"
-        
-        # Add only the new blog folder
-        git add "$TARGET_DIR/$BLOG_FOLDER_NAME"
-        
-        # Check what's being committed
-        echo "=== Files to be committed ==="
-        git status --short
-        
-        if git diff --staged --quiet; then
-          echo "ℹ️ No new files to commit - content may already exist"
-          exit 0
-        fi
-        
-        # Show what will be committed
-        echo "=== Changes to be committed ==="
-        git diff --staged --stat
-        
-        # Commit the changes
-        git commit -m "Add generated blog for $PRODUCT_NAME: $BLOG_FOLDER_NAME" || {
-          echo "❌ Failed to commit changes"
-          exit 1
-        }
-        
-        # Verify commit was created
-        echo "=== Last commit ==="
-        git log -1 --oneline
-        
-        # Push the branch (force push since we deleted and recreated)
-        git push -u origin "$BRANCH_NAME" --force || {
-          echo "❌ Failed to push branch."
-          exit 1
-        }
-        
-        echo "✅ Branch $BRANCH_NAME pushed successfully"
-        
-        # Wait for GitHub to process the push
-        sleep 2
-        
-        # Check if PR already exists for this branch
-        EXISTING_PR=$(gh pr list --repo groupdocs/groupdocs-blog --head "$BRANCH_NAME" --json number --jq '.[0].number' 2>/dev/null || echo "")
-        
-        if [ -n "$EXISTING_PR" ]; then
-          echo "ℹ️  PR #$EXISTING_PR already exists for this branch"
-          echo "PR URL: https://github.com/groupdocs/groupdocs-blog/pull/$EXISTING_PR"
-        else
-          # Create Pull Request using GitHub CLI
-          gh pr create \
-            --repo groupdocs/groupdocs-blog \
-            --base master \
-            --head "$BRANCH_NAME" \
-            --title "Add blog post for $PRODUCT_NAME: $BLOG_FOLDER_NAME" \
-            --body "## Generated Blog Post
+      - name: Upload Generated Blog as Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: generated-blog-groupdocs-${{ github.run_number }}
+          path: ${{ steps.find_blog.outputs.blog_folder_path }}
+          if-no-files-found: error
+
+      ###################################################################
+      # Create Pull Request and Auto-Merge in groupdocs-blog repo
+      ###################################################################
+      - name: Create Pull Request and Auto-Merge in blog.groupdocs.com repo
+        if: success()
+        env:
+          BLOG_FOLDER_NAME: ${{ steps.find_blog.outputs.blog_folder_name }}
+          BLOG_FOLDER_PATH: ${{ steps.find_blog.outputs.blog_folder_path }}
+          GH_TOKEN: ${{ secrets.REPO_PAT }}
+        run: |
+          git config --global user.email "action@github.com"
+          git config --global user.name "GitHub Action"
+
+          if [ -z "${{ secrets.REPO_PAT }}" ]; then
+            echo "❌ REPO_PAT is EMPTY! Fix your repo secret."
+            exit 1
+          fi
+
+          echo "Cloning groupdocs-blog repo..."
+          git clone https://x-access-token:${{ secrets.REPO_PAT }}@github.com/groupdocs/groupdocs-blog.git groupdocs-blog || {
+            echo "❌ Failed to clone repo — invalid PAT or wrong GitHub account."
+            exit 1
+          }
+
+          cd groupdocs-blog
+
+          git checkout master
+          git pull origin master
+
+          # Extract product name from file written by Python
+          PRODUCT_NAME="${{ steps.read_product.outputs.product_name }}"
+
+          # Case-insensitive folder check — use existing if found, else create lowercase
+          EXISTING_DIR=$(find "content/Groupdocs.Blog" -maxdepth 1 -type d -iname "$PRODUCT_NAME" | head -1)
+          if [ -n "$EXISTING_DIR" ]; then
+            TARGET_DIR="$EXISTING_DIR"
+            echo "✅ Using existing directory: $TARGET_DIR"
+          else
+            PRODUCT_NAME_LOWER=$(echo "$PRODUCT_NAME" | tr '[:upper:]' '[:lower:]')
+            TARGET_DIR="content/Groupdocs.Blog/$PRODUCT_NAME_LOWER"
+            mkdir -p "$TARGET_DIR"
+            echo "✅ Created new directory: $TARGET_DIR"
+          fi
+
+          echo "Product name: $PRODUCT_NAME"
+          echo "Target directory: $TARGET_DIR"
+
+          BRANCH_NAME="blog/$BLOG_FOLDER_NAME"
+
+          if git ls-remote --heads origin "$BRANCH_NAME" | grep -q "$BRANCH_NAME"; then
+            echo "⚠️  Branch $BRANCH_NAME already exists remotely. Deleting..."
+            git push origin --delete "$BRANCH_NAME" || echo "Could not delete remote branch (may not exist)"
+          fi
+
+          git branch -D "$BRANCH_NAME" 2>/dev/null || true
+          git checkout -b "$BRANCH_NAME" master
+
+          echo "Copying blog folder: $BLOG_FOLDER_NAME to $TARGET_DIR"
+
+          WORKFLOW_DIR=$(pwd)
+          cd ..
+          REPO_ROOT=$(pwd)
+          BLOG_ABS_PATH="$REPO_ROOT/$BLOG_FOLDER_PATH"
+
+          echo "Repository root: $REPO_ROOT"
+          echo "Blog relative path: $BLOG_FOLDER_PATH"
+          echo "Blog absolute path: $BLOG_ABS_PATH"
+
+          if [ ! -d "$BLOG_ABS_PATH" ]; then
+            echo "❌ Source blog folder does not exist: $BLOG_ABS_PATH"
+            echo "Checking what exists in content/blogPosts/groupdocs_com:"
+            ls -la "$REPO_ROOT/content/blogPosts/groupdocs_com/" || echo "Directory doesn't exist"
+            exit 1
+          fi
+
+          cd "$WORKFLOW_DIR"
+
+          cp -r "$BLOG_ABS_PATH" "$TARGET_DIR/" || {
+            echo "❌ Failed to copy folder from $BLOG_ABS_PATH to $TARGET_DIR"
+            exit 1
+          }
+
+          if [ ! -d "$TARGET_DIR/$BLOG_FOLDER_NAME" ]; then
+            echo "❌ Blog folder was not copied successfully"
+            echo "Target contents:"
+            ls -la "$TARGET_DIR"
+            exit 1
+          fi
+
+          echo "✅ Blog folder copied successfully to $TARGET_DIR/"
+          echo "=== Target folder contents ==="
+          ls -la "$TARGET_DIR/$BLOG_FOLDER_NAME"
+
+          git add "$TARGET_DIR/$BLOG_FOLDER_NAME"
+
+          echo "=== Files to be committed ==="
+          git status --short
+
+          if git diff --staged --quiet; then
+            echo "ℹ️ No new files to commit - content may already exist"
+            exit 0
+          fi
+
+          echo "=== Changes to be committed ==="
+          git diff --staged --stat
+
+          git commit -m "Add generated blog for $PRODUCT_NAME: $BLOG_FOLDER_NAME" || {
+            echo "❌ Failed to commit changes"
+            exit 1
+          }
+
+          echo "=== Last commit ==="
+          git log -1 --oneline
+
+          git push -u origin "$BRANCH_NAME" --force || {
+            echo "❌ Failed to push branch."
+            exit 1
+          }
+
+          echo "✅ Branch $BRANCH_NAME pushed successfully"
+
+          sleep 2
+
+          EXISTING_PR=$(gh pr list --repo groupdocs/groupdocs-blog --head "$BRANCH_NAME" --json number --jq '.[0].number' 2>/dev/null || echo "")
+
+          if [ -n "$EXISTING_PR" ]; then
+            echo "ℹ️  PR #$EXISTING_PR already exists for this branch"
+            PR_NUMBER="$EXISTING_PR"
+            echo "PR URL: https://github.com/groupdocs/groupdocs-blog/pull/$PR_NUMBER"
+          else
+            gh pr create \
+              --repo groupdocs/groupdocs-blog \
+              --base master \
+              --head "$BRANCH_NAME" \
+              --title "Add blog post: $BLOG_FOLDER_NAME" \
+              --body "## Generated Blog Post
 
           **Folder:** $BLOG_FOLDER_NAME
           **Product:** GroupDocs.$PRODUCT_NAME
-          **Author:** ${{ inputs.author }}
-          **Target Path:** \`content/Groupdocs.Blog/$PRODUCT_NAME/$BLOG_FOLDER_NAME\`
+          **Target Path:** \`$TARGET_DIR/$BLOG_FOLDER_NAME\`
 
           **Generated by:** GitHub Actions (Run #${{ github.run_number }})
           **Workflow:** ${{ github.workflow }}
@@ -423,17 +356,48 @@ jobs:
 
           This pull request adds a new blog post generated by the autonomous blog agent.
 
-          ### Contents:
-          - Folder: \`$BLOG_FOLDER_NAME\`
-          - File: \`index.md\`
-          - Location: \`content/Groupdocs.Blog/$PRODUCT_NAME/\`
+          Auto-merged by GitHub Actions." || {
+              echo "❌ Failed to create pull request."
+              git log origin/master..$BRANCH_NAME --oneline
+              exit 1
+            }
 
-          Please review and merge if the content looks good!" || {
-            echo "❌ Failed to create pull request."
-            echo "Attempting to show branch diff..."
-            git log origin/master..$BRANCH_NAME --oneline
+            echo "✅ Pull request created successfully!"
+
+            PR_NUMBER=$(gh pr list --repo groupdocs/groupdocs-blog --head "$BRANCH_NAME" --json number --jq '.[0].number' 2>/dev/null || echo "")
+          fi
+
+          ###############################################################
+          # AUTO-MERGE the PR
+          ###############################################################
+          if [ -n "$PR_NUMBER" ]; then
+            echo "=== Auto-merging PR #$PR_NUMBER ==="
+
+            sleep 3
+
+            gh pr merge "$PR_NUMBER" \
+              --repo groupdocs/groupdocs-blog \
+              --squash \
+              --delete-branch \
+              --admin \
+              --subject "Auto-merge: $BLOG_FOLDER_NAME" \
+              --body "Auto-merged by GitHub Actions (Run #${{ github.run_number }})" || {
+                echo "⚠️  Direct merge failed. Trying auto-merge mode..."
+                gh pr merge "$PR_NUMBER" \
+                  --repo groupdocs/groupdocs-blog \
+                  --auto \
+                  --squash \
+                  --delete-branch || {
+                    echo "❌ Auto-merge also failed. PR #$PR_NUMBER requires manual merge."
+                    echo "PR URL: https://github.com/groupdocs/groupdocs-blog/pull/$PR_NUMBER"
+                    exit 1
+                  }
+                echo "✅ Auto-merge enabled — PR will merge once all checks pass."
+              }
+
+            echo "✅ PR #$PR_NUMBER merged successfully!"
+            echo "Blog is now live at: $TARGET_DIR/$BLOG_FOLDER_NAME"
+          else
+            echo "❌ Could not retrieve PR number for auto-merge."
             exit 1
-          }
-          
-          echo "✅ Pull request created successfully!"
-        fi
+          fi
