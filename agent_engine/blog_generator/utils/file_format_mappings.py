@@ -1305,7 +1305,6 @@ FILE_FORMAT_MAPPINGS = {
     "DRAWIO": "web/drawio/",
     "DWT": "web/dwt/",
     "ECE": "web/ece/",
-    "EDGE": "web/edge/",
     "EPIBRW": "web/epibrw/",
     "ESPROJ": "web/esproj/",
     "EWP": "web/ewp/",

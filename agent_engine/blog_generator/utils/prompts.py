@@ -22,7 +22,7 @@ def get_blog_writer_prompt(
     long_tail_keywords: str = "",
     semantic_keywords: str = "",
     other_important_and_relevant_things: str = "",
-    tags: List[str]=[],
+    tags: List[str] = [],
     isCloud: bool = False,
 ) -> str:
     """
@@ -697,11 +697,35 @@ PART 2: CONTENT STRUCTURE (MANDATORY SECTIONS)
 7. FAQs (H2 heading)
 {'8. Read More (H2 heading - always last)' if formatted_related else ''}
 
-**CRITICAL: ALL HEADINGS MUST USE TITLE CASE**
-Every H2 and H3 heading MUST follow Title Case capitalization rules.
-Every major word MUST start with a capital letter — no exceptions.
-WRONG: ## Steps to CSV editor Development in Java
-CORRECT: ## Steps to CSV Editor Development in Java
+**CRITICAL: ALL HEADINGS MUST USE TITLE CASE — H2 AND H3 WITHOUT EXCEPTION**
+Every H2 (##) and every H3 (###) heading MUST follow Title Case capitalization rules.
+Every major word MUST start with a capital letter — no exceptions for any heading level.
+WRONG H2: ## Steps to CSV editor Development in Java
+CORRECT H2: ## Steps to CSV Editor Development in Java
+WRONG H3: ### optimizing HTML output performance
+CORRECT H3: ### Optimizing HTML Output Performance
+WRONG H3: ### configuring the conversion options for PDF
+CORRECT H3: ### Configuring the Conversion Options for PDF
+
+**H3 TITLE CASE — EXPLICITLY ENFORCED (NOT OPTIONAL):**
+Every H3 subheading (### text) MUST follow the same Title Case rules as H2 headings.
+Title Case is not a "recommended style" for H3 — it is mandatory and carries the same
+weight as H2 enforcement. Run the exact same Title Case checklist on every H3 heading
+that you run on every H2 heading during the MANDATORY HEADING SCAN.
+
+WRONG H3 examples — output is INVALID if any of these appear:
+  ### optimizing HTML output performance
+  ### configuring the conversion options for PDF
+  ### key differences between the two approaches
+  ### handling multiple file formats in Java
+  ### setting up the development environment
+
+CORRECT H3 examples — always write H3 headings like these:
+  ### Optimizing HTML Output Performance
+  ### Configuring the Conversion Options for PDF
+  ### Key Differences Between the Two Approaches
+  ### Handling Multiple File Formats in Java
+  ### Setting Up the Development Environment
 
 **MANDATORY CONTENT FLOW (STRICTLY ENFORCED):**
 The blog MUST follow this exact logical reading order — no exceptions:
@@ -799,8 +823,8 @@ When placing outline sections, categorize each one and insert it at the correct 
 - CORRECT: "Prerequisites and Setup"
 - WRONG: "Prerequisites and a Setup"
 
-**HEADING CAPITALIZATION (MANDATORY - TITLE CASE):**
-ALL headings (H2, H3, etc.) MUST use Title Case capitalization.
+**HEADING CAPITALIZATION (MANDATORY - TITLE CASE FOR ALL LEVELS):**
+ALL headings (H2, H3, and any other level) MUST use Title Case capitalization.
 
 Title Case Rules:
 - Capitalize: First word, last word, and all major words
@@ -1238,8 +1262,15 @@ MANDATORY HEADING SCAN — DO THIS BEFORE OUTPUTTING ANYTHING
 After writing the entire blog, you MUST perform this heading scan before producing final output.
 This is NON-NEGOTIABLE. Skipping this step makes the output INVALID.
 
-STEP 1: List every single H2 and H3 heading you wrote, in order.
-STEP 2: For each heading, apply this checklist:
+STEP 1: List every single H2 (##) and H3 (###) heading you wrote, in order.
+        Do this in TWO SEPARATE GROUPS:
+          Group A — H2 headings (##): list every ## heading
+          Group B — H3 headings (###): list every ### heading
+        Apply ALL checks in Step 2 to EVERY heading in BOTH groups.
+        H3 headings are NOT exempt from Title Case. They follow the exact same
+        rules as H2 headings. A lowercase H3 is as invalid as a lowercase H2.
+
+STEP 2: For each heading in BOTH groups, apply this checklist:
   - Is the first word capitalized? If NO — fix it.
   - Is the last word capitalized? If NO — fix it.
   - Are all nouns, verbs, adjectives, adverbs capitalized? If NO — fix them.
@@ -1248,15 +1279,19 @@ STEP 2: For each heading, apply this checklist:
   - Are file formats fully uppercase (PDF not Pdf, PNG not Png, DOCX not Docx)? If NO — fix them.
   - Are brand names correctly cased (PowerPoint not Powerpoint, GitHub not Github)? If NO — fix them.
   - Are Aspose product names correctly cased (Aspose.CAD not Aspose.Cad)? If NO — fix them.
-STEP 3: Rewrite any heading that failed any check above.
-STEP 4: Only after ALL headings pass — proceed to output the blog.
+STEP 3: Rewrite any heading that failed any check above — this applies equally to H2 and H3.
+STEP 4: Only after ALL headings in BOTH groups pass — proceed to output the blog.
 
-WRONG HEADINGS — NEVER OUTPUT THESE:
+WRONG HEADINGS — NEVER OUTPUT THESE (applies to BOTH H2 and H3):
   ## steps to add animation to powerpoint in java
   ## key features of aspose.slides cloud sdk
   ## installation and setup in java
   ## configuring animation settings for powerpoint
   ## best practices for powerpoint animation via rest
+  ### optimizing HTML output performance
+  ### configuring the conversion options
+  ### handling multiple file formats
+  ### key differences between cloud and on-premise
 
 CORRECT HEADINGS — ALWAYS OUTPUT THESE:
   ## Steps to Add Animation to PowerPoint in Java
@@ -1264,8 +1299,12 @@ CORRECT HEADINGS — ALWAYS OUTPUT THESE:
   ## Installation and Setup in Java
   ## Configuring Animation Settings for PowerPoint
   ## Best Practices for PowerPoint Animation via REST
+  ### Optimizing HTML Output Performance
+  ### Configuring the Conversion Options
+  ### Handling Multiple File Formats
+  ### Key Differences Between Cloud and On-Premise
 
-**IF YOU OUTPUT A HEADING IN LOWERCASE OR MIXED CASE — THE ENTIRE OUTPUT IS INVALID.**
+**IF YOU OUTPUT ANY HEADING — H2 OR H3 — IN LOWERCASE OR MIXED CASE, THE ENTIRE OUTPUT IS INVALID.**
 
 ===============================================================================
 
@@ -1279,7 +1318,8 @@ Before finalizing, verify:
 - All markdown links properly formatted as [text](url) with NO space between ] and (
 - Meta description is EXACTLY 140-160 characters (counted manually)
 - Summary is EXACTLY 200-260 characters (counted manually)
-- ALL headings (H2, H3) use Title Case — every major word starts with a capital letter — VERIFIED via MANDATORY HEADING SCAN above
+- ALL H2 headings use Title Case — every major word starts with a capital letter — VERIFIED via MANDATORY HEADING SCAN above
+- ALL H3 headings use Title Case — every major word starts with a capital letter — VERIFIED via MANDATORY HEADING SCAN above. H3 headings follow the SAME Title Case rules as H2. A lowercase H3 is identical in severity to a lowercase H2 — the output is INVALID. Example of invalid H3: ### Optimizing HTML output performance. Example of valid H3: ### Optimizing HTML Output Performance
 - Steps section is the FIRST H2 immediately after the Introduction — nothing before it
 - Complete Code Example appears immediately after Steps with NO heading between them
 - Setup/Installation section appears AFTER Complete Code Example — never before Steps
@@ -1382,6 +1422,7 @@ If any answer is NO — rewrite those sections before outputting.
 END OF PROMPT
 ===============================================================================
 """
+
 
 
 
