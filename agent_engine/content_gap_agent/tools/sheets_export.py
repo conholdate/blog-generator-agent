@@ -47,6 +47,15 @@ PLATFORM_COLUMNS = [
 
 DEFAULT_SHEETS_POST_TIMEOUT_SECONDS = 180.0
 
+BRAND_DISPLAY_NAMES = {
+    "aspose": "Aspose",
+    "groupdocs": "GroupDocs",
+    "conholdate": "Conholdate",
+    "aspose_cloud": "Aspose.Cloud",
+    "groupdocs_cloud": "GroupDocs.Cloud",
+    "conholdate_cloud": "Conholdate.Cloud",
+}
+
 PLATFORM_HEADER_ALIASES = {
     "net": "NET",
     ".net": "NET",
@@ -91,6 +100,11 @@ PLATFORM_HEADER_ALIASES = {
 
 def _sanitize_brand_key(brand_key: str) -> str:
     return str(brand_key or "").strip().lower()
+
+
+def _brand_display_name(brand_key: str) -> str:
+    normalized = _sanitize_brand_key(brand_key).replace(".", "_").replace("-", "_")
+    return BRAND_DISPLAY_NAMES.get(normalized, str(brand_key or "").strip())
 
 
 def _canonical_platform_header(platform: str) -> str:
@@ -231,7 +245,7 @@ def _extract_rows(coverage_path: Path) -> tuple[list[dict[str, Any]], list[str]]
                 matched_platforms[header] = str((cell or {}).get("url") or "")
 
         item = {
-            "brand_key": brand_key,
+            "brand_key": _brand_display_name(brand_key),
             "product_name": product_name,
             "baseline_platform": baseline_platform,
             "category": row.get("category") or "",
