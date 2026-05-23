@@ -79,9 +79,14 @@ jobs:
       - name: Read product name
         id: read_product
         run: |
-          PRODUCT_NAME=$(cat agent_engine/blog_generator/product_name.txt)
-          echo "product_name=$PRODUCT_NAME" >> $GITHUB_OUTPUT
-          echo "✅ Product name: $PRODUCT_NAME"
+          if [ -f agent_engine/blog_generator/product_name.txt ]; then
+            PRODUCT_NAME=$(cat agent_engine/blog_generator/product_name.txt)
+            echo "product_name=$PRODUCT_NAME" >> $GITHUB_OUTPUT
+            echo "✅ Product name: $PRODUCT_NAME"
+          else
+            echo "⚠️ product_name.txt not found — no blog was generated"
+            echo "product_name=" >> $GITHUB_OUTPUT
+          fi
 
       - name: Find generated blog folder
         id: find_blog
