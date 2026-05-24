@@ -71,7 +71,7 @@ jobs:
           echo "Brand: conholdate.cloud"
 
           python main.py \
-            --author "Muhammad Mustafa" \
+            --author "Farhan Raza" \
             --brand "conholdate.cloud"
 
           echo "✅ Blog generation completed"

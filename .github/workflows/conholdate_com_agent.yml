@@ -71,7 +71,7 @@ jobs:
           echo "Brand: conholdate.com"
 
           python main.py \
-            --author "Muhammad Mustafa" \
+            --author "Farhan Raza" \
             --brand "conholdate.com"
 
           echo "✅ Blog generation completed"
