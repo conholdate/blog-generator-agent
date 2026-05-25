@@ -3,7 +3,7 @@ name: Generate Blog Post for aspose.cloud
 on:
   workflow_dispatch:
   schedule:
-    - cron: "0 7 * * 1,3,5"
+    - cron: "0 7 * * 1,3,5" # Every Monday, Wednesday, and Friday at 12:00 PM PKT
 
 jobs:
   generate:

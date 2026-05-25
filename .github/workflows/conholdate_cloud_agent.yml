@@ -3,7 +3,7 @@ name: Generate Blog Post for conholdate.cloud
 on:
   workflow_dispatch:
   schedule:
-    - cron: "0 9 * * 1,3,5"
+    - cron: "0 9 * * 1,3,5" # Every Monday, Wednesday, and Friday at 2:00 PM PKT
 
 jobs:
   generate:
