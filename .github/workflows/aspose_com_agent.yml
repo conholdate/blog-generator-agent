@@ -3,7 +3,7 @@ name: Generate Blog Post for aspose.com
 on:
   workflow_dispatch:
   schedule:
-    - cron: "0 11 * * 1,3,5" # Every Monday, Wednesday, and Friday at 4:00 PM PKT
+    - cron: "0 6 * * 1,3,5" # Every Monday, Wednesday, and Friday at 11:00 AM PKT
 
 jobs:
   generate:
@@ -79,12 +79,20 @@ jobs:
       - name: Read product name
         id: read_product
         run: |
-          PRODUCT_NAME=$(cat agent_engine/blog_generator/product_name.txt)
-          echo "product_name=$PRODUCT_NAME" >> $GITHUB_OUTPUT
-          echo "✅ Product name: $PRODUCT_NAME"
+          if [ -f agent_engine/blog_generator/product_name.txt ]; then
+            PRODUCT_NAME=$(cat agent_engine/blog_generator/product_name.txt)
+            echo "product_name=$PRODUCT_NAME" >> $GITHUB_OUTPUT
+            echo "blog_generated=true" >> $GITHUB_OUTPUT
+            echo "✅ Product name: $PRODUCT_NAME"
+          else
+            echo "⚠️ product_name.txt not found — no blog was generated"
+            echo "product_name=" >> $GITHUB_OUTPUT
+            echo "blog_generated=false" >> $GITHUB_OUTPUT
+          fi
 
       - name: Find generated blog folder
         id: find_blog
+        if: steps.read_product.outputs.blog_generated == 'true'
         run: |
           echo "=== Searching for generated blog folder ==="
 
@@ -130,6 +138,7 @@ jobs:
           ls -la "$blog_folder"
 
       - name: Verify blog content before upload
+        if: steps.read_product.outputs.blog_generated == 'true'
         run: |
           echo "=== Verifying blog content ==="
           BLOG_PATH="${{ steps.find_blog.outputs.blog_folder_path }}"
@@ -147,6 +156,7 @@ jobs:
       # Commit to THIS repository (content/blogPosts/aspose_com)
       ###################################################################
       - name: Commit generated blog to this repository
+        if: steps.read_product.outputs.blog_generated == 'true'
         env:
           BLOG_FOLDER_NAME: ${{ steps.find_blog.outputs.blog_folder_name }}
           BLOG_FOLDER_PATH: ${{ steps.find_blog.outputs.blog_folder_path }}
@@ -201,6 +211,7 @@ jobs:
           git push origin HEAD
 
       - name: Upload Generated Blog as Artifact
+        if: steps.read_product.outputs.blog_generated == 'true'
         uses: actions/upload-artifact@v4
         with:
           name: generated-blog-aspose-${{ github.run_number }}
@@ -211,7 +222,7 @@ jobs:
       # Create Pull Request and Auto-Merge in aspose-blog repo
       ###################################################################
       - name: Create Pull Request and Auto-Merge in blog.aspose.com repo
-        if: success()
+        if: steps.read_product.outputs.blog_generated == 'true' && success()
         env:
           BLOG_FOLDER_NAME: ${{ steps.find_blog.outputs.blog_folder_name }}
           BLOG_FOLDER_PATH: ${{ steps.find_blog.outputs.blog_folder_path }}
