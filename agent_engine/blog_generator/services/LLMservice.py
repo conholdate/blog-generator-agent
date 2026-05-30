@@ -59,7 +59,8 @@ class LLMService:
         agent_name: str = "assistant",
         temperature: float = 0.6,
         max_turns: int = 10,
-        model: Optional[str] = None
+        model: Optional[str] = None,
+        max_tokens: int = 16000 
     ) -> Any:
         """
         Run an OpenAI Agent with instructions and context.
@@ -89,11 +90,16 @@ class LLMService:
                 name=agent_name,
                 instructions=instructions,
                 model=agent_model,
-                model_settings=ModelSettings(temperature=temperature)
+                model_settings=ModelSettings(temperature=temperature,max_tokens=max_tokens)
             )
             
             result = await Runner.run(agent, context, max_turns=max_turns)
-
+            print(f"DEBUG raw result: {result}", flush=True)
+            print(f"DEBUG final_output: {result.final_output}", flush=True)
+            print(f"DEBUG raw_responses count: {len(getattr(result, 'raw_responses', []))}", flush=True)
+            for i, raw in enumerate(getattr(result, 'raw_responses', [])):
+                print(f"DEBUG raw_response[{i}]: {raw}", flush=True)
+                print(f"DEBUG raw_response choices: {getattr(raw, 'choices', 'NO CHOICES')}", flush=True)
             # ── Aggregate token usage across all turns ──────────────────────
             input_tokens = 0
             output_tokens = 0
@@ -115,6 +121,7 @@ class LLMService:
             
         except Exception as e:
             logger.error(f"Agent run failed: {e}")
+            print(f"error in run_agent: {e}")
             raise
     
     # ─────────────────────────────────────────────────────────────────────────

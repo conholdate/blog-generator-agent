@@ -108,14 +108,6 @@ class BlogOrchestrator:
         isCloud = "cloud" in product_info["ProductName"].lower()
         post_topic = capitalize_file_formats_for_title(post_topic, FILE_FORMAT_MAPPINGS)
 
-        seo_topic = await validate_and_fix_seo_title(
-            post_topic,
-            topics_raw_data.get("keywords", {}).get("primary")[0],
-            product_info.get("ProductName"),
-            isCloud,
-            platform,
-            metrics=self.metrics          # tracks token usage per retry attempt
-        )
         print(f"[METRICS DEBUG] After seo_title => api_call_count: {self.metrics.api_call_count}, token_usage: {self.metrics.token_usage['total_tokens']}", flush=True)
 
         if isCloud:
@@ -181,13 +173,11 @@ class BlogOrchestrator:
             # ════════════════════════════════════════════════════════════════════
             instructions = prompts.get_blog_writer_prompt(
                 post_topic,
-                seo_topic,
                 f_keywords,
                 blog_outline,
                 related_links,
                 context,
                 author,
-                platform,
                 target_persona,
                 blog_post_angle,
                 long_tail_keywords,
@@ -202,9 +192,17 @@ class BlogOrchestrator:
                 context=context,
                 agent_name="blog-writer-agent",
                 temperature=0.6,
-                max_turns=10
+                max_turns=10,
+                max_tokens=16000
             )
-
+            if not result or not result.final_output:
+                print("⚠️ LLM returned empty output. Ending execution gracefully.")
+                return {
+                    "status": "skipped",
+                    "message": "LLM returned empty output"
+                }
+            
+             
             # ── Record token usage from the main blog-writing agent call ────
             self.metrics.record_llm_usage(
                 input_tokens=result.token_usage["input_tokens"],
@@ -240,7 +238,6 @@ class BlogOrchestrator:
             report = validate_seo_content(result.final_output, targets)
             print(f" Audit completed -- {report}", flush=True)
              
-            print(f" Injecting gists now -- ", flush=True)
             blog_post_metadata = extract_blog_metadata(result.final_output)
             jistified = await gist_injector(result.final_output, post_topic, blog_post_metadata['title'], f'https://blog.{self.brand}{blog_post_metadata["url"]}')
             text_output = jistified.content[0].text

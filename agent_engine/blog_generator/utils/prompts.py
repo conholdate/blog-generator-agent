@@ -10,13 +10,11 @@ from config import settings
 
 def get_blog_writer_prompt(
     title: str,
-    seo_topic: str,
     keywords: List[str],
     outline: List[str],
     related_links: List[Dict[str, str]],
     context: str = "",
     author: str = "",
-    platform: str = "",
     target_persona: str = "",
     angle: str = "",
     long_tail_keywords: str = "",
