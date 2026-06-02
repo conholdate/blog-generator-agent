@@ -162,6 +162,78 @@ class KeywordResearchAgent:
         return None
 
     @staticmethod
+    def _preview_llm_output(text: str, limit: int = 500) -> str:
+        preview = re.sub(r"\s+", " ", (text or "").strip())
+        if len(preview) > limit:
+            return preview[:limit] + "..."
+        return preview
+
+    @staticmethod
+    def _parse_topics_payload(text: str) -> Dict[str, Any] | None:
+        """
+        Parse the topic-generation response into the expected top-level object.
+
+        Some OpenAI-compatible backends ignore JSON-only instructions on the
+        first pass. Accept the normal object shape, fenced JSON, JSON embedded
+        in prose, and a bare topics array as a conservative fallback.
+        """
+        txt = (text or "").strip()
+        if not txt:
+            return None
+
+        if txt.startswith("```"):
+            txt = re.sub(r"^```(?:json)?\s*", "", txt, flags=re.IGNORECASE)
+            txt = re.sub(r"\s*```$", "", txt).strip()
+
+        candidates = [txt]
+        json_block = KeywordResearchAgent._extract_json_block(txt)
+        if json_block and json_block not in candidates:
+            candidates.append(json_block)
+
+        list_match = re.search(r"\[[\s\S]*\]", txt)
+        if list_match:
+            list_block = list_match.group(0).strip()
+            if list_block not in candidates:
+                candidates.append(list_block)
+
+        for candidate in candidates:
+            try:
+                parsed: Any = json.loads(candidate)
+            except json.JSONDecodeError:
+                continue
+            if isinstance(parsed, dict):
+                return parsed
+            if isinstance(parsed, list):
+                return {"topics": parsed}
+        return None
+
+    def _call_topic_llm(
+            self,
+            request_kwargs: Dict[str, Any],
+            *,
+            metrics: Optional[RunMetrics],
+            attempt_label: str,
+    ) -> str:
+        logger.info("Calling LLM to generate topics%s...", attempt_label)
+        t0 = time.perf_counter()
+        resp = self.client.chat.completions.create(**request_kwargs)
+        dt = time.perf_counter() - t0
+        logger.info("LLM call%s completed in %.3f seconds", attempt_label, dt)
+
+        usage = getattr(resp, "usage", None)
+        if metrics is not None:
+            metrics.record_llm_usage(
+                duration_seconds=dt,
+                prompt_tokens=getattr(usage, "prompt_tokens", 0) or 0,
+                completion_tokens=getattr(usage, "completion_tokens", 0) or 0,
+                requests=1,
+            )
+
+        txt = resp.choices[0].message.content or ""
+        logger.debug("Raw LLM response%s (truncated to 1200 chars): %s", attempt_label, txt[:1200])
+        return txt
+
+    @staticmethod
     def _rewrite_nested_platform_phrase(text: str, platform_label: Optional[str]) -> str:
         out = " ".join((text or "").strip().split())
         pl = (platform_label or "").strip()
@@ -1264,33 +1336,41 @@ class KeywordResearchAgent:
         if self._use_response_format:
             request_kwargs["response_format"] = {"type": "json_object"}
 
-        logger.info("Calling LLM to generate topics...")
-        t0 = time.perf_counter()
-        resp = self.client.chat.completions.create(**request_kwargs)
-        dt = time.perf_counter() - t0
-        logger.info("LLM call completed in %.3f seconds", dt)
+        txt = self._call_topic_llm(request_kwargs, metrics=metrics, attempt_label="")
 
-        usage = getattr(resp, "usage", None)
-        if metrics is not None:
-            metrics.record_llm_usage(
-                duration_seconds=dt,
-                prompt_tokens=getattr(usage, "prompt_tokens", 0) or 0,
-                completion_tokens=getattr(usage, "completion_tokens", 0) or 0,
-                requests=1,
+        data_obj = self._parse_topics_payload(txt)
+        if data_obj is None:
+            logger.warning(
+                "No JSON object found in LLM output; retrying once with a JSON-only repair prompt. "
+                "response_preview=%r",
+                self._preview_llm_output(txt),
             )
-
-        txt = resp.choices[0].message.content or ""
-        logger.debug("Raw LLM response (truncated to 1200 chars): %s", txt[:1200])
-
-        # Parse JSON
-        try:
-            data_obj: Any = json.loads(txt)
-        except json.JSONDecodeError:
-            json_block = self._extract_json_block(txt)
-            if not json_block:
-                logger.error("No JSON object found in LLM output; returning no topics.")
+            repair_kwargs = dict(request_kwargs)
+            repair_messages = list(request_kwargs["messages"])
+            repair_messages.extend(
+                [
+                    {"role": "assistant", "content": txt[:4000] or "<empty response>"},
+                    {
+                        "role": "user",
+                        "content": (
+                            "The previous response was invalid because it was not strict JSON. "
+                            "Return ONLY one valid JSON object with top-level key \"topics\". "
+                            "Do not include markdown fences, commentary, analysis, or prose. "
+                            "Use the same topic constraints and payload."
+                        ),
+                    },
+                ]
+            )
+            repair_kwargs["messages"] = repair_messages
+            txt = self._call_topic_llm(repair_kwargs, metrics=metrics, attempt_label=" retry")
+            data_obj = self._parse_topics_payload(txt)
+            if data_obj is None:
+                logger.error(
+                    "No JSON object found in LLM output after retry; returning no topics. "
+                    "response_preview=%r",
+                    self._preview_llm_output(txt),
+                )
                 return []
-            data_obj = json.loads(json_block)
 
         if not isinstance(data_obj, dict):
             logger.error("LLM JSON payload is not an object; returning no topics.")
