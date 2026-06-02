@@ -17,67 +17,18 @@
     "excluded_release_update_records": 167,
     "excluded_old_or_undated_records": 74,
     "baseline_records": 80,
-    "total_cells": 325,
-    "matched_cells": 80,
-    "missing_cells": 245,
-    "match_rate": 0.24615384615384617,
+    "total_cells": 315,
+    "matched_cells": 79,
+    "missing_cells": 236,
+    "match_rate": 0.2507936507936508,
     "skipped_empty_keys": 0
   },
   "rows": [
     {
       "category": "Development",
-      "sub_category": "Barcode Generation",
-      "topic": "2d barcode generator generate 2d barcodes or QR codes",
-      "key": "2d-barcode-generator-generate-2d-barcodes-or-qr-codes",
-      "baseline_record_id": "blog::barcode/2023-11-22-2d-barcode-generator/index.md",
-      "coverage": {
-        "cpp": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "general": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "net": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "python": {
-          "matched": true,
-          "score": 1.0,
-          "record_id": "blog::barcode/2023-11-22-2d-barcode-generator/index.md",
-          "title": "2D Barcode Generator - Generate 2D Barcodes or QR Codes",
-          "topic": "2D barcode generator generate 2D barcodes or QR codes",
-          "url": "https://blog.aspose.com/barcode/2d-barcode-generator/"
-        }
-      }
-    },
-    {
-      "category": "Development",
       "sub_category": "Libraries",
-      "topic": "Aspose.Barcode solution for all your barcode needs",
-      "key": "aspose-barcode-solution-for-all-your-barcode-needs",
+      "topic": "Aspose.Barcode reader and generator",
+      "key": "aspose-barcode-reader-and-generator",
       "baseline_record_id": "blog::barcode/2023-01-27-aspose-barcode/index.md",
       "coverage": {
         "cpp": {
@@ -117,7 +68,7 @@
           "score": 1.0,
           "record_id": "blog::barcode/2023-01-27-aspose-barcode/index.md",
           "title": "Aspose Barcode: The Ultimate Solution for All Your Barcode Needs",
-          "topic": "Aspose barcode solution for all your barcode needs",
+          "topic": "Aspose barcode reader and generator",
           "url": "https://blog.aspose.com/barcode/aspose-barcode-reader-and-generator/"
         }
       }
@@ -125,7 +76,7 @@
     {
       "category": "Barcode",
       "sub_category": "Barcode Generation",
-      "topic": "Automate dotcode barcode generation",
+      "topic": "Automate DotCode barcode generation",
       "key": "automate-dotcode-barcode-generation",
       "baseline_record_id": "blog::barcode/2025-09-11-dotcode-barcode-generation-in-java/index.md",
       "coverage": {
@@ -150,7 +101,7 @@
           "score": 1.0,
           "record_id": "blog::barcode/2025-09-11-dotcode-barcode-generation-in-java/index.md",
           "title": "Automate DotCode Barcode Generation in Java",
-          "topic": "Automate dotcode barcode generation",
+          "topic": "Automate DotCode barcode generation",
           "url": "https://blog.aspose.com/barcode/dotcode-barcode-generation-in-java/"
         },
         "net": {
@@ -222,55 +173,6 @@
     },
     {
       "category": "Barcode",
-      "sub_category": "Generator",
-      "topic": "Barcode 128 generator create professional code 128 barcode labels",
-      "key": "barcode-128-generator-create-professional-code-128-barcode-labels",
-      "baseline_record_id": "blog::barcode/2023-01-31-barcode-128-generator/index.md",
-      "coverage": {
-        "cpp": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "general": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "net": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "python": {
-          "matched": true,
-          "score": 1.0,
-          "record_id": "blog::barcode/2023-01-31-barcode-128-generator/index.md",
-          "title": "Barcode 128 Generator: Create Professional Code 128 Barcode Labels",
-          "topic": "Barcode 128 generator create professional code 128 barcode labels",
-          "url": "https://blog.aspose.com/barcode/barcode-128-generator/"
-        }
-      }
-    },
-    {
-      "category": "Barcode",
       "sub_category": "Generation and Reading",
       "topic": "Barcode generator and reader generate and scan barcodes",
       "key": "barcode-generator-and-reader-generate-and-scan-barcodes",
@@ -319,59 +221,10 @@
       }
     },
     {
-      "category": "Barcodes",
-      "sub_category": "Online generation",
-      "topic": "Barcode generator generate barcode",
-      "key": "barcode-generator-generate-barcode",
-      "baseline_record_id": "blog::barcode/2025-04-04-free-barcode-generator/index.md",
-      "coverage": {
-        "cpp": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "general": {
-          "matched": true,
-          "score": 1.0,
-          "record_id": "blog::barcode/2025-04-04-free-barcode-generator/index.md",
-          "title": "Free Barcode Generator - Generate Barcode Online",
-          "topic": "Barcode generator generate barcode",
-          "url": "https://blog.aspose.com/barcode/free-barcode-generator/"
-        },
-        "java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "net": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "python": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        }
-      }
-    },
-    {
       "category": "Development",
       "sub_category": "Barcode Generation",
-      "topic": "Barcode generator STEP by STEP guide for developers",
-      "key": "barcode-generator-step-by-step-guide-for-developers",
+      "topic": "Barcode generator guide for developers",
+      "key": "barcode-generator-guide-for-developers",
       "baseline_record_id": "blog::barcode/2023-01-25-python-barcode-generator/index.md",
       "coverage": {
         "cpp": {
@@ -411,7 +264,7 @@
           "score": 1.0,
           "record_id": "blog::barcode/2023-01-25-python-barcode-generator/index.md",
           "title": "Python Barcode Generator: A Step-by-Step Guide for Developers",
-          "topic": "Barcode generator step by step guide for developers",
+          "topic": "Barcode generator guide for developers",
           "url": "https://blog.aspose.com/barcode/python-barcode-generator/"
         }
       }
@@ -517,8 +370,8 @@
     {
       "category": "Barcode",
       "sub_category": "Code11",
-      "topic": "Build code11 barcode generator",
-      "key": "build-code11-barcode-generator",
+      "topic": "Build code 11 barcode generator",
+      "key": "build-code-11-barcode-generator",
       "baseline_record_id": "blog::barcode/2025-09-09-code11-barcode-generator-in-csharp/index.md",
       "coverage": {
         "cpp": {
@@ -550,7 +403,7 @@
           "score": 1.0,
           "record_id": "blog::barcode/2025-09-09-code11-barcode-generator-in-csharp/index.md",
           "title": "Build a Code11 Barcode Generator in C#",
-          "topic": "Build code11 barcode generator",
+          "topic": "Build Code 11 barcode generator",
           "url": "https://blog.aspose.com/barcode/code11-barcode-generator-in-csharp/"
         },
         "python": {
@@ -609,6 +462,55 @@
           "title": "Code 128 Barcode Generator in Python",
           "topic": "Code 128 barcode generator",
           "url": "https://blog.aspose.com/barcode/code-128-barcode-generator-in-python/"
+        }
+      }
+    },
+    {
+      "category": "Barcode",
+      "sub_category": "Generator",
+      "topic": "Code 128 barcode generator create professional code 128 barcode labels",
+      "key": "code-128-barcode-generator-create-professional-code-128-barcode-labels",
+      "baseline_record_id": "blog::barcode/2023-01-31-barcode-128-generator/index.md",
+      "coverage": {
+        "cpp": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::barcode/2023-01-31-barcode-128-generator/index.md",
+          "title": "Barcode 128 Generator: Create Professional Code 128 Barcode Labels",
+          "topic": "Code 128 barcode generator create professional Code 128 barcode labels",
+          "url": "https://blog.aspose.com/barcode/barcode-128-generator/"
         }
       }
     },
@@ -760,6 +662,104 @@
       }
     },
     {
+      "category": "Barcodes",
+      "sub_category": "QR Code Generation",
+      "topic": "Create QR",
+      "key": "create-qr",
+      "baseline_record_id": "blog::barcode/2023-01-20-python-qr-code-generator/index.md",
+      "coverage": {
+        "cpp": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::barcode/2023-01-20-python-qr-code-generator/index.md",
+          "title": "Python QR Code Generator: Create Stunning QR Codes!",
+          "topic": "Create QR codes",
+          "url": "https://blog.aspose.com/barcode/python-qr-code-generator/"
+        }
+      }
+    },
+    {
+      "category": "Barcode",
+      "sub_category": "QR Code",
+      "topic": "Create TXT",
+      "key": "create-txt",
+      "baseline_record_id": "blog::barcode/2023-02-13-text-qr-code-generator/index.md",
+      "coverage": {
+        "cpp": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::barcode/2023-02-13-text-qr-code-generator/index.md",
+          "title": "Text QR Code Generator - Create a QR Code for Text!",
+          "topic": "Create text QR code",
+          "url": "https://blog.aspose.com/barcode/text-qr-code-generator/"
+        }
+      }
+    },
+    {
       "category": "Barcode",
       "sub_category": "QR Code Generation",
       "topic": "Create wi fi QR code",
@@ -811,7 +811,7 @@
     {
       "category": "Barcode",
       "sub_category": "DataMatrix Generation",
-      "topic": "Develop datamatrix barcode generator",
+      "topic": "Develop DataMatrix barcode generator",
       "key": "develop-datamatrix-barcode-generator",
       "baseline_record_id": "blog::barcode/2025-07-02-develop-a-datamatrix-barcode-generator-in-csharp/index.md",
       "coverage": {
@@ -844,7 +844,7 @@
           "score": 1.0,
           "record_id": "blog::barcode/2025-07-02-develop-a-datamatrix-barcode-generator-in-csharp/index.md",
           "title": "Develop a DataMatrix Barcode Generator in C#",
-          "topic": "Develop datamatrix barcode generator",
+          "topic": "Develop DataMatrix barcode generator",
           "url": "https://blog.aspose.com/barcode/develop-a-datamatrix-barcode-generator-in-csharp/"
         },
         "python": {
@@ -858,11 +858,11 @@
       }
     },
     {
-      "category": "Imaging",
+      "category": "Development",
       "sub_category": "Barcode Generation",
-      "topic": "Ean barcode generator ean 13 barcode",
-      "key": "ean-barcode-generator-ean-13-barcode",
-      "baseline_record_id": "blog::barcode/2023-02-10-ean-barcode-generator/index.md",
+      "topic": "Generate 2D barcodes or QR codes",
+      "key": "generate-2d-barcodes-or-qr-codes",
+      "baseline_record_id": "blog::barcode/2023-11-22-2d-barcode-generator/index.md",
       "coverage": {
         "cpp": {
           "matched": false,
@@ -873,12 +873,12 @@
           "url": null
         },
         "general": {
-          "matched": true,
-          "score": 1.0,
-          "record_id": "blog::barcode/2023-02-10-ean-barcode-generator/index.md",
-          "title": "EAN Barcode Generator - Free Online EAN 13 Barcode Maker",
-          "topic": "EAN barcode generator EAN 13 barcode",
-          "url": "https://blog.aspose.com/barcode/generate-ean-barcode/"
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
         },
         "java": {
           "matched": false,
@@ -897,12 +897,12 @@
           "url": null
         },
         "python": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::barcode/2023-11-22-2d-barcode-generator/index.md",
+          "title": "2D Barcode Generator - Generate 2D Barcodes or QR Codes",
+          "topic": "Generate 2D barcodes or QR codes",
+          "url": "https://blog.aspose.com/barcode/2d-barcode-generator/"
         }
       }
     },
@@ -1148,6 +1148,55 @@
           "title": "Generate Aztec Barcode in Python",
           "topic": "Generate aztec barcode",
           "url": "https://blog.aspose.com/barcode/generate-aztec-barcode-in-python/"
+        }
+      }
+    },
+    {
+      "category": "Barcodes",
+      "sub_category": "Online generation",
+      "topic": "Generate barcode",
+      "key": "generate-barcode",
+      "baseline_record_id": "blog::barcode/2025-04-04-free-barcode-generator/index.md",
+      "coverage": {
+        "cpp": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "general": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::barcode/2025-04-04-free-barcode-generator/index.md",
+          "title": "Free Barcode Generator - Generate Barcode Online",
+          "topic": "Generate barcode",
+          "url": "https://blog.aspose.com/barcode/free-barcode-generator/"
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
         }
       }
     },
@@ -1497,7 +1546,7 @@
     {
       "category": "Barcode",
       "sub_category": "Generation",
-      "topic": "Generate bookland ean barcode",
+      "topic": "Generate bookland EAN barcode",
       "key": "generate-bookland-ean-barcode",
       "baseline_record_id": "blog::barcode/2024-01-01-generate-bookland-ean-barcode-in-python/index.md",
       "coverage": {
@@ -1595,7 +1644,7 @@
     {
       "category": "Barcodes",
       "sub_category": "DataMatrix Generation",
-      "topic": "Generate datamatrix barcode",
+      "topic": "Generate DataMatrix barcode",
       "key": "generate-datamatrix-barcode",
       "baseline_record_id": "blog::barcode/2023-01-24-generate-datamatrix-using-python/index.md",
       "coverage": {
@@ -1636,7 +1685,7 @@
           "score": 1.0,
           "record_id": "blog::barcode/2023-01-24-generate-datamatrix-using-python/index.md",
           "title": "Generate DataMatrix Barcode using Python",
-          "topic": "Generate datamatrix barcode",
+          "topic": "Generate DataMatrix barcode",
           "url": "https://blog.aspose.com/barcode/generate-datamatrix-barcode-using-python/"
         }
       }
@@ -1644,7 +1693,7 @@
     {
       "category": "Barcode",
       "sub_category": "Generation",
-      "topic": "Generate datamatrix code",
+      "topic": "Generate DataMatrix code",
       "key": "generate-datamatrix-code",
       "baseline_record_id": "blog::barcode/2022-09-14-generate-data-matrix-code-in-csharp/index.md",
       "coverage": {
@@ -1677,7 +1726,7 @@
           "score": 1.0,
           "record_id": "blog::barcode/2022-09-14-generate-data-matrix-code-in-csharp/index.md",
           "title": "Generate DataMatrix Code in C#",
-          "topic": "Generate datamatrix code",
+          "topic": "Generate DataMatrix code",
           "url": "https://blog.aspose.com/barcode/generate-data-matrix-code-in-csharp/"
         },
         "python": {
@@ -1693,7 +1742,7 @@
     {
       "category": "Barcode",
       "sub_category": "2D Barcode Generation",
-      "topic": "Generate dotcode barcode",
+      "topic": "Generate DotCode barcode",
       "key": "generate-dotcode-barcode",
       "baseline_record_id": "blog::barcode/2023-03-14-generate-dotcode-python/index.md",
       "coverage": {
@@ -1734,7 +1783,7 @@
           "score": 1.0,
           "record_id": "blog::barcode/2023-03-14-generate-dotcode-python/index.md",
           "title": "Generate DotCode Barcode using Python",
-          "topic": "Generate dotcode barcode",
+          "topic": "Generate DotCode barcode",
           "url": "https://blog.aspose.com/barcode/generate-dotcode-barcode-using-python/"
         }
       }
@@ -1742,7 +1791,7 @@
     {
       "category": "Barcode",
       "sub_category": "Generation",
-      "topic": "Generate dotcode barcodes",
+      "topic": "Generate DotCode barcodes",
       "key": "generate-dotcode-barcodes",
       "baseline_record_id": "blog::barcode/2023-01-24-generate-dotcode-barcodes-in-csharp/index.md",
       "coverage": {
@@ -1775,8 +1824,57 @@
           "score": 1.0,
           "record_id": "blog::barcode/2023-01-24-generate-dotcode-barcodes-in-csharp/index.md",
           "title": "Generate DotCode Barcodes in C#",
-          "topic": "Generate dotcode barcodes",
+          "topic": "Generate DotCode barcodes",
           "url": "https://blog.aspose.com/barcode/generate-dotcode-barcodes/"
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Imaging",
+      "sub_category": "Barcode Generation",
+      "topic": "Generate EAN 13 barcode",
+      "key": "generate-ean-13-barcode",
+      "baseline_record_id": "blog::barcode/2023-02-10-ean-barcode-generator/index.md",
+      "coverage": {
+        "cpp": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "general": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::barcode/2023-02-10-ean-barcode-generator/index.md",
+          "title": "EAN Barcode Generator - Free Online EAN 13 Barcode Maker",
+          "topic": "Generate EAN 13 barcode",
+          "url": "https://blog.aspose.com/barcode/generate-ean-barcode/"
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
         },
         "python": {
           "matched": false,
@@ -1791,7 +1889,7 @@
     {
       "category": "Barcodes",
       "sub_category": "Generation",
-      "topic": "Generate ean barcode",
+      "topic": "Generate EAN barcode",
       "key": "generate-ean-barcode",
       "baseline_record_id": "blog::barcode/2022-08-30-generate-ean-barcode-in-java/index.md",
       "coverage": {
@@ -1840,7 +1938,7 @@
     {
       "category": "Barcode",
       "sub_category": "Healthcare",
-      "topic": "Generate hibc LIC barcodes",
+      "topic": "Generate HIBC LIC barcodes",
       "key": "generate-hibc-lic-barcodes",
       "baseline_record_id": "blog::barcode/2023-01-18-generate-hibc-lic-barcodes-in-csharp/index.md",
       "coverage": {
@@ -1889,7 +1987,7 @@
     {
       "category": "Barcode",
       "sub_category": "Generation",
-      "topic": "Generate maxicode barcode",
+      "topic": "Generate MaxiCode barcode",
       "key": "generate-maxicode-barcode",
       "baseline_record_id": "blog::barcode/2022-08-28-generate-maxicode-barcode-in-java/index.md",
       "coverage": {
@@ -1914,7 +2012,7 @@
           "score": 1.0,
           "record_id": "blog::barcode/2022-08-28-generate-maxicode-barcode-in-java/index.md",
           "title": "Generate Maxicode Barcode in Java",
-          "topic": "Generate maxicode barcode",
+          "topic": "Generate MaxiCode barcode",
           "url": "https://blog.aspose.com/barcode/generate-maxicode-barcode-in-java/"
         },
         "net": {
@@ -1922,7 +2020,7 @@
           "score": 1.0,
           "record_id": "blog::barcode/2022-09-28-generate-maxicode-barcode-in-csharp/index.md",
           "title": "Generate Maxicode Barcode in C#",
-          "topic": "Generate maxicode barcode",
+          "topic": "Generate MaxiCode barcode",
           "url": "https://blog.aspose.com/barcode/generate-maxicode-barcode-in-csharp/"
         },
         "python": {
@@ -1987,7 +2085,7 @@
     {
       "category": "Barcodes",
       "sub_category": "Generation",
-      "topic": "Generate pdf417 barcode",
+      "topic": "Generate PDF417 barcode",
       "key": "generate-pdf417-barcode",
       "baseline_record_id": "blog::barcode/2022-08-16-generate-pdf417-barcode-in-java/index.md",
       "coverage": {
@@ -2020,7 +2118,7 @@
           "score": 1.0,
           "record_id": "blog::barcode/2022-09-16-generate-pdf417-barcode-in-csharp/index.md",
           "title": "Generate Pdf417 Barcode in C#",
-          "topic": "Generate pdf417 barcode",
+          "topic": "Generate PDF417 barcode",
           "url": "https://blog.aspose.com/barcode/generate-pdf417-barcode-in-csharp/"
         },
         "python": {
@@ -2030,55 +2128,6 @@
           "title": "Generate PDF417 Barcode using Python",
           "topic": "Generate PDF417 barcode",
           "url": "https://blog.aspose.com/barcode/generate-pdf417-barcodes-using-python/"
-        }
-      }
-    },
-    {
-      "category": "Barcode",
-      "sub_category": "Generation",
-      "topic": "Generate pdf417 barcode using Aspose.Barcode",
-      "key": "generate-pdf417-barcode-using-aspose-barcode",
-      "baseline_record_id": "blog::barcode/2025-07-01-generate-a-pdf417-barcode-in-java-using-asposebarcode/index.md",
-      "coverage": {
-        "cpp": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "general": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "java": {
-          "matched": true,
-          "score": 1.0,
-          "record_id": "blog::barcode/2025-07-01-generate-a-pdf417-barcode-in-java-using-asposebarcode/index.md",
-          "title": "Generate a PDF417 Barcode in Java using Aspose.BarCode",
-          "topic": "Generate PDF417 barcode using aspose barcode",
-          "url": "https://blog.aspose.com/barcode/generate-a-pdf417-barcode-in-java/"
-        },
-        "net": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "python": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
         }
       }
     },
@@ -2330,7 +2379,7 @@
     {
       "category": "Barcode",
       "sub_category": "Barcode Generation",
-      "topic": "Generate upc barcode",
+      "topic": "Generate UPC barcode",
       "key": "generate-upc-barcode",
       "baseline_record_id": "blog::barcode/2023-12-08-generate-upc-barcode-in-python/index.md",
       "coverage": {
@@ -2379,7 +2428,7 @@
     {
       "category": "Barcode",
       "sub_category": "Barcode Generation",
-      "topic": "Gs1 128 barcode generator",
+      "topic": "GS1 128 barcode generator",
       "key": "gs1-128-barcode-generator",
       "baseline_record_id": "blog::barcode/2022-10-19-gs1-128-barcode-generator-in-csharp/index.md",
       "coverage": {
@@ -2414,55 +2463,6 @@
           "title": "GS1-128 Barcode Generator in C#",
           "topic": "GS1 128 barcode generator",
           "url": "https://blog.aspose.com/barcode/gs1-128-barcode-generator-in-csharp/"
-        },
-        "python": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        }
-      }
-    },
-    {
-      "category": "Barcode",
-      "sub_category": "QR Code Reader",
-      "topic": "JPG QR code reader barcode",
-      "key": "jpg-qr-code-reader-barcode",
-      "baseline_record_id": "blog::barcode/2024-01-31-jpg-qr-code-reader-in-csharp-barcode-scanner-online/index.md",
-      "coverage": {
-        "cpp": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "general": {
-          "matched": true,
-          "score": 1.0,
-          "record_id": "blog::barcode/2024-01-31-jpg-qr-code-reader-in-csharp-barcode-scanner-online/index.md",
-          "title": "JPG QR Code Reader in C# - Barcode Scanner Online",
-          "topic": "JPG QR code reader barcode",
-          "url": "https://blog.aspose.com/barcode/jpg-qr-code-reader-in-csharp-barcode-scanner-online"
-        },
-        "java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "net": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
         },
         "python": {
           "matched": false,
@@ -2524,55 +2524,6 @@
       }
     },
     {
-      "category": "Barcodes",
-      "sub_category": "QR Code Generation",
-      "topic": "QR code generator create stunning QR codes",
-      "key": "qr-code-generator-create-stunning-qr-codes",
-      "baseline_record_id": "blog::barcode/2023-01-20-python-qr-code-generator/index.md",
-      "coverage": {
-        "cpp": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "general": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "net": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "python": {
-          "matched": true,
-          "score": 1.0,
-          "record_id": "blog::barcode/2023-01-20-python-qr-code-generator/index.md",
-          "title": "Python QR Code Generator: Create Stunning QR Codes!",
-          "topic": "QR code generator create stunning QR codes",
-          "url": "https://blog.aspose.com/barcode/python-qr-code-generator/"
-        }
-      }
-    },
-    {
       "category": "Barcode",
       "sub_category": "QR Code Reader",
       "topic": "QR code reader how to build high performance QR code",
@@ -2618,55 +2569,6 @@
           "title": "Python QR Code Reader: How to Build a High-Performance QR Code Scanner",
           "topic": "QR code reader how to build high performance QR code",
           "url": "https://blog.aspose.com/barcode/python-qr-code-reader/"
-        }
-      }
-    },
-    {
-      "category": "Barcode",
-      "sub_category": "QR Code",
-      "topic": "QR code scanner QR code",
-      "key": "qr-code-scanner-qr-code",
-      "baseline_record_id": "blog::barcode/2023-02-07-qr-code-scanner/index.md",
-      "coverage": {
-        "cpp": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "general": {
-          "matched": true,
-          "score": 1.0,
-          "record_id": "blog::barcode/2023-02-07-qr-code-scanner/index.md",
-          "title": "QR Code Scanner - Free Online QR Code Reader",
-          "topic": "QR code scanner QR code",
-          "url": "https://blog.aspose.com/barcode/qr-code-scanner/"
-        },
-        "java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "net": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "python": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
         }
       }
     },
@@ -2966,6 +2868,55 @@
     },
     {
       "category": "Barcode",
+      "sub_category": "QR Code Reader",
+      "topic": "Read QR",
+      "key": "read-qr",
+      "baseline_record_id": "blog::barcode/2024-01-31-jpg-qr-code-reader-in-csharp-barcode-scanner-online/index.md",
+      "coverage": {
+        "cpp": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "general": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::barcode/2024-01-31-jpg-qr-code-reader-in-csharp-barcode-scanner-online/index.md",
+          "title": "JPG QR Code Reader in C# - Barcode Scanner Online",
+          "topic": "Read QR code from JPG",
+          "url": "https://blog.aspose.com/barcode/jpg-qr-code-reader-in-csharp-barcode-scanner-online"
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Barcode",
       "sub_category": "Image Manipulation",
       "topic": "Rotate barcode images barcode",
       "key": "rotate-barcode-images-barcode",
@@ -3029,12 +2980,12 @@
           "url": null
         },
         "general": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::barcode/2023-02-07-qr-code-scanner/index.md",
+          "title": "QR Code Scanner - Free Online QR Code Reader",
+          "topic": "Scan QR code",
+          "url": "https://blog.aspose.com/barcode/qr-code-scanner/"
         },
         "java": {
           "matched": true,
@@ -3059,55 +3010,6 @@
           "title": null,
           "topic": null,
           "url": null
-        }
-      }
-    },
-    {
-      "category": "Barcode",
-      "sub_category": "QR Code",
-      "topic": "Text QR code generator create QR code for text",
-      "key": "text-qr-code-generator-create-qr-code-for-text",
-      "baseline_record_id": "blog::barcode/2023-02-13-text-qr-code-generator/index.md",
-      "coverage": {
-        "cpp": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "general": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "net": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "python": {
-          "matched": true,
-          "score": 1.0,
-          "record_id": "blog::barcode/2023-02-13-text-qr-code-generator/index.md",
-          "title": "Text QR Code Generator - Create a QR Code for Text!",
-          "topic": "Text QR code generator create QR code for text",
-          "url": "https://blog.aspose.com/barcode/text-qr-code-generator/"
         }
       }
     },
@@ -3163,7 +3065,7 @@
     {
       "category": "Development",
       "sub_category": "Desktop Development",
-      "topic": "Wpf barcode generator",
+      "topic": "WPF barcode generator",
       "key": "wpf-barcode-generator",
       "baseline_record_id": "blog::barcode/2022-07-20-wpf-barcode-generator-in-csharp/index.md",
       "coverage": {
