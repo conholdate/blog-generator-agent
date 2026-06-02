@@ -219,6 +219,10 @@ class MetricsRun:
         return self
 
     def __exit__(self, exc_type, exc, tb) -> bool:
+        if not self._sender.enabled:
+            print("[metrics] disabled (METRICS_ENABLED=False). Not sending.")
+            return False
+
         duration_ms = int((time.time() - self._t0) * 1000)
         status = "success" if exc is None else "failed"
 
