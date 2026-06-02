@@ -282,6 +282,7 @@ jobs:
           from agent_engine.blog_keyword_analyzer.tools.google_sheets import (
               SHEET_PLATFORM_COLUMNS,
               _build_sheets_service,
+              execute_google_sheets_request,
               normalize_spreadsheet_id,
           )
           from agent_engine.blog_keyword_analyzer.tools.normalization import (
@@ -309,16 +310,16 @@ jobs:
           credentials_file = os.environ["GOOGLE_SERVICE_ACCOUNT_FILE"]
 
           service = _build_sheets_service(credentials_file)
-          response = (
-              service.spreadsheets()
+          response = execute_google_sheets_request(
+              lambda: service.spreadsheets()
               .values()
               .get(
                   spreadsheetId=spreadsheet_id,
                   range=f"'{worksheet_name}'!1:10000",
                   majorDimension="ROWS",
                   valueRenderOption="FORMATTED_VALUE",
-              )
-              .execute()
+              ),
+              operation="discover queued rows",
           )
           rows = response.get("values") or []
           if not rows:
@@ -397,6 +398,7 @@ jobs:
 
           from agent_engine.blog_keyword_analyzer.tools.google_sheets import (
               _build_sheets_service,
+              execute_google_sheets_request,
               normalize_spreadsheet_id,
           )
 
@@ -477,16 +479,16 @@ jobs:
               status_col = column_letter(int(item["status_col_index"]))
               status_range = f"'{worksheet_name}'!{status_col}{row_index}"
               print(f"Marking row {row_index} Status as Done")
-              (
-                  service.spreadsheets()
+              execute_google_sheets_request(
+                  lambda: service.spreadsheets()
                   .values()
                   .update(
                       spreadsheetId=spreadsheet_id,
                       range=status_range,
                       valueInputOption="RAW",
                       body={"values": [["Done"]]},
-                  )
-                  .execute()
+                  ),
+                  operation=f"mark row {row_index} done",
               )
           PY
         env:

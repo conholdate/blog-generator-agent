@@ -3,7 +3,10 @@ from __future__ import annotations
 from dataclasses import dataclass
 from datetime import datetime, timezone
 import re
-from typing import Any, Dict, List, Mapping, Optional
+import socket
+import ssl
+import time
+from typing import Any, Callable, Dict, List, Mapping, Optional
 
 from google.oauth2 import service_account
 from googleapiclient.discovery import build
@@ -122,6 +125,40 @@ def _build_sheets_service(credentials_file: str):
     return build("sheets", "v4", credentials=creds, cache_discovery=False)
 
 
+def _is_retriable_google_sheets_error(exc: BaseException) -> bool:
+    if isinstance(exc, HttpError):
+        status = getattr(getattr(exc, "resp", None), "status", None)
+        return status in {408, 429, 500, 502, 503, 504}
+    return isinstance(exc, (TimeoutError, ConnectionError, socket.timeout, ssl.SSLError))
+
+
+def execute_google_sheets_request(
+    build_request: Callable[[], Any],
+    *,
+    operation: str,
+    attempts: int = 5,
+    initial_delay: float = 1.0,
+) -> Any:
+    last_exc: BaseException | None = None
+    for attempt in range(1, max(attempts, 1) + 1):
+        try:
+            return build_request().execute()
+        except BaseException as exc:
+            if not _is_retriable_google_sheets_error(exc) or attempt >= attempts:
+                raise
+            last_exc = exc
+            delay = initial_delay * (2 ** (attempt - 1))
+            print(
+                f"Google Sheets {operation} failed on attempt {attempt}/{attempts}: {exc}. "
+                f"Retrying in {delay:.1f}s...",
+                flush=True,
+            )
+            time.sleep(delay)
+    if last_exc:
+        raise last_exc
+    raise RuntimeError(f"Google Sheets {operation} did not execute.")
+
+
 def _row_to_mapping(headers: List[str], values: List[str]) -> Dict[str, str]:
     padded = list(values) + [""] * max(0, len(headers) - len(values))
     return {header: (padded[idx] if idx < len(padded) else "") for idx, header in enumerate(headers)}
@@ -163,16 +200,16 @@ def fetch_topic_sheet_selection(
     ]
 
     try:
-        response = (
-            service.spreadsheets()
+        response = execute_google_sheets_request(
+            lambda: service.spreadsheets()
             .values()
             .batchGet(
                 spreadsheetId=spreadsheet_id,
                 ranges=ranges,
                 majorDimension="ROWS",
                 valueRenderOption="FORMATTED_VALUE",
-            )
-            .execute()
+            ),
+            operation=f"read row {row_index}",
         )
     except HttpError as exc:
         raise RuntimeError(f"Failed to read Google Sheet row {row_index}: {exc}") from exc
@@ -224,16 +261,16 @@ def ensure_output_headers(
     service = _build_sheets_service(credentials_file)
     header_range = f"'{worksheet_name}'!1:1"
     try:
-        existing = (
-            service.spreadsheets()
+        existing = execute_google_sheets_request(
+            lambda: service.spreadsheets()
             .values()
             .get(
                 spreadsheetId=spreadsheet_id,
                 range=header_range,
                 majorDimension="ROWS",
                 valueRenderOption="FORMATTED_VALUE",
-            )
-            .execute()
+            ),
+            operation="read output headers",
         )
         existing_values = existing.get("values") or []
         existing_headers = [str(v).strip() for v in (existing_values[0] if existing_values else [])]
@@ -244,29 +281,29 @@ def ensure_output_headers(
                     merged_headers.append(header)
             if merged_headers == existing_headers:
                 return
-            (
-                service.spreadsheets()
+            execute_google_sheets_request(
+                lambda: service.spreadsheets()
                 .values()
                 .update(
                     spreadsheetId=spreadsheet_id,
                     range=header_range,
                     valueInputOption="RAW",
                     body={"values": [merged_headers]},
-                )
-                .execute()
+                ),
+                operation="update output headers",
             )
             return
 
-        (
-            service.spreadsheets()
+        execute_google_sheets_request(
+            lambda: service.spreadsheets()
             .values()
             .update(
                 spreadsheetId=spreadsheet_id,
                 range=header_range,
                 valueInputOption="RAW",
                 body={"values": [OUTPUT_HEADERS]},
-            )
-            .execute()
+            ),
+            operation="initialize output headers",
         )
     except HttpError as exc:
         raise RuntimeError(f"Failed to initialize Google Sheet output headers: {exc}") from exc
