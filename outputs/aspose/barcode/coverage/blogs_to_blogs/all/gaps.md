@@ -6,8 +6,8 @@
 
 | 🧩 Metric | Value | Status |
 | --- | --- | --- |
-| **Total Canonical Topics** | **63** | — |
-| **Topics with Gaps** | **63** | ⚠️ |
+| **Total Canonical Topics** | **61** | — |
+| **Topics with Gaps** | **61** | ⚠️ |
 | **Fully Covered Topics** | 0 | — |
 | **Excluded (Release / Updates)** | 0 | ℹ️ |
 | **Baseline Scope** | ALL | — |
@@ -30,18 +30,18 @@
 
 | Platform | # Covered | # Missing | Coverage |
 | --- | --- | --- | --- |
-| **CPP** | 1 | 62 | 🔴 Weak (1.6%) |
-| **GENERAL** | 9 | 54 | 🔴 Weak (14.3%) |
-| **JAVA** | 18 | 45 | 🔴 Weak (28.6%) |
-| **NET** | 28 | 35 | 🔴 Weak (44.4%) |
-| **PYTHON** | 23 | 40 | 🔴 Weak (36.5%) |
+| **CPP** | 1 | 60 | 🔴 Weak (1.6%) |
+| **GENERAL** | 9 | 52 | 🔴 Weak (14.8%) |
+| **JAVA** | 18 | 43 | 🔴 Weak (29.5%) |
+| **NET** | 29 | 32 | 🔴 Weak (47.5%) |
+| **PYTHON** | 23 | 38 | 🔴 Weak (37.7%) |
 
 ---
 
 ### 🔎 Executive Insights
 
 - **100.0%** of canonical topics are missing on at least one platform (after exclusions).
-- Highest gap density: **CPP** (62 missing), **GENERAL** (54 missing), **JAVA** (45 missing).
+- Highest gap density: **CPP** (60 missing), **GENERAL** (52 missing), **JAVA** (43 missing).
 - Gaps are concentrated in **8** major category/subcategory clusters (see Section 4).
 - Release notes, product updates, and version announcements are intentionally excluded from this report.
 
@@ -57,15 +57,15 @@
 | 4 | **Development / Barcode Generation** | Generate 2D barcodes or QR codes | CPP, GENERAL, JAVA, NET | Generate 2D barcodes or QR codes — CPP; Generate 2D barcodes or QR codes — GENERAL; Generate 2D barcodes or QR codes — JAVA |
 | 5 | **Barcode / Reading** | Barcode reader scan barcode | CPP, GENERAL, JAVA, NET | Barcode reader scan barcode — CPP; Barcode reader scan barcode — GENERAL; Barcode reader scan barcode — JAVA |
 | 6 | **Barcode / Reading** | Read barcode from TIFF image | CPP, GENERAL, NET, PYTHON | Read barcode from TIFF image — CPP; Read barcode from TIFF image — GENERAL; Read barcode from TIFF image — NET |
-| 7 | **Imaging / Barcode Generation** | Generate and display barcode image in mvc | CPP, GENERAL, JAVA, PYTHON | Generate and display barcode image in mvc — CPP; Generate and display barcode image in mvc — GENERAL; Generate and display barcode image in mvc — JAVA |
-| 8 | **Imaging / Barcode Generation** | Generate barcodes barcode | CPP, GENERAL, JAVA, PYTHON | Generate barcodes barcode — CPP; Generate barcodes barcode — GENERAL; Generate barcodes barcode — JAVA |
-| 9 | **Barcode / Barcode Generation** | Automate DotCode barcode generation | CPP, GENERAL, NET, PYTHON | Automate DotCode barcode generation — CPP; Automate DotCode barcode generation — GENERAL; Automate DotCode barcode generation — NET |
-| 10 | **Barcode / Barcode Generation** | Generate UPC barcode | CPP, GENERAL, JAVA, NET | Generate UPC barcode — CPP; Generate UPC barcode — GENERAL; Generate UPC barcode — JAVA |
-| 11 | **Barcode / QR Code Generation** | Create wi fi QR code | CPP, JAVA, NET, PYTHON | Create wi fi QR code — CPP; Create wi fi QR code — JAVA; Create wi fi QR code — NET |
-| 12 | **Barcode / QR Code Generation** | Generate QR code | CPP, GENERAL, PYTHON | Generate QR code — CPP; Generate QR code — GENERAL; Generate QR code — PYTHON |
-| 13 | **Barcodes / Generation** | Generate barcodes | CPP, GENERAL, JAVA, NET | Generate barcodes — CPP; Generate barcodes — GENERAL; Generate barcodes — JAVA |
-| 14 | **Barcodes / Generation** | Generate EAN barcode | CPP, GENERAL | Generate EAN barcode — CPP; Generate EAN barcode — GENERAL |
-| 15 | **Barcode / Generator** | Build barcode 93 generator barcode | CPP, GENERAL, JAVA, PYTHON | Build barcode 93 generator barcode — CPP; Build barcode 93 generator barcode — GENERAL; Build barcode 93 generator barcode — JAVA |
+| 7 | **Barcode / Barcode Generation** | Automate DotCode barcode generation | CPP, GENERAL, NET, PYTHON | Automate DotCode barcode generation — CPP; Automate DotCode barcode generation — GENERAL; Automate DotCode barcode generation — NET |
+| 8 | **Barcode / Barcode Generation** | Generate UPC barcode | CPP, GENERAL, JAVA, NET | Generate UPC barcode — CPP; Generate UPC barcode — GENERAL; Generate UPC barcode — JAVA |
+| 9 | **Barcode / QR Code Generation** | Create wi fi QR code | CPP, JAVA, NET, PYTHON | Create wi fi QR code — CPP; Create wi fi QR code — JAVA; Create wi fi QR code — NET |
+| 10 | **Barcode / QR Code Generation** | Generate QR code | CPP, GENERAL, PYTHON | Generate QR code — CPP; Generate QR code — GENERAL; Generate QR code — PYTHON |
+| 11 | **Imaging / Barcode Generation** | Generate and display barcode image in mvc | CPP, GENERAL, JAVA, PYTHON | Generate and display barcode image in mvc — CPP; Generate and display barcode image in mvc — GENERAL; Generate and display barcode image in mvc — JAVA |
+| 12 | **Imaging / Barcode Generation** | Generate EAN 13 barcode | CPP, JAVA, NET, PYTHON | Generate EAN 13 barcode — CPP; Generate EAN 13 barcode — JAVA; Generate EAN 13 barcode — NET |
+| 13 | **Barcode / Generator** | Build barcode 93 generator barcode | CPP, GENERAL, JAVA, PYTHON | Build barcode 93 generator barcode — CPP; Build barcode 93 generator barcode — GENERAL; Build barcode 93 generator barcode — JAVA |
+| 14 | **Barcode / Generator** | Code 128 barcode generator create professional code 128 barcode labels | CPP, GENERAL, JAVA, NET | Code 128 barcode generator create professional code 128 barcode labels — CPP; Code 128 barcode generator create professional code 128 barcode labels — GENERAL; Code 128 barcode generator create professional code 128 barcode labels — JAVA |
+| 15 | **Barcode / QR Code Reader** | QR code reader how to build high performance QR code | CPP, GENERAL, JAVA, NET | QR code reader how to build high performance QR code — CPP; QR code reader how to build high performance QR code — GENERAL; QR code reader how to build high performance QR code — JAVA |
 
 *These recommendations are derived from topics missing across the largest number of platforms and clustered by category/subcategory.*
 
@@ -75,11 +75,11 @@
 
 | Platform | # topics covered | % of baseline rows | # topics missing |
 | --- | --- | --- | --- |
-| **CPP** | 1 | 1.6% | 62 |
-| **GENERAL** | 9 | 14.3% | 54 |
-| **JAVA** | 18 | 28.6% | 45 |
-| **NET** | 28 | 44.4% | 35 |
-| **PYTHON** | 23 | 36.5% | 40 |
+| **CPP** | 1 | 1.6% | 60 |
+| **GENERAL** | 9 | 14.8% | 52 |
+| **JAVA** | 18 | 29.5% | 43 |
+| **NET** | 29 | 47.5% | 32 |
+| **PYTHON** | 23 | 37.7% | 38 |
 
 **Takeaway:** Focus first on platforms with the highest missing counts and lowest coverage percentage; port high-impact topics from the best-covered platform first.
 
@@ -92,14 +92,14 @@
 | **Barcode / Generation** | 9 | 33 | CPP, GENERAL, JAVA, PYTHON |
 | **Development / Barcode Generation** | 4 | 16 | CPP, NET, GENERAL, JAVA |
 | **Barcode / Reading** | 4 | 14 | CPP, GENERAL, PYTHON, NET |
-| **Imaging / Barcode Generation** | 3 | 12 | CPP, JAVA, PYTHON, GENERAL |
 | **Barcode / Barcode Generation** | 3 | 11 | CPP, GENERAL, NET, PYTHON |
 | **Barcode / QR Code Generation** | 3 | 10 | CPP, JAVA, PYTHON, GENERAL |
-| **Barcodes / Generation** | 3 | 8 | CPP, GENERAL, JAVA, NET |
+| **Imaging / Barcode Generation** | 3 | 10 | CPP, JAVA, PYTHON, GENERAL |
 | **Barcode / Generator** | 2 | 8 | CPP, GENERAL, JAVA, PYTHON |
 | **Barcode / QR Code Reader** | 2 | 8 | CPP, JAVA, NET, GENERAL |
 | **Barcodes / Reading** | 2 | 8 | CPP, GENERAL, PYTHON, NET |
-| **Barcode / QR Code** | 2 | 6 | CPP, GENERAL, JAVA, NET |
+| **Barcode / QR Code** | 2 | 5 | CPP, GENERAL, JAVA, PYTHON |
+| **Barcodes / Generation** | 2 | 4 | CPP, GENERAL |
 | **Development / Libraries** | 1 | 4 | CPP, GENERAL, JAVA, NET |
 
 ---
