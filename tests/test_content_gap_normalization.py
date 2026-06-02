@@ -4,6 +4,7 @@ from agent_engine.content_gap_agent.tools.normalization import (
     canonical_topic_key,
     normalize_sentence_text,
 )
+from agent_engine.content_indexer_agent.tools.normalization import canonical_topic_key as indexer_canonical_topic_key
 from agent_engine.content_gap_agent.tools.coverage.blogs_to_blogs import record_gap_key, record_gap_keys
 from agent_engine.content_gap_agent.tools.io import IndexRecord
 from agent_engine.content_gap_agent.tools.sheets_export import build_payload
@@ -130,6 +131,13 @@ def test_barcode_acronyms_survive_coverage_display_normalization() -> None:
     assert normalize_sentence_text("generate datamatrix barcode") == "Generate DataMatrix barcode"
     assert normalize_sentence_text("generate pdf417 barcode") == "Generate PDF417 barcode"
     assert normalize_sentence_text("generate gs1 128 barcode") == "Generate GS1 128 barcode"
+
+
+def test_text_qr_code_is_not_collapsed_to_txt_file_topic() -> None:
+    assert canonical_topic_key("Create text QR code") == "create text qr code"
+    assert indexer_canonical_topic_key("Create text QR code") == "create text qr code"
+    assert canonical_topic_key("Create TXT file") == "create txt"
+    assert indexer_canonical_topic_key("Create TXT file") == "create txt"
 
 
 def test_omr_sheet_export_skips_generic_acronym_topic(tmp_path) -> None:

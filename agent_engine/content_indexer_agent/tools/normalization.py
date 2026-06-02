@@ -540,6 +540,7 @@ PRESERVE_TOKENS: Set[str] = {
 FORMAT_TOKEN_SET: Set[str] = set(FILE_FORMAT_REGISTRY.keys()) | {
     "htm", "jpeg", "tif", "djv", "stp", "wrl", "yml"
 }
+_TEXT_PAYLOAD_CONTEXT_RE = re.compile(r"\b(qr|qrcode|barcode|barcodes?)\b", re.IGNORECASE)
 
 
 # =============================================================================
@@ -933,14 +934,15 @@ def canonical_topic_key(text: str) -> str:
             return _final_topic_cleanup(normalize_text(f"{src} to {dst}"))
 
     action_match = re.match(
-        r"^(create|read|parse|validate)\s+([a-z0-9]{1,12})(?:\b.*)?$",
+        r"^(create|read|parse|validate)\s+([a-z0-9]{1,12})(?:\b(?P<rest>.*))?$",
         t,
         re.IGNORECASE,
     )
     if action_match:
         action = action_match.group(1).lower()
         target = canonical_file_format(action_match.group(2))
-        if target in FORMAT_TOKEN_SET:
+        rest = action_match.group("rest") or ""
+        if target in FORMAT_TOKEN_SET and not (target == "txt" and _TEXT_PAYLOAD_CONTEXT_RE.search(rest)):
             return _final_topic_cleanup(normalize_text(f"{action} {target}"))
 
     return _final_topic_cleanup(normalize_text(t))
