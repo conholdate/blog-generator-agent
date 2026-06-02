@@ -541,6 +541,10 @@ FORMAT_TOKEN_SET: Set[str] = set(FILE_FORMAT_REGISTRY.keys()) | {
     "htm", "jpeg", "tif", "djv", "stp", "wrl", "yml"
 }
 _TEXT_PAYLOAD_CONTEXT_RE = re.compile(r"\b(qr|qrcode|barcode|barcodes?)\b", re.IGNORECASE)
+_GENERIC_BARCODE_GENERATION_RE = re.compile(
+    r"^generate\s+barcodes?(?:\s+barcode)?(?:\s+api)?$",
+    re.IGNORECASE,
+)
 
 
 # =============================================================================
@@ -913,6 +917,9 @@ def canonical_topic_key(text: str) -> str:
     t = _FROM_TO_NOISE_RE.sub(" ", t)
     t = _TRAILING_PREPOSITION_RE.sub(" ", t)
     t = _WS_RE.sub(" ", t).strip()
+
+    if _GENERIC_BARCODE_GENERATION_RE.match(t):
+        return "generate barcodes"
 
     alt_match = re.search(
         r"\b([a-z0-9]{1,12})\s*(?:to|into|in2|->|â†’)\s*([a-z0-9]{1,12})\s+or\s+([a-z0-9]{1,12})\b",

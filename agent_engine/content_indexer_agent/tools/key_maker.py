@@ -268,6 +268,7 @@ def _normalize_candidate(text: str) -> str:
         return _BARCODE_TOPIC_REWRITES[slug]
     slug = re.sub(r"^barcode-(128|39|93)-generator-", r"code-\1-barcode-generator-", slug)
     slug = re.sub(r"^code(11)-barcode-generator$", r"code-\1-barcode-generator", slug)
+    slug = re.sub(r"^generate-barcodes?-barcode(?:-api)?$", "generate-barcodes", slug)
     slug = re.sub(r"^(generate|read)-barcodes?-barcode$", r"\1-barcodes", slug)
     slug = re.sub(r"-barcode-barcode$", "-barcode", slug)
     return slug

@@ -8,6 +8,11 @@ import requests
 from agent_engine.config_sources import get_agent_metrics_config
 from agent_engine.blog_keyword_analyzer.tools.normalization import canonical_platform_label, normalize_platform_family
 
+
+def _metrics_enabled() -> bool:
+    return str(os.getenv("METRICS_ENABLED", "true")).strip().lower() not in {"0", "false", "no", "off"}
+
+
 def canonicalize_platform(value: Optional[str]) -> str:
     return normalize_platform_family(value)
 
@@ -68,6 +73,10 @@ def send_stage_metrics(
     """
     Sends ONE stage payload to BOTH external + internal webhook URLs (best-effort).
     """
+    if not _metrics_enabled():
+        print("[metrics] disabled (METRICS_ENABLED=false). Not sending stage metrics.")
+        return
+
     metrics_cfg = get_agent_metrics_config("blog_keyword_analyzer")
     webhooks = metrics_cfg.get("webhooks") or {}
     primary = webhooks.get("primary") or {}

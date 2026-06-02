@@ -140,6 +140,41 @@ def test_text_qr_code_is_not_collapsed_to_txt_file_topic() -> None:
     assert indexer_canonical_topic_key("Create TXT file") == "create txt"
 
 
+def test_generic_generate_barcode_topics_collapse_without_losing_specific_topics() -> None:
+    duplicate_topics = [
+        "Generate barcode",
+        "Generate barcodes",
+        "Generate barcodes barcode",
+        "Generate barcodes barcode API",
+    ]
+
+    for topic in duplicate_topics:
+        assert canonical_topic_key(topic) == "generate barcodes"
+        assert indexer_canonical_topic_key(topic) == "generate barcodes"
+
+    assert canonical_topic_key("Generate barcode 39") == "generate barcode 39"
+    assert canonical_topic_key("Generate barcode and QR code with logo") == "generate barcode and qr code with logo"
+    assert canonical_topic_key("Generate barcodes with UTF 8 encoding") == "generate barcodes with utf 8 encoding"
+
+
+def test_text_qr_records_match_create_text_qr_key() -> None:
+    record = IndexRecord(
+        id="blog::barcode/text-to-qr-code-generator-in-csharp/index.md",
+        repo_key="blog",
+        repo_type="blog",
+        platform="net",
+        title="Text to QR Code Generator in C#",
+        topic="Text to QR code generator",
+        category="Barcode",
+        sub_category="QR Code Generation",
+        key="txt to qr",
+    )
+
+    assert record_gap_key(record) == "txt-to-qr"
+    assert "create-text-qr-code" in record_gap_keys(record)
+    assert "txt-to-qr" in record_gap_keys(record)
+
+
 def test_omr_sheet_export_skips_generic_acronym_topic(tmp_path) -> None:
     coverage_json = tmp_path / "coverage.json"
     coverage_json.write_text(

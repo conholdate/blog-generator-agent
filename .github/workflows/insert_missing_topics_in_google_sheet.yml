@@ -85,6 +85,12 @@ on:
         default: true
         type: boolean
 
+      send_metrics:
+        description: "Send metrics payloads to configured metrics webhooks."
+        required: true
+        default: true
+        type: boolean
+
       case:
         description: "Coverage type."
         required: true
@@ -349,6 +355,10 @@ jobs:
 
           if [ "${{ inputs.normalize_topics }}" = "false" ]; then
             ARGS+=(--no-normalize-topics)
+          fi
+
+          if [ "${{ inputs.send_metrics }}" = "false" ]; then
+            ARGS+=(--no-metrics)
           fi
 
           if [ -n "${{ inputs.platforms }}" ]; then

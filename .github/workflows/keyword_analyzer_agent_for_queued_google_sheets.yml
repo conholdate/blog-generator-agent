@@ -66,6 +66,12 @@ on:
         required: false
         default: false
 
+      send_metrics:
+        description: "Send metrics payloads to configured metrics webhooks."
+        type: boolean
+        required: false
+        default: true
+
 permissions:
   contents: write
 
@@ -82,6 +88,7 @@ jobs:
       METRICS_WEBHOOK_URL_TEAM: ${{ vars.METRICS_WEBHOOK_URL_TEAM || vars.GOOGLE_SCRIPT_URL_FOR_TEAM }}
       TOKEN_FOR_PROD: ${{ secrets.TOKEN_FOR_PROD }}
       TOKEN_FOR_TEAM: ${{ secrets.TOKEN_FOR_TEAM }}
+      METRICS_ENABLED: ${{ inputs.send_metrics }}
       METRICS_TIMEOUT_S: "30"
       GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
       ASPOSE_COM_SPREADSHEET_ID_FOR_KEYWORDS: ${{ secrets.ASPOSE_COM_SPREADSHEET_ID_FOR_KEYWORDS }}

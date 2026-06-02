@@ -32,6 +32,14 @@ _BLOG_DATE_RE = re.compile(r"^(?P<year>\d{4})-(?P<month>\d{2})-(?P<day>\d{2})$")
 
 _KEY_SPLIT_RE = re.compile(r"[^a-z0-9]+", re.I)
 _CONVERSION_PAIR_RE = re.compile(r"\b([a-z0-9]{1,20})\s*(?:to|into|in2|->|→)\s*([a-z0-9]{1,20})\b", re.IGNORECASE)
+_TEXT_QR_PATTERNS = (
+    re.compile(r"\btext\s+(?:to|into)\s+qr(?:\s+code)?\b", re.IGNORECASE),
+    re.compile(r"\bcreate\s+(?:a\s+)?(?:text\s+)?qr\s+code\s+(?:from|for|with)\s+text\b", re.IGNORECASE),
+    re.compile(r"\bgenerate\s+qr\s+code\s+(?:from|for|with)\s+text\b", re.IGNORECASE),
+    re.compile(r"\bcreate\s+text\s+qr\s+code\b", re.IGNORECASE),
+    re.compile(r"\btext\s+qr\s+code\s+generator\b", re.IGNORECASE),
+)
+_TEXT_QR_EQUIVALENT_KEYS = ("create-text-qr-code", "txt-to-qr")
 
 
 def normalize_gap_key(k: str) -> str:
@@ -72,6 +80,13 @@ def _conversion_gap_keys(text: str) -> List[str]:
     return keys
 
 
+def _text_qr_gap_keys(text: str) -> List[str]:
+    normalized = re.sub(r"[-_/]+", " ", str(text or ""))
+    if any(pattern.search(normalized) for pattern in _TEXT_QR_PATTERNS):
+        return list(_TEXT_QR_EQUIVALENT_KEYS)
+    return []
+
+
 def record_gap_keys(r: IndexRecord) -> List[str]:
     """
     Return every conversion key a record can satisfy.
@@ -92,6 +107,9 @@ def record_gap_keys(r: IndexRecord) -> List[str]:
     ]
     for part in searchable_parts:
         for key in _conversion_gap_keys(part):
+            if key and key not in keys:
+                keys.append(key)
+        for key in _text_qr_gap_keys(part):
             if key and key not in keys:
                 keys.append(key)
 
