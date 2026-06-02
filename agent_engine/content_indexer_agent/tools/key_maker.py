@@ -69,6 +69,33 @@ _OMR_TOPIC_REWRITES = {
     "scan-bubble-answer-sheet-omr-sheet-jpg": "scan-omr-bubble-answer-sheet-from-jpg",
     "scan-survey-omr": "scan-omr-survey",
 }
+_BARCODE_TOPIC_REWRITES = {
+    "barcode": "",
+    "2d-barcode-generator-generate-2d-barcodes-or-qr-codes": "generate-2d-barcodes-or-qr-codes",
+    "aspose-barcode-solution-for-all-your-barcode-needs": "",
+    "launch-of-aspose-barcode": "",
+    "barcode-generator-generate-barcode": "generate-barcode",
+    "barcode-generator-and-reader-generate-and-scan-barcodes": "generate-and-scan-barcodes",
+    "barcode-generator-step-by-step-guide-for-developers": "barcode-generator-guide-for-developers",
+    "barcode-generator-create-stunning-qr-codes": "create-qr-codes",
+    "qr-code-generator-create-stunning-qr-codes": "create-qr-codes",
+    "qr-code-scanner-qr-code": "scan-qr-code",
+    "read-barcodes-barcode": "read-barcodes",
+    "generate-barcodes-barcode": "generate-barcodes",
+    "rotate-barcode-images-barcode": "rotate-barcode-images",
+    "build-barcode-93-generator-barcode": "build-code-93-barcode-generator",
+    "ean-barcode-generator-ean-13-barcode": "generate-ean-13-barcode",
+    "create-micro-qr-code-using-qr-code": "create-micro-qr-code",
+    "create-wi-fi-qr-code": "create-wi-fi-qr-code",
+    "develop-datamatrix-barcode-generator": "develop-datamatrix-barcode-generator",
+    "generate-datamatrix-barcode": "generate-datamatrix-barcode",
+    "generate-datamatrix-code": "generate-datamatrix-code",
+    "generate-pdf417-barcode-using-aspose-barcode": "generate-pdf417-barcode",
+    "jpg-qr-code-reader-barcode": "read-qr-code-from-jpg",
+    "txt-to-qr": "txt-to-qr-code",
+    "text-qr-code-generator-create-qr-code-for-text": "create-text-qr-code",
+    "wpf-barcode-generator": "wpf-barcode-generator",
+}
 
 _UPPERCASE_FORMATS = {
     "pdf",
@@ -122,7 +149,15 @@ _UPPERCASE_FORMATS = {
     "usdz",
 }
 _FORMAT_TOKENS = set(_UPPERCASE_FORMATS) | {"iges", "igs", "3mf", "u3d", "x"}
-_ACRONYM_TOKENS = _FORMAT_TOKENS | {"omr", "ocr", "cgpa"}
+_ACRONYM_TOKENS = _FORMAT_TOKENS | {"omr", "ocr", "cgpa", "qr", "ean", "upc", "gs1", "hibc", "lic", "jpg", "txt", "wpf"}
+_SPECIAL_CASE_TOKENS = {
+    "2d": "2D",
+    "datamatrix": "DataMatrix",
+    "dotcode": "DotCode",
+    "maxicode": "MaxiCode",
+    "pdf417": "PDF417",
+    "code11": "Code 11",
+}
 
 
 def extract_seo_title(frontmatter: Dict[str, Any]) -> Optional[str]:
@@ -229,6 +264,12 @@ def _normalize_candidate(text: str) -> str:
         return "create-survey"
     if slug in _OMR_TOPIC_REWRITES:
         return _OMR_TOPIC_REWRITES[slug]
+    if slug in _BARCODE_TOPIC_REWRITES:
+        return _BARCODE_TOPIC_REWRITES[slug]
+    slug = re.sub(r"^barcode-(128|39|93)-generator-", r"code-\1-barcode-generator-", slug)
+    slug = re.sub(r"^code(11)-barcode-generator$", r"code-\1-barcode-generator", slug)
+    slug = re.sub(r"^(generate|read)-barcodes?-barcode$", r"\1-barcodes", slug)
+    slug = re.sub(r"-barcode-barcode$", "-barcode", slug)
     return slug
 
 
@@ -256,6 +297,12 @@ def _to_sentence_case(slug: str, preserve_upper: set[str]) -> str:
 
     rendered = []
     for i, word in enumerate(words):
+        if word in _SPECIAL_CASE_TOKENS:
+            rendered.append(_SPECIAL_CASE_TOKENS[word])
+            continue
+        if word == "code" and i + 1 < len(words) and words[i + 1].isdigit():
+            rendered.append("Code")
+            continue
         if word in _ACRONYM_TOKENS or word in preserve_upper:
             rendered.append(word.upper())
             continue

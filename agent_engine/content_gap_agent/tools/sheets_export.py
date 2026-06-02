@@ -6,7 +6,7 @@ from pathlib import Path
 from typing import Any
 
 import requests
-from .normalization import canonical_topic_key
+from .normalization import canonical_topic_key, normalize_sentence_text
 
 BASE_HEADER_KEYS = [
     "brand_key",
@@ -199,6 +199,11 @@ def _is_generic_missing_topic(product_key: str, topic: str) -> bool:
     topic_key = canonical_topic_key(topic)
     if str(product_key or "").strip().lower() == "omr" and topic_key == "omr":
         return True
+    if str(product_key or "").strip().lower() == "barcode":
+        if topic_key in {"barcode", "aspose barcode", "launch of aspose barcode"}:
+            return True
+        if "solution for all your barcode needs" in topic_key:
+            return True
     return False
 
 
@@ -230,7 +235,7 @@ def _extract_rows(coverage_path: Path) -> tuple[list[dict[str, Any]], list[str]]
         if not missing_platforms:
             continue
 
-        raw_topic = str(row.get("topic") or "")
+        raw_topic = normalize_sentence_text(str(row.get("topic") or ""))
         if _is_generic_missing_topic(product_key, raw_topic):
             continue
 

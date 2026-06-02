@@ -105,6 +105,33 @@ def test_omr_topics_are_canonicalized_to_readable_developer_titles() -> None:
         assert build_content_topic(title=raw) == expected
 
 
+def test_barcode_topics_are_canonicalized_to_readable_developer_titles() -> None:
+    cases = {
+        "2d barcode generator generate 2d barcodes or QR codes": "Generate 2D barcodes or QR codes",
+        "Barcode": "",
+        "Aspose.Barcode solution for all your barcode needs": "",
+        "Launch of Aspose.Barcode": "",
+        "Barcode generator generate barcode": "Generate barcode",
+        "Generate barcodes barcode": "Generate barcodes",
+        "Build barcode 93 generator barcode": "Build Code 93 barcode generator",
+        "Create micro QR code using QR code": "Create micro QR code",
+        "Develop datamatrix barcode generator": "Develop DataMatrix barcode generator",
+        "Generate pdf417 barcode using Aspose.Barcode": "Generate PDF417 barcode",
+        "JPG QR code reader barcode": "Read QR code from JPG",
+        "TXT to QR": "TXT to QR code",
+        "Text QR code generator create QR code for text": "Create text QR code",
+    }
+    for raw, expected in cases.items():
+        assert build_content_topic(title=raw) == expected
+
+
+def test_barcode_acronyms_survive_coverage_display_normalization() -> None:
+    assert normalize_sentence_text("generate 2d barcodes or qr codes") == "Generate 2D barcodes or QR codes"
+    assert normalize_sentence_text("generate datamatrix barcode") == "Generate DataMatrix barcode"
+    assert normalize_sentence_text("generate pdf417 barcode") == "Generate PDF417 barcode"
+    assert normalize_sentence_text("generate gs1 128 barcode") == "Generate GS1 128 barcode"
+
+
 def test_omr_sheet_export_skips_generic_acronym_topic(tmp_path) -> None:
     coverage_json = tmp_path / "coverage.json"
     coverage_json.write_text(
@@ -137,6 +164,46 @@ def test_omr_sheet_export_skips_generic_acronym_topic(tmp_path) -> None:
 
     assert payload["meta"]["row_count"] == 1
     assert payload["rows"][0][5] == "Recognize OMR image from MemoryStream"
+
+
+def test_barcode_sheet_export_skips_generic_and_normalizes_casing(tmp_path) -> None:
+    coverage_json = tmp_path / "coverage.json"
+    coverage_json.write_text(
+        json.dumps(
+            {
+                "brand_key": "aspose",
+                "product_key": "barcode",
+                "product_name": "Aspose.BarCode",
+                "baseline_platform": "all",
+                "rows": [
+                    {
+                        "category": "",
+                        "sub_category": "",
+                        "topic": "Barcode",
+                        "coverage": {"net": {"matched": True}, "java": {"matched": False}},
+                    },
+                    {
+                        "category": "",
+                        "sub_category": "",
+                        "topic": "Aspose.Barcode solution for all your barcode needs",
+                        "coverage": {"net": {"matched": True}, "java": {"matched": False}},
+                    },
+                    {
+                        "category": "",
+                        "sub_category": "",
+                        "topic": "generate 2d barcodes or qr codes",
+                        "coverage": {"net": {"matched": True}, "java": {"matched": False}},
+                    },
+                ],
+            }
+        ),
+        encoding="utf-8",
+    )
+
+    payload = build_payload(coverage_json=coverage_json, sheet_name="All Missing Topics", replace=False)
+
+    assert payload["meta"]["row_count"] == 1
+    assert payload["rows"][0][5] == "Generate 2D barcodes or QR codes"
 
 
 def test_cloud_brand_key_is_exported_as_display_name(tmp_path) -> None:

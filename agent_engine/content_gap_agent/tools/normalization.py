@@ -426,16 +426,32 @@ PHRASE_CANON: Dict[str, str] = {
     "vscode": "VS Code",
     "visual studio code": "VS Code",
     "latex": "LaTeX",
+    "2d": "2D",
+    "qr": "QR",
+    "datamatrix": "DataMatrix",
+    "dotcode": "DotCode",
+    "maxicode": "MaxiCode",
+    "pdf417": "PDF417",
+    "ean": "EAN",
+    "upc": "UPC",
+    "gs1": "GS1",
+    "hibc": "HIBC",
+    "lic": "LIC",
+    "jpg": "JPG",
+    "txt": "TXT",
+    "wpf": "WPF",
 }
 
 ACRONYMS: Set[str] = {
     *FORMAT_CANONICAL_TO_UPPER.keys(),
     "api", "sdk", "cli", "url", "http", "https", "sql", "vsd", "vsdx", "ssrs", "omr", "ocr", "cgpa",
+    "qr", "ean", "upc", "gs1", "hibc", "lic", "jpg", "txt", "wpf",
 }
 
 PRESERVE_TOKENS: Set[str] = {
     ".NET", "ASP.NET", "C#", "C++", "Node.js", "JavaScript", "TypeScript", "PHP",
-    "VS Code", "LaTeX", *PLATFORM_FAMILY_TO_DISPLAY.values(),
+    "VS Code", "LaTeX", "2D", "QR", "DataMatrix", "DotCode", "MaxiCode", "PDF417",
+    "EAN", "UPC", "GS1", "HIBC", "LIC", "JPG", "TXT", "WPF", *PLATFORM_FAMILY_TO_DISPLAY.values(),
 }
 
 FORMAT_TOKEN_SET: Set[str] = set(FILE_FORMAT_REGISTRY.keys()) | {
