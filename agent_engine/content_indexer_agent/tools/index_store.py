@@ -18,7 +18,7 @@ class JsonlIndexStore:
         self.records = {}
         if not self.jsonl_path.exists():
             return
-        with self.jsonl_path.open("r", encoding="utf-8") as f:
+        with self.jsonl_path.open("r", encoding="utf-8-sig") as f:
             for line in f:
                 line = line.strip()
                 if not line:
