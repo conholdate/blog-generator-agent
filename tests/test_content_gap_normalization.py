@@ -133,6 +133,56 @@ def test_barcode_acronyms_survive_coverage_display_normalization() -> None:
     assert normalize_sentence_text("generate gs1 128 barcode") == "Generate GS1 128 barcode"
 
 
+def test_excel_casing_survives_topic_normalization() -> None:
+    assert normalize_sentence_text("add comments in excel") == "Add comments in Excel"
+    assert build_content_topic(title="Add comments in excel") == "Add comments in Excel"
+
+
+def test_autofit_excel_rows_and_columns_topics_collapse() -> None:
+    expected_topic = "Autofit Excel rows and columns"
+    variants = [
+        "Auto FIT rows and columns in excel",
+        "Auto-Fit Rows and Columns in Excel in Python",
+        "Autofit excel rows and columns",
+    ]
+
+    assert normalize_sentence_text("Auto FIT rows and columns in excel") == expected_topic
+    assert normalize_sentence_text("Autofit excel rows and columns") == expected_topic
+
+    for variant in variants:
+        assert canonical_topic_key(variant) == "autofit excel rows and columns"
+        assert indexer_canonical_topic_key(variant) == "autofit excel rows and columns"
+
+    assert build_content_topic(title="Auto-Fit Rows and Columns in Excel in Python") == expected_topic
+    assert build_content_topic(title="AutoFit Excel Rows and Columns in Java") == expected_topic
+
+
+def test_fit_image_to_cell_topic_uses_readable_verb_casing() -> None:
+    expected_topic = "Fit image to cell width and height"
+
+    assert normalize_sentence_text("FIT image to CELL width and height") == expected_topic
+    assert canonical_topic_key("FIT image to CELL width and height") == "fit image to cell width and height"
+    assert indexer_canonical_topic_key("FIT image to CELL width and height") == "fit image to cell width and height"
+    assert build_content_topic(title="Fit Image to Cell Width and Height using C#") == expected_topic
+
+
+def test_ml_to_oz_unit_topic_uses_unit_acronyms() -> None:
+    expected_topic = "ML to OZ free unit"
+
+    assert normalize_sentence_text("ml to oz free unit") == expected_topic
+    assert canonical_topic_key("ML to oz free unit") == "ml to oz free unit"
+    assert indexer_canonical_topic_key("ML to oz free unit") == "ml to oz free unit"
+    assert build_content_topic(title="Convert ml to oz - Free Unit Converter") == "ML to OZ unit"
+
+
+def test_best_excel_library_topic_keeps_product_noun() -> None:
+    topic = "Aspose.Cells best Excel library for developers"
+
+    assert canonical_topic_key(topic) == "aspose cells best excel library for developers"
+    assert indexer_canonical_topic_key(topic) == "aspose cells best excel library for developers"
+    assert canonical_topic_key("Aspose.Cells best Excel for developers") != canonical_topic_key(topic)
+
+
 def test_text_qr_code_is_not_collapsed_to_txt_file_topic() -> None:
     assert canonical_topic_key("Create text QR code") == "create text qr code"
     assert indexer_canonical_topic_key("Create text QR code") == "create text qr code"

@@ -152,6 +152,10 @@ _FORMAT_TOKENS = set(_UPPERCASE_FORMATS) | {"iges", "igs", "3mf", "u3d", "x"}
 _ACRONYM_TOKENS = _FORMAT_TOKENS | {"omr", "ocr", "cgpa", "qr", "ean", "upc", "gs1", "hibc", "lic", "jpg", "txt", "wpf"}
 _SPECIAL_CASE_TOKENS = {
     "2d": "2D",
+    "autofit": "Autofit",
+    "excel": "Excel",
+    "ml": "ML",
+    "oz": "OZ",
     "datamatrix": "DataMatrix",
     "dotcode": "DotCode",
     "maxicode": "MaxiCode",
@@ -266,6 +270,11 @@ def _normalize_candidate(text: str) -> str:
         return _OMR_TOPIC_REWRITES[slug]
     if slug in _BARCODE_TOPIC_REWRITES:
         return _BARCODE_TOPIC_REWRITES[slug]
+    slug = re.sub(
+        r"^(?:auto-fit|autofit)-(?:excel-)?(?:rows-and-columns|columns-and-rows)(?:-in-excel)?$",
+        "autofit-excel-rows-and-columns",
+        slug,
+    )
     slug = re.sub(r"^barcode-(128|39|93)-generator-", r"code-\1-barcode-generator-", slug)
     slug = re.sub(r"^code(11)-barcode-generator$", r"code-\1-barcode-generator", slug)
     slug = re.sub(r"^generate-barcodes?-barcode(?:-api)?$", "generate-barcodes", slug)

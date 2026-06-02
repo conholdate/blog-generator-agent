@@ -422,6 +422,10 @@ PHRASE_CANON: Dict[str, str] = {
     "python": "Python",
     "java": "Java",
     "php": "PHP",
+    "auto fit": "Autofit",
+    "ml": "ML",
+    "oz": "OZ",
+    "excel": "Excel",
     "memorystream": "MemoryStream",
     "vscode": "VS Code",
     "visual studio code": "VS Code",
@@ -450,8 +454,8 @@ ACRONYMS: Set[str] = {
 
 PRESERVE_TOKENS: Set[str] = {
     ".NET", "ASP.NET", "C#", "C++", "Node.js", "JavaScript", "TypeScript", "PHP",
-    "VS Code", "LaTeX", "2D", "QR", "DataMatrix", "DotCode", "MaxiCode", "PDF417",
-    "EAN", "UPC", "GS1", "HIBC", "LIC", "JPG", "TXT", "WPF", *PLATFORM_FAMILY_TO_DISPLAY.values(),
+    "VS Code", "LaTeX", "Excel", "2D", "QR", "DataMatrix", "DotCode", "MaxiCode", "PDF417",
+    "EAN", "UPC", "GS1", "HIBC", "LIC", "JPG", "TXT", "WPF", "ML", "OZ", *PLATFORM_FAMILY_TO_DISPLAY.values(),
 }
 
 FORMAT_TOKEN_SET: Set[str] = set(FILE_FORMAT_REGISTRY.keys()) | {
@@ -509,6 +513,18 @@ _SYMBOL_LANG_QUALIFIER_RE = re.compile(
 )
 _SYMBOL_LANG_TOKEN_RE = re.compile(r"(?<![A-Za-z0-9])(c#|c\+\+|\.net)(?![A-Za-z0-9])", re.IGNORECASE)
 _TOPIC_NOISE_WORDS_RE = re.compile(r"\b(file|files|library|libraries|sdk|api|apis)\b", re.IGNORECASE)
+_BEST_EXCEL_PRODUCT_NOUN_RE = re.compile(
+    r"\bbest(?:\s+[a-z0-9.]+){0,4}?\s+excel\s+(library|libraries|sdk|api|apis)\s+for\s+developers\b",
+    re.IGNORECASE,
+)
+_AUTOFIT_EXCEL_ROWS_COLUMNS_RE = re.compile(
+    r"\b(?:auto\s*fit|autofit)\s+(?:(?:excel\s+)?rows\s+and\s+columns(?:\s+in\s+excel)?|(?:excel\s+)?columns\s+and\s+rows(?:\s+in\s+excel)?)\b",
+    re.IGNORECASE,
+)
+_FIT_IMAGE_TO_CELL_RE = re.compile(
+    r"\bfit\s+image\s+to\s+cell\s+width\s+and\s+height\b",
+    re.IGNORECASE,
+)
 _IMAGE_CALLOUT_RE = re.compile(r"\bimages?\s+callouts?\b|\bcallouts?\s+to\s+images?\b", re.IGNORECASE)
 _TRAILING_PREPOSITION_RE = re.compile(r"\b(in|with|using|for)\b\s*$", re.IGNORECASE)
 _C_NET_NOISE_RE = re.compile(r"\bc\s+net\b", re.IGNORECASE)
@@ -519,6 +535,25 @@ _CONVERSION_PAIR_RE = re.compile(r"\b([a-z0-9]{1,12})\s*(?:to|into|in2|->|→)\s
 # =============================================================================
 # Keyword / title normalization
 # =============================================================================
+
+def _remove_topic_noise_words(text: str) -> str:
+    protected_spans = [m.span(1) for m in _BEST_EXCEL_PRODUCT_NOUN_RE.finditer(text)]
+
+    def repl(m: re.Match[str]) -> str:
+        if any(start <= m.start() and m.end() <= end for start, end in protected_spans):
+            return m.group(0)
+        return " "
+
+    return _TOPIC_NOISE_WORDS_RE.sub(repl, text)
+
+
+def _canon_autofit_excel_topics(text: str) -> str:
+    return _AUTOFIT_EXCEL_ROWS_COLUMNS_RE.sub("Autofit Excel rows and columns", text)
+
+
+def _canon_fit_image_topics(text: str) -> str:
+    return _FIT_IMAGE_TO_CELL_RE.sub("Fit image to cell width and height", text)
+
 
 @dataclass(frozen=True)
 class KeywordRefiner:
@@ -807,7 +842,9 @@ def normalize_sentence_text(text: str) -> str:
     s = _canon_groupdocs_products(s)
     s = _canon_aspose_dotted_prefix(s)
     s = _canon_aspose_products(s)
-    return _apply_case_pipeline(s, mode="sentence")
+    s = _canon_autofit_excel_topics(s)
+    s = _canon_fit_image_topics(s)
+    return _canon_fit_image_topics(_apply_case_pipeline(s, mode="sentence"))
 
 
 def normalize_title_text(text: str) -> str:
@@ -818,7 +855,9 @@ def normalize_title_text(text: str) -> str:
     s = _canon_groupdocs_products(s)
     s = _canon_aspose_dotted_prefix(s)
     s = _canon_aspose_products(s)
-    return _apply_case_pipeline(s, mode="title")
+    s = _canon_autofit_excel_topics(s)
+    s = _canon_fit_image_topics(s)
+    return _canon_fit_image_topics(_apply_case_pipeline(s, mode="title"))
 
 
 # =============================================================================
@@ -837,8 +876,9 @@ def canonical_topic_key(text: str) -> str:
     t = _LANG_TOKEN_ANYWHERE_RE.sub(" ", t)
     t = _SYMBOL_LANG_QUALIFIER_RE.sub(" ", t)
     t = _SYMBOL_LANG_TOKEN_RE.sub(" ", t)
+    t = _canon_autofit_excel_topics(t)
     t = _IMAGE_CALLOUT_RE.sub("image callout", t)
-    t = _TOPIC_NOISE_WORDS_RE.sub(" ", t)
+    t = _remove_topic_noise_words(t)
     t = _C_NET_NOISE_RE.sub(" ", t)
     t = _FROM_TO_NOISE_RE.sub(" ", t)
     t = re.sub(r"\boptical\s+mark\s+recognition\s+omr\b", "optical mark recognition", t, flags=re.IGNORECASE)

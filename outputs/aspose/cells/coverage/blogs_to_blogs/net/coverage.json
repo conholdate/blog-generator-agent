@@ -90,7 +90,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2021-07-12-add-comments-in-excel-using-csharp/index.md",
           "title": "Add Comments in Excel Worksheets using C#",
-          "topic": "Add comments in excel worksheets",
+          "topic": "Add comments in Excel worksheets",
           "url": "https://blog.aspose.com/cells/add-comments-in-excel-using-csharp/"
         },
         "android_via_java": {
@@ -106,7 +106,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2021-09-06-add-comments-in-excel-worksheets-using-cpp/index.md",
           "title": "Add Comments in Excel Worksheets using C++",
-          "topic": "Add comments in excel worksheets",
+          "topic": "Add comments in Excel worksheets",
           "url": "https://blog.aspose.com/cells/add-comments-in-excel-worksheets-using-cpp/"
         },
         "general": {
@@ -138,7 +138,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2021-06-15-add-comments-in-excel-worksheets-using-python/index.md",
           "title": "Add Comments in Excel Worksheets using Python",
-          "topic": "Add comments in excel worksheets",
+          "topic": "Add comments in Excel worksheets",
           "url": "https://blog.aspose.com/cells/add-comments-in-excel-worksheets-using-python/"
         }
       }
@@ -666,8 +666,8 @@
     {
       "category": "Spreadsheet",
       "sub_category": "Auto Fit",
-      "topic": "auto fit rows and columns in excel",
-      "key": "auto fit rows and columns in excel",
+      "topic": "Autofit Excel rows and columns",
+      "key": "autofit excel rows and columns",
       "baseline_record_id": "blog::cells/2022-10-06-autofit-rows-coulmns-in-excel-csharp/index.md",
       "coverage": {
         "net": {
@@ -675,7 +675,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2022-10-06-autofit-rows-coulmns-in-excel-csharp/index.md",
           "title": "Auto-Fit Rows and Columns in Excel in C#",
-          "topic": "Auto fit rows and columns in excel",
+          "topic": "Autofit Excel rows and columns",
           "url": "https://blog.aspose.com/cells/auto-fit-excel-rows-columns-csharp/"
         },
         "android_via_java": {
@@ -723,7 +723,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2022-10-05-autofit-rows-coulmns-in-excel-python/index.md",
           "title": "Auto-Fit Rows and Columns in Excel in Python",
-          "topic": "Auto fit rows and columns in excel",
+          "topic": "Autofit Excel rows and columns",
           "url": "https://blog.aspose.com/cells/auto-fit-excel-rows-columns-python/"
         }
       }
@@ -7881,8 +7881,8 @@
     {
       "category": "Spreadsheet",
       "sub_category": "Image Manipulation",
-      "topic": "fit to cell width and height",
-      "key": "fit to cell width and height",
+      "topic": "Fit image to cell width and height",
+      "key": "fit image to cell width and height",
       "baseline_record_id": "blog::cells/2025-10-24-fit-image-to-cell-width-and-height-in-excel-dotnet/index.md",
       "coverage": {
         "net": {
@@ -7890,7 +7890,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2025-10-24-fit-image-to-cell-width-and-height-in-excel-dotnet/index.md",
           "title": "Fit Image to Cell Width and Height using C#",
-          "topic": "Fit to cell width and height",
+          "topic": "Fit image to cell width and height",
           "url": "https://blog.aspose.com/cells/fit-image-to-cell-width-and-height-in-excel-using-csharp/"
         },
         "android_via_java": {
@@ -8661,7 +8661,7 @@
     {
       "category": "Conversion",
       "sub_category": "Unit Conversion",
-      "topic": "ml to oz free unit",
+      "topic": "ML to OZ free unit",
       "key": "ml to oz free unit",
       "baseline_record_id": "blog::cells/2025-01-09-convert-ml-to-oz-online/index.md",
       "coverage": {
@@ -8670,7 +8670,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2025-01-09-convert-ml-to-oz-online/index.md",
           "title": "Convert ml to oz - Free Unit Converter",
-          "topic": "Ml to oz free unit",
+          "topic": "ML to OZ free unit",
           "url": "https://blog.aspose.com/cells/convert-ml-to-oz-online/"
         },
         "android_via_java": {

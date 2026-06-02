@@ -11,7 +11,7 @@
 | # | Topic | Missing platforms (high-impact)|
 | --- | --- | --- |
 | 1 | Add calculated field in pivot table | ANDROID_VIA_JAVA, CPP, GENERAL, JAVA, NODEJS, PYTHON |
-| 2 | Add comments in excel worksheets | ANDROID_VIA_JAVA, GENERAL, JAVA, NODEJS |
+| 2 | Add comments in Excel worksheets | ANDROID_VIA_JAVA, GENERAL, JAVA, NODEJS |
 | 3 | Add edit and update slicers in excel | ANDROID_VIA_JAVA, CPP, GENERAL, JAVA, NODEJS, PYTHON |
 | 4 | Add or delete rows and columns in excel | ANDROID_VIA_JAVA, CPP, GENERAL, JAVA, NODEJS, PYTHON |
 | 5 | Add or modify vba macros in excel | ANDROID_VIA_JAVA, CPP, GENERAL, NODEJS, PYTHON |
@@ -20,7 +20,7 @@
 | 8 | Add watermark to excel worksheets | ANDROID_VIA_JAVA, CPP, GENERAL, JAVA, NODEJS |
 | 9 | Adjust row height and column width in excel | ANDROID_VIA_JAVA, CPP, GENERAL, NODEJS, PYTHON |
 | 10 | Apply data validation in excel | ANDROID_VIA_JAVA, CPP, GENERAL, JAVA, NODEJS, PYTHON |
-| 11 | Auto fit rows and columns in excel | ANDROID_VIA_JAVA, CPP, GENERAL, JAVA, NODEJS |
+| 11 | Autofit Excel rows and columns | ANDROID_VIA_JAVA, CPP, GENERAL, JAVA, NODEJS |
 | 12 | Convert excel XLSX or XLS to | ANDROID_VIA_JAVA, CPP, GENERAL, JAVA, NODEJS, PYTHON |
 | 13 | Copy or move excel worksheets | ANDROID_VIA_JAVA, GENERAL, JAVA, NODEJS, PYTHON |
 | 14 | Copy range in excel | ANDROID_VIA_JAVA, CPP, GENERAL, NODEJS, PYTHON |
@@ -131,7 +131,7 @@
 | 119 | Excel XLS to powerpoint PPT | ANDROID_VIA_JAVA, CPP, GENERAL, JAVA, NODEJS, PYTHON |
 | 120 | Filter blank and non blank cells in excel | ANDROID_VIA_JAVA, CPP, GENERAL, JAVA, NODEJS, PYTHON |
 | 121 | Find and replace text in excel XLS XLSX | ANDROID_VIA_JAVA, CPP, GENERAL, JAVA, NODEJS, PYTHON |
-| 122 | Fit to cell width and height | ANDROID_VIA_JAVA, CPP, GENERAL, JAVA, NODEJS, PYTHON |
+| 122 | Fit image to cell width and height | ANDROID_VIA_JAVA, CPP, GENERAL, JAVA, NODEJS, PYTHON |
 | 123 | Generate barcode in excel | ANDROID_VIA_JAVA, CPP, GENERAL, JAVA, NODEJS, PYTHON |
 | 124 | HTML to JSON | ANDROID_VIA_JAVA, CPP, GENERAL, JAVA, NODEJS, PYTHON |
 | 125 | Import data from JSON to excel on linux | ANDROID_VIA_JAVA, CPP, GENERAL, NODEJS, PYTHON |
@@ -143,7 +143,7 @@
 | 131 | Mail merge from excel | ANDROID_VIA_JAVA, CPP, GENERAL, JAVA, NODEJS, PYTHON |
 | 132 | Merge multiple excel | ANDROID_VIA_JAVA, CPP, GENERAL, NODEJS, PYTHON |
 | 133 | Merge or unmerge cells in excel worksheet | ANDROID_VIA_JAVA, GENERAL, JAVA, NODEJS, PYTHON |
-| 134 | Ml to oz free unit | ANDROID_VIA_JAVA, CPP, GENERAL, JAVA, NODEJS, PYTHON |
+| 134 | ML to OZ free unit | ANDROID_VIA_JAVA, CPP, GENERAL, JAVA, NODEJS, PYTHON |
 | 135 | Protect and unprotect excel | ANDROID_VIA_JAVA, GENERAL, NODEJS, PYTHON |
 | 136 | Protect vba macros in excel | ANDROID_VIA_JAVA, CPP, GENERAL, JAVA, NODEJS, PYTHON |
 | 137 | Read add and edit threaded comments in excel | ANDROID_VIA_JAVA, CPP, GENERAL, JAVA, NODEJS |

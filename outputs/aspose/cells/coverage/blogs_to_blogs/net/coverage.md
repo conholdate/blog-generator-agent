@@ -21,7 +21,7 @@
 | TOPIC | NET | ANDROID_VIA_JAVA | CPP | GENERAL | JAVA | NODEJS | PYTHON |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | Add calculated field in pivot table | [✅ (1.00)](https://blog.aspose.com/cells/add-calculated-field-in-pivot-table-using-csharp/) | — | — | — | — | — | — |
-| Add comments in excel worksheets | [✅ (1.00)](https://blog.aspose.com/cells/add-comments-in-excel-using-csharp/) | — | [✅ (1.00)](https://blog.aspose.com/cells/add-comments-in-excel-worksheets-using-cpp/) | — | — | — | [✅ (1.00)](https://blog.aspose.com/cells/add-comments-in-excel-worksheets-using-python/) |
+| Add comments in Excel worksheets | [✅ (1.00)](https://blog.aspose.com/cells/add-comments-in-excel-using-csharp/) | — | [✅ (1.00)](https://blog.aspose.com/cells/add-comments-in-excel-worksheets-using-cpp/) | — | — | — | [✅ (1.00)](https://blog.aspose.com/cells/add-comments-in-excel-worksheets-using-python/) |
 | Add edit and update slicers in excel | [✅ (1.00)](https://blog.aspose.com/cells/add-slicer-in-excel-using-csharp/) | — | — | — | — | — | — |
 | Add or delete rows and columns in excel | [✅ (1.00)](https://blog.aspose.com/cells/add-delete-rows-and-columns-in-excel-in-csharp/) | — | — | — | — | — | — |
 | Add or modify vba macros in excel | [✅ (1.00)](https://blog.aspose.com/cells/add-modify-vba-macros-in-excel-using-csharp/) | — | — | — | [✅ (1.00)](https://blog.aspose.com/cells/add-modify-vba-macros-in-excel-using-java/) | — | — |
@@ -30,7 +30,7 @@
 | Add watermark to excel worksheets | [✅ (1.00)](https://blog.aspose.com/cells/add-watermark-to-excel-worksheets-using-csharp/) | — | — | — | — | — | [✅ (1.00)](https://blog.aspose.com/cells/add-watermark-to-excel-worksheets-in-python/) |
 | Adjust row height and column width in excel | [✅ (1.00)](https://blog.aspose.com/cells/adjust-row-height-column-width-in-excel-csharp/) | — | — | — | [✅ (1.00)](https://blog.aspose.com/cells/adjust-row-height-column-width-in-excel-java/) | — | — |
 | Apply data validation in excel | [✅ (1.00)](https://blog.aspose.com/cells/data-validation-in-excel-using-csharp/) | — | — | — | — | — | — |
-| Auto fit rows and columns in excel | [✅ (1.00)](https://blog.aspose.com/cells/auto-fit-excel-rows-columns-csharp/) | — | — | — | — | — | [✅ (1.00)](https://blog.aspose.com/cells/auto-fit-excel-rows-columns-python/) |
+| Autofit Excel rows and columns | [✅ (1.00)](https://blog.aspose.com/cells/auto-fit-excel-rows-columns-csharp/) | — | — | — | — | — | [✅ (1.00)](https://blog.aspose.com/cells/auto-fit-excel-rows-columns-python/) |
 | Convert excel XLSX or XLS to | [✅ (1.00)](https://blog.aspose.com/cells/convert-excel-files-to-images-in-csharp/) | — | — | — | — | — | — |
 | Copy or move excel worksheets | [✅ (1.00)](https://blog.aspose.com/cells/copy-excel-worksheets-using-csharp/) | — | [✅ (1.00)](https://blog.aspose.com/cells/copy-or-move-excel-worksheets-using-cpp/) | — | — | — | — |
 | Copy range in excel | [✅ (1.00)](https://blog.aspose.com/cells/copy-range-in-excel-using-csharp/) | — | — | — | [✅ (1.00)](https://blog.aspose.com/cells/copy-range-in-excel-using-java/) | — | — |
@@ -141,7 +141,7 @@
 | Excel XLS to powerpoint PPT | [✅ (1.00)](https://blog.aspose.com/cells/excel-to-ppt-csharp/) | — | — | — | — | — | — |
 | Filter blank and non blank cells in excel | [✅ (1.00)](https://blog.aspose.com/cells/filter-blank-cells-in-excel-using-csharp/) | — | — | — | — | — | — |
 | Find and replace text in excel XLS XLSX | [✅ (1.00)](https://blog.aspose.com/cells/find-and-replace-text-in-excel-xls-xlsx-in-csharp-net/) | — | — | — | — | — | — |
-| Fit to cell width and height | [✅ (1.00)](https://blog.aspose.com/cells/fit-image-to-cell-width-and-height-in-excel-using-csharp/) | — | — | — | — | — | — |
+| Fit image to cell width and height | [✅ (1.00)](https://blog.aspose.com/cells/fit-image-to-cell-width-and-height-in-excel-using-csharp/) | — | — | — | — | — | — |
 | Generate barcode in excel | [✅ (1.00)](https://blog.aspose.com/cells/generate-barcode-in-excel-using-csharp/) | — | — | — | — | — | — |
 | HTML to JSON | [✅ (1.00)](https://blog.aspose.com/cells/convert-html-to-json-using-csharp/) | — | — | — | — | — | — |
 | Import data from JSON to excel on linux | [✅ (1.00)](https://blog.aspose.com/cells/import-data-from-json-to-excel-on-linux/) | — | — | — | [✅ (1.00)](https://blog.aspose.com/cells/import-data-from-json-to-excel-on-linux-java/) | — | — |
@@ -153,7 +153,7 @@
 | Mail merge from excel | [✅ (1.00)](https://blog.aspose.com/cells/mail-merge-from-excel-in-csharp/) | — | — | — | — | — | — |
 | Merge multiple excel | [✅ (1.00)](https://blog.aspose.com/cells/merge-excel-files-csharp/) | — | — | — | [✅ (1.00)](https://blog.aspose.com/cells/merge-excel-files-java/) | — | — |
 | Merge or unmerge cells in excel worksheet | [✅ (1.00)](https://blog.aspose.com/cells/merge-unmerge-cells-excel-csharp/) | — | [✅ (1.00)](https://blog.aspose.com/cells/merge-or-unmerge-cells-in-an-excel-worksheet-using-cpp/) | — | — | — | — |
-| Ml to oz free unit | [✅ (1.00)](https://blog.aspose.com/cells/convert-ml-to-oz-online/) | — | — | — | — | — | — |
+| ML to OZ free unit | [✅ (1.00)](https://blog.aspose.com/cells/convert-ml-to-oz-online/) | — | — | — | — | — | — |
 | Protect and unprotect excel | [✅ (1.00)](https://blog.aspose.com/cells/protect-or-unprotect-excel-files-using-csharp/) | — | [✅ (1.00)](https://blog.aspose.com/cells/protect-and-unprotect-excel-files-using-cpp/) | — | [✅ (1.00)](https://blog.aspose.com/cells/Protect-Unprotect-Excel-Files-in-Java/) | — | — |
 | Protect vba macros in excel | [✅ (1.00)](https://blog.aspose.com/cells/protect-vba-macros-in-excel-using-csharp/) | — | — | — | — | — | — |
 | Read add and edit threaded comments in excel | [✅ (1.00)](https://blog.aspose.com/cells/threaded-comments-in-excel-using-csharp/) | — | — | — | — | — | [✅ (1.00)](https://blog.aspose.com/cells/threaded-comments-in-excel-using-python/) |
