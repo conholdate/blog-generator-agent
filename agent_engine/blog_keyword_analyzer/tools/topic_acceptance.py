@@ -56,11 +56,15 @@ def _fix_acronyms(value: str) -> str:
     text = re.sub(r"(?i)\blic\b", "LIC", text)
     text = re.sub(r"(?i)\bmvc\b", "MVC", text)
     text = re.sub(r"(?i)\bwpf\b", "WPF", text)
+    text = re.sub(r"(?i)\bdpi\b", "DPI", text)
     text = re.sub(r"(?i)\bci\s*/\s*cd\b", "CI/CD", text)
     text = re.sub(r"(?i)\butf\s*[- ]?\s*8\b", "UTF-8", text)
     text = re.sub(r"(?i)\bstep\s*-\s*by\s*-\s*step\b", "Step-by-Step", text)
     text = re.sub(r"(?i)\bimage\s+FILE\b", "Image File", text)
+    text = re.sub(r"(?i)\bTXT\s+FILE\b", "TXT file", text)
+    text = re.sub(r"(?i)\bWi\s+Fi\b", "Wi-Fi", text)
     text = re.sub(r":\s+a\b", ": A", text)
+    text = re.sub(r":\s*A\s*$", "", text)
     text = re.sub(r"(?i)\bDeveloper\s+S\s+Guide\b", "Developer Guide", text)
     return text
 
@@ -72,7 +76,13 @@ def _clean_barcode_title_phrase(value: str) -> tuple[str, list[str]]:
 
     replacements = [
         (r"(?i)^Guide:\s*", ""),
+        (r"(?i)^Tutorial:\s*", ""),
+        (r"(?i)^Step-by-Step\s+Guide\s+to\s+Read\s+QR\s+from\s+Image\b", "Read QR Code from Image"),
+        (r"(?i)^Step-by-Step\s+Guide\s+to\s+Read\s+Barcode\s+from\s+Image\b", "Read Barcode from Image"),
+        (r"(?i)\bCreate\s+Micro\s+QR\s+Code\s+Tutorial\b", "Create Micro QR Code"),
         (r"(?i)^Quick\s+Tutorial:\s*Program\s+to\s+Generate\b", "Generate"),
+        (r"(?i)^Complete\s+SCRIPT\s+to\s+Generate\s+Data\s+Matrix\s+Barcode\b", "Generate DataMatrix Barcode"),
+        (r"(?i)^SCRIPT\s+to\s+Batch\s+Generate\b", "Batch Generate"),
         (r"(?i)^Program\s+to\s+Generate\b", "Generate"),
         (r"(?i)^Code\s+to\s+Create\b", "Create"),
         (r"(?i)^Code\s+to\s+Generate\b", "Generate"),
@@ -81,8 +91,14 @@ def _clean_barcode_title_phrase(value: str) -> tuple[str, list[str]]:
         (r"(?i)^Reader\s+and\s+Generator\b", "Barcode Reader and Generator"),
         (r"(?i)^How\s+to\s+Convert\s+Reader\s+and\s+Generator\b", "Build Barcode Reader and Generator"),
         (r"(?i)^How\s+to\s+Convert\s+a\s+WPF\s+Barcode\s+Generator\b", "Build WPF Barcode Generator"),
+        (r"(?i)^How\s+to\s+Convert\s+WPF\s+Barcode\s+Generator\b", "Build WPF Barcode Generator"),
+        (r"(?i)^How\s+to\s+Convert\s+Barcode\s+Generator\s+Guide\s+for\s+Developers\b", "Barcode Generator Guide for Developers"),
         (r"(?i)^How\s+to\s+Convert\s+QR\s+Code\s+Read\s+from\s+Image\b", "Read QR Code from Image"),
+        (r"(?i)^How\s+to\s+Convert\s+Read\s+QR\s+Code\s+from\s+Image\b", "Read QR Code from Image"),
+        (r"(?i)^How\s+to\s+Convert\s+Read\s+Barcodes\s+Applications\b", "Read Barcodes from Images"),
         (r"(?i)^How\s+to\s+Convert\s+Barcode\s+Reader\s+Scan\s+Barcode\b", "Scan Barcode with Barcode Reader"),
+        (r"(?i)^QR\s+Code\s+Reader\s+How\s+to\s+Build\s+High\s+Performance\s+QR\s+Code\b", "Build High-Performance QR Code Reader"),
+        (r"(?i)^Read\s+QR\s+from\s+Image\b", "Read QR Code from Image"),
         (r"(?i)^Barcode\s+Reader\s+Scan\s+Barcode\b", "Scan Barcode with Barcode Reader"),
         (r"(?i)^Barcode\s+Generator\s+and\s+Reader\s+Generate\s+and\s+Scan\s+Barcodes\b", "Generate and Scan Barcodes"),
         (
@@ -96,9 +112,15 @@ def _clean_barcode_title_phrase(value: str) -> tuple[str, list[str]]:
         (r"(?i)^Build\s+Barcode\s+93\s+Generator\s+Barcode\b", "Build Code 93 Barcode Generator"),
         (r"(?i)^How\s+to\s+Build\s+Barcode\s+93\s+Generator\s+Barcode\b", "Build Code 93 Barcode Generator"),
         (r"(?i)^Generate\s+Barcode\s+with\s+Simple\s+Steps\s+Complete\s+Guide\b", "Generate Barcode: Step-by-Step Guide"),
+        (r"(?i)^Control\s+Ratio\s+of\s+Wide\s+to\s+Narrow\b", "Control Code 39 Wide-to-Narrow Ratio"),
+        (r"(?i)^Control\s+Wide\s+to\s+Narrow\s+Ratio\s+Code\s+39\s+Barcode\b", "Control Code 39 Wide-to-Narrow Ratio"),
+        (r"(?i)^Mastering\s+Control\s+Barcode\s+39\s+Wide\s+Narrow\s+Ratio\b", "Control Code 39 Wide-to-Narrow Ratio"),
+        (r"(?i)^Generate\s+Barcode\s+Applications\b", "Generate Barcodes for Applications"),
     ]
     for pattern, replacement in replacements:
         text = re.sub(pattern, replacement, text)
+
+    text = re.sub(r"(?i)\s*-\s*(Complete|Quick|Full)\s+(Tutorial|Guide)\b", r": \1 \2", text)
 
     if text != before:
         notes.append("Rewrote malformed barcode title phrasing.")
@@ -198,6 +220,11 @@ def _clean_malformed_topic_phrase(value: str, platform: Optional[str] = None) ->
         )
         text = re.sub(
             rf"(?i)\s+(?:using|with|for)\s+{platform_pattern}\s*$",
+            f" in {platform_label}",
+            text,
+        )
+        text = re.sub(
+            rf"(?i)\s+(?:using|with|for)\s+{platform_pattern}\s+Tutorial\s*$",
             f" in {platform_label}",
             text,
         )

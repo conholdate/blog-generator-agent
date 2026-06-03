@@ -131,3 +131,137 @@ def test_kra_barcode_title_cleanup_normalizes_barcode_acronyms() -> None:
             platform=platform,
         )
         assert result.title == expected
+
+
+def test_kra_barcode_title_cleanup_handles_remaining_bad_wrappers() -> None:
+    cases = [
+        (
+            "Barcode Generator Guide for Developers using .NET Tutorial",
+            "Barcode Generator Guide for Developers in .NET",
+            ".NET",
+            "Barcode Generator Guide for Developers in .NET",
+        ),
+        (
+            "How to Convert Barcode Generator Guide for Developers in C++",
+            "Barcode Generator Guide for Developers in C++",
+            "C++",
+            "Barcode Generator Guide for Developers in C++",
+        ),
+        (
+            "Complete SCRIPT to Generate Data Matrix Barcode in Python",
+            "Generate Data Matrix Barcode in Python",
+            "Python",
+            "Generate DataMatrix Barcode in Python",
+        ),
+        (
+            "SCRIPT to Batch Generate Hibc LIC Barcodes in Python",
+            "Generate Hibc LIC Barcodes in Python",
+            "Python",
+            "Batch Generate HIBC LIC Barcodes in Python",
+        ),
+        (
+            "QR Code Reader How to Build High Performance QR Code in .NET",
+            "QR Code Reader How to Build High Performance QR Code in .NET",
+            ".NET",
+            "Build High-Performance QR Code Reader in .NET",
+        ),
+        (
+            "How to Convert Read QR Code from Image Buffer in C++",
+            "Read QR Code from Image Buffer in C++",
+            "C++",
+            "Read QR Code from Image Buffer in C++",
+        ),
+        (
+            "How to Convert Read Barcodes Applications in Python",
+            "Read Barcodes Applications in Python",
+            "Python",
+            "Read Barcodes from Images in Python",
+        ),
+        (
+            "How to Convert Wpf Barcode Generator in Java",
+            "Wpf Barcode Generator in Java",
+            "Java",
+            "Build WPF Barcode Generator in Java",
+        ),
+        (
+            "How to Rotate Barcode Image in .NET: A",
+            "Rotate Barcode Image in .NET",
+            ".NET",
+            "How to Rotate Barcode Image in .NET",
+        ),
+    ]
+
+    for title, primary_keyword, platform, expected in cases:
+        result = finalize_topic_acceptance(
+            title=title,
+            primary_keyword=primary_keyword,
+            platform=platform,
+        )
+        assert result.title == expected
+
+
+def test_kra_barcode_title_cleanup_handles_remaining_casing_and_context() -> None:
+    cases = [
+        (
+            "Implementing Barcode Reader High Dpi Image Scanning in C++",
+            "Barcode Reader High Dpi Image Scanning in C++",
+            "C++",
+            "Implementing Barcode Reader High DPI Image Scanning in C++",
+        ),
+        (
+            "Guide to Gs1-128 Barcode Image Generation in C++",
+            "Gs1-128 Barcode Image Generation in C++",
+            "C++",
+            "Guide to GS1-128 Barcode Image Generation in C++",
+        ),
+        (
+            "Generate 2d Barcodes or QR Codes using .NET: Step-by-Step",
+            "Generate 2d Barcodes or QR Codes in .NET",
+            ".NET",
+            "Generate 2D Barcodes or QR Codes using .NET: Step-by-Step",
+        ),
+        (
+            "Generate Barcodes with Utf-8 Encoding in Java",
+            "Generate Barcodes with Utf-8 Encoding in Java",
+            "Java",
+            "Generate Barcodes with UTF-8 Encoding in Java",
+        ),
+        (
+            "Create Wi Fi QR Code in Python",
+            "Create Wi Fi QR Code in Python",
+            "Python",
+            "Create Wi-Fi QR Code in Python",
+        ),
+        (
+            "Create QR Code from TXT FILE in Java",
+            "Create QR Code from TXT FILE in Java",
+            "Java",
+            "Create QR Code from TXT file in Java",
+        ),
+        (
+            "Control Ratio of Wide to Narrow in Python",
+            "Control Ratio of Wide to Narrow in Python",
+            "Python",
+            "Control Code 39 Wide-to-Narrow Ratio in Python",
+        ),
+        (
+            "Generate Barcode Applications in C++",
+            "Generate Barcode Applications in C++",
+            "C++",
+            "Generate Barcodes for Applications in C++",
+        ),
+        (
+            "Read Barcode from TIFF Image-Complete Tutorial in .NET",
+            "Read Barcode from TIFF Image in .NET",
+            ".NET",
+            "Read Barcode from TIFF Image: Complete Tutorial in .NET",
+        ),
+    ]
+
+    for title, primary_keyword, platform, expected in cases:
+        result = finalize_topic_acceptance(
+            title=title,
+            primary_keyword=primary_keyword,
+            platform=platform,
+        )
+        assert result.title == expected
