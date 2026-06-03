@@ -43,6 +43,9 @@ def _fix_acronyms(value: str) -> str:
     text = re.sub(r"(?i)\b2d\b", "2D", text)
     text = re.sub(r"(?i)\b3d\b", "3D", text)
     text = re.sub(r"(?i)\bgis\b", "GIS", text)
+    text = re.sub(r"(?i)\bomr\b", "OMR", text)
+    text = re.sub(r"(?i)\bmemorystream\b", "MemoryStream", text)
+    text = re.sub(r":\s+a\b", ": A", text)
     return text
 
 
@@ -116,6 +119,11 @@ def _clean_malformed_topic_phrase(value: str, platform: Optional[str] = None) ->
         before = text
         platform_pattern = re.escape(platform_label)
         text = re.sub(
+            rf"(?i)(?<!\w){platform_pattern}\s*-\s*a\b",
+            f"{platform_label}: A",
+            text,
+        )
+        text = re.sub(
             rf"(?i)\s+(?:or|and)\s+(?:using|with|for|in)\s+{platform_pattern}\s*$",
             f" in {platform_label}",
             text,
@@ -127,6 +135,15 @@ def _clean_malformed_topic_phrase(value: str, platform: Optional[str] = None) ->
         )
         if text != before:
             notes.append("Rewrote malformed platform connector phrasing.")
+
+    before = text
+    text = re.sub(
+        r"(?i)\b(OMR\s+Answer\s+Sheet)\s+(PNG|JPG|JPEG|PDF)\b",
+        lambda m: f"{m.group(1)} from {m.group(2).upper()}",
+        text,
+    )
+    if text != before:
+        notes.append("Added missing source preposition for OMR answer sheet format.")
 
     before = text
     while True:

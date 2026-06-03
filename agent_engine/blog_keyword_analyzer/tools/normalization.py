@@ -25,6 +25,7 @@ _TOKEN_RE = re.compile(r"[A-Za-z0-9#+.]+|[-–—]|[()/:]")
 _MIXED_CASE_RE = re.compile(r"^(?=.*[A-Z].*[a-z]|.*[a-z].*[A-Z])[A-Za-z0-9]+$")
 _PUNCT_RE = re.compile(r"[^\w\s]+", re.UNICODE)
 _WS_RE = re.compile(r"\s+", re.UNICODE)
+_STEP_BY_STEP_RE = re.compile(r"\bstep\s*-\s*by\s*-\s*step\b", re.IGNORECASE)
 _GROUPDOCS_PREFIX_RE = re.compile(r"\bgroupdocs\s*\.\s*([a-z0-9]+)\b", re.IGNORECASE)
 _ASPOSE_PREFIX_RE = re.compile(r"\baspose\s*\.\s*([a-z0-9]+)\b", re.IGNORECASE)
 
@@ -514,6 +515,8 @@ PHRASE_CANON: Dict[str, str] = {
     "python": "Python",
     "java": "Java",
     "php": "PHP",
+    "omr": "OMR",
+    "memorystream": "MemoryStream",
     "vscode": "VS Code",
     "visual studio code": "VS Code",
     "latex": "LaTeX",
@@ -526,7 +529,7 @@ ACRONYMS: Set[str] = {
 
 PRESERVE_TOKENS: Set[str] = {
     ".NET", "ASP.NET", "C#", "C++", "Node.js", "JavaScript", "TypeScript", "PHP",
-    "VS Code", "LaTeX", *PLATFORM_FAMILY_TO_DISPLAY.values(),
+    "VS Code", "LaTeX", "OMR", "MemoryStream", *PLATFORM_FAMILY_TO_DISPLAY.values(),
 }
 
 FORMAT_TOKEN_SET: Set[str] = set(FILE_FORMAT_REGISTRY.keys()) | {
@@ -908,7 +911,7 @@ def normalize_sentence_text(text: str) -> str:
     s = _canon_groupdocs_products(s)
     s = _canon_aspose_dotted_prefix(s)
     s = _canon_aspose_products(s)
-    return _apply_case_pipeline(s, mode="sentence")
+    return _STEP_BY_STEP_RE.sub("Step-by-Step", _apply_case_pipeline(s, mode="sentence"))
 
 
 def normalize_title_text(text: str) -> str:
@@ -919,7 +922,7 @@ def normalize_title_text(text: str) -> str:
     s = _canon_groupdocs_products(s)
     s = _canon_aspose_dotted_prefix(s)
     s = _canon_aspose_products(s)
-    return _apply_case_pipeline(s, mode="title")
+    return _STEP_BY_STEP_RE.sub("Step-by-Step", _apply_case_pipeline(s, mode="title"))
 
 
 # =============================================================================
