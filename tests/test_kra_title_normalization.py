@@ -33,3 +33,101 @@ def test_kra_acceptance_adds_missing_omr_answer_sheet_format_preposition() -> No
     )
 
     assert result.title == "How to Parse OMR Answer Sheet from JPG in .NET"
+
+
+def test_kra_barcode_title_cleanup_rewrites_weak_wrappers_and_casing() -> None:
+    cases = [
+        (
+            "Reader and Generator in .NET Guide",
+            "Reader and Generator in .NET",
+            ".NET",
+            "Barcode Reader and Generator in .NET Guide",
+        ),
+        (
+            "How to Convert Reader and Generator in C++",
+            "Reader and Generator in C++",
+            "C++",
+            "Build Barcode Reader and Generator in C++",
+        ),
+        (
+            "Barcode Generator and Reader Generate and Scan Barcodes-C++",
+            "Barcode Generator and Reader Generate and Scan Barcodes in C++",
+            "C++",
+            "Generate and Scan Barcodes in C++",
+        ),
+        (
+            "Barcode Reader Scan Barcode in .NET: STEP-by-STEP Tutorial",
+            "Barcode Reader Scan Barcode in .NET",
+            ".NET",
+            "Scan Barcode with Barcode Reader in .NET: Step-by-Step Tutorial",
+        ),
+        (
+            "How to Convert Barcode Reader Scan Barcode in C++",
+            "Barcode Reader Scan Barcode in C++",
+            "C++",
+            "Scan Barcode with Barcode Reader in C++",
+        ),
+        (
+            "Build Barcode 93 Generator Barcode in Java-Quick Tutorial",
+            "Build Barcode 93 Generator Barcode in Java",
+            "Java",
+            "Build Code 93 Barcode Generator in Java: Quick Tutorial",
+        ),
+        (
+            "SCRIPT for Wpf Barcode Image in Python-Complete Guide",
+            "Wpf Barcode Image in Python",
+            "Python",
+            "Generate WPF Barcode Image in Python: Complete Guide",
+        ),
+    ]
+
+    for title, primary_keyword, platform, expected in cases:
+        result = finalize_topic_acceptance(
+            title=title,
+            primary_keyword=primary_keyword,
+            platform=platform,
+        )
+        assert result.title == expected
+
+
+def test_kra_barcode_title_cleanup_normalizes_barcode_acronyms() -> None:
+    cases = [
+        (
+            "Automate Dotcode Barcode Generation using Ci/CD in .NET",
+            "Automate Dotcode Barcode Generation using Ci/CD in .NET",
+            ".NET",
+            "Automate DotCode Barcode Generation using CI/CD in .NET",
+        ),
+        (
+            "Generate 2d Barcodes or QR Codes using Java: Code Sample",
+            "Generate 2d Barcodes or QR Codes in Java",
+            "Java",
+            "Generate 2D Barcodes or QR Codes using Java: Code Sample",
+        ),
+        (
+            "Generate Barcodes with Utf 8 Encoding in C++",
+            "Generate Barcodes with Utf 8 Encoding in C++",
+            "C++",
+            "Generate Barcodes with UTF-8 Encoding in C++",
+        ),
+        (
+            "Code to Create Gs1-128 Barcode in C++",
+            "Create Gs1-128 Barcode in C++",
+            "C++",
+            "Create GS1-128 Barcode in C++",
+        ),
+        (
+            "Read QR Code from Image FILE in .NET",
+            "Read QR Code from Image FILE in .NET",
+            ".NET",
+            "Read QR Code from Image File in .NET",
+        ),
+    ]
+
+    for title, primary_keyword, platform, expected in cases:
+        result = finalize_topic_acceptance(
+            title=title,
+            primary_keyword=primary_keyword,
+            platform=platform,
+        )
+        assert result.title == expected

@@ -45,8 +45,64 @@ def _fix_acronyms(value: str) -> str:
     text = re.sub(r"(?i)\bgis\b", "GIS", text)
     text = re.sub(r"(?i)\bomr\b", "OMR", text)
     text = re.sub(r"(?i)\bmemorystream\b", "MemoryStream", text)
+    text = re.sub(r"(?i)\bdotcode\b", "DotCode", text)
+    text = re.sub(r"(?i)\bdatamatrix\b", "DataMatrix", text)
+    text = re.sub(r"(?i)\bmaxicode\b", "MaxiCode", text)
+    text = re.sub(r"(?i)\bpdf417\b", "PDF417", text)
+    text = re.sub(r"(?i)\bean\b", "EAN", text)
+    text = re.sub(r"(?i)\bupc\b", "UPC", text)
+    text = re.sub(r"(?i)\bgs1\b", "GS1", text)
+    text = re.sub(r"(?i)\bhibc\b", "HIBC", text)
+    text = re.sub(r"(?i)\blic\b", "LIC", text)
+    text = re.sub(r"(?i)\bmvc\b", "MVC", text)
+    text = re.sub(r"(?i)\bwpf\b", "WPF", text)
+    text = re.sub(r"(?i)\bci\s*/\s*cd\b", "CI/CD", text)
+    text = re.sub(r"(?i)\butf\s*[- ]?\s*8\b", "UTF-8", text)
+    text = re.sub(r"(?i)\bstep\s*-\s*by\s*-\s*step\b", "Step-by-Step", text)
+    text = re.sub(r"(?i)\bimage\s+FILE\b", "Image File", text)
     text = re.sub(r":\s+a\b", ": A", text)
+    text = re.sub(r"(?i)\bDeveloper\s+S\s+Guide\b", "Developer Guide", text)
     return text
+
+
+def _clean_barcode_title_phrase(value: str) -> tuple[str, list[str]]:
+    text = value or ""
+    notes: list[str] = []
+    before = text
+
+    replacements = [
+        (r"(?i)^Guide:\s*", ""),
+        (r"(?i)^Quick\s+Tutorial:\s*Program\s+to\s+Generate\b", "Generate"),
+        (r"(?i)^Program\s+to\s+Generate\b", "Generate"),
+        (r"(?i)^Code\s+to\s+Create\b", "Create"),
+        (r"(?i)^Code\s+to\s+Generate\b", "Generate"),
+        (r"(?i)^MASTER\s+", ""),
+        (r"(?i)^SCRIPT\s+for\s+WPF\s+Barcode\s+Image\b", "Generate WPF Barcode Image"),
+        (r"(?i)^Reader\s+and\s+Generator\b", "Barcode Reader and Generator"),
+        (r"(?i)^How\s+to\s+Convert\s+Reader\s+and\s+Generator\b", "Build Barcode Reader and Generator"),
+        (r"(?i)^How\s+to\s+Convert\s+a\s+WPF\s+Barcode\s+Generator\b", "Build WPF Barcode Generator"),
+        (r"(?i)^How\s+to\s+Convert\s+QR\s+Code\s+Read\s+from\s+Image\b", "Read QR Code from Image"),
+        (r"(?i)^How\s+to\s+Convert\s+Barcode\s+Reader\s+Scan\s+Barcode\b", "Scan Barcode with Barcode Reader"),
+        (r"(?i)^Barcode\s+Reader\s+Scan\s+Barcode\b", "Scan Barcode with Barcode Reader"),
+        (r"(?i)^Barcode\s+Generator\s+and\s+Reader\s+Generate\s+and\s+Scan\s+Barcodes\b", "Generate and Scan Barcodes"),
+        (
+            r"(?i)^Code\s+128\s+Barcode\s+Generator\s+Create\s+Professional\s+Code\s+128\s+Barcode\s+Labels\b",
+            "Create Code 128 Barcode Labels",
+        ),
+        (
+            r"(?i)^Create\s+Data\s+Matrix\s+Barcode\s+Generate\s+Data\s+Matrix\s+Barcode\b",
+            "Generate DataMatrix Barcode",
+        ),
+        (r"(?i)^Build\s+Barcode\s+93\s+Generator\s+Barcode\b", "Build Code 93 Barcode Generator"),
+        (r"(?i)^How\s+to\s+Build\s+Barcode\s+93\s+Generator\s+Barcode\b", "Build Code 93 Barcode Generator"),
+        (r"(?i)^Generate\s+Barcode\s+with\s+Simple\s+Steps\s+Complete\s+Guide\b", "Generate Barcode: Step-by-Step Guide"),
+    ]
+    for pattern, replacement in replacements:
+        text = re.sub(pattern, replacement, text)
+
+    if text != before:
+        notes.append("Rewrote malformed barcode title phrasing.")
+    return _clean(text), notes
 
 
 def _clean_step_by_step_phrase(value: str) -> tuple[str, list[str]]:
@@ -113,11 +169,23 @@ def _clean_malformed_topic_phrase(value: str, platform: Optional[str] = None) ->
     notes.extend(step_notes)
     text, action_notes = _clean_malformed_action_phrase(text)
     notes.extend(action_notes)
+    text, barcode_notes = _clean_barcode_title_phrase(text)
+    notes.extend(barcode_notes)
 
     platform_label = _platform_label(platform)
     if platform_label:
         before = text
         platform_pattern = re.escape(platform_label)
+        text = re.sub(
+            rf"(?i)\s*-\s*{platform_pattern}\s*$",
+            f" in {platform_label}",
+            text,
+        )
+        text = re.sub(
+            rf"(?i)(?<!\w){platform_pattern}\s*-\s*(?=[A-Za-z])",
+            f"{platform_label}: ",
+            text,
+        )
         text = re.sub(
             rf"(?i)(?<!\w){platform_pattern}\s*-\s*a\b",
             f"{platform_label}: A",
