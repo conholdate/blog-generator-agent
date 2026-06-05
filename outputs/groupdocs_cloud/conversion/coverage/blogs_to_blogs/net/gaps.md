@@ -6,8 +6,8 @@
 
 | 🧩 Metric | Value | Status |
 | --- | --- | --- |
-| **Total Canonical Topics** | **40** | — |
-| **Topics with Gaps** | **40** | ⚠️ |
+| **Total Canonical Topics** | **38** | — |
+| **Topics with Gaps** | **38** | ⚠️ |
 | **Fully Covered Topics** | 0 | — |
 | **Excluded (Release / Updates)** | 0 | ℹ️ |
 | **Baseline Scope** | NET | — |
@@ -30,21 +30,21 @@
 
 | Platform | # Covered | # Missing | Coverage |
 | --- | --- | --- | --- |
-| **NET** | 40 | 0 | 🟢 Strong (100.0%) |
-| **GENERAL** | 5 | 35 | 🔴 Weak (12.5%) |
-| **GO_VIA_CPP** | 0 | 40 | 🔴 Weak (0.0%) |
-| **JAVA** | 9 | 31 | 🔴 Weak (22.5%) |
-| **NODEJS** | 8 | 32 | 🔴 Weak (20.0%) |
-| **PHP** | 0 | 40 | 🔴 Weak (0.0%) |
-| **PYTHON** | 7 | 33 | 🔴 Weak (17.5%) |
-| **RUBY** | 2 | 38 | 🔴 Weak (5.0%) |
+| **NET** | 38 | 0 | 🟢 Strong (100.0%) |
+| **GENERAL** | 8 | 30 | 🔴 Weak (21.1%) |
+| **GO_VIA_CPP** | 0 | 38 | 🔴 Weak (0.0%) |
+| **JAVA** | 24 | 14 | 🟡 Moderate (63.2%) |
+| **NODEJS** | 14 | 24 | 🔴 Weak (36.8%) |
+| **PHP** | 1 | 37 | 🔴 Weak (2.6%) |
+| **PYTHON** | 18 | 20 | 🔴 Weak (47.4%) |
+| **RUBY** | 4 | 34 | 🔴 Weak (10.5%) |
 
 ---
 
 ### 🔎 Executive Insights
 
 - **100.0%** of canonical topics are missing on at least one platform (after exclusions).
-- Highest gap density: **GO_VIA_CPP** (40 missing), **PHP** (40 missing), **RUBY** (38 missing).
+- Highest gap density: **GO_VIA_CPP** (38 missing), **PHP** (37 missing), **RUBY** (34 missing).
 - Gaps are concentrated in **8** major category/subcategory clusters (see Section 4).
 - Release notes, product updates, and version announcements are intentionally excluded from this report.
 
@@ -54,18 +54,18 @@
 
 | # | Cluster | Representative topic | Missing platforms (high-impact) | Suggested new titles (examples) |
 | --- | --- | --- | --- | --- |
-| 1 | **Conversion / Document Conversion** | Csv to PDF | GENERAL, GO_VIA_CPP, JAVA, NODEJS, PHP, PYTHON... | Csv to PDF — GENERAL; Csv to PDF — GO_VIA_CPP; Csv to PDF — JAVA |
-| 2 | **Conversion / Document Conversion** | Effortlessly convert excel to PDF step by step guide | GENERAL, GO_VIA_CPP, JAVA, NODEJS, PHP, PYTHON... | Effortlessly convert excel to PDF step by step guide — GENERAL; Effortlessly convert excel to PDF step by step guide — GO_VIA_CPP; Effortlessly convert excel to PDF step by step guide — JAVA |
-| 3 | **Conversion / Spreadsheet Conversion** | Boost productivity by converting excel to jpg | GENERAL, GO_VIA_CPP, JAVA, NODEJS, PHP, PYTHON... | Boost productivity by converting excel to jpg — GENERAL; Boost productivity by converting excel to jpg — GO_VIA_CPP; Boost productivity by converting excel to jpg — JAVA |
-| 4 | **Conversion / Spreadsheet Conversion** | Ods to excel workbook using rest API easy and fast | GENERAL, GO_VIA_CPP, JAVA, NODEJS, PHP, PYTHON... | Ods to excel workbook using rest API easy and fast — GENERAL; Ods to excel workbook using rest API easy and fast — GO_VIA_CPP; Ods to excel workbook using rest API easy and fast — JAVA |
-| 5 | **Conversion / Document Formats** | Mpp to excel export ms project to XLS XLSX using rest API | GENERAL, GO_VIA_CPP, JAVA, NODEJS, PHP, PYTHON... | Mpp to excel export ms project to XLS XLSX using rest API — GENERAL; Mpp to excel export ms project to XLS XLSX using rest API — GO_VIA_CPP; Mpp to excel export ms project to XLS XLSX using rest API — JAVA |
-| 6 | **Conversion / Document Formats** | PDF to powerpoint PDF to ppt | GENERAL, GO_VIA_CPP, NODEJS, PHP, PYTHON, RUBY | PDF to powerpoint PDF to ppt — GENERAL; PDF to powerpoint PDF to ppt — GO_VIA_CPP; PDF to powerpoint PDF to ppt — NODEJS |
-| 7 | **Conversion / Image Conversion** | Svg to jpg | GENERAL, GO_VIA_CPP, PHP, RUBY | Svg to jpg — GENERAL; Svg to jpg — GO_VIA_CPP; Svg to jpg — PHP |
-| 8 | **Conversion / Image Conversion** | Svg to PNG | GO_VIA_CPP, NODEJS, PHP, RUBY | Svg to PNG — GO_VIA_CPP; Svg to PNG — NODEJS; Svg to PNG — PHP |
-| 9 | **File Conversion / CSV to HTML** | Csv to HTML | GENERAL, GO_VIA_CPP, JAVA, NODEJS, PHP, PYTHON... | Csv to HTML — GENERAL; Csv to HTML — GO_VIA_CPP; Csv to HTML — JAVA |
-| 10 | **Conversion / Document to Image** | Csv to jpeg | GENERAL, GO_VIA_CPP, JAVA, NODEJS, PHP, PYTHON... | Csv to jpeg — GENERAL; Csv to jpeg — GO_VIA_CPP; Csv to jpeg — JAVA |
-| 11 | **Conversion / Project Management** | Develop ms project viewer mpp viewer | GENERAL, GO_VIA_CPP, JAVA, NODEJS, PHP, PYTHON... | Develop ms project viewer mpp viewer — GENERAL; Develop ms project viewer mpp viewer — GO_VIA_CPP; Develop ms project viewer mpp viewer — JAVA |
-| 12 | **Conversion / File Format Conversion** | Effortless csv to excel workbook conversion | GENERAL, GO_VIA_CPP, JAVA, NODEJS, PHP, PYTHON... | Effortless csv to excel workbook conversion — GENERAL; Effortless csv to excel workbook conversion — GO_VIA_CPP; Effortless csv to excel workbook conversion — JAVA |
+| 1 | **Conversion / Document Conversion** | CSV to PDF | GENERAL, GO_VIA_CPP, JAVA, NODEJS, PHP, PYTHON... | CSV to PDF — GENERAL; CSV to PDF — GO_VIA_CPP; CSV to PDF — JAVA |
+| 2 | **Conversion / Document Conversion** | DOCX to HTML | GO_VIA_CPP, NODEJS, PHP, PYTHON, RUBY | DOCX to HTML — GO_VIA_CPP; DOCX to HTML — NODEJS; DOCX to HTML — PHP |
+| 3 | **Conversion / Spreadsheet Conversion** | ODS to XLSX | GENERAL, GO_VIA_CPP, JAVA, NODEJS, PHP, PYTHON... | ODS to XLSX — GENERAL; ODS to XLSX — GO_VIA_CPP; ODS to XLSX — JAVA |
+| 4 | **Conversion / Spreadsheet Conversion** | XLSX to JPG | GENERAL, GO_VIA_CPP, JAVA, NODEJS, PHP, PYTHON... | XLSX to JPG — GENERAL; XLSX to JPG — GO_VIA_CPP; XLSX to JPG — JAVA |
+| 5 | **Conversion / Document Formats** | MPP to XLSX | GENERAL, GO_VIA_CPP, NODEJS, PHP, PYTHON, RUBY | MPP to XLSX — GENERAL; MPP to XLSX — GO_VIA_CPP; MPP to XLSX — NODEJS |
+| 6 | **Conversion / Document Formats** | PDF to PPT | GENERAL, GO_VIA_CPP, PHP, RUBY | PDF to PPT — GENERAL; PDF to PPT — GO_VIA_CPP; PDF to PPT — PHP |
+| 7 | **Conversion / Image Conversion** | SVG to JPG | GENERAL, GO_VIA_CPP, PHP, RUBY | SVG to JPG — GENERAL; SVG to JPG — GO_VIA_CPP; SVG to JPG — PHP |
+| 8 | **Conversion / Image Conversion** | SVG to PNG | GO_VIA_CPP, NODEJS, PHP, RUBY | SVG to PNG — GO_VIA_CPP; SVG to PNG — NODEJS; SVG to PNG — PHP |
+| 9 | **File Conversion / CSV to HTML** | CSV to HTML | GENERAL, GO_VIA_CPP, JAVA, NODEJS, PHP, PYTHON... | CSV to HTML — GENERAL; CSV to HTML — GO_VIA_CPP; CSV to HTML — JAVA |
+| 10 | **Conversion / Document to Image** | CSV to JPG | GENERAL, GO_VIA_CPP, JAVA, NODEJS, PHP, PYTHON... | CSV to JPG — GENERAL; CSV to JPG — GO_VIA_CPP; CSV to JPG — JAVA |
+| 11 | **Conversion / Project Management** | Develop ms project viewer MPP viewer | GENERAL, GO_VIA_CPP, JAVA, NODEJS, PHP, PYTHON... | Develop ms project viewer MPP viewer — GENERAL; Develop ms project viewer MPP viewer — GO_VIA_CPP; Develop ms project viewer MPP viewer — JAVA |
+| 12 | **Document Conversion / Spreadsheet To Html** | Excel spreadsheets to HTML tables | GENERAL, GO_VIA_CPP, JAVA, NODEJS, PHP, PYTHON... | Excel spreadsheets to HTML tables — GENERAL; Excel spreadsheets to HTML tables — GO_VIA_CPP; Excel spreadsheets to HTML tables — JAVA |
 
 *These recommendations are derived from topics missing across the largest number of platforms and clustered by category/subcategory.*
 
@@ -75,14 +75,14 @@
 
 | Platform | # topics covered | % of baseline rows | # topics missing |
 | --- | --- | --- | --- |
-| **NET** | 40 | 100.0% | 0 |
-| **GENERAL** | 5 | 12.5% | 35 |
-| **GO_VIA_CPP** | 0 | 0.0% | 40 |
-| **JAVA** | 9 | 22.5% | 31 |
-| **NODEJS** | 8 | 20.0% | 32 |
-| **PHP** | 0 | 0.0% | 40 |
-| **PYTHON** | 7 | 17.5% | 33 |
-| **RUBY** | 2 | 5.0% | 38 |
+| **NET** | 38 | 100.0% | 0 |
+| **GENERAL** | 8 | 21.1% | 30 |
+| **GO_VIA_CPP** | 0 | 0.0% | 38 |
+| **JAVA** | 24 | 63.2% | 14 |
+| **NODEJS** | 14 | 36.8% | 24 |
+| **PHP** | 1 | 2.6% | 37 |
+| **PYTHON** | 18 | 47.4% | 20 |
+| **RUBY** | 4 | 10.5% | 34 |
 
 **Takeaway:** Focus first on platforms with the highest missing counts and lowest coverage percentage; port high-impact topics from the best-covered platform first.
 
@@ -92,18 +92,18 @@
 
 | Cluster | # gap topics | Missing signals | Most-missed platforms |
 | --- | --- | --- | --- |
-| **Conversion / Document Conversion** | 7 | 42 | GO_VIA_CPP, PHP, GENERAL, PYTHON |
+| **Conversion / Document Conversion** | 5 | 23 | GO_VIA_CPP, PHP, PYTHON, GENERAL |
 | **Conversion / Spreadsheet Conversion** | 2 | 14 | GENERAL, GO_VIA_CPP, JAVA, NODEJS |
-| **Conversion / Document Formats** | 2 | 13 | GENERAL, GO_VIA_CPP, NODEJS, PHP |
+| **Conversion / Document Formats** | 2 | 10 | GENERAL, GO_VIA_CPP, PHP, RUBY |
 | **Conversion / Image Conversion** | 2 | 8 | GO_VIA_CPP, PHP, RUBY, GENERAL |
 | **File Conversion / CSV to HTML** | 1 | 7 | GENERAL, GO_VIA_CPP, JAVA, NODEJS |
 | **Conversion / Document to Image** | 1 | 7 | GENERAL, GO_VIA_CPP, JAVA, NODEJS |
 | **Conversion / Project Management** | 1 | 7 | GENERAL, GO_VIA_CPP, JAVA, NODEJS |
-| **Conversion / File Format Conversion** | 1 | 7 | GENERAL, GO_VIA_CPP, JAVA, NODEJS |
-| **Conversion / Pdf to Excel** | 1 | 7 | GENERAL, GO_VIA_CPP, JAVA, NODEJS |
 | **Document Conversion / Spreadsheet To Html** | 1 | 7 | GENERAL, GO_VIA_CPP, JAVA, NODEJS |
-| **Conversion / File Format** | 1 | 7 | GENERAL, GO_VIA_CPP, JAVA, NODEJS |
 | **Document Conversion / Excel to Text** | 1 | 7 | GENERAL, GO_VIA_CPP, JAVA, NODEJS |
+| **Conversion / Html To Excel** | 1 | 7 | GENERAL, GO_VIA_CPP, JAVA, NODEJS |
+| **Conversion / Image to PowerPoint** | 1 | 7 | GENERAL, GO_VIA_CPP, JAVA, NODEJS |
+| **File Conversion / Archive To Image** | 1 | 7 | GENERAL, GO_VIA_CPP, JAVA, NODEJS |
 
 ---
 
@@ -111,18 +111,18 @@
 
 | Quick-win topic | Missing platforms | Estimated effort |
 | --- | --- | --- |
-| Boost productivity by converting excel to jpg | GENERAL, GO_VIA_CPP, JAVA, NODEJS, PHP, PYTHON... | 1–2 days per platform |
-| Csv to HTML | GENERAL, GO_VIA_CPP, JAVA, NODEJS, PHP, PYTHON... | 1–2 days per platform |
-| Csv to jpeg | GENERAL, GO_VIA_CPP, JAVA, NODEJS, PHP, PYTHON... | 1–2 days per platform |
-| Csv to PDF | GENERAL, GO_VIA_CPP, JAVA, NODEJS, PHP, PYTHON... | 1–2 days per platform |
-| Develop ms project viewer mpp viewer | GENERAL, GO_VIA_CPP, JAVA, NODEJS, PHP, PYTHON... | 1–2 days per platform |
-| Effortless csv to excel workbook conversion | GENERAL, GO_VIA_CPP, JAVA, NODEJS, PHP, PYTHON... | 1–2 days per platform |
-| Effortless PDF to excel conversion | GENERAL, GO_VIA_CPP, JAVA, NODEJS, PHP, PYTHON... | 1–2 days per platform |
-| Effortlessly convert excel to PDF step by step guide | GENERAL, GO_VIA_CPP, JAVA, NODEJS, PHP, PYTHON... | 1–2 days per platform |
+| CSV to HTML | GENERAL, GO_VIA_CPP, JAVA, NODEJS, PHP, PYTHON... | 1–2 days per platform |
+| CSV to JPG | GENERAL, GO_VIA_CPP, JAVA, NODEJS, PHP, PYTHON... | 1–2 days per platform |
+| CSV to PDF | GENERAL, GO_VIA_CPP, JAVA, NODEJS, PHP, PYTHON... | 1–2 days per platform |
+| Develop ms project viewer MPP viewer | GENERAL, GO_VIA_CPP, JAVA, NODEJS, PHP, PYTHON... | 1–2 days per platform |
 | Excel spreadsheets to HTML tables | GENERAL, GO_VIA_CPP, JAVA, NODEJS, PHP, PYTHON... | 1–2 days per platform |
-| Excel to JSON XLS to JSON | GENERAL, GO_VIA_CPP, JAVA, NODEJS, PHP, PYTHON... | 1–2 days per platform |
-| Excel workbook to text rest API | GENERAL, GO_VIA_CPP, JAVA, NODEJS, PHP, PYTHON... | 1–2 days per platform |
-| HTML to excel conversion convert HTML tables to excel spreadsheets | GENERAL, GO_VIA_CPP, JAVA, NODEJS, PHP, PYTHON... | 1–2 days per platform |
+| Excel workbook to text rest | GENERAL, GO_VIA_CPP, JAVA, NODEJS, PHP, PYTHON... | 1–2 days per platform |
+| HTML to XLSX | GENERAL, GO_VIA_CPP, JAVA, NODEJS, PHP, PYTHON... | 1–2 days per platform |
+| ODS to XLSX | GENERAL, GO_VIA_CPP, JAVA, NODEJS, PHP, PYTHON... | 1–2 days per platform |
+| PNG to PPTX | GENERAL, GO_VIA_CPP, JAVA, NODEJS, PHP, PYTHON... | 1–2 days per platform |
+| RAR to JPG | GENERAL, GO_VIA_CPP, JAVA, NODEJS, PHP, PYTHON... | 1–2 days per platform |
+| XLSX to JPG | GENERAL, GO_VIA_CPP, JAVA, NODEJS, PHP, PYTHON... | 1–2 days per platform |
+| DOCX to MD | GENERAL, GO_VIA_CPP, JAVA, NODEJS, PHP, RUBY | 1–2 days per platform |
 
 *Heuristic: topics missing across many platforms but already present on baseline are prime candidates for rapid porting/adaptation.*
 
@@ -132,14 +132,14 @@
 
 | Source (well-covered) | Target (gap) | Suggested anchor text |
 | --- | --- | --- |
-| NET coverage: Boost productivity by converting excel to jpg | New guides for: GENERAL, GO_VIA_CPP, JAVA, NODEJS... | Boost productivity by converting excel to jpg in GENERAL, GO_VIA_CPP |
-| NET coverage: Csv to HTML | New guides for: GENERAL, GO_VIA_CPP, JAVA, NODEJS... | Csv to HTML in GENERAL, GO_VIA_CPP |
-| NET coverage: Csv to jpeg | New guides for: GENERAL, GO_VIA_CPP, JAVA, NODEJS... | Csv to jpeg in GENERAL, GO_VIA_CPP |
-| NET coverage: Csv to PDF | New guides for: GENERAL, GO_VIA_CPP, JAVA, NODEJS... | Csv to PDF in GENERAL, GO_VIA_CPP |
-| NET coverage: Develop ms project viewer mpp viewer | New guides for: GENERAL, GO_VIA_CPP, JAVA, NODEJS... | Develop ms project viewer mpp viewer in GENERAL, GO_VIA_CPP |
-| NET coverage: Effortless csv to excel workbook conversion | New guides for: GENERAL, GO_VIA_CPP, JAVA, NODEJS... | Effortless csv to excel workbook conversion in GENERAL, GO_VIA_CPP |
-| NET coverage: Effortless PDF to excel conversion | New guides for: GENERAL, GO_VIA_CPP, JAVA, NODEJS... | Effortless PDF to excel conversion in GENERAL, GO_VIA_CPP |
-| NET coverage: Effortlessly convert excel to PDF step by step guide | New guides for: GENERAL, GO_VIA_CPP, JAVA, NODEJS... | Effortlessly convert excel to PDF step by step guide in GENERAL, GO_VIA_CPP |
+| NET coverage: CSV to HTML | New guides for: GENERAL, GO_VIA_CPP, JAVA, NODEJS... | CSV to HTML in GENERAL, GO_VIA_CPP |
+| NET coverage: CSV to JPG | New guides for: GENERAL, GO_VIA_CPP, JAVA, NODEJS... | CSV to JPG in GENERAL, GO_VIA_CPP |
+| NET coverage: CSV to PDF | New guides for: GENERAL, GO_VIA_CPP, JAVA, NODEJS... | CSV to PDF in GENERAL, GO_VIA_CPP |
+| NET coverage: Develop ms project viewer MPP viewer | New guides for: GENERAL, GO_VIA_CPP, JAVA, NODEJS... | Develop ms project viewer MPP viewer in GENERAL, GO_VIA_CPP |
+| NET coverage: Excel spreadsheets to HTML tables | New guides for: GENERAL, GO_VIA_CPP, JAVA, NODEJS... | Excel spreadsheets to HTML tables in GENERAL, GO_VIA_CPP |
+| NET coverage: Excel workbook to text rest | New guides for: GENERAL, GO_VIA_CPP, JAVA, NODEJS... | Excel workbook to text rest in GENERAL, GO_VIA_CPP |
+| NET coverage: HTML to XLSX | New guides for: GENERAL, GO_VIA_CPP, JAVA, NODEJS... | HTML to XLSX in GENERAL, GO_VIA_CPP |
+| NET coverage: ODS to XLSX | New guides for: GENERAL, GO_VIA_CPP, JAVA, NODEJS... | ODS to XLSX in GENERAL, GO_VIA_CPP |
 
 *Once coverage cells include canonical URLs per platform, this section can generate concrete link pairs (source URL → target URL).*
 
