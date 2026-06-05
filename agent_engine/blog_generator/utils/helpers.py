@@ -1,6 +1,7 @@
 
 from datetime import datetime, timedelta
 import re, sys, os, json, logging
+from tkinter.font import names
 import requests
 from typing import Dict, Any, Optional, List, Tuple
 
@@ -2350,3 +2351,14 @@ def save_blog_metadata_to_sheet(brand: str, url: str, title: str, author: str, g
     weekly = get_or_create_weekly_sheet(spreadsheet, weekly_sheet_name, headers)
     weekly.append_row(row)
     print(f"Saved to weekly sheet '{weekly_sheet_name}': {row}")
+
+
+def extract_product_names(names):
+    return [
+        {
+            "ProductName": item.get("ProductName"),
+            "ProductURL": item.get("ProductURL")
+        }
+        for item in names
+        if "ProductName" in item and "ProductURL" in item
+    ]

@@ -8,7 +8,7 @@ from tools.mcp_tools import generate_markdown_file, fetch_category_related_artic
 from utils import prompts
 from utils.seo_validator import validate_seo_content, validate_and_fix_meta_description, validate_and_fix_seo_title
 from utils.file_format_mappings import FILE_FORMAT_MAPPINGS, BASE_URL
-from utils.helpers import mark_topic_as_generated, prepare_context, get_productInfo, get_topic_by_index, inject_file_format_links, slugify, normalize_case_preserve_formats_in_keywords, clean_ai_generated_markdown, validate_markdown_links, capitalize_file_formats_for_title, setup_logger, generate_tags_with_llm, save_blog_metadata_to_sheet, extract_blog_metadata, get_topic_from_sheet, get_next_tab
+from utils.helpers import mark_topic_as_generated, prepare_context, get_productInfo, get_topic_by_index, inject_file_format_links, slugify, normalize_case_preserve_formats_in_keywords, clean_ai_generated_markdown, validate_markdown_links, capitalize_file_formats_for_title, setup_logger, generate_tags_with_llm, save_blog_metadata_to_sheet, extract_blog_metadata, get_topic_from_sheet, get_next_tab, extract_product_names
 from utils.metricsRecorder import MetricsRecorder
 from services.LLMservice import llm_service
 import json
@@ -88,11 +88,12 @@ class BlogOrchestrator:
             return
         topics_raw_data, row_number = result
         print(f"sheet data {topics_raw_data}")
-
+        allowed_products = extract_product_names(self.products)
         post_topic = topics_raw_data.pop("topic")
         product_name = topics_raw_data.pop("product")
         platform = topics_raw_data.pop("platform")
-
+     
+ 
         # Get product info
         try:
             product_info = get_productInfo(product_name, platform, self.products, self.brand)
@@ -184,14 +185,15 @@ class BlogOrchestrator:
                 semantic_keywords,
                 other_important_and_relevant_things,
                 tags,
-                isCloud
+                isCloud,
+                allowed_products
             )
         
             result = await llm_service.run_agent(
                 instructions=instructions,
                 context=context,
                 agent_name="blog-writer-agent",
-                temperature=0.6,
+                temperature=0.4,
                 max_turns=10,
                 max_tokens=16000
             )

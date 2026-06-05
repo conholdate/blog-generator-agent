@@ -8,6 +8,78 @@ from utils.helpers import format_related_posts
 from config import settings
 
 
+from datetime import datetime
+from typing import Dict, List
+
+
+def extract_product_names(names):
+    return [
+        {
+            "ProductName": item.get("ProductName"),
+            "ProductURL": item.get("ProductURL")
+        }
+        for item in names
+        if "ProductName" in item and "ProductURL" in item
+    ]
+
+
+def build_allowed_products_block(allowed_products, primary_product_name):
+    products = extract_product_names(allowed_products)
+
+    lines = []
+    for p in products:
+        if p["ProductName"] == primary_product_name:
+            lines.append(f"  - {p['ProductName']} <- PRIMARY PRODUCT (this blog's subject)")
+        else:
+            lines.append(f"  - {p['ProductName']} | {p['ProductURL']}")
+
+    allowed_list = "\n".join(lines)
+
+    return f"""
+===============================================================================
+CRITICAL: CROSS-PRODUCT MENTIONS - STRICT ALLOWLIST (NON-NEGOTIABLE)
+===============================================================================
+
+The ONLY products that exist for this brand are listed below.
+NEVER mention any product not on this list - not even plausibly named ones.
+If a product name is not in this list, it does not exist. Do not guess,
+infer, or invent product names under any circumstances.
+
+ALLOWED PRODUCTS (name + URL for any secondary mentions):
+{allowed_list}
+
+PRIMARY PRODUCT FOR THIS BLOG: {primary_product_name}
+
+RULES:
+1. This blog is EXCLUSIVELY about the PRIMARY PRODUCT listed above.
+   Every section must stay focused on it. Do not drift into unrelated
+   product territory.
+
+2. Only reference a secondary product from the allowlist above when it
+   solves a DIRECT integration need that the primary product cannot
+   handle alone.
+   VALID example: primary product generates a barcode image ->
+     mentioning Aspose.PDF for .NET to embed it in a PDF is valid.
+   INVALID example: mentioning another product just to pad a features
+     section or add variety to the text.
+
+3. When mentioning a secondary product, use its EXACT name from the
+   allowlist above - character for character. Do not shorten, rephrase,
+   abbreviate, or infer a variant name.
+
+4. Never link to a secondary product URL unless that URL appears in the
+   allowlist above. Name-only mentions without a hyperlink are acceptable
+   when the primary product context did not supply a URL for that product.
+
+5. VIOLATION EXAMPLE - what this rule was created to prevent:
+   A blog about Aspose.BarCode for .NET mentioned "Aspose.DICOM" - a
+   product name that does not exist in the allowlist. This is a
+   hallucination. It must never happen again. When in doubt, do not
+   mention a secondary product at all.
+===============================================================================
+"""
+
+
 def get_blog_writer_prompt(
     title: str,
     keywords: List[str],
@@ -22,6 +94,7 @@ def get_blog_writer_prompt(
     other_important_and_relevant_things: str = "",
     tags: List[str] = [],
     isCloud: bool = False,
+    allowed_products: List[str] = []
 ) -> str:
     """
     Creates a full SEO blog-writing prompt with frontmatter, outline, and
@@ -61,8 +134,8 @@ def get_blog_writer_prompt(
             return "\n".join(str(item) for item in value)
         return str(value)
 
-    long_tail_keywords               = _to_str(long_tail_keywords)
-    semantic_keywords                = _to_str(semantic_keywords)
+    long_tail_keywords                  = _to_str(long_tail_keywords)
+    semantic_keywords                   = _to_str(semantic_keywords)
     other_important_and_relevant_things = _to_str(other_important_and_relevant_things)
 
     print(f"primary_keyword -- {primary_keyword}")
@@ -73,6 +146,18 @@ def get_blog_writer_prompt(
     print(f"other_important_and_relevant_things -- {other_important_and_relevant_things}", flush=True)
     print(f"target persona -- {target_persona}", flush=True)
     print(f"Blog post angle -- {angle}", flush=True)
+
+    # ------------------------------------------------------------------
+    # Build the allowed products block from the passed-in list.
+    # Falls back to an empty string if no products were supplied so the
+    # rest of the prompt is unaffected.
+    # ------------------------------------------------------------------
+    primary_product_name = data.get("ProductName", "")
+    allowed_products_block = (
+        build_allowed_products_block(allowed_products, primary_product_name)
+        if allowed_products
+        else ""
+    )
 
     # ------------------------------------------------------------------
     # Detect whether the outline already covers Steps and Complete Code
@@ -203,22 +288,22 @@ You are an expert technical blog writer. Write a detailed, SEO-optimized blog po
 {context}
 
 ===============================================================================
-STEP 0 — MANDATORY HEADING PLAN (DO THIS BEFORE WRITING ANYTHING ELSE)
+STEP 0 - MANDATORY HEADING PLAN (DO THIS BEFORE WRITING ANYTHING ELSE)
 ===============================================================================
 
 Before writing a single word of content, you MUST complete this heading plan:
 
 1. Write down every H2 heading you intend to use across the entire blog
-2. Apply Title Case to every heading — every major word must start with a capital letter
+2. Apply Title Case to every heading - every major word must start with a capital letter
 3. Apply file format and product name capitalization rules to every heading
 4. Categorize each outline section and assign it to the correct position in the flow
 5. For each heading, extract its core keyword phrase (2-4 words)
-6. Scan the list — if any core keyword phrase appears more than ONCE, rewrite that heading NOW
+6. Scan the list - if any core keyword phrase appears more than ONCE, rewrite that heading NOW
 7. Only proceed to write content after every heading in your plan is unique, Title Cased, correctly ordered, and has correct format/product casing
 
-**TITLE CASE CHECK — APPLY TO EVERY HEADING BEFORE WRITING:**
+**TITLE CASE CHECK - APPLY TO EVERY HEADING BEFORE WRITING:**
 After writing your heading plan, scan every heading and verify Title Case is applied.
-Every major word MUST start with a capital letter — no exceptions.
+Every major word MUST start with a capital letter - no exceptions.
 WRONG: ## Steps to CSV editor Development in Java
 CORRECT: ## Steps to CSV Editor Development in Java
 WRONG: ## CSV editor Development in Java - Complete Code Example
@@ -232,10 +317,10 @@ Title Case Rules:
 - Lowercase only: Articles (a, an, the), short conjunctions (and, but, or), short prepositions (in, on, at, to, for, with, from)
 - EXCEPTION: Always capitalize prepositions of 5+ letters (Between, Through, Without, Against)
 
-**FILE FORMAT AND PRODUCT NAME CAPITALIZATION — APPLY TO ALL HEADINGS:**
+**FILE FORMAT AND PRODUCT NAME CAPITALIZATION - APPLY TO ALL HEADINGS:**
 After Title Case verification, scan every heading for file format names and product abbreviations.
 
-FILE FORMATS must always be fully uppercase — no exceptions:
+FILE FORMATS must always be fully uppercase - no exceptions:
 - WRONG: Dwt, Pdf, Png, Html, Docx, Xlsx, Csv, Json, Xml, Svg, Dxf, Dwg, Stl, Obj, Fbx, Jpg, Jpeg, Bmp, Gif, Tiff, Psd, Ai, Eps, Zip, Rar, Mp4, Mp3, Doc, Xls, Ppt, Odt, Rtf, Txt, Msg, Eml
 - CORRECT: DWT, PDF, PNG, HTML, DOCX, XLSX, CSV, JSON, XML, SVG, DXF, DWG, STL, OBJ, FBX, JPG, JPEG, BMP, GIF, TIFF, PSD, AI, EPS, ZIP, RAR, MP4, MP3, DOC, XLS, PPT, ODT, RTF, TXT, MSG, EML
 
@@ -243,7 +328,7 @@ PRODUCT NAME ABBREVIATIONS must use correct casing:
 - WRONG: Aspose.Cad, Aspose.Pdf, Aspose.Html, Aspose.Zip, Groupdocs, Conholdate
 - CORRECT: Aspose.CAD, Aspose.PDF, Aspose.HTML, Aspose.ZIP, GroupDocs, Conholdate
 
-MICROSOFT AND THIRD-PARTY BRAND NAMES must use correct casing everywhere — headings, body, FAQs, frontmatter:
+MICROSOFT AND THIRD-PARTY BRAND NAMES must use correct casing everywhere - headings, body, FAQs, frontmatter:
 - WRONG: Powerpoint, powerpoint, Power Point
 - CORRECT: PowerPoint
 - WRONG: Sharepoint, Share Point
@@ -292,11 +377,11 @@ EXAMPLES:
   H2-9: Conclusion                     -> core phrase: conclusion
   H2-10: FAQs                          -> core phrase: faqs
 
-**DEDUPLICATION CHECK — STRICTLY ENFORCED:**
+**DEDUPLICATION CHECK - STRICTLY ENFORCED:**
 - Extract the core 2-4 word phrase from each heading
-- If the SAME phrase appears in 2 or more headings — REWRITE one of them
+- If the SAME phrase appears in 2 or more headings - REWRITE one of them
 - A phrase is "the same" if it shares 3+ consecutive words with another heading
-- NO exceptions — every heading must have a unique core phrase
+- NO exceptions - every heading must have a unique core phrase
 
 **WRONG (CSV Editor Development in Java appears 3 times):**
   ## CSV Editor Development in Java - Prerequisites and Setup  <- phrase used
@@ -488,6 +573,8 @@ ALWAYS clarify:
 - This is a library/API for programmatic integration
 - Code runs on your local machine or server
 - Requires proper licensing for production use
+
+{allowed_products_block}
 
 ===============================================================================
 PART 1: FRONTMATTER REQUIREMENTS
@@ -687,7 +774,7 @@ PART 2: CONTENT STRUCTURE (MANDATORY SECTIONS)
 
 ### REQUIRED SECTIONS (IN ORDER)
 1. Introduction Content (NO H2 heading - direct paragraphs)
-2. Steps (H2 heading - FIRST H2, immediately after Introduction — NO other section before this)
+2. Steps (H2 heading - FIRST H2, immediately after Introduction - NO other section before this)
 3. Complete Code Example(s) (H2 heading - immediately after Steps)
 4. [CLOUD ONLY] cURL Commands (H2 heading - immediately after Complete Code Example)
 5. Remaining Outline Sections in this order: Setup/Installation, Conceptual, Configuration, Optimization, Best Practices
@@ -695,9 +782,9 @@ PART 2: CONTENT STRUCTURE (MANDATORY SECTIONS)
 7. FAQs (H2 heading)
 {'8. Read More (H2 heading - always last)' if formatted_related else ''}
 
-**CRITICAL: ALL HEADINGS MUST USE TITLE CASE — H2 AND H3 WITHOUT EXCEPTION**
+**CRITICAL: ALL HEADINGS MUST USE TITLE CASE - H2 AND H3 WITHOUT EXCEPTION**
 Every H2 (##) and every H3 (###) heading MUST follow Title Case capitalization rules.
-Every major word MUST start with a capital letter — no exceptions for any heading level.
+Every major word MUST start with a capital letter - no exceptions for any heading level.
 WRONG H2: ## Steps to CSV editor Development in Java
 CORRECT H2: ## Steps to CSV Editor Development in Java
 WRONG H3: ### optimizing HTML output performance
@@ -705,20 +792,20 @@ CORRECT H3: ### Optimizing HTML Output Performance
 WRONG H3: ### configuring the conversion options for PDF
 CORRECT H3: ### Configuring the Conversion Options for PDF
 
-**H3 TITLE CASE — EXPLICITLY ENFORCED (NOT OPTIONAL):**
+**H3 TITLE CASE - EXPLICITLY ENFORCED (NOT OPTIONAL):**
 Every H3 subheading (### text) MUST follow the same Title Case rules as H2 headings.
-Title Case is not a "recommended style" for H3 — it is mandatory and carries the same
+Title Case is not a "recommended style" for H3 - it is mandatory and carries the same
 weight as H2 enforcement. Run the exact same Title Case checklist on every H3 heading
 that you run on every H2 heading during the MANDATORY HEADING SCAN.
 
-WRONG H3 examples — output is INVALID if any of these appear:
+WRONG H3 examples - output is INVALID if any of these appear:
   ### optimizing HTML output performance
   ### configuring the conversion options for PDF
   ### key differences between the two approaches
   ### handling multiple file formats in Java
   ### setting up the development environment
 
-CORRECT H3 examples — always write H3 headings like these:
+CORRECT H3 examples - always write H3 headings like these:
   ### Optimizing HTML Output Performance
   ### Configuring the Conversion Options for PDF
   ### Key Differences Between the Two Approaches
@@ -726,9 +813,8 @@ CORRECT H3 examples — always write H3 headings like these:
   ### Setting Up the Development Environment
 
 **MANDATORY CONTENT FLOW (STRICTLY ENFORCED):**
-The blog MUST follow this exact logical reading order — no exceptions:
+The blog MUST follow this exact logical reading order - no exceptions:
 
-```
 Introduction (no heading)
       |
       v
@@ -764,19 +850,15 @@ FAQs
       |
       v
 Read More
-```
 
-**WRONG ORDER — NEVER DO THIS:**
-```
+**WRONG ORDER - NEVER DO THIS:**
 Introduction
 ## Installation and Setup    <- WRONG: Setup before Steps
 ## Key Features              <- WRONG: Conceptual before Steps
 ## Steps to Generate
 ## Complete Code Example
-```
 
-**CORRECT ORDER — ALWAYS DO THIS:**
-```
+**CORRECT ORDER - ALWAYS DO THIS:**
 Introduction
 ## Steps to Generate         <- Steps is ALWAYS first H2
 ## Complete Code Example     <- Code immediately after Steps
@@ -787,13 +869,12 @@ Introduction
 ## Best Practices            <- Best Practices last before Conclusion
 ## Conclusion
 ## FAQs
-```
 
 **OUTLINE SECTION PLACEMENT RULES:**
 When placing outline sections, categorize each one and insert it at the correct position:
 
 - STEPS category (Steps, Step-by-Step, How to)
-  -> SKIP from outline — use dedicated Steps section (Section 2) instead
+  -> SKIP from outline - use dedicated Steps section (Section 2) instead
   -> The dedicated Steps section is ALWAYS the first H2
 
 - SETUP category (Installation, Setup, Getting Started, Prerequisites, Environment)
@@ -814,7 +895,7 @@ When placing outline sections, categorize each one and insert it at the correct 
   -> Place LAST among outline sections, immediately before Conclusion
 
 - ERROR HANDLING category (Errors, Troubleshooting, Debugging, Common Issues, Exceptions)
-  -> SKIP entirely — do not include this section
+  -> SKIP entirely - do not include this section
 
 **GRAMMAR RULES FOR HEADINGS:**
 - Product names: NEVER use articles (a/an) before product names
@@ -874,18 +955,18 @@ Example 3 (cloud):
 
 ### 2. OUTLINE SECTIONS (STRICTLY ENFORCED)
 
-**CRITICAL: FOLLOW THE OUTLINE EXACTLY AS PROVIDED — THIS IS NON-NEGOTIABLE**
+**CRITICAL: FOLLOW THE OUTLINE EXACTLY AS PROVIDED - THIS IS NON-NEGOTIABLE**
 
 Follow the provided outline EXACTLY as given. Use the EXACT heading text from the outline.
 DO NOT rename, reword, or skip any outline section unless it falls into the skip list below.
-The outline is pre-approved — treat it as fixed, non-negotiable input.
+The outline is pre-approved - treat it as fixed, non-negotiable input.
 
 {formatted_outline}
 
 **OUTLINE COMPLIANCE RULES (STRICTLY ENFORCED):**
-- Use the EXACT heading text from the outline — word for word, character for character
+- Use the EXACT heading text from the outline - word for word, character for character
 - DO NOT generate your own headings to replace outline headings
-- DO NOT reorder outline sections among themselves — preserve the relative order given
+- DO NOT reorder outline sections among themselves - preserve the relative order given
 - DO NOT merge two outline sections into one
 - DO NOT split one outline section into two
 - DO NOT add new headings that are not in the outline
@@ -914,7 +995,7 @@ HEADING UNIQUENESS RULE (APPLIES TO ALL HEADINGS ACROSS THE ENTIRE BLOG)
 
 **THIS IS NON-NEGOTIABLE. READ BEFORE WRITING ANY HEADING.**
 
-Every H2 heading across the entire blog MUST be unique — no two headings may
+Every H2 heading across the entire blog MUST be unique - no two headings may
 share the same keyword phrase.
 
 **THE CORE PROBLEM TO AVOID:**
@@ -960,7 +1041,7 @@ No keyword phrase may be spent twice.
 
 ===============================================================================
 
-### 3. STEPS SECTION (MANDATORY — FIRST H2 AFTER INTRODUCTION)
+### 3. STEPS SECTION (MANDATORY - FIRST H2 AFTER INTRODUCTION)
 
 **THIS IS ALWAYS THE FIRST H2. NOTHING COMES BETWEEN INTRODUCTION AND THIS SECTION.**
 
@@ -995,7 +1076,7 @@ CRITICAL: This section is MANDATORY and MUST ALWAYS be included. NO EXCEPTIONS.
 - NEVER insert any heading between Steps and Complete Code Example
 
 **HEADING RULE:** MUST contain PRIMARY keyword with a DIFFERENT angle than Steps heading.
-Apply Title Case strictly — every major word capitalized.
+Apply Title Case strictly - every major word capitalized.
 Format: ## [Primary Keyword + Differentiating Qualifier] - Complete Code Example
 WRONG: ## CSV editor Development in Java - Complete Code Example  (lowercase "editor")
 CORRECT: ## CSV Editor Development in Java - Complete Code Example  (Title Case)
@@ -1189,8 +1270,8 @@ HTML, HTM, MHTML, XML, JSON, YAML, MARKDOWN, MD,
 ZIP, RAR, TAR, GZ, 7Z, MSG, EML, MBOX, ICS, VCF,
 MP4, AVI, MOV, MP3, WAV, FLAC
 
-If a file format appears in lowercase or mixed case anywhere in the input — title, keywords,
-outline, or context — override it and write it in full uppercase in the output.
+If a file format appears in lowercase or mixed case anywhere in the input - title, keywords,
+outline, or context - override it and write it in full uppercase in the output.
 
 WRONG: "convert dwt to pdf in java", "Dwt to Pdf", "dwt file conversion"
 CORRECT: "convert DWT to PDF in Java", "DWT to PDF", "DWT file conversion"
@@ -1249,12 +1330,12 @@ PART 7: WRITING GUIDELINES
 - "Delve into" / "Dive deep into"
 - "Seamlessly integrate"
 - "Robust solution" / "Cutting-edge technology"
-- "Production-ready" / "Ready-to-run" / "Copy-paste ready"
+- "Production-ready" / "Ready-to-run" / "Ready-to-use" / "Copy-paste ready"
 - "Enterprise-ready" / "Battle-tested"
 - "In conclusion, it's clear that"
 
 ===============================================================================
-MANDATORY HEADING SCAN — DO THIS BEFORE OUTPUTTING ANYTHING
+MANDATORY HEADING SCAN - DO THIS BEFORE OUTPUTTING ANYTHING
 ===============================================================================
 
 After writing the entire blog, you MUST perform this heading scan before producing final output.
@@ -1262,25 +1343,25 @@ This is NON-NEGOTIABLE. Skipping this step makes the output INVALID.
 
 STEP 1: List every single H2 (##) and H3 (###) heading you wrote, in order.
         Do this in TWO SEPARATE GROUPS:
-          Group A — H2 headings (##): list every ## heading
-          Group B — H3 headings (###): list every ### heading
+          Group A - H2 headings (##): list every ## heading
+          Group B - H3 headings (###): list every ### heading
         Apply ALL checks in Step 2 to EVERY heading in BOTH groups.
         H3 headings are NOT exempt from Title Case. They follow the exact same
         rules as H2 headings. A lowercase H3 is as invalid as a lowercase H2.
 
 STEP 2: For each heading in BOTH groups, apply this checklist:
-  - Is the first word capitalized? If NO — fix it.
-  - Is the last word capitalized? If NO — fix it.
-  - Are all nouns, verbs, adjectives, adverbs capitalized? If NO — fix them.
-  - Are articles (a, an, the) lowercase unless first/last word? If NO — fix them.
-  - Are short prepositions (in, on, at, to, for, with, from) lowercase unless first/last? If NO — fix them.
-  - Are file formats fully uppercase (PDF not Pdf, PNG not Png, DOCX not Docx)? If NO — fix them.
-  - Are brand names correctly cased (PowerPoint not Powerpoint, GitHub not Github)? If NO — fix them.
-  - Are Aspose product names correctly cased (Aspose.CAD not Aspose.Cad)? If NO — fix them.
-STEP 3: Rewrite any heading that failed any check above — this applies equally to H2 and H3.
-STEP 4: Only after ALL headings in BOTH groups pass — proceed to output the blog.
+  - Is the first word capitalized? If NO - fix it.
+  - Is the last word capitalized? If NO - fix it.
+  - Are all nouns, verbs, adjectives, adverbs capitalized? If NO - fix them.
+  - Are articles (a, an, the) lowercase unless first/last word? If NO - fix them.
+  - Are short prepositions (in, on, at, to, for, with, from) lowercase unless first/last? If NO - fix them.
+  - Are file formats fully uppercase (PDF not Pdf, PNG not Png, DOCX not Docx)? If NO - fix them.
+  - Are brand names correctly cased (PowerPoint not Powerpoint, GitHub not Github)? If NO - fix them.
+  - Are Aspose product names correctly cased (Aspose.CAD not Aspose.Cad)? If NO - fix them.
+STEP 3: Rewrite any heading that failed any check above - this applies equally to H2 and H3.
+STEP 4: Only after ALL headings in BOTH groups pass - proceed to output the blog.
 
-WRONG HEADINGS — NEVER OUTPUT THESE (applies to BOTH H2 and H3):
+WRONG HEADINGS - NEVER OUTPUT THESE (applies to BOTH H2 and H3):
   ## steps to add animation to powerpoint in java
   ## key features of aspose.slides cloud sdk
   ## installation and setup in java
@@ -1291,7 +1372,7 @@ WRONG HEADINGS — NEVER OUTPUT THESE (applies to BOTH H2 and H3):
   ### handling multiple file formats
   ### key differences between cloud and on-premise
 
-CORRECT HEADINGS — ALWAYS OUTPUT THESE:
+CORRECT HEADINGS - ALWAYS OUTPUT THESE:
   ## Steps to Add Animation to PowerPoint in Java
   ## Key Features of Aspose.Slides Cloud SDK
   ## Installation and Setup in Java
@@ -1302,7 +1383,7 @@ CORRECT HEADINGS — ALWAYS OUTPUT THESE:
   ### Handling Multiple File Formats
   ### Key Differences Between Cloud and On-Premise
 
-**IF YOU OUTPUT ANY HEADING — H2 OR H3 — IN LOWERCASE OR MIXED CASE, THE ENTIRE OUTPUT IS INVALID.**
+**IF YOU OUTPUT ANY HEADING - H2 OR H3 - IN LOWERCASE OR MIXED CASE, THE ENTIRE OUTPUT IS INVALID.**
 
 ===============================================================================
 
@@ -1316,11 +1397,11 @@ Before finalizing, verify:
 - All markdown links properly formatted as [text](url) with NO space between ] and (
 - Meta description is EXACTLY 140-160 characters (counted manually)
 - Summary is EXACTLY 200-260 characters (counted manually)
-- ALL H2 headings use Title Case — every major word starts with a capital letter — VERIFIED via MANDATORY HEADING SCAN above
-- ALL H3 headings use Title Case — every major word starts with a capital letter — VERIFIED via MANDATORY HEADING SCAN above. H3 headings follow the SAME Title Case rules as H2. A lowercase H3 is identical in severity to a lowercase H2 — the output is INVALID. Example of invalid H3: ### Optimizing HTML output performance. Example of valid H3: ### Optimizing HTML Output Performance
-- Steps section is the FIRST H2 immediately after the Introduction — nothing before it
+- ALL H2 headings use Title Case - every major word starts with a capital letter - VERIFIED via MANDATORY HEADING SCAN above
+- ALL H3 headings use Title Case - every major word starts with a capital letter - VERIFIED via MANDATORY HEADING SCAN above. H3 headings follow the SAME Title Case rules as H2. A lowercase H3 is identical in severity to a lowercase H2 - the output is INVALID. Example of invalid H3: ### Optimizing HTML output performance. Example of valid H3: ### Optimizing HTML Output Performance
+- Steps section is the FIRST H2 immediately after the Introduction - nothing before it
 - Complete Code Example appears immediately after Steps with NO heading between them
-- Setup/Installation section appears AFTER Complete Code Example — never before Steps
+- Setup/Installation section appears AFTER Complete Code Example - never before Steps
 - [CLOUD ONLY] cURL Commands section is present when isCloud = true, placed after Complete Code
 - After Complete Code Example (and cURL if cloud), remaining outline sections appear in correct category order: Setup -> Conceptual -> Configuration -> Optimization -> Best Practices
 - Introduction is EXACTLY ONE paragraph with a punchy hook as the first sentence
@@ -1344,6 +1425,7 @@ Before finalizing, verify:
 - FINAL LINK SCAN: Have you checked every single link follows [text](url) with no space between ] and (?
 - HEADING UNIQUENESS: Does the Complete Code Example heading contain the primary keyword? Does the cURL heading use a secondary/semantic phrase with NO repetition of the primary keyword phrase? Are all headings distinct from each other?
 - ERROR HANDLING SECTIONS SKIPPED: No section with "Error", "Troubleshooting", "Debugging", or "Common Issues" in heading included?
+- CROSS-PRODUCT CHECK: Does every product name mentioned in the blog appear in the allowed products list? Is any product name invented or guessed? If yes - remove it immediately.
 
 {other_notes_block}
 
@@ -1351,32 +1433,32 @@ Before finalizing, verify:
 PART 8: FLUENCY, CLARITY AND ENGAGEMENT (TARGET: HIGH QUALITY READABLE CONTENT)
 ===============================================================================
 
-**FLUENCY — Write Like a Human Expert, Not a Machine**
+**FLUENCY - Write Like a Human Expert, Not a Machine**
 
-- Vary sentence length throughout — mix short punchy sentences with longer explanatory ones
+- Vary sentence length throughout - mix short punchy sentences with longer explanatory ones
 - Never write three sentences of the same length in a row
 - Use natural transitions between sentences: "This means...", "As a result...", "In practice...", "For example..."
 - Avoid starting consecutive sentences with the same word or phrase
-- Read each paragraph aloud mentally — if it sounds robotic, rewrite it
+- Read each paragraph aloud mentally - if it sounds robotic, rewrite it
 - Use contractions naturally where appropriate: "you'll", "it's", "don't", "here's"
 - WRONG: "The method initializes the object. The object is then configured. The configuration is applied."
 - CORRECT: "The method initializes the object and applies your configuration in a single call, keeping the setup minimal."
 
-**CLARITY — Make Every Sentence Earn Its Place**
+**CLARITY - Make Every Sentence Earn Its Place**
 
-- One idea per sentence — never pack two unrelated thoughts into one sentence
+- One idea per sentence - never pack two unrelated thoughts into one sentence
 - Define technical terms the first time they appear, briefly and naturally
 - Use concrete examples instead of vague descriptions
   * WRONG: "The API provides various options for configuration"
   * CORRECT: "The API lets you set the output resolution, color mode, and compression level before saving"
-- Lead with the most important information — put the key point at the start of a sentence, not the end
-- Avoid noun stacking: "document conversion output file format" — break it up into readable phrases
+- Lead with the most important information - put the key point at the start of a sentence, not the end
+- Avoid noun stacking: "document conversion output file format" - break it up into readable phrases
 - Cut filler words: "basically", "essentially", "actually", "in order to", "it is important to note that"
 - Replace weak verbs with strong ones:
   * WRONG: "is used to convert", "can be utilized for"
   * CORRECT: "converts", "processes", "generates", "extracts"
 
-**ENGAGEMENT — Keep the Reader Moving Forward**
+**ENGAGEMENT - Keep the Reader Moving Forward**
 
 - Open every section with a sentence that tells the reader WHY this section matters to them
   * WRONG: "Aspose.PDF has many features."
@@ -1393,19 +1475,19 @@ PART 8: FLUENCY, CLARITY AND ENGAGEMENT (TARGET: HIGH QUALITY READABLE CONTENT)
 - Use occasional rhetorical questions to keep the reader engaged
   * "Why does this matter? Because..."
   * "What happens if the file path is wrong? The SDK throws a..."
-- Break up long technical paragraphs — no paragraph should exceed 4 sentences
+- Break up long technical paragraphs - no paragraph should exceed 4 sentences
 - Use parallel structure in lists and steps for easy scanning
 
 **PARAGRAPH QUALITY RULES:**
 - Every paragraph must have a clear topic sentence
-- Every paragraph must have 2-4 sentences — never 1, never more than 5
+- Every paragraph must have 2-4 sentences - never 1, never more than 5
 - No two consecutive paragraphs should start with the same word
 - The last sentence of each paragraph should either summarize or lead into the next idea
 
-**BEFORE FINALIZING — SELF-REVIEW CHECKLIST:**
+**BEFORE FINALIZING - SELF-REVIEW CHECKLIST:**
 Read the entire blog and verify:
 - Does every section open with a sentence that gives context or value to the reader?
-- Are sentences varied in length — not all short, not all long?
+- Are sentences varied in length - not all short, not all long?
 - Is "you" used throughout to speak directly to the developer?
 - Are there concrete examples rather than vague descriptions?
 - Does each paragraph have exactly 2-4 sentences?
@@ -1414,7 +1496,7 @@ Read the entire blog and verify:
 - Do strong verbs replace weak passive constructions?
 - Does every section end with a connecting or summarizing sentence?
 
-If any answer is NO — rewrite those sections before outputting.
+If any answer is NO - rewrite those sections before outputting.
 
 ===============================================================================
 END OF PROMPT
