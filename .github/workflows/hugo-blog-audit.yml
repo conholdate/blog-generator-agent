@@ -83,6 +83,7 @@ permissions:
 jobs:
   test:
     name: Test
+    if: github.event_name == 'push' || github.event_name == 'pull_request'
     runs-on: ubuntu-latest
     timeout-minutes: 15
 
@@ -97,7 +98,19 @@ jobs:
           cache: pip
 
       - name: Install dependencies
-        run: python -m pip install -e ".[dev]"
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install --upgrade pip
+          if [ -f requirements.txt ]; then
+            python -m pip install -r requirements.txt
+          fi
+          if [ -f pyproject.toml ]; then
+            python -m pip install -e .
+          elif [ ! -f requirements.txt ]; then
+            echo "No requirements.txt or pyproject.toml found. Add one for CI installs."
+            exit 1
+          fi
 
       - name: Compile package
         run: python -m compileall agent_engine
@@ -134,7 +147,19 @@ jobs:
           cache: pip
 
       - name: Install dependencies
-        run: python -m pip install -e ".[dev]"
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install --upgrade pip
+          if [ -f requirements.txt ]; then
+            python -m pip install -r requirements.txt
+          fi
+          if [ -f pyproject.toml ]; then
+            python -m pip install -e .
+          elif [ ! -f requirements.txt ]; then
+            echo "No requirements.txt or pyproject.toml found. Add one for CI installs."
+            exit 1
+          fi
 
       - name: Prepare CI audit config
         env:
