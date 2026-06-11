@@ -64,7 +64,7 @@ on:
       detailed_outputs:
         description: Generate the full detailed report set.
         required: true
-        default: true
+        default: false
         type: boolean
       llm_suggestions:
         description: Enable optional LLM suggestions.
@@ -137,7 +137,7 @@ jobs:
       PYTHONIOENCODING: utf-8
       PYTHONUNBUFFERED: "1"
       PROFESSIONALIZE_BASE_URL: ${{ secrets.PROFESSIONALIZE_BASE_URL }}
-      PROFESSIONALIZE_API_KEY: ${{ secrets.PROFESSIONALIZE_API_KEY }}
+      PROFESSIONALIZE_API_KEY: ${{ secrets.PROFESSIONALIZE_API_KEY_1 }}
       PROFESSIONALIZE_LLM_MODEL: ${{ secrets.PROFESSIONALIZE_LLM_MODEL }}
       PROFESSIONALIZE_EMBEDDING_MODEL: ${{ secrets.PROFESSIONALIZE_EMBEDDING_MODEL }}
       METRICS_WEBHOOK_URL_PROD: ${{ secrets.METRICS_WEBHOOK_URL_PROD }}
@@ -227,6 +227,18 @@ jobs:
           print(f"Selected Hugo blog branch: {branch or 'default'}")
           print(f"Wrote {target}")
           PY
+
+      - name: Configure GitHub repository authentication
+        shell: bash
+        env:
+          HUGO_BLOG_REPO_TOKEN: ${{ secrets.ASPOSE_BLOG_TOKEN }}
+        run: |
+          set -euo pipefail
+          if [ -z "${HUGO_BLOG_REPO_TOKEN:-}" ]; then
+            echo "HUGO_BLOG_REPO_TOKEN is not set. Private GitHub blog repositories may fail to clone."
+            exit 0
+          fi
+          git config --global url."https://x-access-token:${HUGO_BLOG_REPO_TOKEN}@github.com/".insteadOf "https://github.com/"
 
       - name: Run audit
         env:
