@@ -1,0 +1,77 @@
+id: audience-fit
+segment: developer_audience_fit
+requires:
+  developer_audience: true
+intended_audiences:
+  - .NET developers
+  - Java developers
+  - Python developers
+  - C++ developers
+  - Node.js developers
+  - PHP developers
+  - Android developers
+  - Technical evaluators of Aspose APIs
+rules:
+  - rule_id: DAF-001
+    id: weak_developer_audience_fit
+    severity: High
+    condition:
+      developer_intent: false
+    evidence: [developer_intent]
+    explanation: Post does not clearly target developers or technical evaluators.
+    why_it_matters: The Aspose blog audience expects concrete API tasks and implementation guidance.
+    recommended_fix: Frame the post around a concrete API task, supported formats, language/platform, and developer outcome.
+    expected_seo_impact: High
+    estimated_effort: Medium
+  - rule_id: DAF-002
+    id: missing_code_example_for_developers
+    severity: High
+    condition:
+      all:
+        - developer_intent: true
+        - code_blocks_eq: 0
+    evidence: [developer_intent, code_blocks]
+    explanation: Developer-audience post has no fenced code block.
+    why_it_matters: Developers evaluate SDKs by seeing complete, runnable examples.
+    recommended_fix: Add a complete runnable code example in the target language.
+    expected_seo_impact: High
+    estimated_effort: Medium
+  - rule_id: DAF-003
+    id: missing_setup_context
+    severity: Medium
+    condition:
+      all:
+        - developer_intent: true
+        - missing_terms: [install, installation, setup, package, dependency, nuget, maven, pip, npm, gradle, composer, prerequisite]
+    evidence: [developer_intent]
+    explanation: Post lacks installation, dependency, or setup context.
+    why_it_matters: Setup instructions reduce implementation friction for SDK evaluators.
+    recommended_fix: Add prerequisites and package installation steps for the target SDK/language.
+    expected_seo_impact: Medium
+    estimated_effort: Low
+  - rule_id: DAF-004
+    id: missing_file_format_context
+    severity: Medium
+    condition:
+      all:
+        - developer_intent: true
+        - missing_terms: [input, output, format, pdf, docx, xlsx, pptx, jpg, png, html, csv, fbx, stl, obj]
+    evidence: [developer_intent]
+    explanation: Post does not clearly explain input/output file formats.
+    why_it_matters: File-format clarity is central to Aspose search intent.
+    recommended_fix: State source and target formats, supported variants, and expected output.
+    expected_seo_impact: Medium
+    estimated_effort: Low
+  - rule_id: DAF-005
+    id: missing_api_reference_link
+    severity: Medium
+    condition:
+      all:
+        - developer_intent: true
+        - has_api_reference_link: false
+    evidence: [developer_intent, has_api_reference_link]
+    explanation: Post does not link to obvious API documentation, product, release, or sample resources.
+    why_it_matters: Technical evaluators need fast paths to API references and SDK packages.
+    recommended_fix: Add links to API reference, product page, documentation, release package, or sample repository.
+    expected_seo_impact: Medium
+    estimated_effort: Low

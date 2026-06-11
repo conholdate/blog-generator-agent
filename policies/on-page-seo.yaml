@@ -1,0 +1,89 @@
+id: on-page-seo
+segment: on_page_seo
+intended_audiences:
+  - Search users evaluating SDK tutorials
+  - Technical decision-makers comparing implementation options
+rules:
+  - rule_id: OPS-001
+    id: missing_title
+    severity: High
+    condition:
+      title_length_eq: 0
+    evidence: [title_length]
+    explanation: Front matter title is missing.
+    why_it_matters: Titles are a primary relevance and CTR signal.
+    recommended_fix: Add a specific title with task, format, and language/platform.
+    expected_seo_impact: High
+    estimated_effort: Low
+  - rule_id: OPS-002
+    id: short_title
+    severity: Medium
+    condition:
+      all:
+        - title_length_gt: 0
+        - title_length_lt: 30
+    evidence: [title_length]
+    explanation: Title may be too short to communicate the search promise.
+    why_it_matters: Short generic titles often underperform in search results.
+    recommended_fix: Expand the title with topic, audience, file format, or outcome.
+    expected_seo_impact: Medium
+    estimated_effort: Low
+  - rule_id: OPS-003
+    id: title_length
+    severity: Medium
+    condition:
+      title_length_gt: 70
+    evidence: [title_length]
+    explanation: Title is longer than the recommended range.
+    why_it_matters: Overlong titles can truncate and reduce CTR clarity.
+    recommended_fix: Keep the title around 30-70 characters while preserving task intent.
+    expected_seo_impact: Medium
+    estimated_effort: Low
+  - rule_id: OPS-004
+    id: missing_description
+    severity: High
+    condition:
+      description_length_eq: 0
+    evidence: [description_length]
+    explanation: Meta description is missing.
+    why_it_matters: Descriptions influence snippets and search result click quality.
+    recommended_fix: Add a 120-160 character description with outcome, SDK, language, and format context.
+    expected_seo_impact: High
+    estimated_effort: Low
+  - rule_id: OPS-005
+    id: description_length
+    severity: Medium
+    condition:
+      any:
+        - all:
+            - description_length_gt: 0
+            - description_length_lt: 70
+        - description_length_gt: 170
+    evidence: [description_length]
+    explanation: Meta description length is outside the recommended range.
+    why_it_matters: Weak or overlong descriptions reduce snippet control.
+    recommended_fix: Rewrite to roughly 120-160 characters.
+    expected_seo_impact: Medium
+    estimated_effort: Low
+  - rule_id: OPS-006
+    id: duplicate_title
+    severity: High
+    condition:
+      duplicate_title: true
+    evidence: [duplicate_title]
+    explanation: Another scanned post uses the same title.
+    why_it_matters: Duplicate titles weaken page distinction.
+    recommended_fix: Make the title unique for this post and language.
+    expected_seo_impact: High
+    estimated_effort: Low
+  - rule_id: OPS-007
+    id: duplicate_description
+    severity: Medium
+    condition:
+      duplicate_description: true
+    evidence: [duplicate_description]
+    explanation: Another scanned post uses the same description.
+    why_it_matters: Duplicate descriptions reduce snippet differentiation.
+    recommended_fix: Write a unique localized description.
+    expected_seo_impact: Medium
+    estimated_effort: Low

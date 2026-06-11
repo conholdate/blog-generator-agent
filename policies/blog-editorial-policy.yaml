@@ -1,0 +1,44 @@
+id: blog-editorial-policy
+segment: editorial_policy
+requires:
+  developer_audience: true
+intended_audiences:
+  - Software developers using Aspose APIs
+  - Engineering teams building document automation workflows
+  - Technical decision-makers evaluating file-format SDKs
+rules:
+  - rule_id: ASP-000
+    id: unverified_product_mention
+    severity: High
+    condition:
+      unverified_product_mentions_gt: 0
+    evidence: [unverified_product_names]
+    explanation: Post mentions an Aspose product or library name that is not in the configured verified product allowlist.
+    why_it_matters: Incorrect product names mislead developers and reduce technical trust in the article.
+    recommended_fix: Replace with a verified product/API name from the configured allowlist, use accurate generic wording, or remove the mention.
+    expected_seo_impact: High
+    estimated_effort: Low
+  - rule_id: ASP-001
+    id: missing_troubleshooting_or_limitations
+    severity: Opportunity
+    condition:
+      all:
+        - developer_intent: true
+        - missing_terms: [error, exception, troubleshoot, troubleshooting, limitation, license, performance, memory, edge, note, important]
+    evidence: [developer_intent]
+    explanation: Developer tutorial lacks troubleshooting, limitations, licensing, or edge-case guidance.
+    why_it_matters: Aspose evaluators need to understand production constraints and common implementation blockers.
+    recommended_fix: Add notes for common errors, licensing, large files, API limitations, or performance considerations.
+    expected_seo_impact: Low
+    estimated_effort: Low
+  - rule_id: ASP-002
+    id: missing_conclusion
+    severity: Low
+    condition:
+      missing_terms: [conclusion, summary, final thoughts]
+    evidence: []
+    explanation: Post lacks a clear conclusion or summary section.
+    why_it_matters: A concise conclusion helps developers confirm next steps.
+    recommended_fix: End with a short recap and next action.
+    expected_seo_impact: Medium
+    estimated_effort: Low

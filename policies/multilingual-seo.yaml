@@ -1,0 +1,47 @@
+id: multilingual-seo
+segment: multilingual_seo
+intended_audiences:
+  - Localized developer audiences
+  - International technical evaluators
+rules:
+  - rule_id: MLS-001
+    id: missing_translation
+    severity: Opportunity
+    condition:
+      missing_translation_count_gt: 0
+    evidence: [missing_translation_count]
+    explanation: Translation group is missing configured languages.
+    why_it_matters: Missing localized versions limit international organic reach.
+    recommended_fix: Prioritize translations for languages and markets with search demand.
+    expected_seo_impact: High
+    estimated_effort: High
+  - rule_id: MLS-002
+    id: unlocalized_title
+    severity: Medium
+    condition:
+      matches: "__ground_existing_issue_only__"
+    explanation: Translation title matches English exactly.
+    why_it_matters: Localized search behavior often differs from English search wording.
+    recommended_fix: Localize the title for the target language and search intent.
+    expected_seo_impact: Medium
+    estimated_effort: Medium
+  - rule_id: MLS-003
+    id: unlocalized_description
+    severity: Medium
+    condition:
+      matches: "__ground_existing_issue_only__"
+    explanation: Translation description matches English exactly.
+    why_it_matters: Localized descriptions improve CTR and user trust.
+    recommended_fix: Localize the meta description for the target language.
+    expected_seo_impact: Medium
+    estimated_effort: Medium
+  - rule_id: MLS-004
+    id: mismatched_headings
+    severity: Low
+    condition:
+      matches: "__ground_existing_issue_only__"
+    explanation: Translation heading count differs substantially from the canonical post.
+    why_it_matters: Structural drift can indicate incomplete or low-quality translation.
+    recommended_fix: Review translated structure for missing or extra sections.
+    expected_seo_impact: Low
+    estimated_effort: Medium

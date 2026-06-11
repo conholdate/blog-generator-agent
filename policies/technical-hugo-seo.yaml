@@ -1,0 +1,87 @@
+id: technical-hugo-seo
+segment: technical_hugo_seo
+intended_audiences:
+  - SEO engineers
+  - Hugo maintainers
+  - Technical content platform owners
+rules:
+  - rule_id: THS-001
+    id: missing_hugo_config
+    severity: High
+    condition:
+      matches: "__ground_existing_issue_only__"
+    explanation: No Hugo config file was found.
+    why_it_matters: Hugo config controls language, URLs, sitemap, and rendering behavior.
+    recommended_fix: Add or verify Hugo config file in repository root.
+    expected_seo_impact: High
+    estimated_effort: Medium
+  - rule_id: THS-002
+    id: missing_robots
+    severity: Medium
+    condition:
+      matches: "__ground_existing_issue_only__"
+    explanation: No local robots.txt was found.
+    why_it_matters: Robots rules influence crawl access and sitemap discovery.
+    recommended_fix: Add robots.txt or confirm Hugo generates one.
+    expected_seo_impact: Medium
+    estimated_effort: Low
+  - rule_id: THS-003
+    id: multilingual_config_unknown
+    severity: Medium
+    condition:
+      matches: "__ground_existing_issue_only__"
+    explanation: Multilingual configuration was not detected.
+    why_it_matters: Missing multilingual config can create hreflang and localized URL risks.
+    recommended_fix: Define languages in Hugo config if translations are published.
+    expected_seo_impact: Medium
+    estimated_effort: Medium
+  - rule_id: THS-004
+    id: canonical_template
+    severity: Medium
+    condition:
+      matches: "__ground_existing_issue_only__"
+    explanation: Canonical template support was not found.
+    why_it_matters: Canonicals reduce duplicate-content ambiguity.
+    recommended_fix: Add or verify canonical rendering in templates.
+    expected_seo_impact: Medium
+    estimated_effort: Medium
+  - rule_id: THS-005
+    id: hreflang_template
+    severity: Medium
+    condition:
+      matches: "__ground_existing_issue_only__"
+    explanation: Hreflang template support was not found.
+    why_it_matters: Hreflang helps search engines serve correct localized pages.
+    recommended_fix: Add or verify hreflang rendering for translated posts.
+    expected_seo_impact: Medium
+    estimated_effort: Medium
+  - rule_id: THS-006
+    id: open_graph
+    severity: Medium
+    condition:
+      matches: "__ground_existing_issue_only__"
+    explanation: Open Graph support was not found in local templates.
+    why_it_matters: Social preview metadata improves sharing quality.
+    recommended_fix: Add or verify Open Graph tags in templates.
+    expected_seo_impact: Low
+    estimated_effort: Medium
+  - rule_id: THS-007
+    id: twitter_cards
+    severity: Medium
+    condition:
+      matches: "__ground_existing_issue_only__"
+    explanation: Twitter card support was not found in local templates.
+    why_it_matters: Social card metadata improves sharing previews.
+    recommended_fix: Add or verify Twitter card tags in templates.
+    expected_seo_impact: Low
+    estimated_effort: Medium
+  - rule_id: THS-008
+    id: schema_markup
+    severity: Medium
+    condition:
+      matches: "__ground_existing_issue_only__"
+    explanation: Schema/JSON-LD support was not found in local templates.
+    why_it_matters: Structured data can improve search understanding and eligibility for enhancements.
+    recommended_fix: Add or verify JSON-LD schema rendering where supported by content.
+    expected_seo_impact: Medium
+    estimated_effort: Medium

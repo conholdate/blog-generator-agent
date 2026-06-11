@@ -13,9 +13,94 @@ search_patterns:
 repositories:
   - repo_key: "blog"
     repo_type: "blog"
+    repo_path: "C:\\GitHub\\aspose-blog"
     repo_url: "https://github.com/Aspose/aspose-blog.git"
     branch: "master"
     scope: "all"
     root_subdir: "content/Aspose.Blog"
     include_globs:
       - "**/index.md"
+
+audit:
+  blog_name: Aspose
+  content_dir: content
+  output_dir: outputs
+  developer_audience: true
+  product_config_dir: aspose
+  audience_profile: "Developers and technical decision-makers evaluating or using Aspose APIs for document and file-format processing."
+  expected_languages:
+    - en
+    - ar
+    - cs
+    - de
+    - es
+    - fa
+    - fr
+    - he
+    - id
+    - it
+    - ja
+    - ko
+    - pl
+    - pt
+    - ru
+    - sv
+    - th
+    - tr
+    - uk
+    - vi
+    - zh
+    - zh-hant
+  file_formats_path: file_formats.json
+  known_product_mentions:
+    - Aspose.3D
+    - Aspose.BarCode
+    - Aspose.CAD
+    - Aspose.Cells
+    - Aspose.Diagram
+    - Aspose.Drawing
+    - Aspose.Email
+    - Aspose.Finance
+    - Aspose.Font
+    - Aspose.GIS
+    - Aspose.HTML
+    - Aspose.Imaging
+    - Aspose.Medical
+    - Aspose.Note
+    - Aspose.OCR
+    - Aspose.OMR
+    - Aspose.Page
+    - Aspose.PDF
+    - Aspose.PSD
+    - Aspose.PUB
+    - Aspose.Slides
+    - Aspose.SVG
+    - Aspose.Tasks
+    - Aspose.TeX
+    - Aspose.Total
+    - Aspose.Words
+    - Aspose.ZIP
+  sdk_validation:
+    enabled: true
+    runtime_import_check: false
+    api_reference_repositories:
+      # Add one entry per product API reference repo. The agent indexes classes from these repos.
+      # Example:
+      # - repo_key: "aspose-barcode-reference"
+      #   product_key: "barcode"
+      #   repo_path: "C:\\GitHub\\aspose-barcode-api-reference"
+      #   repo_url: "https://github.com/aspose-barcode/Aspose.BarCode-API-References.git"
+      #   root_subdir: ""
+      #   applies_to: [barcode, Aspose.BarCode]
+      #   namespaces: [Aspose.BarCode, aspose.barcode, com.aspose.barcode]
+      #   deprecated_symbols:
+      #     BarCodeBuilder: BarcodeGenerator
+      #     Symbology: EncodeTypes
+  policy_files:
+    - ../policies/content-quality.yaml
+    - ../policies/audience-fit.yaml
+    - ../policies/on-page-seo.yaml
+    - ../policies/internal-linking.yaml
+    - ../policies/multilingual-seo.yaml
+    - ../policies/technical-hugo-seo.yaml
+    - ../policies/blog-editorial-policy.yaml

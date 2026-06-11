@@ -1,0 +1,69 @@
+id: internal-linking
+segment: internal_linking
+intended_audiences:
+  - Developers exploring related API workflows
+  - Search crawlers discovering topic clusters
+rules:
+  - rule_id: IL-001
+    id: weak_internal_links
+    severity: Medium
+    condition:
+      internal_links_lt: 2
+    evidence: [internal_links]
+    explanation: Post has fewer than two internal links.
+    why_it_matters: Internal links help users and crawlers discover related implementation paths.
+    recommended_fix: Add contextual links to related tutorials, docs, and product pages.
+    expected_seo_impact: Medium
+    estimated_effort: Low
+  - rule_id: IL-002
+    id: missing_external_links
+    severity: Low
+    condition:
+      external_links_eq: 0
+    evidence: [external_links]
+    explanation: Post has no external reference links.
+    why_it_matters: API reference, product, and documentation links help technical evaluators continue.
+    recommended_fix: Add authoritative docs, API reference, product, or sample links where useful.
+    expected_seo_impact: Medium
+    estimated_effort: Low
+  - rule_id: IL-003
+    id: broken_internal_link
+    severity: High
+    condition:
+      matches: "__ground_existing_issue_only__"
+    explanation: Internal link could not be resolved locally.
+    why_it_matters: Broken links create crawl waste and poor developer experience.
+    recommended_fix: Update the link to an existing post, asset, or Hugo URL.
+    expected_seo_impact: High
+    estimated_effort: Low
+  - rule_id: IL-004
+    id: weak_anchor_text
+    severity: Low
+    condition:
+      matches: "__ground_existing_issue_only__"
+    explanation: Anchor text is generic.
+    why_it_matters: Descriptive anchors clarify destination relevance for readers and crawlers.
+    recommended_fix: Use anchor text that includes the target task, format, API, or language.
+    expected_seo_impact: Medium
+    estimated_effort: Low
+  - rule_id: IL-005
+    id: too_few_outgoing_internal_links
+    severity: Medium
+    condition:
+      internal_links_lt: 2
+    evidence: [internal_links]
+    explanation: Post has fewer than two outgoing internal links.
+    why_it_matters: Outgoing internal links help build product and tutorial clusters.
+    recommended_fix: Add contextual links to related posts, docs, and product pages.
+    expected_seo_impact: Medium
+    estimated_effort: Low
+  - rule_id: IL-006
+    id: orphan_post
+    severity: Medium
+    condition:
+      matches: "__ground_existing_issue_only__"
+    explanation: No incoming internal links were found from scanned Markdown.
+    why_it_matters: Orphan posts are harder for crawlers and users to discover.
+    recommended_fix: Add links to this post from related higher-traffic or hub posts.
+    expected_seo_impact: Medium
+    estimated_effort: Medium
