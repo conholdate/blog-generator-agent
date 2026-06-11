@@ -9,12 +9,12 @@ on:
   workflow_dispatch:
     inputs:
       blog_config:
-        description: Blog audit config path in this repository.
+        description: Select Blog config.
         required: true
         default: configs/aspose.yaml
         type: string
       product:
-        description: Product/path filter.
+        description: Select Product/path.
         required: true
         type: choice
         options:
@@ -64,7 +64,7 @@ on:
       detailed_outputs:
         description: Generate the full detailed report set.
         required: true
-        default: true
+        default: false
         type: boolean
       llm_suggestions:
         description: Enable optional LLM suggestions.
@@ -193,6 +193,32 @@ jobs:
           target.parent.mkdir(parents=True, exist_ok=True)
 
           data = yaml.safe_load(source.read_text(encoding="utf-8")) or {}
+
+          workspace = Path.cwd().resolve()
+
+          def workspace_relative(path):
+              path = Path(path)
+              try:
+                  return path.resolve().relative_to(workspace).as_posix()
+              except ValueError:
+                  return path.as_posix()
+
+          def resolve_config_path(value):
+              if not value:
+                  return value
+              candidate = Path(str(value))
+              if candidate.is_absolute():
+                  return candidate
+              source_relative = (source.parent / candidate).resolve()
+              if source_relative.exists():
+                  return source_relative
+              return candidate
+
+          def rewrite_path(container, key):
+              value = container.get(key)
+              if value:
+                  container[key] = workspace_relative(resolve_config_path(value))
+
           repositories = data.setdefault("repositories", [])
           blog_repo = None
           for repo in repositories:
@@ -223,10 +249,18 @@ jobs:
           if branch:
               audit["branch"] = branch
           audit.setdefault("output_dir", "outputs")
+          rewrite_path(audit, "product_config_dir")
+          rewrite_path(audit, "file_formats_path")
+          rewrite_path(audit, "file_formats")
+          audit["policy_files"] = [
+              workspace_relative(resolve_config_path(policy_file))
+              for policy_file in audit.get("policy_files", []) or []
+          ]
 
           target.write_text(yaml.safe_dump(data, sort_keys=False), encoding="utf-8")
           print(f"Selected Hugo blog repository: {repo_url}")
           print(f"Selected Hugo blog branch: {branch or 'default'}")
+          print(f"Product config directory: {audit.get('product_config_dir') or 'not configured'}")
           print(f"Wrote {target}")
           PY
 
@@ -281,7 +315,7 @@ jobs:
           if [ -n "$metrics_file" ]; then
             echo "### Metrics" >> "$GITHUB_STEP_SUMMARY"
             echo '```json' >> "$GITHUB_STEP_SUMMARY"
-            python -c 'import json, pathlib, sys; metrics=json.loads(pathlib.Path(sys.argv[1]).read_text(encoding="utf-8")); keys=["status","blog_name","product_filter","post_date_filter","markdown_files_scanned","total_issues","technical_issues","internal_linking_issues","code_api_issues","duration_seconds"]; print(json.dumps({key: metrics.get(key) for key in keys}, indent=2))' "$metrics_file" >> "$GITHUB_STEP_SUMMARY"
+            python -c 'import json, pathlib, sys; metrics=json.loads(pathlib.Path(sys.argv[1]).read_text(encoding="utf-8")); keys=["status","blog_name","product","product_name","product_filter","post_date_filter","markdown_files_scanned","total_issues","technical_issues","internal_linking_issues","code_api_issues","duration_seconds"]; print(json.dumps({key: metrics.get(key) for key in keys}, indent=2))' "$metrics_file" >> "$GITHUB_STEP_SUMMARY"
             echo '```' >> "$GITHUB_STEP_SUMMARY"
           fi
 
