@@ -64,7 +64,7 @@ on:
       detailed_outputs:
         description: Generate the full detailed report set.
         required: true
-        default: false
+        default: true
         type: boolean
       llm_suggestions:
         description: Enable optional LLM suggestions.
@@ -132,6 +132,8 @@ jobs:
     if: github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     timeout-minutes: 90
+    permissions:
+      contents: write
 
     env:
       PYTHONIOENCODING: utf-8
@@ -290,6 +292,40 @@ jobs:
           else
             echo "No audit action-items report was produced." >> "$GITHUB_STEP_SUMMARY"
           fi
+
+      - name: Commit audit reports
+        if: success() && github.ref_type == 'branch'
+        shell: bash
+        env:
+          PRODUCT: ${{ inputs.product }}
+          POST_DATE: ${{ inputs.post_date }}
+          MODE: ${{ inputs.mode }}
+        run: |
+          set -euo pipefail
+          if [ ! -d outputs/audit ]; then
+            echo "No outputs/audit directory was produced; nothing to commit."
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -f outputs/audit
+
+          if git diff --cached --quiet; then
+            echo "No audit report changes to commit."
+            exit 0
+          fi
+
+          product_slug="${PRODUCT//\//-}"
+          commit_message="Add Hugo audit reports for ${product_slug}"
+          if [ -n "${POST_DATE:-}" ]; then
+            commit_message="${commit_message} (${POST_DATE})"
+          fi
+          commit_message="${commit_message} [${MODE}]"
+
+          git commit -m "${commit_message}"
+          git pull --rebase --autostash origin "${GITHUB_REF_NAME}"
+          git push origin "HEAD:${GITHUB_REF_NAME}"
 
       - name: Upload audit reports
         if: always()
