@@ -13,20 +13,36 @@ on:
         required: true
         default: configs/aspose.yaml
         type: string
-      audit_repo_url:
-        description: Hugo blog repository URL to audit.
-        required: true
-        default: https://github.com/Aspose/aspose-blog.git
-        type: string
-      audit_repo_branch:
-        description: Branch to clone from the Hugo blog repository.
-        required: true
-        default: master
-        type: string
       product:
-        description: Optional product/path filter, for example Aspose.blog/barcode.
-        required: false
-        type: string
+        description: Product/path filter.
+        required: true
+        type: choice
+        options:
+          - Aspose.blog/3d
+          - Aspose.blog/barcode
+          - Aspose.blog/cad
+          - Aspose.blog/cells
+          - Aspose.blog/diagram
+          - Aspose.blog/drawing
+          - Aspose.blog/email
+          - Aspose.blog/finance
+          - Aspose.blog/font
+          - Aspose.blog/gis
+          - Aspose.blog/html
+          - Aspose.blog/imaging
+          - Aspose.blog/note
+          - Aspose.blog/ocr
+          - Aspose.blog/omr
+          - Aspose.blog/page
+          - Aspose.blog/pdf
+          - Aspose.blog/psd
+          - Aspose.blog/pub
+          - Aspose.blog/slides
+          - Aspose.blog/svg
+          - Aspose.blog/tasks
+          - Aspose.blog/tex
+          - Aspose.blog/words
+          - Aspose.blog/zip
       post_date:
         description: Optional YYYY-MM-DD post date filter.
         required: false
@@ -123,8 +139,6 @@ jobs:
       - name: Prepare CI audit config
         env:
           BLOG_CONFIG: ${{ inputs.blog_config }}
-          AUDIT_REPO_URL: ${{ inputs.audit_repo_url }}
-          AUDIT_REPO_BRANCH: ${{ inputs.audit_repo_branch }}
         run: |
           python - <<'PY'
           import os
@@ -138,23 +152,39 @@ jobs:
 
           data = yaml.safe_load(source.read_text(encoding="utf-8")) or {}
           repositories = data.setdefault("repositories", [])
-          if not repositories:
-              repositories.append({"repo_key": "blog", "repo_type": "blog"})
-
+          blog_repo = None
           for repo in repositories:
               if isinstance(repo, dict) and repo.get("repo_type", "blog") == "blog":
-                  repo.pop("repo_path", None)
-                  repo["repo_url"] = os.environ["AUDIT_REPO_URL"]
-                  repo["branch"] = os.environ["AUDIT_REPO_BRANCH"]
+                  blog_repo = repo
                   break
 
+          if blog_repo is None:
+              blog_repo = {"repo_key": "blog", "repo_type": "blog"}
+              repositories.append(blog_repo)
+
           audit = data.setdefault("audit", {})
+          repo_url = blog_repo.get("repo_url") or audit.get("repo_url") or data.get("repo_url")
+          branch = blog_repo.get("branch") or audit.get("branch") or data.get("branch")
+
+          if not repo_url:
+              raise SystemExit(f"{source} must define repositories[].repo_url or audit.repo_url for the Hugo blog repository.")
+
+          blog_repo.pop("repo_path", None)
+          blog_repo.pop("local_path", None)
+          blog_repo["repo_url"] = repo_url
+          if branch:
+              blog_repo["branch"] = branch
+
           audit.pop("repo_path", None)
-          audit["repo_url"] = os.environ["AUDIT_REPO_URL"]
-          audit["branch"] = os.environ["AUDIT_REPO_BRANCH"]
+          audit.pop("local_path", None)
+          audit["repo_url"] = repo_url
+          if branch:
+              audit["branch"] = branch
           audit.setdefault("output_dir", "outputs")
 
           target.write_text(yaml.safe_dump(data, sort_keys=False), encoding="utf-8")
+          print(f"Selected Hugo blog repository: {repo_url}")
+          print(f"Selected Hugo blog branch: {branch or 'default'}")
           print(f"Wrote {target}")
           PY
 
@@ -170,6 +200,7 @@ jobs:
         run: |
           args=(
             --blog-config outputs/workflow-blog-config.yaml
+            --product "$PRODUCT"
             --mode "$MODE"
             --include-translations "$INCLUDE_TRANSLATIONS"
             --detailed-outputs "$DETAILED_OUTPUTS"
@@ -177,10 +208,6 @@ jobs:
             --send-metrics "$SEND_METRICS"
             --verbose
           )
-
-          if [ -n "$PRODUCT" ]; then
-            args+=(--product "$PRODUCT")
-          fi
 
           if [ -n "$POST_DATE" ]; then
             args+=(--post-date "$POST_DATE")
