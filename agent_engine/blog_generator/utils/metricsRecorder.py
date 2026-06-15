@@ -263,7 +263,7 @@ class MetricsRecorder:
             "status": self.status,
             "agent_name": self.agent_name,
             "agent_owner": self.agent_owner,
-            "job_type": self.job_type,
+            "job_type": "test",
             "run_id": self.run_id,
             "product": self.product or "Unknown",
             "platform": self.platform or "Unknown",
