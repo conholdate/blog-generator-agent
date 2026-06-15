@@ -23,6 +23,9 @@ class MetricsRecorder:
     GOOGLE_SCRIPT_URL_FOR_TEAM = settings.GOOGLE_SCRIPT_URL_FOR_TEAM
     TOKEN_FOR_TEAM = settings.TOKEN_FOR_TEAM
 
+    GOOGLE_SCRIPT_URL_FOR_PROD = settings.GOOGLE_SCRIPT_URL_FOR_PROD
+    TOKEN_FOR_PROD = settings.TOKEN_FOR_PROD
+
     METRICS_API_URL = settings.METRICS_API_URL
     METRICS_API_KEY = settings.METRICS_API_KEY
     
@@ -263,7 +266,7 @@ class MetricsRecorder:
             "status": self.status,
             "agent_name": self.agent_name,
             "agent_owner": self.agent_owner,
-            "job_type": "test",
+            "job_type": self.job_type,
             "run_id": self.run_id,
             "product": self.product or "Unknown",
             "platform": self.platform or "Unknown",
@@ -350,6 +353,8 @@ class MetricsRecorder:
         payload = self.get_metrics_payload()
         payload.pop('run_env', None)
 
+        print(f"📤 Sending prod metrics to REST API | run_id: {self.run_id} | url: {self.METRICS_API_URL}")
+        print(f"📦 Prod metrics payload: {json.dumps(payload, indent=2)}")
         logger.debug(
             "Sending prod metrics payload:\n%s",
             json.dumps(payload, indent=2)
@@ -373,12 +378,13 @@ class MetricsRecorder:
                     response_text = await response.text()
 
                     if response.status == 200:
+                        print(f"✅ Prod metrics sent successfully | run_id: {self.run_id} | response: {response_text}")
                         logger.info(
                             f"✅ Prod metrics sent successfully for run_id: {self.run_id}"
                         )
-                        logger.debug(f"Response: {response_text}")
                         return True
 
+                    print(f"❌ Prod metrics failed | HTTP {response.status} | run_id: {self.run_id} | response: {response_text}")
                     logger.error(
                         f"❌ Failed to send prod metrics "
                         f"(HTTP {response.status}) for run_id: {self.run_id}"
@@ -387,12 +393,14 @@ class MetricsRecorder:
                     return False
 
         except asyncio.TimeoutError:
+            print(f"❌ Prod metrics timed out | run_id: {self.run_id}")
             logger.error(
                 f"❌ Timeout while sending prod metrics for run_id: {self.run_id}"
             )
             return False
 
-        except Exception:
+        except Exception as e:
+            print(f"❌ Prod metrics unexpected error | run_id: {self.run_id} | error: {e}")
             logger.exception(
                 f"❌ Unexpected error while sending prod metrics for run_id: {self.run_id}"
             )
