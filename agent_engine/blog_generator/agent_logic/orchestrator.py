@@ -281,7 +281,7 @@ class BlogOrchestrator:
             metrics_sent_for_pro = await self.metrics.send_metrics_to_prod()
             
             if metrics_sent_for_team and metrics_sent_for_pro:
-                print("Metrics sent successfully\n")
+                print(f"Metrics sent successfully\n {metrics_sent_for_pro}",flush=True)
             else:
                 print("Failed to send metrics (check logs)\n")
             
