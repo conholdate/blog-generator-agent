@@ -23,8 +23,8 @@ class MetricsRecorder:
     GOOGLE_SCRIPT_URL_FOR_TEAM = settings.GOOGLE_SCRIPT_URL_FOR_TEAM
     TOKEN_FOR_TEAM = settings.TOKEN_FOR_TEAM
 
-    GOOGLE_SCRIPT_URL_FOR_PROD = settings.GOOGLE_SCRIPT_URL_FOR_PROD
-    TOKEN_FOR_PROD = settings.TOKEN_FOR_PROD
+    METRICS_API_URL = settings.METRICS_API_URL
+    METRICS_API_KEY = settings.METRICS_API_KEY
     
     def __init__(
         self, 
@@ -305,7 +305,6 @@ class MetricsRecorder:
         timeout = aiohttp.ClientTimeout(total=30)
 
         try:
-            # No need for custom SSL context in GitHub Actions
             async with aiohttp.ClientSession(timeout=timeout) as session:
                 async with session.post(
                     url_with_token,
@@ -343,35 +342,30 @@ class MetricsRecorder:
     
     async def send_metrics_to_prod(self) -> bool:
         """
-        Send metrics to Prod Google Script endpoint
+        Send metrics to Prod REST API endpoint (PUT + X-Api-Key).
         
         Returns:
             True if successful, False otherwise
         """
-        
         payload = self.get_metrics_payload()
-        # Remove run_env for prod endpoint if needed
-        payload.pop('run_env', None) 
-      
+        payload.pop('run_env', None)
+
         logger.debug(
             "Sending prod metrics payload:\n%s",
             json.dumps(payload, indent=2)
         )
 
-        # Add token as query parameter
-        url_with_token = f"{self.GOOGLE_SCRIPT_URL_FOR_PROD}?token={self.TOKEN_FOR_PROD}"
-
         headers = {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            "X-Api-Key": self.METRICS_API_KEY,
         }
      
         timeout = aiohttp.ClientTimeout(total=30)
 
         try:
-            # No need for custom SSL context in GitHub Actions
             async with aiohttp.ClientSession(timeout=timeout) as session:
-                async with session.post(
-                    url_with_token,
+                async with session.put(
+                    self.METRICS_API_URL,
                     json=payload,
                     headers=headers
                 ) as response:

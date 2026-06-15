@@ -28,8 +28,8 @@ class Settings(BaseSettings):
     SERPAPI_KEY: str = ""  
     GOOGLE_SCRIPT_URL_FOR_TEAM: str= ""
     TOKEN_FOR_TEAM: str = ""
-    GOOGLE_SCRIPT_URL_FOR_PROD: str = ""
-    TOKEN_FOR_PROD: str = ""
+    METRICS_API_KEY:str=""
+    METRICS_API_URL:str=""
 
 
     CONSOLIDATED_SHEET_NAME_FOR_BLOGPOST_METADATA:str=""
