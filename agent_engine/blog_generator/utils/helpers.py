@@ -2352,3 +2352,13 @@ def save_blog_metadata_to_sheet(brand: str, url: str, title: str, author: str, g
     weekly.append_row(row)
     print(f"Saved to weekly sheet '{weekly_sheet_name}': {row}")
 
+
+def extract_product_names(names):
+    return [
+        {
+            "ProductName": item.get("ProductName"),
+            "ProductURL": item.get("ProductURL")
+        }
+        for item in names
+        if "ProductName" in item and "ProductURL" in item
+    ]
