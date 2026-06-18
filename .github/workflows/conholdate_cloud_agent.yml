@@ -53,7 +53,6 @@ jobs:
           TOKEN_FOR_TEAM=${{ secrets.TOKEN_FOR_TEAM }}
           METRICS_API_KEY=${{ secrets.METRICS_API_KEY }}
           METRICS_API_URL=${{ vars.METRICS_API_URL }}
-          GOOGLE_SCRIPT_URL_FOR_PROD=${{ vars.GOOGLE_SCRIPT_URL_FOR_PROD }}
           GOOGLE_SCRIPT_URL_FOR_TEAM=${{ vars.GOOGLE_SCRIPT_URL_FOR_TEAM }}
           REPO_PAT=${{ secrets.GISTS_PAT_CONHOLDATE_CLOUD }}
           GIST_NAME=${{ vars.CONHOLDATE_CLOUD_GIST }}

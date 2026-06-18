@@ -52,8 +52,7 @@ jobs:
           PROFESSIONALIZE_LLM_MODEL=${{ secrets.PROFESSIONALIZE_LLM_MODEL }}
           TOKEN_FOR_TEAM=${{ secrets.TOKEN_FOR_TEAM }}
           METRICS_API_KEY=${{ secrets.METRICS_API_KEY }}
-          METRICS_API_URL=${{ vars.METRICS_API_URL }}
-          GOOGLE_SCRIPT_URL_FOR_PROD=${{ vars.GOOGLE_SCRIPT_URL_FOR_PROD }}
+          METRICS_API_URL=${{ vars.METRICS_API_URL 
           GOOGLE_SCRIPT_URL_FOR_TEAM=${{ vars.GOOGLE_SCRIPT_URL_FOR_TEAM }}
           REPO_PAT=${{ secrets.GISTS_PAT_GROUPDOCS_COM }}
           GIST_NAME=${{ vars.GROUPDOCS_COM_GIST }}
