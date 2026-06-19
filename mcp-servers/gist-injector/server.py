@@ -22,7 +22,7 @@ mcp = FastMCP("gist-injector")
 async def gist_injector(content: str, title: str, summary: str = "", url: str = "") -> dict:
 
     try:
-        snippets = extract_all_complete_code_snippets(content,title)
+        snippets = await extract_all_complete_code_snippets(content,title,metrics=None)
         if len(snippets) == 0:
             print("No complete code snippets found!", flush=True, file=sys.stderr)
             return {"jistified_content": content}

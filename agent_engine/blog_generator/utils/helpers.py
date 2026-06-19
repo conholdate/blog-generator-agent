@@ -440,28 +440,26 @@ def generate_snippet_filename(title: str, language: str, section_heading: str, i
     title_words = [w for w in title_slug.split() if w not in noise_words][:4]
     title_part = "_".join(title_words)
     
-    # Extract keyword from section heading
+    # Extract keyword from section heading — skip words already in title
+    title_word_set = set(title_words)
     section_slug = re.sub(r'[^\w\s]', '', section_heading.lower())
-    section_words = [w for w in section_slug.split() if w not in noise_words][:3]
+    section_words = [w for w in section_slug.split() if w not in noise_words and w not in title_word_set][:3]
     section_part = "_".join(section_words)
     
     extension = get_file_extension(language)
     
-    if total_snippets == 1:
-        # No index for single snippets
+    # If section adds nothing new, just use title_part alone
+    if section_part:
         filename = f"{title_part}_{section_part}.{extension}"
     else:
-        # Use section keyword only, index as fallback for collisions
-        filename = f"{title_part}_{section_part}.{extension}"
+        filename = f"{title_part}.{extension}"
     
     # Clean up double underscores
     filename = re.sub(r'_+', '_', filename).strip('_')
     
-    # Handle collisions for multiple snippets with same section keyword
     return filename
 
-
-def extract_all_complete_code_snippets(markdown_content: str, title: str = "") -> dict:
+async def extract_all_complete_code_snippets(markdown_content: str, title: str = "",metrics=None) -> dict:
     """
     Extract ALL complete code snippets marked with COMPLETE_CODE_SNIPPET tags
     """
@@ -517,8 +515,11 @@ def extract_all_complete_code_snippets(markdown_content: str, title: str = "") -
             if len(code) < 50:
                 print(f"  ⚠ Code is short ({len(code)} chars), but extracting anyway", flush=True, file=sys.stderr)
             
-            filename = generate_snippet_filename(title, language, task_name, snippet_index, total_snippets)
-            
+            filename = await generate_gist_filename_via_llm(title, task_name, language, metrics)
+
+            # Fallback to slug-based if LLM fails
+            if not filename:
+                filename = generate_snippet_filename(title, language, task_name, snippet_index, total_snippets)            
             # Handle collisions
             if filename in used_filenames.values():
                 base, ext = filename.rsplit(".", 1)
@@ -1507,16 +1508,16 @@ def clean_ai_generated_markdown(content: str, verbose: bool = True) -> str:
     total_replaced = sum(stats.values())
     
     if verbose:
-        print("\n" + "=" * 70)
-        print("AI CONTENT CLEANUP - Markdown-Aware Processing")
-        print("=" * 70)
+        print("\n" + "=" * 70, file=sys.stderr)
+        print("AI CONTENT CLEANUP - Markdown-Aware Processing", file=sys.stderr)
+        print("=" * 70, file=sys.stderr)
         
         if total_replaced == 0:
-            print(" No AI indicators found - content looks clean!")
-            print("=" * 70 + "\n")
+            print(" No AI indicators found - content looks clean!", file=sys.stderr)
+            print("=" * 70 + "\n", file=sys.stderr)
             return cleaned_content
         
-        print(f"⚠️  Found {total_replaced} AI generation indicators\n")
+        print(f"⚠️  Found {total_replaced} AI generation indicators\n", file=sys.stderr)
         
         # Group replacements by type
         by_type = {}
@@ -1528,20 +1529,19 @@ def clean_ai_generated_markdown(content: str, verbose: bool = True) -> str:
         
         # Display grouped results
         for pattern_name, items in by_type.items():
-            print(f"📍 {pattern_name}: {len(items)} occurrence(s)")
+            print(f"📍 {pattern_name}: {len(items)} occurrence(s)", file=sys.stderr)
             
             # Show first 5 occurrences with line numbers
             for i, item in enumerate(items[:5], 1):
-                print(f"   Line {item['line_number']}: '{item['original']}' → '{item['replacement']}'")
-                print(f"   Context: {item['context']}")
+                print(f"   Line {item['line_number']}: '{item['original']}' → '{item['replacement']}'", file=sys.stderr)
+                print(f"   Context: {item['context']}", file=sys.stderr)
             
             if len(items) > 5:
-                print(f"   ... and {len(items) - 5} more occurrence(s)")
-            print()
+                print(f"   ... and {len(items) - 5} more occurrence(s)", file=sys.stderr)
         
-        print(f"🔧 Cleanup completed: Replaced {total_replaced} fancy punctuation marks")
-        print("✅ Protected: Code blocks, inline code, images, URLs, gists")
-        print("=" * 70 + "\n")
+        print(f"🔧 Cleanup completed: Replaced {total_replaced} fancy punctuation marks", file=sys.stderr)
+        print("✅ Protected: Code blocks, inline code, images, URLs, gists", file=sys.stderr)
+        print("=" * 70 + "\n", file=sys.stderr)
     
     return cleaned_content
 
@@ -1830,11 +1830,11 @@ def fix_malformed_links(content: str, verbose: bool = True) -> Tuple[str, int, L
 
     if not issues:
         if verbose:
-            print("\n" + "=" * 70)
-            print("MARKDOWN LINK VALIDATION")
-            print("=" * 70)
-            print("✅ No malformed links found - all links are properly formatted!")
-            print("=" * 70 + "\n")
+            print("\n" + "=" * 70, file=sys.stderr)
+            print("MARKDOWN LINK VALIDATION", file=sys.stderr)
+            print("=" * 70, file=sys.stderr)
+            print("✅ No malformed links found - all links are properly formatted!", file=sys.stderr)
+            print("=" * 70 + "\n", file=sys.stderr)
         return content, 0, []
 
     lines = protected_content.split('\n')
@@ -1893,10 +1893,10 @@ def fix_malformed_links(content: str, verbose: bool = True) -> Tuple[str, int, L
             'empty_url':                         'Empty URL ()',
         }
 
-        print("\n" + "=" * 70)
-        print("MARKDOWN LINK VALIDATION & REPAIR")
-        print("=" * 70)
-        print(f"⚠️  Found {len(issues)} malformed link(s)\n")
+        print("\n" + "=" * 70, file=sys.stderr)
+        print("MARKDOWN LINK VALIDATION & REPAIR", file=sys.stderr)
+        print("=" * 70, file=sys.stderr)
+        print(f"⚠️  Found {len(issues)} malformed link(s)\n", file=sys.stderr)
 
         by_type: Dict[str, List[Dict]] = {}
         for issue in issues:
@@ -1904,23 +1904,22 @@ def fix_malformed_links(content: str, verbose: bool = True) -> Tuple[str, int, L
 
         for issue_type, type_issues in by_type.items():
             label = issue_labels.get(issue_type, issue_type)
-            print(f"📍 {label}: {len(type_issues)} occurrence(s)")
+            print(f"📍 {label}: {len(type_issues)} occurrence(s)", file=sys.stderr)
             for issue in type_issues[:3]:
                 print(f"   Line {issue['line_number']}: "
-                      f"'{issue['original']}' → '{issue['suggested']}'")
-                print(f"   Context: {issue['context']}")
+                      f"'{issue['original']}' → '{issue['suggested']}'", file=sys.stderr)
+                print(f"   Context: {issue['context']}", file=sys.stderr)
             if len(type_issues) > 3:
-                print(f"   ... and {len(type_issues) - 3} more occurrence(s)")
-            print()
+                print(f"   ... and {len(type_issues) - 3} more occurrence(s)", file=sys.stderr)
 
         fixable   = sum(1 for i in issues if i['replacement_pattern'] is not None)
         unfixable = len(issues) - fixable
-        print(f"🔧 Repair completed: Fixed {fixes_applied} of {fixable} fixable link(s)")
+        print(f"🔧 Repair completed: Fixed {fixes_applied} of {fixable} fixable link(s)", file=sys.stderr)
         if unfixable:
-            print(f"⚠️  {unfixable} issue(s) require manual review")
-        print("✅ Protected: Frontmatter, code blocks, inline code, HTML, autolinks,")
-        print("              images, valid links, reference-style links")
-        print("=" * 70 + "\n")
+            print(f"⚠️  {unfixable} issue(s) require manual review", file=sys.stderr)
+        print("✅ Protected: Frontmatter, code blocks, inline code, HTML, autolinks,", file=sys.stderr)
+        print("              images, valid links, reference-style links", file=sys.stderr)
+        print("=" * 70 + "\n", file=sys.stderr)
 
     return fixed_content, fixes_applied, issues
 
@@ -1934,9 +1933,9 @@ def validate_markdown_links(content: str, fix_automatically: bool = True, verbos
         protected_content, _ = extract_protected_regions(content)
         issues = find_malformed_links(protected_content)
         if verbose and issues:
-            print(f"\n⚠️  Found {len(issues)} malformed links (not fixed)")
+            print(f"\n⚠️  Found {len(issues)} malformed links (not fixed)", file=sys.stderr)
             for issue in issues[:5]:
-                print(f"   Line {issue['line_number']}: {issue['original']}")
+                print(f"   Line {issue['line_number']}: {issue['original']}", file=sys.stderr)
         return content
 
 
@@ -2376,3 +2375,88 @@ def extract_product_names(names):
         for item in names
         if "ProductName" in item and "ProductURL" in item
     ]
+
+async def generate_gist_filename_via_llm(
+    title: str,
+    section_heading: str,
+    language: str,
+    metrics=None
+) -> str | None:
+    """
+    Generate a clean, meaningful gist filename using LLM.
+    Returns a filename string, or None if all retries fail.
+    """
+    from services.LLMservice import llm_service
+    MAX_RETRIES = 3
+
+    extension = get_file_extension(language)
+
+    instructions = f"""
+You are a code file naming assistant.
+
+Your task:
+- Generate a clean, concise filename for a code snippet
+- Use snake_case
+- Max 4 words
+- Do NOT include the language name (extension already conveys it)
+- Do NOT use noise words like: without, external, tools, simple, using, with, complete, example, code, guide, tutorial, step, basic, advanced
+- Must reflect what the code actually does
+- Return ONLY the filename with .{extension} extension — no explanations, no extra text
+
+Topic: {title}
+Section: {section_heading}
+Language: {language}
+
+Example output format:
+svg_to_jpg.php
+"""
+
+    for attempt in range(1, MAX_RETRIES + 1):
+        print(f"  [Attempt {attempt}/{MAX_RETRIES}] Generating gist filename for: '{section_heading}'...",flush=True, file=sys.stderr)
+
+        try:
+            result = await llm_service.run_agent(
+                instructions=instructions,
+                context="Generate a clean filename for the code snippet above.",
+                agent_name="gist-filename-generator",
+                temperature=0.3,
+                max_turns=1
+            )
+
+            if metrics is not None:
+                metrics.record_llm_usage(
+                    input_tokens=result.token_usage["input_tokens"],
+                    output_tokens=result.token_usage["output_tokens"],
+                    caller="gist-filename-generator"
+                )
+
+            raw = result.final_output.strip().strip('"').strip("'")
+
+            if not raw or len(raw.strip()) == 0:
+                print(f"  [Attempt {attempt}/{MAX_RETRIES}] LLM returned empty response",flush=True, file=sys.stderr)
+                if attempt == MAX_RETRIES:
+                    return None
+                continue
+
+            # Sanitize
+            filename = re.sub(r'[^\w.]', '_', raw)
+            filename = re.sub(r'_+', '_', filename).strip('_')
+
+            # Ensure correct extension
+            if not filename.endswith(f".{extension}"):
+                base = filename.rsplit(".", 1)[0] if "." in filename else filename
+                filename = f"{base}.{extension}"
+
+            print(f"  ✅ Filename generated on attempt {attempt}: {filename}",flush=True, file=sys.stderr)
+            return filename
+
+        except Exception as e:
+            print(f"  [Attempt {attempt}/{MAX_RETRIES}] LLM call failed: {e}",flush=True, file=sys.stderr)
+            import traceback
+            traceback.print_exc()
+            if attempt == MAX_RETRIES:
+                return None
+            continue
+
+    print(f"  ❌ Could not generate filename after {MAX_RETRIES} attempts.",flush=True, file=sys.stderr)
+    return None
