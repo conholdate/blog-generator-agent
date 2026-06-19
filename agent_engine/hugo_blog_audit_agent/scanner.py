@@ -13,6 +13,8 @@ MD_LINK_RE = re.compile(r"!?\[([^\]]*)\]\(([^)\s]+)(?:\s+\"[^\"]*\")?\)")
 HTML_LINK_RE = re.compile(r"<a\s+[^>]*href=[\"']([^\"']+)[\"'][^>]*>(.*?)</a>", re.I | re.S)
 HTML_IMG_RE = re.compile(r"<img\s+[^>]*src=[\"']([^\"']+)[\"'][^>]*(?:alt=[\"']([^\"']*)[\"'])?[^>]*>", re.I)
 SHORTCODE_RE = re.compile(r"{{[%<].*?[%>]}}", re.S)
+SHORTCODE_IMAGE_NAMES = {"figure", "image", "img", "picture"}
+SHORTCODE_ATTR_RE = re.compile(r"([A-Za-z_][\w-]*)\s*=\s*(?:\"([^\"]*)\"|'([^']*)'|([^\s%>]+))")
 CODE_BLOCK_RE = re.compile(r"```.*?```|~~~.*?~~~", re.S)
 FENCED_CODE_RE = re.compile(r"^(?P<fence>```|~~~)(?P<language>[^\n`]*)\n(?P<code>.*?)(?:\n(?P=fence))", re.M | re.S)
 
@@ -240,7 +242,32 @@ def extract_images(body: str, line_offset: int = 0) -> list[ImageRef]:
                 images.append(ImageRef(match.group(1).strip(), match.group(2), line_offset + idx))
         for match in HTML_IMG_RE.finditer(line):
             images.append(ImageRef(match.group(2) or "", match.group(1), line_offset + idx))
+        images.extend(extract_shortcode_images(line, line_offset + idx))
     return images
+
+
+def extract_shortcode_images(line: str, line_number: int) -> list[ImageRef]:
+    images: list[ImageRef] = []
+    for match in SHORTCODE_RE.finditer(line):
+        raw = match.group(0)
+        shortcode = re.match(r"{{[%<]\s*([A-Za-z0-9_-]+)\b(?P<attrs>.*?)[%>]}}", raw, re.S)
+        if not shortcode or shortcode.group(1).lower() not in SHORTCODE_IMAGE_NAMES:
+            continue
+        attrs = shortcode_attrs(shortcode.group("attrs"))
+        target = attrs.get("src") or attrs.get("image") or attrs.get("url")
+        if not target:
+            continue
+        alt = attrs.get("alt") or attrs.get("caption") or attrs.get("title") or ""
+        images.append(ImageRef(alt, target, line_number))
+    return images
+
+
+def shortcode_attrs(raw: str) -> dict[str, str]:
+    attrs: dict[str, str] = {}
+    for match in SHORTCODE_ATTR_RE.finditer(raw):
+        value = next((group for group in match.groups()[1:] if group is not None), "")
+        attrs[match.group(1).lower()] = value
+    return attrs
 
 
 def extract_code_samples(body: str, line_offset: int = 0) -> list[CodeSample]:
