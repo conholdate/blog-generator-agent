@@ -1,23 +1,23 @@
 [
   {
-    "path": "/home/runner/work/blog-generator-agent/blog-generator-agent/outputs/_repos/aspose-blog/content/Aspose.Blog/barcode/2026-06-18-build-code-93-barcode-generator-in-python/index.md",
-    "relative_path": "content/Aspose.Blog/barcode/2026-06-18-build-code-93-barcode-generator-in-python/index.md",
-    "url_candidate": "/barcode/build-code-93-barcode-generator-in-python/",
+    "path": "/home/runner/work/blog-generator-agent/blog-generator-agent/outputs/_repos/aspose-blog/content/Aspose.Blog/barcode/2026-06-15-generate-barcode-and-qr-code-with-logo-in-python/index.md",
+    "relative_path": "content/Aspose.Blog/barcode/2026-06-15-generate-barcode-and-qr-code-with-logo-in-python/index.md",
+    "url_candidate": "/barcode/generate-barcode-and-qr-code-with-logo-in-python/",
     "language": "en",
     "front_matter_format": "yaml",
     "front_matter": {
-      "title": "Build Code 93 Barcode Generator in Python",
-      "seoTitle": "Build Code 93 Barcode Generator in Python",
-      "description": "Build a Code 93 barcode generator in Python with Aspose.BarCode for Python via .NET. Follow the guide, see full code, and learn configuration and speed tips.",
-      "date": "Thu, 18 Jun 2026 09:53:28 +0000",
-      "lastmod": "Thu, 18 Jun 2026 09:53:28 +0000",
+      "title": "Generate Barcode and QR Code with Logo in Python",
+      "seoTitle": "Generate Barcode and QR Code with Logo in Python",
+      "description": "Learn how to generate barcode and QR code with logo in Python using Aspose.BarCode for Python via .NET. Guide includes code, setup, and performance tips.",
+      "date": "Mon, 15 Jun 2026 11:54:08 +0000",
+      "lastmod": "Mon, 15 Jun 2026 11:54:08 +0000",
       "draft": false,
-      "url": "/barcode/build-code-93-barcode-generator-in-python/",
+      "url": "/barcode/generate-barcode-and-qr-code-with-logo-in-python/",
       "author": "Muzammil Khan",
-      "summary": "Create a Code 93 barcode generator in Python using Aspose.BarCode for Python via .NET. Follow step-by-step instructions, see a full code example, and learn installation, key features, configuration, and performance tips to add reliable barcodes to your apps.",
+      "summary": "This tutorial shows Python developers how to generate barcode and QR code with logo using Aspose.BarCode for Python via .NET. Follow steps to install the SDK, create barcodes, embed a custom logo, tweak QR appearance, and improve performance for branding.",
       "tags": [
-        "code 93 barcode",
         "python barcode generation",
+        "qrcode with logo",
         "aspose barcode"
       ],
       "categories": [
@@ -25,48 +25,48 @@
       ],
       "showtoc": true,
       "cover": {
-        "image": "images/build-code-93-barcode-generator-in-python.jpg",
-        "alt": "Build Code 93 Barcode Generator in Python",
-        "caption": "Build Code 93 Barcode Generator in Python"
+        "image": "images/generate-barcode-and-qr-code-with-logo-in-python.jpg",
+        "alt": "Generate Barcode and QR Code with Logo in Python",
+        "caption": "Generate Barcode and QR Code with Logo in Python"
       },
       "steps": [
         "Step 1: Install the Aspose.BarCode SDK for Python via .NET",
-        "Step 2: Import required classes and set up the barcode generator",
-        "Step 3: Configure Code 93 symbology and barcode text",
-        "Step 4: Generate and save the barcode image",
-        "Step 5: Verify the output and integrate into your application"
+        "Step 2: Initialize the barcode generator and set symbology",
+        "Step 3: Load and apply a logo image",
+        "Step 4: Save the generated image",
+        "Step 5: Optimize image size and format"
       ],
       "faqs": [
         {
-          "q": "How do I build code 93 barcode generator in Python using Aspose.BarCode?",
-          "a": "Use the BarCodeGenerator class, set EncodeTypes.Code93, provide the data string, and call save. See the complete code example above and refer to the [Aspose.BarCode for Python via .NET](https://products.aspose.com/barcode/python-net/) documentation for details."
+          "q": "How do I generate barcode and QR code with logo in Python using Aspose.BarCode?",
+          "a": "Use the Aspose.BarCode for Python via .NET SDK to create a BarcodeGenerator, set the desired symbology, assign a logo image, and save the result. See the [product page](https://products.aspose.com/barcode/python-net/) for details."
         },
         {
-          "q": "What Python imaging libraries work with Aspose.BarCode?",
-          "a": "Aspose.BarCode handles image creation internally, but you can further process the PNG with libraries like Pillow or OpenCV if needed."
+          "q": "Can I customize the size and position of the logo inside the QR code?",
+          "a": "Yes, the SDK provides properties such as set_QRCodeLogoImage and set_QRCodeLogoScale to control logo dimensions and placement. Refer to the [official documentation](https://docs.aspose.com/barcode/python-net/) for examples."
         },
         {
-          "q": "Can I customize the barcode size and colors?",
-          "a": "Yes, you can set the XDimension, BarHeight, ForeColor, and BackColor properties on the BarCodeGenerator instance."
+          "q": "What image formats are supported for the embedded logo?",
+          "a": "The SDK supports common formats like PNG, JPG, BMP, and GIF. Ensure the logo file is a supported format before loading it with the generator."
         },
         {
-          "q": "Is a license required for production use?",
-          "a": "A temporary license is available at the [temporary license page](https://purchase.aspose.com/temporary-license/). For full features, purchase a license via the [pricing page](https://purchase.aspose.com/pricing/barcode/family/)."
+          "q": "Is there a way to improve the performance when generating many barcodes?",
+          "a": "Enable image caching and reuse the BarcodeGenerator instance where possible. Adjust the image resolution and compression settings as described in the [API reference](https://reference.aspose.com/barcode/python-net/)."
         }
       ]
     },
-    "body": "\n\nCreating barcodes programmatically is a frequent requirement when you need to embed product identifiers, inventory codes, or tracking [numbers](https://docs.fileformat.com/spreadsheet/numbers/) directly into your software. [Aspose.BarCode for Python via .NET](https://products.aspose.com/barcode/python-net/) provides a robust SDK that simplifies barcode creation across many symbologies, including Code 93. This guide walks you through the entire process of building a Code 93 barcode generator in Python, from environment setup to performance tuning, so you can integrate reliable barcodes into your applications with confidence.\n\n## Steps to Generate Code 93 Barcodes Using Python\n1. **Install the SDK**: Run `pip install aspose-barcode-for-python-via-net` to add the library to your project.  \n2. **Create a BarCodeGenerator instance**: Initialize the generator with `EncodeTypes.Code93` to specify the Code 93 symbology.  \n3. **Set the barcode text**: Provide the data you want to encode, ensuring it complies with Code 93 character rules.  \n4. **Configure visual properties**: Adjust size, colors, and resolution to match your UI requirements.  \n5. **Save the image**: Call the `save` method to write the barcode to a [PNG](https://docs.fileformat.com/image/png/) file.  \n\nFor detailed API information, see the [BarCodeGenerator class reference](https://reference.aspose.com/barcode/python-net/BarCodeGenerator).\n\n## Code 93 Barcode Generation - Complete Code Example\nThe following example demonstrates how to generate a Code 93 barcode, customize its appearance, and save it as a PNG image.\n\n<!--[COMPLETE_CODE_SNIPPET_START]-->\n```python\n# Complete working code for generating a Code 93 barcode with Aspose.BarCode for Python via .NET\n\nimport aspose.barcode as barcode\nfrom aspose.barcode import BarCodeGenerator, EncodeTypes, BarCodeImageFormat, Color\n\n# Initialize the barcode generator with Code 93 symbology\ngenerator = BarCodeGenerator(EncodeTypes.CODE_93)\n\n# Set the data to be encoded (must be alphanumeric)\ngenerator.code_text = \"ABC-1234-XYZ\"\n\n# Optional visual customizations\ngenerator.x_dimension = 2.0          # Width of the smallest bar (in points)\ngenerator.bar_height = 100           # Height of the barcode (in points)\ngenerator.fore_color = Color.black   # Bar color\ngenerator.back_color = Color.white   # Background color\n\n# Save the barcode as a PNG image\noutput_path = \"code93_barcode.png\"\ngenerator.save(output_path, BarCodeImageFormat.PNG)\n\nprint(f\"Barcode saved to {output_path}\")\n```\n<!--[COMPLETE_CODE_SNIPPET_END]-->\n\n> **Note:** This code example demonstrates the core functionality. Before using it in your project, make sure to update the file paths (`code93_barcode.png`, etc.) to match your actual file locations, verify that all required dependencies are properly installed, and test thoroughly in your development environment. If you encounter any issues, please refer to the [official documentation](https://docs.aspose.com/barcode/python-net/) or reach out to the [support team](https://forum.aspose.com/c/barcode/) for assistance.\n\n## Installation and Setup in Python\n1. **Install the package**  \n   ```bash\n   pip install aspose-barcode-for-python-via-net\n   ```  \n2. **Download the native .NET binaries** from the [download page](https://releases.aspose.com/barcode/python-net/). Extract the archive and ensure the DLLs are accessible to your Python runtime (add the folder to `PATH` or place the files beside your script).  \n3. **Apply a license (optional for evaluation)**  \n   ```python\n   from aspose.barcode import License\n   license = License()\n   license.set_license(\"Aspose.BarCode.lic\")\n   ```  \n   A temporary license can be obtained from the [temporary license page](https://purchase.aspose.com/temporary-license/). For production use, purchase a full license via the [pricing page](https://purchase.aspose.com/pricing/barcode/family/).\n\n## Aspose.BarCode Features That Matter For This Task\n- **Wide symbology support**: Includes Code 93, Code 128, QR, DataMatrix, and more.  \n- **High‑resolution rendering**: Generates vector and raster images suitable for printing or screen display.  \n- **Customizable appearance**: Control dimensions, colors, margins, and text placement.  \n- **Cross‑platform output**: PNG, [JPEG](https://docs.fileformat.com/image/jpeg/), [BMP](https://docs.fileformat.com/image/bmp/), [GIF](https://docs.fileformat.com/image/gif/), [TIFF](https://docs.fileformat.com/image/tiff/), and [PDF](https://docs.fileformat.com/pdf) formats are all supported.  \n- **Performance‑optimized engine**: Designed for batch processing and low memory footprint.\n\nThese capabilities make Aspose.BarCode the ideal choice for creating reliable Code 93 barcodes in Python applications.\n\n## Configuring Code 93 Barcode Parameters\nWhen working with Code 93, you may need to fine‑tune several parameters:\n\n- **`code_text`**: The data string; must be alphanumeric and can include special characters defined by the Code 93 specification.  \n- **`x_dimension`**: Controls the width of the narrowest bar; typical values range from 1.0 to 3.0 points.  \n- **`bar_height`**: Sets the overall height of the barcode; adjust based on printing requirements.  \n- **`fore_color` / `back_color`**: Define bar and background colors using `Color` objects.  \n- **`resolution`**: When saving to raster formats, you can specify DPI via the `resolution` argument of the `save` method.\n\nExample of setting these options is shown in the complete code snippet above.\n\n## Performance Considerations for Barcode Generation\n- **Reuse the generator**: If you need to create many barcodes, instantiate a single `BarCodeGenerator` object and only change the `code_text` and visual properties between saves. This reduces object‑creation overhead.  \n- **Batch processing**: Loop through your data set and call `save` with different file names; avoid writing to disk inside tight loops if you can keep images in memory.  \n- **Memory management**: Dispose of large images promptly by deleting references or using `with` statements when working with streams.  \n- **Parallel execution**: For massive workloads, consider generating barcodes in parallel processes, but ensure each process loads its own copy of the native DLLs.\n\nFollowing these tips helps maintain low latency and minimal memory usage even when generating thousands of barcodes.\n\n## Best Practices for Generating Code 93 Barcodes in Python\n- **Validate input data** before passing it to the generator to avoid runtime exceptions caused by unsupported characters.  \n- **Standardize dimensions** across your application to ensure consistent scanning performance.  \n- **Use PNG for web and screen display**, but switch to PDF or [SVG](https://docs.fileformat.com/page-description-language/svg/) when you need vector scalability for print.  \n- **Apply a license early** in development to avoid evaluation limitations and to test the exact behavior of the licensed version.  \n- **Log generation results** (file path, data string, timestamp) to simplify troubleshooting and audit trails.\n\nImplementing these practices will result in more maintainable code and higher-quality barcode outputs.\n\n## Conclusion\nBuilding a Code 93 barcode generator in Python is straightforward with [Aspose.BarCode for Python via .NET](https://products.aspose.com/barcode/python-net/). By following the steps, reviewing the complete example, and applying the configuration and performance recommendations, you can embed high‑quality barcodes into any Python‑based system. Remember to acquire a proper license for production use; a temporary license is available on the [temporary license page](https://purchase.aspose.com/temporary-license/), and full licensing details are listed on the [pricing page](https://purchase.aspose.com/pricing/barcode/family/). Start generating barcodes today and streamline your data‑capture workflows.\n\n## FAQs\n- **How do I build code 93 barcode generator in Python using Aspose.BarCode?**  \n  Use the `BarCodeGenerator` class, set `EncodeTypes.CODE_93`, assign your data to `code_text`, configure visual settings, and call `save`. The complete code example above illustrates the process.\n\n- **Which Python imaging libraries can I combine with Aspose.BarCode?**  \n  While Aspose.BarCode creates the image internally, you can further manipulate the PNG with libraries such as Pillow, OpenCV, or Matplotlib for tasks like adding overlays or converting formats.\n\n- **Can I change the barcode size and colors programmatically?**  \n  Yes. Adjust properties like `x_dimension`, `bar_height`, `fore_color`, and `back_color` on the `BarCodeGenerator` instance before saving the image.\n\n- **Do I need a license for commercial projects?**  \n  A temporary license is free for evaluation via the [temporary license page](https://purchase.aspose.com/temporary-license/). For production deployments, purchase a full license from the [pricing page](https://purchase.aspose.com/pricing/barcode/family/).\n\n## Read More\n- [Control the Ratio of Wide to Narrow in Barcode-39](https://blog.aspose.com/barcode/control-the-ratio-of-wide-to-narrow-in-barcode39/)\n- [Generate Barcode-39 in C# Programmatically](https://blog.aspose.com/barcode/generate-barcode-39-in-csharp/)\n- [Text to QR Code Generator in Python](https://blog.aspose.com/barcode/text-to-qr-code-generator-in-python/)",
+    "body": "\n\nAdding a custom logo to barcodes and QR codes is a powerful way to reinforce brand identity on packaging, tickets, or marketing material. [Aspose.BarCode for Python via .NET](https://products.aspose.com/barcode/python-net/) enables Python developers to generate barcode and QR code with logo in Python quickly and reliably. This guide walks you through installing the SDK, creating both 1D barcodes and QR codes, embedding a logo image, customizing appearance, and fine‑tuning performance for real‑world applications.\n\n## Steps to Generate Barcode and QR Code with Logo in Python\n1. **Install the SDK**: Run the pip command below to add the library to your environment.  \n   ```bash\n   pip install aspose-barcode-for-python-via-net\n   ```\n2. **Create a BarcodeGenerator**: Import the library and instantiate a `BarcodeGenerator` with the desired symbology (e.g., `CODE_128` for 1D or `QR` for QR codes).  \n   ```python\n   import asposebarcode as barcode\n   generator = barcode.BarcodeGenerator(barcode.Symbology.QR, \"https://example.com\")\n   ```\n3. **Load the logo image**: Use the `set_qr_code_logo_image` method to attach a logo. The logo can be any supported image format ([PNG](https://docs.fileformat.com/image/png/), [JPG](https://docs.fileformat.com/image/jpg/), [BMP](https://docs.fileformat.com/image/bmp/), [GIF](https://docs.fileformat.com/image/gif/)).  \n   ```python\n   generator.parameters.qr_code_parameters.logo_image = \"logo.png\"\n   ```\n4. **Adjust logo scaling (optional)**: Control the logo size relative to the QR code using `logo_image_scale`.  \n   ```python\n   generator.parameters.qr_code_parameters.logo_image_scale = 0.2  # 20 % of QR size\n   ```\n5. **Save the barcode**: Choose an output format such as PNG or [JPEG](https://docs.fileformat.com/image/jpeg/) and write the image to disk.  \n   ```python\n   generator.save(\"branded_qr.png\", barcode.BarcodeImageFormat.PNG)\n   ```\n\nFor detailed property descriptions, see the [API reference](https://reference.aspose.com/barcode/python-net/).\n\n## Logo Embedded Codes - Complete Code Example\nThe following script demonstrates a full end‑to‑end workflow: installing the SDK, generating a QR code, embedding a custom logo, and saving the final image.\n\n<!--[COMPLETE_CODE_SNIPPET_START]-->\n```python\nimport asposebarcode as barcode\n\n# Initialize the generator for a QR code\nqr_generator = barcode.BarcodeGenerator(\n    symbology=barcode.Symbology.QR,\n    code_text=\"https://www.yourcompany.com\"\n)\n\n# Set image format and resolution\nqr_generator.parameters.image_format = barcode.BarcodeImageFormat.PNG\nqr_generator.parameters.resolution = 300  # DPI for high‑quality output\n\n# Load and apply the logo\nqr_generator.parameters.qr_code_parameters.logo_image = \"assets/company_logo.png\"\nqr_generator.parameters.qr_code_parameters.logo_image_scale = 0.18  # 18 % of QR size\n\n# Optional: change foreground/background colors\nqr_generator.parameters.barcode_color = barcode.Color.black\nqr_generator.parameters.back_color = barcode.Color.white\n\n# Save the resulting image\nqr_generator.save(\"output/branded_qr.png\", barcode.BarcodeImageFormat.PNG)\n\n# Clean up resources\nqr_generator.dispose()\n```\n<!--[COMPLETE_CODE_SNIPPET_END]-->\n\n> **Note:** This code example demonstrates the core functionality. Before using it in your project, make sure to update the file paths (`assets/company_logo.png`, `output/branded_qr.png`) to match your actual file locations, verify that all required dependencies are properly installed, and test thoroughly in your development environment. If you encounter any issues, please refer to the [official documentation](https://docs.aspose.com/barcode/python-net/) or reach out to the [support team](https://forum.aspose.com/c/barcode/) for assistance.\n\n## Installation and Setup in Python\nTo begin, download the latest SDK package from the official repository and install it with pip:\n\n```bash\npip install aspose-barcode-for-python-via-net\n```\n\n* **Download URL**: [Aspose.BarCode for Python via .NET Download](https://releases.aspose.com/barcode/python-net/)  \n* **License**: Obtain a temporary license for evaluation from the [temporary license page](https://purchase.aspose.com/temporary-license/). For production use, purchase a full license via the [pricing page](https://purchase.aspose.com/pricing/barcode/family/).\n\nAfter installation, you can import the library in any Python script as shown in the code example above.\n\n## Code Generation Workflow Using Aspose.BarCode\nAspose.BarCode provides a unified API for creating a wide range of 1D and 2D symbologies. The workflow consists of three main steps:\n\n1. **Initialize** the `BarcodeGenerator` with the required symbology and data.\n2. **Configure** optional parameters such as image format, resolution, and logo settings.\n3. **Render** the barcode to an image file or stream.\n\nBecause the SDK runs on .NET under the hood, it offers high performance and accurate rendering across all supported platforms.\n\n## Aspose.BarCode Features That Matter for This Task\n* **Logo Embedding** - Direct support for adding a logo to QR codes without manual image composition.  \n* **Extensive Symbology Support** - Over 150 barcode types, including CODE_128, EAN13, PDF417, and QR.  \n* **Image Format Flexibility** - Export to PNG, JPEG, BMP, GIF, [TIFF](https://docs.fileformat.com/image/tiff/), and more.  \n* **High‑Resolution Output** - Control DPI and scaling for print‑ready graphics.  \n* **Cross‑Platform Compatibility** - Works on Windows, Linux, and macOS with Python 3.x.\n\nThese features simplify the creation of branded barcodes and QR codes for product packaging, marketing campaigns, and inventory management.\n\n## Adding a Logo to the Barcode\nWhile QR codes natively support logo embedding, 1D barcodes can also display a logo by overlaying an image after generation. For QR codes, use the `logo_image` and `logo_image_scale` properties as demonstrated in the code example. For 1D barcodes, you may combine the generated barcode image with a logo using standard Python imaging libraries such as Pillow.\n\n```python\nfrom PIL import Image\n\n# Load generated barcode and logo\nbarcode_img = Image.open(\"output/barcode.png\")\nlogo_img = Image.open(\"assets/logo.png\")\n\n# Calculate position (centered)\npos = ((barcode_img.width - logo_img.width) // 2,\n       (barcode_img.height - logo_img.height) // 2)\n\n# Paste logo onto barcode\nbarcode_img.paste(logo_img, pos, logo_img.convert(\"RGBA\"))\nbarcode_img.save(\"output/barcode_with_logo.png\")\n```\n\n## Customizing QR Code Appearance\nBeyond logo placement, you can adjust colors, error correction level, and module size:\n\n```python\nqr_generator.parameters.qr_code_parameters.error_correction = barcode.QRCodeErrorCorrectionLevel.H\nqr_generator.parameters.barcode_color = barcode.Color.dark_blue\nqr_generator.parameters.back_color = barcode.Color.light_yellow\nqr_generator.parameters.qr_code_parameters.module_size = 6  # pixels per module\n```\n\nThese settings help maintain scan reliability even when a logo occupies part of the code.\n\n## Performance Considerations\n* **Reuse the Generator** - Creating a new `BarcodeGenerator` for each image adds overhead. Reuse the instance when generating multiple codes with the same settings.  \n* **Adjust DPI** - Higher DPI yields larger files and longer processing time. Use the lowest DPI that satisfies your quality requirements.  \n* **Batch Processing** - For large batches, process codes in parallel using Python's `concurrent.futures` module to take advantage of multi‑core CPUs.\n\n## Best Practices for Branded Barcodes and QR Codes\n1. **Keep the logo size below 30 %** of the QR code area to preserve readability.  \n2. **Use high‑contrast colors** (dark foreground, light background) for optimal scanning.  \n3. **Test with multiple devices** to ensure the logo does not interfere with detection.  \n4. **Store the original logo in a lossless format** (PNG) before scaling.  \n5. **Document the symbology and error‑correction level** used for each product line to aid future maintenance.\n\n## Conclusion\nBy following this guide, you now know how to generate barcode and QR code with logo in Python using [Aspose.BarCode for Python via .NET](https://products.aspose.com/barcode/python-net/). The SDK's rich feature set makes it easy to embed custom logos, tweak visual settings, and produce high‑quality images suitable for branding and product identification. Remember to acquire a proper license for production deployments; you can obtain a temporary evaluation license from the [temporary license page](https://purchase.aspose.com/temporary-license/) and review the full pricing options on the [pricing page](https://purchase.aspose.com/pricing/barcode/family/). Happy coding!\n\n## FAQs\n**How do I generate barcode and QR code with logo in Python without writing low‑level image manipulation code?**  \nUse the `BarcodeGenerator` class from [Aspose.BarCode for Python via .NET](https://products.aspose.com/barcode/python-net/). The SDK handles image creation, logo embedding, and format conversion internally.\n\n**What if the logo is not visible after generation?**  \nEnsure the logo file is a supported format (PNG, JPG, BMP, GIF) and that its scale does not exceed 30 % of the QR code size. Adjust `logo_image_scale` accordingly.\n\n**Can I generate multiple barcodes in a loop efficiently?**  \nYes. Create a single `BarcodeGenerator` instance, update its `code_text` and any logo properties inside the loop, and call `save` for each iteration. This reuses internal resources and improves performance.",
     "body_line_offset": 33,
-    "title": "Build Code 93 Barcode Generator in Python",
-    "description": "Build a Code 93 barcode generator in Python with Aspose.BarCode for Python via .NET. Follow the guide, see full code, and learn configuration and speed tips.",
-    "date": "Thu, 18 Jun 2026 09:53:28 +0000",
-    "lastmod": "Thu, 18 Jun 2026 09:53:28 +0000",
+    "title": "Generate Barcode and QR Code with Logo in Python",
+    "description": "Learn how to generate barcode and QR code with logo in Python using Aspose.BarCode for Python via .NET. Guide includes code, setup, and performance tips.",
+    "date": "Mon, 15 Jun 2026 11:54:08 +0000",
+    "lastmod": "Mon, 15 Jun 2026 11:54:08 +0000",
     "draft": false,
     "slug": "",
     "aliases": [],
     "tags": [
-      "code 93 barcode",
       "python barcode generation",
+      "qrcode with logo",
       "aspose barcode"
     ],
     "categories": [
@@ -75,93 +75,93 @@
     "keywords": [],
     "canonical_url": "",
     "translation_key": "",
-    "word_count": 1141,
-    "character_count": 8315,
+    "word_count": 1081,
+    "character_count": 7408,
     "headings": [
       {
         "level": 2,
-        "text": "Steps to Generate Code 93 Barcodes Using Python",
+        "text": "Steps to Generate Barcode and QR Code with Logo in Python",
         "line": 38
       },
       {
         "level": 2,
-        "text": "Code 93 Barcode Generation - Complete Code Example",
-        "line": 47
+        "text": "Logo Embedded Codes - Complete Code Example",
+        "line": 63
       },
       {
         "level": 2,
         "text": "Installation and Setup in Python",
-        "line": 79
+        "line": 98
       },
       {
         "level": 2,
-        "text": "Aspose.BarCode Features That Matter For This Task",
-        "line": 93
+        "text": "Code Generation Workflow Using Aspose.BarCode",
+        "line": 110
       },
       {
         "level": 2,
-        "text": "Configuring Code 93 Barcode Parameters",
-        "line": 102
+        "text": "Aspose.BarCode Features That Matter for This Task",
+        "line": 119
       },
       {
         "level": 2,
-        "text": "Performance Considerations for Barcode Generation",
-        "line": 113
+        "text": "Adding a Logo to the Barcode",
+        "line": 128
       },
       {
         "level": 2,
-        "text": "Best Practices for Generating Code 93 Barcodes in Python",
-        "line": 121
+        "text": "Customizing QR Code Appearance",
+        "line": 147
+      },
+      {
+        "level": 2,
+        "text": "Performance Considerations",
+        "line": 159
+      },
+      {
+        "level": 2,
+        "text": "Best Practices for Branded Barcodes and QR Codes",
+        "line": 164
       },
       {
         "level": 2,
         "text": "Conclusion",
-        "line": 130
+        "line": 171
       },
       {
         "level": 2,
         "text": "FAQs",
-        "line": 133
-      },
-      {
-        "level": 2,
-        "text": "Read More",
-        "line": 146
+        "line": 174
       }
     ],
     "paragraphs": [
-      "Creating barcodes programmatically is a frequent requirement when you need to embed product identifiers, inventory codes, or tracking [numbers](https://docs.fileformat.com/spreadsheet/numbers/) directly into your software. [Aspose.BarCode for Python via .NET](https://products.aspose.com/barcode/python-net/) provides a robust SDK that simplifies barcode creation across many symbologies, including Code 93. This guide walks you through the entire process of building a Code 93 barcode generator in Python, from environment setup to performance tuning, so you can integrate reliable barcodes into your applications with confidence.",
-      "For detailed API information, see the [BarCodeGenerator class reference](https://reference.aspose.com/barcode/python-net/BarCodeGenerator).",
+      "Adding a custom logo to barcodes and QR codes is a powerful way to reinforce brand identity on packaging, tickets, or marketing material. [Aspose.BarCode for Python via .NET](https://products.aspose.com/barcode/python-net/) enables Python developers to generate barcode and QR code with logo in Python quickly and reliably. This guide walks you through installing the SDK, creating both 1D barcodes and QR codes, embedding a logo image, customizing appearance, and fine‑tuning performance for real‑world applications.",
+      "2. **Create a BarcodeGenerator**: Import the library and instantiate a `BarcodeGenerator` with the desired symbology (e.g., `CODE_128` for 1D or `QR` for QR codes).",
+      "3. **Load the logo image**: Use the `set_qr_code_logo_image` method to attach a logo. The logo can be any supported image format ([PNG](https://docs.fileformat.com/image/png/), [JPG](https://docs.fileformat.com/image/jpg/), [BMP](https://docs.fileformat.com/image/bmp/), [GIF](https://docs.fileformat.com/image/gif/)).",
+      "4. **Adjust logo scaling (optional)**: Control the logo size relative to the QR code using `logo_image_scale`.",
+      "5. **Save the barcode**: Choose an output format such as PNG or [JPEG](https://docs.fileformat.com/image/jpeg/) and write the image to disk.",
+      "For detailed property descriptions, see the [API reference](https://reference.aspose.com/barcode/python-net/).",
       "<!--[COMPLETE_CODE_SNIPPET_START]-->",
       "<!--[COMPLETE_CODE_SNIPPET_END]-->",
-      "> **Note:** This code example demonstrates the core functionality. Before using it in your project, make sure to update the file paths (`code93_barcode.png`, etc.) to match your actual file locations, verify that all required dependencies are properly installed, and test thoroughly in your development environment. If you encounter any issues, please refer to the [official documentation](https://docs.aspose.com/barcode/python-net/) or reach out to the [support team](https://forum.aspose.com/c/barcode/) for assistance.",
-      "2. **Download the native .NET binaries** from the [download page](https://releases.aspose.com/barcode/python-net/). Extract the archive and ensure the DLLs are accessible to your Python runtime (add the folder to `PATH` or place the files beside your script).  \n3. **Apply a license (optional for evaluation)**",
-      "A temporary license can be obtained from the [temporary license page](https://purchase.aspose.com/temporary-license/). For production use, purchase a full license via the [pricing page](https://purchase.aspose.com/pricing/barcode/family/).",
-      "These capabilities make Aspose.BarCode the ideal choice for creating reliable Code 93 barcodes in Python applications.",
-      "- **`code_text`**: The data string; must be alphanumeric and can include special characters defined by the Code 93 specification.  \n- **`x_dimension`**: Controls the width of the narrowest bar; typical values range from 1.0 to 3.0 points.  \n- **`bar_height`**: Sets the overall height of the barcode; adjust based on printing requirements.  \n- **`fore_color` / `back_color`**: Define bar and background colors using `Color` objects.  \n- **`resolution`**: When saving to raster formats, you can specify DPI via the `resolution` argument of the `save` method.",
-      "Example of setting these options is shown in the complete code snippet above.",
-      "Following these tips helps maintain low latency and minimal memory usage even when generating thousands of barcodes.",
-      "Implementing these practices will result in more maintainable code and higher-quality barcode outputs.",
-      "- **Which Python imaging libraries can I combine with Aspose.BarCode?**  \n  While Aspose.BarCode creates the image internally, you can further manipulate the PNG with libraries such as Pillow, OpenCV, or Matplotlib for tasks like adding overlays or converting formats.",
-      "- **Can I change the barcode size and colors programmatically?**  \n  Yes. Adjust properties like `x_dimension`, `bar_height`, `fore_color`, and `back_color` on the `BarCodeGenerator` instance before saving the image.",
-      "- **Do I need a license for commercial projects?**  \n  A temporary license is free for evaluation via the [temporary license page](https://purchase.aspose.com/temporary-license/). For production deployments, purchase a full license from the [pricing page](https://purchase.aspose.com/pricing/barcode/family/)."
+      "> **Note:** This code example demonstrates the core functionality. Before using it in your project, make sure to update the file paths (`assets/company_logo.png`, `output/branded_qr.png`) to match your actual file locations, verify that all required dependencies are properly installed, and test thoroughly in your development environment. If you encounter any issues, please refer to the [official documentation](https://docs.aspose.com/barcode/python-net/) or reach out to the [support team](https://forum.aspose.com/c/barcode/) for assistance.",
+      "* **Download URL**: [Aspose.BarCode for Python via .NET Download](https://releases.aspose.com/barcode/python-net/)  \n* **License**: Obtain a temporary license for evaluation from the [temporary license page](https://purchase.aspose.com/temporary-license/). For production use, purchase a full license via the [pricing page](https://purchase.aspose.com/pricing/barcode/family/).",
+      "After installation, you can import the library in any Python script as shown in the code example above.",
+      "1. **Initialize** the `BarcodeGenerator` with the required symbology and data.\n2. **Configure** optional parameters such as image format, resolution, and logo settings.\n3. **Render** the barcode to an image file or stream.",
+      "Because the SDK runs on .NET under the hood, it offers high performance and accurate rendering across all supported platforms.",
+      "These features simplify the creation of branded barcodes and QR codes for product packaging, marketing campaigns, and inventory management.",
+      "These settings help maintain scan reliability even when a logo occupies part of the code.",
+      "**What if the logo is not visible after generation?**  \nEnsure the logo file is a supported format (PNG, JPG, BMP, GIF) and that its scale does not exceed 30 % of the QR code size. Adjust `logo_image_scale` accordingly.",
+      "**Can I generate multiple barcodes in a loop efficiently?**  \nYes. Create a single `BarcodeGenerator` instance, update its `code_text` and any logo properties inside the loop, and call `save` for each iteration. This reuses internal resources and improves performance."
     ],
     "images": [
       {
-        "alt": "Build Code 93 Barcode Generator in Python",
-        "target": "images/build-code-93-barcode-generator-in-python.jpg",
+        "alt": "Generate Barcode and QR Code with Logo in Python",
+        "target": "images/generate-barcode-and-qr-code-with-logo-in-python.jpg",
         "line": 0,
         "exists": true
       }
     ],
     "links": [
-      {
-        "text": "numbers",
-        "target": "https://docs.fileformat.com/spreadsheet/numbers/",
-        "is_internal": false,
-        "line": 36,
-        "exists": null
-      },
       {
         "text": "Aspose.BarCode for Python via .NET",
         "target": "https://products.aspose.com/barcode/python-net/",
@@ -173,165 +173,145 @@
         "text": "PNG",
         "target": "https://docs.fileformat.com/image/png/",
         "is_internal": false,
-        "line": 43,
+        "line": 48,
         "exists": null
       },
       {
-        "text": "BarCodeGenerator class reference",
-        "target": "https://reference.aspose.com/barcode/python-net/BarCodeGenerator",
+        "text": "JPG",
+        "target": "https://docs.fileformat.com/image/jpg/",
         "is_internal": false,
-        "line": 45,
-        "exists": null
-      },
-      {
-        "text": "official documentation",
-        "target": "https://docs.aspose.com/barcode/python-net/",
-        "is_internal": false,
-        "line": 77,
-        "exists": null
-      },
-      {
-        "text": "support team",
-        "target": "https://forum.aspose.com/c/barcode/",
-        "is_internal": false,
-        "line": 77,
-        "exists": null
-      },
-      {
-        "text": "download page",
-        "target": "https://releases.aspose.com/barcode/python-net/",
-        "is_internal": false,
-        "line": 84,
-        "exists": null
-      },
-      {
-        "text": "temporary license page",
-        "target": "https://purchase.aspose.com/temporary-license/",
-        "is_internal": false,
-        "line": 91,
-        "exists": null
-      },
-      {
-        "text": "pricing page",
-        "target": "https://purchase.aspose.com/pricing/barcode/family/",
-        "is_internal": false,
-        "line": 91,
-        "exists": null
-      },
-      {
-        "text": "JPEG",
-        "target": "https://docs.fileformat.com/image/jpeg/",
-        "is_internal": false,
-        "line": 97,
+        "line": 48,
         "exists": null
       },
       {
         "text": "BMP",
         "target": "https://docs.fileformat.com/image/bmp/",
         "is_internal": false,
-        "line": 97,
+        "line": 48,
         "exists": null
       },
       {
         "text": "GIF",
         "target": "https://docs.fileformat.com/image/gif/",
         "is_internal": false,
-        "line": 97,
+        "line": 48,
+        "exists": null
+      },
+      {
+        "text": "JPEG",
+        "target": "https://docs.fileformat.com/image/jpeg/",
+        "is_internal": false,
+        "line": 56,
+        "exists": null
+      },
+      {
+        "text": "API reference",
+        "target": "https://reference.aspose.com/barcode/python-net/",
+        "is_internal": false,
+        "line": 61,
+        "exists": null
+      },
+      {
+        "text": "official documentation",
+        "target": "https://docs.aspose.com/barcode/python-net/",
+        "is_internal": false,
+        "line": 96,
+        "exists": null
+      },
+      {
+        "text": "support team",
+        "target": "https://forum.aspose.com/c/barcode/",
+        "is_internal": false,
+        "line": 96,
+        "exists": null
+      },
+      {
+        "text": "Aspose.BarCode for Python via .NET Download",
+        "target": "https://releases.aspose.com/barcode/python-net/",
+        "is_internal": false,
+        "line": 105,
+        "exists": null
+      },
+      {
+        "text": "temporary license page",
+        "target": "https://purchase.aspose.com/temporary-license/",
+        "is_internal": false,
+        "line": 106,
+        "exists": null
+      },
+      {
+        "text": "pricing page",
+        "target": "https://purchase.aspose.com/pricing/barcode/family/",
+        "is_internal": false,
+        "line": 106,
         "exists": null
       },
       {
         "text": "TIFF",
         "target": "https://docs.fileformat.com/image/tiff/",
         "is_internal": false,
-        "line": 97,
-        "exists": null
-      },
-      {
-        "text": "PDF",
-        "target": "https://docs.fileformat.com/pdf",
-        "is_internal": false,
-        "line": 97,
-        "exists": null
-      },
-      {
-        "text": "SVG",
-        "target": "https://docs.fileformat.com/page-description-language/svg/",
-        "is_internal": false,
-        "line": 124,
+        "line": 122,
         "exists": null
       },
       {
         "text": "Aspose.BarCode for Python via .NET",
         "target": "https://products.aspose.com/barcode/python-net/",
         "is_internal": false,
-        "line": 131,
+        "line": 172,
         "exists": null
       },
       {
         "text": "temporary license page",
         "target": "https://purchase.aspose.com/temporary-license/",
         "is_internal": false,
-        "line": 131,
+        "line": 172,
         "exists": null
       },
       {
         "text": "pricing page",
         "target": "https://purchase.aspose.com/pricing/barcode/family/",
         "is_internal": false,
-        "line": 131,
+        "line": 172,
         "exists": null
       },
       {
-        "text": "temporary license page",
-        "target": "https://purchase.aspose.com/temporary-license/",
+        "text": "Aspose.BarCode for Python via .NET",
+        "target": "https://products.aspose.com/barcode/python-net/",
         "is_internal": false,
-        "line": 144,
-        "exists": null
-      },
-      {
-        "text": "pricing page",
-        "target": "https://purchase.aspose.com/pricing/barcode/family/",
-        "is_internal": false,
-        "line": 144,
-        "exists": null
-      },
-      {
-        "text": "Control the Ratio of Wide to Narrow in Barcode-39",
-        "target": "https://blog.aspose.com/barcode/control-the-ratio-of-wide-to-narrow-in-barcode39/",
-        "is_internal": false,
-        "line": 147,
-        "exists": null
-      },
-      {
-        "text": "Generate Barcode-39 in C# Programmatically",
-        "target": "https://blog.aspose.com/barcode/generate-barcode-39-in-csharp/",
-        "is_internal": false,
-        "line": 148,
-        "exists": null
-      },
-      {
-        "text": "Text to QR Code Generator in Python",
-        "target": "https://blog.aspose.com/barcode/text-to-qr-code-generator-in-python/",
-        "is_internal": false,
-        "line": 149,
+        "line": 176,
         "exists": null
       }
     ],
     "code_samples": [
       {
         "language": "python",
-        "code": "# Complete working code for generating a Code 93 barcode with Aspose.BarCode for Python via .NET\n\nimport aspose.barcode as barcode\nfrom aspose.barcode import BarCodeGenerator, EncodeTypes, BarCodeImageFormat, Color\n\n# Initialize the barcode generator with Code 93 symbology\ngenerator = BarCodeGenerator(EncodeTypes.CODE_93)\n\n# Set the data to be encoded (must be alphanumeric)\ngenerator.code_text = \"ABC-1234-XYZ\"\n\n# Optional visual customizations\ngenerator.x_dimension = 2.0          # Width of the smallest bar (in points)\ngenerator.bar_height = 100           # Height of the barcode (in points)\ngenerator.fore_color = Color.black   # Bar color\ngenerator.back_color = Color.white   # Background color\n\n# Save the barcode as a PNG image\noutput_path = \"code93_barcode.png\"\ngenerator.save(output_path, BarCodeImageFormat.PNG)\n\nprint(f\"Barcode saved to {output_path}\")",
-        "line": 51
+        "code": "import asposebarcode as barcode\n\n# Initialize the generator for a QR code\nqr_generator = barcode.BarcodeGenerator(\n    symbology=barcode.Symbology.QR,\n    code_text=\"https://www.yourcompany.com\"\n)\n\n# Set image format and resolution\nqr_generator.parameters.image_format = barcode.BarcodeImageFormat.PNG\nqr_generator.parameters.resolution = 300  # DPI for high‑quality output\n\n# Load and apply the logo\nqr_generator.parameters.qr_code_parameters.logo_image = \"assets/company_logo.png\"\nqr_generator.parameters.qr_code_parameters.logo_image_scale = 0.18  # 18 % of QR size\n\n# Optional: change foreground/background colors\nqr_generator.parameters.barcode_color = barcode.Color.black\nqr_generator.parameters.back_color = barcode.Color.white\n\n# Save the resulting image\nqr_generator.save(\"output/branded_qr.png\", barcode.BarcodeImageFormat.PNG)\n\n# Clean up resources\nqr_generator.dispose()",
+        "line": 67
+      },
+      {
+        "language": "bash",
+        "code": "pip install aspose-barcode-for-python-via-net",
+        "line": 101
+      },
+      {
+        "language": "python",
+        "code": "from PIL import Image\n\n# Load generated barcode and logo\nbarcode_img = Image.open(\"output/barcode.png\")\nlogo_img = Image.open(\"assets/logo.png\")\n\n# Calculate position (centered)\npos = ((barcode_img.width - logo_img.width) // 2,\n       (barcode_img.height - logo_img.height) // 2)\n\n# Paste logo onto barcode\nbarcode_img.paste(logo_img, pos, logo_img.convert(\"RGBA\"))\nbarcode_img.save(\"output/barcode_with_logo.png\")",
+        "line": 131
+      },
+      {
+        "language": "python",
+        "code": "qr_generator.parameters.qr_code_parameters.error_correction = barcode.QRCodeErrorCorrectionLevel.H\nqr_generator.parameters.barcode_color = barcode.Color.dark_blue\nqr_generator.parameters.back_color = barcode.Color.light_yellow\nqr_generator.parameters.qr_code_parameters.module_size = 6  # pixels per module",
+        "line": 150
       }
     ],
-    "code_blocks": 3,
+    "code_blocks": 9,
     "tables": 0,
     "shortcodes": [],
     "faq_like_sections": 5,
     "schema_like_blocks": 0,
     "issues": [
       {
-        "file_path": "content/Aspose.Blog/barcode/2026-06-18-build-code-93-barcode-generator-in-python/index.md",
+        "file_path": "content/Aspose.Blog/barcode/2026-06-15-generate-barcode-and-qr-code-with-logo-in-python/index.md",
         "issue_type": "suggest_body_output_image",
         "severity": "Opportunity",
         "explanation": "Post has a cover/front matter image but no inline body image, and the content appears to describe a visual or generated output. Policy: content-quality; rule: CQ-006.",
@@ -349,7 +329,22 @@
         ]
       },
       {
-        "file_path": "content/Aspose.Blog/barcode/2026-06-18-build-code-93-barcode-generator-in-python/index.md",
+        "file_path": "content/Aspose.Blog/barcode/2026-06-15-generate-barcode-and-qr-code-with-logo-in-python/index.md",
+        "issue_type": "unresolved_api_module",
+        "severity": "High",
+        "explanation": "Code block line 67 imports `asposebarcode`, which does not match configured SDK namespaces: Aspose.BarCode, aspose.barcode, com.aspose.barcode.",
+        "why_it_matters": "Incorrect SDK symbols break developer tutorials and reduce trust in the article.",
+        "recommended_fix": "Replace `asposebarcode` with the relevant configured SDK module/namespace if it fits. Possible namespace options: `aspose.barcode`, `Aspose.BarCode`, `com.aspose.barcode`. Otherwise update sdk_validation namespaces if this module is valid.",
+        "estimated_effort": "Low",
+        "expected_seo_impact": "High",
+        "line": 67,
+        "policy_id": "",
+        "rule_id": "",
+        "evidence": "",
+        "intended_audiences": []
+      },
+      {
+        "file_path": "content/Aspose.Blog/barcode/2026-06-15-generate-barcode-and-qr-code-with-logo-in-python/index.md",
         "issue_type": "weak_internal_links",
         "severity": "Medium",
         "explanation": "Post has fewer than two internal links. Policy: internal-linking; rule: IL-001.",
@@ -367,7 +362,7 @@
         ]
       },
       {
-        "file_path": "content/Aspose.Blog/barcode/2026-06-18-build-code-93-barcode-generator-in-python/index.md",
+        "file_path": "content/Aspose.Blog/barcode/2026-06-15-generate-barcode-and-qr-code-with-logo-in-python/index.md",
         "issue_type": "too_few_outgoing_internal_links",
         "severity": "Medium",
         "explanation": "Post has fewer than two outgoing internal links. Policy: internal-linking; rule: IL-005.",
@@ -387,14 +382,14 @@
     ],
     "llm_suggestions": [],
     "scores": {
-      "content_quality": 100,
+      "content_quality": 88,
       "on_page_seo": 100,
       "technical_seo": 85,
       "internal_linking": 86,
       "translation_seo": 100,
-      "organic_growth_opportunity": 45,
-      "priority": 23
+      "organic_growth_opportunity": 58,
+      "priority": 49
     },
-    "translation_group": "content/Aspose.Blog/barcode/2026-06-18-build-code-93-barcode-generator-in-python/index.md"
+    "translation_group": "content/Aspose.Blog/barcode/2026-06-15-generate-barcode-and-qr-code-with-logo-in-python/index.md"
   }
 ]

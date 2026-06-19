@@ -7,12 +7,12 @@ Consolidated actionable backlog for Aspose. This combines post-level, technical 
 | --- | --- |
 | Blog | Aspose |
 | Product | Aspose.BarCode |
-| Audit date | 2026-06-19 12:55:31 UTC |
+| Audit date | 2026-06-19 13:13:09 UTC |
 | Repository | /home/runner/work/blog-generator-agent/blog-generator-agent/outputs/_repos/aspose-blog |
 | Blog config | outputs/workflow-blog-config.yaml |
 | Mode | report-with-fix-suggestions |
 | Product filter | Aspose.blog/barcode |
-| Post date filter | 2026-06-18 |
+| Post date filter | 2026-06-15 |
 | Language filter | All |
 | Include translations | false |
 | Detailed outputs | true |
@@ -30,12 +30,12 @@ Consolidated actionable backlog for Aspose. This combines post-level, technical 
 | Metric | Count |
 | --- | --- |
 | Total scanned blog posts | 1 |
-| Total action items | 5 |
+| Total action items | 6 |
 | P0 action items | 0 |
-| P1 action items | 0 |
-| Low-effort quick wins | 5 |
+| P1 action items | 1 |
+| Low-effort quick wins | 6 |
 | Critical issues | 0 |
-| High issues | 0 |
+| High issues | 1 |
 | Medium issues | 4 |
 | Low issues | 0 |
 | Opportunity issues | 1 |
@@ -44,28 +44,30 @@ Consolidated actionable backlog for Aspose. This combines post-level, technical 
 | Area | Action Items |
 | --- | --- |
 | Internal Linking | 3 |
+| Code/API | 1 |
 | Technical SEO | 1 |
 | Content Quality | 1 |
 
 ## All Action Items
 Action items are grouped by affected post. The post heading carries the file path, so the tables omit the repeated file column.
 
-### Build Code 93 Barcode Generator in Python
-File: `content/Aspose.Blog/barcode/2026-06-18-build-code-93-barcode-generator-in-python/index.md`
+### Generate Barcode and QR Code with Logo in Python
+File: `content/Aspose.Blog/barcode/2026-06-15-generate-barcode-and-qr-code-with-logo-in-python/index.md`
 
 | ID | Priority | Severity | Area | Issue | Line / Scope | Post Priority | Recommended Action | Effort | Impact | Source |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| AA-0001 | P2 | Medium | Internal Linking | too_few_outgoing_internal_links | Post-level | 23 | Add contextual links to related posts, docs, and product pages. | Low | Medium | internal-linking-audit.md |
-| AA-0002 | P2 | Medium | Internal Linking | weak_internal_links | Post-level | 23 | Add links to related tutorials, docs, and product pages. | Low | Medium | internal-linking-audit.md |
-| AA-0003 | P2 | Medium | Internal Linking | orphan_post | Post-level | 0 | Add links to this post from related higher-traffic posts. | Low | Medium | internal-linking-audit.md |
-| AA-0005 | P3 | Opportunity | Content Quality | suggest_body_output_image | Post-level | 23 | Consider adding an output screenshot or result image inside the post body if it helps readers validate the tutorial result. | Low | Medium | content-improvement-plan.md |
+| AA-0001 | P1 | High | Code/API | unresolved_api_module | 67 | 49 | Replace `asposebarcode` with the relevant configured SDK module/namespace if it fits. Possible namespace options: `aspose.barcode`, `Aspose.BarCode`, `com.aspose.barcode`. Otherwise update sdk_validation namespaces if this module is valid. | Low | High | code-audit.md |
+| AA-0002 | P2 | Medium | Internal Linking | too_few_outgoing_internal_links | Post-level | 49 | Add contextual links to related posts, docs, and product pages. | Low | Medium | internal-linking-audit.md |
+| AA-0003 | P2 | Medium | Internal Linking | weak_internal_links | Post-level | 49 | Add links to related tutorials, docs, and product pages. | Low | Medium | internal-linking-audit.md |
+| AA-0004 | P2 | Medium | Internal Linking | orphan_post | Post-level | 0 | Add links to this post from related higher-traffic posts. | Low | Medium | internal-linking-audit.md |
+| AA-0006 | P3 | Opportunity | Content Quality | suggest_body_output_image | Post-level | 49 | Consider adding an output screenshot or result image inside the post body if it helps readers validate the tutorial result. | Low | Medium | content-improvement-plan.md |
 
 ### Sitewide / Technical
 Scope: `/home/runner/work/blog-generator-agent/blog-generator-agent/outputs/_repos/aspose-blog`
 
 | ID | Priority | Severity | Area | Issue | Line / Scope | Post Priority | Recommended Action | Effort | Impact | Source |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| AA-0004 | P2 | Medium | Technical SEO | missing_robots | Sitewide | 0 | Add robots.txt or confirm Hugo generates one. | Low | Medium | technical-seo-audit.md |
+| AA-0005 | P2 | Medium | Technical SEO | missing_robots | Sitewide | 0 | Add robots.txt or confirm Hugo generates one. | Low | Medium | technical-seo-audit.md |
 
 
 ## Detailed Source Reports

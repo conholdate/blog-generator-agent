@@ -3,8 +3,8 @@
 ## Summary
 - Posts scanned: 1
 - Posts with fenced code blocks: 1
-- Code blocks found: 1
-- Code/API issues found: 0
+- Code blocks found: 4
+- Code/API issues found: 1
 - SDK validation enabled: True
 
 ## API Reference Sources
@@ -20,7 +20,7 @@ The agent validates SDK classes by indexing configured product API reference rep
 ## Per-Post Code Coverage
 | Blog Post | Title | Language | Code Blocks | Code Issues | Top Code Issues |
 | --- | --- | --- | --- | --- | --- |
-| `content/Aspose.Blog/barcode/2026-06-18-build-code-93-barcode-generator-in-python/index.md` | Build Code 93 Barcode Generator in Python | en | 1 | 0 |  |
+| `content/Aspose.Blog/barcode/2026-06-15-generate-barcode-and-qr-code-with-logo-in-python/index.md` | Generate Barcode and QR Code with Logo in Python | en | 4 | 1 | unresolved_api_module |
 
 ## Class/Member Resolution Details
 Missing or deprecated SDK classes, properties, and members are listed here with the closest existing indexed-symbol suggestions when the API reference data can support them.
@@ -30,7 +30,9 @@ Missing or deprecated SDK classes, properties, and members are listed here with 
 | None |  |  |  |  |
 
 ## Code/API Issues
-No issues detected.
+| Severity | Issue | Policy | Rule | Evidence | Audience | File | Explanation | Recommended Fix | Effort | Impact |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| High | unresolved_api_module |  |  |  |  | `content/Aspose.Blog/barcode/2026-06-15-generate-barcode-and-qr-code-with-logo-in-python/index.md` | Code block line 67 imports `asposebarcode`, which does not match configured SDK namespaces: Aspose.BarCode, aspose.barcode, com.aspose.barcode. | Replace `asposebarcode` with the relevant configured SDK module/namespace if it fits. Possible namespace options: `aspose.barcode`, `Aspose.BarCode`, `com.aspose.barcode`. Otherwise update sdk_validation namespaces if this module is valid. | Low | High |
 
 ## Checks Applied
 - Validates Aspose import/module names against configured SDK namespaces.

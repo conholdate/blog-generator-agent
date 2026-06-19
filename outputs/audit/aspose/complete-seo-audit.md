@@ -1,21 +1,21 @@
 # Complete SEO Audit Report
 
 ## Executive Summary
-This local audit scanned 1 Markdown files for Aspose. It found 6 total issues across content quality, on-page SEO, technical Hugo SEO, internal linking, multilingual SEO, and audience fit.
-The estimated overall SEO health score is 89/100. The highest-leverage work is to fix high-severity content gaps, improve developer-intent completeness, repair internal linking weaknesses, and tighten translation metadata.
+This local audit scanned 1 Markdown files for Aspose. It found 7 total issues across content quality, on-page SEO, technical Hugo SEO, internal linking, multilingual SEO, and audience fit.
+The estimated overall SEO health score is 84/100. The highest-leverage work is to fix high-severity content gaps, improve developer-intent completeness, repair internal linking weaknesses, and tighten translation metadata.
 
 - Repository: `/home/runner/work/blog-generator-agent/blog-generator-agent/outputs/_repos/aspose-blog`
 - Audience profile: Developers and technical decision-makers evaluating or using Aspose APIs for document and file-format processing.
 - Markdown files scanned: 1
 - Languages detected: 1
 - Translation groups: 1
-- Total issues: 6
+- Total issues: 7
 
 ## SEO Scorecard
 | Area | Score | Interpretation |
 | --- | --- | --- |
-| Overall SEO Health | 89 | Strong. Monitor and refine. |
-| Content Quality | 92 | Strong. Monitor and refine. |
+| Overall SEO Health | 84 | Good but has visible improvement opportunities. |
+| Content Quality | 72 | Good but has visible improvement opportunities. |
 | On-Page SEO | 100 | Strong. Monitor and refine. |
 | Technical SEO | 92 | Strong. Monitor and refine. |
 | Internal Linking | 50 | Needs focused cleanup and refresh work. |
@@ -28,7 +28,7 @@ The estimated overall SEO health score is 89/100. The highest-leverage work is t
 | Severity | Count |
 | --- | --- |
 | Critical | 0 |
-| High | 0 |
+| High | 1 |
 | Medium | 5 |
 | Low | 0 |
 | Opportunity | 1 |
@@ -38,6 +38,7 @@ The estimated overall SEO health score is 89/100. The highest-leverage work is t
 | --- | --- |
 | too_few_outgoing_internal_links | 2 |
 | suggest_body_output_image | 1 |
+| unresolved_api_module | 1 |
 | weak_internal_links | 1 |
 | missing_robots | 1 |
 | orphan_post | 1 |
@@ -45,14 +46,14 @@ The estimated overall SEO health score is 89/100. The highest-leverage work is t
 ### Top Priority Posts
 | File | Language | Priority | Issues | Top Issue | Recommended Action |
 | --- | --- | --- | --- | --- | --- |
-| `content/Aspose.Blog/barcode/2026-06-18-build-code-93-barcode-generator-in-python/index.md` | en | 23 | 3 | suggest_body_output_image | Consider adding an output screenshot or result image inside the post body if it helps readers validate the tutorial result. |
+| `content/Aspose.Blog/barcode/2026-06-15-generate-barcode-and-qr-code-with-logo-in-python/index.md` | en | 49 | 4 | suggest_body_output_image | Consider adding an output screenshot or result image inside the post body if it helps readers validate the tutorial result. |
 
 ## Per-Post SEO Segment Score Table
 All scanned posts are listed below, sorted by priority score. Each SEO audit segment is shown as a column for direct post-by-post comparison.
 
 | Blog Post | Title | Language | Content Quality | On-Page SEO | Technical SEO | Internal Linking | Translation SEO | Developer Audience Fit | Growth Opportunity | Priority | Issues | Top Issues |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| `content/Aspose.Blog/barcode/2026-06-18-build-code-93-barcode-generator-in-python/index.md` | Build Code 93 Barcode Generator in Python | en | 100 | 100 | 85 | 86 | 100 | 100 | 45 | 23 | 3 | suggest_body_output_image; weak_internal_links; too_few_outgoing_internal_links |
+| `content/Aspose.Blog/barcode/2026-06-15-generate-barcode-and-qr-code-with-logo-in-python/index.md` | Generate Barcode and QR Code with Logo in Python | en | 88 | 100 | 85 | 86 | 100 | 100 | 58 | 49 | 4 | suggest_body_output_image; unresolved_api_module; weak_internal_links; too_few_outgoing_internal_links |
 
 ## Content Quality Audit
 Developer and file-format processing content should satisfy a concrete task, show working code, explain setup, clarify input/output formats, and provide troubleshooting or limitations.
