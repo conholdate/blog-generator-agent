@@ -1,34 +1,36 @@
-[13:12:09] Loading blog configuration
-[13:12:09] Audit output will be written to: /home/runner/work/blog-generator-agent/blog-generator-agent/outputs/audit/aspose
-[13:12:09] Preparing repository source: https://github.com/Aspose/aspose-blog.git
-[13:12:09] Loading policy files: 7 configured
-[13:12:09] Policy files loaded: 7
-[13:13:00] Repository ready: /home/runner/work/blog-generator-agent/blog-generator-agent/outputs/_repos/aspose-blog
-[13:13:00] Detecting Hugo project structure
-[13:13:00] Hugo config files detected: config.yml
-[13:13:00] Scanning Markdown content; include translations: False; product filter: Aspose.blog/barcode; post date filter: 2026-06-15
-[13:13:03] Markdown scan complete: 1 files
-[13:13:03] Loaded product config: Aspose.BarCode
-[13:13:03] Preparing SDK/API reference validation
-[13:13:03] Indexing API reference repository: barcode-net-api-reference
-[13:13:08] API reference symbols indexed: 6703
-[13:13:08] Indexing API reference repository: barcode-java-api-reference
-[13:13:09] API reference symbols indexed: 2249
-[13:13:09] Indexing API reference repository: barcode-cpp-api-reference
-[13:13:09] API reference symbols indexed: 7663
-[13:13:09] Indexing API reference repository: barcode-python_net-api-reference
-[13:13:09] API reference symbols indexed: 2083
-[13:13:09] Checking local image and asset references
-[13:13:09] Grouping translations
-[13:13:09] Translation grouping complete: 1 groups
-[13:13:09] Running technical Hugo SEO audit
-[13:13:09] Technical audit complete: 1 issues
-[13:13:09] Running internal linking audit
-[13:13:09] Internal linking audit complete: 2 issues
-[13:13:09] Running content and on-page SEO audits
-[13:13:09] Applying policy-grounded rules
-[13:13:09] Scoring complete
-[13:13:09] Writing report files
-[13:13:09] Sending metrics API payload
-[13:13:09] Metrics API payload: {"timestamp":"2026-06-19T13:13:09.834391+00:00","agent_name":"Blog Audit Agent","agent_owner":"Muzammil Khan","job_type":"Blog Audit","run_id":"23b504fd-035a-42cf-8ae4-ae30264ef79b","status":"success","product":"Aspose.BarCode","platform":"All","website":"https://blog.aspose.com","website_section":"Blog","item_name":"Blog Posts","items_discovered":1,"items_failed":0,"items_succeeded":1,"run_duration_ms":60530.0,"token_usage":0,"api_calls_count":0}
-[13:13:10] Metrics API sent: delivery=success; status=200; response={"id":10256,"timestamp":"2026-06-19T13:13:09.834391+00:00","agent_name":"Blog Audit Agent","agent_owner":"Muzammil Khan","job_type":"Blog Audit","run_id":"23b504fd-035a-42cf-8ae4-ae30264ef79b","status":"success","product":"Aspose.BarCode","platform":"All","website":"https://blog.aspose.com","website_section":"Blog","item_name":"Blog Posts","items_discovered":1,"items_failed":0,"items_succeeded":1,"run_duration_ms":60530,"token_usage":0,"api_calls_count":0}
+[14:57:32] Loading blog configuration
+[14:57:32] Audit output will be written to: /home/runner/work/blog-generator-agent/blog-generator-agent/outputs/audit/aspose
+[14:57:32] Preparing repository source: https://github.com/Aspose/aspose-blog.git
+[14:57:32] Loading policy files: 7 configured
+[14:57:32] Policy files loaded: 7
+[14:58:25] Repository ready: /home/runner/work/blog-generator-agent/blog-generator-agent/outputs/_repos/aspose-blog
+[14:58:25] Detecting Hugo project structure
+[14:58:25] Hugo config files detected: config.yml
+[14:58:25] Scanning Markdown content; include translations: False; product filter: Aspose.blog/barcode; post date filter: 2026-06-19
+[14:58:29] Markdown scan complete: 4 files
+[14:58:29] Loaded product config: Aspose.BarCode
+[14:58:29] Preparing SDK/API reference validation
+[14:58:29] Indexing API reference repository: barcode-net-api-reference
+[14:58:34] API reference symbols indexed: 6703
+[14:58:34] Indexing API reference repository: barcode-java-api-reference
+[14:58:34] API reference symbols indexed: 2249
+[14:58:34] Indexing API reference repository: barcode-cpp-api-reference
+[14:58:35] API reference symbols indexed: 7663
+[14:58:35] Indexing API reference repository: barcode-python_net-api-reference
+[14:58:35] API reference symbols indexed: 2083
+[14:58:35] Checking local image and asset references
+[14:58:35] Grouping translations
+[14:58:35] Translation grouping complete: 4 groups
+[14:58:35] Running technical Hugo SEO audit
+[14:58:35] Technical audit complete: 1 issues
+[14:58:35] Running internal linking audit
+[14:58:35] Internal linking audit complete: 8 issues
+[14:58:35] Running content and on-page SEO audits
+[14:58:45] Applying policy-grounded rules
+[14:58:45] Running optional LLM suggestion enrichment
+[14:58:45] Running LLM suggestion enrichment for 4 posts
+[14:59:22] Scoring complete
+[14:59:22] Writing report files
+[14:59:22] Sending metrics API payload
+[14:59:22] Metrics API payload: {"timestamp":"2026-06-19T14:59:22.370725+00:00","agent_name":"Blog Audit Agent","agent_owner":"Muzammil Khan","job_type":"Blog Audit","run_id":"d3d3d876-ee9b-4cd7-9edc-72bd29e54308","status":"success","product":"Aspose.BarCode","platform":"All","website":"https://blog.aspose.com","website_section":"Blog","item_name":"Blog Posts","items_discovered":4,"items_failed":0,"items_succeeded":4,"run_duration_ms":109780.0,"token_usage":22835,"api_calls_count":4}
+[14:59:22] Metrics API sent: delivery=success; status=200; response={"id":10465,"timestamp":"2026-06-19T14:59:22.370725+00:00","agent_name":"Blog Audit Agent","agent_owner":"Muzammil Khan","job_type":"Blog Audit","run_id":"d3d3d876-ee9b-4cd7-9edc-72bd29e54308","status":"success","product":"Aspose.BarCode","platform":"All","website":"https://blog.aspose.com","website_section":"Blog","item_name":"Blog Posts","items_discovered":4,"items_failed":0,"items_succeeded":4,"run_duration_ms":109780,"token_usage":22835,"api_calls_count":4}
