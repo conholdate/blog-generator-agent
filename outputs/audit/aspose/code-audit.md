@@ -1,0 +1,78 @@
+# Code Audit
+
+## Summary
+- Posts scanned: 4
+- Posts with fenced code blocks: 4
+- Code blocks found: 12
+- Code/API issues found: 16
+- SDK validation enabled: True
+
+## API Reference Sources
+The agent validates SDK classes by indexing configured product API reference repositories. For product-scoped audits, these references are derived from the selected product config where available.
+
+| Source | Product | Path | Namespaces | Symbols Indexed |
+| --- | --- | --- | --- | --- |
+| barcode-net-api-reference |  | /home/runner/work/blog-generator-agent/blog-generator-agent/outputs/_repos/_api_references/Aspose/english/net | Aspose.BarCode, aspose.barcode, com.aspose.barcode | 6703 |
+| barcode-java-api-reference |  | /home/runner/work/blog-generator-agent/blog-generator-agent/outputs/_repos/_api_references/Aspose/english/java | Aspose.BarCode, aspose.barcode, com.aspose.barcode | 2249 |
+| barcode-cpp-api-reference |  | /home/runner/work/blog-generator-agent/blog-generator-agent/outputs/_repos/_api_references/Aspose/english/cpp | Aspose.BarCode, aspose.barcode, com.aspose.barcode | 7663 |
+| barcode-python_net-api-reference |  | /home/runner/work/blog-generator-agent/blog-generator-agent/outputs/_repos/_api_references/Aspose/english/python-net | Aspose.BarCode, aspose.barcode, com.aspose.barcode | 2083 |
+
+## Per-Post Code Coverage
+| Blog Post | Title | Language | Code Blocks | Code Issues | Top Code Issues |
+| --- | --- | --- | --- | --- | --- |
+| `content/Aspose.Blog/barcode/2026-06-19-generate-upc-barcode-in-net/index.md` | Generate Upc Barcode in .NET | en | 2 | 6 | unresolved_api_member; unresolved_api_member; unresolved_api_member; unresolved_api_member; unresolved_api_member; unresolved_api_class |
+| `content/Aspose.Blog/barcode/2026-06-19-generate-high-density-data-matrix-code-in-net/index.md` | Generate High Density Data Matrix Code in .NET | en | 1 | 5 | unresolved_api_class; unresolved_api_member; unresolved_api_member; unresolved_api_member; unresolved_api_member |
+| `content/Aspose.Blog/barcode/2026-06-19-generate-ean-13-barcode-in-net/index.md` | Generate Ean-13 Barcode in .NET | en | 7 | 4 | unresolved_api_member; unresolved_api_member; unresolved_api_class; unresolved_api_member |
+| `content/Aspose.Blog/barcode/2026-06-19-generate-maxicode-barcode-in-python/index.md` | Generate MaxiCode Barcode in Python | en | 2 | 1 | unresolved_api_module |
+
+## Class/Member Resolution Details
+Missing or deprecated SDK classes, properties, and members are listed here with the closest existing indexed-symbol suggestions when the API reference data can support them.
+
+| File | Code Line | Referenced Class/Member | Status | Suggested Existing Symbol/Fix |
+| --- | --- | --- | --- | --- |
+| `content/Aspose.Blog/barcode/2026-06-19-generate-ean-13-barcode-in-net/index.md` | 70 | ForeColor | Missing from API reference | Replace `ForeColor` with the relevant existing API property/member if it fits. Nearest indexed symbols: `BorderColor`, `Color`, `for`, `bar_color`, `BarColor`. |
+| `content/Aspose.Blog/barcode/2026-06-19-generate-ean-13-barcode-in-net/index.md` | 112 | ForeColor | Missing from API reference | Replace `ForeColor` with the relevant existing API property/member if it fits. Nearest indexed symbols: `BorderColor`, `Color`, `for`, `bar_color`, `BarColor`. |
+| `content/Aspose.Blog/barcode/2026-06-19-generate-ean-13-barcode-in-net/index.md` | 159 | TextLocation | Missing from API reference | Replace `TextLocation` with the relevant existing API symbol if it fits. Nearest indexed symbols: `get_Location`, `GetLocation`, `set_Location`, `SetLocation`, `Location`. |
+| `content/Aspose.Blog/barcode/2026-06-19-generate-ean-13-barcode-in-net/index.md` | 159 | TextLocation | Missing from API reference | Replace `TextLocation` with the relevant existing API property/member if it fits. Nearest indexed symbols: `get_Location`, `GetLocation`, `set_Location`, `SetLocation`, `Location`. |
+| `content/Aspose.Blog/barcode/2026-06-19-generate-high-density-data-matrix-code-in-net/index.md` | 104 | DataMatrixSize | Missing from API reference | Replace `DataMatrixSize` with the relevant existing API symbol if it fits. Nearest indexed symbols: `DATA_MATRIX`, `DATAMATRIX`, `DatamatrixIndex`, `data_matrix_ecc`, `DataMatrixEcc`. |
+| `content/Aspose.Blog/barcode/2026-06-19-generate-high-density-data-matrix-code-in-net/index.md` | 104 | DataMatrixSize | Missing from API reference | Replace `DataMatrixSize` with the relevant existing API property/member if it fits. Nearest indexed symbols: `DATA_MATRIX`, `DATAMATRIX`, `DatamatrixIndex`, `data_matrix_ecc`, `DataMatrixEcc`. |
+| `content/Aspose.Blog/barcode/2026-06-19-generate-high-density-data-matrix-code-in-net/index.md` | 105 | ImageResolution | Missing from API reference | Replace `ImageResolution` with the relevant existing API property/member if it fits. Nearest indexed symbols: `get_Resolution`, `GetResolution`, `Resolution`, `set_Resolution`, `SetResolution`. |
+| `content/Aspose.Blog/barcode/2026-06-19-generate-high-density-data-matrix-code-in-net/index.md` | 106 | QRQuietZone | Missing from API reference | Replace `QRQuietZone` with the relevant existing API property/member if it fits. Nearest indexed symbols: `quiet_zone_coef`, `QuietZoneCoef`, `get_QuietZoneCoef`, `GetQuietZoneCoef`, `ITFQuietZoneCoef`. |
+| `content/Aspose.Blog/barcode/2026-06-19-generate-high-density-data-matrix-code-in-net/index.md` | 107 | ImageFormat | Missing from API reference | Replace `ImageFormat` with the relevant existing API property/member if it fits. Nearest indexed symbols: `get_Format`, `GetFormat`, `BarCodeImageFormat`, `Format`, `Image`. |
+| `content/Aspose.Blog/barcode/2026-06-19-generate-upc-barcode-in-net/index.md` | 86 | ImageFormat | Missing from API reference | Replace `ImageFormat` with the relevant existing API property/member if it fits. Nearest indexed symbols: `get_Format`, `GetFormat`, `BarCodeImageFormat`, `Format`, `Image`. |
+| `content/Aspose.Blog/barcode/2026-06-19-generate-upc-barcode-in-net/index.md` | 87 | ImageResolution | Missing from API reference | Replace `ImageResolution` with the relevant existing API property/member if it fits. Nearest indexed symbols: `get_Resolution`, `GetResolution`, `Resolution`, `set_Resolution`, `SetResolution`. |
+| `content/Aspose.Blog/barcode/2026-06-19-generate-upc-barcode-in-net/index.md` | 92 | ImageFormat | Missing from API reference | Replace `ImageFormat` with the relevant existing API property/member if it fits. Nearest indexed symbols: `get_Format`, `GetFormat`, `BarCodeImageFormat`, `Format`, `Image`. |
+| `content/Aspose.Blog/barcode/2026-06-19-generate-upc-barcode-in-net/index.md` | 93 | ImageResolution | Missing from API reference | Replace `ImageResolution` with the relevant existing API property/member if it fits. Nearest indexed symbols: `get_Resolution`, `GetResolution`, `Resolution`, `set_Resolution`, `SetResolution`. |
+| `content/Aspose.Blog/barcode/2026-06-19-generate-upc-barcode-in-net/index.md` | 137 | ForeColor | Missing from API reference | Replace `ForeColor` with the relevant existing API property/member if it fits. Nearest indexed symbols: `BorderColor`, `Color`, `for`, `bar_color`, `BarColor`. |
+| `content/Aspose.Blog/barcode/2026-06-19-generate-upc-barcode-in-net/index.md` | 39 | NuGet | Missing from API reference | Replace `NuGet` with the relevant existing API symbol if it fits. Nearest indexed symbols: `net`, `agent`, `Angle`, `get_QR`, `GetQR`. |
+
+## Code/API Issues
+| Severity | Issue | Policy | Rule | Evidence | Audience | File | Explanation | Recommended Fix | Effort | Impact |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| High | unresolved_api_member |  |  |  |  | `content/Aspose.Blog/barcode/2026-06-19-generate-ean-13-barcode-in-net/index.md` | Code line 70 assigns `ForeColor` as an SDK property/member, but it was not found in the indexed API reference symbols. | Replace `ForeColor` with the relevant existing API property/member if it fits. Nearest indexed symbols: `BorderColor`, `Color`, `for`, `bar_color`, `BarColor`. | Low | High |
+| High | unresolved_api_member |  |  |  |  | `content/Aspose.Blog/barcode/2026-06-19-generate-ean-13-barcode-in-net/index.md` | Code line 112 assigns `ForeColor` as an SDK property/member, but it was not found in the indexed API reference symbols. | Replace `ForeColor` with the relevant existing API property/member if it fits. Nearest indexed symbols: `BorderColor`, `Color`, `for`, `bar_color`, `BarColor`. | Low | High |
+| High | unresolved_api_class |  |  |  |  | `content/Aspose.Blog/barcode/2026-06-19-generate-ean-13-barcode-in-net/index.md` | Code line 159 references `TextLocation` as an SDK class/member, but it was not found in the indexed API reference symbols. | Replace `TextLocation` with the relevant existing API symbol if it fits. Nearest indexed symbols: `get_Location`, `GetLocation`, `set_Location`, `SetLocation`, `Location`. | Low | High |
+| High | unresolved_api_member |  |  |  |  | `content/Aspose.Blog/barcode/2026-06-19-generate-ean-13-barcode-in-net/index.md` | Code line 159 assigns `TextLocation` as an SDK property/member, but it was not found in the indexed API reference symbols. | Replace `TextLocation` with the relevant existing API property/member if it fits. Nearest indexed symbols: `get_Location`, `GetLocation`, `set_Location`, `SetLocation`, `Location`. | Low | High |
+| High | unresolved_api_class |  |  |  |  | `content/Aspose.Blog/barcode/2026-06-19-generate-high-density-data-matrix-code-in-net/index.md` | Code line 104 references `DataMatrixSize` as an SDK class/member, but it was not found in the indexed API reference symbols. | Replace `DataMatrixSize` with the relevant existing API symbol if it fits. Nearest indexed symbols: `DATA_MATRIX`, `DATAMATRIX`, `DatamatrixIndex`, `data_matrix_ecc`, `DataMatrixEcc`. | Low | High |
+| High | unresolved_api_member |  |  |  |  | `content/Aspose.Blog/barcode/2026-06-19-generate-high-density-data-matrix-code-in-net/index.md` | Code line 104 assigns `DataMatrixSize` as an SDK property/member, but it was not found in the indexed API reference symbols. | Replace `DataMatrixSize` with the relevant existing API property/member if it fits. Nearest indexed symbols: `DATA_MATRIX`, `DATAMATRIX`, `DatamatrixIndex`, `data_matrix_ecc`, `DataMatrixEcc`. | Low | High |
+| High | unresolved_api_member |  |  |  |  | `content/Aspose.Blog/barcode/2026-06-19-generate-high-density-data-matrix-code-in-net/index.md` | Code line 105 assigns `ImageResolution` as an SDK property/member, but it was not found in the indexed API reference symbols. | Replace `ImageResolution` with the relevant existing API property/member if it fits. Nearest indexed symbols: `get_Resolution`, `GetResolution`, `Resolution`, `set_Resolution`, `SetResolution`. | Low | High |
+| High | unresolved_api_member |  |  |  |  | `content/Aspose.Blog/barcode/2026-06-19-generate-high-density-data-matrix-code-in-net/index.md` | Code line 106 assigns `QRQuietZone` as an SDK property/member, but it was not found in the indexed API reference symbols. | Replace `QRQuietZone` with the relevant existing API property/member if it fits. Nearest indexed symbols: `quiet_zone_coef`, `QuietZoneCoef`, `get_QuietZoneCoef`, `GetQuietZoneCoef`, `ITFQuietZoneCoef`. | Low | High |
+| High | unresolved_api_member |  |  |  |  | `content/Aspose.Blog/barcode/2026-06-19-generate-high-density-data-matrix-code-in-net/index.md` | Code line 107 assigns `ImageFormat` as an SDK property/member, but it was not found in the indexed API reference symbols. | Replace `ImageFormat` with the relevant existing API property/member if it fits. Nearest indexed symbols: `get_Format`, `GetFormat`, `BarCodeImageFormat`, `Format`, `Image`. | Low | High |
+| High | unresolved_api_module |  |  |  |  | `content/Aspose.Blog/barcode/2026-06-19-generate-maxicode-barcode-in-python/index.md` | Code block line 70 imports `asposebarcode`, which does not match configured SDK namespaces: Aspose.BarCode, aspose.barcode, com.aspose.barcode. | Replace `asposebarcode` with the relevant configured SDK module/namespace if it fits. Possible namespace options: `aspose.barcode`, `Aspose.BarCode`, `com.aspose.barcode`. Otherwise update sdk_validation namespaces if this module is valid. | Low | High |
+| High | unresolved_api_member |  |  |  |  | `content/Aspose.Blog/barcode/2026-06-19-generate-upc-barcode-in-net/index.md` | Code line 86 assigns `ImageFormat` as an SDK property/member, but it was not found in the indexed API reference symbols. | Replace `ImageFormat` with the relevant existing API property/member if it fits. Nearest indexed symbols: `get_Format`, `GetFormat`, `BarCodeImageFormat`, `Format`, `Image`. | Low | High |
+| High | unresolved_api_member |  |  |  |  | `content/Aspose.Blog/barcode/2026-06-19-generate-upc-barcode-in-net/index.md` | Code line 87 assigns `ImageResolution` as an SDK property/member, but it was not found in the indexed API reference symbols. | Replace `ImageResolution` with the relevant existing API property/member if it fits. Nearest indexed symbols: `get_Resolution`, `GetResolution`, `Resolution`, `set_Resolution`, `SetResolution`. | Low | High |
+| High | unresolved_api_member |  |  |  |  | `content/Aspose.Blog/barcode/2026-06-19-generate-upc-barcode-in-net/index.md` | Code line 92 assigns `ImageFormat` as an SDK property/member, but it was not found in the indexed API reference symbols. | Replace `ImageFormat` with the relevant existing API property/member if it fits. Nearest indexed symbols: `get_Format`, `GetFormat`, `BarCodeImageFormat`, `Format`, `Image`. | Low | High |
+| High | unresolved_api_member |  |  |  |  | `content/Aspose.Blog/barcode/2026-06-19-generate-upc-barcode-in-net/index.md` | Code line 93 assigns `ImageResolution` as an SDK property/member, but it was not found in the indexed API reference symbols. | Replace `ImageResolution` with the relevant existing API property/member if it fits. Nearest indexed symbols: `get_Resolution`, `GetResolution`, `Resolution`, `set_Resolution`, `SetResolution`. | Low | High |
+| High | unresolved_api_member |  |  |  |  | `content/Aspose.Blog/barcode/2026-06-19-generate-upc-barcode-in-net/index.md` | Code line 137 assigns `ForeColor` as an SDK property/member, but it was not found in the indexed API reference symbols. | Replace `ForeColor` with the relevant existing API property/member if it fits. Nearest indexed symbols: `BorderColor`, `Color`, `for`, `bar_color`, `BarColor`. | Low | High |
+| High | unresolved_api_class |  |  |  |  | `content/Aspose.Blog/barcode/2026-06-19-generate-upc-barcode-in-net/index.md` | Markdown line 39 references `NuGet` as an SDK class/member, but it was not found in the indexed API reference symbols. | Replace `NuGet` with the relevant existing API symbol if it fits. Nearest indexed symbols: `net`, `agent`, `Angle`, `get_QR`, `GetQR`. | Low | High |
+
+## Checks Applied
+- Validates Aspose import/module names against configured SDK namespaces.
+- Validates imported or fully qualified classes against symbols indexed from API reference repositories.
+- Flags configured deprecated or renamed SDK symbols.
+- Optionally validates Python imports at runtime when `runtime_import_check` is enabled and target SDKs are installed.
+
+## Known Limits
+- Static validation focuses on explicit imports and fully qualified symbols; it does not execute snippets.
+- Method-level validation depends on how completely the API reference repository exposes method names.
+- If an API reference repository cannot be cloned or opened, the audit logs the skip and continues.

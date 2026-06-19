@@ -84,6 +84,9 @@ FILE_EXTENSIONS = {
     "xlsx",
     "zip",
 }
+KNOWN_ASPOSE_SUPPORT_MODULES = {
+    "aspose.pydrawing",
+}
 
 
 def hydrate_sdk_validation_from_references(
@@ -271,26 +274,80 @@ def validate_import_modules(post: Post, sample: CodeSample, namespaces: list[str
     valid = tuple(namespace.lower() for namespace in namespaces)
     issues: list[Issue] = []
     for module in re.findall(r"^\s*from\s+([A-Za-z_][\w.]*)\s+import\s+", sample.code, re.M):
-        if "aspose" in module.lower() and not module.lower().startswith(valid):
+        if "aspose" in module.lower() and not module.lower().startswith(valid) and not is_known_aspose_support_module(module):
             issues.append(api_issue(
                 post,
                 "unresolved_api_module",
                 "High",
                 f"Code block line {sample.line} imports `{module}`, which does not match configured SDK namespaces: {', '.join(namespaces)}.",
-                "Use the verified SDK module/namespace from current documentation, or update sdk_validation namespaces if this module is valid.",
+                unresolved_module_fix(module, namespaces),
                 line=sample.line,
             ))
     for module in re.findall(r"^\s*import\s+([A-Za-z_][\w.]*)", sample.code, re.M):
-        if "aspose" in module.lower() and not module.lower().startswith(valid):
+        if "aspose" in module.lower() and not module.lower().startswith(valid) and not is_known_aspose_support_module(module):
             issues.append(api_issue(
                 post,
                 "unresolved_api_module",
                 "High",
                 f"Code block line {sample.line} imports `{module}`, which does not match configured SDK namespaces: {', '.join(namespaces)}.",
-                "Use the verified SDK module/namespace from current documentation, or update sdk_validation namespaces if this module is valid.",
+                unresolved_module_fix(module, namespaces),
                 line=sample.line,
             ))
     return issues
+
+
+def is_known_aspose_support_module(module: str) -> bool:
+    lowered = module.lower()
+    return any(lowered == support or lowered.startswith(f"{support}.") for support in KNOWN_ASPOSE_SUPPORT_MODULES)
+
+
+def unresolved_module_fix(module: str, namespaces: list[str]) -> str:
+    suggestions = suggest_namespace_replacements(module, namespaces)
+    if suggestions:
+        formatted = ", ".join(f"`{suggestion}`" for suggestion in suggestions)
+        return f"Replace `{module}` with the relevant configured SDK module/namespace if it fits. Possible namespace options: {formatted}. Otherwise update sdk_validation namespaces if this module is valid."
+    return f"Replace or verify unresolved module `{module}` using current SDK documentation, or update sdk_validation namespaces if `{module}` is valid."
+
+
+def suggest_namespace_replacements(module: str, namespaces: list[str], limit: int = 5, min_score: float = 0.56) -> list[str]:
+    normalized_module = normalize_symbol_for_match(module)
+    if not normalized_module:
+        return []
+    module_is_lower = module == module.lower()
+    candidates: list[tuple[float, int, int, str]] = []
+    seen: set[str] = set()
+    for namespace in namespaces:
+        display = str(namespace).strip()
+        if not display or display in seen:
+            continue
+        seen.add(display)
+        normalized_namespace = normalize_symbol_for_match(display)
+        if not normalized_namespace:
+            continue
+        score = SequenceMatcher(None, normalized_module, normalized_namespace).ratio()
+        if normalized_module == normalized_namespace:
+            score = 1.0
+        elif normalized_module in normalized_namespace or normalized_namespace in normalized_module:
+            score = max(score, 0.72)
+        if score < min_score:
+            continue
+        language_rank = namespace_language_rank(display, module_is_lower)
+        candidates.append((score, language_rank, abs(len(normalized_namespace) - len(normalized_module)), display))
+    candidates.sort(key=lambda item: (-item[0], item[1], item[2], item[3].lower()))
+    return [candidate for _score, _language_rank, _distance, candidate in candidates[:limit]]
+
+
+def namespace_language_rank(namespace: str, prefer_lowercase: bool) -> int:
+    lowered = namespace.lower()
+    if prefer_lowercase and namespace == lowered and lowered.startswith("aspose."):
+        return 0
+    if prefer_lowercase and namespace == lowered:
+        return 1
+    if lowered.startswith("aspose."):
+        return 2
+    if lowered.startswith("com.aspose."):
+        return 3
+    return 4
 
 
 def validate_imported_symbols(
@@ -510,7 +567,7 @@ def validate_python_runtime_imports(post: Post, sample: CodeSample, namespaces: 
         try:
             loaded = importlib.import_module(module)
         except Exception:
-            issues.append(api_issue(post, "unresolved_api_module", "High", f"Code block line {sample.line} imports `{module}`, but it could not be imported in the current Python environment.", "Install the target SDK for runtime validation or correct the module path.", line=sample.line))
+            issues.append(api_issue(post, "unresolved_api_module", "High", f"Code block line {sample.line} imports `{module}`, but it could not be imported in the current Python environment.", f"Install the target SDK for runtime validation or correct unresolved module `{module}`.", line=sample.line))
             continue
         for symbol in split_imported_symbols(imported):
             if not hasattr(loaded, symbol):

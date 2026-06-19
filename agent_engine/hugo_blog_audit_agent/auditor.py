@@ -454,9 +454,9 @@ def audit_on_page(post: Post, titles: Counter[str], descs: Counter[str], slugs: 
     h1_headings = [h for h in post.headings if h.level == 1]
     if len(h1_headings) > 1:
         issues.append(issue(post, "multiple_h1", "High", "More than one H1 heading was detected.", "Use one H1-equivalent page title and H2/H3 body headings.", line=h1_headings[1].line))
-    if len([l for l in post.links if l.is_internal]) < 2:
+    if len([link for link in post.links if link.is_internal]) < 2:
         issues.append(issue(post, "weak_internal_links", "Medium", "Post has fewer than two internal links.", "Add links to related tutorials, docs, and product pages.", line=first_internal_link_line(post)))
-    if not any(not l.is_internal for l in post.links):
+    if not any(not link.is_internal for link in post.links):
         issues.append(issue(post, "missing_external_links", "Low", "No external links were detected.", "Cite authoritative references where useful."))
     for image in post.images:
         if not image.alt:
@@ -497,7 +497,7 @@ def audit_internal_links(repo_root: Path, content_dir: str, posts: list[Post]) -
                 issues.append(issue(post, "broken_internal_link", "High", f"Internal link `{link.target}` could not be resolved locally.", "Update the link to an existing post, asset, or Hugo URL.", "High", line=link.line))
             if len(link.text.split()) <= 1 and link.text.lower() in {"here", "link", "click"}:
                 issues.append(issue(post, "weak_anchor_text", "Low", f"Anchor text `{link.text}` is generic.", "Use descriptive anchor text that reflects the destination topic.", line=link.line))
-        if len([l for l in post.links if l.is_internal]) < 2:
+        if len([link for link in post.links if link.is_internal]) < 2:
             issues.append(issue(post, "too_few_outgoing_internal_links", "Medium", "Post has fewer than two outgoing internal links.", "Add contextual links to related posts.", line=first_internal_link_line(post)))
     linked_targets = {k for k, v in incoming.items() if v > 0}
     for post in posts:

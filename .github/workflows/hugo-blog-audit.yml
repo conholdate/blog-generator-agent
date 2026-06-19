@@ -9,12 +9,12 @@ on:
   workflow_dispatch:
     inputs:
       blog_config:
-        description: Select Blog config.
+        description: Blog audit config path in this repository.
         required: true
         default: configs/aspose.yaml
         type: string
       product:
-        description: Select Product/path.
+        description: Product/path filter.
         required: true
         type: choice
         options:
@@ -64,7 +64,7 @@ on:
       detailed_outputs:
         description: Generate the full detailed report set.
         required: true
-        default: false
+        default: true
         type: boolean
       llm_suggestions:
         description: Enable optional LLM suggestions.
@@ -72,7 +72,7 @@ on:
         default: false
         type: boolean
       send_metrics:
-        description: Send metrics webhooks.
+        description: Send metrics to the metrics API.
         required: true
         default: true
         type: boolean
@@ -84,11 +84,11 @@ env:
   PYTHONPATH: ${{ github.workspace }}/agent_engine
 
 jobs:
-  test:
-    name: Test
+  quality:
+    name: Quality Gates
     if: github.event_name == 'push' || github.event_name == 'pull_request'
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 25
 
     steps:
       - name: Check out repository
@@ -105,14 +105,13 @@ jobs:
         run: |
           set -euo pipefail
           python -m pip install --upgrade pip
-          if [ -f requirements.txt ]; then
-            python -m pip install -r requirements.txt
-          fi
           if [ -f pyproject.toml ]; then
-            python -m pip install -e .
+            python -m pip install -e ".[dev]"
           elif [ ! -f requirements.txt ]; then
             echo "No requirements.txt or pyproject.toml found. Add one for CI installs."
             exit 1
+          else
+            python -m pip install -r requirements.txt
           fi
 
       - name: Verify package import
@@ -121,11 +120,47 @@ jobs:
           set -euo pipefail
           python -c "import hugo_blog_audit_agent; print(hugo_blog_audit_agent.__file__)"
 
-      - name: Compile package
-        run: python -m compileall agent_engine
+      - name: Lint
+        run: python -m ruff check agent_engine tests
 
-      - name: Run tests
-        run: python -m pytest
+      - name: Compile package
+        run: python -m compileall agent_engine tests
+
+      - name: Run tests with coverage
+        run: python -m pytest --cov=hugo_blog_audit_agent --cov-report=term-missing --cov-report=xml
+
+      - name: Dependency audit
+        run: python -m pip_audit -r requirements.txt
+
+      - name: Build container image
+        run: docker build -t hugo-blog-audit-agent:ci .
+
+      - name: Upload coverage artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-${{ github.run_id }}
+          path: coverage.xml
+          if-no-files-found: warn
+
+  secret-scan:
+    name: Secret Scan
+    if: github.event_name == 'push' || github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Run Gitleaks
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   audit:
     name: Manual Blog Audit
@@ -142,10 +177,9 @@ jobs:
       PROFESSIONALIZE_API_KEY: ${{ secrets.PROFESSIONALIZE_API_KEY_1 }}
       PROFESSIONALIZE_LLM_MODEL: ${{ secrets.PROFESSIONALIZE_LLM_MODEL }}
       PROFESSIONALIZE_EMBEDDING_MODEL: ${{ secrets.PROFESSIONALIZE_EMBEDDING_MODEL }}
-      METRICS_WEBHOOK_URL_PROD: ${{ secrets.METRICS_WEBHOOK_URL_PROD }}
-      TOKEN_FOR_PROD: ${{ secrets.TOKEN_FOR_PROD }}
-      METRICS_WEBHOOK_URL_TEAM: ${{ secrets.METRICS_WEBHOOK_URL_TEAM }}
-      TOKEN_FOR_TEAM: ${{ secrets.TOKEN_FOR_TEAM }}
+      METRICS_API_URL: ${{ secrets.METRICS_API_URL }}
+      MUZAMMIL_KHAN_METRICS_API_KEY: ${{ secrets.MUZAMMIL_KHAN_METRICS_API_KEY }}
+      METRICS_JOB_TYPE: ${{ inputs.send_metrics && 'Blog Audit' || 'test' }}
 
     steps:
       - name: Check out audit agent

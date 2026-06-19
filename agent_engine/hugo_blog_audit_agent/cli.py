@@ -12,7 +12,7 @@ from typing import Any
 
 from .auditor import run_audit
 from .config import load_blog_config
-from .metrics_webhook import AGENT_NAME, AGENT_OWNER, ITEM_NAME, JOB_TYPE, PLATFORM, WEBSITE_SECTION, send_metrics_webhooks
+from .metrics_api import AGENT_NAME, AGENT_OWNER, ITEM_NAME, JOB_TYPE, PLATFORM, WEBSITE_SECTION, send_metrics_api
 from .reports import write_reports
 
 
@@ -43,7 +43,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--llm-max-posts", type=int, help="Limit how many highest-priority posts receive LLM suggestions.")
     parser.add_argument("--llm-timeout-seconds", type=float, help="LLM HTTP read timeout in seconds.")
     parser.add_argument("--llm-retries", type=int, help="Retry count for timeout or connection-style LLM failures.")
-    parser.add_argument("--send-metrics", type=parse_bool, nargs="?", const=True, default=False, help="Send normalized run metrics to configured webhooks. Defaults to false.")
+    parser.add_argument("--send-metrics", type=parse_bool, nargs="?", const=True, default=False, help="Send normalized run metrics to the configured metrics API. Defaults to false.")
     parser.add_argument("--verbose", action="store_true")
     parser.add_argument("--quiet", action="store_true", help="Suppress progress logs and final metrics in the console.")
     parser.add_argument("--keep-workdir", action="store_true", default=False)
@@ -93,7 +93,7 @@ def main(argv: list[str] | None = None) -> None:
     write_reports(result, output_dir, include_suggestions, draft_fixes, args.max_draft_fixes, args.priority_only, args.detailed_outputs, run_context)
     metrics = build_run_metrics(result, output_dir, args.mode, args.product, args.post_date, languages, args.include_translations, started, args.detailed_outputs, run_id)
     metrics["send_metrics"] = bool(args.send_metrics)
-    metrics["metrics_webhooks"] = deliver_metrics(metrics, args.send_metrics, logger.log)
+    metrics["metrics_api"] = deliver_metrics(metrics, args.send_metrics, logger.log)
     write_run_artifacts(output_dir, logger.lines, metrics)
     if args.verbose:
         print(f"Repository: {result.repo_root}")
@@ -107,11 +107,11 @@ def main(argv: list[str] | None = None) -> None:
 def deliver_metrics(metrics: dict[str, Any], send_metrics: bool, log: Any | None = None) -> list[dict[str, Any]]:
     if not send_metrics:
         if log:
-            log("Metrics webhook sending skipped; pass --send-metrics true to enable.")
+            log("Metrics API sending skipped; pass --send-metrics true to enable.")
         return [{"target": "all", "sent": False, "status": "skipped", "reason": "disabled_by_flag"}]
     if log:
-        log("Sending metrics webhooks")
-    return send_metrics_webhooks(metrics, log)
+        log("Sending metrics API payload")
+    return send_metrics_api(metrics, log)
 
 
 def build_report_run_context(args, config, output_dir: Path, languages: list[str] | None, draft_fixes: bool) -> dict[str, object]:
