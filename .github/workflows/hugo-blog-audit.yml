@@ -74,7 +74,7 @@ on:
       send_metrics:
         description: Send metrics to the metrics API.
         required: true
-        default: false
+        default: true
         type: boolean
 
 permissions:
@@ -179,7 +179,7 @@ jobs:
       PROFESSIONALIZE_EMBEDDING_MODEL: ${{ secrets.PROFESSIONALIZE_EMBEDDING_MODEL }}
       METRICS_API_URL: ${{ secrets.METRICS_API_URL }}
       MUZAMMIL_KHAN_METRICS_API_KEY: ${{ secrets.MUZAMMIL_KHAN_METRICS_API_KEY }}
-      METRICS_JOB_TYPE: test
+      METRICS_JOB_TYPE: ${{ inputs.send_metrics && 'Blog Audit' || 'test' }}
 
     steps:
       - name: Check out audit agent
