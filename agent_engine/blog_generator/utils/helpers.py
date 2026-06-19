@@ -701,7 +701,9 @@ async def upload_to_gist(
     files_dict: dict,  # {"file1.java": "code1", "file2.py": "code2"}
     description: str = "",
     token: str = "",
-    gist_name: str = ""
+    gist_name: str = "",
+    url: str = "" ,
+    summary:str=""
 ) -> dict:
     """
     Upload code to GitHub Gist - handles single or multiple files intelligently
@@ -722,18 +724,27 @@ async def upload_to_gist(
         }
     """
     print(f"Uploading {len(files_dict)} file(s) to gist...", flush=True, file=sys.stderr)
-    
-    # --- Token Check ---
+
+    # --- Token Check (fail fast) ---
     if not token:
         return {"error": "GITHUB_TOKEN environment variable not set"}
-    
     print(f"🔑 GITHUB_TOKEN found", flush=True, file=sys.stderr)
-    
-    # --- Build files object for gist ---
-    gist_files = {
-        filename: {"content": content} 
+
+    # --- Build readme.md (renders above code files; sorts first alphabetically) ---
+    readme_lines = [f"# {description}"]
+    if summary:
+        readme_lines.append(f"\n{summary.strip().strip(chr(34)).strip(chr(39))}")
+    if url:
+        readme_lines.append(f"\nRead the full guide here: [{url}]({url})")
+    readme_content = "\n".join(readme_lines)
+
+    # --- Build files object (readme.md first, then code files) ---
+    gist_files = {"readme.md": {"content": readme_content}}
+    gist_files.update({
+        filename: {"content": content}
         for filename, content in files_dict.items()
-    }
+    })
+    
     
     # --- Send Request ---
     response = requests.post(
@@ -757,6 +768,8 @@ async def upload_to_gist(
         # Generate shortcodes for each file
         shortcodes = {}
         for file_name in gist['files'].keys():
+            if file_name == "readme.md":   # <-- skip the readme
+                continue
             shortcodes[file_name] = f'{{{{< gist "{gist_name}" "{gist_id}" "{file_name}" >}}}}'
             print(f"✓ Created shortcode for {file_name}", flush=True, file=sys.stderr)
         
@@ -2200,6 +2213,7 @@ def extract_blog_metadata(markdown_content: str) -> dict:
         "url": get_field(r'^url:\s*(.+)', fm),
         "date": get_field(r'^date:\s*(.+)', fm),
         "author": get_field(r'^author:\s*"(.+?)"', fm),
+        "summary": get_field(r'^summary:\s*(.+)', fm)
     }
 
 

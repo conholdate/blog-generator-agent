@@ -17,21 +17,6 @@ load_dotenv()
 # Initialize MCP
 mcp = FastMCP("gist-injector")
 
-def prepend_backlink_comment(code: str, filename: str, summary: str, url: str) -> str:
-    """Prepend a backlink comment to a code snippet based on file extension."""
-    ext = filename.split(".")[-1].lower()
-    
-    if ext in ("py",):
-        comment = f"# {summary}\n# Read the full guide here: {url}\n\n"
-    elif ext in ("java", "cs", "cpp", "c", "js", "ts", "go"):
-        comment = f"// {summary}\n// Read the full guide here: {url}\n\n"
-    elif ext in ("sh", "bash"):
-        comment = f"# {summary}\n# Read the full guide here: {url}\n\n"
-    else:
-        comment = f"# {summary}\n# Read the full guide here: {url}\n\n"
-    
-    return comment + code
-
 
 @mcp.tool()
 async def gist_injector(content: str, title: str, summary: str = "", url: str = "") -> dict:
@@ -42,15 +27,6 @@ async def gist_injector(content: str, title: str, summary: str = "", url: str = 
             print("No complete code snippets found!", flush=True, file=sys.stderr)
             return {"jistified_content": content}
         
-        # Prepend backlink comment to each snippet
-        if summary or url:
-            for key in snippets:
-                snippets[key]["code"] = prepend_backlink_comment(
-                    snippets[key]["code"],
-                    snippets[key]["filename"],
-                    summary,
-                    url
-                )
 
         code_for_gist = {
             data['filename']: data['code']
@@ -61,7 +37,9 @@ async def gist_injector(content: str, title: str, summary: str = "", url: str = 
             code_for_gist,
             description=title,
             token=settings.REPO_PAT,
-            gist_name=settings.GIST_NAME
+            gist_name=settings.GIST_NAME,
+            url=url,
+            summary=summary,
         )
 
         print(f"gist result --- {gist_result}", flush=True, file=sys.stderr)

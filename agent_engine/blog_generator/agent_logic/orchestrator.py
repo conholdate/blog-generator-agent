@@ -92,7 +92,6 @@ class BlogOrchestrator:
         post_topic = topics_raw_data.pop("topic")
         product_name = topics_raw_data.pop("product")
         platform = topics_raw_data.pop("platform")
-        print(f"bingaa------- {allowed_products}", flush=True)
  
         # Get product info
         try:
@@ -241,7 +240,8 @@ class BlogOrchestrator:
             print(f" Audit completed -- {report}", flush=True)
              
             blog_post_metadata = extract_blog_metadata(result.final_output)
-            jistified = await gist_injector(result.final_output, post_topic, blog_post_metadata['title'], f'https://blog.{self.brand}{blog_post_metadata["url"]}')
+          
+            jistified = await gist_injector(result.final_output, post_topic, blog_post_metadata["summary"], f'https://blog.{self.brand}{blog_post_metadata["url"]}')
             text_output = jistified.content[0].text
             data = json.loads(text_output)
             # final_content = data["jistified_content"]
