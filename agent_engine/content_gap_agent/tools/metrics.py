@@ -7,10 +7,8 @@ import uuid
 from dataclasses import dataclass, asdict
 from datetime import datetime, timezone
 from typing import Any, Dict, Optional
-from urllib.parse import urlparse
 
-import requests
-
+from ...hugo_blog_audit_agent.metrics_api import send_metrics_api
 from .logging_utils import get_logger
 from .normalization import normalize_product_display_name
 
@@ -25,11 +23,6 @@ def _utc_now_z() -> str:
     # Example: "2025-12-15T10:12:45.123Z"
     dt = datetime.now(timezone.utc)
     return dt.strftime("%Y-%m-%dT%H:%M:%S.") + f"{int(dt.microsecond/1000):03d}Z"
-
-
-def _looks_like_invalid_token_response(body: str) -> bool:
-    text = str(body or "").strip().lower()
-    return "invalid token" in text or "unauthorized" in text
 
 
 def new_run_id(prefix: str = "run") -> str:
@@ -78,8 +71,7 @@ class MetricsPayload:
 
 class MetricsSender:
     """
-    Reads agent metadata + transport config from Settings.
-    No env vars, no duplication in agent.py.
+    Reads agent metadata from Settings and sends through the shared metrics API.
     """
 
     def __init__(self, *, settings: Any) -> None:
@@ -104,30 +96,9 @@ class MetricsSender:
         if self.required:
             raise RuntimeError(message) from exc
 
-    def _post_metric(self, url: str, token: str, data: Dict[str, Any]) -> None:
-        if not token:
-            raise RuntimeError("Metrics token is empty.")
-        resp = requests.post(
-            url,
-            params={"token": token},
-            headers={"Content-Type": "application/json"},
-            data=json.dumps(data, ensure_ascii=False),
-            timeout=self.timeout_s,
-        )
-        print("[metrics] response status =", resp.status_code)
-        print("[metrics] response text =", resp.text[:500])
-        if resp.status_code < 200 or resp.status_code >= 300:
-            raise RuntimeError(f"Metrics webhook returned status={resp.status_code}: {resp.text[:500]}")
-        if _looks_like_invalid_token_response(resp.text):
-            raise RuntimeError(f"Metrics webhook rejected token: {resp.text[:500]}")
-
     def send(self, payload: MetricsPayload) -> None:
         if not self.enabled:
             print("[metrics] disabled (METRICS_ENABLED=False). Not sending.")
-            return
-
-        if not self.webhook_url and not self.int_webhook_url:
-            self._handle_send_failure("Metrics enabled, but no metrics webhooks are configured. Not sending.")
             return
 
         data = asdict(payload)
@@ -142,24 +113,25 @@ class MetricsSender:
         if data.get("job_type") is None:
             data.pop("job_type", None)
 
+        log.info("Metrics API payload (about to send):\n%s", json.dumps(data, ensure_ascii=False, indent=2))
         try:
-            log.info("Metrics payload (about to send):\n%s", json.dumps(data, ensure_ascii=False, indent=2))
-            # Aspose Metrics
-            if self.webhook_url:
-                self._post_metric(self.webhook_url, self.token, data)
-
-            # Ensure run_env is present (default to PROD if missing/None)
-            data.setdefault("run_env", "PROD")
-            if data.get("run_env") is None:
-                data["run_env"] = "PROD"
-
-            # Blog metrics
-            if self.int_webhook_url:
-                self._post_metric(self.int_webhook_url, self.int_token, data)
-
+            deliveries = send_metrics_api(
+                data,
+                log.info,
+            )
         except Exception as e:
             print("[metrics] send failed:", repr(e))
-            self._handle_send_failure("Metrics send failed", e)
+            self._handle_send_failure("Metrics API send failed", e)
+            return
+
+        failed = [
+            delivery
+            for delivery in deliveries
+            if delivery.get("status") != "success"
+        ]
+        if failed:
+            reasons = ", ".join(str(item.get("reason") or item.get("status") or "unknown") for item in failed)
+            self._handle_send_failure(f"Metrics API delivery failed: {reasons}")
 
 
 class MetricsRun:

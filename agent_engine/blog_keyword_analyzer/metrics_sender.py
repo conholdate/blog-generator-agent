@@ -3,9 +3,9 @@ import json
 import os
 from datetime import datetime, timezone, timedelta
 from typing import Any, Optional
-import requests
 
 from agent_engine.config_sources import get_agent_metrics_config
+from agent_engine.hugo_blog_audit_agent.metrics_api import send_metrics_api
 from agent_engine.blog_keyword_analyzer.tools.normalization import canonical_platform_label, normalize_platform_family
 
 
@@ -20,30 +20,28 @@ def canonicalize_platform(value: Optional[str]) -> str:
 def platform_display(value: Optional[str]) -> str:
     return canonical_platform_label(value)
 
-def _metrics_timeout_seconds() -> float:
-    raw = str(os.getenv("METRICS_TIMEOUT_S") or "").strip()
-    if not raw:
-        return 30.0
-    try:
-        timeout = float(raw)
-    except ValueError:
-        return 30.0
-    return max(1.0, timeout)
-
-def _post_json_best_effort(url: str, token: str, payload: dict[str, Any], debug: bool = False) -> None:
-    """Best-effort POST; never raises."""
-    if not url or not token:
-        return
+def _send_metrics_api_best_effort(payload: dict[str, Any], debug: bool = False) -> None:
+    """Best-effort metrics API delivery; never raises."""
     try:
         payload_data = dict(payload)
 
         print("[metrics] payload before send:")
         print(json.dumps(payload_data, ensure_ascii=False, indent=2))
 
-        resp = requests.post(url, params={"token": token}, json=payload, timeout=_metrics_timeout_seconds())
+        deliveries = send_metrics_api(
+            payload,
+            None,
+        )
         if debug:
-            print(f"[metrics:{payload.get('stage','')}] {resp.status_code} {resp.text[:200]!r}")
-            print("[metrics] debug payload after send:")
+            print(f"[metrics:{payload.get('stage','')}] API deliveries: {deliveries!r}")
+        failed = [
+            delivery
+            for delivery in deliveries
+            if delivery.get("status") != "success"
+        ]
+        if failed:
+            reasons = ", ".join(str(item.get("reason") or item.get("status") or "unknown") for item in failed)
+            print(f"[metrics:{payload.get('stage','')}] Metrics API delivery failed: {reasons}")
     except Exception as exc:
         print(f"[metrics:{payload.get('stage','')}] Failed to send: {exc!r}")
 
@@ -71,22 +69,13 @@ def send_stage_metrics(
     extra_fields: Optional[dict[str, Any]] = None,
 ) -> None:
     """
-    Sends ONE stage payload to BOTH external + internal webhook URLs (best-effort).
+    Sends ONE stage payload to the metrics API (best-effort).
     """
     if not _metrics_enabled():
         print("[metrics] disabled (METRICS_ENABLED=false). Not sending stage metrics.")
         return
 
     metrics_cfg = get_agent_metrics_config("blog_keyword_analyzer")
-    webhooks = metrics_cfg.get("webhooks") or {}
-    primary = webhooks.get("primary") or {}
-    internal = webhooks.get("internal") or {}
-    metrics_url = str(primary.get("url") or "").strip()
-    metrics_token = str(primary.get("token") or "").strip()
-    int_url = str(internal.get("url") or "").strip()
-    int_token = str(internal.get("token") or "").strip()
-    if not (metrics_url and metrics_token):
-        return
 
     platform_label = platform_display(platform)
     PKT_TZ = timezone(timedelta(hours=5))
@@ -119,9 +108,4 @@ def send_stage_metrics(
     if extra_fields:
         payload.update(extra_fields)
 
-    _post_json_best_effort(metrics_url, metrics_token, payload, debug=bool(getattr(settings, "DEBUG", False)))
-
-    if int_url and int_token:
-        payload_internal = dict(payload)
-        payload_internal["run_env"] = "PROD"
-        _post_json_best_effort(int_url, int_token, payload_internal, debug=bool(getattr(settings, "DEBUG", False)))
+    _send_metrics_api_best_effort(payload, debug=bool(getattr(settings, "DEBUG", False)))

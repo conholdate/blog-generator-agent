@@ -86,7 +86,7 @@ on:
         type: boolean
 
       send_metrics:
-        description: "Send metrics payloads to configured metrics webhooks."
+        description: "Send metrics payloads to configured metrics API."
         required: true
         default: true
         type: boolean
@@ -192,11 +192,11 @@ jobs:
       OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
       ASPOSE_BLOG_TOKEN: ${{ secrets.ASPOSE_BLOG_TOKEN }}
       CONHOLDATE_BLOG_TOKEN: ${{ secrets.CONHOLDATE_BLOG_TOKEN || secrets.ASPOSE_BLOG_TOKEN }}
-      METRICS_WEBHOOK_URL_PROD: ${{ vars.METRICS_WEBHOOK_URL_PROD || vars.GOOGLE_SCRIPT_URL_FOR_PROD }}
-      METRICS_WEBHOOK_URL_TEAM: ${{ vars.METRICS_WEBHOOK_URL_TEAM || vars.GOOGLE_SCRIPT_URL_FOR_TEAM }}
-      TOKEN_FOR_PROD: ${{ secrets.TOKEN_FOR_PROD }}
-      TOKEN_FOR_TEAM: ${{ secrets.TOKEN_FOR_TEAM }}
-      METRICS_TIMEOUT_S: "30"
+      METRICS_ENABLED: ${{ inputs.send_metrics }}
+      METRICS_API_URL: ${{ secrets.METRICS_API_URL || vars.METRICS_API_URL }}
+      MUZAMMIL_KHAN_METRICS_API_KEY: ${{ secrets.MUZAMMIL_KHAN_METRICS_API_KEY }}
+      METRICS_API_TIMEOUT_SECONDS: "30"
+      METRICS_JOB_TYPE: ${{ vars.METRICS_JOB_TYPE }}
       TOPICS_SHEETS_CONFIG_PATH: configs/topics_sheets.json
       TOPICS_SHEETS_TOKEN: ${{ secrets.TOPICS_SHEETS_TOKEN }}
       TOPICS_SHEETS_TIMEOUT_SECONDS: "180"

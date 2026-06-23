@@ -63,6 +63,12 @@ on:
         default: true
         type: boolean
 
+      send_metrics:
+        description: "Send metrics payloads to configured metrics API."
+        required: true
+        default: true
+        type: boolean
+
       case:
         description: "Coverage case."
         required: true
@@ -163,11 +169,11 @@ jobs:
       PROFESSIONALIZE_API_KEY: ${{ secrets.PROFESSIONALIZE_API_KEY_1 }}
       OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
       CONHOLDATE_BLOG_TOKEN: ${{ secrets.CONHOLDATE_BLOG_TOKEN || secrets.ASPOSE_BLOG_TOKEN }}
-      METRICS_WEBHOOK_URL_PROD: ${{ vars.METRICS_WEBHOOK_URL_PROD || vars.GOOGLE_SCRIPT_URL_FOR_PROD }}
-      METRICS_WEBHOOK_URL_TEAM: ${{ vars.METRICS_WEBHOOK_URL_TEAM || vars.GOOGLE_SCRIPT_URL_FOR_TEAM }}
-      TOKEN_FOR_PROD: ${{ secrets.TOKEN_FOR_PROD }}
-      TOKEN_FOR_TEAM: ${{ secrets.TOKEN_FOR_TEAM }}
-      METRICS_TIMEOUT_S: "30"
+      METRICS_ENABLED: ${{ inputs.send_metrics }}
+      METRICS_API_URL: ${{ secrets.METRICS_API_URL || vars.METRICS_API_URL }}
+      MUZAMMIL_KHAN_METRICS_API_KEY: ${{ secrets.MUZAMMIL_KHAN_METRICS_API_KEY }}
+      METRICS_API_TIMEOUT_SECONDS: "30"
+      METRICS_JOB_TYPE: ${{ vars.METRICS_JOB_TYPE }}
       TOPICS_SHEETS_CONFIG_PATH: configs/topics_sheets.json
       TOPICS_SHEETS_TOKEN: ${{ secrets.TOPICS_SHEETS_TOKEN }}
       CG_SKIP_SHEETS_AUTO_POST: "true"
@@ -303,6 +309,10 @@ jobs:
 
           if [ "${{ inputs.normalize_topics }}" = "false" ]; then
             ARGS+=(--no-normalize-topics)
+          fi
+
+          if [ "${{ inputs.send_metrics }}" = "false" ]; then
+            ARGS+=(--no-metrics)
           fi
 
           if [ -n "${{ inputs.platforms }}" ]; then
