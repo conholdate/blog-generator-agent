@@ -88,6 +88,12 @@ on:
         required: false
         default: false
 
+      send_metrics:
+        description: "Send metrics payloads to configured metrics API."
+        type: boolean
+        required: false
+        default: true
+
 permissions:
   contents: write
 
@@ -100,11 +106,11 @@ jobs:
       PROFESSIONALIZE_BASE_URL: "https://llm.professionalize.com/v1"
       PROFESSIONALIZE_API_KEY: ${{ secrets.PROFESSIONALIZE_API_KEY_1 }}
       OPENAI_API_KEY: ${{ secrets.PROFESSIONALIZE_API_KEY_1 }}
-      METRICS_WEBHOOK_URL_PROD: ${{ vars.METRICS_WEBHOOK_URL_PROD || vars.GOOGLE_SCRIPT_URL_FOR_PROD }}
-      METRICS_WEBHOOK_URL_TEAM: ${{ vars.METRICS_WEBHOOK_URL_TEAM || vars.GOOGLE_SCRIPT_URL_FOR_TEAM }}
-      TOKEN_FOR_PROD: ${{ secrets.TOKEN_FOR_PROD }}
-      TOKEN_FOR_TEAM: ${{ secrets.TOKEN_FOR_TEAM }}
-      METRICS_TIMEOUT_S: "30"
+      METRICS_ENABLED: ${{ inputs.send_metrics }}
+      METRICS_API_URL: ${{ secrets.METRICS_API_URL || vars.METRICS_API_URL }}
+      MUZAMMIL_KHAN_METRICS_API_KEY: ${{ secrets.MUZAMMIL_KHAN_METRICS_API_KEY }}
+      METRICS_API_TIMEOUT_SECONDS: "30"
+      METRICS_JOB_TYPE: ${{ vars.METRICS_JOB_TYPE }}
       GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
       ASPOSE_COM_SPREADSHEET_ID_FOR_KEYWORDS: ${{ secrets.ASPOSE_COM_SPREADSHEET_ID_FOR_KEYWORDS }}
       CONHOLDATE_COM_SPREADSHEET_ID_FOR_KEYWORDS: ${{ secrets.CONHOLDATE_COM_SPREADSHEET_ID_FOR_KEYWORDS }}
