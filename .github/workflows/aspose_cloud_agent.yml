@@ -221,194 +221,194 @@ jobs:
       # ###################################################################
       # # Create Pull Request and Auto-Merge in aspose-cloud-blog repo
       # ###################################################################
-      # - name: Create Pull Request and Auto-Merge in aspose-cloud-blog repo
-      #   if: steps.read_product.outputs.blog_generated == 'true' && success()
-      #   env:
-      #     BLOG_FOLDER_NAME: ${{ steps.find_blog.outputs.blog_folder_name }}
-      #     BLOG_FOLDER_PATH: ${{ steps.find_blog.outputs.blog_folder_path }}
-      #     GH_TOKEN: ${{ secrets.REPO_PAT }}
-      #   run: |
-      #     git config --global user.email "action@github.com"
-      #     git config --global user.name "GitHub Action"
+      - name: Create Pull Request and Auto-Merge in aspose-cloud-blog repo
+        if: steps.read_product.outputs.blog_generated == 'true' && success()
+        env:
+          BLOG_FOLDER_NAME: ${{ steps.find_blog.outputs.blog_folder_name }}
+          BLOG_FOLDER_PATH: ${{ steps.find_blog.outputs.blog_folder_path }}
+          GH_TOKEN: ${{ secrets.REPO_PAT }}
+        run: |
+          git config --global user.email "action@github.com"
+          git config --global user.name "GitHub Action"
 
-      #     if [ -z "${{ secrets.REPO_PAT }}" ]; then
-      #       echo "❌ REPO_PAT is EMPTY! Fix your repo secret."
-      #       exit 1
-      #     fi
+          if [ -z "${{ secrets.REPO_PAT }}" ]; then
+            echo "❌ REPO_PAT is EMPTY! Fix your repo secret."
+            exit 1
+          fi
 
-      #     echo "Cloning aspose-cloud-blog repo..."
-      #     git clone https://x-access-token:${{ secrets.REPO_PAT }}@github.com/aspose-cloud/aspose-cloud-blog.git aspose-cloud-blog || {
-      #       echo "❌ Failed to clone repo — invalid PAT or wrong GitHub account."
-      #       exit 1
-      #     }
+          echo "Cloning aspose-cloud-blog repo..."
+          git clone https://x-access-token:${{ secrets.REPO_PAT }}@github.com/aspose-cloud/aspose-cloud-blog.git aspose-cloud-blog || {
+            echo "❌ Failed to clone repo — invalid PAT or wrong GitHub account."
+            exit 1
+          }
 
-      #     cd aspose-cloud-blog
+          cd aspose-cloud-blog
 
-      #     git checkout master
-      #     git pull origin master
+          git checkout master
+          git pull origin master
 
-      #     # Extract product name from file written by Python
-      #     PRODUCT_NAME="${{ steps.read_product.outputs.product_name }}"
+          # Extract product name from file written by Python
+          PRODUCT_NAME="${{ steps.read_product.outputs.product_name }}"
 
-      #     # Case-insensitive folder check — use existing if found, else create lowercase
-      #     EXISTING_DIR=$(find "content/Aspose.Cloud" -maxdepth 1 -type d -iname "$PRODUCT_NAME" | head -1)
-      #     if [ -n "$EXISTING_DIR" ]; then
-      #       TARGET_DIR="$EXISTING_DIR"
-      #       echo "✅ Using existing directory: $TARGET_DIR"
-      #     else
-      #       PRODUCT_NAME_LOWER=$(echo "$PRODUCT_NAME" | tr '[:upper:]' '[:lower:]')
-      #       TARGET_DIR="content/Aspose.Cloud/$PRODUCT_NAME_LOWER"
-      #       mkdir -p "$TARGET_DIR"
-      #       echo "✅ Created new directory: $TARGET_DIR"
-      #     fi
+          # Case-insensitive folder check — use existing if found, else create lowercase
+          EXISTING_DIR=$(find "content/Aspose.Cloud" -maxdepth 1 -type d -iname "$PRODUCT_NAME" | head -1)
+          if [ -n "$EXISTING_DIR" ]; then
+            TARGET_DIR="$EXISTING_DIR"
+            echo "✅ Using existing directory: $TARGET_DIR"
+          else
+            PRODUCT_NAME_LOWER=$(echo "$PRODUCT_NAME" | tr '[:upper:]' '[:lower:]')
+            TARGET_DIR="content/Aspose.Cloud/$PRODUCT_NAME_LOWER"
+            mkdir -p "$TARGET_DIR"
+            echo "✅ Created new directory: $TARGET_DIR"
+          fi
 
-      #     echo "Product name: $PRODUCT_NAME"
-      #     echo "Target directory: $TARGET_DIR"
+          echo "Product name: $PRODUCT_NAME"
+          echo "Target directory: $TARGET_DIR"
 
-      #     BRANCH_NAME="blog/$BLOG_FOLDER_NAME"
+          BRANCH_NAME="blog/$BLOG_FOLDER_NAME"
 
-      #     if git ls-remote --heads origin "$BRANCH_NAME" | grep -q "$BRANCH_NAME"; then
-      #       echo "⚠️  Branch $BRANCH_NAME already exists remotely. Deleting..."
-      #       git push origin --delete "$BRANCH_NAME" || echo "Could not delete remote branch (may not exist)"
-      #     fi
+          if git ls-remote --heads origin "$BRANCH_NAME" | grep -q "$BRANCH_NAME"; then
+            echo "⚠️  Branch $BRANCH_NAME already exists remotely. Deleting..."
+            git push origin --delete "$BRANCH_NAME" || echo "Could not delete remote branch (may not exist)"
+          fi
 
-      #     git branch -D "$BRANCH_NAME" 2>/dev/null || true
-      #     git checkout -b "$BRANCH_NAME" master
+          git branch -D "$BRANCH_NAME" 2>/dev/null || true
+          git checkout -b "$BRANCH_NAME" master
 
-      #     echo "Copying blog folder: $BLOG_FOLDER_NAME to $TARGET_DIR"
+          echo "Copying blog folder: $BLOG_FOLDER_NAME to $TARGET_DIR"
 
-      #     WORKFLOW_DIR=$(pwd)
-      #     cd ..
-      #     REPO_ROOT=$(pwd)
-      #     BLOG_ABS_PATH="$REPO_ROOT/$BLOG_FOLDER_PATH"
+          WORKFLOW_DIR=$(pwd)
+          cd ..
+          REPO_ROOT=$(pwd)
+          BLOG_ABS_PATH="$REPO_ROOT/$BLOG_FOLDER_PATH"
 
-      #     echo "Repository root: $REPO_ROOT"
-      #     echo "Blog relative path: $BLOG_FOLDER_PATH"
-      #     echo "Blog absolute path: $BLOG_ABS_PATH"
+          echo "Repository root: $REPO_ROOT"
+          echo "Blog relative path: $BLOG_FOLDER_PATH"
+          echo "Blog absolute path: $BLOG_ABS_PATH"
 
-      #     if [ ! -d "$BLOG_ABS_PATH" ]; then
-      #       echo "❌ Source blog folder does not exist: $BLOG_ABS_PATH"
-      #       echo "Checking what exists in content/blogPosts/aspose_cloud:"
-      #       ls -la "$REPO_ROOT/content/blogPosts/aspose_cloud/" || echo "Directory doesn't exist"
-      #       exit 1
-      #     fi
+          if [ ! -d "$BLOG_ABS_PATH" ]; then
+            echo "❌ Source blog folder does not exist: $BLOG_ABS_PATH"
+            echo "Checking what exists in content/blogPosts/aspose_cloud:"
+            ls -la "$REPO_ROOT/content/blogPosts/aspose_cloud/" || echo "Directory doesn't exist"
+            exit 1
+          fi
 
-      #     cd "$WORKFLOW_DIR"
+          cd "$WORKFLOW_DIR"
 
-      #     cp -r "$BLOG_ABS_PATH" "$TARGET_DIR/" || {
-      #       echo "❌ Failed to copy folder from $BLOG_ABS_PATH to $TARGET_DIR"
-      #       exit 1
-      #     }
+          cp -r "$BLOG_ABS_PATH" "$TARGET_DIR/" || {
+            echo "❌ Failed to copy folder from $BLOG_ABS_PATH to $TARGET_DIR"
+            exit 1
+          }
 
-      #     if [ ! -d "$TARGET_DIR/$BLOG_FOLDER_NAME" ]; then
-      #       echo "❌ Blog folder was not copied successfully"
-      #       echo "Target contents:"
-      #       ls -la "$TARGET_DIR"
-      #       exit 1
-      #     fi
+          if [ ! -d "$TARGET_DIR/$BLOG_FOLDER_NAME" ]; then
+            echo "❌ Blog folder was not copied successfully"
+            echo "Target contents:"
+            ls -la "$TARGET_DIR"
+            exit 1
+          fi
 
-      #     echo "✅ Blog folder copied successfully to $TARGET_DIR/"
-      #     echo "=== Target folder contents ==="
-      #     ls -la "$TARGET_DIR/$BLOG_FOLDER_NAME"
+          echo "✅ Blog folder copied successfully to $TARGET_DIR/"
+          echo "=== Target folder contents ==="
+          ls -la "$TARGET_DIR/$BLOG_FOLDER_NAME"
 
-      #     git add "$TARGET_DIR/$BLOG_FOLDER_NAME"
+          git add "$TARGET_DIR/$BLOG_FOLDER_NAME"
 
-      #     echo "=== Files to be committed ==="
-      #     git status --short
+          echo "=== Files to be committed ==="
+          git status --short
 
-      #     if git diff --staged --quiet; then
-      #       echo "ℹ️ No new files to commit - content may already exist"
-      #       exit 0
-      #     fi
+          if git diff --staged --quiet; then
+            echo "ℹ️ No new files to commit - content may already exist"
+            exit 0
+          fi
 
-      #     echo "=== Changes to be committed ==="
-      #     git diff --staged --stat
+          echo "=== Changes to be committed ==="
+          git diff --staged --stat
 
-      #     git commit -m "Add generated blog for $PRODUCT_NAME: $BLOG_FOLDER_NAME" || {
-      #       echo "❌ Failed to commit changes"
-      #       exit 1
-      #     }
+          git commit -m "Add generated blog for $PRODUCT_NAME: $BLOG_FOLDER_NAME" || {
+            echo "❌ Failed to commit changes"
+            exit 1
+          }
 
-      #     echo "=== Last commit ==="
-      #     git log -1 --oneline
+          echo "=== Last commit ==="
+          git log -1 --oneline
 
-      #     git push -u origin "$BRANCH_NAME" --force || {
-      #       echo "❌ Failed to push branch."
-      #       exit 1
-      #     }
+          git push -u origin "$BRANCH_NAME" --force || {
+            echo "❌ Failed to push branch."
+            exit 1
+          }
 
-      #     echo "✅ Branch $BRANCH_NAME pushed successfully"
+          echo "✅ Branch $BRANCH_NAME pushed successfully"
 
-      #     sleep 2
+          sleep 2
 
-      #     EXISTING_PR=$(gh pr list --repo aspose-cloud/aspose-cloud-blog --head "$BRANCH_NAME" --json number --jq '.[0].number' 2>/dev/null || echo "")
+          EXISTING_PR=$(gh pr list --repo aspose-cloud/aspose-cloud-blog --head "$BRANCH_NAME" --json number --jq '.[0].number' 2>/dev/null || echo "")
 
-      #     if [ -n "$EXISTING_PR" ]; then
-      #       echo "ℹ️  PR #$EXISTING_PR already exists for this branch"
-      #       PR_NUMBER="$EXISTING_PR"
-      #       echo "PR URL: https://github.com/aspose-cloud/aspose-cloud-blog/pull/$PR_NUMBER"
-      #     else
-      #       gh pr create \
-      #         --repo aspose-cloud/aspose-cloud-blog \
-      #         --base master \
-      #         --head "$BRANCH_NAME" \
-      #         --title "Add blog post: $BLOG_FOLDER_NAME" \
-      #         --body "## Generated Blog Post
+          if [ -n "$EXISTING_PR" ]; then
+            echo "ℹ️  PR #$EXISTING_PR already exists for this branch"
+            PR_NUMBER="$EXISTING_PR"
+            echo "PR URL: https://github.com/aspose-cloud/aspose-cloud-blog/pull/$PR_NUMBER"
+          else
+            gh pr create \
+              --repo aspose-cloud/aspose-cloud-blog \
+              --base master \
+              --head "$BRANCH_NAME" \
+              --title "Add blog post: $BLOG_FOLDER_NAME" \
+              --body "## Generated Blog Post
 
-      #     **Folder:** $BLOG_FOLDER_NAME
-      #     **Product:** Aspose.$PRODUCT_NAME Cloud SDK
-      #     **Target Path:** \`$TARGET_DIR/$BLOG_FOLDER_NAME\`
+          **Folder:** $BLOG_FOLDER_NAME
+          **Product:** Aspose.$PRODUCT_NAME Cloud SDK
+          **Target Path:** \`$TARGET_DIR/$BLOG_FOLDER_NAME\`
 
-      #     **Generated by:** GitHub Actions (Run #${{ github.run_number }})
-      #     **Workflow:** ${{ github.workflow }}
-      #     **Brand:** aspose.cloud
+          **Generated by:** GitHub Actions (Run #${{ github.run_number }})
+          **Workflow:** ${{ github.workflow }}
+          **Brand:** aspose.cloud
 
-      #     ---
+          ---
 
-      #     This pull request adds a new blog post generated by the autonomous blog agent.
+          This pull request adds a new blog post generated by the autonomous blog agent.
 
-      #     Auto-merged by GitHub Actions." || {
-      #         echo "❌ Failed to create pull request."
-      #         git log origin/master..$BRANCH_NAME --oneline
-      #         exit 1
-      #       }
+          Auto-merged by GitHub Actions." || {
+              echo "❌ Failed to create pull request."
+              git log origin/master..$BRANCH_NAME --oneline
+              exit 1
+            }
 
-      #       echo "✅ Pull request created successfully!"
+            echo "✅ Pull request created successfully!"
 
-      #       PR_NUMBER=$(gh pr list --repo aspose-cloud/aspose-cloud-blog --head "$BRANCH_NAME" --json number --jq '.[0].number' 2>/dev/null || echo "")
-      #     fi
+            PR_NUMBER=$(gh pr list --repo aspose-cloud/aspose-cloud-blog --head "$BRANCH_NAME" --json number --jq '.[0].number' 2>/dev/null || echo "")
+          fi
 
-      #     ###############################################################
-      #     # AUTO-MERGE the PR
-      #     ###############################################################
-      #     if [ -n "$PR_NUMBER" ]; then
-      #       echo "=== Auto-merging PR #$PR_NUMBER ==="
+          ###############################################################
+          # AUTO-MERGE the PR
+          ###############################################################
+          if [ -n "$PR_NUMBER" ]; then
+            echo "=== Auto-merging PR #$PR_NUMBER ==="
 
-      #       sleep 3
+            sleep 3
 
-      #       gh pr merge "$PR_NUMBER" \
-      #         --repo aspose-cloud/aspose-cloud-blog \
-      #         --squash \
-      #         --delete-branch \
-      #         --admin \
-      #         --subject "Auto-merge: $BLOG_FOLDER_NAME" \
-      #         --body "Auto-merged by GitHub Actions (Run #${{ github.run_number }})" || {
-      #           echo "⚠️  Direct merge failed. Trying auto-merge mode..."
-      #           gh pr merge "$PR_NUMBER" \
-      #             --repo aspose-cloud/aspose-cloud-blog \
-      #             --auto \
-      #             --squash \
-      #             --delete-branch || {
-      #               echo "❌ Auto-merge also failed. PR #$PR_NUMBER requires manual merge."
-      #               echo "PR URL: https://github.com/aspose-cloud/aspose-cloud-blog/pull/$PR_NUMBER"
-      #               exit 1
-      #             }
-      #           echo "✅ Auto-merge enabled — PR will merge once all checks pass."
-      #         }
+            gh pr merge "$PR_NUMBER" \
+              --repo aspose-cloud/aspose-cloud-blog \
+              --squash \
+              --delete-branch \
+              --admin \
+              --subject "Auto-merge: $BLOG_FOLDER_NAME" \
+              --body "Auto-merged by GitHub Actions (Run #${{ github.run_number }})" || {
+                echo "⚠️  Direct merge failed. Trying auto-merge mode..."
+                gh pr merge "$PR_NUMBER" \
+                  --repo aspose-cloud/aspose-cloud-blog \
+                  --auto \
+                  --squash \
+                  --delete-branch || {
+                    echo "❌ Auto-merge also failed. PR #$PR_NUMBER requires manual merge."
+                    echo "PR URL: https://github.com/aspose-cloud/aspose-cloud-blog/pull/$PR_NUMBER"
+                    exit 1
+                  }
+                echo "✅ Auto-merge enabled — PR will merge once all checks pass."
+              }
 
-      #       echo "✅ PR #$PR_NUMBER merged successfully!"
-      #       echo "Blog is now live at: $TARGET_DIR/$BLOG_FOLDER_NAME"
-      #     else
-      #       echo "❌ Could not retrieve PR number for auto-merge."
-      #       exit 1
-      #     fi
+            echo "✅ PR #$PR_NUMBER merged successfully!"
+            echo "Blog is now live at: $TARGET_DIR/$BLOG_FOLDER_NAME"
+          else
+            echo "❌ Could not retrieve PR number for auto-merge."
+            exit 1
+          fi
