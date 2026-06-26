@@ -1,27 +1,27 @@
 # Audit Summary
 
 ## Executive Summary
-Scanned 4 Markdown files across 1 detected languages. The strongest opportunities are metadata cleanup, internal linking, translation coverage validation, and content expansion for thin or weakly structured posts.
+Scanned 1 Markdown files across 1 detected languages. The strongest opportunities are metadata cleanup, internal linking, translation coverage validation, and content expansion for thin or weakly structured posts.
 
-- Total Markdown files scanned: 4
-- Total blog posts detected: 4
+- Total Markdown files scanned: 1
+- Total blog posts detected: 1
 - Total languages detected: 1 (en)
-- Translation groups: 4
-- Total issues: 39
+- Translation groups: 1
+- Total issues: 6
 - Audience profile: Developers and technical decision-makers evaluating or using Aspose APIs for document and file-format processing.
 
 ## Audit Segment Summary
 | Segment | Scope | Key Metric | Issues | Status | Detailed Report |
 | --- | --- | --- | --- | --- | --- |
-| Complete SEO | All audit areas | 4 posts, 39 total issues | 39 | Priority risk | complete-seo-audit.md |
-| Content Quality | Markdown body and structure | 0 posts under 800 words | 20 | Priority risk | content-improvement-plan.md |
+| Complete SEO | All audit areas | 1 posts, 6 total issues | 6 | Needs cleanup | complete-seo-audit.md |
+| Content Quality | Markdown body and structure | 0 posts under 800 words | 1 | Monitor | content-improvement-plan.md |
 | Developer Audience Fit | API/developer usefulness | 0 missing code examples | 0 | Clear | complete-seo-audit.md |
-| Code/API Audit | Code blocks and SDK/API symbols | 12 code blocks | 16 | Priority risk | code-audit.md |
-| On-Page SEO | Titles, descriptions, headings, links, images | 0 description length issues | 2 | Monitor | post-audit.csv |
+| Code/API Audit | Code blocks and SDK/API symbols | 2 code blocks | 0 | Clear | code-audit.md |
+| On-Page SEO | Titles, descriptions, headings, links, images | 0 description length issues | 0 | Clear | post-audit.csv |
 | Technical Hugo SEO | Config, templates, robots, canonical, hreflang, schema | 1 technical findings | 1 | Monitor | technical-seo-audit.md |
-| Internal Linking | Outgoing links, incoming links, broken local links, anchors | 8 linking findings | 8 | Needs cleanup | internal-linking-audit.md |
+| Internal Linking | Outgoing links, incoming links, broken local links, anchors | 2 linking findings | 2 | Monitor | internal-linking-audit.md |
 | Multilingual SEO | Translation groups and localized metadata | 0 groups missing languages | 0 | Clear | complete-seo-audit.md |
-| Quick Wins | Low-effort fixes | 30 low-effort findings | 30 | Priority risk | quick-wins.md |
+| Quick Wins | Low-effort fixes | 3 low-effort findings | 3 | Monitor | quick-wins.md |
 | Content Inventory | Years and product-family distribution | 1 years, 1 product groups | 0 | Informational | audit-summary.md |
 
 ## Repository Signal Tables
@@ -52,7 +52,7 @@ Scanned 4 Markdown files across 1 detected languages. The strongest opportunitie
 | Signal | Count |
 | --- | --- |
 | Missing title | 0 |
-| Titles under 30 chars | 1 |
+| Titles under 30 chars | 0 |
 | Titles over 60 chars | 0 |
 | Missing description | 0 |
 | Descriptions under 120 chars | 0 |
@@ -65,29 +65,26 @@ Scanned 4 Markdown files across 1 detected languages. The strongest opportunitie
 ### Posts By Year
 | Year | Posts |
 | --- | --- |
-| 2026 | 4 |
+| 2026 | 1 |
 
 ### Product-Family Distribution
 | Product | Posts |
 | --- | --- |
-| barcode | 4 |
+| barcode | 1 |
 
 ## Highest-Priority Posts
 | File | Priority | Issues | Top Issue | Recommended Action |
 | --- | --- | --- | --- | --- |
-| `content/Aspose.Blog/barcode/2026-06-19-generate-ean-13-barcode-in-net/index.md` | 100 | 7 | suggest_body_output_image | Consider adding an output screenshot or result image inside the post body if it helps readers validate the tutorial result. |
-| `content/Aspose.Blog/barcode/2026-06-19-generate-high-density-data-matrix-code-in-net/index.md` | 100 | 8 | suggest_body_output_image | Consider adding an output screenshot or result image inside the post body if it helps readers validate the tutorial result. |
-| `content/Aspose.Blog/barcode/2026-06-19-generate-upc-barcode-in-net/index.md` | 100 | 11 | suggest_body_output_image | Consider adding an output screenshot or result image inside the post body if it helps readers validate the tutorial result. |
-| `content/Aspose.Blog/barcode/2026-06-19-generate-maxicode-barcode-in-python/index.md` | 50 | 4 | suggest_body_output_image | Consider adding an output screenshot or result image inside the post body if it helps readers validate the tutorial result. |
+| `content/Aspose.Blog/barcode/2026-06-22-read-qr-from-image-in-java-a-complete-developer-guide/index.md` | 23 | 3 | suggest_body_output_image | Consider adding an output screenshot or result image inside the post body if it helps readers validate the tutorial result. |
 
 ## Severity Summary
 | Severity | Issue Count |
 | --- | --- |
 | Critical | 0 |
-| High | 16 |
-| Medium | 19 |
+| High | 0 |
+| Medium | 5 |
 | Low | 0 |
-| Opportunity | 4 |
+| Opportunity | 1 |
 
 ## Recommended 30-Day Action Plan
 1. Fix broken internal links, missing descriptions, duplicate metadata, and missing alt text.
