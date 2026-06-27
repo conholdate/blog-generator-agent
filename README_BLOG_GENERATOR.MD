@@ -23,8 +23,7 @@ Update the .env file inside agent_engine/.env:
 
 ## Run the Agent
 
-python3 main.py --keywords_file "content/GroupDocs/output/e5afbdf4_groupdocs-conversion_c_topics.md" --author "Muhammad Mustafa" --brand "groupdocs.com"
-
+python main.py  --author "Muhammad Mustafa"  --brand "aspose.cloud"
 ## Project Structure
 
 ```

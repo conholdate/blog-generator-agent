@@ -318,6 +318,8 @@ def get_productInfo(product_name: str, platform: str, products, brand) -> str:
         platform_clean = "Java"
     elif platform_clean == "python":
         platform_clean = "Python"
+    elif platform_clean == "nodejs":
+        platform_clean = "Node.js"
     else:
         platform_clean = platform_clean.capitalize()
     
