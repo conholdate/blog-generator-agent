@@ -115,9 +115,22 @@ class MetricsRecorder:
         self.website = website
         self.start_time_ms = self._get_current_time_ms()
         self.items_discovered += 1
-        
+        if website == "aspose.com" and platform == "python":
+            self.platform = "Python via .NET"
+        elif platform == "net":
+            self.platform = ".NET"
+        elif platform == "python-via-net":
+            self.platform = "Python via .NET"
+        elif platform == "java":
+            self.platform = "Java"
+        elif platform == "python":
+            self.platform = "Python"
+        elif platform == "nodejs":
+            self.platform = "Node.js"
+        else:
+            self.platform = platform.capitalize()
         logger.info(f"Started job [{self.run_id}]: {product} - {platform} on {website}")
-    
+
     def record_success(self, details: Optional[str] = None):
         """
         Record a successful operation
