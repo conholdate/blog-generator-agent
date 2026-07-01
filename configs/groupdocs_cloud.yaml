@@ -1,6 +1,6 @@
 key: groupdocs_cloud
 display_name: GroupDocs.Cloud
-website: https://blog.groupdocs.cloud
+website: groupdocs.cloud
 enabled: true
 
 outputs_root: ../outputs

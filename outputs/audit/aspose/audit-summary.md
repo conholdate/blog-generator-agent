@@ -1,27 +1,27 @@
 # Audit Summary
 
 ## Executive Summary
-Scanned 1 Markdown files across 1 detected languages. The strongest opportunities are metadata cleanup, internal linking, translation coverage validation, and content expansion for thin or weakly structured posts.
+Scanned 3 Markdown files across 1 detected languages. The strongest opportunities are metadata cleanup, internal linking, translation coverage validation, and content expansion for thin or weakly structured posts.
 
-- Total Markdown files scanned: 1
-- Total blog posts detected: 1
+- Total Markdown files scanned: 3
+- Total blog posts detected: 3
 - Total languages detected: 1 (en)
-- Translation groups: 1
-- Total issues: 6
+- Translation groups: 3
+- Total issues: 17
 - Audience profile: Developers and technical decision-makers evaluating or using Aspose APIs for document and file-format processing.
 
 ## Audit Segment Summary
 | Segment | Scope | Key Metric | Issues | Status | Detailed Report |
 | --- | --- | --- | --- | --- | --- |
-| Complete SEO | All audit areas | 1 posts, 6 total issues | 6 | Needs cleanup | complete-seo-audit.md |
-| Content Quality | Markdown body and structure | 0 posts under 800 words | 1 | Monitor | content-improvement-plan.md |
+| Complete SEO | All audit areas | 3 posts, 17 total issues | 17 | Priority risk | complete-seo-audit.md |
+| Content Quality | Markdown body and structure | 0 posts under 800 words | 4 | Monitor | content-improvement-plan.md |
 | Developer Audience Fit | API/developer usefulness | 0 missing code examples | 0 | Clear | complete-seo-audit.md |
-| Code/API Audit | Code blocks and SDK/API symbols | 2 code blocks | 0 | Clear | code-audit.md |
+| Code/API Audit | Code blocks and SDK/API symbols | 8 code blocks | 0 | Clear | code-audit.md |
 | On-Page SEO | Titles, descriptions, headings, links, images | 0 description length issues | 0 | Clear | post-audit.csv |
 | Technical Hugo SEO | Config, templates, robots, canonical, hreflang, schema | 1 technical findings | 1 | Monitor | technical-seo-audit.md |
-| Internal Linking | Outgoing links, incoming links, broken local links, anchors | 2 linking findings | 2 | Monitor | internal-linking-audit.md |
+| Internal Linking | Outgoing links, incoming links, broken local links, anchors | 6 linking findings | 6 | Needs cleanup | internal-linking-audit.md |
 | Multilingual SEO | Translation groups and localized metadata | 0 groups missing languages | 0 | Clear | complete-seo-audit.md |
-| Quick Wins | Low-effort fixes | 3 low-effort findings | 3 | Monitor | quick-wins.md |
+| Quick Wins | Low-effort fixes | 10 low-effort findings | 10 | Needs cleanup | quick-wins.md |
 | Content Inventory | Years and product-family distribution | 1 years, 1 product groups | 0 | Informational | audit-summary.md |
 
 ## Repository Signal Tables
@@ -44,7 +44,7 @@ Scanned 1 Markdown files across 1 detected languages. The strongest opportunitie
 | No code block | 0 | 0.0% |
 | No post image | 0 | 0.0% |
 | No H2 heading | 0 | 0.0% |
-| Placeholder/template terms | 0 | 0.0% |
+| Placeholder/template terms | 1 | 33.3% |
 | Possible mojibake | 0 | 0.0% |
 | Draft true | 0 | 0.0% |
 
@@ -65,26 +65,28 @@ Scanned 1 Markdown files across 1 detected languages. The strongest opportunitie
 ### Posts By Year
 | Year | Posts |
 | --- | --- |
-| 2026 | 1 |
+| 2026 | 3 |
 
 ### Product-Family Distribution
 | Product | Posts |
 | --- | --- |
-| barcode | 1 |
+| gis | 3 |
 
 ## Highest-Priority Posts
 | File | Priority | Issues | Top Issue | Recommended Action |
 | --- | --- | --- | --- | --- |
-| `content/Aspose.Blog/barcode/2026-06-22-read-qr-from-image-in-java-a-complete-developer-guide/index.md` | 23 | 3 | suggest_body_output_image | Consider adding an output screenshot or result image inside the post body if it helps readers validate the tutorial result. |
+| `content/Aspose.Blog/gis/2026-07-01-complete-guide-shapefile-to-csv-in-python/index.md` | 49 | 4 | suggest_body_output_image | Consider adding an output screenshot or result image inside the post body if it helps readers validate the tutorial result. |
+| `content/Aspose.Blog/gis/2026-07-01-geojson-to-topojson-conversion-in-net-sample-guide/index.md` | 23 | 3 | suggest_body_output_image | Consider adding an output screenshot or result image inside the post body if it helps readers validate the tutorial result. |
+| `content/Aspose.Blog/gis/2026-07-01-kml-to-gpx-conversion-tutorial-in-python/index.md` | 23 | 3 | suggest_body_output_image | Consider adding an output screenshot or result image inside the post body if it helps readers validate the tutorial result. |
 
 ## Severity Summary
 | Severity | Issue Count |
 | --- | --- |
 | Critical | 0 |
-| High | 0 |
-| Medium | 5 |
+| High | 1 |
+| Medium | 13 |
 | Low | 0 |
-| Opportunity | 1 |
+| Opportunity | 3 |
 
 ## Recommended 30-Day Action Plan
 1. Fix broken internal links, missing descriptions, duplicate metadata, and missing alt text.

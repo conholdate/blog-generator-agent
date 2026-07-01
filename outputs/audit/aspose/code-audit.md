@@ -1,9 +1,9 @@
 # Code Audit
 
 ## Summary
-- Posts scanned: 1
-- Posts with fenced code blocks: 1
-- Code blocks found: 2
+- Posts scanned: 3
+- Posts with fenced code blocks: 3
+- Code blocks found: 8
 - Code/API issues found: 0
 - SDK validation enabled: True
 
@@ -12,15 +12,14 @@ The agent validates SDK classes by indexing configured product API reference rep
 
 | Source | Product | Path | Namespaces | Symbols Indexed |
 | --- | --- | --- | --- | --- |
-| barcode-net-api-reference |  | /home/runner/work/blog-generator-agent/blog-generator-agent/outputs/_repos/_api_references/Aspose/english/net | Aspose.BarCode, aspose.barcode, com.aspose.barcode | 6703 |
-| barcode-java-api-reference |  | /home/runner/work/blog-generator-agent/blog-generator-agent/outputs/_repos/_api_references/Aspose/english/java | Aspose.BarCode, aspose.barcode, com.aspose.barcode | 2249 |
-| barcode-cpp-api-reference |  | /home/runner/work/blog-generator-agent/blog-generator-agent/outputs/_repos/_api_references/Aspose/english/cpp | Aspose.BarCode, aspose.barcode, com.aspose.barcode | 7663 |
-| barcode-python_net-api-reference |  | /home/runner/work/blog-generator-agent/blog-generator-agent/outputs/_repos/_api_references/Aspose/english/python-net | Aspose.BarCode, aspose.barcode, com.aspose.barcode | 2083 |
+| None |  |  |  |  |
 
 ## Per-Post Code Coverage
 | Blog Post | Title | Language | Code Blocks | Code Issues | Top Code Issues |
 | --- | --- | --- | --- | --- | --- |
-| `content/Aspose.Blog/barcode/2026-06-22-read-qr-from-image-in-java-a-complete-developer-guide/index.md` | Read QR from Image in Java: a Complete Developer Guide | en | 2 | 0 |  |
+| `content/Aspose.Blog/gis/2026-07-01-complete-guide-shapefile-to-csv-in-python/index.md` | Complete Guide: Shapefile to CSV in Python | en | 4 | 0 |  |
+| `content/Aspose.Blog/gis/2026-07-01-geojson-to-topojson-conversion-in-net-sample-guide/index.md` | GEOJSON to Topojson Conversion in .NET: Sample Guide | en | 1 | 0 |  |
+| `content/Aspose.Blog/gis/2026-07-01-kml-to-gpx-conversion-tutorial-in-python/index.md` | KML to GPX Conversion Tutorial in Python | en | 3 | 0 |  |
 
 ## Class/Member Resolution Details
 Missing or deprecated SDK classes, properties, and members are listed here with the closest existing indexed-symbol suggestions when the API reference data can support them.
