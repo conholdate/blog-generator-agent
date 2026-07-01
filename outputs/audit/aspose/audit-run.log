@@ -1,34 +1,36 @@
-[05:37:27] Loading blog configuration
-[05:37:28] Audit output will be written to: /home/runner/work/blog-generator-agent/blog-generator-agent/outputs/audit/aspose
-[05:37:28] Preparing repository source: https://github.com/Aspose/aspose-blog.git
-[05:37:28] Loading policy files: 7 configured
-[05:37:28] Policy files loaded: 7
-[05:38:19] Repository ready: /home/runner/work/blog-generator-agent/blog-generator-agent/outputs/_repos/aspose-blog
-[05:38:19] Detecting Hugo project structure
-[05:38:19] Hugo config files detected: config.yml
-[05:38:19] Scanning Markdown content; include translations: False; product filter: Aspose.blog/gis; post date filter: 2026-07-01
-[05:38:21] Markdown scan complete: 1 files
-[05:38:21] Loaded product config: Aspose.GIS
-[05:38:21] Preparing SDK/API reference validation
-[05:38:21] Indexing API reference repository: gis-net-api-reference
-[05:38:21] API reference repository skipped: Git clone failed for https://github.com/aspose-gis/Aspose.GIS-API-References: Cloning into 'outputs/_repos/_api_references/Aspose'...
+[06:29:35] Loading blog configuration
+[06:29:35] Audit output will be written to: /home/runner/work/blog-generator-agent/blog-generator-agent/outputs/audit/aspose
+[06:29:35] Preparing repository source: https://github.com/Aspose/aspose-blog.git
+[06:29:35] Loading policy files: 7 configured
+[06:29:35] Policy files loaded: 7
+[06:30:28] Repository ready: /home/runner/work/blog-generator-agent/blog-generator-agent/outputs/_repos/aspose-blog
+[06:30:28] Detecting Hugo project structure
+[06:30:28] Hugo config files detected: config.yml
+[06:30:28] Scanning Markdown content; include translations: False; product filter: Aspose.blog/gis; post date filter: 2026-07-01
+[06:30:30] Markdown scan complete: 3 files
+[06:30:30] Loaded product config: Aspose.GIS
+[06:30:30] Preparing SDK/API reference validation
+[06:30:30] Indexing API reference repository: gis-net-api-reference
+[06:30:31] API reference repository skipped: Git clone failed for https://github.com/aspose-gis/Aspose.GIS-API-References: Cloning into 'outputs/_repos/_api_references/Aspose'...
 remote: Repository not found.
 fatal: repository 'https://github.com/aspose-gis/Aspose.GIS-API-References/' not found
-[05:38:21] Indexing API reference repository: gis-java-api-reference
-[05:38:21] API reference repository skipped: Git clone failed for https://github.com/aspose-gis/Aspose.GIS-API-References: Cloning into 'outputs/_repos/_api_references/Aspose'...
+[06:30:31] Indexing API reference repository: gis-java-api-reference
+[06:30:31] API reference repository skipped: Git clone failed for https://github.com/aspose-gis/Aspose.GIS-API-References: Cloning into 'outputs/_repos/_api_references/Aspose'...
 remote: Repository not found.
 fatal: repository 'https://github.com/aspose-gis/Aspose.GIS-API-References/' not found
-[05:38:21] Checking local image and asset references
-[05:38:21] Grouping translations
-[05:38:21] Translation grouping complete: 1 groups
-[05:38:21] Running technical Hugo SEO audit
-[05:38:21] Technical audit complete: 1 issues
-[05:38:21] Running internal linking audit
-[05:38:21] Internal linking audit complete: 2 issues
-[05:38:21] Running content and on-page SEO audits
-[05:38:21] Applying policy-grounded rules
-[05:38:21] Scoring complete
-[05:38:21] Writing report files
-[05:38:21] Sending metrics API payload
-[05:38:21] Metrics API payload: {"timestamp":"2026-07-01T05:38:21.877726+00:00","agent_name":"Blog Audit Agent","agent_owner":"Muzammil Khan","job_type":"Blog Audit","run_id":"bb2fb857-21f9-45fd-a1ab-7db3f7327c80","status":"success","product":"Aspose.GIS","platform":"All","website":"aspose.com","website_section":"Blog","item_name":"Blog Posts","items_discovered":1,"items_failed":0,"items_succeeded":1,"run_duration_ms":53950.0,"token_usage":0,"api_calls_count":0}
-[05:38:22] Metrics API sent: delivery=success; status=200; response={"id":5402,"timestamp":"2026-07-01T05:38:21.877726+00:00","agent_name":"Blog Audit Agent","agent_owner":"Muzammil Khan","job_type":"Blog Audit","run_id":"bb2fb857-21f9-45fd-a1ab-7db3f7327c80","status":"success","product":"Aspose.GIS","platform":"All","website":"aspose.com","website_section":"Blog","item_name":"Blog Posts","items_discovered":1,"items_failed":0,"items_succeeded":1,"run_duration_ms":53950,"token_usage":0,"api_calls_count":0}
+[06:30:31] Checking local image and asset references
+[06:30:31] Grouping translations
+[06:30:31] Translation grouping complete: 3 groups
+[06:30:31] Running technical Hugo SEO audit
+[06:30:31] Technical audit complete: 1 issues
+[06:30:31] Running internal linking audit
+[06:30:31] Internal linking audit complete: 6 issues
+[06:30:31] Running content and on-page SEO audits
+[06:30:31] Applying policy-grounded rules
+[06:30:31] Running optional LLM suggestion enrichment
+[06:30:31] Running LLM suggestion enrichment for 3 posts
+[06:30:48] Scoring complete
+[06:30:48] Writing report files
+[06:30:48] Sending metrics API payload
+[06:30:48] Metrics API payload: {"timestamp":"2026-07-01T06:30:48.089524+00:00","agent_name":"Blog Audit Agent","agent_owner":"Muzammil Khan","job_type":"Blog Audit","run_id":"d108aab2-b9f5-4484-967a-8563b11562e7","status":"success","product":"Aspose.GIS","platform":"All","website":"aspose.com","website_section":"Blog","item_name":"Blog Posts","items_discovered":3,"items_failed":0,"items_succeeded":3,"run_duration_ms":72770.0,"token_usage":15306,"api_calls_count":3}
+[06:30:48] Metrics API sent: delivery=success; status=200; response={"id":5978,"timestamp":"2026-07-01T06:30:48.089524+00:00","agent_name":"Blog Audit Agent","agent_owner":"Muzammil Khan","job_type":"Blog Audit","run_id":"d108aab2-b9f5-4484-967a-8563b11562e7","status":"success","product":"Aspose.GIS","platform":"All","website":"aspose.com","website_section":"Blog","item_name":"Blog Posts","items_discovered":3,"items_failed":0,"items_succeeded":3,"run_duration_ms":72770,"token_usage":15306,"api_calls_count":3}
