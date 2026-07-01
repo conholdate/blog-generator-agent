@@ -1,3 +1,6 @@
 # Internal Linking Audit
 
-No issues detected in this area.
+| Severity | Issue | Policy | Rule | Evidence | Audience | File | Explanation | Recommended Fix | Effort | Impact |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| Medium | too_few_outgoing_internal_links | internal-linking | IL-005 |  | Developers exploring related API workflows, Search crawlers discovering topic clusters | `content/Aspose.Blog/drawing/2026-06-29-txt-to-jpg-conversion-in-java-high-quality-step-by-step/index.md` | Post has fewer than two outgoing internal links. Policy: internal-linking; rule: IL-005. | Add contextual links to related posts. | Low | Medium |
+| Medium | orphan_post | internal-linking | IL-006 |  | Developers exploring related API workflows, Search crawlers discovering topic clusters | `content/Aspose.Blog/drawing/2026-06-29-txt-to-jpg-conversion-in-java-high-quality-step-by-step/index.md` | No incoming internal links were found in scanned Markdown. Policy: internal-linking; rule: IL-006. | Add links to this post from related higher-traffic posts. | Low | Medium |

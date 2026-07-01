@@ -1,9 +1,9 @@
 # Code Audit
 
 ## Summary
-- Posts scanned: 0
-- Posts with fenced code blocks: 0
-- Code blocks found: 0
+- Posts scanned: 1
+- Posts with fenced code blocks: 1
+- Code blocks found: 5
 - Code/API issues found: 0
 - SDK validation enabled: True
 
@@ -12,15 +12,12 @@ The agent validates SDK classes by indexing configured product API reference rep
 
 | Source | Product | Path | Namespaces | Symbols Indexed |
 | --- | --- | --- | --- | --- |
-| barcode-net-api-reference |  | /home/runner/work/blog-generator-agent/blog-generator-agent/outputs/_repos/_api_references/Aspose/english/net | Aspose.BarCode, aspose.barcode, com.aspose.barcode | 6722 |
-| barcode-java-api-reference |  | /home/runner/work/blog-generator-agent/blog-generator-agent/outputs/_repos/_api_references/Aspose/english/java | Aspose.BarCode, aspose.barcode, com.aspose.barcode | 2249 |
-| barcode-cpp-api-reference |  | /home/runner/work/blog-generator-agent/blog-generator-agent/outputs/_repos/_api_references/Aspose/english/cpp | Aspose.BarCode, aspose.barcode, com.aspose.barcode | 7663 |
-| barcode-python_net-api-reference |  | /home/runner/work/blog-generator-agent/blog-generator-agent/outputs/_repos/_api_references/Aspose/english/python-net | Aspose.BarCode, aspose.barcode, com.aspose.barcode | 2083 |
+| None |  |  |  |  |
 
 ## Per-Post Code Coverage
 | Blog Post | Title | Language | Code Blocks | Code Issues | Top Code Issues |
 | --- | --- | --- | --- | --- | --- |
-| None |  |  |  |  |  |
+| `content/Aspose.Blog/drawing/2026-06-29-txt-to-jpg-conversion-in-java-high-quality-step-by-step/index.md` | TXT to JPG Conversion in Java: High Quality STEP by STEP | en | 5 | 0 |  |
 
 ## Class/Member Resolution Details
 Missing or deprecated SDK classes, properties, and members are listed here with the closest existing indexed-symbol suggestions when the API reference data can support them.

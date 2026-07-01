@@ -1,28 +1,28 @@
 # Audit Summary
 
 ## Executive Summary
-Scanned 0 Markdown files across 0 detected languages. The strongest opportunities are metadata cleanup, internal linking, translation coverage validation, and content expansion for thin or weakly structured posts.
+Scanned 1 Markdown files across 1 detected languages. The strongest opportunities are metadata cleanup, internal linking, translation coverage validation, and content expansion for thin or weakly structured posts.
 
-- Total Markdown files scanned: 0
-- Total blog posts detected: 0
-- Total languages detected: 0 ()
-- Translation groups: 0
-- Total issues: 1
+- Total Markdown files scanned: 1
+- Total blog posts detected: 1
+- Total languages detected: 1 (en)
+- Translation groups: 1
+- Total issues: 6
 - Audience profile: Developers and technical decision-makers evaluating or using Aspose APIs for document and file-format processing.
 
 ## Audit Segment Summary
 | Segment | Scope | Key Metric | Issues | Status | Detailed Report |
 | --- | --- | --- | --- | --- | --- |
-| Complete SEO | All audit areas | 0 posts, 1 total issues | 1 | Monitor | complete-seo-audit.md |
-| Content Quality | Markdown body and structure | 0 posts under 800 words | 0 | Clear | content-improvement-plan.md |
+| Complete SEO | All audit areas | 1 posts, 6 total issues | 6 | Needs cleanup | complete-seo-audit.md |
+| Content Quality | Markdown body and structure | 0 posts under 800 words | 1 | Monitor | content-improvement-plan.md |
 | Developer Audience Fit | API/developer usefulness | 0 missing code examples | 0 | Clear | complete-seo-audit.md |
-| Code/API Audit | Code blocks and SDK/API symbols | 0 code blocks | 0 | Clear | code-audit.md |
+| Code/API Audit | Code blocks and SDK/API symbols | 5 code blocks | 0 | Clear | code-audit.md |
 | On-Page SEO | Titles, descriptions, headings, links, images | 0 description length issues | 0 | Clear | post-audit.csv |
 | Technical Hugo SEO | Config, templates, robots, canonical, hreflang, schema | 1 technical findings | 1 | Monitor | technical-seo-audit.md |
-| Internal Linking | Outgoing links, incoming links, broken local links, anchors | 0 linking findings | 0 | Clear | internal-linking-audit.md |
+| Internal Linking | Outgoing links, incoming links, broken local links, anchors | 2 linking findings | 2 | Monitor | internal-linking-audit.md |
 | Multilingual SEO | Translation groups and localized metadata | 0 groups missing languages | 0 | Clear | complete-seo-audit.md |
-| Quick Wins | Low-effort fixes | 0 low-effort findings | 0 | Clear | quick-wins.md |
-| Content Inventory | Years and product-family distribution | 0 years, 0 product groups | 0 | Informational | audit-summary.md |
+| Quick Wins | Low-effort fixes | 3 low-effort findings | 3 | Monitor | quick-wins.md |
+| Content Inventory | Years and product-family distribution | 1 years, 1 product groups | 0 | Informational | audit-summary.md |
 
 ## Repository Signal Tables
 
@@ -65,26 +65,26 @@ Scanned 0 Markdown files across 0 detected languages. The strongest opportunitie
 ### Posts By Year
 | Year | Posts |
 | --- | --- |
-| None |  |
+| 2026 | 1 |
 
 ### Product-Family Distribution
 | Product | Posts |
 | --- | --- |
-| None |  |
+| drawing | 1 |
 
 ## Highest-Priority Posts
 | File | Priority | Issues | Top Issue | Recommended Action |
 | --- | --- | --- | --- | --- |
-| None |  |  |  |  |
+| `content/Aspose.Blog/drawing/2026-06-29-txt-to-jpg-conversion-in-java-high-quality-step-by-step/index.md` | 23 | 3 | suggest_body_output_image | Consider adding an output screenshot or result image inside the post body if it helps readers validate the tutorial result. |
 
 ## Severity Summary
 | Severity | Issue Count |
 | --- | --- |
 | Critical | 0 |
 | High | 0 |
-| Medium | 1 |
+| Medium | 5 |
 | Low | 0 |
-| Opportunity | 0 |
+| Opportunity | 1 |
 
 ## Recommended 30-Day Action Plan
 1. Fix broken internal links, missing descriptions, duplicate metadata, and missing alt text.

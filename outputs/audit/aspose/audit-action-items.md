@@ -6,12 +6,12 @@ Consolidated actionable backlog for Aspose. This combines post-level, technical 
 | Field | Value |
 | --- | --- |
 | Blog | Aspose |
-| Product | Aspose.BarCode |
-| Audit date | 2026-07-01 04:15:54 UTC |
+| Product | Aspose.Drawing |
+| Audit date | 2026-07-01 04:24:53 UTC |
 | Repository | /home/runner/work/blog-generator-agent/blog-generator-agent/outputs/_repos/aspose-blog |
 | Blog config | outputs/workflow-blog-config.yaml |
 | Mode | report-with-fix-suggestions |
-| Product filter | Aspose.blog/barcode |
+| Product filter | Aspose.blog/drawing |
 | Post date filter | 2026-06-29 |
 | Language filter | All |
 | Include translations | false |
@@ -29,31 +29,43 @@ Consolidated actionable backlog for Aspose. This combines post-level, technical 
 ## Summary
 | Metric | Count |
 | --- | --- |
-| Total scanned blog posts | 0 |
-| Total action items | 1 |
+| Total scanned blog posts | 1 |
+| Total action items | 5 |
 | P0 action items | 0 |
 | P1 action items | 0 |
-| Low-effort quick wins | 1 |
+| Low-effort quick wins | 5 |
 | Critical issues | 0 |
 | High issues | 0 |
-| Medium issues | 1 |
+| Medium issues | 4 |
 | Low issues | 0 |
-| Opportunity issues | 0 |
+| Opportunity issues | 1 |
 
 ## Items By Area
 | Area | Action Items |
 | --- | --- |
+| Internal Linking | 3 |
 | Technical SEO | 1 |
+| Content Quality | 1 |
 
 ## All Action Items
 Action items are grouped by affected post. The post heading carries the file path, so the tables omit the repeated file column.
+
+### TXT to JPG Conversion in Java: High Quality STEP by STEP
+File: `content/Aspose.Blog/drawing/2026-06-29-txt-to-jpg-conversion-in-java-high-quality-step-by-step/index.md`
+
+| ID | Priority | Severity | Area | Issue | Line / Scope | Post Priority | Recommended Action | Effort | Impact | Source |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| AA-0001 | P2 | Medium | Internal Linking | too_few_outgoing_internal_links | Post-level | 23 | Add contextual links to related posts, docs, and product pages. | Low | Medium | internal-linking-audit.md |
+| AA-0002 | P2 | Medium | Internal Linking | weak_internal_links | Post-level | 23 | Add links to related tutorials, docs, and product pages. | Low | Medium | internal-linking-audit.md |
+| AA-0003 | P2 | Medium | Internal Linking | orphan_post | Post-level | 0 | Add links to this post from related higher-traffic posts. | Low | Medium | internal-linking-audit.md |
+| AA-0005 | P3 | Opportunity | Content Quality | suggest_body_output_image | Post-level | 23 | Consider adding an output screenshot or result image inside the post body if it helps readers validate the tutorial result. | Low | Medium | content-improvement-plan.md |
 
 ### Sitewide / Technical
 Scope: `/home/runner/work/blog-generator-agent/blog-generator-agent/outputs/_repos/aspose-blog`
 
 | ID | Priority | Severity | Area | Issue | Line / Scope | Post Priority | Recommended Action | Effort | Impact | Source |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| AA-0001 | P2 | Medium | Technical SEO | missing_robots | Sitewide | 0 | Add robots.txt or confirm Hugo generates one. | Low | Medium | technical-seo-audit.md |
+| AA-0004 | P2 | Medium | Technical SEO | missing_robots | Sitewide | 0 | Add robots.txt or confirm Hugo generates one. | Low | Medium | technical-seo-audit.md |
 
 
 ## Detailed Source Reports
