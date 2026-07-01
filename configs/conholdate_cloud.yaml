@@ -1,6 +1,6 @@
 key: conholdate_cloud
 display_name: Conholdate.Cloud
-website: https://blog.conholdate.cloud
+website: conholdate.cloud
 enabled: true
 
 outputs_root: ../outputs

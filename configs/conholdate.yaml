@@ -1,6 +1,6 @@
 key: conholdate
 display_name: Conholdate
-website: https://blog.conholdate.com
+website: conholdate.com
 enabled: true
 
 outputs_root: ../outputs
