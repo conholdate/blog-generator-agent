@@ -3,7 +3,7 @@
 ## Summary
 - Posts scanned: 1
 - Posts with fenced code blocks: 1
-- Code blocks found: 5
+- Code blocks found: 1
 - Code/API issues found: 0
 - SDK validation enabled: True
 
@@ -17,7 +17,7 @@ The agent validates SDK classes by indexing configured product API reference rep
 ## Per-Post Code Coverage
 | Blog Post | Title | Language | Code Blocks | Code Issues | Top Code Issues |
 | --- | --- | --- | --- | --- | --- |
-| `content/Aspose.Blog/drawing/2026-06-29-txt-to-jpg-conversion-in-java-high-quality-step-by-step/index.md` | TXT to JPG Conversion in Java: High Quality STEP by STEP | en | 5 | 0 |  |
+| `content/Aspose.Blog/gis/2026-07-01-geojson-to-topojson-conversion-in-net-sample-guide/index.md` | GEOJSON to Topojson Conversion in .NET: Sample Guide | en | 1 | 0 |  |
 
 ## Class/Member Resolution Details
 Missing or deprecated SDK classes, properties, and members are listed here with the closest existing indexed-symbol suggestions when the API reference data can support them.

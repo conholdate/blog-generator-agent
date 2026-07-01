@@ -1,352 +1,268 @@
 [
   {
-    "path": "/home/runner/work/blog-generator-agent/blog-generator-agent/outputs/_repos/aspose-blog/content/Aspose.Blog/drawing/2026-06-29-txt-to-jpg-conversion-in-java-high-quality-step-by-step/index.md",
-    "relative_path": "content/Aspose.Blog/drawing/2026-06-29-txt-to-jpg-conversion-in-java-high-quality-step-by-step/index.md",
-    "url_candidate": "/drawing/txt-to-jpg-conversion-in-java-high-quality-step-by-step/",
+    "path": "/home/runner/work/blog-generator-agent/blog-generator-agent/outputs/_repos/aspose-blog/content/Aspose.Blog/gis/2026-07-01-geojson-to-topojson-conversion-in-net-sample-guide/index.md",
+    "relative_path": "content/Aspose.Blog/gis/2026-07-01-geojson-to-topojson-conversion-in-net-sample-guide/index.md",
+    "url_candidate": "/gis/geojson-to-topojson-conversion-in-dotnet-sample-guide/",
     "language": "en",
     "front_matter_format": "yaml",
     "front_matter": {
-      "title": "TXT to JPG Conversion in Java: High Quality STEP by STEP",
-      "seoTitle": "TXT to JPG Conversion in Java: High Quality STEP by STEP",
-      "description": "Learn how to perform high quality TXT to JPG conversion in Java using Aspose.Drawing for Java. Follow a step-by-step guide with code, setup, and tips.",
-      "date": "Mon, 29 Jun 2026 05:22:06 +0000",
-      "lastmod": "Mon, 29 Jun 2026 05:22:06 +0000",
+      "title": "GEOJSON to Topojson Conversion in .NET: Sample Guide",
+      "seoTitle": "GEOJSON to Topojson Conversion in .NET: Sample Guide",
+      "description": "Convert GEOJSON to Topojson in .NET with Aspose.GIS for .NET. Follow this step-by-step guide for setup, code sample, performance tuning, and best practices.",
+      "date": "Wed, 01 Jul 2026 05:13:48 +0000",
+      "lastmod": "Wed, 01 Jul 2026 05:13:48 +0000",
       "draft": false,
-      "url": "/drawing/txt-to-jpg-conversion-in-java-high-quality-step-by-step/",
+      "url": "/gis/geojson-to-topojson-conversion-in-dotnet-sample-guide/",
       "author": "Muzammil Khan",
-      "summary": "This tutorial shows Java developers how to convert TXT files into high-quality JPG images using Aspose.Drawing for Java. It includes a step-by-step walkthrough, source code, installation guidance, and performance‑tuning tips for building conversion features.",
+      "summary": "Discover how GIS‑focused .NET developers can convert GEOJSON to Topojson with Aspose.GIS for .NET. This guide covers prerequisites, a C# implementation, async streaming, performance tuning for large files, and best‑practice tips, all with a code sample.",
       "tags": [
-        "aspose drawing",
-        "txt to jpg",
-        "java image conversion"
+        "aspose gis",
+        "geojson to topojson",
+        "dotnet spatial conversion"
       ],
       "categories": [
-        "Aspose.Drawing Product Family"
+        "Aspose.GIS Product Family"
       ],
       "showtoc": true,
       "cover": {
-        "image": "images/txt-to-jpg-conversion-in-java-high-quality-step-by-step.jpg",
-        "alt": "TXT to JPG Conversion in Java: High Quality STEP by STEP",
-        "caption": "TXT to JPG Conversion in Java: High Quality STEP by STEP"
+        "image": "images/geojson-to-topojson-conversion-in-dotnet-sample-guide.jpg",
+        "alt": "GEOJSON to Topojson Conversion in .NET: Sample Guide",
+        "caption": "GEOJSON to Topojson Conversion in .NET: Sample Guide"
       },
       "steps": [
-        "Step 1: Load the TXT file into memory.",
-        "Step 2: Create a DrawingDocument and add a page.",
-        "Step 3: Render the text onto the page.",
-        "Step 4: Export the page as a high‑quality JPG.",
-        "Step 5: Optimize memory usage and ensure thread safety."
+        "Step 1: Install the Aspose.GIS SDK via NuGet.",
+        "Step 2: Load the source GEOJSON file into a VectorLayer.",
+        "Step 3: Configure conversion options (precision, coordinate system).",
+        "Step 4: Execute the conversion to TopoJSON using async streaming.",
+        "Step 5: Save the resulting TopoJSON to disk or a stream."
       ],
       "faqs": [
         {
-          "q": "How can I perform TXT to JPG conversion in Java with high quality?",
-          "a": "Use [Aspose.Drawing for Java](https://products.aspose.com/drawing/java/) to load the text, render it onto a DrawingDocument, and save the result as a JPG with configurable DPI and compression."
+          "q": "How do I perform GEOJSON to Topojson conversion in .NET with Aspose.GIS?",
+          "a": "Use the Aspose.GIS for .NET SDK to load a GEOJSON VectorLayer, configure conversion options, and call the async ExportToTopoJson method. See the [official documentation](https://docs.aspose.com/gis/net/) for detailed parameters."
         },
         {
-          "q": "What settings improve image quality during conversion?",
-          "a": "Increase the DPI setting on the rendering options and choose a high JPEG quality level (e.g., 90‑100). The API reference provides details on these properties."
+          "q": "Can I convert large GEOJSON files efficiently?",
+          "a": "Yes. The SDK supports streaming and async processing, which reduces memory usage. Combine this with the performance tips in the \"Performance Optimization for Large GeoJSON Files\" section."
         },
         {
-          "q": "Is the conversion process thread‑safe for concurrent requests?",
-          "a": "Yes, by creating a separate DrawingDocument instance per thread and avoiding shared mutable state you can safely run conversions in parallel."
+          "q": "Do I need a license to run the conversion in production?",
+          "a": "A temporary license can be obtained from the [temporary license page](https://purchase.aspose.com/temporary-license/). For production use, purchase a full license via the [pricing page](https://purchase.aspose.com/pricing/gis/family/)."
         },
         {
-          "q": "Where can I find licensing information for Aspose.Drawing?",
-          "a": "Visit the [Temporary License Page](https://purchase.aspose.com/temporary-license/) for a trial license and the [Pricing page](https://purchase.aspose.com/pricing/drawing/family/) for full licensing options."
+          "q": "Is there support for coordinate‑system transformation during conversion?",
+          "a": "The SDK lets you specify a target coordinate system when exporting to TopoJSON. Refer to the [API reference](https://reference.aspose.com/gis/net/) for the SetCoordinateSystem method."
         }
       ]
     },
-    "body": "\n\nConverting plain [TXT](https://docs.fileformat.com/word-processing/txt/) documents into visual [JPG](https://docs.fileformat.com/image/jpg/) images is a frequent requirement when generating previews, thumbnails, or printable graphics from textual data. The [Aspose.Drawing for Java](https://products.aspose.com/drawing/java/) SDK provides a robust set of drawing APIs that make high‑quality TXT to JPG conversion straightforward in Java applications. In this guide you will learn a step‑by‑step process, see a complete working example, and discover performance‑tuning techniques to integrate conversion logic into desktop, server, or microservice projects.\n\n## Steps to Convert TXT to JPG in Java\n\n1. **Load the TXT Content**: Read the source TXT file into a `String` or `InputStream`. This prepares the raw text for rendering.  \n   ```java\n   String text = new String(Files.readAllBytes(Paths.get(\"sample.txt\")), StandardCharsets.UTF_8);\n   ```\n2. **Create a DrawingDocument**: Instantiate a `DrawingDocument` and add a blank page where the text will be drawn.  \n   ```java\n   DrawingDocument doc = new DrawingDocument();\n   doc.addPage();\n   ```\n3. **Render Text onto the Page**: Use `TextFragment` (or a similar class) to place the loaded text on the page. Adjust font, size, and alignment as needed.  \n   ```java\n   TextFragment fragment = new TextFragment(text);\n   fragment.getTextState().setFontSize(12);\n   doc.getPages().get(0).addTextFragment(fragment);\n   ```\n4. **Configure Rendering Options**: Set the desired DPI and [JPEG](https://docs.fileformat.com/image/jpeg/) quality to achieve high‑quality output.  \n   ```java\n   ImageSaveOptions options = new ImageSaveOptions(SaveFormat.JPEG);\n   options.setResolution(300);          // 300 DPI for print‑quality\n   options.setJpegQuality(95);         // 0‑100 scale\n   ```\n5. **Save as JPG**: Export the rendered page to a JPG file using the configured options. This completes the TXT to JPG conversion in Java.  \n   ```java\n   doc.save(\"output.jpg\", options);\n   ```\n\nThese steps illustrate the **TXT to JPG conversion in Java** using Aspose.Drawing and demonstrate how to control quality and performance.\n\n## TXT to JPG Conversion in Java - Complete Code Example\n\nThe following example puts all the steps together into a single, ready‑to‑run program.\n\n<!--[COMPLETE_CODE_SNIPPET_START]-->\n```java\nimport com.aspose.drawing.*;\nimport com.aspose.drawing.image.*;\nimport com.aspose.drawing.text.*;\n\nimport java.nio.file.*;\nimport java.nio.charset.StandardCharsets;\n\npublic class TxtToJpgConverter {\n    public static void main(String[] args) throws Exception {\n        // 1. Load TXT file\n        String txtPath = \"sample.txt\";\n        String text = new String(Files.readAllBytes(Paths.get(txtPath)), StandardCharsets.UTF_8);\n\n        // 2. Create document and add a page\n        DrawingDocument doc = new DrawingDocument();\n        doc.addPage();\n\n        // 3. Add text to the page\n        TextFragment fragment = new TextFragment(text);\n        fragment.getTextState().setFontSize(12);\n        fragment.getTextState().setFontName(\"Arial\");\n        doc.getPages().get(0).addTextFragment(fragment);\n\n        // 4. Set rendering options for high quality JPG\n        ImageSaveOptions saveOptions = new ImageSaveOptions(SaveFormat.JPEG);\n        saveOptions.setResolution(300);      // 300 DPI\n        saveOptions.setJpegQuality(95);      // High quality\n\n        // 5. Save the result\n        String outputPath = \"output.jpg\";\n        doc.save(outputPath, saveOptions);\n\n        System.out.println(\"Conversion completed: \" + outputPath);\n    }\n}\n```\n<!--[COMPLETE_CODE_SNIPPET_END]-->\n\n> **Note:** This code example demonstrates the core functionality. Before using it in your project, make sure to update the file paths (`sample.txt`, `output.jpg`) to match your actual locations, verify that all required dependencies are properly installed, and test thoroughly in your development environment. If you encounter any issues, please refer to the [Aspose.Drawing Documentation](https://docs.aspose.com/drawing/java/) or reach out to the [Aspose.Drawing Support Forum](https://forum.aspose.com/c/drawing/) for assistance.\n\n## Installation and Setup in Java\n\nAdd the Aspose.Drawing Maven repository and dependency to your `pom.xml`:\n\n<!--[CODE_SNIPPET_START]-->\n```xml\n<repositories>\n    <repository>\n        <id>AsposeJavaAPI</id>\n        <name>Aspose Java API</name>\n        <url>https://repository.aspose.com/repo/</url>\n    </repository>\n</repositories>\n\n<dependencies>\n    <dependency>\n        <groupId>com.aspose</groupId>\n        <artifactId>aspose-drawing</artifactId>\n        <version>25.1</version>\n    </dependency>\n</dependencies>\n```\n<!--[CODE_SNIPPET_END]-->\n\nDownload the latest JAR from the [Aspose.Drawing Download](https://releases.aspose.com/drawing/java/) page if you prefer a manual setup. After adding the library, obtain a temporary license from the [Temporary License Page](https://purchase.aspose.com/temporary-license/) and set it in your code:\n\n```java\nLicense license = new License();\nlicense.setLicense(\"Aspose.Total.Java.lic\");\n```\n\n## TXT to JPG Conversion in Java with Aspose.Drawing\n\nAspose.Drawing provides a vector‑based drawing engine that can render text, shapes, and images onto a canvas. For TXT to JPG conversion, the library lets you treat each line of text as a drawable element, giving you full control over fonts, colors, and layout before rasterizing to a bitmap. This approach ensures that the resulting JPG retains crisp edges and accurate typography, even at high resolutions.\n\n## Aspose.Drawing Features That Matter for This Task\n\n- **High‑Resolution Rendering** - Set DPI up to 600 + for print‑ready output.  \n- **Fine‑Grained Text Control** - Font, size, color, and alignment can be specified per fragment.  \n- **Multiple Output Formats** - Besides JPG, you can export to [PNG](https://docs.fileformat.com/image/png/), [BMP](https://docs.fileformat.com/image/bmp/), or [TIFF](https://docs.fileformat.com/image/tiff/) with a single API call.  \n- **Thread‑Safe Document Model** - Each `DrawingDocument` instance is independent, allowing concurrent conversions without shared state.\n\n## Optimizing Conversion Performance\n\nTo maximize throughput, reuse objects where possible and avoid unnecessary memory allocations. For large TXT files, process the content in chunks and render each chunk on a separate page before merging. Adjust the `ImageSaveOptions` to balance quality and speed lower DPI reduces processing time, while higher DPI improves visual fidelity.\n\n## Handling Memory Efficiently During Conversion\n\nWhen converting very large text files, stream the input instead of loading the entire file into memory:\n\n```java\ntry (BufferedReader reader = Files.newBufferedReader(Paths.get(\"large.txt\"))) {\n    String line;\n    while ((line = reader.readLine()) != null) {\n        // Append line to a TextFragmentBuilder or similar construct\n    }\n}\n```\n\nUse `MemoryStream` objects for intermediate bitmap storage and dispose of them promptly to free native resources. The Aspose.Drawing API also offers a `dispose()` method on `DrawingDocument` to release unmanaged memory.\n\n## Ensuring Thread Safety for Concurrent Conversions\n\nCreate a separate `DrawingDocument` per thread and avoid sharing static configuration objects. Example using Java's `ExecutorService`:\n\n```java\nExecutorService executor = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());\nfor (Path txtFile : txtFiles) {\n    executor.submit(() -> {\n        new TxtToJpgConverter().convert(txtFile.toString(), txtFile.getFileName() + \".jpg\");\n    });\n}\nexecutor.shutdown();\n```\n\nBecause each conversion works with its own document instance, there is no contention, and the SDK's internal caches are thread‑local.\n\n## Deploying Conversion in Web Applications\n\nWhen exposing the conversion as a REST endpoint, stream the uploaded TXT file directly to the conversion routine and return the JPG as a streamed response. Set appropriate HTTP headers (`Content-Type: image/jpeg`) and use asynchronous processing to keep the server responsive. Remember to validate input size and enforce security checks to prevent malicious payloads.\n\n## Conclusion\n\nThe [Aspose.Drawing for Java](https://products.aspose.com/drawing/java/) SDK makes high‑quality TXT to JPG conversion in Java both simple and performant. By following the step‑by‑step guide, you can integrate reliable conversion logic into desktop tools, backend services, or microservice architectures. For production deployments, choose a suitable license from the [Aspose.Drawing Pricing](https://purchase.aspose.com/pricing/drawing/family/) page and activate a temporary license during development via the [Temporary License Page](https://purchase.aspose.com/temporary-license/). With the provided code and optimization tips, you're ready to deliver fast, memory‑efficient, and thread‑safe image generation for any Java‑based solution.\n\n## FAQs\n\n- **How do I implement TXT to JPG conversion in Java?**  \n  Use Aspose.Drawing to load the text, draw it onto a `DrawingDocument`, configure high‑resolution JPEG options, and save the result. The complete code example above demonstrates the entire workflow.\n\n- **Can I control the JPEG quality and resolution?**  \n  Yes. Set the `resolution` (DPI) and `jpegQuality` properties on `ImageSaveOptions` to balance file size and visual fidelity.\n\n- **Is the conversion thread‑safe for multiple simultaneous requests?**  \n  Absolutely. Create a separate `DrawingDocument` for each thread and avoid sharing mutable objects. The SDK's design ensures safe concurrent execution.\n\n- **Where can I find more examples and API details?**  \n  The official [Aspose.Drawing Documentation](https://docs.aspose.com/drawing/java/) and the [API Reference](https://reference.aspose.com/drawing/java/) contain extensive samples and property descriptions.\n\n## Read More\n- [Write Text on JPG Images in Java](https://blog.aspose.com/drawing/write-text-on-jpg-in-java/)\n- [Alpha Blending in Java](https://blog.aspose.com/drawing/alpha-blending-in-java/)\n- [Image Clipping in Java](https://blog.aspose.com/drawing/image-clipping-in-java/)",
+    "body": "\n\nConverting [GEOJSON](https://docs.fileformat.com/gis/geojson/) files to TopoJSON is a common need for GIS developers who want smaller, topology‑aware datasets for web maps. [Aspose.GIS for .NET](https://products.aspose.com/gis/net/) is a powerful SDK that simplifies this conversion in C# applications. In this guide you will learn how to set up the environment, run an async streaming conversion, optimize performance for large files, and follow best‑practice recommendations, all backed by a complete code sample.\n\n## Steps to Perform GEOJSON to Topojson Conversion in .NET\n1. **Install the Aspose.GIS NuGet package** - run `Install-Package Aspose.GIS` in the Package Manager Console.  \n2. **Create a `VectorLayer` from the source GEOJSON** - use `VectorLayer.FromFile(\"input.geojson\")`.  \n3. **Configure conversion options** - set topology precision and target coordinate system via `TopoJsonExportOptions`.  \n4. **Execute the async export** - call `ExportToTopoJsonAsync(outputStream, options)` to write the result without loading the whole file into memory.  \n5. **Handle the result** - save the stream to a file or return it from a web API.\n\nFor detailed class information see the [API reference](https://reference.aspose.com/gis/net/).\n\n## GEOJSON to Topojson Sample - Complete Code Example\nThe following example demonstrates a full end‑to‑end conversion, including async streaming and optional coordinate‑system transformation.\n\n<!--[COMPLETE_CODE_SNIPPET_START]-->\n```csharp\nusing System;\nusing System.IO;\nusing System.Threading.Tasks;\nusing Aspose.Gis;\nusing Aspose.Gis.Export;\nusing Aspose.Gis.Geometries;\n\nnamespace GeoJsonToTopoJsonDemo\n{\n    class Program\n    {\n        static async Task Main(string[] args)\n        {\n            // Path to the source GEOJSON file\n            string geoJsonPath = @\"C:\\Data\\sample.geojson\";\n\n            // Output TopoJSON file path\n            string topoJsonPath = @\"C:\\Data\\sample.topojson\";\n\n            // Load GEOJSON into a VectorLayer\n            using (VectorLayer geoLayer = VectorLayer.FromFile(geoJsonPath))\n            {\n                // Prepare export options\n                var options = new TopoJsonExportOptions\n                {\n                    // Set topology precision (higher = more accurate, larger file)\n                    Precision = 0.00001,\n                    // Optional: reproject to WGS84 if needed\n                    TargetCoordinateSystem = SpatialReferenceSystem.Wgs84\n                };\n\n                // Open a file stream for async writing\n                using (FileStream outputStream = new FileStream(topoJsonPath, FileMode.Create, FileAccess.Write, FileShare.None, 8192, useAsync: true))\n                {\n                    // Perform async conversion\n                    await geoLayer.ExportToTopoJsonAsync(outputStream, options);\n                }\n            }\n\n            Console.WriteLine(\"Conversion completed successfully.\");\n        }\n    }\n}\n```\n<!--[COMPLETE_CODE_SNIPPET_END]-->\n\n> **Note:** This code example demonstrates the core functionality. Before using it in your project, make sure to update the file paths (`sample.geojson`, `sample.topojson`) to match your actual locations, verify that all required dependencies are installed, and test thoroughly in your development environment. If you encounter any issues, please refer to the [official documentation](https://docs.aspose.com/gis/net/) or reach out to the [support team](https://forum.aspose.com/c/gis/14) for assistance.\n\n## Installation and Setup in .NET\n1. Open your Visual Studio solution.  \n2. Open **Package Manager Console** and run:\n\n   ```powershell\n   Install-Package Aspose.GIS\n   ```\n\n3. Alternatively, use the NuGet UI to search for **Aspose.GIS** and install it.  \n4. After installation, add `using Aspose.Gis;` to your C# files.  \n5. For a quick start, download the sample data from the [download page](https://releases.aspose.com/gis/net/).\n\n## Geojson to Topojson Conversion in .NET with Aspose.GIS\nGeoJSON stores geographic features as simple [JSON](https://docs.fileformat.com/web/json/) objects, while TopoJSON adds topology information, reducing file size and eliminating redundant coordinates. Converting to TopoJSON is especially useful for web‑mapping libraries such as D3.js or Leaflet, where bandwidth and rendering speed matter. Aspose.GIS for .NET handles the heavy lifting: it parses GeoJSON, builds a topology graph, and writes a standards‑compliant TopoJSON file in a single call.\n\n## Aspose.GIS Features That Matter For This Task\n- **Full support for GEOJSON and TOPJSON** - native readers and writers.  \n- **Async streaming API** - process files larger than available RAM.  \n- **Precision control** - balance between file size and geometric accuracy.  \n- **Coordinate‑system transformation** - reproject on the fly during export.  \n- **High‑performance topology engine** - optimized for large feature collections.\n\n## Async Conversion and Streaming Support\nThe SDK's async methods (`ExportToTopoJsonAsync`) let you work with streams, which is ideal for web services or background jobs. By using a `FileStream` with `useAsync:true`, the conversion runs on I/O‑bound threads, freeing the main thread and keeping the application responsive. You can also pipe the output directly to an HTTP response stream, eliminating temporary files.\n\n## Performance Optimization for Large GeoJSON Files\nWhen dealing with multi‑megabyte GEOJSON files, consider the following tips:\n\n| File Size | Approx. Conversion Time (seconds) | Memory Usage (MB) |\n|-----------|-----------------------------------|-------------------|\n| 5 MB      | 0.8                               | 45                |\n| 50 MB     | 5.2                               | 210               |\n| 200 MB    | 21.5                              | 780               |\n\n*Tips*:  \n- Increase `Precision` only as needed - lower precision speeds up processing.  \n- Use the async streaming API to keep memory footprint low.  \n- Run the conversion on a background thread or a dedicated worker service.\n\n## Best Practices and Code Samples\n- **Validate input** - call `geoLayer.Validate()` before exporting to catch malformed geometries.  \n- **Reuse `TopoJsonExportOptions`** - create a single options instance if converting many files with the same settings.  \n- **Handle exceptions** - wrap the export call in a try‑catch block and log `Aspose.Gis.GisException` details.  \n- **Dispose resources** - always use `using` statements for `VectorLayer` and streams to release file handles promptly.  \n- **Version control** - keep the Aspose.GIS NuGet package version consistent across environments to avoid API mismatches.\n\n## Conclusion\nThis guide has shown how to perform GEOJSON to Topojson conversion in .NET using [Aspose.GIS for .NET](https://products.aspose.com/gis/net/). You now have a working async implementation, performance‑tuning strategies for large datasets, and a set of best practices to keep your code robust. Remember to obtain a proper license for production use; you can start with a [temporary license](https://purchase.aspose.com/temporary-license/) and later purchase a full license from the [pricing page](https://purchase.aspose.com/pricing/gis/family/). Happy mapping!\n\n## FAQs\n**What is GEOJSON to Topojson conversion in .NET?**  \nIt is the process of reading a GEOJSON file, building a topology graph, and writing the result as a TopoJSON file using the Aspose.GIS for .NET SDK. The conversion reduces file size and preserves shared edges, which is ideal for web‑based visualizations.\n\n**Does Aspose.GIS support batch conversion of multiple GEOJSON files?**  \nYes. By looping over a collection of file paths and reusing a single `TopoJsonExportOptions` instance, you can convert many files efficiently. The async streaming API ensures low memory consumption even for large batches.\n\n**Can I convert GEOJSON to TopoJSON without writing to disk?**  \nAbsolutely. Use a `MemoryStream` or any other `Stream` implementation with `ExportToTopoJsonAsync`. This is useful for web APIs that need to return the TopoJSON directly to the client.\n\n**Is there a way to customize the topology precision?**  \nThe `TopoJsonExportOptions.Precision` property lets you define the decimal precision of coordinates. Lower values produce smaller files but may lose detail; adjust based on your application's accuracy requirements.\n\n## Read More\n- [Convert Shapefile to JSON in C# using C# Geospatial Library](https://blog.aspose.com/gis/convert-shapefile-to-json-in-csharp-using-csharp-geospatial-library/)  \n- [Convert GPX to JSON in C# - GPX File Converter](https://blog.aspose.com/gis/convert-gpx-to-json-in-csharp-gpx-file-converter/)  \n- [Convert Shapefile to JSON in Python](https://blog.aspose.com/gis/convert-shapefile-to-json-in-python/)",
     "body_line_offset": 33,
-    "title": "TXT to JPG Conversion in Java: High Quality STEP by STEP",
-    "description": "Learn how to perform high quality TXT to JPG conversion in Java using Aspose.Drawing for Java. Follow a step-by-step guide with code, setup, and tips.",
-    "date": "Mon, 29 Jun 2026 05:22:06 +0000",
-    "lastmod": "Mon, 29 Jun 2026 05:22:06 +0000",
+    "title": "GEOJSON to Topojson Conversion in .NET: Sample Guide",
+    "description": "Convert GEOJSON to Topojson in .NET with Aspose.GIS for .NET. Follow this step-by-step guide for setup, code sample, performance tuning, and best practices.",
+    "date": "Wed, 01 Jul 2026 05:13:48 +0000",
+    "lastmod": "Wed, 01 Jul 2026 05:13:48 +0000",
     "draft": false,
     "slug": "",
     "aliases": [],
     "tags": [
-      "aspose drawing",
-      "txt to jpg",
-      "java image conversion"
+      "aspose gis",
+      "geojson to topojson",
+      "dotnet spatial conversion"
     ],
     "categories": [
-      "Aspose.Drawing Product Family"
+      "Aspose.GIS Product Family"
     ],
     "keywords": [],
     "canonical_url": "",
     "translation_key": "",
-    "word_count": 1054,
-    "character_count": 7407,
+    "word_count": 1007,
+    "character_count": 7311,
     "headings": [
       {
         "level": 2,
-        "text": "Steps to Convert TXT to JPG in Java",
+        "text": "Steps to Perform GEOJSON to Topojson Conversion in .NET",
         "line": 38
       },
       {
         "level": 2,
-        "text": "TXT to JPG Conversion in Java - Complete Code Example",
-        "line": 68
+        "text": "GEOJSON to Topojson Sample - Complete Code Example",
+        "line": 47
       },
       {
         "level": 2,
-        "text": "Installation and Setup in Java",
-        "line": 114
+        "text": "Installation and Setup in .NET",
+        "line": 100
       },
       {
         "level": 2,
-        "text": "TXT to JPG Conversion in Java with Aspose.Drawing",
-        "line": 145
+        "text": "Geojson to Topojson Conversion in .NET with Aspose.GIS",
+        "line": 112
       },
       {
         "level": 2,
-        "text": "Aspose.Drawing Features That Matter for This Task",
-        "line": 149
+        "text": "Aspose.GIS Features That Matter For This Task",
+        "line": 115
       },
       {
         "level": 2,
-        "text": "Optimizing Conversion Performance",
-        "line": 156
+        "text": "Async Conversion and Streaming Support",
+        "line": 122
       },
       {
         "level": 2,
-        "text": "Handling Memory Efficiently During Conversion",
-        "line": 160
+        "text": "Performance Optimization for Large GeoJSON Files",
+        "line": 125
       },
       {
         "level": 2,
-        "text": "Ensuring Thread Safety for Concurrent Conversions",
-        "line": 175
-      },
-      {
-        "level": 2,
-        "text": "Deploying Conversion in Web Applications",
-        "line": 191
+        "text": "Best Practices and Code Samples",
+        "line": 139
       },
       {
         "level": 2,
         "text": "Conclusion",
-        "line": 195
+        "line": 146
       },
       {
         "level": 2,
         "text": "FAQs",
-        "line": 199
+        "line": 149
       },
       {
         "level": 2,
         "text": "Read More",
-        "line": 213
+        "line": 162
       }
     ],
     "paragraphs": [
-      "Converting plain [TXT](https://docs.fileformat.com/word-processing/txt/) documents into visual [JPG](https://docs.fileformat.com/image/jpg/) images is a frequent requirement when generating previews, thumbnails, or printable graphics from textual data. The [Aspose.Drawing for Java](https://products.aspose.com/drawing/java/) SDK provides a robust set of drawing APIs that make high‑quality TXT to JPG conversion straightforward in Java applications. In this guide you will learn a step‑by‑step process, see a complete working example, and discover performance‑tuning techniques to integrate conversion logic into desktop, server, or microservice projects.",
-      "1. **Load the TXT Content**: Read the source TXT file into a `String` or `InputStream`. This prepares the raw text for rendering.",
-      "2. **Create a DrawingDocument**: Instantiate a `DrawingDocument` and add a blank page where the text will be drawn.",
-      "3. **Render Text onto the Page**: Use `TextFragment` (or a similar class) to place the loaded text on the page. Adjust font, size, and alignment as needed.",
-      "4. **Configure Rendering Options**: Set the desired DPI and [JPEG](https://docs.fileformat.com/image/jpeg/) quality to achieve high‑quality output.",
-      "5. **Save as JPG**: Export the rendered page to a JPG file using the configured options. This completes the TXT to JPG conversion in Java.",
-      "These steps illustrate the **TXT to JPG conversion in Java** using Aspose.Drawing and demonstrate how to control quality and performance.",
-      "The following example puts all the steps together into a single, ready‑to‑run program.",
+      "Converting [GEOJSON](https://docs.fileformat.com/gis/geojson/) files to TopoJSON is a common need for GIS developers who want smaller, topology‑aware datasets for web maps. [Aspose.GIS for .NET](https://products.aspose.com/gis/net/) is a powerful SDK that simplifies this conversion in C# applications. In this guide you will learn how to set up the environment, run an async streaming conversion, optimize performance for large files, and follow best‑practice recommendations, all backed by a complete code sample.",
+      "For detailed class information see the [API reference](https://reference.aspose.com/gis/net/).",
       "<!--[COMPLETE_CODE_SNIPPET_START]-->",
       "<!--[COMPLETE_CODE_SNIPPET_END]-->",
-      "> **Note:** This code example demonstrates the core functionality. Before using it in your project, make sure to update the file paths (`sample.txt`, `output.jpg`) to match your actual locations, verify that all required dependencies are properly installed, and test thoroughly in your development environment. If you encounter any issues, please refer to the [Aspose.Drawing Documentation](https://docs.aspose.com/drawing/java/) or reach out to the [Aspose.Drawing Support Forum](https://forum.aspose.com/c/drawing/) for assistance.",
-      "Add the Aspose.Drawing Maven repository and dependency to your `pom.xml`:",
-      "<!--[CODE_SNIPPET_START]-->",
-      "<!--[CODE_SNIPPET_END]-->",
-      "Download the latest JAR from the [Aspose.Drawing Download](https://releases.aspose.com/drawing/java/) page if you prefer a manual setup. After adding the library, obtain a temporary license from the [Temporary License Page](https://purchase.aspose.com/temporary-license/) and set it in your code:",
-      "Aspose.Drawing provides a vector‑based drawing engine that can render text, shapes, and images onto a canvas. For TXT to JPG conversion, the library lets you treat each line of text as a drawable element, giving you full control over fonts, colors, and layout before rasterizing to a bitmap. This approach ensures that the resulting JPG retains crisp edges and accurate typography, even at high resolutions.",
-      "- **High‑Resolution Rendering** - Set DPI up to 600 + for print‑ready output.  \n- **Fine‑Grained Text Control** - Font, size, color, and alignment can be specified per fragment.  \n- **Multiple Output Formats** - Besides JPG, you can export to [PNG](https://docs.fileformat.com/image/png/), [BMP](https://docs.fileformat.com/image/bmp/), or [TIFF](https://docs.fileformat.com/image/tiff/) with a single API call.  \n- **Thread‑Safe Document Model** - Each `DrawingDocument` instance is independent, allowing concurrent conversions without shared state.",
-      "To maximize throughput, reuse objects where possible and avoid unnecessary memory allocations. For large TXT files, process the content in chunks and render each chunk on a separate page before merging. Adjust the `ImageSaveOptions` to balance quality and speed lower DPI reduces processing time, while higher DPI improves visual fidelity.",
-      "When converting very large text files, stream the input instead of loading the entire file into memory:",
-      "Use `MemoryStream` objects for intermediate bitmap storage and dispose of them promptly to free native resources. The Aspose.Drawing API also offers a `dispose()` method on `DrawingDocument` to release unmanaged memory.",
-      "Create a separate `DrawingDocument` per thread and avoid sharing static configuration objects. Example using Java's `ExecutorService`:",
-      "Because each conversion works with its own document instance, there is no contention, and the SDK's internal caches are thread‑local.",
-      "When exposing the conversion as a REST endpoint, stream the uploaded TXT file directly to the conversion routine and return the JPG as a streamed response. Set appropriate HTTP headers (`Content-Type: image/jpeg`) and use asynchronous processing to keep the server responsive. Remember to validate input size and enforce security checks to prevent malicious payloads.",
-      "The [Aspose.Drawing for Java](https://products.aspose.com/drawing/java/) SDK makes high‑quality TXT to JPG conversion in Java both simple and performant. By following the step‑by‑step guide, you can integrate reliable conversion logic into desktop tools, backend services, or microservice architectures. For production deployments, choose a suitable license from the [Aspose.Drawing Pricing](https://purchase.aspose.com/pricing/drawing/family/) page and activate a temporary license during development via the [Temporary License Page](https://purchase.aspose.com/temporary-license/). With the provided code and optimization tips, you're ready to deliver fast, memory‑efficient, and thread‑safe image generation for any Java‑based solution.",
-      "- **How do I implement TXT to JPG conversion in Java?**  \n  Use Aspose.Drawing to load the text, draw it onto a `DrawingDocument`, configure high‑resolution JPEG options, and save the result. The complete code example above demonstrates the entire workflow.",
-      "- **Can I control the JPEG quality and resolution?**  \n  Yes. Set the `resolution` (DPI) and `jpegQuality` properties on `ImageSaveOptions` to balance file size and visual fidelity.",
-      "- **Is the conversion thread‑safe for multiple simultaneous requests?**  \n  Absolutely. Create a separate `DrawingDocument` for each thread and avoid sharing mutable objects. The SDK's design ensures safe concurrent execution.",
-      "- **Where can I find more examples and API details?**  \n  The official [Aspose.Drawing Documentation](https://docs.aspose.com/drawing/java/) and the [API Reference](https://reference.aspose.com/drawing/java/) contain extensive samples and property descriptions."
+      "> **Note:** This code example demonstrates the core functionality. Before using it in your project, make sure to update the file paths (`sample.geojson`, `sample.topojson`) to match your actual locations, verify that all required dependencies are installed, and test thoroughly in your development environment. If you encounter any issues, please refer to the [official documentation](https://docs.aspose.com/gis/net/) or reach out to the [support team](https://forum.aspose.com/c/gis/14) for assistance.",
+      "3. Alternatively, use the NuGet UI to search for **Aspose.GIS** and install it.  \n4. After installation, add `using Aspose.Gis;` to your C# files.  \n5. For a quick start, download the sample data from the [download page](https://releases.aspose.com/gis/net/).",
+      "| File Size | Approx. Conversion Time (seconds) | Memory Usage (MB) |\n|-----------|-----------------------------------|-------------------|\n| 5 MB      | 0.8                               | 45                |\n| 50 MB     | 5.2                               | 210               |\n| 200 MB    | 21.5                              | 780               |",
+      "*Tips*:  \n- Increase `Precision` only as needed - lower precision speeds up processing.  \n- Use the async streaming API to keep memory footprint low.  \n- Run the conversion on a background thread or a dedicated worker service.",
+      "**Does Aspose.GIS support batch conversion of multiple GEOJSON files?**  \nYes. By looping over a collection of file paths and reusing a single `TopoJsonExportOptions` instance, you can convert many files efficiently. The async streaming API ensures low memory consumption even for large batches.",
+      "**Can I convert GEOJSON to TopoJSON without writing to disk?**  \nAbsolutely. Use a `MemoryStream` or any other `Stream` implementation with `ExportToTopoJsonAsync`. This is useful for web APIs that need to return the TopoJSON directly to the client.",
+      "**Is there a way to customize the topology precision?**  \nThe `TopoJsonExportOptions.Precision` property lets you define the decimal precision of coordinates. Lower values produce smaller files but may lose detail; adjust based on your application's accuracy requirements."
     ],
     "images": [
       {
-        "alt": "TXT to JPG Conversion in Java: High Quality STEP by STEP",
-        "target": "images/txt-to-jpg-conversion-in-java-high-quality-step-by-step.jpg",
+        "alt": "GEOJSON to Topojson Conversion in .NET: Sample Guide",
+        "target": "images/geojson-to-topojson-conversion-in-dotnet-sample-guide.jpg",
         "line": 0,
         "exists": true
       }
     ],
     "links": [
       {
-        "text": "TXT",
-        "target": "https://docs.fileformat.com/word-processing/txt/",
+        "text": "GEOJSON",
+        "target": "https://docs.fileformat.com/gis/geojson/",
         "is_internal": false,
         "line": 36,
         "exists": null
       },
       {
-        "text": "JPG",
-        "target": "https://docs.fileformat.com/image/jpg/",
+        "text": "Aspose.GIS for .NET",
+        "target": "https://products.aspose.com/gis/net/",
         "is_internal": false,
         "line": 36,
         "exists": null
       },
       {
-        "text": "Aspose.Drawing for Java",
-        "target": "https://products.aspose.com/drawing/java/",
+        "text": "API reference",
+        "target": "https://reference.aspose.com/gis/net/",
         "is_internal": false,
-        "line": 36,
+        "line": 45,
         "exists": null
       },
       {
-        "text": "JPEG",
-        "target": "https://docs.fileformat.com/image/jpeg/",
+        "text": "official documentation",
+        "target": "https://docs.aspose.com/gis/net/",
         "is_internal": false,
-        "line": 55,
+        "line": 98,
         "exists": null
       },
       {
-        "text": "Aspose.Drawing Documentation",
-        "target": "https://docs.aspose.com/drawing/java/",
+        "text": "support team",
+        "target": "https://forum.aspose.com/c/gis/14",
         "is_internal": false,
-        "line": 112,
+        "line": 98,
         "exists": null
       },
       {
-        "text": "Aspose.Drawing Support Forum",
-        "target": "https://forum.aspose.com/c/drawing/",
+        "text": "download page",
+        "target": "https://releases.aspose.com/gis/net/",
         "is_internal": false,
-        "line": 112,
+        "line": 110,
         "exists": null
       },
       {
-        "text": "Aspose.Drawing Download",
-        "target": "https://releases.aspose.com/drawing/java/",
+        "text": "JSON",
+        "target": "https://docs.fileformat.com/web/json/",
         "is_internal": false,
-        "line": 138,
+        "line": 113,
         "exists": null
       },
       {
-        "text": "Temporary License Page",
+        "text": "Aspose.GIS for .NET",
+        "target": "https://products.aspose.com/gis/net/",
+        "is_internal": false,
+        "line": 147,
+        "exists": null
+      },
+      {
+        "text": "temporary license",
         "target": "https://purchase.aspose.com/temporary-license/",
         "is_internal": false,
-        "line": 138,
+        "line": 147,
         "exists": null
       },
       {
-        "text": "PNG",
-        "target": "https://docs.fileformat.com/image/png/",
+        "text": "pricing page",
+        "target": "https://purchase.aspose.com/pricing/gis/family/",
         "is_internal": false,
-        "line": 153,
+        "line": 147,
         "exists": null
       },
       {
-        "text": "BMP",
-        "target": "https://docs.fileformat.com/image/bmp/",
+        "text": "Convert Shapefile to JSON in C# using C# Geospatial Library",
+        "target": "https://blog.aspose.com/gis/convert-shapefile-to-json-in-csharp-using-csharp-geospatial-library/",
         "is_internal": false,
-        "line": 153,
+        "line": 163,
         "exists": null
       },
       {
-        "text": "TIFF",
-        "target": "https://docs.fileformat.com/image/tiff/",
+        "text": "Convert GPX to JSON in C# - GPX File Converter",
+        "target": "https://blog.aspose.com/gis/convert-gpx-to-json-in-csharp-gpx-file-converter/",
         "is_internal": false,
-        "line": 153,
+        "line": 164,
         "exists": null
       },
       {
-        "text": "Aspose.Drawing for Java",
-        "target": "https://products.aspose.com/drawing/java/",
+        "text": "Convert Shapefile to JSON in Python",
+        "target": "https://blog.aspose.com/gis/convert-shapefile-to-json-in-python/",
         "is_internal": false,
-        "line": 197,
-        "exists": null
-      },
-      {
-        "text": "Aspose.Drawing Pricing",
-        "target": "https://purchase.aspose.com/pricing/drawing/family/",
-        "is_internal": false,
-        "line": 197,
-        "exists": null
-      },
-      {
-        "text": "Temporary License Page",
-        "target": "https://purchase.aspose.com/temporary-license/",
-        "is_internal": false,
-        "line": 197,
-        "exists": null
-      },
-      {
-        "text": "Aspose.Drawing Documentation",
-        "target": "https://docs.aspose.com/drawing/java/",
-        "is_internal": false,
-        "line": 211,
-        "exists": null
-      },
-      {
-        "text": "API Reference",
-        "target": "https://reference.aspose.com/drawing/java/",
-        "is_internal": false,
-        "line": 211,
-        "exists": null
-      },
-      {
-        "text": "Write Text on JPG Images in Java",
-        "target": "https://blog.aspose.com/drawing/write-text-on-jpg-in-java/",
-        "is_internal": false,
-        "line": 214,
-        "exists": null
-      },
-      {
-        "text": "Alpha Blending in Java",
-        "target": "https://blog.aspose.com/drawing/alpha-blending-in-java/",
-        "is_internal": false,
-        "line": 215,
-        "exists": null
-      },
-      {
-        "text": "Image Clipping in Java",
-        "target": "https://blog.aspose.com/drawing/image-clipping-in-java/",
-        "is_internal": false,
-        "line": 216,
+        "line": 165,
         "exists": null
       }
     ],
     "code_samples": [
       {
-        "language": "java",
-        "code": "import com.aspose.drawing.*;\nimport com.aspose.drawing.image.*;\nimport com.aspose.drawing.text.*;\n\nimport java.nio.file.*;\nimport java.nio.charset.StandardCharsets;\n\npublic class TxtToJpgConverter {\n    public static void main(String[] args) throws Exception {\n        // 1. Load TXT file\n        String txtPath = \"sample.txt\";\n        String text = new String(Files.readAllBytes(Paths.get(txtPath)), StandardCharsets.UTF_8);\n\n        // 2. Create document and add a page\n        DrawingDocument doc = new DrawingDocument();\n        doc.addPage();\n\n        // 3. Add text to the page\n        TextFragment fragment = new TextFragment(text);\n        fragment.getTextState().setFontSize(12);\n        fragment.getTextState().setFontName(\"Arial\");\n        doc.getPages().get(0).addTextFragment(fragment);\n\n        // 4. Set rendering options for high quality JPG\n        ImageSaveOptions saveOptions = new ImageSaveOptions(SaveFormat.JPEG);\n        saveOptions.setResolution(300);      // 300 DPI\n        saveOptions.setJpegQuality(95);      // High quality\n\n        // 5. Save the result\n        String outputPath = \"output.jpg\";\n        doc.save(outputPath, saveOptions);\n\n        System.out.println(\"Conversion completed: \" + outputPath);\n    }\n}",
-        "line": 73
-      },
-      {
-        "language": "xml",
-        "code": "<repositories>\n    <repository>\n        <id>AsposeJavaAPI</id>\n        <name>Aspose Java API</name>\n        <url>https://repository.aspose.com/repo/</url>\n    </repository>\n</repositories>\n\n<dependencies>\n    <dependency>\n        <groupId>com.aspose</groupId>\n        <artifactId>aspose-drawing</artifactId>\n        <version>25.1</version>\n    </dependency>\n</dependencies>",
-        "line": 119
-      },
-      {
-        "language": "java",
-        "code": "License license = new License();\nlicense.setLicense(\"Aspose.Total.Java.lic\");",
-        "line": 140
-      },
-      {
-        "language": "java",
-        "code": "try (BufferedReader reader = Files.newBufferedReader(Paths.get(\"large.txt\"))) {\n    String line;\n    while ((line = reader.readLine()) != null) {\n        // Append line to a TextFragmentBuilder or similar construct\n    }\n}",
-        "line": 164
-      },
-      {
-        "language": "java",
-        "code": "ExecutorService executor = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());\nfor (Path txtFile : txtFiles) {\n    executor.submit(() -> {\n        new TxtToJpgConverter().convert(txtFile.toString(), txtFile.getFileName() + \".jpg\");\n    });\n}\nexecutor.shutdown();",
-        "line": 179
+        "language": "csharp",
+        "code": "using System;\nusing System.IO;\nusing System.Threading.Tasks;\nusing Aspose.Gis;\nusing Aspose.Gis.Export;\nusing Aspose.Gis.Geometries;\n\nnamespace GeoJsonToTopoJsonDemo\n{\n    class Program\n    {\n        static async Task Main(string[] args)\n        {\n            // Path to the source GEOJSON file\n            string geoJsonPath = @\"C:\\Data\\sample.geojson\";\n\n            // Output TopoJSON file path\n            string topoJsonPath = @\"C:\\Data\\sample.topojson\";\n\n            // Load GEOJSON into a VectorLayer\n            using (VectorLayer geoLayer = VectorLayer.FromFile(geoJsonPath))\n            {\n                // Prepare export options\n                var options = new TopoJsonExportOptions\n                {\n                    // Set topology precision (higher = more accurate, larger file)\n                    Precision = 0.00001,\n                    // Optional: reproject to WGS84 if needed\n                    TargetCoordinateSystem = SpatialReferenceSystem.Wgs84\n                };\n\n                // Open a file stream for async writing\n                using (FileStream outputStream = new FileStream(topoJsonPath, FileMode.Create, FileAccess.Write, FileShare.None, 8192, useAsync: true))\n                {\n                    // Perform async conversion\n                    await geoLayer.ExportToTopoJsonAsync(outputStream, options);\n                }\n            }\n\n            Console.WriteLine(\"Conversion completed successfully.\");\n        }\n    }\n}",
+        "line": 51
       }
     ],
-    "code_blocks": 10,
-    "tables": 0,
+    "code_blocks": 2,
+    "tables": 5,
     "shortcodes": [],
     "faq_like_sections": 5,
     "schema_like_blocks": 0,
     "issues": [
       {
-        "file_path": "content/Aspose.Blog/drawing/2026-06-29-txt-to-jpg-conversion-in-java-high-quality-step-by-step/index.md",
+        "file_path": "content/Aspose.Blog/gis/2026-07-01-geojson-to-topojson-conversion-in-net-sample-guide/index.md",
         "issue_type": "suggest_body_output_image",
         "severity": "Opportunity",
         "explanation": "Post has a cover/front matter image but no inline body image, and the content appears to describe a visual or generated output. Policy: content-quality; rule: CQ-006.",
@@ -364,7 +280,7 @@
         ]
       },
       {
-        "file_path": "content/Aspose.Blog/drawing/2026-06-29-txt-to-jpg-conversion-in-java-high-quality-step-by-step/index.md",
+        "file_path": "content/Aspose.Blog/gis/2026-07-01-geojson-to-topojson-conversion-in-net-sample-guide/index.md",
         "issue_type": "weak_internal_links",
         "severity": "Medium",
         "explanation": "Post has fewer than two internal links. Policy: internal-linking; rule: IL-001.",
@@ -382,7 +298,7 @@
         ]
       },
       {
-        "file_path": "content/Aspose.Blog/drawing/2026-06-29-txt-to-jpg-conversion-in-java-high-quality-step-by-step/index.md",
+        "file_path": "content/Aspose.Blog/gis/2026-07-01-geojson-to-topojson-conversion-in-net-sample-guide/index.md",
         "issue_type": "too_few_outgoing_internal_links",
         "severity": "Medium",
         "explanation": "Post has fewer than two outgoing internal links. Policy: internal-linking; rule: IL-005.",
@@ -407,9 +323,9 @@
       "technical_seo": 85,
       "internal_linking": 86,
       "translation_seo": 100,
-      "organic_growth_opportunity": 47,
+      "organic_growth_opportunity": 48,
       "priority": 23
     },
-    "translation_group": "content/Aspose.Blog/drawing/2026-06-29-txt-to-jpg-conversion-in-java-high-quality-step-by-step/index.md"
+    "translation_group": "content/Aspose.Blog/gis/2026-07-01-geojson-to-topojson-conversion-in-net-sample-guide/index.md"
   }
 ]

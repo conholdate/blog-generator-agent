@@ -1,10 +1,10 @@
 # Content Improvement Plan
 
-## TXT to JPG Conversion in Java: High Quality STEP by STEP
-- File: `content/Aspose.Blog/drawing/2026-06-29-txt-to-jpg-conversion-in-java-high-quality-step-by-step/index.md`
+## GEOJSON to Topojson Conversion in .NET: Sample Guide
+- File: `content/Aspose.Blog/gis/2026-07-01-geojson-to-topojson-conversion-in-net-sample-guide/index.md`
 - Priority score: 23
-- Recommended title rewrite: TXT to JPG Conversion in Java: High Quality STEP by STEP
-- Recommended meta description rewrite: Learn txt to jpg conversion in java: high quality step by step with clear steps, examples, and practical guidance for developers.
+- Recommended title rewrite: GEOJSON to Topojson Conversion in .NET: Sample Guide
+- Recommended meta description rewrite: Learn geojson to topojson conversion in .net: sample guide with clear steps, examples, and practical guidance for developers.
 - Heading improvements: Add descriptive H2 sections for prerequisites, steps, troubleshooting, FAQs, and conclusion where missing.
 - FAQ ideas: What is the easiest way? What formats are supported? How do I troubleshoot common errors?
 - Schema opportunities: FAQPage and HowTo where content supports it.

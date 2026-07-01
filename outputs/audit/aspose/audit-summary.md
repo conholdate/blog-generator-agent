@@ -16,7 +16,7 @@ Scanned 1 Markdown files across 1 detected languages. The strongest opportunitie
 | Complete SEO | All audit areas | 1 posts, 6 total issues | 6 | Needs cleanup | complete-seo-audit.md |
 | Content Quality | Markdown body and structure | 0 posts under 800 words | 1 | Monitor | content-improvement-plan.md |
 | Developer Audience Fit | API/developer usefulness | 0 missing code examples | 0 | Clear | complete-seo-audit.md |
-| Code/API Audit | Code blocks and SDK/API symbols | 5 code blocks | 0 | Clear | code-audit.md |
+| Code/API Audit | Code blocks and SDK/API symbols | 1 code blocks | 0 | Clear | code-audit.md |
 | On-Page SEO | Titles, descriptions, headings, links, images | 0 description length issues | 0 | Clear | post-audit.csv |
 | Technical Hugo SEO | Config, templates, robots, canonical, hreflang, schema | 1 technical findings | 1 | Monitor | technical-seo-audit.md |
 | Internal Linking | Outgoing links, incoming links, broken local links, anchors | 2 linking findings | 2 | Monitor | internal-linking-audit.md |
@@ -70,12 +70,12 @@ Scanned 1 Markdown files across 1 detected languages. The strongest opportunitie
 ### Product-Family Distribution
 | Product | Posts |
 | --- | --- |
-| drawing | 1 |
+| gis | 1 |
 
 ## Highest-Priority Posts
 | File | Priority | Issues | Top Issue | Recommended Action |
 | --- | --- | --- | --- | --- |
-| `content/Aspose.Blog/drawing/2026-06-29-txt-to-jpg-conversion-in-java-high-quality-step-by-step/index.md` | 23 | 3 | suggest_body_output_image | Consider adding an output screenshot or result image inside the post body if it helps readers validate the tutorial result. |
+| `content/Aspose.Blog/gis/2026-07-01-geojson-to-topojson-conversion-in-net-sample-guide/index.md` | 23 | 3 | suggest_body_output_image | Consider adding an output screenshot or result image inside the post body if it helps readers validate the tutorial result. |
 
 ## Severity Summary
 | Severity | Issue Count |

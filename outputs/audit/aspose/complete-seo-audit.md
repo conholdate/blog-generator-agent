@@ -45,14 +45,14 @@ The estimated overall SEO health score is 89/100. The highest-leverage work is t
 ### Top Priority Posts
 | File | Language | Priority | Issues | Top Issue | Recommended Action |
 | --- | --- | --- | --- | --- | --- |
-| `content/Aspose.Blog/drawing/2026-06-29-txt-to-jpg-conversion-in-java-high-quality-step-by-step/index.md` | en | 23 | 3 | suggest_body_output_image | Consider adding an output screenshot or result image inside the post body if it helps readers validate the tutorial result. |
+| `content/Aspose.Blog/gis/2026-07-01-geojson-to-topojson-conversion-in-net-sample-guide/index.md` | en | 23 | 3 | suggest_body_output_image | Consider adding an output screenshot or result image inside the post body if it helps readers validate the tutorial result. |
 
 ## Per-Post SEO Segment Score Table
 All scanned posts are listed below, sorted by priority score. Each SEO audit segment is shown as a column for direct post-by-post comparison.
 
 | Blog Post | Title | Language | Content Quality | On-Page SEO | Technical SEO | Internal Linking | Translation SEO | Developer Audience Fit | Growth Opportunity | Priority | Issues | Top Issues |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| `content/Aspose.Blog/drawing/2026-06-29-txt-to-jpg-conversion-in-java-high-quality-step-by-step/index.md` | TXT to JPG Conversion in Java: High Quality STEP by STEP | en | 100 | 100 | 85 | 86 | 100 | 100 | 47 | 23 | 3 | suggest_body_output_image; weak_internal_links; too_few_outgoing_internal_links |
+| `content/Aspose.Blog/gis/2026-07-01-geojson-to-topojson-conversion-in-net-sample-guide/index.md` | GEOJSON to Topojson Conversion in .NET: Sample Guide | en | 100 | 100 | 85 | 86 | 100 | 100 | 48 | 23 | 3 | suggest_body_output_image; weak_internal_links; too_few_outgoing_internal_links |
 
 ## Content Quality Audit
 Developer and file-format processing content should satisfy a concrete task, show working code, explain setup, clarify input/output formats, and provide troubleshooting or limitations.
@@ -158,7 +158,7 @@ The target reader is a developer or technical evaluator using Aspose APIs for do
 ### Product-Family Distribution
 | Product | Posts |
 | --- | --- |
-| drawing | 1 |
+| gis | 1 |
 
 ## Priority Roadmap
 | Priority | Action | Reason |

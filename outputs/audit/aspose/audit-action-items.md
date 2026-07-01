@@ -6,13 +6,13 @@ Consolidated actionable backlog for Aspose. This combines post-level, technical 
 | Field | Value |
 | --- | --- |
 | Blog | Aspose |
-| Product | Aspose.Drawing |
-| Audit date | 2026-07-01 04:24:53 UTC |
+| Product | Aspose.GIS |
+| Audit date | 2026-07-01 05:38:21 UTC |
 | Repository | /home/runner/work/blog-generator-agent/blog-generator-agent/outputs/_repos/aspose-blog |
 | Blog config | outputs/workflow-blog-config.yaml |
 | Mode | report-with-fix-suggestions |
-| Product filter | Aspose.blog/drawing |
-| Post date filter | 2026-06-29 |
+| Product filter | Aspose.blog/gis |
+| Post date filter | 2026-07-01 |
 | Language filter | All |
 | Include translations | false |
 | Detailed outputs | true |
@@ -50,8 +50,8 @@ Consolidated actionable backlog for Aspose. This combines post-level, technical 
 ## All Action Items
 Action items are grouped by affected post. The post heading carries the file path, so the tables omit the repeated file column.
 
-### TXT to JPG Conversion in Java: High Quality STEP by STEP
-File: `content/Aspose.Blog/drawing/2026-06-29-txt-to-jpg-conversion-in-java-high-quality-step-by-step/index.md`
+### GEOJSON to Topojson Conversion in .NET: Sample Guide
+File: `content/Aspose.Blog/gis/2026-07-01-geojson-to-topojson-conversion-in-net-sample-guide/index.md`
 
 | ID | Priority | Severity | Area | Issue | Line / Scope | Post Priority | Recommended Action | Effort | Impact | Source |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
