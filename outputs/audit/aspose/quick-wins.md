@@ -1,7 +1,3 @@
 # Quick Wins
 
-| Severity | Issue | Policy | Rule | Evidence | Audience | File | Explanation | Recommended Fix | Effort | Impact |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| Opportunity | suggest_body_output_image | content-quality | CQ-006 | body_images=0; front_matter_images=1 | Developers evaluating file-format SDKs, Technical content editors | `content/Aspose.Blog/barcode/2026-06-22-read-qr-from-image-in-java-a-complete-developer-guide/index.md` | Post has a cover/front matter image but no inline body image, and the content appears to describe a visual or generated output. Policy: content-quality; rule: CQ-006. | Consider adding an output screenshot or result image inside the post body if it helps readers validate the tutorial result. | Low | Medium |
-| Medium | weak_internal_links | internal-linking | IL-001 | internal_links=0 | Developers exploring related API workflows, Search crawlers discovering topic clusters | `content/Aspose.Blog/barcode/2026-06-22-read-qr-from-image-in-java-a-complete-developer-guide/index.md` | Post has fewer than two internal links. Policy: internal-linking; rule: IL-001. | Add links to related tutorials, docs, and product pages. | Low | Medium |
-| Medium | too_few_outgoing_internal_links | internal-linking | IL-005 | internal_links=0 | Developers exploring related API workflows, Search crawlers discovering topic clusters | `content/Aspose.Blog/barcode/2026-06-22-read-qr-from-image-in-java-a-complete-developer-guide/index.md` | Post has fewer than two outgoing internal links. Policy: internal-linking; rule: IL-005. | Add contextual links to related posts, docs, and product pages. | Low | Medium |
+No issues detected.
