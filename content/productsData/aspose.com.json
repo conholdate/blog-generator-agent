@@ -419,7 +419,7 @@
   "APIReferenceURL" : "https://reference.aspose.com/gis/python-net/",
   "FreeAppsURL" : "https://products.aspose.app/gis",
   "ForumsURL" : "https://forum.aspose.com/c/gis/14",
-  "InstallCommand" : "Install-Package Aspose.GIS ",
+  "InstallCommand" : "pip install aspose-gis-net",
   "urlPrefix" : "gis",
   "license":"https://purchase.aspose.com/temporary-license/",
   "pricing": "https://purchase.aspose.com/pricing/gis/family/"
