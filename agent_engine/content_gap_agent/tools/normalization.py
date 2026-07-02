@@ -530,6 +530,12 @@ _TRAILING_PREPOSITION_RE = re.compile(r"\b(in|with|using|for)\b\s*$", re.IGNOREC
 _C_NET_NOISE_RE = re.compile(r"\bc\s+net\b", re.IGNORECASE)
 _FROM_TO_NOISE_RE = re.compile(r"\bfrom\s+to\b", re.IGNORECASE)
 _CONVERSION_PAIR_RE = re.compile(r"\b([a-z0-9]{1,12})\s*(?:to|into|in2|->|→)\s*([a-z0-9]{1,12})\b", re.IGNORECASE)
+_MERGE_PDF_TOPIC_RE = re.compile(
+    r"\b(?:merge|merging|combine|combining|concatenate|concatenating|join|joining)\b"
+    r"(?:\s+(?:all|multiple|several|two|2|pdf|pdfs?|documents?|docs?))*"
+    r"\s+pdfs?\b",
+    re.IGNORECASE,
+)
 
 
 # =============================================================================
@@ -887,6 +893,9 @@ def canonical_topic_key(text: str) -> str:
 
     if _GENERIC_BARCODE_GENERATION_RE.match(t):
         return "generate barcodes"
+
+    if _MERGE_PDF_TOPIC_RE.search(t):
+        return "merge pdf"
 
     alt_match = re.search(
         r"\b([a-z0-9]{1,12})\s*(?:to|into|in2|->|â†’)\s*([a-z0-9]{1,12})\s+or\s+([a-z0-9]{1,12})\b",

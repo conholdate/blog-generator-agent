@@ -207,6 +207,52 @@ def test_generic_generate_barcode_topics_collapse_without_losing_specific_topics
     assert canonical_topic_key("Generate barcodes with UTF 8 encoding") == "generate barcodes with utf 8 encoding"
 
 
+def test_pdf_merge_topic_keys_collapse_action_variants() -> None:
+    variants = [
+        "Merging PDF files programmatically",
+        "Merging Multiple PDF Files with Python",
+        "Merge Multiple PDF Files in Python",
+        "Merge Multiple PDF in Python",
+        "How to Merge Multiple PDF Files in C#",
+        "Merge Multiple PDF Files into a Single PDF using Java",
+        "Merge Two PDF Files in JavaScript",
+    ]
+
+    for topic in variants:
+        assert canonical_topic_key(topic) == "merge pdf"
+        assert indexer_canonical_topic_key(topic) == "merge pdf"
+
+    assert canonical_topic_key("Merge JPG Images to PDF in C#") != "merge pdf"
+    assert indexer_canonical_topic_key("Merge JPG Images to PDF in C#") != "merge pdf"
+
+
+def test_pdf_merge_blog_records_match_across_topic_wording() -> None:
+    net_record = IndexRecord(
+        id="blog::pdf/merge-multiple-pdf-files-in-csharp-net/index.md",
+        repo_key="blog",
+        repo_type="blog",
+        platform="net",
+        title="How to Merge Multiple PDF Files in C#",
+        topic="Merging PDF files programmatically",
+        category="",
+        sub_category="",
+    )
+    python_record = IndexRecord(
+        id="blog::pdf/merge-pdf-files-in-python/index.md",
+        repo_key="blog",
+        repo_type="blog",
+        platform="python",
+        title="Merge Multiple PDF Files in Python",
+        topic="Merging Multiple PDF Files with Python",
+        category="",
+        sub_category="",
+    )
+
+    assert record_gap_key(net_record) == "merge-pdf"
+    assert record_gap_key(python_record) == "merge-pdf"
+    assert "merge-pdf" in record_gap_keys(python_record)
+
+
 def test_text_qr_records_match_create_text_qr_key() -> None:
     record = IndexRecord(
         id="blog::barcode/text-to-qr-code-generator-in-csharp/index.md",
