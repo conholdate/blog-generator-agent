@@ -25,6 +25,7 @@ logger = get_logger("cg-cover.agent")
 GENERAL_PLATFORM_KEY = "general"
 MIN_BLOG_DATE = date(2020, 1, 1)
 _BLOG_DATE_RE = re.compile(r"^(?P<year>\d{4})-(?P<month>\d{2})-(?P<day>\d{2})$")
+_BLOG_DATE_IN_PATH_RE = re.compile(r"(?<!\d)(?P<year>\d{4})-(?P<month>\d{2})-(?P<day>\d{2})(?!\d)")
 
 # -----------------------------
 # KEY-BASED GROUPING + MATCHING
@@ -124,18 +125,27 @@ def _normalize_platform_key(s: Optional[str]) -> str:
 
 
 def _record_blog_date(record: IndexRecord) -> Optional[date]:
-    raw = str(getattr(record, "published_date", "") or "").strip()
-    match = _BLOG_DATE_RE.match(raw)
-    if not match:
-        return None
-    try:
-        return date(
-            int(match.group("year")),
-            int(match.group("month")),
-            int(match.group("day")),
-        )
-    except ValueError:
-        return None
+    candidates = [
+        str(getattr(record, "published_date", "") or "").strip(),
+        str(getattr(record, "source_path", "") or "").strip(),
+        str(getattr(record, "id", "") or "").strip(),
+        str(getattr(record, "url", "") or "").strip(),
+    ]
+    for raw in candidates:
+        if not raw:
+            continue
+        match = _BLOG_DATE_RE.match(raw) or _BLOG_DATE_IN_PATH_RE.search(raw)
+        if not match:
+            continue
+        try:
+            return date(
+                int(match.group("year")),
+                int(match.group("month")),
+                int(match.group("day")),
+            )
+        except ValueError:
+            continue
+    return None
 
 
 def _is_recent_blog_record(record: IndexRecord) -> bool:

@@ -5,7 +5,11 @@ from agent_engine.content_gap_agent.tools.normalization import (
     normalize_sentence_text,
 )
 from agent_engine.content_indexer_agent.tools.normalization import canonical_topic_key as indexer_canonical_topic_key
-from agent_engine.content_gap_agent.tools.coverage.blogs_to_blogs import record_gap_key, record_gap_keys
+from agent_engine.content_gap_agent.tools.coverage.blogs_to_blogs import (
+    compute_blogs_to_blogs,
+    record_gap_key,
+    record_gap_keys,
+)
 from agent_engine.content_gap_agent.tools.io import IndexRecord
 from agent_engine.content_gap_agent.tools.sheets_export import build_payload
 from agent_engine.content_indexer_agent.tools.key_maker import build_content_topic
@@ -251,6 +255,49 @@ def test_pdf_merge_blog_records_match_across_topic_wording() -> None:
     assert record_gap_key(net_record) == "merge-pdf"
     assert record_gap_key(python_record) == "merge-pdf"
     assert "merge-pdf" in record_gap_keys(python_record)
+
+
+def test_blogs_to_blogs_infers_dates_from_blog_slug_for_matching(tmp_path) -> None:
+    index_path = tmp_path / "indexes" / "blog" / "all.jsonl"
+    index_path.parent.mkdir(parents=True)
+    records = [
+        {
+            "id": "blog::pdf/2020-01-16-merge-multiple-pdf-files-in-csharp-net/index.md",
+            "repo_key": "blog",
+            "repo_type": "blog",
+            "platform": "net",
+            "title": "How to Merge Multiple PDF Files in C#",
+            "topic": "Merging PDF files programmatically",
+            "category": "Document Processing",
+            "sub_category": "Pdf Merge",
+            "source_path": "pdf/2020-01-16-merge-multiple-pdf-files-in-csharp-net/index.md",
+            "url": "https://blog.aspose.com/pdf/merge-multiple-pdf-files-in-csharp-net/",
+        },
+        {
+            "id": "blog::pdf/2023-05-04-merge-pdf-files-in-python/index.md",
+            "repo_key": "blog",
+            "repo_type": "blog",
+            "platform": "python",
+            "title": "Merge Multiple PDF Files in Python",
+            "topic": "Merging Multiple PDF Files with Python",
+            "category": "File Processing",
+            "sub_category": "PDF Merging",
+            "source_path": "pdf/2023-05-04-merge-pdf-files-in-python/index.md",
+            "url": "https://blog.aspose.com/pdf/merge-pdf-files-in-python/",
+        },
+    ]
+    index_path.write_text("\n".join(json.dumps(record) for record in records), encoding="utf-8")
+
+    result = compute_blogs_to_blogs(
+        brand_key="aspose",
+        product_key="pdf",
+        outputs_product_root=tmp_path,
+        baseline_platform=None,
+    )
+
+    row = next(row for row in result.rows if row.key == "merge-pdf")
+    assert row.coverage["net"]["matched"] is True
+    assert row.coverage["python"]["matched"] is True
 
 
 def test_text_qr_records_match_create_text_qr_key() -> None:
