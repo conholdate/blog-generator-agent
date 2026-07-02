@@ -25,7 +25,7 @@
 | 13 | JPG PNG TIFF EMF or BMP images to PDF | CPP, GENERAL, JAVA, PYTHON |
 | 14 | JPG to PDF | CPP, GENERAL, JAVA, NET |
 | 15 | MemoryStream to PDF or PDF to MemoryStream | CPP, GENERAL, JAVA, PYTHON |
-| 16 | Merge multiple PDF | CPP, GENERAL, JAVA, PYTHON |
+| 16 | Merge PDF | CPP, GENERAL, JAVA, PYTHON |
 | 17 | PDF documents to Excel XLS XLSX | CPP, GENERAL, NET, PYTHON |
 | 18 | PDF to base64 | CPP, JAVA, NET, PYTHON |
 | 19 | PDF to CSV | CPP, GENERAL, JAVA |

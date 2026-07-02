@@ -35,7 +35,7 @@
 | JPG PNG TIFF EMF or BMP images to PDF | — | — | — | [✅ (1.00)](aspose.com/pdf/images-to-pdf-csharp/) | — |
 | JPG to PDF | — | — | — | — | [✅ (1.00)](aspose.com/pdf/convert-jpg-to-pdf-in-python/) |
 | MemoryStream to PDF or PDF to MemoryStream | — | — | — | [✅ (1.00)](aspose.com/pdf/memorystream-file-pdf-csharp-vb-net/) | — |
-| Merge multiple PDF | — | — | — | [✅ (1.00)](aspose.com/pdf/merge-multiple-pdf-files-in-csharp-net/) | — |
+| Merge PDF | — | — | — | [✅ (1.00)](aspose.com/pdf/merge-multiple-pdf-files-in-csharp-net/) | — |
 | PDF documents to Excel XLS XLSX | — | — | [✅ (1.00)](aspose.com/pdf/convert-pdf-to-excel-xls-xlsx-using-java/) | — | — |
 | PDF to base64 | — | [✅ (1.00)](aspose.com/pdf/convert-pdf-to-base64-online/) | — | — | — |
 | PDF to CSV | — | — | — | [✅ (1.00)](aspose.com/pdf/csv-pdf-csharp-vb-net/) | [✅ (1.00)](aspose.com/pdf/convert-pdf-to-csv-in-python/) |

@@ -762,8 +762,8 @@
     {
       "category": "Document Processing",
       "sub_category": "Pdf Merge",
-      "topic": "Merge multiple PDF",
-      "key": "merge-multiple-pdf",
+      "topic": "Merge PDF",
+      "key": "merge-pdf",
       "baseline_record_id": "blog::pdf/2020-01-16-merge-multiple-pdf-files-in-csharp-net/index.md",
       "coverage": {
         "cpp": {
