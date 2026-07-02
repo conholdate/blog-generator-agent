@@ -130,7 +130,7 @@ class MetricsRecorder:
         else:
             self.platform = platform.capitalize()
         logger.info(f"Started job [{self.run_id}]: {product} - {platform} on {website}")
-
+        
     def record_success(self, details: Optional[str] = None):
         """
         Record a successful operation
