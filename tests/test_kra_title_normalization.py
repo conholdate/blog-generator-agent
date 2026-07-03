@@ -265,3 +265,168 @@ def test_kra_barcode_title_cleanup_handles_remaining_casing_and_context() -> Non
             platform=platform,
         )
         assert result.title == expected
+
+
+def test_kra_pdf_title_cleanup_fixes_malformed_wrappers() -> None:
+    cases = [
+        (
+            "How to Convert AI PDF Summarizer Best Practices in Python",
+            "AI PDF Summarizer Best Practices in Python",
+            "Python",
+            "AI PDF Summarizer Best Practices in Python",
+        ),
+        (
+            "A Developer Guide AI PDF Summarizer Best Practices in Java",
+            "AI PDF Summarizer Best Practices in Java",
+            "Java",
+            "AI PDF Summarizer Best Practices in Java: Developer Guide",
+        ),
+        (
+            "How to Work with Best PDF for Working with Pdfs in .NET",
+            "Best PDF for Working with Pdfs in .NET",
+            ".NET",
+            "Work with PDFs in .NET",
+        ),
+        (
+            "Convert CSV to PDF in Without External Tools in Python",
+            "Convert CSV to PDF in Without External Tools in Python",
+            "Python",
+            "Convert CSV to PDF in Python Without External Tools",
+        ),
+        (
+            "How to SCRIPT to Create Multi Column PDF in Python",
+            "Create Multi Column PDF in Python",
+            "Python",
+            "Create Multi-Column PDF in Python",
+        ),
+        (
+            "SCRIPT to Extract Text from PDF Files in Python",
+            "Extract Text from PDF Files in Python",
+            "Python",
+            "Extract Text from PDF in Python",
+        ),
+        (
+            "Code to Crop PDF PAGES in C++",
+            "Crop PDF PAGES in C++",
+            "C++",
+            "Crop PDF Pages in C++",
+        ),
+    ]
+
+    for title, primary_keyword, platform, expected in cases:
+        result = finalize_topic_acceptance(
+            title=title,
+            primary_keyword=primary_keyword,
+            platform=platform,
+        )
+        assert result.title == expected
+
+
+def test_kra_pdf_title_cleanup_fixes_missing_objects_and_guides() -> None:
+    cases = [
+        (
+            "How to Convert Crop in .NET",
+            "Crop in .NET",
+            ".NET",
+            "Crop PDF Pages in .NET",
+        ),
+        (
+            "Crop in PDF Try and Build: Complete Tutorial in Java",
+            "Crop in PDF Try and Build in Java",
+            "Java",
+            "Crop PDF Pages in Java: Complete Tutorial",
+        ),
+        (
+            "Add or Remove in PDF in C++",
+            "Add or Remove in PDF in C++",
+            "C++",
+            "Add or Remove Annotations in PDF in C++",
+        ),
+        (
+            "Create Table in Python",
+            "Create Table in Python",
+            "Python",
+            "Create Table in PDF in Python",
+        ),
+        (
+            "Create Graphs and Charts in Python",
+            "Create Graphs and Charts in Python",
+            "Python",
+            "Create Graphs and Charts in PDF in Python",
+        ),
+        (
+            "Create Multi Column PDF in Complete Guide using .NET",
+            "Create Multi Column PDF in .NET",
+            ".NET",
+            "Create Multi-Column PDF in .NET: Complete Guide",
+        ),
+        (
+            "Extract Text from PDF in Comprehensive Guide in Python",
+            "Extract Text from PDF in Python",
+            "Python",
+            "Extract Text from PDF in Python: Comprehensive Guide",
+        ),
+        (
+            "Create PDF with in .NET",
+            "Create PDF in .NET",
+            ".NET",
+            "Create PDF in .NET",
+        ),
+    ]
+
+    for title, primary_keyword, platform, expected in cases:
+        result = finalize_topic_acceptance(
+            title=title,
+            primary_keyword=primary_keyword,
+            platform=platform,
+        )
+        assert result.title == expected
+
+
+def test_kra_pdf_title_cleanup_normalizes_pdf_casing() -> None:
+    cases = [
+        (
+            "Adding Digital Signatures to Pdfs in Java: a Quick Guide",
+            "Adding Digital Signatures to Pdfs in Java",
+            "Java",
+            "Add Digital Signatures to PDFs in Java: A Quick Guide",
+        ),
+        (
+            "Convert Legacy Xfa Pdfs to Acroforms in .NET",
+            "Convert Legacy Xfa Pdfs to Acroforms in .NET",
+            ".NET",
+            "Convert Legacy XFA PDFs to AcroForms in .NET",
+        ),
+        (
+            "Extract PDF Tables to Dataframe in Python",
+            "Extract PDF Tables to Dataframe in Python",
+            "Python",
+            "Extract PDF Tables to DataFrame in Python",
+        ),
+        (
+            "PDF Create PDF: Step-by-Step Guide in Java",
+            "Create PDF in Java",
+            "Java",
+            "Create PDF in Java: Step-by-Step Guide",
+        ),
+        (
+            "PDF Editor Create PDF in C++",
+            "PDF Editor Create PDF in C++",
+            "C++",
+            "Create PDF with PDF Editor in C++",
+        ),
+        (
+            "Merge JPG Combine JPG in Python",
+            "Merge JPG Combine JPG in Python",
+            "Python",
+            "Merge JPG Images in Python",
+        ),
+    ]
+
+    for title, primary_keyword, platform, expected in cases:
+        result = finalize_topic_acceptance(
+            title=title,
+            primary_keyword=primary_keyword,
+            platform=platform,
+        )
+        assert result.title == expected
