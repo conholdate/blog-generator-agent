@@ -6,8 +6,8 @@
 
 | 🧩 Metric | Value | Status |
 | --- | --- | --- |
-| **Total Canonical Topics** | **112** | — |
-| **Topics with Gaps** | **110** | ⚠️ |
+| **Total Canonical Topics** | **95** | — |
+| **Topics with Gaps** | **93** | ⚠️ |
 | **Fully Covered Topics** | 2 | ✅ |
 | **Excluded (Release / Updates)** | 0 | ℹ️ |
 | **Baseline Scope** | ALL | — |
@@ -19,9 +19,9 @@
 
 | Indicator | Score | Interpretation |
 | --- | --- | --- |
-| Cross-Platform Parity | 1.8% | 🔴 Weak |
+| Cross-Platform Parity | 2.1% | 🔴 Weak |
 | Content Reusability | High | ✅ Strong |
-| Porting Opportunity | 98.2% gaps | 🔥 Very High |
+| Porting Opportunity | 97.9% gaps | 🔥 Very High |
 | Excluded Noise (Releases) | 0 | ✅ Controlled |
 
 ---
@@ -30,18 +30,18 @@
 
 | Platform | # Covered | # Missing | Coverage |
 | --- | --- | --- | --- |
-| **CPP** | 27 | 85 | 🔴 Weak (24.1%) |
-| **GENERAL** | 22 | 90 | 🔴 Weak (19.6%) |
-| **JAVA** | 51 | 61 | 🔴 Weak (45.5%) |
-| **NET** | 67 | 45 | 🔴 Weak (59.8%) |
-| **PYTHON** | 37 | 75 | 🔴 Weak (33.0%) |
+| **CPP** | 27 | 68 | 🔴 Weak (28.4%) |
+| **GENERAL** | 22 | 73 | 🔴 Weak (23.2%) |
+| **JAVA** | 50 | 45 | 🔴 Weak (52.6%) |
+| **NET** | 67 | 28 | 🟡 Moderate (70.5%) |
+| **PYTHON** | 37 | 58 | 🔴 Weak (38.9%) |
 
 ---
 
 ### 🔎 Executive Insights
 
-- **98.2%** of canonical topics are missing on at least one platform (after exclusions).
-- Highest gap density: **GENERAL** (90 missing), **CPP** (85 missing), **PYTHON** (75 missing).
+- **97.9%** of canonical topics are missing on at least one platform (after exclusions).
+- Highest gap density: **GENERAL** (73 missing), **CPP** (68 missing), **PYTHON** (58 missing).
 - Gaps are concentrated in **8** major category/subcategory clusters (see Section 4).
 - Release notes, product updates, and version announcements are intentionally excluded from this report.
 
@@ -51,21 +51,20 @@
 
 | # | Cluster | Representative topic | Missing platforms (high-impact) | Suggested new titles (examples) |
 | --- | --- | --- | --- | --- |
-| 1 | **Document Processing / PDF Manipulation** | Copy PDF Pages | CPP, GENERAL, JAVA, PYTHON | Copy PDF Pages — CPP; Copy PDF Pages — GENERAL; Copy PDF Pages — JAVA |
-| 2 | **Document Processing / PDF Manipulation** | PAGES to PDF | CPP, GENERAL, JAVA, NET | PAGES to PDF — CPP; PAGES to PDF — GENERAL; PAGES to PDF — JAVA |
-| 3 | **Programming / File Conversion** | Combine JPG images to PDF | CPP, GENERAL, JAVA, NET | Combine JPG images to PDF — CPP; Combine JPG images to PDF — GENERAL; Combine JPG images to PDF — JAVA |
-| 4 | **Programming / File Conversion** | PDF to byte array or byte array to PDF | CPP, GENERAL, JAVA, PYTHON | PDF to byte array or byte array to PDF — CPP; PDF to byte array or byte array to PDF — GENERAL; PDF to byte array or byte array to PDF — JAVA |
-| 5 | **Document Processing / PDF Conversion** | Create 3D PDF converter | CPP, GENERAL, JAVA, PYTHON | Create 3D PDF converter — CPP; Create 3D PDF converter — GENERAL; Create 3D PDF converter — JAVA |
-| 6 | **Document Processing / PDF Conversion** | PDF documents to Excel XLS XLSX | CPP, GENERAL, NET, PYTHON | PDF documents to Excel XLS XLSX — CPP; PDF documents to Excel XLS XLSX — GENERAL; PDF documents to Excel XLS XLSX — NET |
-| 7 | **Document Processing / Digital Signatures** | Add and verify digital signatures in PDF documents | CPP, GENERAL, NET, PYTHON | Add and verify digital signatures in PDF documents — CPP; Add and verify digital signatures in PDF documents — GENERAL; Add and verify digital signatures in PDF documents — NET |
-| 8 | **Document Processing / Digital Signatures** | Add digital signatures to PDF | CPP, GENERAL, JAVA, PYTHON | Add digital signatures to PDF — CPP; Add digital signatures to PDF — GENERAL; Add digital signatures to PDF — JAVA |
-| 9 | **Document Processing / Image to PDF Conversion** | JPG PNG TIFF EMF or BMP images to PDF | CPP, GENERAL, JAVA, PYTHON | JPG PNG TIFF EMF or BMP images to PDF — CPP; JPG PNG TIFF EMF or BMP images to PDF — GENERAL; JPG PNG TIFF EMF or BMP images to PDF — JAVA |
-| 10 | **Document Processing / Image to PDF Conversion** | TIF to PDF | CPP, GENERAL, JAVA, PYTHON | TIF to PDF — CPP; TIF to PDF — GENERAL; TIF to PDF — JAVA |
-| 11 | **Document Processing / PDF Printing** | Print PDF | CPP, GENERAL, NET, PYTHON | Print PDF — CPP; Print PDF — GENERAL; Print PDF — NET |
-| 12 | **Document Processing / PDF Printing** | Print PDF to printer | CPP, JAVA, NET, PYTHON | Print PDF to printer — CPP; Print PDF to printer — JAVA; Print PDF to printer — NET |
-| 13 | **File Conversion / Image to PDF** | Images to PDF | GENERAL, NET, PYTHON | Images to PDF — GENERAL; Images to PDF — NET; Images to PDF — PYTHON |
-| 14 | **File Conversion / Image to PDF** | JPG to PDF | CPP, JAVA | JPG to PDF — CPP; JPG to PDF — JAVA |
-| 15 | **Development / PDF Manipulation** | Search text in PDF | CPP, GENERAL, JAVA, PYTHON | Search text in PDF — CPP; Search text in PDF — GENERAL; Search text in PDF — JAVA |
+| 1 | **Programming / File Conversion** | Combine JPG images to PDF | CPP, GENERAL, JAVA, NET | Combine JPG images to PDF — CPP; Combine JPG images to PDF — GENERAL; Combine JPG images to PDF — JAVA |
+| 2 | **Programming / File Conversion** | PDF to Byte Array or Byte Array to PDF | CPP, GENERAL, JAVA, PYTHON | PDF to Byte Array or Byte Array to PDF — CPP; PDF to Byte Array or Byte Array to PDF — GENERAL; PDF to Byte Array or Byte Array to PDF — JAVA |
+| 3 | **Document Processing / PDF Manipulation** | Copy PDF Pages | CPP, GENERAL, JAVA, PYTHON | Copy PDF Pages — CPP; Copy PDF Pages — GENERAL; Copy PDF Pages — JAVA |
+| 4 | **Document Processing / PDF Manipulation** | PAGES to PDF | CPP, GENERAL, JAVA, NET | PAGES to PDF — CPP; PAGES to PDF — GENERAL; PAGES to PDF — JAVA |
+| 5 | **Document Processing / PDF Conversion** | Create 3D PDF | CPP, GENERAL, JAVA, PYTHON | Create 3D PDF — CPP; Create 3D PDF — GENERAL; Create 3D PDF — JAVA |
+| 6 | **Document Processing / PDF Conversion** | PDF to Excel XLS/XLSX | CPP, GENERAL, NET, PYTHON | PDF to Excel XLS/XLSX — CPP; PDF to Excel XLS/XLSX — GENERAL; PDF to Excel XLS/XLSX — NET |
+| 7 | **Document Processing / Image to PDF Conversion** | JPG, PNG, TIFF, EMF, or BMP images to PDF | CPP, GENERAL, JAVA, PYTHON | JPG, PNG, TIFF, EMF, or BMP images to PDF — CPP; JPG, PNG, TIFF, EMF, or BMP images to PDF — GENERAL; JPG, PNG, TIFF, EMF, or BMP images to PDF — JAVA |
+| 8 | **Document Processing / Image to PDF Conversion** | TIF to PDF | CPP, GENERAL, JAVA, PYTHON | TIF to PDF — CPP; TIF to PDF — GENERAL; TIF to PDF — JAVA |
+| 9 | **File Conversion / Image to PDF** | Image to PDF | GENERAL, PYTHON | Image to PDF — GENERAL; Image to PDF — PYTHON |
+| 10 | **File Conversion / Image to PDF** | JPG to PDF | CPP, JAVA | JPG to PDF — CPP; JPG to PDF — JAVA |
+| 11 | **Development / PDF Manipulation** | Search text in PDF | CPP, GENERAL, JAVA, PYTHON | Search text in PDF — CPP; Search text in PDF — GENERAL; Search text in PDF — JAVA |
+| 12 | **Development / PDF Manipulation** | Add, extract, remove, or replace images in PDF | GENERAL, PYTHON | Add, extract, remove, or replace images in PDF — GENERAL; Add, extract, remove, or replace images in PDF — PYTHON |
+| 13 | **Document Processing / PDF Barcode Generation** | Add barcode to PDF | CPP, GENERAL, JAVA, PYTHON | Add barcode to PDF — CPP; Add barcode to PDF — GENERAL; Add barcode to PDF — JAVA |
+| 14 | **Pdf / Data Import** | Add data from database to PDF | CPP, GENERAL, JAVA, PYTHON | Add data from database to PDF — CPP; Add data from database to PDF — GENERAL; Add data from database to PDF — JAVA |
 
 *These recommendations are derived from topics missing across the largest number of platforms and clustered by category/subcategory.*
 
@@ -75,11 +74,11 @@
 
 | Platform | # topics covered | % of baseline rows | # topics missing |
 | --- | --- | --- | --- |
-| **CPP** | 27 | 24.1% | 85 |
-| **GENERAL** | 22 | 19.6% | 90 |
-| **JAVA** | 51 | 45.5% | 61 |
-| **NET** | 67 | 59.8% | 45 |
-| **PYTHON** | 37 | 33.0% | 75 |
+| **CPP** | 27 | 28.4% | 68 |
+| **GENERAL** | 22 | 23.2% | 73 |
+| **JAVA** | 50 | 52.6% | 45 |
+| **NET** | 67 | 70.5% | 28 |
+| **PYTHON** | 37 | 38.9% | 58 |
 
 **Takeaway:** Focus first on platforms with the highest missing counts and lowest coverage percentage; port high-impact topics from the best-covered platform first.
 
@@ -89,18 +88,18 @@
 
 | Cluster | # gap topics | Missing signals | Most-missed platforms |
 | --- | --- | --- | --- |
-| **Document Processing / PDF Manipulation** | 4 | 15 | CPP, GENERAL, JAVA, PYTHON |
 | **Programming / File Conversion** | 3 | 12 | GENERAL, JAVA, CPP, NET |
+| **Document Processing / PDF Manipulation** | 3 | 11 | CPP, GENERAL, JAVA, PYTHON |
 | **Document Processing / PDF Conversion** | 3 | 11 | GENERAL, CPP, JAVA, PYTHON |
-| **Document Processing / Digital Signatures** | 2 | 8 | CPP, GENERAL, PYTHON, NET |
 | **Document Processing / Image to PDF Conversion** | 2 | 8 | CPP, GENERAL, JAVA, PYTHON |
-| **Document Processing / PDF Printing** | 2 | 8 | CPP, NET, PYTHON, GENERAL |
-| **File Conversion / Image to PDF** | 3 | 7 | CPP, JAVA, GENERAL, NET |
+| **File Conversion / Image to PDF** | 3 | 6 | CPP, JAVA, GENERAL, PYTHON |
 | **Development / PDF Manipulation** | 2 | 6 | GENERAL, PYTHON, CPP, JAVA |
-| **Development / PDF Generation** | 2 | 6 | GENERAL, NET, CPP, JAVA |
 | **Document Processing / PDF Barcode Generation** | 1 | 4 | CPP, GENERAL, JAVA, PYTHON |
 | **Pdf / Data Import** | 1 | 4 | CPP, GENERAL, JAVA, PYTHON |
-| **PDF Processing / Annotations** | 1 | 4 | GENERAL, JAVA, NET, PYTHON |
+| **Conversion / Base64 To PDF/JPG/PNG** | 1 | 4 | CPP, GENERAL, NET, PYTHON |
+| **Pdf / Form Conversion** | 1 | 4 | CPP, JAVA, NET, PYTHON |
+| **Web Development / PDF Generation** | 1 | 4 | CPP, GENERAL, JAVA, PYTHON |
+| **Document Management / PDF Editing** | 1 | 4 | CPP, JAVA, NET, PYTHON |
 
 ---
 
