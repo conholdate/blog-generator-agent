@@ -4,6 +4,7 @@ import json
 import os
 from pathlib import Path
 from typing import Any
+from urllib.parse import urlparse
 
 import requests
 from .normalization import canonical_topic_key, normalize_topic_display
@@ -347,9 +348,48 @@ def should_post_payload(payload: dict[str, Any]) -> tuple[bool, str]:
     return True, ""
 
 
+def validate_sheets_webhook_url(url: str) -> tuple[bool, str]:
+    raw = str(url or "").strip()
+    if not raw:
+        return False, "Missing Google Sheets webhook_url."
+
+    parsed = urlparse(raw)
+    host = (parsed.netloc or "").lower()
+    path = parsed.path or ""
+    if parsed.scheme.lower() != "https":
+        return False, "Invalid Google Sheets webhook_url: expected an HTTPS Apps Script web app URL."
+    if host in {"docs.google.com", "drive.google.com"} or host.endswith(".docs.google.com"):
+        return (
+            False,
+            "Invalid Google Sheets webhook_url: this points to Google Docs/Drive. "
+            "Use the Apps Script Web App URL ending in /exec, not the spreadsheet URL.",
+        )
+    if host != "script.google.com":
+        return (
+            False,
+            "Invalid Google Sheets webhook_url: expected https://script.google.com/macros/s/<deployment-id>/exec.",
+        )
+    if not path.startswith("/macros/s/") or not path.rstrip("/").endswith("/exec"):
+        return (
+            False,
+            "Invalid Google Sheets webhook_url: expected Apps Script Web App path /macros/s/<deployment-id>/exec.",
+        )
+    return True, ""
+
+
 def is_successful_sheet_response(status: int, text: str) -> tuple[bool, str]:
     body = str(text or "").strip()
     lowered = body.lower()
+    if status == 0 and body.startswith("Invalid Google Sheets webhook_url:"):
+        return False, body
+    if status == 404 and ("page not found" in lowered or "docs.google.com" in lowered):
+        return (
+            False,
+            "Google Sheets webhook returned 404 Page Not Found. "
+            "The configured Apps Script deployment URL is probably stale/deleted, inaccessible, "
+            "or overridden by a Google Docs/Sheets URL. Redeploy the Apps Script as a Web App "
+            "and update configs/topics_sheets.json or any TOPICS_*_WEBHOOK_URL override with the /exec URL.",
+        )
     if status < 200 or status >= 300:
         return False, f"Google Sheets webhook returned status={status}: {body[:500]}"
     if "invalid token" in lowered or "unauthorized" in lowered:
@@ -371,6 +411,10 @@ def _sheet_post_timeout_seconds() -> float:
 
 
 def post_payload(payload: dict[str, Any], url: str, token: str | None, timeout_seconds: float | None = None) -> tuple[int, str]:
+    valid_url, validation_error = validate_sheets_webhook_url(url)
+    if not valid_url:
+        return 0, validation_error
+
     query: dict[str, str] = {}
     if token:
         query["token"] = token

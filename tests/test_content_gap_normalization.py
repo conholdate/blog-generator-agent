@@ -405,8 +405,9 @@ def test_pdf_topic_keys_preserve_object_context_and_repair_generated_noise() -> 
         "Extract table from PDF": "extract tables from pdf",
         "Print PDF documents": "print pdf",
         "Rotate PDF document": "rotate pdf",
-        "Rotate PDF Pages text or images": "rotate pdf pages text or image",
+        "Rotate PDF Pages text or images": "rotate pdf",
         "Split PDF into multiple files": "split pdf",
+        "Print PDF to printer": "print pdf",
     }
 
     for topic, expected in cases.items():
@@ -444,7 +445,9 @@ def test_pdf_topic_display_uses_readable_label_not_raw_key() -> None:
         "Edit PDF page size": "Resize PDF Pages",
         "Print PDF documents": "Print PDF",
         "Rotate PDF document": "Rotate PDF",
-        "Rotate PDF Pages text or images": "Rotate PDF Pages text or image",
+        "Rotate PDF Pages text or images": "Rotate PDF",
+        "Print PDF to printer": "Print PDF",
+        "Merge JPG images": "Merge JPG images to PDF",
         "PDF to byte array or byte array to PDF": "PDF to Byte Array or Byte Array to PDF",
         "PDF documents to Excel XLS XLSX": "PDF to Excel XLS/XLSX",
         "Base64 string to PDF or JPG PNG image": "Base64 string to PDF or JPG/PNG image",
@@ -494,6 +497,22 @@ def test_pdf_sheet_export_cleans_or_skips_regressed_topic_labels(tmp_path) -> No
                         "coverage": {"net": {"matched": True}, "python": {"matched": False}},
                     },
                     {
+                        "topic": "Print PDF to printer",
+                        "coverage": {"net": {"matched": True}, "python": {"matched": False}},
+                    },
+                    {
+                        "topic": "Rotate PDF Pages text or image",
+                        "coverage": {"net": {"matched": True}, "python": {"matched": False}},
+                    },
+                    {
+                        "topic": "Merge JPG images",
+                        "coverage": {"net": {"matched": True}, "python": {"matched": False}},
+                    },
+                    {
+                        "topic": "Merge JPG images to PDF",
+                        "coverage": {"net": {"matched": True}, "python": {"matched": False}},
+                    },
+                    {
                         "topic": "Resize PDF PAGES or with code",
                         "coverage": {"net": {"matched": True}, "python": {"matched": False}},
                     },
@@ -519,8 +538,11 @@ def test_pdf_sheet_export_cleans_or_skips_regressed_topic_labels(tmp_path) -> No
         "Create 3D PDF",
         "Create PDF",
         "Image to PDF",
+        "Merge JPG images to PDF",
         "Parse PDF",
+        "Print PDF",
         "Resize PDF Pages",
+        "Rotate PDF",
     ]
 
 
@@ -596,6 +618,8 @@ def test_generic_similarity_topic_keys_collapse_across_products() -> None:
         "Fill create or edit fillable DOCX forms": "create fill or edit fillable docx forms",
         "Edit Word document Word editor": "edit word document",
         "Split Word documents": "split word",
+        "Print Word to printer": "print word",
+        "Rotate Word Pages text or images": "rotate word",
     }
 
     for topic, expected in cases.items():

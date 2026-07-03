@@ -720,6 +720,8 @@ def _normalize_similarity_topic_key_text(text: str) -> str:
         (r"(?i)^extract\s+table\s+from\b", "extract tables from"),
         (r"(?i)^images?\s+to\s+", "image to "),
         (r"(?i)\s+to\s+images?$", " to image"),
+        (r"(?i)^print\s+(.+?)\s+to\s+printer$", r"print \1"),
+        (r"(?i)^rotate\s+(.+?)\s+pages\s+text\s+or\s+images?$", r"rotate \1"),
         (
             r"(?i)^edit\s+(?P<object>[a-z0-9.+# ]+?)\s+document\s+(?P=object)\s+editor$",
             r"edit \g<object> document",

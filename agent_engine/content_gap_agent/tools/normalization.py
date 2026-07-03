@@ -638,6 +638,8 @@ def _normalize_similarity_topic_key_text(text: str) -> str:
         (r"(?i)^extract\s+table\s+from\b", "extract tables from"),
         (r"(?i)^images?\s+to\s+", "image to "),
         (r"(?i)\s+to\s+images?$", " to image"),
+        (r"(?i)^print\s+(.+?)\s+to\s+printer$", r"print \1"),
+        (r"(?i)^rotate\s+(.+?)\s+pages\s+text\s+or\s+images?$", r"rotate \1"),
         (
             r"(?i)^edit\s+(?P<object>[a-z0-9.+# ]+?)\s+document\s+(?P=object)\s+editor$",
             r"edit \g<object> document",
@@ -738,6 +740,7 @@ def _pdf_product_display_key(topic_key: str, *, product_key: str = "") -> str:
     weak_pdf_objects = {
         "create 3d": "create 3d pdf",
         "create photo album": "create photo album pdf",
+        "merge jpg images": "merge jpg images to pdf",
     }
     return weak_pdf_objects.get(key, key)
 
