@@ -9,8 +9,8 @@ from .schemas import Cluster, KeywordRecord
 from .tools.content_index import get_existing_posts
 from agent_engine.blog_keyword_analyzer.tools.normalization import (
     canonical_blog_platform_key,
-    canonical_platform_label,
     detect_file_formats_in_text,
+    seo_platform_label,
 )
 
 logger = logging.getLogger(__name__)
@@ -64,7 +64,7 @@ def _off_scope_seed_modifier(text: str, seed_topic: str) -> bool:
 
 
 def _platform_phrase(platform: Optional[str]) -> str:
-    return canonical_platform_label(platform)
+    return seo_platform_label(platform)
 
 
 def focus_records_for_seed_topic(

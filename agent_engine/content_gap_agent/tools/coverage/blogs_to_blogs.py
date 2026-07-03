@@ -10,7 +10,7 @@ from typing import Dict, List, Optional, Tuple, Set
 from ..io import IndexRecord, read_jsonl
 from ..logging_utils import get_logger
 from ..normalization import (
-    FORMAT_TOKEN_SET,
+    CONVERSION_TOKEN_SET,
     canonical_file_format,
     canonical_topic_key,
     nor_platform_key,
@@ -71,10 +71,11 @@ def record_gap_key(r: IndexRecord) -> str:
 def _conversion_gap_keys(text: str) -> List[str]:
     keys: List[str] = []
     normalized = re.sub(r"[-_/]+", " ", str(text or ""))
+    normalized = re.sub(r"\bbase\s*64\b", "base64", normalized, flags=re.IGNORECASE)
     for match in _CONVERSION_PAIR_RE.finditer(normalized):
         src = canonical_file_format(match.group(1))
         dst = canonical_file_format(match.group(2))
-        if src in FORMAT_TOKEN_SET and dst in FORMAT_TOKEN_SET:
+        if src in CONVERSION_TOKEN_SET and dst in CONVERSION_TOKEN_SET:
             key = normalize_gap_key(f"{src} to {dst}")
             if key and key not in keys:
                 keys.append(key)

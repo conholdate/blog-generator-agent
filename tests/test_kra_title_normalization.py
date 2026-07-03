@@ -430,3 +430,155 @@ def test_kra_pdf_title_cleanup_normalizes_pdf_casing() -> None:
             platform=platform,
         )
         assert result.title == expected
+
+
+def test_kra_cleanup_normalizes_decorated_conversion_titles_from_gap_workflow() -> None:
+    cases = [
+        (
+            "Step-by-Step Guide to PDF to EPUB Conversion Tool in Java",
+            "PDF to EPUB Conversion Tool in Java",
+            "Java",
+            "Convert PDF to EPUB in Java",
+        ),
+        (
+            "PDF to JPG Conversion SCRIPT in Python",
+            "PDF to JPG Conversion SCRIPT in Python",
+            "Python",
+            "Convert PDF to JPG in Python",
+        ),
+        (
+            "Complete Guide: PDF to PPTX Conversion Sample Code in Python",
+            "PDF to PPTX Conversion Sample Code in Python",
+            "Python",
+            "Convert PDF to PPTX in Python",
+        ),
+        (
+            "How to Perform PDF to TXT Conversion in C++",
+            "PDF to TXT Conversion in C++",
+            "C++",
+            "Convert PDF to TXT in C++",
+        ),
+        (
+            "PDF to Base64 using in C++: a Complete Tutorial",
+            "PDF to Base64 using in C++",
+            "C++",
+            "Convert PDF to Base64 in C++",
+        ),
+        (
+            "How to Convert PDF to Base64 in Python Guide",
+            "PDF to Base64 in Python",
+            "Python",
+            "Convert PDF to Base64 in Python",
+        ),
+        (
+            "How to Use the TIF to PDF Conversion Command in Python",
+            "TIF to PDF Conversion Command in Python",
+            "Python",
+            "Convert TIF to PDF in Python",
+        ),
+        (
+            "ZIP to PDF Guide using Java: Code Samples Optimization",
+            "ZIP to PDF Guide using Java",
+            "Java",
+            "Convert ZIP to PDF in Java",
+        ),
+        (
+            "PUB to DOCX Conversion in .NET: Complete Guide",
+            "PUB to DOCX Conversion in .NET",
+            "C#",
+            "Convert PUB to DOCX in C#",
+        ),
+    ]
+
+    for title, primary_keyword, platform, expected in cases:
+        result = finalize_topic_acceptance(
+            title=title,
+            primary_keyword=primary_keyword,
+            platform=platform,
+        )
+        assert result.title == expected
+
+
+def test_kra_pdf_title_cleanup_repairs_generated_pdf_action_titles() -> None:
+    cases = [
+        (
+            "Replace Images in Python",
+            "Replace Images in Python",
+            "Python",
+            "Replace Images in PDF in Python",
+        ),
+        (
+            "Rotate Text in Python",
+            "Rotate Text in Python",
+            "Python",
+            "Rotate Text in PDF in Python",
+        ),
+        (
+            "Split PDF into Multiple in Java",
+            "Split PDF into Multiple in Java",
+            "Java",
+            "Split PDF into Multiple Files in Java",
+        ),
+        (
+            "Rotate PDF Document for Best Tool and Methods in .NET",
+            "Rotate PDF Document for Best Tool and Methods in .NET",
+            "C#",
+            "Rotate PDF Document in C#",
+        ),
+        (
+            "PDF Search and Extract Text in Java: a Complete Guide",
+            "PDF Search and Extract Text in Java",
+            "Java",
+            "Search and Extract Text from PDF in Java: A Complete Guide",
+        ),
+        (
+            "How to Perform PDF Version Downgrade to Shrink Size in .NET",
+            "PDF Version Downgrade to Shrink Size in .NET",
+            "C#",
+            "Downgrade PDF Version to Shrink Size in C#",
+        ),
+        (
+            "Program to Rotate PDF Text Content in C++: Sample Code",
+            "Rotate PDF Text Content in C++",
+            "C++",
+            "Rotate Text in PDF in C++: Sample Code",
+        ),
+        (
+            "Print PDF FILE in Java: Code Samples and Best Practices",
+            "Print PDF FILE in Java",
+            "Java",
+            "Print PDF File in Java: Code Samples and Best Practices",
+        ),
+        (
+            "Parse PDF in Java: Tables Encryption and Comments",
+            "Parse PDF in Java",
+            "Java",
+            "Parse PDF Content in Java",
+        ),
+        (
+            "Parse PDF in C++: Extract PAGES Outlines and Form Data",
+            "Parse PDF in C++",
+            "C++",
+            "Parse PDF Content in C++",
+        ),
+        (
+            "Remove PAGES from PDF Document in Java",
+            "Remove PAGES from PDF Document in Java",
+            "Java",
+            "Remove Pages from PDF in Java",
+        ),
+        (
+            "PDF Bookmarks Create Hierarchy in Python",
+            "PDF Bookmarks Create Hierarchy in Python",
+            "Python",
+            "Create PDF Bookmark Hierarchy in Python",
+        ),
+    ]
+
+    for title, primary_keyword, platform, expected in cases:
+        result = finalize_topic_acceptance(
+            title=title,
+            primary_keyword=primary_keyword,
+            platform=platform,
+        )
+        assert result.title == expected

@@ -526,6 +526,7 @@ PHRASE_CANON: Dict[str, str] = {
     "ml": "ML",
     "oz": "OZ",
     "excel": "Excel",
+    "base64": "Base64",
     "vscode": "VS Code",
     "visual studio code": "VS Code",
     "latex": "LaTeX",
@@ -544,6 +545,7 @@ PRESERVE_TOKENS: Set[str] = {
 FORMAT_TOKEN_SET: Set[str] = set(FILE_FORMAT_REGISTRY.keys()) | {
     "htm", "jpeg", "tif", "djv", "stp", "wrl", "yml"
 }
+CONVERSION_TOKEN_SET: Set[str] = FORMAT_TOKEN_SET | {"base64"}
 _TEXT_PAYLOAD_CONTEXT_RE = re.compile(r"\b(qr|qrcode|barcode|barcodes?)\b", re.IGNORECASE)
 _GENERIC_BARCODE_GENERATION_RE = re.compile(
     r"^generate\s+barcodes?(?:\s+barcode)?(?:\s+api)?$",
@@ -590,6 +592,11 @@ _LANG_QUALIFIER_RE = re.compile(
 
 _TRAILING_LANG_TOKEN_RE = re.compile(rf"\b({LANG_QUALIFIER_PATTERN})\b\s*$", re.IGNORECASE)
 _LANG_TOKEN_ANYWHERE_RE = re.compile(rf"\b({LANG_QUALIFIER_PATTERN})\b", re.IGNORECASE)
+_SYMBOL_LANG_QUALIFIER_RE = re.compile(
+    r"(\(|\[)?\b(using|in|with|for)\s+(c#|c\+\+|\.net)(?![A-Za-z0-9])(\)|\])?",
+    re.IGNORECASE,
+)
+_SYMBOL_LANG_TOKEN_RE = re.compile(r"(?<![A-Za-z0-9])(c#|c\+\+|\.net)(?![A-Za-z0-9])", re.IGNORECASE)
 _TOPIC_NOISE_WORDS_RE = re.compile(r"\b(file|files|format|formats|library|libraries|sdk|api|apis)\b", re.IGNORECASE)
 _BEST_EXCEL_PRODUCT_NOUN_RE = re.compile(
     r"\bbest(?:\s+[a-z0-9.]+){0,4}?\s+excel\s+(library|libraries|sdk|api|apis)\s+for\s+developers\b",
@@ -606,7 +613,32 @@ _FIT_IMAGE_TO_CELL_RE = re.compile(
 _TRAILING_PREPOSITION_RE = re.compile(r"\b(in|with|using|for)\b\s*$", re.IGNORECASE)
 _C_NET_NOISE_RE = re.compile(r"\bc\s+net\b", re.IGNORECASE)
 _FROM_TO_NOISE_RE = re.compile(r"\bfrom\s+to\b", re.IGNORECASE)
+_BASE64_TOKEN_RE = re.compile(r"\bbase\s*64\b", re.IGNORECASE)
 _CONVERSION_PAIR_RE = re.compile(r"\b([a-z0-9]{1,12})\s*(?:to|into|in2|->|→)\s*([a-z0-9]{1,12})\b", re.IGNORECASE)
+_TOPIC_GUIDE_QUALIFIER_PATTERN = (
+    r"(?:(?:step\s+by\s+step|complete|comprehensive|quick|full|developer|practical)\s+)*"
+    r"(?:guide|tutorial|example|code\s+sample|sample)"
+)
+_TOPIC_PRODUCT_QUALIFIER_RE = re.compile(
+    r"\b(?:using|with|via|for)\s+"
+    r"(?:aspose|groupdocs|conholdate)(?:[.\s]+[a-z0-9]+)?(?:\s+(?:cloud|api|sdk))?\b",
+    re.IGNORECASE,
+)
+_TOPIC_LEADING_HOW_TO_RE = re.compile(r"^how\s+to\s+", re.IGNORECASE)
+_TOPIC_LEADING_GUIDE_RE = re.compile(
+    rf"^(?:how\s+to\s+)?(?:a\s+|an\s+|the\s+)?{_TOPIC_GUIDE_QUALIFIER_PATTERN}\s+"
+    r"(?:to|for|on|about)\s+",
+    re.IGNORECASE,
+)
+_TOPIC_LEADING_DEVELOPER_GUIDE_RE = re.compile(r"^(?:a\s+|an\s+|the\s+)?developer\s+guide\s+", re.IGNORECASE)
+_TOPIC_TRAILING_GUIDE_QUALIFIER_RE = re.compile(
+    rf"\b(?:in|with|using|for|as)\s+(?:a\s+|an\s+|the\s+)?{_TOPIC_GUIDE_QUALIFIER_PATTERN}\b$",
+    re.IGNORECASE,
+)
+_TOPIC_TRAILING_GUIDE_RE = re.compile(
+    rf"\b(?:a\s+|an\s+|the\s+)?{_TOPIC_GUIDE_QUALIFIER_PATTERN}\b$",
+    re.IGNORECASE,
+)
 _MERGE_PDF_TOPIC_RE = re.compile(
     r"\b(?:merge|merging|combine|combining|concatenate|concatenating|join|joining)\b"
     r"(?:\s+(?:all|multiple|several|two|2|pdf|pdfs?|documents?|docs?))*"
@@ -636,6 +668,23 @@ def _canon_autofit_excel_topics(text: str) -> str:
 
 def _canon_fit_image_topics(text: str) -> str:
     return _FIT_IMAGE_TO_CELL_RE.sub("Fit image to cell width and height", text)
+
+
+def _strip_topic_key_decorations(text: str) -> str:
+    out = text
+    for _ in range(3):
+        before = out
+        out = _TOPIC_PRODUCT_QUALIFIER_RE.sub(" ", out)
+        out = _TOPIC_LEADING_GUIDE_RE.sub(" ", out)
+        out = _TOPIC_LEADING_DEVELOPER_GUIDE_RE.sub(" ", out)
+        out = _TOPIC_LEADING_HOW_TO_RE.sub(" ", out)
+        out = _TOPIC_TRAILING_GUIDE_QUALIFIER_RE.sub(" ", out)
+        out = _TOPIC_TRAILING_GUIDE_RE.sub(" ", out)
+        out = _TRAILING_PREPOSITION_RE.sub(" ", out)
+        out = _WS_RE.sub(" ", out).strip(" -,:;")
+        if out == before:
+            break
+    return out
 
 
 @dataclass(frozen=True)
@@ -954,14 +1003,20 @@ def canonical_topic_key(text: str) -> str:
 
     t = unicodedata.normalize("NFKC", text).strip()
     t = re.sub(r"[-_/]+", " ", t)
+    t = re.sub(r"[:;]+", " ", t)
+    t = _BASE64_TOKEN_RE.sub("base64", t)
     t = _LANG_QUALIFIER_RE.sub(" ", t)
     t = _TRAILING_LANG_TOKEN_RE.sub(" ", t)
     t = _LANG_TOKEN_ANYWHERE_RE.sub(" ", t)
+    t = _SYMBOL_LANG_QUALIFIER_RE.sub(" ", t)
+    t = _SYMBOL_LANG_TOKEN_RE.sub(" ", t)
+    t = _strip_topic_key_decorations(t)
     t = _canon_autofit_excel_topics(t)
     t = _remove_topic_noise_words(t)
     t = _C_NET_NOISE_RE.sub(" ", t)
     t = _FROM_TO_NOISE_RE.sub(" ", t)
     t = _TRAILING_PREPOSITION_RE.sub(" ", t)
+    t = _strip_topic_key_decorations(t)
     t = _WS_RE.sub(" ", t).strip()
 
     if _GENERIC_BARCODE_GENERATION_RE.match(t):
@@ -979,14 +1034,14 @@ def canonical_topic_key(text: str) -> str:
         src = canonical_file_format(alt_match.group(1))
         dst = canonical_file_format(alt_match.group(2))
         alt = canonical_file_format(alt_match.group(3))
-        if src in FORMAT_TOKEN_SET and dst in FORMAT_TOKEN_SET and alt in FORMAT_TOKEN_SET:
+        if src in CONVERSION_TOKEN_SET and dst in CONVERSION_TOKEN_SET and alt in CONVERSION_TOKEN_SET:
             return _final_topic_cleanup(normalize_text(f"{src} to {dst}"))
 
     m = _CONVERSION_PAIR_RE.search(t)
     if m:
         src = canonical_file_format(m.group(1))
         dst = canonical_file_format(m.group(2))
-        if src in FORMAT_TOKEN_SET and dst in FORMAT_TOKEN_SET:
+        if src in CONVERSION_TOKEN_SET and dst in CONVERSION_TOKEN_SET:
             return _final_topic_cleanup(normalize_text(f"{src} to {dst}"))
 
     action_match = re.match(
@@ -1330,6 +1385,7 @@ title_case = normalize_title_text
 __all__ = [
     "ASPOSE_PRODUCT_REGISTRY",
     "CONHOLDATE_PRODUCT_REGISTRY",
+    "CONVERSION_TOKEN_SET",
     "FILE_FORMAT_REGISTRY",
     "FORMAT_ALIAS_TO_CANONICAL",
     "FORMAT_CANONICAL_TO_ALIASES",

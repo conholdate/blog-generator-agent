@@ -516,6 +516,7 @@ PHRASE_CANON: Dict[str, str] = {
     "java": "Java",
     "php": "PHP",
     "omr": "OMR",
+    "base64": "Base64",
     "memorystream": "MemoryStream",
     "vscode": "VS Code",
     "visual studio code": "VS Code",
@@ -535,6 +536,7 @@ PRESERVE_TOKENS: Set[str] = {
 FORMAT_TOKEN_SET: Set[str] = set(FILE_FORMAT_REGISTRY.keys()) | {
     "htm", "jpeg", "tif", "djv", "stp", "wrl", "yml"
 }
+CONVERSION_TOKEN_SET: Set[str] = FORMAT_TOKEN_SET | {"base64"}
 
 
 # =============================================================================
@@ -576,16 +578,63 @@ _LANG_QUALIFIER_RE = re.compile(
 
 _TRAILING_LANG_TOKEN_RE = re.compile(rf"\b({LANG_QUALIFIER_PATTERN})\b\s*$", re.IGNORECASE)
 _LANG_TOKEN_ANYWHERE_RE = re.compile(rf"\b({LANG_QUALIFIER_PATTERN})\b", re.IGNORECASE)
+_SYMBOL_LANG_QUALIFIER_RE = re.compile(
+    r"(\(|\[)?\b(using|in|with|for)\s+(c#|c\+\+|\.net)(?![A-Za-z0-9])(\)|\])?",
+    re.IGNORECASE,
+)
+_SYMBOL_LANG_TOKEN_RE = re.compile(r"(?<![A-Za-z0-9])(c#|c\+\+|\.net)(?![A-Za-z0-9])", re.IGNORECASE)
 _TOPIC_NOISE_WORDS_RE = re.compile(r"\b(file|files|format|formats|library|libraries|sdk|api|apis)\b", re.IGNORECASE)
 _TRAILING_PREPOSITION_RE = re.compile(r"\b(in|with|using|for)\b\s*$", re.IGNORECASE)
 _C_NET_NOISE_RE = re.compile(r"\bc\s+net\b", re.IGNORECASE)
 _FROM_TO_NOISE_RE = re.compile(r"\bfrom\s+to\b", re.IGNORECASE)
+_BASE64_TOKEN_RE = re.compile(r"\bbase\s*64\b", re.IGNORECASE)
 _CONVERSION_PAIR_RE = re.compile(r"\b([a-z0-9]{1,12})\s*(?:to|into|in2|->|→)\s*([a-z0-9]{1,12})\b", re.IGNORECASE)
+_TOPIC_GUIDE_QUALIFIER_PATTERN = (
+    r"(?:(?:step\s+by\s+step|complete|comprehensive|quick|full|developer|practical)\s+)*"
+    r"(?:guide|tutorial|example|code\s+sample|sample)"
+)
+_TOPIC_PRODUCT_QUALIFIER_RE = re.compile(
+    r"\b(?:using|with|via|for)\s+"
+    r"(?:aspose|groupdocs|conholdate)(?:[.\s]+[a-z0-9]+)?(?:\s+(?:cloud|api|sdk))?\b",
+    re.IGNORECASE,
+)
+_TOPIC_LEADING_HOW_TO_RE = re.compile(r"^how\s+to\s+", re.IGNORECASE)
+_TOPIC_LEADING_GUIDE_RE = re.compile(
+    rf"^(?:how\s+to\s+)?(?:a\s+|an\s+|the\s+)?{_TOPIC_GUIDE_QUALIFIER_PATTERN}\s+"
+    r"(?:to|for|on|about)\s+",
+    re.IGNORECASE,
+)
+_TOPIC_LEADING_DEVELOPER_GUIDE_RE = re.compile(r"^(?:a\s+|an\s+|the\s+)?developer\s+guide\s+", re.IGNORECASE)
+_TOPIC_TRAILING_GUIDE_QUALIFIER_RE = re.compile(
+    rf"\b(?:in|with|using|for|as)\s+(?:a\s+|an\s+|the\s+)?{_TOPIC_GUIDE_QUALIFIER_PATTERN}\b$",
+    re.IGNORECASE,
+)
+_TOPIC_TRAILING_GUIDE_RE = re.compile(
+    rf"\b(?:a\s+|an\s+|the\s+)?{_TOPIC_GUIDE_QUALIFIER_PATTERN}\b$",
+    re.IGNORECASE,
+)
 
 
 # =============================================================================
 # Keyword / title normalization
 # =============================================================================
+
+def _strip_topic_key_decorations(text: str) -> str:
+    out = text
+    for _ in range(3):
+        before = out
+        out = _TOPIC_PRODUCT_QUALIFIER_RE.sub(" ", out)
+        out = _TOPIC_LEADING_GUIDE_RE.sub(" ", out)
+        out = _TOPIC_LEADING_DEVELOPER_GUIDE_RE.sub(" ", out)
+        out = _TOPIC_LEADING_HOW_TO_RE.sub(" ", out)
+        out = _TOPIC_TRAILING_GUIDE_QUALIFIER_RE.sub(" ", out)
+        out = _TOPIC_TRAILING_GUIDE_RE.sub(" ", out)
+        out = _TRAILING_PREPOSITION_RE.sub(" ", out)
+        out = _WS_RE.sub(" ", out).strip(" -,:;")
+        if out == before:
+            break
+    return out
+
 
 @dataclass(frozen=True)
 class KeywordRefiner:
@@ -698,6 +747,13 @@ def platform_to_csharp(value: Optional[str]) -> str:
 
 def platform_to_display(value: Optional[str]) -> str:
     return canonical_platform_label(value)
+
+
+def seo_platform_label(value: Optional[str]) -> str:
+    family = normalize_platform_family(value)
+    if family == "net":
+        return "C#"
+    return PLATFORM_FAMILY_TO_DISPLAY.get(family, family.replace("_", " ").title() if family else "")
 
 
 def platform_header_display(value: Optional[str]) -> str:
@@ -936,20 +992,26 @@ def canonical_topic_key(text: str) -> str:
 
     t = unicodedata.normalize("NFKC", text).strip()
     t = re.sub(r"[-_/]+", " ", t)
+    t = re.sub(r"[:;]+", " ", t)
+    t = _BASE64_TOKEN_RE.sub("base64", t)
     t = _LANG_QUALIFIER_RE.sub(" ", t)
     t = _TRAILING_LANG_TOKEN_RE.sub(" ", t)
     t = _LANG_TOKEN_ANYWHERE_RE.sub(" ", t)
+    t = _SYMBOL_LANG_QUALIFIER_RE.sub(" ", t)
+    t = _SYMBOL_LANG_TOKEN_RE.sub(" ", t)
+    t = _strip_topic_key_decorations(t)
     t = _TOPIC_NOISE_WORDS_RE.sub(" ", t)
     t = _C_NET_NOISE_RE.sub(" ", t)
     t = _FROM_TO_NOISE_RE.sub(" ", t)
     t = _TRAILING_PREPOSITION_RE.sub(" ", t)
+    t = _strip_topic_key_decorations(t)
     t = _WS_RE.sub(" ", t).strip()
 
     m = _CONVERSION_PAIR_RE.search(t)
     if m:
         src = canonical_file_format(m.group(1))
         dst = canonical_file_format(m.group(2))
-        if src in FORMAT_TOKEN_SET and dst in FORMAT_TOKEN_SET:
+        if src in CONVERSION_TOKEN_SET and dst in CONVERSION_TOKEN_SET:
             return _final_topic_cleanup(normalize_text(f"{src} to {dst}"))
 
     return _final_topic_cleanup(normalize_text(t))
@@ -1270,6 +1332,7 @@ title_case = normalize_title_text
 
 __all__ = [
     "ASPOSE_PRODUCT_REGISTRY",
+    "CONVERSION_TOKEN_SET",
     "FILE_FORMAT_REGISTRY",
     "FORMAT_ALIAS_TO_CANONICAL",
     "FORMAT_CANONICAL_TO_ALIASES",
@@ -1313,6 +1376,7 @@ __all__ = [
     "platform_aliases",
     "platform_base_display",
     "platform_header_display",
+    "seo_platform_label",
     "platform_to_csharp",
     "platform_to_display",
     "platform_variant_pattern",

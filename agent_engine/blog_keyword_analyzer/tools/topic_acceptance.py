@@ -42,6 +42,7 @@ def _fix_acronyms(value: str) -> str:
     text = value or ""
     text = re.sub(r"(?i)\b2d\b", "2D", text)
     text = re.sub(r"(?i)\b3d\b", "3D", text)
+    text = re.sub(r"(?i)\bbase\s*64\b", "Base64", text)
     text = re.sub(r"(?i)\bpdfs\b", "PDFs", text)
     text = re.sub(r"(?i)\bpdf\b", "PDF", text)
     text = re.sub(r"(?i)\bxfa\b", "XFA", text)
@@ -67,6 +68,8 @@ def _fix_acronyms(value: str) -> str:
     text = re.sub(r"(?i)\bstep\s*-\s*by\s*-\s*step\b", "Step-by-Step", text)
     text = re.sub(r"(?i)\bimage\s+FILE\b", "Image File", text)
     text = re.sub(r"(?i)\bTXT\s+FILE\b", "TXT file", text)
+    text = re.sub(r"(?i)\bFILE\s+(Path|Size)\b", r"File \1", text)
+    text = re.sub(r"(?i)\bPDF\s+FILE\b", "PDF File", text)
     text = re.sub(r"(?i)\bWi\s+Fi\b", "Wi-Fi", text)
     text = re.sub(r"(?i)\bMulti\s+Column\b", "Multi-Column", text)
     text = re.sub(r"(?i)\bPDF\s+PAGES\b", "PDF Pages", text)
@@ -135,12 +138,80 @@ def _clean_barcode_title_phrase(value: str) -> tuple[str, list[str]]:
     return _clean(text), notes
 
 
+_CONVERSION_ENDPOINT_PATTERN = (
+    r"(?:"
+    r"base\s*64|byte\s+array|memory\s*stream|"
+    r"pdf|epub|html|jpg|jpeg|png|tif|tiff|svg|tex|txt|xfdf|"
+    r"xls|xlsx|xml|json|doc|docx|csv|pub|zip|ppt|pptx|image|images"
+    r")"
+)
+_TITLE_CONVERSION_PAIR_RE = re.compile(
+    rf"(?i)\b(?P<src>{_CONVERSION_ENDPOINT_PATTERN})\s+to\s+"
+    rf"(?P<dst>{_CONVERSION_ENDPOINT_PATTERN})"
+    rf"(?:\s+or\s+(?P<alt>{_CONVERSION_ENDPOINT_PATTERN}))?\b"
+)
+_TITLE_PLATFORM_RE = re.compile(
+    r"(?i)\b(?:in|using|with|for)\s+(?P<platform>C\+\+|C#|\.NET|Java|Python|PHP|Node\.js|JavaScript)\b"
+)
+_CONVERSION_TITLE_DECORATION_RE = re.compile(
+    r"(?i)(?:"
+    r"^how\s+to\s+(?:perform|convert|use)|"
+    r"^step-by-step\s+guide\s+(?:to|for)|"
+    r"^complete\s+guide:|"
+    r"\bconversion\b|\btransformation\b|\bscript\b|\btool\b|\bcommand\b|"
+    r"\bguide\b|\btutorial\b|\bsample\s+code\b|\bcode\s+example\b|"
+    r"\breference\b|\bbest\s+practices\b|\busing\s+in\b"
+    r")"
+)
+
+
+def _conversion_pair_phrase(match: re.Match[str]) -> str:
+    src = _canonical_format(match.group("src"))
+    dst = _canonical_format(match.group("dst"))
+    phrase = f"{src} to {dst}"
+    alt = match.groupdict().get("alt")
+    if alt:
+        phrase = f"{phrase} or {_canonical_format(alt)}"
+    return phrase
+
+
+def _detected_platform_label(text: str, platform: Optional[str]) -> str:
+    platform_label = _platform_label(platform)
+    if platform_label:
+        return platform_label
+    match = _TITLE_PLATFORM_RE.search(text or "")
+    return _platform_label(None, match.group("platform")) if match else ""
+
+
+def _clean_conversion_title_phrase(value: str, platform: Optional[str] = None) -> tuple[str, list[str]]:
+    text = value or ""
+    notes: list[str] = []
+    before = text
+    match = _TITLE_CONVERSION_PAIR_RE.search(text)
+    if not match:
+        return _clean(text), notes
+    if re.match(r"(?i)^\s*parse\s+", text):
+        return _clean(text), notes
+    if not _CONVERSION_TITLE_DECORATION_RE.search(text):
+        return _clean(text), notes
+
+    phrase = f"Convert {_conversion_pair_phrase(match)}"
+    platform_label = _detected_platform_label(text, platform)
+    if platform_label:
+        phrase = f"{phrase} in {platform_label}"
+
+    if phrase != before:
+        notes.append("Rewrote decorated conversion title phrasing.")
+    return _clean(phrase), notes
+
+
 def _clean_pdf_title_phrase(value: str, platform: Optional[str] = None) -> tuple[str, list[str]]:
     text = value or ""
     notes: list[str] = []
     before = text
     if not re.search(
-        r"(?i)\b(pdf|pdfs|xfa|acroforms|pages|crop|merge\s+jpg|create\s+table|graphs\s+and\s+charts)\b",
+        r"(?i)\b(pdf|pdfs|xfa|acroforms|pages|crop|merge\s+jpg|create\s+table|graphs\s+and\s+charts|"
+        r"replace\s+images|rotate\s+text|split\s+pdf|print\s+pdf|shrink\s+pdf|bookmarks?)\b",
         text,
     ):
         return _clean(text), notes
@@ -151,6 +222,8 @@ def _clean_pdf_title_phrase(value: str, platform: Optional[str] = None) -> tuple
         if platform_label
         else r"(?:\.NET|C\+\+|Java|Python|PHP|Node\.js)"
     )
+    if platform_label == "C#":
+        text = re.sub(r"(?i)(?<![A-Za-z0-9])\.NET(?![A-Za-z0-9])", "C#", text)
 
     replacements = [
         (r"(?i)^A\s+Developer\s+Guide\s+(.+)$", r"\1: Developer Guide"),
@@ -163,6 +236,13 @@ def _clean_pdf_title_phrase(value: str, platform: Optional[str] = None) -> tuple
         (r"(?i)^PDF\s+Create\s+PDF\b", "Create PDF"),
         (r"(?i)^PDF\s+Editor\s+Create\s+PDF\b", "Create PDF with PDF Editor"),
         (r"(?i)^How\s+to\s+Perform\s+(PAGES\s+to\s+PDF)\s+Conversion\b", r"Convert \1"),
+        (r"(?i)^How\s+to\s+Perform\s+PDF\s+Version\s+Downgrade\s+to\s+Shrink\s+Size\b", "Downgrade PDF Version to Shrink Size"),
+        (r"(?i)^How\s+to\s+Shrink\s+PDF\s+using\s+Document\.Compress\b", "Shrink PDF using Document.Compress"),
+        (r"(?i)^PDF\s+Search\s+and\s+Extract\s+Text\b", "Search and Extract Text from PDF"),
+        (r"(?i)^Extract\s+PDF\s+Search\s+Results\b", "Extract Search Results from PDF"),
+        (r"(?i)^PDF\s+Bookmarks?\s+Create\s+Hierarchy\b", "Create PDF Bookmark Hierarchy"),
+        (r"(?i)^Rotate\s+PDF\s+Document\s+for\s+Best\s+Tool\s+and\s+Methods\b", "Rotate PDF Document"),
+        (r"(?i)^Program\s+to\s+Rotate\s+PDF\s+Text\s+Content\b", "Rotate Text in PDF"),
         (r"(?i)^Merge\s+JPG\s+Combine\s+JPG\b", "Merge JPG Images"),
     ]
     for pattern, replacement in replacements:
@@ -204,6 +284,14 @@ def _clean_pdf_title_phrase(value: str, platform: Optional[str] = None) -> tuple
     text = re.sub(rf"(?i)^Create\s+Table\s+in\s+({platform_pattern})$", r"Create Table in PDF in \1", text)
     text = re.sub(rf"(?i)^Create\s+Graphs\s+and\s+Charts\s+in\s+({platform_pattern})$", r"Create Graphs and Charts in PDF in \1", text)
     text = re.sub(rf"(?i)^Create\s+PDF\s+with\s+in\s+({platform_pattern})$", r"Create PDF in \1", text)
+    text = re.sub(rf"(?i)^Replace\s+Images\s+in\s+({platform_pattern})$", r"Replace Images in PDF in \1", text)
+    text = re.sub(rf"(?i)^Rotate\s+Text\s+in\s+({platform_pattern})$", r"Rotate Text in PDF in \1", text)
+    text = re.sub(rf"(?i)^Split\s+PDF\s+into\s+Multiple\s+in\s+({platform_pattern})$", r"Split PDF into Multiple Files in \1", text)
+    text = re.sub(rf"(?i)^Remove\s+Pages\s+from\s+PDF\s+Document\s+in\s+({platform_pattern})$", r"Remove Pages from PDF in \1", text)
+    text = re.sub(rf"(?i)^Parse\s+PDF\s+in\s+({platform_pattern}):\s+.+$", r"Parse PDF Content in \1", text)
+    text = re.sub(rf"(?i)^How\s+to\s+Resize\s+PDF\s+Pages\s+to\s+Letter\s+Size\s+in\s+({platform_pattern})$", r"Resize PDF Pages to Letter Size in \1", text)
+    text = re.sub(rf"(?i)^How\s+to\s+Rotate\s+PDF\s+to\s+Portrait\s+Orientation\s+in\s+({platform_pattern})$", r"Rotate PDF to Portrait Orientation in \1", text)
+    text = re.sub(rf"(?i)^How\s+to\s+Rotate\s+PDF\s+During\s+Conversion\s+in\s+({platform_pattern})$", r"Rotate PDF During Conversion in \1", text)
     text = re.sub(r"(?i)\bfrom\s+PDF\s+Files\b", "from PDF", text)
     text = re.sub(r"(?i)\bwith\s+in\s+", "in ", text)
 
@@ -276,6 +364,8 @@ def _clean_malformed_topic_phrase(value: str, platform: Optional[str] = None) ->
     notes.extend(step_notes)
     text, action_notes = _clean_malformed_action_phrase(text)
     notes.extend(action_notes)
+    text, conversion_notes = _clean_conversion_title_phrase(text, platform)
+    notes.extend(conversion_notes)
     text, barcode_notes = _clean_barcode_title_phrase(text)
     notes.extend(barcode_notes)
     text, pdf_notes = _clean_pdf_title_phrase(text, platform)
@@ -284,6 +374,8 @@ def _clean_malformed_topic_phrase(value: str, platform: Optional[str] = None) ->
     platform_label = _platform_label(platform)
     if platform_label:
         before = text
+        if platform_label == "C#":
+            text = re.sub(r"(?i)(?<![A-Za-z0-9])\.NET(?![A-Za-z0-9])", "C#", text)
         platform_pattern = re.escape(platform_label)
         text = re.sub(
             rf"(?i)\s*-\s*{platform_pattern}\s*$",
@@ -365,6 +457,11 @@ def _canonical_format(value: str) -> str:
 
 
 def _platform_label(platform: Optional[str], fallback: str = "") -> str:
+    raw_platform = str(platform or "").strip()
+    raw_fallback = str(fallback or "").strip()
+    raw = raw_platform or raw_fallback
+    if re.fullmatch(r"(?i)(?:c\s*#|csharp|c\s+sharp|net)", raw):
+        return "C#"
     return canonical_platform_label(platform) or refiner.refine(fallback)
 
 

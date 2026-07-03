@@ -4,6 +4,7 @@ from agent_engine.content_gap_agent.tools.normalization import (
     canonical_topic_key,
     normalize_sentence_text,
 )
+from agent_engine.blog_keyword_analyzer.tools.normalization import canonical_topic_key as kra_canonical_topic_key
 from agent_engine.content_indexer_agent.tools.normalization import canonical_topic_key as indexer_canonical_topic_key
 from agent_engine.content_gap_agent.tools.coverage.blogs_to_blogs import (
     compute_blogs_to_blogs,
@@ -74,7 +75,36 @@ def test_format_is_preserved_when_used_as_action() -> None:
     topic = build_content_topic(title=title)
 
     assert topic == "Draw and format text using aspose drawing"
-    assert canonical_topic_key(topic) == "draw and format text using aspose drawing"
+    assert canonical_topic_key(topic) == "draw and format text"
+
+
+def test_topic_key_decorations_collapse_for_general_topics() -> None:
+    cases = {
+        "add watermark to pdf": [
+            "Add Watermark to PDF",
+            "Step-by-Step Guide to Add Watermark to PDF in Python",
+            "Add Watermark to PDF using Aspose.PDF",
+            "Add Watermark to PDF in Complete Guide using .NET",
+            "How to Add Watermark to PDF with Aspose.PDF for Java",
+        ],
+        "extract text from pdf": [
+            "Extract Text from PDF",
+            "Extract Text from PDF in Comprehensive Guide in Python",
+            "Complete Tutorial for Extract Text from PDF using Aspose.PDF",
+            "How to Extract Text from PDF with Aspose.PDF for .NET",
+        ],
+        "generate barcodes": [
+            "Generate Barcodes",
+            "Generate Barcodes with Aspose.BarCode",
+            "Complete Guide to Generate Barcodes in C#",
+        ],
+    }
+
+    for expected, variants in cases.items():
+        for topic in variants:
+            assert canonical_topic_key(topic) == expected
+            assert indexer_canonical_topic_key(topic) == expected
+            assert kra_canonical_topic_key(topic) == expected
 
 
 def test_omr_topics_drop_platform_and_seo_noise() -> None:
@@ -255,6 +285,131 @@ def test_pdf_merge_blog_records_match_across_topic_wording() -> None:
     assert record_gap_key(net_record) == "merge-pdf"
     assert record_gap_key(python_record) == "merge-pdf"
     assert "merge-pdf" in record_gap_keys(python_record)
+
+
+def test_pdf_base64_conversion_topic_keys_collapse_decorated_variants() -> None:
+    variants = [
+        "PDF to base64",
+        "PDF to base64 STEP by STEP guide with Aspose.PDF",
+        "PDF to base64 using Aspose.PDF",
+        "Step-by-Step Guide for PDF to Base64 Conversion in Python",
+        "Convert PDF to Base64 in C# using Aspose.PDF for .NET",
+        "Convert PDF to Base 64 Online",
+    ]
+
+    for topic in variants:
+        assert canonical_topic_key(topic) == "pdf to base64"
+        assert indexer_canonical_topic_key(topic) == "pdf to base64"
+        assert kra_canonical_topic_key(topic) == "pdf to base64"
+
+
+def test_pdf_base64_blog_records_match_across_topic_wording() -> None:
+    base_record = IndexRecord(
+        id="blog::pdf/convert-pdf-to-base64-online/index.md",
+        repo_key="blog",
+        repo_type="blog",
+        platform="general",
+        title="Convert PDF to Base64 Online",
+        topic="PDF to base64",
+        category="Conversion",
+        sub_category="Pdf To Base64",
+        key="pdf to base64",
+    )
+    decorated_record = IndexRecord(
+        id="blog::pdf/convert-pdf-to-base64-in-python/index.md",
+        repo_key="blog",
+        repo_type="blog",
+        platform="python",
+        title="Step-by-Step Guide for PDF to Base64 Conversion in Python",
+        topic="PDF to base64 STEP by STEP guide with Aspose.PDF",
+        category="Data Conversion",
+        sub_category="PDF Encoding",
+        key="pdf to base64 step by step guide with aspose pdf",
+    )
+
+    assert record_gap_key(base_record) == "pdf-to-base64"
+    assert record_gap_key(decorated_record) == "pdf-to-base64"
+    assert "pdf-to-base64" in record_gap_keys(decorated_record)
+
+
+def test_pdf_base64_sheet_export_dedupes_decorated_missing_topics(tmp_path) -> None:
+    coverage_json = tmp_path / "coverage.json"
+    coverage_json.write_text(
+        json.dumps(
+            {
+                "brand_key": "aspose",
+                "product_key": "pdf",
+                "product_name": "Aspose.PDF",
+                "baseline_platform": "all",
+                "rows": [
+                    {
+                        "category": "Conversion",
+                        "sub_category": "Pdf To Base64",
+                        "topic": "PDF to base64",
+                        "coverage": {"general": {"matched": True}, "python": {"matched": False}},
+                    },
+                    {
+                        "category": "Data Conversion",
+                        "sub_category": "PDF Encoding",
+                        "topic": "PDF to base64 STEP by STEP guide with Aspose.PDF",
+                        "coverage": {"general": {"matched": True}, "python": {"matched": False}},
+                    },
+                    {
+                        "category": "Data Encoding",
+                        "sub_category": "PDF Conversion",
+                        "topic": "PDF to base64 using Aspose.PDF",
+                        "coverage": {"general": {"matched": True}, "python": {"matched": False}},
+                    },
+                ],
+            }
+        ),
+        encoding="utf-8",
+    )
+
+    payload = build_payload(coverage_json=coverage_json, sheet_name="All Missing Topics", replace=False)
+
+    assert payload["meta"]["row_count"] == 1
+    assert payload["rows"][0][5] == "PDF to Base64"
+
+
+def test_sheet_export_dedupes_general_topic_key_decorations(tmp_path) -> None:
+    coverage_json = tmp_path / "coverage.json"
+    coverage_json.write_text(
+        json.dumps(
+            {
+                "brand_key": "aspose",
+                "product_key": "pdf",
+                "product_name": "Aspose.PDF",
+                "baseline_platform": "all",
+                "rows": [
+                    {
+                        "category": "Watermarks",
+                        "sub_category": "PDF Watermark",
+                        "topic": "Add Watermark to PDF",
+                        "coverage": {"net": {"matched": True}, "python": {"matched": False}},
+                    },
+                    {
+                        "category": "Document Processing",
+                        "sub_category": "PDF Editing",
+                        "topic": "Step-by-Step Guide to Add Watermark to PDF in Python",
+                        "coverage": {"net": {"matched": True}, "python": {"matched": False}},
+                    },
+                    {
+                        "category": "PDF",
+                        "sub_category": "Aspose.PDF",
+                        "topic": "Add Watermark to PDF using Aspose.PDF",
+                        "coverage": {"net": {"matched": True}, "python": {"matched": False}},
+                    },
+                ],
+            }
+        ),
+        encoding="utf-8",
+    )
+
+    payload = build_payload(coverage_json=coverage_json, sheet_name="All Missing Topics", replace=False)
+
+    assert payload["meta"]["row_count"] == 1
+    assert payload["rows"][0][5] == "Add Watermark to PDF"
 
 
 def test_blogs_to_blogs_infers_dates_from_blog_slug_for_matching(tmp_path) -> None:
