@@ -605,6 +605,101 @@ def _strip_topic_key_decorations(text: str) -> str:
     return out
 
 
+_PDF_GENERIC_TOPIC_KEYS = {
+    "add or remove in pdf",
+    "best pdf for working with pdf",
+    "best pdf for working with pdfs",
+}
+
+
+def _normalize_pdf_topic_key_text(text: str) -> str:
+    t = _WS_RE.sub(" ", str(text or "")).strip(" -,:;")
+    if not t:
+        return ""
+
+    t = re.sub(r"(?i)\bpdfs\b", "pdf", t)
+    t = re.sub(r"(?i)\bpages\b", "pages", t)
+
+    image_ops = {m.group(1).lower() for m in re.finditer(r"(?i)\b(add|extract|remove|replace)\b", t)}
+    if len(image_ops) >= 2 and re.search(r"(?i)\bimages?\b", t) and re.search(r"(?i)\bpdf\b", t):
+        return "add extract remove or replace images in pdf"
+
+    replacements = [
+        (r"(?i)^ai\s+pdf\s+summari[sz]er\s+summari[sz]e\s+any\s+pdf$", "ai pdf summarizer"),
+        (r"(?i)^ai\s+pdf\s+summary\s+generator$", "ai pdf summarizer"),
+        (
+            r"(?i)^acroforms?\s+vs\s+xfa\s+forms?\s+convert\s+xfa\s+to\s+acroforms?\s+in\s+pdf$",
+            "convert xfa to acroforms in pdf",
+        ),
+        (r"(?i)^add\s+and\s+remove\s+attachments\s+in\s+pdf$", "add or remove attachments in pdf"),
+        (r"(?i)^adding\s+digital\s+signatures\s+to\s+pdf$", "add digital signatures to pdf"),
+        (r"(?i)^add\s+watermark\s+in\s+pdf$", "add watermark to pdf"),
+        (r"(?i)^watermark\s+pdf(?:\s+.*)?$", "add watermark to pdf"),
+        (r"(?i)^copy\s+pages\s+in\s+pdf$", "copy pdf pages"),
+        (r"(?i)^crop\s+in\s+pdf\s+try\s+and\s+build$", "crop pdf pages"),
+        (r"(?i)^delete\s+pdf\s+pages$", "delete pages from pdf"),
+        (r"(?i)^generate\s+thumbnail\s+images\s+for\s+pdf\s+pages$", "generate pdf thumbnails"),
+        (r"(?i)^generate\s+thumbnails\s+for\s+pdf$", "generate pdf thumbnails"),
+        (r"(?i)^merge\s+jpg\s+combine\s+jpg$", "merge jpg images"),
+        (r"(?i)^merge\s+two\s+or\s+more\s+pdf$", "merge pdf"),
+        (r"(?i)^pdf\s+create\s+pdf$", "create pdf"),
+        (r"(?i)^creating\s+pdf$", "create pdf"),
+        (r"(?i)^pdf\s+editor\s+create\s+pdf$", "create pdf with pdf editor"),
+        (r"(?i)^remove\s+pages\s+from\s+pdf\s+document$", "remove pages from pdf"),
+        (r"(?i)^resize\s+pdf\s+pages\s+or\s+with\s+code$", "resize pdf pages"),
+        (r"(?i)^resize\s+pdf\s+document$", "resize pdf pages"),
+        (r"(?i)^rotate\s+pdf\s+document\s+for\s+best\s+tool\s+and\s+methods$", "rotate pdf document"),
+        (r"(?i)^search\s+in\s+pdf$", "search text in pdf"),
+        (r"(?i)^shrink\s+pdf\s+quick\s+and\s+easy\s+tips\s+for\s+smaller$", "shrink pdf"),
+        (r"(?i)^split\s+pdf\s+into\s+multiple$", "split pdf into multiple files"),
+        (r"(?i)^working\s+with\s+bookmarks\s+in\s+pdf$", "work with bookmarks in pdf"),
+        (r"(?i)^create\s+multi\s+column\s+pdf\s+in\s+pdf$", "create multi column pdf"),
+    ]
+    for pattern, replacement in replacements:
+        t = re.sub(pattern, replacement, t)
+    return _WS_RE.sub(" ", t).strip(" -,:;")
+
+
+def _looks_like_pdf_context(*values: str, product_key: str = "") -> bool:
+    if str(product_key or "").strip().lower().replace("_", ".") in {"pdf", "aspose.pdf"}:
+        return True
+    return any(re.search(r"(?i)(?<![a-z0-9])pdfs?(?![a-z0-9])", str(value or "")) for value in values)
+
+
+def _pdf_product_display_key(topic_key: str, *, product_key: str = "") -> str:
+    key = topic_key
+    if str(product_key or "").strip().lower().replace("_", ".") not in {"pdf", "aspose.pdf"}:
+        return key
+    weak_pdf_objects = {
+        "create 3d": "create 3d pdf",
+        "create photo album": "create photo album pdf",
+    }
+    return weak_pdf_objects.get(key, key)
+
+
+def normalize_topic_display(text: str, *, key: str = "", product_key: str = "") -> str:
+    raw = str(text or "").strip()
+    raw_key = str(key or "").replace("-", " ").strip()
+    topic_key = canonical_topic_key(raw or raw_key)
+    if not topic_key and raw_key:
+        topic_key = canonical_topic_key(raw_key)
+
+    if _looks_like_pdf_context(raw, raw_key, topic_key, product_key=product_key):
+        pdf_key = _normalize_pdf_topic_key_text(topic_key or raw_key or raw)
+        pdf_key = _pdf_product_display_key(pdf_key, product_key=product_key)
+        if normalize_text(pdf_key) in _PDF_GENERIC_TOPIC_KEYS:
+            return ""
+        display = normalize_sentence_text(pdf_key)
+        display = re.sub(r"(?i)\bPDF\s+PAGES\b", "PDF Pages", display)
+        display = re.sub(r"(?i)\bPAGES\s+(from|in|of)\s+PDF\b", r"Pages \1 PDF", display)
+        display = re.sub(r"(?i)\bxfa\b", "XFA", display)
+        display = re.sub(r"(?i)\bacroforms\b", "AcroForms", display)
+        display = re.sub(r"(?i)^Add watermark to PDF$", "Add Watermark to PDF", display)
+        return display
+
+    return normalize_sentence_text(topic_key or raw or raw_key)
+
+
 @dataclass(frozen=True)
 class KeywordRefiner:
     """Deterministic keyword/title normalizer shared by all agents."""
@@ -938,6 +1033,9 @@ def canonical_topic_key(text: str) -> str:
     t = _TRAILING_PREPOSITION_RE.sub(" ", t)
     t = _strip_topic_key_decorations(t)
     t = _WS_RE.sub(" ", t).strip()
+    t = _normalize_pdf_topic_key_text(t)
+    if normalize_text(t) in _PDF_GENERIC_TOPIC_KEYS:
+        return ""
 
     if _GENERIC_BARCODE_GENERATION_RE.match(t):
         return "generate barcodes"
@@ -972,7 +1070,12 @@ def canonical_topic_key(text: str) -> str:
         action = action_match.group(1).lower()
         target = canonical_file_format(action_match.group(2))
         rest = action_match.group("rest") or ""
-        if target in FORMAT_TOKEN_SET and not (target == "txt" and _TEXT_PAYLOAD_CONTEXT_RE.search(rest)):
+        rest_key = normalize_text(rest)
+        if (
+            target in FORMAT_TOKEN_SET
+            and rest_key in {"", "file", "files", "document", "documents"}
+            and not (target == "txt" and _TEXT_PAYLOAD_CONTEXT_RE.search(rest))
+        ):
             return _final_topic_cleanup(normalize_text(f"{action} {target}"))
 
     return _final_topic_cleanup(normalize_text(t))
@@ -1342,6 +1445,7 @@ __all__ = [
     "normalize_product_display_name",
     "normalize_sentence_text",
     "normalize_text",
+    "normalize_topic_display",
     "normalize_title_text",
     "normalize_whitespace",
     "nor_platform_display_name",

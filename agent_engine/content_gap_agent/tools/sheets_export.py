@@ -6,7 +6,7 @@ from pathlib import Path
 from typing import Any
 
 import requests
-from .normalization import canonical_topic_key, normalize_sentence_text
+from .normalization import canonical_topic_key, normalize_topic_display
 
 BASE_HEADER_KEYS = [
     "brand_key",
@@ -235,7 +235,13 @@ def _extract_rows(coverage_path: Path) -> tuple[list[dict[str, Any]], list[str]]
         if not missing_platforms:
             continue
 
-        raw_topic = normalize_sentence_text(str(row.get("topic") or ""))
+        raw_topic = normalize_topic_display(
+            str(row.get("topic") or ""),
+            key=str(row.get("key") or ""),
+            product_key=product_key,
+        )
+        if not raw_topic:
+            continue
         if _is_generic_missing_topic(product_key, raw_topic):
             continue
 

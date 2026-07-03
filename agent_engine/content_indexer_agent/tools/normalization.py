@@ -687,6 +687,61 @@ def _strip_topic_key_decorations(text: str) -> str:
     return out
 
 
+_PDF_GENERIC_TOPIC_KEYS = {
+    "add or remove in pdf",
+    "best pdf for working with pdf",
+    "best pdf for working with pdfs",
+}
+
+
+def _normalize_pdf_topic_key_text(text: str) -> str:
+    t = _WS_RE.sub(" ", str(text or "")).strip(" -,:;")
+    if not t:
+        return ""
+
+    t = re.sub(r"(?i)\bpdfs\b", "pdf", t)
+    t = re.sub(r"(?i)\bpages\b", "pages", t)
+
+    image_ops = {m.group(1).lower() for m in re.finditer(r"(?i)\b(add|extract|remove|replace)\b", t)}
+    if len(image_ops) >= 2 and re.search(r"(?i)\bimages?\b", t) and re.search(r"(?i)\bpdf\b", t):
+        return "add extract remove or replace images in pdf"
+
+    replacements = [
+        (r"(?i)^ai\s+pdf\s+summari[sz]er\s+summari[sz]e\s+any\s+pdf$", "ai pdf summarizer"),
+        (r"(?i)^ai\s+pdf\s+summary\s+generator$", "ai pdf summarizer"),
+        (
+            r"(?i)^acroforms?\s+vs\s+xfa\s+forms?\s+convert\s+xfa\s+to\s+acroforms?\s+in\s+pdf$",
+            "convert xfa to acroforms in pdf",
+        ),
+        (r"(?i)^add\s+and\s+remove\s+attachments\s+in\s+pdf$", "add or remove attachments in pdf"),
+        (r"(?i)^adding\s+digital\s+signatures\s+to\s+pdf$", "add digital signatures to pdf"),
+        (r"(?i)^add\s+watermark\s+in\s+pdf$", "add watermark to pdf"),
+        (r"(?i)^watermark\s+pdf(?:\s+.*)?$", "add watermark to pdf"),
+        (r"(?i)^copy\s+pages\s+in\s+pdf$", "copy pdf pages"),
+        (r"(?i)^crop\s+in\s+pdf\s+try\s+and\s+build$", "crop pdf pages"),
+        (r"(?i)^delete\s+pdf\s+pages$", "delete pages from pdf"),
+        (r"(?i)^generate\s+thumbnail\s+images\s+for\s+pdf\s+pages$", "generate pdf thumbnails"),
+        (r"(?i)^generate\s+thumbnails\s+for\s+pdf$", "generate pdf thumbnails"),
+        (r"(?i)^merge\s+jpg\s+combine\s+jpg$", "merge jpg images"),
+        (r"(?i)^merge\s+two\s+or\s+more\s+pdf$", "merge pdf"),
+        (r"(?i)^pdf\s+create\s+pdf$", "create pdf"),
+        (r"(?i)^creating\s+pdf$", "create pdf"),
+        (r"(?i)^pdf\s+editor\s+create\s+pdf$", "create pdf with pdf editor"),
+        (r"(?i)^remove\s+pages\s+from\s+pdf\s+document$", "remove pages from pdf"),
+        (r"(?i)^resize\s+pdf\s+pages\s+or\s+with\s+code$", "resize pdf pages"),
+        (r"(?i)^resize\s+pdf\s+document$", "resize pdf pages"),
+        (r"(?i)^rotate\s+pdf\s+document\s+for\s+best\s+tool\s+and\s+methods$", "rotate pdf document"),
+        (r"(?i)^search\s+in\s+pdf$", "search text in pdf"),
+        (r"(?i)^shrink\s+pdf\s+quick\s+and\s+easy\s+tips\s+for\s+smaller$", "shrink pdf"),
+        (r"(?i)^split\s+pdf\s+into\s+multiple$", "split pdf into multiple files"),
+        (r"(?i)^working\s+with\s+bookmarks\s+in\s+pdf$", "work with bookmarks in pdf"),
+        (r"(?i)^create\s+multi\s+column\s+pdf\s+in\s+pdf$", "create multi column pdf"),
+    ]
+    for pattern, replacement in replacements:
+        t = re.sub(pattern, replacement, t)
+    return _WS_RE.sub(" ", t).strip(" -,:;")
+
+
 @dataclass(frozen=True)
 class KeywordRefiner:
     """Deterministic keyword/title normalizer shared by all agents."""
@@ -1018,6 +1073,9 @@ def canonical_topic_key(text: str) -> str:
     t = _TRAILING_PREPOSITION_RE.sub(" ", t)
     t = _strip_topic_key_decorations(t)
     t = _WS_RE.sub(" ", t).strip()
+    t = _normalize_pdf_topic_key_text(t)
+    if normalize_text(t) in _PDF_GENERIC_TOPIC_KEYS:
+        return ""
 
     if _GENERIC_BARCODE_GENERATION_RE.match(t):
         return "generate barcodes"
@@ -1053,7 +1111,12 @@ def canonical_topic_key(text: str) -> str:
         action = action_match.group(1).lower()
         target = canonical_file_format(action_match.group(2))
         rest = action_match.group("rest") or ""
-        if target in FORMAT_TOKEN_SET and not (target == "txt" and _TEXT_PAYLOAD_CONTEXT_RE.search(rest)):
+        rest_key = normalize_text(rest)
+        if (
+            target in FORMAT_TOKEN_SET
+            and rest_key in {"", "file", "files", "document", "documents"}
+            and not (target == "txt" and _TEXT_PAYLOAD_CONTEXT_RE.search(rest))
+        ):
             return _final_topic_cleanup(normalize_text(f"{action} {target}"))
 
     return _final_topic_cleanup(normalize_text(t))

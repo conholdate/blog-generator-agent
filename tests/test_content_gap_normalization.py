@@ -3,6 +3,7 @@ from agent_engine.content_gap_agent.tools.normalization import (
     canonical_file_format,
     canonical_topic_key,
     normalize_sentence_text,
+    normalize_topic_display,
 )
 from agent_engine.blog_keyword_analyzer.tools.normalization import canonical_topic_key as kra_canonical_topic_key
 from agent_engine.content_indexer_agent.tools.normalization import canonical_topic_key as indexer_canonical_topic_key
@@ -370,6 +371,106 @@ def test_pdf_base64_sheet_export_dedupes_decorated_missing_topics(tmp_path) -> N
 
     assert payload["meta"]["row_count"] == 1
     assert payload["rows"][0][5] == "PDF to Base64"
+
+
+def test_pdf_topic_keys_preserve_object_context_and_repair_generated_noise() -> None:
+    cases = {
+        "Create 3D PDF": "create 3d pdf",
+        "PDF create PDF": "create pdf",
+        "Creating PDF": "create pdf",
+        "Watermark PDF in complete guide for developers": "add watermark to pdf",
+        "Resize PDF PAGES or with code": "resize pdf pages",
+        "Rotate PDF document for best tool and methods": "rotate pdf document",
+        "Shrink PDF quick and easy tips for smaller": "shrink pdf",
+        "Split PDF into multiple": "split pdf into multiple files",
+        "Add Remove and Replace Images in PDF": "add extract remove or replace images in pdf",
+        "Add Extract Remove or Replace Images in PDF": "add extract remove or replace images in pdf",
+        "AI PDF summary generator": "ai pdf summarizer",
+        "Acroforms vs xfa forms convert xfa to acroforms in PDF": "convert xfa to acroforms in pdf",
+    }
+
+    for topic, expected in cases.items():
+        assert canonical_topic_key(topic) == expected
+        assert indexer_canonical_topic_key(topic) == expected
+
+    assert canonical_topic_key("Add or remove in PDF") == ""
+    assert indexer_canonical_topic_key("Add or remove in PDF") == ""
+    assert canonical_topic_key("Best PDF for working with pdfs") == ""
+    assert indexer_canonical_topic_key("Best PDF for working with pdfs") == ""
+
+
+def test_pdf_topic_display_uses_readable_label_not_raw_key() -> None:
+    cases = {
+        "Create 3D": "Create 3D PDF",
+        "Create photo album": "Create photo album PDF",
+        "PDF create PDF": "Create PDF",
+        "Resize PDF PAGES or with code": "Resize PDF Pages",
+        "Watermark PDF in complete guide for developers": "Add Watermark to PDF",
+        "Add Remove and Replace Images in PDF": "Add extract remove or replace images in PDF",
+        "Acroforms vs xfa forms convert xfa to acroforms in PDF": "Convert XFA to AcroForms in PDF",
+        "Best PDF for working with pdfs": "",
+    }
+
+    for topic, expected in cases.items():
+        assert normalize_topic_display(topic, product_key="pdf") == expected
+
+
+def test_pdf_sheet_export_cleans_or_skips_regressed_topic_labels(tmp_path) -> None:
+    coverage_json = tmp_path / "coverage.json"
+    coverage_json.write_text(
+        json.dumps(
+            {
+                "brand_key": "aspose",
+                "product_key": "pdf",
+                "product_name": "Aspose.PDF",
+                "baseline_platform": "all",
+                "rows": [
+                    {
+                        "topic": "Create 3D",
+                        "coverage": {"net": {"matched": True}, "python": {"matched": False}},
+                    },
+                    {
+                        "topic": "PDF create PDF",
+                        "coverage": {"net": {"matched": True}, "python": {"matched": False}},
+                    },
+                    {
+                        "topic": "Resize PDF PAGES or with code",
+                        "coverage": {"net": {"matched": True}, "python": {"matched": False}},
+                    },
+                    {
+                        "topic": "Add or remove in PDF",
+                        "coverage": {"net": {"matched": True}, "python": {"matched": False}},
+                    },
+                    {
+                        "topic": "Best PDF for working with pdfs",
+                        "coverage": {"net": {"matched": True}, "python": {"matched": False}},
+                    },
+                ],
+            }
+        ),
+        encoding="utf-8",
+    )
+
+    payload = build_payload(coverage_json=coverage_json, sheet_name="All Missing Topics", replace=False)
+    topics = [row[5] for row in payload["rows"]]
+
+    assert topics == ["Create 3D PDF", "Create PDF", "Resize PDF Pages"]
+
+
+def test_record_gap_key_prefers_richer_pdf_topic_over_weak_index_key() -> None:
+    record = IndexRecord(
+        id="blog::pdf/create-3d-pdf/index.md",
+        repo_key="blog",
+        repo_type="blog",
+        platform="java",
+        title="Create 3D PDF in Java",
+        topic="Create 3D PDF",
+        category="",
+        sub_category="",
+        key="create-3d",
+    )
+
+    assert record_gap_key(record) == "create-3d-pdf"
 
 
 def test_sheet_export_dedupes_general_topic_key_decorations(tmp_path) -> None:

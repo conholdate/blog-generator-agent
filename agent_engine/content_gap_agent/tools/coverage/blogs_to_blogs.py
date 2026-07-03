@@ -14,7 +14,7 @@ from ..normalization import (
     canonical_file_format,
     canonical_topic_key,
     nor_platform_key,
-    normalize_sentence_text,
+    normalize_topic_display,
     normalize_text,
 )
 from .base import CoverageResult, CoverageRow
@@ -63,9 +63,27 @@ def record_gap_key(r: IndexRecord) -> str:
     Prefer indexer-provided key; fallback to canonical topic key if missing.
     Indexing is now responsible for topic normalization quality.
     """
-    if getattr(r, "key", None):
-        return normalize_gap_key(str(r.key))
-    return normalize_gap_key(r.topic or r.title)
+    candidates = [
+        normalize_gap_key(str(getattr(r, attr, "") or ""))
+        for attr in ("key", "topic", "title")
+    ]
+    candidates = [candidate for candidate in candidates if candidate]
+    if not candidates:
+        return ""
+
+    selected = candidates[0]
+    selected_parts = set(selected.split("-"))
+    for candidate in candidates[1:]:
+        candidate_parts = set(candidate.split("-"))
+        if (
+            "pdf" in candidate_parts
+            and "pdf" not in selected_parts
+            and selected_parts
+            and selected_parts.issubset(candidate_parts)
+        ):
+            selected = candidate
+            selected_parts = candidate_parts
+    return selected
 
 
 def _conversion_gap_keys(text: str) -> List[str]:
@@ -316,7 +334,13 @@ def compute_blogs_to_blogs(
     for key_norm, b in sorted(grouped.items(), key=lambda x: x[0]):
         cat = b.category or ""
         sub = b.sub_category or ""
-        display_topic = normalize_sentence_text(canonical_topic_key(b.topic or b.title or key_norm) or key_norm.replace("-", " "))
+        display_topic = normalize_topic_display(
+            b.topic or b.title or key_norm,
+            key=key_norm,
+            product_key=product_key,
+        )
+        if not display_topic:
+            continue
         row_cov: Dict[str, Dict[str, object]] = {}
 
         # If baseline platform explicitly provided, mark it as covered by definition.
