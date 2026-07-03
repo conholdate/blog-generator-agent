@@ -17,62 +17,13 @@
     "excluded_release_update_records": 181,
     "excluded_old_or_undated_records": 182,
     "baseline_records": 215,
-    "total_cells": 560,
-    "matched_cells": 204,
-    "missing_cells": 356,
-    "match_rate": 0.36428571428571427,
+    "total_cells": 475,
+    "matched_cells": 203,
+    "missing_cells": 272,
+    "match_rate": 0.42736842105263156,
     "skipped_empty_keys": 0
   },
   "rows": [
-    {
-      "category": "Document Processing",
-      "sub_category": "Digital Signatures",
-      "topic": "Add and verify digital signatures in PDF documents",
-      "key": "add-and-verify-digital-signatures-in-pdf-documents",
-      "baseline_record_id": "blog::pdf/2020-07-15-add-and-verify-digital-signatures-in-pdf-documents-using-java/index.md",
-      "coverage": {
-        "cpp": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "general": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "java": {
-          "matched": true,
-          "score": 1.0,
-          "record_id": "blog::pdf/2020-07-15-add-and-verify-digital-signatures-in-pdf-documents-using-java/index.md",
-          "title": "Add and Verify Digital Signatures in PDF Documents using Java",
-          "topic": "Add and verify digital signatures in PDF documents",
-          "url": "https://blog.aspose.com/pdf/add-and-verify-digital-signatures-in-pdf-documents-using-java/"
-        },
-        "net": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "python": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        }
-      }
-    },
     {
       "category": "Document Processing",
       "sub_category": "PDF Barcode Generation",
@@ -195,12 +146,12 @@
           "url": null
         },
         "java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::pdf/2020-07-15-add-and-verify-digital-signatures-in-pdf-documents-using-java/index.md",
+          "title": "Add and Verify Digital Signatures in PDF Documents using Java",
+          "topic": "Add and verify digital signatures in PDF documents",
+          "url": "https://blog.aspose.com/pdf/add-and-verify-digital-signatures-in-pdf-documents-using-java/"
         },
         "net": {
           "matched": true,
@@ -223,7 +174,7 @@
     {
       "category": "Development",
       "sub_category": "PDF Manipulation",
-      "topic": "Add extract remove or replace images in PDF",
+      "topic": "Add, extract, remove, or replace images in PDF",
       "key": "add-extract-remove-or-replace-images-in-pdf",
       "baseline_record_id": "blog::pdf/2021-01-25-work-with-images-in-pdf-in-csharp/index.md",
       "coverage": {
@@ -277,12 +228,12 @@
       "baseline_record_id": "blog::pdf/2021-01-04-add-or-remove-annotations-in-pdf-using-csharp/index.md",
       "coverage": {
         "cpp": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::pdf/2021-04-14-working-with-annotations-in-pdf-files-using-cpp/index.md",
+          "title": "Add, Update, and Remove Annotations in PDF using C++",
+          "topic": "Add update and remove annotations in PDF",
+          "url": "https://blog.aspose.com/pdf/working-with-annotations-in-pdf-files-using-cpp/"
         },
         "general": {
           "matched": false,
@@ -417,55 +368,6 @@
       }
     },
     {
-      "category": "PDF Processing",
-      "sub_category": "Annotations",
-      "topic": "Add update and remove annotations in PDF",
-      "key": "add-update-and-remove-annotations-in-pdf",
-      "baseline_record_id": "blog::pdf/2021-04-14-working-with-annotations-in-pdf-files-using-cpp/index.md",
-      "coverage": {
-        "cpp": {
-          "matched": true,
-          "score": 1.0,
-          "record_id": "blog::pdf/2021-04-14-working-with-annotations-in-pdf-files-using-cpp/index.md",
-          "title": "Add, Update, and Remove Annotations in PDF using C++",
-          "topic": "Add update and remove annotations in PDF",
-          "url": "https://blog.aspose.com/pdf/working-with-annotations-in-pdf-files-using-cpp/"
-        },
-        "general": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "net": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "python": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        }
-      }
-    },
-    {
       "category": "Document Processing",
       "sub_category": "PDF Watermarking",
       "topic": "Add Watermark to PDF",
@@ -566,7 +468,7 @@
     {
       "category": "Conversion",
       "sub_category": "Base64 To PDF/JPG/PNG",
-      "topic": "Base64 string to PDF or JPG PNG image",
+      "topic": "Base64 string to PDF or JPG/PNG image",
       "key": "base64-string-to-pdf-or-jpg-png-image",
       "baseline_record_id": "blog::pdf/2020-07-29-convert-base64-string-to-pdf-jpg-png-image-with-java/index.md",
       "coverage": {
@@ -601,55 +503,6 @@
           "title": null,
           "topic": null,
           "url": null
-        },
-        "python": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        }
-      }
-    },
-    {
-      "category": "Pdf Processing",
-      "sub_category": "Page Manipulation",
-      "topic": "Change PDF page size",
-      "key": "change-pdf-page-size",
-      "baseline_record_id": "blog::pdf/2025-05-30-change-pdf-page-size-in-csharp/index.md",
-      "coverage": {
-        "cpp": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "general": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "net": {
-          "matched": true,
-          "score": 1.0,
-          "record_id": "blog::pdf/2025-05-30-change-pdf-page-size-in-csharp/index.md",
-          "title": "Change PDF Page Size in C# Using Aspose.PDF for .NET",
-          "topic": "Change PDF page size using aspose PDF",
-          "url": "https://blog.aspose.com/pdf/change-pdf-page-size-in-csharp/"
         },
         "python": {
           "matched": false,
@@ -775,12 +628,12 @@
           "url": null
         },
         "general": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::pdf/2025-05-26-compress-pdf-document/index.md",
+          "title": "How to Compress PDF Documents - A Complete Guide",
+          "topic": "Compress PDF documents complete guide",
+          "url": "https://blog.aspose.com/pdf/compress-pdf-document/"
         },
         "java": {
           "matched": true,
@@ -805,55 +658,6 @@
           "title": "Compress PDF Files in Python",
           "topic": "Compress PDF",
           "url": "https://blog.aspose.com/pdf/compress-pdf-in-python/"
-        }
-      }
-    },
-    {
-      "category": "File Processing",
-      "sub_category": "PDF Compression",
-      "topic": "Compress PDF documents",
-      "key": "compress-pdf-documents",
-      "baseline_record_id": "blog::pdf/2025-05-26-compress-pdf-document/index.md",
-      "coverage": {
-        "cpp": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "general": {
-          "matched": true,
-          "score": 1.0,
-          "record_id": "blog::pdf/2025-05-26-compress-pdf-document/index.md",
-          "title": "How to Compress PDF Documents - A Complete Guide",
-          "topic": "Compress PDF documents complete guide",
-          "url": "https://blog.aspose.com/pdf/compress-pdf-document/"
-        },
-        "java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "net": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "python": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
         }
       }
     },
@@ -958,8 +762,8 @@
     {
       "category": "Document Processing",
       "sub_category": "PDF Conversion",
-      "topic": "Create 3D PDF converter",
-      "key": "create-3d-pdf-converter",
+      "topic": "Create 3D PDF",
+      "key": "create-3d-pdf",
       "baseline_record_id": "blog::pdf/2020-07-22-3d-pdf-converter-csharp/index.md",
       "coverage": {
         "cpp": {
@@ -1077,12 +881,12 @@
           "url": null
         },
         "java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::pdf/2020-07-20-create-fill-edit-fillable-pdf-form-field-java/index.md",
+          "title": "Fill, Create, or Edit Fillable PDF Forms Programmatically using Java",
+          "topic": "Fill create or edit fillable PDF forms",
+          "url": "https://blog.aspose.com/pdf/create-fill-edit-fillable-pdf-form-field-java/"
         },
         "net": {
           "matched": true,
@@ -1232,12 +1036,12 @@
           "url": "https://blog.aspose.com/pdf/create-pdf-files-in-java/"
         },
         "net": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::pdf/2020-05-21-create-pdf-documents-using-csharp-with-.net-pdf-library/index.md",
+          "title": "Create PDF Files using C# with .NET PDF Library",
+          "topic": "Create PDF PDF library",
+          "url": "https://blog.aspose.com/pdf/create-pdf-documents-using-csharp-with-.net-pdf-library/"
         },
         "python": {
           "matched": true,
@@ -1250,107 +1054,9 @@
       }
     },
     {
-      "category": "Document Processing",
-      "sub_category": "Pdf Generation",
-      "topic": "Create PDF from images",
-      "key": "create-pdf-from-images",
-      "baseline_record_id": "blog::pdf/2021-04-20-create-pdf-from-images-using-csharp/index.md",
-      "coverage": {
-        "cpp": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "general": {
-          "matched": true,
-          "score": 1.0,
-          "record_id": "blog::pdf/2021-04-20-create-pdf-from-images-using-csharp/index.md",
-          "title": "Create PDF File from Images using C#",
-          "topic": "Create PDF from images",
-          "url": "https://blog.aspose.com/pdf/create-pdf-from-images-using-csharp/"
-        },
-        "java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "net": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "python": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        }
-      }
-    },
-    {
-      "category": "Development",
-      "sub_category": "PDF Generation",
-      "topic": "Create PDF PDF",
-      "key": "create-pdf-pdf",
-      "baseline_record_id": "blog::pdf/2020-05-21-create-pdf-documents-using-csharp-with-.net-pdf-library/index.md",
-      "coverage": {
-        "cpp": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "general": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "net": {
-          "matched": true,
-          "score": 1.0,
-          "record_id": "blog::pdf/2020-05-21-create-pdf-documents-using-csharp-with-.net-pdf-library/index.md",
-          "title": "Create PDF Files using C# with .NET PDF Library",
-          "topic": "Create PDF PDF library",
-          "url": "https://blog.aspose.com/pdf/create-pdf-documents-using-csharp-with-.net-pdf-library/"
-        },
-        "python": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        }
-      }
-    },
-    {
       "category": "Web Development",
       "sub_category": "PDF Generation",
-      "topic": "Create PDF with PDF editor",
+      "topic": "Create PDF with PDF Editor",
       "key": "create-pdf-with-pdf-editor",
       "baseline_record_id": "blog::pdf/2020-02-06-create-pdf-files-in-asp-net-core-mvc/index.md",
       "coverage": {
@@ -1642,59 +1348,10 @@
       }
     },
     {
-      "category": "Document Processing",
-      "sub_category": "PDF Editing",
-      "topic": "Delete Pages from PDF",
-      "key": "delete-pages-from-pdf",
-      "baseline_record_id": "blog::pdf/2025-02-03-delete-pages-from-pdf-in-python/index.md",
-      "coverage": {
-        "cpp": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "general": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "java": {
-          "matched": true,
-          "score": 1.0,
-          "record_id": "blog::pdf/2025-06-30-delete-pdf-pages-in-java/index.md",
-          "title": "Delete PDF Pages in Java using Aspose.PDF",
-          "topic": "Delete PDF pages using aspose PDF",
-          "url": "https://blog.aspose.com/pdf/delete-pdf-pages-in-java/"
-        },
-        "net": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "python": {
-          "matched": true,
-          "score": 1.0,
-          "record_id": "blog::pdf/2025-02-03-delete-pages-from-pdf-in-python/index.md",
-          "title": "Delete Pages from PDF in Python",
-          "topic": "Delete pages from PDF",
-          "url": "https://blog.aspose.com/pdf/delete-pages-from-pdf-in-python/"
-        }
-      }
-    },
-    {
       "category": "Document Management",
       "sub_category": "PDF Editing",
-      "topic": "Edit PDF document PDF editor",
-      "key": "edit-pdf-document-pdf-editor",
+      "topic": "Edit PDF document",
+      "key": "edit-pdf-document",
       "baseline_record_id": "blog::pdf/2024-10-17-edit-pdf-document-online-free/index.md",
       "coverage": {
         "cpp": {
@@ -1740,68 +1397,19 @@
       }
     },
     {
-      "category": "Document Processing",
-      "sub_category": "Pdf Page Size",
-      "topic": "Edit PDF page size",
-      "key": "edit-pdf-page-size",
-      "baseline_record_id": "blog::pdf/2025-06-12-edit-pdf-page-size-in-java/index.md",
-      "coverage": {
-        "cpp": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "general": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "java": {
-          "matched": true,
-          "score": 1.0,
-          "record_id": "blog::pdf/2025-06-12-edit-pdf-page-size-in-java/index.md",
-          "title": "Edit PDF Page Size in Java Using Aspose.PDF for Java",
-          "topic": "Edit PDF page size using aspose PDF",
-          "url": "https://blog.aspose.com/pdf/edit-pdf-page-size-in-java/"
-        },
-        "net": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "python": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        }
-      }
-    },
-    {
       "category": "Security",
       "sub_category": "PDF Encryption",
-      "topic": "Encrypt and decrypt PDF",
-      "key": "encrypt-and-decrypt-pdf",
+      "topic": "Encrypt or decrypt PDF",
+      "key": "encrypt-or-decrypt-pdf",
       "baseline_record_id": "blog::pdf/2020-04-28-encrypt-or-decrypt-pdf-files-programmatically-using-csharp-asp.net/index.md",
       "coverage": {
         "cpp": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::pdf/2020-09-25-encrypt-or-decrypt-pdf-files-using-cpp/index.md",
+          "title": "Encrypt or Decrypt PDF Files using C++",
+          "topic": "Encrypt or decrypt PDF",
+          "url": "https://blog.aspose.com/pdf/encrypt-or-decrypt-pdf-files-using-cpp/"
         },
         "general": {
           "matched": false,
@@ -1826,55 +1434,6 @@
           "title": "Encrypt and Decrypt PDF Files using C#",
           "topic": "Encrypt and decrypt PDF",
           "url": "https://blog.aspose.com/pdf/encrypt-or-decrypt-pdf-files-programmatically-using-csharp-asp.net/"
-        },
-        "python": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        }
-      }
-    },
-    {
-      "category": "Document Processing",
-      "sub_category": "Security",
-      "topic": "Encrypt or decrypt PDF",
-      "key": "encrypt-or-decrypt-pdf",
-      "baseline_record_id": "blog::pdf/2020-09-25-encrypt-or-decrypt-pdf-files-using-cpp/index.md",
-      "coverage": {
-        "cpp": {
-          "matched": true,
-          "score": 1.0,
-          "record_id": "blog::pdf/2020-09-25-encrypt-or-decrypt-pdf-files-using-cpp/index.md",
-          "title": "Encrypt or Decrypt PDF Files using C++",
-          "topic": "Encrypt or decrypt PDF",
-          "url": "https://blog.aspose.com/pdf/encrypt-or-decrypt-pdf-files-using-cpp/"
-        },
-        "general": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "net": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
         },
         "python": {
           "matched": true,
@@ -2083,55 +1642,6 @@
       }
     },
     {
-      "category": "File Formats",
-      "sub_category": "PDF Data Extraction",
-      "topic": "Extract table from PDF",
-      "key": "extract-table-from-pdf",
-      "baseline_record_id": "blog::pdf/2023-05-03-extract-table-from-pdf-in-python/index.md",
-      "coverage": {
-        "cpp": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "general": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "net": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "python": {
-          "matched": true,
-          "score": 1.0,
-          "record_id": "blog::pdf/2023-05-03-extract-table-from-pdf-in-python/index.md",
-          "title": "Extract Table from PDF in Python",
-          "topic": "Extract table from PDF",
-          "url": "https://blog.aspose.com/pdf/extract-table-from-pdf-in-python/"
-        }
-      }
-    },
-    {
       "category": "Document Processing",
       "sub_category": "Table Extraction",
       "topic": "Extract tables from PDF",
@@ -2171,29 +1681,29 @@
           "url": null
         },
         "python": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::pdf/2023-05-03-extract-table-from-pdf-in-python/index.md",
+          "title": "Extract Table from PDF in Python",
+          "topic": "Extract table from PDF",
+          "url": "https://blog.aspose.com/pdf/extract-table-from-pdf-in-python/"
         }
       }
     },
     {
-      "category": "Programming",
-      "sub_category": "PDF Processing",
+      "category": "Document Processing",
+      "sub_category": "Text Extraction",
       "topic": "Extract text from PDF",
       "key": "extract-text-from-pdf",
-      "baseline_record_id": "blog::pdf/2020-05-16-extract-text-from-pdf-csharp-vb-net/index.md",
+      "baseline_record_id": "blog::pdf/2020-04-21-extract-text-from-pdf-programmatically-cpp-pdf-reader-library/index.md",
       "coverage": {
         "cpp": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::pdf/2020-04-21-extract-text-from-pdf-programmatically-cpp-pdf-reader-library/index.md",
+          "title": "Extract Text from PDF Documents Programmatically using C++",
+          "topic": "Extract text from PDF documents",
+          "url": "https://blog.aspose.com/pdf/extract-text-from-pdf-programmatically-cpp-pdf-reader-library/"
         },
         "general": {
           "matched": false,
@@ -2226,104 +1736,6 @@
           "title": "Extract Text from PDF in Python",
           "topic": "Extract text from PDF",
           "url": "https://blog.aspose.com/pdf/extract-text-from-pdf-in-python/"
-        }
-      }
-    },
-    {
-      "category": "Document Processing",
-      "sub_category": "Text Extraction",
-      "topic": "Extract text from PDF documents",
-      "key": "extract-text-from-pdf-documents",
-      "baseline_record_id": "blog::pdf/2020-04-21-extract-text-from-pdf-programmatically-cpp-pdf-reader-library/index.md",
-      "coverage": {
-        "cpp": {
-          "matched": true,
-          "score": 1.0,
-          "record_id": "blog::pdf/2020-04-21-extract-text-from-pdf-programmatically-cpp-pdf-reader-library/index.md",
-          "title": "Extract Text from PDF Documents Programmatically using C++",
-          "topic": "Extract text from PDF documents",
-          "url": "https://blog.aspose.com/pdf/extract-text-from-pdf-programmatically-cpp-pdf-reader-library/"
-        },
-        "general": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "net": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "python": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        }
-      }
-    },
-    {
-      "category": "Document Processing",
-      "sub_category": "PDF Form Handling",
-      "topic": "Fill create or edit fillable PDF forms",
-      "key": "fill-create-or-edit-fillable-pdf-forms",
-      "baseline_record_id": "blog::pdf/2020-07-20-create-fill-edit-fillable-pdf-form-field-java/index.md",
-      "coverage": {
-        "cpp": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "general": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "java": {
-          "matched": true,
-          "score": 1.0,
-          "record_id": "blog::pdf/2020-07-20-create-fill-edit-fillable-pdf-form-field-java/index.md",
-          "title": "Fill, Create, or Edit Fillable PDF Forms Programmatically using Java",
-          "topic": "Fill create or edit fillable PDF forms",
-          "url": "https://blog.aspose.com/pdf/create-fill-edit-fillable-pdf-form-field-java/"
-        },
-        "net": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "python": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
         }
       }
     },
@@ -2392,12 +1804,12 @@
           "url": null
         },
         "general": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::pdf/2021-04-20-create-pdf-from-images-using-csharp/index.md",
+          "title": "Create PDF File from Images using C#",
+          "topic": "Create PDF from images",
+          "url": "https://blog.aspose.com/pdf/create-pdf-from-images-using-csharp/"
         },
         "java": {
           "matched": true,
@@ -2524,59 +1936,10 @@
       }
     },
     {
-      "category": "Programming",
-      "sub_category": "Pdf Generation",
-      "topic": "Image to PDF",
-      "key": "image-to-pdf",
-      "baseline_record_id": "blog::pdf/2022-10-20-convert-image-to-pdf-csharp/index.md",
-      "coverage": {
-        "cpp": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "general": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "java": {
-          "matched": true,
-          "score": 1.0,
-          "record_id": "blog::pdf/2022-10-26-convert-image-to-pdf-java/index.md",
-          "title": "How to Convert Image to PDF in Java",
-          "topic": "Image to PDF",
-          "url": "https://blog.aspose.com/pdf/convert-image-to-pdf-java/"
-        },
-        "net": {
-          "matched": true,
-          "score": 1.0,
-          "record_id": "blog::pdf/2022-10-20-convert-image-to-pdf-csharp/index.md",
-          "title": "Convert Image to PDF in C#: A Complete Guide",
-          "topic": "Image to PDF in complete guide",
-          "url": "https://blog.aspose.com/pdf/convert-image-to-pdf-csharp/"
-        },
-        "python": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        }
-      }
-    },
-    {
       "category": "File Conversion",
       "sub_category": "Image to PDF",
-      "topic": "Images to PDF",
-      "key": "images-to-pdf",
+      "topic": "Image to PDF",
+      "key": "image-to-pdf",
       "baseline_record_id": "blog::pdf/2021-04-14-convert-images-to-pdf-using-java/index.md",
       "coverage": {
         "cpp": {
@@ -2604,12 +1967,12 @@
           "url": "https://blog.aspose.com/pdf/convert-images-to-pdf-using-java/"
         },
         "net": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::pdf/2022-10-20-convert-image-to-pdf-csharp/index.md",
+          "title": "Convert Image to PDF in C#: A Complete Guide",
+          "topic": "Image to PDF in complete guide",
+          "url": "https://blog.aspose.com/pdf/convert-image-to-pdf-csharp/"
         },
         "python": {
           "matched": false,
@@ -2673,7 +2036,7 @@
     {
       "category": "Document Processing",
       "sub_category": "Image to PDF Conversion",
-      "topic": "JPG PNG TIFF EMF or BMP images to PDF",
+      "topic": "JPG, PNG, TIFF, EMF, or BMP images to PDF",
       "key": "jpg-png-tiff-emf-or-bmp-images-to-pdf",
       "baseline_record_id": "blog::pdf/2020-07-26-images-to-pdf-csharp/index.md",
       "coverage": {
@@ -3114,8 +2477,8 @@
     {
       "category": "Data Processing",
       "sub_category": "PDF Parsing",
-      "topic": "Parse PDF in powerful",
-      "key": "parse-pdf-in-powerful",
+      "topic": "Parse PDF",
+      "key": "parse-pdf",
       "baseline_record_id": "blog::pdf/2025-03-19-parse-pdf-in-python/index.md",
       "coverage": {
         "cpp": {
@@ -3163,7 +2526,7 @@
     {
       "category": "Document Processing",
       "sub_category": "PDF Conversion",
-      "topic": "PDF documents to Excel XLS XLSX",
+      "topic": "PDF to Excel XLS/XLSX",
       "key": "pdf-documents-to-excel-xls-xlsx",
       "baseline_record_id": "blog::pdf/2020-06-24-convert-pdf-to-excel-xls-xlsx-using-java/index.md",
       "coverage": {
@@ -3261,7 +2624,7 @@
     {
       "category": "Programming",
       "sub_category": "File Conversion",
-      "topic": "PDF to byte array or byte array to PDF",
+      "topic": "PDF to Byte Array or Byte Array to PDF",
       "key": "pdf-to-byte-array-or-byte-array-to-pdf",
       "baseline_record_id": "blog::pdf/2020-11-29-convert-file-byte-array-pdf-csharp/index.md",
       "coverage": {
@@ -3555,7 +2918,7 @@
     {
       "category": "Programming",
       "sub_category": "Python",
-      "topic": "PDF to image",
+      "topic": "PDF to Image",
       "key": "pdf-to-image",
       "baseline_record_id": "blog::pdf/2023-03-24-convert-pdf-to-image-in-python/index.md",
       "coverage": {
@@ -4190,11 +3553,11 @@
       }
     },
     {
-      "category": "Document Processing",
-      "sub_category": "PDF Printing",
+      "category": "Development",
+      "sub_category": "PDF Processing",
       "topic": "Print PDF",
       "key": "print-pdf",
-      "baseline_record_id": "blog::pdf/2020-11-04-print-pdf-files-programmatically-using-java/index.md",
+      "baseline_record_id": "blog::pdf/2020-07-09-print-pdf-csharp/index.md",
       "coverage": {
         "cpp": {
           "matched": false,
@@ -4219,55 +3582,6 @@
           "title": "Print PDF Files Programmatically using Java",
           "topic": "Print PDF",
           "url": "https://blog.aspose.com/pdf/print-pdf-files-programmatically-using-java/"
-        },
-        "net": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "python": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        }
-      }
-    },
-    {
-      "category": "Development",
-      "sub_category": "PDF Processing",
-      "topic": "Print PDF documents",
-      "key": "print-pdf-documents",
-      "baseline_record_id": "blog::pdf/2020-07-09-print-pdf-csharp/index.md",
-      "coverage": {
-        "cpp": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "general": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
         },
         "net": {
           "matched": true,
@@ -4388,7 +3702,7 @@
     {
       "category": "Programming",
       "sub_category": "File Conversion",
-      "topic": "PUB to image",
+      "topic": "PUB to Image",
       "key": "pub-to-image",
       "baseline_record_id": "blog::pdf/2021-07-23-convert-pub-to-image-using-cpp/index.md",
       "coverage": {
@@ -4484,11 +3798,11 @@
       }
     },
     {
-      "category": "Pdf Manipulation",
-      "sub_category": "Page Management",
+      "category": "Document Processing",
+      "sub_category": "PDF Editing",
       "topic": "Remove Pages from PDF",
       "key": "remove-pages-from-pdf",
-      "baseline_record_id": "blog::pdf/2025-04-14-remove-pages-from-pdf-document-in-csharp/index.md",
+      "baseline_record_id": "blog::pdf/2025-02-03-delete-pages-from-pdf-in-python/index.md",
       "coverage": {
         "cpp": {
           "matched": false,
@@ -4507,12 +3821,12 @@
           "url": null
         },
         "java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::pdf/2025-06-30-delete-pdf-pages-in-java/index.md",
+          "title": "Delete PDF Pages in Java using Aspose.PDF",
+          "topic": "Delete PDF pages using aspose PDF",
+          "url": "https://blog.aspose.com/pdf/delete-pdf-pages-in-java/"
         },
         "net": {
           "matched": true,
@@ -4523,12 +3837,12 @@
           "url": "https://blog.aspose.com/pdf/remove-pages-from-pdf-document-in-csharp/"
         },
         "python": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::pdf/2025-02-03-delete-pages-from-pdf-in-python/index.md",
+          "title": "Delete Pages from PDF in Python",
+          "topic": "Delete pages from PDF",
+          "url": "https://blog.aspose.com/pdf/delete-pages-from-pdf-in-python/"
         }
       }
     },
@@ -4654,20 +3968,20 @@
           "url": "https://blog.aspose.com/pdf/resize-pdf-document-in-python/"
         },
         "java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::pdf/2025-06-12-edit-pdf-page-size-in-java/index.md",
+          "title": "Edit PDF Page Size in Java Using Aspose.PDF for Java",
+          "topic": "Edit PDF page size using aspose PDF",
+          "url": "https://blog.aspose.com/pdf/edit-pdf-page-size-in-java/"
         },
         "net": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::pdf/2025-05-30-change-pdf-page-size-in-csharp/index.md",
+          "title": "Change PDF Page Size in C# Using Aspose.PDF for .NET",
+          "topic": "Change PDF page size using aspose PDF",
+          "url": "https://blog.aspose.com/pdf/change-pdf-page-size-in-csharp/"
         },
         "python": {
           "matched": false,
@@ -4685,55 +3999,6 @@
       "topic": "Rotate PDF",
       "key": "rotate-pdf",
       "baseline_record_id": "blog::pdf/2023-04-06-rotate-pdf-in-python/index.md",
-      "coverage": {
-        "cpp": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "general": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "net": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "python": {
-          "matched": true,
-          "score": 1.0,
-          "record_id": "blog::pdf/2023-04-06-rotate-pdf-in-python/index.md",
-          "title": "Rotate PDF Files in Python",
-          "topic": "Rotate PDF",
-          "url": "https://blog.aspose.com/pdf/rotate-pdf-in-python/"
-        }
-      }
-    },
-    {
-      "category": "Document Processing",
-      "sub_category": "PDF Manipulation",
-      "topic": "Rotate PDF document",
-      "key": "rotate-pdf-document",
-      "baseline_record_id": "blog::pdf/2025-03-27-rotate-pdf-document-online/index.md",
       "coverage": {
         "cpp": {
           "matched": false,
@@ -4768,12 +4033,12 @@
           "url": null
         },
         "python": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::pdf/2023-04-06-rotate-pdf-in-python/index.md",
+          "title": "Rotate PDF Files in Python",
+          "topic": "Rotate PDF",
+          "url": "https://blog.aspose.com/pdf/rotate-pdf-in-python/"
         }
       }
     },
@@ -4783,55 +4048,6 @@
       "topic": "Rotate PDF Pages text or image",
       "key": "rotate-pdf-pages-text-or-image",
       "baseline_record_id": "blog::pdf/2020-10-18-rotate-pdf-text-image-page-with-csharp-vb-net/index.md",
-      "coverage": {
-        "cpp": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "general": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "net": {
-          "matched": true,
-          "score": 1.0,
-          "record_id": "blog::pdf/2020-10-18-rotate-pdf-text-image-page-with-csharp-vb-net/index.md",
-          "title": "Rotate PDF Pages, the Text or Image with C# or VB.NET",
-          "topic": "Rotate PDF pages text or image",
-          "url": "https://blog.aspose.com/pdf/rotate-pdf-text-image-page-with-csharp-vb-net/"
-        },
-        "python": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        }
-      }
-    },
-    {
-      "category": "PDF Processing",
-      "sub_category": "Page Manipulation",
-      "topic": "Rotate PDF Pages text or images",
-      "key": "rotate-pdf-pages-text-or-images",
-      "baseline_record_id": "blog::pdf/2021-05-31-rotate-pdf-pages-text-or-image-using-cpp/index.md",
       "coverage": {
         "cpp": {
           "matched": true,
@@ -4858,12 +4074,12 @@
           "url": null
         },
         "net": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::pdf/2020-10-18-rotate-pdf-text-image-page-with-csharp-vb-net/index.md",
+          "title": "Rotate PDF Pages, the Text or Image with C# or VB.NET",
+          "topic": "Rotate PDF pages text or image",
+          "url": "https://blog.aspose.com/pdf/rotate-pdf-text-image-page-with-csharp-vb-net/"
         },
         "python": {
           "matched": false,
@@ -5023,11 +4239,11 @@
       }
     },
     {
-      "category": "File Management",
-      "sub_category": "Pdf Manipulation",
+      "category": "File Processing",
+      "sub_category": "PDF Splitting",
       "topic": "Split PDF",
       "key": "split-pdf",
-      "baseline_record_id": "blog::pdf/2021-01-15-split-pdf-files-using-java/index.md",
+      "baseline_record_id": "blog::pdf/2020-11-03-split-pdf-into-multiple-files-using-csharp/index.md",
       "coverage": {
         "cpp": {
           "matched": true,
@@ -5052,55 +4268,6 @@
           "title": "Split a PDF File using Java",
           "topic": "Split PDF",
           "url": "https://blog.aspose.com/pdf/split-pdf-files-using-java/"
-        },
-        "net": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "python": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        }
-      }
-    },
-    {
-      "category": "File Processing",
-      "sub_category": "PDF Splitting",
-      "topic": "Split PDF into multiple files",
-      "key": "split-pdf-into-multiple-files",
-      "baseline_record_id": "blog::pdf/2020-11-03-split-pdf-into-multiple-files-using-csharp/index.md",
-      "coverage": {
-        "cpp": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "general": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
         },
         "net": {
           "matched": true,
