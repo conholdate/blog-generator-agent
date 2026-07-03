@@ -3,36 +3,105 @@
 - **Brand:** Aspose
 - **Product:** Aspose.PDF
 - **Platform:** ALL
-- **Total Topics:** 24
+- **Total Topics:** 93
 
 ---
 ## All Missing Topics
 
 | # | Topic | Missing platforms (high-impact)|
 | --- | --- | --- |
-| 1 | Acroforms vs xfa forms convert xfa to acroforms in PDF | CPP, JAVA, NET, PYTHON |
+| 1 | Add barcode to PDF | CPP, GENERAL, JAVA, PYTHON |
 | 2 | Add data from database to PDF | CPP, GENERAL, JAVA, PYTHON |
-| 3 | Adding digital signatures to pdfs STEP by STEP guide | CPP, GENERAL, JAVA, PYTHON |
-| 4 | Base64 string to PDF or JPG PNG image | CPP, GENERAL, NET, PYTHON |
-| 5 | Crop PDF PAGES | CPP, GENERAL, JAVA, NET |
-| 6 | CSV to PDF | CPP, GENERAL, JAVA, PYTHON |
-| 7 | Edit PDF document PDF editor | CPP, JAVA, NET, PYTHON |
-| 8 | Extract PAGES from PDF | CPP, GENERAL, JAVA, NET |
-| 9 | Extract text from PDF | CPP, GENERAL, NET, PYTHON |
-| 10 | Generate thumbnails for PDF | CPP, GENERAL, JAVA, PYTHON |
-| 11 | HTML to PDF | CPP, GENERAL, NET, PYTHON |
-| 12 | Insert or delete text image watermarks in PDF | GENERAL, JAVA, NET, PYTHON |
-| 13 | JPG PNG TIFF EMF or BMP images to PDF | CPP, GENERAL, JAVA, PYTHON |
-| 14 | JPG to PDF | CPP, GENERAL, JAVA, NET |
-| 15 | MemoryStream to PDF or PDF to MemoryStream | CPP, GENERAL, JAVA, PYTHON |
-| 16 | Merge multiple PDF | CPP, GENERAL, JAVA, PYTHON |
-| 17 | PDF documents to Excel XLS XLSX | CPP, GENERAL, NET, PYTHON |
-| 18 | PDF to base64 | CPP, JAVA, NET, PYTHON |
-| 19 | PDF to CSV | CPP, GENERAL, JAVA |
-| 20 | PDF to DOCX | CPP, GENERAL, NET, PYTHON |
-| 21 | PDF to PNG | CPP, GENERAL, JAVA, NET |
-| 22 | PDF to XLSX | CPP, GENERAL, JAVA, PYTHON |
-| 23 | Split PDF into multiple | CPP, GENERAL, JAVA, NET |
-| 24 | TEX to DOCX | CPP, GENERAL, JAVA, PYTHON |
+| 3 | Add digital signatures to PDF | CPP, GENERAL, PYTHON |
+| 4 | Add extract remove or replace images in PDF | GENERAL, PYTHON |
+| 5 | Add or remove annotations in PDF | GENERAL, PYTHON |
+| 6 | Add or remove attachments in PDF | GENERAL, PYTHON |
+| 7 | Add or update hyperlinks in PDF | CPP, GENERAL, PYTHON |
+| 8 | Add Watermark to PDF | CPP, GENERAL |
+| 9 | AI PDF summarizer | CPP, JAVA, PYTHON |
+| 10 | Base64 string to PDF or JPG/PNG image | CPP, GENERAL, NET, PYTHON |
+| 11 | Combine JPG images to PDF | CPP, GENERAL, JAVA, NET |
+| 12 | Compress or optimize PDF with same quality | GENERAL, NET, PYTHON |
+| 13 | Compress PDF | CPP |
+| 14 | Convert xfa to AcroForms in PDF | CPP, JAVA, NET, PYTHON |
+| 15 | Copy PDF Pages | CPP, GENERAL, JAVA, PYTHON |
+| 16 | Create 3D PDF | CPP, GENERAL, JAVA, PYTHON |
+| 17 | Create booklet from PDF | CPP, GENERAL, PYTHON |
+| 18 | Create fill or edit fillable PDF forms | GENERAL, PYTHON |
+| 19 | Create graphs and charts in PDF | CPP, GENERAL, PYTHON |
+| 20 | Create multi column PDF | CPP, GENERAL, PYTHON |
+| 21 | Create PDF | GENERAL |
+| 22 | Create PDF with PDF Editor | CPP, GENERAL, JAVA, PYTHON |
+| 23 | Create photo album PDF | CPP, GENERAL, PYTHON |
+| 24 | Create table in PDF | CPP, GENERAL, PYTHON |
+| 25 | Create tagged PDF | CPP, GENERAL, PYTHON |
+| 26 | Crop PDF Pages | CPP |
+| 27 | CSV to PDF | GENERAL, JAVA, PYTHON |
+| 28 | Edit PDF document | CPP, JAVA, NET, PYTHON |
+| 29 | Encrypt or decrypt PDF | GENERAL |
+| 30 | EPUB to PDF | CPP, JAVA, NET |
+| 31 | Extract data from tables in PDF | GENERAL, JAVA, PYTHON |
+| 32 | Extract images from PDF | GENERAL |
+| 33 | Extract Pages from PDF | CPP, GENERAL, JAVA, NET |
+| 34 | Extract tables from PDF | CPP, GENERAL, NET |
+| 35 | Extract text from PDF | GENERAL |
+| 36 | Find and replace text in PDF | GENERAL |
+| 37 | Generate PDF from images | CPP, NET, PYTHON |
+| 38 | Generate PDF thumbnails | CPP, GENERAL, PYTHON |
+| 39 | HTML to PDF | CPP |
+| 40 | Image to PDF | GENERAL, PYTHON |
+| 41 | Insert or delete text image watermarks in PDF | GENERAL, JAVA, NET, PYTHON |
+| 42 | JPG PNG TIFF EMF or BMP images to PDF | CPP, GENERAL, JAVA, PYTHON |
+| 43 | JPG to PDF | CPP, JAVA |
+| 44 | MemoryStream to PDF or PDF to MemoryStream | CPP, GENERAL, JAVA, PYTHON |
+| 45 | Merge JPG images | CPP, GENERAL, NET, PYTHON |
+| 46 | Merge JPG images to PDF | CPP, GENERAL, JAVA, PYTHON |
+| 47 | MPP to DOCX | CPP, GENERAL, JAVA, PYTHON |
+| 48 | Optimize PDF | CPP, GENERAL, NET, PYTHON |
+| 49 | PAGES to PDF | CPP, GENERAL, JAVA, NET |
+| 50 | Parse PDF | CPP, GENERAL, JAVA, NET |
+| 51 | PDF to Excel XLS/XLSX | CPP, GENERAL, NET, PYTHON |
+| 52 | PDF to Base64 | CPP, JAVA, PYTHON |
+| 53 | PDF to Byte Array or Byte Array to PDF | CPP, GENERAL, JAVA, PYTHON |
+| 54 | PDF to CSV | GENERAL, JAVA |
+| 55 | PDF to DOC | GENERAL, JAVA, NET |
+| 56 | PDF to DOCX | NET, PYTHON |
+| 57 | PDF to EPUB | CPP, JAVA, PYTHON |
+| 58 | PDF to HTML | GENERAL, NET |
+| 59 | PDF to Image | CPP, GENERAL, JAVA, NET |
+| 60 | PDF to JPG | CPP, JAVA, PYTHON |
+| 61 | PDF to PPT | CPP, GENERAL |
+| 62 | PDF to PPTX | CPP, GENERAL, JAVA, PYTHON |
+| 63 | PDF to SVG | GENERAL, PYTHON |
+| 64 | PDF to TEX | CPP, GENERAL |
+| 65 | PDF to TIF | CPP, GENERAL, JAVA, NET |
+| 66 | PDF to TXT | CPP, GENERAL, JAVA, PYTHON |
+| 67 | PDF to XFDF | CPP, GENERAL, JAVA, PYTHON |
+| 68 | PDF to XLSX | CPP |
+| 69 | PDF to XML | CPP, GENERAL |
+| 70 | PNG to PDF | CPP, JAVA |
+| 71 | Print PDF | CPP, GENERAL, PYTHON |
+| 72 | Print PDF to printer | CPP, JAVA, NET, PYTHON |
+| 73 | PUB to DOCX | GENERAL, JAVA, NET, PYTHON |
+| 74 | PUB to Image | GENERAL, JAVA, NET, PYTHON |
+| 75 | Remove images from PDF | CPP, GENERAL, NET |
+| 76 | Remove Pages from PDF | CPP, GENERAL |
+| 77 | Remove watermark from PDF | CPP, JAVA |
+| 78 | Replace images in PDF | CPP, GENERAL, PYTHON |
+| 79 | Resize PDF Pages | CPP, PYTHON |
+| 80 | Rotate PDF | CPP, JAVA, NET |
+| 81 | Rotate PDF Pages text or image | GENERAL, JAVA, PYTHON |
+| 82 | Rotate text in PDF | CPP, GENERAL, PYTHON |
+| 83 | Search text in PDF | CPP, GENERAL, JAVA, PYTHON |
+| 84 | Shrink PDF | CPP, JAVA, NET, PYTHON |
+| 85 | Split PDF | GENERAL |
+| 86 | TEX to DOCX | GENERAL |
+| 87 | TEX to PDF | CPP, GENERAL |
+| 88 | TIF to PDF | CPP, GENERAL, JAVA, PYTHON |
+| 89 | TXT to PDF | CPP, GENERAL, PYTHON |
+| 90 | Verify digital signature in PDF | CPP, GENERAL, JAVA, NET |
+| 91 | Work with bookmarks in PDF | GENERAL, JAVA, NET, PYTHON |
+| 92 | XML to PDF | CPP, GENERAL |
+| 93 | ZIP to PDF | CPP, GENERAL, JAVA, PYTHON |
 
 ---

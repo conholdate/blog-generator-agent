@@ -10,11 +10,11 @@ from typing import Dict, List, Optional, Tuple, Set
 from ..io import IndexRecord, read_jsonl
 from ..logging_utils import get_logger
 from ..normalization import (
-    FORMAT_TOKEN_SET,
+    CONVERSION_TOKEN_SET,
     canonical_file_format,
     canonical_topic_key,
     nor_platform_key,
-    normalize_sentence_text,
+    normalize_topic_display,
     normalize_text,
 )
 from .base import CoverageResult, CoverageRow
@@ -25,6 +25,7 @@ logger = get_logger("cg-cover.agent")
 GENERAL_PLATFORM_KEY = "general"
 MIN_BLOG_DATE = date(2020, 1, 1)
 _BLOG_DATE_RE = re.compile(r"^(?P<year>\d{4})-(?P<month>\d{2})-(?P<day>\d{2})$")
+_BLOG_DATE_IN_PATH_RE = re.compile(r"(?<!\d)(?P<year>\d{4})-(?P<month>\d{2})-(?P<day>\d{2})(?!\d)")
 
 # -----------------------------
 # KEY-BASED GROUPING + MATCHING
@@ -62,18 +63,37 @@ def record_gap_key(r: IndexRecord) -> str:
     Prefer indexer-provided key; fallback to canonical topic key if missing.
     Indexing is now responsible for topic normalization quality.
     """
-    if getattr(r, "key", None):
-        return normalize_gap_key(str(r.key))
-    return normalize_gap_key(r.topic or r.title)
+    candidates = [
+        normalize_gap_key(str(getattr(r, attr, "") or ""))
+        for attr in ("key", "topic", "title")
+    ]
+    candidates = [candidate for candidate in candidates if candidate]
+    if not candidates:
+        return ""
+
+    selected = candidates[0]
+    selected_parts = set(selected.split("-"))
+    for candidate in candidates[1:]:
+        candidate_parts = set(candidate.split("-"))
+        if (
+            "pdf" in candidate_parts
+            and "pdf" not in selected_parts
+            and selected_parts
+            and selected_parts.issubset(candidate_parts)
+        ):
+            selected = candidate
+            selected_parts = candidate_parts
+    return selected
 
 
 def _conversion_gap_keys(text: str) -> List[str]:
     keys: List[str] = []
     normalized = re.sub(r"[-_/]+", " ", str(text or ""))
+    normalized = re.sub(r"\bbase\s*64\b", "base64", normalized, flags=re.IGNORECASE)
     for match in _CONVERSION_PAIR_RE.finditer(normalized):
         src = canonical_file_format(match.group(1))
         dst = canonical_file_format(match.group(2))
-        if src in FORMAT_TOKEN_SET and dst in FORMAT_TOKEN_SET:
+        if src in CONVERSION_TOKEN_SET and dst in CONVERSION_TOKEN_SET:
             key = normalize_gap_key(f"{src} to {dst}")
             if key and key not in keys:
                 keys.append(key)
@@ -124,18 +144,27 @@ def _normalize_platform_key(s: Optional[str]) -> str:
 
 
 def _record_blog_date(record: IndexRecord) -> Optional[date]:
-    raw = str(getattr(record, "published_date", "") or "").strip()
-    match = _BLOG_DATE_RE.match(raw)
-    if not match:
-        return None
-    try:
-        return date(
-            int(match.group("year")),
-            int(match.group("month")),
-            int(match.group("day")),
-        )
-    except ValueError:
-        return None
+    candidates = [
+        str(getattr(record, "published_date", "") or "").strip(),
+        str(getattr(record, "source_path", "") or "").strip(),
+        str(getattr(record, "id", "") or "").strip(),
+        str(getattr(record, "url", "") or "").strip(),
+    ]
+    for raw in candidates:
+        if not raw:
+            continue
+        match = _BLOG_DATE_RE.match(raw) or _BLOG_DATE_IN_PATH_RE.search(raw)
+        if not match:
+            continue
+        try:
+            return date(
+                int(match.group("year")),
+                int(match.group("month")),
+                int(match.group("day")),
+            )
+        except ValueError:
+            continue
+    return None
 
 
 def _is_recent_blog_record(record: IndexRecord) -> bool:
@@ -305,7 +334,13 @@ def compute_blogs_to_blogs(
     for key_norm, b in sorted(grouped.items(), key=lambda x: x[0]):
         cat = b.category or ""
         sub = b.sub_category or ""
-        display_topic = normalize_sentence_text(canonical_topic_key(b.topic or b.title or key_norm) or key_norm.replace("-", " "))
+        display_topic = normalize_topic_display(
+            b.topic or b.title or key_norm,
+            key=key_norm,
+            product_key=product_key,
+        )
+        if not display_topic:
+            continue
         row_cov: Dict[str, Dict[str, object]] = {}
 
         # If baseline platform explicitly provided, mark it as covered by definition.

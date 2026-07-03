@@ -3,9 +3,15 @@ from agent_engine.content_gap_agent.tools.normalization import (
     canonical_file_format,
     canonical_topic_key,
     normalize_sentence_text,
+    normalize_topic_display,
 )
+from agent_engine.blog_keyword_analyzer.tools.normalization import canonical_topic_key as kra_canonical_topic_key
 from agent_engine.content_indexer_agent.tools.normalization import canonical_topic_key as indexer_canonical_topic_key
-from agent_engine.content_gap_agent.tools.coverage.blogs_to_blogs import record_gap_key, record_gap_keys
+from agent_engine.content_gap_agent.tools.coverage.blogs_to_blogs import (
+    compute_blogs_to_blogs,
+    record_gap_key,
+    record_gap_keys,
+)
 from agent_engine.content_gap_agent.tools.io import IndexRecord
 from agent_engine.content_gap_agent.tools.sheets_export import build_payload
 from agent_engine.content_indexer_agent.tools.key_maker import build_content_topic
@@ -70,7 +76,36 @@ def test_format_is_preserved_when_used_as_action() -> None:
     topic = build_content_topic(title=title)
 
     assert topic == "Draw and format text using aspose drawing"
-    assert canonical_topic_key(topic) == "draw and format text using aspose drawing"
+    assert canonical_topic_key(topic) == "draw and format text"
+
+
+def test_topic_key_decorations_collapse_for_general_topics() -> None:
+    cases = {
+        "add watermark to pdf": [
+            "Add Watermark to PDF",
+            "Step-by-Step Guide to Add Watermark to PDF in Python",
+            "Add Watermark to PDF using Aspose.PDF",
+            "Add Watermark to PDF in Complete Guide using .NET",
+            "How to Add Watermark to PDF with Aspose.PDF for Java",
+        ],
+        "extract text from pdf": [
+            "Extract Text from PDF",
+            "Extract Text from PDF in Comprehensive Guide in Python",
+            "Complete Tutorial for Extract Text from PDF using Aspose.PDF",
+            "How to Extract Text from PDF with Aspose.PDF for .NET",
+        ],
+        "generate barcodes": [
+            "Generate Barcodes",
+            "Generate Barcodes with Aspose.BarCode",
+            "Complete Guide to Generate Barcodes in C#",
+        ],
+    }
+
+    for expected, variants in cases.items():
+        for topic in variants:
+            assert canonical_topic_key(topic) == expected
+            assert indexer_canonical_topic_key(topic) == expected
+            assert kra_canonical_topic_key(topic) == expected
 
 
 def test_omr_topics_drop_platform_and_seo_noise() -> None:
@@ -205,6 +240,472 @@ def test_generic_generate_barcode_topics_collapse_without_losing_specific_topics
     assert canonical_topic_key("Generate barcode 39") == "generate barcode 39"
     assert canonical_topic_key("Generate barcode and QR code with logo") == "generate barcode and qr code with logo"
     assert canonical_topic_key("Generate barcodes with UTF 8 encoding") == "generate barcodes with utf 8 encoding"
+
+
+def test_pdf_merge_topic_keys_collapse_action_variants() -> None:
+    variants = [
+        "Merging PDF files programmatically",
+        "Merging Multiple PDF Files with Python",
+        "Merge Multiple PDF Files in Python",
+        "Merge Multiple PDF in Python",
+        "How to Merge Multiple PDF Files in C#",
+        "Merge Multiple PDF Files into a Single PDF using Java",
+        "Merge Two PDF Files in JavaScript",
+    ]
+
+    for topic in variants:
+        assert canonical_topic_key(topic) == "merge pdf"
+        assert indexer_canonical_topic_key(topic) == "merge pdf"
+
+    assert canonical_topic_key("Merge JPG Images to PDF in C#") != "merge pdf"
+    assert indexer_canonical_topic_key("Merge JPG Images to PDF in C#") != "merge pdf"
+
+
+def test_pdf_merge_blog_records_match_across_topic_wording() -> None:
+    net_record = IndexRecord(
+        id="blog::pdf/merge-multiple-pdf-files-in-csharp-net/index.md",
+        repo_key="blog",
+        repo_type="blog",
+        platform="net",
+        title="How to Merge Multiple PDF Files in C#",
+        topic="Merging PDF files programmatically",
+        category="",
+        sub_category="",
+    )
+    python_record = IndexRecord(
+        id="blog::pdf/merge-pdf-files-in-python/index.md",
+        repo_key="blog",
+        repo_type="blog",
+        platform="python",
+        title="Merge Multiple PDF Files in Python",
+        topic="Merging Multiple PDF Files with Python",
+        category="",
+        sub_category="",
+    )
+
+    assert record_gap_key(net_record) == "merge-pdf"
+    assert record_gap_key(python_record) == "merge-pdf"
+    assert "merge-pdf" in record_gap_keys(python_record)
+
+
+def test_pdf_base64_conversion_topic_keys_collapse_decorated_variants() -> None:
+    variants = [
+        "PDF to base64",
+        "PDF to base64 STEP by STEP guide with Aspose.PDF",
+        "PDF to base64 using Aspose.PDF",
+        "Step-by-Step Guide for PDF to Base64 Conversion in Python",
+        "Convert PDF to Base64 in C# using Aspose.PDF for .NET",
+        "Convert PDF to Base 64 Online",
+    ]
+
+    for topic in variants:
+        assert canonical_topic_key(topic) == "pdf to base64"
+        assert indexer_canonical_topic_key(topic) == "pdf to base64"
+        assert kra_canonical_topic_key(topic) == "pdf to base64"
+
+
+def test_pdf_base64_blog_records_match_across_topic_wording() -> None:
+    base_record = IndexRecord(
+        id="blog::pdf/convert-pdf-to-base64-online/index.md",
+        repo_key="blog",
+        repo_type="blog",
+        platform="general",
+        title="Convert PDF to Base64 Online",
+        topic="PDF to base64",
+        category="Conversion",
+        sub_category="Pdf To Base64",
+        key="pdf to base64",
+    )
+    decorated_record = IndexRecord(
+        id="blog::pdf/convert-pdf-to-base64-in-python/index.md",
+        repo_key="blog",
+        repo_type="blog",
+        platform="python",
+        title="Step-by-Step Guide for PDF to Base64 Conversion in Python",
+        topic="PDF to base64 STEP by STEP guide with Aspose.PDF",
+        category="Data Conversion",
+        sub_category="PDF Encoding",
+        key="pdf to base64 step by step guide with aspose pdf",
+    )
+
+    assert record_gap_key(base_record) == "pdf-to-base64"
+    assert record_gap_key(decorated_record) == "pdf-to-base64"
+    assert "pdf-to-base64" in record_gap_keys(decorated_record)
+
+
+def test_pdf_base64_sheet_export_dedupes_decorated_missing_topics(tmp_path) -> None:
+    coverage_json = tmp_path / "coverage.json"
+    coverage_json.write_text(
+        json.dumps(
+            {
+                "brand_key": "aspose",
+                "product_key": "pdf",
+                "product_name": "Aspose.PDF",
+                "baseline_platform": "all",
+                "rows": [
+                    {
+                        "category": "Conversion",
+                        "sub_category": "Pdf To Base64",
+                        "topic": "PDF to base64",
+                        "coverage": {"general": {"matched": True}, "python": {"matched": False}},
+                    },
+                    {
+                        "category": "Data Conversion",
+                        "sub_category": "PDF Encoding",
+                        "topic": "PDF to base64 STEP by STEP guide with Aspose.PDF",
+                        "coverage": {"general": {"matched": True}, "python": {"matched": False}},
+                    },
+                    {
+                        "category": "Data Encoding",
+                        "sub_category": "PDF Conversion",
+                        "topic": "PDF to base64 using Aspose.PDF",
+                        "coverage": {"general": {"matched": True}, "python": {"matched": False}},
+                    },
+                ],
+            }
+        ),
+        encoding="utf-8",
+    )
+
+    payload = build_payload(coverage_json=coverage_json, sheet_name="All Missing Topics", replace=False)
+
+    assert payload["meta"]["row_count"] == 1
+    assert payload["rows"][0][5] == "PDF to Base64"
+
+
+def test_pdf_topic_keys_preserve_object_context_and_repair_generated_noise() -> None:
+    cases = {
+        "Create 3D PDF": "create 3d pdf",
+        "PDF create PDF": "create pdf",
+        "Creating PDF": "create pdf",
+        "Watermark PDF in complete guide for developers": "add watermark to pdf",
+        "Resize PDF PAGES or with code": "resize pdf pages",
+        "Rotate PDF document for best tool and methods": "rotate pdf",
+        "Shrink PDF quick and easy tips for smaller": "shrink pdf",
+        "Split PDF into multiple": "split pdf",
+        "Add Remove and Replace Images in PDF": "add extract remove or replace images in pdf",
+        "Add Extract Remove or Replace Images in PDF": "add extract remove or replace images in pdf",
+        "AI PDF summary generator": "ai pdf summarizer",
+        "Acroforms vs xfa forms convert xfa to acroforms in PDF": "convert xfa to acroforms in pdf",
+        "Create 3D PDF converter": "create 3d pdf",
+        "Create PDF PDF": "create pdf",
+        "Parse PDF in powerful": "parse pdf",
+        "Edit PDF document PDF editor": "edit pdf document",
+        "Compress PDF documents": "compress pdf",
+        "Encrypt and decrypt PDF": "encrypt or decrypt pdf",
+        "Extract text from PDF documents": "extract text from pdf",
+        "Fill create or edit fillable PDF forms": "create fill or edit fillable pdf forms",
+        "Create PDF from images": "generate pdf from images",
+        "Images to PDF": "image to pdf",
+        "Add and verify digital signatures in PDF documents": "add digital signatures to pdf",
+        "Add update and remove annotations in PDF": "add or remove annotations in pdf",
+        "Change PDF page size": "resize pdf pages",
+        "Edit PDF page size": "resize pdf pages",
+        "Delete Pages from PDF": "remove pages from pdf",
+        "Extract table from PDF": "extract tables from pdf",
+        "Print PDF documents": "print pdf",
+        "Rotate PDF document": "rotate pdf",
+        "Rotate PDF Pages text or images": "rotate pdf",
+        "Split PDF into multiple files": "split pdf",
+        "Print PDF to printer": "print pdf",
+    }
+
+    for topic, expected in cases.items():
+        assert canonical_topic_key(topic) == expected
+        assert indexer_canonical_topic_key(topic) == expected
+
+    assert canonical_topic_key("Add or remove in PDF") == ""
+    assert indexer_canonical_topic_key("Add or remove in PDF") == ""
+    assert canonical_topic_key("Best PDF for working with pdfs") == ""
+    assert indexer_canonical_topic_key("Best PDF for working with pdfs") == ""
+
+
+def test_pdf_topic_display_uses_readable_label_not_raw_key() -> None:
+    cases = {
+        "Create 3D": "Create 3D PDF",
+        "Create photo album": "Create photo album PDF",
+        "PDF create PDF": "Create PDF",
+        "Resize PDF PAGES or with code": "Resize PDF Pages",
+        "Watermark PDF in complete guide for developers": "Add Watermark to PDF",
+        "Add Remove and Replace Images in PDF": "Add, extract, remove, or replace images in PDF",
+        "Acroforms vs xfa forms convert xfa to acroforms in PDF": "Convert XFA to AcroForms in PDF",
+        "Best PDF for working with pdfs": "",
+        "Create 3D PDF converter": "Create 3D PDF",
+        "Create PDF PDF": "Create PDF",
+        "Parse PDF in powerful": "Parse PDF",
+        "Edit PDF document PDF editor": "Edit PDF document",
+        "Compress PDF documents": "Compress PDF",
+        "Encrypt and decrypt PDF": "Encrypt or decrypt PDF",
+        "Extract text from PDF documents": "Extract text from PDF",
+        "Fill create or edit fillable PDF forms": "Create fill or edit fillable PDF forms",
+        "Create PDF from images": "Generate PDF from images",
+        "Images to PDF": "Image to PDF",
+        "Split PDF into multiple files": "Split PDF",
+        "Change PDF page size": "Resize PDF Pages",
+        "Edit PDF page size": "Resize PDF Pages",
+        "Print PDF documents": "Print PDF",
+        "Rotate PDF document": "Rotate PDF",
+        "Rotate PDF Pages text or images": "Rotate PDF",
+        "Print PDF to printer": "Print PDF",
+        "Merge JPG images": "Merge JPG images to PDF",
+        "PDF to byte array or byte array to PDF": "PDF to Byte Array or Byte Array to PDF",
+        "PDF documents to Excel XLS XLSX": "PDF to Excel XLS/XLSX",
+        "Base64 string to PDF or JPG PNG image": "Base64 string to PDF or JPG/PNG image",
+        "JPG PNG TIFF EMF or BMP images to PDF": "JPG, PNG, TIFF, EMF, or BMP images to PDF",
+    }
+
+    for topic, expected in cases.items():
+        assert normalize_topic_display(topic, product_key="pdf") == expected
+
+
+def test_pdf_sheet_export_cleans_or_skips_regressed_topic_labels(tmp_path) -> None:
+    coverage_json = tmp_path / "coverage.json"
+    coverage_json.write_text(
+        json.dumps(
+            {
+                "brand_key": "aspose",
+                "product_key": "pdf",
+                "product_name": "Aspose.PDF",
+                "baseline_platform": "all",
+                "rows": [
+                    {
+                        "topic": "Create 3D",
+                        "coverage": {"net": {"matched": True}, "python": {"matched": False}},
+                    },
+                    {
+                        "topic": "Create 3D PDF converter",
+                        "coverage": {"net": {"matched": True}, "python": {"matched": False}},
+                    },
+                    {
+                        "topic": "PDF create PDF",
+                        "coverage": {"net": {"matched": True}, "python": {"matched": False}},
+                    },
+                    {
+                        "topic": "Create PDF PDF",
+                        "coverage": {"net": {"matched": True}, "python": {"matched": False}},
+                    },
+                    {
+                        "topic": "Parse PDF in powerful",
+                        "coverage": {"net": {"matched": True}, "python": {"matched": False}},
+                    },
+                    {
+                        "topic": "Compress PDF documents",
+                        "coverage": {"net": {"matched": True}, "python": {"matched": False}},
+                    },
+                    {
+                        "topic": "Images to PDF",
+                        "coverage": {"net": {"matched": True}, "python": {"matched": False}},
+                    },
+                    {
+                        "topic": "Print PDF to printer",
+                        "coverage": {"net": {"matched": True}, "python": {"matched": False}},
+                    },
+                    {
+                        "topic": "Rotate PDF Pages text or image",
+                        "coverage": {"net": {"matched": True}, "python": {"matched": False}},
+                    },
+                    {
+                        "topic": "Merge JPG images",
+                        "coverage": {"net": {"matched": True}, "python": {"matched": False}},
+                    },
+                    {
+                        "topic": "Merge JPG images to PDF",
+                        "coverage": {"net": {"matched": True}, "python": {"matched": False}},
+                    },
+                    {
+                        "topic": "Resize PDF PAGES or with code",
+                        "coverage": {"net": {"matched": True}, "python": {"matched": False}},
+                    },
+                    {
+                        "topic": "Add or remove in PDF",
+                        "coverage": {"net": {"matched": True}, "python": {"matched": False}},
+                    },
+                    {
+                        "topic": "Best PDF for working with pdfs",
+                        "coverage": {"net": {"matched": True}, "python": {"matched": False}},
+                    },
+                ],
+            }
+        ),
+        encoding="utf-8",
+    )
+
+    payload = build_payload(coverage_json=coverage_json, sheet_name="All Missing Topics", replace=False)
+    topics = [row[5] for row in payload["rows"]]
+
+    assert topics == [
+        "Compress PDF",
+        "Create 3D PDF",
+        "Create PDF",
+        "Image to PDF",
+        "Merge JPG images to PDF",
+        "Parse PDF",
+        "Print PDF",
+        "Resize PDF Pages",
+        "Rotate PDF",
+    ]
+
+
+def test_record_gap_key_prefers_richer_pdf_topic_over_weak_index_key() -> None:
+    record = IndexRecord(
+        id="blog::pdf/create-3d-pdf/index.md",
+        repo_key="blog",
+        repo_type="blog",
+        platform="java",
+        title="Create 3D PDF in Java",
+        topic="Create 3D PDF",
+        category="",
+        sub_category="",
+        key="create-3d",
+    )
+
+    assert record_gap_key(record) == "create-3d-pdf"
+
+
+def test_sheet_export_dedupes_general_topic_key_decorations(tmp_path) -> None:
+    coverage_json = tmp_path / "coverage.json"
+    coverage_json.write_text(
+        json.dumps(
+            {
+                "brand_key": "aspose",
+                "product_key": "pdf",
+                "product_name": "Aspose.PDF",
+                "baseline_platform": "all",
+                "rows": [
+                    {
+                        "category": "Watermarks",
+                        "sub_category": "PDF Watermark",
+                        "topic": "Add Watermark to PDF",
+                        "coverage": {"net": {"matched": True}, "python": {"matched": False}},
+                    },
+                    {
+                        "category": "Document Processing",
+                        "sub_category": "PDF Editing",
+                        "topic": "Step-by-Step Guide to Add Watermark to PDF in Python",
+                        "coverage": {"net": {"matched": True}, "python": {"matched": False}},
+                    },
+                    {
+                        "category": "PDF",
+                        "sub_category": "Aspose.PDF",
+                        "topic": "Add Watermark to PDF using Aspose.PDF",
+                        "coverage": {"net": {"matched": True}, "python": {"matched": False}},
+                    },
+                ],
+            }
+        ),
+        encoding="utf-8",
+    )
+
+    payload = build_payload(coverage_json=coverage_json, sheet_name="All Missing Topics", replace=False)
+
+    assert payload["meta"]["row_count"] == 1
+    assert payload["rows"][0][5] == "Add Watermark to PDF"
+
+
+def test_generic_similarity_topic_keys_collapse_across_products() -> None:
+    cases = {
+        "Create Barcode converter": "create barcode",
+        "Create Barcode Barcode": "create barcode",
+        "Compress Word documents": "compress word",
+        "Print Word documents": "print word",
+        "Parse Spreadsheet in powerful": "parse xlsx",
+        "Extract table from Excel": "extract tables from excel",
+        "Images to SVG": "image to svg",
+        "SVG to images": "svg to image",
+        "Add and remove comments in Excel": "add or remove comments in excel",
+        "Add update and remove comments in Excel": "add or remove comments in excel",
+        "Encrypt and decrypt Word": "encrypt or decrypt word",
+        "Fill create or edit fillable DOCX forms": "create fill or edit fillable docx forms",
+        "Edit Word document Word editor": "edit word document",
+        "Split Word documents": "split word",
+        "Print Word to printer": "print word",
+        "Rotate Word Pages text or images": "rotate word",
+    }
+
+    for topic, expected in cases.items():
+        assert canonical_topic_key(topic) == expected
+        assert indexer_canonical_topic_key(topic) == expected
+
+
+def test_sheet_export_dedupes_generic_similarity_variants_for_non_pdf_products(tmp_path) -> None:
+    coverage_json = tmp_path / "coverage.json"
+    coverage_json.write_text(
+        json.dumps(
+            {
+                "brand_key": "aspose",
+                "product_key": "cells",
+                "product_name": "Aspose.Cells",
+                "baseline_platform": "all",
+                "rows": [
+                    {
+                        "topic": "Add and remove comments in Excel",
+                        "coverage": {"net": {"matched": True}, "python": {"matched": False}},
+                    },
+                    {
+                        "topic": "Add update and remove comments in Excel",
+                        "coverage": {"net": {"matched": True}, "python": {"matched": False}},
+                    },
+                    {
+                        "topic": "Create Barcode converter",
+                        "coverage": {"net": {"matched": True}, "python": {"matched": False}},
+                    },
+                    {
+                        "topic": "Create Barcode Barcode",
+                        "coverage": {"net": {"matched": True}, "python": {"matched": False}},
+                    },
+                ],
+            }
+        ),
+        encoding="utf-8",
+    )
+
+    payload = build_payload(coverage_json=coverage_json, sheet_name="All Missing Topics", replace=False)
+    topics = [row[5] for row in payload["rows"]]
+
+    assert topics == ["Add or remove comments in Excel", "Create barcode"]
+
+
+def test_blogs_to_blogs_infers_dates_from_blog_slug_for_matching(tmp_path) -> None:
+    index_path = tmp_path / "indexes" / "blog" / "all.jsonl"
+    index_path.parent.mkdir(parents=True)
+    records = [
+        {
+            "id": "blog::pdf/2020-01-16-merge-multiple-pdf-files-in-csharp-net/index.md",
+            "repo_key": "blog",
+            "repo_type": "blog",
+            "platform": "net",
+            "title": "How to Merge Multiple PDF Files in C#",
+            "topic": "Merging PDF files programmatically",
+            "category": "Document Processing",
+            "sub_category": "Pdf Merge",
+            "source_path": "pdf/2020-01-16-merge-multiple-pdf-files-in-csharp-net/index.md",
+            "url": "https://blog.aspose.com/pdf/merge-multiple-pdf-files-in-csharp-net/",
+        },
+        {
+            "id": "blog::pdf/2023-05-04-merge-pdf-files-in-python/index.md",
+            "repo_key": "blog",
+            "repo_type": "blog",
+            "platform": "python",
+            "title": "Merge Multiple PDF Files in Python",
+            "topic": "Merging Multiple PDF Files with Python",
+            "category": "File Processing",
+            "sub_category": "PDF Merging",
+            "source_path": "pdf/2023-05-04-merge-pdf-files-in-python/index.md",
+            "url": "https://blog.aspose.com/pdf/merge-pdf-files-in-python/",
+        },
+    ]
+    index_path.write_text("\n".join(json.dumps(record) for record in records), encoding="utf-8")
+
+    result = compute_blogs_to_blogs(
+        brand_key="aspose",
+        product_key="pdf",
+        outputs_product_root=tmp_path,
+        baseline_platform=None,
+    )
+
+    row = next(row for row in result.rows if row.key == "merge-pdf")
+    assert row.coverage["net"]["matched"] is True
+    assert row.coverage["python"]["matched"] is True
 
 
 def test_text_qr_records_match_create_text_qr_key() -> None:

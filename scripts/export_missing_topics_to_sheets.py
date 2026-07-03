@@ -11,6 +11,7 @@ if str(REPO_ROOT) not in sys.path:
 from agent_engine.content_gap_agent.settings import CoverageSettings
 from agent_engine.content_gap_agent.tools.sheets_export import (
     build_payload,
+    is_successful_sheet_response,
     post_payload,
     resolve_sheet_config,
     should_post_payload,
@@ -87,6 +88,9 @@ def main() -> None:
             status, text = post_payload(payload, post_url, token)
             print(f"POST status: {status}")
             print(text[:1000])
+            ok, reason = is_successful_sheet_response(status, text)
+            if not ok:
+                raise SystemExit(reason)
     elif args.post:
         print("POST skipped: no Apps Script URL configured.")
     else:

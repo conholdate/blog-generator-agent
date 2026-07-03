@@ -1,0 +1,2079 @@
+{
+  "case": "blogs_to_blogs",
+  "brand_key": "aspose",
+  "product_key": "psd",
+  "baseline_platform": "all",
+  "platforms": [
+    "general",
+    "java",
+    "net",
+    "python"
+  ],
+  "meta": {
+    "matching_mode": "key_exact",
+    "total_input_records": 79,
+    "records_after_filters": 70,
+    "excluded_release_update_records": 2,
+    "excluded_old_or_undated_records": 7,
+    "baseline_records": 70,
+    "total_cells": 200,
+    "matched_cells": 69,
+    "missing_cells": 131,
+    "match_rate": 0.345,
+    "skipped_empty_keys": 0
+  },
+  "rows": [
+    {
+      "category": "Graphics",
+      "sub_category": "Layer Manipulation",
+      "topic": "Add fill layer in photoshop document PSD easy",
+      "key": "add-fill-layer-in-photoshop-document-psd-easy",
+      "baseline_record_id": "blog::psd/2020-06-09-add-fill-layer-in-photoshop/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::psd/2020-06-09-add-fill-layer-in-photoshop/index.md",
+          "title": "Add Fill Layer in Photoshop Document (PSD file) - Easy Guide",
+          "topic": "Add fill layer in photoshop document PSD easy guide",
+          "url": "aspose.com/psd/add-fill-layer-in-photoshop/"
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Graphics",
+      "sub_category": "PSD Manipulation",
+      "topic": "Add new layer in PSD",
+      "key": "add-new-layer-in-psd",
+      "baseline_record_id": "blog::psd/2022-08-11-add-new-layer-in-psd-using-csharp/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::psd/2022-08-11-add-new-layer-in-psd-using-csharp/index.md",
+          "title": "Add New Layer in PSD Programmatically using C#",
+          "topic": "Add new layer in PSD",
+          "url": "aspose.com/psd/add-new-layer-in-psd-using-csharp/"
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Image",
+      "sub_category": "Layer Manipulation",
+      "topic": "Add new layer to PSD",
+      "key": "add-new-layer-to-psd",
+      "baseline_record_id": "blog::psd/2022-10-11-add-new-layer-to-psd-in-java/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::psd/2022-10-11-add-new-layer-to-psd-in-java/index.md",
+          "title": "Add New Layer to PSD in Java",
+          "topic": "Add new layer to PSD",
+          "url": "aspose.com/psd/add-new-layer-to-psd-in-java/"
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Image Processing",
+      "sub_category": "Digital Signature",
+      "topic": "Add signature to image",
+      "key": "add-signature-to-image",
+      "baseline_record_id": "blog::psd/2022-02-18-sign-image-java/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::psd/2022-02-18-sign-image-java/index.md",
+          "title": "Add Signature to an Image in Java",
+          "topic": "Add signature to image",
+          "url": "aspose.com/psd/sign-image-java/"
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::psd/2022-03-18-sign-image-csharp/index.md",
+          "title": "Add Signature to an Image Programmatically in C#",
+          "topic": "Add signature to image",
+          "url": "aspose.com/psd/sign-image-csharp/"
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Image Processing",
+      "sub_category": "Watermarking",
+      "topic": "Add watermark to PSD",
+      "key": "add-watermark-to-psd",
+      "baseline_record_id": "blog::psd/2022-09-08-add-watermark-to-psd-in-csharp/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::psd/2022-09-08-add-watermark-to-psd-in-csharp/index.md",
+          "title": "Add Watermark to PSD in C#",
+          "topic": "Add watermark to PSD",
+          "url": "aspose.com/psd/add-watermark-to-psd-in-csharp/"
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Image Processing",
+      "sub_category": "Format Conversion",
+      "topic": "AI image to GIF",
+      "key": "ai-image-to-gif",
+      "baseline_record_id": "blog::psd/2025-05-21-convert-ai-image-to-gif-in-python/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::psd/2025-05-21-convert-ai-image-to-gif-in-python/index.md",
+          "title": "Convert AI Image to GIF in Python",
+          "topic": "AI image to GIF",
+          "url": "aspose.com/psd/convert-ai-image-to-gif-in-python/"
+        }
+      }
+    },
+    {
+      "category": "File Formats",
+      "sub_category": "AI Viewer",
+      "topic": "AI reader how to open and view AI",
+      "key": "ai-reader-how-to-open-and-view-ai",
+      "baseline_record_id": "blog::psd/2023-01-05-ai-file-viewer-open-ai-file-online/index.md",
+      "coverage": {
+        "general": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::psd/2023-01-05-ai-file-viewer-open-ai-file-online/index.md",
+          "title": "AI File Reader: How to Open and View AI Files",
+          "topic": "AI reader how to open and view AI",
+          "url": "aspose.com/psd/ai-file-viewer-open-ai-file-online/"
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Image Processing",
+      "sub_category": "File Conversion",
+      "topic": "AI to BMP",
+      "key": "ai-to-bmp",
+      "baseline_record_id": "blog::psd/2024-07-04-convert-ai-to-bmp-in-java/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::psd/2024-07-04-convert-ai-to-bmp-in-java/index.md",
+          "title": "Convert AI to BMP in Java - Adobe Illustrator Library",
+          "topic": "AI to BMP adobe illustrator library",
+          "url": "aspose.com/psd/convert-ai-to-bmp-in-java/"
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::psd/2025-05-19-convert-ai-to-bmp-in-python/index.md",
+          "title": "Convert AI to BMP in Python",
+          "topic": "AI to BMP",
+          "url": "aspose.com/psd/convert-ai-to-bmp-in-python/"
+        }
+      }
+    },
+    {
+      "category": "Image Conversion",
+      "sub_category": "AI to JPEG",
+      "topic": "AI to JPG",
+      "key": "ai-to-jpg",
+      "baseline_record_id": "blog::psd/2025-05-20-convert-ai-to-jpeg-in-python-programmatically/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::psd/2025-05-20-convert-ai-to-jpeg-in-python-programmatically/index.md",
+          "title": "Convert AI to JPEG in Python Programmatically",
+          "topic": "AI to JPEG",
+          "url": "aspose.com/psd/convert-ai-to-jpeg-in-python-programmatically/"
+        }
+      }
+    },
+    {
+      "category": "File Conversion",
+      "sub_category": "Image To PDF",
+      "topic": "AI to PDF",
+      "key": "ai-to-pdf",
+      "baseline_record_id": "blog::psd/2025-01-02-convert-ai-to-pdf-in-csharp-adobe-illustrator-sdk/index.md",
+      "coverage": {
+        "general": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::psd/2025-01-27-convert-ai-to-pdf-online/index.md",
+          "title": "Convert AI to PDF Online",
+          "topic": "AI to PDF",
+          "url": "aspose.com/psd/convert-ai-to-pdf-online/"
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::psd/2025-01-02-convert-ai-to-pdf-in-csharp-adobe-illustrator-sdk/index.md",
+          "title": "Convert AI to PDF in C# - Adobe Photoshop SDK",
+          "topic": "AI to PDF adobe photoshop SDK",
+          "url": "aspose.com/psd/convert-ai-to-pdf-in-csharp-adobe-photoshop-sdk/"
+        },
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::psd/2026-02-17-python-via-net-simple-ai-to-pdf-conversion/index.md",
+          "title": "Python via .NET: Simple AI to PDF Conversion",
+          "topic": "Via simple AI to PDF conversion",
+          "url": "aspose.com/psd/python-via-net-simple-ai-to-pdf-conversion/"
+        }
+      }
+    },
+    {
+      "category": "File Formats",
+      "sub_category": "Conversion",
+      "topic": "AI to PNG",
+      "key": "ai-to-png",
+      "baseline_record_id": "blog::psd/2020-07-01-convert-ai-to-png-jpg-psd-and-pdf-csharp/index.md",
+      "coverage": {
+        "general": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::psd/2025-02-03-change-ai-file-to-png-ai-to-png-online/index.md",
+          "title": "Change AI File to PNG - AI to PNG Online",
+          "topic": "AI to PNG AI to PNG",
+          "url": "aspose.com/psd/change-ai-file-to-png-ai-to-png-online/"
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::psd/2020-07-01-convert-ai-to-png-jpg-psd-and-pdf-csharp/index.md",
+          "title": "Convert AI to PNG, JPG, PSD and PDF file with C# .NET",
+          "topic": "AI to PNG JPG PSD and PDF",
+          "url": "aspose.com/psd/convert-ai-to-png-jpg-psd-and-pdf-csharp/"
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "File Conversion",
+      "sub_category": "Image Formats",
+      "topic": "AI to PSD",
+      "key": "ai-to-psd",
+      "baseline_record_id": "blog::psd/2020-12-19-convert-ai-to-psd-pdf-jpeg-or-png-image-format-in-java/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::psd/2020-12-19-convert-ai-to-psd-pdf-jpeg-or-png-image-format-in-java/index.md",
+          "title": "Convert AI to PSD, PDF, JPEG, or PNG Image Format in Java",
+          "topic": "AI to PSD PDF JPEG or PNG image format",
+          "url": "aspose.com/psd/convert-ai-to-psd-pdf-jpeg-or-png-image-format-in-java/"
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Image Processing",
+      "sub_category": "Vector Format Conversion",
+      "topic": "AI to SVG",
+      "key": "ai-to-svg",
+      "baseline_record_id": "blog::psd/2026-02-14-how-to-convert-ai-files-to-svg-in-python-via-net/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::psd/2026-02-14-how-to-convert-ai-files-to-svg-in-python-via-net/index.md",
+          "title": "How to Convert AI Files to SVG in Python via .NET",
+          "topic": "AI to SVG",
+          "url": "aspose.com/psd/how-to-convert-ai-files-to-svg-in-python-via-net/"
+        }
+      }
+    },
+    {
+      "category": "File Format Conversion",
+      "sub_category": "Image Conversion",
+      "topic": "AI to TIF",
+      "key": "ai-to-tif",
+      "baseline_record_id": "blog::psd/2024-04-19-convert-ai-to-tiff-in-java-using-an-adobe-illustrator-api/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::psd/2024-04-19-convert-ai-to-tiff-in-java-using-an-adobe-illustrator-api/index.md",
+          "title": "Convert AI to TIFF in Java using an Adobe Illustrator API",
+          "topic": "AI to TIFF using adobe illustrator API",
+          "url": "aspose.com/psd/convert-ai-to-tiff-in-java-using-an-adobe-illustrator-api/"
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Graphics",
+      "sub_category": "Filters",
+      "topic": "Apply gaussian blur filter on images",
+      "key": "apply-gaussian-blur-filter-on-images",
+      "baseline_record_id": "blog::psd/2022-04-24-gaussian-blur-filter-csharp/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::psd/2022-04-24-gaussian-blur-filter-csharp/index.md",
+          "title": "Apply Gaussian Blur Filter on Images in C#",
+          "topic": "Apply gaussian blur filter on images",
+          "url": "aspose.com/psd/gaussian-blur-filter-csharp/"
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Image Editing",
+      "sub_category": "Layer Effects",
+      "topic": "Apply photoshop layer effects",
+      "key": "apply-photoshop-layer-effects",
+      "baseline_record_id": "blog::psd/2025-10-16-apply-photoshop-layer-effects-in-python/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::psd/2025-10-16-apply-photoshop-layer-effects-in-python/index.md",
+          "title": "Apply Photoshop Layer Effects in Python using Aspose.PSD",
+          "topic": "Apply photoshop layer effects using aspose PSD",
+          "url": "aspose.com/psd/apply-photoshop-layer-effects-in-python/"
+        }
+      }
+    },
+    {
+      "category": "Image Processing",
+      "sub_category": "File Compression",
+      "topic": "Compress photoshop PSD compressor",
+      "key": "compress-photoshop-psd-compressor",
+      "baseline_record_id": "blog::psd/2022-02-03-compress-psd-csharp/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::psd/2022-02-03-compress-psd-csharp/index.md",
+          "title": "Compress Photoshop File in C# - PSD File Compressor",
+          "topic": "Compress photoshop PSD compressor",
+          "url": "aspose.com/psd/compress-psd-csharp/"
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Image Processing",
+      "sub_category": "File Compression",
+      "topic": "Compress PSD photoshop",
+      "key": "compress-psd-photoshop",
+      "baseline_record_id": "blog::psd/2022-01-03-compress-psd-java/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::psd/2022-01-03-compress-psd-java/index.md",
+          "title": "Compress PSD Photoshop File in Java",
+          "topic": "Compress PSD photoshop",
+          "url": "aspose.com/psd/compress-psd-java/"
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Image Processing",
+      "sub_category": "File Compression",
+      "topic": "Compress PSD PSD compressor",
+      "key": "compress-psd-psd-compressor",
+      "baseline_record_id": "blog::psd/2023-01-10-the-ultimate-guide-to-compress-psd-file/index.md",
+      "coverage": {
+        "general": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::psd/2023-01-10-the-ultimate-guide-to-compress-psd-file/index.md",
+          "title": "Compress PSD File Online - PSD Compressor",
+          "topic": "Compress PSD PSD compressor",
+          "url": "aspose.com/psd/compress-psd-file-online/"
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Image Processing",
+      "sub_category": "File Creation",
+      "topic": "Create PSB",
+      "key": "create-psb",
+      "baseline_record_id": "blog::psd/2025-08-05-make-a-psb-file-in-python/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::psd/2025-08-05-make-a-psb-file-in-python/index.md",
+          "title": "Create a PSB File in Python using Aspose.PSD",
+          "topic": "Create PSB using aspose PSD",
+          "url": "aspose.com/psd/create-a-psb-file-in-python/"
+        }
+      }
+    },
+    {
+      "category": "Image Processing",
+      "sub_category": "PSD Manipulation",
+      "topic": "Create PSD",
+      "key": "create-psd",
+      "baseline_record_id": "blog::psd/2022-01-02-create-psd-image-java/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::psd/2022-01-02-create-psd-image-java/index.md",
+          "title": "Create a PSD Image in Java",
+          "topic": "Create PSD image",
+          "url": "aspose.com/psd/create-psd-image-java/"
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::psd/2022-02-02-create-psd-image-csharp/index.md",
+          "title": "Create a PSD Image in C#",
+          "topic": "Create PSD image",
+          "url": "aspose.com/psd/create-psd-image-csharp/"
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Image Processing",
+      "sub_category": "Cropping",
+      "topic": "Crop image in circle",
+      "key": "crop-image-in-circle",
+      "baseline_record_id": "blog::psd/2023-11-29-crop-image-in-circle/index.md",
+      "coverage": {
+        "general": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::psd/2023-11-29-crop-image-in-circle/index.md",
+          "title": "Crop Image in Circle",
+          "topic": "Crop image in circle",
+          "url": "aspose.com/psd/crop-image-in-circle/"
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Image Processing",
+      "sub_category": "PSD Manipulation",
+      "topic": "Crop or rotate PSD image",
+      "key": "crop-or-rotate-psd-image",
+      "baseline_record_id": "blog::psd/2021-10-26-crop-rotate-psd-image-java/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::psd/2021-10-26-crop-rotate-psd-image-java/index.md",
+          "title": "Crop or Rotate PSD Image in Java",
+          "topic": "Crop or rotate PSD image",
+          "url": "aspose.com/psd/crop-rotate-psd-image-java/"
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Graphics",
+      "sub_category": "Drawing Shapes",
+      "topic": "Draw geometric shapes drawing",
+      "key": "draw-geometric-shapes-drawing",
+      "baseline_record_id": "blog::psd/2024-06-05-draw-geometric-shapes-in-java/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::psd/2024-06-05-draw-geometric-shapes-in-java/index.md",
+          "title": "Draw Geometric Shapes in Java - Java Drawing Library",
+          "topic": "Draw geometric shapes drawing library",
+          "url": "aspose.com/psd/draw-geometric-shapes-in-java/"
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Graphics",
+      "sub_category": "Drawing API",
+      "topic": "Draw graphics",
+      "key": "draw-graphics",
+      "baseline_record_id": "blog::psd/2025-03-27-draw-graphics-in-java/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::psd/2025-03-27-draw-graphics-in-java/index.md",
+          "title": "Let's Draw Graphics in Java Programmatically",
+          "topic": "Draw graphics",
+          "url": "aspose.com/psd/draw-graphics-in-java/"
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Graphics",
+      "sub_category": "Drawing Shapes",
+      "topic": "Drawing shapes graphics",
+      "key": "drawing-shapes-graphics",
+      "baseline_record_id": "blog::psd/2024-05-27-drawing-shapes-in-java-using-java-graphics-library/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::psd/2024-05-27-drawing-shapes-in-java-using-java-graphics-library/index.md",
+          "title": "Drawing Shapes in Java using Java Graphics Library",
+          "topic": "Drawing shapes graphics library",
+          "url": "aspose.com/psd/drawing-shapes-in-java-using-java-graphics-library"
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "File Formats",
+      "sub_category": "Photoshop",
+      "topic": "Easily create photoshop PSB",
+      "key": "easily-create-photoshop-psb",
+      "baseline_record_id": "blog::psd/2025-01-30-easily-create-a-photoshop-psb-file/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::psd/2025-01-30-easily-create-a-photoshop-psb-file/index.md",
+          "title": "Easily Create A Photoshop PSB File",
+          "topic": "Easily create photoshop PSB",
+          "url": "aspose.com/psd/easily-create-a-photoshop-psb-file/"
+        }
+      }
+    },
+    {
+      "category": "Graphics",
+      "sub_category": "Image Editing",
+      "topic": "Edit PSD PSD editor",
+      "key": "edit-psd-psd-editor",
+      "baseline_record_id": "blog::psd/2023-04-14-online-psd-editor/index.md",
+      "coverage": {
+        "general": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::psd/2023-04-14-online-psd-editor/index.md",
+          "title": "Edit PSD File Online - Free PSD Editor",
+          "topic": "Edit PSD PSD editor",
+          "url": "aspose.com/psd/edit-psd-file-online-psd-editor/"
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Image Processing",
+      "sub_category": "PSD Layer Editing",
+      "topic": "Find layers and update layer s text or image in photoshop",
+      "key": "find-layers-and-update-layer-s-text-or-image-in-photoshop",
+      "baseline_record_id": "blog::psd/2020-06-08-find-and-update-text-or-image-layers-in-psd-files-using-csharp/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::psd/2020-06-08-find-and-update-text-or-image-layers-in-psd-files-using-csharp/index.md",
+          "title": "Find Layers and Update Layer's Text or Image in Photoshop Files using C#",
+          "topic": "Find layers and update layer s text or image in photoshop",
+          "url": "aspose.com/psd/find-and-update-text-or-image-layers-in-psd-files-using-csharp/"
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Imaging",
+      "sub_category": "PSD Manipulation",
+      "topic": "Flatten or merge layers in PSD image",
+      "key": "flatten-or-merge-layers-in-psd-image",
+      "baseline_record_id": "blog::psd/2021-12-10-flatten-merge-layers-in-psd-csharp/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::psd/2021-12-10-flatten-merge-layers-in-psd-csharp/index.md",
+          "title": "Flatten or Merge Layers in PSD Image using C#",
+          "topic": "Flatten or merge layers in PSD image",
+          "url": "aspose.com/psd/flatten-merge-layers-in-psd-csharp/"
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Imaging",
+      "sub_category": "PSD Layer Operations",
+      "topic": "Flatten or merge layers of PSD",
+      "key": "flatten-or-merge-layers-of-psd",
+      "baseline_record_id": "blog::psd/2021-11-09-flatten-merge-layers-in-psd-using-java/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::psd/2021-11-09-flatten-merge-layers-in-psd-using-java/index.md",
+          "title": "Flatten or Merge the Layers of a PSD File in Java",
+          "topic": "Flatten or merge layers of PSD",
+          "url": "aspose.com/psd/flatten-merge-layers-in-psd-using-java/"
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Image",
+      "sub_category": "Thumbnail Generation",
+      "topic": "Generate PSD thumbnail",
+      "key": "generate-psd-thumbnail",
+      "baseline_record_id": "blog::psd/2023-03-09-generate-psd-thumbnail-in-csharp/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::psd/2023-03-09-generate-psd-thumbnail-in-csharp/index.md",
+          "title": "Generate PSD Thumbnail in C#",
+          "topic": "Generate PSD thumbnail",
+          "url": "aspose.com/psd/generate-psd-thumbnail-in-csharp/"
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Image Processing",
+      "sub_category": "File Conversion",
+      "topic": "Grayscale to rgb PSD image",
+      "key": "grayscale-to-rgb-psd-image",
+      "baseline_record_id": "blog::psd/2022-10-13-convert-grayscale-rgb-psd-csharp/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::psd/2022-10-13-convert-grayscale-rgb-psd-csharp/index.md",
+          "title": "Convert Grayscale to RGB PSD Image in C#",
+          "topic": "Grayscale to RGB PSD image",
+          "url": "aspose.com/psd/convert-grayscale-to-rgb-psd-in-csharp/"
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Image Editing",
+      "sub_category": "Layer Manipulation",
+      "topic": "Insert image in photoshop layer",
+      "key": "insert-image-in-photoshop-layer",
+      "baseline_record_id": "blog::psd/2025-10-14-insert-image-in-photoshop-layer-using-python/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::psd/2025-10-14-insert-image-in-photoshop-layer-using-python/index.md",
+          "title": "Insert Image in Photoshop Layer using Python",
+          "topic": "Insert image in photoshop layer",
+          "url": "aspose.com/psd/insert-image-in-photoshop-layer-using-python/"
+        }
+      }
+    },
+    {
+      "category": "Image Processing",
+      "sub_category": "PSD Files",
+      "topic": "MAKE PSD",
+      "key": "make-psd",
+      "baseline_record_id": "blog::psd/2024-10-24-how-to-make-a-psd-file-in-python/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::psd/2024-10-24-how-to-make-a-psd-file-in-python/index.md",
+          "title": "How to Make a PSD File in Python",
+          "topic": "Make PSD",
+          "url": "aspose.com/psd/how-to-make-a-psd-file-in-python/"
+        }
+      }
+    },
+    {
+      "category": "Graphics",
+      "sub_category": "Text Editing",
+      "topic": "Modify text in photoshop",
+      "key": "modify-text-in-photoshop",
+      "baseline_record_id": "blog::psd/2025-10-15-modify-text-in-photoshop/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::psd/2025-10-15-modify-text-in-photoshop/index.md",
+          "title": "Modify Text in Photoshop using Aspose.PSD for Python",
+          "topic": "Modify text in photoshop using aspose PSD",
+          "url": "aspose.com/psd/modify-text-in-photoshop-using-python/"
+        }
+      }
+    },
+    {
+      "category": "Image Processing",
+      "sub_category": "Format Conversion",
+      "topic": "PNG or JPG image to PSD",
+      "key": "png-or-jpg-image-to-psd",
+      "baseline_record_id": "blog::psd/2021-04-01-convert-png-jpg-image-psd-csharp/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::psd/2021-05-11-convert-png-or-jpg-image-to-psd-programmatically-using-java/index.md",
+          "title": "Convert PNG or JPG Image to PSD Programmatically using Java",
+          "topic": "PNG or JPG image to PSD",
+          "url": "aspose.com/psd/convert-png-or-jpg-image-to-psd-programmatically-using-java/"
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::psd/2021-04-01-convert-png-jpg-image-psd-csharp/index.md",
+          "title": "Convert PNG or JPG Image to PSD Programmatically using C#",
+          "topic": "PNG or JPG image to PSD",
+          "url": "aspose.com/psd/convert-png-jpg-image-psd-csharp/"
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "File Conversion",
+      "sub_category": "Graphics Files",
+      "topic": "PSB to PDF",
+      "key": "psb-to-pdf",
+      "baseline_record_id": "blog::psd/2021-02-17-convert-psb-to-pdf-jpg-or-psd-programmatically-in-java/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::psd/2021-02-17-convert-psb-to-pdf-jpg-or-psd-programmatically-in-java/index.md",
+          "title": "Convert PSB to PDF, JPG, or PSD Programmatically in Java",
+          "topic": "PSB to PDF JPG or PSD",
+          "url": "aspose.com/psd/convert-psb-to-pdf-jpg-or-psd-programmatically-in-java/"
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::psd/2021-07-16-convert-psb-to-pdf-jpg-or-psd-programmatically-using-csharp/index.md",
+          "title": "Convert PSB to PDF, JPG, or PSD Programmatically using C#",
+          "topic": "PSB to PDF JPG or PSD",
+          "url": "aspose.com/psd/convert-psb-to-pdf-jpg-or-psd-programmatically-using-csharp/"
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Image Processing",
+      "sub_category": "Format Conversion",
+      "topic": "PSD to BMP",
+      "key": "psd-to-bmp",
+      "baseline_record_id": "blog::psd/2024-01-17-convert-psd-to-bmp-in-c-raster-image-processor/index.md",
+      "coverage": {
+        "general": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::psd/2024-01-17-convert-psd-to-bmp-in-c-raster-image-processor/index.md",
+          "title": "Convert PSD to BMP in C# - Raster Image Processor",
+          "topic": "PSD to BMP raster image processor",
+          "url": "aspose.com/psd/convert-psd-to-bmp-in-csharp-raster-image-processor"
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "File Format Conversion",
+      "sub_category": "PSD to GIF",
+      "topic": "PSD to GIF",
+      "key": "psd-to-gif",
+      "baseline_record_id": "blog::psd/2024-11-27-convert-psd-to-gif-in-python/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::psd/2024-11-27-convert-psd-to-gif-in-python/index.md",
+          "title": "Convert PSD to GIF in Python",
+          "topic": "PSD to GIF",
+          "url": "aspose.com/psd/convert-psd-to-gif-in-python/"
+        }
+      }
+    },
+    {
+      "category": "File Conversion",
+      "sub_category": "Image Format Conversion",
+      "topic": "PSD to JPG",
+      "key": "psd-to-jpg",
+      "baseline_record_id": "blog::psd/2022-11-15-convert-psd-to-jpg-in-csharp/index.md",
+      "coverage": {
+        "general": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::psd/2023-06-14-convert-psd-to-jpg-online/index.md",
+          "title": "Convert PSD to JPG Online",
+          "topic": "PSD to JPG",
+          "url": "aspose.com/psd/convert-psd-to-jpg-online/"
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::psd/2023-07-31-convert-psd-to-jpg-in-java/index.md",
+          "title": "Convert PSD to JPG in Java",
+          "topic": "PSD to JPG",
+          "url": "aspose.com/psd/convert-psd-to-jpg-in-java/"
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::psd/2022-11-15-convert-psd-to-jpg-in-csharp/index.md",
+          "title": "Convert PSD to JPG in C#",
+          "topic": "PSD to JPG",
+          "url": "aspose.com/psd/convert-psd-to-jpg-in-csharp/"
+        },
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::psd/2024-10-25-convert-psd-to-jpeg-in-python/index.md",
+          "title": "Convert PSD to JPEG in Python",
+          "topic": "PSD to JPEG",
+          "url": "aspose.com/psd/convert-psd-to-jpeg-in-python/"
+        }
+      }
+    },
+    {
+      "category": "File Conversion",
+      "sub_category": "Image Format Conversion",
+      "topic": "PSD to PDF",
+      "key": "psd-to-pdf",
+      "baseline_record_id": "blog::psd/2020-03-27-convert-psd-to-pdf-jpg-png-tiff-gif-bmp-jp2-in-csharp-net/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::psd/2020-12-16-convert-psd-to-pdf-jpg-png-gif-bmp-in-java/index.md",
+          "title": "Convert PSD to PDF, JPG, PNG, GIF, BMP, and JPEG 2000 in Java",
+          "topic": "PSD to PDF JPG PNG GIF BMP and JPEG 2000",
+          "url": "aspose.com/psd/convert-psd-to-pdf-jpg-png-gif-bmp-in-java/"
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::psd/2020-03-27-convert-psd-to-pdf-jpg-png-tiff-gif-bmp-jp2-in-csharp-net/index.md",
+          "title": "Convert PSD to PDF, JPG, PNG and Other Raster Image Formats in C#",
+          "topic": "PSD to PDF JPG PNG and other raster image formats",
+          "url": "aspose.com/psd/convert-psd-to-pdf-jpg-png-tiff-gif-bmp-jp2-in-csharp-net/"
+        },
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::psd/2025-01-07-convert-psd-to-pdf-in-python/index.md",
+          "title": "Convert PSD to PDF in Python",
+          "topic": "PSD to PDF",
+          "url": "aspose.com/psd/convert-psd-to-pdf-in-python/"
+        }
+      }
+    },
+    {
+      "category": "Image Processing",
+      "sub_category": "Raster Image Conversion",
+      "topic": "PSD to PNG",
+      "key": "psd-to-png",
+      "baseline_record_id": "blog::psd/2022-11-14-convert-psd-to-png-in-csharp/index.md",
+      "coverage": {
+        "general": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::psd/2025-03-26-convert-psd-to-png-online/index.md",
+          "title": "Convert PSD to PNG Online - Free Converter",
+          "topic": "PSD to PNG",
+          "url": "aspose.com/psd/convert-psd-to-png-online/"
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::psd/2023-06-12-convert-psd-to-png-in-java/index.md",
+          "title": "Convert PSD to PNG in Java",
+          "topic": "PSD to PNG",
+          "url": "aspose.com/psd/convert-psd-to-png-in-java/"
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::psd/2022-11-14-convert-psd-to-png-in-csharp/index.md",
+          "title": "Convert PSD to PNG in C#",
+          "topic": "PSD to PNG",
+          "url": "aspose.com/psd/convert-psd-to-png-in-csharp/"
+        },
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::psd/2024-11-28-convert-psd-to-png-in-python/index.md",
+          "title": "Convert PSD to PNG in Python",
+          "topic": "PSD to PNG",
+          "url": "aspose.com/psd/convert-psd-to-png-in-python/"
+        }
+      }
+    },
+    {
+      "category": "Conversion",
+      "sub_category": "Psd To Tiff",
+      "topic": "PSD to TIF",
+      "key": "psd-to-tif",
+      "baseline_record_id": "blog::psd/2021-10-01-convert-psd-tiff-java/index.md",
+      "coverage": {
+        "general": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::psd/2025-03-24-convert-psd-to-tiff-online/index.md",
+          "title": "Convert PSD to TIFF Online - Free Application",
+          "topic": "PSD to TIFF",
+          "url": "aspose.com/psd/convert-psd-to-tiff-online/"
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::psd/2021-10-01-convert-psd-tiff-java/index.md",
+          "title": "Convert PSD to TIFF in Java",
+          "topic": "PSD to TIFF",
+          "url": "aspose.com/psd/convert-psd-tiff-java/"
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::psd/2021-11-18-convert-psd-to-tiff-image-csharp/index.md",
+          "title": "Convert PSD to TIFF in C#",
+          "topic": "PSD to TIFF",
+          "url": "aspose.com/psd/convert-psd-to-tiff-image-csharp/"
+        },
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::psd/2024-11-25-convert-psd-to-tiff-in-python/index.md",
+          "title": "Convert PSD to TIFF in Python",
+          "topic": "PSD to TIFF",
+          "url": "aspose.com/psd/convert-psd-to-tiff-in-python/"
+        }
+      }
+    },
+    {
+      "category": "Graphics",
+      "sub_category": "File Viewer",
+      "topic": "PSD viewer",
+      "key": "psd-viewer",
+      "baseline_record_id": "blog::psd/2023-05-26-psd-file-viewer/index.md",
+      "coverage": {
+        "general": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::psd/2023-05-26-psd-file-viewer/index.md",
+          "title": "PSD File Viewer",
+          "topic": "PSD viewer",
+          "url": "aspose.com/psd/psd-file-viewer-online/"
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Graphics",
+      "sub_category": "Layer Editing",
+      "topic": "Resize rotate and crop PSD layers",
+      "key": "resize-rotate-and-crop-psd-layers",
+      "baseline_record_id": "blog::psd/2025-08-07-crop-psd-layers-in-python/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::psd/2025-08-07-crop-psd-layers-in-python/index.md",
+          "title": "Resize, Rotate, & Crop PSD Layers in Python with Aspose.PSD",
+          "topic": "Resize rotate and crop PSD layers with aspose PSD",
+          "url": "aspose.com/psd/crop-psd-layers-in-python/"
+        }
+      }
+    },
+    {
+      "category": "Imaging",
+      "sub_category": "PSD Editing",
+      "topic": "Rotate or crop PSD image",
+      "key": "rotate-or-crop-psd-image",
+      "baseline_record_id": "blog::psd/2021-09-25-crop-rotate-psd-csharp/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::psd/2021-09-25-crop-rotate-psd-csharp/index.md",
+          "title": "Rotate or Crop PSD Image using C#",
+          "topic": "Rotate or crop PSD image",
+          "url": "aspose.com/psd/crop-rotate-psd-csharp/"
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Image Processing",
+      "sub_category": "Image Enhancement",
+      "topic": "Unblur picture sharpen images",
+      "key": "unblur-picture-sharpen-images",
+      "baseline_record_id": "blog::psd/2024-03-22-unblur-a-picture-sharpen-images-online/index.md",
+      "coverage": {
+        "general": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::psd/2024-03-22-unblur-a-picture-sharpen-images-online/index.md",
+          "title": "Unblur a Picture - Sharpen Images Online",
+          "topic": "Unblur picture sharpen images",
+          "url": "aspose.com/psd/unblur-a-picture-sharpen-images-online"
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Image Processing",
+      "sub_category": "PSD Editing",
+      "topic": "Work with smart filters and smart objects in PSD",
+      "key": "work-with-smart-filters-and-smart-objects-in-psd",
+      "baseline_record_id": "blog::psd/2022-04-06-smart-filter-smart-object-psd-csharp/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::psd/2022-04-06-smart-filter-smart-object-psd-csharp/index.md",
+          "title": "Work with Smart Filters and Smart Objects in PSD File with C#",
+          "topic": "Work with smart filters and smart objects in PSD",
+          "url": "aspose.com/psd/smart-filter-smart-object-psd-csharp/"
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Image Processing",
+      "sub_category": "PSD Editing",
+      "topic": "Working with photoshop layers",
+      "key": "working-with-photoshop-layers",
+      "baseline_record_id": "blog::psd/2025-08-06-working-with-photoshop-layers-in-python/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::psd/2025-08-06-working-with-photoshop-layers-in-python/index.md",
+          "title": "Working with Photoshop Layers in Python",
+          "topic": "Working with photoshop layers",
+          "url": "aspose.com/psd/working-with-photoshop-layers-in-python/"
+        }
+      }
+    }
+  ],
+  "brand_name": "Aspose",
+  "product_name": "Aspose.PSD"
+}

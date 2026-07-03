@@ -17,6 +17,7 @@ from agent_engine.blog_keyword_analyzer.tools.normalization import (
     normalize_product_short_name,
     platform_base_display,
     platform_variant_pattern,
+    seo_platform_label,
     strip_platform_mentions,
 )
 from ..schemas import Cluster, TopicIdea
@@ -267,7 +268,7 @@ class KeywordResearchAgent:
 
     @staticmethod
     def _platform_label(fw: Optional[str]) -> Optional[str]:
-        return canonical_platform_label(fw) or None
+        return seo_platform_label(fw) or canonical_platform_label(fw) or None
 
     @staticmethod
     def _cluster_is_serp_derived(cluster: Cluster) -> bool:

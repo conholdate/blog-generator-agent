@@ -426,6 +426,7 @@ PHRASE_CANON: Dict[str, str] = {
     "ml": "ML",
     "oz": "OZ",
     "excel": "Excel",
+    "base64": "Base64",
     "memorystream": "MemoryStream",
     "vscode": "VS Code",
     "visual studio code": "VS Code",
@@ -461,6 +462,7 @@ PRESERVE_TOKENS: Set[str] = {
 FORMAT_TOKEN_SET: Set[str] = set(FILE_FORMAT_REGISTRY.keys()) | {
     "htm", "jpeg", "tif", "djv", "stp", "wrl", "yml"
 }
+CONVERSION_TOKEN_SET: Set[str] = FORMAT_TOKEN_SET | {"base64"}
 _TEXT_PAYLOAD_CONTEXT_RE = re.compile(r"\b(qr|qrcode|barcode|barcodes?)\b", re.IGNORECASE)
 _GENERIC_BARCODE_GENERATION_RE = re.compile(
     r"^generate\s+barcodes?(?:\s+barcode)?(?:\s+api)?$",
@@ -529,7 +531,38 @@ _IMAGE_CALLOUT_RE = re.compile(r"\bimages?\s+callouts?\b|\bcallouts?\s+to\s+imag
 _TRAILING_PREPOSITION_RE = re.compile(r"\b(in|with|using|for)\b\s*$", re.IGNORECASE)
 _C_NET_NOISE_RE = re.compile(r"\bc\s+net\b", re.IGNORECASE)
 _FROM_TO_NOISE_RE = re.compile(r"\bfrom\s+to\b", re.IGNORECASE)
+_BASE64_TOKEN_RE = re.compile(r"\bbase\s*64\b", re.IGNORECASE)
 _CONVERSION_PAIR_RE = re.compile(r"\b([a-z0-9]{1,12})\s*(?:to|into|in2|->|→)\s*([a-z0-9]{1,12})\b", re.IGNORECASE)
+_TOPIC_GUIDE_QUALIFIER_PATTERN = (
+    r"(?:(?:step\s+by\s+step|complete|comprehensive|quick|full|developer|practical)\s+)*"
+    r"(?:guide|tutorial|example|code\s+sample|sample)"
+)
+_TOPIC_PRODUCT_QUALIFIER_RE = re.compile(
+    r"\b(?:using|with|via|for)\s+"
+    r"(?:aspose|groupdocs|conholdate)(?:[.\s]+[a-z0-9]+)?(?:\s+(?:cloud|api|sdk))?\b",
+    re.IGNORECASE,
+)
+_TOPIC_LEADING_HOW_TO_RE = re.compile(r"^how\s+to\s+", re.IGNORECASE)
+_TOPIC_LEADING_GUIDE_RE = re.compile(
+    rf"^(?:how\s+to\s+)?(?:a\s+|an\s+|the\s+)?{_TOPIC_GUIDE_QUALIFIER_PATTERN}\s+"
+    r"(?:to|for|on|about)\s+",
+    re.IGNORECASE,
+)
+_TOPIC_LEADING_DEVELOPER_GUIDE_RE = re.compile(r"^(?:a\s+|an\s+|the\s+)?developer\s+guide\s+", re.IGNORECASE)
+_TOPIC_TRAILING_GUIDE_QUALIFIER_RE = re.compile(
+    rf"\b(?:in|with|using|for|as)\s+(?:a\s+|an\s+|the\s+)?{_TOPIC_GUIDE_QUALIFIER_PATTERN}\b$",
+    re.IGNORECASE,
+)
+_TOPIC_TRAILING_GUIDE_RE = re.compile(
+    rf"\b(?:a\s+|an\s+|the\s+)?{_TOPIC_GUIDE_QUALIFIER_PATTERN}\b$",
+    re.IGNORECASE,
+)
+_MERGE_PDF_TOPIC_RE = re.compile(
+    r"\b(?:merge|merging|combine|combining|concatenate|concatenating|join|joining)\b"
+    r"(?:\s+(?:all|multiple|several|two|2|pdf|pdfs?|documents?|docs?))*"
+    r"\s+pdfs?\b",
+    re.IGNORECASE,
+)
 
 
 # =============================================================================
@@ -553,6 +586,206 @@ def _canon_autofit_excel_topics(text: str) -> str:
 
 def _canon_fit_image_topics(text: str) -> str:
     return _FIT_IMAGE_TO_CELL_RE.sub("Fit image to cell width and height", text)
+
+
+def _strip_topic_key_decorations(text: str) -> str:
+    out = text
+    for _ in range(3):
+        before = out
+        out = _TOPIC_PRODUCT_QUALIFIER_RE.sub(" ", out)
+        out = _TOPIC_LEADING_GUIDE_RE.sub(" ", out)
+        out = _TOPIC_LEADING_DEVELOPER_GUIDE_RE.sub(" ", out)
+        out = _TOPIC_LEADING_HOW_TO_RE.sub(" ", out)
+        out = _TOPIC_TRAILING_GUIDE_QUALIFIER_RE.sub(" ", out)
+        out = _TOPIC_TRAILING_GUIDE_RE.sub(" ", out)
+        out = _TRAILING_PREPOSITION_RE.sub(" ", out)
+        out = _WS_RE.sub(" ", out).strip(" -,:;")
+        if out == before:
+            break
+    return out
+
+
+def _collapse_adjacent_duplicate_terms(text: str) -> str:
+    words = [word for word in _WS_RE.split(str(text or "").strip()) if word]
+    if not words:
+        return ""
+
+    out: list[str] = []
+    previous = ""
+    for word in words:
+        normalized = normalize_text(word)
+        if normalized and normalized == previous:
+            continue
+        out.append(word)
+        previous = normalized
+    return " ".join(out)
+
+
+def _normalize_similarity_topic_key_text(text: str) -> str:
+    t = _WS_RE.sub(" ", str(text or "")).strip(" -,:;")
+    if not t:
+        return ""
+
+    replacements = [
+        (r"(?i)\b(?:quick\s+and\s+easy\s+tips\s+for\s+smaller|in\s+powerful)\b$", ""),
+        (r"(?i)\b(?:or\s+)?with\s+code\b$", ""),
+        (r"(?i)\b(?:converter|converters|tool|tools|command|commands)\b$", ""),
+        (r"(?i)^add\s+and\s+remove\b", "add or remove"),
+        (r"(?i)^add\s+update\s+and\s+remove\b", "add or remove"),
+        (r"(?i)^encrypt\s+and\s+decrypt\b", "encrypt or decrypt"),
+        (r"(?i)^lock\s+and\s+unlock\b", "lock or unlock"),
+        (r"(?i)^fill\s+create\s+or\s+edit\s+fillable\b", "create fill or edit fillable"),
+        (r"(?i)^extract\s+table\s+from\b", "extract tables from"),
+        (r"(?i)^images?\s+to\s+", "image to "),
+        (r"(?i)\s+to\s+images?$", " to image"),
+        (r"(?i)^print\s+(.+?)\s+to\s+printer$", r"print \1"),
+        (r"(?i)^rotate\s+(.+?)\s+pages\s+text\s+or\s+images?$", r"rotate \1"),
+        (
+            r"(?i)^edit\s+(?P<object>[a-z0-9.+# ]+?)\s+document\s+(?P=object)\s+editor$",
+            r"edit \g<object> document",
+        ),
+        (
+            r"(?i)^(compress|optimize|split|print|protect|lock|unlock|encrypt|decrypt|edit|view|annotate|redact|sign|verify|search)\s+(.+?)\s+documents$",
+            r"\1 \2",
+        ),
+    ]
+    for pattern, replacement in replacements:
+        t = re.sub(pattern, replacement, t)
+    t = _collapse_adjacent_duplicate_terms(t)
+    return _WS_RE.sub(" ", t).strip(" -,:;")
+
+
+_PDF_GENERIC_TOPIC_KEYS = {
+    "add or remove in pdf",
+    "best pdf for working with pdf",
+    "best pdf for working with pdfs",
+}
+
+
+def _normalize_pdf_topic_key_text(text: str) -> str:
+    t = _WS_RE.sub(" ", str(text or "")).strip(" -,:;")
+    if not t:
+        return ""
+
+    t = re.sub(r"(?i)\bpdfs\b", "pdf", t)
+    t = re.sub(r"(?i)\bpages\b", "pages", t)
+
+    image_ops = {m.group(1).lower() for m in re.finditer(r"(?i)\b(add|extract|remove|replace)\b", t)}
+    if len(image_ops) >= 2 and re.search(r"(?i)\bimages?\b", t) and re.search(r"(?i)\bpdf\b", t):
+        return "add extract remove or replace images in pdf"
+
+    replacements = [
+        (r"(?i)^ai\s+pdf\s+summari[sz]er\s+summari[sz]e\s+any\s+pdf$", "ai pdf summarizer"),
+        (r"(?i)^ai\s+pdf\s+summary\s+generator$", "ai pdf summarizer"),
+        (
+            r"(?i)^acroforms?\s+vs\s+xfa\s+forms?\s+convert\s+xfa\s+to\s+acroforms?\s+in\s+pdf$",
+            "convert xfa to acroforms in pdf",
+        ),
+        (r"(?i)^add\s+and\s+verify\s+digital\s+signatures\s+in\s+pdf\s+documents?$", "add digital signatures to pdf"),
+        (r"(?i)^add\s+update\s+and\s+remove\s+annotations\s+in\s+pdf$", "add or remove annotations in pdf"),
+        (r"(?i)^add\s+and\s+remove\s+attachments\s+in\s+pdf$", "add or remove attachments in pdf"),
+        (r"(?i)^adding\s+digital\s+signatures\s+to\s+pdf$", "add digital signatures to pdf"),
+        (r"(?i)^add\s+watermark\s+in\s+pdf$", "add watermark to pdf"),
+        (r"(?i)^watermark\s+pdf(?:\s+.*)?$", "add watermark to pdf"),
+        (r"(?i)^(?:change|edit)\s+pdf\s+page\s+size$", "resize pdf pages"),
+        (r"(?i)^compress\s+pdf\s+documents?$", "compress pdf"),
+        (r"(?i)^copy\s+pages\s+in\s+pdf$", "copy pdf pages"),
+        (r"(?i)^create\s+3d\s+pdf\s+converters?$", "create 3d pdf"),
+        (r"(?i)^create\s+pdf\s+pdf$", "create pdf"),
+        (r"(?i)^create\s+pdf\s+from\s+images?$", "generate pdf from images"),
+        (r"(?i)^crop\s+in\s+pdf\s+try\s+and\s+build$", "crop pdf pages"),
+        (r"(?i)^delete\s+(?:pdf\s+)?pages\s+from\s+pdf$", "remove pages from pdf"),
+        (r"(?i)^delete\s+pdf\s+pages$", "remove pages from pdf"),
+        (r"(?i)^edit\s+pdf\s+document\s+pdf\s+editor$", "edit pdf document"),
+        (r"(?i)^encrypt\s+and\s+decrypt\s+pdf$", "encrypt or decrypt pdf"),
+        (r"(?i)^extract\s+table\s+from\s+pdf$", "extract tables from pdf"),
+        (r"(?i)^extract\s+text\s+from\s+pdf\s+documents?$", "extract text from pdf"),
+        (r"(?i)^fill\s+create\s+or\s+edit\s+fillable\s+pdf\s+forms$", "create fill or edit fillable pdf forms"),
+        (r"(?i)^generate\s+thumbnail\s+images\s+for\s+pdf\s+pages$", "generate pdf thumbnails"),
+        (r"(?i)^generate\s+thumbnails\s+for\s+pdf$", "generate pdf thumbnails"),
+        (r"(?i)^images?\s+to\s+pdf$", "image to pdf"),
+        (r"(?i)^merge\s+jpg\s+combine\s+jpg$", "merge jpg images"),
+        (r"(?i)^merge\s+two\s+or\s+more\s+pdf$", "merge pdf"),
+        (r"(?i)^parse\s+pdf\s+in\s+powerful$", "parse pdf"),
+        (r"(?i)^pdf\s+create\s+pdf$", "create pdf"),
+        (r"(?i)^creating\s+pdf$", "create pdf"),
+        (r"(?i)^pdf\s+editor\s+create\s+pdf$", "create pdf with pdf editor"),
+        (r"(?i)^print\s+pdf\s+documents?$", "print pdf"),
+        (r"(?i)^remove\s+pages\s+from\s+pdf\s+document$", "remove pages from pdf"),
+        (r"(?i)^resize\s+pdf\s+pages\s+or\s+with\s+code$", "resize pdf pages"),
+        (r"(?i)^resize\s+pdf\s+document$", "resize pdf pages"),
+        (r"(?i)^rotate\s+pdf\s+document(?:\s+for\s+best\s+tool\s+and\s+methods)?$", "rotate pdf"),
+        (r"(?i)^rotate\s+pdf\s+pages\s+text\s+or\s+images?$", "rotate pdf pages text or image"),
+        (r"(?i)^search\s+in\s+pdf$", "search text in pdf"),
+        (r"(?i)^shrink\s+pdf\s+quick\s+and\s+easy\s+tips\s+for\s+smaller$", "shrink pdf"),
+        (r"(?i)^split\s+pdf\s+into\s+multiple(?:\s+files)?$", "split pdf"),
+        (r"(?i)^working\s+with\s+bookmarks\s+in\s+pdf$", "work with bookmarks in pdf"),
+        (r"(?i)^create\s+multi\s+column\s+pdf\s+in\s+pdf$", "create multi column pdf"),
+    ]
+    for pattern, replacement in replacements:
+        t = re.sub(pattern, replacement, t)
+    return _WS_RE.sub(" ", t).strip(" -,:;")
+
+
+def _looks_like_pdf_context(*values: str, product_key: str = "") -> bool:
+    if str(product_key or "").strip().lower().replace("_", ".") in {"pdf", "aspose.pdf"}:
+        return True
+    return any(re.search(r"(?i)(?<![a-z0-9])pdfs?(?![a-z0-9])", str(value or "")) for value in values)
+
+
+def _pdf_product_display_key(topic_key: str, *, product_key: str = "") -> str:
+    key = topic_key
+    if str(product_key or "").strip().lower().replace("_", ".") not in {"pdf", "aspose.pdf"}:
+        return key
+    weak_pdf_objects = {
+        "create 3d": "create 3d pdf",
+        "create photo album": "create photo album pdf",
+        "merge jpg images": "merge jpg images to pdf",
+    }
+    return weak_pdf_objects.get(key, key)
+
+
+def normalize_topic_display(text: str, *, key: str = "", product_key: str = "") -> str:
+    raw = str(text or "").strip()
+    raw_key = str(key or "").replace("-", " ").strip()
+    topic_key = canonical_topic_key(raw or raw_key)
+    if not topic_key and raw_key:
+        topic_key = canonical_topic_key(raw_key)
+
+    if _looks_like_pdf_context(raw, raw_key, topic_key, product_key=product_key):
+        pdf_key = _normalize_pdf_topic_key_text(topic_key or raw_key or raw)
+        pdf_key = _pdf_product_display_key(pdf_key, product_key=product_key)
+        if normalize_text(pdf_key) in _PDF_GENERIC_TOPIC_KEYS:
+            return ""
+        display = normalize_sentence_text(pdf_key)
+        display = re.sub(r"(?i)\bPDF\s+PAGES\b", "PDF Pages", display)
+        display = re.sub(r"(?i)\bPAGES\s+(from|in|of)\s+PDF\b", r"Pages \1 PDF", display)
+        display = re.sub(r"(?i)\bxfa\b", "XFA", display)
+        display = re.sub(r"(?i)\bacroforms\b", "AcroForms", display)
+        display = re.sub(r"(?i)\bbyte\s+array\b", "Byte Array", display)
+        display = re.sub(r"(?i)^Add watermark to PDF$", "Add Watermark to PDF", display)
+        display = re.sub(
+            r"(?i)^Add extract remove or replace images in PDF$",
+            "Add, extract, remove, or replace images in PDF",
+            display,
+        )
+        display = re.sub(
+            r"(?i)^Base64 string to PDF or JPG PNG image$",
+            "Base64 string to PDF or JPG/PNG image",
+            display,
+        )
+        display = re.sub(
+            r"(?i)^JPG PNG TIFF EMF or BMP images to PDF$",
+            "JPG, PNG, TIFF, EMF, or BMP images to PDF",
+            display,
+        )
+        display = re.sub(r"(?i)^PDF documents to Excel XLS XLSX$", "PDF to Excel XLS/XLSX", display)
+        display = re.sub(r"(?i)\bPDF editor\b", "PDF Editor", display)
+        display = re.sub(r"(?i)^PDF to image$", "PDF to Image", display)
+        display = re.sub(r"(?i)^PUB to image$", "PUB to Image", display)
+        return display
+
+    return normalize_sentence_text(topic_key or raw or raw_key)
 
 
 @dataclass(frozen=True)
@@ -871,11 +1104,14 @@ def canonical_topic_key(text: str) -> str:
 
     t = unicodedata.normalize("NFKC", text).strip()
     t = re.sub(r"[-_/]+", " ", t)
+    t = re.sub(r"[:;]+", " ", t)
+    t = _BASE64_TOKEN_RE.sub("base64", t)
     t = _LANG_QUALIFIER_RE.sub(" ", t)
     t = _TRAILING_LANG_TOKEN_RE.sub(" ", t)
     t = _LANG_TOKEN_ANYWHERE_RE.sub(" ", t)
     t = _SYMBOL_LANG_QUALIFIER_RE.sub(" ", t)
     t = _SYMBOL_LANG_TOKEN_RE.sub(" ", t)
+    t = _strip_topic_key_decorations(t)
     t = _canon_autofit_excel_topics(t)
     t = _IMAGE_CALLOUT_RE.sub("image callout", t)
     t = _remove_topic_noise_words(t)
@@ -883,10 +1119,18 @@ def canonical_topic_key(text: str) -> str:
     t = _FROM_TO_NOISE_RE.sub(" ", t)
     t = re.sub(r"\boptical\s+mark\s+recognition\s+omr\b", "optical mark recognition", t, flags=re.IGNORECASE)
     t = _TRAILING_PREPOSITION_RE.sub(" ", t)
+    t = _strip_topic_key_decorations(t)
     t = _WS_RE.sub(" ", t).strip()
+    t = _normalize_similarity_topic_key_text(t)
+    t = _normalize_pdf_topic_key_text(t)
+    if normalize_text(t) in _PDF_GENERIC_TOPIC_KEYS:
+        return ""
 
     if _GENERIC_BARCODE_GENERATION_RE.match(t):
         return "generate barcodes"
+
+    if _MERGE_PDF_TOPIC_RE.search(t):
+        return "merge pdf"
 
     alt_match = re.search(
         r"\b([a-z0-9]{1,12})\s*(?:to|into|in2|->|â†’)\s*([a-z0-9]{1,12})\s+or\s+([a-z0-9]{1,12})\b",
@@ -897,13 +1141,13 @@ def canonical_topic_key(text: str) -> str:
         src = canonical_file_format(alt_match.group(1))
         dst = canonical_file_format(alt_match.group(2))
         alt = canonical_file_format(alt_match.group(3))
-        if src in FORMAT_TOKEN_SET and dst in FORMAT_TOKEN_SET and alt in FORMAT_TOKEN_SET:
+        if src in CONVERSION_TOKEN_SET and dst in CONVERSION_TOKEN_SET and alt in CONVERSION_TOKEN_SET:
             return _final_topic_cleanup(normalize_text(f"{src} to {dst}"))
 
     for m in _CONVERSION_PAIR_RE.finditer(t):
         src = canonical_file_format(m.group(1))
         dst = canonical_file_format(m.group(2))
-        if src in FORMAT_TOKEN_SET and dst in FORMAT_TOKEN_SET:
+        if src in CONVERSION_TOKEN_SET and dst in CONVERSION_TOKEN_SET:
             return _final_topic_cleanup(normalize_text(f"{src} to {dst}"))
 
     action_match = re.match(
@@ -915,7 +1159,12 @@ def canonical_topic_key(text: str) -> str:
         action = action_match.group(1).lower()
         target = canonical_file_format(action_match.group(2))
         rest = action_match.group("rest") or ""
-        if target in FORMAT_TOKEN_SET and not (target == "txt" and _TEXT_PAYLOAD_CONTEXT_RE.search(rest)):
+        rest_key = normalize_text(rest)
+        if (
+            target in FORMAT_TOKEN_SET
+            and rest_key in {"", "file", "files", "document", "documents"}
+            and not (target == "txt" and _TEXT_PAYLOAD_CONTEXT_RE.search(rest))
+        ):
             return _final_topic_cleanup(normalize_text(f"{action} {target}"))
 
     return _final_topic_cleanup(normalize_text(t))
@@ -1249,6 +1498,7 @@ title_case = normalize_title_text
 __all__ = [
     "ASPOSE_PRODUCT_REGISTRY",
     "CONHOLDATE_PRODUCT_REGISTRY",
+    "CONVERSION_TOKEN_SET",
     "FILE_FORMAT_REGISTRY",
     "FORMAT_ALIAS_TO_CANONICAL",
     "FORMAT_CANONICAL_TO_ALIASES",
@@ -1284,6 +1534,7 @@ __all__ = [
     "normalize_product_display_name",
     "normalize_sentence_text",
     "normalize_text",
+    "normalize_topic_display",
     "normalize_title_text",
     "normalize_whitespace",
     "nor_platform_display_name",
