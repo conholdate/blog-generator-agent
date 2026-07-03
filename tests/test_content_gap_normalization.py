@@ -380,13 +380,33 @@ def test_pdf_topic_keys_preserve_object_context_and_repair_generated_noise() -> 
         "Creating PDF": "create pdf",
         "Watermark PDF in complete guide for developers": "add watermark to pdf",
         "Resize PDF PAGES or with code": "resize pdf pages",
-        "Rotate PDF document for best tool and methods": "rotate pdf document",
+        "Rotate PDF document for best tool and methods": "rotate pdf",
         "Shrink PDF quick and easy tips for smaller": "shrink pdf",
-        "Split PDF into multiple": "split pdf into multiple files",
+        "Split PDF into multiple": "split pdf",
         "Add Remove and Replace Images in PDF": "add extract remove or replace images in pdf",
         "Add Extract Remove or Replace Images in PDF": "add extract remove or replace images in pdf",
         "AI PDF summary generator": "ai pdf summarizer",
         "Acroforms vs xfa forms convert xfa to acroforms in PDF": "convert xfa to acroforms in pdf",
+        "Create 3D PDF converter": "create 3d pdf",
+        "Create PDF PDF": "create pdf",
+        "Parse PDF in powerful": "parse pdf",
+        "Edit PDF document PDF editor": "edit pdf document",
+        "Compress PDF documents": "compress pdf",
+        "Encrypt and decrypt PDF": "encrypt or decrypt pdf",
+        "Extract text from PDF documents": "extract text from pdf",
+        "Fill create or edit fillable PDF forms": "create fill or edit fillable pdf forms",
+        "Create PDF from images": "generate pdf from images",
+        "Images to PDF": "image to pdf",
+        "Add and verify digital signatures in PDF documents": "add digital signatures to pdf",
+        "Add update and remove annotations in PDF": "add or remove annotations in pdf",
+        "Change PDF page size": "resize pdf pages",
+        "Edit PDF page size": "resize pdf pages",
+        "Delete Pages from PDF": "remove pages from pdf",
+        "Extract table from PDF": "extract tables from pdf",
+        "Print PDF documents": "print pdf",
+        "Rotate PDF document": "rotate pdf",
+        "Rotate PDF Pages text or images": "rotate pdf pages text or image",
+        "Split PDF into multiple files": "split pdf",
     }
 
     for topic, expected in cases.items():
@@ -406,9 +426,29 @@ def test_pdf_topic_display_uses_readable_label_not_raw_key() -> None:
         "PDF create PDF": "Create PDF",
         "Resize PDF PAGES or with code": "Resize PDF Pages",
         "Watermark PDF in complete guide for developers": "Add Watermark to PDF",
-        "Add Remove and Replace Images in PDF": "Add extract remove or replace images in PDF",
+        "Add Remove and Replace Images in PDF": "Add, extract, remove, or replace images in PDF",
         "Acroforms vs xfa forms convert xfa to acroforms in PDF": "Convert XFA to AcroForms in PDF",
         "Best PDF for working with pdfs": "",
+        "Create 3D PDF converter": "Create 3D PDF",
+        "Create PDF PDF": "Create PDF",
+        "Parse PDF in powerful": "Parse PDF",
+        "Edit PDF document PDF editor": "Edit PDF document",
+        "Compress PDF documents": "Compress PDF",
+        "Encrypt and decrypt PDF": "Encrypt or decrypt PDF",
+        "Extract text from PDF documents": "Extract text from PDF",
+        "Fill create or edit fillable PDF forms": "Create fill or edit fillable PDF forms",
+        "Create PDF from images": "Generate PDF from images",
+        "Images to PDF": "Image to PDF",
+        "Split PDF into multiple files": "Split PDF",
+        "Change PDF page size": "Resize PDF Pages",
+        "Edit PDF page size": "Resize PDF Pages",
+        "Print PDF documents": "Print PDF",
+        "Rotate PDF document": "Rotate PDF",
+        "Rotate PDF Pages text or images": "Rotate PDF Pages text or image",
+        "PDF to byte array or byte array to PDF": "PDF to Byte Array or Byte Array to PDF",
+        "PDF documents to Excel XLS XLSX": "PDF to Excel XLS/XLSX",
+        "Base64 string to PDF or JPG PNG image": "Base64 string to PDF or JPG/PNG image",
+        "JPG PNG TIFF EMF or BMP images to PDF": "JPG, PNG, TIFF, EMF, or BMP images to PDF",
     }
 
     for topic, expected in cases.items():
@@ -430,7 +470,27 @@ def test_pdf_sheet_export_cleans_or_skips_regressed_topic_labels(tmp_path) -> No
                         "coverage": {"net": {"matched": True}, "python": {"matched": False}},
                     },
                     {
+                        "topic": "Create 3D PDF converter",
+                        "coverage": {"net": {"matched": True}, "python": {"matched": False}},
+                    },
+                    {
                         "topic": "PDF create PDF",
+                        "coverage": {"net": {"matched": True}, "python": {"matched": False}},
+                    },
+                    {
+                        "topic": "Create PDF PDF",
+                        "coverage": {"net": {"matched": True}, "python": {"matched": False}},
+                    },
+                    {
+                        "topic": "Parse PDF in powerful",
+                        "coverage": {"net": {"matched": True}, "python": {"matched": False}},
+                    },
+                    {
+                        "topic": "Compress PDF documents",
+                        "coverage": {"net": {"matched": True}, "python": {"matched": False}},
+                    },
+                    {
+                        "topic": "Images to PDF",
                         "coverage": {"net": {"matched": True}, "python": {"matched": False}},
                     },
                     {
@@ -454,7 +514,14 @@ def test_pdf_sheet_export_cleans_or_skips_regressed_topic_labels(tmp_path) -> No
     payload = build_payload(coverage_json=coverage_json, sheet_name="All Missing Topics", replace=False)
     topics = [row[5] for row in payload["rows"]]
 
-    assert topics == ["Create 3D PDF", "Create PDF", "Resize PDF Pages"]
+    assert topics == [
+        "Compress PDF",
+        "Create 3D PDF",
+        "Create PDF",
+        "Image to PDF",
+        "Parse PDF",
+        "Resize PDF Pages",
+    ]
 
 
 def test_record_gap_key_prefers_richer_pdf_topic_over_weak_index_key() -> None:
@@ -511,6 +578,67 @@ def test_sheet_export_dedupes_general_topic_key_decorations(tmp_path) -> None:
 
     assert payload["meta"]["row_count"] == 1
     assert payload["rows"][0][5] == "Add Watermark to PDF"
+
+
+def test_generic_similarity_topic_keys_collapse_across_products() -> None:
+    cases = {
+        "Create Barcode converter": "create barcode",
+        "Create Barcode Barcode": "create barcode",
+        "Compress Word documents": "compress word",
+        "Print Word documents": "print word",
+        "Parse Spreadsheet in powerful": "parse xlsx",
+        "Extract table from Excel": "extract tables from excel",
+        "Images to SVG": "image to svg",
+        "SVG to images": "svg to image",
+        "Add and remove comments in Excel": "add or remove comments in excel",
+        "Add update and remove comments in Excel": "add or remove comments in excel",
+        "Encrypt and decrypt Word": "encrypt or decrypt word",
+        "Fill create or edit fillable DOCX forms": "create fill or edit fillable docx forms",
+        "Edit Word document Word editor": "edit word document",
+        "Split Word documents": "split word",
+    }
+
+    for topic, expected in cases.items():
+        assert canonical_topic_key(topic) == expected
+        assert indexer_canonical_topic_key(topic) == expected
+
+
+def test_sheet_export_dedupes_generic_similarity_variants_for_non_pdf_products(tmp_path) -> None:
+    coverage_json = tmp_path / "coverage.json"
+    coverage_json.write_text(
+        json.dumps(
+            {
+                "brand_key": "aspose",
+                "product_key": "cells",
+                "product_name": "Aspose.Cells",
+                "baseline_platform": "all",
+                "rows": [
+                    {
+                        "topic": "Add and remove comments in Excel",
+                        "coverage": {"net": {"matched": True}, "python": {"matched": False}},
+                    },
+                    {
+                        "topic": "Add update and remove comments in Excel",
+                        "coverage": {"net": {"matched": True}, "python": {"matched": False}},
+                    },
+                    {
+                        "topic": "Create Barcode converter",
+                        "coverage": {"net": {"matched": True}, "python": {"matched": False}},
+                    },
+                    {
+                        "topic": "Create Barcode Barcode",
+                        "coverage": {"net": {"matched": True}, "python": {"matched": False}},
+                    },
+                ],
+            }
+        ),
+        encoding="utf-8",
+    )
+
+    payload = build_payload(coverage_json=coverage_json, sheet_name="All Missing Topics", replace=False)
+    topics = [row[5] for row in payload["rows"]]
+
+    assert topics == ["Add or remove comments in Excel", "Create barcode"]
 
 
 def test_blogs_to_blogs_infers_dates_from_blog_slug_for_matching(tmp_path) -> None:

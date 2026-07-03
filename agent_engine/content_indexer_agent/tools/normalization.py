@@ -687,6 +687,54 @@ def _strip_topic_key_decorations(text: str) -> str:
     return out
 
 
+def _collapse_adjacent_duplicate_terms(text: str) -> str:
+    words = [word for word in _WS_RE.split(str(text or "").strip()) if word]
+    if not words:
+        return ""
+
+    out: list[str] = []
+    previous = ""
+    for word in words:
+        normalized = normalize_text(word)
+        if normalized and normalized == previous:
+            continue
+        out.append(word)
+        previous = normalized
+    return " ".join(out)
+
+
+def _normalize_similarity_topic_key_text(text: str) -> str:
+    t = _WS_RE.sub(" ", str(text or "")).strip(" -,:;")
+    if not t:
+        return ""
+
+    replacements = [
+        (r"(?i)\b(?:quick\s+and\s+easy\s+tips\s+for\s+smaller|in\s+powerful)\b$", ""),
+        (r"(?i)\b(?:or\s+)?with\s+code\b$", ""),
+        (r"(?i)\b(?:converter|converters|tool|tools|command|commands)\b$", ""),
+        (r"(?i)^add\s+and\s+remove\b", "add or remove"),
+        (r"(?i)^add\s+update\s+and\s+remove\b", "add or remove"),
+        (r"(?i)^encrypt\s+and\s+decrypt\b", "encrypt or decrypt"),
+        (r"(?i)^lock\s+and\s+unlock\b", "lock or unlock"),
+        (r"(?i)^fill\s+create\s+or\s+edit\s+fillable\b", "create fill or edit fillable"),
+        (r"(?i)^extract\s+table\s+from\b", "extract tables from"),
+        (r"(?i)^images?\s+to\s+", "image to "),
+        (r"(?i)\s+to\s+images?$", " to image"),
+        (
+            r"(?i)^edit\s+(?P<object>[a-z0-9.+# ]+?)\s+document\s+(?P=object)\s+editor$",
+            r"edit \g<object> document",
+        ),
+        (
+            r"(?i)^(compress|optimize|split|print|protect|lock|unlock|encrypt|decrypt|edit|view|annotate|redact|sign|verify|search)\s+(.+?)\s+documents$",
+            r"\1 \2",
+        ),
+    ]
+    for pattern, replacement in replacements:
+        t = re.sub(pattern, replacement, t)
+    t = _collapse_adjacent_duplicate_terms(t)
+    return _WS_RE.sub(" ", t).strip(" -,:;")
+
+
 _PDF_GENERIC_TOPIC_KEYS = {
     "add or remove in pdf",
     "best pdf for working with pdf",
@@ -713,27 +761,44 @@ def _normalize_pdf_topic_key_text(text: str) -> str:
             r"(?i)^acroforms?\s+vs\s+xfa\s+forms?\s+convert\s+xfa\s+to\s+acroforms?\s+in\s+pdf$",
             "convert xfa to acroforms in pdf",
         ),
+        (r"(?i)^add\s+and\s+verify\s+digital\s+signatures\s+in\s+pdf\s+documents?$", "add digital signatures to pdf"),
+        (r"(?i)^add\s+update\s+and\s+remove\s+annotations\s+in\s+pdf$", "add or remove annotations in pdf"),
         (r"(?i)^add\s+and\s+remove\s+attachments\s+in\s+pdf$", "add or remove attachments in pdf"),
         (r"(?i)^adding\s+digital\s+signatures\s+to\s+pdf$", "add digital signatures to pdf"),
         (r"(?i)^add\s+watermark\s+in\s+pdf$", "add watermark to pdf"),
         (r"(?i)^watermark\s+pdf(?:\s+.*)?$", "add watermark to pdf"),
+        (r"(?i)^(?:change|edit)\s+pdf\s+page\s+size$", "resize pdf pages"),
+        (r"(?i)^compress\s+pdf\s+documents?$", "compress pdf"),
         (r"(?i)^copy\s+pages\s+in\s+pdf$", "copy pdf pages"),
+        (r"(?i)^create\s+3d\s+pdf\s+converters?$", "create 3d pdf"),
+        (r"(?i)^create\s+pdf\s+pdf$", "create pdf"),
+        (r"(?i)^create\s+pdf\s+from\s+images?$", "generate pdf from images"),
         (r"(?i)^crop\s+in\s+pdf\s+try\s+and\s+build$", "crop pdf pages"),
-        (r"(?i)^delete\s+pdf\s+pages$", "delete pages from pdf"),
+        (r"(?i)^delete\s+(?:pdf\s+)?pages\s+from\s+pdf$", "remove pages from pdf"),
+        (r"(?i)^delete\s+pdf\s+pages$", "remove pages from pdf"),
+        (r"(?i)^edit\s+pdf\s+document\s+pdf\s+editor$", "edit pdf document"),
+        (r"(?i)^encrypt\s+and\s+decrypt\s+pdf$", "encrypt or decrypt pdf"),
+        (r"(?i)^extract\s+table\s+from\s+pdf$", "extract tables from pdf"),
+        (r"(?i)^extract\s+text\s+from\s+pdf\s+documents?$", "extract text from pdf"),
+        (r"(?i)^fill\s+create\s+or\s+edit\s+fillable\s+pdf\s+forms$", "create fill or edit fillable pdf forms"),
         (r"(?i)^generate\s+thumbnail\s+images\s+for\s+pdf\s+pages$", "generate pdf thumbnails"),
         (r"(?i)^generate\s+thumbnails\s+for\s+pdf$", "generate pdf thumbnails"),
+        (r"(?i)^images?\s+to\s+pdf$", "image to pdf"),
         (r"(?i)^merge\s+jpg\s+combine\s+jpg$", "merge jpg images"),
         (r"(?i)^merge\s+two\s+or\s+more\s+pdf$", "merge pdf"),
+        (r"(?i)^parse\s+pdf\s+in\s+powerful$", "parse pdf"),
         (r"(?i)^pdf\s+create\s+pdf$", "create pdf"),
         (r"(?i)^creating\s+pdf$", "create pdf"),
         (r"(?i)^pdf\s+editor\s+create\s+pdf$", "create pdf with pdf editor"),
+        (r"(?i)^print\s+pdf\s+documents?$", "print pdf"),
         (r"(?i)^remove\s+pages\s+from\s+pdf\s+document$", "remove pages from pdf"),
         (r"(?i)^resize\s+pdf\s+pages\s+or\s+with\s+code$", "resize pdf pages"),
         (r"(?i)^resize\s+pdf\s+document$", "resize pdf pages"),
-        (r"(?i)^rotate\s+pdf\s+document\s+for\s+best\s+tool\s+and\s+methods$", "rotate pdf document"),
+        (r"(?i)^rotate\s+pdf\s+document(?:\s+for\s+best\s+tool\s+and\s+methods)?$", "rotate pdf"),
+        (r"(?i)^rotate\s+pdf\s+pages\s+text\s+or\s+images?$", "rotate pdf pages text or image"),
         (r"(?i)^search\s+in\s+pdf$", "search text in pdf"),
         (r"(?i)^shrink\s+pdf\s+quick\s+and\s+easy\s+tips\s+for\s+smaller$", "shrink pdf"),
-        (r"(?i)^split\s+pdf\s+into\s+multiple$", "split pdf into multiple files"),
+        (r"(?i)^split\s+pdf\s+into\s+multiple(?:\s+files)?$", "split pdf"),
         (r"(?i)^working\s+with\s+bookmarks\s+in\s+pdf$", "work with bookmarks in pdf"),
         (r"(?i)^create\s+multi\s+column\s+pdf\s+in\s+pdf$", "create multi column pdf"),
     ]
@@ -1073,6 +1138,7 @@ def canonical_topic_key(text: str) -> str:
     t = _TRAILING_PREPOSITION_RE.sub(" ", t)
     t = _strip_topic_key_decorations(t)
     t = _WS_RE.sub(" ", t).strip()
+    t = _normalize_similarity_topic_key_text(t)
     t = _normalize_pdf_topic_key_text(t)
     if normalize_text(t) in _PDF_GENERIC_TOPIC_KEYS:
         return ""
