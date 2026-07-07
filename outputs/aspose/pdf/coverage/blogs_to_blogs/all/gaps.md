@@ -6,8 +6,8 @@
 
 | 🧩 Metric | Value | Status |
 | --- | --- | --- |
-| **Total Canonical Topics** | **95** | — |
-| **Topics with Gaps** | **93** | ⚠️ |
+| **Total Canonical Topics** | **93** | — |
+| **Topics with Gaps** | **91** | ⚠️ |
 | **Fully Covered Topics** | 2 | ✅ |
 | **Excluded (Release / Updates)** | 0 | ℹ️ |
 | **Baseline Scope** | ALL | — |
@@ -19,9 +19,9 @@
 
 | Indicator | Score | Interpretation |
 | --- | --- | --- |
-| Cross-Platform Parity | 2.1% | 🔴 Weak |
+| Cross-Platform Parity | 2.2% | 🔴 Weak |
 | Content Reusability | High | ✅ Strong |
-| Porting Opportunity | 97.9% gaps | 🔥 Very High |
+| Porting Opportunity | 97.8% gaps | 🔥 Very High |
 | Excluded Noise (Releases) | 0 | ✅ Controlled |
 
 ---
@@ -30,18 +30,18 @@
 
 | Platform | # Covered | # Missing | Coverage |
 | --- | --- | --- | --- |
-| **CPP** | 27 | 68 | 🔴 Weak (28.4%) |
-| **GENERAL** | 22 | 73 | 🔴 Weak (23.2%) |
-| **JAVA** | 50 | 45 | 🔴 Weak (52.6%) |
-| **NET** | 67 | 28 | 🟡 Moderate (70.5%) |
-| **PYTHON** | 37 | 58 | 🔴 Weak (38.9%) |
+| **CPP** | 27 | 66 | 🔴 Weak (29.0%) |
+| **GENERAL** | 22 | 71 | 🔴 Weak (23.7%) |
+| **JAVA** | 50 | 43 | 🔴 Weak (53.8%) |
+| **NET** | 67 | 26 | 🟡 Moderate (72.0%) |
+| **PYTHON** | 37 | 56 | 🔴 Weak (39.8%) |
 
 ---
 
 ### 🔎 Executive Insights
 
-- **97.9%** of canonical topics are missing on at least one platform (after exclusions).
-- Highest gap density: **GENERAL** (73 missing), **CPP** (68 missing), **PYTHON** (58 missing).
+- **97.8%** of canonical topics are missing on at least one platform (after exclusions).
+- Highest gap density: **GENERAL** (71 missing), **CPP** (66 missing), **PYTHON** (56 missing).
 - Gaps are concentrated in **8** major category/subcategory clusters (see Section 4).
 - Release notes, product updates, and version announcements are intentionally excluded from this report.
 
@@ -74,11 +74,11 @@
 
 | Platform | # topics covered | % of baseline rows | # topics missing |
 | --- | --- | --- | --- |
-| **CPP** | 27 | 28.4% | 68 |
-| **GENERAL** | 22 | 23.2% | 73 |
-| **JAVA** | 50 | 52.6% | 45 |
-| **NET** | 67 | 70.5% | 28 |
-| **PYTHON** | 37 | 38.9% | 58 |
+| **CPP** | 27 | 29.0% | 66 |
+| **GENERAL** | 22 | 23.7% | 71 |
+| **JAVA** | 50 | 53.8% | 43 |
+| **NET** | 67 | 72.0% | 26 |
+| **PYTHON** | 37 | 39.8% | 56 |
 
 **Takeaway:** Focus first on platforms with the highest missing counts and lowest coverage percentage; port high-impact topics from the best-covered platform first.
 

@@ -3,7 +3,7 @@
 - **Brand:** Aspose
 - **Product:** Aspose.PDF
 - **Platform:** ALL
-- **Total Topics:** 93
+- **Total Topics:** 91
 
 ---
 ## All Missing Topics
@@ -54,7 +54,7 @@
 | 42 | JPG PNG TIFF EMF or BMP images to PDF | CPP, GENERAL, JAVA, PYTHON |
 | 43 | JPG to PDF | CPP, JAVA |
 | 44 | MemoryStream to PDF or PDF to MemoryStream | CPP, GENERAL, JAVA, PYTHON |
-| 45 | Merge JPG images | CPP, GENERAL, NET, PYTHON |
+| 45 | Merge JPG images to PDF | CPP, GENERAL, NET, PYTHON |
 | 46 | Merge JPG images to PDF | CPP, GENERAL, JAVA, PYTHON |
 | 47 | MPP to DOCX | CPP, GENERAL, JAVA, PYTHON |
 | 48 | Optimize PDF | CPP, GENERAL, NET, PYTHON |
@@ -80,28 +80,26 @@
 | 68 | PDF to XLSX | CPP |
 | 69 | PDF to XML | CPP, GENERAL |
 | 70 | PNG to PDF | CPP, JAVA |
-| 71 | Print PDF | CPP, GENERAL, PYTHON |
-| 72 | Print PDF to printer | CPP, JAVA, NET, PYTHON |
-| 73 | PUB to DOCX | GENERAL, JAVA, NET, PYTHON |
-| 74 | PUB to Image | GENERAL, JAVA, NET, PYTHON |
-| 75 | Remove images from PDF | CPP, GENERAL, NET |
-| 76 | Remove Pages from PDF | CPP, GENERAL |
-| 77 | Remove watermark from PDF | CPP, JAVA |
-| 78 | Replace images in PDF | CPP, GENERAL, PYTHON |
-| 79 | Resize PDF Pages | CPP, PYTHON |
-| 80 | Rotate PDF | CPP, JAVA, NET |
-| 81 | Rotate PDF Pages text or image | GENERAL, JAVA, PYTHON |
-| 82 | Rotate text in PDF | CPP, GENERAL, PYTHON |
-| 83 | Search text in PDF | CPP, GENERAL, JAVA, PYTHON |
-| 84 | Shrink PDF | CPP, JAVA, NET, PYTHON |
-| 85 | Split PDF | GENERAL |
-| 86 | TEX to DOCX | GENERAL |
-| 87 | TEX to PDF | CPP, GENERAL |
-| 88 | TIF to PDF | CPP, GENERAL, JAVA, PYTHON |
-| 89 | TXT to PDF | CPP, GENERAL, PYTHON |
-| 90 | Verify digital signature in PDF | CPP, GENERAL, JAVA, NET |
-| 91 | Work with bookmarks in PDF | GENERAL, JAVA, NET, PYTHON |
-| 92 | XML to PDF | CPP, GENERAL |
-| 93 | ZIP to PDF | CPP, GENERAL, JAVA, PYTHON |
+| 71 | Print PDF | CPP, PYTHON |
+| 72 | PUB to DOCX | GENERAL, JAVA, NET, PYTHON |
+| 73 | PUB to Image | GENERAL, JAVA, NET, PYTHON |
+| 74 | Remove images from PDF | CPP, GENERAL, NET |
+| 75 | Remove Pages from PDF | CPP, GENERAL |
+| 76 | Remove watermark from PDF | CPP, JAVA |
+| 77 | Replace images in PDF | CPP, GENERAL, PYTHON |
+| 78 | Resize PDF Pages | CPP, PYTHON |
+| 79 | Rotate PDF | JAVA |
+| 80 | Rotate text in PDF | CPP, GENERAL, PYTHON |
+| 81 | Search text in PDF | CPP, GENERAL, JAVA, PYTHON |
+| 82 | Shrink PDF | CPP, JAVA, NET, PYTHON |
+| 83 | Split PDF | GENERAL |
+| 84 | TEX to DOCX | GENERAL |
+| 85 | TEX to PDF | CPP, GENERAL |
+| 86 | TIF to PDF | CPP, GENERAL, JAVA, PYTHON |
+| 87 | TXT to PDF | CPP, GENERAL, PYTHON |
+| 88 | Verify digital signature in PDF | CPP, GENERAL, JAVA, NET |
+| 89 | Work with bookmarks in PDF | GENERAL, JAVA, NET, PYTHON |
+| 90 | XML to PDF | CPP, GENERAL |
+| 91 | ZIP to PDF | CPP, GENERAL, JAVA, PYTHON |
 
 ---
