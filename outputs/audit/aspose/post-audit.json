@@ -55,7 +55,7 @@
         }
       ]
     },
-    "body": "\n\nManipulating [PDF](https://docs.fileformat.com/pdf) annotations is a frequent requirement when building document‑centric applications, whether you need to highlight sections, add comments, or clean up old notes. [Aspose.PDF for Python via .NET](https://products.aspose.com/pdf/python-net/) provides a robust SDK that makes adding, editing, and removing PDF annotations straightforward for Python developers. In this guide you will learn how to set up the SDK, work with different annotation types, handle large PDFs efficiently, and apply best‑practice techniques for reliable annotation management.\n\n## Steps to Add or Remove Annotations in PDF Using Python\n1. **Install the SDK**: Run `pip install aspose-pdf` to add the library to your environment.  \n2. **Load the PDF**: Create a `Document` instance pointing to the source file.  \n3. **Add an Annotation**: Use the `PdfAnnotation` classes (e.g., `TextAnnotation`, `LinkAnnotation`) to place new notes.  \n4. **Save the Changes**: Call `save()` to write the updated PDF to disk.  \n5. **Remove Unwanted Annotations**: Locate annotations by their `id` or `type` and delete them before saving again.  \n\nFor detailed class information, see the [Document class reference](https://reference.aspose.com/pdf/python-net/Document).\n\n## Add or Remove Annotations in PDF Using Python with Aspose.PDF - Complete Code Example\nThe following example demonstrates how to add a text annotation, save the document, then remove the same annotation and save the result again.\n\n<!--[COMPLETE_CODE_SNIPPET_START]-->\n```python\nimport aspose.pdf as ap\n\n# Load an existing PDF\npdf_path = \"sample.pdf\"\ndoc = ap.Document(pdf_path)\n\n# -------------------------------------------------\n# Add a Text Annotation (Sticky Note)\n# -------------------------------------------------\ntext_annot = ap.annotations.TextAnnotation(doc.pages[1])\ntext_annot.rect = ap.Rectangle(100, 600, 200, 650)   # Position on the page\ntext_annot.contents = \"Review this section\"\ntext_annot.title = \"Reviewer\"\ndoc.pages[1].annotations.add(text_annot)\n\n# Save the PDF with the new annotation\ndoc.save(\"with_annotation.pdf\")\n\n# -------------------------------------------------\n# Remove the previously added annotation\n# -------------------------------------------------\n# Reload the document to demonstrate removal\ndoc2 = ap.Document(\"with_annotation.pdf\")\n# Assume we know the annotation's title or we iterate to find it\nfor annot in list(doc2.pages[1].annotations):\n    if isinstance(annot, ap.annotations.TextAnnotation) and annot.title == \"Reviewer\":\n        doc2.pages[1].annotations.delete(annot)\n\n# Save the cleaned PDF\ndoc2.save(\"without_annotation.pdf\")\n```\n<!--[COMPLETE_CODE_SNIPPET_END]-->\n\n> **Note:** This code example demonstrates the core functionality. Before using it in your project, make sure to update the file paths (`sample.pdf`, `with_annotation.pdf`, `without_annotation.pdf`) to match your actual file locations, verify that all required dependencies are properly installed, and test thoroughly in your development environment. If you encounter any issues, please refer to the [official documentation](https://docs.aspose.com/pdf/python-net/) or reach out to the [support team](https://forum.aspose.com/c/pdf/) for assistance.\n\n## Installation and Setup in Python\n```bash\npip install aspose-pdf\n```\n\nAfter installing, import the library in your script:\n\n```python\nimport aspose.pdf as ap\n```\n\nIf you are using the SDK in a production environment, apply a license to remove evaluation watermarks:\n\n```python\nlicense = ap.License()\nlicense.set_license(\"Aspose.PDF.lic\")\n```\n\nDownload the latest package from the [official download page](https://releases.aspose.com/pdf/python-net/) and review the [temporary license information](https://purchase.aspose.com/temporary-license/) before deployment.\n\n## Add or Remove Annotations in PDF using Python with Aspose.PDF\nThis section explains the overall workflow for annotation manipulation. Adding or removing annotations does not require re‑rendering the entire document; the SDK updates only the annotation streams, which keeps the operation fast even for large files. The process consists of loading the PDF, accessing the `annotations` collection of a page, performing the desired CRUD operation, and saving the result.\n\n## Aspose.PDF Features That Matter for This Task\n- **Annotation Classes** - `TextAnnotation`, `LinkAnnotation`, `SquareAnnotation`, `CircleAnnotation`, etc.  \n- **Selective Saving** - Save only modified pages to improve performance.  \n- **Batch Processing** - Loop through pages to add or delete annotations in bulk.  \n- **Metadata Access** - Retrieve author, creation date, and custom data from each annotation.  \n\nThese features enable a smooth **add or remove Annotations in PDF** workflow in Python.\n\n## Managing Annotation Types and Properties\nDifferent annotation types expose specific properties. For example, a `LinkAnnotation` requires a `action` URL, while a `SquareAnnotation` lets you set border color and opacity. Use the following pattern to customize an annotation:\n\n```python\nannot = ap.annotations.SquareAnnotation(doc.pages[1])\nannot.rect = ap.Rectangle(50, 500, 150, 550)\nannot.border = ap.Border()\nannot.border.color = ap.Color.red\nannot.opacity = 0.5\ndoc.pages[1].annotations.add(annot)\n```\n\nYou can also **edit PDF annotations in Python** by modifying properties such as `contents`, `title`, or `rect` after the annotation has been created.\n\n## Handling Large PDFs and Performance Considerations\nWhen working with PDFs that contain hundreds of pages, keep these tips in mind:\n\n- **Load pages on demand** - Access `doc.pages[index]` only when needed.  \n- **Use `save_incremental`** - Saves only the changed parts of the file, reducing I/O.  \n- **Dispose of objects** - Delete references to pages or annotations after processing to free memory.  \n\nThese practices help maintain high throughput while you **add or remove annotations in PDF** documents.\n\n## Best Practices for PDF Annotation Management\n- **Assign unique IDs** to annotations for easy lookup and removal.  \n- **Group related annotations** on the same page to minimize page‑level updates.  \n- **Validate coordinates** to ensure annotations appear within page bounds.  \n- **Log changes** when modifying annotations in production systems for audit trails.  \n\nFollowing these guidelines will make your annotation workflow reliable and maintainable.\n\n## Conclusion\nAdding or removing annotations in PDF files using Python is now a simple, repeatable process thanks to **Aspose.PDF for Python via .NET**. By installing the SDK, leveraging the rich annotation classes, and applying performance‑aware techniques, you can build robust PDF annotation features in any application. Remember to obtain a proper license from the [pricing page](https://purchase.aspose.com/pricing/pdf/family/) and, if needed, start with a temporary license from the [temporary license page](https://purchase.aspose.com/temporary-license/). Happy coding!\n\n## FAQs\n**How can I programmatically edit PDF annotations in Python?**  \nUse the SDK's annotation objects (e.g., `TextAnnotation`, `LinkAnnotation`) to modify properties such as `contents`, `rect`, or `color`. After updating, call `save()` to persist the changes. See the [API reference](https://reference.aspose.com/pdf/python-net/) for full method lists.\n\n**Is it possible to extract PDF annotations in Python for analysis?**  \nYes. Iterate over `page.annotations` and read each annotation's metadata. You can export the collected data to [CSV](https://docs.fileformat.com/spreadsheet/csv/), [JSON](https://docs.fileformat.com/web/json/), or a database for reporting. The SDK's `Annotation` class provides getters for all relevant fields.\n\n**What is the recommended way to remove multiple annotations at once?**  \nCollect the target annotations in a list and call `page.annotations.delete(annotation)` inside a loop. Using `save_incremental` after the loop reduces file‑write overhead.\n\n**Do I need a license to use the SDK in development?**  \nA temporary license is available for evaluation. For production deployments, purchase a license from the [pricing page](https://purchase.aspose.com/pricing/pdf/family/) to unlock full functionality and remove evaluation watermarks.\n\n## Read More\n- [Remove Images from PDF using Python](https://blog.aspose.com/pdf/remove-images-from-pdf-using-python/)\n- [How to Add Pages to PDF Documents in Python](https://blog.aspose.com/pdf/add-pages-to-pdf-in-python/)\n- [Delete Pages from PDF in Python](https://blog.aspose.com/pdf/delete-pages-from-pdf-in-python/)",
+    "body": "\n\nManipulating [PDF](https://docs.fileformat.com/pdf) annotations is a frequent requirement when building document‑centric applications, whether you need to highlight sections, add comments, or clean up old notes. [Aspose.PDF for Python via .NET](https://products.aspose.com/pdf/python-net/) provides a robust SDK that makes adding, editing, and removing PDF annotations straightforward for Python developers. In this guide you will learn how to set up the SDK, work with different annotation types, handle large PDFs efficiently, and apply best‑practice techniques for reliable annotation management.\n\n## Steps to Add or Remove Annotations in PDF Using Python\n1. **Install the SDK**: Run `pip install aspose-pdf` to add the library to your environment.  \n2. **Load the PDF**: Create a `Document` instance pointing to the source file.  \n3. **Add an Annotation**: Use the `PdfAnnotation` classes (e.g., `FreeTextAnnotation`, `LinkAnnotation`) to place new notes.  \n4. **Save the Changes**: Call `save()` to write the updated PDF to disk.  \n5. **Remove Unwanted Annotations**: Locate annotations by their `id` or `type` and delete them before saving again.  \n\nFor detailed class information, see the [Document class reference](https://reference.aspose.com/pdf/python-net/Document).\n\n## Add Annotations in PDF Using Python with Aspose.PDF - Complete Code Example\nThe following example demonstrates how to add a text annotation, save the document, then remove the same annotation and save the result again.\n\n<!--[COMPLETE_CODE_SNIPPET_START]-->\n```python\nimport aspose.pdf as ap\n\n# Load an existing PDF\npdf_path = \"sample.pdf\"\ndoc = ap.Document(pdf_path)\n\n# -------------------------------------------------\n# Add a Text Annotation (Sticky Note)\n# -------------------------------------------------\nfree_text_annotation = ap.annotations.FreeTextAnnotation(\n    doc.pages[1],\n    ap.Rectangle(299, 713, 308, 720, True),\n    ap.annotations.DefaultAppearance(),\n)\nfree_text_annotation.title = \"Aspose User\"\nfree_text_annotation.color = ap.Color.light_green\n\ndoc.pages[1].annotations.append(free_text_annotation)\n\n# Save the PDF with the new annotation\ndoc.save(\"with_annotation.pdf\")\n\n```\n<!--[COMPLETE_CODE_SNIPPET_END]-->\n\n## Remove Annotations from PDF Using Python with Aspose.PDF - Complete Code Example\nThe following example demonstrates how to load a PDF document, remove a text annotation, and then save the document again.\n\n<!--[COMPLETE_CODE_SNIPPET_START]-->\n```python\n# -------------------------------------------------\n# Remove the previously added annotation\n# -------------------------------------------------\n# Reload the document to demonstrate removal\ndoc2 = ap.Document(\"with_annotation.pdf\")\n# Assume we know the annotation's title or we iterate to find it\nfor annot in list(doc2.pages[1].annotations):\n    if isinstance(annot, ap.annotations.TextAnnotation) and annot.title == \"Reviewer\":\n        doc2.pages[1].annotations.delete(annot)\n\n# Save the cleaned PDF\ndoc2.save(\"without_annotation.pdf\")\n```\n<!--[COMPLETE_CODE_SNIPPET_END]-->\n\n> **Note:** These code examples demonstrate the core functionality. Before using them in your project, make sure to update the file paths (`sample.pdf`, `with_annotation.pdf`, `without_annotation.pdf`) to match your actual file locations, verify that all required dependencies are properly installed, and test thoroughly in your development environment. If you encounter any issues, please refer to the [official documentation](https://docs.aspose.com/pdf/python-net/) or reach out to the [support team](https://forum.aspose.com/c/pdf/) for assistance.\n\n## Installation and Setup in Python\n```bash\npip install aspose-pdf\n```\n\nAfter installing, import the library in your script:\n\n```python\nimport aspose.pdf as ap\n```\n\nIf you are using the SDK in a production environment, apply a license to remove evaluation watermarks:\n\n```python\nlicense = ap.License()\nlicense.set_license(\"Aspose.PDF.lic\")\n```\n\nDownload the latest package from the [official download page](https://releases.aspose.com/pdf/python-net/) and review the [temporary license information](https://purchase.aspose.com/temporary-license/) before deployment.\n\n## Why using Aspose.PDF for Adding or Removing Annotations in PDF \nAdding or removing annotations does not require re‑rendering the entire document; the SDK updates only the annotation streams, which keeps the operation fast even for large files. The process consists of loading the PDF, accessing the `annotations` collection of a page, performing the desired CRUD operation, and saving the result.\n\n### Aspose.PDF Features That Matter for This Task\n- **Annotation Classes** - `FreeTextAnnotation`, `LinkAnnotation`, `SquareAnnotation`, `CircleAnnotation`, etc.  \n- **Selective Saving** - Save only modified pages to improve performance.  \n- **Batch Processing** - Loop through pages to add or delete annotations in bulk.  \n- **Metadata Access** - Retrieve author, creation date, and custom data from each annotation.  \n\nThese features enable a smooth **add or remove Annotations in PDF** workflow in Python.\n\n## Best Practices for PDF Annotation Management\n- **Assign unique IDs** to annotations for easy lookup and removal.  \n- **Group related annotations** on the same page to minimize page‑level updates.  \n- **Validate coordinates** to ensure annotations appear within page bounds.  \n- **Log changes** when modifying annotations in production systems for audit trails.  \n\nFollowing these guidelines will make your annotation workflow reliable and maintainable.\n\n## Conclusion\nAdding or removing annotations in PDF files using Python is now a simple, repeatable process thanks to **Aspose.PDF for Python via .NET**. By installing the SDK, leveraging the rich annotation classes, and applying performance‑aware techniques, you can build robust PDF annotation features in any application. Remember to obtain a proper license from the [pricing page](https://purchase.aspose.com/pricing/pdf/family/) and, if needed, start with a temporary license from the [temporary license page](https://purchase.aspose.com/temporary-license/). Happy coding!\n\n## FAQs\n**How can I programmatically edit PDF annotations in Python?**  \nUse the SDK's annotation objects (e.g., `FreeTextAnnotation`, `LinkAnnotation`) to modify properties such as `contents`, `rect`, or `color`. After updating, call `save()` to persist the changes. See the [API reference](https://reference.aspose.com/pdf/python-net/) for full method lists.\n\n**Is it possible to extract PDF annotations in Python for analysis?**  \nYes. Iterate over `page.annotations` and read each annotation's metadata. You can export the collected data to [CSV](https://docs.fileformat.com/spreadsheet/csv/), [JSON](https://docs.fileformat.com/web/json/), or a database for reporting. The SDK's `Annotation` class provides getters for all relevant fields.\n\n**What is the recommended way to remove multiple annotations at once?**  \nCollect the target annotations in a list and call `page.annotations.delete(annotation)` inside a loop. Using `save_incremental` after the loop reduces file‑write overhead.\n\n**Do I need a license to use the SDK in development?**  \nA temporary license is available for evaluation. For production deployments, purchase a license from the [pricing page](https://purchase.aspose.com/pricing/pdf/family/) to unlock full functionality and remove evaluation watermarks.\n\n## Read More\n- [Remove Images from PDF using Python](https://blog.aspose.com/pdf/remove-images-from-pdf-using-python/)\n- [How to Add Pages to PDF Documents in Python](https://blog.aspose.com/pdf/add-pages-to-pdf-in-python/)\n- [Delete Pages from PDF in Python](https://blog.aspose.com/pdf/delete-pages-from-pdf-in-python/)",
     "body_line_offset": 33,
     "title": "Add or Remove Annotations in Python",
     "description": "Add or remove annotations in PDF with Python using Aspose.PDF for Python via .NET. Follow this guide for setup and code samples to manage PDF annotations.",
@@ -75,8 +75,8 @@
     "keywords": [],
     "canonical_url": "",
     "translation_key": "",
-    "word_count": 1002,
-    "character_count": 7152,
+    "word_count": 892,
+    "character_count": 6429,
     "headings": [
       {
         "level": 2,
@@ -85,53 +85,48 @@
       },
       {
         "level": 2,
-        "text": "Add or Remove Annotations in PDF Using Python with Aspose.PDF - Complete Code Example",
+        "text": "Add Annotations in PDF Using Python with Aspose.PDF - Complete Code Example",
         "line": 47
       },
       {
         "level": 2,
+        "text": "Remove Annotations from PDF Using Python with Aspose.PDF - Complete Code Example",
+        "line": 77
+      },
+      {
+        "level": 2,
         "text": "Installation and Setup in Python",
-        "line": 87
+        "line": 99
       },
       {
         "level": 2,
-        "text": "Add or Remove Annotations in PDF using Python with Aspose.PDF",
-        "line": 107
+        "text": "Why using Aspose.PDF for Adding or Removing Annotations in PDF",
+        "line": 119
       },
       {
-        "level": 2,
+        "level": 3,
         "text": "Aspose.PDF Features That Matter for This Task",
-        "line": 110
-      },
-      {
-        "level": 2,
-        "text": "Managing Annotation Types and Properties",
-        "line": 118
-      },
-      {
-        "level": 2,
-        "text": "Handling Large PDFs and Performance Considerations",
-        "line": 132
+        "line": 122
       },
       {
         "level": 2,
         "text": "Best Practices for PDF Annotation Management",
-        "line": 141
+        "line": 130
       },
       {
         "level": 2,
         "text": "Conclusion",
-        "line": 149
+        "line": 138
       },
       {
         "level": 2,
         "text": "FAQs",
-        "line": 152
+        "line": 141
       },
       {
         "level": 2,
         "text": "Read More",
-        "line": 165
+        "line": 154
       }
     ],
     "paragraphs": [
@@ -139,14 +134,13 @@
       "For detailed class information, see the [Document class reference](https://reference.aspose.com/pdf/python-net/Document).",
       "<!--[COMPLETE_CODE_SNIPPET_START]-->",
       "<!--[COMPLETE_CODE_SNIPPET_END]-->",
-      "> **Note:** This code example demonstrates the core functionality. Before using it in your project, make sure to update the file paths (`sample.pdf`, `with_annotation.pdf`, `without_annotation.pdf`) to match your actual file locations, verify that all required dependencies are properly installed, and test thoroughly in your development environment. If you encounter any issues, please refer to the [official documentation](https://docs.aspose.com/pdf/python-net/) or reach out to the [support team](https://forum.aspose.com/c/pdf/) for assistance.",
+      "<!--[COMPLETE_CODE_SNIPPET_START]-->",
+      "<!--[COMPLETE_CODE_SNIPPET_END]-->",
+      "> **Note:** These code examples demonstrate the core functionality. Before using them in your project, make sure to update the file paths (`sample.pdf`, `with_annotation.pdf`, `without_annotation.pdf`) to match your actual file locations, verify that all required dependencies are properly installed, and test thoroughly in your development environment. If you encounter any issues, please refer to the [official documentation](https://docs.aspose.com/pdf/python-net/) or reach out to the [support team](https://forum.aspose.com/c/pdf/) for assistance.",
       "After installing, import the library in your script:",
       "If you are using the SDK in a production environment, apply a license to remove evaluation watermarks:",
       "Download the latest package from the [official download page](https://releases.aspose.com/pdf/python-net/) and review the [temporary license information](https://purchase.aspose.com/temporary-license/) before deployment.",
       "These features enable a smooth **add or remove Annotations in PDF** workflow in Python.",
-      "You can also **edit PDF annotations in Python** by modifying properties such as `contents`, `title`, or `rect` after the annotation has been created.",
-      "- **Load pages on demand** - Access `doc.pages[index]` only when needed.  \n- **Use `save_incremental`** - Saves only the changed parts of the file, reducing I/O.  \n- **Dispose of objects** - Delete references to pages or annotations after processing to free memory.",
-      "These practices help maintain high throughput while you **add or remove annotations in PDF** documents.",
       "Following these guidelines will make your annotation workflow reliable and maintainable.",
       "**Is it possible to extract PDF annotations in Python for analysis?**  \nYes. Iterate over `page.annotations` and read each annotation's metadata. You can export the collected data to [CSV](https://docs.fileformat.com/spreadsheet/csv/), [JSON](https://docs.fileformat.com/web/json/), or a database for reporting. The SDK's `Annotation` class provides getters for all relevant fields.",
       "**What is the recommended way to remove multiple annotations at once?**  \nCollect the target annotations in a list and call `page.annotations.delete(annotation)` inside a loop. Using `save_incremental` after the loop reduces file‑write overhead.",
@@ -186,119 +180,119 @@
         "text": "official documentation",
         "target": "https://docs.aspose.com/pdf/python-net/",
         "is_internal": false,
-        "line": 85,
+        "line": 97,
         "exists": null
       },
       {
         "text": "support team",
         "target": "https://forum.aspose.com/c/pdf/",
         "is_internal": false,
-        "line": 85,
+        "line": 97,
         "exists": null
       },
       {
         "text": "official download page",
         "target": "https://releases.aspose.com/pdf/python-net/",
         "is_internal": false,
-        "line": 105,
+        "line": 117,
         "exists": null
       },
       {
         "text": "temporary license information",
         "target": "https://purchase.aspose.com/temporary-license/",
         "is_internal": false,
-        "line": 105,
+        "line": 117,
         "exists": null
       },
       {
         "text": "pricing page",
         "target": "https://purchase.aspose.com/pricing/pdf/family/",
         "is_internal": false,
-        "line": 150,
+        "line": 139,
         "exists": null
       },
       {
         "text": "temporary license page",
         "target": "https://purchase.aspose.com/temporary-license/",
         "is_internal": false,
-        "line": 150,
+        "line": 139,
         "exists": null
       },
       {
         "text": "API reference",
         "target": "https://reference.aspose.com/pdf/python-net/",
         "is_internal": false,
-        "line": 154,
+        "line": 143,
         "exists": null
       },
       {
         "text": "CSV",
         "target": "https://docs.fileformat.com/spreadsheet/csv/",
         "is_internal": false,
-        "line": 157,
+        "line": 146,
         "exists": null
       },
       {
         "text": "JSON",
         "target": "https://docs.fileformat.com/web/json/",
         "is_internal": false,
-        "line": 157,
+        "line": 146,
         "exists": null
       },
       {
         "text": "pricing page",
         "target": "https://purchase.aspose.com/pricing/pdf/family/",
         "is_internal": false,
-        "line": 163,
+        "line": 152,
         "exists": null
       },
       {
         "text": "Remove Images from PDF using Python",
         "target": "https://blog.aspose.com/pdf/remove-images-from-pdf-using-python/",
         "is_internal": false,
-        "line": 166,
+        "line": 155,
         "exists": null
       },
       {
         "text": "How to Add Pages to PDF Documents in Python",
         "target": "https://blog.aspose.com/pdf/add-pages-to-pdf-in-python/",
         "is_internal": false,
-        "line": 167,
+        "line": 156,
         "exists": null
       },
       {
         "text": "Delete Pages from PDF in Python",
         "target": "https://blog.aspose.com/pdf/delete-pages-from-pdf-in-python/",
         "is_internal": false,
-        "line": 168,
+        "line": 157,
         "exists": null
       }
     ],
     "code_samples": [
       {
         "language": "python",
-        "code": "import aspose.pdf as ap\n\n# Load an existing PDF\npdf_path = \"sample.pdf\"\ndoc = ap.Document(pdf_path)\n\n# -------------------------------------------------\n# Add a Text Annotation (Sticky Note)\n# -------------------------------------------------\ntext_annot = ap.annotations.TextAnnotation(doc.pages[1])\ntext_annot.rect = ap.Rectangle(100, 600, 200, 650)   # Position on the page\ntext_annot.contents = \"Review this section\"\ntext_annot.title = \"Reviewer\"\ndoc.pages[1].annotations.add(text_annot)\n\n# Save the PDF with the new annotation\ndoc.save(\"with_annotation.pdf\")\n\n# -------------------------------------------------\n# Remove the previously added annotation\n# -------------------------------------------------\n# Reload the document to demonstrate removal\ndoc2 = ap.Document(\"with_annotation.pdf\")\n# Assume we know the annotation's title or we iterate to find it\nfor annot in list(doc2.pages[1].annotations):\n    if isinstance(annot, ap.annotations.TextAnnotation) and annot.title == \"Reviewer\":\n        doc2.pages[1].annotations.delete(annot)\n\n# Save the cleaned PDF\ndoc2.save(\"without_annotation.pdf\")",
+        "code": "import aspose.pdf as ap\n\n# Load an existing PDF\npdf_path = \"sample.pdf\"\ndoc = ap.Document(pdf_path)\n\n# -------------------------------------------------\n# Add a Text Annotation (Sticky Note)\n# -------------------------------------------------\nfree_text_annotation = ap.annotations.FreeTextAnnotation(\n    doc.pages[1],\n    ap.Rectangle(299, 713, 308, 720, True),\n    ap.annotations.DefaultAppearance(),\n)\nfree_text_annotation.title = \"Aspose User\"\nfree_text_annotation.color = ap.Color.light_green\n\ndoc.pages[1].annotations.append(free_text_annotation)\n\n# Save the PDF with the new annotation\ndoc.save(\"with_annotation.pdf\")",
         "line": 51
+      },
+      {
+        "language": "python",
+        "code": "# -------------------------------------------------\n# Remove the previously added annotation\n# -------------------------------------------------\n# Reload the document to demonstrate removal\ndoc2 = ap.Document(\"with_annotation.pdf\")\n# Assume we know the annotation's title or we iterate to find it\nfor annot in list(doc2.pages[1].annotations):\n    if isinstance(annot, ap.annotations.TextAnnotation) and annot.title == \"Reviewer\":\n        doc2.pages[1].annotations.delete(annot)\n\n# Save the cleaned PDF\ndoc2.save(\"without_annotation.pdf\")",
+        "line": 81
       },
       {
         "language": "bash",
         "code": "pip install aspose-pdf",
-        "line": 88
-      },
-      {
-        "language": "python",
-        "code": "import aspose.pdf as ap",
-        "line": 94
-      },
-      {
-        "language": "python",
-        "code": "license = ap.License()\nlicense.set_license(\"Aspose.PDF.lic\")",
         "line": 100
       },
       {
         "language": "python",
-        "code": "annot = ap.annotations.SquareAnnotation(doc.pages[1])\nannot.rect = ap.Rectangle(50, 500, 150, 550)\nannot.border = ap.Border()\nannot.border.color = ap.Color.red\nannot.opacity = 0.5\ndoc.pages[1].annotations.add(annot)",
-        "line": 121
+        "code": "import aspose.pdf as ap",
+        "line": 106
+      },
+      {
+        "language": "python",
+        "code": "license = ap.License()\nlicense.set_license(\"Aspose.PDF.lic\")",
+        "line": 112
       }
     ],
     "code_blocks": 5,
@@ -362,61 +356,456 @@
         ]
       }
     ],
-    "llm_suggestions": [
-      {
-        "file_path": "content/Aspose.Blog/pdf/2026-07-08-add-or-remove-annotations-in-python/index.md",
-        "provider": "openai-compatible",
-        "model": "gpt-oss",
-        "cached": false,
-        "summary": "The post covers adding and removing PDF annotations using Aspose.PDF for Python via .NET but needs an inline output image, more internal links, and a stronger conclusion.",
-        "suggested_title": "How to Add and Remove PDF Annotations in Python with Aspose.PDF",
-        "suggested_description": "Learn to add, edit, and delete PDF annotations in Python using Aspose.PDF for Python via .NET – step‑by‑step setup, code samples, and best practices.",
-        "outline": [
-          "Installation and Setup in Python",
-          "Loading a PDF Document",
-          "Adding Annotations (Text, Link, Shape)",
-          "Saving the Document with New Annotations",
-          "Removing Annotations by ID or Property",
-          "Saving the Cleaned PDF",
-          "Performance Tips for Large PDFs",
-          "Best Practices for Annotation Management",
-          "Conclusion",
-          "FAQs"
-        ],
-        "faq_questions": [
-          "What are the prerequisites for using Aspose.PDF for Python via .NET?",
-          "How do I apply a license to remove evaluation watermarks?",
-          "Can I add or remove annotations in a PDF without re‑saving the entire file?",
-          "What annotation types are supported by the SDK?",
-          "How can I troubleshoot common errors when loading or saving PDFs?"
-        ],
-        "content_actions": [
-          "Insert an inline screenshot showing the PDF before and after adding a text annotation.",
-          "Add at least two contextual internal links to related tutorials (e.g., \"Working with PDF Forms in Python\" and \"Extracting Text from PDFs with Aspose.PDF\").",
-          "Add outgoing internal links in the conclusion to product pages such as the Aspose.PDF for Python via .NET overview and the licensing guide.",
-          "Expand the conclusion to recap the steps and suggest next actions (e.g., explore other annotation types or batch processing).",
-          "Add a short troubleshooting section covering licensing errors and large‑file memory usage."
-        ],
-        "risk_notes": [
-          "Ensure the license file path is correct; otherwise the SDK will add evaluation watermarks to the output PDF.",
-          "When processing very large PDFs, consider using incremental saving and disposing of page objects to avoid high memory consumption."
-        ],
-        "issues_addressed": [
-          "suggest_body_output_image",
-          "weak_internal_links",
-          "too_few_outgoing_internal_links"
-        ]
-      }
-    ],
+    "llm_suggestions": [],
     "scores": {
       "content_quality": 100,
       "on_page_seo": 100,
       "technical_seo": 85,
       "internal_linking": 86,
       "translation_seo": 100,
-      "organic_growth_opportunity": 48,
-      "priority": 23
+      "organic_growth_opportunity": 51,
+      "priority": 24
     },
     "translation_group": "content/Aspose.Blog/pdf/2026-07-08-add-or-remove-annotations-in-python/index.md"
+  },
+  {
+    "path": "/home/runner/work/blog-generator-agent/blog-generator-agent/outputs/_repos/aspose-blog/content/Aspose.Blog/pdf/2026-07-08-create-pdf-booklet-in-python/index.md",
+    "relative_path": "content/Aspose.Blog/pdf/2026-07-08-create-pdf-booklet-in-python/index.md",
+    "url_candidate": "/pdf/create-pdf-booklet-in-python/",
+    "language": "en",
+    "front_matter_format": "yaml",
+    "front_matter": {
+      "title": "Create PDF Booklet in Python",
+      "seoTitle": "Create PDF Booklet in Python",
+      "description": "Learn how to create a PDF booklet in Python with Aspose.PDF for Python via .NET. This guide shows setup, stepwise code, and bookmarks for reports or manuals.",
+      "date": "Wed, 08 Jul 2026 09:55:45 +0000",
+      "lastmod": "Wed, 08 Jul 2026 09:55:45 +0000",
+      "draft": false,
+      "url": "/pdf/create-pdf-booklet-in-python/",
+      "author": "Muzammil Khan",
+      "summary": "This tutorial walks Python developers through generating a PDF booklet using Aspose.PDF for Python via .NET. You'll learn to set up the SDK, configure booklet layout, add optional bookmarks, and produce high-quality PDFs for reports, catalogs, or manuals.",
+      "tags": [
+        "python pdf generation",
+        "aspose pdf",
+        "pdf booklet"
+      ],
+      "categories": [
+        "Aspose.PDF Product Family"
+      ],
+      "showtoc": true,
+      "cover": {
+        "image": "images/create-pdf-booklet-in-python.jpg",
+        "alt": "Create PDF Booklet in Python",
+        "caption": "Create PDF Booklet in Python"
+      },
+      "steps": [
+        "Step 1: Install Aspose.PDF SDK",
+        "Step 2: Load source PDF",
+        "Step 3: Configure booklet options",
+        "Step 4: Add optional bookmarks",
+        "Step 5: Save booklet"
+      ],
+      "faqs": [
+        {
+          "q": "How do I create a PDF booklet in Python using Aspose.PDF?",
+          "a": "Use the Document and Booklet classes from [Aspose.PDF for Python via .NET](https://products.aspose.com/pdf/python-net/). Load your source PDF, configure BookletLayoutOptions, optionally add OutlineItemCollection for bookmarks, and save the result."
+        },
+        {
+          "q": "Can I add bookmarks to the generated booklet?",
+          "a": "Yes. After creating the booklet you can create an OutlineItemCollection, add entries with titles and destinations, and assign it to the document's Bookmarks property. See the API reference for OutlineItemCollection."
+        },
+        {
+          "q": "What licensing is required for production use?",
+          "a": "A temporary license is available at the [temporary license page](https://purchase.aspose.com/temporary-license/). For full production use, purchase a license via the [pricing page](https://purchase.aspose.com/pricing/pdf/family/)."
+        },
+        {
+          "q": "Is the SDK compatible with virtual environments?",
+          "a": "Absolutely. Install the package with pip inside any virtual environment and the SDK works the same as in a global Python installation."
+        }
+      ]
+    },
+    "body": "\nGenerating compact, printable PDFs from multiple pages is a frequent need for reports, catalogs, and manuals. [Aspose.PDF for Python via .NET](https://products.aspose.com/pdf/python-net/) provides a robust SDK that lets you programmatically create [PDF](https://docs.fileformat.com/pdf) Booklet in Python with fine‑grained control. In this guide you'll see how to set up the environment, build a booklet, optionally add bookmarks, and export the final document.\n\n## Prerequisites and Setup\n\nBefore you start, ensure you have the following:\n\n- Python 3.7 or later installed on your development machine.\n- An IDE or code editor of your choice (VS Code, PyCharm, etc.).\n- Access to the Aspose.PDF for Python via .NET library.\n\nInstall the SDK using pip:\n\n<!--[CODE_SNIPPET_START]-->\n```bash\npip install aspose-pdf\n```\n<!--[CODE_SNIPPET_END]-->\n\nDownload the latest binaries if you prefer a manual install: [Aspose.PDF for Python via .NET Download](https://releases.aspose.com/pdf/python-net/). After installation, you can import the library in your Python scripts.\n\nWith the SDK ready, we can move on to the implementation.\n\n## Create PDF Booklet in Python: Step-by-Step Walkthrough\n\n### Step 1: Load the Source Document\n\nFirst, open the PDF that will become the source for the booklet.\n\n<!--[CODE_SNIPPET_START]-->\n```python\nimport aspose.pdf as ap\n\n# Load the existing PDF\nsource_doc = ap.Document(\"input.pdf\")\n```\n<!--[CODE_SNIPPET_END]-->\n\nThe `Document` class is documented in the [API Reference](https://reference.aspose.com/pdf/python-net/).\n\n### Step 2: Define Booklet Layout\n\nHere we configure the booklet layout to **create PDF Booklet in Python**. The `Booklet` class lets you specify page ordering, binding, and page size.\n\n<!--[CODE_SNIPPET_START]-->\n```python\n# Create a Booklet object with default options\nbooklet = ap.Booklet()\n# Optional: customize layout (e.g., landscape, binding side)\nbooklet.layout_options = ap.BookletLayoutOptions()\nbooklet.layout_options.binding = ap.BookletBinding.LEFT\n```\n<!--[CODE_SNIPPET_END]-->\n\n### Step 3: Add Pages to Booklet\n\nAdd the pages from the source document to the booklet object.\n\n<!--[CODE_SNIPPET_START]-->\n```python\n# Add all pages from the source document\nbooklet.add_pages(source_doc.pages)\n```\n<!--[CODE_SNIPPET_END]-->\n\n### Step 4: Insert Bookmarks (Optional)\n\nIf you need a navigable PDF, create bookmarks that point to the first page of each section.\n\n<!--[CODE_SNIPPET_START]-->\n```python\n# Create a bookmark collection\nbookmarks = ap.OutlineItemCollection()\nbookmark = ap.OutlineItem()\nbookmark.title = \"Chapter 1\"\nbookmark.destination = ap.Destination(source_doc.pages[1])\nbookmarks.add(bookmark)\n\n# Assign bookmarks to the booklet document\nbooklet.bookmarks = bookmarks\n```\n<!--[CODE_SNIPPET_END]-->\n\n### Step 5: Save the Booklet\n\nFinally, write the booklet to a new PDF file.\n\n<!--[CODE_SNIPPET_START]-->\n```python\n# Save the booklet as a new PDF\nbooklet.save(\"output_booklet.pdf\")\n```\n<!--[CODE_SNIPPET_END]-->\n\nWith these steps completed, you have a ready‑to‑print PDF booklet.\n\n## Complete Code Example: Create PDF Booklet with Bookmarks\n\nThe following script puts all the pieces together into a single, runnable program.\n\n<!--[COMPLETE_CODE_SNIPPET_START]-->\n```python\nimport aspose.pdf as ap\n\ndef create_pdf_booklet(input_path: str, output_path: str, add_bookmarks: bool = True):\n    # Load source PDF\n    source_doc = ap.Document(input_path)\n\n    # Initialize booklet\n    booklet = ap.Booklet()\n    booklet.layout_options = ap.BookletLayoutOptions()\n    booklet.layout_options.binding = ap.BookletBinding.LEFT\n\n    # Add pages\n    booklet.add_pages(source_doc.pages)\n\n    # Optional bookmarks\n    if add_bookmarks:\n        bookmarks = ap.OutlineItemCollection()\n        for i, page in enumerate(source_doc.pages, start=1):\n            bm = ap.OutlineItem()\n            bm.title = f\"Page {i}\"\n            bm.destination = ap.Destination(page)\n            bookmarks.add(bm)\n        booklet.bookmarks = bookmarks\n\n    # Save the booklet\n    booklet.save(output_path)\n\nif __name__ == \"__main__\":\n    create_pdf_booklet(\"input.pdf\", \"output_booklet.pdf\")\n```\n<!--[COMPLETE_CODE_SNIPPET_END]-->\n\n> **Note:** This code example demonstrates the core functionality. Before using it in your project, make sure to update the file paths (`input.pdf`, `output_booklet.pdf`, etc.) to match your actual file locations, verify that all required dependencies are properly installed, and test thoroughly in your development environment. If you encounter any issues, please refer to the [official documentation](https://docs.aspose.com/pdf/python-net/) or reach out to the [support team](https://forum.aspose.com/c/pdf/) for assistance.\n\n## Conclusion\n\nCreating a PDF booklet in Python becomes straightforward with [Aspose.PDF for Python via .NET](https://products.aspose.com/pdf/python-net/). By following the steps above you can automate booklet generation, control layout, and enrich the document with bookmarks for easy navigation. Remember to obtain a proper license for production use; a temporary license is available at the [temporary license page](https://purchase.aspose.com/temporary-license/), and full licensing details can be found on the [pricing page](https://purchase.aspose.com/pricing/pdf/family/). With the SDK installed and a few lines of code, you're ready to integrate PDF booklet creation into any reporting, catalog, or manual workflow.\n\n## FAQs\n\n**How do I create a PDF booklet in Python using Aspose.PDF?**  \nUse the `Document` and `Booklet` classes from the SDK. Load your source PDF, configure `BookletLayoutOptions`, optionally add an `OutlineItemCollection` for bookmarks, and call `save()` to generate the booklet.\n\n**Can I add bookmarks to the generated booklet?**  \nYes. After creating the booklet, instantiate an `OutlineItemCollection`, populate it with `OutlineItem` objects that reference specific pages, and assign it to the booklet's `bookmarks` property.\n\n**What licensing is required for production deployments?**  \nA temporary license can be obtained from the [temporary license page](https://purchase.aspose.com/temporary-license/). For ongoing projects, purchase a full license via the [pricing page](https://purchase.aspose.com/pricing/pdf/family/).\n\n**Is the SDK compatible with virtual environments?**  \nAbsolutely. Install the package with `pip install aspose-pdf` inside any virtual environment, and the library works the same as in a global Python installation.\n\n## Read More\n- [Delete Pages from PDF in Python](https://blog.aspose.com/pdf/delete-pages-from-pdf-in-python/)\n- [Extract Pages from PDF in Python](https://blog.aspose.com/pdf/extract-pages-from-pdf-in-python/)\n- [Remove Images from PDF using Python](https://blog.aspose.com/pdf/remove-images-from-pdf-using-python/)",
+    "body_line_offset": 33,
+    "title": "Create PDF Booklet in Python",
+    "description": "Learn how to create a PDF booklet in Python with Aspose.PDF for Python via .NET. This guide shows setup, stepwise code, and bookmarks for reports or manuals.",
+    "date": "Wed, 08 Jul 2026 09:55:45 +0000",
+    "lastmod": "Wed, 08 Jul 2026 09:55:45 +0000",
+    "draft": false,
+    "slug": "",
+    "aliases": [],
+    "tags": [
+      "python pdf generation",
+      "aspose pdf",
+      "pdf booklet"
+    ],
+    "categories": [
+      "Aspose.PDF Product Family"
+    ],
+    "keywords": [],
+    "canonical_url": "",
+    "translation_key": "",
+    "word_count": 706,
+    "character_count": 5099,
+    "headings": [
+      {
+        "level": 2,
+        "text": "Prerequisites and Setup",
+        "line": 37
+      },
+      {
+        "level": 2,
+        "text": "Create PDF Booklet in Python: Step-by-Step Walkthrough",
+        "line": 57
+      },
+      {
+        "level": 3,
+        "text": "Step 1: Load the Source Document",
+        "line": 59
+      },
+      {
+        "level": 3,
+        "text": "Step 2: Define Booklet Layout",
+        "line": 74
+      },
+      {
+        "level": 3,
+        "text": "Step 3: Add Pages to Booklet",
+        "line": 88
+      },
+      {
+        "level": 3,
+        "text": "Step 4: Insert Bookmarks (Optional)",
+        "line": 99
+      },
+      {
+        "level": 3,
+        "text": "Step 5: Save the Booklet",
+        "line": 117
+      },
+      {
+        "level": 2,
+        "text": "Complete Code Example: Create PDF Booklet with Bookmarks",
+        "line": 130
+      },
+      {
+        "level": 2,
+        "text": "Conclusion",
+        "line": 170
+      },
+      {
+        "level": 2,
+        "text": "FAQs",
+        "line": 174
+      },
+      {
+        "level": 2,
+        "text": "Read More",
+        "line": 188
+      }
+    ],
+    "paragraphs": [
+      "Generating compact, printable PDFs from multiple pages is a frequent need for reports, catalogs, and manuals. [Aspose.PDF for Python via .NET](https://products.aspose.com/pdf/python-net/) provides a robust SDK that lets you programmatically create [PDF](https://docs.fileformat.com/pdf) Booklet in Python with fine‑grained control. In this guide you'll see how to set up the environment, build a booklet, optionally add bookmarks, and export the final document.",
+      "Before you start, ensure you have the following:",
+      "- Python 3.7 or later installed on your development machine.\n- An IDE or code editor of your choice (VS Code, PyCharm, etc.).\n- Access to the Aspose.PDF for Python via .NET library.",
+      "Install the SDK using pip:",
+      "<!--[CODE_SNIPPET_START]-->",
+      "<!--[CODE_SNIPPET_END]-->",
+      "Download the latest binaries if you prefer a manual install: [Aspose.PDF for Python via .NET Download](https://releases.aspose.com/pdf/python-net/). After installation, you can import the library in your Python scripts.",
+      "With the SDK ready, we can move on to the implementation.",
+      "First, open the PDF that will become the source for the booklet.",
+      "<!--[CODE_SNIPPET_START]-->",
+      "<!--[CODE_SNIPPET_END]-->",
+      "The `Document` class is documented in the [API Reference](https://reference.aspose.com/pdf/python-net/).",
+      "Here we configure the booklet layout to **create PDF Booklet in Python**. The `Booklet` class lets you specify page ordering, binding, and page size.",
+      "<!--[CODE_SNIPPET_START]-->",
+      "<!--[CODE_SNIPPET_END]-->",
+      "Add the pages from the source document to the booklet object.",
+      "<!--[CODE_SNIPPET_START]-->",
+      "<!--[CODE_SNIPPET_END]-->",
+      "If you need a navigable PDF, create bookmarks that point to the first page of each section.",
+      "<!--[CODE_SNIPPET_START]-->",
+      "<!--[CODE_SNIPPET_END]-->",
+      "Finally, write the booklet to a new PDF file.",
+      "<!--[CODE_SNIPPET_START]-->",
+      "<!--[CODE_SNIPPET_END]-->",
+      "With these steps completed, you have a ready‑to‑print PDF booklet.",
+      "The following script puts all the pieces together into a single, runnable program.",
+      "<!--[COMPLETE_CODE_SNIPPET_START]-->",
+      "<!--[COMPLETE_CODE_SNIPPET_END]-->",
+      "> **Note:** This code example demonstrates the core functionality. Before using it in your project, make sure to update the file paths (`input.pdf`, `output_booklet.pdf`, etc.) to match your actual file locations, verify that all required dependencies are properly installed, and test thoroughly in your development environment. If you encounter any issues, please refer to the [official documentation](https://docs.aspose.com/pdf/python-net/) or reach out to the [support team](https://forum.aspose.com/c/pdf/) for assistance.",
+      "Creating a PDF booklet in Python becomes straightforward with [Aspose.PDF for Python via .NET](https://products.aspose.com/pdf/python-net/). By following the steps above you can automate booklet generation, control layout, and enrich the document with bookmarks for easy navigation. Remember to obtain a proper license for production use; a temporary license is available at the [temporary license page](https://purchase.aspose.com/temporary-license/), and full licensing details can be found on the [pricing page](https://purchase.aspose.com/pricing/pdf/family/). With the SDK installed and a few lines of code, you're ready to integrate PDF booklet creation into any reporting, catalog, or manual workflow.",
+      "**How do I create a PDF booklet in Python using Aspose.PDF?**  \nUse the `Document` and `Booklet` classes from the SDK. Load your source PDF, configure `BookletLayoutOptions`, optionally add an `OutlineItemCollection` for bookmarks, and call `save()` to generate the booklet.",
+      "**Can I add bookmarks to the generated booklet?**  \nYes. After creating the booklet, instantiate an `OutlineItemCollection`, populate it with `OutlineItem` objects that reference specific pages, and assign it to the booklet's `bookmarks` property.",
+      "**What licensing is required for production deployments?**  \nA temporary license can be obtained from the [temporary license page](https://purchase.aspose.com/temporary-license/). For ongoing projects, purchase a full license via the [pricing page](https://purchase.aspose.com/pricing/pdf/family/).",
+      "**Is the SDK compatible with virtual environments?**  \nAbsolutely. Install the package with `pip install aspose-pdf` inside any virtual environment, and the library works the same as in a global Python installation."
+    ],
+    "images": [
+      {
+        "alt": "Create PDF Booklet in Python",
+        "target": "images/create-pdf-booklet-in-python.jpg",
+        "line": 0,
+        "exists": true
+      }
+    ],
+    "links": [
+      {
+        "text": "Aspose.PDF for Python via .NET",
+        "target": "https://products.aspose.com/pdf/python-net/",
+        "is_internal": false,
+        "line": 35,
+        "exists": null
+      },
+      {
+        "text": "PDF",
+        "target": "https://docs.fileformat.com/pdf",
+        "is_internal": false,
+        "line": 35,
+        "exists": null
+      },
+      {
+        "text": "Aspose.PDF for Python via .NET Download",
+        "target": "https://releases.aspose.com/pdf/python-net/",
+        "is_internal": false,
+        "line": 53,
+        "exists": null
+      },
+      {
+        "text": "API Reference",
+        "target": "https://reference.aspose.com/pdf/python-net/",
+        "is_internal": false,
+        "line": 72,
+        "exists": null
+      },
+      {
+        "text": "official documentation",
+        "target": "https://docs.aspose.com/pdf/python-net/",
+        "is_internal": false,
+        "line": 168,
+        "exists": null
+      },
+      {
+        "text": "support team",
+        "target": "https://forum.aspose.com/c/pdf/",
+        "is_internal": false,
+        "line": 168,
+        "exists": null
+      },
+      {
+        "text": "Aspose.PDF for Python via .NET",
+        "target": "https://products.aspose.com/pdf/python-net/",
+        "is_internal": false,
+        "line": 172,
+        "exists": null
+      },
+      {
+        "text": "temporary license page",
+        "target": "https://purchase.aspose.com/temporary-license/",
+        "is_internal": false,
+        "line": 172,
+        "exists": null
+      },
+      {
+        "text": "pricing page",
+        "target": "https://purchase.aspose.com/pricing/pdf/family/",
+        "is_internal": false,
+        "line": 172,
+        "exists": null
+      },
+      {
+        "text": "temporary license page",
+        "target": "https://purchase.aspose.com/temporary-license/",
+        "is_internal": false,
+        "line": 183,
+        "exists": null
+      },
+      {
+        "text": "pricing page",
+        "target": "https://purchase.aspose.com/pricing/pdf/family/",
+        "is_internal": false,
+        "line": 183,
+        "exists": null
+      },
+      {
+        "text": "Delete Pages from PDF in Python",
+        "target": "https://blog.aspose.com/pdf/delete-pages-from-pdf-in-python/",
+        "is_internal": false,
+        "line": 189,
+        "exists": null
+      },
+      {
+        "text": "Extract Pages from PDF in Python",
+        "target": "https://blog.aspose.com/pdf/extract-pages-from-pdf-in-python/",
+        "is_internal": false,
+        "line": 190,
+        "exists": null
+      },
+      {
+        "text": "Remove Images from PDF using Python",
+        "target": "https://blog.aspose.com/pdf/remove-images-from-pdf-using-python/",
+        "is_internal": false,
+        "line": 191,
+        "exists": null
+      }
+    ],
+    "code_samples": [
+      {
+        "language": "bash",
+        "code": "pip install aspose-pdf",
+        "line": 48
+      },
+      {
+        "language": "python",
+        "code": "import aspose.pdf as ap\n\n# Load the existing PDF\nsource_doc = ap.Document(\"input.pdf\")",
+        "line": 64
+      },
+      {
+        "language": "python",
+        "code": "# Create a Booklet object with default options\nbooklet = ap.Booklet()\n# Optional: customize layout (e.g., landscape, binding side)\nbooklet.layout_options = ap.BookletLayoutOptions()\nbooklet.layout_options.binding = ap.BookletBinding.LEFT",
+        "line": 79
+      },
+      {
+        "language": "python",
+        "code": "# Add all pages from the source document\nbooklet.add_pages(source_doc.pages)",
+        "line": 93
+      },
+      {
+        "language": "python",
+        "code": "# Create a bookmark collection\nbookmarks = ap.OutlineItemCollection()\nbookmark = ap.OutlineItem()\nbookmark.title = \"Chapter 1\"\nbookmark.destination = ap.Destination(source_doc.pages[1])\nbookmarks.add(bookmark)\n\n# Assign bookmarks to the booklet document\nbooklet.bookmarks = bookmarks",
+        "line": 104
+      },
+      {
+        "language": "python",
+        "code": "# Save the booklet as a new PDF\nbooklet.save(\"output_booklet.pdf\")",
+        "line": 122
+      },
+      {
+        "language": "python",
+        "code": "import aspose.pdf as ap\n\ndef create_pdf_booklet(input_path: str, output_path: str, add_bookmarks: bool = True):\n    # Load source PDF\n    source_doc = ap.Document(input_path)\n\n    # Initialize booklet\n    booklet = ap.Booklet()\n    booklet.layout_options = ap.BookletLayoutOptions()\n    booklet.layout_options.binding = ap.BookletBinding.LEFT\n\n    # Add pages\n    booklet.add_pages(source_doc.pages)\n\n    # Optional bookmarks\n    if add_bookmarks:\n        bookmarks = ap.OutlineItemCollection()\n        for i, page in enumerate(source_doc.pages, start=1):\n            bm = ap.OutlineItem()\n            bm.title = f\"Page {i}\"\n            bm.destination = ap.Destination(page)\n            bookmarks.add(bm)\n        booklet.bookmarks = bookmarks\n\n    # Save the booklet\n    booklet.save(output_path)\n\nif __name__ == \"__main__\":\n    create_pdf_booklet(\"input.pdf\", \"output_booklet.pdf\")",
+        "line": 135
+      }
+    ],
+    "code_blocks": 7,
+    "tables": 0,
+    "shortcodes": [],
+    "faq_like_sections": 5,
+    "schema_like_blocks": 0,
+    "issues": [
+      {
+        "file_path": "content/Aspose.Blog/pdf/2026-07-08-create-pdf-booklet-in-python/index.md",
+        "issue_type": "moderate_thin_content",
+        "severity": "Medium",
+        "explanation": "Post has 706 words. Policy: content-quality; rule: CQ-002.",
+        "why_it_matters": "The issue can reduce crawl clarity, search relevance, or reader engagement.",
+        "recommended_fix": "Expand with examples, screenshots, troubleshooting notes, and a stronger conclusion.",
+        "estimated_effort": "Medium",
+        "expected_seo_impact": "Medium",
+        "line": 0,
+        "policy_id": "content-quality",
+        "rule_id": "CQ-002",
+        "evidence": "word_count=706",
+        "intended_audiences": [
+          "Developers evaluating file-format SDKs",
+          "Technical content editors"
+        ]
+      },
+      {
+        "file_path": "content/Aspose.Blog/pdf/2026-07-08-create-pdf-booklet-in-python/index.md",
+        "issue_type": "suggest_body_output_image",
+        "severity": "Opportunity",
+        "explanation": "Post has a cover/front matter image but no inline body image, and the content appears to describe a visual or generated output. Policy: content-quality; rule: CQ-006.",
+        "why_it_matters": "Inline output screenshots help technical readers confirm that code produced the expected result.",
+        "recommended_fix": "Consider adding an output screenshot or result image inside the post body if it helps readers validate the tutorial result.",
+        "estimated_effort": "Low",
+        "expected_seo_impact": "Medium",
+        "line": 0,
+        "policy_id": "content-quality",
+        "rule_id": "CQ-006",
+        "evidence": "body_images=0; front_matter_images=1",
+        "intended_audiences": [
+          "Developers evaluating file-format SDKs",
+          "Technical content editors"
+        ]
+      },
+      {
+        "file_path": "content/Aspose.Blog/pdf/2026-07-08-create-pdf-booklet-in-python/index.md",
+        "issue_type": "title_length",
+        "severity": "Medium",
+        "explanation": "Title length is 28 characters.",
+        "why_it_matters": "The issue can reduce crawl clarity, search relevance, or reader engagement.",
+        "recommended_fix": "Keep the title around 30-70 characters while preserving clarity.",
+        "estimated_effort": "Low",
+        "expected_seo_impact": "Medium",
+        "line": 0,
+        "policy_id": "",
+        "rule_id": "",
+        "evidence": "",
+        "intended_audiences": []
+      },
+      {
+        "file_path": "content/Aspose.Blog/pdf/2026-07-08-create-pdf-booklet-in-python/index.md",
+        "issue_type": "weak_internal_links",
+        "severity": "Medium",
+        "explanation": "Post has fewer than two internal links. Policy: internal-linking; rule: IL-001.",
+        "why_it_matters": "Internal links help users and crawlers discover related content.",
+        "recommended_fix": "Add links to related tutorials, docs, and product pages.",
+        "estimated_effort": "Low",
+        "expected_seo_impact": "Medium",
+        "line": 0,
+        "policy_id": "internal-linking",
+        "rule_id": "IL-001",
+        "evidence": "internal_links=0",
+        "intended_audiences": [
+          "Developers exploring related API workflows",
+          "Search crawlers discovering topic clusters"
+        ]
+      },
+      {
+        "file_path": "content/Aspose.Blog/pdf/2026-07-08-create-pdf-booklet-in-python/index.md",
+        "issue_type": "short_title",
+        "severity": "Medium",
+        "explanation": "Title may be too short to communicate the search promise. Policy: on-page-seo; rule: OPS-002.",
+        "why_it_matters": "Short generic titles often underperform in search results.",
+        "recommended_fix": "Expand the title with topic, audience, file format, or outcome.",
+        "estimated_effort": "Low",
+        "expected_seo_impact": "Medium",
+        "line": 0,
+        "policy_id": "on-page-seo",
+        "rule_id": "OPS-002",
+        "evidence": "title_length=28",
+        "intended_audiences": [
+          "Search users evaluating SDK tutorials",
+          "Technical decision-makers comparing implementation options"
+        ]
+      },
+      {
+        "file_path": "content/Aspose.Blog/pdf/2026-07-08-create-pdf-booklet-in-python/index.md",
+        "issue_type": "too_few_outgoing_internal_links",
+        "severity": "Medium",
+        "explanation": "Post has fewer than two outgoing internal links. Policy: internal-linking; rule: IL-005.",
+        "why_it_matters": "Outgoing internal links help build product and tutorial clusters.",
+        "recommended_fix": "Add contextual links to related posts, docs, and product pages.",
+        "estimated_effort": "Low",
+        "expected_seo_impact": "Medium",
+        "line": 0,
+        "policy_id": "internal-linking",
+        "rule_id": "IL-005",
+        "evidence": "internal_links=0",
+        "intended_audiences": [
+          "Developers exploring related API workflows",
+          "Search crawlers discovering topic clusters"
+        ]
+      }
+    ],
+    "llm_suggestions": [],
+    "scores": {
+      "content_quality": 93,
+      "on_page_seo": 86,
+      "technical_seo": 85,
+      "internal_linking": 86,
+      "translation_seo": 100,
+      "organic_growth_opportunity": 77,
+      "priority": 50
+    },
+    "translation_group": "content/Aspose.Blog/pdf/2026-07-08-create-pdf-booklet-in-python/index.md"
   }
 ]

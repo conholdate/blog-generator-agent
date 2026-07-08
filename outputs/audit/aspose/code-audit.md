@@ -1,9 +1,9 @@
 # Code Audit
 
 ## Summary
-- Posts scanned: 1
-- Posts with fenced code blocks: 1
-- Code blocks found: 5
+- Posts scanned: 2
+- Posts with fenced code blocks: 2
+- Code blocks found: 12
 - Code/API issues found: 0
 - SDK validation enabled: True
 
@@ -20,6 +20,7 @@ The agent validates SDK classes by indexing configured product API reference rep
 | Blog Post | Title | Language | Code Blocks | Code Issues | Top Code Issues |
 | --- | --- | --- | --- | --- | --- |
 | `content/Aspose.Blog/pdf/2026-07-08-add-or-remove-annotations-in-python/index.md` | Add or Remove Annotations in Python | en | 5 | 0 |  |
+| `content/Aspose.Blog/pdf/2026-07-08-create-pdf-booklet-in-python/index.md` | Create PDF Booklet in Python | en | 7 | 0 |  |
 
 ## Class/Member Resolution Details
 Missing or deprecated SDK classes, properties, and members are listed here with the closest existing indexed-symbol suggestions when the API reference data can support them.
