@@ -7,11 +7,11 @@
 
 | Metric | Value |
 | --- | --- |
-| Total baseline topics | 95 |
+| Total baseline topics | 93 |
 | Platforms evaluated | CPP, GENERAL, JAVA, NET, PYTHON |
 | Fully covered across all platforms | 2 |
-| Topics with gaps (missing at least one platform) | 93 |
-| Missing topic×platform pairs | 272 |
+| Topics with gaps (missing at least one platform) | 91 |
+| Missing topic×platform pairs | 262 |
 | Matching mode | deterministic lexical ranking; strict=0.86, loose=0.80, top_k=5, no_embeddings=False. |
 
 </details>
@@ -64,7 +64,7 @@
 | JPG, PNG, TIFF, EMF, or BMP images to PDF | — | — | — | [✅ (1.00)](aspose.com/pdf/images-to-pdf-csharp/) | — |
 | JPG to PDF | — | [✅ (1.00)](https://blog.aspose.com/pdf/merge-jpg-to-pdf/) | — | [✅ (1.00)](https://blog.aspose.com/pdf/convert-jpg-to-pdf-online/) | [✅ (1.00)](aspose.com/pdf/convert-jpg-to-pdf-in-python/) |
 | MemoryStream to PDF or PDF to MemoryStream | — | — | — | [✅ (1.00)](aspose.com/pdf/memorystream-file-pdf-csharp-vb-net/) | — |
-| Merge JPG images | — | — | [✅ (1.00)](https://blog.aspose.com/pdf/merge-jpg-online/) | — | — |
+| Merge JPG images to PDF | — | — | [✅ (1.00)](https://blog.aspose.com/pdf/merge-jpg-online/) | — | — |
 | Merge JPG images to PDF | — | — | — | [✅ (1.00)](https://blog.aspose.com/pdf/merge-jpg-to-pdf-in-csharp/) | — |
 | Merge PDF | [✅ (1.00)](https://blog.aspose.com/pdf/merge-pdf-files-using-cpp/) | [✅ (1.00)](https://blog.aspose.com/pdf/merge-pdf-documents-online/) | [✅ (1.00)](https://blog.aspose.com/pdf/merge-two-or-multiple-pdf-files-using-java/) | [✅ (1.00)](aspose.com/pdf/merge-multiple-pdf-files-in-csharp-net/) | [✅ (1.00)](https://blog.aspose.com/pdf/merge-pdf-files-in-python/) |
 | MPP to DOCX | — | — | — | [✅ (1.00)](https://blog.aspose.com/pdf/convert-ms-project-mpp-to-word-document-doc-docx-using-csharp/) | — |
@@ -92,8 +92,7 @@
 | PDF to XLSX | — | [✅ (1.00)](https://blog.aspose.com/pdf/convert-pdf-to-excel-online/) | [✅ (1.00)](https://blog.aspose.com/pdf/convert-pdf-to-excel-javascript/) | [✅ (1.00)](aspose.com/pdf/convert-pdf-to-excel-in-csharp-net-pdf-to-xls-pdf-to-xlsx/) | [✅ (1.00)](https://blog.aspose.com/pdf/convert-pdf-to-excel-in-python/) |
 | PDF to XML | — | — | [✅ (1.00)](https://blog.aspose.com/pdf/convert-pdf-to-xml-in-java/) | [✅ (1.00)](https://blog.aspose.com/pdf/convert-pdf-to-xml-in-csharp/) | [✅ (1.00)](https://blog.aspose.com/pdf/convert-pdf-to-xml-in-python/) |
 | PNG to PDF | — | [✅ (1.00)](https://blog.aspose.com/pdf/convert-png-to-pdf-online/) | — | [✅ (1.00)](https://blog.aspose.com/pdf/convert-png-to-pdf-in-csharp/) | [✅ (1.00)](https://blog.aspose.com/pdf/convert-png-to-pdf-in-python/) |
-| Print PDF | — | — | [✅ (1.00)](https://blog.aspose.com/pdf/print-pdf-files-programmatically-using-java/) | [✅ (1.00)](https://blog.aspose.com/pdf/print-pdf-csharp/) | — |
-| Print PDF to printer | — | [✅ (1.00)](https://blog.aspose.com/pdf/print-pdf-in-python/) | — | — | — |
+| Print PDF | — | [✅ (1.00)](https://blog.aspose.com/pdf/print-pdf-in-python/) | [✅ (1.00)](https://blog.aspose.com/pdf/print-pdf-files-programmatically-using-java/) | [✅ (1.00)](https://blog.aspose.com/pdf/print-pdf-csharp/) | — |
 | PUB to DOCX | [✅ (1.00)](https://blog.aspose.com/pdf/convert-pub-to-word-document-doc-docx-using-cpp/) | — | — | — | — |
 | PUB to Image | [✅ (1.00)](https://blog.aspose.com/pdf/convert-pub-to-image-using-cpp/) | — | — | — | — |
 | Remove images from PDF | — | — | [✅ (1.00)](https://blog.aspose.com/pdf/remove-images-from-pdf-using-java/) | — | [✅ (1.00)](https://blog.aspose.com/pdf/remove-images-from-pdf-using-python/) |
@@ -101,8 +100,7 @@
 | Remove watermark from PDF | — | [✅ (1.00)](https://blog.aspose.com/pdf/remove-watermark-from-pdf-online/) | — | [✅ (1.00)](https://blog.aspose.com/pdf/remove-watermark-from-pdf-in-csharp/) | [✅ (1.00)](https://blog.aspose.com/pdf/remove-watermark-from-pdf-in-python/) |
 | Replace images in PDF | — | — | [✅ (1.00)](https://blog.aspose.com/pdf/replace-images-in-pdf-files-in-java/) | [✅ (1.00)](https://blog.aspose.com/pdf/replace-images-in-pdf-files-in-csharp-net/) | — |
 | Resize PDF Pages | — | [✅ (1.00)](https://blog.aspose.com/pdf/resize-pdf-document-in-python/) | [✅ (1.00)](https://blog.aspose.com/pdf/edit-pdf-page-size-in-java/) | [✅ (1.00)](https://blog.aspose.com/pdf/change-pdf-page-size-in-csharp/) | — |
-| Rotate PDF | — | [✅ (1.00)](https://blog.aspose.com/pdf/rotate-pdf-document-online/) | — | — | [✅ (1.00)](https://blog.aspose.com/pdf/rotate-pdf-in-python/) |
-| Rotate PDF Pages text or image | [✅ (1.00)](https://blog.aspose.com/pdf/rotate-pdf-pages-text-or-image-using-cpp/) | — | — | [✅ (1.00)](https://blog.aspose.com/pdf/rotate-pdf-text-image-page-with-csharp-vb-net/) | — |
+| Rotate PDF | [✅ (1.00)](https://blog.aspose.com/pdf/rotate-pdf-pages-text-or-image-using-cpp/) | [✅ (1.00)](https://blog.aspose.com/pdf/rotate-pdf-document-online/) | — | [✅ (1.00)](https://blog.aspose.com/pdf/rotate-pdf-text-image-page-with-csharp-vb-net/) | [✅ (1.00)](https://blog.aspose.com/pdf/rotate-pdf-in-python/) |
 | Rotate text in PDF | — | — | [✅ (1.00)](https://blog.aspose.com/pdf/rotate-text-inside-pdf-documents-in-java/) | [✅ (1.00)](https://blog.aspose.com/pdf/rotate-text-inside-pdf-documents-in-csharp/) | — |
 | Search text in PDF | — | — | — | [✅ (1.00)](https://blog.aspose.com/pdf/search-in-pdf-using-csharp/) | — |
 | Shrink PDF | — | [✅ (1.00)](https://blog.aspose.com/pdf/shrink-pdf-size/) | — | — | — |

@@ -17,10 +17,10 @@
     "excluded_release_update_records": 181,
     "excluded_old_or_undated_records": 182,
     "baseline_records": 215,
-    "total_cells": 475,
+    "total_cells": 465,
     "matched_cells": 203,
-    "missing_cells": 272,
-    "match_rate": 0.42736842105263156,
+    "missing_cells": 262,
+    "match_rate": 0.43655913978494626,
     "skipped_empty_keys": 0
   },
   "rows": [
@@ -2183,7 +2183,7 @@
     {
       "category": "Image Processing",
       "sub_category": "Image Merging",
-      "topic": "Merge JPG images",
+      "topic": "Merge JPG images to PDF",
       "key": "merge-jpg-images",
       "baseline_record_id": "blog::pdf/2024-04-05-merge-jpg-online/index.md",
       "coverage": {
@@ -3568,12 +3568,12 @@
           "url": null
         },
         "general": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::pdf/2024-03-13-print-pdf-in-python/index.md",
+          "title": "Print PDF to Printer in Python",
+          "topic": "Print PDF to printer",
+          "url": "https://blog.aspose.com/pdf/print-pdf-in-python/"
         },
         "java": {
           "matched": true,
@@ -3590,55 +3590,6 @@
           "title": "C# Print PDF Documents Programmatically with .NET",
           "topic": "Print PDF documents",
           "url": "https://blog.aspose.com/pdf/print-pdf-csharp/"
-        },
-        "python": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        }
-      }
-    },
-    {
-      "category": "Document Processing",
-      "sub_category": "PDF Printing",
-      "topic": "Print PDF to printer",
-      "key": "print-pdf-to-printer",
-      "baseline_record_id": "blog::pdf/2024-03-13-print-pdf-in-python/index.md",
-      "coverage": {
-        "cpp": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "general": {
-          "matched": true,
-          "score": 1.0,
-          "record_id": "blog::pdf/2024-03-13-print-pdf-in-python/index.md",
-          "title": "Print PDF to Printer in Python",
-          "topic": "Print PDF to printer",
-          "url": "https://blog.aspose.com/pdf/print-pdf-in-python/"
-        },
-        "java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "net": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
         },
         "python": {
           "matched": false,
@@ -3994,19 +3945,19 @@
       }
     },
     {
-      "category": "File Processing",
-      "sub_category": "PDF Manipulation",
+      "category": "Document Processing",
+      "sub_category": "PDF Rotation",
       "topic": "Rotate PDF",
       "key": "rotate-pdf",
-      "baseline_record_id": "blog::pdf/2023-04-06-rotate-pdf-in-python/index.md",
+      "baseline_record_id": "blog::pdf/2020-10-18-rotate-pdf-text-image-page-with-csharp-vb-net/index.md",
       "coverage": {
         "cpp": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::pdf/2021-05-31-rotate-pdf-pages-text-or-image-using-cpp/index.md",
+          "title": "Rotate PDF Pages, Text or Images using C++",
+          "topic": "Rotate PDF pages text or images",
+          "url": "https://blog.aspose.com/pdf/rotate-pdf-pages-text-or-image-using-cpp/"
         },
         "general": {
           "matched": true,
@@ -4025,55 +3976,6 @@
           "url": null
         },
         "net": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "python": {
-          "matched": true,
-          "score": 1.0,
-          "record_id": "blog::pdf/2023-04-06-rotate-pdf-in-python/index.md",
-          "title": "Rotate PDF Files in Python",
-          "topic": "Rotate PDF",
-          "url": "https://blog.aspose.com/pdf/rotate-pdf-in-python/"
-        }
-      }
-    },
-    {
-      "category": "Document Processing",
-      "sub_category": "PDF Rotation",
-      "topic": "Rotate PDF Pages text or image",
-      "key": "rotate-pdf-pages-text-or-image",
-      "baseline_record_id": "blog::pdf/2020-10-18-rotate-pdf-text-image-page-with-csharp-vb-net/index.md",
-      "coverage": {
-        "cpp": {
-          "matched": true,
-          "score": 1.0,
-          "record_id": "blog::pdf/2021-05-31-rotate-pdf-pages-text-or-image-using-cpp/index.md",
-          "title": "Rotate PDF Pages, Text or Images using C++",
-          "topic": "Rotate PDF pages text or images",
-          "url": "https://blog.aspose.com/pdf/rotate-pdf-pages-text-or-image-using-cpp/"
-        },
-        "general": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "net": {
           "matched": true,
           "score": 1.0,
           "record_id": "blog::pdf/2020-10-18-rotate-pdf-text-image-page-with-csharp-vb-net/index.md",
@@ -4082,12 +3984,12 @@
           "url": "https://blog.aspose.com/pdf/rotate-pdf-text-image-page-with-csharp-vb-net/"
         },
         "python": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::pdf/2023-04-06-rotate-pdf-in-python/index.md",
+          "title": "Rotate PDF Files in Python",
+          "topic": "Rotate PDF",
+          "url": "https://blog.aspose.com/pdf/rotate-pdf-in-python/"
         }
       }
     },

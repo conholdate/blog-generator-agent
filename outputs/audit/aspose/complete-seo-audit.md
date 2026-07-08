@@ -1,21 +1,21 @@
 # Complete SEO Audit Report
 
 ## Executive Summary
-This local audit scanned 3 Markdown files for Aspose. It found 17 total issues across content quality, on-page SEO, technical Hugo SEO, internal linking, multilingual SEO, and audience fit.
-The estimated overall SEO health score is 88/100. The highest-leverage work is to fix high-severity content gaps, improve developer-intent completeness, repair internal linking weaknesses, and tighten translation metadata.
+This local audit scanned 1 Markdown files for Aspose. It found 6 total issues across content quality, on-page SEO, technical Hugo SEO, internal linking, multilingual SEO, and audience fit.
+The estimated overall SEO health score is 89/100. The highest-leverage work is to fix high-severity content gaps, improve developer-intent completeness, repair internal linking weaknesses, and tighten translation metadata.
 
 - Repository: `/home/runner/work/blog-generator-agent/blog-generator-agent/outputs/_repos/aspose-blog`
 - Audience profile: Developers and technical decision-makers evaluating or using Aspose APIs for document and file-format processing.
-- Markdown files scanned: 3
+- Markdown files scanned: 1
 - Languages detected: 1
-- Translation groups: 3
-- Total issues: 17
+- Translation groups: 1
+- Total issues: 6
 
 ## SEO Scorecard
 | Area | Score | Interpretation |
 | --- | --- | --- |
-| Overall SEO Health | 88 | Strong. Monitor and refine. |
-| Content Quality | 89 | Strong. Monitor and refine. |
+| Overall SEO Health | 89 | Strong. Monitor and refine. |
+| Content Quality | 92 | Strong. Monitor and refine. |
 | On-Page SEO | 100 | Strong. Monitor and refine. |
 | Technical SEO | 92 | Strong. Monitor and refine. |
 | Internal Linking | 50 | Needs focused cleanup and refresh work. |
@@ -28,36 +28,31 @@ The estimated overall SEO health score is 88/100. The highest-leverage work is t
 | Severity | Count |
 | --- | --- |
 | Critical | 0 |
-| High | 1 |
-| Medium | 13 |
+| High | 0 |
+| Medium | 5 |
 | Low | 0 |
-| Opportunity | 3 |
+| Opportunity | 1 |
 
 ### Top Issue Types
 | Issue Type | Count |
 | --- | --- |
-| too_few_outgoing_internal_links | 6 |
-| suggest_body_output_image | 3 |
-| weak_internal_links | 3 |
-| orphan_post | 3 |
-| placeholder_artifact | 1 |
+| too_few_outgoing_internal_links | 2 |
+| suggest_body_output_image | 1 |
+| weak_internal_links | 1 |
 | missing_robots | 1 |
+| orphan_post | 1 |
 
 ### Top Priority Posts
 | File | Language | Priority | Issues | Top Issue | Recommended Action |
 | --- | --- | --- | --- | --- | --- |
-| `content/Aspose.Blog/gis/2026-07-01-complete-guide-shapefile-to-csv-in-python/index.md` | en | 49 | 4 | suggest_body_output_image | Consider adding an output screenshot or result image inside the post body if it helps readers validate the tutorial result. |
-| `content/Aspose.Blog/gis/2026-07-01-geojson-to-topojson-conversion-in-net-sample-guide/index.md` | en | 23 | 3 | suggest_body_output_image | Consider adding an output screenshot or result image inside the post body if it helps readers validate the tutorial result. |
-| `content/Aspose.Blog/gis/2026-07-01-kml-to-gpx-conversion-tutorial-in-python/index.md` | en | 23 | 3 | suggest_body_output_image | Consider adding an output screenshot or result image inside the post body if it helps readers validate the tutorial result. |
+| `content/Aspose.Blog/pdf/2026-07-08-add-or-remove-annotations-in-python/index.md` | en | 23 | 3 | suggest_body_output_image | Consider adding an output screenshot or result image inside the post body if it helps readers validate the tutorial result. |
 
 ## Per-Post SEO Segment Score Table
 All scanned posts are listed below, sorted by priority score. Each SEO audit segment is shown as a column for direct post-by-post comparison.
 
 | Blog Post | Title | Language | Content Quality | On-Page SEO | Technical SEO | Internal Linking | Translation SEO | Developer Audience Fit | Growth Opportunity | Priority | Issues | Top Issues |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| `content/Aspose.Blog/gis/2026-07-01-complete-guide-shapefile-to-csv-in-python/index.md` | Complete Guide: Shapefile to CSV in Python | en | 100 | 100 | 85 | 86 | 100 | 100 | 56 | 49 | 4 | suggest_body_output_image; placeholder_artifact; weak_internal_links; too_few_outgoing_internal_links |
-| `content/Aspose.Blog/gis/2026-07-01-geojson-to-topojson-conversion-in-net-sample-guide/index.md` | GEOJSON to Topojson Conversion in .NET: Sample Guide | en | 100 | 100 | 85 | 86 | 100 | 100 | 48 | 23 | 3 | suggest_body_output_image; weak_internal_links; too_few_outgoing_internal_links |
-| `content/Aspose.Blog/gis/2026-07-01-kml-to-gpx-conversion-tutorial-in-python/index.md` | KML to GPX Conversion Tutorial in Python | en | 100 | 100 | 85 | 86 | 100 | 100 | 49 | 23 | 3 | suggest_body_output_image; weak_internal_links; too_few_outgoing_internal_links |
+| `content/Aspose.Blog/pdf/2026-07-08-add-or-remove-annotations-in-python/index.md` | Add or Remove Annotations in Python | en | 100 | 100 | 85 | 86 | 100 | 100 | 48 | 23 | 3 | suggest_body_output_image; weak_internal_links; too_few_outgoing_internal_links |
 
 ## Content Quality Audit
 Developer and file-format processing content should satisfy a concrete task, show working code, explain setup, clarify input/output formats, and provide troubleshooting or limitations.
@@ -69,7 +64,7 @@ Developer and file-format processing content should satisfy a concrete task, sho
 | No code block | 0 | 0.0% |
 | No post image | 0 | 0.0% |
 | No H2 heading | 0 | 0.0% |
-| Placeholder/template terms | 1 | 33.3% |
+| Placeholder/template terms | 0 | 0.0% |
 | Possible mojibake | 0 | 0.0% |
 | Draft true | 0 | 0.0% |
 
@@ -129,9 +124,9 @@ The target reader is a developer or technical evaluator using Aspose APIs for do
 ## Internal Linking Audit
 | Signal | Count |
 | --- | --- |
-| Internal linking issues | 6 |
-| Orphan posts | 3 |
-| Too few outgoing internal links | 3 |
+| Internal linking issues | 2 |
+| Orphan posts | 1 |
+| Too few outgoing internal links | 1 |
 | Broken internal links | 0 |
 | Weak anchor text | 0 |
 
@@ -143,7 +138,7 @@ The target reader is a developer or technical evaluator using Aspose APIs for do
 ## Multilingual SEO
 | Signal | Count |
 | --- | --- |
-| Translation groups | 3 |
+| Translation groups | 1 |
 | Groups missing configured languages | 0 |
 | Groups with translation issues | 0 |
 | Detected languages | 1 |
@@ -158,12 +153,12 @@ The target reader is a developer or technical evaluator using Aspose APIs for do
 ### Posts By Year
 | Year | Posts |
 | --- | --- |
-| 2026 | 3 |
+| 2026 | 1 |
 
 ### Product-Family Distribution
 | Product | Posts |
 | --- | --- |
-| gis | 3 |
+| pdf | 1 |
 
 ## Priority Roadmap
 | Priority | Action | Reason |
