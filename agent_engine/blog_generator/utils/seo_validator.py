@@ -75,8 +75,8 @@ def validate_seo_content(markdown_string, targets):
     report["details"]["required_sections"] = {"score": sec_score, "msg": msg}
 
     # --- RULE 5: Complete Code Snippet Wrapper ---
-    has_wrapper = ("" in content_body and 
-                   "" in content_body)
+    has_wrapper = ("<!--[COMPLETE_CODE_SNIPPET_START]-->" in content_body and
+                   "<!--[COMPLETE_CODE_SNIPPET_END]-->" in content_body)
     code_score = 20
     if not has_wrapper:
         code_score = 0

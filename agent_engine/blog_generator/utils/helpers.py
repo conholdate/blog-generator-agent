@@ -2195,7 +2195,8 @@ def convert_sheet_row_to_file_format(row: dict) -> dict:
         "cluster_id": row.get("run_id", ""),
         "target_persona": row.get("target_persona", ""),
         "angle": row.get("angle", ""),
-        "other_notes": [note.strip() for note in row.get("editorial_notes", "").split("|")]
+        "other_notes": [note.strip() for note in row.get("editorial_notes", "").split("|")],
+        "layout": str(row.get("layout", "")).strip()
     }
 
 def extract_blog_metadata(markdown_content: str) -> dict:
@@ -2337,7 +2338,7 @@ def mark_topic_as_generated(sheet_name: str, row_number: int) -> None:
     print(f"✅ Row {row_number} in '{sheet_name}' marked as Generated")
 
 
-def save_blog_metadata_to_sheet(brand: str, url: str, title: str, author: str, gist_url: str, published_date: str, product: str = "") -> None:
+def save_blog_metadata_to_sheet(brand: str, url: str, title: str, author: str, gist_url: str, published_date: str, product: str = "", layout: str = "") -> None:
     base_dir = get_project_root()
     key_path = os.path.join(base_dir, "keys", settings.GOOGLE_KEY)
 
@@ -2351,8 +2352,8 @@ def save_blog_metadata_to_sheet(brand: str, url: str, title: str, author: str, g
     client = gspread.authorize(creds)
 
     spreadsheet = client.open_by_key(spreadsheet_id)
-    headers = ["Published Date", "Brand", "Product", "Blog Title", "Author", "Gist URL", "Blog URL"]
-    row = [published_date, brand, product, title, author, gist_url, url]
+    headers = ["Published Date", "Brand", "Product", "Blog Title", "Author", "Gist URL", "Blog URL", "Layout"]
+    row = [published_date, brand, product, title, author, gist_url, url, layout]
 
     # Save to consolidated sheet
     consolidated = spreadsheet.worksheet(settings.CONSOLIDATED_SHEET_NAME_FOR_BLOGPOST_METADATA)
@@ -2366,6 +2367,32 @@ def save_blog_metadata_to_sheet(brand: str, url: str, title: str, author: str, g
     weekly = get_or_create_weekly_sheet(spreadsheet, weekly_sheet_name, headers)
     weekly.append_row(row)
     print(f"Saved to weekly sheet '{weekly_sheet_name}': {row}")
+
+
+def get_recent_layouts(product: str, limit: int = 2) -> list[str]:
+    """Return the layouts of the most recent posts for a product (newest last),
+    read from the consolidated blog metadata sheet. Used by the layout selector
+    to avoid repeating the same skeleton back-to-back within a product.
+
+    Columns are read positionally (Product = col 3, Layout = col 8) because
+    older rows predate the Layout column and get_all_records would choke on
+    the header mismatch.
+    """
+    base_dir = get_project_root()
+    key_path = os.path.join(base_dir, "keys", settings.GOOGLE_KEY)
+
+    scopes = ["https://www.googleapis.com/auth/spreadsheets.readonly"]
+    creds = Credentials.from_service_account_file(key_path, scopes=scopes)
+    client = gspread.authorize(creds)
+
+    spreadsheet = client.open_by_key(settings.SPREADSHEET_ID_FOR_BLOGPOST_METADATA)
+    worksheet = spreadsheet.worksheet(settings.CONSOLIDATED_SHEET_NAME_FOR_BLOGPOST_METADATA)
+
+    layouts = []
+    for row in worksheet.get_all_values()[1:]:
+        if len(row) >= 8 and row[2].strip().lower() == product.strip().lower() and row[7].strip():
+            layouts.append(row[7].strip())
+    return layouts[-limit:]
 
 
 def extract_product_names(names):

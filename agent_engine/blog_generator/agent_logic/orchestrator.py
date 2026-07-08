@@ -8,7 +8,8 @@ from tools.mcp_tools import generate_markdown_file, fetch_category_related_artic
 from utils import prompts
 from utils.seo_validator import validate_seo_content, validate_and_fix_meta_description, validate_and_fix_seo_title
 from utils.file_format_mappings import FILE_FORMAT_MAPPINGS, BASE_URL
-from utils.helpers import mark_topic_as_generated, prepare_context, get_productInfo, get_topic_by_index, inject_file_format_links, slugify, normalize_case_preserve_formats_in_keywords, clean_ai_generated_markdown, validate_markdown_links, capitalize_file_formats_for_title, setup_logger, generate_tags_with_llm, save_blog_metadata_to_sheet, extract_blog_metadata, get_topic_from_sheet, get_next_tab, extract_product_names
+from utils.helpers import mark_topic_as_generated, prepare_context, get_productInfo, get_topic_by_index, inject_file_format_links, slugify, normalize_case_preserve_formats_in_keywords, clean_ai_generated_markdown, validate_markdown_links, capitalize_file_formats_for_title, setup_logger, generate_tags_with_llm, save_blog_metadata_to_sheet, extract_blog_metadata, get_topic_from_sheet, get_next_tab, extract_product_names, get_recent_layouts
+from utils.layouts import select_layout
 from utils.metricsRecorder import MetricsRecorder
 from services.LLMservice import llm_service
 import json
@@ -168,6 +169,25 @@ class BlogOrchestrator:
             tags = await generate_tags_with_llm(post_topic,f_keywords, blog_outline, self.metrics )
             print(f"tags are -- {tags}")
 
+            # ── Layout selection: sheet override -> signals -> anti-repeat ──
+            try:
+                recent_layouts = get_recent_layouts(product=sheet_name, limit=2)
+            except Exception as layout_err:
+                print(f"⚠️ Could not read recent layouts ({layout_err}), continuing without history")
+                recent_layouts = []
+
+            layout_choice = select_layout(
+                topic=post_topic,
+                angle=blog_post_angle,
+                persona=target_persona,
+                is_cloud=isCloud,
+                recent_layouts=recent_layouts,
+                override=topics_raw_data.get("layout", ""),
+            )
+            print(f"📐 Layout: {layout_choice.name} (reason: {layout_choice.reason})", flush=True)
+            print(f"📐 Skeleton: {' -> '.join(layout_choice.skeleton())}", flush=True)
+            # ─────────────────────────────────────────────────────────────────
+
             # ════════════════════════════════════════════════════════════════════
             # UPDATED: Using centralized LLM service instead of direct Agent creation
             # ════════════════════════════════════════════════════════════════════
@@ -185,7 +205,8 @@ class BlogOrchestrator:
                 other_important_and_relevant_things,
                 tags,
                 isCloud,
-                allowed_products
+                allowed_products,
+                layout_choice=layout_choice
             )
         
             result = await llm_service.run_agent(
@@ -288,6 +309,7 @@ class BlogOrchestrator:
 
             self.log("---Execution started---")
             self.log(f"Topic-> {post_topic}")
+            self.log(f"Layout-> {layout_choice.name} ({layout_choice.reason})")
             self.log(f"Brand-> {self.brand}")
             self.log(f"Keywords -> {topics_raw_data}")
             self.log(f"product info {product_info}")
@@ -307,7 +329,8 @@ class BlogOrchestrator:
                 author=blog_post_metadata['author'],
                 gist_url=gist_url,
                 published_date=blog_post_metadata['date'],
-                product=sheet_name
+                product=sheet_name,
+                layout=layout_choice.name
                 )
             
             return {
@@ -315,6 +338,7 @@ class BlogOrchestrator:
                 "product": product_name,
                 "platform": platform,
                 "brand": self.brand,
+                "layout": layout_choice.name,
                 "SEO_Score": report["score"],
                 "run_id": self.metrics.run_id,
                 "duration_ms": self.metrics.run_duration_ms,

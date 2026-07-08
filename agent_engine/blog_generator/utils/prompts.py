@@ -2,7 +2,8 @@ import json
 from datetime import datetime
 import sys, os
 from .helpers import slugify
-from typing import List, Dict
+from .layouts import default_choice, render_prompt_blocks, LayoutChoice
+from typing import List, Dict, Optional
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 from utils.helpers import format_related_posts
 from config import settings
@@ -94,11 +95,14 @@ def get_blog_writer_prompt(
     other_important_and_relevant_things: str = "",
     tags: List[str] = [],
     isCloud: bool = False,
-    allowed_products: List[str] = []
+    allowed_products: List[str] = [],
+    layout_choice: Optional[LayoutChoice] = None
 ) -> str:
     """
-    Creates a full SEO blog-writing prompt with frontmatter, outline, and
-    a final 'Read More' section using the provided related_links.
+    Creates a full SEO blog-writing prompt with frontmatter, layout-driven
+    structure, outline coverage rules, and a final 'Read More' section using
+    the provided related_links. If layout_choice is None, the classic layout
+    is used (backwards-compatible default).
     """
     url = slugify(title)
 
@@ -110,9 +114,6 @@ def get_blog_writer_prompt(
             data[key.strip()] = value.strip()
 
     category = data.get("Category", "General")
-
-    # Outline formatting
-    formatted_outline = "\n".join([f"   {item}" for item in outline])
 
     # Properly formatted Read More links (SAFE)
     formatted_related = format_related_posts(related_links)
@@ -160,43 +161,20 @@ def get_blog_writer_prompt(
     )
 
     # ------------------------------------------------------------------
-    # Detect whether the outline already covers Steps and Complete Code
-    # so we can inject an explicit notice when either is missing.
+    # Layout system: the chosen layout drives the post structure. The
+    # outline from the sheet is treated as a keyword-preserving coverage
+    # checklist, not a heading list.
     # ------------------------------------------------------------------
-    outline_lower = " ".join(outline).lower()
-    outline_has_steps = any(
-        kw in outline_lower
-        for kw in ["step-by-step", "step by step", "steps to", "steps for"]
+    if layout_choice is None:
+        layout_choice = default_choice(is_cloud=isCloud)
+    layout_blocks = render_prompt_blocks(
+        layout_choice,
+        is_cloud=isCloud,
+        has_read_more=bool(formatted_related),
+        outline_items=outline,
     )
-    outline_has_complete_code = any(
-        kw in outline_lower
-        for kw in ["complete code", "full code", "complete example", "code example"]
-    )
-
-    if not outline_has_steps and not outline_has_complete_code:
-        outline_addition_notice = (
-            "IMPORTANT: The provided outline does NOT include a Steps section or a "
-            "Complete Code Example section. You MUST add BOTH after all outline "
-            "sections, in this exact order:\n"
-            "  1. ## Steps to [Task Based on Title]\n"
-            "  2. ## [Task Based on Title] - Complete Code Example"
-        )
-    elif not outline_has_steps:
-        outline_addition_notice = (
-            "IMPORTANT: The provided outline does NOT include a Steps section. "
-            "You MUST add it immediately before the Complete Code Example section."
-        )
-    elif not outline_has_complete_code:
-        outline_addition_notice = (
-            "IMPORTANT: The provided outline does NOT include a Complete Code Example "
-            "section. You MUST add it immediately after the Steps section."
-        )
-    else:
-        outline_addition_notice = (
-            "The outline already includes Steps and Complete Code Example sections. "
-            "Preserve them in the correct order: Steps immediately before Complete "
-            "Code Example, with NO other heading between them."
-        )
+    print(f"layout -- {layout_choice.name} ({layout_choice.reason})", flush=True)
+    print(f"skeleton -- {layout_blocks['skeleton_summary']}", flush=True)
 
     # ------------------------------------------------------------------
     # Optional blocks - only rendered when the values are non-empty
@@ -296,7 +274,7 @@ Before writing a single word of content, you MUST complete this heading plan:
 1. Write down every H2 heading you intend to use across the entire blog
 2. Apply Title Case to every heading - every major word must start with a capital letter
 3. Apply file format and product name capitalization rules to every heading
-4. Categorize each outline section and assign it to the correct position in the flow
+4. Match every H2 to the MANDATORY CONTENT FLOW for this post's layout (defined in Part 2) - same sections, same order, nothing extra
 5. For each heading, extract its core keyword phrase (2-4 words)
 6. Scan the list - if any core keyword phrase appears more than ONCE, rewrite that heading NOW
 7. Only proceed to write content after every heading in your plan is unique, Title Cased, correctly ordered, and has correct format/product casing
@@ -366,16 +344,7 @@ EXAMPLES:
 
 **HEADING PLAN FORMAT (fill this out mentally before writing):**
 
-  H2-1: [Steps heading]                -> category: STEPS    -> core phrase: ___
-  H2-2: [Complete Code heading]        -> category: CODE     -> core phrase: ___
-  H2-3: [cURL heading if cloud]        -> category: CURL     -> core phrase: ___
-  H2-4: [Setup/Installation heading]   -> category: SETUP    -> core phrase: ___
-  H2-5: [Conceptual outline heading]   -> category: CONCEPT  -> core phrase: ___
-  H2-6: [Config outline heading]       -> category: CONFIG   -> core phrase: ___
-  H2-7: [Optimization heading]         -> category: OPTIMIZE -> core phrase: ___
-  H2-8: [Best practices heading]       -> category: BEST     -> core phrase: ___
-  H2-9: Conclusion                     -> core phrase: conclusion
-  H2-10: FAQs                          -> core phrase: faqs
+{layout_blocks['heading_plan']}
 
 **DEDUPLICATION CHECK - STRICTLY ENFORCED:**
 - Extract the core 2-4 word phrase from each heading
@@ -773,14 +742,9 @@ PART 2: CONTENT STRUCTURE (MANDATORY SECTIONS)
 ===============================================================================
 
 ### REQUIRED SECTIONS (IN ORDER)
-1. Introduction Content (NO H2 heading - direct paragraphs)
-2. Steps (H2 heading - FIRST H2, immediately after Introduction - NO other section before this)
-3. Complete Code Example(s) (H2 heading - immediately after Steps)
-4. [CLOUD ONLY] cURL Commands (H2 heading - immediately after Complete Code Example)
-5. Remaining Outline Sections in this order: Setup/Installation, Conceptual, Configuration, Optimization, Best Practices
-6. Conclusion (H2 heading)
-7. FAQs (H2 heading)
-{'8. Read More (H2 heading - always last)' if formatted_related else ''}
+This post uses the '{layout_choice.name}' layout. These are the ONLY sections allowed, in this exact order:
+
+{layout_blocks['required_sections']}
 
 **CRITICAL: ALL HEADINGS MUST USE TITLE CASE - H2 AND H3 WITHOUT EXCEPTION**
 Every H2 (##) and every H3 (###) heading MUST follow Title Case capitalization rules.
@@ -812,90 +776,7 @@ CORRECT H3 examples - always write H3 headings like these:
   ### Handling Multiple File Formats in Java
   ### Setting Up the Development Environment
 
-**MANDATORY CONTENT FLOW (STRICTLY ENFORCED):**
-The blog MUST follow this exact logical reading order - no exceptions:
-
-Introduction (no heading)
-      |
-      v
-Steps to [Action]           <- FIRST H2, immediately after introduction
-                               NO other section allowed before this
-      |
-      v
-Complete Code Example       <- full working code immediately after steps
-      |
-      v
-[CLOUD ONLY] cURL Commands  <- only if isCloud = true
-      |
-      v
-Setup / Installation        <- environment setup comes AFTER code example
-      |
-      v
-Conceptual / Feature sections  <- Key Features, Overview, What is, Architecture
-      |
-      v
-Configuration / Parameter sections  <- Configuring, Options, Settings, Customization
-      |
-      v
-Optimization / Performance sections  <- Optimizing, Speed, Efficiency, Performance
-      |
-      v
-Best Practices              <- Tips, Recommendations, Guidelines
-      |
-      v
-Conclusion
-      |
-      v
-FAQs
-      |
-      v
-Read More
-
-**WRONG ORDER - NEVER DO THIS:**
-Introduction
-## Installation and Setup    <- WRONG: Setup before Steps
-## Key Features              <- WRONG: Conceptual before Steps
-## Steps to Generate
-## Complete Code Example
-
-**CORRECT ORDER - ALWAYS DO THIS:**
-Introduction
-## Steps to Generate         <- Steps is ALWAYS first H2
-## Complete Code Example     <- Code immediately after Steps
-## Installation and Setup    <- Setup comes after Code
-## Key Features              <- Conceptual after Setup
-## Configuring Parameters    <- Config after Conceptual
-## Optimizing Performance    <- Optimization after Config
-## Best Practices            <- Best Practices last before Conclusion
-## Conclusion
-## FAQs
-
-**OUTLINE SECTION PLACEMENT RULES:**
-When placing outline sections, categorize each one and insert it at the correct position:
-
-- STEPS category (Steps, Step-by-Step, How to)
-  -> SKIP from outline - use dedicated Steps section (Section 2) instead
-  -> The dedicated Steps section is ALWAYS the first H2
-
-- SETUP category (Installation, Setup, Getting Started, Prerequisites, Environment)
-  -> Place AFTER Complete Code Example (and cURL section if cloud)
-  -> Place BEFORE all Conceptual sections
-  -> NEVER place before Steps or Complete Code Example
-
-- CONCEPTUAL category (Key Features, Overview, Introduction to X, What is X, Architecture, Benefits, Why Use)
-  -> Place AFTER Setup section
-
-- CONFIGURATION category (Configuring X, Parameters, Options, Settings, Customization, Advanced)
-  -> Place AFTER all Conceptual sections
-
-- OPTIMIZATION category (Optimizing, Performance, Speed, Efficiency, Tuning)
-  -> Place AFTER all Configuration sections
-
-- BEST PRACTICES category (Best Practices, Tips, Recommendations, Guidelines)
-  -> Place LAST among outline sections, immediately before Conclusion
-
-- ERROR HANDLING category (Errors, Troubleshooting, Debugging, Common Issues, Exceptions)
-  -> SKIP entirely - do not include this section
+{layout_blocks['content_flow']}
 
 **GRAMMAR RULES FOR HEADINGS:**
 - Product names: NEVER use articles (a/an) before product names
@@ -919,8 +800,8 @@ Title Case Rules:
 - The introduction MUST be EXACTLY ONE paragraph
 - NO second paragraph allowed
 - NO third paragraph allowed
-- After the single introductory paragraph, IMMEDIATELY start the Steps H2 heading
-- DO NOT start with Setup, Installation, or any other section before Steps
+- After the single introductory paragraph, IMMEDIATELY start the FIRST H2 defined by the MANDATORY CONTENT FLOW in Part 2
+- DO NOT insert any other section between the Introduction and that first H2
 
 **SINGLE PARAGRAPH REQUIREMENTS:**
 - Must be 3-5 sentences long
@@ -953,41 +834,9 @@ Example 3 (cloud):
 - "[Aspose.PDF for .NET](ProductURL) enables developers to..." - WRONG: product link in first sentence
 - Two separate paragraphs in introduction - WRONG: must be exactly one paragraph
 
-### 2. OUTLINE SECTIONS (STRICTLY ENFORCED)
+### 2. OUTLINE COVERAGE (KEYWORD-PRESERVING)
 
-**CRITICAL: FOLLOW THE OUTLINE EXACTLY AS PROVIDED - THIS IS NON-NEGOTIABLE**
-
-Follow the provided outline EXACTLY as given. Use the EXACT heading text from the outline.
-DO NOT rename, reword, or skip any outline section unless it falls into the skip list below.
-The outline is pre-approved - treat it as fixed, non-negotiable input.
-
-{formatted_outline}
-
-**OUTLINE COMPLIANCE RULES (STRICTLY ENFORCED):**
-- Use the EXACT heading text from the outline - word for word, character for character
-- DO NOT generate your own headings to replace outline headings
-- DO NOT reorder outline sections among themselves - preserve the relative order given
-- DO NOT merge two outline sections into one
-- DO NOT split one outline section into two
-- DO NOT add new headings that are not in the outline
-- ONLY skip sections that match the skip list below
-
-**SKIP THESE OUTLINE SECTIONS:**
-- Skip: ANY heading containing the word "Steps" or "Step-by-Step"
-- Skip: ANY heading containing "Error", "Troubleshooting", "Debugging", or "Common Issues"
-
-**PLACEMENT OF OUTLINE SECTIONS BY CATEGORY:**
-Place outline sections at the correct position based on their category:
-1. SETUP sections (Installation, Setup, Getting Started, Prerequisites) -> After Complete Code Example
-2. CONCEPTUAL sections (Key Features, Overview, What is, Architecture) -> After Setup
-3. CONFIGURATION sections (Configuring, Parameters, Options, Settings) -> After Conceptual
-4. OPTIMIZATION sections (Optimizing, Performance, Speed, Tuning) -> After Configuration
-5. BEST PRACTICES sections (Best Practices, Tips, Recommendations) -> After Optimization
-
-If two outline sections fall in the same category, preserve their relative order from the outline.
-
-**OUTLINE COMPLETION NOTICE:**
-{outline_addition_notice}
+{layout_blocks['outline_coverage']}
 
 ===============================================================================
 HEADING UNIQUENESS RULE (APPLIES TO ALL HEADINGS ACROSS THE ENTIRE BLOG)
@@ -1011,143 +860,16 @@ The same keyword phrase must NEVER appear in more than one heading:
 Each heading MUST draw from a DIFFERENT part of the keyword budget.
 No keyword phrase may be spent twice.
 
-**MANDATORY HEADING ASSIGNMENT:**
-
-  Section 2 - Steps heading (FIRST H2):
-    - Use PRIMARY keyword + platform/language
-    - Format: ## Steps to [Primary Keyword Action in Language/Platform]
-    - Example: ## Steps to Build a CSV Editor in Java
-
-  Section 3 - Complete Code Example heading:
-    - MUST contain PRIMARY keyword but with a DIFFERENT angle than Steps heading
-    - Format: ## [Primary Keyword + Differentiating Qualifier] - Complete Code Example
-    - Examples:
-        ## Java CSV Editor - Complete Code Example
-        ## CSV Editing in Java - Complete Code Example
-        ## Building CSV Editor Programmatically - Complete Code Example
-
-  Setup/Prerequisites heading (from outline or prompt-generated):
-    - If using outline heading: use it as-is
-    - If adding prompt heading: use core topic WITHOUT platform/language
-    - Example: ## CSV Editor Development - Prerequisites and Setup (no "in Java")
-
-  Section 5a - cURL heading (cloud only):
-    - Primary keyword phrase MUST NOT appear here
-    - Use SECONDARY keyword, semantic term, or long-tail phrase
-    - Format: ## [Distinct Secondary/Semantic Phrase] via REST API using cURL
-    - Examples:
-        ## Cloud-Based Document Conversion via REST API using cURL
-        ## REST-Based CSV Processing via REST API using cURL
+{layout_blocks['heading_budget']}
 
 ===============================================================================
 
-### 3. STEPS SECTION (MANDATORY - FIRST H2 AFTER INTRODUCTION)
+### 3. BODY SECTION SPECIFICATIONS (LAYOUT: {layout_choice.name})
 
-**THIS IS ALWAYS THE FIRST H2. NOTHING COMES BETWEEN INTRODUCTION AND THIS SECTION.**
+Each body section below MUST follow its specification. Apply Title Case to every
+heading. The position labels refer to the MANDATORY CONTENT FLOW in Part 2.
 
-**HEADING RULE:** Use PRIMARY keyword + platform/language. Apply Title Case strictly.
-Format: ## Steps to [Primary Keyword Action in Language/Platform]
-Example: ## Steps to Build a CSV Editor in Java
-WRONG: ## Steps to CSV editor Development in Java  (lowercase "editor" - INVALID)
-CORRECT: ## Steps to CSV Editor Development in Java  (Title Case - VALID)
-
-**PLACEMENT RULE (NON-NEGOTIABLE):**
-- This section MUST appear immediately after the Introduction paragraph
-- NO Setup, Installation, Key Features, or any other section before this
-- This section MUST be immediately followed by the Complete Code Example section
-- NO other heading is allowed between Steps and Complete Code Example
-
-Format:
-1. **[Step summary with class/method]**: Brief explanation
-   - Mention classes/methods naturally
-   - Link API references if URLs in context: "Initialize the [ClassName](api_url) class"
-   - NEVER put links inside backticks
-   - Optional code snippet if helpful
-
-3-6 steps total, each actionable and technical
-MUST include at least 1 Documentation or API Reference link in this section
-
-### 4. COMPLETE CODE EXAMPLE(S) - MANDATORY (NON-NEGOTIABLE)
-CRITICAL: This section is MANDATORY and MUST ALWAYS be included. NO EXCEPTIONS.
-
-**ABSOLUTE REQUIREMENT:**
-- EVERY blog post MUST have at least ONE Complete Code Example section
-- This section MUST appear immediately after the Steps section
-- NEVER insert any heading between Steps and Complete Code Example
-
-**HEADING RULE:** MUST contain PRIMARY keyword with a DIFFERENT angle than Steps heading.
-Apply Title Case strictly - every major word capitalized.
-Format: ## [Primary Keyword + Differentiating Qualifier] - Complete Code Example
-WRONG: ## CSV editor Development in Java - Complete Code Example  (lowercase "editor")
-CORRECT: ## CSV Editor Development in Java - Complete Code Example  (Title Case)
-
-**INTRO SENTENCE (1-2 sentences before code block):**
-- NEVER use: "ready-to-run", "ready-to-use", "production-ready", "copy-paste ready"
-- DO use phrases like:
-  - "This example demonstrates how to..."
-  - "The following code shows the implementation of..."
-
-**YOU MUST USE THESE EXACT TAGS:**
-
-<!--[COMPLETE_CODE_SNIPPET_START]-->
-```language
-// Full working code
-// All necessary imports at the top
-// Complete initialization
-// Full implementation logic
-// Resource cleanup
-```
-<!--[COMPLETE_CODE_SNIPPET_END]-->
-
-**IMPORTANT READER DISCLAIMER (MANDATORY - INCLUDE AFTER EVERY COMPLETE CODE EXAMPLE):**
-
-> **Note:** This code example demonstrates the core functionality. Before using it in your project, make sure to update the file paths (`input.pdf`, `output.png`, etc.) to match your actual file locations, verify that all required dependencies are properly installed, and test thoroughly in your development environment. If you encounter any issues, please refer to the [official documentation](documentation_url) or reach out to the [support team](forums_url) for assistance.
-
-===============================================================================
-### 4a. [CLOUD ONLY] CURL COMMANDS SECTION - MANDATORY WHEN isCloud = true
-===============================================================================
-
-**CONDITION: Include this section ONLY when isCloud = {isCloud}**
-
-**IF isCloud = true - THIS SECTION IS MANDATORY. NEVER SKIP IT.**
-**IF isCloud = false - DO NOT include this section at all.**
-
-**HEADING RULE:** MUST use a keyword phrase NOT used in Steps or Complete Code headings.
-Apply Title Case strictly.
-Format: ## [Distinct Keyword/Phrase] via REST API using cURL
-Examples:
-  ## Cloud-Based Document Conversion via REST API using cURL
-  ## REST-Based PDF Processing via REST API using cURL
-  ## Remote File Transformation via REST API using cURL
-  ## API-Driven PDF Export via REST API using cURL
-
-**REQUIREMENTS:**
-- Place this section IMMEDIATELY after the Complete Code Example section
-- Provide a brief 2-3 sentence introduction
-- Include all required cURL steps in logical order:
-  1. Authenticate and Get Access Token
-  2. Upload the Source File
-  3. Execute the Conversion or Operation
-  4. Download the Output File
-
-**CODE FORMAT FOR EACH cURL STEP:**
-
-<!--[CODE_SNIPPET_START]-->
-```bash
-curl -X POST "https://api.example.com/v1/endpoint" \\
-     -H "Authorization: Bearer YOUR_ACCESS_TOKEN" \\
-     -H "Content-Type: application/json" \\
-     -d '{{"inputFile": "input.ext", "outputFormat": "target"}}'
-```
-<!--[CODE_SNIPPET_END]-->
-
-**cURL SECTION CONTENT RULES:**
-- Use placeholder values for credentials: YOUR_CLIENT_ID, YOUR_CLIENT_SECRET, YOUR_ACCESS_TOKEN
-- Use realistic but generic API endpoint URLs
-- Use the actual source and target file formats from the blog title
-- Add a brief explanatory sentence before each cURL command
-- NEVER use COMPLETE_CODE_SNIPPET tags in this section - use regular CODE_SNIPPET tags only
-- Include a closing note pointing readers to the [official API documentation](documentation_url)
+{layout_blocks['section_specs']}
 
 ===============================================================================
 
@@ -1256,7 +978,7 @@ PART 6: KEYWORD STRATEGY (SEO - CRITICAL)
 ===============================================================================
 
 ### WORD COUNT TARGET
-Introduction + Steps + Code + Outline sections + Conclusion = {settings.NUMBER_OF_BLOG_WORDS} words
+Introduction + all body sections + Conclusion = {settings.NUMBER_OF_BLOG_WORDS} words
 
 **FILE FORMAT CAPITALIZATION IN KEYWORDS AND BODY CONTENT (STRICTLY ENFORCED):**
 All file format names appearing in keywords, outline headings, steps, body content, and FAQs
@@ -1292,7 +1014,7 @@ EXCLUDING frontmatter fields. Occurrences must be distributed across specific se
 | # | Location | Requirement |
 |---|----------|-------------|
 | 1 | Introduction paragraph | Primary keyword MUST appear in the first paragraph |
-| 2 | Middle of the blog body | Primary keyword MUST appear at least once within Outline or Steps sections |
+| 2 | Middle of the blog body | Primary keyword MUST appear at least once within the middle body sections |
 | 3 | Conclusion section | Primary keyword MUST appear at least once in the Conclusion |
 | 4 | FAQs section | Primary keyword MUST appear at least once in the FAQs |
 | 5 | Optional additional occurrence | A 5th occurrence anywhere else is encouraged |
@@ -1399,11 +1121,7 @@ Before finalizing, verify:
 - Summary is EXACTLY 200-260 characters (counted manually)
 - ALL H2 headings use Title Case - every major word starts with a capital letter - VERIFIED via MANDATORY HEADING SCAN above
 - ALL H3 headings use Title Case - every major word starts with a capital letter - VERIFIED via MANDATORY HEADING SCAN above. H3 headings follow the SAME Title Case rules as H2. A lowercase H3 is identical in severity to a lowercase H2 - the output is INVALID. Example of invalid H3: ### Optimizing HTML output performance. Example of valid H3: ### Optimizing HTML Output Performance
-- Steps section is the FIRST H2 immediately after the Introduction - nothing before it
-- Complete Code Example appears immediately after Steps with NO heading between them
-- Setup/Installation section appears AFTER Complete Code Example - never before Steps
-- [CLOUD ONLY] cURL Commands section is present when isCloud = true, placed after Complete Code
-- After Complete Code Example (and cURL if cloud), remaining outline sections appear in correct category order: Setup -> Conceptual -> Configuration -> Optimization -> Best Practices
+{layout_blocks['structure_checklist']}
 - Introduction is EXACTLY ONE paragraph with a punchy hook as the first sentence
 - First sentence of introduction does NOT mention the product name or include a product link
 - Product link appears in the SECOND or THIRD sentence of the introduction
@@ -1411,12 +1129,12 @@ Before finalizing, verify:
 - STEP 0 COMPLETED: Heading plan created, Title Case verified, section order verified, all core phrases unique
 - GLOBAL HEADING DEDUPLICATION: No core phrase (3+ consecutive words) appears in more than one heading
 - Setup heading does NOT include the platform/language name (if prompt-generated)
-- OUTLINE COMPLIANCE: All outline headings used word for word exactly as provided (except skipped ones)
+- OUTLINE COVERAGE: Every non-skipped outline topic covered, with its core keyword phrase preserved in the covering section's heading or first two sentences
 - FILE FORMAT CAPITALIZATION: All file format names fully uppercase (DWT not Dwt, PDF not Pdf, STL not Stl)
 - PRODUCT NAME CASING: Aspose.CAD not Aspose.Cad, Aspose.PDF not Aspose.Pdf, GroupDocs not Groupdocs
 - THIRD-PARTY BRAND CASING: PowerPoint not Powerpoint, SharePoint not Sharepoint, GitHub not Github, JavaScript not Javascript, NuGet not Nuget, .NET not dotnet, macOS not MacOS, iOS not IOS
 - PRIMARY KEYWORD - Occurrence 1: present in the Introduction paragraph?
-- PRIMARY KEYWORD - Occurrence 2: present in the Steps or Outline sections?
+- PRIMARY KEYWORD - Occurrence 2: present in the middle body sections?
 - PRIMARY KEYWORD - Occurrence 3: present in the Conclusion section?
 - PRIMARY KEYWORD - Occurrence 4: present in at least one FAQ question or answer?
 - PRIMARY KEYWORD - Total body occurrences (excluding frontmatter): at least 3, ideally 4-5?
