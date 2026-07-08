@@ -1,9 +1,9 @@
 # Code Audit
 
 ## Summary
-- Posts scanned: 3
-- Posts with fenced code blocks: 3
-- Code blocks found: 8
+- Posts scanned: 1
+- Posts with fenced code blocks: 1
+- Code blocks found: 5
 - Code/API issues found: 0
 - SDK validation enabled: True
 
@@ -12,14 +12,14 @@ The agent validates SDK classes by indexing configured product API reference rep
 
 | Source | Product | Path | Namespaces | Symbols Indexed |
 | --- | --- | --- | --- | --- |
-| None |  |  |  |  |
+| pdf-net-api-reference |  | /home/runner/work/blog-generator-agent/blog-generator-agent/outputs/_repos/_api_references/Aspose.PDF-API-References/english/net | Aspose.PDF, Aspose.Pdf, aspose.pdf, com.aspose.pdf | 27015 |
+| pdf-java-api-reference |  | /home/runner/work/blog-generator-agent/blog-generator-agent/outputs/_repos/_api_references/Aspose.PDF-API-References/english/java | Aspose.PDF, Aspose.Pdf, aspose.pdf, com.aspose.pdf | 11369 |
+| pdf-python_net-api-reference |  | /home/runner/work/blog-generator-agent/blog-generator-agent/outputs/_repos/_api_references/Aspose.PDF-API-References/english/python-net | Aspose.PDF, Aspose.Pdf, aspose.pdf, com.aspose.pdf | 6921 |
 
 ## Per-Post Code Coverage
 | Blog Post | Title | Language | Code Blocks | Code Issues | Top Code Issues |
 | --- | --- | --- | --- | --- | --- |
-| `content/Aspose.Blog/gis/2026-07-01-complete-guide-shapefile-to-csv-in-python/index.md` | Complete Guide: Shapefile to CSV in Python | en | 4 | 0 |  |
-| `content/Aspose.Blog/gis/2026-07-01-geojson-to-topojson-conversion-in-net-sample-guide/index.md` | GEOJSON to Topojson Conversion in .NET: Sample Guide | en | 1 | 0 |  |
-| `content/Aspose.Blog/gis/2026-07-01-kml-to-gpx-conversion-tutorial-in-python/index.md` | KML to GPX Conversion Tutorial in Python | en | 3 | 0 |  |
+| `content/Aspose.Blog/pdf/2026-07-08-add-or-remove-annotations-in-python/index.md` | Add or Remove Annotations in Python | en | 5 | 0 |  |
 
 ## Class/Member Resolution Details
 Missing or deprecated SDK classes, properties, and members are listed here with the closest existing indexed-symbol suggestions when the API reference data can support them.
