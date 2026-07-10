@@ -3,8 +3,8 @@
 ## Summary
 - Posts scanned: 2
 - Posts with fenced code blocks: 2
-- Code blocks found: 12
-- Code/API issues found: 0
+- Code blocks found: 7
+- Code/API issues found: 4
 - SDK validation enabled: True
 
 ## API Reference Sources
@@ -19,18 +19,26 @@ The agent validates SDK classes by indexing configured product API reference rep
 ## Per-Post Code Coverage
 | Blog Post | Title | Language | Code Blocks | Code Issues | Top Code Issues |
 | --- | --- | --- | --- | --- | --- |
-| `content/Aspose.Blog/pdf/2026-07-08-add-or-remove-annotations-in-python/index.md` | Add or Remove Annotations in Python | en | 5 | 0 |  |
-| `content/Aspose.Blog/pdf/2026-07-08-create-pdf-booklet-in-python/index.md` | Create PDF Booklet in Python | en | 7 | 0 |  |
+| `content/Aspose.Blog/pdf/2026-07-10-extract-text-from-scanned-pdfs-in-csharp/index.md` | Extract Text from Scanned PDFs with Aspose.PDF OCR in C# | en | 2 | 4 | unresolved_api_symbol; unresolved_api_symbol; unresolved_api_class; unresolved_api_class |
+| `content/Aspose.Blog/pdf/2026-07-10-add-timestamped-digital-signatures-to-pdf-in-csharp/index.md` | Add Timestamped Digital Signatures to PDFs in C# | en | 5 | 0 |  |
 
 ## Class/Member Resolution Details
 Missing or deprecated SDK classes, properties, and members are listed here with the closest existing indexed-symbol suggestions when the API reference data can support them.
 
 | File | Code Line | Referenced Class/Member | Status | Suggested Existing Symbol/Fix |
 | --- | --- | --- | --- | --- |
-| None |  |  |  |  |
+| `content/Aspose.Blog/pdf/2026-07-10-extract-text-from-scanned-pdfs-in-csharp/index.md` | 69 | OcrTextRecognitionOptions | Missing from indexed symbols | Replace `OcrTextRecognitionOptions` with a verified existing SDK symbol if one fits. Nearest indexed symbols: `extraction_options`, `ExtractionOptions`, `getExtractionOptions`, `setExtractionOptions`, `TextExtractionOptions`. Otherwise add the symbol to sdk_va... |
+| `content/Aspose.Blog/pdf/2026-07-10-extract-text-from-scanned-pdfs-in-csharp/index.md` | 69 | OcrTextAbsorber | Missing from indexed symbols | Replace `OcrTextAbsorber` with a verified existing SDK symbol if one fits. Nearest indexed symbols: `TextAbsorber`, `TextabsorberIndex`, `FontAbsorber`, `absorber`, `TEXT`. Otherwise add the symbol to sdk_validation if it is valid. |
+| `content/Aspose.Blog/pdf/2026-07-10-extract-text-from-scanned-pdfs-in-csharp/index.md` | 71 | RecognizeTextWithOcr | Missing from API reference | Replace `RecognizeTextWithOcr` with the relevant existing API symbol if it fits. Nearest indexed symbols: `recognize`, `hocr`, `TEXT`, `with`, `TE_X`. |
+| `content/Aspose.Blog/pdf/2026-07-10-extract-text-from-scanned-pdfs-in-csharp/index.md` | 74 | RunExamples | Missing from API reference | Replace `RunExamples` with the relevant existing API symbol if it fits. Nearest indexed symbols: `Examples`, `new_XmpValue`, `NewXmpValue`, `Names`, `Rename`. |
 
 ## Code/API Issues
-No issues detected.
+| Severity | Issue | Policy | Rule | Evidence | Audience | File | Explanation | Recommended Fix | Effort | Impact |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| High | unresolved_api_symbol |  |  |  |  | `content/Aspose.Blog/pdf/2026-07-10-extract-text-from-scanned-pdfs-in-csharp/index.md` | Code block line 69 references `OcrTextRecognitionOptions`, which is not in the configured SDK symbol allowlist. | Replace `OcrTextRecognitionOptions` with a verified existing SDK symbol if one fits. Nearest indexed symbols: `extraction_options`, `ExtractionOptions`, `getExtractionOptions`, `setExtractionOptions`, `TextExtractionOptions`. Otherwise add the symbol to sdk_va... | Low | High |
+| High | unresolved_api_symbol |  |  |  |  | `content/Aspose.Blog/pdf/2026-07-10-extract-text-from-scanned-pdfs-in-csharp/index.md` | Code block line 69 references `OcrTextAbsorber`, which is not in the configured SDK symbol allowlist. | Replace `OcrTextAbsorber` with a verified existing SDK symbol if one fits. Nearest indexed symbols: `TextAbsorber`, `TextabsorberIndex`, `FontAbsorber`, `absorber`, `TEXT`. Otherwise add the symbol to sdk_validation if it is valid. | Low | High |
+| High | unresolved_api_class |  |  |  |  | `content/Aspose.Blog/pdf/2026-07-10-extract-text-from-scanned-pdfs-in-csharp/index.md` | Code line 71 references `RecognizeTextWithOcr` as an SDK class/member, but it was not found in the indexed API reference symbols. | Replace `RecognizeTextWithOcr` with the relevant existing API symbol if it fits. Nearest indexed symbols: `recognize`, `hocr`, `TEXT`, `with`, `TE_X`. | Low | High |
+| High | unresolved_api_class |  |  |  |  | `content/Aspose.Blog/pdf/2026-07-10-extract-text-from-scanned-pdfs-in-csharp/index.md` | Code line 74 references `RunExamples` as an SDK class/member, but it was not found in the indexed API reference symbols. | Replace `RunExamples` with the relevant existing API symbol if it fits. Nearest indexed symbols: `Examples`, `new_XmpValue`, `NewXmpValue`, `Names`, `Rename`. | Low | High |
 
 ## Checks Applied
 - Validates Aspose import/module names against configured SDK namespaces.

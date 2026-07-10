@@ -1,73 +1,88 @@
 [
   {
-    "path": "/home/runner/work/blog-generator-agent/blog-generator-agent/outputs/_repos/aspose-blog/content/Aspose.Blog/pdf/2026-07-08-add-or-remove-annotations-in-python/index.md",
-    "relative_path": "content/Aspose.Blog/pdf/2026-07-08-add-or-remove-annotations-in-python/index.md",
-    "url_candidate": "/pdf/add-or-remove-annotations-in-python/",
+    "path": "/home/runner/work/blog-generator-agent/blog-generator-agent/outputs/_repos/aspose-blog/content/Aspose.Blog/pdf/2026-07-10-add-timestamped-digital-signatures-to-pdf-in-csharp/index.md",
+    "relative_path": "content/Aspose.Blog/pdf/2026-07-10-add-timestamped-digital-signatures-to-pdf-in-csharp/index.md",
+    "url_candidate": "/pdf/add-timestamped-digital-signatures-to-pdf-in-csharp/",
     "language": "en",
     "front_matter_format": "yaml",
     "front_matter": {
-      "title": "Add or Remove Annotations in Python",
-      "seoTitle": "Add or Remove Annotations in Python",
-      "description": "Add or remove annotations in PDF with Python using Aspose.PDF for Python via .NET. Follow this guide for setup and code samples to manage PDF annotations.",
-      "date": "Wed, 08 Jul 2026 06:47:22 +0000",
-      "lastmod": "Wed, 08 Jul 2026 06:47:22 +0000",
+      "title": "Add Timestamped Digital Signatures to PDFs in C#",
+      "seoTitle": "Add Timestamped Digital Signatures to PDFs in C#",
+      "description": "Learn to add timestamped digital signatures to PDFs in C# with Aspose.PDF for .NET, covering TSA integration, certificate handling, and signature appearance.",
+      "date": "Fri, 10 Jul 2026 04:54:59 +0000",
       "draft": false,
-      "url": "/pdf/add-or-remove-annotations-in-python/",
+      "url": "/pdf/add-timestamped-digital-signatures-to-pdf-in-csharp/",
       "author": "Muzammil Khan",
-      "summary": "Discover how Python developers can add and remove PDF annotations with Aspose.PDF for Python via .NET. The guide covers SDK setup, handling various annotation types, performance for large PDFs, and best‑practice tips for annotation management.",
+      "summary": "In this tutorial you’ll see how to use Aspose.PDF for .NET to digitally sign a PDF with a certificate and attach a timestamp from a TSA server. The article walks through installation, code walkthrough, and saving the signed document.",
       "tags": [
-        "python pdf annotations",
         "aspose pdf",
-        "pdf annotation management"
+        "pdf digital signature",
+        "timestamp authority",
+        "tsa server",
+        "pdf signing dotnet",
+        "timestamped signature",
+        "aspose pdf timestamp"
       ],
       "categories": [
         "Aspose.PDF Product Family"
       ],
       "showtoc": true,
       "cover": {
-        "image": "images/add-or-remove-annotations-in-python.jpg",
-        "alt": "Add or Remove Annotations in Python",
-        "caption": "Add or Remove Annotations in Python"
+        "image": "images/add-timestamped-digital-signatures-to-pdf-in-csharp.jpg",
+        "alt": "Add Timestamped Digital Signatures to PDFs with Aspose.PDF for .NET",
+        "caption": "Add Timestamped Digital Signatures to PDFs with Aspose.PDF for .NET"
       },
       "steps": [
-        "Step 1: Install the Aspose.PDF SDK for Python.",
-        "Step 2: Load the target PDF document.",
-        "Step 3: Add the required annotation objects.",
-        "Step 4: Save the modified PDF.",
-        "Step 5: Remove unwanted annotations and re‑save."
+        "Install Aspose.PDF for .NET via NuGet.",
+        "Load the PDF document you want to sign.",
+        "Create a PKCS#7 signature with your .pfx file and configure TimestampSettings.",
+        "Apply the signature to a page using PdfFileSignature.Sign.",
+        "Save the signed PDF to a file."
       ],
       "faqs": [
         {
-          "q": "How do I add or remove annotations in PDF using Python?",
-          "a": "Use the Aspose.PDF for Python via .NET SDK to create, modify, or delete annotation objects. The API lets you work with text, link, and shape annotations directly in your code. See the [Aspose.PDF for Python via .NET](https://products.aspose.com/pdf/python-net/) product page for details."
+          "q": "What is a Timestamp Authority (TSA) and why do I need it?",
+          "a": "A TSA provides a trusted time mark that proves a signature existed at a specific moment, which is essential for long‑term validation when the signing certificate expires or is revoked."
         },
         {
-          "q": "Can I edit PDF annotations in Python without rewriting the whole document?",
-          "a": "Yes. The SDK updates only the annotation streams, leaving the rest of the PDF untouched. This makes edit PDF annotations in Python fast and memory‑efficient. Refer to the [documentation](https://docs.aspose.com/pdf/python-net/) for the specific methods."
+          "q": "Can I use any .pfx certificate for the signature?",
+          "a": "Yes, any valid PKCS#12 (.pfx) file containing a private key and corresponding certificate can be used, as long as the certificate is trusted by the parties validating the PDF."
         },
         {
-          "q": "Is it possible to extract PDF annotations in Python for reporting purposes?",
-          "a": "Absolutely. You can iterate over the PdfAnnotation collection and read properties such as Title, Contents, and Rect. The extracted data can then be exported to CSV, JSON, or a database. Check the [API reference](https://reference.aspose.com/pdf/python-net/) for the Annotation class."
+          "q": "Will the timestamp affect the visual appearance of the signature?",
+          "a": "No. The timestamp is embedded in the cryptographic data of the signature, while the visual appearance (the rectangle you define) remains unchanged."
         },
         {
-          "q": "What licensing is required for production use?",
-          "a": "A temporary license is available at the [temporary license page](https://purchase.aspose.com/temporary-license/). For full production use, review the pricing details on the [pricing page](https://purchase.aspose.com/pricing/pdf/family/)."
+          "q": "How can I verify that a timestamp was successfully applied?",
+          "a": "Open the signed PDF in a PDF viewer that supports signature validation (e.g., Adobe Acrobat). The signature properties will display the timestamp source and time."
+        },
+        {
+          "q": "Is it possible to sign multiple pages with the same timestamped signature?",
+          "a": "Yes. You can call PdfFileSignature.Sign for each page you wish to sign, reusing the same PKCS#7 object with its TimestampSettings."
+        },
+        {
+          "q": "Do I need a paid license to use TimestampSettings?",
+          "a": "TimestampSettings is available in the full feature set of Aspose.PDF. You can evaluate it with a temporary license obtained from the Aspose website."
         }
       ]
     },
-    "body": "\n\nManipulating [PDF](https://docs.fileformat.com/pdf) annotations is a frequent requirement when building document‑centric applications, whether you need to highlight sections, add comments, or clean up old notes. [Aspose.PDF for Python via .NET](https://products.aspose.com/pdf/python-net/) provides a robust SDK that makes adding, editing, and removing PDF annotations straightforward for Python developers. In this guide you will learn how to set up the SDK, work with different annotation types, handle large PDFs efficiently, and apply best‑practice techniques for reliable annotation management.\n\n## Steps to Add or Remove Annotations in PDF Using Python\n1. **Install the SDK**: Run `pip install aspose-pdf` to add the library to your environment.  \n2. **Load the PDF**: Create a `Document` instance pointing to the source file.  \n3. **Add an Annotation**: Use the `PdfAnnotation` classes (e.g., `FreeTextAnnotation`, `LinkAnnotation`) to place new notes.  \n4. **Save the Changes**: Call `save()` to write the updated PDF to disk.  \n5. **Remove Unwanted Annotations**: Locate annotations by their `id` or `type` and delete them before saving again.  \n\nFor detailed class information, see the [Document class reference](https://reference.aspose.com/pdf/python-net/Document).\n\n## Add Annotations in PDF Using Python with Aspose.PDF - Complete Code Example\nThe following example demonstrates how to add a text annotation, save the document, then remove the same annotation and save the result again.\n\n<!--[COMPLETE_CODE_SNIPPET_START]-->\n```python\nimport aspose.pdf as ap\n\n# Load an existing PDF\npdf_path = \"sample.pdf\"\ndoc = ap.Document(pdf_path)\n\n# -------------------------------------------------\n# Add a Text Annotation (Sticky Note)\n# -------------------------------------------------\nfree_text_annotation = ap.annotations.FreeTextAnnotation(\n    doc.pages[1],\n    ap.Rectangle(299, 713, 308, 720, True),\n    ap.annotations.DefaultAppearance(),\n)\nfree_text_annotation.title = \"Aspose User\"\nfree_text_annotation.color = ap.Color.light_green\n\ndoc.pages[1].annotations.append(free_text_annotation)\n\n# Save the PDF with the new annotation\ndoc.save(\"with_annotation.pdf\")\n\n```\n<!--[COMPLETE_CODE_SNIPPET_END]-->\n\n## Remove Annotations from PDF Using Python with Aspose.PDF - Complete Code Example\nThe following example demonstrates how to load a PDF document, remove a text annotation, and then save the document again.\n\n<!--[COMPLETE_CODE_SNIPPET_START]-->\n```python\n# -------------------------------------------------\n# Remove the previously added annotation\n# -------------------------------------------------\n# Reload the document to demonstrate removal\ndoc2 = ap.Document(\"with_annotation.pdf\")\n# Assume we know the annotation's title or we iterate to find it\nfor annot in list(doc2.pages[1].annotations):\n    if isinstance(annot, ap.annotations.TextAnnotation) and annot.title == \"Reviewer\":\n        doc2.pages[1].annotations.delete(annot)\n\n# Save the cleaned PDF\ndoc2.save(\"without_annotation.pdf\")\n```\n<!--[COMPLETE_CODE_SNIPPET_END]-->\n\n> **Note:** These code examples demonstrate the core functionality. Before using them in your project, make sure to update the file paths (`sample.pdf`, `with_annotation.pdf`, `without_annotation.pdf`) to match your actual file locations, verify that all required dependencies are properly installed, and test thoroughly in your development environment. If you encounter any issues, please refer to the [official documentation](https://docs.aspose.com/pdf/python-net/) or reach out to the [support team](https://forum.aspose.com/c/pdf/) for assistance.\n\n## Installation and Setup in Python\n```bash\npip install aspose-pdf\n```\n\nAfter installing, import the library in your script:\n\n```python\nimport aspose.pdf as ap\n```\n\nIf you are using the SDK in a production environment, apply a license to remove evaluation watermarks:\n\n```python\nlicense = ap.License()\nlicense.set_license(\"Aspose.PDF.lic\")\n```\n\nDownload the latest package from the [official download page](https://releases.aspose.com/pdf/python-net/) and review the [temporary license information](https://purchase.aspose.com/temporary-license/) before deployment.\n\n## Why using Aspose.PDF for Adding or Removing Annotations in PDF \nAdding or removing annotations does not require re‑rendering the entire document; the SDK updates only the annotation streams, which keeps the operation fast even for large files. The process consists of loading the PDF, accessing the `annotations` collection of a page, performing the desired CRUD operation, and saving the result.\n\n### Aspose.PDF Features That Matter for This Task\n- **Annotation Classes** - `FreeTextAnnotation`, `LinkAnnotation`, `SquareAnnotation`, `CircleAnnotation`, etc.  \n- **Selective Saving** - Save only modified pages to improve performance.  \n- **Batch Processing** - Loop through pages to add or delete annotations in bulk.  \n- **Metadata Access** - Retrieve author, creation date, and custom data from each annotation.  \n\nThese features enable a smooth **add or remove Annotations in PDF** workflow in Python.\n\n## Best Practices for PDF Annotation Management\n- **Assign unique IDs** to annotations for easy lookup and removal.  \n- **Group related annotations** on the same page to minimize page‑level updates.  \n- **Validate coordinates** to ensure annotations appear within page bounds.  \n- **Log changes** when modifying annotations in production systems for audit trails.  \n\nFollowing these guidelines will make your annotation workflow reliable and maintainable.\n\n## Conclusion\nAdding or removing annotations in PDF files using Python is now a simple, repeatable process thanks to **Aspose.PDF for Python via .NET**. By installing the SDK, leveraging the rich annotation classes, and applying performance‑aware techniques, you can build robust PDF annotation features in any application. Remember to obtain a proper license from the [pricing page](https://purchase.aspose.com/pricing/pdf/family/) and, if needed, start with a temporary license from the [temporary license page](https://purchase.aspose.com/temporary-license/). Happy coding!\n\n## FAQs\n**How can I programmatically edit PDF annotations in Python?**  \nUse the SDK's annotation objects (e.g., `FreeTextAnnotation`, `LinkAnnotation`) to modify properties such as `contents`, `rect`, or `color`. After updating, call `save()` to persist the changes. See the [API reference](https://reference.aspose.com/pdf/python-net/) for full method lists.\n\n**Is it possible to extract PDF annotations in Python for analysis?**  \nYes. Iterate over `page.annotations` and read each annotation's metadata. You can export the collected data to [CSV](https://docs.fileformat.com/spreadsheet/csv/), [JSON](https://docs.fileformat.com/web/json/), or a database for reporting. The SDK's `Annotation` class provides getters for all relevant fields.\n\n**What is the recommended way to remove multiple annotations at once?**  \nCollect the target annotations in a list and call `page.annotations.delete(annotation)` inside a loop. Using `save_incremental` after the loop reduces file‑write overhead.\n\n**Do I need a license to use the SDK in development?**  \nA temporary license is available for evaluation. For production deployments, purchase a license from the [pricing page](https://purchase.aspose.com/pricing/pdf/family/) to unlock full functionality and remove evaluation watermarks.\n\n## Read More\n- [Remove Images from PDF using Python](https://blog.aspose.com/pdf/remove-images-from-pdf-using-python/)\n- [How to Add Pages to PDF Documents in Python](https://blog.aspose.com/pdf/add-pages-to-pdf-in-python/)\n- [Delete Pages from PDF in Python](https://blog.aspose.com/pdf/delete-pages-from-pdf-in-python/)",
-    "body_line_offset": 33,
-    "title": "Add or Remove Annotations in Python",
-    "description": "Add or remove annotations in PDF with Python using Aspose.PDF for Python via .NET. Follow this guide for setup and code samples to manage PDF annotations.",
-    "date": "Wed, 08 Jul 2026 06:47:22 +0000",
-    "lastmod": "Wed, 08 Jul 2026 06:47:22 +0000",
+    "body": "\n## Introduction\n\nAdding a **timestamped digital signature** to a PDF not only proves authorship but also guarantees that the signature existed at a specific point in time. This is crucial for legal, financial, and compliance scenarios where long‑term validity of a document must be demonstrated. In this tutorial we will show you how to achieve timestamped signing in C# using **Aspose.PDF for .NET**. The focus keyword **timestamped digital signatures** appears early to signal the article’s relevance to search engines and developers alike.\n\n## Why Timestamped Digital Signatures Matter\n\nA regular digital signature binds a document to a certificate, but the certificate’s validity may change—certificates expire, are revoked, or the signing authority may be compromised. A Timestamp Authority (TSA) injects a trusted time‑stamp into the signature, creating an immutable proof that the document was signed before any potential certificate issue. This protects against future disputes and satisfies regulations such as eIDAS and the U.S. ESIGN Act. By embedding a TSA‐provided timestamp, you future‑proof your PDFs without having to re‑sign them when certificates change.\n\n## Why Using Aspose.PDF for .NET\n\nAspose.PDF for .NET is a powerful library that enables creation, manipulation, and signing of PDF files without requiring Adobe Acrobat. To get started, install the library via NuGet:\n\n```\nInstall-Package Aspose.PDF\n```\n\nOnce installed, you can reference the API documentation on the **[Aspose.PDF product page](https://products.aspose.com/pdf/net/)** for detailed class descriptions. The key classes we will use are:\n\n- `Aspose.Pdf.Document` – represents the PDF document.\n- `Aspose.Pdf.Facades.PdfFileSignature` – provides signing capabilities.\n- `Aspose.Pdf.Forms.PKCS7` – encapsulates a certificate‑based signature.\n- `Aspose.Pdf.TimestampSettings` – holds the TSA URL and credentials.\n- `System.Drawing.Rectangle` – defines the visual area of the signature on the page.\n\n## Step‑by‑Step Tutorial: Add a Timestamped Digital Signature\n\n### 1. Prepare the Environment and Load the PDF\n\n1. Create a new C# console or Windows project.\n2. Ensure the NuGet package is referenced.\n3. Place the PDF you want to sign in a known folder (e.g., `Data` directory).\n4. Store your signing certificate (`.pfx`) and password securely.\n\nThe following example demonstrates how to add a timestamped digital signature to a PDF using C# and Aspose.PDF.\n\n```csharp\n// Load a PDF document from the file system\nstring dataDir = \"./Data/\"; // Adjust the path to your data folder\nstring pdfPath = Path.Combine(dataDir, \"SimpleResume.pdf\");\n\nusing (var document = new Aspose.Pdf.Document(pdfPath))\n{\n    // PDF is now loaded and ready for signing\n    // Further steps will be performed inside this using block\n}\n```\n\n**Explanation**:\n- `dataDir` points to the folder containing input files.\n- `Aspose.Pdf.Document` opens the PDF in a disposable context, ensuring resources are released.\n\n### 2. Create the PKCS#7 Signature Object and Configure the Timestamp\n\n1. Load your `.pfx` file and password.\n2. Instantiate `PKCS7` with those credentials.\n3. Create a `TimestampSettings` object pointing to a publicly reachable TSA endpoint (e.g., https://freetsa.org/tsr). You can leave the second argument empty if no authentication is required.\n4. Assign the `TimestampSettings` to the `PKCS7` instance.\n\nThe following example demonstrates how to configure a PKCS#7 signature with a TSA server using C#.\n\n```csharp\nstring pfxPath = Path.Combine(dataDir, \"myCertificate.pfx\");\nstring pfxPassword = \"myPassword\"; // Keep this secure!\n\n// Create the PKCS#7 signature object using the certificate\nvar pkcs = new Aspose.Pdf.Forms.PKCS7(pfxPath, pfxPassword);\n\n// Configure timestamp settings – replace URL with your TSA if needed\nvar timestampSettings = new Aspose.Pdf.TimestampSettings(\"https://freetsa.org/tsr\", string.Empty);\npkcs.TimestampSettings = timestampSettings;\n```\n\n**Explanation**:\n- `PKCS7` encapsulates the certificate and private key required for a cryptographic signature.\n- `TimestampSettings` tells Aspose.PDF to request a timestamp from the specified TSA URL during the signing process.\n- By assigning the `TimestampSettings` to the `PKCS7` instance, every signature created with this object will include the TSA‑provided time.\n\n### 3. Define the Visual Appearance of the Signature\n\nPDF signatures can have a visible representation (a signature field) or be invisible. Here we will create a visible rectangle on page 1:\n\nThe following example demonstrates how to define a signature rectangle on the first page.\n\n```csharp\n// Define a rectangle where the signature will appear (in points)\nvar rect = new System.Drawing.Rectangle(100, 100, 200, 100); // x, y, width, height\n```\n\n**Explanation**:\n- The rectangle's coordinates use the PDF point system (1 point = 1/72 inch).\n- Adjust `x` and `y` to position the signature field where you want it on the page.\n\n### 4. Apply the Signature to the Document\n\n1. Instantiate `PdfFileSignature` with the loaded `Document`.\n2. Call `Sign` with the page number, reason, contact, location, a boolean indicating if the signature should be visible, the rectangle, and the `PKCS7` object.\n3. Finally, save the signed document using `PdfFileSignature.Save`.\n\nThe following example demonstrates how to apply the timestamped signature and save the PDF using C#.\n\n```csharp\nusing (var signature = new Aspose.Pdf.Facades.PdfFileSignature(document))\n{\n    // Sign page 1 with the configured PKCS7 (which includes timestamp settings)\n    signature.Sign(\n        pageNumber: 1,\n        reason: \"Approved by HR\",\n        contact: \"hr@example.com\",\n        location: \"New York, USA\",\n        visible: true,\n        rect: rect,\n        pkcs: pkcs);\n\n    // Save the signed PDF to the output path\n    string outputPath = Path.Combine(dataDir, \"DigitallySignWithTimeStamp_out.pdf\");\n    signature.Save(outputPath);\n}\n```\n\n**Explanation**:\n- `PdfFileSignature.Sign` creates a certificate‑based signature on the chosen page.\n- `reason`, `contact`, and `location` are optional metadata fields that appear in the signature properties.\n- Setting `visible` to `true` makes the signature appear in the rectangle we defined earlier.\n- Because `pkcs.TimestampSettings` was set, Aspose.PDF contacts the TSA (`https://freetsa.org/tsr`) during signing and embeds the returned timestamp token in the signature.\n- The signed file is written to `DigitallySignWithTimeStamp_out.pdf`.\n\n### 5. Verify the Signature and Timestamp (optional)\n\nAfter signing, you can open the resulting PDF in Adobe Acrobat Reader or any PDF viewer that supports signature validation. Navigate to the signature panel; you should see the timestamp source (e.g., \"freetsa.org\") and the exact time the signature was applied. This step confirms that the TSA interaction succeeded and that the signature is both cryptographically sound and time‑stamped.\n\n## Get a Free License\n\nAspose offers a temporary evaluation license that removes the evaluation watermark and lets you explore all features, including timestamped signing. Grab one instantly at the **[temporary license page](https://purchase.aspose.com/temporary-license/)**.\n\n## Free Additional Resources\n\n- **Documentation** – Comprehensive guides and API usage examples are available at the **[Aspose.PDF for .NET docs](https://docs.aspose.com/pdf/net/)**.\n- **API Reference** – Detailed method signatures and class hierarchies can be explored at the **[API reference](https://reference.aspose.com/pdf/net/)**.\n- **Free Online Apps** – Try out PDF signing without code using the free web apps at **[Aspose Apps](https://products.aspose.app/pdf/family)**.\n\n## Conclusion\n\nTimestamped digital signatures provide a reliable proof‑of‑signing time that survives certificate expiration and revocation. Using Aspose.PDF for .NET, you can quickly integrate certificate‑based signing with TSA support, define a visual signature area, and produce a standards‑compliant PDF ready for long‑term archival. The step‑by‑step guide above walks you from installation through code execution, empowering you to secure PDF documents programmatically.\n\n## FAQs\n\n1. **What is a Timestamp Authority (TSA) and why do I need it?**\n   A TSA provides a trusted time mark that proves a signature existed at a specific moment, which is essential for long‑term validation when the signing certificate expires or is revoked.\n\n2. **Can I use any .pfx certificate for the signature?**\n   Yes, any valid PKCS#12 (.pfx) file containing a private key and corresponding certificate can be used, as long as the certificate is trusted by the parties validating the PDF.\n\n3. **Will the timestamp affect the visual appearance of the signature?**\n   No. The timestamp is embedded in the cryptographic data of the signature, while the visual appearance (the rectangle you define) remains unchanged.\n\n4. **How can I verify that a timestamp was successfully applied?**\n   Open the signed PDF in a PDF viewer that supports signature validation (e.g., Adobe Acrobat). The signature properties will display the timestamp source and time.\n\n5. **Is it possible to sign multiple pages with the same timestamped signature?**\n   Yes. You can call `PdfFileSignature.Sign` for each page you wish to sign, reusing the same PKCS#7 object with its TimestampSettings.\n\n6. **Do I need a paid license to use TimestampSettings?**\n   TimestampSettings is available in the full feature set of Aspose.PDF. You can evaluate it with a temporary license obtained from the Aspose website.\n\n\n## Read More\n- [Shrink PDF Files](https://blog.aspose.com/pdf/shrink-pdf-size/)\n- [Extract Text from Scanned PDFs with Aspose.PDF OCR](https://blog.aspose.com/pdf/extract-text-from-scanned-pdfs-in-csharp/)\n- [Convert PDF to Base64 in C#](https://blog.aspose.com/pdf/convert-pdf-to-base64-in-csharp/)",
+    "body_line_offset": 48,
+    "title": "Add Timestamped Digital Signatures to PDFs in C#",
+    "description": "Learn to add timestamped digital signatures to PDFs in C# with Aspose.PDF for .NET, covering TSA integration, certificate handling, and signature appearance.",
+    "date": "Fri, 10 Jul 2026 04:54:59 +0000",
+    "lastmod": "",
     "draft": false,
     "slug": "",
     "aliases": [],
     "tags": [
-      "python pdf annotations",
       "aspose pdf",
-      "pdf annotation management"
+      "pdf digital signature",
+      "timestamp authority",
+      "tsa server",
+      "pdf signing dotnet",
+      "timestamped signature",
+      "aspose pdf timestamp"
     ],
     "categories": [
       "Aspose.PDF Product Family"
@@ -75,234 +90,210 @@
     "keywords": [],
     "canonical_url": "",
     "translation_key": "",
-    "word_count": 892,
-    "character_count": 6429,
+    "word_count": 1237,
+    "character_count": 8326,
     "headings": [
       {
         "level": 2,
-        "text": "Steps to Add or Remove Annotations in PDF Using Python",
-        "line": 38
+        "text": "Introduction",
+        "line": 50
       },
       {
         "level": 2,
-        "text": "Add Annotations in PDF Using Python with Aspose.PDF - Complete Code Example",
-        "line": 47
+        "text": "Why Timestamped Digital Signatures Matter",
+        "line": 54
       },
       {
         "level": 2,
-        "text": "Remove Annotations from PDF Using Python with Aspose.PDF - Complete Code Example",
-        "line": 77
+        "text": "Why Using Aspose.PDF for .NET",
+        "line": 58
       },
       {
         "level": 2,
-        "text": "Installation and Setup in Python",
-        "line": 99
-      },
-      {
-        "level": 2,
-        "text": "Why using Aspose.PDF for Adding or Removing Annotations in PDF",
-        "line": 119
+        "text": "Step‑by‑Step Tutorial: Add a Timestamped Digital Signature",
+        "line": 74
       },
       {
         "level": 3,
-        "text": "Aspose.PDF Features That Matter for This Task",
-        "line": 122
+        "text": "1. Prepare the Environment and Load the PDF",
+        "line": 76
+      },
+      {
+        "level": 3,
+        "text": "2. Create the PKCS#7 Signature Object and Configure the Timestamp",
+        "line": 101
+      },
+      {
+        "level": 3,
+        "text": "3. Define the Visual Appearance of the Signature",
+        "line": 127
+      },
+      {
+        "level": 3,
+        "text": "4. Apply the Signature to the Document",
+        "line": 142
+      },
+      {
+        "level": 3,
+        "text": "5. Verify the Signature and Timestamp (optional)",
+        "line": 176
       },
       {
         "level": 2,
-        "text": "Best Practices for PDF Annotation Management",
-        "line": 130
+        "text": "Get a Free License",
+        "line": 180
+      },
+      {
+        "level": 2,
+        "text": "Free Additional Resources",
+        "line": 184
       },
       {
         "level": 2,
         "text": "Conclusion",
-        "line": 138
+        "line": 190
       },
       {
         "level": 2,
         "text": "FAQs",
-        "line": 141
+        "line": 194
       },
       {
         "level": 2,
         "text": "Read More",
-        "line": 154
+        "line": 215
       }
     ],
     "paragraphs": [
-      "Manipulating [PDF](https://docs.fileformat.com/pdf) annotations is a frequent requirement when building document‑centric applications, whether you need to highlight sections, add comments, or clean up old notes. [Aspose.PDF for Python via .NET](https://products.aspose.com/pdf/python-net/) provides a robust SDK that makes adding, editing, and removing PDF annotations straightforward for Python developers. In this guide you will learn how to set up the SDK, work with different annotation types, handle large PDFs efficiently, and apply best‑practice techniques for reliable annotation management.",
-      "For detailed class information, see the [Document class reference](https://reference.aspose.com/pdf/python-net/Document).",
-      "<!--[COMPLETE_CODE_SNIPPET_START]-->",
-      "<!--[COMPLETE_CODE_SNIPPET_END]-->",
-      "<!--[COMPLETE_CODE_SNIPPET_START]-->",
-      "<!--[COMPLETE_CODE_SNIPPET_END]-->",
-      "> **Note:** These code examples demonstrate the core functionality. Before using them in your project, make sure to update the file paths (`sample.pdf`, `with_annotation.pdf`, `without_annotation.pdf`) to match your actual file locations, verify that all required dependencies are properly installed, and test thoroughly in your development environment. If you encounter any issues, please refer to the [official documentation](https://docs.aspose.com/pdf/python-net/) or reach out to the [support team](https://forum.aspose.com/c/pdf/) for assistance.",
-      "After installing, import the library in your script:",
-      "If you are using the SDK in a production environment, apply a license to remove evaluation watermarks:",
-      "Download the latest package from the [official download page](https://releases.aspose.com/pdf/python-net/) and review the [temporary license information](https://purchase.aspose.com/temporary-license/) before deployment.",
-      "These features enable a smooth **add or remove Annotations in PDF** workflow in Python.",
-      "Following these guidelines will make your annotation workflow reliable and maintainable.",
-      "**Is it possible to extract PDF annotations in Python for analysis?**  \nYes. Iterate over `page.annotations` and read each annotation's metadata. You can export the collected data to [CSV](https://docs.fileformat.com/spreadsheet/csv/), [JSON](https://docs.fileformat.com/web/json/), or a database for reporting. The SDK's `Annotation` class provides getters for all relevant fields.",
-      "**What is the recommended way to remove multiple annotations at once?**  \nCollect the target annotations in a list and call `page.annotations.delete(annotation)` inside a loop. Using `save_incremental` after the loop reduces file‑write overhead.",
-      "**Do I need a license to use the SDK in development?**  \nA temporary license is available for evaluation. For production deployments, purchase a license from the [pricing page](https://purchase.aspose.com/pricing/pdf/family/) to unlock full functionality and remove evaluation watermarks."
+      "Adding a **timestamped digital signature** to a PDF not only proves authorship but also guarantees that the signature existed at a specific point in time. This is crucial for legal, financial, and compliance scenarios where long‑term validity of a document must be demonstrated. In this tutorial we will show you how to achieve timestamped signing in C# using **Aspose.PDF for .NET**. The focus keyword **timestamped digital signatures** appears early to signal the article’s relevance to search engines and developers alike.",
+      "A regular digital signature binds a document to a certificate, but the certificate’s validity may change—certificates expire, are revoked, or the signing authority may be compromised. A Timestamp Authority (TSA) injects a trusted time‑stamp into the signature, creating an immutable proof that the document was signed before any potential certificate issue. This protects against future disputes and satisfies regulations such as eIDAS and the U.S. ESIGN Act. By embedding a TSA‐provided timestamp, you future‑proof your PDFs without having to re‑sign them when certificates change.",
+      "Aspose.PDF for .NET is a powerful library that enables creation, manipulation, and signing of PDF files without requiring Adobe Acrobat. To get started, install the library via NuGet:",
+      "Once installed, you can reference the API documentation on the **[Aspose.PDF product page](https://products.aspose.com/pdf/net/)** for detailed class descriptions. The key classes we will use are:",
+      "- `Aspose.Pdf.Document` – represents the PDF document.\n- `Aspose.Pdf.Facades.PdfFileSignature` – provides signing capabilities.\n- `Aspose.Pdf.Forms.PKCS7` – encapsulates a certificate‑based signature.\n- `Aspose.Pdf.TimestampSettings` – holds the TSA URL and credentials.\n- `System.Drawing.Rectangle` – defines the visual area of the signature on the page.",
+      "1. Create a new C# console or Windows project.\n2. Ensure the NuGet package is referenced.\n3. Place the PDF you want to sign in a known folder (e.g., `Data` directory).\n4. Store your signing certificate (`.pfx`) and password securely.",
+      "The following example demonstrates how to add a timestamped digital signature to a PDF using C# and Aspose.PDF.",
+      "**Explanation**:\n- `dataDir` points to the folder containing input files.\n- `Aspose.Pdf.Document` opens the PDF in a disposable context, ensuring resources are released.",
+      "1. Load your `.pfx` file and password.\n2. Instantiate `PKCS7` with those credentials.\n3. Create a `TimestampSettings` object pointing to a publicly reachable TSA endpoint (e.g., https://freetsa.org/tsr). You can leave the second argument empty if no authentication is required.\n4. Assign the `TimestampSettings` to the `PKCS7` instance.",
+      "The following example demonstrates how to configure a PKCS#7 signature with a TSA server using C#.",
+      "**Explanation**:\n- `PKCS7` encapsulates the certificate and private key required for a cryptographic signature.\n- `TimestampSettings` tells Aspose.PDF to request a timestamp from the specified TSA URL during the signing process.\n- By assigning the `TimestampSettings` to the `PKCS7` instance, every signature created with this object will include the TSA‑provided time.",
+      "PDF signatures can have a visible representation (a signature field) or be invisible. Here we will create a visible rectangle on page 1:",
+      "The following example demonstrates how to define a signature rectangle on the first page.",
+      "**Explanation**:\n- The rectangle's coordinates use the PDF point system (1 point = 1/72 inch).\n- Adjust `x` and `y` to position the signature field where you want it on the page.",
+      "1. Instantiate `PdfFileSignature` with the loaded `Document`.\n2. Call `Sign` with the page number, reason, contact, location, a boolean indicating if the signature should be visible, the rectangle, and the `PKCS7` object.\n3. Finally, save the signed document using `PdfFileSignature.Save`.",
+      "The following example demonstrates how to apply the timestamped signature and save the PDF using C#.",
+      "**Explanation**:\n- `PdfFileSignature.Sign` creates a certificate‑based signature on the chosen page.\n- `reason`, `contact`, and `location` are optional metadata fields that appear in the signature properties.\n- Setting `visible` to `true` makes the signature appear in the rectangle we defined earlier.\n- Because `pkcs.TimestampSettings` was set, Aspose.PDF contacts the TSA (`https://freetsa.org/tsr`) during signing and embeds the returned timestamp token in the signature.\n- The signed file is written to `DigitallySignWithTimeStamp_out.pdf`.",
+      "After signing, you can open the resulting PDF in Adobe Acrobat Reader or any PDF viewer that supports signature validation. Navigate to the signature panel; you should see the timestamp source (e.g., \"freetsa.org\") and the exact time the signature was applied. This step confirms that the TSA interaction succeeded and that the signature is both cryptographically sound and time‑stamped.",
+      "Aspose offers a temporary evaluation license that removes the evaluation watermark and lets you explore all features, including timestamped signing. Grab one instantly at the **[temporary license page](https://purchase.aspose.com/temporary-license/)**.",
+      "- **Documentation** – Comprehensive guides and API usage examples are available at the **[Aspose.PDF for .NET docs](https://docs.aspose.com/pdf/net/)**.\n- **API Reference** – Detailed method signatures and class hierarchies can be explored at the **[API reference](https://reference.aspose.com/pdf/net/)**.\n- **Free Online Apps** – Try out PDF signing without code using the free web apps at **[Aspose Apps](https://products.aspose.app/pdf/family)**.",
+      "Timestamped digital signatures provide a reliable proof‑of‑signing time that survives certificate expiration and revocation. Using Aspose.PDF for .NET, you can quickly integrate certificate‑based signing with TSA support, define a visual signature area, and produce a standards‑compliant PDF ready for long‑term archival. The step‑by‑step guide above walks you from installation through code execution, empowering you to secure PDF documents programmatically.",
+      "1. **What is a Timestamp Authority (TSA) and why do I need it?**\n   A TSA provides a trusted time mark that proves a signature existed at a specific moment, which is essential for long‑term validation when the signing certificate expires or is revoked.",
+      "2. **Can I use any .pfx certificate for the signature?**\n   Yes, any valid PKCS#12 (.pfx) file containing a private key and corresponding certificate can be used, as long as the certificate is trusted by the parties validating the PDF.",
+      "3. **Will the timestamp affect the visual appearance of the signature?**\n   No. The timestamp is embedded in the cryptographic data of the signature, while the visual appearance (the rectangle you define) remains unchanged.",
+      "4. **How can I verify that a timestamp was successfully applied?**\n   Open the signed PDF in a PDF viewer that supports signature validation (e.g., Adobe Acrobat). The signature properties will display the timestamp source and time.",
+      "5. **Is it possible to sign multiple pages with the same timestamped signature?**\n   Yes. You can call `PdfFileSignature.Sign` for each page you wish to sign, reusing the same PKCS#7 object with its TimestampSettings.",
+      "6. **Do I need a paid license to use TimestampSettings?**\n   TimestampSettings is available in the full feature set of Aspose.PDF. You can evaluate it with a temporary license obtained from the Aspose website."
     ],
     "images": [
       {
-        "alt": "Add or Remove Annotations in Python",
-        "target": "images/add-or-remove-annotations-in-python.jpg",
+        "alt": "Add Timestamped Digital Signatures to PDFs with Aspose.PDF for .NET",
+        "target": "images/add-timestamped-digital-signatures-to-pdf-in-csharp.jpg",
         "line": 0,
         "exists": true
       }
     ],
     "links": [
       {
-        "text": "PDF",
-        "target": "https://docs.fileformat.com/pdf",
+        "text": "Aspose.PDF product page",
+        "target": "https://products.aspose.com/pdf/net/",
         "is_internal": false,
-        "line": 36,
-        "exists": null
-      },
-      {
-        "text": "Aspose.PDF for Python via .NET",
-        "target": "https://products.aspose.com/pdf/python-net/",
-        "is_internal": false,
-        "line": 36,
-        "exists": null
-      },
-      {
-        "text": "Document class reference",
-        "target": "https://reference.aspose.com/pdf/python-net/Document",
-        "is_internal": false,
-        "line": 45,
-        "exists": null
-      },
-      {
-        "text": "official documentation",
-        "target": "https://docs.aspose.com/pdf/python-net/",
-        "is_internal": false,
-        "line": 97,
-        "exists": null
-      },
-      {
-        "text": "support team",
-        "target": "https://forum.aspose.com/c/pdf/",
-        "is_internal": false,
-        "line": 97,
-        "exists": null
-      },
-      {
-        "text": "official download page",
-        "target": "https://releases.aspose.com/pdf/python-net/",
-        "is_internal": false,
-        "line": 117,
-        "exists": null
-      },
-      {
-        "text": "temporary license information",
-        "target": "https://purchase.aspose.com/temporary-license/",
-        "is_internal": false,
-        "line": 117,
-        "exists": null
-      },
-      {
-        "text": "pricing page",
-        "target": "https://purchase.aspose.com/pricing/pdf/family/",
-        "is_internal": false,
-        "line": 139,
+        "line": 66,
         "exists": null
       },
       {
         "text": "temporary license page",
         "target": "https://purchase.aspose.com/temporary-license/",
         "is_internal": false,
-        "line": 139,
+        "line": 182,
+        "exists": null
+      },
+      {
+        "text": "Aspose.PDF for .NET docs",
+        "target": "https://docs.aspose.com/pdf/net/",
+        "is_internal": false,
+        "line": 186,
         "exists": null
       },
       {
         "text": "API reference",
-        "target": "https://reference.aspose.com/pdf/python-net/",
+        "target": "https://reference.aspose.com/pdf/net/",
         "is_internal": false,
-        "line": 143,
+        "line": 187,
         "exists": null
       },
       {
-        "text": "CSV",
-        "target": "https://docs.fileformat.com/spreadsheet/csv/",
+        "text": "Aspose Apps",
+        "target": "https://products.aspose.app/pdf/family",
         "is_internal": false,
-        "line": 146,
+        "line": 188,
         "exists": null
       },
       {
-        "text": "JSON",
-        "target": "https://docs.fileformat.com/web/json/",
+        "text": "Shrink PDF Files",
+        "target": "https://blog.aspose.com/pdf/shrink-pdf-size/",
         "is_internal": false,
-        "line": 146,
+        "line": 216,
         "exists": null
       },
       {
-        "text": "pricing page",
-        "target": "https://purchase.aspose.com/pricing/pdf/family/",
+        "text": "Extract Text from Scanned PDFs with Aspose.PDF OCR",
+        "target": "https://blog.aspose.com/pdf/extract-text-from-scanned-pdfs-in-csharp/",
         "is_internal": false,
-        "line": 152,
+        "line": 217,
         "exists": null
       },
       {
-        "text": "Remove Images from PDF using Python",
-        "target": "https://blog.aspose.com/pdf/remove-images-from-pdf-using-python/",
+        "text": "Convert PDF to Base64 in C#",
+        "target": "https://blog.aspose.com/pdf/convert-pdf-to-base64-in-csharp/",
         "is_internal": false,
-        "line": 155,
-        "exists": null
-      },
-      {
-        "text": "How to Add Pages to PDF Documents in Python",
-        "target": "https://blog.aspose.com/pdf/add-pages-to-pdf-in-python/",
-        "is_internal": false,
-        "line": 156,
-        "exists": null
-      },
-      {
-        "text": "Delete Pages from PDF in Python",
-        "target": "https://blog.aspose.com/pdf/delete-pages-from-pdf-in-python/",
-        "is_internal": false,
-        "line": 157,
+        "line": 218,
         "exists": null
       }
     ],
     "code_samples": [
       {
-        "language": "python",
-        "code": "import aspose.pdf as ap\n\n# Load an existing PDF\npdf_path = \"sample.pdf\"\ndoc = ap.Document(pdf_path)\n\n# -------------------------------------------------\n# Add a Text Annotation (Sticky Note)\n# -------------------------------------------------\nfree_text_annotation = ap.annotations.FreeTextAnnotation(\n    doc.pages[1],\n    ap.Rectangle(299, 713, 308, 720, True),\n    ap.annotations.DefaultAppearance(),\n)\nfree_text_annotation.title = \"Aspose User\"\nfree_text_annotation.color = ap.Color.light_green\n\ndoc.pages[1].annotations.append(free_text_annotation)\n\n# Save the PDF with the new annotation\ndoc.save(\"with_annotation.pdf\")",
-        "line": 51
+        "language": "",
+        "code": "Install-Package Aspose.PDF",
+        "line": 62
       },
       {
-        "language": "python",
-        "code": "# -------------------------------------------------\n# Remove the previously added annotation\n# -------------------------------------------------\n# Reload the document to demonstrate removal\ndoc2 = ap.Document(\"with_annotation.pdf\")\n# Assume we know the annotation's title or we iterate to find it\nfor annot in list(doc2.pages[1].annotations):\n    if isinstance(annot, ap.annotations.TextAnnotation) and annot.title == \"Reviewer\":\n        doc2.pages[1].annotations.delete(annot)\n\n# Save the cleaned PDF\ndoc2.save(\"without_annotation.pdf\")",
-        "line": 81
+        "language": "csharp",
+        "code": "// Load a PDF document from the file system\nstring dataDir = \"./Data/\"; // Adjust the path to your data folder\nstring pdfPath = Path.Combine(dataDir, \"SimpleResume.pdf\");\n\nusing (var document = new Aspose.Pdf.Document(pdfPath))\n{\n    // PDF is now loaded and ready for signing\n    // Further steps will be performed inside this using block\n}",
+        "line": 85
       },
       {
-        "language": "bash",
-        "code": "pip install aspose-pdf",
-        "line": 100
+        "language": "csharp",
+        "code": "string pfxPath = Path.Combine(dataDir, \"myCertificate.pfx\");\nstring pfxPassword = \"myPassword\"; // Keep this secure!\n\n// Create the PKCS#7 signature object using the certificate\nvar pkcs = new Aspose.Pdf.Forms.PKCS7(pfxPath, pfxPassword);\n\n// Configure timestamp settings – replace URL with your TSA if needed\nvar timestampSettings = new Aspose.Pdf.TimestampSettings(\"https://freetsa.org/tsr\", string.Empty);\npkcs.TimestampSettings = timestampSettings;",
+        "line": 110
       },
       {
-        "language": "python",
-        "code": "import aspose.pdf as ap",
-        "line": 106
+        "language": "csharp",
+        "code": "// Define a rectangle where the signature will appear (in points)\nvar rect = new System.Drawing.Rectangle(100, 100, 200, 100); // x, y, width, height",
+        "line": 133
       },
       {
-        "language": "python",
-        "code": "license = ap.License()\nlicense.set_license(\"Aspose.PDF.lic\")",
-        "line": 112
+        "language": "csharp",
+        "code": "using (var signature = new Aspose.Pdf.Facades.PdfFileSignature(document))\n{\n    // Sign page 1 with the configured PKCS7 (which includes timestamp settings)\n    signature.Sign(\n        pageNumber: 1,\n        reason: \"Approved by HR\",\n        contact: \"hr@example.com\",\n        location: \"New York, USA\",\n        visible: true,\n        rect: rect,\n        pkcs: pkcs);\n\n    // Save the signed PDF to the output path\n    string outputPath = Path.Combine(dataDir, \"DigitallySignWithTimeStamp_out.pdf\");\n    signature.Save(outputPath);\n}",
+        "line": 150
       }
     ],
     "code_blocks": 5,
     "tables": 0,
     "shortcodes": [],
-    "faq_like_sections": 5,
+    "faq_like_sections": 7,
     "schema_like_blocks": 0,
     "issues": [
       {
-        "file_path": "content/Aspose.Blog/pdf/2026-07-08-add-or-remove-annotations-in-python/index.md",
+        "file_path": "content/Aspose.Blog/pdf/2026-07-10-add-timestamped-digital-signatures-to-pdf-in-csharp/index.md",
         "issue_type": "suggest_body_output_image",
         "severity": "Opportunity",
         "explanation": "Post has a cover/front matter image but no inline body image, and the content appears to describe a visual or generated output. Policy: content-quality; rule: CQ-006.",
@@ -320,7 +311,7 @@
         ]
       },
       {
-        "file_path": "content/Aspose.Blog/pdf/2026-07-08-add-or-remove-annotations-in-python/index.md",
+        "file_path": "content/Aspose.Blog/pdf/2026-07-10-add-timestamped-digital-signatures-to-pdf-in-csharp/index.md",
         "issue_type": "weak_internal_links",
         "severity": "Medium",
         "explanation": "Post has fewer than two internal links. Policy: internal-linking; rule: IL-001.",
@@ -338,7 +329,7 @@
         ]
       },
       {
-        "file_path": "content/Aspose.Blog/pdf/2026-07-08-add-or-remove-annotations-in-python/index.md",
+        "file_path": "content/Aspose.Blog/pdf/2026-07-10-add-timestamped-digital-signatures-to-pdf-in-csharp/index.md",
         "issue_type": "too_few_outgoing_internal_links",
         "severity": "Medium",
         "explanation": "Post has fewer than two outgoing internal links. Policy: internal-linking; rule: IL-005.",
@@ -356,87 +347,140 @@
         ]
       }
     ],
-    "llm_suggestions": [],
+    "llm_suggestions": [
+      {
+        "file_path": "content/Aspose.Blog/pdf/2026-07-10-add-timestamped-digital-signatures-to-pdf-in-csharp/index.md",
+        "provider": "openai-compatible",
+        "model": "gpt-oss",
+        "cached": false,
+        "summary": "The post provides a solid tutorial but needs an inline output image, more internal links, and a stronger conclusion to meet content‑quality and internal‑linking policies.",
+        "suggested_title": "How to Add Timestamped Digital Signatures to PDFs Using Aspose.PDF for .NET (C#)",
+        "suggested_description": "Step‑by‑step guide to add TSA‑based timestamped digital signatures to PDFs in C# with Aspose.PDF for .NET, including setup, code, visual appearance, verification, and troubleshooting.",
+        "outline": [
+          "Prerequisites and Environment Setup",
+          "Install Aspose.PDF for .NET via NuGet",
+          "Load the PDF Document",
+          "Configure the Timestamp Authority (TSA)",
+          "Create the PKCS#7 Signature Object",
+          "Define the Visual Appearance of the Signature",
+          "Apply the Timestamped Signature to the PDF",
+          "Verify the Signature and Timestamp (optional)",
+          "Troubleshooting Common Issues",
+          "Related Internal Resources"
+        ],
+        "faq_questions": [
+          "What TSA services can I use with Aspose.PDF and are there any limitations?",
+          "How do I protect my .pfx certificate password in a production application?",
+          "Can I create an invisible timestamped signature, and how does that differ from a visible one?",
+          "What licensing requirements are needed to use Aspose.PDF for digital signing?",
+          "How can I verify the timestamp after the PDF has been signed?"
+        ],
+        "content_actions": [
+          "Insert an inline screenshot showing the signed PDF with the visible timestamped signature field.",
+          "Add at least two internal links: one to a related tutorial on PDF signing without timestamps, and another to the Aspose.PDF API reference page for the `PdfFileSignature` class.",
+          "Add outgoing internal links to the product page (Aspose.PDF for .NET) and the official documentation section on Timestamp Settings.",
+          "Include a brief troubleshooting subsection covering TSA connectivity failures and certificate loading errors.",
+          "Add a concise conclusion summarizing the steps and encouraging readers to explore further Aspose.PDF features."
+        ],
+        "risk_notes": [
+          "Ensure the TSA URL used (e.g., https://freetsa.org/tsr) is reachable from the deployment environment; fallback handling should be implemented for network failures.",
+          "Never hard‑code the .pfx password in source code; use secure storage mechanisms such as Azure Key Vault or environment variables.",
+          "Verify that the appropriate Aspose.PDF license is applied before signing to avoid evaluation watermarks in production PDFs."
+        ],
+        "issues_addressed": [
+          "suggest_body_output_image (CQ-006)",
+          "weak_internal_links (IL-001)",
+          "too_few_outgoing_internal_links (IL-005)"
+        ]
+      }
+    ],
     "scores": {
       "content_quality": 100,
       "on_page_seo": 100,
       "technical_seo": 85,
       "internal_linking": 86,
       "translation_seo": 100,
-      "organic_growth_opportunity": 51,
-      "priority": 24
+      "organic_growth_opportunity": 44,
+      "priority": 22
     },
-    "translation_group": "content/Aspose.Blog/pdf/2026-07-08-add-or-remove-annotations-in-python/index.md"
+    "translation_group": "content/Aspose.Blog/pdf/2026-07-10-add-timestamped-digital-signatures-to-pdf-in-csharp/index.md"
   },
   {
-    "path": "/home/runner/work/blog-generator-agent/blog-generator-agent/outputs/_repos/aspose-blog/content/Aspose.Blog/pdf/2026-07-08-create-pdf-booklet-in-python/index.md",
-    "relative_path": "content/Aspose.Blog/pdf/2026-07-08-create-pdf-booklet-in-python/index.md",
-    "url_candidate": "/pdf/create-pdf-booklet-in-python/",
+    "path": "/home/runner/work/blog-generator-agent/blog-generator-agent/outputs/_repos/aspose-blog/content/Aspose.Blog/pdf/2026-07-10-extract-text-from-scanned-pdfs-in-csharp/index.md",
+    "relative_path": "content/Aspose.Blog/pdf/2026-07-10-extract-text-from-scanned-pdfs-in-csharp/index.md",
+    "url_candidate": "/pdf/extract-text-from-scanned-pdfs-in-csharp/",
     "language": "en",
     "front_matter_format": "yaml",
     "front_matter": {
-      "title": "Create PDF Booklet in Python",
-      "seoTitle": "Create PDF Booklet in Python",
-      "description": "Learn how to create a PDF booklet in Python with Aspose.PDF for Python via .NET. This guide shows setup, stepwise code, and bookmarks for reports or manuals.",
-      "date": "Wed, 08 Jul 2026 09:55:45 +0000",
-      "lastmod": "Wed, 08 Jul 2026 09:55:45 +0000",
+      "title": "Extract Text from Scanned PDFs with Aspose.PDF OCR in C#",
+      "seoTitle": "Extract Text from Scanned PDFs with Aspose.PDF OCR in C#",
+      "description": "Learn how to recognize and extract text from scanned PDFs using Aspose.PDF OCR in C# step‑by‑step.",
+      "date": "Fri, 10 Jul 2026 04:52:36 +0000",
       "draft": false,
-      "url": "/pdf/create-pdf-booklet-in-python/",
+      "url": "/pdf/extract-text-from-scanned-pdfs-in-csharp/",
       "author": "Muzammil Khan",
-      "summary": "This tutorial walks Python developers through generating a PDF booklet using Aspose.PDF for Python via .NET. You'll learn to set up the SDK, configure booklet layout, add optional bookmarks, and produce high-quality PDFs for reports, catalogs, or manuals.",
+      "summary": "This tutorial shows .NET developers how to use Aspose.PDF OCR to pull plain text from scanned PDF files. You will learn to install the library, configure OCR settings for better accuracy, handle large documents efficiently, and troubleshoot common issues.",
       "tags": [
-        "python pdf generation",
-        "aspose pdf",
-        "pdf booklet"
+        "extract text",
+        "text from scanned pdf",
+        "aspose pdf ocr"
       ],
       "categories": [
         "Aspose.PDF Product Family"
       ],
       "showtoc": true,
       "cover": {
-        "image": "images/create-pdf-booklet-in-python.jpg",
-        "alt": "Create PDF Booklet in Python",
-        "caption": "Create PDF Booklet in Python"
+        "image": "images/extract-text-from-scanned-pdfs-in-csharp.jpg",
+        "alt": "Extract Text from Scanned PDFs with Aspose.PDF OCR in C#",
+        "caption": "Extract Text from Scanned PDFs with Aspose.PDF OCR in C#"
       },
       "steps": [
-        "Step 1: Install Aspose.PDF SDK",
-        "Step 2: Load source PDF",
-        "Step 3: Configure booklet options",
-        "Step 4: Add optional bookmarks",
-        "Step 5: Save booklet"
+        "Install Aspose.PDF for .NET via NuGet.",
+        "Create a Document object pointing to the scanned PDF.",
+        "Configure OcrTextRecognitionOptions with language, resolution, and separators.",
+        "Use OcrTextAbsorber to extract text from the document pages.",
+        "Save the extracted text to a file or process it further."
       ],
       "faqs": [
         {
-          "q": "How do I create a PDF booklet in Python using Aspose.PDF?",
-          "a": "Use the Document and Booklet classes from [Aspose.PDF for Python via .NET](https://products.aspose.com/pdf/python-net/). Load your source PDF, configure BookletLayoutOptions, optionally add OutlineItemCollection for bookmarks, and save the result."
+          "q": "How do I extract text from a scanned PDF in C# using Aspose.PDF?",
+          "a": "Create a Document, set up OcrTextRecognitionOptions, run an OcrTextAbsorber across the pages, and read the absorber's Text property."
         },
         {
-          "q": "Can I add bookmarks to the generated booklet?",
-          "a": "Yes. After creating the booklet you can create an OutlineItemCollection, add entries with titles and destinations, and assign it to the document's Bookmarks property. See the API reference for OutlineItemCollection."
+          "q": "Which OCR languages are supported by Aspose.PDF?",
+          "a": "Aspose.PDF supports many languages via the OcrLanguage enum, including English, French, German, Spanish, Chinese, and more."
         },
         {
-          "q": "What licensing is required for production use?",
-          "a": "A temporary license is available at the [temporary license page](https://purchase.aspose.com/temporary-license/). For full production use, purchase a license via the [pricing page](https://purchase.aspose.com/pricing/pdf/family/)."
+          "q": "How can I improve OCR accuracy for low‑resolution scans?",
+          "a": "Increase the Resolution value (e.g., 300 DPI), enable language‑specific dictionaries, and tune PageSeparator to preserve line breaks."
         },
         {
-          "q": "Is the SDK compatible with virtual environments?",
-          "a": "Absolutely. Install the package with pip inside any virtual environment and the SDK works the same as in a global Python installation."
+          "q": "Is it safe to process large PDFs in parallel?",
+          "a": "Yes, you can split the PDF into page ranges and run separate OcrTextAbsorbers on each thread, but be mindful of memory consumption."
+        },
+        {
+          "q": "What licensing is required for OCR features?",
+          "a": "OCR is available in the full Aspose.PDF for .NET license; you can request a temporary license for evaluation."
+        },
+        {
+          "q": "Where can I find more documentation on OCR settings?",
+          "a": "See the Aspose.PDF OCR settings documentation at https://docs.aspose.com/pdf/net/."
         }
       ]
     },
-    "body": "\nGenerating compact, printable PDFs from multiple pages is a frequent need for reports, catalogs, and manuals. [Aspose.PDF for Python via .NET](https://products.aspose.com/pdf/python-net/) provides a robust SDK that lets you programmatically create [PDF](https://docs.fileformat.com/pdf) Booklet in Python with fine‑grained control. In this guide you'll see how to set up the environment, build a booklet, optionally add bookmarks, and export the final document.\n\n## Prerequisites and Setup\n\nBefore you start, ensure you have the following:\n\n- Python 3.7 or later installed on your development machine.\n- An IDE or code editor of your choice (VS Code, PyCharm, etc.).\n- Access to the Aspose.PDF for Python via .NET library.\n\nInstall the SDK using pip:\n\n<!--[CODE_SNIPPET_START]-->\n```bash\npip install aspose-pdf\n```\n<!--[CODE_SNIPPET_END]-->\n\nDownload the latest binaries if you prefer a manual install: [Aspose.PDF for Python via .NET Download](https://releases.aspose.com/pdf/python-net/). After installation, you can import the library in your Python scripts.\n\nWith the SDK ready, we can move on to the implementation.\n\n## Create PDF Booklet in Python: Step-by-Step Walkthrough\n\n### Step 1: Load the Source Document\n\nFirst, open the PDF that will become the source for the booklet.\n\n<!--[CODE_SNIPPET_START]-->\n```python\nimport aspose.pdf as ap\n\n# Load the existing PDF\nsource_doc = ap.Document(\"input.pdf\")\n```\n<!--[CODE_SNIPPET_END]-->\n\nThe `Document` class is documented in the [API Reference](https://reference.aspose.com/pdf/python-net/).\n\n### Step 2: Define Booklet Layout\n\nHere we configure the booklet layout to **create PDF Booklet in Python**. The `Booklet` class lets you specify page ordering, binding, and page size.\n\n<!--[CODE_SNIPPET_START]-->\n```python\n# Create a Booklet object with default options\nbooklet = ap.Booklet()\n# Optional: customize layout (e.g., landscape, binding side)\nbooklet.layout_options = ap.BookletLayoutOptions()\nbooklet.layout_options.binding = ap.BookletBinding.LEFT\n```\n<!--[CODE_SNIPPET_END]-->\n\n### Step 3: Add Pages to Booklet\n\nAdd the pages from the source document to the booklet object.\n\n<!--[CODE_SNIPPET_START]-->\n```python\n# Add all pages from the source document\nbooklet.add_pages(source_doc.pages)\n```\n<!--[CODE_SNIPPET_END]-->\n\n### Step 4: Insert Bookmarks (Optional)\n\nIf you need a navigable PDF, create bookmarks that point to the first page of each section.\n\n<!--[CODE_SNIPPET_START]-->\n```python\n# Create a bookmark collection\nbookmarks = ap.OutlineItemCollection()\nbookmark = ap.OutlineItem()\nbookmark.title = \"Chapter 1\"\nbookmark.destination = ap.Destination(source_doc.pages[1])\nbookmarks.add(bookmark)\n\n# Assign bookmarks to the booklet document\nbooklet.bookmarks = bookmarks\n```\n<!--[CODE_SNIPPET_END]-->\n\n### Step 5: Save the Booklet\n\nFinally, write the booklet to a new PDF file.\n\n<!--[CODE_SNIPPET_START]-->\n```python\n# Save the booklet as a new PDF\nbooklet.save(\"output_booklet.pdf\")\n```\n<!--[CODE_SNIPPET_END]-->\n\nWith these steps completed, you have a ready‑to‑print PDF booklet.\n\n## Complete Code Example: Create PDF Booklet with Bookmarks\n\nThe following script puts all the pieces together into a single, runnable program.\n\n<!--[COMPLETE_CODE_SNIPPET_START]-->\n```python\nimport aspose.pdf as ap\n\ndef create_pdf_booklet(input_path: str, output_path: str, add_bookmarks: bool = True):\n    # Load source PDF\n    source_doc = ap.Document(input_path)\n\n    # Initialize booklet\n    booklet = ap.Booklet()\n    booklet.layout_options = ap.BookletLayoutOptions()\n    booklet.layout_options.binding = ap.BookletBinding.LEFT\n\n    # Add pages\n    booklet.add_pages(source_doc.pages)\n\n    # Optional bookmarks\n    if add_bookmarks:\n        bookmarks = ap.OutlineItemCollection()\n        for i, page in enumerate(source_doc.pages, start=1):\n            bm = ap.OutlineItem()\n            bm.title = f\"Page {i}\"\n            bm.destination = ap.Destination(page)\n            bookmarks.add(bm)\n        booklet.bookmarks = bookmarks\n\n    # Save the booklet\n    booklet.save(output_path)\n\nif __name__ == \"__main__\":\n    create_pdf_booklet(\"input.pdf\", \"output_booklet.pdf\")\n```\n<!--[COMPLETE_CODE_SNIPPET_END]-->\n\n> **Note:** This code example demonstrates the core functionality. Before using it in your project, make sure to update the file paths (`input.pdf`, `output_booklet.pdf`, etc.) to match your actual file locations, verify that all required dependencies are properly installed, and test thoroughly in your development environment. If you encounter any issues, please refer to the [official documentation](https://docs.aspose.com/pdf/python-net/) or reach out to the [support team](https://forum.aspose.com/c/pdf/) for assistance.\n\n## Conclusion\n\nCreating a PDF booklet in Python becomes straightforward with [Aspose.PDF for Python via .NET](https://products.aspose.com/pdf/python-net/). By following the steps above you can automate booklet generation, control layout, and enrich the document with bookmarks for easy navigation. Remember to obtain a proper license for production use; a temporary license is available at the [temporary license page](https://purchase.aspose.com/temporary-license/), and full licensing details can be found on the [pricing page](https://purchase.aspose.com/pricing/pdf/family/). With the SDK installed and a few lines of code, you're ready to integrate PDF booklet creation into any reporting, catalog, or manual workflow.\n\n## FAQs\n\n**How do I create a PDF booklet in Python using Aspose.PDF?**  \nUse the `Document` and `Booklet` classes from the SDK. Load your source PDF, configure `BookletLayoutOptions`, optionally add an `OutlineItemCollection` for bookmarks, and call `save()` to generate the booklet.\n\n**Can I add bookmarks to the generated booklet?**  \nYes. After creating the booklet, instantiate an `OutlineItemCollection`, populate it with `OutlineItem` objects that reference specific pages, and assign it to the booklet's `bookmarks` property.\n\n**What licensing is required for production deployments?**  \nA temporary license can be obtained from the [temporary license page](https://purchase.aspose.com/temporary-license/). For ongoing projects, purchase a full license via the [pricing page](https://purchase.aspose.com/pricing/pdf/family/).\n\n**Is the SDK compatible with virtual environments?**  \nAbsolutely. Install the package with `pip install aspose-pdf` inside any virtual environment, and the library works the same as in a global Python installation.\n\n## Read More\n- [Delete Pages from PDF in Python](https://blog.aspose.com/pdf/delete-pages-from-pdf-in-python/)\n- [Extract Pages from PDF in Python](https://blog.aspose.com/pdf/extract-pages-from-pdf-in-python/)\n- [Remove Images from PDF using Python](https://blog.aspose.com/pdf/remove-images-from-pdf-using-python/)",
-    "body_line_offset": 33,
-    "title": "Create PDF Booklet in Python",
-    "description": "Learn how to create a PDF booklet in Python with Aspose.PDF for Python via .NET. This guide shows setup, stepwise code, and bookmarks for reports or manuals.",
-    "date": "Wed, 08 Jul 2026 09:55:45 +0000",
-    "lastmod": "Wed, 08 Jul 2026 09:55:45 +0000",
+    "body": "\nIn many business workflows, scanned PDF documents must be transformed into searchable or editable text. The **Extract Text from Scanned PDFs with Aspose.PDF OCR in C#** tutorial demonstrates how to harness the integrated OCR engine in Aspose.PDF for .NET to pull plain text from image‑based pages. By following this guide you’ll get a ready‑to‑run solution that works with any scanned PDF, regardless of its size or language.\n\n## Extract Text from Scanned PDFs using Aspose.PDF OCR SDK\n\nScanned PDFs contain only images, so typical text extraction APIs return nothing. OCR (Optical Character Recognition) converts those images into machine‑readable characters, enabling indexing, data mining, and downstream processing. Automating OCR in C# removes manual copy‑paste steps, improves accuracy, and scales across large document batches.\n\nAspose.PDF provides the `Aspose.Pdf.Ocr` namespace, which includes `OcrTextRecognitionOptions`, `OcrTextAbsorber`, and language enums. The library is distributed via **NuGet**. Install it with the following command:\n\n```powershell\nInstall-Package Aspose.PDF\n```\n\nFor more information, visit the [Aspose.PDF product page](https://products.aspose.com/pdf/net/).\n\n## Extract Text from Scanned PDFs with Aspose.PDF OCR in C#\n\n1. Load the scanned PDF into an `Aspose.Pdf.Document`.\n2. Configure OCR options (language, resolution, page separator).\n3. Apply an `OcrTextAbsorber` to the document’s page collection.\n4. Retrieve the recognized text and save it.\n\nThe example demonstrates loading a scanned PDF, configuring OCR, extracting text, and writing the result to a file using C#.\n\n```csharp\n// For complete examples and data files, visit https://github.com/aspose-pdf/Aspose.PDF-for-.NET\nprivate static void RecognizeTextWithOcr()\n{\n    // The path to the documents directory\n    var dataDir = RunExamples.GetDataDir_AsposePdf();\n\n    // Open PDF document\n    using (var document = new Aspose.Pdf.Document(dataDir + \"input.pdf\"))\n    {\n        // Configure OCR recognition options\n        var options = new Aspose.Pdf.Ocr.OcrTextRecognitionOptions\n        {\n            Language = Aspose.Pdf.Ocr.OcrLanguage.English,\n            Resolution = 300,\n            PageSeparator = \"\\n\\n\"\n        };\n\n        // Recognize text from all pages\n        var absorber = new Aspose.Pdf.Ocr.OcrTextAbsorber(options);\n        document.Pages.Accept(absorber);\n\n        // Save recognized text\n        System.IO.File.WriteAllText(dataDir + \"recognized-text.txt\", absorber.Text);\n    }\n}\n```\n\n## Aspose.PDF Features that Matter for this Task\n\n- **Integrated OCR engine** – No external dependencies; the OCR engine lives in the `Aspose.Pdf.Ocr` namespace.\n- **Language selection** – `OcrLanguage` enum lets you specify the dictionary for better recognition.\n- **Resolution control** – Higher DPI improves character fidelity, especially for faint scans.\n- **PageSeparator** – Customizable string to separate pages in the output text.\n- **Thread‑safe page collection** – Allows parallel processing of large PDFs.\n\nThese capabilities enable a robust, single‑library solution for extracting text from any scanned PDF.\n\n## Installation and Setup in C#\n\n1. Open your .NET solution in Visual Studio.\n2. Open the **Package Manager Console** and run `Install-Package Aspose.PDF`.\n3. Add `using Aspose.Pdf;` and `using Aspose.Pdf.Ocr;` at the top of your class file.\n4. Ensure you have a temporary or full license; without it, the output may contain a watermark.\n\nFor licensing details, see the [temporary license page](https://purchase.aspose.com/temporary-license/).\n\n## Step‑by‑Step Implementation in C#\n\n**What does this section answer?** *What are the exact code steps to extract text?*\n\n1. **Initialize the document**\n   ```csharp\n   var pdfPath = \"path/to/scanned.pdf\";\n   var document = new Document(pdfPath);\n   ```\n2. **Create OCR options**\n   ```csharp\n   var ocrOptions = new OcrTextRecognitionOptions\n   {\n       Language = OcrLanguage.English,\n       Resolution = 300,\n       PageSeparator = \"\\n--- Page Break ---\\n\"\n   };\n   ```\n3. **Run the absorber**\n   ```csharp\n   var absorber = new OcrTextAbsorber(ocrOptions);\n   document.Pages.Accept(absorber);\n   ```\n4. **Access the extracted text**\n   ```csharp\n   string extractedText = absorber.Text;\n   ```\n5. **Save or process the text**\n   ```csharp\n   System.IO.File.WriteAllText(\"output.txt\", extractedText);\n   ```\n\nThe code follows the same flow as the comprehensive example above but breaks the logic into digestible steps.\n\n## Get a Free License\n\nEvaluate Aspose.PDF without cost by requesting a temporary license here: https://purchase.aspose.com/temporary-license/.\n\n## Free Additional Resources\n\n- [Aspose.PDF for .NET Documentation](https://docs.aspose.com/pdf/net/)\n- [API Reference](https://reference.aspose.com/pdf/net/)\n- [Free Online PDF Apps](https://products.aspose.app/pdf/family)\n\n## Conclusion\n\nThis guide walked you through extracting text from scanned PDFs using Aspose.PDF OCR in C#. You learned how to install the library, configure OCR options for accuracy, implement a clean extraction pipeline, and apply performance optimizations for large documents. With these techniques, any .NET developer can turn image‑only PDFs into searchable, editable text streams.\n\n## FAQs\n\n1. **How do I extract text from a scanned PDF in C# using Aspose.PDF?**\n   Create a `Document`, configure `OcrTextRecognitionOptions`, run an `OcrTextAbsorber` on the pages, and read the `Text` property.\n2. **Which OCR languages are supported by Aspose.PDF?**\n   The library supports many languages via the `OcrLanguage` enum, including English, French, German, Spanish, Chinese, and more.\n3. **How can I improve OCR accuracy for low‑resolution scans?**\n   Increase the `Resolution` (e.g., 300 DPI), select the correct language, and consider pre‑processing images to boost contrast.\n4. **Is it safe to process large PDFs in parallel?**\n   Yes, by splitting the document into page ranges and processing each range on a separate thread, while monitoring memory usage.\n5. **What licensing is required for OCR features?**\n   OCR is fully available with a valid Aspose.PDF for .NET license; a temporary license can be obtained for evaluation.\n6. **Where can I find more documentation on OCR settings?**\n   Detailed OCR configuration guidance is available in the Aspose.PDF OCR settings docs at https://docs.aspose.com/pdf/net/.\n\n\n## Read More\n- [Shrink PDF Files](https://blog.aspose.com/pdf/shrink-pdf-size/)\n- [Add Timestamped Digital Signatures to PDFs in C#](https://blog.aspose.com/pdf/add-timestamped-digital-signatures-to-pdf-in-csharp/)\n- [Convert PDF to Base64 in C#](https://blog.aspose.com/pdf/convert-pdf-to-base64-in-csharp/)",
+    "body_line_offset": 44,
+    "title": "Extract Text from Scanned PDFs with Aspose.PDF OCR in C#",
+    "description": "Learn how to recognize and extract text from scanned PDFs using Aspose.PDF OCR in C# step‑by‑step.",
+    "date": "Fri, 10 Jul 2026 04:52:36 +0000",
+    "lastmod": "",
     "draft": false,
     "slug": "",
     "aliases": [],
     "tags": [
-      "python pdf generation",
-      "aspose pdf",
-      "pdf booklet"
+      "extract text",
+      "text from scanned pdf",
+      "aspose pdf ocr"
     ],
     "categories": [
       "Aspose.PDF Product Family"
@@ -444,257 +488,172 @@
     "keywords": [],
     "canonical_url": "",
     "translation_key": "",
-    "word_count": 706,
-    "character_count": 5099,
+    "word_count": 775,
+    "character_count": 5285,
     "headings": [
       {
         "level": 2,
-        "text": "Prerequisites and Setup",
-        "line": 37
+        "text": "Extract Text from Scanned PDFs using Aspose.PDF OCR SDK",
+        "line": 48
       },
       {
         "level": 2,
-        "text": "Create PDF Booklet in Python: Step-by-Step Walkthrough",
-        "line": 57
-      },
-      {
-        "level": 3,
-        "text": "Step 1: Load the Source Document",
-        "line": 59
-      },
-      {
-        "level": 3,
-        "text": "Step 2: Define Booklet Layout",
-        "line": 74
-      },
-      {
-        "level": 3,
-        "text": "Step 3: Add Pages to Booklet",
-        "line": 88
-      },
-      {
-        "level": 3,
-        "text": "Step 4: Insert Bookmarks (Optional)",
-        "line": 99
-      },
-      {
-        "level": 3,
-        "text": "Step 5: Save the Booklet",
-        "line": 117
+        "text": "Extract Text from Scanned PDFs with Aspose.PDF OCR in C",
+        "line": 60
       },
       {
         "level": 2,
-        "text": "Complete Code Example: Create PDF Booklet with Bookmarks",
-        "line": 130
+        "text": "Aspose.PDF Features that Matter for this Task",
+        "line": 97
+      },
+      {
+        "level": 2,
+        "text": "Installation and Setup in C",
+        "line": 107
+      },
+      {
+        "level": 2,
+        "text": "Step‑by‑Step Implementation in C",
+        "line": 116
+      },
+      {
+        "level": 2,
+        "text": "Get a Free License",
+        "line": 150
+      },
+      {
+        "level": 2,
+        "text": "Free Additional Resources",
+        "line": 154
       },
       {
         "level": 2,
         "text": "Conclusion",
-        "line": 170
+        "line": 160
       },
       {
         "level": 2,
         "text": "FAQs",
-        "line": 174
+        "line": 164
       },
       {
         "level": 2,
         "text": "Read More",
-        "line": 188
+        "line": 180
       }
     ],
     "paragraphs": [
-      "Generating compact, printable PDFs from multiple pages is a frequent need for reports, catalogs, and manuals. [Aspose.PDF for Python via .NET](https://products.aspose.com/pdf/python-net/) provides a robust SDK that lets you programmatically create [PDF](https://docs.fileformat.com/pdf) Booklet in Python with fine‑grained control. In this guide you'll see how to set up the environment, build a booklet, optionally add bookmarks, and export the final document.",
-      "Before you start, ensure you have the following:",
-      "- Python 3.7 or later installed on your development machine.\n- An IDE or code editor of your choice (VS Code, PyCharm, etc.).\n- Access to the Aspose.PDF for Python via .NET library.",
-      "Install the SDK using pip:",
-      "<!--[CODE_SNIPPET_START]-->",
-      "<!--[CODE_SNIPPET_END]-->",
-      "Download the latest binaries if you prefer a manual install: [Aspose.PDF for Python via .NET Download](https://releases.aspose.com/pdf/python-net/). After installation, you can import the library in your Python scripts.",
-      "With the SDK ready, we can move on to the implementation.",
-      "First, open the PDF that will become the source for the booklet.",
-      "<!--[CODE_SNIPPET_START]-->",
-      "<!--[CODE_SNIPPET_END]-->",
-      "The `Document` class is documented in the [API Reference](https://reference.aspose.com/pdf/python-net/).",
-      "Here we configure the booklet layout to **create PDF Booklet in Python**. The `Booklet` class lets you specify page ordering, binding, and page size.",
-      "<!--[CODE_SNIPPET_START]-->",
-      "<!--[CODE_SNIPPET_END]-->",
-      "Add the pages from the source document to the booklet object.",
-      "<!--[CODE_SNIPPET_START]-->",
-      "<!--[CODE_SNIPPET_END]-->",
-      "If you need a navigable PDF, create bookmarks that point to the first page of each section.",
-      "<!--[CODE_SNIPPET_START]-->",
-      "<!--[CODE_SNIPPET_END]-->",
-      "Finally, write the booklet to a new PDF file.",
-      "<!--[CODE_SNIPPET_START]-->",
-      "<!--[CODE_SNIPPET_END]-->",
-      "With these steps completed, you have a ready‑to‑print PDF booklet.",
-      "The following script puts all the pieces together into a single, runnable program.",
-      "<!--[COMPLETE_CODE_SNIPPET_START]-->",
-      "<!--[COMPLETE_CODE_SNIPPET_END]-->",
-      "> **Note:** This code example demonstrates the core functionality. Before using it in your project, make sure to update the file paths (`input.pdf`, `output_booklet.pdf`, etc.) to match your actual file locations, verify that all required dependencies are properly installed, and test thoroughly in your development environment. If you encounter any issues, please refer to the [official documentation](https://docs.aspose.com/pdf/python-net/) or reach out to the [support team](https://forum.aspose.com/c/pdf/) for assistance.",
-      "Creating a PDF booklet in Python becomes straightforward with [Aspose.PDF for Python via .NET](https://products.aspose.com/pdf/python-net/). By following the steps above you can automate booklet generation, control layout, and enrich the document with bookmarks for easy navigation. Remember to obtain a proper license for production use; a temporary license is available at the [temporary license page](https://purchase.aspose.com/temporary-license/), and full licensing details can be found on the [pricing page](https://purchase.aspose.com/pricing/pdf/family/). With the SDK installed and a few lines of code, you're ready to integrate PDF booklet creation into any reporting, catalog, or manual workflow.",
-      "**How do I create a PDF booklet in Python using Aspose.PDF?**  \nUse the `Document` and `Booklet` classes from the SDK. Load your source PDF, configure `BookletLayoutOptions`, optionally add an `OutlineItemCollection` for bookmarks, and call `save()` to generate the booklet.",
-      "**Can I add bookmarks to the generated booklet?**  \nYes. After creating the booklet, instantiate an `OutlineItemCollection`, populate it with `OutlineItem` objects that reference specific pages, and assign it to the booklet's `bookmarks` property.",
-      "**What licensing is required for production deployments?**  \nA temporary license can be obtained from the [temporary license page](https://purchase.aspose.com/temporary-license/). For ongoing projects, purchase a full license via the [pricing page](https://purchase.aspose.com/pricing/pdf/family/).",
-      "**Is the SDK compatible with virtual environments?**  \nAbsolutely. Install the package with `pip install aspose-pdf` inside any virtual environment, and the library works the same as in a global Python installation."
+      "In many business workflows, scanned PDF documents must be transformed into searchable or editable text. The **Extract Text from Scanned PDFs with Aspose.PDF OCR in C#** tutorial demonstrates how to harness the integrated OCR engine in Aspose.PDF for .NET to pull plain text from image‑based pages. By following this guide you’ll get a ready‑to‑run solution that works with any scanned PDF, regardless of its size or language.",
+      "Scanned PDFs contain only images, so typical text extraction APIs return nothing. OCR (Optical Character Recognition) converts those images into machine‑readable characters, enabling indexing, data mining, and downstream processing. Automating OCR in C# removes manual copy‑paste steps, improves accuracy, and scales across large document batches.",
+      "Aspose.PDF provides the `Aspose.Pdf.Ocr` namespace, which includes `OcrTextRecognitionOptions`, `OcrTextAbsorber`, and language enums. The library is distributed via **NuGet**. Install it with the following command:",
+      "For more information, visit the [Aspose.PDF product page](https://products.aspose.com/pdf/net/).",
+      "1. Load the scanned PDF into an `Aspose.Pdf.Document`.\n2. Configure OCR options (language, resolution, page separator).\n3. Apply an `OcrTextAbsorber` to the document’s page collection.\n4. Retrieve the recognized text and save it.",
+      "The example demonstrates loading a scanned PDF, configuring OCR, extracting text, and writing the result to a file using C#.",
+      "- **Integrated OCR engine** – No external dependencies; the OCR engine lives in the `Aspose.Pdf.Ocr` namespace.\n- **Language selection** – `OcrLanguage` enum lets you specify the dictionary for better recognition.\n- **Resolution control** – Higher DPI improves character fidelity, especially for faint scans.\n- **PageSeparator** – Customizable string to separate pages in the output text.\n- **Thread‑safe page collection** – Allows parallel processing of large PDFs.",
+      "These capabilities enable a robust, single‑library solution for extracting text from any scanned PDF.",
+      "1. Open your .NET solution in Visual Studio.\n2. Open the **Package Manager Console** and run `Install-Package Aspose.PDF`.\n3. Add `using Aspose.Pdf;` and `using Aspose.Pdf.Ocr;` at the top of your class file.\n4. Ensure you have a temporary or full license; without it, the output may contain a watermark.",
+      "For licensing details, see the [temporary license page](https://purchase.aspose.com/temporary-license/).",
+      "**What does this section answer?** *What are the exact code steps to extract text?*",
+      "1. **Initialize the document**",
+      "2. **Create OCR options**",
+      "3. **Run the absorber**",
+      "4. **Access the extracted text**",
+      "5. **Save or process the text**",
+      "The code follows the same flow as the comprehensive example above but breaks the logic into digestible steps.",
+      "Evaluate Aspose.PDF without cost by requesting a temporary license here: https://purchase.aspose.com/temporary-license/.",
+      "- [Aspose.PDF for .NET Documentation](https://docs.aspose.com/pdf/net/)\n- [API Reference](https://reference.aspose.com/pdf/net/)\n- [Free Online PDF Apps](https://products.aspose.app/pdf/family)",
+      "This guide walked you through extracting text from scanned PDFs using Aspose.PDF OCR in C#. You learned how to install the library, configure OCR options for accuracy, implement a clean extraction pipeline, and apply performance optimizations for large documents. With these techniques, any .NET developer can turn image‑only PDFs into searchable, editable text streams.",
+      "1. **How do I extract text from a scanned PDF in C# using Aspose.PDF?**\n   Create a `Document`, configure `OcrTextRecognitionOptions`, run an `OcrTextAbsorber` on the pages, and read the `Text` property.\n2. **Which OCR languages are supported by Aspose.PDF?**\n   The library supports many languages via the `OcrLanguage` enum, including English, French, German, Spanish, Chinese, and more.\n3. **How can I improve OCR accuracy for low‑resolution scans?**\n   Increase the `Resolution` (e.g., 300 DPI), select the correct language, and consider pre‑processing images to boost contrast.\n4. **Is it safe to process large PDFs in parallel?**\n   Yes, by splitting the document into page ranges and processing each range on a separate thread, while monitoring memory usage.\n5. **What licensing is required for OCR features?**\n   OCR is fully available with a valid Aspose.PDF for .NET license; a temporary license can be obtained for evaluation.\n6. **Where can I find more documentation on OCR settings?**\n   Detailed OCR configuration guidance is available in the Aspose.PDF OCR settings docs at https://docs.aspose.com/pdf/net/."
     ],
     "images": [
       {
-        "alt": "Create PDF Booklet in Python",
-        "target": "images/create-pdf-booklet-in-python.jpg",
+        "alt": "Extract Text from Scanned PDFs with Aspose.PDF OCR in C#",
+        "target": "images/extract-text-from-scanned-pdfs-in-csharp.jpg",
         "line": 0,
         "exists": true
       }
     ],
     "links": [
       {
-        "text": "Aspose.PDF for Python via .NET",
-        "target": "https://products.aspose.com/pdf/python-net/",
+        "text": "Aspose.PDF product page",
+        "target": "https://products.aspose.com/pdf/net/",
         "is_internal": false,
-        "line": 35,
+        "line": 58,
         "exists": null
       },
       {
-        "text": "PDF",
-        "target": "https://docs.fileformat.com/pdf",
+        "text": "temporary license page",
+        "target": "https://purchase.aspose.com/temporary-license/",
         "is_internal": false,
-        "line": 35,
+        "line": 114,
         "exists": null
       },
       {
-        "text": "Aspose.PDF for Python via .NET Download",
-        "target": "https://releases.aspose.com/pdf/python-net/",
+        "text": "Aspose.PDF for .NET Documentation",
+        "target": "https://docs.aspose.com/pdf/net/",
         "is_internal": false,
-        "line": 53,
+        "line": 156,
         "exists": null
       },
       {
         "text": "API Reference",
-        "target": "https://reference.aspose.com/pdf/python-net/",
+        "target": "https://reference.aspose.com/pdf/net/",
         "is_internal": false,
-        "line": 72,
+        "line": 157,
         "exists": null
       },
       {
-        "text": "official documentation",
-        "target": "https://docs.aspose.com/pdf/python-net/",
+        "text": "Free Online PDF Apps",
+        "target": "https://products.aspose.app/pdf/family",
         "is_internal": false,
-        "line": 168,
+        "line": 158,
         "exists": null
       },
       {
-        "text": "support team",
-        "target": "https://forum.aspose.com/c/pdf/",
+        "text": "Shrink PDF Files",
+        "target": "https://blog.aspose.com/pdf/shrink-pdf-size/",
         "is_internal": false,
-        "line": 168,
+        "line": 181,
         "exists": null
       },
       {
-        "text": "Aspose.PDF for Python via .NET",
-        "target": "https://products.aspose.com/pdf/python-net/",
+        "text": "Add Timestamped Digital Signatures to PDFs in C#",
+        "target": "https://blog.aspose.com/pdf/add-timestamped-digital-signatures-to-pdf-in-csharp/",
         "is_internal": false,
-        "line": 172,
+        "line": 182,
         "exists": null
       },
       {
-        "text": "temporary license page",
-        "target": "https://purchase.aspose.com/temporary-license/",
-        "is_internal": false,
-        "line": 172,
-        "exists": null
-      },
-      {
-        "text": "pricing page",
-        "target": "https://purchase.aspose.com/pricing/pdf/family/",
-        "is_internal": false,
-        "line": 172,
-        "exists": null
-      },
-      {
-        "text": "temporary license page",
-        "target": "https://purchase.aspose.com/temporary-license/",
+        "text": "Convert PDF to Base64 in C#",
+        "target": "https://blog.aspose.com/pdf/convert-pdf-to-base64-in-csharp/",
         "is_internal": false,
         "line": 183,
-        "exists": null
-      },
-      {
-        "text": "pricing page",
-        "target": "https://purchase.aspose.com/pricing/pdf/family/",
-        "is_internal": false,
-        "line": 183,
-        "exists": null
-      },
-      {
-        "text": "Delete Pages from PDF in Python",
-        "target": "https://blog.aspose.com/pdf/delete-pages-from-pdf-in-python/",
-        "is_internal": false,
-        "line": 189,
-        "exists": null
-      },
-      {
-        "text": "Extract Pages from PDF in Python",
-        "target": "https://blog.aspose.com/pdf/extract-pages-from-pdf-in-python/",
-        "is_internal": false,
-        "line": 190,
-        "exists": null
-      },
-      {
-        "text": "Remove Images from PDF using Python",
-        "target": "https://blog.aspose.com/pdf/remove-images-from-pdf-using-python/",
-        "is_internal": false,
-        "line": 191,
         "exists": null
       }
     ],
     "code_samples": [
       {
-        "language": "bash",
-        "code": "pip install aspose-pdf",
-        "line": 48
+        "language": "powershell",
+        "code": "Install-Package Aspose.PDF",
+        "line": 54
       },
       {
-        "language": "python",
-        "code": "import aspose.pdf as ap\n\n# Load the existing PDF\nsource_doc = ap.Document(\"input.pdf\")",
-        "line": 64
-      },
-      {
-        "language": "python",
-        "code": "# Create a Booklet object with default options\nbooklet = ap.Booklet()\n# Optional: customize layout (e.g., landscape, binding side)\nbooklet.layout_options = ap.BookletLayoutOptions()\nbooklet.layout_options.binding = ap.BookletBinding.LEFT",
-        "line": 79
-      },
-      {
-        "language": "python",
-        "code": "# Add all pages from the source document\nbooklet.add_pages(source_doc.pages)",
-        "line": 93
-      },
-      {
-        "language": "python",
-        "code": "# Create a bookmark collection\nbookmarks = ap.OutlineItemCollection()\nbookmark = ap.OutlineItem()\nbookmark.title = \"Chapter 1\"\nbookmark.destination = ap.Destination(source_doc.pages[1])\nbookmarks.add(bookmark)\n\n# Assign bookmarks to the booklet document\nbooklet.bookmarks = bookmarks",
-        "line": 104
-      },
-      {
-        "language": "python",
-        "code": "# Save the booklet as a new PDF\nbooklet.save(\"output_booklet.pdf\")",
-        "line": 122
-      },
-      {
-        "language": "python",
-        "code": "import aspose.pdf as ap\n\ndef create_pdf_booklet(input_path: str, output_path: str, add_bookmarks: bool = True):\n    # Load source PDF\n    source_doc = ap.Document(input_path)\n\n    # Initialize booklet\n    booklet = ap.Booklet()\n    booklet.layout_options = ap.BookletLayoutOptions()\n    booklet.layout_options.binding = ap.BookletBinding.LEFT\n\n    # Add pages\n    booklet.add_pages(source_doc.pages)\n\n    # Optional bookmarks\n    if add_bookmarks:\n        bookmarks = ap.OutlineItemCollection()\n        for i, page in enumerate(source_doc.pages, start=1):\n            bm = ap.OutlineItem()\n            bm.title = f\"Page {i}\"\n            bm.destination = ap.Destination(page)\n            bookmarks.add(bm)\n        booklet.bookmarks = bookmarks\n\n    # Save the booklet\n    booklet.save(output_path)\n\nif __name__ == \"__main__\":\n    create_pdf_booklet(\"input.pdf\", \"output_booklet.pdf\")",
-        "line": 135
+        "language": "csharp",
+        "code": "// For complete examples and data files, visit https://github.com/aspose-pdf/Aspose.PDF-for-.NET\nprivate static void RecognizeTextWithOcr()\n{\n    // The path to the documents directory\n    var dataDir = RunExamples.GetDataDir_AsposePdf();\n\n    // Open PDF document\n    using (var document = new Aspose.Pdf.Document(dataDir + \"input.pdf\"))\n    {\n        // Configure OCR recognition options\n        var options = new Aspose.Pdf.Ocr.OcrTextRecognitionOptions\n        {\n            Language = Aspose.Pdf.Ocr.OcrLanguage.English,\n            Resolution = 300,\n            PageSeparator = \"\\n\\n\"\n        };\n\n        // Recognize text from all pages\n        var absorber = new Aspose.Pdf.Ocr.OcrTextAbsorber(options);\n        document.Pages.Accept(absorber);\n\n        // Save recognized text\n        System.IO.File.WriteAllText(dataDir + \"recognized-text.txt\", absorber.Text);\n    }\n}",
+        "line": 69
       }
     ],
     "code_blocks": 7,
     "tables": 0,
     "shortcodes": [],
-    "faq_like_sections": 5,
+    "faq_like_sections": 7,
     "schema_like_blocks": 0,
     "issues": [
       {
-        "file_path": "content/Aspose.Blog/pdf/2026-07-08-create-pdf-booklet-in-python/index.md",
+        "file_path": "content/Aspose.Blog/pdf/2026-07-10-extract-text-from-scanned-pdfs-in-csharp/index.md",
         "issue_type": "moderate_thin_content",
         "severity": "Medium",
-        "explanation": "Post has 706 words. Policy: content-quality; rule: CQ-002.",
+        "explanation": "Post has 775 words. Policy: content-quality; rule: CQ-002.",
         "why_it_matters": "The issue can reduce crawl clarity, search relevance, or reader engagement.",
         "recommended_fix": "Expand with examples, screenshots, troubleshooting notes, and a stronger conclusion.",
         "estimated_effort": "Medium",
@@ -702,14 +661,14 @@
         "line": 0,
         "policy_id": "content-quality",
         "rule_id": "CQ-002",
-        "evidence": "word_count=706",
+        "evidence": "word_count=775",
         "intended_audiences": [
           "Developers evaluating file-format SDKs",
           "Technical content editors"
         ]
       },
       {
-        "file_path": "content/Aspose.Blog/pdf/2026-07-08-create-pdf-booklet-in-python/index.md",
+        "file_path": "content/Aspose.Blog/pdf/2026-07-10-extract-text-from-scanned-pdfs-in-csharp/index.md",
         "issue_type": "suggest_body_output_image",
         "severity": "Opportunity",
         "explanation": "Post has a cover/front matter image but no inline body image, and the content appears to describe a visual or generated output. Policy: content-quality; rule: CQ-006.",
@@ -727,22 +686,67 @@
         ]
       },
       {
-        "file_path": "content/Aspose.Blog/pdf/2026-07-08-create-pdf-booklet-in-python/index.md",
-        "issue_type": "title_length",
-        "severity": "Medium",
-        "explanation": "Title length is 28 characters.",
-        "why_it_matters": "The issue can reduce crawl clarity, search relevance, or reader engagement.",
-        "recommended_fix": "Keep the title around 30-70 characters while preserving clarity.",
+        "file_path": "content/Aspose.Blog/pdf/2026-07-10-extract-text-from-scanned-pdfs-in-csharp/index.md",
+        "issue_type": "unresolved_api_symbol",
+        "severity": "High",
+        "explanation": "Code block line 69 references `OcrTextRecognitionOptions`, which is not in the configured SDK symbol allowlist.",
+        "why_it_matters": "Incorrect SDK symbols break developer tutorials and reduce trust in the article.",
+        "recommended_fix": "Replace `OcrTextRecognitionOptions` with a verified existing SDK symbol if one fits. Nearest indexed symbols: `extraction_options`, `ExtractionOptions`, `getExtractionOptions`, `setExtractionOptions`, `TextExtractionOptions`. Otherwise add the symbol to sdk_validation if it is valid.",
         "estimated_effort": "Low",
-        "expected_seo_impact": "Medium",
-        "line": 0,
+        "expected_seo_impact": "High",
+        "line": 69,
         "policy_id": "",
         "rule_id": "",
         "evidence": "",
         "intended_audiences": []
       },
       {
-        "file_path": "content/Aspose.Blog/pdf/2026-07-08-create-pdf-booklet-in-python/index.md",
+        "file_path": "content/Aspose.Blog/pdf/2026-07-10-extract-text-from-scanned-pdfs-in-csharp/index.md",
+        "issue_type": "unresolved_api_symbol",
+        "severity": "High",
+        "explanation": "Code block line 69 references `OcrTextAbsorber`, which is not in the configured SDK symbol allowlist.",
+        "why_it_matters": "Incorrect SDK symbols break developer tutorials and reduce trust in the article.",
+        "recommended_fix": "Replace `OcrTextAbsorber` with a verified existing SDK symbol if one fits. Nearest indexed symbols: `TextAbsorber`, `TextabsorberIndex`, `FontAbsorber`, `absorber`, `TEXT`. Otherwise add the symbol to sdk_validation if it is valid.",
+        "estimated_effort": "Low",
+        "expected_seo_impact": "High",
+        "line": 69,
+        "policy_id": "",
+        "rule_id": "",
+        "evidence": "",
+        "intended_audiences": []
+      },
+      {
+        "file_path": "content/Aspose.Blog/pdf/2026-07-10-extract-text-from-scanned-pdfs-in-csharp/index.md",
+        "issue_type": "unresolved_api_class",
+        "severity": "High",
+        "explanation": "Code line 71 references `RecognizeTextWithOcr` as an SDK class/member, but it was not found in the indexed API reference symbols.",
+        "why_it_matters": "Incorrect SDK symbols break developer tutorials and reduce trust in the article.",
+        "recommended_fix": "Replace `RecognizeTextWithOcr` with the relevant existing API symbol if it fits. Nearest indexed symbols: `recognize`, `hocr`, `TEXT`, `with`, `TE_X`.",
+        "estimated_effort": "Low",
+        "expected_seo_impact": "High",
+        "line": 71,
+        "policy_id": "",
+        "rule_id": "",
+        "evidence": "",
+        "intended_audiences": []
+      },
+      {
+        "file_path": "content/Aspose.Blog/pdf/2026-07-10-extract-text-from-scanned-pdfs-in-csharp/index.md",
+        "issue_type": "unresolved_api_class",
+        "severity": "High",
+        "explanation": "Code line 74 references `RunExamples` as an SDK class/member, but it was not found in the indexed API reference symbols.",
+        "why_it_matters": "Incorrect SDK symbols break developer tutorials and reduce trust in the article.",
+        "recommended_fix": "Replace `RunExamples` with the relevant existing API symbol if it fits. Nearest indexed symbols: `Examples`, `new_XmpValue`, `NewXmpValue`, `Names`, `Rename`.",
+        "estimated_effort": "Low",
+        "expected_seo_impact": "High",
+        "line": 74,
+        "policy_id": "",
+        "rule_id": "",
+        "evidence": "",
+        "intended_audiences": []
+      },
+      {
+        "file_path": "content/Aspose.Blog/pdf/2026-07-10-extract-text-from-scanned-pdfs-in-csharp/index.md",
         "issue_type": "weak_internal_links",
         "severity": "Medium",
         "explanation": "Post has fewer than two internal links. Policy: internal-linking; rule: IL-001.",
@@ -760,25 +764,7 @@
         ]
       },
       {
-        "file_path": "content/Aspose.Blog/pdf/2026-07-08-create-pdf-booklet-in-python/index.md",
-        "issue_type": "short_title",
-        "severity": "Medium",
-        "explanation": "Title may be too short to communicate the search promise. Policy: on-page-seo; rule: OPS-002.",
-        "why_it_matters": "Short generic titles often underperform in search results.",
-        "recommended_fix": "Expand the title with topic, audience, file format, or outcome.",
-        "estimated_effort": "Low",
-        "expected_seo_impact": "Medium",
-        "line": 0,
-        "policy_id": "on-page-seo",
-        "rule_id": "OPS-002",
-        "evidence": "title_length=28",
-        "intended_audiences": [
-          "Search users evaluating SDK tutorials",
-          "Technical decision-makers comparing implementation options"
-        ]
-      },
-      {
-        "file_path": "content/Aspose.Blog/pdf/2026-07-08-create-pdf-booklet-in-python/index.md",
+        "file_path": "content/Aspose.Blog/pdf/2026-07-10-extract-text-from-scanned-pdfs-in-csharp/index.md",
         "issue_type": "too_few_outgoing_internal_links",
         "severity": "Medium",
         "explanation": "Post has fewer than two outgoing internal links. Policy: internal-linking; rule: IL-005.",
@@ -796,16 +782,73 @@
         ]
       }
     ],
-    "llm_suggestions": [],
+    "llm_suggestions": [
+      {
+        "file_path": "content/Aspose.Blog/pdf/2026-07-10-extract-text-from-scanned-pdfs-in-csharp/index.md",
+        "provider": "openai-compatible",
+        "model": "gpt-oss",
+        "cached": false,
+        "summary": "The post is thin, lacks inline images, contains several unresolved Aspose.PDF API symbols, and has weak internal linking; the audit recommends expanding content, adding visuals, correcting code to use verified SDK symbols, and strengthening SEO elements.",
+        "suggested_title": "Extract Text from Scanned PDFs with Aspose.PDF OCR in C# – Step‑by‑Step Guide",
+        "suggested_description": "A complete tutorial for .NET developers showing how to install Aspose.PDF, configure OCR, extract searchable text from scanned PDFs, and troubleshoot common issues.",
+        "outline": [
+          "Introduction",
+          "Prerequisites and Installation",
+          "Understanding Aspose.PDF OCR Capabilities",
+          "Corrected Code Example (using verified SDK symbols)",
+          "Running the Example and Verifying Output",
+          "Troubleshooting Common Errors and Licensing",
+          "Performance and Parallel Processing Tips",
+          "Additional Resources and Sample Projects",
+          "Conclusion"
+        ],
+        "faq_questions": [
+          "How do I extract text from a scanned PDF using Aspose.PDF OCR in C#?",
+          "Which OCR languages are supported by Aspose.PDF and how do I set them?",
+          "What licensing options are required to remove the watermark from OCR output?",
+          "How can I improve OCR accuracy for low‑resolution or noisy scans?",
+          "Can I process large PDFs in parallel with Aspose.PDF?"
+        ],
+        "content_actions": [
+          "Add at least two inline screenshots: one showing the OCR configuration UI (or code editor) and another showing the extracted text output file.",
+          "Replace the unresolved `OcrTextRecognitionOptions` with the verified `TextExtractionOptions` class and set its properties (Language, Resolution, PageSeparator).",
+          "Replace `OcrTextAbsorber` with the verified `TextAbsorber` class, passing the `TextExtractionOptions` instance to its constructor.",
+          "Remove the non‑existent `RecognizeTextWithOcr` and `RunExamples` references; instead call the corrected method directly from the sample code.",
+          "Add two contextual internal links, e.g., to the “How to Convert Scanned PDFs to Searchable PDFs” tutorial and the Aspose.PDF API reference page.",
+          "Add two outgoing internal links to related posts such as “Extract Text from PDF Documents with Aspose.PDF” and “Batch OCR Processing with Aspose.PDF”.",
+          "Expand the conclusion with a concise recap and a call‑to‑action encouraging readers to try the free license and explore other OCR features.",
+          "Insert a new “Troubleshooting” H2 section covering licensing warnings, out‑of‑memory errors, and unsupported image formats.",
+          "Update the meta description to 120‑160 characters and ensure the title length is within 30‑70 characters."
+        ],
+        "risk_notes": [
+          "Changing API symbols may affect compilation; verify the exact method signatures in the version of Aspose.PDF you are using.",
+          "If `TextExtractionOptions` does not expose OCR‑specific properties in a given SDK version, consider using the documented OCR API (e.g., `OcrEngine`) that is present in the allowlist.",
+          "Adding images increases page load size; optimize screenshots for web delivery.",
+          "Internal links must point to existing Hugo pages; confirm URLs before publishing."
+        ],
+        "issues_addressed": [
+          "moderate_thin_content (CQ-002)",
+          "suggest_body_output_image (CQ-006)",
+          "unresolved_api_symbol – OcrTextRecognitionOptions",
+          "unresolved_api_symbol – OcrTextAbsorber",
+          "unresolved_api_class – RecognizeTextWithOcr",
+          "unresolved_api_class – RunExamples",
+          "weak_internal_links (IL-001)",
+          "too_few_outgoing_internal_links (IL-005)",
+          "missing_faq (CQ-004)",
+          "missing_post_image (CQ-005)"
+        ]
+      }
+    ],
     "scores": {
-      "content_quality": 93,
-      "on_page_seo": 86,
+      "content_quality": 45,
+      "on_page_seo": 100,
       "technical_seo": 85,
       "internal_linking": 86,
       "translation_seo": 100,
-      "organic_growth_opportunity": 77,
-      "priority": 50
+      "organic_growth_opportunity": 100,
+      "priority": 100
     },
-    "translation_group": "content/Aspose.Blog/pdf/2026-07-08-create-pdf-booklet-in-python/index.md"
+    "translation_group": "content/Aspose.Blog/pdf/2026-07-10-extract-text-from-scanned-pdfs-in-csharp/index.md"
   }
 ]

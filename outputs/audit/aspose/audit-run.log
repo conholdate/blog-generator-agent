@@ -1,32 +1,34 @@
-[10:17:46] Loading blog configuration
-[10:17:46] Audit output will be written to: /home/runner/work/blog-generator-agent/blog-generator-agent/outputs/audit/aspose
-[10:17:46] Preparing repository source: https://github.com/Aspose/aspose-blog.git
-[10:17:46] Loading policy files: 7 configured
-[10:17:46] Policy files loaded: 7
-[10:18:40] Repository ready: /home/runner/work/blog-generator-agent/blog-generator-agent/outputs/_repos/aspose-blog
-[10:18:40] Detecting Hugo project structure
-[10:18:40] Hugo config files detected: config.yml
-[10:18:40] Scanning Markdown content; include translations: False; product filter: Aspose.blog/pdf; post date filter: 2026-07-08
-[10:18:48] Markdown scan complete: 2 files
-[10:18:48] Loaded product config: Aspose.PDF
-[10:18:48] Preparing SDK/API reference validation
-[10:18:48] Indexing API reference repository: pdf-net-api-reference
-[10:19:11] API reference symbols indexed: 27015
-[10:19:11] Indexing API reference repository: pdf-java-api-reference
-[10:19:13] API reference symbols indexed: 11369
-[10:19:13] Indexing API reference repository: pdf-python_net-api-reference
-[10:19:13] API reference symbols indexed: 6921
-[10:19:13] Checking local image and asset references
-[10:19:13] Grouping translations
-[10:19:13] Translation grouping complete: 2 groups
-[10:19:13] Running technical Hugo SEO audit
-[10:19:13] Technical audit complete: 1 issues
-[10:19:13] Running internal linking audit
-[10:19:13] Internal linking audit complete: 4 issues
-[10:19:13] Running content and on-page SEO audits
-[10:19:14] Applying policy-grounded rules
-[10:19:14] Scoring complete
-[10:19:14] Writing report files
-[10:19:14] Sending metrics API payload
-[10:19:14] Metrics API payload: {"timestamp":"2026-07-08T10:19:14.192246+00:00","agent_name":"Blog Audit Agent","agent_owner":"Muzammil Khan","job_type":"Blog Audit","run_id":"e59e6297-5cec-4604-ae81-44fc1740e6bd","status":"success","product":"Aspose.PDF","platform":"All","website":"aspose.com","website_section":"Blog","item_name":"Blog Posts","items_discovered":2,"items_failed":0,"items_succeeded":2,"run_duration_ms":87780.0,"token_usage":0,"api_calls_count":0}
-[10:19:14] Metrics API sent: delivery=success; status=200; response={"id":78532,"timestamp":"2026-07-08T10:19:14.192246+00:00","agent_name":"Blog Audit Agent","agent_owner":"Muzammil Khan","job_type":"Blog Audit","run_id":"e59e6297-5cec-4604-ae81-44fc1740e6bd","status":"success","product":"Aspose.PDF","platform":"All","website":"aspose.com","website_section":"Blog","item_name":"Blog Posts","items_discovered":2,"items_failed":0,"items_succeeded":2,"run_duration_ms":87780,"token_usage":0,"api_calls_count":0}
+[08:02:25] Loading blog configuration
+[08:02:25] Audit output will be written to: /home/runner/work/blog-generator-agent/blog-generator-agent/outputs/audit/aspose
+[08:02:25] Preparing repository source: https://github.com/Aspose/aspose-blog.git
+[08:02:25] Loading policy files: 7 configured
+[08:02:25] Policy files loaded: 7
+[08:03:19] Repository ready: /home/runner/work/blog-generator-agent/blog-generator-agent/outputs/_repos/aspose-blog
+[08:03:19] Detecting Hugo project structure
+[08:03:19] Hugo config files detected: config.yml
+[08:03:19] Scanning Markdown content; include translations: False; product filter: Aspose.blog/pdf; post date filter: 2026-07-10
+[08:03:26] Markdown scan complete: 2 files
+[08:03:26] Loaded product config: Aspose.PDF
+[08:03:26] Preparing SDK/API reference validation
+[08:03:26] Indexing API reference repository: pdf-net-api-reference
+[08:03:48] API reference symbols indexed: 27015
+[08:03:48] Indexing API reference repository: pdf-java-api-reference
+[08:03:50] API reference symbols indexed: 11369
+[08:03:50] Indexing API reference repository: pdf-python_net-api-reference
+[08:03:50] API reference symbols indexed: 6921
+[08:03:50] Checking local image and asset references
+[08:03:50] Grouping translations
+[08:03:50] Translation grouping complete: 2 groups
+[08:03:50] Running technical Hugo SEO audit
+[08:03:50] Technical audit complete: 1 issues
+[08:03:50] Running internal linking audit
+[08:03:50] Internal linking audit complete: 4 issues
+[08:03:50] Running content and on-page SEO audits
+[08:03:56] Applying policy-grounded rules
+[08:03:56] Running optional LLM suggestion enrichment
+[08:03:56] Running LLM suggestion enrichment for 2 posts
+[08:04:35] Scoring complete
+[08:04:35] Writing report files
+[08:04:35] Sending metrics API payload
+[08:04:35] Metrics API payload: {"timestamp":"2026-07-10T08:04:35.639954+00:00","agent_name":"Blog Audit Agent","agent_owner":"Muzammil Khan","job_type":"Blog Audit","run_id":"0f2386d1-b186-4b7e-b199-ad1b968c9992","status":"success","product":"Aspose.PDF","platform":"All","website":"aspose.com","website_section":"Blog","item_name":"Blog Posts","items_discovered":2,"items_failed":0,"items_succeeded":2,"run_duration_ms":130590.0,"token_usage":11384,"api_calls_count":2}
+[08:04:35] Metrics API sent: delivery=success; status=200; response={"id":94093,"timestamp":"2026-07-10T08:04:35.639954+00:00","agent_name":"Blog Audit Agent","agent_owner":"Muzammil Khan","job_type":"Blog Audit","run_id":"0f2386d1-b186-4b7e-b199-ad1b968c9992","status":"success","product":"Aspose.PDF","platform":"All","website":"aspose.com","website_section":"Blog","item_name":"Blog Posts","items_discovered":2,"items_failed":0,"items_succeeded":2,"run_duration_ms":130590,"token_usage":11384,"api_calls_count":2}

@@ -7,21 +7,21 @@ Scanned 2 Markdown files across 1 detected languages. The strongest opportunitie
 - Total blog posts detected: 2
 - Total languages detected: 1 (en)
 - Translation groups: 2
-- Total issues: 14
+- Total issues: 16
 - Audience profile: Developers and technical decision-makers evaluating or using Aspose APIs for document and file-format processing.
 
 ## Audit Segment Summary
 | Segment | Scope | Key Metric | Issues | Status | Detailed Report |
 | --- | --- | --- | --- | --- | --- |
-| Complete SEO | All audit areas | 2 posts, 14 total issues | 14 | Priority risk | complete-seo-audit.md |
-| Content Quality | Markdown body and structure | 1 posts under 800 words | 3 | Monitor | content-improvement-plan.md |
+| Complete SEO | All audit areas | 2 posts, 16 total issues | 16 | Priority risk | complete-seo-audit.md |
+| Content Quality | Markdown body and structure | 1 posts under 800 words | 7 | Needs cleanup | content-improvement-plan.md |
 | Developer Audience Fit | API/developer usefulness | 0 missing code examples | 0 | Clear | complete-seo-audit.md |
-| Code/API Audit | Code blocks and SDK/API symbols | 12 code blocks | 0 | Clear | code-audit.md |
-| On-Page SEO | Titles, descriptions, headings, links, images | 0 description length issues | 2 | Monitor | post-audit.csv |
+| Code/API Audit | Code blocks and SDK/API symbols | 7 code blocks | 4 | Monitor | code-audit.md |
+| On-Page SEO | Titles, descriptions, headings, links, images | 0 description length issues | 0 | Clear | post-audit.csv |
 | Technical Hugo SEO | Config, templates, robots, canonical, hreflang, schema | 1 technical findings | 1 | Monitor | technical-seo-audit.md |
 | Internal Linking | Outgoing links, incoming links, broken local links, anchors | 4 linking findings | 4 | Monitor | internal-linking-audit.md |
 | Multilingual SEO | Translation groups and localized metadata | 0 groups missing languages | 0 | Clear | complete-seo-audit.md |
-| Quick Wins | Low-effort fixes | 8 low-effort findings | 8 | Needs cleanup | quick-wins.md |
+| Quick Wins | Low-effort fixes | 10 low-effort findings | 10 | Needs cleanup | quick-wins.md |
 | Content Inventory | Years and product-family distribution | 1 years, 1 product groups | 0 | Informational | audit-summary.md |
 
 ## Repository Signal Tables
@@ -52,10 +52,10 @@ Scanned 2 Markdown files across 1 detected languages. The strongest opportunitie
 | Signal | Count |
 | --- | --- |
 | Missing title | 0 |
-| Titles under 30 chars | 1 |
+| Titles under 30 chars | 0 |
 | Titles over 60 chars | 0 |
 | Missing description | 0 |
-| Descriptions under 120 chars | 0 |
+| Descriptions under 120 chars | 1 |
 | Descriptions over 170 chars | 0 |
 | Duplicate title values | 0 |
 | Files affected by duplicate titles | 0 |
@@ -75,15 +75,15 @@ Scanned 2 Markdown files across 1 detected languages. The strongest opportunitie
 ## Highest-Priority Posts
 | File | Priority | Issues | Top Issue | Recommended Action |
 | --- | --- | --- | --- | --- |
-| `content/Aspose.Blog/pdf/2026-07-08-create-pdf-booklet-in-python/index.md` | 50 | 6 | moderate_thin_content | Expand with examples, screenshots, troubleshooting notes, and a stronger conclusion. |
-| `content/Aspose.Blog/pdf/2026-07-08-add-or-remove-annotations-in-python/index.md` | 24 | 3 | suggest_body_output_image | Consider adding an output screenshot or result image inside the post body if it helps readers validate the tutorial result. |
+| `content/Aspose.Blog/pdf/2026-07-10-extract-text-from-scanned-pdfs-in-csharp/index.md` | 100 | 8 | moderate_thin_content | Expand with examples, screenshots, troubleshooting notes, and a stronger conclusion. |
+| `content/Aspose.Blog/pdf/2026-07-10-add-timestamped-digital-signatures-to-pdf-in-csharp/index.md` | 22 | 3 | suggest_body_output_image | Consider adding an output screenshot or result image inside the post body if it helps readers validate the tutorial result. |
 
 ## Severity Summary
 | Severity | Issue Count |
 | --- | --- |
 | Critical | 0 |
-| High | 0 |
-| Medium | 12 |
+| High | 4 |
+| Medium | 10 |
 | Low | 0 |
 | Opportunity | 2 |
 
