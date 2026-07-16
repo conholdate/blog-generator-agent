@@ -1,22 +1,22 @@
 # Complete SEO Audit Report
 
 ## Executive Summary
-This local audit scanned 2 Markdown files for Aspose. It found 16 total issues across content quality, on-page SEO, technical Hugo SEO, internal linking, multilingual SEO, and audience fit.
-The estimated overall SEO health score is 77/100. The highest-leverage work is to fix high-severity content gaps, improve developer-intent completeness, repair internal linking weaknesses, and tighten translation metadata.
+This local audit scanned 3 Markdown files for Aspose. It found 33 total issues across content quality, on-page SEO, technical Hugo SEO, internal linking, multilingual SEO, and audience fit.
+The estimated overall SEO health score is 66/100. The highest-leverage work is to fix high-severity content gaps, improve developer-intent completeness, repair internal linking weaknesses, and tighten translation metadata.
 
 - Repository: `/home/runner/work/blog-generator-agent/blog-generator-agent/outputs/_repos/aspose-blog`
 - Audience profile: Developers and technical decision-makers evaluating or using Aspose APIs for document and file-format processing.
-- Markdown files scanned: 2
+- Markdown files scanned: 3
 - Languages detected: 1
-- Translation groups: 2
-- Total issues: 16
+- Translation groups: 3
+- Total issues: 33
 
 ## SEO Scorecard
 | Area | Score | Interpretation |
 | --- | --- | --- |
-| Overall SEO Health | 77 | Good but has visible improvement opportunities. |
-| Content Quality | 44 | High risk. Prioritize remediation. |
-| On-Page SEO | 100 | Strong. Monitor and refine. |
+| Overall SEO Health | 66 | Needs focused cleanup and refresh work. |
+| Content Quality | 19 | High risk. Prioritize remediation. |
+| On-Page SEO | 72 | Good but has visible improvement opportunities. |
 | Technical SEO | 92 | Strong. Monitor and refine. |
 | Internal Linking | 50 | Needs focused cleanup and refresh work. |
 | Translation SEO | 100 | Strong. Monitor and refine. |
@@ -28,36 +28,40 @@ The estimated overall SEO health score is 77/100. The highest-leverage work is t
 | Severity | Count |
 | --- | --- |
 | Critical | 0 |
-| High | 4 |
-| Medium | 10 |
+| High | 11 |
+| Medium | 19 |
 | Low | 0 |
-| Opportunity | 2 |
+| Opportunity | 3 |
 
 ### Top Issue Types
 | Issue Type | Count |
 | --- | --- |
-| too_few_outgoing_internal_links | 4 |
-| suggest_body_output_image | 2 |
-| weak_internal_links | 2 |
-| unresolved_api_symbol | 2 |
-| unresolved_api_class | 2 |
-| orphan_post | 2 |
-| moderate_thin_content | 1 |
+| unresolved_api_class | 7 |
+| too_few_outgoing_internal_links | 6 |
+| suggest_body_output_image | 3 |
+| unresolved_api_module | 3 |
+| title_length | 3 |
+| weak_internal_links | 3 |
+| short_title | 3 |
+| orphan_post | 3 |
+| unresolved_api_symbol | 1 |
 | missing_robots | 1 |
 
 ### Top Priority Posts
 | File | Language | Priority | Issues | Top Issue | Recommended Action |
 | --- | --- | --- | --- | --- | --- |
-| `content/Aspose.Blog/pdf/2026-07-10-extract-text-from-scanned-pdfs-in-csharp/index.md` | en | 100 | 8 | moderate_thin_content | Expand with examples, screenshots, troubleshooting notes, and a stronger conclusion. |
-| `content/Aspose.Blog/pdf/2026-07-10-add-timestamped-digital-signatures-to-pdf-in-csharp/index.md` | en | 22 | 3 | suggest_body_output_image | Consider adding an output screenshot or result image inside the post body if it helps readers validate the tutorial result. |
+| `content/Aspose.Blog/pdf/2026-07-16-add-barcode-to-pdf-in-python/index.md` | en | 100 | 10 | suggest_body_output_image | Consider adding an output screenshot or result image inside the post body if it helps readers validate the tutorial result. |
+| `content/Aspose.Blog/pdf/2026-07-16-convert-csv-to-pdf-in-java/index.md` | en | 100 | 8 | suggest_body_output_image | Consider adding an output screenshot or result image inside the post body if it helps readers validate the tutorial result. |
+| `content/Aspose.Blog/pdf/2026-07-16-convert-epub-to-pdf-in-csharp/index.md` | en | 100 | 8 | suggest_body_output_image | Consider adding an output screenshot or result image inside the post body if it helps readers validate the tutorial result. |
 
 ## Per-Post SEO Segment Score Table
 All scanned posts are listed below, sorted by priority score. Each SEO audit segment is shown as a column for direct post-by-post comparison.
 
 | Blog Post | Title | Language | Content Quality | On-Page SEO | Technical SEO | Internal Linking | Translation SEO | Developer Audience Fit | Growth Opportunity | Priority | Issues | Top Issues |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| `content/Aspose.Blog/pdf/2026-07-10-extract-text-from-scanned-pdfs-in-csharp/index.md` | Extract Text from Scanned PDFs with Aspose.PDF OCR in C# | en | 45 | 100 | 85 | 86 | 100 | 100 | 100 | 100 | 8 | moderate_thin_content; suggest_body_output_image; unresolved_api_symbol; unresolved_api_symbol; unresolved_api_class |
-| `content/Aspose.Blog/pdf/2026-07-10-add-timestamped-digital-signatures-to-pdf-in-csharp/index.md` | Add Timestamped Digital Signatures to PDFs in C# | en | 100 | 100 | 85 | 86 | 100 | 100 | 44 | 22 | 3 | suggest_body_output_image; weak_internal_links; too_few_outgoing_internal_links |
+| `content/Aspose.Blog/pdf/2026-07-16-add-barcode-to-pdf-in-python/index.md` | Add Barcode to PDF in Python | en | 40 | 86 | 85 | 86 | 100 | 100 | 100 | 100 | 10 | suggest_body_output_image; unresolved_api_module; unresolved_api_module; unresolved_api_module; unresolved_api_class |
+| `content/Aspose.Blog/pdf/2026-07-16-convert-csv-to-pdf-in-java/index.md` | Convert CSV to PDF in Java | en | 64 | 86 | 85 | 86 | 100 | 100 | 100 | 100 | 8 | suggest_body_output_image; unresolved_api_class; unresolved_api_class; unresolved_api_symbol; title_length |
+| `content/Aspose.Blog/pdf/2026-07-16-convert-epub-to-pdf-in-csharp/index.md` | Convert EPUB to PDF in C# | en | 64 | 86 | 85 | 86 | 100 | 100 | 99 | 100 | 8 | suggest_body_output_image; unresolved_api_class; unresolved_api_class; unresolved_api_class; title_length |
 
 ## Content Quality Audit
 Developer and file-format processing content should satisfy a concrete task, show working code, explain setup, clarify input/output formats, and provide troubleshooting or limitations.
@@ -65,7 +69,7 @@ Developer and file-format processing content should satisfy a concrete task, sho
 | Signal | Count | Share |
 | --- | --- | --- |
 | Under 500 words | 0 | 0.0% |
-| Under 800 words | 1 | 50.0% |
+| Under 800 words | 0 | 0.0% |
 | No code block | 0 | 0.0% |
 | No post image | 0 | 0.0% |
 | No H2 heading | 0 | 0.0% |
@@ -101,10 +105,10 @@ The target reader is a developer or technical evaluator using Aspose APIs for do
 | Signal | Count |
 | --- | --- |
 | Missing title | 0 |
-| Titles under 30 chars | 0 |
+| Titles under 30 chars | 3 |
 | Titles over 60 chars | 0 |
 | Missing description | 0 |
-| Descriptions under 120 chars | 1 |
+| Descriptions under 120 chars | 0 |
 | Descriptions over 170 chars | 0 |
 | Duplicate title values | 0 |
 | Files affected by duplicate titles | 0 |
@@ -129,9 +133,9 @@ The target reader is a developer or technical evaluator using Aspose APIs for do
 ## Internal Linking Audit
 | Signal | Count |
 | --- | --- |
-| Internal linking issues | 4 |
-| Orphan posts | 2 |
-| Too few outgoing internal links | 2 |
+| Internal linking issues | 6 |
+| Orphan posts | 3 |
+| Too few outgoing internal links | 3 |
 | Broken internal links | 0 |
 | Weak anchor text | 0 |
 
@@ -143,7 +147,7 @@ The target reader is a developer or technical evaluator using Aspose APIs for do
 ## Multilingual SEO
 | Signal | Count |
 | --- | --- |
-| Translation groups | 2 |
+| Translation groups | 3 |
 | Groups missing configured languages | 0 |
 | Groups with translation issues | 0 |
 | Detected languages | 1 |
@@ -158,12 +162,12 @@ The target reader is a developer or technical evaluator using Aspose APIs for do
 ### Posts By Year
 | Year | Posts |
 | --- | --- |
-| 2026 | 2 |
+| 2026 | 3 |
 
 ### Product-Family Distribution
 | Product | Posts |
 | --- | --- |
-| pdf | 2 |
+| pdf | 3 |
 
 ## Priority Roadmap
 | Priority | Action | Reason |
