@@ -2352,8 +2352,8 @@ def save_blog_metadata_to_sheet(brand: str, url: str, title: str, author: str, g
     client = gspread.authorize(creds)
 
     spreadsheet = client.open_by_key(spreadsheet_id)
-    headers = ["Published Date", "Brand", "Product", "Blog Title", "Author", "Gist URL", "Blog URL", "Layout"]
-    row = [published_date, brand, product, title, author, gist_url, url, layout]
+    headers = ["Published Date", "Product", "Blog Title", "Author", "Gist URL", "Blog URL", "Layout"]
+    row = [published_date, product, title, author, gist_url, url, layout]
 
     # Save to consolidated sheet
     consolidated = spreadsheet.worksheet(settings.CONSOLIDATED_SHEET_NAME_FOR_BLOGPOST_METADATA)
@@ -2374,7 +2374,7 @@ def get_recent_layouts(product: str, limit: int = 2) -> list[str]:
     read from the consolidated blog metadata sheet. Used by the layout selector
     to avoid repeating the same skeleton back-to-back within a product.
 
-    Columns are read positionally (Product = col 3, Layout = col 8) because
+    Columns are read positionally (Product = col 2, Layout = col 7) because
     older rows predate the Layout column and get_all_records would choke on
     the header mismatch.
     """
@@ -2390,8 +2390,8 @@ def get_recent_layouts(product: str, limit: int = 2) -> list[str]:
 
     layouts = []
     for row in worksheet.get_all_values()[1:]:
-        if len(row) >= 8 and row[2].strip().lower() == product.strip().lower() and row[7].strip():
-            layouts.append(row[7].strip())
+        if len(row) >= 7 and row[1].strip().lower() == product.strip().lower() and row[6].strip():
+            layouts.append(row[6].strip())
     return layouts[-limit:]
 
 
