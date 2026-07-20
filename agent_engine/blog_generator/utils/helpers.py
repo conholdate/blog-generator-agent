@@ -2223,7 +2223,17 @@ def extract_blog_metadata(markdown_content: str) -> dict:
 
 # sheet automation functions
 
+ROTATION_STATE_TAB = "RotationState"
+
+
 def get_last_processed_product() -> str:
+    """Round-robin pointer for fallback topic selection.
+
+    Prefers the dedicated RotationState tab (written only by round-robin picks,
+    so GSC-driven picks never move the pointer). Falls back to the legacy
+    behavior — last row of the consolidated metadata tab — until the state tab
+    exists.
+    """
     base_dir = get_project_root()
     key_path = os.path.join(base_dir, "keys", settings.GOOGLE_KEY)
 
@@ -2232,6 +2242,15 @@ def get_last_processed_product() -> str:
     client = gspread.authorize(creds)
 
     spreadsheet = client.open_by_key(settings.SPREADSHEET_ID_FOR_BLOGPOST_METADATA)
+
+    try:
+        state_value = spreadsheet.worksheet(ROTATION_STATE_TAB).acell("B1").value
+        if state_value and state_value.strip():
+            print(f"Rotation pointer from {ROTATION_STATE_TAB}: {state_value.strip()}")
+            return state_value.strip()
+    except gspread.WorksheetNotFound:
+        pass
+
     worksheet = spreadsheet.worksheet(settings.CONSOLIDATED_SHEET_NAME_FOR_BLOGPOST_METADATA)
 
     all_rows = worksheet.get_all_records()
@@ -2243,6 +2262,28 @@ def get_last_processed_product() -> str:
 
     last_row = all_rows[-1]
     return last_row.get("Product", None)
+
+
+def update_last_processed_product(product: str) -> None:
+    """Advance the round-robin pointer (RotationState tab, cell B1).
+
+    Called only after round-robin picks — GSC-driven picks leave the pointer
+    untouched so the fallback rotation stays fair.
+    """
+    base_dir = get_project_root()
+    key_path = os.path.join(base_dir, "keys", settings.GOOGLE_KEY)
+
+    scopes = ["https://www.googleapis.com/auth/spreadsheets"]
+    creds = Credentials.from_service_account_file(key_path, scopes=scopes)
+    client = gspread.authorize(creds)
+
+    spreadsheet = client.open_by_key(settings.SPREADSHEET_ID_FOR_BLOGPOST_METADATA)
+    try:
+        worksheet = spreadsheet.worksheet(ROTATION_STATE_TAB)
+    except gspread.WorksheetNotFound:
+        worksheet = spreadsheet.add_worksheet(title=ROTATION_STATE_TAB, rows=2, cols=2)
+    worksheet.update([["Last Round-Robin Product", product]], "A1:B1")
+    print(f"Rotation pointer updated to: {product}")
 
 
 def get_next_tab() -> str:

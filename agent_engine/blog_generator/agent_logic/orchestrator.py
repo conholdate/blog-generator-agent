@@ -8,7 +8,7 @@ from tools.mcp_tools import generate_markdown_file, fetch_category_related_artic
 from utils import prompts
 from utils.seo_validator import validate_seo_content, validate_and_fix_meta_description, validate_and_fix_seo_title
 from utils.file_format_mappings import FILE_FORMAT_MAPPINGS, BASE_URL
-from utils.helpers import mark_topic_as_generated, prepare_context, get_productInfo, get_topic_by_index, inject_file_format_links, slugify, normalize_case_preserve_formats_in_keywords, clean_ai_generated_markdown, validate_markdown_links, capitalize_file_formats_for_title, setup_logger, generate_tags_with_llm, save_blog_metadata_to_sheet, extract_blog_metadata, get_topic_from_sheet, get_next_tab, extract_product_names, get_recent_layouts
+from utils.helpers import mark_topic_as_generated, prepare_context, get_productInfo, get_topic_by_index, inject_file_format_links, slugify, normalize_case_preserve_formats_in_keywords, clean_ai_generated_markdown, validate_markdown_links, capitalize_file_formats_for_title, setup_logger, generate_tags_with_llm, save_blog_metadata_to_sheet, extract_blog_metadata, get_topic_from_sheet, get_next_tab, extract_product_names, get_recent_layouts, convert_sheet_row_to_file_format, update_last_processed_product
 from utils.layouts import select_layout
 from utils.metricsRecorder import MetricsRecorder
 from services.LLMservice import llm_service
@@ -70,24 +70,44 @@ class BlogOrchestrator:
     ):
         """Let the agent autonomously create a blog with metrics tracking"""
         set_tracing_disabled(disabled=True)
-        # topics_raw_data = get_topic_by_index(topics_file, index)
-        
-        # topics_raw_data = get_topic_from_sheet(sheet_name="PDF")
-        sheet_name = get_next_tab()
 
-        if not sheet_name:
-            print("No approved topics found in any tab. Exiting gracefully.")
-            return {
-                "status": "skipped",
-                "message": "No approved topics found in any tab"
-            }
-        print("going down further")
-        # Get first approved topic from that tab
-        result = get_topic_from_sheet(sheet_name)
-        if not result:
-            print(f"No approved topics in {sheet_name}, skipping.")
-            return
-        topics_raw_data, row_number = result
+        # ── GSC-first topic selection ────────────────────────────────────
+        # Fail-safe by design: any error here (API, quota, sheets, parsing)
+        # logs a warning and falls through to the existing round-robin flow,
+        # so current behavior is never affected.
+        gsc_selection = None
+        try:
+            from services.gsc_selector import select_topic_via_gsc
+            gsc_selection = select_topic_via_gsc(self.brand)
+        except Exception as gsc_err:
+            print(f"⚠️ GSC selection unavailable ({gsc_err}); using round-robin", flush=True)
+
+        if gsc_selection:
+            sheet_name = gsc_selection["tab"]
+            topics_raw_data = convert_sheet_row_to_file_format(gsc_selection["row"])
+            row_number = gsc_selection["row_number"]
+            print(
+                f"🎯 Topic selected via GSC opportunity '{gsc_selection['keyword']}' "
+                f"(tab: {sheet_name}, row: {row_number})",
+                flush=True,
+            )
+        else:
+            # ── Fallback: existing round-robin selection (unchanged) ─────
+            sheet_name = get_next_tab()
+
+            if not sheet_name:
+                print("No approved topics found in any tab. Exiting gracefully.")
+                return {
+                    "status": "skipped",
+                    "message": "No approved topics found in any tab"
+                }
+            print("going down further")
+            # Get first approved topic from that tab
+            result = get_topic_from_sheet(sheet_name)
+            if not result:
+                print(f"No approved topics in {sheet_name}, skipping.")
+                return
+            topics_raw_data, row_number = result
         print(f"sheet data {topics_raw_data}")
         allowed_products = extract_product_names(self.products)
         post_topic = topics_raw_data.pop("topic")
@@ -316,6 +336,14 @@ class BlogOrchestrator:
             self.log(f" File path: {filepath}")
             self.log("---Execution ended---")
             mark_topic_as_generated(sheet_name, row_number)
+
+            # Advance the rotation pointer only for round-robin picks so
+            # GSC-driven picks never disturb the fallback rotation's fairness.
+            if not gsc_selection:
+                try:
+                    update_last_processed_product(sheet_name)
+                except Exception as state_err:
+                    print(f"⚠️ Could not update rotation pointer (non-fatal): {state_err}", flush=True)
 
             # Write product name for GitHub Actions to read
             base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))

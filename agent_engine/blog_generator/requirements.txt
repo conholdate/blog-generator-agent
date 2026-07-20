@@ -7,3 +7,4 @@ bs4
 aiohttp
 python-frontmatter
 gspread
+google-api-python-client>=2.169,<3

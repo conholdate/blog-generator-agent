@@ -40,6 +40,16 @@ class Settings(BaseSettings):
     ASPOSE_CLOUD_AUTHOR:str=""
     GROUPDOCS_CLOUD_AUTHOR:str=""
 
+    # GSC-driven topic selection (fail-safe: any error falls back to round-robin)
+    GSC_ENABLED: bool = True                       # kill-switch
+    GSC_PROPERTY_URL: str = ""                     # default: https://blog.<brand>/
+    GSC_TOP_N: int = 5                             # opportunities tried per run
+    GSC_MIN_IMPRESSIONS: int = 30                  # floor over the recent 90-day window
+    GSC_POSITION_MIN: float = 8.0                  # striking-distance band
+    GSC_POSITION_MAX: float = 20.0
+    GSC_MATCH_MIN_COVERAGE: float = 0.7            # keyword-token overlap to accept a topic
+    GSC_SUGGESTIONS_SHEET_NAME: str = "GSC Suggestions"
+
     # Agent Settings
     NUMBER_OF_BLOG_WORDS: int = 0  
     ENVIRONMENT: str = ""
