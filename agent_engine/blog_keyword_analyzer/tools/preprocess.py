@@ -1,5 +1,5 @@
 from __future__ import annotations
-from typing import List, Optional
+from typing import List
 from ..schemas import KeywordRecord
 from agent_engine.blog_keyword_analyzer.workflow_support import clean_keyword_phrase
 

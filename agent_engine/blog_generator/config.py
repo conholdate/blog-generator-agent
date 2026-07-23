@@ -13,7 +13,8 @@ ENV_PATH = BASE_DIR / ".env"
 class Settings(BaseSettings):
     model_config = ConfigDict(
         env_file=ENV_PATH,
-        env_file_encoding="utf-8"
+        env_file_encoding="utf-8",
+        extra="ignore"
     )
 
     PROFESSIONALIZE_BASE_URL: str = "http://your-llm-server.com/v1"

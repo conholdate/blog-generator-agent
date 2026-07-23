@@ -6,8 +6,10 @@ from sklearn.cluster import MiniBatchKMeans
 from ..schemas import KeywordRecord, Cluster, ClusterMetrics
 
 def _auto_k(n_samples: int) -> int:
-    if n_samples < 500: return 10
-    if n_samples < 2000: return 15
+    if n_samples < 500:
+        return 10
+    if n_samples < 2000:
+        return 15
     return 20
 
 def _to_1d(a) -> np.ndarray:

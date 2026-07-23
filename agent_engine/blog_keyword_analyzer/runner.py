@@ -13,8 +13,9 @@ from typing import Optional, List, Mapping, Any, Dict, Tuple
 
 from .schemas import RunRequest, RunResult, Cluster, KeywordRecord
 from .agents import build_keyword_workflow_agent
-from .config import settings
+from .config import settings, UNCONFIGURED_API_KEY
 from .tools.metrics import RunMetrics
+from .tools.policy import check_external_write_policy
 from agent_engine.blog_keyword_analyzer.tools.normalization import (
     canonical_blog_platform_key,
     KeywordRefiner,
@@ -294,6 +295,8 @@ def _sanitize_display_text(text: str, platform: Optional[str] = None) -> str:
     out = re.sub(r"(?i)\bwith\s+in\s+([A-Za-z0-9.+#]+)\b", r"in \1", out)
     out = re.sub(r"(?i)\badd\s+pages\s+to\s+PDF\s+with\s+for\s+in\s+\.NET\b", "add pages to PDF in .NET", out)
     out = re.sub(r"(?i)\badd\s+pages\s+to\s+PDF\s+with\s+for\s+in\s+([A-Za-z0-9.+#]+)\b", r"add pages to PDF in \1", out)
+    out = re.sub(r"\bPAGES\b", "Pages", out)
+    out = re.sub(r"\bIMAGES\b", "Images", out)
     out = re.sub(r"(?i)\bfor[-\s]?in\s+loop\b", "foreach loop", out)
     out = re.sub(r"(?i)\bfor\s+in\s+loop\b", "foreach loop", out)
     out = re.sub(r"(?i)\busing\s+a\s+for\s+in\s+loop\b", "using a loop", out)
@@ -326,6 +329,7 @@ def _display_question(text: str, platform: Optional[str]) -> str:
     had_question_mark = str(text or "").strip().endswith("?")
     out = _content_platform_display(text, platform)
     out = _fix_step_by_step_case(refiner.to_sentence_case(out))
+    out = re.sub(r"\bDO\b", "do", out)
     out = re.sub(r"\bi\b", "I", out)
     out = re.sub(r"(?i)\bextract\s+Pages\b", "extract pages", out)
     out = re.sub(r"(?i)\bextract\s+Images\b", "extract images", out)
@@ -366,6 +370,9 @@ def _display_editorial_note(text: str, platform: Optional[str]) -> str:
         out,
     )
     out = _fix_step_by_step_case(refiner.to_sentence_case(out))
+    out = re.sub(r"\bDO\b", "do", out)
+    out = re.sub(r"\bPAGES\b", "pages", out)
+    out = re.sub(r"\bIMAGES\b", "images", out)
     out = _clean_note(out)
     out = re.sub(r"\bi\b", "I", out)
     return out
@@ -681,7 +688,8 @@ def write_topics_markdown(
         keyword_analysis = _keyword_groups_to_mapping(pick("keyword_analysis", {}) or {})
         product_page_opportunities = _product_page_opportunities(result, product_name, platform)
 
-        topic_title = _fix_step_by_step_case(refiner.to_title_case(_topic_title_platform_display(title, platform)))
+        topic_title = _sanitize_display_text(title, platform)
+        topic_title = _fix_step_by_step_case(refiner.to_title_case(_topic_title_platform_display(topic_title, platform)))
         topic_title = _sanitize_display_text(topic_title, platform)
         lines.append(f"## {idx}. {topic_title}")
         if cluster_id is not None:
@@ -810,7 +818,9 @@ def write_missing_topics_markdown(
         lines.append(f"## {platform}")
         lines.append("")
         for idx, topic in enumerate(result.topics, start=1):
-            lines.append(f"### {idx}. {_sanitize_display_text(refiner.to_title_case(_topic_title_platform_display(topic.title, platform)), platform)}")
+            topic_title = _sanitize_display_text(topic.title, platform)
+            topic_title = refiner.to_title_case(_topic_title_platform_display(topic_title, platform))
+            lines.append(f"### {idx}. {_sanitize_display_text(topic_title, platform)}")
             lines.append(f"- **Cluster ID:** `{topic.cluster_id}`")
             lines.append(f"- **Target persona:** {_sanitize_display_text(_content_platform_display(topic.target_persona, platform), platform)}")
             lines.append(f"- **Blog post angle:** {_sanitize_display_text(_fix_step_by_step_case(_content_platform_display(topic.angle, platform)), platform)}")
@@ -1043,6 +1053,12 @@ def run_sync(
     include_product_in_title: bool = True,
     source: str = "csv",
 ) -> tuple[RunResult, RunMetrics]:
+    if not settings.PROFESSIONALIZE_API_KEY or settings.PROFESSIONALIZE_API_KEY == UNCONFIGURED_API_KEY:
+        raise SystemExit(
+            "PROFESSIONALIZE_API_KEY is not configured. Set CUSTOM_LLM_API_KEY (or "
+            "PROFESSIONALIZE_API_KEY) in your environment or .env file before running. "
+            "See .env.example for the required variables."
+        )
     workflow_agent = build_keyword_workflow_agent(source)
     return workflow_agent.execute(
         req=req,
@@ -1178,6 +1194,18 @@ def main() -> None:
     )
     parser.set_defaults(include_product_in_title=True)
 
+    parser.add_argument(
+        "--dry-run",
+        dest="dry_run",
+        action="store_true",
+        help=(
+            "Run the pipeline and write local output, but skip writes to shared "
+            "external state (currently: appending to the live Google Sheet in "
+            "live-sheet mode). See tools/policy.py."
+        ),
+    )
+    parser.set_defaults(dry_run=False)
+
     args = parser.parse_args()
 
     if args.use_serp_api and args.use_llm_keywords:
@@ -1307,26 +1335,38 @@ def main() -> None:
             file_name=file_name,
         )
 
-        try:
-            ensure_output_headers(
-                credentials_file=settings.GOOGLE_SERVICE_ACCOUNT_FILE,
-                spreadsheet_id=output_spreadsheet_id,
-                worksheet_name=output_worksheet_name,
+        policy = check_external_write_policy(
+            action="append_topic_row_to_google_sheet",
+            dry_run=args.dry_run,
+            topics_count=len(result.topics),
+            metrics=metrics,
+        )
+        if not policy.approved:
+            print(
+                f"[dry-run] Would append output row to "
+                f"spreadsheet={output_spreadsheet_id} worksheet={output_worksheet_name}"
             )
-            append_output_row(
-                credentials_file=settings.GOOGLE_SERVICE_ACCOUNT_FILE,
-                spreadsheet_id=output_spreadsheet_id,
-                worksheet_name=output_worksheet_name,
-                row_payload=build_output_row(
-                    selection=selection,
-                    selected_platform="General" if selected_platform == "general" else selected_platform,
-                    result=result,
-                    markdown_path=str(md_path),
-                ),
-            )
-        except Exception as e:
-            logger.warning("Google Sheet output append failed: %s", e, exc_info=True)
-            raise SystemExit(f"Run completed but failed to append output row: {e}")
+        else:
+            try:
+                ensure_output_headers(
+                    credentials_file=settings.GOOGLE_SERVICE_ACCOUNT_FILE,
+                    spreadsheet_id=output_spreadsheet_id,
+                    worksheet_name=output_worksheet_name,
+                )
+                append_output_row(
+                    credentials_file=settings.GOOGLE_SERVICE_ACCOUNT_FILE,
+                    spreadsheet_id=output_spreadsheet_id,
+                    worksheet_name=output_worksheet_name,
+                    row_payload=build_output_row(
+                        selection=selection,
+                        selected_platform="General" if selected_platform == "general" else selected_platform,
+                        result=result,
+                        markdown_path=str(md_path),
+                    ),
+                )
+            except Exception as e:
+                logger.warning("Google Sheet output append failed: %s", e, exc_info=True)
+                raise SystemExit(f"Run completed but failed to append output row: {e}")
 
         print(md_path)
         return
@@ -1471,11 +1511,12 @@ def main() -> None:
     _print_summary(result)
 
     # Save JSON artifact under KRA_OUTPUT_DIR
+    _resolve_output_dir()
+    # Uncomment this section if you want to save JSON file
+    """
     out_dir = _resolve_output_dir()
     brand_slug = _brand_slug(result.brand)
     out_path = out_dir / f"kra_result_{brand_slug}_{result.run_id}.json"
-    # Uncomment this section if you want to save JSON file
-    """
     with open(out_path, "w", encoding="utf-8") as f:
         # pydantic v2
         f.write(result.model_dump_json(indent=2))

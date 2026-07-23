@@ -2,11 +2,23 @@ from __future__ import annotations
 import json
 import os
 from datetime import datetime, timezone, timedelta
-from typing import Any, Optional
+from typing import Any, Callable, Optional
 
 from agent_engine.config_sources import get_agent_metrics_config
-from agent_engine.hugo_blog_audit_agent.metrics_api import send_metrics_api
 from agent_engine.blog_keyword_analyzer.tools.normalization import canonical_platform_label, normalize_platform_family
+
+MetricsSender = Callable[[dict[str, Any], Any], list[dict[str, Any]]]
+
+
+def _load_metrics_api_sender() -> Optional[MetricsSender]:
+    """Load the shared metrics sender only when metrics delivery is actually needed."""
+    try:
+        from agent_engine.hugo_blog_audit_agent.metrics_api import send_metrics_api
+    except ModuleNotFoundError as exc:
+        if exc.name == "agent_engine.hugo_blog_audit_agent":
+            return None
+        raise
+    return send_metrics_api
 
 
 def _metrics_enabled() -> bool:
@@ -23,6 +35,15 @@ def platform_display(value: Optional[str]) -> str:
 def _send_metrics_api_best_effort(payload: dict[str, Any], debug: bool = False) -> None:
     """Best-effort metrics API delivery; never raises."""
     try:
+        send_metrics_api = _load_metrics_api_sender()
+        if send_metrics_api is None:
+            if debug:
+                print(
+                    f"[metrics:{payload.get('stage','')}] Metrics API package is unavailable; "
+                    "skipping best-effort delivery."
+                )
+            return
+
         payload_data = dict(payload)
 
         print("[metrics] payload before send:")

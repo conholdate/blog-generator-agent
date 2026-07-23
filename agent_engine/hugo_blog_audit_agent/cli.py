@@ -14,6 +14,7 @@ from .auditor import run_audit
 from .config import load_blog_config
 from .metrics_api import AGENT_NAME, AGENT_OWNER, ITEM_NAME, JOB_TYPE, PLATFORM, WEBSITE_SECTION, send_metrics_api
 from .reports import write_reports
+from .state import build_current_run_state, diff_run_state, load_previous_run_state, write_run_state
 
 
 MODES = {"report", "report-with-fix-suggestions", "report-with-draft-fixes"}
@@ -64,10 +65,13 @@ class RunLogger:
     def __init__(self, enabled: bool = True) -> None:
         self.enabled = enabled
         self.lines: list[str] = []
+        self.records: list[dict[str, Any]] = []
 
-    def log(self, message: str) -> None:
-        line = f"[{datetime.now().strftime('%H:%M:%S')}] {message}"
+    def log(self, message: str, level: str = "info") -> None:
+        now = datetime.now(timezone.utc)
+        line = f"[{now.strftime('%H:%M:%S')}] {message}"
         self.lines.append(line)
+        self.records.append({"ts": now.isoformat(), "level": level, "message": message})
         if self.enabled:
             print(line)
 
@@ -87,6 +91,7 @@ def main(argv: list[str] | None = None) -> None:
     draft_fixes = args.mode == "report-with-draft-fixes" or args.generate_draft_fixes
     output_dir = Path(args.output_dir) if args.output_dir else blog_audit_dir(config.output_dir, config.blog_name)
     logger.log(f"Audit output will be written to: {output_dir.resolve()}")
+    previous_state = load_previous_run_state(output_dir)
     result = run_audit(config, args.product, args.mode, languages, args.include_translations, args.keep_workdir, Path(args.workdir), post_date=args.post_date, log=logger.log)
     logger.log("Writing report files")
     run_context = build_report_run_context(args, config, output_dir, languages, draft_fixes)
@@ -94,7 +99,17 @@ def main(argv: list[str] | None = None) -> None:
     metrics = build_run_metrics(result, output_dir, args.mode, args.product, args.post_date, languages, args.include_translations, started, args.detailed_outputs, run_id)
     metrics["send_metrics"] = bool(args.send_metrics)
     metrics["metrics_api"] = deliver_metrics(metrics, args.send_metrics, logger.log)
-    write_run_artifacts(output_dir, logger.lines, metrics)
+    current_state = build_current_run_state(result, run_id, metrics["timestamp"])
+    state_diff = diff_run_state(previous_state, current_state)
+    metrics["state_diff"] = state_diff
+    if state_diff["has_previous_run"]:
+        logger.log(
+            f"Compared against previous run {state_diff['previous_run_id']}: "
+            f"{len(state_diff['regressed_posts'])} regressed, {len(state_diff['improved_posts'])} improved, "
+            f"{len(state_diff['new_posts'])} new"
+        )
+    write_run_state(output_dir, current_state)
+    write_run_artifacts(output_dir, logger.lines, metrics, logger.records)
     if args.verbose:
         print(f"Repository: {result.repo_root}")
         print(f"Posts scanned: {len(result.posts)}")
@@ -255,9 +270,17 @@ def product_display_name(config, product: str | None) -> str:
     return str(config.blog_name)
 
 
-def write_run_artifacts(output_dir: Path, log_lines: list[str], metrics: dict[str, Any]) -> None:
+def write_run_artifacts(
+    output_dir: Path,
+    log_lines: list[str],
+    metrics: dict[str, Any],
+    log_records: list[dict[str, Any]] | None = None,
+) -> None:
     output_dir.mkdir(parents=True, exist_ok=True)
     (output_dir / "audit-run.log").write_text("\n".join(log_lines) + "\n", encoding="utf-8")
+    records = log_records if log_records is not None else [{"message": line} for line in log_lines]
+    jsonl_body = "\n".join(json.dumps(record, ensure_ascii=False) for record in records)
+    (output_dir / "audit-run.jsonl").write_text(jsonl_body + ("\n" if jsonl_body else ""), encoding="utf-8")
     (output_dir / "audit-metrics.json").write_text(json.dumps(metrics, indent=2, ensure_ascii=False), encoding="utf-8")
 
 
@@ -290,6 +313,15 @@ def print_metrics(metrics: dict[str, Any]) -> None:
             f"errors={llm_metrics.get('errors', 0)}"
         )
     print("Severity counts: " + ", ".join(f"{key}={value}" for key, value in metrics["severity_counts"].items()))
+    state_diff = metrics.get("state_diff") or {}
+    if state_diff.get("has_previous_run"):
+        print(
+            "Since previous run: "
+            f"regressed={len(state_diff.get('regressed_posts', []))}, "
+            f"improved={len(state_diff.get('improved_posts', []))}, "
+            f"new={len(state_diff.get('new_posts', []))}, "
+            f"removed={len(state_diff.get('removed_posts', []))}"
+        )
 
 
 if __name__ == "__main__":

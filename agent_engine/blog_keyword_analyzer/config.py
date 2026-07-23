@@ -1,9 +1,16 @@
 from dotenv import load_dotenv
 from pathlib import Path
-from pydantic import Field, SecretStr
+from pydantic import AliasChoices, Field
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 load_dotenv()  # loads .env from project root by default
+
+# Sentinel default for PROFESSIONALIZE_API_KEY. Deliberately not a real-shaped
+# credential: the OpenAI SDK client constructor requires a non-empty string at
+# import time (empty string raises), so this must stay non-empty, but it must
+# also never be mistakable for a live key. Real configuration must come from
+# CUSTOM_LLM_API_KEY / PROFESSIONALIZE_API_KEY in the environment or .env.
+UNCONFIGURED_API_KEY = "not-configured"
 
 
 class Settings(BaseSettings):
@@ -20,19 +27,34 @@ class Settings(BaseSettings):
         env_file=Path(".env"),
         env_file_encoding="utf-8",
         extra="ignore",
+        populate_by_name=True,
     )
-    PROFESSIONALIZE_BASE_URL: str ="https://llm.professionalize.com/v1"
-    PROFESSIONALIZE_API_KEY_1: SecretStr | None = None
-    PROFESSIONALIZE_API_KEY: str = "sk-etp8ZujXM8fJYQ8ApV6a-Q" # PROFESSIONALIZE_API_KEY_1
+    PROFESSIONALIZE_BASE_URL: str = Field(
+        default="https://llm.professionalize.com/v1",
+        validation_alias=AliasChoices("PROFESSIONALIZE_BASE_URL", "CUSTOM_LLM_BASE_URL"),
+    )
+    # No secret ships as a source default. If neither PROFESSIONALIZE_API_KEY nor
+    # CUSTOM_LLM_API_KEY is set in the environment/.env, this stays at the
+    # UNCONFIGURED_API_KEY sentinel and the CLI fails closed with a clear error
+    # (see runner.main()) instead of silently using a committed credential.
+    PROFESSIONALIZE_API_KEY: str = Field(
+        default=UNCONFIGURED_API_KEY,
+        validation_alias=AliasChoices("PROFESSIONALIZE_API_KEY", "CUSTOM_LLM_API_KEY"),
+    )
 
     # Standard OpenAI key (used when no custom base URL is set)
     OPENAI_API_KEY: str | None = None
 
     # --- Model defaults ---
-    PROFESSIONALIZE_LLM_MODEL: str = "gpt-oss"
+    PROFESSIONALIZE_LLM_MODEL: str = Field(
+        default="gpt-oss",
+        validation_alias=AliasChoices("PROFESSIONALIZE_LLM_MODEL", "DEFAULT_LLM_MODEL"),
+    )
 
     # --- SerpAPI integration ---
-    SERPAPI_KEY: str = "66c1df1bd9d524fc1f5864c6070b9a73666994b392127d642839817119d7992d"
+    # Empty by default; serp_import.py already treats a falsy SERPAPI_KEY as
+    # "not configured" and degrades gracefully (returns no SERP keywords).
+    SERPAPI_KEY: str = ""
     SERPAPI_ENGINE: str = "google"  # we’ll use standard Google search
 
     # --- KRA scoring / data dirs (unchanged) ---
@@ -47,6 +69,12 @@ class Settings(BaseSettings):
     KRA_OUTPUT_DIR: str = "./content"
     BLOG_CONTENT_ROOT: str = ""
     KRA_METRICS_DB_PATH: str = "./src/data/kra_metrics_db.json"
+    # Persisted, cross-run topic-title history (brand/product/platform ->
+    # previously generated/rejected titles). Lets a later, separate run avoid
+    # regenerating a title an earlier run already produced, even before that
+    # title's post is published (content-index dedup only knows about already
+    # published posts).
+    KRA_RUN_HISTORY_PATH: str = "./content/kra_run_history.json"
     DEBUG: bool = False
     GOOGLE_SERVICE_ACCOUNT_FILE: str = ""
 

@@ -26,7 +26,7 @@ DEFAULT_METRICS_API_RETRIES = 2
 DEFAULT_METRICS_API_TIMEOUT_SECONDS = 30.0
 
 
-def normalized_metrics_payload(metrics: dict[str, Any], *, allow_job_type_env_override: bool = True) -> dict[str, Any]:
+def normalized_metrics_payload(metrics: dict[str, Any]) -> dict[str, Any]:
     llm_metrics = metrics.get("llm") or {}
     items_discovered = nonnegative_int(value_with_fallback(metrics, "items_discovered", "markdown_files_scanned"))
     items_failed = nonnegative_int(metrics.get("items_failed"))
@@ -37,11 +37,7 @@ def normalized_metrics_payload(metrics: dict[str, Any], *, allow_job_type_env_ov
         "timestamp": nonempty_string(metrics.get("timestamp"), default=datetime.now(timezone.utc).isoformat()),
         "agent_name": nonempty_string(metrics.get("agent_name"), default=AGENT_NAME),
         "agent_owner": nonempty_string(metrics.get("agent_owner"), default=AGENT_OWNER),
-        "job_type": nonempty_string(
-            metrics_job_type() if allow_job_type_env_override else "",
-            metrics.get("job_type"),
-            default=JOB_TYPE,
-        ),
+        "job_type": nonempty_string(metrics_job_type(), metrics.get("job_type"), default=JOB_TYPE),
         "run_id": nonempty_string(metrics.get("run_id"), default=str(uuid4())),
         "status": nonempty_string(metrics.get("status"), default="success"),
         "product": nonempty_string(metrics.get("product"), metrics.get("product_name"), metrics.get("blog_name"), default="Unknown product"),
@@ -58,14 +54,9 @@ def normalized_metrics_payload(metrics: dict[str, Any], *, allow_job_type_env_ov
     }
 
 
-def send_metrics_api(
-    metrics: dict[str, Any],
-    log: Callable[[str], None] | None = None,
-    *,
-    allow_job_type_env_override: bool = True,
-) -> list[dict[str, Any]]:
+def send_metrics_api(metrics: dict[str, Any], log: Callable[[str], None] | None = None) -> list[dict[str, Any]]:
     load_dotenv()
-    payload = normalized_metrics_payload(metrics, allow_job_type_env_override=allow_job_type_env_override)
+    payload = normalized_metrics_payload(metrics)
     url = metrics_api_url()
     api_key = metrics_api_key()
     if not api_key:

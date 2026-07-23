@@ -243,6 +243,20 @@ def filter_duplicate_topics(topics: list[Any], existing_topics: List[dict]) -> l
     return filtered
 
 
+def build_retry_existing_topics(
+    rejected_topics: list[Any],
+    existing_topics: List[dict],
+) -> List[dict]:
+    """
+    Given topics that were all filtered out as duplicates, return an
+    existing_topics list augmented with those rejected titles, so a retry
+    generation call can be told explicitly which titles to avoid repeating.
+    """
+    rejected_titles = [getattr(t, "title", "") or "" for t in rejected_topics]
+    rejected_titles = [title for title in rejected_titles if title]
+    return list(existing_topics) + [{"title": title} for title in rejected_titles]
+
+
 def resolve_metric_context(brand: str) -> Tuple[str, str]:
     website, section = get_metric_context(brand)
 

@@ -1,0 +1,28 @@
+{
+  "source_url": "https://releases.aspose.com/pdf/net/release-notes/2026/aspose-pdf-for-net-26-6-release-notes/",
+  "publication_readiness": "draft_ready",
+  "blocker_reason": null,
+  "topics": [
+    {
+      "heading": "Integrated OCR for PDF Text Recognition",
+      "slug": "extract-text-pdfs-ocr-net",
+      "publish_date": "2026-07-23",
+      "publication_status": "needs_code_review",
+      "seo_issues": [
+        "Meta description outside the 120-165 character range",
+        "A paragraph has more than 7 sentences"
+      ]
+    },
+    {
+      "heading": "Signing with Certificate and TSA",
+      "slug": "digitally-sign-pdf-certificate-timestamp",
+      "publish_date": "2026-07-23",
+      "publication_status": "needs_code_review",
+      "seo_issues": []
+    }
+  ],
+  "rejected_sections": [
+    "Bug Fixing and Other Changes",
+    "Added APIs"
+  ]
+}

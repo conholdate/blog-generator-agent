@@ -54,9 +54,9 @@ async def fetch_keywords(topic: str, product_name: str = None, platform: str = N
 
         prompt = keyword_filter_prompt(topic, product_name, merged, platform)
 
-        response = await llm_service.complete(prompt, max_tokens=4000)
+        response_text, _usage = await llm_service.complete(prompt, max_tokens=4000)
 
-        output_text = response.strip()
+        output_text = (response_text or "").strip()
 
         if not output_text:
             raise ValueError("Empty response from LLM")

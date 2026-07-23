@@ -155,6 +155,11 @@ def run_audit(
     if config.llm.get("enabled"):
         emit("Running optional LLM suggestion enrichment")
         llm_metrics = enrich_posts_with_llm(posts, policies, config, workdir, emit)
+        risk_issue_count = llm_metrics.get("risk_issues_flagged", 0)
+        if risk_issue_count:
+            emit(f"Re-scoring {risk_issue_count} post(s) after LLM-flagged risk notes")
+        for post in posts:
+            post.scores = score_post(post)
     else:
         llm_metrics = {"enabled": False, "skipped_reason": "disabled"}
     emit("Scoring complete")
