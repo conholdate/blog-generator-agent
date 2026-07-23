@@ -1,4 +1,4 @@
-openai>=1.51,<3
+openai>=1.51,<2.45  # openai 2.45+ adds InputTokensDetails.cache_write_tokens, which openai-agents==0.4.2 doesn't set, breaking Runner.run_sync
 openai-agents==0.4.2
 pydantic>=2.7,<3
 pandas>=2.2,<3
