@@ -1,4 +1,4 @@
-# aspose.html — Gaps (blogs_to_blogs, baseline=all)
+# Aspose.HTML — Gaps (Blogs to Blogs, Baseline=all)
 
 ---
 
@@ -6,11 +6,11 @@
 
 | 🧩 Metric | Value | Status |
 | --- | --- | --- |
-| **Total Canonical Topics** | **110** | — |
-| **Topics with Gaps** | **110** | ⚠️ |
-| **Fully Covered Topics** | 0 | — |
-| **Excluded (Release / Updates)** | 23 | ℹ️ |
-| **Baseline Scope** | all | — |
+| **Total Canonical Topics** | **72** | — |
+| **Topics with Gaps** | **70** | ⚠️ |
+| **Fully Covered Topics** | 2 | ✅ |
+| **Excluded (Release / Updates)** | 0 | ℹ️ |
+| **Baseline Scope** | ALL | — |
 | **Case** | blogs_to_blogs | — |
 
 ---
@@ -19,10 +19,10 @@
 
 | Indicator | Score | Interpretation |
 | --- | --- | --- |
-| Cross-Platform Parity | 0.0% | 🔴 Weak |
+| Cross-Platform Parity | 2.8% | 🔴 Weak |
 | Content Reusability | High | ✅ Strong |
-| Porting Opportunity | 100.0% gaps | 🔥 Very High |
-| Excluded Noise (Releases) | 23 | ✅ Controlled |
+| Porting Opportunity | 97.2% gaps | 🔥 Very High |
+| Excluded Noise (Releases) | 0 | ✅ Controlled |
 
 ---
 
@@ -30,17 +30,17 @@
 
 | Platform | # Covered | # Missing | Coverage |
 | --- | --- | --- | --- |
-| **general** | 42 | 68 | 🔴 Weak (38.2%) |
-| **java** | 55 | 55 | 🔴 Weak (50.0%) |
-| **net** | 32 | 78 | 🔴 Weak (29.1%) |
-| **python** | 7 | 103 | 🔴 Weak (6.4%) |
+| **GENERAL** | 25 | 47 | 🔴 Weak (34.7%) |
+| **JAVA** | 37 | 35 | 🔴 Weak (51.4%) |
+| **NET** | 30 | 42 | 🔴 Weak (41.7%) |
+| **PYTHON** | 9 | 63 | 🔴 Weak (12.5%) |
 
 ---
 
 ### 🔎 Executive Insights
 
-- **100.0%** of canonical topics are missing on at least one platform (after exclusions).
-- Highest gap density: **python** (103 missing), **net** (78 missing), **general** (68 missing).
+- **97.2%** of canonical topics are missing on at least one platform (after exclusions).
+- Highest gap density: **PYTHON** (63 missing), **GENERAL** (47 missing), **NET** (42 missing).
 - Gaps are concentrated in **8** major category/subcategory clusters (see Section 4).
 - Release notes, product updates, and version announcements are intentionally excluded from this report.
 
@@ -50,21 +50,21 @@
 
 | # | Cluster | Representative topic | Missing platforms (high-impact) | Suggested new titles (examples) |
 | --- | --- | --- | --- | --- |
-| 1 | **Development / Image Processing** | Convert HTML to BMP in Java Programmatically | general, net, python | Convert HTML to BMP in Java Programmatically — general; Convert HTML to BMP in Java Programmatically — net; Convert HTML to BMP in Java Programmatically — python |
-| 2 | **Development / Image Processing** | Convert HTML to JPG, PNG, TIFF, or BMP Image in Java | general, net, python | Convert HTML to JPG, PNG, TIFF, or BMP Image in Java — general; Convert HTML to JPG, PNG, TIFF, or BMP Image in Java — net; Convert HTML to JPG, PNG, TIFF, or BMP Image in Java — python |
-| 3 | **Development / Web Development** | Merge HTML Template with JSON in C# | general, java, python | Merge HTML Template with JSON in C# — general; Merge HTML Template with JSON in C# — java; Merge HTML Template with JSON in C# — python |
-| 4 | **Development / Web Development** | Java API For Manipulating DOM Programmatically | general, net, python | Java API For Manipulating DOM Programmatically — general; Java API For Manipulating DOM Programmatically — net; Java API For Manipulating DOM Programmatically — python |
-| 5 | **Development / File Conversion** | Convert Markdown to PNG in Java using a Markdown Processor | general, net, python | Convert Markdown to PNG in Java using a Markdown Processor — general; Convert Markdown to PNG in Java using a Markdown Processor — net; Convert Markdown to PNG in Java using a Markdown Processor — python |
-| 6 | **Development / File Conversion** | Inter File Conversion using Aspose.HTML for Java | general, net, python | Inter File Conversion using Aspose.HTML for Java — general; Inter File Conversion using Aspose.HTML for Java — net; Inter File Conversion using Aspose.HTML for Java — python |
-| 7 | **Document Conversion / XHTML to PDF** | Convert XHTML to PDF in C# | general, java, python | Convert XHTML to PDF in C# — general; Convert XHTML to PDF in C# — java; Convert XHTML to PDF in C# — python |
-| 8 | **Document Conversion / XHTML to PDF** | Convert XHTML to PDF in Java | general, net, python | Convert XHTML to PDF in Java — general; Convert XHTML to PDF in Java — net; Convert XHTML to PDF in Java — python |
-| 9 | **Programming / HTML Processing** | Convert HTML to Plain Text or Extract Text from HTML in C# | java, net, python | Convert HTML to Plain Text or Extract Text from HTML in C# — java; Convert HTML to Plain Text or Extract Text from HTML in C# — net; Convert HTML to Plain Text or Extract Text from HTML in C# — python |
-| 10 | **Programming / HTML Processing** | Create, Read, and Edit HTML Files in C# | general, java, python | Create, Read, and Edit HTML Files in C# — general; Create, Read, and Edit HTML Files in C# — java; Create, Read, and Edit HTML Files in C# — python |
-| 11 | **Development / Web Scraping** | Download Image from URL in C# | general, java, python | Download Image from URL in C# — general; Download Image from URL in C# — java; Download Image from URL in C# — python |
-| 12 | **Development / Web Scraping** | Extract SVG from Website in C# | general, java, python | Extract SVG from Website in C# — general; Extract SVG from Website in C# — java; Extract SVG from Website in C# — python |
-| 13 | **Development / Document Conversion** | Convert HTML to PDF File on Linux in .NET | net, python | Convert HTML to PDF File on Linux in .NET — net; Convert HTML to PDF File on Linux in .NET — python |
-| 14 | **Development / Document Conversion** | Convert HTML To PDF in C#: The Ultimate Solution | java, python | Convert HTML To PDF in C#: The Ultimate Solution — java; Convert HTML To PDF in C#: The Ultimate Solution — python |
-| 15 | **Conversion / HTML to Image** | Convert HTML to JPEG Online - Free Tool | java, net, python | Convert HTML to JPEG Online - Free Tool — java; Convert HTML to JPEG Online - Free Tool — net; Convert HTML to JPEG Online - Free Tool — python |
+| 1 | **Development / Web Development** | Create HTML page | GENERAL, JAVA, NET | Create HTML page — GENERAL; Create HTML page — JAVA; Create HTML page — NET |
+| 2 | **Development / Web Development** | Edit HTML Aspose.HTML | GENERAL, JAVA, NET | Edit HTML Aspose.HTML — GENERAL; Edit HTML Aspose.HTML — JAVA; Edit HTML Aspose.HTML — NET |
+| 3 | **Development / Image Processing** | HTML to BMP | GENERAL, NET, PYTHON | HTML to BMP — GENERAL; HTML to BMP — NET; HTML to BMP — PYTHON |
+| 4 | **Development / Image Processing** | HTML to PNG | GENERAL, NET, PYTHON | HTML to PNG — GENERAL; HTML to PNG — NET; HTML to PNG — PYTHON |
+| 5 | **Document Conversion / HTML to PDF** | Generate PDF from HTML | GENERAL, JAVA, PYTHON | Generate PDF from HTML — GENERAL; Generate PDF from HTML — JAVA; Generate PDF from HTML — PYTHON |
+| 6 | **Document Conversion / HTML to PDF** | HTML tables to PDF | GENERAL, JAVA, NET | HTML tables to PDF — GENERAL; HTML tables to PDF — JAVA; HTML tables to PDF — NET |
+| 7 | **Web Development / HTML Tools** | Iframe generator create iframe | JAVA, NET, PYTHON | Iframe generator create iframe — JAVA; Iframe generator create iframe — NET; Iframe generator create iframe — PYTHON |
+| 8 | **Web Development / HTML Tools** | MAKE table HTML table generator | JAVA, NET, PYTHON | MAKE table HTML table generator — JAVA; MAKE table HTML table generator — NET; MAKE table HTML table generator — PYTHON |
+| 9 | **Programming / HTML Manipulation** | Change HTML border color | GENERAL, JAVA, PYTHON | Change HTML border color — GENERAL; Change HTML border color — JAVA; Change HTML border color — PYTHON |
+| 10 | **Programming / HTML Manipulation** | Change text color in HTML | GENERAL, PYTHON | Change text color in HTML — GENERAL; Change text color in HTML — PYTHON |
+| 11 | **Programming / Web Scraping** | DOWNLOAD images from WEBSITE | GENERAL, JAVA, PYTHON | DOWNLOAD images from WEBSITE — GENERAL; DOWNLOAD images from WEBSITE — JAVA; DOWNLOAD images from WEBSITE — PYTHON |
+| 12 | **Programming / Web Scraping** | Create web scraper | NET, PYTHON | Create web scraper — NET; Create web scraper — PYTHON |
+| 13 | **Development / File Conversion** | MD to PNG | GENERAL, NET, PYTHON | MD to PNG — GENERAL; MD to PNG — NET; MD to PNG — PYTHON |
+| 14 | **Development / File Conversion** | SVG to PDF | GENERAL, NET | SVG to PDF — GENERAL; SVG to PDF — NET |
+| 15 | **Web Development / HTML Embedding** | Create iframe embed code | GENERAL, JAVA, PYTHON | Create iframe embed code — GENERAL; Create iframe embed code — JAVA; Create iframe embed code — PYTHON |
 
 *These recommendations are derived from topics missing across the largest number of platforms and clustered by category/subcategory.*
 
@@ -74,10 +74,10 @@
 
 | Platform | # topics covered | % of baseline rows | # topics missing |
 | --- | --- | --- | --- |
-| **general** | 42 | 38.2% | 68 |
-| **java** | 55 | 50.0% | 55 |
-| **net** | 32 | 29.1% | 78 |
-| **python** | 7 | 6.4% | 103 |
+| **GENERAL** | 25 | 34.7% | 47 |
+| **JAVA** | 37 | 51.4% | 35 |
+| **NET** | 30 | 41.7% | 42 |
+| **PYTHON** | 9 | 12.5% | 63 |
 
 **Takeaway:** Focus first on platforms with the highest missing counts and lowest coverage percentage; port high-impact topics from the best-covered platform first.
 
@@ -87,18 +87,18 @@
 
 | Cluster | # gap topics | Missing signals | Most-missed platforms |
 | --- | --- | --- | --- |
-| **Development / Image Processing** | 4 | 12 | general, net, python |
-| **Development / Web Development** | 4 | 12 | general, java, net, python |
-| **Development / File Conversion** | 4 | 10 | general, net, python |
-| **Document Conversion / XHTML to PDF** | 3 | 9 | python, general, java, net |
-| **Programming / HTML Processing** | 3 | 9 | java, python, net, general |
-| **Development / Web Scraping** | 3 | 8 | python, general, java, net |
-| **Development / Document Conversion** | 3 | 6 | python, net, java |
-| **Conversion / HTML to Image** | 2 | 6 | net, python, java, general |
-| **Development / File Format Conversion** | 2 | 6 | java, python, general, net |
-| **File Conversion / Document Formats** | 2 | 6 | general, python, java, net |
-| **Programming / HTML Manipulation** | 2 | 6 | general, python, net, java |
-| **Web Development / HTML Manipulation** | 2 | 6 | general, java, python |
+| **Development / Web Development** | 4 | 12 | GENERAL, JAVA, NET, PYTHON |
+| **Development / Image Processing** | 3 | 9 | GENERAL, NET, PYTHON |
+| **Document Conversion / HTML to PDF** | 2 | 6 | GENERAL, JAVA, PYTHON, NET |
+| **Web Development / HTML Tools** | 2 | 6 | JAVA, NET, PYTHON |
+| **Programming / HTML Manipulation** | 2 | 5 | GENERAL, PYTHON, JAVA |
+| **Programming / Web Scraping** | 2 | 5 | PYTHON, NET, GENERAL, JAVA |
+| **Development / File Conversion** | 2 | 5 | GENERAL, NET, PYTHON |
+| **Web Development / HTML Embedding** | 1 | 3 | GENERAL, JAVA, PYTHON |
+| **Web Development / Forms** | 1 | 3 | GENERAL, JAVA, PYTHON |
+| **Programming / HTML Processing** | 1 | 3 | GENERAL, JAVA, PYTHON |
+| **Web Development / Web Scraping** | 1 | 3 | GENERAL, JAVA, PYTHON |
+| **Web Development / Image Processing** | 1 | 3 | JAVA, NET, PYTHON |
 
 ---
 
