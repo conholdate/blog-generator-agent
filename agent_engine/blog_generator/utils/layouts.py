@@ -94,7 +94,8 @@ Format for each step:
    - Mention classes/methods naturally
    - Link API references if URLs are in context: "Initialize the [ClassName](api_url) class"
    - NEVER put links inside backticks
-   - Optional short code snippet if helpful
+   - Optional short code snippet if helpful - EXCERPTED from the PROVIDED CODE
+     block earlier in this prompt, not invented separately
 MUST include at least 1 Documentation or API Reference link in this section.
 """ + _CODE_TAG_REMINDER,
 )
@@ -109,7 +110,9 @@ COMPLETE_CODE = Section(
         "## Full Working Example for [Primary Keyword + Differentiating Qualifier]",
     ),
     spec="""**COMPLETE CODE EXAMPLE SECTION (MANDATORY - NON-NEGOTIABLE)**
-EVERY blog post MUST have exactly this section with ONE complete, working code example.
+EVERY blog post MUST have exactly this section with ONE complete, working code
+example - reproduce the PROVIDED CODE block given earlier in this prompt
+EXACTLY as given. Do not modify, shorten, or rewrite it.
 
 Intro sentence (1-2 sentences before the code block):
 - NEVER use: "ready-to-run", "ready-to-use", "production-ready", "copy-paste ready"
@@ -142,6 +145,10 @@ CURL = Section(
     ),
     cloud_only=True,
     spec="""**cURL COMMANDS SECTION (CLOUD ONLY - MANDATORY when isCloud = true)**
+This is a SEPARATE REST API approach to the SAME task as the PROVIDED CODE
+block earlier in this prompt (same source/target file formats, same
+operation) - it is NOT a translation of that code. Write idiomatic cURL for
+the equivalent REST operation.
 - Provide a brief 2-3 sentence introduction
 - Include all required cURL steps in logical order:
   1. Authenticate and Get Access Token
@@ -171,6 +178,8 @@ SETUP = Section(
 - MUST link the Download URL from context in this section
 - Mention any prerequisites (runtime version, account/credentials for cloud)
 - Keep it practical: commands and short config snippets, minimal prose
+- Any snippet beyond the install command MUST be excerpted from the PROVIDED
+  CODE block earlier in this prompt, not invented separately
 """ + _CODE_TAG_REMINDER,
 )
 
@@ -184,12 +193,14 @@ HOW_IT_WORKS = Section(
         "## Breaking Down [Primary Keyword Action in Language/Platform]",
     ),
     spec="""**HOW THE CODE WORKS SECTION**
-Walk the reader through the complete code example they just saw, as a numbered
-breakdown (3-6 numbered points), each explaining one part of the code:
+Walk the reader through the complete code example they just saw (the PROVIDED
+CODE block earlier in this prompt), as a numbered breakdown (3-6 numbered
+points), each explaining one part of that same code:
 1. **[What this part does]**: which class/method is used and why
 Link API references for classes/methods where URLs are in context.
 MUST include at least 1 Documentation or API Reference link.
-Do NOT repeat the full code - reference it. Short 1-3 line excerpts are allowed.
+Do NOT repeat the full code - reference it. Short 1-3 line excerpts are
+allowed, and MUST be taken directly from the PROVIDED CODE, not invented.
 """ + _CODE_TAG_REMINDER,
 )
 
@@ -207,6 +218,8 @@ PREREQUISITES_SETUP = Section(
 - Show the install command / dependency snippet (Maven/NuGet/pip as appropriate)
 - MUST link the Download URL from context in this section
 - End with a forward-looking sentence that leads into the walkthrough
+- Any snippet beyond the install command MUST be excerpted from the PROVIDED
+  CODE block earlier in this prompt, not invented separately
 """ + _CODE_TAG_REMINDER,
 )
 
@@ -223,11 +236,13 @@ WALKTHROUGH = Section(
 One H2 with an H3 per step (3-6 steps). Each H3:
 - Title Case, action-oriented: ### Step 1: Load the Source Document
 - 1-3 sentences explaining the step
-- A SHORT code snippet showing just that step (regular CODE_SNIPPET tags)
+- A SHORT code snippet showing just that step (regular CODE_SNIPPET tags) -
+  EXCERPTED from the PROVIDED CODE block earlier in this prompt, split into
+  logical steps. Do not invent code that differs from it.
 - Link API references for classes/methods where URLs are in context
 MUST include at least 1 Documentation or API Reference link across the steps.
-The snippets are partial by design - the full program appears in the
-Complete Code Example section that follows.
+The snippets are partial by design - the full program appears verbatim in
+the Complete Code Example section that follows.
 """ + _CODE_TAG_REMINDER,
 )
 
@@ -278,9 +293,11 @@ IMPLEMENTATION = Section(
     spec="""**IMPLEMENTATION SECTION (steps + code interleaved)**
 Implement the scenario end to end. One H2 with an H3 per implementation step
 (3-5 steps). Each H3: 1-3 sentences + a SHORT code snippet (regular
-CODE_SNIPPET tags). Include the install command / dependency snippet in the
-first step. MUST link the Download URL and at least 1 API Reference link.
-The full program appears in the Complete Code Example section that follows.
+CODE_SNIPPET tags), EXCERPTED from the PROVIDED CODE block earlier in this
+prompt, split into logical steps - do not invent different code. Include the
+install command / dependency snippet in the first step. MUST link the
+Download URL and at least 1 API Reference link. The full program appears
+verbatim in the Complete Code Example section that follows.
 """ + _CODE_TAG_REMINDER,
 )
 
@@ -313,7 +330,9 @@ CONFIGURATION = Section(
     spec="""**CONFIGURATION / OPTIONS SECTION**
 Show 2-4 useful options/parameters the reader can adjust for this task.
 Brief explanation per option, with a short code snippet where it helps
-(regular CODE_SNIPPET tags). Link API Reference for classes/properties mentioned.
+(regular CODE_SNIPPET tags), consistent with the PROVIDED CODE block earlier
+in this prompt - do not invent a different implementation approach.
+Link API Reference for classes/properties mentioned.
 """ + _CODE_TAG_REMINDER,
 )
 

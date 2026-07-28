@@ -96,7 +96,8 @@ def get_blog_writer_prompt(
     tags: List[str] = [],
     isCloud: bool = False,
     allowed_products: List[str] = [],
-    layout_choice: Optional[LayoutChoice] = None
+    layout_choice: Optional[LayoutChoice] = None,
+    generated_code: Optional[Dict[str, str]] = None
 ) -> str:
     """
     Creates a full SEO blog-writing prompt with frontmatter, layout-driven
@@ -256,6 +257,45 @@ RULES:
         if other_important_and_relevant_things.strip()
         else ""
     )
+
+    # ------------------------------------------------------------------
+    # Provided code: the single source-of-truth snippet generated before
+    # this prompt was built. Every code-bearing section derives from it
+    # instead of inventing its own code (cURL is the one exception - it's
+    # a separate REST approach to the same task, not a translation of it).
+    # ------------------------------------------------------------------
+    provided_code_block = ""
+    if generated_code and generated_code.get("code"):
+        code_language = generated_code.get("language", "")
+        code_body = generated_code.get("code", "")
+        provided_code_block = f"""
+===============================================================================
+PROVIDED CODE (SOURCE OF TRUTH FOR ALL CODE IN THIS POST)
+===============================================================================
+
+The following {code_language} code has already been written and verified. It
+performs the exact task this blog post is about. Every code-bearing section in
+this post MUST derive its code from this snippet - do not invent different
+code that accomplishes the same task another way.
+
+```{code_language}
+{code_body}
+```
+
+RULES FOR USING THIS CODE:
+1. COMPLETE CODE EXAMPLE section: reproduce this code EXACTLY as given above,
+   wrapped in COMPLETE_CODE_SNIPPET tags, with the mandatory intro sentence
+   and disclaimer. Do not modify, shorten, rename variables, or rewrite it.
+2. Steps / Setup / Walkthrough / How the Code Works / Implementation /
+   Configuration sections: any short snippet shown MUST be excerpted
+   directly from the code above - same class/method names, same logic. Do
+   not invent alternate code that does the same thing a different way.
+3. cURL Commands section: this is a SEPARATE REST API approach to the SAME
+   task (same source/target file formats, same operation) - it is NOT a
+   translation of the code above. Write idiomatic cURL calls for the
+   equivalent REST operation.
+===============================================================================
+"""
 
     # ------------------------------------------------------------------
     # FULL PROMPT
@@ -736,7 +776,7 @@ faqs:
   - q: "[Optional]"
     a: "[Optional]"
 ---
-
+{provided_code_block}
 ===============================================================================
 PART 2: CONTENT STRUCTURE (MANDATORY SECTIONS)
 ===============================================================================
@@ -972,6 +1012,8 @@ PART 5: CODE SNIPPET REQUIREMENTS (CRITICAL)
 - Complete with all imports
 - No placeholder comments like "// ... rest of code"
 - NO license initialization code (License class, SetLicense, ApplyLicense)
+- When a PROVIDED CODE block appears earlier in this prompt, the Complete
+  Code Example section MUST reproduce it exactly - not a rewritten version
 
 ===============================================================================
 PART 6: KEYWORD STRATEGY (SEO - CRITICAL)
@@ -1219,6 +1261,63 @@ If any answer is NO - rewrite those sections before outputting.
 ===============================================================================
 END OF PROMPT
 ===============================================================================
+"""
+
+
+def get_code_snippet_prompt(
+    topic: str,
+    primary_keyword: str,
+    platform: str,
+    context: str = "",
+    outline: List[str] = [],
+    is_cloud: bool = False,
+) -> str:
+    """
+    Scoped prompt for generating the ONE complete, working code example that
+    the rest of the post (Steps, Setup, Walkthrough, Complete Code Example)
+    is built around. Asks for code only - no prose, headings, or frontmatter -
+    so the response is trivial to parse and swap for a non-LLM source later.
+    """
+    data = {}
+    for line in context.splitlines():
+        if ":" in line:
+            key, value = line.split(":", 1)
+            data[key.strip()] = value.strip()
+
+    product_name = data.get("ProductName", "")
+    outline_items = [str(item).strip() for item in (outline or []) if str(item).strip()]
+    outline_block = (
+        "Specific functionality to demonstrate (from the approved outline):\n"
+        + "\n".join(f"- {item}" for item in outline_items)
+        if outline_items
+        else ""
+    )
+    sdk_term = "library/API" if is_cloud else "SDK"
+
+    return f"""
+You are an expert {platform} developer. Write ONE complete, working code example
+in {platform} that accomplishes this task: "{topic}"
+
+Product/{sdk_term}: {product_name}
+Primary keyword/operation: {primary_keyword}
+{outline_block}
+
+REQUIREMENTS:
+- Syntactically correct and executable {platform} code
+- Complete with all necessary imports/using statements at the top
+- Full initialization, implementation logic, and resource cleanup
+- NO placeholder comments such as "// rest of code" or "// ..."
+- NO license initialization code (License class, SetLicense, ApplyLicense)
+- Use realistic but generic file paths (e.g. input.pdf, output.docx)
+- Do NOT include markdown prose, headings, or explanation - CODE ONLY
+
+RESPONSE FORMAT (STRICT):
+Respond with a SINGLE fenced code block and nothing else - no text before or
+after it:
+
+```{platform}
+// your complete code here
+```
 """
 
 

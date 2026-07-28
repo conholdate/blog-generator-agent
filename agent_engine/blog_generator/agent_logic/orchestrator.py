@@ -10,6 +10,7 @@ from utils.seo_validator import validate_seo_content, validate_and_fix_meta_desc
 from utils.file_format_mappings import FILE_FORMAT_MAPPINGS, BASE_URL
 from utils.helpers import mark_topic_as_generated, prepare_context, get_productInfo, get_topic_by_index, inject_file_format_links, slugify, normalize_case_preserve_formats_in_keywords, clean_ai_generated_markdown, validate_markdown_links, capitalize_file_formats_for_title, setup_logger, generate_tags_with_llm, save_blog_metadata_to_sheet, extract_blog_metadata, get_topic_from_sheet, get_next_tab, extract_product_names, get_recent_layouts, convert_sheet_row_to_file_format, update_last_processed_product
 from utils.layouts import select_layout
+from utils.code_snippet import generate_code_snippet
 from utils.metricsRecorder import MetricsRecorder
 from services.LLMservice import llm_service
 import json
@@ -208,6 +209,35 @@ class BlogOrchestrator:
             print(f"📐 Skeleton: {' -> '.join(layout_choice.skeleton())}", flush=True)
             # ─────────────────────────────────────────────────────────────────
 
+            # ── Code snippet generation: single source-of-truth code, up to  ──
+            # ── 3 retries. The whole post is built around this snippet, so  ──
+            # ── a total failure here aborts the run rather than falling     ──
+            # ── back to the writer inventing code inline.                   ──
+            print("💻 Generating source-of-truth code snippet...", flush=True)
+            generated_code = await generate_code_snippet(
+                topic=post_topic,
+                primary_keyword=f_keywords[0],
+                platform=platform,
+                context=context,
+                outline=blog_outline,
+                is_cloud=isCloud,
+                max_retries=3,
+                metrics=self.metrics,
+            )
+            if not generated_code:
+                message = "Code snippet generation failed after 3 attempts. Aborting blog generation."
+                print(f"❌ {message}", flush=True)
+                self.metrics.record_failure(message)
+                self.metrics.end_job()
+                return {
+                    "status": "error",
+                    "message": message,
+                    "run_id": self.metrics.run_id,
+                    "token_usage": self.metrics.token_usage["total_tokens"],
+                    "api_call_count": self.metrics.api_call_count,
+                }
+            # ─────────────────────────────────────────────────────────────────
+
             # ════════════════════════════════════════════════════════════════════
             # UPDATED: Using centralized LLM service instead of direct Agent creation
             # ════════════════════════════════════════════════════════════════════
@@ -226,7 +256,8 @@ class BlogOrchestrator:
                 tags,
                 isCloud,
                 allowed_products,
-                layout_choice=layout_choice
+                layout_choice=layout_choice,
+                generated_code=generated_code
             )
         
             result = await llm_service.run_agent(
