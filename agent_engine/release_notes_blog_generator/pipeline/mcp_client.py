@@ -41,7 +41,18 @@ def call_tool(
     if not server_script.exists():
         raise McpToolError(f"MCP server script not found: {server_script}")
 
-    return asyncio.run(_call_tool(server_script, tool_name, arguments, settings, extra_env))
+    try:
+        return asyncio.run(_call_tool(server_script, tool_name, arguments, settings, extra_env))
+    except McpToolError:
+        raise
+    except Exception as exc:
+        # Callers treat these servers as best-effort enrichment and catch
+        # McpToolError, but a server that *starts* and then dies (missing
+        # dependency, import error) surfaces as McpError, and stdio_client
+        # wraps failures in an ExceptionGroup. Neither is an McpToolError, so
+        # both used to escape the best-effort handlers and abort the topic —
+        # turning a skipped banner or keyword lookup into zero drafts.
+        raise McpToolError(f"{tool_name} on {server_script.name} failed: {exc!r}") from exc
 
 
 async def _call_tool(

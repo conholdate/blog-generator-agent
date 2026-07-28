@@ -83,8 +83,12 @@ def run(
         len(extraction.eligible_topics),
         len(extraction.rejected_sections),
     )
+    # At INFO when nothing survived: a run that generates no drafts still exits
+    # 0, so the rejection reasons are the only thing in the CI log explaining
+    # why. Kept at DEBUG otherwise to avoid drowning out the per-topic progress.
+    rejection_log = logger.debug if extraction.eligible_topics else logger.info
     for section in extraction.rejected_sections:
-        logger.debug("Rejected %r: %s", section.heading, section.reason_for_rejection)
+        rejection_log("Rejected %r: %s", section.heading, section.reason_for_rejection)
 
     topic_results: list[TopicResult] = []
     run_platform_ctx: PlatformContext | None = None
