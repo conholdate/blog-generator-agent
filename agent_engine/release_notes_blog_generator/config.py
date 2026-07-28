@@ -1,11 +1,15 @@
 from __future__ import annotations
 
-from pydantic import Field
+from pydantic import AliasChoices, Field
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
 class Settings(BaseSettings):
-    model_config = SettingsConfigDict(env_file=".env", extra="ignore")
+    # populate_by_name lets callers still pass `professionalize_api_key=...`
+    # by field name; without it the validation_alias below is the *only* way
+    # to set that field, so an explicit kwarg is silently ignored in favour
+    # of whatever the environment happens to hold.
+    model_config = SettingsConfigDict(env_file=".env", extra="ignore", populate_by_name=True)
 
     llm_provider: str = "professionalize"  # "anthropic" | "openai" | "professionalize"
 
@@ -20,7 +24,12 @@ class Settings(BaseSettings):
     # professionalize_api_key: str | None = None
     professionalize_api_key: str | None = Field(
         default=None,
-        validation_alias="PROFESSIONALIZE_API_KEY_1",
+        # Accepts either name: PROFESSIONALIZE_API_KEY_1 is what CI sets, but
+        # pinning that alias alone made the plain PROFESSIONALIZE_API_KEY in
+        # .env resolve to None and fail startup with "key is not set".
+        validation_alias=AliasChoices(
+            "PROFESSIONALIZE_API_KEY_1"
+        ),
     )
     professionalize_llm_model: str = "gpt-oss"
     professionalize_embedding_model: str = "qwen3-embedding-8b"
@@ -30,6 +39,14 @@ class Settings(BaseSettings):
     )
     request_timeout_seconds: float = 20.0
     output_dir: str = "output"
+
+    # Aspose release notes embed their usage samples as gist.github.com <script>
+    # tags and keep only API signature stubs in the page's own <pre> blocks, so
+    # the fetcher resolves those embeds against gist.githubusercontent.com — an
+    # outbound host beyond allowed_domains, which governs release-notes pages
+    # only. Disable to keep the fetcher talking to allowed_domains alone; pages
+    # that publish samples this way will then yield no eligible topics.
+    resolve_gist_embeds: bool = True
 
     # DEBUG | INFO | WARNING | ERROR — progress logging verbosity. INFO shows one
     # line per pipeline stage/topic; DEBUG also shows raw LLM call timing.
@@ -43,8 +60,11 @@ class Settings(BaseSettings):
     # via the MCP protocol (StdioServerParameters + stdio_client + ClientSession),
     # the same calling convention agent_engine/blog_generator uses in
     # tools/mcp_tools.py to invoke its own sibling agents (banner generator,
-    # keyword fetcher, etc.).
-    mcp_servers_dir: str = r"C:\GitHub\blog-generator-agent\mcp-servers"
+    # keyword fetcher, etc.). mcp_servers_dir points at an absolute path to that
+    # checkout until this repo is physically embedded under
+    # blog-generator-agents/agent_engine/ as a sibling of blog_generator, at
+    # which point it can become a relative "../../mcp-servers" path instead.
+    mcp_servers_dir: str = r"C:\GitHub\blog-generator-agents\mcp-servers"
     mcp_python_executable: str | None = None  # defaults to sys.executable
     mcp_call_timeout_seconds: float = 90.0
 
