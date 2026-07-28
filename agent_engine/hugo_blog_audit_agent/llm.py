@@ -11,13 +11,14 @@ import urllib.request
 from pathlib import Path
 from typing import Any, Callable
 
-from .models import BlogConfig, LLMSuggestion, Post
+from .models import BlogConfig, Issue, LLMSuggestion, Post
 
 
 PROMPT_VERSION = "llm-suggestions-v1"
 DEFAULT_BASE_URL = "https://api.openai.com/v1/chat/completions"
 DEFAULT_MODEL = "gpt-4o-mini"
 DEFAULT_TIMEOUT_SECONDS = 120.0
+DEFAULT_CIRCUIT_BREAKER_THRESHOLD = 3
 DOTENV_LOADED = False
 
 
@@ -36,6 +37,7 @@ def enrich_posts_with_llm(
     timeout_seconds = llm_timeout_seconds(llm_config)
     retries = llm_retries(llm_config)
     max_posts = _int_config(llm_config, "max_posts", 10)
+    circuit_breaker_threshold = _int_config(llm_config, "circuit_breaker_threshold", DEFAULT_CIRCUIT_BREAKER_THRESHOLD)
     metrics: dict[str, Any] = {
         "enabled": bool(llm_config.get("enabled")),
         "provider": provider,
@@ -54,6 +56,10 @@ def enrich_posts_with_llm(
         "completion_tokens": 0,
         "total_tokens": 0,
         "skipped_reason": "",
+        "circuit_breaker_tripped": False,
+        "circuit_breaker_threshold": circuit_breaker_threshold,
+        "posts_skipped_after_circuit_breaker": 0,
+        "risk_issues_flagged": 0,
     }
     if not llm_config.get("enabled"):
         metrics["skipped_reason"] = "disabled"
@@ -71,18 +77,37 @@ def enrich_posts_with_llm(
     if log:
         log(f"Running LLM suggestion enrichment for {len(eligible)} posts")
 
-    for post in eligible:
+    consecutive_errors = 0
+    for index, post in enumerate(eligible):
+        if circuit_breaker_threshold > 0 and consecutive_errors >= circuit_breaker_threshold:
+            remaining = eligible[index:]
+            metrics["circuit_breaker_tripped"] = True
+            metrics["posts_skipped_after_circuit_breaker"] = len(remaining)
+            if log:
+                log(
+                    f"LLM circuit breaker tripped after {consecutive_errors} consecutive failures; "
+                    f"skipping remaining {len(remaining)} post(s) for this run"
+                )
+            break
         metrics["attempted_posts"] += 1
+        succeeded = False
         try:
             suggestion, call_metrics = llm_suggestion_for_post(post, policies, config, llm_config, provider, model, cache_dir)
             merge_metrics(metrics, call_metrics)
             if suggestion:
                 post.llm_suggestions.append(suggestion)
                 metrics["generated_suggestions"] += 1
+                if apply_risk_notes_as_issue(post, suggestion):
+                    metrics["risk_issues_flagged"] = metrics.get("risk_issues_flagged", 0) + 1
+                succeeded = True
+            elif call_metrics.get("errors"):
+                if log:
+                    log(f"LLM suggestion skipped for {post.relative_path}: provider returned no usable suggestion")
         except Exception as exc:
             metrics["errors"] += 1
             if log:
                 log(f"LLM suggestion failed for {post.relative_path}: {exc}")
+        consecutive_errors = 0 if succeeded else consecutive_errors + 1
     return metrics
 
 
@@ -258,6 +283,30 @@ def suggestion_from_data(data: dict[str, Any], post: Post, provider: str, model:
         risk_notes=_string_list(data.get("risk_notes")),
         issues_addressed=_string_list(data.get("issues_addressed")),
     )
+
+
+def apply_risk_notes_as_issue(post: Post, suggestion: LLMSuggestion) -> bool:
+    """Feed LLM-generated risk notes back into deterministic scoring.
+
+    Without this, LLM output is purely advisory and never changes a post's
+    score. One combined low-severity issue keeps the effect bounded and
+    proportionate to how many risk notes were actually raised.
+    """
+    if not suggestion.risk_notes:
+        return False
+    post.issues.append(
+        Issue(
+            file_path=post.relative_path,
+            issue_type="llm_flagged_risk",
+            severity="Low",
+            explanation="LLM review flagged: " + " / ".join(suggestion.risk_notes[:5]),
+            why_it_matters="Model-identified caveats can point at accuracy, licensing, or scope risks a rules-based check would miss.",
+            recommended_fix="Review the flagged risk notes and address or dismiss each before publishing.",
+            estimated_effort="Low",
+            expected_seo_impact="Low",
+        )
+    )
+    return True
 
 
 def mock_suggestion(post: Post) -> dict[str, Any]:

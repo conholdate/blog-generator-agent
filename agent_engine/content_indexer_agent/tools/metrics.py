@@ -8,11 +8,28 @@ from dataclasses import dataclass, asdict
 from datetime import datetime, timezone
 from typing import Any, Dict, Optional
 
-from ...hugo_blog_audit_agent.metrics_api import send_metrics_api
 from .logging_utils import get_logger
 from .normalization import normalize_product_display_name
 
 log = get_logger("cg.metrics")
+
+
+def _load_send_metrics_api():
+    """Load the shared metrics sender only when metrics delivery is actually needed.
+
+    ``hugo_blog_audit_agent`` lives outside this repo's installed package set;
+    importing it eagerly at module load time breaks every caller (including
+    both CLI entry points) whenever it isn't available, not just metrics
+    delivery. Returns None if it can't be found so callers can degrade
+    instead of crashing on import.
+    """
+    try:
+        from ...hugo_blog_audit_agent.metrics_api import send_metrics_api
+    except ModuleNotFoundError as exc:
+        if exc.name == "agent_engine.hugo_blog_audit_agent":
+            return None
+        raise
+    return send_metrics_api
 
 
 def _clean_optional(value: Any) -> str:
@@ -112,6 +129,11 @@ class MetricsSender:
         # Remove job_type if None (keeps payload clean)
         if data.get("job_type") is None:
             data.pop("job_type", None)
+
+        send_metrics_api = _load_send_metrics_api()
+        if send_metrics_api is None:
+            self._handle_send_failure("Metrics API unavailable (hugo_blog_audit_agent not installed); skipping delivery")
+            return
 
         log.info("Metrics API payload (about to send):\n%s", json.dumps(data, ensure_ascii=False, indent=2))
         try:

@@ -1,5 +1,5 @@
 from __future__ import annotations
-from typing import List, Dict, Optional
+from typing import List, Dict
 from ..schemas import Cluster
 import numpy as np
 

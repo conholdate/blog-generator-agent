@@ -1,0 +1,30 @@
+{
+  "source_url": "https://releases.aspose.com/words/net/release-notes/2026/aspose-words-for-net-26-7-release-notes/",
+  "publication_readiness": "draft_ready",
+  "blocker_reason": null,
+  "topics": [
+    {
+      "heading": "Added feature to calculate document text Flesch reading scores",
+      "slug": "calculate-flesch-reading-scores-net",
+      "publish_date": "2026-07-28",
+      "publication_status": "ready_for_editor",
+      "seo_issues": [
+        "Meta description outside the 120-165 character range"
+      ]
+    },
+    {
+      "heading": "Added public method to clear list level tab stop",
+      "slug": "remove-list-level-tab-stops-dotnet",
+      "publish_date": "2026-07-28",
+      "publication_status": "ready_for_editor",
+      "seo_issues": [
+        "A paragraph has more than 7 sentences"
+      ]
+    }
+  ],
+  "rejected_sections": [
+    "Major Features",
+    "Full List of Issues Covering all Changes in this Release",
+    "Public API and Backward Incompatible Changes"
+  ]
+}
