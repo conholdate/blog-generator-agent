@@ -1,28 +1,30 @@
 {
-  "source_url": "https://releases.aspose.com/pdf/net/release-notes/2026/aspose-pdf-for-net-26-6-release-notes/",
+  "source_url": "https://releases.aspose.com/words/net/release-notes/2026/aspose-words-for-net-26-7-release-notes/",
   "publication_readiness": "draft_ready",
   "blocker_reason": null,
   "topics": [
     {
-      "heading": "Integrated OCR for PDF Text Recognition",
-      "slug": "extract-text-pdfs-ocr-net",
-      "publish_date": "2026-07-23",
-      "publication_status": "needs_code_review",
+      "heading": "Added feature to calculate document text Flesch reading scores",
+      "slug": "calculate-flesch-reading-scores-net",
+      "publish_date": "2026-07-28",
+      "publication_status": "ready_for_editor",
       "seo_issues": [
-        "Meta description outside the 120-165 character range",
-        "A paragraph has more than 7 sentences"
+        "Meta description outside the 120-165 character range"
       ]
     },
     {
-      "heading": "Signing with Certificate and TSA",
-      "slug": "digitally-sign-pdf-certificate-timestamp",
-      "publish_date": "2026-07-23",
-      "publication_status": "needs_code_review",
-      "seo_issues": []
+      "heading": "Added public method to clear list level tab stop",
+      "slug": "remove-list-level-tab-stops-dotnet",
+      "publish_date": "2026-07-28",
+      "publication_status": "ready_for_editor",
+      "seo_issues": [
+        "A paragraph has more than 7 sentences"
+      ]
     }
   ],
   "rejected_sections": [
-    "Bug Fixing and Other Changes",
-    "Added APIs"
+    "Major Features",
+    "Full List of Issues Covering all Changes in this Release",
+    "Public API and Backward Incompatible Changes"
   ]
 }
