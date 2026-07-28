@@ -24,7 +24,8 @@
   "_failure_streaks": {
     "aspose|aspose.html|java": 1,
     "aspose|aspose.html|python": 1,
-    "aspose|aspose.html|net": 1
+    "aspose|aspose.html|net": 1,
+    "conholdate|conholdate.total|java": 0
   },
   "aspose|aspose.html|python": [
     "How to Convert Code to Change HTML Border Color in Python",
@@ -88,5 +89,8 @@
     "Step-by-Step Guide to SVG to XPS Conversion in C#",
     "Use Xpath to Select Nodes-a Complete Tutorial in C#",
     "Webpage to PDF with C#: Integration and Processing Guide"
+  ],
+  "conholdate|conholdate.total|java": [
+    "Add Table of Contents to Word Document in Java"
   ]
 }
