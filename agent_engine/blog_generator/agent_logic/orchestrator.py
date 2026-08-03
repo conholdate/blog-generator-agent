@@ -376,10 +376,13 @@ class BlogOrchestrator:
                 except Exception as state_err:
                     print(f"⚠️ Could not update rotation pointer (non-fatal): {state_err}", flush=True)
 
-            # Write product name for GitHub Actions to read
+            # Write product name for GitHub Actions to read. Use the resolved
+            # product's urlPrefix (same source of truth as the post content
+            # itself), not sheet_name - sheet_name is only the rotation tab
+            # label and can mismatch the topic's actual product.
             base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
             with open(os.path.join(base_dir, "product_name.txt"), "w") as f:
-                f.write(sheet_name)
+                f.write(product_info.get("urlPrefix", sheet_name))
 
             save_blog_metadata_to_sheet(
                 brand=self.brand,
