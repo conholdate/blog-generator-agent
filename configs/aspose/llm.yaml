@@ -26,8 +26,8 @@ tut_branch: "main"
 platforms:
   - net:
       definition: net
-      doc_path: ""
-      api_path: ""
+      doc_path: "net"
+      api_path: "net"
       tut_path: "llm"
       enabled: true
 
