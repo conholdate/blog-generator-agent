@@ -1,1 +1,1 @@
-../../content/blogPosts/aspose_com/2026-08-05-add-barcode-to-pdf-in-java
+../../content/blogPosts/aspose_com/2026-08-06-add-barcode-to-pdf-in-java

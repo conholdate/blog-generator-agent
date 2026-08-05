@@ -11,10 +11,12 @@ GITLAB_REPO=/Users/mustafa/Desktop/gitlab/blog-post-generator   # confirm this p
 cd "$GITHUB_REPO" || exit 1
 mkdir -p /tmp/lab-patches && rm -f /tmp/lab-patches/*.patch
 
-# Generate patches for everything since last sync, EXCLUDING this script file
-# and the logs file (logs.txt is handled separately below, not via patch).
+# Generate patches for everything since last sync, EXCLUDING this script file,
+# the logs file (handled separately below, not via patch), and audit reports
+# (generated output that diverges between independently-run clones and isn't
+# meant to be synced at all).
 git format-patch lab-sync..main -o /tmp/lab-patches --quiet \
-  -- . ':!sync-to-gitlab.sh' ':!content/logs/logs.txt'
+  -- . ':!sync-to-gitlab.sh' ':!content/logs/logs.txt' ':!outputs/audit/*'
 
 if [ -z "$(ls -A /tmp/lab-patches 2>/dev/null)" ]; then
   echo "Nothing new to sync"
