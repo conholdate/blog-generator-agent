@@ -497,7 +497,7 @@ class BlogOrchestrator:
                         secondary.append(kw)
 
             f_keywords = normalize_case_preserve_formats_in_keywords(primary + secondary, FILE_FORMAT_MAPPINGS)
-            blog_outline = [line.strip() for line in outline_text.splitlines() if line.strip()]
+            blog_outline = [item.strip() for item in outline_text.split(",") if item.strip()]
             allowed_products = extract_product_names(self.products)
 
             print(f" Generating content now. ")

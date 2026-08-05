@@ -57,7 +57,7 @@ on:
         required: true
         type: string
       outline:
-        description: "Outline (one point per line)"
+        description: "Outline, comma-separated"
         required: false
         type: string
       author:
