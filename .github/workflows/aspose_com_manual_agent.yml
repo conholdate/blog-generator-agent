@@ -171,23 +171,30 @@ jobs:
 
           echo "✅ Blog generation completed"
 
-      - name: Read generated blog folder
+      - name: Find generated blog folder
         id: read_blog
         run: |
-          if [ -f agent_engine/blog_generator/manual_blog_folder.txt ]; then
-            BLOG_FOLDER_PATH=$(cat agent_engine/blog_generator/manual_blog_folder.txt)
-            if [ -n "$BLOG_FOLDER_PATH" ] && [ -d "$BLOG_FOLDER_PATH" ]; then
-              echo "blog_folder_path=$BLOG_FOLDER_PATH" >> $GITHUB_OUTPUT
-              echo "blog_generated=true" >> $GITHUB_OUTPUT
-              echo "✅ Blog folder: $BLOG_FOLDER_PATH"
-            else
-              echo "⚠️ manual_blog_folder.txt was empty or folder missing"
-              echo "blog_generated=false" >> $GITHUB_OUTPUT
-            fi
-          else
-            echo "⚠️ manual_blog_folder.txt not found — no blog was generated"
+          echo "=== Searching for generated blog folder ==="
+
+          BRAND_DIR="content/blogPosts/aspose_com"
+
+          if [ ! -d "$BRAND_DIR" ]; then
+            echo "❌ Brand directory not found: $BRAND_DIR"
             echo "blog_generated=false" >> $GITHUB_OUTPUT
+            exit 0
           fi
+
+          blog_folder=$(find "$BRAND_DIR" -mindepth 1 -maxdepth 1 -type d -name "20??-??-??-*" -mmin -10 -printf '%T@ %p\n' | sort -nr | head -1 | cut -d' ' -f2-)
+
+          if [ -z "$blog_folder" ] || [ ! -f "$blog_folder/index.md" ]; then
+            echo "⚠️ No recently generated blog folder found in $BRAND_DIR"
+            echo "blog_generated=false" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+
+          echo "✅ Found: $blog_folder"
+          echo "blog_folder_path=$blog_folder" >> $GITHUB_OUTPUT
+          echo "blog_generated=true" >> $GITHUB_OUTPUT
 
       - name: Verify blog content
         if: steps.read_blog.outputs.blog_generated == 'true'

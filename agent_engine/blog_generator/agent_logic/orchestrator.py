@@ -625,12 +625,9 @@ class BlogOrchestrator:
 
             # ── No sheet row exists for this run: nothing to mark as       ──
             # ── generated, no rotation pointer to advance, no metadata     ──
-            # ── sheet write, and no commit/PR anywhere. The workflow reads ──
-            # ── this file to know what to upload as an artifact.           ──
-            base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-            with open(os.path.join(base_dir, "manual_blog_folder.txt"), "w") as f:
-                f.write(full_path or "")
-
+            # ── sheet write, and no commit/PR anywhere. The workflow finds ──
+            # ── the output folder itself (same approach as the automated  ──
+            # ── flow) rather than this method handing back a path.        ──
             self.metrics.record_success(f"Blog post created: {filepath}")
             self.metrics.end_job()
 
