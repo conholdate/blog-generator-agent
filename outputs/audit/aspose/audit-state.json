@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "run_id": "53e6acde-0c99-400f-a5ef-85556d29feb5",
+  "generated_at": "2026-08-05T12:30:28.663947+00:00",
+  "posts": {
+    "content/Aspose.Blog/html/2026-08-05-convert-html-to-txt-in-python/index.md": {
+      "priority": 100,
+      "total_issues": 8,
+      "issue_types": [
+        "short_title",
+        "suggest_body_output_image",
+        "title_length",
+        "too_few_outgoing_internal_links",
+        "unresolved_api_class",
+        "weak_internal_links"
+      ]
+    },
+    "content/Aspose.Blog/html/2026-08-05-create-read-and-edit-html-in-python/index.md": {
+      "priority": 100,
+      "total_issues": 13,
+      "issue_types": [
+        "suggest_body_output_image",
+        "too_few_outgoing_internal_links",
+        "unresolved_api_class",
+        "unresolved_api_symbol",
+        "weak_internal_links"
+      ]
+    }
+  }
+}
