@@ -34,7 +34,7 @@ on:
           - configs/aspose/tex.yaml
           - configs/aspose/words.yaml
           - configs/aspose/zip.yaml
-
+          - configs/aspose/llm.yaml
       platform:
         description: "Target platform for indexing."
         required: true

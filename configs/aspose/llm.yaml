@@ -1,0 +1,90 @@
+# Aspose.LLM
+blog: aspose
+key: llm
+# Reusable platform definitions
+platform_definitions:
+  net:
+    display_name: ".NET"
+    keywords: ["c#", "csharp", ".net", "dotnet", "vb.net", "visual basic"]
+
+# Product: Aspose.LLM
+display_name: "Aspose.LLM"
+description: "On-device local LLM inference APIs — chat sessions, vision (image input), GPU acceleration, and session persistence with GGUF models. No cloud, no API key."
+enabled: true
+
+# Common repo URLs for all platforms
+# VERIFY: repo names follow the Aspose convention but were not confirmed reachable.
+doc_repo: "https://github.com/aspose-llm/Aspose.LLM-Doc-md"
+doc_branch: "master"
+
+api_repo: "https://github.com/aspose-llm/Aspose.LLM-API-References"
+api_branch: "main"
+
+tut_repo: "https://github.com/aspose-llm/Aspose-LLM-Reference-Tutorials"
+tut_branch: "main"
+
+platforms:
+  - net:
+      definition: net
+      doc_path: "english/net"
+      api_path: "english/net"
+      tut_path: "llm"
+      enabled: true
+
+strategic_cluster: On-Device AI Automation
+
+# Aspose.LLM consumes model weights rather than document formats.
+# GGUF is the only file format in play; image formats apply to vision presets.
+formats:
+- GGUF
+- JPEG
+- PNG
+- BMP
+- GIF
+- WEBP
+
+actions:
+- chat
+- generate
+- summarize
+- translate
+- classify
+- extract
+- describe
+- analyze
+- caption
+
+# Model families shipped as built-in presets
+model_families:
+- Qwen
+- Llama
+- Mistral
+- Ministral
+- Gemma
+- Phi
+- DeepSeek
+- Granite
+- Yi
+- SmolLM
+- TinyLlama
+- MiniCPM
+- StableCode
+- OpenChat
+- Aya Expanse
+- gpt-oss
+
+# Hardware acceleration backends
+accelerations:
+- CUDA
+- HIP
+- ROCm
+- Metal
+- Vulkan
+- CPU
+- AVX512
+- AVX2
+
+money_pages:
+  net: https://products.aspose.com/llm/net/
+docs_pages:
+  net: https://docs.aspose.com/llm/net/
