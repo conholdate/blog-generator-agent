@@ -2091,6 +2091,10 @@ Your task:
 - Tags must be lowercase, hyphen-separated if multi-word (e.g. "leather-jackets")
 - Tags must be specific, searchable, and relevant to the topic
 - Do NOT use generic tags like "blog", "post", "article"
+- NEVER include any product, brand, SDK, or library name in a tag - not the
+  product this post is about, and not any other company's product (e.g.
+  iText, PDFBox, OpenPDF, POI, etc). Describe the task/technology only
+  (e.g. "java pdf", "barcode generation") - no brand names, ever.
 - Return ONLY the 3 tags as a comma-separated list — no explanations, no numbering, no extra text
 
 Blog Topic: {post_topic}

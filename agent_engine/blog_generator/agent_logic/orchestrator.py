@@ -424,9 +424,249 @@ class BlogOrchestrator:
             print(" Sending failure metrics...")
             # await self.metrics.send_metrics_to_team()
             # await self.metrics.send_metrics_to_prod()
-            
+
             return {
-                "status": "error", 
+                "status": "error",
+                "message": str(e),
+                "run_id": self.metrics.run_id,
+                "token_usage": self.metrics.token_usage["total_tokens"],
+                "api_call_count": self.metrics.api_call_count,
+            }
+
+    async def create_blog_from_manual_input(
+        self,
+        author: str,
+        product: str,
+        platform: str,
+        topic: str,
+        outline_text: str = "",
+        keywords_text: str = "",
+        merge_with_serp: bool = False,
+        layout_override: str = "",
+    ):
+        """
+        Generate a blog post from a user-supplied topic/outline/keywords
+        instead of pulling from the approved-topics sheet. There is no sheet
+        row for this run, so nothing gets marked as generated and the
+        rotation pointer is untouched. This method never pushes anything to
+        a downstream repo - the caller (workflow) is responsible for
+        retrieving the generated folder, e.g. via an artifact upload.
+        """
+        set_tracing_disabled(disabled=True)
+
+        try:
+            product_info = get_productInfo(product, platform, self.products, self.brand)
+        except ValueError as e:
+            print(f"❌ Product info error: {e}. Aborting.", flush=True)
+            return {"status": "error", "message": str(e)}
+
+        isCloud = "cloud" in product_info["ProductName"].lower()
+        post_topic = capitalize_file_formats_for_title(topic, FILE_FORMAT_MAPPINGS)
+        product_name = product_info.get("ProductName")
+
+        self.metrics.start_job(product=product_name, platform=platform, website=self.brand)
+
+        try:
+            context = prepare_context(product_info)
+
+            print("📚 Connecting to fetch_category_related_articles MCP server")
+            related_links = await fetch_category_related_articles(
+                post_topic,
+                product_name,
+                product_info.get('BlogsURL'),
+                3
+            )
+            scan_stats = related_links.get("scan_stats", {}) if isinstance(related_links, dict) else {}
+            http_calls = scan_stats.get("tier1_scanned", 0) + scan_stats.get("tier2_scanned", 0)
+            if http_calls:
+                self.metrics.record_http_call(count=http_calls, caller="fetch_category_related_articles")
+
+            # ── Keywords: user-supplied, optionally merged with SERP research ──
+            user_keywords = [k.strip() for k in keywords_text.split(",") if k.strip()]
+            if not user_keywords:
+                user_keywords = [post_topic]
+
+            primary = [user_keywords[0]]
+            secondary = user_keywords[1:]
+
+            if merge_with_serp:
+                print("🔍 Merging with SERP-based keyword research...", flush=True)
+                serp_keywords = await fetch_keywords_auto(post_topic, product_name, platform)
+                for kw in serp_keywords:
+                    if kw not in primary and kw not in secondary:
+                        secondary.append(kw)
+
+            f_keywords = normalize_case_preserve_formats_in_keywords(primary + secondary, FILE_FORMAT_MAPPINGS)
+            blog_outline = [line.strip() for line in outline_text.splitlines() if line.strip()]
+            allowed_products = extract_product_names(self.products)
+
+            print(f" Generating content now. ")
+            tags = await generate_tags_with_llm(post_topic, f_keywords, blog_outline, self.metrics)
+            print(f"tags are -- {tags}")
+
+            # ── Layout: explicit override wins outright, same mechanism as ──
+            # ── the sheet-driven flow; empty/"auto" falls through to the   ──
+            # ── normal signal-based weighted selection.                    ──
+            layout_choice = select_layout(
+                topic=post_topic,
+                angle="",
+                persona="",
+                is_cloud=isCloud,
+                recent_layouts=[],
+                override=layout_override,
+            )
+            print(f"📐 Layout: {layout_choice.name} (reason: {layout_choice.reason})", flush=True)
+            print(f"📐 Skeleton: {' -> '.join(layout_choice.skeleton())}", flush=True)
+
+            # ── Code snippet generation: same source-of-truth step and     ──
+            # ── abort-on-total-failure contract as the automated flow.     ──
+            print("💻 Generating source-of-truth code snippet...", flush=True)
+            generated_code = await generate_code_snippet(
+                topic=post_topic,
+                primary_keyword=f_keywords[0],
+                platform=platform,
+                context=context,
+                outline=blog_outline,
+                is_cloud=isCloud,
+                max_retries=3,
+                metrics=self.metrics,
+            )
+            if not generated_code:
+                message = "Code snippet generation failed after 3 attempts. Aborting blog generation."
+                print(f"❌ {message}", flush=True)
+                self.metrics.record_failure(message)
+                self.metrics.end_job()
+                return {
+                    "status": "error",
+                    "message": message,
+                    "run_id": self.metrics.run_id,
+                    "token_usage": self.metrics.token_usage["total_tokens"],
+                    "api_call_count": self.metrics.api_call_count,
+                }
+
+            instructions = prompts.get_blog_writer_prompt(
+                post_topic,
+                f_keywords,
+                blog_outline,
+                related_links,
+                context,
+                author,
+                "",
+                "",
+                [],
+                [],
+                "",
+                tags,
+                isCloud,
+                allowed_products,
+                layout_choice=layout_choice,
+                generated_code=generated_code
+            )
+
+            result = await llm_service.run_agent(
+                instructions=instructions,
+                context=context,
+                agent_name="blog-writer-agent",
+                temperature=0.4,
+                max_turns=10,
+                max_tokens=16000
+            )
+            if not result or not result.final_output:
+                print("⚠️ LLM returned empty output. Ending execution gracefully.")
+                return {
+                    "status": "skipped",
+                    "message": "LLM returned empty output"
+                }
+
+            self.metrics.record_llm_usage(
+                input_tokens=result.token_usage["input_tokens"],
+                output_tokens=result.token_usage["output_tokens"],
+                caller="blog-writer-agent"
+            )
+
+            fixed_content, was_fixed = await validate_and_fix_meta_description(result.final_output, metrics=self.metrics)
+            if was_fixed:
+                result.final_output = fixed_content
+
+            result.final_output = clean_ai_generated_markdown(result.final_output)
+            result.final_output = validate_markdown_links(result.final_output)
+            print(f" Content Generated, Performing SEO Audit Now --", flush=True)
+
+            targets = {
+                "primary_keyword": f_keywords[0],
+                "target_keyword_count": 5,
+                "min_words": settings.NUMBER_OF_BLOG_WORDS
+            }
+            report = validate_seo_content(result.final_output, targets)
+            print(f" Audit completed -- {report}", flush=True)
+
+            blog_post_metadata = extract_blog_metadata(result.final_output)
+
+            jistified = await gist_injector(result.final_output, post_topic, blog_post_metadata.get("summary", ""), f'https://blog.{self.brand}{blog_post_metadata.get("url", "")}')
+            text_output = jistified.content[0].text
+            data = json.loads(text_output)
+            gist_url = data.get("gist_url", "")
+
+            final_content = inject_file_format_links(result.final_output, FILE_FORMAT_MAPPINGS, BASE_URL)
+
+            print(f" Generating markdown file")
+            file_res = await generate_markdown_file(
+                title=post_topic,
+                content=final_content,
+                brand=self.brand
+            )
+
+            filepath = file_res.get("output", {}).get("filepath")
+            folder_name = file_res.get("output", {}).get("folder_name")
+            full_path = file_res.get("output", {}).get("full_path")
+            banner_location = f"../../content/blogPosts/{file_res['output']['brand_folder']}/{file_res['output']['folder_name']}/images/{slugify(post_topic)}.jpg"
+            banner = await generate_blog_image(product_name, post_topic, "Left", banner_location)
+            print(f"banner generated -- {banner}", flush=True)
+
+            # ── No sheet row exists for this run: nothing to mark as       ──
+            # ── generated, no rotation pointer to advance, no metadata     ──
+            # ── sheet write, and no commit/PR anywhere. The workflow reads ──
+            # ── this file to know what to upload as an artifact.           ──
+            base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+            with open(os.path.join(base_dir, "manual_blog_folder.txt"), "w") as f:
+                f.write(full_path or "")
+
+            self.metrics.record_success(f"Blog post created: {filepath}")
+            self.metrics.end_job()
+
+            print(f"\n✅ Blog post generation completed!")
+            print(f"📄 File: {filepath}")
+            print(f"⏱️  Duration: {self.metrics.run_duration_ms}ms\n")
+
+            self.metrics.print_summary()
+
+            return {
+                "folder_name": folder_name,
+                "folder_path": full_path,
+                "product": product_name,
+                "platform": platform,
+                "brand": self.brand,
+                "layout": layout_choice.name,
+                "SEO_Score": report["score"],
+                "run_id": self.metrics.run_id,
+                "duration_ms": self.metrics.run_duration_ms,
+                "token_usage": self.metrics.token_usage["total_tokens"],
+                "api_call_count": self.metrics.api_call_count,
+                "status": "success"
+            }
+
+        except Exception as e:
+            import traceback
+            print(f"\n Blog generation failed!", flush=True)
+            print(f"Error: {e}", flush=True)
+            traceback.print_exc()
+
+            self.metrics.record_failure(str(e))
+            self.metrics.end_job()
+            self.metrics.print_summary()
+
+            return {
+                "status": "error",
                 "message": str(e),
                 "run_id": self.metrics.run_id,
                 "token_usage": self.metrics.token_usage["total_tokens"],
