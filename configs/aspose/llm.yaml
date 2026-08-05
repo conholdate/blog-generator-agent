@@ -14,20 +14,20 @@ enabled: true
 
 # Common repo URLs for all platforms
 # VERIFY: repo names follow the Aspose convention but were not confirmed reachable.
-doc_repo: "https://github.com/aspose-llm/Aspose.LLM-Doc-md"
-doc_branch: "master"
+doc_repo: "https://github.com/aspose-llm/Aspose.LLM-Documentation"
+doc_branch: "main"
 
-api_repo: "https://github.com/aspose-llm/Aspose.LLM-API-References"
+api_repo: "https://github.com/aspose-llm/Aspose.LLM-References"
 api_branch: "main"
 
-tut_repo: "https://github.com/aspose-llm/Aspose-LLM-Reference-Tutorials"
+tut_repo: "https://github.com/aspose-llm/Aspose-LLM-API-Tutorials"
 tut_branch: "main"
 
 platforms:
   - net:
       definition: net
-      doc_path: "english/net"
-      api_path: "english/net"
+      doc_path: ""
+      api_path: ""
       tut_path: "llm"
       enabled: true
 
