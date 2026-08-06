@@ -636,6 +636,15 @@ class BlogOrchestrator:
             print(f"⏱️  Duration: {self.metrics.run_duration_ms}ms\n")
 
             self.metrics.print_summary()
+            print("📊 Sending metrics to Google Script... ")
+
+            metrics_sent_for_team = await self.metrics.send_metrics_to_team()
+            metrics_sent_for_pro = await self.metrics.send_metrics_to_prod()
+
+            if metrics_sent_for_team and metrics_sent_for_pro:
+                print(f"Metrics sent successfully\n {metrics_sent_for_pro}", flush=True)
+            else:
+                print("Failed to send metrics (check logs)\n")
 
             return {
                 "folder_name": folder_name,
