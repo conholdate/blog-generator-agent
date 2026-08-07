@@ -625,9 +625,13 @@ class BlogOrchestrator:
 
             # ── No sheet row exists for this run: nothing to mark as       ──
             # ── generated, no rotation pointer to advance, no metadata     ──
-            # ── sheet write, and no commit/PR anywhere. The workflow finds ──
-            # ── the output folder itself (same approach as the automated  ──
-            # ── flow) rather than this method handing back a path.        ──
+            # ── sheet write. Product name is still written out (same as    ──
+            # ── the automated flow) so a caller workflow can optionally    ──
+            # ── commit/PR the result using the same downstream steps.      ──
+            base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+            with open(os.path.join(base_dir, "product_name.txt"), "w") as f:
+                f.write(product_info.get("urlPrefix", product))
+
             self.metrics.record_success(f"Blog post created: {filepath}")
             self.metrics.end_job()
 

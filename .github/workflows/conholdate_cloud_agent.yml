@@ -2,6 +2,57 @@ name: Generate Blog Post for conholdate.cloud
 
 on:
   workflow_dispatch:
+    inputs:
+      autonomous:
+        description: "Autonomous: auto-pick the next approved topic from the sheet. Uncheck to manually specify a topic/product/platform below."
+        required: false
+        type: boolean
+        default: true
+      product:
+        description: "Product (manual mode only)"
+        required: false
+        type: choice
+        options:
+          - Conholdate.Total
+      platform:
+        description: "Platform (manual mode only)"
+        required: false
+        type: choice
+        options:
+          - Java
+      topic:
+        description: "Blog post topic / title (manual mode only)"
+        required: false
+        type: string
+      outline:
+        description: "Outline, comma-separated (manual mode only)"
+        required: false
+        type: string
+      author:
+        description: "Author name"
+        required: false
+        type: string
+        default: "Farhan Raza"
+      keywords:
+        description: "Keywords, comma-separated, first one treated as primary (manual mode only)"
+        required: false
+        type: string
+      merge_with_serp:
+        description: "Merge keywords with SERP-based keyword research (manual mode only)"
+        required: false
+        type: boolean
+        default: false
+      layout:
+        description: "Layout (manual mode only)"
+        required: false
+        type: choice
+        default: "Auto (recommended)"
+        options:
+          - "Auto (recommended)"
+          - "Classic Tutorial"
+          - "Quick Answer"
+          - "Guided Walkthrough"
+          - "Use Case Driven"
   schedule:
     - cron: "0 9 * * 1,3,5" # Every Monday, Wednesday, and Friday at 2:00 PM PKT
 
@@ -65,14 +116,47 @@ jobs:
 
       - name: Generate Blog
         id: generate_blog
+        env:
+          AUTONOMOUS: ${{ inputs.autonomous }}
+          TOPIC: ${{ inputs.topic }}
+          OUTLINE: ${{ inputs.outline }}
+          KEYWORDS: ${{ inputs.keywords }}
+          AUTHOR_INPUT: ${{ inputs.author }}
         run: |
           cd agent_engine/blog_generator
           echo "=== Starting blog generation ==="
           echo "Brand: conholdate.cloud"
 
-          python main.py \
-            --author "Farhan Raza" \
-            --brand "conholdate.cloud"
+          AUTHOR="${AUTHOR_INPUT:-Farhan Raza}"
+
+          if [ "$AUTONOMOUS" == "false" ]; then
+            echo "Mode: manual topic"
+            echo "Product: ${{ inputs.product }}"
+            echo "Platform: ${{ inputs.platform }}"
+            echo "Layout: ${{ inputs.layout }}"
+            echo "Merge with SERP: ${{ inputs.merge_with_serp }}"
+
+            if [ -z "$TOPIC" ] || [ -z "${{ inputs.product }}" ] || [ -z "${{ inputs.platform }}" ]; then
+              echo "❌ Manual mode requires topic, product, and platform to be set."
+              exit 1
+            fi
+
+            python main.py \
+              --author "$AUTHOR" \
+              --brand "conholdate.cloud" \
+              --product "${{ inputs.product }}" \
+              --platform "${{ inputs.platform }}" \
+              --topic "$TOPIC" \
+              --outline "$OUTLINE" \
+              --keywords "$KEYWORDS" \
+              --merge-serp "${{ inputs.merge_with_serp }}" \
+              --layout "${{ inputs.layout }}"
+          else
+            echo "Mode: autonomous"
+            python main.py \
+              --author "$AUTHOR" \
+              --brand "conholdate.cloud"
+          fi
 
           echo "✅ Blog generation completed"
 
