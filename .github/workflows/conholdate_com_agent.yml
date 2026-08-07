@@ -167,14 +167,17 @@ jobs:
           if [ -f agent_engine/blog_generator/product_name.txt ]; then
             PRODUCT_NAME=$(cat agent_engine/blog_generator/product_name.txt)
             echo "product_name=$PRODUCT_NAME" >> $GITHUB_OUTPUT
+            echo "blog_generated=true" >> $GITHUB_OUTPUT
             echo "✅ Product name: $PRODUCT_NAME"
           else
             echo "⚠️ product_name.txt not found — no blog was generated"
             echo "product_name=" >> $GITHUB_OUTPUT
+            echo "blog_generated=false" >> $GITHUB_OUTPUT
           fi
 
       - name: Find generated blog folder
         id: find_blog
+        if: steps.read_product.outputs.blog_generated == 'true'
         run: |
           echo "=== Searching for generated blog folder ==="
 
@@ -210,6 +213,7 @@ jobs:
           ls -la "$blog_folder"
 
       - name: Verify blog content before upload
+        if: steps.read_product.outputs.blog_generated == 'true'
         run: |
           echo "=== Verifying blog content ==="
           BLOG_PATH="${{ steps.find_blog.outputs.blog_folder_path }}"
@@ -227,6 +231,7 @@ jobs:
       # Commit to THIS repository (content/blogPosts/conholdate_com)
       ###################################################################
       - name: Commit generated blog to this repository
+        if: steps.read_product.outputs.blog_generated == 'true'
         env:
           BLOG_FOLDER_NAME: ${{ steps.find_blog.outputs.blog_folder_name }}
           BLOG_FOLDER_PATH: ${{ steps.find_blog.outputs.blog_folder_path }}
@@ -273,6 +278,7 @@ jobs:
           fi
 
       - name: Commit logs
+        if: always()
         run: |
           git config --global user.email "action@github.com"
           git config --global user.name "GitHub Action"
@@ -281,6 +287,7 @@ jobs:
           git push origin HEAD
 
       - name: Upload Generated Blog as Artifact
+        if: steps.read_product.outputs.blog_generated == 'true'
         uses: actions/upload-artifact@v4
         with:
           name: generated-blog-conholdate-${{ github.run_number }}
@@ -291,7 +298,7 @@ jobs:
       # Create Pull Request and Auto-Merge in conholdate-blog repo
       ###################################################################
       - name: Create Pull Request and Auto-Merge in blog.conholdate.com repo
-        if: success()
+        if: steps.read_product.outputs.blog_generated == 'true' && success()
         env:
           BLOG_FOLDER_NAME: ${{ steps.find_blog.outputs.blog_folder_name }}
           BLOG_FOLDER_PATH: ${{ steps.find_blog.outputs.blog_folder_path }}

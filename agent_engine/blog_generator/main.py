@@ -50,5 +50,8 @@ def main():
 
     print(f"Generated blog post details : {result}")
 
+    if isinstance(result, dict) and result.get("status") == "error":
+        sys.exit(1)
+
 if __name__ == "__main__":
     main()

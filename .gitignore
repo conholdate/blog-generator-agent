@@ -13,3 +13,4 @@ keys/
 /repo_cache
 /outputs/_repos
 outputs/aspose/tex/cache/embeddings.sqlite
+agent_engine/blog_generator/product_name.txt
