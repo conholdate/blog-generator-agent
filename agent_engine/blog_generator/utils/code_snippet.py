@@ -15,7 +15,7 @@ from typing import Dict, List, Optional
 from services.LLMservice import llm_service
 from utils.prompts import get_code_snippet_prompt
 
-_CODE_BLOCK_RE = re.compile(r"```(\w+)?\s*\n(.*?)```", re.DOTALL)
+_CODE_BLOCK_RE = re.compile(r"```([^\n]*)\r?\n(.*?)```", re.DOTALL)
 
 
 def _parse_snippet(text: str) -> Optional[Dict[str, str]]:
