@@ -1,0 +1,181 @@
+name: Generate Blog Post for conholdate.com (Manual Topic)
+
+on:
+  workflow_dispatch:
+    inputs:
+      product:
+        description: "Product"
+        required: true
+        type: choice
+        options:
+          - Conholdate.Total
+      platform:
+        description: "Platform"
+        required: true
+        type: choice
+        options:
+          - .NET
+          - Java
+      topic:
+        description: "Blog post topic / title"
+        required: true
+        type: string
+      outline:
+        description: "Outline, comma-separated"
+        required: false
+        type: string
+      author:
+        description: "Author name"
+        required: true
+        type: string
+      keywords:
+        description: "Keywords, comma-separated (first one is treated as primary)"
+        required: false
+        type: string
+      merge_with_serp:
+        description: "Merge keywords with SERP-based keyword research"
+        required: false
+        type: boolean
+        default: false
+      layout:
+        description: "Layout"
+        required: false
+        type: choice
+        default: "Auto (recommended)"
+        options:
+          - "Auto (recommended)"
+          - "Classic Tutorial"
+          - "Quick Answer"
+          - "Guided Walkthrough"
+          - "Use Case Driven"
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Cache pip packages
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+
+      - name: Remove any .env files that could interfere
+        run: |
+          find . -name ".env" -type f -delete
+          echo "Removed all .env files"
+
+      - name: Create Google service account key
+        run: |
+          mkdir -p keys
+          echo '${{ secrets.GOOGLE_SERVICE_ACCOUNT_KEY }}' > keys/sheet-reader-494108-bd5e61ef812c.json
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          cd agent_engine/blog_generator
+          pip install -r requirements.txt
+          cd ../../mcp-servers
+          pip install -r requirements.txt
+          cd ..
+
+      - name: Create runtime .env file with secrets
+        run: |
+          cat > .env << EOF
+          PROFESSIONALIZE_API_KEY_2=${{ secrets.PROFESSIONALIZE_API_KEY_2 }}
+          PROFESSIONALIZE_BASE_URL=${{ secrets.PROFESSIONALIZE_BASE_URL }}
+          PROFESSIONALIZE_LLM_MODEL=${{ secrets.PROFESSIONALIZE_LLM_MODEL }}
+          TOKEN_FOR_TEAM=${{ secrets.TOKEN_FOR_TEAM }}
+          METRICS_API_KEY=${{ secrets.METRICS_API_KEY }}
+          METRICS_API_URL=${{ vars.METRICS_API_URL }}
+          GOOGLE_SCRIPT_URL_FOR_TEAM=${{ vars.GOOGLE_SCRIPT_URL_FOR_TEAM }}
+          REPO_PAT=${{ secrets.GISTS_PAT_CONHOLDATE_COM }}
+          GIST_NAME=${{ vars.CONHOLDATE_COM_GIST }}
+          SPREADSHEET_ID_FOR_BLOGPOST_METADATA=${{ secrets.CONHOLDATE_COM_SPREADSHEET_ID_FOR_BLOGPOST_METADATA }}
+          SPREADSHEET_ID_FOR_KEYWORDS=${{ secrets.CONHOLDATE_COM_SPREADSHEET_ID_FOR_KEYWORDS }}
+          GOOGLE_KEY=sheet-reader-494108-bd5e61ef812c.json
+          CONSOLIDATED_SHEET_NAME_FOR_BLOGPOST_METADATA=Consolidated
+          EOF
+          echo ".env file created"
+
+      - name: Generate Blog
+        id: generate_blog
+        env:
+          TOPIC: ${{ inputs.topic }}
+          OUTLINE: ${{ inputs.outline }}
+          KEYWORDS: ${{ inputs.keywords }}
+        run: |
+          cd agent_engine/blog_generator
+          echo "=== Starting manual blog generation ==="
+          echo "Brand: conholdate.com"
+          echo "Product: ${{ inputs.product }}"
+          echo "Platform: ${{ inputs.platform }}"
+          echo "Layout: ${{ inputs.layout }}"
+          echo "Merge with SERP: ${{ inputs.merge_with_serp }}"
+
+          python main.py \
+            --author "${{ inputs.author }}" \
+            --brand "conholdate.com" \
+            --product "${{ inputs.product }}" \
+            --platform "${{ inputs.platform }}" \
+            --topic "$TOPIC" \
+            --outline "$OUTLINE" \
+            --keywords "$KEYWORDS" \
+            --merge-serp "${{ inputs.merge_with_serp }}" \
+            --layout "${{ inputs.layout }}"
+
+          echo "✅ Blog generation completed"
+
+      - name: Find generated blog folder
+        id: read_blog
+        run: |
+          echo "=== Searching for generated blog folder ==="
+
+          BRAND_DIR="content/blogPosts/conholdate_com"
+
+          if [ ! -d "$BRAND_DIR" ]; then
+            echo "❌ Brand directory not found: $BRAND_DIR"
+            echo "blog_generated=false" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+
+          blog_folder=$(find "$BRAND_DIR" -mindepth 1 -maxdepth 1 -type d -name "20??-??-??-*" -mmin -10 -printf '%T@ %p\n' | sort -nr | head -1 | cut -d' ' -f2-)
+
+          if [ -z "$blog_folder" ] || [ ! -f "$blog_folder/index.md" ]; then
+            echo "⚠️ No recently generated blog folder found in $BRAND_DIR"
+            echo "blog_generated=false" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+
+          echo "✅ Found: $blog_folder"
+          echo "blog_folder_path=$blog_folder" >> $GITHUB_OUTPUT
+          echo "blog_generated=true" >> $GITHUB_OUTPUT
+
+      - name: Verify blog content
+        if: steps.read_blog.outputs.blog_generated == 'true'
+        run: |
+          BLOG_PATH="${{ steps.read_blog.outputs.blog_folder_path }}"
+          echo "=== Folder contents ==="
+          ls -la "$BLOG_PATH"
+          echo "--- Frontmatter excerpt ---"
+          head -20 "$BLOG_PATH/index.md"
+          echo "--- End excerpt ---"
+
+      # No commit or PR steps - this workflow never pushes the generated
+      # post anywhere. Retrieve it from the artifact below.
+      - name: Upload Generated Blog as Artifact
+        if: steps.read_blog.outputs.blog_generated == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: generated-blog-conholdate-com-manual-${{ github.run_number }}
+          path: ${{ steps.read_blog.outputs.blog_folder_path }}
+          if-no-files-found: error
