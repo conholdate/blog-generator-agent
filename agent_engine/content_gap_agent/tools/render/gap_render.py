@@ -231,6 +231,12 @@ def render_gaps_md(title: str, coverage_json: Dict[str, Any]) -> str:
     fully_covered = total_rows - gap_count
     gap_pct = (gap_count / total_rows * 100.0) if total_rows else 0.0
 
+    # Coverage is undefined when there is nothing to compare against: no platform
+    # columns, or no baseline topics. Every derived percentage would then read as
+    # perfect coverage (0 gaps out of 0 cells), so report the degenerate state
+    # explicitly instead of a false 100%.
+    coverage_undefined = (not platforms) or (total_rows == 0)
+
     # Per-platform coverage counts (on FILTERED rows only)
     platform_covered_counts = Counter()
     for r in filtered_rows:
@@ -301,6 +307,23 @@ def render_gaps_md(title: str, coverage_json: Dict[str, Any]) -> str:
     out.append("---")
     out.append("")
 
+    if coverage_undefined:
+        reason = (
+            "no baseline topics were found"
+            if total_rows == 0
+            else "the coverage map contains no platform columns (the candidate corpus is empty)"
+        )
+        out.append("> ⚠️ **Coverage undefined — percentages below are not meaningful.**")
+        out.append(">")
+        out.append(
+            f"> This report was generated from a coverage map where {reason}. "
+            "With nothing to compare against, no topic can be marked covered *or* missing. "
+            "Index the missing content source and re-run before reading these numbers as coverage."
+        )
+        out.append("")
+        out.append("---")
+        out.append("")
+
     # Dashboard-style Executive Summary
     out.append("## 📊 Coverage Performance Overview")
     out.append("")
@@ -309,8 +332,16 @@ def render_gaps_md(title: str, coverage_json: Dict[str, Any]) -> str:
             ["🧩 Metric", "Value", "Status"],
             [
                 ["**Total Canonical Topics**", f"**{total_rows}**", "—"],
-                ["**Topics with Gaps**", f"**{gap_count}**", "⚠️" if gap_count else "✅"],
-                ["**Fully Covered Topics**", str(fully_covered), "✅" if fully_covered else "—"],
+                [
+                    "**Topics with Gaps**",
+                    "**n/a**" if coverage_undefined else f"**{gap_count}**",
+                    "⚠️" if (coverage_undefined or gap_count) else "✅",
+                ],
+                [
+                    "**Fully Covered Topics**",
+                    "n/a" if coverage_undefined else str(fully_covered),
+                    "⚠️" if coverage_undefined else ("✅" if fully_covered else "—"),
+                ],
                 ["**Excluded (Release / Updates)**", str(excluded), "ℹ️"],
                 ["**Baseline Scope**", (baseline.upper() if baseline else "all"), "—"],
                 ["**Case**", case, "—"],
@@ -325,17 +356,21 @@ def render_gaps_md(title: str, coverage_json: Dict[str, Any]) -> str:
     out.append("")
     parity_status = _status_for_pct(100.0 - gap_pct)  # parity improves as gaps decrease
     porting_status = "🔥 Very High" if gap_pct >= 40 else ("✅ High" if gap_pct >= 20 else "🟢 Low")
-    out.append(
-        _md_table(
-            ["Indicator", "Score", "Interpretation"],
-            [
-                ["Cross-Platform Parity", f"{100.0 - gap_pct:.1f}%", parity_status],
-                ["Content Reusability", "High", "✅ Strong"],
-                ["Porting Opportunity", f"{gap_pct:.1f}% gaps", porting_status],
-                ["Excluded Noise (Releases)", str(excluded), "✅ Controlled"],
-            ],
-        )
-    )
+    if coverage_undefined:
+        health_rows = [
+            ["Cross-Platform Parity", "n/a", "⚠️ Undefined"],
+            ["Content Reusability", "n/a", "⚠️ Undefined"],
+            ["Porting Opportunity", "n/a", "⚠️ Undefined"],
+            ["Excluded Noise (Releases)", str(excluded), "✅ Controlled"],
+        ]
+    else:
+        health_rows = [
+            ["Cross-Platform Parity", f"{100.0 - gap_pct:.1f}%", parity_status],
+            ["Content Reusability", "High", "✅ Strong"],
+            ["Porting Opportunity", f"{gap_pct:.1f}% gaps", porting_status],
+            ["Excluded Noise (Releases)", str(excluded), "✅ Controlled"],
+        ]
+    out.append(_md_table(["Indicator", "Score", "Interpretation"], health_rows))
     out.append("")
     out.append("---")
     out.append("")
@@ -348,14 +383,23 @@ def render_gaps_md(title: str, coverage_json: Dict[str, Any]) -> str:
         missing = platform_missing_counts.get(p, 0)
         pct = (covered / total_rows * 100.0) if total_rows else 0.0
         plat_snapshot_rows.append([f"**{p.upper()}**", str(covered), str(missing), f"{_status_for_pct(pct)} ({pct:.1f}%)"])
-    out.append(_md_table(["Platform", "# Covered", "# Missing", "Coverage"], plat_snapshot_rows))
+    if plat_snapshot_rows:
+        out.append(_md_table(["Platform", "# Covered", "# Missing", "Coverage"], plat_snapshot_rows))
+    else:
+        out.append("_No platform columns in the coverage map — nothing to score._")
     out.append("")
     out.append("---")
     out.append("")
 
     out.append("### 🔎 Executive Insights")
     out.append("")
-    out.append(f"- **{gap_pct:.1f}%** of canonical topics are missing on at least one platform (after exclusions).")
+    if coverage_undefined:
+        out.append(
+            "- Coverage could not be computed: the map has "
+            f"{len(platforms)} platform column(s) and {total_rows} baseline topic(s)."
+        )
+    else:
+        out.append(f"- **{gap_pct:.1f}%** of canonical topics are missing on at least one platform (after exclusions).")
     if platform_missing_counts:
         worst = platform_missing_counts.most_common(3)
         out.append(f"- Highest gap density: {', '.join(f'**{p.upper()}** ({c} missing)' for p, c in worst)}.")

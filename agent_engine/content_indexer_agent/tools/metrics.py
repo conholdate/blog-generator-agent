@@ -17,16 +17,16 @@ log = get_logger("cg.metrics")
 def _load_send_metrics_api():
     """Load the shared metrics sender only when metrics delivery is actually needed.
 
-    ``hugo_blog_audit_agent`` lives outside this repo's installed package set;
-    importing it eagerly at module load time breaks every caller (including
-    both CLI entry points) whenever it isn't available, not just metrics
-    delivery. Returns None if it can't be found so callers can degrade
-    instead of crashing on import.
+    Importing the transport eagerly at module load time would break every
+    caller (including both CLI entry points) whenever it is absent, not just
+    metrics delivery. Returns None if it can't be found so callers can degrade
+    instead of crashing on import. A missing third-party dependency still
+    raises, since that is a broken install rather than absent metrics config.
     """
     try:
-        from ...hugo_blog_audit_agent.metrics_api import send_metrics_api
+        from ...metrics_api import send_metrics_api
     except ModuleNotFoundError as exc:
-        if exc.name == "agent_engine.hugo_blog_audit_agent":
+        if exc.name == "agent_engine.metrics_api":
             return None
         raise
     return send_metrics_api
@@ -89,21 +89,19 @@ class MetricsPayload:
 class MetricsSender:
     """
     Reads agent metadata from Settings and sends through the shared metrics API.
+
+    Only reporting policy lives here (whether metrics are enabled/required, and
+    who the run is attributed to). Delivery config -- endpoint, credential,
+    timeout, retries -- is owned by ``agent_engine.metrics_api``, which reads its
+    own environment variables. Do not re-read webhook URLs or tokens here.
     """
 
     def __init__(self, *, settings: Any) -> None:
         self.enabled: bool = bool(getattr(settings, "METRICS_ENABLED", True))
         self.required: bool = bool(getattr(settings, "METRICS_REQUIRED", False))
-        self.timeout_s: float = float(getattr(settings, "METRICS_TIMEOUT_S", 2.0))
-
-        self.webhook_url: str = _clean_optional(getattr(settings, "METRICS_WEBHOOK_URL", ""))
-        self.token: str = _clean_optional(getattr(settings, "METRICS_TOKEN", ""))
 
         self.agent_name: str = _clean_optional(getattr(settings, "METRICS_AGENT_NAME", ""))
         self.agent_owner: str = _clean_optional(getattr(settings, "METRICS_AGENT_OWNER", ""))
-
-        self.int_webhook_url: str = _clean_optional(getattr(settings, "INT_METRICS_WEBHOOK_URL", ""))
-        self.int_token: str = _clean_optional(getattr(settings, "INT_METRICS_TOKEN", ""))
 
     def _handle_send_failure(self, message: str, exc: Exception | None = None) -> None:
         if exc is not None:
@@ -121,10 +119,6 @@ class MetricsSender:
         data = asdict(payload)
         if data.get("extra") is None:
             data["extra"] = {}
-
-        # If your Apps Script expects token in JSON
-        # if self.token:
-        #    data["token"] = self.token
 
         # Remove job_type if None (keeps payload clean)
         if data.get("job_type") is None:
@@ -146,10 +140,21 @@ class MetricsSender:
             self._handle_send_failure("Metrics API send failed", e)
             return
 
+        # "skipped" means delivery was never attempted because no endpoint or
+        # credential is configured. That is the normal state for local runs, so
+        # it stays informational unless the operator declared metrics required.
+        skipped = [delivery for delivery in deliveries if delivery.get("status") == "skipped"]
+        if skipped:
+            reasons = ", ".join(str(item.get("reason") or "unknown") for item in skipped)
+            if self.required:
+                self._handle_send_failure(f"Metrics API delivery skipped: {reasons}")
+            else:
+                log.info("Metrics API delivery skipped: %s", reasons)
+
         failed = [
             delivery
             for delivery in deliveries
-            if delivery.get("status") != "success"
+            if delivery.get("status") not in {"success", "skipped"}
         ]
         if failed:
             reasons = ", ".join(str(item.get("reason") or item.get("status") or "unknown") for item in failed)

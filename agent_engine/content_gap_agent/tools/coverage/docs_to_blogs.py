@@ -201,15 +201,33 @@ def compute_docs_to_blogs(
 
     platforms = sorted(all_platforms_set)
 
+    limit_norm: List[str] = []
     if platforms_limit:
-        limit_set = {normalize_text(x) for x in platforms_limit if normalize_text(x)}
+        limit_norm = [p for p in (normalize_text(x) for x in platforms_limit) if p]
+        limit_set = set(limit_norm)
         platforms = [p for p in platforms if p in limit_set]
 
+    # A product with no blog posts yet (or a platforms_limit that matches no blog)
+    # leaves zero platform columns. Zero columns means zero cells, which downstream
+    # reads as "nothing is missing" -> a false 100% coverage report. Fall back to the
+    # requested platform universe so every baseline topic is reported as a real gap.
+    platform_fallback_used = False
+    if not platforms:
+        platforms = limit_norm or ([baseline_platform_n] if baseline_platform_n else [])
+        platform_fallback_used = bool(platforms)
+        logger.warning(
+            "No blog candidate platforms found (blog_records=%d). Falling back to platforms=%s "
+            "so uncovered topics are reported as gaps instead of full coverage.",
+            len(blog_records),
+            ",".join(platforms) if platforms else "None",
+        )
+
     logger.info(
-        "Blog platform mapping built (%.2f ms): unique_platforms=%d no_platform_records=%d",
+        "Blog platform mapping built (%.2f ms): unique_platforms=%d no_platform_records=%d platform_fallback_used=%s",
         (perf_counter() - t_map) * 1000.0,
         len(platforms),
         no_platform_records,
+        platform_fallback_used,
     )
 
     # -----------------------------
@@ -333,6 +351,7 @@ def compute_docs_to_blogs(
             "excluded_release_update_blogs": blog_total - len(blog_records),
             "baseline_records": len(baseline_docs),
             "candidate_records": len(blog_records),
+            "platform_fallback_used": platform_fallback_used,
             "total_cells": total_cells,
             "matched_cells": matched_cells,
             "missing_cells": max(0, total_cells - matched_cells),
