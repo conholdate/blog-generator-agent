@@ -28,7 +28,8 @@ class Settings(BaseSettings):
         # pinning that alias alone made the plain PROFESSIONALIZE_API_KEY in
         # .env resolve to None and fail startup with "key is not set".
         validation_alias=AliasChoices(
-            "PROFESSIONALIZE_API_KEY_1"
+            "PROFESSIONALIZE_API_KEY_1",
+            "PROFESSIONALIZE_API_KEY",
         ),
     )
     professionalize_llm_model: str = "gpt-oss"
@@ -40,12 +41,13 @@ class Settings(BaseSettings):
     request_timeout_seconds: float = 20.0
     output_dir: str = "output"
 
-    # Aspose release notes embed their usage samples as gist.github.com <script>
-    # tags and keep only API signature stubs in the page's own <pre> blocks, so
-    # the fetcher resolves those embeds against gist.githubusercontent.com — an
-    # outbound host beyond allowed_domains, which governs release-notes pages
-    # only. Disable to keep the fetcher talking to allowed_domains alone; pages
-    # that publish samples this way will then yield no eligible topics.
+    # Aspose release notes and docs articles both embed their usage samples as
+    # gist.github.com <script> tags and keep only API signature stubs in the
+    # page's own <pre> blocks, so the fetcher resolves those embeds against
+    # gist.githubusercontent.com — an outbound host beyond allowed_domains,
+    # which governs the source page only. Disable to keep the fetcher talking
+    # to allowed_domains alone; pages that publish samples this way will then
+    # yield no eligible topics.
     resolve_gist_embeds: bool = True
 
     # DEBUG | INFO | WARNING | ERROR — progress logging verbosity. INFO shows one

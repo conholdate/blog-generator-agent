@@ -205,7 +205,15 @@ def _extract_code_blocks(node) -> list[str]:
     candidates = [node] if getattr(node, "name", None) == "pre" else node.find_all("pre")
     blocks = []
     for pre in candidates:
-        text = pre.get_text("\n").strip()
+        # get_text() with no separator, deliberately: <pre> preserves the
+        # literal newlines in its own text nodes, so this reproduces the block
+        # exactly. Passing a "\n" separator (as this used to) silently destroys
+        # any syntax-highlighted sample — docs.aspose.com renders code through
+        # Chroma, which wraps every *token* in its own <span>, and a separator
+        # then puts each token on a line of its own ("using\n \nAspose.LLM\n;").
+        # Release-notes pages hid the bug because their samples arrive as gist
+        # embeds, which _inline_gist_embeds stores as one plain text node.
+        text = pre.get_text().strip()
         if text:
             blocks.append(text)
     return blocks

@@ -1,9 +1,9 @@
 from __future__ import annotations
 
 import logging
+from typing import Protocol
 
 from ..config import Settings
-from ..models.extraction import EligibleTopic
 from ..models.keyword_analysis import KeywordAnalysisResult, KeywordGroups
 from ..models.platform import PlatformContext
 from . import mcp_client
@@ -14,7 +14,17 @@ logger = logging.getLogger(__name__)
 _KEYWORDS_SERVER = "keywords_auto/server.py"
 
 
-def analyze_topic(topic: EligibleTopic, platform: PlatformContext, settings: Settings) -> KeywordAnalysisResult | None:
+class TitledTopic(Protocol):
+    """The only thing the keyword server needs from a topic. Satisfied by
+    `models.extraction.EligibleTopic` (one release-notes feature) and by
+    `models.docs_extraction.DocsArticleExtraction` (a whole docs article),
+    so the same MCP call serves both use cases.
+    """
+
+    suggested_title: str
+
+
+def analyze_topic(topic: TitledTopic, platform: PlatformContext, settings: Settings) -> KeywordAnalysisResult | None:
     """Calls the keywords_auto MCP server (mcp-servers/keywords_auto) over
     stdio for SEO keyword groups — the same MCP-over-stdio convention
     agent_engine/blog_generator uses for its own fetch_keywords_auto() call

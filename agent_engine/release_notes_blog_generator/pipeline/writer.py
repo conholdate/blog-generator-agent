@@ -17,7 +17,12 @@ from .slug import slugify
 
 logger = logging.getLogger(__name__)
 
-_PROMPT_PATH = Path(__file__).resolve().parent.parent / "prompts" / "writer_agent.md"
+_PROMPTS_DIR = Path(__file__).resolve().parent.parent / "prompts"
+_PROMPT_PATH = _PROMPTS_DIR / "writer_agent.md"
+# Docs-article use case: same writer, same output schema, different brief —
+# one post covering every topic on a documentation page instead of one post
+# per release-notes feature. See prompts/docs_writer_agent.md.
+DOCS_PROMPT_PATH = _PROMPTS_DIR / "docs_writer_agent.md"
 _MAX_TAGS = 10
 _MAX_COMPLETENESS_RETRIES = 1
 _MIN_SLUG_LENGTH = 15
@@ -35,19 +40,29 @@ class _WriterOutput(BaseModel):
     body_markdown: str
 
 
-def write_article(fact_pack: FactPack, llm: LLMClient, settings: Settings) -> BlogPost:
+def write_article(
+    fact_pack: FactPack,
+    llm: LLMClient,
+    settings: Settings,
+    prompt_path: Path | None = None,
+) -> BlogPost:
     """Blog Writer Agent (instructions.md step 6) — writes only from the fact
     pack. The LLM only supplies content fields (title, copy, tags, steps,
     faqs, body); every mechanical/policy field (date, draft, url, cover path,
     categories) is filled in deterministically in `_assemble_blog_post` so a
     model quirk can't produce a malformed CMS field.
 
+    `prompt_path` selects the brief: the release-notes writer prompt by
+    default, or `DOCS_PROMPT_PATH` for the docs-article use case. Everything
+    downstream of the prompt — output schema, completeness retry, front-matter
+    assembly — is shared, so both use cases produce identical draft structure.
+
     A single completeness retry guards against the model silently stopping
     mid-article (valid JSON, but a truncated body missing required sections)
     — this has been observed in practice, and without it the incomplete
     draft would ship with only an advisory note in quality.json.
     """
-    system_prompt = _PROMPT_PATH.read_text(encoding="utf-8")
+    system_prompt = (prompt_path or _PROMPT_PATH).read_text(encoding="utf-8")
     user_prompt = fact_pack.model_dump_json(indent=2)
     result = llm.complete_structured(system=system_prompt, user=user_prompt, schema=_WriterOutput)
 
