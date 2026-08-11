@@ -3,10 +3,18 @@ name: Release Notes Blog Generator
 on:
   workflow_dispatch:
     inputs:
-      release_notes_url:
-        description: Aspose release notes URL to process (e.g. https://releases.aspose.com/pdf/net/release-notes/2026/aspose-pdf-for-net-26-6-release-notes/)
+      source_url:
+        description: 'Source URL to process — a release-notes page (e.g. https://releases.aspose.com/pdf/net/release-notes/2026/aspose-pdf-for-net-26-6-release-notes/) or a docs article (e.g. https://docs.aspose.com/words/net/create-or-load-a-document/). Must match source_type.'
         required: true
         type: string
+      source_type:
+        description: "What kind of page source_url points at: release-notes fans out to one draft per code-backed feature; docs fans in to one detailed draft covering the whole article"
+        required: true
+        default: release-notes
+        type: choice
+        options:
+          - release-notes
+          - docs
       verbose:
         description: Enable debug-level logging (-v)
         required: true
@@ -74,11 +82,12 @@ jobs:
         id: generate
         shell: bash
         env:
-          RELEASE_NOTES_URL: ${{ inputs.release_notes_url }}
+          SOURCE_URL: ${{ inputs.source_url }}
+          SOURCE_TYPE: ${{ inputs.source_type }}
           VERBOSE: ${{ inputs.verbose }}
         run: |
           set -euo pipefail
-          args=(-m agent_engine.release_notes_blog_generator.cli "$RELEASE_NOTES_URL")
+          args=(-m agent_engine.release_notes_blog_generator.cli --source-type "$SOURCE_TYPE" "$SOURCE_URL")
           if [ "$VERBOSE" = "true" ]; then
             args+=(-v)
           fi
@@ -90,7 +99,8 @@ jobs:
         run: |
           echo "## Release Notes Blog Generator" >> "$GITHUB_STEP_SUMMARY"
           echo "" >> "$GITHUB_STEP_SUMMARY"
-          echo "**Source URL:** ${{ inputs.release_notes_url }}" >> "$GITHUB_STEP_SUMMARY"
+          echo "**Source URL:** ${{ inputs.source_url }}" >> "$GITHUB_STEP_SUMMARY"
+          echo "**Source type:** \`${{ inputs.source_type }}\`" >> "$GITHUB_STEP_SUMMARY"
           echo "" >> "$GITHUB_STEP_SUMMARY"
 
           if [ -d output ] && [ -n "$(find output -mindepth 1 -maxdepth 1 -type d -not -name meta)" ]; then
@@ -123,9 +133,9 @@ jobs:
             exit 0
           fi
 
-          git commit -m "Add generated release-notes blog draft(s) [Run #${{ github.run_number }}]
+          git commit -m "Add generated ${{ inputs.source_type }} blog draft(s) [Run #${{ github.run_number }}]
 
-          Source: ${{ inputs.release_notes_url }}"
+          Source: ${{ inputs.source_url }}"
           git pull --rebase --autostash origin "${GITHUB_REF_NAME}"
           git push origin "HEAD:${GITHUB_REF_NAME}"
 
@@ -133,6 +143,6 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: release-notes-blog-draft-${{ github.run_number }}
+          name: ${{ inputs.source_type }}-blog-draft-${{ github.run_number }}
           path: output/**
           if-no-files-found: warn
