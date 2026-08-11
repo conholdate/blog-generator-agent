@@ -11,7 +11,7 @@
   "APIReferenceURL" : "https://reference.aspose.cloud/words/",
   "FreeAppsURL" : "https://products.aspose.app/words/family",
   "ForumsURL" : "https://forum.aspose.cloud/c/words/17",
-  "InstallCommand" : "dotnet add package Aspose.Words-Cloud --version 25.12.0",
+  "InstallCommand" : "dotnet add package Aspose.Words-Cloud",
   "urlPrefix" : "words",
   "license":"https://purchase.aspose.com/temporary-license/"
 },
@@ -27,7 +27,7 @@
   "APIReferenceURL": "https://reference.aspose.cloud/words/",
   "FreeAppsURL": "https://products.aspose.app/words/family",
   "ForumsURL": "https://forum.aspose.cloud/c/words/17",
-  "InstallCommand": "mvn install com.aspose:aspose-words-cloud",
+  "InstallCommand": "<dependency>\n<groupId>com.aspose</groupId>\n<artifactId>aspose-words-cloud</artifactId>\n<version>26.8.0</version>\n</dependency>",
   "urlPrefix": "words",
   "license": "https://purchase.aspose.com/temporary-license/"
 },
@@ -59,7 +59,7 @@
   "APIReferenceURL": "https://reference.aspose.cloud/words/",
   "FreeAppsURL": "https://products.aspose.app/words/family",
   "ForumsURL": "https://forum.aspose.cloud/c/words/17",
-  "InstallCommand": "composer require aspose/words-cloud",
+  "InstallCommand": "composer require aspose-cloud/aspose-words-cloud",
   "urlPrefix": "words",
   "license": "https://purchase.aspose.com/temporary-license/"
 },
@@ -155,7 +155,7 @@
   "APIReferenceURL": "https://reference.aspose.cloud/words/",
   "FreeAppsURL": "https://products.aspose.app/words/family",
   "ForumsURL": "https://forum.aspose.cloud/c/words/17",
-  "InstallCommand": "pub global activate aspose_words_cloud",
+  "InstallCommand": "pub add aspose_words_cloud",
   "urlPrefix": "words",
   "license": "https://purchase.aspose.com/temporary-license/"
 },
@@ -171,7 +171,7 @@
   "APIReferenceURL": "https://reference.aspose.cloud/pdf/",
   "FreeAppsURL": "https://products.aspose.app/pdf/family/",
   "ForumsURL": "https://forum.aspose.cloud/c/pdf/13",
-  "InstallCommand": "dotnet add package Aspose.Pdf-Cloud",
+  "InstallCommand": "dotnet add package Aspose.PDF-Cloud",
   "urlPrefix": "pdf",
   "license": "https://purchase.aspose.com/temporary-license/"
 },
@@ -187,7 +187,7 @@
   "APIReferenceURL": "https://reference.aspose.cloud/pdf/",
   "FreeAppsURL": "https://products.aspose.app/pdf/family/",
   "ForumsURL": "https://forum.aspose.cloud/c/pdf/13",
-  "InstallCommand": "mvn install com.aspose:aspose-pdf-cloud",
+  "InstallCommand": "<dependency>\n<groupId>com.aspose</groupId>\n<artifactId>aspose-pdf-cloud</artifactId>\n<version>26.7.0</version>\n</dependency>",
   "urlPrefix": "pdf",
   "license": "https://purchase.aspose.com/temporary-license/"
 },
@@ -203,7 +203,7 @@
   "APIReferenceURL": "https://reference.aspose.cloud/pdf/",
   "FreeAppsURL": "https://products.aspose.app/pdf/family/",
   "ForumsURL": "https://forum.aspose.cloud/c/pdf/13",
-  "InstallCommand": "composer require aspose/pdf-cloud",
+  "InstallCommand": "composer require aspose/pdf-sdk-php",
   "urlPrefix": "pdf",
   "license": "https://purchase.aspose.com/temporary-license/"
 },
@@ -235,7 +235,7 @@
   "APIReferenceURL": "https://reference.aspose.cloud/pdf/",
   "FreeAppsURL": "https://products.aspose.app/pdf/family/",
   "ForumsURL": "https://forum.aspose.cloud/c/pdf/13",
-  "InstallCommand": "pip install aspose-pdf-cloud",
+  "InstallCommand": "pip install asposepdfcloud",
   "urlPrefix": "pdf",
   "license": "https://purchase.aspose.com/temporary-license/"
 },
@@ -251,7 +251,7 @@
   "APIReferenceURL": "https://reference.aspose.cloud/pdf/",
   "FreeAppsURL": "https://products.aspose.app/pdf/family/",
   "ForumsURL": "https://forum.aspose.cloud/c/pdf/13",
-  "InstallCommand": "gem install aspose-pdf-cloud",
+  "InstallCommand": "gem install aspose_pdf_cloud",
   "urlPrefix": "pdf",
   "license": "https://purchase.aspose.com/temporary-license/"
 },
@@ -346,7 +346,7 @@
   "APIReferenceURL": "https://reference.aspose.cloud/cells/",
   "FreeAppsURL": "https://products.aspose.app/cells/family/",
   "ForumsURL": "https://forum.aspose.cloud/c/cells/7",
-  "InstallCommand": "mvn install com.aspose:aspose-cells-cloud",
+  "InstallCommand": "<dependency>\n<groupId>com.aspose</groupId>\n<artifactId>aspose-cells-cloud</artifactId>\n<version>26.7</version>\n</dependency>",
   "urlPrefix": "cells",
   "license": "https://purchase.aspose.com/temporary-license/"
 },
@@ -362,7 +362,7 @@
   "APIReferenceURL": "https://reference.aspose.cloud/cells/",
   "FreeAppsURL": "https://products.aspose.app/cells/family/",
   "ForumsURL": "https://forum.aspose.cloud/c/cells/7",
-  "InstallCommand": "dotnet add package Aspose.Cells‑Cloud",
+  "InstallCommand": "dotnet add package Aspose.cells-Cloud",
   "urlPrefix": "cells",
   "license": "https://purchase.aspose.com/temporary-license/"
 },
@@ -394,7 +394,7 @@
   "APIReferenceURL": "https://reference.aspose.cloud/cells/",
   "FreeAppsURL": "https://products.aspose.app/cells/family/",
   "ForumsURL": "https://forum.aspose.cloud/c/cells/7",
-  "InstallCommand": "composer require asposecellscloud/cells",
+  "InstallCommand": "composer require aspose/cells-sdk-php",
   "urlPrefix": "cells",
   "license": "https://purchase.aspose.com/temporary-license/"
 },
@@ -426,7 +426,7 @@
   "APIReferenceURL": "https://reference.aspose.cloud/cells/",
   "FreeAppsURL": "https://products.aspose.app/cells/family/",
   "ForumsURL": "https://forum.aspose.cloud/c/cells/7",
-  "InstallCommand": "gem install asposecellscloud",
+  "InstallCommand": "gem install aspose_cells_cloud",
   "urlPrefix": "cells",
   "license": "https://purchase.aspose.com/temporary-license/"
 },
@@ -442,7 +442,7 @@
   "APIReferenceURL": "https://reference.aspose.cloud/cells/",
   "FreeAppsURL": "https://products.aspose.app/cells/family/",
   "ForumsURL": "https://forum.aspose.cloud/c/cells/7",
-  "InstallCommand": "cpan install asposecellscloud-cellsapi",
+  "InstallCommand": "cpan install AsposeCellsCloud::CellsApi",
   "urlPrefix": "cells",
   "license": "https://purchase.aspose.com/temporary-license/"
 },
@@ -474,7 +474,7 @@
   "APIReferenceURL": "https://reference.aspose.cloud/email/",
   "FreeAppsURL": "https://products.aspose.app/email/family",
   "ForumsURL": "https://forum.aspose.cloud/c/email/9",
-  "InstallCommand": "mvn install com.aspose:aspose-email-cloud",
+  "InstallCommand": "<dependency>\n<groupId>com.aspose</groupId>\n<artifactId>aspose-email-cloud</artifactId>\n<version>21.9.0</version>\n</dependency>",
   "urlPrefix": "email",
   "license": "https://purchase.aspose.com/temporary-license/"
 },
@@ -490,7 +490,7 @@
   "APIReferenceURL": "https://reference.aspose.cloud/email/",
   "FreeAppsURL": "https://products.aspose.app/email/family",
   "ForumsURL": "https://forum.aspose.cloud/c/email/9",
-  "InstallCommand": "composer require aspose-email-cloud",
+  "InstallCommand": "composer require aspose/aspose-email-cloud",
   "urlPrefix": "email",
   "license": "https://purchase.aspose.com/temporary-license/"
 },
@@ -522,7 +522,7 @@
   "APIReferenceURL": "https://reference.aspose.cloud/email/",
   "FreeAppsURL": "https://products.aspose.app/email/family",
   "ForumsURL": "https://forum.aspose.cloud/c/email/9",
-  "InstallCommand": "gem install aspose-email-cloud",
+  "InstallCommand": "gem install aspose_email_cloud",
   "urlPrefix": "email",
   "license": "https://purchase.aspose.com/temporary-license/"
 },
@@ -538,7 +538,7 @@
   "APIReferenceURL": "https://reference.aspose.cloud/email/",
   "FreeAppsURL": "https://products.aspose.app/email/family",
   "ForumsURL": "https://forum.aspose.cloud/c/email/9",
-  "InstallCommand": "npm install aspose-email-cloud",
+  "InstallCommand": "npm install @asposecloud/aspose-email-cloud",
   "urlPrefix": "email",
   "license": "https://purchase.aspose.com/temporary-license/"
 },
@@ -570,7 +570,7 @@
   "APIReferenceURL": "https://reference.aspose.cloud/slides/",
   "FreeAppsURL": "https://products.aspose.app/slides/family/",
   "ForumsURL": "https://forum.aspose.cloud/c/slides/15",
-  "InstallCommand": "mvn install com.aspose:aspose-slides-cloud",
+  "InstallCommand": "<dependency>\n<groupId>com.aspose</groupId>\n<artifactId>aspose-slides-cloud</artifactId>\n<version>26.6.0</version>\n</dependency>",
   "urlPrefix": "slides",
   "license": "https://purchase.aspose.com/temporary-license/"
 },
@@ -586,7 +586,7 @@
   "APIReferenceURL": "https://reference.aspose.cloud/slides/",
   "FreeAppsURL": "https://products.aspose.app/slides/family/",
   "ForumsURL": "https://forum.aspose.cloud/c/slides/15",
-  "InstallCommand": "composer require aspose-slides-cloud",
+  "InstallCommand": "composer require aspose/slides-sdk-php",
   "urlPrefix": "slides",
   "license": "https://purchase.aspose.com/temporary-license/"
 },
@@ -618,7 +618,7 @@
   "APIReferenceURL": "https://reference.aspose.cloud/slides/",
   "FreeAppsURL": "https://products.aspose.app/slides/family/",
   "ForumsURL": "https://forum.aspose.cloud/c/slides/15",
-  "InstallCommand": "pip install aspose-slides-cloud",
+  "InstallCommand": "pip install asposeslidescloud",
   "urlPrefix": "slides",
   "license": "https://purchase.aspose.com/temporary-license/"
 },
@@ -634,7 +634,7 @@
   "APIReferenceURL": "https://reference.aspose.cloud/slides/",
   "FreeAppsURL": "https://products.aspose.app/slides/family/",
   "ForumsURL": "https://forum.aspose.cloud/c/slides/15",
-  "InstallCommand": "gem install aspose-slides-cloud",
+  "InstallCommand": "gem install aspose_slides_cloud",
   "urlPrefix": "slides",
   "license": "https://purchase.aspose.com/temporary-license/"
 },
@@ -650,7 +650,7 @@
   "APIReferenceURL": "https://reference.aspose.cloud/slides/",
   "FreeAppsURL": "https://products.aspose.app/slides/family/",
   "ForumsURL": "https://forum.aspose.cloud/c/slides/15",
-  "InstallCommand": "npm install aspose-slides-cloud",
+  "InstallCommand": "npm install asposeslidescloud",
   "urlPrefix": "slides",
   "license": "https://purchase.aspose.com/temporary-license/"
 },
@@ -666,7 +666,7 @@
   "APIReferenceURL": "https://reference.aspose.cloud/slides/",
   "FreeAppsURL": "https://products.aspose.app/slides/family/",
   "ForumsURL": "https://forum.aspose.cloud/c/slides/15",
-  "InstallCommand": "Add C++ SDK via package manager or source",
+  "InstallCommand": "See GitHub for build instructions",
   "urlPrefix": "slides",
   "license": "https://purchase.aspose.com/temporary-license/"
 },
@@ -682,7 +682,7 @@
   "APIReferenceURL": "https://reference.aspose.cloud/slides/",
   "FreeAppsURL": "https://products.aspose.app/slides/family/",
   "ForumsURL": "https://forum.aspose.cloud/c/slides/15",
-  "InstallCommand": "cpan install aspose-slides-cloud",
+  "InstallCommand": "cpan install AsposeSlidesCloud::SlidesApi",
   "urlPrefix": "slides",
   "license": "https://purchase.aspose.com/temporary-license/"
 },
@@ -746,7 +746,7 @@
   "APIReferenceURL": "https://reference.aspose.cloud/imaging/",
   "FreeAppsURL": "https://products.aspose.app/imaging/family/",
   "ForumsURL": "https://forum.aspose.cloud/c/imaging/10",
-  "InstallCommand": "mvn install com.aspose:aspose-imaging-cloud",
+  "InstallCommand": "<dependency>\n<groupId>com.aspose</groupId>\n<artifactId>aspose-imaging-cloud</artifactId>\n<version>25.4</version>\n</dependency>",
   "urlPrefix": "imaging",
   "license": "https://purchase.aspose.com/temporary-license/"
 },
@@ -762,7 +762,7 @@
   "APIReferenceURL": "https://reference.aspose.cloud/imaging/",
   "FreeAppsURL": "https://products.aspose.app/imaging/family/",
   "ForumsURL": "https://forum.aspose.cloud/c/imaging/10",
-  "InstallCommand": "composer require aspose-imaging-cloud",
+  "InstallCommand": "composer require aspose/aspose-imaging-cloud",
   "urlPrefix": "imaging",
   "license": "https://purchase.aspose.com/temporary-license/"
 },
@@ -810,7 +810,7 @@
   "APIReferenceURL": "https://reference.aspose.cloud/imaging/",
   "FreeAppsURL": "https://products.aspose.app/imaging/family/",
   "ForumsURL": "https://forum.aspose.cloud/c/imaging/10",
-  "InstallCommand": "gem install aspose-imaging-cloud",
+  "InstallCommand": "gem install aspose_imaging_cloud",
   "urlPrefix": "imaging",
   "license": "https://purchase.aspose.com/temporary-license/"
 },
@@ -826,7 +826,7 @@
   "APIReferenceURL": "https://reference.aspose.cloud/imaging/",
   "FreeAppsURL": "https://products.aspose.app/imaging/family/",
   "ForumsURL": "https://forum.aspose.cloud/c/imaging/10",
-  "InstallCommand": "npm install aspose-imaging-cloud",
+  "InstallCommand": "npm install @asposecloud/aspose-imaging-cloud",
   "urlPrefix": "imaging",
   "license": "https://purchase.aspose.com/temporary-license/"
 },
@@ -874,7 +874,7 @@
   "APIReferenceURL": "https://reference.aspose.cloud/barcode/",
   "FreeAppsURL": "https://products.aspose.app/barcode/family/",
   "ForumsURL": "https://forum.aspose.cloud/c/barcode/6",
-  "InstallCommand": "mvn install com.aspose:aspose-barcode-cloud",
+  "InstallCommand": "<dependency>\n<groupId>com.aspose</groupId>\n<artifactId>aspose-barcode-cloud</artifactId>\n<version>26.7.0</version>\n</dependency>",
   "urlPrefix": "barcode",
   "license": "https://purchase.aspose.com/temporary-license/"
 },
@@ -890,7 +890,7 @@
   "APIReferenceURL": "https://reference.aspose.cloud/barcode/",
   "FreeAppsURL": "https://products.aspose.app/barcode/family/",
   "ForumsURL": "https://forum.aspose.cloud/c/barcode/6",
-  "InstallCommand": "composer require aspose-barcode-cloud",
+  "InstallCommand": "composer require aspose/barcode-cloud-php",
   "urlPrefix": "barcode",
   "license": "https://purchase.aspose.com/temporary-license/"
 },
@@ -922,7 +922,7 @@
   "APIReferenceURL": "https://reference.aspose.cloud/barcode/",
   "FreeAppsURL": "https://products.aspose.app/barcode/family/",
   "ForumsURL": "https://forum.aspose.cloud/c/barcode/6",
-  "InstallCommand": "npm install aspose-barcode-cloud",
+  "InstallCommand": "npm install aspose-barcode-cloud-node",
   "urlPrefix": "barcode",
   "license": "https://purchase.aspose.com/temporary-license/"
 },
@@ -954,7 +954,7 @@
   "APIReferenceURL": "https://reference.aspose.cloud/barcode/",
   "FreeAppsURL": "https://products.aspose.app/barcode/family/",
   "ForumsURL": "https://forum.aspose.cloud/c/barcode/6",
-  "InstallCommand": "pub add aspose-barcode-cloud",
+  "InstallCommand": "pub add aspose_barcode_cloud",
   "urlPrefix": "barcode",
   "license": "https://purchase.aspose.com/temporary-license/"
 },
@@ -986,7 +986,7 @@
   "APIReferenceURL": "https://reference.aspose.cloud/diagram/",
   "FreeAppsURL": "https://products.aspose.app/diagram/family/",
   "ForumsURL": "https://forum.aspose.cloud/c/diagram/27",
-  "InstallCommand": "mvn install com.aspose:aspose-diagram-cloud",
+  "InstallCommand": "<dependency>\n<groupId>com.aspose</groupId>\n<artifactId>aspose-diagram-cloud</artifactId>\n<version>20.3</version>\n</dependency>",
   "urlPrefix": "diagram",
   "license": "https://purchase.aspose.com/temporary-license/"
 },
@@ -1002,7 +1002,7 @@
   "APIReferenceURL": "https://reference.aspose.cloud/diagram/",
   "FreeAppsURL": "https://products.aspose.app/diagram/family/",
   "ForumsURL": "https://forum.aspose.cloud/c/diagram/27",
-  "InstallCommand": "composer require aspose-diagram-cloud",
+  "InstallCommand": "composer require aspose/diagram-sdk-php",
   "urlPrefix": "diagram",
   "license": "https://purchase.aspose.com/temporary-license/"
 },
@@ -1034,7 +1034,7 @@
   "APIReferenceURL": "https://reference.aspose.cloud/diagram/",
   "FreeAppsURL": "https://products.aspose.app/diagram/family/",
   "ForumsURL": "https://forum.aspose.cloud/c/diagram/27",
-  "InstallCommand": "pip install aspose-diagram-cloud",
+  "InstallCommand": "pip install asposediagramcloud",
   "urlPrefix": "diagram",
   "license": "https://purchase.aspose.com/temporary-license/"
 },
@@ -1050,7 +1050,7 @@
   "APIReferenceURL": "https://reference.aspose.cloud/diagram/",
   "FreeAppsURL": "https://products.aspose.app/diagram/family/",
   "ForumsURL": "https://forum.aspose.cloud/c/diagram/27",
-  "InstallCommand": "gem install aspose-diagram-cloud",
+  "InstallCommand": "gem install aspose_diagram_cloud",
   "urlPrefix": "diagram",
   "license": "https://purchase.aspose.com/temporary-license/"
 },
@@ -1066,7 +1066,7 @@
   "APIReferenceURL": "https://reference.aspose.cloud/diagram/",
   "FreeAppsURL": "https://products.aspose.app/diagram/family/",
   "ForumsURL": "https://forum.aspose.cloud/c/diagram/27",
-  "InstallCommand": "npm install aspose-diagram-cloud",
+  "InstallCommand": "npm install asposediagramcloud",
   "urlPrefix": "diagram",
   "license": "https://purchase.aspose.com/temporary-license/"
 },
@@ -1082,7 +1082,7 @@
   "APIReferenceURL": "https://reference.aspose.cloud/diagram/",
   "FreeAppsURL": "https://products.aspose.app/diagram/family/",
   "ForumsURL": "https://forum.aspose.cloud/c/diagram/27",
-  "InstallCommand": "cpan install aspose-diagram-cloud",
+  "InstallCommand": "cpan install AsposeDiagramCloud::DiagramApi",
   "urlPrefix": "diagram",
   "license": "https://purchase.aspose.com/temporary-license/"
 },
@@ -1130,7 +1130,7 @@
   "APIReferenceURL": "https://reference.aspose.cloud/tasks/",
   "FreeAppsURL": "https://products.aspose.app/tasks/applications",
   "ForumsURL": "https://forum.aspose.cloud/c/tasks/16",
-  "InstallCommand": "mvn install com.aspose:aspose-tasks-cloud",
+  "InstallCommand": "<dependency>\n<groupId>com.aspose</groupId>\n<artifactId>aspose-tasks-cloud</artifactId>\n<version>26.7.0</version>\n</dependency>",
   "urlPrefix": "tasks",
   "license": "https://purchase.aspose.com/temporary-license/"
 },
@@ -1146,7 +1146,7 @@
   "APIReferenceURL": "https://reference.aspose.cloud/tasks/",
   "FreeAppsURL": "https://products.aspose.app/tasks/applications",
   "ForumsURL": "https://forum.aspose.cloud/c/tasks/16",
-  "InstallCommand": "composer require aspose-tasks-cloud",
+  "InstallCommand": "composer require aspose/tasks-sdk-php",
   "urlPrefix": "tasks",
   "license": "https://purchase.aspose.com/temporary-license/"
 },
@@ -1178,7 +1178,7 @@
   "APIReferenceURL": "https://reference.aspose.cloud/tasks/",
   "FreeAppsURL": "https://products.aspose.app/tasks/applications",
   "ForumsURL": "https://forum.aspose.cloud/c/tasks/16",
-  "InstallCommand": "npm install aspose-tasks-cloud",
+  "InstallCommand": "npm install @asposecloud/aspose-tasks-cloud",
   "urlPrefix": "tasks",
   "license": "https://purchase.aspose.com/temporary-license/"
 },
@@ -1226,7 +1226,7 @@
   "APIReferenceURL": "https://reference.aspose.cloud/ocr/",
   "FreeAppsURL": "https://products.aspose.app/ocr/family/",
   "ForumsURL": "https://forum.aspose.cloud/c/ocr/12",
-  "InstallCommand": "mvn install com.aspose:aspose-ocr-cloud",
+  "InstallCommand": "<dependency>\n<groupId>com.aspose</groupId>\n<artifactId>aspose-ocr-cloud</artifactId>\n<version>25.9.0</version>\n</dependency>",
   "urlPrefix": "ocr",
   "license": "https://purchase.aspose.com/temporary-license/"
 },
@@ -1258,7 +1258,7 @@
   "APIReferenceURL": "https://reference.aspose.cloud/ocr/",
   "FreeAppsURL": "https://products.aspose.app/ocr/family/",
   "ForumsURL": "https://forum.aspose.cloud/c/ocr/12",
-  "InstallCommand": "pip install aspose-ocr-cloud",
+  "InstallCommand": "pip install aspose-imaging-cloud",
   "urlPrefix": "ocr",
   "license": "https://purchase.aspose.com/temporary-license/"
 },
@@ -1306,7 +1306,7 @@
   "APIReferenceURL": "https://reference.aspose.cloud/omr/",
   "FreeAppsURL": "https://products.aspose.app/omr/family/",
   "ForumsURL": "https://forum.aspose.cloud/c/omr/8",
-  "InstallCommand": "mvn install com.aspose:aspose-omr-cloud",
+  "InstallCommand": "<dependency>\n<groupId>com.aspose</groupId>\n<artifactId>aspose-omr-cloud</artifactId>\n<version>23.02.0</version>\n</dependency>",
   "urlPrefix": "omr",
   "license": "https://purchase.aspose.com/temporary-license/"
 },
@@ -1322,7 +1322,7 @@
   "APIReferenceURL": "https://reference.aspose.cloud/omr/",
   "FreeAppsURL": "https://products.aspose.app/omr/family/",
   "ForumsURL": "https://forum.aspose.cloud/c/omr/8",
-  "InstallCommand": "composer require aspose-omr-cloud",
+  "InstallCommand": "composer require aspose/aspose-omr-cloud",
   "urlPrefix": "omr",
   "license": "https://purchase.aspose.com/temporary-license/"
 },
@@ -1354,7 +1354,7 @@
   "APIReferenceURL": "https://reference.aspose.cloud/omr/",
   "FreeAppsURL": "https://products.aspose.app/omr/family/",
   "ForumsURL": "https://forum.aspose.cloud/c/omr/8",
-  "InstallCommand": "gem install aspose-omr-cloud",
+  "InstallCommand": "gem install aspose_omr_cloud",
   "urlPrefix": "omr",
   "license": "https://purchase.aspose.com/temporary-license/"
 },
@@ -1418,7 +1418,7 @@
   "APIReferenceURL": "https://reference.aspose.cloud/cad/",
   "FreeAppsURL": "",
   "ForumsURL": "https://forum.aspose.cloud/c/cad/28",
-  "InstallCommand": "dotnet add package Aspose.CAD-Cloud",
+  "InstallCommand": "dotnet add package Aspose.cad-Cloud",
   "urlPrefix": "cad",
   "license": "https://purchase.aspose.com/temporary-license/"
 },
@@ -1434,7 +1434,7 @@
   "APIReferenceURL": "https://reference.aspose.cloud/cad/",
   "FreeAppsURL": "",
   "ForumsURL": "https://forum.aspose.cloud/c/cad/28",
-  "InstallCommand": "mvn install com.aspose:aspose-cad-cloud",
+  "InstallCommand": "<dependency>\n<groupId>com.aspose</groupId>\n<artifactId>aspose-cad-cloud</artifactId>\n<version>24.5.2</version>\n</dependency>",
   "urlPrefix": "cad",
   "license": "https://purchase.aspose.com/temporary-license/"
 },
@@ -1450,7 +1450,7 @@
   "APIReferenceURL": "https://reference.aspose.cloud/cad/",
   "FreeAppsURL": "",
   "ForumsURL": "https://forum.aspose.cloud/c/cad/28",
-  "InstallCommand": "composer require aspose-cad-cloud",
+  "InstallCommand": "composer require aspose/aspose-cad-cloud",
   "urlPrefix": "cad",
   "license": "https://purchase.aspose.com/temporary-license/"
 },
@@ -1482,7 +1482,7 @@
   "APIReferenceURL": "https://reference.aspose.cloud/cad/",
   "FreeAppsURL": "",
   "ForumsURL": "https://forum.aspose.cloud/c/cad/28",
-  "InstallCommand": "gem install aspose-cad-cloud",
+  "InstallCommand": "gem install aspose_cad_cloud",
   "urlPrefix": "cad",
   "license": "https://purchase.aspose.com/temporary-license/"
 },
@@ -1498,7 +1498,7 @@
   "APIReferenceURL": "https://reference.aspose.cloud/cad/",
   "FreeAppsURL": "",
   "ForumsURL": "https://forum.aspose.cloud/c/cad/28",
-  "InstallCommand": "npm install aspose-cad-cloud",
+  "InstallCommand": "npm install @asposecloud/aspose-cad-cloud",
   "urlPrefix": "cad",
   "license": "https://purchase.aspose.com/temporary-license/"
 },
@@ -1530,7 +1530,7 @@
   "APIReferenceURL": "https://reference.aspose.cloud/3d/",
   "FreeAppsURL": "https://products.aspose.app/3d/family/",
   "ForumsURL": "https://forum.aspose.cloud/c/3d/29",
-  "InstallCommand": "mvn install com.aspose:aspose-3d-cloud",
+  "InstallCommand": "<dependency>\n<groupId>com.aspose</groupId>\n<artifactId>aspose-3d-cloud</artifactId>\n<version>25.8</version>\n</dependency>",
   "urlPrefix": "3d",
   "license": "https://purchase.aspose.com/temporary-license/"
 },
@@ -1562,7 +1562,7 @@
   "APIReferenceURL": "https://reference.aspose.cloud/3d/",
   "FreeAppsURL": "https://products.aspose.app/3d/family/",
   "ForumsURL": "https://forum.aspose.cloud/c/3d/29",
-  "InstallCommand": "pip install aspose-3d-cloud",
+  "InstallCommand": "pip install aspose3dcloud",
   "urlPrefix": "3d",
   "license": "https://purchase.aspose.com/temporary-license/"
 },
@@ -1578,7 +1578,7 @@
   "APIReferenceURL": "https://reference.aspose.cloud/3d/",
   "FreeAppsURL": "https://products.aspose.app/3d/family/",
   "ForumsURL": "https://forum.aspose.cloud/c/3d/29",
-  "InstallCommand": "gem install aspose-3d-cloud",
+  "InstallCommand": "gem install aspose_3d_cloud",
   "urlPrefix": "3d",
   "license": "https://purchase.aspose.com/temporary-license/"
 },
@@ -1594,7 +1594,7 @@
   "APIReferenceURL": "https://reference.aspose.cloud/3d/",
   "FreeAppsURL": "https://products.aspose.app/3d/family/",
   "ForumsURL": "https://forum.aspose.cloud/c/3d/29",
-  "InstallCommand": "npm install aspose-3d-cloud",
+  "InstallCommand": "npm install aspose3dcloud",
   "urlPrefix": "3d",
   "license": "https://purchase.aspose.com/temporary-license/"
 },
@@ -1610,7 +1610,7 @@
   "APIReferenceURL": "https://reference.aspose.cloud/3d/",
   "FreeAppsURL": "https://products.aspose.app/3d/family/",
   "ForumsURL": "https://forum.aspose.cloud/c/3d/29",
-  "InstallCommand": "cpan install aspose-3d-cloud",
+  "InstallCommand": "cpan install AsposeThreeDCloud::ThreeDCloudApi",
   "urlPrefix": "3d",
   "license": "https://purchase.aspose.com/temporary-license/"
 },
@@ -1642,7 +1642,7 @@
   "APIReferenceURL": "https://reference.aspose.cloud/3d/",
   "FreeAppsURL": "https://products.aspose.app/3d/family/",
   "ForumsURL": "https://forum.aspose.cloud/c/3d/29",
-  "InstallCommand": "go get github.com/aspose-3d-cloud/aspose-3d-cloud-go",
+  "InstallCommand": "go get github.com/Aspose-3D-Cloud/Aspose.3D-Cloud-SDK-for-Go",
   "urlPrefix": "3d",
   "license": "https://purchase.aspose.com/temporary-license/"
 },
@@ -1674,7 +1674,7 @@
   "APIReferenceURL": "https://reference.aspose.cloud/html/",
   "FreeAppsURL": "https://products.aspose.app/html/applications",
   "ForumsURL": "https://forum.aspose.cloud/c/html/24",
-  "InstallCommand": "mvn install com.aspose:aspose-html-cloud",
+  "InstallCommand": "<dependency>\n<groupId>com.aspose</groupId>\n<artifactId>aspose-html-cloud</artifactId>\n<version>25.11.1</version>\n</dependency>",
   "urlPrefix": "html",
   "license": "https://purchase.aspose.com/temporary-license/"
 },
@@ -1690,7 +1690,7 @@
   "APIReferenceURL": "https://reference.aspose.cloud/html/",
   "FreeAppsURL": "https://products.aspose.app/html/applications",
   "ForumsURL": "https://forum.aspose.cloud/c/html/24",
-  "InstallCommand": "Use C++ SDK with appropriate package manager",
+  "InstallCommand": "See GitHub for build instructions",
   "urlPrefix": "html",
   "license": "https://purchase.aspose.com/temporary-license/"
 },
@@ -1706,7 +1706,7 @@
   "APIReferenceURL": "https://reference.aspose.cloud/html/",
   "FreeAppsURL": "https://products.aspose.app/html/applications",
   "ForumsURL": "https://forum.aspose.cloud/c/html/24",
-  "InstallCommand": "composer require aspose-html-cloud",
+  "InstallCommand": "composer require aspose/aspose-html-cloud-php",
   "urlPrefix": "html",
   "license": "https://purchase.aspose.com/temporary-license/"
 },
@@ -1738,7 +1738,7 @@
   "APIReferenceURL": "https://reference.aspose.cloud/html/",
   "FreeAppsURL": "https://products.aspose.app/html/applications",
   "ForumsURL": "https://forum.aspose.cloud/c/html/24",
-  "InstallCommand": "pip install aspose-html-cloud",
+  "InstallCommand": "pip install asposehtmlcloud",
   "urlPrefix": "html",
   "license": "https://purchase.aspose.com/temporary-license/"
 },
@@ -1770,7 +1770,7 @@
   "APIReferenceURL": "https://reference.aspose.cloud/html/",
   "FreeAppsURL": "https://products.aspose.app/html/applications",
   "ForumsURL": "https://forum.aspose.cloud/c/html/24",
-  "InstallCommand": "npm install aspose-html-cloud",
+  "InstallCommand": "npm install @asposecloud/aspose-html-cloud --save",
   "urlPrefix": "html",
   "license": "https://purchase.aspose.com/temporary-license/"
 },
