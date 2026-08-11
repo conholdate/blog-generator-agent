@@ -1,0 +1,339 @@
+{
+  "topic": "Simple Chat with Aspose.LLM in C# – Implicit Session Messaging",
+  "primary_source_url": "https://docs.aspose.com/llm/net/use-cases/simple-chat/",
+  "source_title": "Simple chat|Documentation",
+  "sdk_version": "",
+  "main_problem_solved": "This page demonstrates how to use Aspose.LLM for .NET to exchange messages with an LLM without manually handling chat sessions. The engine creates and tracks a current session implicitly, letting developers build quick, single‑conversation bots or scripts.",
+  "platform": {
+    "platform_key": "net",
+    "platform_name": ".NET",
+    "language": "C#",
+    "language_tag": "csharp",
+    "package_manager": "NuGet",
+    "install_command": "Install-Package Aspose.LLM",
+    "product_key": "llm",
+    "product_display": "LLM",
+    "product_page_url": "https://products.aspose.com/llm/net/",
+    "docs_url": "https://docs.aspose.com/llm/net/",
+    "api_reference_url": "https://reference.aspose.com/llm/net/",
+    "free_apps_url": "https://products.aspose.app/llm/family",
+    "license_url": "https://purchase.aspose.com/temporary-license/",
+    "forum_url": "https://forum.aspose.com/c/llm/"
+  },
+  "source_type": "docs",
+  "keyword_analysis": {
+    "title": "",
+    "angle": "",
+    "outline": [],
+    "target_persona": "",
+    "primary_keyword": "Simple chat with implicit session messaging in .NET",
+    "supporting_keywords": [
+      ".NET Library for AI and Chat",
+      "Implement implicit session messaging in .NET chat",
+      "sample code for simple chat with session memory in .NET"
+    ],
+    "keyword_groups": {
+      "core_seo_keywords": [
+        "Simple chat with implicit session messaging in .NET",
+        ".NET Library for AI and Chat"
+      ],
+      "long_tail_keywords": [
+        "sample code for simple chat with session memory in .NET"
+      ],
+      "context_keywords": [
+        "Implement implicit session messaging in .NET chat"
+      ]
+    },
+    "editorial_notes": []
+  },
+  "key_steps": [
+    "When to use this pattern",
+    "Prerequisites",
+    "Minimal example",
+    "Override the preset for one message",
+    "Cancellation",
+    "Full runnable example",
+    "Common errors",
+    "What’s next"
+  ],
+  "code_snippets": [
+    "using Aspose.LLM;\nusing Aspose.LLM.Abstractions.Parameters.Presets;\n\nvar license = new Aspose.LLM.License();\nlicense.SetLicense(\"Aspose.LLM.lic\");\n\nvar preset = new Qwen25Preset();\nusing var api = AsposeLLMApi.Create(preset);\n\nstring reply = await api.SendMessageAsync(\"What is 2 + 2?\");\nConsole.WriteLine(reply);\n// Output: 2 + 2 equals 4.\n\nawait api.SendMessageAsync(\"My name is Alice.\");\nstring reply = await api.SendMessageAsync(\"What is my name?\");\nConsole.WriteLine(reply);\n// Output: Your name is Alice.",
+    "using Aspose.LLM.Abstractions.Parameters.Presets;\n\n// Default preset used by the API\nvar defaultPreset = new Qwen25Preset();\nusing var api = AsposeLLMApi.Create(defaultPreset);\n\n// Use a more deterministic preset for this one question\nvar strictPreset = new Qwen25Preset();\nstrictPreset.SamplerParameters.Temperature = 0.1f;\n\nstring reply = await api.SendMessageAsync(\n    \"What is the square root of 144?\",\n    preset: strictPreset);\n\nConsole.WriteLine(reply);\n// Output: The square root of 144 is 12.",
+    "using var cts = new CancellationTokenSource(TimeSpan.FromSeconds(30));\n\ntry\n{\n    string reply = await api.SendMessageAsync(\n        \"Write a 500-word essay about migration patterns of the Arctic tern.\",\n        cancellationToken: cts.Token);\n    Console.WriteLine(reply);\n}\ncatch (OperationCanceledException)\n{\n    Console.WriteLine(\"Generation timed out.\");\n}",
+    "using Aspose.LLM;\nusing Aspose.LLM.Abstractions.Parameters.Presets;\n\ninternal class SimpleChatDemo\n{\n    public static async Task Main()\n    {\n        var license = new Aspose.LLM.License();\n        license.SetLicense(\"Aspose.LLM.lic\");\n\n        var preset = new Qwen25Preset();\n        using var api = AsposeLLMApi.Create(preset);\n\n        Console.WriteLine(\"Ask me anything. Type 'quit' to exit.\");\n        while (true)\n        {\n            Console.Write(\"> \");\n            string? line = Console.ReadLine();\n            if (line == null || line.Equals(\"quit\", StringComparison.OrdinalIgnoreCase))\n                break;\n\n            try\n            {\n                string reply = await api.SendMessageAsync(line);\n                Console.WriteLine(reply);\n            }\n            catch (Exception ex)\n            {\n                Console.WriteLine($\"Error: {ex.Message}\");\n            }\n        }\n    }\n}\n\ndotnet run"
+  ],
+  "limitations": [],
+  "warnings": [
+    "All 4 code sample(s) have not been executed in a sandbox, but each was matched verbatim against Aspose's own documentation page; note them as reproduced from the official documentation and untested, not as unverified."
+  ],
+  "related_concepts": [
+    "Aspose.LLM.License",
+    "Qwen25Preset",
+    "SetLicense",
+    "Create",
+    "SendMessageAsync",
+    "CancellationTokenSource",
+    "OperationCanceledException",
+    "ReadLine",
+    "WriteLine"
+  ],
+  "facts_confirmed_from_source": [
+    "Documentation article: Simple chat",
+    "This page demonstrates how to use Aspose.LLM for .NET to exchange messages with an LLM without manually handling chat sessions. The engine creates and tracks a current session implicitly, letting developers build quick, single‑conversation bots or scripts.",
+    "Section 'When to use this pattern': This section outlines scenarios where the implicit‑session `SendMessageAsync` pattern is appropriate. It is best suited for one‑off questions, short back‑and‑forth exchanges, command‑line tools, or early prototypes that don’t need explicit session handling.",
+    "'When to use this pattern' fact: Single question and single answer.",
+    "'When to use this pattern' fact: A short back‑and‑forth where every message belongs to the same conversation.",
+    "'When to use this pattern' fact: CLI tools, scripts, or test harnesses that run one conversation at a time.",
+    "'When to use this pattern' fact: Prototypes where session management is not yet needed.",
+    "Section 'Prerequisites': Before using the simple chat pattern you must install the Aspose.LLM NuGet package, apply a valid license, and ensure the machine has enough RAM for the selected model preset.",
+    "'Prerequisites' fact: Install the NuGet package.",
+    "'Prerequisites' fact: Apply a license.",
+    "'Prerequisites' fact: RAM for the chosen preset — see System requirements.",
+    "Section 'Minimal example': A concise example that creates a license, selects a preset, instantiates the API, and sends a message using `SendMessageAsync`. Subsequent calls reuse the same implicit session, allowing a coherent multi‑turn exchange.",
+    "'Minimal example' fact: Create a license instance and set the .lic file.",
+    "'Minimal example' fact: Choose a preset (e.g., Qwen25Preset).",
+    "'Minimal example' fact: Create a single AsposeLLMApi instance.",
+    "'Minimal example' fact: Call `SendMessageAsync` to get a reply.",
+    "'Minimal example' fact: Further calls automatically use the current session.",
+    "'Minimal example' API used: AsposeLLMApi",
+    "'Minimal example' API used: SendMessageAsync",
+    "Section 'Override the preset for one message': Shows how to supply a different preset just for a single call to `SendMessageAsync` without changing the API's default preset. The override affects only that message; later calls revert to the original preset.",
+    "'Override the preset for one message' fact: Create a default preset for the API.",
+    "'Override the preset for one message' fact: Create a strict preset with a low temperature for deterministic output.",
+    "'Override the preset for one message' fact: Pass the strict preset via the `preset` argument to `SendMessageAsync`.",
+    "'Override the preset for one message' API used: AsposeLLMApi",
+    "'Override the preset for one message' API used: SendMessageAsync",
+    "Section 'Cancellation': Demonstrates passing a `CancellationToken` to abort a long generation. If the token is triggered, `OperationCanceledException` is caught, preventing corrupt session state.",
+    "'Cancellation' fact: Create a `CancellationTokenSource` with a timeout.",
+    "'Cancellation' fact: Pass `cancellationToken` to `SendMessageAsync`.",
+    "'Cancellation' fact: Catch `OperationCanceledException` to handle timeouts.",
+    "'Cancellation' API used: SendMessageAsync",
+    "Section 'Full runnable example': Provides a complete console application that continuously reads user input, sends it to the model via `SendMessageAsync`, and prints the response until the user types \"quit\". Includes the command to run the program.",
+    "'Full runnable example' fact: Initialize license and preset.",
+    "'Full runnable example' fact: Create a single AsposeLLMApi instance.",
+    "'Full runnable example' fact: Loop: read line → send → display reply.",
+    "'Full runnable example' fact: Gracefully handle exceptions.",
+    "'Full runnable example' API used: AsposeLLMApi",
+    "'Full runnable example' API used: SendMessageAsync",
+    "Section 'Common errors': Lists typical runtime errors and their causes when using the simple chat pattern, along with quick mitigation advice.",
+    "'Common errors' fact: `Not licensed for this method` – apply a license before any chat call.",
+    "'Common errors' fact: `Only one AsposeLLMApi instance can be created at a time` – ensure previous instance is disposed.",
+    "'Common errors' fact: Slow first response – the engine downloads binaries and model files on the first `Create`; expect 5‑15 minutes on a fresh machine.",
+    "Section 'What’s next': Points readers to related use‑case articles for more advanced scenarios such as multi‑turn chats, persisting sessions, custom presets, and a full API reference.",
+    "'What’s next' fact: Multi‑turn chat – explicit sessions and concurrent conversations.",
+    "'What’s next' fact: Save and restore session – persist conversations across restarts.",
+    "'What’s next' fact: Custom preset – tailor a preset to your model.",
+    "'What’s next' fact: Chat sessions reference – detailed semantics of `SendMessageAsync` and the current session."
+  ],
+  "facts_needing_verification": [
+    "Missing `using System.Threading;` for CancellationTokenSource in the Cancellation example.",
+    "The `dotnet run` command is a shell command, not C# code; readers may need to know how to run a .NET console project.",
+    "No explicit information about the required .NET version or target framework."
+  ],
+  "suggested_article_outline": [
+    "Introduction",
+    "Why these tasks matter",
+    "Brief introduction of the API (install + product/docs links)",
+    "Prerequisites (only if the documentation stated any)",
+    "When to use this pattern",
+    "Prerequisites",
+    "Minimal example",
+    "Override the preset for one message",
+    "Cancellation",
+    "Full runnable example",
+    "Common errors",
+    "What’s next",
+    "Choosing the Right Approach (only if more than one code-backed topic was covered)",
+    "Get a Free License",
+    "Free Additional Resources",
+    "Conclusion",
+    "FAQs",
+    "See Also (only if related post URLs are supplied)"
+  ],
+  "code_verification": {
+    "language": "C#",
+    "tested": false,
+    "source_verified": true,
+    "syntax_valid": true,
+    "package_name": null,
+    "package_version": null,
+    "os": null,
+    "input_file_used": null,
+    "output_file_generated": null,
+    "errors": [],
+    "notes": "4 code sample(s) checked against the documentation page. Every sample matches a block scraped verbatim from the source page. Static syntax check passed for every sample (balanced brackets/quotes). Sandboxed execution against the real Aspose SDK is not attempted: these samples reference proprietary licensed assemblies and external input files that only exist in the product team's own test environment."
+  },
+  "prerequisites": [
+    "Install the NuGet package",
+    "Apply a license",
+    "Adequate RAM for the chosen preset"
+  ],
+  "doc_topics": [
+    {
+      "heading": "When to use this pattern",
+      "summary": "This section outlines scenarios where the implicit‑session `SendMessageAsync` pattern is appropriate. It is best suited for one‑off questions, short back‑and‑forth exchanges, command‑line tools, or early prototypes that don’t need explicit session handling.",
+      "key_points": [
+        "Single question and single answer.",
+        "A short back‑and‑forth where every message belongs to the same conversation.",
+        "CLI tools, scripts, or test harnesses that run one conversation at a time.",
+        "Prototypes where session management is not yet needed."
+      ],
+      "code_sample": "",
+      "language": "",
+      "apis_used": [],
+      "classes_used": [],
+      "methods_used": [],
+      "properties_used": []
+    },
+    {
+      "heading": "Prerequisites",
+      "summary": "Before using the simple chat pattern you must install the Aspose.LLM NuGet package, apply a valid license, and ensure the machine has enough RAM for the selected model preset.",
+      "key_points": [
+        "Install the NuGet package.",
+        "Apply a license.",
+        "RAM for the chosen preset — see System requirements."
+      ],
+      "code_sample": "",
+      "language": "",
+      "apis_used": [],
+      "classes_used": [],
+      "methods_used": [],
+      "properties_used": []
+    },
+    {
+      "heading": "Minimal example",
+      "summary": "A concise example that creates a license, selects a preset, instantiates the API, and sends a message using `SendMessageAsync`. Subsequent calls reuse the same implicit session, allowing a coherent multi‑turn exchange.",
+      "key_points": [
+        "Create a license instance and set the .lic file.",
+        "Choose a preset (e.g., Qwen25Preset).",
+        "Create a single AsposeLLMApi instance.",
+        "Call `SendMessageAsync` to get a reply.",
+        "Further calls automatically use the current session."
+      ],
+      "code_sample": "using Aspose.LLM;\nusing Aspose.LLM.Abstractions.Parameters.Presets;\n\nvar license = new Aspose.LLM.License();\nlicense.SetLicense(\"Aspose.LLM.lic\");\n\nvar preset = new Qwen25Preset();\nusing var api = AsposeLLMApi.Create(preset);\n\nstring reply = await api.SendMessageAsync(\"What is 2 + 2?\");\nConsole.WriteLine(reply);\n// Output: 2 + 2 equals 4.\n\nawait api.SendMessageAsync(\"My name is Alice.\");\nstring reply = await api.SendMessageAsync(\"What is my name?\");\nConsole.WriteLine(reply);\n// Output: Your name is Alice.",
+      "language": "C#",
+      "apis_used": [
+        "AsposeLLMApi",
+        "SendMessageAsync"
+      ],
+      "classes_used": [
+        "Aspose.LLM.License",
+        "Qwen25Preset"
+      ],
+      "methods_used": [
+        "SetLicense",
+        "Create",
+        "SendMessageAsync"
+      ],
+      "properties_used": []
+    },
+    {
+      "heading": "Override the preset for one message",
+      "summary": "Shows how to supply a different preset just for a single call to `SendMessageAsync` without changing the API's default preset. The override affects only that message; later calls revert to the original preset.",
+      "key_points": [
+        "Create a default preset for the API.",
+        "Create a strict preset with a low temperature for deterministic output.",
+        "Pass the strict preset via the `preset` argument to `SendMessageAsync`."
+      ],
+      "code_sample": "using Aspose.LLM.Abstractions.Parameters.Presets;\n\n// Default preset used by the API\nvar defaultPreset = new Qwen25Preset();\nusing var api = AsposeLLMApi.Create(defaultPreset);\n\n// Use a more deterministic preset for this one question\nvar strictPreset = new Qwen25Preset();\nstrictPreset.SamplerParameters.Temperature = 0.1f;\n\nstring reply = await api.SendMessageAsync(\n    \"What is the square root of 144?\",\n    preset: strictPreset);\n\nConsole.WriteLine(reply);\n// Output: The square root of 144 is 12.",
+      "language": "C#",
+      "apis_used": [
+        "AsposeLLMApi",
+        "SendMessageAsync"
+      ],
+      "classes_used": [
+        "Qwen25Preset"
+      ],
+      "methods_used": [
+        "Create",
+        "SendMessageAsync"
+      ],
+      "properties_used": [
+        "SamplerParameters.Temperature"
+      ]
+    },
+    {
+      "heading": "Cancellation",
+      "summary": "Demonstrates passing a `CancellationToken` to abort a long generation. If the token is triggered, `OperationCanceledException` is caught, preventing corrupt session state.",
+      "key_points": [
+        "Create a `CancellationTokenSource` with a timeout.",
+        "Pass `cancellationToken` to `SendMessageAsync`.",
+        "Catch `OperationCanceledException` to handle timeouts."
+      ],
+      "code_sample": "using var cts = new CancellationTokenSource(TimeSpan.FromSeconds(30));\n\ntry\n{\n    string reply = await api.SendMessageAsync(\n        \"Write a 500-word essay about migration patterns of the Arctic tern.\",\n        cancellationToken: cts.Token);\n    Console.WriteLine(reply);\n}\ncatch (OperationCanceledException)\n{\n    Console.WriteLine(\"Generation timed out.\");\n}",
+      "language": "C#",
+      "apis_used": [
+        "SendMessageAsync"
+      ],
+      "classes_used": [
+        "CancellationTokenSource",
+        "OperationCanceledException"
+      ],
+      "methods_used": [
+        "SendMessageAsync"
+      ],
+      "properties_used": [
+        "cancellationToken"
+      ]
+    },
+    {
+      "heading": "Full runnable example",
+      "summary": "Provides a complete console application that continuously reads user input, sends it to the model via `SendMessageAsync`, and prints the response until the user types \"quit\". Includes the command to run the program.",
+      "key_points": [
+        "Initialize license and preset.",
+        "Create a single AsposeLLMApi instance.",
+        "Loop: read line → send → display reply.",
+        "Gracefully handle exceptions."
+      ],
+      "code_sample": "using Aspose.LLM;\nusing Aspose.LLM.Abstractions.Parameters.Presets;\n\ninternal class SimpleChatDemo\n{\n    public static async Task Main()\n    {\n        var license = new Aspose.LLM.License();\n        license.SetLicense(\"Aspose.LLM.lic\");\n\n        var preset = new Qwen25Preset();\n        using var api = AsposeLLMApi.Create(preset);\n\n        Console.WriteLine(\"Ask me anything. Type 'quit' to exit.\");\n        while (true)\n        {\n            Console.Write(\"> \");\n            string? line = Console.ReadLine();\n            if (line == null || line.Equals(\"quit\", StringComparison.OrdinalIgnoreCase))\n                break;\n\n            try\n            {\n                string reply = await api.SendMessageAsync(line);\n                Console.WriteLine(reply);\n            }\n            catch (Exception ex)\n            {\n                Console.WriteLine($\"Error: {ex.Message}\");\n            }\n        }\n    }\n}\n\ndotnet run",
+      "language": "C#",
+      "apis_used": [
+        "AsposeLLMApi",
+        "SendMessageAsync"
+      ],
+      "classes_used": [
+        "Aspose.LLM.License",
+        "Qwen25Preset"
+      ],
+      "methods_used": [
+        "SetLicense",
+        "Create",
+        "SendMessageAsync",
+        "ReadLine",
+        "WriteLine"
+      ],
+      "properties_used": []
+    },
+    {
+      "heading": "Common errors",
+      "summary": "Lists typical runtime errors and their causes when using the simple chat pattern, along with quick mitigation advice.",
+      "key_points": [
+        "`Not licensed for this method` – apply a license before any chat call.",
+        "`Only one AsposeLLMApi instance can be created at a time` – ensure previous instance is disposed.",
+        "Slow first response – the engine downloads binaries and model files on the first `Create`; expect 5‑15 minutes on a fresh machine."
+      ],
+      "code_sample": "",
+      "language": "",
+      "apis_used": [],
+      "classes_used": [],
+      "methods_used": [],
+      "properties_used": []
+    },
+    {
+      "heading": "What’s next",
+      "summary": "Points readers to related use‑case articles for more advanced scenarios such as multi‑turn chats, persisting sessions, custom presets, and a full API reference.",
+      "key_points": [
+        "Multi‑turn chat – explicit sessions and concurrent conversations.",
+        "Save and restore session – persist conversations across restarts.",
+        "Custom preset – tailor a preset to your model.",
+        "Chat sessions reference – detailed semantics of `SendMessageAsync` and the current session."
+      ],
+      "code_sample": "",
+      "language": "",
+      "apis_used": [],
+      "classes_used": [],
+      "methods_used": [],
+      "properties_used": []
+    }
+  ]
+}

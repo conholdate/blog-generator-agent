@@ -1,0 +1,23 @@
+{
+  "scores": {
+    "technical_accuracy": 4,
+    "code_correctness": 7,
+    "original_value": 10,
+    "source_faithfulness": 10,
+    "seo_readiness": 5,
+    "readability": 8,
+    "duplication_risk": 6,
+    "missing_citations": false,
+    "unsupported_claims": true
+  },
+  "publication_status": "needs_fact_check",
+  "reasons": [
+    "Title longer than 65 characters",
+    "SEO title longer than 65 characters",
+    "Meta description outside the 120-165 character range",
+    "A paragraph has more than 7 sentences",
+    "Code sample has not been executed in a sandbox (not feasible: proprietary SDK/license/input files)",
+    "Fact pack lists details needing verification",
+    "Body contains near-duplicate paragraphs"
+  ]
+}
