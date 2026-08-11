@@ -11,7 +11,7 @@
     "APIReferenceURL": "https://reference.groupdocs.cloud/viewer/",
     "FreeAppsURL": "https://products.groupdocs.app/viewer/family",
     "ForumsURL": "https://forum.groupdocs.cloud/c/viewer/9",
-    "InstallCommand": "dotnet add package GroupDocs.Viewer-Cloud",
+    "InstallCommand": "dotnet add package GroupDocs.viewer-Cloud",
     "urlPrefix": "viewer",
     "license": "https://purchase.groupdocs.cloud/temporary-license/"
   },
@@ -27,7 +27,7 @@
     "APIReferenceURL": "https://reference.groupdocs.cloud/viewer/",
     "FreeAppsURL": "https://products.groupdocs.app/viewer/family",
     "ForumsURL": "https://forum.groupdocs.cloud/c/viewer/9",
-    "InstallCommand": "mvn install com.groupdocs:groupdocs-viewer-cloud",
+    "InstallCommand": "<dependency>\n<groupId>com.groupdocs</groupId>\n<artifactId>groupdocs-viewer-cloud</artifactId>\n<version>26.6</version>\n</dependency>",
     "urlPrefix": "viewer",
     "license": "https://purchase.groupdocs.cloud/temporary-license/"
   },
@@ -43,7 +43,7 @@
     "APIReferenceURL": "https://reference.groupdocs.cloud/viewer/",
     "FreeAppsURL": "https://products.groupdocs.app/viewer/family",
     "ForumsURL": "https://forum.groupdocs.cloud/c/viewer/9",
-    "InstallCommand": "composer require groupdocs-viewer-cloud",
+    "InstallCommand": "composer require groupdocscloud/groupdocs-viewer-cloud",
     "urlPrefix": "viewer",
     "license": "https://purchase.groupdocs.cloud/temporary-license/"
   },
@@ -75,7 +75,7 @@
     "APIReferenceURL": "https://reference.groupdocs.cloud/viewer/",
     "FreeAppsURL": "https://products.groupdocs.app/viewer/family",
     "ForumsURL": "https://forum.groupdocs.cloud/c/viewer/9",
-    "InstallCommand": "gem install groupdocs-viewer-cloud",
+    "InstallCommand": "gem install groupdocs_viewer_cloud",
     "urlPrefix": "viewer",
     "license": "https://purchase.groupdocs.cloud/temporary-license/"
   },
@@ -107,7 +107,7 @@
     "APIReferenceURL": "https://reference.groupdocs.cloud/viewer/",
     "FreeAppsURL": "https://products.groupdocs.app/viewer/family",
     "ForumsURL": "https://forum.groupdocs.cloud/c/viewer/9",
-    "InstallCommand": "implementation 'com.groupdocs.viewer-cloud-android'",
+    "InstallCommand": "implementation 'com.groupdocs:groupdocs-viewer-cloud-android:20.5'",
     "urlPrefix": "viewer",
     "license": "https://purchase.groupdocs.cloud/temporary-license/"
   },
@@ -155,7 +155,7 @@
     "APIReferenceURL": "https://reference.groupdocs.cloud/annotation/",
     "FreeAppsURL": "https://products.groupdocs.app/annotation/total",
     "ForumsURL": "https://forum.groupdocs.cloud/c/annotation/10",
-    "InstallCommand": "mvn install com.groupdocs:groupdocs-annotation-cloud",
+    "InstallCommand": "<dependency>\n<groupId>com.groupdocs</groupId>\n<artifactId>groupdocs-annotation-cloud</artifactId>\n<version>25.7</version>\n</dependency>",
     "urlPrefix": "annotation",
     "license": "https://purchase.groupdocs.cloud/temporary-license/"
   },
@@ -171,7 +171,7 @@
     "APIReferenceURL": "https://reference.groupdocs.cloud/annotation/",
     "FreeAppsURL": "https://products.groupdocs.app/annotation/total",
     "ForumsURL": "https://forum.groupdocs.cloud/c/annotation/10",
-    "InstallCommand": "composer require groupdocs-annotation-cloud",
+    "InstallCommand": "composer require groupdocscloud/groupdocs-annotation-cloud",
     "urlPrefix": "annotation",
     "license": "https://purchase.groupdocs.cloud/temporary-license/"
   },
@@ -203,7 +203,7 @@
     "APIReferenceURL": "https://reference.groupdocs.cloud/annotation/",
     "FreeAppsURL": "https://products.groupdocs.app/annotation/total",
     "ForumsURL": "https://forum.groupdocs.cloud/c/annotation/10",
-    "InstallCommand": "gem install groupdocs-annotation-cloud",
+    "InstallCommand": "gem install groupdocs_annotation_cloud",
     "urlPrefix": "annotation",
     "license": "https://purchase.groupdocs.cloud/temporary-license/"
   },
@@ -251,7 +251,7 @@
     "APIReferenceURL": "https://reference.groupdocs.cloud/conversion/",
     "FreeAppsURL": "https://products.groupdocs.app/conversion/family",
     "ForumsURL": "https://forum.groupdocs.cloud/c/conversion/11",
-    "InstallCommand": "mvn install com.groupdocs:groupdocs-conversion-cloud",
+    "InstallCommand": "<dependency>\n<groupId>com.groupdocs</groupId>\n<artifactId>groupdocs-conversion-cloud</artifactId>\n<version>26.8</version>\n</dependency>",
     "urlPrefix": "conversion",
     "license":"https://purchase.groupdocs.cloud/temporary-license/"
   },
@@ -267,7 +267,7 @@
     "APIReferenceURL": "https://reference.groupdocs.cloud/conversion/",
     "FreeAppsURL": "https://products.groupdocs.app/conversion/family",
     "ForumsURL": "https://forum.groupdocs.cloud/c/conversion/11",
-    "InstallCommand": "composer require groupdocs-conversion-cloud",
+    "InstallCommand": "composer require groupdocscloud/groupdocs-conversion-cloud",
     "urlPrefix": "conversion",
     "license":"https://purchase.groupdocs.cloud/temporary-license/"
   },
@@ -299,7 +299,7 @@
     "APIReferenceURL": "https://reference.groupdocs.cloud/conversion/",
     "FreeAppsURL": "https://products.groupdocs.app/conversion/family",
     "ForumsURL": "https://forum.groupdocs.cloud/c/conversion/11",
-    "InstallCommand": "gem install groupdocs-conversion-cloud",
+    "InstallCommand": "gem install groupdocs_conversion_cloud",
     "urlPrefix": "conversion",
     "license":"https://purchase.groupdocs.cloud/temporary-license/"
   },
@@ -331,7 +331,7 @@
     "APIReferenceURL": "https://reference.groupdocs.cloud/conversion/",
     "FreeAppsURL": "https://products.groupdocs.app/conversion/family",
     "ForumsURL": "https://forum.groupdocs.cloud/c/conversion/11",
-    "InstallCommand": "implementation 'com.groupdocs.conversion-cloud-android'",
+    "InstallCommand": "implementation 'com.groupdocs:groupdocs-conversion-cloud:24.8'",
     "urlPrefix": "conversion",
     "license":"https://purchase.groupdocs.cloud/temporary-license/"
   },
@@ -379,7 +379,7 @@
     "APIReferenceURL": "https://reference.groupdocs.cloud/comparison/",
     "FreeAppsURL": "https://products.groupdocs.app/comparison/family",
     "ForumsURL": "https://forum.groupdocs.cloud/c/comparison/12",
-    "InstallCommand": "mvn install com.groupdocs:groupdocs-comparison-cloud",
+    "InstallCommand": "<dependency>\n<groupId>com.groupdocs</groupId>\n<artifactId>groupdocs-comparison-cloud</artifactId>\n<version>26.6</version>\n</dependency>",
     "urlPrefix": "comparison",
     "license":"https://purchase.groupdocs.cloud/temporary-license/"
   },
@@ -395,7 +395,7 @@
     "APIReferenceURL": "https://reference.groupdocs.cloud/comparison/",
     "FreeAppsURL": "https://products.groupdocs.app/comparison/family",
     "ForumsURL": "https://forum.groupdocs.cloud/c/comparison/12",
-    "InstallCommand": "composer require groupdocs-comparison-cloud",
+    "InstallCommand": "composer require groupdocscloud/groupdocs-comparison-cloud",
     "urlPrefix": "comparison",
     "license":"https://purchase.groupdocs.cloud/temporary-license/"
   },
@@ -427,7 +427,7 @@
     "APIReferenceURL": "https://reference.groupdocs.cloud/comparison/",
     "FreeAppsURL": "https://products.groupdocs.app/comparison/family",
     "ForumsURL": "https://forum.groupdocs.cloud/c/comparison/12",
-    "InstallCommand": "gem install groupdocs-comparison-cloud",
+    "InstallCommand": "gem install groupdocs_comparison_cloud",
     "urlPrefix": "comparison",
     "license":"https://purchase.groupdocs.cloud/temporary-license/"
   },
@@ -475,7 +475,7 @@
     "APIReferenceURL": "https://reference.groupdocs.cloud/comparison/",
     "FreeAppsURL": "https://products.groupdocs.app/comparison/family",
     "ForumsURL": "https://forum.groupdocs.cloud/c/comparison/12",
-    "InstallCommand": "Use Apex package manager to install GroupDocs.Comparison Cloud SDK",
+    "InstallCommand": "See documentation for build instructions",
     "urlPrefix": "comparison",
     "license":"https://purchase.groupdocs.cloud/temporary-license/"
   },
@@ -491,7 +491,7 @@
     "APIReferenceURL": "https://reference.groupdocs.cloud/signature/",
     "FreeAppsURL": "https://products.groupdocs.app/signature/family",
     "ForumsURL": "https://forum.groupdocs.cloud/c/signature/13",
-    "InstallCommand": "dotnet add package GroupDocs.Signature-Cloud",
+    "InstallCommand": "dotnet add package GroupDocs.signature-Cloud",
     "urlPrefix": "signature",
     "license": "https://purchase.groupdocs.cloud/temporary-license/"
   },
@@ -507,7 +507,7 @@
     "APIReferenceURL": "https://reference.groupdocs.cloud/signature/",
     "FreeAppsURL": "https://products.groupdocs.app/signature/family",
     "ForumsURL": "https://forum.groupdocs.cloud/c/signature/13",
-    "InstallCommand": "mvn install com.groupdocs:groupdocs-signature-cloud",
+    "InstallCommand": "<dependency>\n<groupId>com.groupdocs</groupId>\n<artifactId>groupdocs-signature-cloud</artifactId>\n<version>25.6</version>\n</dependency>",
     "urlPrefix": "signature",
     "license": "https://purchase.groupdocs.cloud/temporary-license/"
   },
@@ -523,7 +523,7 @@
     "APIReferenceURL": "https://reference.groupdocs.cloud/signature/",
     "FreeAppsURL": "https://products.groupdocs.app/signature/family",
     "ForumsURL": "https://forum.groupdocs.cloud/c/signature/13",
-    "InstallCommand": "composer require groupdocs-signature-cloud",
+    "InstallCommand": "composer require groupdocscloud/groupdocs-signature-cloud",
     "urlPrefix": "signature",
     "license": "https://purchase.groupdocs.cloud/temporary-license/"
   },
@@ -555,7 +555,7 @@
     "APIReferenceURL": "https://reference.groupdocs.cloud/signature/",
     "FreeAppsURL": "https://products.groupdocs.app/signature/family",
     "ForumsURL": "https://forum.groupdocs.cloud/c/signature/13",
-    "InstallCommand": "gem install groupdocs-signature-cloud",
+    "InstallCommand": "gem install groupdocs_signature_cloud",
     "urlPrefix": "signature",
     "license": "https://purchase.groupdocs.cloud/temporary-license/"
   },
@@ -619,7 +619,7 @@
     "APIReferenceURL": "https://reference.groupdocs.cloud/assembly/",
     "FreeAppsURL": "https://products.groupdocs.app/assembly/family",
     "ForumsURL": "https://forum.groupdocs.cloud/c/assembly/15",
-    "InstallCommand": "mvn install com.groupdocs:groupdocs-assembly-cloud",
+    "InstallCommand": "<dependency>\n<groupId>com.groupdocs</groupId>\n<artifactId>groupdocs-assembly-cloud</artifactId>\n<version>25.1</version>\n</dependency>",
     "urlPrefix": "assembly",
     "license": "https://purchase.groupdocs.cloud/temporary-license/"
   },
@@ -635,7 +635,7 @@
     "APIReferenceURL": "https://reference.groupdocs.cloud/assembly/",
     "FreeAppsURL": "https://products.groupdocs.app/assembly/family",
     "ForumsURL": "https://forum.groupdocs.cloud/c/assembly/15",
-    "InstallCommand": "composer require groupdocs-assembly-cloud",
+    "InstallCommand": "composer require groupdocscloud/groupdocs-assembly-cloud",
     "urlPrefix": "assembly",
     "license": "https://purchase.groupdocs.cloud/temporary-license/"
   },
@@ -667,7 +667,7 @@
     "APIReferenceURL": "https://reference.groupdocs.cloud/assembly/",
     "FreeAppsURL": "https://products.groupdocs.app/assembly/family",
     "ForumsURL": "https://forum.groupdocs.cloud/c/assembly/15",
-    "InstallCommand": "gem install groupdocs-assembly-cloud",
+    "InstallCommand": "gem install groupdocs_assembly_cloud",
     "urlPrefix": "assembly",
     "license": "https://purchase.groupdocs.cloud/temporary-license/"
   },
@@ -731,7 +731,7 @@
     "APIReferenceURL": "https://reference.groupdocs.cloud/assembly/",
     "FreeAppsURL": "https://products.groupdocs.app/assembly/family",
     "ForumsURL": "https://forum.groupdocs.cloud/c/assembly/15",
-    "InstallCommand": "Use C++ package manager to install groupdocs-assembly-cloud",
+    "InstallCommand": "See GitHub for build instructions",
     "urlPrefix": "assembly",
     "license": "https://purchase.groupdocs.cloud/temporary-license/"
   },
@@ -763,7 +763,7 @@
     "APIReferenceURL": "https://reference.groupdocs.cloud/metadata/",
     "FreeAppsURL": "https://products.groupdocs.app/metadata/family",
     "ForumsURL": "https://forum.groupdocs.cloud/c/metadata/30",
-    "InstallCommand": "mvn install com.groupdocs:groupdocs-metadata-cloud",
+    "InstallCommand": "<dependency>\n<groupId>com.groupdocs</groupId>\n<artifactId>groupdocs-metadata-cloud</artifactId>\n<version>26.1</version>\n</dependency>",
     "urlPrefix": "metadata",
     "license": "https://purchase.groupdocs.cloud/temporary-license/"
   },
@@ -795,7 +795,7 @@
     "APIReferenceURL": "https://reference.groupdocs.cloud/parser/",
     "FreeAppsURL": "https://products.groupdocs.app/parser/family",
     "ForumsURL": "https://forum.groupdocs.cloud/c/parser/19",
-    "InstallCommand": "mvn install com.groupdocs:groupdocs-parser-cloud",
+    "InstallCommand": "<dependency>\n<groupId>com.groupdocs</groupId>\n<artifactId>groupdocs-parser-cloud</artifactId>\n<version>26.2</version>\n</dependency>",
     "urlPrefix": "parser",
     "license":"https://purchase.groupdocs.cloud/temporary-license/"
   },
@@ -811,7 +811,7 @@
     "APIReferenceURL": "https://reference.groupdocs.cloud/parser/",
     "FreeAppsURL": "https://products.groupdocs.app/parser/family",
     "ForumsURL": "https://forum.groupdocs.cloud/c/parser/19",
-    "InstallCommand": "composer require groupdocs-parser-cloud",
+    "InstallCommand": "composer require groupdocscloud/groupdocs-parser-cloud",
     "urlPrefix": "parser",
     "license":"https://purchase.groupdocs.cloud/temporary-license/"
   },
@@ -843,7 +843,7 @@
     "APIReferenceURL": "https://reference.groupdocs.cloud/parser/",
     "FreeAppsURL": "https://products.groupdocs.app/parser/family",
     "ForumsURL": "https://forum.groupdocs.cloud/c/parser/19",
-    "InstallCommand": "gem install groupdocs-parser-cloud",
+    "InstallCommand": "gem install groupdocs_parser_cloud",
     "urlPrefix": "parser",
     "license":"https://purchase.groupdocs.cloud/temporary-license/"
   },
@@ -875,7 +875,7 @@
     "APIReferenceURL": "https://reference.groupdocs.cloud/watermark/",
     "FreeAppsURL": "https://products.groupdocs.app/watermark/family",
     "ForumsURL": "https://forum.groupdocs.cloud/c/watermark/29",
-    "InstallCommand": "dotnet add package GroupDocs.Watermark‑Cloud",
+    "InstallCommand": "dotnet add package GroupDocs.Watermark-Cloud",
     "urlPrefix": "watermark",
     "license": "https://purchase.groupdocs.cloud/temporary‑license/"
   },
@@ -891,7 +891,7 @@
     "APIReferenceURL": "https://reference.groupdocs.cloud/watermark/",
     "FreeAppsURL": "https://products.groupdocs.app/watermark/family",
     "ForumsURL": "https://forum.groupdocs.cloud/c/watermark/29",
-    "InstallCommand": "mvn install com.groupdocs:groupdocs‑watermark‑cloud",
+    "InstallCommand": "<dependency>\n<groupId>com.groupdocs</groupId>\n<artifactId>groupdocs-watermark-cloud</artifactId>\n<version>23.8</version>\n</dependency>",
     "urlPrefix": "watermark",
     "license": "https://purchase.groupdocs.cloud/temporary‑license/"
   },
@@ -907,7 +907,7 @@
     "APIReferenceURL": "https://reference.groupdocs.cloud/editor/",
     "FreeAppsURL": "https://products.groupdocs.app/editor/family",
     "ForumsURL": "https://forum.groupdocs.cloud/c/editor/20",
-    "InstallCommand": "dotnet add package GroupDocs.Editor-Cloud",
+    "InstallCommand": "dotnet add package GroupDocs.editor-Cloud",
     "urlPrefix": "editor",
     "license": "https://purchase.groupdocs.cloud/temporary-license/"
   },
@@ -923,7 +923,7 @@
     "APIReferenceURL": "https://reference.groupdocs.cloud/editor/",
     "FreeAppsURL": "https://products.groupdocs.app/editor/family",
     "ForumsURL": "https://forum.groupdocs.cloud/c/editor/20",
-    "InstallCommand": "mvn install com.groupdocs:groupdocs-editor-cloud",
+    "InstallCommand": "<dependency>\n<groupId>com.groupdocs</groupId>\n<artifactId>groupdocs-editor-cloud</artifactId>\n<version>25.7</version>\n</dependency>",
     "urlPrefix": "editor",
     "license": "https://purchase.groupdocs.cloud/temporary-license/"
   },
@@ -939,7 +939,7 @@
     "APIReferenceURL": "https://reference.groupdocs.cloud/editor/",
     "FreeAppsURL": "https://products.groupdocs.app/editor/family",
     "ForumsURL": "https://forum.groupdocs.cloud/c/editor/20",
-    "InstallCommand": "composer require groupdocs-editor-cloud",
+    "InstallCommand": "composer require groupdocscloud/groupdocs-editor-cloud",
     "urlPrefix": "editor",
     "license": "https://purchase.groupdocs.cloud/temporary-license/"
   },
@@ -971,7 +971,7 @@
     "APIReferenceURL": "https://reference.groupdocs.cloud/editor/",
     "FreeAppsURL": "https://products.groupdocs.app/editor/family",
     "ForumsURL": "https://forum.groupdocs.cloud/c/editor/20",
-    "InstallCommand": "gem install groupdocs-editor-cloud",
+    "InstallCommand": "gem install groupdocs_editor_cloud",
     "urlPrefix": "editor",
     "license": "https://purchase.groupdocs.cloud/temporary-license/"
   },
@@ -1051,7 +1051,7 @@
     "APIReferenceURL": "https://reference.groupdocs.cloud/merger/",
     "FreeAppsURL": "https://products.groupdocs.app/merger/family",
     "ForumsURL": "https://forum.groupdocs.cloud/c/merger/18",
-    "InstallCommand": "mvn install com.groupdocs:groupdocs-merger-cloud",
+    "InstallCommand": "<dependency>\n<groupId>com.groupdocs</groupId>\n<artifactId>groupdocs-merger-cloud</artifactId>\n<version>25.11</version>\n</dependency>",
     "urlPrefix": "merger",
     "license": "https://purchase.groupdocs.cloud/temporary-license/"
   },
@@ -1067,7 +1067,7 @@
     "APIReferenceURL": "https://reference.groupdocs.cloud/merger/",
     "FreeAppsURL": "https://products.groupdocs.app/merger/family",
     "ForumsURL": "https://forum.groupdocs.cloud/c/merger/18",
-    "InstallCommand": "composer require groupdocs-merger-cloud",
+    "InstallCommand": "composer require groupdocscloud/groupdocs-merger-cloud",
     "urlPrefix": "merger",
     "license": "https://purchase.groupdocs.cloud/temporary-license/"
   },
@@ -1099,7 +1099,7 @@
     "APIReferenceURL": "https://reference.groupdocs.cloud/merger/",
     "FreeAppsURL": "https://products.groupdocs.app/merger/family",
     "ForumsURL": "https://forum.groupdocs.cloud/c/merger/18",
-    "InstallCommand": "gem install groupdocs-merger-cloud",
+    "InstallCommand": "gem install groupdocs_merger_cloud",
     "urlPrefix": "merger",
     "license": "https://purchase.groupdocs.cloud/temporary-license/"
   },
@@ -1147,7 +1147,7 @@
     "APIReferenceURL": "https://reference.groupdocs.cloud/translation/",
     "FreeAppsURL": "https://products.groupdocs.app/translation/family",
     "ForumsURL": "https://forum.groupdocs.cloud/c/translation/31",
-    "InstallCommand": "dotnet add package GroupDocs.Translation‑Cloud",
+    "InstallCommand": "dotnet add package GroupDocs.Translation-Cloud",
     "urlPrefix": "translation",
     "license": "https://purchase.groupdocs.cloud/temporary‑license/"
   },
@@ -1163,7 +1163,7 @@
     "APIReferenceURL": "https://reference.groupdocs.cloud/translation/",
     "FreeAppsURL": "https://products.groupdocs.app/translation/family",
     "ForumsURL": "https://forum.groupdocs.cloud/c/translation/31",
-    "InstallCommand": "mvn install com.groupdocs:groupdocs‑translation‑cloud",
+    "InstallCommand": "<dependency>\n<groupId>com.groupdocs</groupId>\n<artifactId>groupdocs-translation-cloud</artifactId>\n<version>25.7</version>\n</dependency>",
     "urlPrefix": "translation",
     "license": "https://purchase.groupdocs.cloud/temporary‑license/"
   },
@@ -1179,7 +1179,7 @@
     "APIReferenceURL": "https://reference.groupdocs.cloud/translation/",
     "FreeAppsURL": "https://products.groupdocs.app/translation/family",
     "ForumsURL": "https://forum.groupdocs.cloud/c/translation/31",
-    "InstallCommand": "pip install groupdocs‑translation‑cloud",
+    "InstallCommand": "pip install groupdocs-translation-cloud",
     "urlPrefix": "translation",
     "license": "https://purchase.groupdocs.cloud/temporary‑license/"
   },
