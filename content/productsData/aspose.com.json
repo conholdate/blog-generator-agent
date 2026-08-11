@@ -11,7 +11,7 @@
   "APIReferenceURL" : "https://reference.aspose.com/cells/net/",
   "FreeAppsURL" : "https://products.aspose.app/cells",
   "ForumsURL" : "https://forum.aspose.com/c/cells/",
-  "InstallCommand" : "dotnet add package Aspose.Cells --version 25.12.0",
+  "InstallCommand" : "dotnet add package Aspose.Cells",
   "urlPrefix" : "cells",
   "license":"https://purchase.aspose.com/temporary-license/",
   "pricing": "https://purchase.aspose.com/pricing/cells/family/"
@@ -45,7 +45,7 @@
     "APIReferenceURL" : "https://reference.aspose.com/cells/cpp/",
     "FreeAppsURL" : "https://products.aspose.app/cells",
     "ForumsURL" : "https://forum.aspose.com/c/cells/",
-    "InstallCommand" : "Install-Package Aspose.Cells.Cpp -Version 25.12.0",
+    "InstallCommand" : "Install-Package Aspose.Cells.Cpp",
     "urlPrefix" : "cells",
     "license":"https://purchase.aspose.com/temporary-license/",
     "pricing": "https://purchase.aspose.com/pricing/cells/family/"
@@ -62,7 +62,7 @@
     "APIReferenceURL" : "https://reference.aspose.com/cells/nodejs-cpp/",
     "FreeAppsURL" : "https://products.aspose.app/cells",
     "ForumsURL" : "https://forum.aspose.com/c/cells/",
-    "InstallCommand" : "npm install aspose.cells.node",
+    "InstallCommand" : "npm i aspose.cells.node",
     "urlPrefix" : "cells",
     "license":"https://purchase.aspose.com/temporary-license/",
     "pricing": "https://purchase.aspose.com/pricing/cells/family/"
@@ -79,7 +79,7 @@
     "APIReferenceURL" : "https://reference.aspose.com/cells/python-net/",
     "FreeAppsURL" : "https://products.aspose.app/cells",
     "ForumsURL" : "https://forum.aspose.com/c/cells/",
-    "InstallCommand" : "pip install aspose-cells-python-net",
+    "InstallCommand" : "pip install aspose-cells-python",
     "urlPrefix" : "cells",
     "license":"https://purchase.aspose.com/temporary-license/",
     "pricing": "https://purchase.aspose.com/pricing/cells/family/"
@@ -96,7 +96,7 @@
     "APIReferenceURL" : "https://reference.aspose.com/cells/python-java/",
     "FreeAppsURL" : "https://products.aspose.app/cells",
     "ForumsURL" : "https://forum.aspose.com/c/cells/",
-    "InstallCommand" : "pip install aspose-cells-python",
+    "InstallCommand" : "pip install aspose-cells",
     "urlPrefix" : "cells",
     "license":"https://purchase.aspose.com/temporary-license/",
     "pricing": "https://purchase.aspose.com/pricing/cells/family/"
@@ -113,7 +113,7 @@
     "APIReferenceURL" : "https://reference.aspose.com/cells/nodejs/",
     "FreeAppsURL" : "https://products.aspose.app/cells",
     "ForumsURL" : "https://forum.aspose.com/c/cells/",
-    "InstallCommand" : "npm install aspose.cells",
+    "InstallCommand" : "npm i aspose.cells",
     "urlPrefix" : "cells",
     "license":"https://purchase.aspose.com/temporary-license/",
     "pricing": "https://purchase.aspose.com/pricing/cells/family/"
@@ -164,7 +164,7 @@
   "APIReferenceURL" : "https://reference.aspose.com/omr/cpp/",
   "FreeAppsURL" : "https://products.aspose.app/omr",
   "ForumsURL" : "https://forum.aspose.com/c/omr/",
-  "InstallCommand" : "dotnet add package Aspose.OMR.Cpp --version 24.9.0",
+  "InstallCommand" : "Install-Package Aspose.OMR.Cpp",
   "urlPrefix" : "omr",
   "license":"https://purchase.aspose.com/temporary-license/",
   "pricing": "https://purchase.aspose.com/pricing/omr/family/"
@@ -198,7 +198,7 @@
   "APIReferenceURL" : "https://reference.aspose.com/omr/net/",
   "FreeAppsURL" : "https://products.aspose.app/omr",
   "ForumsURL" : "https://forum.aspose.com/c/omr/",
-  "InstallCommand" : "dotnet add package Aspose.OMR --version 25.8.0",
+  "InstallCommand" : "Install-Package Aspose.OMR",
   "urlPrefix" : "omr",
   "license":"https://purchase.aspose.com/temporary-license/",
   "pricing": "https://purchase.aspose.com/pricing/omr/family/"
@@ -317,7 +317,7 @@
   "APIReferenceURL" : "https://reference.aspose.com/page/cpp/",
   "FreeAppsURL" : "https://products.aspose.app/page",
   "ForumsURL" : "https://forum.aspose.com/c/page/",
-  "InstallCommand" : "dotnet add package Aspose.Page.Cpp --version 25.9.0",
+  "InstallCommand" : "Install-Package Aspose.Page.Cpp",
   "urlPrefix" : "page",
   "license":"https://purchase.aspose.com/temporary-license/",
   "pricing": "https://purchase.aspose.com/pricing/page/family/"
@@ -520,7 +520,7 @@
   "APIReferenceURL" : "https://reference.aspose.com/3d/net/",
   "FreeAppsURL" : "https://products.aspose.app/3d",
   "ForumsURL" : "https://forum.aspose.com/c/3d/18",
-  "InstallCommand" : "dotnet add package Aspose.3D --version 25.11.0",
+  "InstallCommand" : "Install-Package Aspose.3D",
   "urlPrefix" : "3d",
   "license":"https://purchase.aspose.com/temporary-license/",
   "pricing": "https://purchase.aspose.com/pricing/3d/family/"
@@ -1030,7 +1030,7 @@
   "APIReferenceURL" : "https://reference.aspose.com/slides/python-java/",
   "FreeAppsURL" : "https://products.aspose.app/slides",
   "ForumsURL" : "https://forum.aspose.com/c/slides/14",
-  "InstallCommand" : "pip install aspose.slides ",
+  "InstallCommand" : "pip install aspose-slides-java",
   "urlPrefix" : "slides",
   "license":"https://purchase.aspose.com/temporary-license/",
   "pricing": "https://purchase.aspose.com/pricing/slides/family/"
@@ -1081,7 +1081,7 @@
   "APIReferenceURL" : "https://reference.aspose.com/slides/nodejs-net/",
   "FreeAppsURL" : "https://products.aspose.app/slides",
   "ForumsURL" : "https://forum.aspose.com/c/slides/14",
-  "InstallCommand" : "npm install aspose.slides.via.java  ",
+  "InstallCommand" : "npm install aspose.slides.via.net",
   "urlPrefix" : "slides",
   "license":"https://purchase.aspose.com/temporary-license/",
   "pricing": "https://purchase.aspose.com/pricing/slides/family/"
@@ -1166,7 +1166,7 @@
   "APIReferenceURL" : "https://reference.aspose.com/email/cpp",
   "FreeAppsURL" : "https://products.aspose.app/email",
   "ForumsURL" : "https://forum.aspose.com/c/email/",
-  "InstallCommand" : "Install-Package Aspose.Email.Cpp.VC140",
+  "InstallCommand" : "Install-Package Aspose.Email.Cpp",
   "urlPrefix" : "email",
   "license":"https://purchase.aspose.com/temporary-license/",
   "pricing": "https://purchase.aspose.com/pricing/email/family/"
@@ -1319,7 +1319,7 @@
   "APIReferenceURL" : "https://reference.aspose.com/words/cpp/",
   "FreeAppsURL" : "https://products.aspose.app/words",
   "ForumsURL" : "https://forum.aspose.com/c/words/",
-  "InstallCommand" : "dotnet add package Aspose.Words.Cpp --version 25.9.0",
+  "InstallCommand" : "Install-Package Aspose.Words.Cpp",
   "urlPrefix" : "words",
   "license":"https://purchase.aspose.com/temporary-license/",
   "pricing": "https://purchase.aspose.com/pricing/words/family/"
@@ -1524,7 +1524,7 @@
   "APIReferenceURL" : "https://reference.aspose.com/total/python-net/",
   "FreeAppsURL" : "https://products.aspose.app/total",
   "ForumsURL" : "https://forum.aspose.com/c/total/",
-  "InstallCommand" : "pip install aspose-total",
+  "InstallCommand" : "pip install aspose-total-net",
   "urlPrefix" : "total",
   "license":"https://purchase.aspose.com/temporary-license/",
   "pricing": "https://purchase.aspose.com/pricing/total/family/"
@@ -1541,7 +1541,7 @@
   "APIReferenceURL" : "https://reference.aspose.com/total/python-java/",
   "FreeAppsURL" : "https://products.aspose.app/total",
   "ForumsURL" : "https://forum.aspose.com/c/total/",
-  "InstallCommand" : "pip install aspose-total",
+  "InstallCommand" : "pip install aspose-total-java",
   "urlPrefix" : "total",
   "license":"https://purchase.aspose.com/temporary-license/",
   "pricing": "https://purchase.aspose.com/pricing/total/family/"
@@ -1983,7 +1983,7 @@
   "APIReferenceURL" : "https://reference.aspose.com/pdf/go-cpp/",
   "FreeAppsURL" : "https://products.aspose.app/pdf",
   "ForumsURL" : "https://forum.aspose.com/c/pdf/",
-  "InstallCommand" : "go get github.com/aspose-pdf",
+  "InstallCommand" : "go get github.com/aspose-pdf/aspose-pdf-go-cpp@latest",
   "urlPrefix" : "pdf",
   "license":"https://purchase.aspose.com/temporary-license/",
   "pricing": "https://purchase.aspose.com/pricing/pdf/family/"
@@ -2119,7 +2119,7 @@
   "APIReferenceURL" : "https://reference.aspose.com/cells/javascript-cpp/",
   "FreeAppsURL" : "https://products.aspose.app/cells",
   "ForumsURL" : "https://forum.aspose.com/c/cells/",
-  "InstallCommand" : "npm install aspose.cells",
+  "InstallCommand" : "npm i aspose.cells.js",
   "urlPrefix" : "cells",
   "license":"https://purchase.aspose.com/temporary-license/",
   "pricing": "https://purchase.aspose.com/pricing/cells/family/"
@@ -2255,7 +2255,7 @@
   "APIReferenceURL" : "https://reference.aspose.com/diagram/python-net/",
   "FreeAppsURL" : "https://products.aspose.app/diagram",
   "ForumsURL" : "https://forum.aspose.com/c/diagram/",
-  "InstallCommand" : "pip install aspose-diagram",
+  "InstallCommand" : "pip install aspose-diagram-python",
   "urlPrefix" : "diagram",
   "license":"https://purchase.aspose.com/temporary-license/",
   "pricing": "https://purchase.aspose.com/pricing/diagram/family/"
@@ -2391,7 +2391,7 @@
   "APIReferenceURL" : "https://reference.aspose.com/ocr/python-net/",
   "FreeAppsURL" : "https://products.aspose.app/ocr",
   "ForumsURL" : "https://forum.aspose.com/c/ocr/",
-  "InstallCommand" : "pip install aspose-ocr",
+  "InstallCommand" : "pip install aspose-ocr-python-net",
   "urlPrefix" : "ocr",
   "license":"https://purchase.aspose.com/temporary-license/",
   "pricing": "https://purchase.aspose.com/pricing/ocr/family/"
@@ -2425,7 +2425,7 @@
   "APIReferenceURL" : "https://reference.aspose.com/ocr/python-java/",
   "FreeAppsURL" : "https://products.aspose.app/ocr",
   "ForumsURL" : "https://forum.aspose.com/c/ocr/",
-  "InstallCommand" : "pip install aspose-ocr",
+  "InstallCommand" : "pip install aspose-ocr-python-java",
   "urlPrefix" : "ocr",
   "license":"https://purchase.aspose.com/temporary-license/",
   "pricing": "https://purchase.aspose.com/pricing/ocr/family/"
@@ -2493,7 +2493,7 @@
   "APIReferenceURL" : "https://reference.aspose.com/cad/javascript-net/",
   "FreeAppsURL" : "https://products.aspose.app/cad",
   "ForumsURL" : "https://forum.aspose.com/c/cad/",
-  "InstallCommand" : "npm install aspose.cad",
+  "InstallCommand" : "npm i aspose-cad",
   "urlPrefix" : "cad",
   "license":"https://purchase.aspose.com/temporary-license/",
   "pricing": "https://purchase.aspose.com/pricing/cad/family/"
@@ -2595,7 +2595,7 @@
   "APIReferenceURL" : "https://reference.aspose.com/svg/python-net/",
   "FreeAppsURL" : "https://products.aspose.app/svg",
   "ForumsURL" : "https://forum.aspose.com/c/svg/",
-  "InstallCommand" : "pip install aspose-svg",
+  "InstallCommand" : "pip install aspose-svg-net",
   "urlPrefix" : "svg",
   "license":"https://purchase.aspose.com/temporary-license/",
   "pricing": "https://purchase.aspose.com/pricing/svg/family/"
@@ -2714,7 +2714,7 @@
   "APIReferenceURL" : "https://reference.aspose.com/font/nodejs-cpp/",
   "FreeAppsURL" : "https://products.aspose.app/font",
   "ForumsURL" : "https://forum.aspose.com/c/font/",
-  "InstallCommand" : "npm install aspose.font",
+  "InstallCommand" : "npm install asposefontnodejs",
   "urlPrefix" : "font",
   "license":"https://purchase.aspose.com/temporary-license/",
   "pricing": "https://purchase.aspose.com/pricing/font/family/"
