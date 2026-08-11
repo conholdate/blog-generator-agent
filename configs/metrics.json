@@ -5,34 +5,14 @@
     "stages": [
       "Content Coverage Map",
       "Content Gap Analysis"
-    ],
-    "webhooks": {
-      "primary": {
-        "url": "${METRICS_WEBHOOK_URL_PROD}",
-        "token": "${TOKEN_FOR_PROD}"
-      },
-      "internal": {
-        "url": "${METRICS_WEBHOOK_URL_TEAM}",
-        "token": "${TOKEN_FOR_TEAM}"
-      }
-    }
+    ]
   },
   "content_indexer_agent": {
     "agent_name": "Content Indexer Agent",
     "agent_owner": "Muzammil Khan",
     "stages": [
       "Content Indexing"
-    ],
-    "webhooks": {
-      "primary": {
-        "url": "${METRICS_WEBHOOK_URL_PROD}",
-        "token": "${TOKEN_FOR_PROD}"
-      },
-      "internal": {
-        "url": "${METRICS_WEBHOOK_URL_TEAM}",
-        "token": "${TOKEN_FOR_TEAM}"
-      }
-    }
+    ]
   },
   "blog_keyword_analyzer": {
     "agent_name": "Blog Keyword Analyzer",
@@ -40,16 +20,6 @@
     "stages": [
       "Keyword Clustering",
       "Topics Generation"
-    ],
-    "webhooks": {
-      "primary": {
-        "url": "${METRICS_WEBHOOK_URL_PROD}",
-        "token": "${TOKEN_FOR_PROD}"
-      },
-      "internal": {
-        "url": "${METRICS_WEBHOOK_URL_TEAM}",
-        "token": "${TOKEN_FOR_TEAM}"
-      }
-    }
+    ]
   }
 }

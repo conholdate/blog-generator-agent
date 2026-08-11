@@ -1,11 +1,21 @@
 from __future__ import annotations
 
 from ..config import Settings
+from .anthropic_client import AnthropicClient
 from .base import LLMClient
+from .openai_client import OpenAIClient
 from .professionalize_client import ProfessionalizeClient
 
 
 def get_llm_client(settings: Settings) -> LLMClient:
+    if settings.llm_provider == "anthropic":
+        if not settings.anthropic_api_key:
+            raise RuntimeError("ANTHROPIC_API_KEY is not set")
+        return AnthropicClient(api_key=settings.anthropic_api_key, model=settings.anthropic_model)
+    if settings.llm_provider == "openai":
+        if not settings.openai_api_key:
+            raise RuntimeError("OPENAI_API_KEY is not set")
+        return OpenAIClient(api_key=settings.openai_api_key, model=settings.openai_model)
     if settings.llm_provider == "professionalize":
         if not settings.professionalize_base_url:
             raise RuntimeError("PROFESSIONALIZE_BASE_URL is not set")

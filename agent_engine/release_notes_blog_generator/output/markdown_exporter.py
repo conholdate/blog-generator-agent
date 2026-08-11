@@ -1,188 +1,93 @@
 from __future__ import annotations
 
 import json
+import logging
 import re
 import shutil
 from pathlib import Path
-from typing import TYPE_CHECKING
 
-if TYPE_CHECKING:
-    from ..models.article import SeoFrontMatter
-    from ..pipeline.orchestrator import PipelineResult
+import yaml
 
-_SMALL_WORDS = {
-    "a", "an", "and", "as", "at", "but", "by", "for", "if", "in", "nor",
-    "of", "off", "on", "or", "per", "so", "the", "to", "up", "via", "vs", "with", "yet",
+from ..models.article import SeoFrontMatter
+from ..pipeline.orchestrator import PipelineResult
+
+logger = logging.getLogger(__name__)
+
+# Small words the Chicago/AP title-case convention lowercases unless they open
+# or close the heading.
+_TITLE_CASE_SMALL_WORDS = {
+    "a", "an", "and", "as", "at", "but", "by", "for", "from", "if", "in",
+    "into", "nor", "of", "on", "or", "per", "the", "to", "up", "via", "with", "yet",
 }
+_HEADING_PATTERN = re.compile(r"^(#{1,6})[ \t]+(.*)$", re.MULTILINE)
 _INLINE_CODE_PATTERN = re.compile(r"`[^`]*`")
-_HEADING_PATTERN = re.compile(r"^(#{1,6})[ \t]+(.+)$", re.MULTILINE)
-_LEADING_INTRO_PATTERN = re.compile(r"^#{1,6}[ \t]+introduction[ \t]*\n+", re.IGNORECASE)
-_PLACEHOLDER_PATTERN = re.compile(r"\x00\d+\x00")
+_SINGLE_QUOTE = "'"
+_DOUBLE_QUOTE = '"'
+
+# The renderer adds the H1 from the front matter title, so the body should open
+# directly with the introduction paragraph beneath it — a leading "Introduction"
+# heading is redundant if the writer added one anyway.
+_LEADING_INTRODUCTION_HEADING = re.compile(r"\A[ \t]*#{1,6}[ \t]*introduction[ \t]*\n+", re.IGNORECASE)
 
 
-def _title_case_heading_text(text: str) -> str:
-    """Title-cases a heading: capitalizes the first/last word and every word
-    outside a small set of articles/prepositions/conjunctions, but leaves any
-    word that already carries its own casing (acronyms, mixed-case
-    identifiers like `OcrTextAbsorber`, tokens like `C#`) untouched, and never
-    reaches inside an inline code span.
+def export(result: PipelineResult, output_dir: Path) -> list[Path]:
+    """Markdown Export step (instructions.md "Practical MVP architecture").
+
+    Mirrors input/2025-10-30-add-pages-to-pdf-in-python/'s folder layout exactly:
+    one `<publish_date>-<slug>/index.md` bundle per eligible topic, with an
+    `images/` folder (populated with the real cover image when
+    pipeline/banner_generator.py produced one, otherwise left empty) and
+    nothing else, so the folder can be copied straight into the blog repo.
+    `factpack.json` and `quality.json` are editor-review artifacts, not blog
+    content, so they're written under a sibling `meta/<publish_date>-<slug>/`
+    tree instead of inside the post folder. A single `run_summary.json` covers
+    the whole run.
     """
-    placeholders: list[str] = []
-
-    def _stash(match: re.Match[str]) -> str:
-        placeholders.append(match.group(0))
-        return f"\x00{len(placeholders) - 1}\x00"
-
-    stashed = _INLINE_CODE_PATTERN.sub(_stash, text)
-    words = stashed.split(" ")
-    last_index = len(words) - 1
-
-    cased_words = []
-    for index, word in enumerate(words):
-        if _PLACEHOLDER_PATTERN.fullmatch(word) or not re.fullmatch(r"[a-z]+", word):
-            # Not a plain lowercase word (already-cased acronym/identifier, a
-            # stashed code placeholder, or a token like "C#") - leave as-is.
-            cased_words.append(word)
-            continue
-        if word in _SMALL_WORDS and 0 < index < last_index:
-            cased_words.append(word)
-        else:
-            cased_words.append(word[:1].upper() + word[1:])
-
-    result = " ".join(cased_words)
-    for index, original in enumerate(placeholders):
-        result = result.replace(f"\x00{index}\x00", original)
-    return result
-
-
-def _title_case_headings(body: str) -> str:
-    """Applies `_title_case_heading_text` to every Markdown heading line in `body`."""
-    return _HEADING_PATTERN.sub(lambda m: f"{m.group(1)} {_title_case_heading_text(m.group(2))}", body)
-
-
-def _strip_leading_introduction_heading(body: str) -> str:
-    """Removes a leading '# Introduction'-style heading (any level, any case).
-
-    The renderer already places the writer's introduction paragraphs directly
-    under the H1 title (see prompts/writer_agent.md), so a redundant explicit
-    "Introduction" heading from the model is dropped rather than doubled up.
-    """
-    return _LEADING_INTRO_PATTERN.sub("", body, count=1)
-
-
-def _render_front_matter(front_matter: "SeoFrontMatter") -> str:
-    """Renders front matter in the style used by input/2025-10-30-.../index.md:
-    a single-quoted Python-list literal for tags, a double-quoted list for
-    categories.
-    """
-    lines = ["---"]
-    lines.append(f'title: "{front_matter.title}"')
-    lines.append(f'seoTitle: "{front_matter.seoTitle}"')
-    lines.append(f'description: "{front_matter.description}"')
-    lines.append(f"date: {front_matter.date}")
-    lines.append(f"draft: {str(front_matter.draft).lower()}")
-    lines.append(f"url: {front_matter.url}")
-    if front_matter.author:
-        lines.append(f'author: "{front_matter.author}"')
-    lines.append(f'summary: "{front_matter.summary}"')
-    lines.append(f"tags: {front_matter.tags!r}")
-    categories = "[" + ", ".join(f'"{category}"' for category in front_matter.categories) + "]"
-    lines.append(f"categories: {categories}")
-    lines.append(f"showtoc: {str(front_matter.showtoc).lower()}")
-    lines.append("cover:")
-    lines.append(f"    image: {front_matter.cover.image}")
-    lines.append(f'    alt: "{front_matter.cover.alt}"')
-    lines.append(f'    caption: "{front_matter.cover.caption}"')
-    lines.append(f"    hidden: {str(front_matter.cover.hidden).lower()}")
-    lines.append("steps:")
-    for step in front_matter.steps:
-        lines.append(f"  - {step}")
-    lines.append("faqs:")
-    for faq in front_matter.faqs:
-        lines.append(f'  - q: "{faq.q}"')
-        lines.append(f'    a: "{faq.a}"')
-        lines.append("")
-    lines.append("---")
-    return "\n".join(lines) + "\n"
-
-
-def _render_body(body_markdown: str) -> str:
-    cleaned = _strip_leading_introduction_heading(body_markdown)
-    return _title_case_headings(cleaned)
-
-
-def export(result: "PipelineResult", output_dir: Path) -> list[Path]:
-    """Writes every generated draft in `result.topics` to disk.
-
-    For each topic with a blog post: `<publish_date>-<slug>/index.md` (front
-    matter + cleaned body), `<publish_date>-<slug>/images/<slug>.jpg` (moved
-    into place when a cover image was generated), and the matching
-    `meta/<publish_date>-<slug>/factpack.json` (+ `quality.json` once a
-    quality assessment exists). One top-level `run_summary.json` describes
-    the whole run. Meta/summary JSON is kept out of the post directory itself
-    so `<publish_date>-<slug>/` only ever holds publishable content.
-
-    Returns every path written, in write order.
-    """
-    output_dir = Path(output_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
     written: list[Path] = []
-    topic_summaries = []
 
     for topic in result.topics:
-        post = topic.blog_post
-        if post is None:
+        if topic.blog_post is None:
             continue
-
+        post = topic.blog_post
         post_dir = output_dir / f"{post.publish_date}-{post.slug}"
+        logger.info("Writing draft to %s", post_dir)
         post_dir.mkdir(parents=True, exist_ok=True)
+        (post_dir / "images").mkdir(exist_ok=True)
 
+        if topic.cover_image_path and topic.cover_image_path.exists():
+            cover_dest = post_dir / "images" / f"{post.slug}.jpg"
+            shutil.move(str(topic.cover_image_path), cover_dest)
+            logger.info("Moved generated cover image to %s", cover_dest)
+
+        front_matter_yaml = _render_front_matter(post.front_matter)
+        body_markdown = _title_case_headings(_strip_leading_introduction_heading(post.body_markdown))
+        content = f"---\n{front_matter_yaml}---\n\n{body_markdown}\n"
         index_path = post_dir / "index.md"
-        index_path.write_text(
-            _render_front_matter(post.front_matter) + "\n" + _render_body(post.body_markdown),
-            encoding="utf-8",
-        )
+        index_path.write_text(content, encoding="utf-8")
         written.append(index_path)
-
-        images_dir = post_dir / "images"
-        images_dir.mkdir(parents=True, exist_ok=True)
-        if topic.cover_image_path is not None and Path(topic.cover_image_path).exists():
-            image_path = images_dir / f"{post.slug}.jpg"
-            shutil.move(str(topic.cover_image_path), str(image_path))
-            written.append(image_path)
 
         meta_dir = output_dir / "meta" / post_dir.name
         meta_dir.mkdir(parents=True, exist_ok=True)
 
-        factpack_path = meta_dir / "factpack.json"
-        factpack_path.write_text(post.fact_pack.model_dump_json(indent=2), encoding="utf-8")
-        written.append(factpack_path)
+        fact_pack_path = meta_dir / "factpack.json"
+        fact_pack_path.write_text(post.fact_pack.model_dump_json(indent=2), encoding="utf-8")
+        written.append(fact_pack_path)
 
-        publication_status = None
         if post.quality is not None:
             quality_path = meta_dir / "quality.json"
             quality_path.write_text(post.quality.model_dump_json(indent=2), encoding="utf-8")
             written.append(quality_path)
-            publication_status = post.quality.publication_status.value
-
-        topic_summaries.append(
-            {
-                "heading": topic.heading,
-                "slug": post.slug,
-                "publish_date": post.publish_date,
-                "publication_status": publication_status,
-                "seo_issues": topic.seo_issues,
-            }
-        )
 
     summary_path = output_dir / "run_summary.json"
     summary_path.write_text(
         json.dumps(
             {
                 "source_url": result.source_url,
+                "source_type": result.source_type,
                 "publication_readiness": result.publication_readiness,
                 "blocker_reason": result.blocker_reason,
-                "topics": topic_summaries,
+                "topics_generated": [topic.heading for topic in result.topics],
                 "rejected_sections": result.rejected_sections,
             },
             indent=2,
@@ -190,5 +95,77 @@ def export(result: "PipelineResult", output_dir: Path) -> list[Path]:
         encoding="utf-8",
     )
     written.append(summary_path)
+    logger.info("Export complete: %d file(s) written under %s", len(written), output_dir)
 
     return written
+
+
+def _render_front_matter(front_matter: SeoFrontMatter) -> str:
+    """Dumps the front matter with yaml.safe_dump for every field except
+    `tags`/`categories`, which the blog CMS expects as single-line flow lists
+    (single-quoted tags, double-quoted categories) rather than yaml.safe_dump's
+    default block-list style.
+    """
+    data = front_matter.model_dump(exclude_none=True)
+    tags = data.pop("tags", [])
+    categories = data.pop("categories", [])
+
+    yaml_text = yaml.safe_dump(data, sort_keys=False, allow_unicode=True)
+
+    lines = yaml_text.splitlines(keepends=True)
+    insert_at = next(i for i, line in enumerate(lines) if line.startswith("showtoc:"))
+    lines[insert_at:insert_at] = [
+        f"tags: {_flow_list(tags, _SINGLE_QUOTE)}\n",
+        f"categories: {_flow_list(categories, _DOUBLE_QUOTE)}\n",
+    ]
+    return "".join(lines)
+
+
+def _flow_list(items: list[str], quote_char: str) -> str:
+    quoted_items = [f"{quote_char}{item}{quote_char}" for item in items]
+    return "[" + ", ".join(quoted_items) + "]"
+
+
+def _strip_leading_introduction_heading(body_markdown: str) -> str:
+    return _LEADING_INTRODUCTION_HEADING.sub("", body_markdown, count=1)
+
+
+def _title_case_headings(body_markdown: str) -> str:
+    return _HEADING_PATTERN.sub(
+        lambda match: f"{match.group(1)} {_title_case_heading_text(match.group(2))}",
+        body_markdown,
+    )
+
+
+def _title_case_heading_text(text: str) -> str:
+    # Protect inline code spans (`OcrTextAbsorber`, `pip install ...`) from re-casing.
+    protected: list[str] = []
+
+    def _stash(match: re.Match[str]) -> str:
+        protected.append(match.group(0))
+        return f"\x00{len(protected) - 1}\x00"
+
+    stashed = _INLINE_CODE_PATTERN.sub(_stash, text)
+    words = stashed.split(" ")
+    cased = [
+        _title_case_word(word, is_edge=(index == 0 or index == len(words) - 1))
+        for index, word in enumerate(words)
+    ]
+    result = " ".join(cased)
+    for index, original in enumerate(protected):
+        result = result.replace(f"\x00{index}\x00", original)
+    return result
+
+
+def _title_case_word(word: str, is_edge: bool) -> str:
+    # Leave acronyms, mixed-case identifiers, and version-like tokens alone
+    # (PDF, OCR, FAQs, OcrTextAbsorber, C#, 26.6, Aspose.PDF).
+    if any(char.isupper() for char in word[1:]) or any(char.isdigit() for char in word) or "#" in word:
+        return word
+    lower = word.lower()
+    if not is_edge and lower in _TITLE_CASE_SMALL_WORDS:
+        return lower
+    for index, char in enumerate(word):
+        if char.isalpha():
+            return word[:index] + char.upper() + word[index + 1 :].lower()
+    return word

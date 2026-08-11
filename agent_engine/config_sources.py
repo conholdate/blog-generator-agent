@@ -81,6 +81,21 @@ def resolve_env_value(env_name: Any, *, env_file: Path | None = None) -> str | N
     return None
 
 
+def env_first(*names: str) -> str:
+    """Return the first non-empty value among ``names``, or ``""``.
+
+    Each name is resolved via :func:`resolve_env_value`, which checks
+    ``os.environ`` before falling back to the project ``.env``. That keeps
+    callers working whether or not the active CLI entry point loaded dotenv --
+    the indexer CLI does, the gap CLI does not.
+    """
+    for name in names:
+        value = resolve_env_value(name)
+        if value:
+            return value
+    return ""
+
+
 def resolve_config_env_value(raw_cfg: dict[str, Any], key: str, *, env_file: Path | None = None) -> str | None:
     if not isinstance(raw_cfg, dict):
         return None
