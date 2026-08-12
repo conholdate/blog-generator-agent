@@ -33,7 +33,7 @@ jobs:
       - name: Create runtime .env file with secrets
         run: |
           cat > .env << EOF
-          REPO_PAT=${{ secrets.GISTS_PAT_ASPOSE_CLOUD }}
+          REPO_PAT=${{ secrets.REPO_PAT }}
           EOF
 
       - name: Run reconciliation
@@ -59,7 +59,7 @@ jobs:
       - name: Create Pull Request
         if: steps.reconcile.outputs.has_changes == 'true'
         env:
-          GH_TOKEN: ${{ secrets.GISTS_PAT_ASPOSE_CLOUD }}
+          GH_TOKEN: ${{ secrets.REPO_PAT }}
         run: |
           git config --global user.email "action@github.com"
           git config --global user.name "GitHub Action"
