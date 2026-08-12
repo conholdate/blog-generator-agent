@@ -25,7 +25,11 @@
     "aspose|aspose.html|java": 1,
     "aspose|aspose.html|python": 1,
     "aspose|aspose.html|net": 1,
-    "conholdate|conholdate.total|java": 0
+    "conholdate|conholdate.total|java": 0,
+    "aspose.cloud|aspose.cells|net": 0,
+    "aspose.cloud|aspose.cells|java": 2,
+    "aspose.cloud|aspose.cells|php": 0,
+    "aspose.cloud|aspose.cells|nodejs": 0
   },
   "aspose|aspose.html|python": [
     "How to Convert Code to Change HTML Border Color in Python",
@@ -92,5 +96,48 @@
   ],
   "conholdate|conholdate.total|java": [
     "Add Table of Contents to Word Document in Java"
+  ],
+  "aspose.cloud|aspose.cells|net": [
+    "A Guide to Heroku Email Sending Best Practices in C#",
+    "How to Encrypt and Password Protect PDF Rest in C#",
+    "GLB to FBX Conversion Example in C#",
+    "Create Excel Timesheet from Ms Project Rest in C#",
+    "Spreadsheet Conversion Streamlined Document Conversion Solution Cloud in C#",
+    "Programmatic Text Case Conversion for Excel Spreadsheets in C#"
+  ],
+  "aspose.cloud|aspose.cells|php": [
+    "Heroku Email Sending Best Practices in PHP",
+    "Convert HTML to PDF in PHP: Tips Options Troubleshooting",
+    "XML Data to PDF Conversion Rest in PHP: a Complete Guide",
+    "Convert JPG to PDF in PHP",
+    "MPP to XLSX Conversion in PHP: a Complete Tutorial",
+    "Microsoft Powerpoint PPTX to Opendocument in PHP",
+    "Convert PDF to DOCX in PHP",
+    "Convert PDF to PPT in PHP",
+    "How to Sync Ms Project Tasks to Excel via Rest Calls in PHP",
+    "XLSB to PDF Conversion in PHP",
+    "Convert XLSX to CSV in PHP",
+    "Convert XLSX to PDF in PHP: Code for Charts Formulas"
+  ],
+  "aspose.cloud|aspose.cells|nodejs": [
+    "Email Sending Best Practices for Heroku in Node.JS",
+    "Encrypt and Password Protect PDF Rest in Node.JS",
+    "Extract Text from PDF using Rest in Node.JS",
+    "Import XML Data to PDF Rest in Node.JS",
+    "MPP to XLSX Conversion Without Office in Node.JS",
+    "Guide to Reverse Image Search and Image Deskewing in Node.JS",
+    "Spreadsheet Conversion Streamlined Document Conversion Solution Cloud in Node.JS",
+    "Excel Spreadsheet Text Formatting Case Conversion Tutorial in Node.JS",
+    "Convert XLSX to PDF in Node.JS"
+  ],
+  "aspose.cloud|aspose.cells|java": [
+    "Guide to Encrypt and Password Protect PDF Rest in Java",
+    "GLB to FBX Conversion using Open-Source in Java",
+    "Import XML Data to PDF Rest in Java",
+    "Convert JPG to PDF in Java: Easy Automated PDF Generation",
+    "Microsoft Powerpoint PPTX to Opendocument in Java",
+    "Implement Reverse Image Search and Image Deskewing in Java",
+    "Edit CELL Text to Delete Line Breaks in Java",
+    "Spreadsheet Conversion Streamlined Document Conversion Solution Cloud in Java"
   ]
 }
