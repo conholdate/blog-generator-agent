@@ -65,7 +65,8 @@ def discover_inventory(client: GitHubClient) -> list[InventoryItem]:
     the bug that surfaced while testing against the real repo."""
     product_folders = client.list_dir(PRODUCTS_REPO, "content")
     if not product_folders:
-        raise RuntimeError("Could not list products.aspose.cloud content/ — check repo access")
+        reason = client.last_error or "no additional detail captured"
+        raise RuntimeError(f"Could not list {PRODUCTS_REPO} content/ — {reason}")
 
     items: list[InventoryItem] = []
     for product in product_folders:
