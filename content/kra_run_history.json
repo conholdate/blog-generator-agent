@@ -29,7 +29,10 @@
     "aspose.cloud|aspose.cells|net": 0,
     "aspose.cloud|aspose.cells|java": 2,
     "aspose.cloud|aspose.cells|php": 0,
-    "aspose.cloud|aspose.cells|nodejs": 0
+    "aspose.cloud|aspose.cells|nodejs": 0,
+    "groupdocs.cloud|groupdocs.merger|net": 1,
+    "groupdocs.cloud|groupdocs.merger|java": 0,
+    "groupdocs.cloud|groupdocs.merger|nodejs": 0
   },
   "aspose|aspose.html|python": [
     "How to Convert Code to Change HTML Border Color in Python",
@@ -139,5 +142,38 @@
     "Implement Reverse Image Search and Image Deskewing in Java",
     "Edit CELL Text to Delete Line Breaks in Java",
     "Spreadsheet Conversion Streamlined Document Conversion Solution Cloud in Java"
+  ],
+  "groupdocs.cloud|groupdocs.merger|nodejs": [
+    "Convert Word Page Orientation in Node.JS",
+    "How to Combine Multiple Word Documents in Node.JS",
+    "Extract PAGES from Word Documents in Node.JS",
+    "Extract PAGES from Large Word Documents via Rest in Node.JS",
+    "Extract Specific PAGES from PDF in Node.JS",
+    "Merge PDF in Node.JS",
+    "Split PDF Extract PAGES from PDF using Rest in Node.JS",
+    "Split PDF into Multiple PDF in Node.JS: Code Example",
+    "Split Powerpoint PPT or PPTX Slides Using Node.JS Example"
+  ],
+  "groupdocs.cloud|groupdocs.merger|net": [
+    "How to Combine and Merge Powerpoint PPT PPTX in C#",
+    "Combine Multiple Word Documents Using C# Efficiently",
+    "Extract PAGES from Word Documents using Large Files in C#",
+    "Extract PAGES from Word Documents using Rest in C#",
+    "Extract Specific PAGES from PDF in C#",
+    "Merge Documents of Different Types using Rest in C#",
+    "How to Convert Rest Endpoint to Rotate PDF PAGES in C#",
+    "How to Split PDF Extract PAGES Rest in C#",
+    "Split PDF into Multiple PDFs in C#",
+    "Split Powerpoint PPT or PPTX Slides in C#"
+  ],
+  "groupdocs.cloud|groupdocs.merger|java": [
+    "Guide to Combine and Merge Powerpoint PPT PPTX in Java",
+    "How to Combine Multiple Word Documents in Java",
+    "Extract PAGES from Word Documents using Rest in Java",
+    "Extract Specific PDF PAGES in Java",
+    "Password Protect Excel via Rest in Java",
+    "Split PDF Extract PAGES from PDF using Rest in Java",
+    "Split PDF into Multiple PDF in Java",
+    "XLSX to ONE Conversion Guide in Java: Build a Microservice"
   ]
 }
