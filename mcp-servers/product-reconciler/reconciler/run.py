@@ -1,0 +1,82 @@
+"""
+Ties discovery, diffing, field derivation, and applying together into
+the one operation the MCP tool exposes.
+
+Safety rule that shapes this whole module: a freshly-derived field only
+overwrites a stored value when it was independently confirmed (not in
+`FieldResult.unverified`). An uncertain re-derivation must never
+replace a value that might still be perfectly fine — same principle
+used throughout today's manual InstallCommand fixes.
+"""
+from .config import PRODUCTS_REPO
+from .github_client import GitHubClient
+from .inventory import discover_inventory
+from .diff import compute_diff, pairs_from_json
+from .fields import derive_full_entry
+from .apply import apply_field_fixes, append_new_entries, load_raw_and_parsed
+
+
+def reconcile(token: str, dry_run: bool = False) -> dict:
+    client = GitHubClient(token)
+
+    inventory = discover_inventory(client)
+    _, existing_products = load_raw_and_parsed()
+    diff = compute_diff(inventory, existing_products)
+    stored_by_pair = pairs_from_json(existing_products)
+
+    report = {
+        "new_products": [],
+        "new_platforms": [],
+        "fixed_fields": [],
+        "unresolved": [],
+        "potential_removals": [f"{p.url_prefix}/{p.platform_key}" for p in diff.potential_removals],
+    }
+
+    new_entries = []
+    for pair in diff.new_products + diff.new_platforms:
+        result = derive_full_entry(client, pair.url_prefix, pair.platform_key)
+        bucket = "new_products" if pair in diff.new_products else "new_platforms"
+        if not result.values.get("ProductName"):
+            report["unresolved"].append(f"{pair.url_prefix}/{pair.platform_key}: {result.notes.get('ProductName')}")
+            continue
+        new_entries.append(result.values)
+        report[bucket].append({
+            "product": result.values["ProductName"],
+            "missing_fields": result.unverified,
+        })
+
+    field_fixes = []
+    for pair in diff.existing:
+        stored = stored_by_pair.get(pair)
+        if not stored:
+            continue
+        result = derive_full_entry(client, pair.url_prefix, pair.platform_key)
+        for field_name, new_value in result.values.items():
+            if field_name in result.unverified:
+                continue
+            if field_name == "ProductName":
+                continue  # never rename the key we match on in the same pass
+            old_value = stored.get(field_name, "")
+            if new_value and new_value != old_value:
+                field_fixes.append({
+                    "ProductName": stored["ProductName"],
+                    "field": field_name,
+                    "value": new_value,
+                    "old_value": old_value,
+                })
+
+    report["fixed_fields"] = [
+        f"{fx['ProductName']}.{fx['field']}: {fx['old_value']!r} -> {fx['value']!r}"
+        for fx in field_fixes
+    ]
+
+    if dry_run:
+        report["mode"] = "dry_run"
+        return report
+
+    report["mode"] = "applied"
+    if field_fixes:
+        apply_field_fixes(field_fixes)
+    if new_entries:
+        append_new_entries(new_entries)
+    return report
