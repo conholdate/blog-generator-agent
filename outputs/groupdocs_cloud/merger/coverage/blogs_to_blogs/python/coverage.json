@@ -1,0 +1,886 @@
+{
+  "case": "blogs_to_blogs",
+  "brand_key": "groupdocs_cloud",
+  "product_key": "merger",
+  "baseline_platform": "python",
+  "platforms": [
+    "python",
+    "general",
+    "java",
+    "net",
+    "nodejs",
+    "ruby"
+  ],
+  "meta": {
+    "matching_mode": "key_exact",
+    "total_input_records": 73,
+    "records_after_filters": 71,
+    "excluded_release_update_records": 0,
+    "excluded_old_or_undated_records": 2,
+    "baseline_records": 15,
+    "total_cells": 90,
+    "matched_cells": 24,
+    "missing_cells": 66,
+    "match_rate": 0.26666666666666666,
+    "skipped_empty_keys": 0
+  },
+  "rows": [
+    {
+      "category": "Document Processing",
+      "sub_category": "Page Layout",
+      "topic": "Change page orientation in word documents",
+      "key": "change-page-orientation-in-word-documents",
+      "baseline_record_id": "blog::merger/2022-10-26-change-page-orientation-in-word-documents-using-python/index.md",
+      "coverage": {
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::merger/2022-10-26-change-page-orientation-in-word-documents-using-python/index.md",
+          "title": "Change Page Orientation in Word Documents using Python",
+          "topic": "Change page orientation in word documents",
+          "url": "groupdocs.cloud/merger/change-page-orientation-in-word-documents-using-python/"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "nodejs": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "ruby": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Document Processing",
+      "sub_category": "PowerPoint Merge",
+      "topic": "Combine and merge powerpoint PPT PPTX",
+      "key": "combine-and-merge-powerpoint-ppt-pptx",
+      "baseline_record_id": "blog::merger/2022-08-11-combine-and-merge-powerpoint-pptpptx-files-in-python/index.md",
+      "coverage": {
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::merger/2022-08-11-combine-and-merge-powerpoint-pptpptx-files-in-python/index.md",
+          "title": "Combine and Merge PowerPoint PPT/PPTX Files in Python",
+          "topic": "Combine and merge powerpoint PPT PPTX",
+          "url": "groupdocs.cloud/merger/combine-and-merge-powerpoint-pptpptx-files-in-python/"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "nodejs": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "ruby": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Document Management",
+      "sub_category": "Merging",
+      "topic": "Combine multiple word documents",
+      "key": "combine-multiple-word-documents",
+      "baseline_record_id": "blog::merger/2022-08-25-how-to-combine-multiple-word-documents-using-python/index.md",
+      "coverage": {
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::merger/2022-08-25-how-to-combine-multiple-word-documents-using-python/index.md",
+          "title": "How to Combine Multiple Word Documents using Python",
+          "topic": "Combine multiple word documents",
+          "url": "groupdocs.cloud/merger/how-to-combine-multiple-word-documents-using-python/"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "nodejs": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "ruby": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Document Management",
+      "sub_category": "Merging and Editing",
+      "topic": "Document merger cloud and sdks",
+      "key": "document-merger-cloud-and-sdks",
+      "baseline_record_id": "blog::merger/2023-08-30-document-merging-cloud-apis/index.md",
+      "coverage": {
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::merger/2023-08-30-document-merging-cloud-apis/index.md",
+          "title": "Document Merger Cloud API and SDKs for C#, Java, Python, Ruby, PHP and Node.js",
+          "topic": "Document merger cloud API and sdks",
+          "url": "groupdocs.cloud/merger/document-merging-cloud-apis/"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "nodejs": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "ruby": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Document Management",
+      "sub_category": "Word Splitting",
+      "topic": "Extract PAGES from word documents",
+      "key": "extract-pages-from-word-documents",
+      "baseline_record_id": "blog::merger/2022-08-16-how-to-extract-pages-from-word-documents-in-python/index.md",
+      "coverage": {
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::merger/2022-08-16-how-to-extract-pages-from-word-documents-in-python/index.md",
+          "title": "How to Extract Pages From Word Documents in Python",
+          "topic": "Extract pages from word documents",
+          "url": "groupdocs.cloud/merger/how-to-extract-pages-from-word-documents-in-python/"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "nodejs": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "ruby": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Document Management",
+      "sub_category": "Page Extraction",
+      "topic": "Extract PAGES from word documents using rest",
+      "key": "extract-pages-from-word-documents-using-rest",
+      "baseline_record_id": "blog::merger/2022-06-20-extract-pages-from-word-documents-using-rest-api-in-ruby/index.md",
+      "coverage": {
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::merger/2022-06-20-extract-pages-from-word-documents-using-rest-api-in-ruby/index.md",
+          "title": "Extract Pages From Word Documents using Rest API in Ruby",
+          "topic": "Extract pages from word documents using REST API",
+          "url": "groupdocs.cloud/merger/extract-pages-from-word-documents-using-rest-api-in-ruby/"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "nodejs": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "ruby": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Document Processing",
+      "sub_category": "PDF Extraction",
+      "topic": "Extract specific Pages from PDF",
+      "key": "extract-specific-pages-from-pdf",
+      "baseline_record_id": "blog::merger/2021-05-21-extract-specific-pages-from-pdf-using-python/index.md",
+      "coverage": {
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::merger/2021-05-21-extract-specific-pages-from-pdf-using-python/index.md",
+          "title": "Extract Specific Pages from PDF using Python",
+          "topic": "Extract specific pages from PDF",
+          "url": "groupdocs.cloud/merger/extract-specific-pages-from-pdf-using-python/"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "nodejs": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "ruby": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Document Management",
+      "sub_category": "File Merging",
+      "topic": "Merge documents of different types using rest",
+      "key": "merge-documents-of-different-types-using-rest",
+      "baseline_record_id": "blog::merger/2021-12-31-merge-documents-of-different-types-using-rest-api-in-python/index.md",
+      "coverage": {
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::merger/2021-12-31-merge-documents-of-different-types-using-rest-api-in-python/index.md",
+          "title": "Merge Documents of Different Types using REST API in Python",
+          "topic": "Merge documents of different types using REST API",
+          "url": "groupdocs.cloud/merger/merge-documents-of-different-types-using-rest-api-in-python/"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::merger/2023-05-19-merge-documents-of-different-types-in-java-using-rest-api/index.md",
+          "title": "Merge Documents of Different Types in Java using REST API",
+          "topic": "Merge documents of different types using REST API",
+          "url": "groupdocs.cloud/merger/merge-documents-of-different-types-in-java-using-rest-api/"
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "nodejs": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "ruby": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Document Management",
+      "sub_category": "PDF Merger",
+      "topic": "Merge PDF",
+      "key": "merge-pdf",
+      "baseline_record_id": "blog::merger/2021-09-17-merge-pdf-files-using-rest-api-in-python/index.md",
+      "coverage": {
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::merger/2021-09-17-merge-pdf-files-using-rest-api-in-python/index.md",
+          "title": "Merge PDF Files using REST API in Python",
+          "topic": "Merge PDF using REST API",
+          "url": "groupdocs.cloud/merger/merge-pdf-files-using-rest-api-in-python/"
+        },
+        "general": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::merger/2021-02-02-merge-multiple-pdf-files-using-a-rest-api/index.md",
+          "title": "Merge Multiple PDF Files using a REST API",
+          "topic": "Merge multiple PDF using REST API",
+          "url": "groupdocs.cloud/merger/merge-multiple-pdf-files-using-a-rest-api/"
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::merger/2023-04-18-combine-and-merge-pdf-files-into-one-in-java-using-rest-api/index.md",
+          "title": "Combine and Merge PDF Files into One in Java using REST API",
+          "topic": "Combine and merge PDF into one using REST API",
+          "url": "groupdocs.cloud/merger/combine-and-merge-pdf-files-into-one-in-java-using-rest-api/"
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::merger/2023-06-20-how-to-merge-pdf-files-in-csharp-using-rest-api/index.md",
+          "title": "How to Merge PDF Files in C# using REST API",
+          "topic": "Merge PDF using REST API",
+          "url": "groupdocs.cloud/merger/how-to-merge-pdf-files-in-csharp-using-rest-api/"
+        },
+        "nodejs": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "ruby": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::merger/2022-06-15-merge-and-combine-pdf-files-using-rest-api-in-ruby/index.md",
+          "title": "Merge and Combine PDF Files using REST API in Ruby",
+          "topic": "Merge and combine PDF using REST API",
+          "url": "groupdocs.cloud/merger/merge-and-combine-pdf-files-using-rest-api-in-ruby/"
+        }
+      }
+    },
+    {
+      "category": "Document Security",
+      "sub_category": "Password Protection",
+      "topic": "Password protect Excel using rest",
+      "key": "password-protect-excel-using-rest",
+      "baseline_record_id": "blog::merger/2023-08-16-password-protect-excel-files-using-rest-api-in-python/index.md",
+      "coverage": {
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::merger/2023-08-16-password-protect-excel-files-using-rest-api-in-python/index.md",
+          "title": "Password Protect Excel Files using REST API in Python",
+          "topic": "Password protect Excel using REST API",
+          "url": "groupdocs.cloud/merger/password-protect-excel-files-using-rest-api-in-python/"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "nodejs": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "ruby": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Document Processing",
+      "sub_category": "Pdf Rotation",
+      "topic": "Rotate PDF Pages using rest",
+      "key": "rotate-pdf-pages-using-rest",
+      "baseline_record_id": "blog::merger/2022-10-24-rotate-pdf-file-pages-using-rest-api-in-python/index.md",
+      "coverage": {
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::merger/2022-10-24-rotate-pdf-file-pages-using-rest-api-in-python/index.md",
+          "title": "Rotate PDF File Pages using Rest API in Python",
+          "topic": "Rotate PDF pages using REST API",
+          "url": "groupdocs.cloud/merger/rotate-pdf-file-pages-using-rest-api-in-python/"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::merger/2023-05-16-how-to-rotate-pdf-pages-in-java-using-rest-api/index.md",
+          "title": "How to Rotate PDF Pages in Java using Rest API",
+          "topic": "Rotate PDF pages using REST API",
+          "url": "groupdocs.cloud/merger/how-to-rotate-pdf-pages-in-java-using-rest-api/"
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "nodejs": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::merger/2022-10-03-how-to-rotate-pdf-pages-using-rest-api-in-node-js/index.md",
+          "title": "How to Rotate PDF Pages using Rest API in Node.js",
+          "topic": "Rotate PDF pages using REST API",
+          "url": "groupdocs.cloud/merger/how-to-rotate-pdf-pages-using-rest-api-in-node-js/"
+        },
+        "ruby": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::merger/2022-06-09-how-to-rotate-pdf-pages-using-rest-api-in-ruby/index.md",
+          "title": "How to Rotate PDF Pages using Rest API in Ruby",
+          "topic": "Rotate PDF pages using REST API",
+          "url": "groupdocs.cloud/merger/how-to-rotate-pdf-pages-using-rest-api-in-ruby/"
+        }
+      }
+    },
+    {
+      "category": "Document Processing",
+      "sub_category": "PDF Split",
+      "topic": "Split PDF extract Pages from PDF using rest",
+      "key": "split-pdf-extract-pages-from-pdf-using-rest",
+      "baseline_record_id": "blog::merger/2022-06-03-split-pdf-extract-pages-from-pdf-using-rest-api-in-ruby/index.md",
+      "coverage": {
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::merger/2022-06-03-split-pdf-extract-pages-from-pdf-using-rest-api-in-ruby/index.md",
+          "title": "Split PDF - Extract Pages from PDF using Rest API in Ruby",
+          "topic": "Split PDF extract pages from PDF using REST API",
+          "url": "groupdocs.cloud/merger/split-pdf-extract-pages-from-pdf-using-rest-api-in-ruby/"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "nodejs": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "ruby": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Document Management",
+      "sub_category": "Split PDF",
+      "topic": "Split PDF into multiple PDF",
+      "key": "split-pdf-into-multiple-pdf",
+      "baseline_record_id": "blog::merger/2023-06-22-split-pdf-file-into-multiple-pdf-files-using-python/index.md",
+      "coverage": {
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::merger/2023-06-22-split-pdf-file-into-multiple-pdf-files-using-python/index.md",
+          "title": "Split PDF File into Multiple PDF Files using Python",
+          "topic": "Split PDF into multiple PDF",
+          "url": "groupdocs.cloud/merger/split-pdf-file-into-multiple-pdf-files-using-python/"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "nodejs": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "ruby": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Document Processing",
+      "sub_category": "Presentation Splitting",
+      "topic": "Split powerpoint PPT or PPTX slides",
+      "key": "split-powerpoint-ppt-or-pptx-slides",
+      "baseline_record_id": "blog::merger/2022-08-04-how-to-split-powerpoint-ppt-or-pptx-slides-in-python/index.md",
+      "coverage": {
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::merger/2022-08-04-how-to-split-powerpoint-ppt-or-pptx-slides-in-python/index.md",
+          "title": "How to Split PowerPoint PPT or PPTX Slides in Python",
+          "topic": "Split powerpoint PPT or PPTX slides",
+          "url": "groupdocs.cloud/merger/how-to-split-powerpoint-ppt-or-pptx-slides-in-python/"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "nodejs": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "ruby": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Document Management",
+      "sub_category": "Excel Merging",
+      "topic": "XLSX to ONE",
+      "key": "xlsx-to-one",
+      "baseline_record_id": "blog::merger/2021-10-16-merge-multiple-excel-files-into-one-using-rest-api-in-python/index.md",
+      "coverage": {
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::merger/2021-10-16-merge-multiple-excel-files-into-one-using-rest-api-in-python/index.md",
+          "title": "Merge Multiple Excel Files into One using REST API in Python",
+          "topic": "Merge multiple Excel into one using REST API",
+          "url": "groupdocs.cloud/merger/merge-multiple-excel-files-into-one-using-rest-api-in-python/"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "nodejs": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::merger/2021-07-30-merge-multiple-excel-files-into-one-using-rest-api-in-node-js/index.md",
+          "title": "Merge Multiple Excel Files into One using REST API in Node.js",
+          "topic": "Merge multiple Excel into one using REST API",
+          "url": "groupdocs.cloud/merger/merge-multiple-excel-files-into-one-using-rest-api-in-node-js/"
+        },
+        "ruby": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    }
+  ],
+  "brand_name": "GroupDocs.Cloud",
+  "product_name": "GroupDocs.Merger"
+}
