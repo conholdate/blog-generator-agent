@@ -5,7 +5,7 @@ aspose.cloud.json.
 """
 from dataclasses import dataclass
 
-from .config import PRODUCTS_REPO, NON_PLATFORM_FOLDERS, PLATFORM_ALIASES, PLATFORM_INFO
+from .config import PRODUCTS_REPO, PLATFORM_ALIASES, PLATFORM_INFO
 
 _ALIAS_TO_CANONICAL = {
     alias: canonical

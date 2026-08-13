@@ -13,13 +13,15 @@ PRODUCTS_DATA_PATH = os.path.join(
     os.path.dirname(os.path.abspath(__file__)), "../../../content/productsData/aspose.cloud.json"
 )
 
-# Folders under products.aspose.cloud/content/{product}/ that are not
-# platform SDKs and must never be treated as a new platform.
-NON_PLATFORM_FOLDERS = {"family", "embed", "release-notes"}
-
 # platform folder name -> (ProgrammingLanguage display name, package-manager verb)
 # Verb is used to pick the right consolebox/install-script block when a
 # release page offers more than one package manager for the same platform.
+#
+# This is an allowlist, not just a naming table: discover_inventory() only
+# treats a folder as a platform if its (normalized) name is a key here.
+# Anything else — locale codes, feature/operation subpages, and "curl"
+# (a real folder on the site with raw REST usage docs, but not an SDK/
+# package aspose.cloud.json has ever tracked) — is silently skipped.
 PLATFORM_INFO = {
     "net":     {"language": ".NET",       "verb": "dotnet add package"},
     "java":    {"language": "Java",       "verb": None},  # handled via data/repository/*.json
@@ -32,7 +34,6 @@ PLATFORM_INFO = {
     "cpp":     {"language": "C++",        "verb": None},  # no package manager; fallback text
     "dart":    {"language": "Dart",       "verb": "pub add"},
     "android": {"language": "Android",    "verb": None},  # gradle implementation line
-    "curl":    {"language": "cURL",       "verb": None},
     "aws":     {"language": "AWS",        "verb": "docker pull"},
     "perl":    {"language": "Perl",       "verb": "cpan install"},
 }
@@ -63,7 +64,6 @@ PLATFORM_REPO_TOKENS = {
     "cpp": ["cpp", "c++"],
     "dart": ["dart"],
     "android": ["android"],
-    "curl": ["curl"],
     "aws": ["aws"],
     "perl": ["perl"],
 }
