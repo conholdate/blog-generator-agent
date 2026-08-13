@@ -39,6 +39,12 @@ def reconcile(token: str, dry_run: bool = False) -> dict:
         if not result.values.get("ProductName"):
             report["unresolved"].append(f"{pair.url_prefix}/{pair.platform_key}: {result.notes.get('ProductName')}")
             continue
+        if "ProductURL" in result.unverified:
+            # Exists in the source repo, but the live page 404s — likely
+            # committed ahead of an actual deploy. Don't add a product
+            # whose own primary link is dead; wait for it to go live.
+            report["unresolved"].append(f"{pair.url_prefix}/{pair.platform_key}: {result.notes.get('ProductURL')}")
+            continue
         new_entries.append(result.values)
         report[bucket].append({
             "product": result.values["ProductName"],

@@ -264,6 +264,16 @@ def derive_full_entry(client: GitHubClient, url_prefix: str, platform_key: str) 
 
     result.values.update(derive_deterministic_fields(url_prefix, platform_key, pf_name))
 
+    # A folder existing in the products.aspose.cloud repo doesn't guarantee
+    # the page is actually deployed (found while testing: words/android's
+    # source exists, but the site 404s on it — likely committed ahead of a
+    # real release). Confirm the primary link is actually live before this
+    # entry is trusted enough to add.
+    product_url = result.values["ProductURL"]
+    if _resolve_redirect(product_url) is None:
+        result.unverified.append("ProductURL")
+        result.notes["ProductURL"] = f"{product_url} does not resolve live (page may exist in the repo but not be deployed yet)"
+
     if external_dl and _is_plausible_repo_url(external_dl, platform_key):
         result.values["ExternalDownloadURL"] = external_dl
     elif external_dl:
