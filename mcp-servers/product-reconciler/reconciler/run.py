@@ -8,7 +8,7 @@ overwrites a stored value when it was independently confirmed (not in
 replace a value that might still be perfectly fine — same principle
 used throughout today's manual InstallCommand fixes.
 """
-from .config import PRODUCTS_REPO
+from .config import get_brand_config
 from .github_client import GitHubClient
 from .inventory import discover_inventory
 from .diff import compute_diff, pairs_from_json
@@ -16,15 +16,17 @@ from .fields import derive_full_entry
 from .apply import apply_field_fixes, append_new_entries, load_raw_and_parsed
 
 
-def reconcile(token: str, dry_run: bool = False) -> dict:
+def reconcile(brand: str, token: str, dry_run: bool = False) -> dict:
+    config = get_brand_config(brand)
     client = GitHubClient(token)
 
-    inventory = discover_inventory(client)
-    _, existing_products = load_raw_and_parsed()
-    diff = compute_diff(inventory, existing_products)
-    stored_by_pair = pairs_from_json(existing_products)
+    inventory = discover_inventory(client, config)
+    _, existing_products = load_raw_and_parsed(config)
+    diff = compute_diff(inventory, existing_products, config)
+    stored_by_pair = pairs_from_json(existing_products, config)
 
     report = {
+        "brand": brand,
         "new_products": [],
         "new_platforms": [],
         "fixed_fields": [],
@@ -34,7 +36,7 @@ def reconcile(token: str, dry_run: bool = False) -> dict:
 
     new_entries = []
     for pair in diff.new_products + diff.new_platforms:
-        result = derive_full_entry(client, pair.url_prefix, pair.platform_key)
+        result = derive_full_entry(client, pair.url_prefix, pair.platform_key, config)
         bucket = "new_products" if pair in diff.new_products else "new_platforms"
         if not result.values.get("ProductName"):
             report["unresolved"].append(f"{pair.url_prefix}/{pair.platform_key}: {result.notes.get('ProductName')}")
@@ -56,7 +58,7 @@ def reconcile(token: str, dry_run: bool = False) -> dict:
         stored = stored_by_pair.get(pair)
         if not stored:
             continue
-        result = derive_full_entry(client, pair.url_prefix, pair.platform_key)
+        result = derive_full_entry(client, pair.url_prefix, pair.platform_key, config)
         for field_name, new_value in result.values.items():
             if field_name in result.unverified:
                 continue
@@ -82,7 +84,7 @@ def reconcile(token: str, dry_run: bool = False) -> dict:
 
     report["mode"] = "applied"
     if field_fixes:
-        apply_field_fixes(field_fixes)
+        apply_field_fixes(field_fixes, config)
     if new_entries:
-        append_new_entries(new_entries)
+        append_new_entries(new_entries, config)
     return report

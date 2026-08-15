@@ -1,0 +1,120 @@
+name: Reconcile Product Data
+
+on:
+  workflow_dispatch:
+    inputs:
+      brand:
+        description: "Brand to reconcile"
+        required: true
+        type: choice
+        default: "aspose.cloud"
+        options:
+          - "aspose.cloud"
+          # Add more brands here as they get a BrandConfig entry in
+          # mcp-servers/product-reconciler/reconciler/config.py
+  schedule:
+    - cron: "0 6 * * 1" # Every Monday at 11:00 AM PKT
+
+jobs:
+  # A cron trigger can't read a dropdown value — schedule always fires
+  # with fixed defaults. So a manual run reconciles exactly the one brand
+  # picked above, while a scheduled run fans out over every brand that's
+  # actually been built out (currently just aspose.cloud). Add a brand to
+  # SCHEDULED_BRANDS once it has a real BrandConfig + extraction logic.
+  determine-brands:
+    runs-on: ubuntu-latest
+    outputs:
+      brands: ${{ steps.set.outputs.brands }}
+    steps:
+      - id: set
+        run: |
+          if [ "${{ github.event_name }}" == "workflow_dispatch" ]; then
+            echo 'brands=["${{ inputs.brand }}"]' >> "$GITHUB_OUTPUT"
+          else
+            SCHEDULED_BRANDS='["aspose.cloud"]'
+            echo "brands=$SCHEDULED_BRANDS" >> "$GITHUB_OUTPUT"
+          fi
+
+  reconcile:
+    needs: determine-brands
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        brand: ${{ fromJSON(needs.determine-brands.outputs.brands) }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+
+      - name: Cache pip packages
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('mcp-servers/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r mcp-servers/requirements.txt
+
+      - name: Create runtime .env file with secrets
+        run: |
+          cat > .env << EOF
+          REPO_PAT=${{ secrets.REPO_PAT }}
+          EOF
+
+      - name: Run reconciliation
+        id: reconcile
+        env:
+          RECONCILE_BRAND: ${{ matrix.brand }}
+        run: |
+          cd mcp-servers/product-reconciler
+          python run_reconciliation.py
+
+      - name: Upload reconciliation report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: reconciliation-report-${{ steps.reconcile.outputs.brand_safe }}-${{ github.run_number }}
+          path: |
+            mcp-servers/product-reconciler/reconciliation_report_${{ steps.reconcile.outputs.brand_safe }}.md
+            mcp-servers/product-reconciler/reconciliation_report_${{ steps.reconcile.outputs.brand_safe }}.json
+          if-no-files-found: warn
+
+      ###################################################################
+      # Open a PR with whatever changed — never pushed to main directly,
+      # and never auto-merged. A human reviews every run's diff.
+      ###################################################################
+      - name: Create Pull Request
+        if: steps.reconcile.outputs.has_changes == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.REPO_PAT }}
+        run: |
+          git config --global user.email "action@github.com"
+          git config --global user.name "GitHub Action"
+
+          BRAND_SAFE="${{ steps.reconcile.outputs.brand_safe }}"
+          BRANCH_NAME="reconcile/${BRAND_SAFE}-${{ github.run_number }}"
+          DATA_FILE="content/productsData/${{ matrix.brand }}.json"
+
+          git checkout -b "$BRANCH_NAME"
+          git add "$DATA_FILE"
+          git commit -m "Reconcile ${{ matrix.brand }} product data [Run #${{ github.run_number }}]"
+          git push -u origin "$BRANCH_NAME"
+
+          gh pr create \
+            --title "Reconcile ${{ matrix.brand }} product data (Run #${{ github.run_number }})" \
+            --body-file "mcp-servers/product-reconciler/reconciliation_report_${BRAND_SAFE}.md" \
+            --base main \
+            --head "$BRANCH_NAME"
+
+      - name: No changes
+        if: steps.reconcile.outputs.has_changes != 'true'
+        run: echo "Nothing to reconcile this run for ${{ matrix.brand }} — already up to date."

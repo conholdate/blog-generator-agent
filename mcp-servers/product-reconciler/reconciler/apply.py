@@ -1,5 +1,5 @@
 """
-Writes changes to aspose.cloud.json.
+Writes changes to a brand's productsData JSON.
 
 Every write here is a targeted text edit, never a full re-serialize —
 same discipline used when fixing InstallCommand by hand: touch only the
@@ -9,17 +9,11 @@ else in the file's (inconsistent, hand-edited) formatting gets disturbed.
 import json
 import re
 
-from .config import PRODUCTS_DATA_PATH
-
-FIELD_ORDER = [
-    "ProductName", "Category", "ProgrammingLanguage", "ProductURL", "DownloadURL",
-    "ExternalDownloadURL", "DocumentationURL", "BlogsURL", "APIReferenceURL",
-    "FreeAppsURL", "ForumsURL", "InstallCommand", "urlPrefix", "license",
-]
+from .config import BrandConfig
 
 
-def load_raw_and_parsed() -> tuple[str, list[dict]]:
-    with open(PRODUCTS_DATA_PATH, "r") as f:
+def load_raw_and_parsed(config: BrandConfig) -> tuple[str, list[dict]]:
+    with open(config.products_data_path, "r") as f:
         text = f.read()
     return text, json.loads(text)
 
@@ -43,21 +37,21 @@ def patch_field(text: str, product_name: str, field_name: str, new_value: str) -
     return text, False
 
 
-def apply_field_fixes(fixes: list[dict]) -> dict:
+def apply_field_fixes(fixes: list[dict], config: BrandConfig) -> dict:
     """fixes: [{"ProductName": ..., "field": ..., "value": ...}, ...]"""
-    text, _ = load_raw_and_parsed()
+    text, _ = load_raw_and_parsed(config)
     applied, skipped = [], []
     for fix in fixes:
         text, changed = patch_field(text, fix["ProductName"], fix["field"], fix["value"])
         (applied if changed else skipped).append(fix["ProductName"] + "." + fix["field"])
 
-    _validate_and_write(text, expected_min_entries=1)
+    _validate_and_write(text, expected_min_entries=1, config=config)
     return {"applied": applied, "skipped": skipped}
 
 
-def append_new_entries(entries: list[dict]) -> dict:
+def append_new_entries(entries: list[dict], config: BrandConfig) -> dict:
     """entries: list of fully-derived field dicts, one per new product/platform."""
-    text, parsed = load_raw_and_parsed()
+    text, parsed = load_raw_and_parsed(config)
     before_count = len(parsed)
 
     insert_point = text.rstrip().rfind("]")
@@ -69,20 +63,20 @@ def append_new_entries(entries: list[dict]) -> dict:
 
     pieces = []
     for values in entries:
-        ordered = {k: values.get(k, "") for k in FIELD_ORDER}
+        ordered = {k: values.get(k, "") for k in config.field_order}
         pieces.append(json.dumps(ordered, indent=2))
 
     addition = ",\n" + ",\n".join(pieces) if body_before.endswith("}") else "\n".join(pieces)
     new_text = body_before + addition + "\n" + trailing
 
-    parsed_after = _validate_and_write(new_text, expected_min_entries=before_count + len(entries))
+    parsed_after = _validate_and_write(new_text, expected_min_entries=before_count + len(entries), config=config)
     return {"added": len(entries), "total_entries": len(parsed_after)}
 
 
-def _validate_and_write(text: str, expected_min_entries: int) -> list[dict]:
+def _validate_and_write(text: str, expected_min_entries: int, config: BrandConfig) -> list[dict]:
     parsed = json.loads(text)  # raises if the edit broke the JSON
     if len(parsed) < expected_min_entries:
         raise ValueError(f"Safety check failed: expected >= {expected_min_entries} entries, got {len(parsed)}")
-    with open(PRODUCTS_DATA_PATH, "w") as f:
+    with open(config.products_data_path, "w") as f:
         f.write(text)
     return parsed

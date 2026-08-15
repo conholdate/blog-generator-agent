@@ -7,6 +7,13 @@ Split into two tiers, same distinction used when this was done by hand:
   - dynamic fields (InstallCommand, ForumsURL): read from a second
     source and independently verified; left blank rather than guessed
     when that source doesn't have an answer yet.
+
+Note: unlike the config/repo/URL layer, this extraction logic (what a
+"platform page" looks like, how an install command is written) is still
+tied to aspose.cloud's specific page templates — confirmed today that
+groupdocs.cloud and aspose.com each use meaningfully different markup.
+A second brand needs its own extraction logic here, not just a new
+BrandConfig entry.
 """
 import html
 import re
@@ -14,10 +21,7 @@ from dataclasses import dataclass, field
 
 import requests
 
-from .config import (
-    PRODUCTS_REPO, RELEASES_REPO, PLATFORM_INFO, PLATFORM_ALIASES,
-    CPP_FALLBACK_COMMAND, BRAND_LICENSE_URL, PLATFORM_REPO_TOKENS,
-)
+from .config import BrandConfig
 from .github_client import GitHubClient
 
 
@@ -44,11 +48,11 @@ def _resolve_redirect(url: str, timeout: int = 8) -> str | None:
         return None
 
 
-def derive_deterministic_fields(url_prefix: str, platform_key: str, pf_name: str) -> dict:
+def derive_deterministic_fields(url_prefix: str, platform_key: str, pf_name: str, config: BrandConfig) -> dict:
     """Fields derivable purely from the (url_prefix, platform_key) pair and
     the product's display name — no extra network round-trip beyond what
     already fetched pf_name."""
-    info = PLATFORM_INFO.get(platform_key, {"language": platform_key})
+    info = config.platform_info.get(platform_key, {"language": platform_key})
     language = info["language"]
     category = f"{pf_name} Cloud Product Family"
     category_slug = category.lower().replace(" ", "-")
@@ -57,18 +61,18 @@ def derive_deterministic_fields(url_prefix: str, platform_key: str, pf_name: str
         "ProductName": f"{pf_name} Cloud SDK for {language}",
         "Category": category,
         "ProgrammingLanguage": language,
-        "ProductURL": f"https://products.aspose.cloud/{url_prefix}/{platform_key}/",
-        "DownloadURL": f"https://releases.aspose.cloud/{url_prefix}/{platform_key}/",
-        "DocumentationURL": f"https://docs.aspose.cloud/{url_prefix}/",
-        "APIReferenceURL": f"https://reference.aspose.cloud/{url_prefix}/",
-        "FreeAppsURL": f"https://products.aspose.app/{url_prefix}/family/",
-        "BlogsURL": f"https://blog.aspose.cloud/categories/{category_slug}/",
+        "ProductURL": f"https://{config.products_domain}/{url_prefix}/{platform_key}/",
+        "DownloadURL": f"https://{config.releases_domain}/{url_prefix}/{platform_key}/",
+        "DocumentationURL": f"https://{config.docs_domain}/{url_prefix}/",
+        "APIReferenceURL": f"https://{config.reference_domain}/{url_prefix}/",
+        "FreeAppsURL": f"https://{config.apps_domain}/{url_prefix}/family/",
+        "BlogsURL": f"https://{config.blog_domain}/categories/{category_slug}/",
         "urlPrefix": url_prefix,
-        "license": BRAND_LICENSE_URL,
+        "license": config.brand_license_url,
     }
 
 
-def fetch_pf_name_and_external_download(client: GitHubClient, url_prefix: str, platform_key: str) -> tuple[str | None, str | None]:
+def fetch_pf_name_and_external_download(client: GitHubClient, url_prefix: str, platform_key: str, config: BrandConfig) -> tuple[str | None, str | None]:
     """Reads the product's own page for its display name (pfName) and its
     GitHub SDK repo link — the two things that aren't derivable from a URL
     pattern alone.
@@ -77,9 +81,9 @@ def fetch_pf_name_and_external_download(client: GitHubClient, url_prefix: str, p
     a few (cells, total — confirmed while testing this) are locale-nested
     at content/{product}/en/{platform}/_index.md instead. Try the common
     layout first, fall back to the locale-nested one."""
-    md = client.get_raw_file(PRODUCTS_REPO, f"content/{url_prefix}/{platform_key}/_index.md")
+    md = client.get_raw_file(config.products_repo, f"content/{url_prefix}/{platform_key}/_index.md")
     if md is None:
-        md = client.get_raw_file(PRODUCTS_REPO, f"content/{url_prefix}/en/{platform_key}/_index.md")
+        md = client.get_raw_file(config.products_repo, f"content/{url_prefix}/en/{platform_key}/_index.md")
     if md is None:
         return None, None
     pf_match = re.search(r'pfName="([^"]*)"', md)
@@ -89,24 +93,24 @@ def fetch_pf_name_and_external_download(client: GitHubClient, url_prefix: str, p
     return pf_name, external_dl
 
 
-def _is_plausible_repo_url(url: str, platform_key: str) -> bool:
+def _is_plausible_repo_url(url: str, platform_key: str, config: BrandConfig) -> bool:
     """Guards against copy-paste errors on the source page itself (found
     while testing: barcode/python's own page links to the PHP repo).
     A value that doesn't even mention the right platform is not
     trustworthy just because it came from the "real" source."""
-    tokens = PLATFORM_REPO_TOKENS.get(platform_key)
+    tokens = config.platform_repo_tokens.get(platform_key)
     if not tokens:
         return True  # no known tokens for this platform; nothing to check against
     url_lower = url.lower()
     return any(token in url_lower for token in tokens)
 
 
-def resolve_forums_url(url_prefix: str) -> tuple[str | None, str]:
-    """forum.aspose.cloud/c/{urlPrefix} redirects to the canonical
+def resolve_forums_url(url_prefix: str, config: BrandConfig) -> tuple[str | None, str]:
+    """forum.{brand}/c/{urlPrefix} redirects to the canonical
     /c/{urlPrefix}/{category_id} form on Discourse once the category
     exists. If it doesn't resolve yet, fall back to the un-verified slug
     URL rather than guessing a category number."""
-    slug_url = f"https://forum.aspose.cloud/c/{url_prefix}"
+    slug_url = f"https://{config.forum_domain}/c/{url_prefix}"
     resolved = _resolve_redirect(slug_url)
     if resolved:
         return resolved, "verified via redirect"
@@ -123,7 +127,7 @@ def _extract_install_script_blocks(html_text: str) -> dict:
     return blocks
 
 
-def _scrape_install_command(url_prefix: str, platform_key: str, external_download_url: str | None) -> tuple[str | None, str | None, str]:
+def _scrape_install_command(url_prefix: str, platform_key: str, external_download_url: str | None, config: BrandConfig) -> tuple[str | None, str | None, str]:
     """Returns (command, registry_ref, method). Mirrors the extraction
     logic validated against 113 real aspose.cloud entries earlier today.
 
@@ -131,7 +135,7 @@ def _scrape_install_command(url_prefix: str, platform_key: str, external_downloa
     releases.aspose.cloud's per-platform install text was confirmed, so
     this deliberately reads the live rendered page rather than guessing
     a repo path that was never verified."""
-    page = _fetch_release_page_html(url_prefix, platform_key)
+    page = _fetch_release_page_html(url_prefix, platform_key, config)
     if page is None:
         return None, None, "no_source"
 
@@ -207,24 +211,24 @@ def _scrape_install_command(url_prefix: str, platform_key: str, external_downloa
         return (m.group(0).strip(), None, "verbatim") if m else (None, None, "no_source")
 
     if platform_key == "cpp":
-        return CPP_FALLBACK_COMMAND, None, "fallback"
+        return config.cpp_fallback_command, None, "fallback"
 
     return None, None, "no_source"
 
 
-def _fetch_release_page_html(url_prefix: str, platform_key: str) -> str | None:
+def _fetch_release_page_html(url_prefix: str, platform_key: str, config: BrandConfig) -> str | None:
     """releases.aspose.cloud doesn't expose its Hugo source the same way
     products.aspose.cloud does for every field, so InstallCommand falls
     back to the live rendered page, same source proven during today's
     113-entry audit."""
     try:
-        r = requests.get(f"https://releases.aspose.cloud/{url_prefix}/{platform_key}/", timeout=10)
+        r = requests.get(f"https://{config.releases_domain}/{url_prefix}/{platform_key}/", timeout=10)
         return r.text if r.status_code == 200 else None
     except requests.RequestException:
         return None
 
 
-def _registry_check(platform_key: str, ref) -> str:
+def _registry_check(platform_key: str, ref, config: BrandConfig) -> str:
     if not ref:
         return "UNCHECKED"
     try:
@@ -243,7 +247,7 @@ def _registry_check(platform_key: str, ref) -> str:
             artifact_id = ref[1]
             if not artifact_id:
                 return "UNCHECKED"
-            code = _http_status(f"https://releases.aspose.cloud/java/repo/com/aspose/{artifact_id}/maven-metadata.xml")
+            code = _http_status(f"https://{config.releases_domain}/java/repo/{config.java_group_path}/{artifact_id}/maven-metadata.xml")
         elif platform_key == "dart":
             code = _http_status(f"https://pub.dev/api/packages/{ref}")
         else:
@@ -253,28 +257,28 @@ def _registry_check(platform_key: str, ref) -> str:
     return "VALID" if code == 200 else f"INVALID({code})"
 
 
-def derive_full_entry(client: GitHubClient, url_prefix: str, platform_key: str) -> FieldResult:
+def derive_full_entry(client: GitHubClient, url_prefix: str, platform_key: str, config: BrandConfig) -> FieldResult:
     result = FieldResult()
 
-    pf_name, external_dl = fetch_pf_name_and_external_download(client, url_prefix, platform_key)
+    pf_name, external_dl = fetch_pf_name_and_external_download(client, url_prefix, platform_key, config)
     if not pf_name:
         result.unverified.append("ProductName")
         result.notes["ProductName"] = "product page not found or missing pfName attribute"
         return result
 
-    result.values.update(derive_deterministic_fields(url_prefix, platform_key, pf_name))
+    result.values.update(derive_deterministic_fields(url_prefix, platform_key, pf_name, config))
 
-    # A folder existing in the products.aspose.cloud repo doesn't guarantee
-    # the page is actually deployed (found while testing: words/android's
-    # source exists, but the site 404s on it — likely committed ahead of a
-    # real release). Confirm the primary link is actually live before this
+    # A folder existing in the products repo doesn't guarantee the page is
+    # actually deployed (found while testing: words/android's source
+    # exists, but the site 404s on it — likely committed ahead of a real
+    # release). Confirm the primary link is actually live before this
     # entry is trusted enough to add.
     product_url = result.values["ProductURL"]
     if _resolve_redirect(product_url) is None:
         result.unverified.append("ProductURL")
         result.notes["ProductURL"] = f"{product_url} does not resolve live (page may exist in the repo but not be deployed yet)"
 
-    if external_dl and _is_plausible_repo_url(external_dl, platform_key):
+    if external_dl and _is_plausible_repo_url(external_dl, platform_key, config):
         result.values["ExternalDownloadURL"] = external_dl
     elif external_dl:
         result.unverified.append("ExternalDownloadURL")
@@ -286,15 +290,15 @@ def derive_full_entry(client: GitHubClient, url_prefix: str, platform_key: str) 
         result.unverified.append("ExternalDownloadURL")
         result.notes["ExternalDownloadURL"] = "directDownloadLink not present on product page"
 
-    forums_url, forums_note = resolve_forums_url(url_prefix)
+    forums_url, forums_note = resolve_forums_url(url_prefix, config)
     result.values["ForumsURL"] = forums_url
     result.notes["ForumsURL"] = forums_note
     if "unverified" in forums_note:
         result.unverified.append("ForumsURL")
 
-    cmd, ref, method = _scrape_install_command(url_prefix, platform_key, external_dl)
+    cmd, ref, method = _scrape_install_command(url_prefix, platform_key, external_dl, config)
     if cmd:
-        status = _registry_check(platform_key, ref) if method != "fallback" else "N/A"
+        status = _registry_check(platform_key, ref, config) if method != "fallback" else "N/A"
         result.values["InstallCommand"] = cmd
         result.notes["InstallCommand"] = f"{method}, registry={status}"
         if method != "fallback" and status not in ("VALID", "N/A"):
