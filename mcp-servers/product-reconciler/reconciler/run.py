@@ -12,8 +12,17 @@ from .config import get_brand_config
 from .github_client import GitHubClient
 from .inventory import discover_inventory
 from .diff import compute_diff, pairs_from_json
-from .fields import derive_full_entry
+from .fields import derive_full_entry, _resolve_redirect
 from .apply import apply_field_fixes, append_new_entries, load_raw_and_parsed
+
+# Fields where the "correct" pattern can't be determined from HTTP status
+# alone — confirmed for FreeAppsURL while testing groupdocs.cloud: every
+# candidate suffix ("family/" and "total") resolves via the exact same
+# http->https + trailing-slash redirect chain, so "does it eventually
+# resolve" can't tell a genuinely-wrong guess apart from a stylistic one.
+# For these, only propose a change when the *current* value is actually
+# broken — a working link's exact form isn't worth "fixing" on a guess.
+FIELDS_REQUIRE_BROKEN_OLD_VALUE = {"FreeAppsURL"}
 
 
 def reconcile(brand: str, token: str, dry_run: bool = False) -> dict:
@@ -65,13 +74,16 @@ def reconcile(brand: str, token: str, dry_run: bool = False) -> dict:
             if field_name == "ProductName":
                 continue  # never rename the key we match on in the same pass
             old_value = stored.get(field_name, "")
-            if new_value and new_value != old_value:
-                field_fixes.append({
-                    "ProductName": stored["ProductName"],
-                    "field": field_name,
-                    "value": new_value,
-                    "old_value": old_value,
-                })
+            if not new_value or new_value == old_value:
+                continue
+            if field_name in FIELDS_REQUIRE_BROKEN_OLD_VALUE and old_value and _resolve_redirect(old_value) is not None:
+                continue  # old value still resolves — a differently-formatted guess isn't a fix
+            field_fixes.append({
+                "ProductName": stored["ProductName"],
+                "field": field_name,
+                "value": new_value,
+                "old_value": old_value,
+            })
 
     report["fixed_fields"] = [
         f"{fx['ProductName']}.{fx['field']}: {fx['old_value']!r} -> {fx['value']!r}"

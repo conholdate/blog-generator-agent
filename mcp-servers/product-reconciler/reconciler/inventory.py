@@ -41,7 +41,7 @@ def _list_platform_folders(client: GitHubClient, product: str, config: BrandConf
     codes, not platforms. Detect that by checking whether anything at the
     top level is a known platform key; if not, and "en" is present,
     descend into it."""
-    top_level = client.list_dir(config.products_repo, f"content/{product}")
+    top_level = client.list_dir(config.products_repo, f"{config.content_root}/{product}")
     if not top_level:
         return []
 
@@ -50,7 +50,7 @@ def _list_platform_folders(client: GitHubClient, product: str, config: BrandConf
         return top_level
 
     if "en" in top_level:
-        nested = client.list_dir(config.products_repo, f"content/{product}/en")
+        nested = client.list_dir(config.products_repo, f"{config.content_root}/{product}/en")
         return nested or []
 
     return top_level
@@ -67,10 +67,10 @@ def discover_inventory(client: GitHubClient, config: BrandConfig) -> list[Invent
     random non-platform folder (a locale code, a feature/operation subpage
     like Cells' "merge"/"export" pages) can never masquerade as one —
     exactly the bug that surfaced while testing against the real repo."""
-    product_folders = client.list_dir(config.products_repo, "content")
+    product_folders = client.list_dir(config.products_repo, config.content_root)
     if not product_folders:
         reason = client.last_error or "no additional detail captured"
-        raise RuntimeError(f"Could not list {config.products_repo} content/ — {reason}")
+        raise RuntimeError(f"Could not list {config.products_repo}/{config.content_root} — {reason}")
 
     known = known_platform_keys(config)
     items: list[InventoryItem] = []

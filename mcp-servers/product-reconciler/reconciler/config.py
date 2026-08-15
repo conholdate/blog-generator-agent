@@ -22,6 +22,12 @@ class BrandConfig:
     products_repo: str
     releases_repo: str
     products_data_path: str
+    # Path under the products repo where product folders actually live.
+    # aspose.cloud keeps them at content/{product}/ directly; groupdocs.cloud
+    # nests everything one level deeper at content/english/{product}/ —
+    # confirmed live, not a guess (products.groupdocs.cloud's content/ has
+    # exactly one entry, "english").
+    content_root: str = "content"
     # platform folder name -> {"language": display name, "verb": package-manager verb or None}
     # This doubles as an allowlist: discover_inventory() only treats a folder
     # as a platform if its (normalized) name is a key here. Anything else —
@@ -52,6 +58,11 @@ class BrandConfig:
     apps_domain: str = ""
     blog_domain: str = ""
     forum_domain: str = ""
+    # FreeAppsURL's path suffix — brands genuinely differ here, confirmed
+    # live: aspose.app canonicalizes to a trailing slash ("family/"),
+    # groupdocs.app does not ("family", no slash — adding one just adds an
+    # unnecessary http->https + slash-drop redirect hop).
+    apps_family_suffix: str = "family/"
     # Path segment for this brand's custom Maven repo (releases_domain/java/repo/{java_group_path}/{artifactId})
     java_group_path: str = ""
     # Key order for a freshly-written entry — schema varies slightly by
@@ -119,8 +130,56 @@ ASPOSE_CLOUD = BrandConfig(
     java_group_path="com/aspose",
 )
 
+GROUPDOCS_CLOUD = BrandConfig(
+    name="groupdocs.cloud",
+    products_repo="groupdocs-cloud/products.groupdocs.cloud",
+    releases_repo="groupdocs-cloud/releases.groupdocs.cloud",
+    products_data_path=os.path.join(_MODULE_DIR, "../../../content/productsData/groupdocs.cloud.json"),
+    content_root="content/english",
+    platform_info={
+        "net":     {"language": ".NET",    "verb": "dotnet add package"},
+        "java":    {"language": "Java",    "verb": None},  # handled via data/repository/*.json
+        "python":  {"language": "Python",  "verb": "pip install"},
+        "php":     {"language": "PHP",     "verb": "composer require"},
+        "ruby":    {"language": "Ruby",    "verb": "gem install"},
+        "nodejs":  {"language": "Node.js", "verb": "npm install"},
+        "android": {"language": "Android", "verb": None},  # gradle implementation line
+        "go":      {"language": "Go",      "verb": "go get"},
+        "swift":   {"language": "Swift",   "verb": "swift package add"},
+        "cpp":     {"language": "C++",     "verb": None},  # no package manager; fallback text
+        "apex":    {"language": "Apex",    "verb": None},  # no package manager; fallback text
+    },
+    platform_aliases={
+        "nodejs": ["nodejs", "node"],
+    },
+    platform_repo_tokens={
+        "net": ["net", "dotnet"],
+        "java": ["java"],
+        "python": ["python", "py"],
+        "php": ["php"],
+        "ruby": ["ruby"],
+        "nodejs": ["node", "nodejs", "js"],
+        "android": ["android"],
+        "go": ["go"],
+        "swift": ["swift"],
+        "cpp": ["cpp", "c++"],
+        "apex": ["apex"],
+    },
+    brand_license_url="https://purchase.groupdocs.cloud/temporary-license/",
+    products_domain="products.groupdocs.cloud",
+    releases_domain="releases.groupdocs.cloud",
+    docs_domain="docs.groupdocs.cloud",
+    reference_domain="reference.groupdocs.cloud",
+    apps_domain="products.groupdocs.app",
+    blog_domain="blog.groupdocs.cloud",
+    forum_domain="forum.groupdocs.cloud",
+    java_group_path="com/groupdocs",
+    apps_family_suffix="family",
+)
+
 BRANDS: dict[str, BrandConfig] = {
     "aspose.cloud": ASPOSE_CLOUD,
+    "groupdocs.cloud": GROUPDOCS_CLOUD,
 }
 
 
