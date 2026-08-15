@@ -166,7 +166,7 @@ def _scrape_install_command(url_prefix: str, platform_key: str, external_downloa
         m = re.search(r'gem install [A-Za-z0-9_\-]+', page)
         return (m.group(0).strip(), m.group(0).replace("gem install ", "").strip(), "verbatim") if m else (None, None, "no_source")
 
-    if platform_key == "nodejs":
+    if platform_key in ("nodejs", "javascript"):
         m = re.search(r'npm install (@?[A-Za-z0-9_./\-]+)( --save)?', page)
         if m:
             save = " --save" if m.group(2) else ""
@@ -236,7 +236,7 @@ def _registry_check(platform_key: str, ref) -> str:
             code = _http_status(f"https://packagist.org/packages/{ref}.json")
         elif platform_key == "ruby":
             code = _http_status(f"https://rubygems.org/api/v1/gems/{ref}.json")
-        elif platform_key == "nodejs":
+        elif platform_key in ("nodejs", "javascript"):
             enc = ref.replace("/", "%2F") if ref.startswith("@") else ref
             code = _http_status(f"https://registry.npmjs.org/{enc}")
         elif platform_key == "java" and isinstance(ref, tuple):

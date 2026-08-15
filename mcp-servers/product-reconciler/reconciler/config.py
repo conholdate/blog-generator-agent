@@ -29,6 +29,11 @@ PLATFORM_INFO = {
     "php":     {"language": "PHP",        "verb": "composer require"},
     "ruby":    {"language": "Ruby",       "verb": "gem install"},
     "nodejs":  {"language": "Node.js",    "verb": "npm install"},
+    # Distinct from nodejs, not an alias of it — confirmed while investigating a
+    # false "removal" flag: Imaging ships both a separate browser "SDK for
+    # JavaScript" (content/{product}/javascript/) and a server-side "Cloud SDK
+    # for Node.js" (content/{product}/nodejs/) as two different real products.
+    "javascript": {"language": "JavaScript", "verb": "npm install"},
     "go":      {"language": "Go",         "verb": "go get"},
     "swift":   {"language": "Swift",      "verb": "swift package add"},
     "cpp":     {"language": "C++",        "verb": None},  # no package manager; fallback text
@@ -59,6 +64,7 @@ PLATFORM_REPO_TOKENS = {
     "php": ["php"],
     "ruby": ["ruby"],
     "nodejs": ["node", "nodejs", "js"],
+    "javascript": ["javascript", "js"],
     "go": ["go"],
     "swift": ["swift"],
     "cpp": ["cpp", "c++"],
