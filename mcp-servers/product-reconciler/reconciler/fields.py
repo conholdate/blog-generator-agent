@@ -169,6 +169,11 @@ def derive_full_entry(client: GitHubClient, url_prefix: str, platform_key: str, 
         if _resolve_redirect(candidate) is None:
             result.unverified.append(url_field)
             result.notes[url_field] = f"{candidate} does not resolve live (page may exist in the repo but not be deployed yet)"
+            # Don't write a link known to be dead — same "leave blank rather
+            # than guess" rule ExternalDownloadURL already follows below.
+            # Existing entries are unaffected: run.py's field-fix loop
+            # already skips anything in `unverified` before using its value.
+            result.values[url_field] = ""
 
     if external_dl and _is_plausible_repo_url(external_dl, platform_key, config):
         if _resolve_redirect(external_dl) is not None:
