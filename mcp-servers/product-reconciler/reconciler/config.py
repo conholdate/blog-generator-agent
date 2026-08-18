@@ -74,6 +74,32 @@ class BrandConfig:
         "FreeAppsURL", "ForumsURL", "InstallCommand", "urlPrefix", "license",
     )
 
+    # How ProductName/Category get built from a brand module's pf_name.
+    # Defaults reproduce the two cloud brands' exact current output
+    # ("{pf_name} Cloud SDK for {language}" / "{pf_name} Cloud Product
+    # Family") — aspose.com overrides both, since its pf_name (confirmed
+    # live via releases.aspose.com's `linktitle` front-matter field, e.g.
+    # "Aspose.Cells") already reads as a real product family name with no
+    # "Cloud" branding involved.
+    product_name_template: str = "{pf_name} Cloud SDK for {language}"
+    category_template: str = "{pf_name} Cloud Product Family"
+    # Same reasoning as apps_family_suffix but for the whole FreeAppsURL
+    # shape: aspose.com's confirmed live value (products.aspose.app/cells)
+    # has no platform segment or suffix at all, unlike either cloud brand.
+    apps_url_template: str = "https://{apps_domain}/{url_prefix}/{apps_family_suffix}"
+    # Both cloud brands' docs/reference sites are organized per product
+    # family, not per platform ("docs.aspose.cloud/barcode/", confirmed
+    # against real stored entries). aspose.com's real entries are
+    # per-platform instead ("docs.aspose.com/cells/net/") — caught by
+    # diffing a derived aspose.com sample against its real JSON entry
+    # before this shipped.
+    docs_url_template: str = "https://{docs_domain}/{url_prefix}/"
+    api_reference_url_template: str = "https://{reference_domain}/{url_prefix}/"
+    # Empty means this brand has no such field (aspose.cloud/groupdocs.cloud
+    # don't). aspose.com's pricing URL is a plain brand-wide pattern,
+    # confirmed against the live aspose.com.json data.
+    pricing_url_template: str = ""
+
 
 ASPOSE_CLOUD = BrandConfig(
     name="aspose.cloud",
@@ -177,9 +203,73 @@ GROUPDOCS_CLOUD = BrandConfig(
     apps_family_suffix="family",
 )
 
+ASPOSE_COM = BrandConfig(
+    name="aspose.com",
+    # Single repo serves both roles here — confirmed live: releases.aspose.com's
+    # own product pages (content/en/{product}/{platform}/_index.md) already carry
+    # the product name (`linktitle`), the install-command source
+    # (`homepage_package_type`/`homepage_package_link`), and a GitHub examples
+    # link in the body. Unlike the two cloud brands, there is no separate
+    # products.aspose.com content repo to fall back to.
+    products_repo="Aspose/releases.aspose.com",
+    releases_repo="Aspose/releases.aspose.com",
+    products_data_path=os.path.join(_MODULE_DIR, "../../../content/productsData/aspose.com.json"),
+    content_root="content/en",
+    # Deliberately conservative first cut: only platform folder names actually
+    # confirmed live (via cells/net, cells/java, cells/php, cells/nodejs,
+    # cells/cpp, words/python). aspose.com ships many more platform-folder
+    # spellings (python-net, python-java, nodejs-cpp, nodejs-net, javascript-cpp,
+    # go-cpp, androidjava, jasperreports, reportingservices, sharepoint, ...) —
+    # real per-product bridge variants, not naming drift — but none of those
+    # were inspected, so per discover_inventory's allowlist design they're
+    # silently skipped rather than guessed at. Add each once its page markup
+    # and homepage_package_type are confirmed.
+    #
+    # "language" here is the platform's display suffix as aspose.com's own
+    # `linktitle` writes it (feeds ProductName, e.g. "... for .NET"); the
+    # ProgrammingLanguage column value is separate and often differs (C# for
+    # .NET) — see prog_language.
+    platform_info={
+        "net":    {"language": ".NET", "prog_language": "C#", "verb": "dotnet add package"},
+        "java":   {"language": "Java", "verb": "maven"},  # groupId/artifactId derived from homepage_package_link
+        "php":    {"language": "PHP", "verb": "composer require"},
+        "nodejs": {"language": "Node.js", "prog_language": "JavaScript", "verb": "npm install"},
+        "python": {"language": "Python", "verb": "pip install"},
+        # Confirmed live (cells/cpp): distributed via NuGet like .NET, not a
+        # no-package-manager fallback the way it is for aspose.cloud/groupdocs.cloud.
+        "cpp":    {"language": "C++", "verb": "dotnet add package"},
+    },
+    # No plausibility check for now — aspose.com bridge products legitimately
+    # link to a *different* platform's GitHub repo (e.g. cells/nodejs's
+    # Examples link points at the Java repo, since it's Node.js-via-Java).
+    # Guessing tokens here risks rejecting genuinely-correct links.
+    platform_repo_tokens={},
+    brand_license_url="https://purchase.aspose.com/temporary-license/",
+    products_domain="products.aspose.com",
+    releases_domain="releases.aspose.com",
+    docs_domain="docs.aspose.com",
+    reference_domain="reference.aspose.com",
+    apps_domain="products.aspose.app",
+    blog_domain="blog.aspose.com",
+    forum_domain="forum.aspose.com",
+    java_group_path="com/aspose",
+    product_name_template="{pf_name} for {language}",
+    category_template="{pf_name} Product Family",
+    apps_url_template="https://{apps_domain}/{url_prefix}",
+    docs_url_template="https://{docs_domain}/{url_prefix}/{platform_key}/",
+    api_reference_url_template="https://{reference_domain}/{url_prefix}/{platform_key}/",
+    pricing_url_template="https://purchase.aspose.com/pricing/{url_prefix}/family/",
+    field_order=(
+        "ProductName", "Category", "ProgrammingLanguage", "ProductURL", "DownloadURL",
+        "ExternalDownloadURL", "DocumentationURL", "BlogsURL", "APIReferenceURL",
+        "FreeAppsURL", "ForumsURL", "InstallCommand", "urlPrefix", "license", "pricing",
+    ),
+)
+
 BRANDS: dict[str, BrandConfig] = {
     "aspose.cloud": ASPOSE_CLOUD,
     "groupdocs.cloud": GROUPDOCS_CLOUD,
+    "aspose.com": ASPOSE_COM,
 }
 
 

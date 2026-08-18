@@ -20,11 +20,12 @@ import requests
 
 from .config import BrandConfig
 from .github_client import GitHubClient
-from .brands import aspose_cloud, groupdocs_cloud
+from .brands import aspose_cloud, groupdocs_cloud, aspose_com
 
 _BRAND_MODULES = {
     "aspose.cloud": aspose_cloud,
     "groupdocs.cloud": groupdocs_cloud,
+    "aspose.com": aspose_com,
 }
 
 
@@ -57,22 +58,32 @@ def derive_deterministic_fields(url_prefix: str, platform_key: str, pf_name: str
     already fetched pf_name."""
     info = config.platform_info.get(platform_key, {"language": platform_key})
     language = info["language"]
-    category = f"{pf_name} Cloud Product Family"
+    prog_language = info.get("prog_language", language)
+    category = config.category_template.format(pf_name=pf_name)
     category_slug = category.lower().replace(" ", "-")
 
-    return {
-        "ProductName": f"{pf_name} Cloud SDK for {language}",
+    values = {
+        "ProductName": config.product_name_template.format(pf_name=pf_name, language=language),
         "Category": category,
-        "ProgrammingLanguage": language,
+        "ProgrammingLanguage": prog_language,
         "ProductURL": f"https://{config.products_domain}/{url_prefix}/{platform_key}/",
         "DownloadURL": f"https://{config.releases_domain}/{url_prefix}/{platform_key}/",
-        "DocumentationURL": f"https://{config.docs_domain}/{url_prefix}/",
-        "APIReferenceURL": f"https://{config.reference_domain}/{url_prefix}/",
-        "FreeAppsURL": f"https://{config.apps_domain}/{url_prefix}/{config.apps_family_suffix}",
+        "DocumentationURL": config.docs_url_template.format(
+            docs_domain=config.docs_domain, url_prefix=url_prefix, platform_key=platform_key,
+        ),
+        "APIReferenceURL": config.api_reference_url_template.format(
+            reference_domain=config.reference_domain, url_prefix=url_prefix, platform_key=platform_key,
+        ),
+        "FreeAppsURL": config.apps_url_template.format(
+            apps_domain=config.apps_domain, url_prefix=url_prefix, apps_family_suffix=config.apps_family_suffix,
+        ),
         "BlogsURL": f"https://{config.blog_domain}/categories/{category_slug}/",
         "urlPrefix": url_prefix,
         "license": config.brand_license_url,
     }
+    if config.pricing_url_template:
+        values["pricing"] = config.pricing_url_template.format(url_prefix=url_prefix)
+    return values
 
 
 def _is_plausible_repo_url(url: str, platform_key: str, config: BrandConfig) -> bool:

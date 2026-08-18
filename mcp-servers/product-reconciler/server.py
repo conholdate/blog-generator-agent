@@ -7,9 +7,10 @@ they launch, and fixes fields that have drifted from their real source.
 Runs on its own schedule (see the GitHub Actions workflow), independent
 of individual blog-post runs.
 
-Only aspose.cloud has a populated BrandConfig + extraction logic so far
-(see reconciler/config.py) — other brands need both a config entry and
-brand-aware scraping before "brand" here can do real work for them.
+aspose.cloud, groupdocs.cloud, and aspose.com each have a populated
+BrandConfig + extraction logic (see reconciler/config.py) — a new brand
+needs both a config entry and brand-aware scraping before "brand" here
+can do real work for it.
 """
 import sys
 import os
@@ -40,7 +41,8 @@ def reconcile_products(brand: str = "aspose.cloud", dry_run: bool = False) -> di
     releases repos.
 
     Args:
-        brand: which brand to reconcile. Currently supported: aspose.cloud.
+        brand: which brand to reconcile. Currently supported: aspose.cloud,
+            groupdocs.cloud, aspose.com.
         dry_run: if True, computes and returns the report without writing
             anything to the JSON file. Defaults to False (applies fixes
             and adds new entries) since this tool is only ever invoked
