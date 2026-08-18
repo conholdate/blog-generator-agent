@@ -32,7 +32,8 @@
     "aspose.cloud|aspose.cells|nodejs": 0,
     "groupdocs.cloud|groupdocs.merger|net": 1,
     "groupdocs.cloud|groupdocs.merger|java": 0,
-    "groupdocs.cloud|groupdocs.merger|nodejs": 0
+    "groupdocs.cloud|groupdocs.merger|nodejs": 0,
+    "aspose|aspose.drawing|java": 0
   },
   "aspose|aspose.html|python": [
     "How to Convert Code to Change HTML Border Color in Python",
@@ -175,5 +176,8 @@
     "Split PDF Extract PAGES from PDF using Rest in Java",
     "Split PDF into Multiple PDF in Java",
     "XLSX to ONE Conversion Guide in Java: Build a Microservice"
+  ],
+  "aspose|aspose.drawing|java": [
+    "Create BMP Image in Java: Save BufferedImage as BMP"
   ]
 }
