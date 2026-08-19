@@ -1,10 +1,10 @@
 {
-  "source_url": "https://docs.aspose.com/llm/net/use-cases/simple-chat/",
+  "source_url": "https://docs.aspose.com/llm/net/use-cases/save-and-restore-session/",
   "source_type": "docs",
   "publication_readiness": "draft_ready",
   "blocker_reason": null,
   "topics_generated": [
-    "Simple chat"
+    "Save and restore session"
   ],
   "rejected_sections": [
     "Contents"
