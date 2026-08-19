@@ -310,9 +310,23 @@ class BlogOrchestrator:
             }
             report = validate_seo_content(result.final_output, targets)
             print(f" Audit completed -- {report}", flush=True)
-             
+
+            if report.get("status") != "PASS":
+                # Content failed its own SEO audit (e.g. too short, missing
+                # required sections) — extract_blog_metadata regexes for a
+                # frontmatter block that malformed content may not even have,
+                # which previously crashed downstream with a raw KeyError on
+                # blog_post_metadata["summary"] instead of just skipping this
+                # run, same as the empty-LLM-output case above.
+                print(f"⚠️  SEO audit did not pass (status={report.get('status')}, score={report.get('score')}). Skipping this run.", flush=True)
+                return {
+                    "status": "skipped",
+                    "message": f"SEO audit failed: {report.get('status')}",
+                    "report": report,
+                }
+
             blog_post_metadata = extract_blog_metadata(result.final_output)
-          
+
             jistified = await gist_injector(result.final_output, post_topic, blog_post_metadata["summary"], f'https://blog.{self.brand}{blog_post_metadata["url"]}')
             text_output = jistified.content[0].text
             data = json.loads(text_output)
