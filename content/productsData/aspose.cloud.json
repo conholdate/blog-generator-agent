@@ -346,7 +346,7 @@
   "APIReferenceURL": "https://reference.aspose.cloud/cells/",
   "FreeAppsURL": "https://products.aspose.app/cells/family/",
   "ForumsURL": "https://forum.aspose.cloud/c/cells/7",
-  "InstallCommand": "<dependency>\n<groupId>com.aspose</groupId>\n<artifactId>aspose-cells-cloud</artifactId>\n<version>26.7</version>\n</dependency>",
+  "InstallCommand": "<dependency>\n<groupId>com.aspose</groupId>\n<artifactId>aspose-cells-cloud</artifactId>\n<version>26.8</version>\n</dependency>",
   "urlPrefix": "cells",
   "license": "https://purchase.aspose.com/temporary-license/"
 },
