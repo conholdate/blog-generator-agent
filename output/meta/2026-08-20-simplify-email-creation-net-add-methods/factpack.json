@@ -1,0 +1,102 @@
+{
+  "topic": "Simplify Email Creation with Aspose.Email .NET 26.7: New Add Methods Return Instances",
+  "primary_source_url": "https://releases.aspose.com/email/net/release-notes/2026/aspose-email-for-net-26-7-release-notes/",
+  "source_title": "Aspose.Email for .NET 26.7 Release Notes",
+  "sdk_version": "Aspose.Email for .NET 26.7 Release Notes",
+  "main_problem_solved": "The Add methods in MapiAttachmentCollection and MapiRecipientCollection now return the newly created attachment or recipient, allowing immediate property configuration without a separate lookup.",
+  "platform": {
+    "platform_key": "net",
+    "platform_name": ".NET",
+    "language": "C#",
+    "language_tag": "csharp",
+    "package_manager": "NuGet",
+    "install_command": "Install-Package Aspose.Email",
+    "product_key": "email",
+    "product_display": "Email",
+    "product_page_url": "https://products.aspose.com/email/net/",
+    "docs_url": "https://docs.aspose.com/email/net/",
+    "api_reference_url": "https://reference.aspose.com/email/net/",
+    "free_apps_url": "https://products.aspose.app/email/family",
+    "license_url": "https://purchase.aspose.com/temporary-license/",
+    "forum_url": "https://forum.aspose.com/c/email/"
+  },
+  "source_type": "release_notes",
+  "keyword_analysis": {
+    "title": "",
+    "angle": "",
+    "outline": [],
+    "target_persona": "",
+    "primary_keyword": "Simplify Email Creation with net New Add Methods Return Instances",
+    "supporting_keywords": [
+      "What's New in for net",
+      "How to Create Emails in net",
+      "Add email methods returning instances in net"
+    ],
+    "keyword_groups": {
+      "core_seo_keywords": [
+        "Simplify Email Creation with net New Add Methods Return Instances",
+        "What's New in for net"
+      ],
+      "long_tail_keywords": [
+        "Add email methods returning instances in net"
+      ],
+      "context_keywords": [
+        "How to Create Emails in net"
+      ]
+    },
+    "editorial_notes": []
+  },
+  "key_steps": [],
+  "code_snippets": [
+    "var message = new MapiMessage();\nvar recipient = message.Recipients.Add(\"alice.johnson@example.com\", \"SMTP\", \"Alice Johnson\", MapiRecipientType.MAPI_TO);\nrecipient.DisplayName = \"Alice Johnson\";\nvar attachment = message.Attachments.Add(\"invoice.pdf\", File.ReadAllBytes(\"invoice.pdf\"));\nattachment.DisplayName = \"Invoice #2026-001.pdf\";"
+  ],
+  "limitations": [],
+  "warnings": [
+    "Code sample has not been executed in a sandbox, but it was matched verbatim against the product team's own release notes page; note it as reproduced from the official release notes and untested, not as unverified."
+  ],
+  "related_concepts": [
+    "MapiMessage",
+    "MapiRecipientCollection",
+    "MapiAttachmentCollection",
+    "MapiRecipientType",
+    "MapiMessage.Recipients.Add",
+    "MapiMessage.Attachments.Add",
+    "File.ReadAllBytes"
+  ],
+  "facts_confirmed_from_source": [
+    "Heading: Add Methods Now Return the Newly Created Instance",
+    "The Add methods in MapiAttachmentCollection and MapiRecipientCollection now return the newly created attachment or recipient, allowing immediate property configuration without a separate lookup.",
+    "API used: MapiMessage",
+    "API used: MapiRecipientCollection",
+    "API used: MapiAttachmentCollection",
+    "API used: MapiRecipientType",
+    "API used: File.ReadAllBytes"
+  ],
+  "facts_needing_verification": [],
+  "suggested_article_outline": [
+    "Introduction",
+    "Why this feature matters",
+    "Brief introduction of the API (install + product/docs links)",
+    "Step-by-step tutorial with a code example",
+    "Get a Free License",
+    "Free Additional Resources",
+    "Conclusion",
+    "FAQs",
+    "See Also (only if related post URLs are supplied)"
+  ],
+  "code_verification": {
+    "language": "C#",
+    "tested": false,
+    "source_verified": true,
+    "syntax_valid": false,
+    "package_name": null,
+    "package_version": null,
+    "os": null,
+    "input_file_used": null,
+    "output_file_generated": null,
+    "errors": [],
+    "notes": "Code sample matches a block scraped verbatim from the product team's release notes page. Static syntax check found unbalanced brackets or quotes. Sandboxed execution against the real Aspose SDK is not attempted: these samples reference proprietary licensed assemblies, external input files, and sometimes network services (e.g. a timestamp authority URL) that only exist in the product team's own test environment."
+  },
+  "prerequisites": [],
+  "doc_topics": []
+}

@@ -1,12 +1,14 @@
 {
-  "source_url": "https://docs.aspose.com/llm/net/use-cases/save-and-restore-session/",
-  "source_type": "docs",
+  "source_url": "https://releases.aspose.com/email/net/release-notes/2026/aspose-email-for-net-26-7-release-notes/",
+  "source_type": "release-notes",
   "publication_readiness": "draft_ready",
   "blocker_reason": null,
   "topics_generated": [
-    "Save and restore session"
+    "Add Methods Now Return the Newly Created Instance"
   ],
   "rejected_sections": [
-    "Contents"
+    "All Changes",
+    "New Features",
+    "Add Methods Now Return the Newly Created Instance (duplicate)"
   ]
 }
