@@ -48,23 +48,31 @@ def fetch_product_info(client, url_prefix, platform_key, config):
         return None, None
 
     linktitle_m = re.search(r'^linktitle:\s*"([^"]*)"', md, re.M)
-    if not linktitle_m:
-        return None, None
-    # linktitle is the full display name, e.g. "Aspose.Cells for .NET" or
-    # "Aspose.Cells for Node.js via Java" — pf_name here is the family base
-    # ("Aspose.Cells"), confirmed live to exactly match this brand's real
-    # Category values once " Product Family" is appended.
-    pf_name = linktitle_m.group(1).split(" for ", 1)[0].strip()
+    if linktitle_m:
+        pf_name = linktitle_m.group(1).strip()
+    else:
+        # A handful of pages omit linktitle entirely (confirmed live:
+        # content/en/3d/nodejs-java/_index.md) but still carry the same
+        # display name under family_listing_page_title instead.
+        fallback_m = re.search(r'^family_listing_page_title:\s*"([^"]*)"', md, re.M)
+        if not fallback_m:
+            return None, None
+        pf_name = fallback_m.group(1).strip()
+    # pf_name is the FULL display name, e.g. "Aspose.Cells for .NET" or
+    # "Aspose.Cells for Node.js via Java" — kept whole (not split) so
+    # bridge-platform ProductNames keep their "via X" suffix. Category is
+    # derived separately in fields.py by splitting on " for ".
 
     # No single consistent shortcode/badge form for the GitHub examples
     # link across platforms (badge image on net, plain markdown link on
-    # nodejs) — match either.
+    # nodejs, "Code Samples" instead of "Examples" on pdf/pythoncpp) —
+    # match any of them.
     external_dl = None
-    m = re.search(r'\[!\[Examples\][^\]]*\]\(([^)\s]+)\)', md)
-    if not m:
-        m = re.search(r'\[Examples\]\(([^)\s]+)\)', md)
-    if m:
-        external_dl = m.group(1)
+    for pattern in (r'\[!\[Examples\][^\]]*\]\(([^)\s]+)\)', r'\[Examples\]\(([^)\s]+)\)', r'\[Code Samples\]\(([^)\s]+)\)'):
+        m = re.search(pattern, md)
+        if m:
+            external_dl = m.group(1)
+            break
 
     return pf_name, external_dl
 
@@ -91,6 +99,27 @@ def _latest_java_release(client, data_folder: str, config) -> dict | None:
         return None
 
 
+def _scrape_body_install_command(md: str):
+    """Fallback for pages with no homepage_package_type/link front matter.
+    Confirmed live shapes: "go install github.com/.../vNN@latest" (cells,
+    total go-cpp, inside <details>/blockquote text) and "go get
+    github.com/...@latest" (pdf's go-cpp, inside a consolebox shortcode) —
+    one regex covers both. pdf/pythoncpp has a plain "pip install <pkg>"
+    inside the same consolebox shortcode. Returns method "scraped_body" so
+    fields.py still runs its usual registry-check gate on the result."""
+    m = re.search(r'\bgo (install|get) ([A-Za-z0-9./@_-]+)', md)
+    if m:
+        pkg = m.group(2)
+        return f"go {m.group(1)} {pkg}", pkg, "scraped_body"
+
+    m = re.search(r'\bpip install ([A-Za-z0-9._-]+)', md)
+    if m:
+        pkg = m.group(1)
+        return f"pip install {pkg}", pkg, "scraped_body"
+
+    return None, None, "no_source"
+
+
 def scrape_install_command(client, url_prefix: str, platform_key: str, external_download_url, config):
     """Returns (command, registry_ref, method), derived from the
     `homepage_package_type` / `homepage_package_link` front-matter pair
@@ -106,7 +135,14 @@ def scrape_install_command(client, url_prefix: str, platform_key: str, external_
     type_m = re.search(r'^homepage_package_type:\s*"?([^"\n]+?)"?\s*$', md, re.M)
     link_m = re.search(r'^homepage_package_link:\s*"([^"]*)"', md, re.M)
     if not type_m or not link_m:
-        return None, None, "no_source"
+        # A handful of pages (confirmed: every go-cpp folder, pdf/pythoncpp)
+        # never got the homepage_package_type/link front-matter fields at
+        # all, but still carry a real, working install command as literal
+        # text inside a body shortcode (consolebox / <details>) rather than
+        # a structured field. pdf/rustcpp has neither — this correctly
+        # falls through to "no_source" for it, same as any product with no
+        # discoverable install source.
+        return _scrape_body_install_command(md)
     pkg_type = type_m.group(1).strip()
     pkg_link = link_m.group(1).strip()
 

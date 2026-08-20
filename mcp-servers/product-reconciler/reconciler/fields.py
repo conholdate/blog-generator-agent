@@ -59,20 +59,40 @@ def derive_deterministic_fields(url_prefix: str, platform_key: str, pf_name: str
     info = config.platform_info.get(platform_key, {"language": platform_key})
     language = info["language"]
     prog_language = info.get("prog_language", language)
-    category = config.category_template.format(pf_name=pf_name)
+    # pf_name may carry a bridge suffix (aspose.com: "Aspose.Cells for
+    # Python via .NET") that must stay in ProductName but not leak into
+    # Category. Splitting unconditionally is safe for every brand: the
+    # other brands' pf_name never contains " for " in the first place.
+    # A handful of platforms need an explicit override instead (confirmed
+    # live: ocr/java-gpu's own linktitle reads "Aspose.OCR-GPU for Java",
+    # but it isn't its own family — see BrandConfig.category_base_overrides).
+    category_base = config.category_base_overrides.get(
+        (url_prefix, platform_key), pf_name.split(" for ", 1)[0].strip()
+    )
+    category = config.category_template.format(pf_name=category_base)
     category_slug = category.lower().replace(" ", "-")
+    # The public-facing slug products/docs/reference.aspose.com serve a
+    # platform under is usually identical to its releases-repo folder name
+    # (platform_key) — DownloadURL always uses the latter, since that's
+    # the real download location. A few platforms diverge; see
+    # BrandConfig.url_slug_overrides for exactly which and why.
+    public_slug = config.url_slug_overrides.get((url_prefix, platform_key), platform_key)
+    # ProductURL-only override, for the rarer case where even
+    # products.aspose.com itself disagrees with docs/reference on the
+    # slug — see BrandConfig.product_url_slug_overrides.
+    product_url_slug = config.product_url_slug_overrides.get((url_prefix, platform_key), public_slug)
 
     values = {
         "ProductName": config.product_name_template.format(pf_name=pf_name, language=language),
         "Category": category,
         "ProgrammingLanguage": prog_language,
-        "ProductURL": f"https://{config.products_domain}/{url_prefix}/{platform_key}/",
+        "ProductURL": f"https://{config.products_domain}/{url_prefix}/{product_url_slug}/",
         "DownloadURL": f"https://{config.releases_domain}/{url_prefix}/{platform_key}/",
         "DocumentationURL": config.docs_url_template.format(
-            docs_domain=config.docs_domain, url_prefix=url_prefix, platform_key=platform_key,
+            docs_domain=config.docs_domain, url_prefix=url_prefix, platform_key=public_slug,
         ),
         "APIReferenceURL": config.api_reference_url_template.format(
-            reference_domain=config.reference_domain, url_prefix=url_prefix, platform_key=platform_key,
+            reference_domain=config.reference_domain, url_prefix=url_prefix, platform_key=public_slug,
         ),
         "FreeAppsURL": config.apps_url_template.format(
             apps_domain=config.apps_domain, url_prefix=url_prefix, apps_family_suffix=config.apps_family_suffix,

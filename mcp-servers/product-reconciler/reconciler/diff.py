@@ -36,7 +36,10 @@ def pairs_from_json(products: list[dict], config: BrandConfig) -> dict[Pair, dic
         parts = [seg for seg in urlparse(p.get("ProductURL", "")).path.split("/") if seg]
         if len(parts) < 2:
             continue
-        url_prefix, platform_key = parts[0], normalize_platform_key(parts[1], config)
+        url_prefix, raw_platform = parts[0], parts[1]
+        platform_key = config.json_slug_aliases.get(
+            (url_prefix, raw_platform), normalize_platform_key(raw_platform, config)
+        )
         by_pair[Pair(url_prefix, platform_key)] = p
     return by_pair
 

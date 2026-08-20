@@ -99,6 +99,48 @@ class BrandConfig:
     # don't). aspose.com's pricing URL is a plain brand-wide pattern,
     # confirmed against the live aspose.com.json data.
     pricing_url_template: str = ""
+    # (url_prefix, platform_key) -> the slug products.aspose.com/docs.aspose.com/
+    # reference.aspose.com actually serve this platform under, when it
+    # differs from the releases-repo folder name (platform_key) that
+    # DownloadURL correctly uses as-is. Confirmed live: needed only for
+    # pdf's 4 concatenated-spelling folders (pythoncpp/pythonjava/
+    # javascriptcpp/nodejscpp/rustcpp all 404 on those three domains;
+    # their hyphenated siblings 200) and ocr/java-gpu (which has no
+    # standalone product/docs page at all — it shares ocr/java's).
+    # Empty for every other brand/platform, where platform_key already
+    # serves both roles.
+    url_slug_overrides: dict = field(default_factory=dict)
+    # (url_prefix, platform_key) -> Category text base, for the rare case
+    # where splitting pf_name on " for " doesn't yield the real family
+    # name. Confirmed live: ocr/java-gpu's linktitle is "Aspose.OCR-GPU
+    # for Java" — the generic split reads "Aspose.OCR-GPU" as the family,
+    # but every sibling OCR entry (and the family's own blog category)
+    # uses plain "Aspose.OCR".
+    category_base_overrides: dict = field(default_factory=dict)
+    # (url_prefix, slug as it appears in a stored ProductURL) -> the real
+    # platform_key (releases-repo folder name) that slug corresponds to.
+    # The inverse of url_slug_overrides, and deliberately NOT auto-derived
+    # from it: diff.py's pairs_from_json parses stored ProductURLs to
+    # match them against live-discovered (url_prefix, platform_key) pairs,
+    # and for pdf's 4 concatenated-spelling platforms the stored JSON
+    # already has real rows under the hyphenated public slug (confirmed
+    # live) — without this, those rows would never match their live
+    # counterpart and running for real would append duplicates instead of
+    # updating them. ocr/java-gpu is deliberately NOT here: it has no
+    # existing row to match (confirmed), and its override target ("java")
+    # is itself a real, independent platform_key for ocr — reversing it
+    # here would incorrectly steal the genuine ocr/java entry's pairing.
+    json_slug_aliases: dict = field(default_factory=dict)
+    # (url_prefix, platform_key) -> slug, applied to ProductURL ONLY —
+    # unlike url_slug_overrides (which applies the same slug to
+    # ProductURL/DocumentationURL/APIReferenceURL uniformly). Confirmed
+    # live this split is real, not an oversight: every "reportingservices"
+    # platform's ProductURL only resolves under the hyphenated
+    # "reporting-services" slug, but its DocumentationURL only resolves
+    # under the plain concatenated platform_key — the two domains
+    # genuinely disagree for this platform type, so one shared override
+    # would break whichever field didn't match.
+    product_url_slug_overrides: dict = field(default_factory=dict)
 
 
 ASPOSE_CLOUD = BrandConfig(
@@ -238,6 +280,71 @@ ASPOSE_COM = BrandConfig(
         # Confirmed live (cells/cpp): distributed via NuGet like .NET, not a
         # no-package-manager fallback the way it is for aspose.cloud/groupdocs.cloud.
         "cpp":    {"language": "C++", "verb": "dotnet add package"},
+        # --- Phase 1: language-bridge variants, scoped to folder names
+        # confirmed spelled identically across every product that has them
+        # (surveyed live across all 29 top-level products). "pdf" spells
+        # five of these differently (javascriptcpp, nodejscpp, pythoncpp,
+        # pythonjava, rustcpp) and go-cpp/rust-cpp don't carry
+        # homepage_package_type at all (install command lives only in body
+        # text) — both deliberately left out, to be handled separately.
+        # "language"/"prog_language" come from tabulating real
+        # ProgrammingLanguage values already in
+        # content/productsData/aspose.com.json per folder name, not
+        # guessed. homepage_package_type on every key below was spot-checked
+        # live and uses the same NuGet/Maven/Composer/NPM/Pip dispatch as
+        # the core six — no new install-command logic needed.
+        "python-net":  {"language": "Python via .NET", "prog_language": "Python", "verb": "pip install"},
+        "python-java": {"language": "Python via Java", "prog_language": "Python", "verb": "pip install"},
+        "python-cpp":  {"language": "Python via C++", "prog_language": "Python", "verb": "pip install"},
+        "pythonnet":   {"language": "Python via .NET", "prog_language": "Python", "verb": "pip install"},  # email-only spelling
+        "nodejs-java": {"language": "Node.js via Java", "prog_language": "JavaScript", "verb": "npm install"},
+        "nodejs-cpp":  {"language": "Node.js via C++", "prog_language": "JavaScript", "verb": "npm install"},
+        "nodejs-net":  {"language": "Node.js via .NET", "prog_language": "JavaScript", "verb": "npm install"},
+        "javascript-cpp": {"language": "JavaScript via C++", "prog_language": "JavaScript", "verb": "npm install"},
+        "javascript-net": {"language": "JavaScript via .NET", "prog_language": "JavaScript", "verb": "npm install"},
+        "php-java":    {"language": "PHP via Java", "prog_language": "PHP", "verb": "composer require"},
+        # Confirmed live: folder is always "androidjava" (no hyphen) —
+        # products.aspose.com's hyphenated "android-java" is a redirect
+        # alias, not a real releases-repo folder, so it's not a key here.
+        "androidjava": {"language": "Android via Java", "prog_language": "Java", "verb": "maven"},
+        # --- remaining 9: 3 pdf-only concatenated spellings sharing the
+        # same front-matter mechanism as their hyphenated siblings above
+        # (javascriptcpp/nodejscpp/pythonjava — confirmed live), one
+        # standalone GPU variant (java-gpu, Maven+dataFolder same as any
+        # Java entry), and 3 platforms with no homepage_package_type at
+        # all (go-cpp x3, pythoncpp) handled by the body-scrape fallback
+        # in brands/aspose_com.py — see scrape_install_command there.
+        # rustcpp is included for URL/name/category derivation even
+        # though it has no derivable InstallCommand on its own page
+        # (confirmed: no front matter, no body command either) — stays
+        # blank rather than guessed, same as any other missing source.
+        "javascriptcpp": {"language": "JavaScript via C++", "prog_language": "JavaScript", "verb": "npm install"},
+        "nodejscpp":     {"language": "Node.js via C++", "prog_language": "JavaScript", "verb": "npm install"},
+        "pythonjava":    {"language": "Python via Java", "prog_language": "Python", "verb": "pip install"},
+        "pythoncpp":     {"language": "Python via C++", "prog_language": "Python", "verb": "pip install"},
+        "go-cpp":        {"language": "Go via C++", "prog_language": "Go", "verb": "go install"},
+        "rustcpp":       {"language": "Rust via C++", "prog_language": "Rust", "verb": None},
+        # Category derives to "Aspose.OCR-GPU Product Family" (splitting
+        # linktitle "Aspose.OCR-GPU for Java" on " for "), not "Aspose.OCR
+        # Product Family" like its sibling entries — Aspose's own page
+        # bakes "-GPU" into the family name with no space, so the generic
+        # split can't distinguish it from a real family name. Flagged, not
+        # special-cased for one entry.
+        "java-gpu":      {"language": "Java (GPU)", "prog_language": "Java", "verb": "maven"},
+        # --- Phase 2: plugin/extension-style integration platforms.
+        # Genuinely different product shape, confirmed live across
+        # barcode/cad/cells/imaging/pdf/slides/total/words: none of these
+        # pages carry homepage_package_type front matter OR any install
+        # command in the body (no consolebox, no pip/npm/go pattern) —
+        # they're downloadable plugin binaries for a host application, not
+        # a package-manager-installable library. InstallCommand correctly
+        # stays blank for all of them via the existing no-match fallthrough
+        # — no new scraping code needed. Same for ExternalDownloadURL: none
+        # of these pages have an "Examples"/"Code Samples" link either.
+        "jasperreports":     {"language": "JasperReports", "prog_language": "JasperReports", "verb": None},
+        "jasperreport":      {"language": "JasperReports", "prog_language": "JasperReports", "verb": None},  # slides-only spelling, confirmed live
+        "reportingservices": {"language": "Reporting Services", "prog_language": "Reporting Services", "verb": None},
+        "sharepoint":        {"language": "SharePoint", "prog_language": "SharePoint", "verb": None},
     },
     # No plausibility check for now — aspose.com bridge products legitimately
     # link to a *different* platform's GitHub repo (e.g. cells/nodejs's
@@ -253,12 +360,66 @@ ASPOSE_COM = BrandConfig(
     blog_domain="blog.aspose.com",
     forum_domain="forum.aspose.com",
     java_group_path="com/aspose",
-    product_name_template="{pf_name} for {language}",
+    # pf_name is already the full display name (fetch_product_info returns
+    # linktitle/family_listing_page_title verbatim, unsplit, so bridge
+    # suffixes like "for Python via .NET" stay intact) — identity template,
+    # not "{pf_name} for {language}" like the cloud brands use.
+    product_name_template="{pf_name}",
     category_template="{pf_name} Product Family",
     apps_url_template="https://{apps_domain}/{url_prefix}",
     docs_url_template="https://{docs_domain}/{url_prefix}/{platform_key}/",
     api_reference_url_template="https://{reference_domain}/{url_prefix}/{platform_key}/",
     pricing_url_template="https://purchase.aspose.com/pricing/{url_prefix}/family/",
+    url_slug_overrides={
+        ("pdf", "pythoncpp"):     "python-cpp",
+        ("pdf", "pythonjava"):    "python-java",
+        ("pdf", "javascriptcpp"): "javascript-cpp",
+        ("pdf", "nodejscpp"):     "nodejs-cpp",
+        ("pdf", "rustcpp"):       "rust-cpp",
+        ("ocr", "java-gpu"):      "java",
+        # slides' jasperreport(s): confirmed live that BOTH
+        # products.aspose.com AND docs.aspose.com only resolve under the
+        # plural "jasperreports", unlike reportingservices below where the
+        # two domains disagree — so this belongs in the uniform override,
+        # not product_url_slug_overrides.
+        ("slides", "jasperreport"): "jasperreports",
+    },
+    category_base_overrides={
+        ("ocr", "java-gpu"): "Aspose.OCR",
+    },
+    json_slug_aliases={
+        ("pdf", "python-cpp"):     "pythoncpp",
+        ("pdf", "python-java"):    "pythonjava",
+        ("pdf", "javascript-cpp"): "javascriptcpp",
+        ("pdf", "nodejs-cpp"):     "nodejscpp",
+        ("pdf", "rust-cpp"):       "rustcpp",
+        ("slides", "jasperreports"): "jasperreport",
+        # reportingservices: every stored row's ProductURL uses the
+        # hyphenated "reporting-services" slug (matching
+        # product_url_slug_overrides below); without this reverse mapping
+        # each of these 6 would look brand new and get duplicated on a
+        # real run instead of matched and updated.
+        ("barcode", "reporting-services"): "reportingservices",
+        ("cells", "reporting-services"):   "reportingservices",
+        ("pdf", "reporting-services"):     "reportingservices",
+        ("slides", "reporting-services"):  "reportingservices",
+        ("total", "reporting-services"):   "reportingservices",
+        ("words", "reporting-services"):   "reportingservices",
+    },
+    product_url_slug_overrides={
+        # Confirmed live: products.aspose.com/{family}/reportingservices/
+        # (concatenated) 404s everywhere it was checked — only the
+        # hyphenated slug resolves. docs.aspose.com and reference.aspose.com
+        # disagree (they want the concatenated form, matching platform_key
+        # directly, same as DownloadURL) — hence ProductURL-only, not
+        # url_slug_overrides.
+        ("barcode", "reportingservices"): "reporting-services",
+        ("cells", "reportingservices"):   "reporting-services",
+        ("pdf", "reportingservices"):     "reporting-services",
+        ("slides", "reportingservices"):  "reporting-services",
+        ("total", "reportingservices"):   "reporting-services",
+        ("words", "reportingservices"):   "reporting-services",
+    },
     field_order=(
         "ProductName", "Category", "ProgrammingLanguage", "ProductURL", "DownloadURL",
         "ExternalDownloadURL", "DocumentationURL", "BlogsURL", "APIReferenceURL",
