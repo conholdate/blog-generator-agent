@@ -1,14 +1,18 @@
 {
-  "source_url": "https://releases.aspose.com/email/net/release-notes/2026/aspose-email-for-net-26-7-release-notes/",
+  "source_url": "https://releases.aspose.com/imaging/net/release-notes/2026/aspose-imaging-for-net-26-8-release-notes/",
   "source_type": "release-notes",
   "publication_readiness": "draft_ready",
   "blocker_reason": null,
   "topics_generated": [
-    "Add Methods Now Return the Newly Created Instance"
+    "IMAGINGNET-8108 CDR rendering produces all-black (PDF/vector) or blank (raster) output",
+    "IMAGINGNET-8062 The feasibility of iterating over SVG file content",
+    "IMAGINGNET-7501 Implement RasterImage.Create method that provide the ability to create a raster image without specifying its format.",
+    "IMAGINGNET-6788 WebP: CompressorException: Error code normal: maxSymbol > alphabetSize"
   ],
   "rejected_sections": [
-    "All Changes",
-    "New Features",
-    "Add Methods Now Return the Newly Created Instance (duplicate)"
+    "Competitive features",
+    "Public API changes",
+    "Usage Examples:",
+    "Duplicate code-sample blocks (code-sample-1 to code-sample-4 repeated)"
   ]
 }
