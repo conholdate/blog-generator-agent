@@ -1,0 +1,105 @@
+{
+  "topic": "How to Generate and Manipulate Raster Images In-Memory Using Aspose.Imaging",
+  "primary_source_url": "https://releases.aspose.com/imaging/net/release-notes/2026/aspose-imaging-for-net-26-8-release-notes/",
+  "source_title": "Aspose.Imaging for .NET 26.8 - Release notes",
+  "sdk_version": "Aspose.Imaging for .NET 26.8 - Release notes",
+  "main_problem_solved": "Introduces RasterImage.Create for on‑the‑fly raster image creation without pre‑defining a format, including drawing primitives and saving to various formats.",
+  "platform": {
+    "platform_key": "net",
+    "platform_name": ".NET",
+    "language": "C#",
+    "language_tag": "csharp",
+    "package_manager": "NuGet",
+    "install_command": "Install-Package Aspose.Imaging",
+    "product_key": "imaging",
+    "product_display": "Imaging",
+    "product_page_url": "https://products.aspose.com/imaging/net/",
+    "docs_url": "https://docs.aspose.com/imaging/net/",
+    "api_reference_url": "https://reference.aspose.com/imaging/net/",
+    "free_apps_url": "https://products.aspose.app/imaging/family",
+    "license_url": "https://purchase.aspose.com/temporary-license/",
+    "forum_url": "https://forum.aspose.com/c/imaging/"
+  },
+  "source_type": "release_notes",
+  "keyword_analysis": {
+    "title": "",
+    "angle": "",
+    "outline": [],
+    "target_persona": "",
+    "primary_keyword": "Generate and manipulate raster images in-memory",
+    "supporting_keywords": [
+      "Create MemoryStream for raster image processing",
+      "Load raster image into MemoryStream in .NET",
+      "Edit raster image bytes directly in .NET memory"
+    ],
+    "keyword_groups": {
+      "core_seo_keywords": [
+        "Generate and manipulate raster images in-memory",
+        "Create MemoryStream for raster image processing"
+      ],
+      "long_tail_keywords": [
+        "Edit raster image bytes directly in .NET memory"
+      ],
+      "context_keywords": [
+        "Load raster image into MemoryStream in .NET"
+      ]
+    },
+    "editorial_notes": []
+  },
+  "key_steps": [],
+  "code_snippets": [
+    "// Creating 32bit raster image in memory\nusing (var newImage = RasterImage.Create(100, 100))\n{\n   Aspose.Imaging.Graphics gr = new Aspose.Imaging.Graphics(newImage);\n   gr.Clear(Color.Blue);\n   gr.DrawRectangle(new Pen(Color.Red), 50, 50, 100, 100);\n   newImage.Resize(450, 450);\n   newImage.Save(\"out_image.png\"); // we can export the image in any supported format\n}\n// Creating 32bit raster image in memory, filled with a green color\nint[] argb32Pixels = new int[10000];\nArray.Fill(argb32Pixels, Color.Green.ToArgb());\n\nusing (var newImage = RasterImage.Create(100, 100, argb32Pixels))\n{\n   newImage.Save(\"out_image.png\"); // we can export the image in any supported format\n}\n"
+  ],
+  "limitations": [],
+  "warnings": [
+    "Code sample has not been executed in a sandbox, but it was matched verbatim against the product team's own release notes page; note it as reproduced from the official release notes and untested, not as unverified."
+  ],
+  "related_concepts": [
+    "RasterImage",
+    "Aspose.Imaging.Graphics",
+    "Pen",
+    "Color",
+    "Create",
+    "Clear",
+    "DrawRectangle",
+    "Resize",
+    "Save"
+  ],
+  "facts_confirmed_from_source": [
+    "Heading: IMAGINGNET-7501 Implement RasterImage.Create method that provide the ability to create a raster image without specifying its format.",
+    "Introduces RasterImage.Create for on‑the‑fly raster image creation without pre‑defining a format, including drawing primitives and saving to various formats.",
+    "API used: Aspose.Imaging.RasterImage.Create",
+    "API used: Aspose.Imaging.Graphics",
+    "API used: Aspose.Imaging.Graphics.Clear",
+    "API used: Aspose.Imaging.Graphics.DrawRectangle",
+    "API used: Aspose.Imaging.RasterImage.Resize",
+    "API used: Aspose.Imaging.RasterImage.Save"
+  ],
+  "facts_needing_verification": [],
+  "suggested_article_outline": [
+    "Introduction",
+    "Why this feature matters",
+    "Brief introduction of the API (install + product/docs links)",
+    "Step-by-step tutorial with a code example",
+    "Get a Free License",
+    "Free Additional Resources",
+    "Conclusion",
+    "FAQs",
+    "See Also (only if related post URLs are supplied)"
+  ],
+  "code_verification": {
+    "language": "C#",
+    "tested": false,
+    "source_verified": true,
+    "syntax_valid": true,
+    "package_name": null,
+    "package_version": null,
+    "os": null,
+    "input_file_used": null,
+    "output_file_generated": null,
+    "errors": [],
+    "notes": "Code sample matches a block scraped verbatim from the product team's release notes page. Static syntax check passed (balanced brackets/quotes). Sandboxed execution against the real Aspose SDK is not attempted: these samples reference proprietary licensed assemblies, external input files, and sometimes network services (e.g. a timestamp authority URL) that only exist in the product team's own test environment."
+  },
+  "prerequisites": [],
+  "doc_topics": []
+}
