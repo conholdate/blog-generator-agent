@@ -66,11 +66,15 @@ def fetch_product_info(client, url_prefix, platform_key, config):
     # No single consistent shortcode/badge form for the GitHub examples
     # link across platforms (badge image on net, plain markdown link on
     # nodejs, "Code Samples" instead of "Examples" on pdf/pythoncpp) —
-    # match any of them.
+    # match any of them. Confirmed live (ocr/python-net): the label isn't
+    # always actually a GitHub link — that page's "Code Samples" points at
+    # a docs.aspose.com getting-started page instead, since no GitHub repo
+    # exists for it. Only accept a match that's actually github.com, so a
+    # field meant to hold a repo link doesn't end up holding a docs page.
     external_dl = None
     for pattern in (r'\[!\[Examples\][^\]]*\]\(([^)\s]+)\)', r'\[Examples\]\(([^)\s]+)\)', r'\[Code Samples\]\(([^)\s]+)\)'):
         m = re.search(pattern, md)
-        if m:
+        if m and "github.com" in m.group(1):
             external_dl = m.group(1)
             break
 

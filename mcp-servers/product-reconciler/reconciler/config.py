@@ -383,6 +383,12 @@ ASPOSE_COM = BrandConfig(
         # two domains disagree — so this belongs in the uniform override,
         # not product_url_slug_overrides.
         ("slides", "jasperreport"): "jasperreports",
+        # pdf's pythonnet: same shape as its other 4 concatenated-spelling
+        # platforms (confirmed live: hyphenated resolves on all three
+        # domains, concatenated 404s on reference.aspose.com specifically)
+        # — was missed in the original pdf batch since it was mistakenly
+        # left as "just unresolved" instead of given the same override.
+        ("pdf", "pythonnet"): "python-net",
     },
     category_base_overrides={
         ("ocr", "java-gpu"): "Aspose.OCR",
@@ -393,6 +399,7 @@ ASPOSE_COM = BrandConfig(
         ("pdf", "javascript-cpp"): "javascriptcpp",
         ("pdf", "nodejs-cpp"):     "nodejscpp",
         ("pdf", "rust-cpp"):       "rustcpp",
+        ("pdf", "python-net"):     "pythonnet",
         ("slides", "jasperreports"): "jasperreport",
         # reportingservices: every stored row's ProductURL uses the
         # hyphenated "reporting-services" slug (matching
@@ -405,6 +412,32 @@ ASPOSE_COM = BrandConfig(
         ("slides", "reporting-services"):  "reportingservices",
         ("total", "reporting-services"):   "reportingservices",
         ("words", "reporting-services"):   "reportingservices",
+        # android-java: real folder is always "androidjava" (no hyphen,
+        # see platform_info comment above) but every one of these 7 stored
+        # rows uses the hyphenated "android-java" in its ProductURL —
+        # missed in the original androidjava rollout, which only handled
+        # the live-resolution side (redirects fine) and not this matching
+        # side, so all 7 showed up as false-positive "potential removals"
+        # on the first live run instead of being matched and updated.
+        ("barcode", "android-java"): "androidjava",
+        ("cells", "android-java"):   "androidjava",
+        ("email", "android-java"):   "androidjava",
+        ("pdf", "android-java"):     "androidjava",
+        ("slides", "android-java"):  "androidjava",
+        ("total", "android-java"):   "androidjava",
+        ("words", "android-java"):   "androidjava",
+        # php-java / nodejs-java: only safe where there's no separate
+        # plain stored row that would collide with this alias's target.
+        # barcode has only the php-java row (real folder is plain "php",
+        # which is itself the Java bridge); diagram has only nodejs-java
+        # (real folder is plain "nodejs"). cells has BOTH a "php"/"php-java"
+        # pair AND a "nodejs"/"nodejs-java" pair as separate stored rows
+        # even though only one real live folder exists for each — aliasing
+        # there would make one of the two rows silently collide and drop
+        # out of the diff, so cells is deliberately left unaliased pending
+        # a human decision on which stored row is authoritative.
+        ("barcode", "php-java"):    "php",
+        ("diagram", "nodejs-java"): "nodejs",
     },
     product_url_slug_overrides={
         # Confirmed live: products.aspose.com/{family}/reportingservices/
