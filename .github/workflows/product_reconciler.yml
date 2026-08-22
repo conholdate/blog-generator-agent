@@ -15,7 +15,7 @@ on:
           # Add more brands here as they get a BrandConfig entry in
           # mcp-servers/product-reconciler/reconciler/config.py
   schedule:
-    - cron: "0 6 * * 1" # Every Monday at 11:00 AM PKT
+    - cron: "0 6 * * 6" # Every Saturday at 11:00 AM PKT
 
 jobs:
   # A cron trigger can't read a dropdown value — schedule always fires
