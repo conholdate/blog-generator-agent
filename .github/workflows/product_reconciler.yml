@@ -33,7 +33,7 @@ jobs:
           if [ "${{ github.event_name }}" == "workflow_dispatch" ]; then
             echo 'brands=["${{ inputs.brand }}"]' >> "$GITHUB_OUTPUT"
           else
-            SCHEDULED_BRANDS='["aspose.cloud", "groupdocs.cloud"]'
+            SCHEDULED_BRANDS='["aspose.cloud", "groupdocs.cloud", "aspose.com"]'
             echo "brands=$SCHEDULED_BRANDS" >> "$GITHUB_OUTPUT"
           fi
 
