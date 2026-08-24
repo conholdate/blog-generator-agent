@@ -1,0 +1,19 @@
+{
+  "repo_head": "741bd90df2824982dfe687928469b77b2c4be2cc",
+  "file_fingerprints": {
+    "editor/2020-02-11-update-word-excel-ppt-html-with-rest-api/index.md": "67ad52dcf9870a5dc4b393b997bc083ad09a88230df78ae9a7173e9c30408209",
+    "editor/2021-02-12-edit-word-or-excel-documents-using-rest-api/index.md": "8de2acdf6ec6dcd04a2f0be9fa2a933983a0fbda371d1c7676db08cb5dc84b9e",
+    "editor/2021-05-07-edit-powerpoint-presentations-using-python/index.md": "6536b85705a1b446293b32f479e96c67a61128ec7ddee8a3a64c01c7d7546ff8",
+    "editor/2021-07-28-edit-word-documents-using-rest-api-in-node.js/index.md": "a04524eb8a2175198cf8dbd238e213e3ae2abcd1ebe541b410dc0a8c89d4a1fa",
+    "editor/2021-11-19-edit-word-documents-using-rest-api-in-python/index.md": "6fe8c613b6dca3a0d704a9f48bff616ebfd08cc66aa455f782b78cc81a0f2d90",
+    "editor/2021-12-23-edit-excel-sheet-using-rest-api-in-python/index.md": "ccab916cd22186f8d5efc2e2b5b7dcc2ff81f0c31f6fd1e08acf3d7cfe220226",
+    "editor/2022-01-27-edit-documents-using-rest-api-in-php/index.md": "4ccd10f2f15defb1cb89efc3008a66eb341ee4ca2059ddb17ad6c9d773a6caaf",
+    "editor/2023-09-13-edit-text-file-with-python-via-rest-api/index.md": "5a1e827b5a3235b6237c0271710f4850146016c09d0edf5a81b05b06ca30dfce",
+    "editor/2023-09-28-edit-word-documents-online-using-a-free-word-editor/index.md": "ee7e624a49c7afc0420bae6ac99df35fc4e793c11f70c5ebee7f7fe45be318ce",
+    "editor/2023-10-27-edit-pptx-online-using-an-online-ppt-editor/index.md": "ae80a7359a24272948f17cda400803e2945147510a5ff01b56919e8264e0ee49",
+    "editor/2026-02-25-edit-powerpoint-files-using-java-library/index.md": "bc60f87230beeee4b89ff98d6cc9db057f8fa8be138317996017fa6ef94a1618",
+    "editor/2026-03-09-update-pptx-file-in-net/index.md": "25eb0490e82cd03e57eea5ed2fd2a77524ba9e877e79be39ac4c618dafb0cde9",
+    "editor/2026-03-29-best-practices-for-csv-editor-development-in-java/index.md": "85caec2ca32acfc4f11364df7dcba0fd13af7ecc822c5e19f91669cbb2e567f3",
+    "editor/2026-04-20-modify-txt-files-in-java/index.md": "467039904b919c510a216044367c3654714d23afbb1d24f8ce0b8db0283fba9d"
+  }
+}
