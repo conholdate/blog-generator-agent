@@ -33,7 +33,11 @@
     "groupdocs.cloud|groupdocs.merger|net": 1,
     "groupdocs.cloud|groupdocs.merger|java": 0,
     "groupdocs.cloud|groupdocs.merger|nodejs": 0,
-    "aspose|aspose.drawing|java": 0
+    "aspose|aspose.drawing|java": 0,
+    "groupdocs.cloud|groupdocs.editor|net": 0,
+    "groupdocs.cloud|groupdocs.editor|java": 0,
+    "groupdocs.cloud|groupdocs.editor|php": 0,
+    "groupdocs.cloud|groupdocs.editor|nodejs": 0
   },
   "aspose|aspose.html|python": [
     "How to Convert Code to Change HTML Border Color in Python",
@@ -181,5 +185,32 @@
   ],
   "aspose|aspose.drawing|java": [
     "Create BMP Image in Java: Save BufferedImage as BMP"
+  ],
+  "groupdocs.cloud|groupdocs.editor|net": [
+    "Rest Edit Excel Sheet in C#",
+    "Edit Powerpoint Presentations in C#",
+    "Edit Text via Editor Rest in C#",
+    "Edit Word Documents using Rest in C#",
+    "Edit Word or Excel Documents using Rest in C#"
+  ],
+  "groupdocs.cloud|groupdocs.editor|java": [
+    "Edit Excel Sheet via Rest in Java",
+    "Edit Powerpoint Presentations in Java",
+    "Edit Text via Editor Rest in Java",
+    "Edit Word Documents via Rest in Java",
+    "Edit Word or Excel Documents using Rest in Java"
+  ],
+  "groupdocs.cloud|groupdocs.editor|php": [
+    "Edit Excel Sheet using Rest in PHP",
+    "Edit Powerpoint Presentations in PHP",
+    "Edit Text via Editor Rest in PHP",
+    "Rest Edit Word Documents in PHP: Complete Developer Tutorial",
+    "Edit Word or Excel Documents using Rest in PHP"
+  ],
+  "groupdocs.cloud|groupdocs.editor|nodejs": [
+    "Edit Excel Sheet via Rest in Node.JS",
+    "Edit Powerpoint Presentations in Node.JS",
+    "Edit Text via Editor Rest in Node.JS",
+    "Edit Word or Excel Documents using Rest in Node.JS"
   ]
 }
