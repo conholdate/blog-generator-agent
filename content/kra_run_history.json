@@ -105,7 +105,8 @@
   "conholdate|conholdate.total|java": [
     "Add Table of Contents to Word Document in Java",
     "Convert Word to PDF in Java",
-    "Convert Image to Grayscale in Java"
+    "Convert Image to Grayscale in Java",
+    "Convert Excel to PDF in Java"
   ],
   "aspose.cloud|aspose.cells|net": [
     "A Guide to Heroku Email Sending Best Practices in C#",
