@@ -37,7 +37,8 @@
     "groupdocs.cloud|groupdocs.editor|net": 0,
     "groupdocs.cloud|groupdocs.editor|java": 0,
     "groupdocs.cloud|groupdocs.editor|php": 0,
-    "groupdocs.cloud|groupdocs.editor|nodejs": 0
+    "groupdocs.cloud|groupdocs.editor|nodejs": 0,
+    "groupdocs.cloud|groupdocs.watermark|java": 0
   },
   "aspose|aspose.html|python": [
     "How to Convert Code to Change HTML Border Color in Python",
@@ -215,5 +216,12 @@
     "Edit Powerpoint Presentations in Node.JS",
     "Edit Text via Editor Rest in Node.JS",
     "Edit Word or Excel Documents using Rest in Node.JS"
+  ],
+  "groupdocs.cloud|groupdocs.watermark|java": [
+    "Add Image Watermark to PDF Documents in Java",
+    "Add Text Overlay to GIF using Rest in Java",
+    "Add Text Watermark to PDF Insert Watermark into PDF Rest in Java",
+    "Code to Add Watermark to Powerpoint Presentation in Java",
+    "Remove Image Watermark from PDF Delete PDF Watermark in Java"
   ]
 }
