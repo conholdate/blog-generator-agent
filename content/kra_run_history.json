@@ -38,7 +38,15 @@
     "groupdocs.cloud|groupdocs.editor|java": 0,
     "groupdocs.cloud|groupdocs.editor|php": 0,
     "groupdocs.cloud|groupdocs.editor|nodejs": 0,
-    "groupdocs.cloud|groupdocs.watermark|java": 0
+    "groupdocs.cloud|groupdocs.watermark|java": 0,
+    "aspose.cloud|aspose.words|net": 1,
+    "aspose.cloud|aspose.words|java": 1,
+    "aspose.cloud|aspose.words|php": 0,
+    "aspose.cloud|aspose.words|nodejs": 1,
+    "aspose.cloud|aspose.3d|net": 0,
+    "aspose.cloud|aspose.3d|php": 0,
+    "aspose.cloud|aspose.3d|nodejs": 0,
+    "aspose.cloud|aspose.3d|java": 0
   },
   "aspose|aspose.html|python": [
     "How to Convert Code to Change HTML Border Color in Python",
@@ -223,5 +231,79 @@
     "Add Text Watermark to PDF Insert Watermark into PDF Rest in Java",
     "Code to Add Watermark to Powerpoint Presentation in Java",
     "Remove Image Watermark from PDF Delete PDF Watermark in Java"
+  ],
+  "aspose.cloud|aspose.words|php": [
+    "Convert XLSX to CSV in PHP",
+    "Convert XLSX to PDF in PHP"
+  ],
+  "aspose.cloud|aspose.words|nodejs": [
+    "Convert XLSX to CSV in Node.JS"
+  ],
+  "aspose.cloud|aspose.3d|net": [
+    "3D to PDF Conversion in C#: a Complete Tutorial",
+    "Add Speaker Notes to Powerpoint via Rest in C#",
+    "Guide to PDF Display Properties in C#: a Complete Tutorial",
+    "Create EML FILE in C#",
+    "Create Edit or Convert Excel in C#",
+    "Convert DOCX to PNG in C#",
+    "Send 3D Model Email from Heroku in C#",
+    "Import XML Data to PDF Rest in C#",
+    "How to Use Token Based Access to Primavera P6 Rest in C#",
+    "Implement Reverse Image Search and Image Deskewing in C#"
+  ],
+  "aspose.cloud|aspose.3d|php": [
+    "3D to PDF Conversion in PHP: a Step-by-Step Developer Guide",
+    "Add Speaker Notes to Powerpoint via Rest in PHP",
+    "Convert CSV to HTML in PHP",
+    "Convert CSV to JSON in PHP",
+    "Convert CSV to TXT in PHP",
+    "How to Control PDF Display Properties in PHP",
+    "Create EML FILE in PHP",
+    "Convert DOCX to PDF in PHP",
+    "Convert DOCX to PNG in PHP",
+    "Convert EML to MSG in PHP",
+    "How to Encrypt and Password Protect PDF Rest in PHP",
+    "Complete GLB to FBX Conversion Guide in PHP",
+    "Convert HTML to JPG in PHP",
+    "Convert HTML to PDF in PHP",
+    "Import XML Data to PDF Rest in PHP",
+    "Convert JPG to PDF in PHP",
+    "Convert PDF to DOCX in PHP",
+    "Convert PDF to PDF in PHP",
+    "Convert PDF to PPT in PHP",
+    "Convert XLSX to CSV in PHP",
+    "Convert XLSX to PDF in PHP"
+  ],
+  "aspose.cloud|aspose.3d|nodejs": [
+    "3D to PDF Rendering in Node.JS: Fast Streaming Memory Tips",
+    "Add Speaker Notes to Powerpoint via Rest in Node.JS",
+    "Convert CSV to TXT in Node.JS: Code Samples Tips",
+    "Create EML in Node.JS",
+    "Create Edit or Convert Excel using Node.JS: Code Samples",
+    "DOCX to PDF Without Microsoft Office in Node.JS",
+    "Convert DOCX to PNG in Node.JS",
+    "Asynchronous Email Sending from Heroku in Node.JS",
+    "Encrypt and Password Protect PDF Rest in Node.JS",
+    "Import XML Data to PDF Rest in Node.JS",
+    "Convert JSON to XLSX in Node.JS",
+    "How to Perform MPP to XLSX Conversion in Node.JS",
+    "Rest for Exporting Primavera P6 to OBJ Format in Node.JS",
+    "Reverse Image Search and Image Deskewing in Node.JS",
+    "Convert XLSX to CSV in Node.JS",
+    "Convert XLSX to PDF in Node.JS: Boost Memory and Accuracy"
+  ],
+  "aspose.cloud|aspose.3d|java": [
+    "Add Speaker Notes to Powerpoint via Rest in Java",
+    "Convert DOCX to PNG in Java",
+    "EML to HTML Export in Java: Rendering Transformation Guide",
+    "Email Conversion EML MSG in Java: Complete Developer Guide",
+    "Tls Secure Email Sending in Java",
+    "How to Encrypt and Password Protect PDF Rest in Java",
+    "Extract Text from PDF using Rest in Java",
+    "GLB to FBX in Java: Sample Code Texture Mapping Gradle",
+    "Convert HTML to JPG in Java",
+    "Import XML Data to PDF Rest in Java",
+    "Guide to Reverse Image Search and Image Deskewing in Java",
+    "Step-by-Step Guide to XLSM to CSV Conversion in Java"
   ]
 }
