@@ -1,4 +1,4 @@
-# aspose.slides — Gaps (blogs_to_blogs, baseline=all)
+# Aspose.slides — Gaps (Blogs to Blogs, Baseline=all)
 
 ---
 
@@ -6,11 +6,11 @@
 
 | 🧩 Metric | Value | Status |
 | --- | --- | --- |
-| **Total Canonical Topics** | **283** | — |
-| **Topics with Gaps** | **283** | ⚠️ |
+| **Total Canonical Topics** | **128** | — |
+| **Topics with Gaps** | **128** | ⚠️ |
 | **Fully Covered Topics** | 0 | — |
-| **Excluded (Release / Updates)** | 217 | ℹ️ |
-| **Baseline Scope** | all | — |
+| **Excluded (Release / Updates)** | 0 | ℹ️ |
+| **Baseline Scope** | ALL | — |
 | **Case** | blogs_to_blogs | — |
 
 ---
@@ -22,7 +22,7 @@
 | Cross-Platform Parity | 0.0% | 🔴 Weak |
 | Content Reusability | High | ✅ Strong |
 | Porting Opportunity | 100.0% gaps | 🔥 Very High |
-| Excluded Noise (Releases) | 217 | ✅ Controlled |
+| Excluded Noise (Releases) | 0 | ✅ Controlled |
 
 ---
 
@@ -30,18 +30,19 @@
 
 | Platform | # Covered | # Missing | Coverage |
 | --- | --- | --- | --- |
-| **cpp** | 10 | 273 | 🔴 Weak (3.5%) |
-| **general** | 173 | 110 | 🟡 Moderate (61.1%) |
-| **java** | 143 | 140 | 🔴 Weak (50.5%) |
-| **net** | 11 | 272 | 🔴 Weak (3.9%) |
-| **python** | 63 | 220 | 🔴 Weak (22.3%) |
+| **ANDROID_VIA_JAVA** | 1 | 127 | 🔴 Weak (0.8%) |
+| **CPP** | 2 | 126 | 🔴 Weak (1.6%) |
+| **GENERAL** | 74 | 54 | 🔴 Weak (57.8%) |
+| **JAVA** | 63 | 65 | 🔴 Weak (49.2%) |
+| **NET** | 10 | 118 | 🔴 Weak (7.8%) |
+| **PYTHON** | 35 | 93 | 🔴 Weak (27.3%) |
 
 ---
 
 ### 🔎 Executive Insights
 
 - **100.0%** of canonical topics are missing on at least one platform (after exclusions).
-- Highest gap density: **cpp** (273 missing), **net** (272 missing), **python** (220 missing).
+- Highest gap density: **ANDROID_VIA_JAVA** (127 missing), **CPP** (126 missing), **NET** (118 missing).
 - Gaps are concentrated in **8** major category/subcategory clusters (see Section 4).
 - Release notes, product updates, and version announcements are intentionally excluded from this report.
 
@@ -51,21 +52,21 @@
 
 | # | Cluster | Representative topic | Missing platforms (high-impact) | Suggested new titles (examples) |
 | --- | --- | --- | --- | --- |
-| 1 | **Development / Office Automation** | Create Math Equations in PowerPoint PPT in C# | cpp, java, net, python | Create Math Equations in PowerPoint PPT in C# — cpp; Create Math Equations in PowerPoint PPT in C# — java; Create Math Equations in PowerPoint PPT in C# — net |
-| 2 | **Development / Office Automation** | Create PowerPoint PPT PPTX Presentations in Java | cpp, general, net, python | Create PowerPoint PPT PPTX Presentations in Java — cpp; Create PowerPoint PPT PPTX Presentations in Java — general; Create PowerPoint PPT PPTX Presentations in Java — net |
-| 3 | **File Conversion / Presentation Formats** | Convert ODP to PPT Online - Free Presentation Converter | cpp, java, net, python | Convert ODP to PPT Online - Free Presentation Converter — cpp; Convert ODP to PPT Online - Free Presentation Converter — java; Convert ODP to PPT Online - Free Presentation Converter — net |
-| 4 | **File Conversion / Presentation Formats** | Convert ODP to PPTX in Java - PowerPoint Slides Library | cpp, general, net, python | Convert ODP to PPTX in Java - PowerPoint Slides Library — cpp; Convert ODP to PPTX in Java - PowerPoint Slides Library — general; Convert ODP to PPTX in Java - PowerPoint Slides Library — net |
-| 5 | **Office Automation / PowerPoint** | Add Text or Image Watermark to PowerPoint PPT in Python | cpp, general, java, net | Add Text or Image Watermark to PowerPoint PPT in Python — cpp; Add Text or Image Watermark to PowerPoint PPT in Python — general; Add Text or Image Watermark to PowerPoint PPT in Python — java |
-| 6 | **Office Automation / PowerPoint** | Apply 3D Effects in PowerPoint PPT using Python | cpp, general, java, net | Apply 3D Effects in PowerPoint PPT using Python — cpp; Apply 3D Effects in PowerPoint PPT using Python — general; Apply 3D Effects in PowerPoint PPT using Python — java |
-| 7 | **Development / File Conversion** | Convert PPT to HTML in Node.js - PowerPoint JavaScript API | cpp, java, net, python | Convert PPT to HTML in Node.js - PowerPoint JavaScript API — cpp; Convert PPT to HTML in Node.js - PowerPoint JavaScript API — java; Convert PPT to HTML in Node.js - PowerPoint JavaScript API — net |
-| 8 | **Development / File Conversion** | Convert PPTX to XML in C# Programmatically | cpp, java, net, python | Convert PPTX to XML in C# Programmatically — cpp; Convert PPTX to XML in C# Programmatically — java; Convert PPTX to XML in C# Programmatically — net |
-| 9 | **Programming / Office Automation** | Access or Modify Properties of PowerPoint PPT in C# | cpp, java, net, python | Access or Modify Properties of PowerPoint PPT in C# — cpp; Access or Modify Properties of PowerPoint PPT in C# — java; Access or Modify Properties of PowerPoint PPT in C# — net |
-| 10 | **Programming / Office Automation** | Add Slide Transitions in PowerPoint PPT using C# | cpp, java, net, python | Add Slide Transitions in PowerPoint PPT using C# — cpp; Add Slide Transitions in PowerPoint PPT using C# — java; Add Slide Transitions in PowerPoint PPT using C# — net |
-| 11 | **Document Processing / Presentation Conversion** | Convert ODP to PDF Programmatically using C++ | cpp, java, net, python | Convert ODP to PDF Programmatically using C++ — cpp; Convert ODP to PDF Programmatically using C++ — java; Convert ODP to PDF Programmatically using C++ — net |
-| 12 | **Document Processing / Presentation Conversion** | Convert PPT to PNG in Python | cpp, general, java, net | Convert PPT to PNG in Python — cpp; Convert PPT to PNG in Python — general; Convert PPT to PNG in Python — java |
-| 13 | **File Conversion / Presentation to Image** | Convert PPT to PNG Online - Free PowerPoint to PNG Converter | cpp, java, net, python | Convert PPT to PNG Online - Free PowerPoint to PNG Converter — cpp; Convert PPT to PNG Online - Free PowerPoint to PNG Converter — java; Convert PPT to PNG Online - Free PowerPoint to PNG Converter — net |
-| 14 | **File Conversion / Presentation to Image** | PowerPoint Presentation Converter - Convert PPTX to EMF in C# | cpp, general, java, python | PowerPoint Presentation Converter - Convert PPTX to EMF in C# — cpp; PowerPoint Presentation Converter - Convert PPTX to EMF in C# — general; PowerPoint Presentation Converter - Convert PPTX to EMF in C# — java |
-| 15 | **Office Automation / PowerPoint Manipulation** | Clone Slides in PowerPoint Presentations using C# | cpp, java, net, python | Clone Slides in PowerPoint Presentations using C# — cpp; Clone Slides in PowerPoint Presentations using C# — java; Clone Slides in PowerPoint Presentations using C# — net |
+| 1 | **Development / Office Automation** | Create math equations in powerpoint PPT | ANDROID_VIA_JAVA, CPP, JAVA, NET, PYTHON | Create math equations in powerpoint PPT — ANDROID_VIA_JAVA; Create math equations in powerpoint PPT — CPP; Create math equations in powerpoint PPT — JAVA |
+| 2 | **Development / Office Automation** | Create powerpoint PPT PPTX presentations | ANDROID_VIA_JAVA, CPP, GENERAL, NET, PYTHON | Create powerpoint PPT PPTX presentations — ANDROID_VIA_JAVA; Create powerpoint PPT PPTX presentations — CPP; Create powerpoint PPT PPTX presentations — GENERAL |
+| 3 | **File Conversion / Presentation Formats** | ODP to PPT | ANDROID_VIA_JAVA, CPP, JAVA, NET, PYTHON | ODP to PPT — ANDROID_VIA_JAVA; ODP to PPT — CPP; ODP to PPT — JAVA |
+| 4 | **File Conversion / Presentation Formats** | PPTX to ODP | ANDROID_VIA_JAVA, CPP, GENERAL, NET, PYTHON | PPTX to ODP — ANDROID_VIA_JAVA; PPTX to ODP — CPP; PPTX to ODP — GENERAL |
+| 5 | **Office Automation / PowerPoint Manipulation** | Add update or remove slide notes in powerpoint PPT | ANDROID_VIA_JAVA, CPP, JAVA, NET, PYTHON | Add update or remove slide notes in powerpoint PPT — ANDROID_VIA_JAVA; Add update or remove slide notes in powerpoint PPT — CPP; Add update or remove slide notes in powerpoint PPT — JAVA |
+| 6 | **Office Automation / PowerPoint Manipulation** | SET background of powerpoint PPT slides | ANDROID_VIA_JAVA, CPP, GENERAL, JAVA, NET | SET background of powerpoint PPT slides — ANDROID_VIA_JAVA; SET background of powerpoint PPT slides — CPP; SET background of powerpoint PPT slides — GENERAL |
+| 7 | **Office Automation / PowerPoint** | Add text or image watermark to powerpoint PPT | ANDROID_VIA_JAVA, CPP, GENERAL, JAVA, NET | Add text or image watermark to powerpoint PPT — ANDROID_VIA_JAVA; Add text or image watermark to powerpoint PPT — CPP; Add text or image watermark to powerpoint PPT — GENERAL |
+| 8 | **Office Automation / PowerPoint** | Create and open PPT | ANDROID_VIA_JAVA, CPP, JAVA, NET, PYTHON | Create and open PPT — ANDROID_VIA_JAVA; Create and open PPT — CPP; Create and open PPT — JAVA |
+| 9 | **Development / File Conversion** | PPTX to XML | ANDROID_VIA_JAVA, CPP, JAVA, NET, PYTHON | PPTX to XML — ANDROID_VIA_JAVA; PPTX to XML — CPP; PPTX to XML — JAVA |
+| 10 | **Development / File Conversion** | PNG to PPT | ANDROID_VIA_JAVA, CPP, JAVA, NET | PNG to PPT — ANDROID_VIA_JAVA; PNG to PPT — CPP; PNG to PPT — JAVA |
+| 11 | **Office Development / PowerPoint Automation** | Add digital signature to powerpoint | ANDROID_VIA_JAVA, CPP, GENERAL, JAVA, PYTHON | Add digital signature to powerpoint — ANDROID_VIA_JAVA; Add digital signature to powerpoint — CPP; Add digital signature to powerpoint — GENERAL |
+| 12 | **Office Development / PowerPoint Automation** | Create ms powerpoint presentations | ANDROID_VIA_JAVA, CPP, JAVA, NET, PYTHON | Create ms powerpoint presentations — ANDROID_VIA_JAVA; Create ms powerpoint presentations — CPP; Create ms powerpoint presentations — JAVA |
+| 13 | **Programming / Office Automation** | Add slide transitions in powerpoint PPT | ANDROID_VIA_JAVA, CPP, JAVA, NET, PYTHON | Add slide transitions in powerpoint PPT — ANDROID_VIA_JAVA; Add slide transitions in powerpoint PPT — CPP; Add slide transitions in powerpoint PPT — JAVA |
+| 14 | **Programming / Office Automation** | Work with vba macros in powerpoint PPT PPTX | ANDROID_VIA_JAVA, CPP, GENERAL, JAVA, NET | Work with vba macros in powerpoint PPT PPTX — ANDROID_VIA_JAVA; Work with vba macros in powerpoint PPT PPTX — CPP; Work with vba macros in powerpoint PPT PPTX — GENERAL |
+| 15 | **Office Productivity / PowerPoint Automation** | Working with shapes in powerpoint presentations | ANDROID_VIA_JAVA, CPP, JAVA, NET, PYTHON | Working with shapes in powerpoint presentations — ANDROID_VIA_JAVA; Working with shapes in powerpoint presentations — CPP; Working with shapes in powerpoint presentations — JAVA |
 
 *These recommendations are derived from topics missing across the largest number of platforms and clustered by category/subcategory.*
 
@@ -75,11 +76,12 @@
 
 | Platform | # topics covered | % of baseline rows | # topics missing |
 | --- | --- | --- | --- |
-| **cpp** | 10 | 3.5% | 273 |
-| **general** | 173 | 61.1% | 110 |
-| **java** | 143 | 50.5% | 140 |
-| **net** | 11 | 3.9% | 272 |
-| **python** | 63 | 22.3% | 220 |
+| **ANDROID_VIA_JAVA** | 1 | 0.8% | 127 |
+| **CPP** | 2 | 1.6% | 126 |
+| **GENERAL** | 74 | 57.8% | 54 |
+| **JAVA** | 63 | 49.2% | 65 |
+| **NET** | 10 | 7.8% | 118 |
+| **PYTHON** | 35 | 27.3% | 93 |
 
 **Takeaway:** Focus first on platforms with the highest missing counts and lowest coverage percentage; port high-impact topics from the best-covered platform first.
 
@@ -89,18 +91,18 @@
 
 | Cluster | # gap topics | Missing signals | Most-missed platforms |
 | --- | --- | --- | --- |
-| **Development / Office Automation** | 8 | 24 | cpp, net, python, java |
-| **File Conversion / Presentation Formats** | 6 | 22 | cpp, net, python, general |
-| **Office Automation / PowerPoint** | 5 | 19 | cpp, net, java, python |
-| **Development / File Conversion** | 5 | 16 | cpp, net, java, python |
-| **Programming / Office Automation** | 5 | 16 | cpp, net, java, python |
-| **Document Processing / Presentation Conversion** | 4 | 15 | cpp, net, java, python |
-| **File Conversion / Presentation to Image** | 4 | 15 | cpp, python, net, java |
-| **Office Automation / PowerPoint Manipulation** | 4 | 14 | cpp, net, java, python |
-| **File Conversion / PowerPoint to SVG** | 4 | 12 | cpp, net, python |
-| **Document Conversion / PowerPoint to Word** | 3 | 12 | cpp, net, general, python |
-| **File Conversion / Presentation To Image** | 3 | 12 | cpp, net, java, python |
-| **Presentation / Charts** | 3 | 12 | net, python, general, java |
+| **Development / Office Automation** | 7 | 29 | ANDROID_VIA_JAVA, CPP, NET, PYTHON |
+| **File Conversion / Presentation Formats** | 4 | 18 | ANDROID_VIA_JAVA, CPP, PYTHON, NET |
+| **Office Automation / PowerPoint Manipulation** | 3 | 14 | ANDROID_VIA_JAVA, CPP, NET, JAVA |
+| **Office Automation / PowerPoint** | 3 | 13 | ANDROID_VIA_JAVA, CPP, NET, JAVA |
+| **Development / File Conversion** | 3 | 13 | ANDROID_VIA_JAVA, CPP, NET, JAVA |
+| **Office Development / PowerPoint Automation** | 2 | 10 | ANDROID_VIA_JAVA, CPP, JAVA, PYTHON |
+| **Programming / Office Automation** | 2 | 10 | ANDROID_VIA_JAVA, CPP, JAVA, NET |
+| **Office Productivity / PowerPoint Automation** | 2 | 9 | ANDROID_VIA_JAVA, CPP, NET, PYTHON |
+| **Office Automation / PowerPoint Text Replacement** | 2 | 8 | ANDROID_VIA_JAVA, NET, JAVA, CPP |
+| **Document Processing / Presentation Conversion** | 2 | 8 | ANDROID_VIA_JAVA, CPP, NET, GENERAL |
+| **File Conversion / PowerPoint to SVG** | 2 | 8 | ANDROID_VIA_JAVA, CPP, NET, JAVA |
+| **File Conversion / Presentation To Image** | 2 | 6 | ANDROID_VIA_JAVA, CPP, NET, PYTHON |
 
 ---
 
