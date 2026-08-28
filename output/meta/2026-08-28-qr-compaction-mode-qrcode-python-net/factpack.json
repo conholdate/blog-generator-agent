@@ -1,0 +1,100 @@
+{
+  "topic": "Simplified QR Compaction Mode Selection with QREncodeMode.EXTENDED in Aspose.BarCode for Python",
+  "primary_source_url": "https://releases.aspose.com/barcode/python-net/release-notes/2026/aspose-barcode-for-python-via-dotnet-26-6-release-notes/",
+  "source_title": "Aspose.BarCode for Python via .NET 26.6",
+  "sdk_version": "Aspose.BarCode for Python via .NET 26.6",
+  "main_problem_solved": "QREncodeMode.EXTENDED now recognizes explicit compaction mode selectors (\\auto, \\num, \\alnum, \\byte, \\kanji) within the codetext string, giving users direct control over encoding mode.",
+  "platform": {
+    "platform_key": "python-net",
+    "platform_name": "Python",
+    "language": "Python",
+    "language_tag": "python",
+    "package_manager": "pip",
+    "install_command": "pip install aspose-barcode",
+    "product_key": "barcode",
+    "product_display": "BarCode",
+    "product_page_url": "https://products.aspose.com/barcode/python-net/",
+    "docs_url": "https://docs.aspose.com/barcode/python-net/",
+    "api_reference_url": "https://reference.aspose.com/barcode/python-net/",
+    "free_apps_url": "https://products.aspose.app/barcode/family",
+    "license_url": "https://purchase.aspose.com/temporary-license/",
+    "forum_url": "https://forum.aspose.com/c/barcode/"
+  },
+  "source_type": "release_notes",
+  "keyword_analysis": {
+    "title": "",
+    "angle": "",
+    "outline": [],
+    "target_persona": "",
+    "primary_keyword": "QR compaction mode QREncodeMode.EXTENDED in python-net",
+    "supporting_keywords": [
+      "set QREncodeMode to EXTENDED for QR compaction in python-net",
+      "extended QR compaction mode QREncodeMode in python-net",
+      "use QREncodeMode.EXTENDED for QR compaction in python-net"
+    ],
+    "keyword_groups": {
+      "core_seo_keywords": [
+        "QR compaction mode QREncodeMode.EXTENDED in python-net"
+      ],
+      "long_tail_keywords": [],
+      "context_keywords": [
+        "set QREncodeMode to EXTENDED for QR compaction in python-net",
+        "extended QR compaction mode QREncodeMode in python-net",
+        "use QREncodeMode.EXTENDED for QR compaction in python-net"
+      ]
+    },
+    "editorial_notes": []
+  },
+  "key_steps": [],
+  "code_snippets": [
+    "from aspose.barcode.barcoderecognition import BarCodeReader, DecodeType\nfrom aspose.barcode.generation import BarcodeGenerator, EncodeTypes, QREncodeMode\n\ncodetext = \"\\\\num1234567890\\\\alnumASPOSE2026\\\\byteaspose2026\\\\kanji\\u3062\\u3063\\u3064\\u3065\\u3066\\u3067\\u3068\\u3069\\u306A\\\\auto\"\n\ngen = BarcodeGenerator(EncodeTypes.QR, codetext)\ngen.parameters.barcode.qr.encode_mode = QREncodeMode.EXTENDED\ngen.save(\"test.png\")\n\nreader = BarCodeReader(\"test.png\", DecodeType.QR)\nfor result in reader.read_bar_codes():\n    print(\"BarCode CodeText: \" + result.code_text)"
+  ],
+  "limitations": [],
+  "warnings": [
+    "Code sample has not been executed in a sandbox, but it was matched verbatim against the product team's own release notes page; note it as reproduced from the official release notes and untested, not as unverified."
+  ],
+  "related_concepts": [
+    "BarcodeGenerator",
+    "BarCodeReader",
+    "BarcodeGenerator.__init__",
+    "BarcodeGenerator.save",
+    "BarCodeReader.__init__",
+    "BarCodeReader.read_bar_codes"
+  ],
+  "facts_confirmed_from_source": [
+    "Heading: New compaction mode support in QREncodeMode.EXTENDED",
+    "QREncodeMode.EXTENDED now recognizes explicit compaction mode selectors (\\auto, \\num, \\alnum, \\byte, \\kanji) within the codetext string, giving users direct control over encoding mode.",
+    "API used: BarCodeReader",
+    "API used: DecodeType",
+    "API used: BarcodeGenerator",
+    "API used: EncodeTypes",
+    "API used: QREncodeMode"
+  ],
+  "facts_needing_verification": [],
+  "suggested_article_outline": [
+    "Introduction",
+    "Why this feature matters",
+    "Brief introduction of the API (install + product/docs links)",
+    "Step-by-step tutorial with a code example",
+    "Get a Free License",
+    "Free Additional Resources",
+    "Conclusion",
+    "FAQs",
+    "See Also (only if related post URLs are supplied)"
+  ],
+  "code_verification": {
+    "language": "Python",
+    "tested": false,
+    "source_verified": true,
+    "syntax_valid": true,
+    "package_name": null,
+    "package_version": null,
+    "os": null,
+    "input_file_used": null,
+    "output_file_generated": null,
+    "errors": [],
+    "notes": "Code sample matches a block scraped verbatim from the product team's release notes page. Static syntax check passed (balanced brackets/quotes). Sandboxed execution against the real Aspose SDK is not attempted: these samples reference proprietary licensed assemblies, external input files, and sometimes network services (e.g. a timestamp authority URL) that only exist in the product team's own test environment."
+  },
+  "prerequisites": [],
+  "doc_topics": []
+}

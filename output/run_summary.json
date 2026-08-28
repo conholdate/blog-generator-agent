@@ -1,18 +1,19 @@
 {
-  "source_url": "https://releases.aspose.com/imaging/net/release-notes/2026/aspose-imaging-for-net-26-8-release-notes/",
+  "source_url": "https://releases.aspose.com/barcode/python-net/release-notes/2026/aspose-barcode-for-python-via-dotnet-26-6-release-notes/",
   "source_type": "release-notes",
   "publication_readiness": "draft_ready",
   "blocker_reason": null,
   "topics_generated": [
-    "IMAGINGNET-8108 CDR rendering produces all-black (PDF/vector) or blank (raster) output",
-    "IMAGINGNET-8062 The feasibility of iterating over SVG file content",
-    "IMAGINGNET-7501 Implement RasterImage.Create method that provide the ability to create a raster image without specifying its format.",
-    "IMAGINGNET-6788 WebP: CompressorException: Error code normal: maxSymbol > alphabetSize"
+    "Improved PDF417 barcode recognition quality",
+    "New encode_gs1_separator_in_byte_mode option",
+    "New compaction modes support in QrExtCodetextBuilder",
+    "New compaction mode support in QREncodeMode.EXTENDED"
   ],
   "rejected_sections": [
-    "Competitive features",
-    "Public API changes",
-    "Usage Examples:",
-    "Duplicate code-sample blocks (code-sample-1 to code-sample-4 repeated)"
+    "All Changes",
+    "Improved PDF417 barcode recognition quality (duplicate)",
+    "New encode_gs1_separator_in_byte_mode option (duplicate)",
+    "New compaction modes support in QrExtCodetextBuilder (duplicate)",
+    "New compaction mode support in QREncodeMode.EXTENDED (duplicate)"
   ]
 }
