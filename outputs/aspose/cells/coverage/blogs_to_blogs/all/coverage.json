@@ -19,10 +19,10 @@
     "excluded_release_update_records": 302,
     "excluded_old_or_undated_records": 158,
     "baseline_records": 327,
-    "total_cells": 1610,
+    "total_cells": 1603,
     "matched_cells": 320,
-    "missing_cells": 1290,
-    "match_rate": 0.19875776397515527,
+    "missing_cells": 1283,
+    "match_rate": 0.19962570180910794,
     "skipped_empty_keys": 0
   },
   "rows": [
@@ -94,7 +94,7 @@
     {
       "category": "Spreadsheets",
       "sub_category": "Comments",
-      "topic": "Add comments in excel",
+      "topic": "Add comments in Excel",
       "key": "add-comments-in-excel",
       "baseline_record_id": "blog::cells/2021-05-18-add-comments-in-excel-worksheets-using-java/index.md",
       "coverage": {
@@ -127,7 +127,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2021-05-18-add-comments-in-excel-worksheets-using-java/index.md",
           "title": "Add Comments in Excel Files in Java",
-          "topic": "Add comments in excel",
+          "topic": "Add comments in Excel",
           "url": "https://blog.aspose.com/cells/add-comments-in-excel-worksheets-using-java/"
         },
         "net": {
@@ -158,8 +158,8 @@
     },
     {
       "category": "Spreadsheet",
-      "sub_category": "Cell Comments",
-      "topic": "Add comments in excel worksheets",
+      "sub_category": "Comments",
+      "topic": "Add comments in Excel worksheets",
       "key": "add-comments-in-excel-worksheets",
       "baseline_record_id": "blog::cells/2021-06-15-add-comments-in-excel-worksheets-using-python/index.md",
       "coverage": {
@@ -176,7 +176,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2021-09-06-add-comments-in-excel-worksheets-using-cpp/index.md",
           "title": "Add Comments in Excel Worksheets using C++",
-          "topic": "Add comments in excel worksheets",
+          "topic": "Add comments in Excel worksheets",
           "url": "https://blog.aspose.com/cells/add-comments-in-excel-worksheets-using-cpp/"
         },
         "general": {
@@ -200,7 +200,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2021-07-12-add-comments-in-excel-using-csharp/index.md",
           "title": "Add Comments in Excel Worksheets using C#",
-          "topic": "Add comments in excel worksheets",
+          "topic": "Add comments in Excel worksheets",
           "url": "https://blog.aspose.com/cells/add-comments-in-excel-using-csharp/"
         },
         "nodejs": {
@@ -216,15 +216,15 @@
           "score": 1.0,
           "record_id": "blog::cells/2021-06-15-add-comments-in-excel-worksheets-using-python/index.md",
           "title": "Add Comments in Excel Worksheets using Python",
-          "topic": "Add comments in excel worksheets",
-          "url": "https://blog.aspose.com/cells/add-comments-in-excel-worksheets-using-python/"
+          "topic": "Add comments in Excel worksheets",
+          "url": "aspose.com/cells/add-comments-in-excel-worksheets-using-python/"
         }
       }
     },
     {
       "category": "Office Automation",
       "sub_category": "Excel Slicers",
-      "topic": "Add edit and update slicers in excel",
+      "topic": "Add edit and update slicers in Excel",
       "key": "add-edit-and-update-slicers-in-excel",
       "baseline_record_id": "blog::cells/2025-11-06-add-slicer-in-excel-using-csharp/index.md",
       "coverage": {
@@ -265,7 +265,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2025-11-06-add-slicer-in-excel-using-csharp/index.md",
           "title": "How to Add, Edit, and Update Slicers in Excel Using C#",
-          "topic": "Add edit and update slicers in excel",
+          "topic": "Add edit and update slicers in Excel",
           "url": "https://blog.aspose.com/cells/add-slicer-in-excel-using-csharp/"
         },
         "nodejs": {
@@ -289,7 +289,7 @@
     {
       "category": "Office",
       "sub_category": "Spreadsheet Editing",
-      "topic": "Add or delete rows and columns in excel",
+      "topic": "Add or delete rows and columns in Excel",
       "key": "add-or-delete-rows-and-columns-in-excel",
       "baseline_record_id": "blog::cells/2022-08-05-insert-delete-rows-and-columns-in-excel-csharp/index.md",
       "coverage": {
@@ -330,7 +330,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2022-08-05-insert-delete-rows-and-columns-in-excel-csharp/index.md",
           "title": "Add or Delete Rows and Columns in Excel in C#",
-          "topic": "Add or delete rows and columns in excel",
+          "topic": "Add or delete rows and columns in Excel",
           "url": "https://blog.aspose.com/cells/add-delete-rows-and-columns-in-excel-in-csharp/"
         },
         "nodejs": {
@@ -352,9 +352,9 @@
       }
     },
     {
-      "category": "Spreadsheet Processing",
+      "category": "Spreadsheet",
       "sub_category": "VBA Macro Management",
-      "topic": "Add or modify vba macros in excel",
+      "topic": "Add or modify vba macros in Excel",
       "key": "add-or-modify-vba-macros-in-excel",
       "baseline_record_id": "blog::cells/2020-12-21-add-modify-vba-macros-in-excel-using-csharp/index.md",
       "coverage": {
@@ -387,7 +387,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2021-06-08-add-modify-vba-macros-in-excel-using-java/index.md",
           "title": "Add or Modify VBA Macros in Excel Files using Java",
-          "topic": "Add or modify VBA macros in excel",
+          "topic": "Add or modify VBA macros in Excel",
           "url": "https://blog.aspose.com/cells/add-modify-vba-macros-in-excel-using-java/"
         },
         "net": {
@@ -395,8 +395,8 @@
           "score": 1.0,
           "record_id": "blog::cells/2020-12-21-add-modify-vba-macros-in-excel-using-csharp/index.md",
           "title": "Add or Modify VBA Macros in Excel Files using C#",
-          "topic": "Add or modify VBA macros in excel",
-          "url": "https://blog.aspose.com/cells/add-modify-vba-macros-in-excel-using-csharp/"
+          "topic": "Add or modify VBA macros in Excel",
+          "url": "aspose.com/cells/add-modify-vba-macros-in-excel-using-csharp/"
         },
         "nodejs": {
           "matched": false,
@@ -417,9 +417,9 @@
       }
     },
     {
-      "category": "Office",
-      "sub_category": "Excel",
-      "topic": "Add or remove autofilter in excel",
+      "category": "Spreadsheet",
+      "sub_category": "AutoFilter",
+      "topic": "Add or remove autofilter in Excel",
       "key": "add-or-remove-autofilter-in-excel",
       "baseline_record_id": "blog::cells/2021-05-19-add-or-remove-autofilter-in-excel-files-using-cpp/index.md",
       "coverage": {
@@ -436,8 +436,8 @@
           "score": 1.0,
           "record_id": "blog::cells/2021-05-19-add-or-remove-autofilter-in-excel-files-using-cpp/index.md",
           "title": "Add or Remove AutoFilter in Excel Files using C++",
-          "topic": "Add or remove autofilter in excel",
-          "url": "https://blog.aspose.com/cells/add-or-remove-autofilter-in-excel-files-using-cpp/"
+          "topic": "Add or remove autofilter in Excel",
+          "url": "aspose.com/cells/add-or-remove-autofilter-in-excel-files-using-cpp/"
         },
         "general": {
           "matched": false,
@@ -482,9 +482,9 @@
       }
     },
     {
-      "category": "Programming",
-      "sub_category": "Spreadsheet Processing",
-      "topic": "Add or remove autofilter in excel XLSX XLS",
+      "category": "Spreadsheets",
+      "sub_category": "AutoFilter",
+      "topic": "Add or remove autofilter in Excel XLSX XLS",
       "key": "add-or-remove-autofilter-in-excel-xlsx-xls",
       "baseline_record_id": "blog::cells/2020-09-16-add-remove-autofilter-in-excel-file-csharp/index.md",
       "coverage": {
@@ -525,8 +525,8 @@
           "score": 1.0,
           "record_id": "blog::cells/2020-09-16-add-remove-autofilter-in-excel-file-csharp/index.md",
           "title": "Add or Remove AutoFilter in Excel File (XLSX/XLS) using C#",
-          "topic": "Add or remove autofilter in excel XLSX XLS",
-          "url": "https://blog.aspose.com/cells/add-remove-autofilter-in-excel-file-csharp/"
+          "topic": "Add or remove autofilter in Excel XLSX XLS",
+          "url": "aspose.com/cells/add-remove-autofilter-in-excel-file-csharp/"
         },
         "nodejs": {
           "matched": false,
@@ -549,7 +549,7 @@
     {
       "category": "Spreadsheet",
       "sub_category": "Image Insertion",
-      "topic": "Add photo to excel",
+      "topic": "Add photo to Excel",
       "key": "add-photo-to-excel",
       "baseline_record_id": "blog::cells/2025-06-23-add-photo-to-excel-in-java/index.md",
       "coverage": {
@@ -582,7 +582,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2025-06-23-add-photo-to-excel-in-java/index.md",
           "title": "How to Add a Photo to Excel in Java",
-          "topic": "Add photo to excel",
+          "topic": "Add photo to Excel",
           "url": "https://blog.aspose.com/cells/add-photo-to-excel-in-java/"
         },
         "net": {
@@ -614,7 +614,7 @@
     {
       "category": "Spreadsheets",
       "sub_category": "Images",
-      "topic": "Add picture to excel",
+      "topic": "Add picture to Excel",
       "key": "add-picture-to-excel",
       "baseline_record_id": "blog::cells/2024-11-20-add-picture-to-excel-in-csharp/index.md",
       "coverage": {
@@ -655,7 +655,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2024-11-20-add-picture-to-excel-in-csharp/index.md",
           "title": "Add Picture to Excel in C#",
-          "topic": "Add picture to excel",
+          "topic": "Add picture to Excel",
           "url": "https://blog.aspose.com/cells/add-picture-to-excel-in-csharp/"
         },
         "nodejs": {
@@ -679,7 +679,7 @@
     {
       "category": "Spreadsheets",
       "sub_category": "Watermarking",
-      "topic": "Add watermark to excel worksheets",
+      "topic": "Add watermark to Excel worksheets",
       "key": "add-watermark-to-excel-worksheets",
       "baseline_record_id": "blog::cells/2021-05-07-add-watermark-to-excel-worksheets-in-python/index.md",
       "coverage": {
@@ -720,7 +720,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2021-07-06-add-watermark-to-excel-worksheets-using-csharp/index.md",
           "title": "Add Watermark to Excel Worksheets using C#",
-          "topic": "Add watermark to excel worksheets",
+          "topic": "Add watermark to Excel worksheets",
           "url": "https://blog.aspose.com/cells/add-watermark-to-excel-worksheets-using-csharp/"
         },
         "nodejs": {
@@ -736,7 +736,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2021-05-07-add-watermark-to-excel-worksheets-in-python/index.md",
           "title": "Add Watermark to Excel Worksheets in Python",
-          "topic": "Add watermark to excel worksheets",
+          "topic": "Add watermark to Excel worksheets",
           "url": "https://blog.aspose.com/cells/add-watermark-to-excel-worksheets-in-python/"
         }
       }
@@ -744,7 +744,7 @@
     {
       "category": "Spreadsheet",
       "sub_category": "Watermark",
-      "topic": "Add watermark to excel XLS",
+      "topic": "Add watermark to Excel XLS",
       "key": "add-watermark-to-excel-xls",
       "baseline_record_id": "blog::cells/2021-06-07-add-watermark-to-excel-worksheets-using-java/index.md",
       "coverage": {
@@ -777,8 +777,8 @@
           "score": 1.0,
           "record_id": "blog::cells/2021-06-07-add-watermark-to-excel-worksheets-using-java/index.md",
           "title": "Add Watermark to Excel XLS in Java",
-          "topic": "Add watermark to excel XLS",
-          "url": "https://blog.aspose.com/cells/add-watermark-to-excel-worksheets-using-java/"
+          "topic": "Add watermark to Excel XLS",
+          "url": "aspose.com/cells/add-watermark-to-excel-worksheets-using-java/"
         },
         "net": {
           "matched": false,
@@ -809,7 +809,7 @@
     {
       "category": "Spreadsheets",
       "sub_category": "Row and Column Formatting",
-      "topic": "Adjust height of row and width of column in excel",
+      "topic": "Adjust height of row and width of column in Excel",
       "key": "adjust-height-of-row-and-width-of-column-in-excel",
       "baseline_record_id": "blog::cells/2022-09-20-adjust-row-height-and-column-width-python/index.md",
       "coverage": {
@@ -866,7 +866,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2022-09-20-adjust-row-height-and-column-width-python/index.md",
           "title": "Python: Adjust Height of Row and Width of Column in Excel",
-          "topic": "Adjust height of row and width of column in excel",
+          "topic": "Adjust height of row and width of column in Excel",
           "url": "https://blog.aspose.com/cells/adjust-row-height-column-width-in-excel-python/"
         }
       }
@@ -874,7 +874,7 @@
     {
       "category": "Spreadsheet",
       "sub_category": "Formatting",
-      "topic": "Adjust row height and column width in excel",
+      "topic": "Adjust row height and column width in Excel",
       "key": "adjust-row-height-and-column-width-in-excel",
       "baseline_record_id": "blog::cells/2022-10-12-adjust-excel-row-height-column-width-csharp/index.md",
       "coverage": {
@@ -907,7 +907,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2022-10-12-adjust-excel-row-height-column-width-java/index.md",
           "title": "Adjust Row Height and Column Width in Excel using Java",
-          "topic": "Adjust row height and column width in excel",
+          "topic": "Adjust row height and column width in Excel",
           "url": "https://blog.aspose.com/cells/adjust-row-height-column-width-in-excel-java/"
         },
         "net": {
@@ -915,7 +915,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2022-10-12-adjust-excel-row-height-column-width-csharp/index.md",
           "title": "Adjust Row Height and Column Width in Excel using C#",
-          "topic": "Adjust row height and column width in excel",
+          "topic": "Adjust row height and column width in Excel",
           "url": "https://blog.aspose.com/cells/adjust-row-height-column-width-in-excel-csharp/"
         },
         "nodejs": {
@@ -939,7 +939,7 @@
     {
       "category": "Office",
       "sub_category": "Data Validation",
-      "topic": "Apply data validation in excel",
+      "topic": "Apply data validation in Excel",
       "key": "apply-data-validation-in-excel",
       "baseline_record_id": "blog::cells/2025-06-05-data-validation-in-excel-using-csharp/index.md",
       "coverage": {
@@ -980,7 +980,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2025-06-05-data-validation-in-excel-using-csharp/index.md",
           "title": "Apply Data Validation in Excel Using C#",
-          "topic": "Apply data validation in excel",
+          "topic": "Apply data validation in Excel",
           "url": "https://blog.aspose.com/cells/data-validation-in-excel-using-csharp/"
         },
         "nodejs": {
@@ -1004,8 +1004,8 @@
     {
       "category": "Development Tools",
       "sub_category": "Spreadsheet Processing",
-      "topic": "Aspose.Cells best excel for developers",
-      "key": "aspose-cells-best-excel-for-developers",
+      "topic": "Aspose.Cells best Excel library for developers",
+      "key": "aspose-cells-best-excel-library-for-developers",
       "baseline_record_id": "blog::cells/2025-08-13-best-excel-library-for-python/index.md",
       "coverage": {
         "android_via_java": {
@@ -1061,7 +1061,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2025-08-13-best-excel-library-for-python/index.md",
           "title": "Aspose.Cells for Python – The Best Python Excel Library for Developers",
-          "topic": "Aspose cells best excel library for developers",
+          "topic": "Aspose cells best Excel library for developers",
           "url": "https://blog.aspose.com/cells/best-excel-library-for-python/"
         }
       }
@@ -1069,8 +1069,8 @@
     {
       "category": "Data Processing",
       "sub_category": "Spreadsheet Reporting",
-      "topic": "Aspose.Cells data analysis and report generation guide",
-      "key": "aspose-cells-data-analysis-and-report-generation-guide",
+      "topic": "Aspose.Cells data analysis and report generation",
+      "key": "aspose-cells-data-analysis-and-report-generation",
       "baseline_record_id": "blog::cells/2025-10-15-aspose.cells-for-go-via-c++---data-analysis-and-report-generation-guide/index.md",
       "coverage": {
         "android_via_java": {
@@ -1197,74 +1197,9 @@
       }
     },
     {
-      "category": "Data",
-      "sub_category": "Spreadsheets",
-      "topic": "Auto FIT rows and columns in excel",
-      "key": "auto-fit-rows-and-columns-in-excel",
-      "baseline_record_id": "blog::cells/2022-10-05-autofit-rows-coulmns-in-excel-python/index.md",
-      "coverage": {
-        "android_via_java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "cpp": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "general": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "net": {
-          "matched": true,
-          "score": 1.0,
-          "record_id": "blog::cells/2022-10-06-autofit-rows-coulmns-in-excel-csharp/index.md",
-          "title": "Auto-Fit Rows and Columns in Excel in C#",
-          "topic": "Auto fit rows and columns in excel",
-          "url": "https://blog.aspose.com/cells/auto-fit-excel-rows-columns-csharp/"
-        },
-        "nodejs": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "python": {
-          "matched": true,
-          "score": 1.0,
-          "record_id": "blog::cells/2022-10-05-autofit-rows-coulmns-in-excel-python/index.md",
-          "title": "Auto-Fit Rows and Columns in Excel in Python",
-          "topic": "Auto fit rows and columns in excel",
-          "url": "https://blog.aspose.com/cells/auto-fit-excel-rows-columns-python/"
-        }
-      }
-    },
-    {
       "category": "Office",
       "sub_category": "Excel",
-      "topic": "Autofit excel rows and columns",
+      "topic": "Autofit Excel rows and columns",
       "key": "autofit-excel-rows-and-columns",
       "baseline_record_id": "blog::cells/2022-09-27-autofit-rows-coulmns-in-excel-java/index.md",
       "coverage": {
@@ -1297,16 +1232,16 @@
           "score": 1.0,
           "record_id": "blog::cells/2022-09-27-autofit-rows-coulmns-in-excel-java/index.md",
           "title": "AutoFit Excel Rows and Columns in Java",
-          "topic": "Autofit excel rows and columns",
+          "topic": "Autofit Excel rows and columns",
           "url": "https://blog.aspose.com/cells/auto-fit-excel-rows-columns-java/"
         },
         "net": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::cells/2022-10-06-autofit-rows-coulmns-in-excel-csharp/index.md",
+          "title": "Auto-Fit Rows and Columns in Excel in C#",
+          "topic": "Autofit Excel rows and columns",
+          "url": "https://blog.aspose.com/cells/auto-fit-excel-rows-columns-csharp/"
         },
         "nodejs": {
           "matched": false,
@@ -1317,18 +1252,18 @@
           "url": null
         },
         "python": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::cells/2022-10-05-autofit-rows-coulmns-in-excel-python/index.md",
+          "title": "Auto-Fit Rows and Columns in Excel in Python",
+          "topic": "Autofit Excel rows and columns",
+          "url": "https://blog.aspose.com/cells/auto-fit-excel-rows-columns-python/"
         }
       }
     },
     {
-      "category": "Spreadsheets",
-      "sub_category": "Chart Export",
+      "category": "Document Conversion",
+      "sub_category": "Chart Conversion",
       "topic": "Chart to PDF and images like JPG PNG WMF",
       "key": "chart-to-pdf-and-images-like-jpg-png-wmf",
       "baseline_record_id": "blog::cells/2020-09-24-convert-chart-to-pdf-or-image-java/index.md",
@@ -1363,7 +1298,7 @@
           "record_id": "blog::cells/2020-09-24-convert-chart-to-pdf-or-image-java/index.md",
           "title": "Convert Chart to PDF and Images like JPG, PNG, WMF in Java",
           "topic": "Chart to PDF and images like JPG PNG WMF",
-          "url": "https://blog.aspose.com/cells/convert-chart-to-pdf-or-image-java/"
+          "url": "aspose.com/cells/convert-chart-to-pdf-or-image-java/"
         },
         "net": {
           "matched": false,
@@ -1394,7 +1329,7 @@
     {
       "category": "Data Processing",
       "sub_category": "Spreadsheet Manipulation",
-      "topic": "Combine excel",
+      "topic": "Combine Excel",
       "key": "combine-excel",
       "baseline_record_id": "blog::cells/2025-01-30-combine-excel-files-in-python/index.md",
       "coverage": {
@@ -1451,7 +1386,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2025-01-30-combine-excel-files-in-python/index.md",
           "title": "Combine Excel Files in Python",
-          "topic": "Combine excel",
+          "topic": "Combine Excel",
           "url": "https://blog.aspose.com/cells/combine-excel-files-in-python/"
         }
       }
@@ -1459,8 +1394,8 @@
     {
       "category": "File Management",
       "sub_category": "Compression",
-      "topic": "Compress excel complete guide",
-      "key": "compress-excel-complete-guide",
+      "topic": "Compress Excel",
+      "key": "compress-excel",
       "baseline_record_id": "blog::cells/2025-04-30-compress-excel-file/index.md",
       "coverage": {
         "android_via_java": {
@@ -1516,7 +1451,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2025-04-30-compress-excel-file/index.md",
           "title": "How to Compress Excel Files - A Complete Guide",
-          "topic": "Compress excel complete guide",
+          "topic": "Compress Excel complete guide",
           "url": "https://blog.aspose.com/cells/compress-excel-file/"
         }
       }
@@ -1524,7 +1459,7 @@
     {
       "category": "Data Management",
       "sub_category": "Excel",
-      "topic": "Copy data from excel sheets",
+      "topic": "Copy data from Excel sheets",
       "key": "copy-data-from-excel-sheets",
       "baseline_record_id": "blog::cells/2022-08-18-copy-data-from-excel-sheets-in-python/index.md",
       "coverage": {
@@ -1581,7 +1516,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2022-08-18-copy-data-from-excel-sheets-in-python/index.md",
           "title": "Copy Data from Excel Sheets in Python",
-          "topic": "Copy data from excel sheets",
+          "topic": "Copy data from Excel sheets",
           "url": "https://blog.aspose.com/cells/copy-data-from-excel-sheets-in-python/"
         }
       }
@@ -1589,7 +1524,7 @@
     {
       "category": "Spreadsheets",
       "sub_category": "Worksheet Management",
-      "topic": "Copy excel sheets within workbook or to another workbook",
+      "topic": "Copy Excel sheets within workbook or to another workbook",
       "key": "copy-excel-sheets-within-workbook-or-to-another-workbook",
       "baseline_record_id": "blog::cells/2021-07-08-copy-worksheets-in-excel-files-using-java/index.md",
       "coverage": {
@@ -1622,7 +1557,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2021-07-08-copy-worksheets-in-excel-files-using-java/index.md",
           "title": "Copy Excel Sheets in Java - Within a Workbook or to Another Workbook",
-          "topic": "Copy excel sheets within workbook or to another workbook",
+          "topic": "Copy Excel sheets within workbook or to another workbook",
           "url": "https://blog.aspose.com/cells/copy-worksheets-in-excel-files-using-java/"
         },
         "net": {
@@ -1654,7 +1589,7 @@
     {
       "category": "Spreadsheet",
       "sub_category": "Worksheet Management",
-      "topic": "Copy or move excel worksheets",
+      "topic": "Copy or move Excel worksheets",
       "key": "copy-or-move-excel-worksheets",
       "baseline_record_id": "blog::cells/2021-03-15-copy-excel-worksheets-using-csharp/index.md",
       "coverage": {
@@ -1671,7 +1606,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2021-04-06-copy-or-move-excel-worksheets-using-cpp/index.md",
           "title": "Copy or Move Excel Worksheets using C++",
-          "topic": "Copy or move excel worksheets",
+          "topic": "Copy or move Excel worksheets",
           "url": "https://blog.aspose.com/cells/copy-or-move-excel-worksheets-using-cpp/"
         },
         "general": {
@@ -1695,7 +1630,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2021-03-15-copy-excel-worksheets-using-csharp/index.md",
           "title": "Copy or Move Excel Worksheets in C#",
-          "topic": "Copy or move excel worksheets",
+          "topic": "Copy or move Excel worksheets",
           "url": "https://blog.aspose.com/cells/copy-excel-worksheets-using-csharp/"
         },
         "nodejs": {
@@ -1719,7 +1654,7 @@
     {
       "category": "Spreadsheet",
       "sub_category": "Copy Range",
-      "topic": "Copy range in excel",
+      "topic": "Copy range in Excel",
       "key": "copy-range-in-excel",
       "baseline_record_id": "blog::cells/2025-06-30-copy-range-in-excel-dotnet/index.md",
       "coverage": {
@@ -1752,7 +1687,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2025-06-30-copy-range-in-excel-java/index.md",
           "title": "Copy Range in Excel using Java",
-          "topic": "Copy range in excel",
+          "topic": "Copy range in Excel",
           "url": "https://blog.aspose.com/cells/copy-range-in-excel-using-java/"
         },
         "net": {
@@ -1760,7 +1695,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2025-06-30-copy-range-in-excel-dotnet/index.md",
           "title": "Copy Range in Excel using C#",
-          "topic": "Copy range in excel",
+          "topic": "Copy range in Excel",
           "url": "https://blog.aspose.com/cells/copy-range-in-excel-using-csharp/"
         },
         "nodejs": {
@@ -1784,7 +1719,7 @@
     {
       "category": "Office",
       "sub_category": "Excel",
-      "topic": "Copy rows and columns in excel",
+      "topic": "Copy rows and columns in Excel",
       "key": "copy-rows-and-columns-in-excel",
       "baseline_record_id": "blog::cells/2021-06-15-copy-rows-and-columns-in-excel-using-java/index.md",
       "coverage": {
@@ -1801,7 +1736,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2021-09-03-copy-rows-and-columns-in-excel-files-using-cpp/index.md",
           "title": "Copy Rows and Columns in Excel Files using C++",
-          "topic": "Copy rows and columns in excel",
+          "topic": "Copy rows and columns in Excel",
           "url": "https://blog.aspose.com/cells/copy-rows-and-columns-in-excel-files-using-cpp/"
         },
         "general": {
@@ -1817,7 +1752,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2021-06-15-copy-rows-and-columns-in-excel-using-java/index.md",
           "title": "Copy Rows and Columns in Excel using Java",
-          "topic": "Copy rows and columns in excel",
+          "topic": "Copy rows and columns in Excel",
           "url": "https://blog.aspose.com/cells/copy-rows-and-columns-in-excel-using-java/"
         },
         "net": {
@@ -1825,7 +1760,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2021-07-15-copy-rows-and-columns-in-excel-using-csharp/index.md",
           "title": "Copy Rows and Columns in Excel using C#",
-          "topic": "Copy rows and columns in excel",
+          "topic": "Copy rows and columns in Excel",
           "url": "https://blog.aspose.com/cells/copy-rows-and-columns-in-excel-using-csharp/"
         },
         "nodejs": {
@@ -1841,7 +1776,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2022-10-06-copy-rows-and-columns-in-excel-python/index.md",
           "title": "Copy Rows and Columns in Excel using Python",
-          "topic": "Copy rows and columns in excel",
+          "topic": "Copy rows and columns in Excel",
           "url": "https://blog.aspose.com/cells/copy-rows-columns-in-excel-python/"
         }
       }
@@ -1849,7 +1784,7 @@
     {
       "category": "Spreadsheet",
       "sub_category": "Area Chart",
-      "topic": "Create 100 stacked area chart in excel",
+      "topic": "Create 100 stacked area chart in Excel",
       "key": "create-100-stacked-area-chart-in-excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-area100percentstacked-chart/index.md",
       "coverage": {
@@ -1890,7 +1825,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2025-11-17-create-area100percentstacked-chart/index.md",
           "title": "Create 100% Stacked Area Chart in Excel using C#",
-          "topic": "Create 100 stacked area chart in excel",
+          "topic": "Create 100 stacked area chart in Excel",
           "url": "https://blog.aspose.com/cells/create-area100percentstacked-chart-in-excel-using-csharp/"
         },
         "nodejs": {
@@ -1914,7 +1849,7 @@
     {
       "category": "Office",
       "sub_category": "Spreadsheet Automation",
-      "topic": "Create and edit excel",
+      "topic": "Create and edit Excel",
       "key": "create-and-edit-excel",
       "baseline_record_id": "blog::cells/2021-06-11-create-excel-files-from-scratch-using-php/index.md",
       "coverage": {
@@ -1939,7 +1874,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2021-06-11-create-excel-files-from-scratch-using-php/index.md",
           "title": "Create and Edit Excel Files in PHP",
-          "topic": "Create and edit excel",
+          "topic": "Create and edit Excel",
           "url": "https://blog.aspose.com/cells/create-excel-files-from-scratch-using-php/"
         },
         "java": {
@@ -1979,7 +1914,7 @@
     {
       "category": "Office",
       "sub_category": "Excel",
-      "topic": "Create and protect shared excel workbook",
+      "topic": "Create and protect shared Excel workbook",
       "key": "create-and-protect-shared-excel-workbook",
       "baseline_record_id": "blog::cells/2023-01-16-create-shared-excel-workbook-csharp/index.md",
       "coverage": {
@@ -2020,7 +1955,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2023-01-16-create-shared-excel-workbook-csharp/index.md",
           "title": "Create and Protect a Shared Excel Workbook in C#",
-          "topic": "Create and protect shared excel workbook",
+          "topic": "Create and protect shared Excel workbook",
           "url": "https://blog.aspose.com/cells/create-shared-excel-workbook-csharp/"
         },
         "nodejs": {
@@ -2044,7 +1979,7 @@
     {
       "category": "Data Visualization",
       "sub_category": "Area Chart",
-      "topic": "Create area chart in excel",
+      "topic": "Create area chart in Excel",
       "key": "create-area-chart-in-excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-area-chart/index.md",
       "coverage": {
@@ -2085,7 +2020,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2025-11-17-create-area-chart/index.md",
           "title": "Create Area Chart in Excel using C#",
-          "topic": "Create area chart in excel",
+          "topic": "Create area chart in Excel",
           "url": "https://blog.aspose.com/cells/create-area-chart-in-excel-using-csharp/"
         },
         "nodejs": {
@@ -2109,7 +2044,7 @@
     {
       "category": "Spreadsheet",
       "sub_category": "Charts",
-      "topic": "Create area stacked chart in excel",
+      "topic": "Create area stacked chart in Excel",
       "key": "create-area-stacked-chart-in-excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-areastacked-chart/index.md",
       "coverage": {
@@ -2150,7 +2085,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2025-11-17-create-areastacked-chart/index.md",
           "title": "Create Area Stacked Chart in Excel using C#",
-          "topic": "Create area stacked chart in excel",
+          "topic": "Create area stacked chart in Excel",
           "url": "https://blog.aspose.com/cells/create-area-stacked-chart-in-excel-using-csharp/"
         },
         "nodejs": {
@@ -2174,7 +2109,7 @@
     {
       "category": "Charts",
       "sub_category": "3D Charts",
-      "topic": "Create area3d chart in excel",
+      "topic": "Create area3d chart in Excel",
       "key": "create-area3d-chart-in-excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-area3d-chart/index.md",
       "coverage": {
@@ -2215,7 +2150,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2025-11-17-create-area3d-chart/index.md",
           "title": "Create Area3D Chart in Excel using C#",
-          "topic": "Create area3d chart in excel",
+          "topic": "Create area3d chart in Excel",
           "url": "https://blog.aspose.com/cells/create-area3d-chart-in-excel-using-csharp/"
         },
         "nodejs": {
@@ -2239,7 +2174,7 @@
     {
       "category": "Data Visualization",
       "sub_category": "Excel Charts",
-      "topic": "Create area3d100percentstacked chart in excel",
+      "topic": "Create area3d100percentstacked chart in Excel",
       "key": "create-area3d100percentstacked-chart-in-excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-area3d100percentstacked-chart/index.md",
       "coverage": {
@@ -2280,7 +2215,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2025-11-17-create-area3d100percentstacked-chart/index.md",
           "title": "Create Area3D100PercentStacked Chart in Excel using C#",
-          "topic": "Create area3d100percentstacked chart in excel",
+          "topic": "Create area3d100percentstacked chart in Excel",
           "url": "https://blog.aspose.com/cells/create-area3d-100percentstacked-chart-in-excel-using-csharp/"
         },
         "nodejs": {
@@ -2304,7 +2239,7 @@
     {
       "category": "Data Visualization",
       "sub_category": "Charts",
-      "topic": "Create area3dstacked chart in excel",
+      "topic": "Create area3dstacked chart in Excel",
       "key": "create-area3dstacked-chart-in-excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-area3dstacked-chart/index.md",
       "coverage": {
@@ -2345,7 +2280,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2025-11-17-create-area3dstacked-chart/index.md",
           "title": "Create Area3DStacked Chart in Excel using C#",
-          "topic": "Create area3dstacked chart in excel",
+          "topic": "Create area3dstacked chart in Excel",
           "url": "https://blog.aspose.com/cells/create-area3dstacked-chart-in-excel-using-csharp/"
         },
         "nodejs": {
@@ -2369,7 +2304,7 @@
     {
       "category": "Data Visualization",
       "sub_category": "Bar Chart",
-      "topic": "Create bar chart in excel",
+      "topic": "Create bar chart in Excel",
       "key": "create-bar-chart-in-excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-bar-chart/index.md",
       "coverage": {
@@ -2410,7 +2345,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2025-11-17-create-bar-chart/index.md",
           "title": "Create Bar Chart in Excel using C#",
-          "topic": "Create bar chart in excel",
+          "topic": "Create bar chart in Excel",
           "url": "https://blog.aspose.com/cells/create-bar-chart-in-excel-using-csharp/"
         },
         "nodejs": {
@@ -2434,7 +2369,7 @@
     {
       "category": "Data Visualization",
       "sub_category": "Charts",
-      "topic": "Create bar stacked chart in excel",
+      "topic": "Create bar stacked chart in Excel",
       "key": "create-bar-stacked-chart-in-excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-barstacked-chart/index.md",
       "coverage": {
@@ -2475,7 +2410,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2025-11-17-create-barstacked-chart/index.md",
           "title": "Create Bar Stacked Chart in Excel using C#",
-          "topic": "Create bar stacked chart in excel",
+          "topic": "Create bar stacked chart in Excel",
           "url": "https://blog.aspose.com/cells/create-bar-stacked-chart-in-excel-using-csharp/"
         },
         "nodejs": {
@@ -2499,7 +2434,7 @@
     {
       "category": "Spreadsheet",
       "sub_category": "Bar Chart",
-      "topic": "Create bar100percentstacked chart in excel",
+      "topic": "Create bar100percentstacked chart in Excel",
       "key": "create-bar100percentstacked-chart-in-excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-bar100percentstacked-chart/index.md",
       "coverage": {
@@ -2540,7 +2475,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2025-11-17-create-bar100percentstacked-chart/index.md",
           "title": "Create Bar100PercentStacked Chart in Excel using C#",
-          "topic": "Create bar100percentstacked chart in excel",
+          "topic": "Create bar100percentstacked chart in Excel",
           "url": "https://blog.aspose.com/cells/create-bar100percentstacked-chart-in-excel-using-csharp/"
         },
         "nodejs": {
@@ -2564,7 +2499,7 @@
     {
       "category": "Data Visualization",
       "sub_category": "3D Bar Chart",
-      "topic": "Create bar3d100percentstacked chart in excel",
+      "topic": "Create bar3d100percentstacked chart in Excel",
       "key": "create-bar3d100percentstacked-chart-in-excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-bar3d100percentstacked-chart/index.md",
       "coverage": {
@@ -2605,7 +2540,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2025-11-17-create-bar3d100percentstacked-chart/index.md",
           "title": "Create Bar3D100PercentStacked Chart in Excel using C#",
-          "topic": "Create bar3d100percentstacked chart in excel",
+          "topic": "Create bar3d100percentstacked chart in Excel",
           "url": "https://blog.aspose.com/cells/create-bar3d100percentstacked-chart-in-excel-using-csharp/"
         },
         "nodejs": {
@@ -2629,7 +2564,7 @@
     {
       "category": "Charts",
       "sub_category": "Bar Chart",
-      "topic": "Create bar3dclustered chart in excel",
+      "topic": "Create bar3dclustered chart in Excel",
       "key": "create-bar3dclustered-chart-in-excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-bar3dclustered-chart/index.md",
       "coverage": {
@@ -2670,7 +2605,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2025-11-17-create-bar3dclustered-chart/index.md",
           "title": "Create Bar3DClustered Chart in Excel using C#",
-          "topic": "Create bar3dclustered chart in excel",
+          "topic": "Create bar3dclustered chart in Excel",
           "url": "https://blog.aspose.com/cells/create-bar3dclustered-chart-in-excel-using-csharp/"
         },
         "nodejs": {
@@ -2694,7 +2629,7 @@
     {
       "category": "Data Visualization",
       "sub_category": "Excel Bar Charts",
-      "topic": "Create bar3dstacked chart in excel",
+      "topic": "Create bar3dstacked chart in Excel",
       "key": "create-bar3dstacked-chart-in-excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-bar3dstacked-chart/index.md",
       "coverage": {
@@ -2735,7 +2670,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2025-11-17-create-bar3dstacked-chart/index.md",
           "title": "Create Bar3DStacked Chart in Excel using C#",
-          "topic": "Create bar3dstacked chart in excel",
+          "topic": "Create bar3dstacked chart in Excel",
           "url": "https://blog.aspose.com/cells/create-bar3dstacked-chart-in-excel-using-csharp/"
         },
         "nodejs": {
@@ -2759,7 +2694,7 @@
     {
       "category": "Data Visualization",
       "sub_category": "Charts",
-      "topic": "Create boxwhisker chart in excel",
+      "topic": "Create boxwhisker chart in Excel",
       "key": "create-boxwhisker-chart-in-excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-boxwhisker-chart/index.md",
       "coverage": {
@@ -2800,7 +2735,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2025-11-17-create-boxwhisker-chart/index.md",
           "title": "Create BoxWhisker Chart in Excel using C#",
-          "topic": "Create boxwhisker chart in excel",
+          "topic": "Create boxwhisker chart in Excel",
           "url": "https://blog.aspose.com/cells/create-boxwhisker-chart-in-excel-using-csharp/"
         },
         "nodejs": {
@@ -2824,7 +2759,7 @@
     {
       "category": "Data Visualization",
       "sub_category": "Charts",
-      "topic": "Create bubble chart in excel",
+      "topic": "Create bubble chart in Excel",
       "key": "create-bubble-chart-in-excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-bubble-chart/index.md",
       "coverage": {
@@ -2865,7 +2800,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2025-11-17-create-bubble-chart/index.md",
           "title": "Create Bubble Chart in Excel using C#",
-          "topic": "Create bubble chart in excel",
+          "topic": "Create bubble chart in Excel",
           "url": "https://blog.aspose.com/cells/create-bubble-chart-in-excel-using-csharp/"
         },
         "nodejs": {
@@ -2889,7 +2824,7 @@
     {
       "category": "Data Visualization",
       "sub_category": "Excel Charts",
-      "topic": "Create bubble3d chart in excel",
+      "topic": "Create bubble3d chart in Excel",
       "key": "create-bubble3d-chart-in-excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-bubble3d-chart/index.md",
       "coverage": {
@@ -2930,7 +2865,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2025-11-17-create-bubble3d-chart/index.md",
           "title": "Create Bubble3D Chart in Excel using C#",
-          "topic": "Create bubble3d chart in excel",
+          "topic": "Create bubble3d chart in Excel",
           "url": "https://blog.aspose.com/cells/create-bubble3d-chart-in-excel-using-csharp/"
         },
         "nodejs": {
@@ -2954,7 +2889,7 @@
     {
       "category": "Data Visualization",
       "sub_category": "Charts",
-      "topic": "Create charts in excel",
+      "topic": "Create charts in Excel",
       "key": "create-charts-in-excel",
       "baseline_record_id": "blog::cells/2021-06-23-create-charts-in-excel-using-java/index.md",
       "coverage": {
@@ -2987,7 +2922,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2021-06-23-create-charts-in-excel-using-java/index.md",
           "title": "Create Charts in Excel using Java",
-          "topic": "Create charts in excel",
+          "topic": "Create charts in Excel",
           "url": "https://blog.aspose.com/cells/create-charts-in-excel-using-java/"
         },
         "net": {
@@ -3011,7 +2946,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2022-08-16-create-charts-in-excel-using-python/index.md",
           "title": "Create Charts in Excel Files using Python",
-          "topic": "Create charts in excel",
+          "topic": "Create charts in Excel",
           "url": "https://blog.aspose.com/cells/create-charts-in-excel-using-python/"
         }
       }
@@ -3019,7 +2954,7 @@
     {
       "category": "Data Visualization",
       "sub_category": "Charts",
-      "topic": "Create charts in excel spreadsheets",
+      "topic": "Create charts in Excel spreadsheets",
       "key": "create-charts-in-excel-spreadsheets",
       "baseline_record_id": "blog::cells/2021-03-30-create-charts-in-excel-spreadsheets-using-csharp/index.md",
       "coverage": {
@@ -3036,7 +2971,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2021-04-16-create-charts-in-excel-spreadsheets-using-cpp/index.md",
           "title": "Create Charts in Excel Spreadsheets using C++",
-          "topic": "Create charts in excel spreadsheets",
+          "topic": "Create charts in Excel spreadsheets",
           "url": "https://blog.aspose.com/cells/create-charts-in-excel-spreadsheets-using-cpp/"
         },
         "general": {
@@ -3060,7 +2995,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2021-03-30-create-charts-in-excel-spreadsheets-using-csharp/index.md",
           "title": "Create Charts in Excel Spreadsheets using C#",
-          "topic": "Create charts in excel spreadsheets",
+          "topic": "Create charts in Excel spreadsheets",
           "url": "https://blog.aspose.com/cells/create-charts-in-excel-spreadsheets-using-csharp/"
         },
         "nodejs": {
@@ -3084,7 +3019,7 @@
     {
       "category": "Data Visualization",
       "sub_category": "Excel Charts",
-      "topic": "Create column chart in excel",
+      "topic": "Create column chart in Excel",
       "key": "create-column-chart-in-excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-column-chart/index.md",
       "coverage": {
@@ -3125,7 +3060,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2025-11-17-create-column-chart/index.md",
           "title": "Create Column Chart in Excel using C#",
-          "topic": "Create column chart in excel",
+          "topic": "Create column chart in Excel",
           "url": "https://blog.aspose.com/cells/create-column-chart-in-excel-using-csharp/"
         },
         "nodejs": {
@@ -3149,7 +3084,7 @@
     {
       "category": "Data Visualization",
       "sub_category": "Charts",
-      "topic": "Create column stacked chart in excel",
+      "topic": "Create column stacked chart in Excel",
       "key": "create-column-stacked-chart-in-excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-columnstacked-chart/index.md",
       "coverage": {
@@ -3190,7 +3125,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2025-11-17-create-columnstacked-chart/index.md",
           "title": "Create Column Stacked Chart in Excel using C#",
-          "topic": "Create column stacked chart in excel",
+          "topic": "Create column stacked chart in Excel",
           "url": "https://blog.aspose.com/cells/create-columnstacked-chart-in-excel-using-csharp/"
         },
         "nodejs": {
@@ -3214,7 +3149,7 @@
     {
       "category": "Data Visualization",
       "sub_category": "Charts",
-      "topic": "Create column100percentstacked chart in excel",
+      "topic": "Create column100percentstacked chart in Excel",
       "key": "create-column100percentstacked-chart-in-excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-column100percentstacked-chart/index.md",
       "coverage": {
@@ -3255,7 +3190,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2025-11-17-create-column100percentstacked-chart/index.md",
           "title": "Create Column100PercentStacked Chart in Excel using C#",
-          "topic": "Create column100percentstacked chart in excel",
+          "topic": "Create column100percentstacked chart in Excel",
           "url": "https://blog.aspose.com/cells/create-column100percentstacked-chart-in-excel-using-csharp/"
         },
         "nodejs": {
@@ -3279,7 +3214,7 @@
     {
       "category": "Excel",
       "sub_category": "Charts",
-      "topic": "Create column3d chart in excel",
+      "topic": "Create column3d chart in Excel",
       "key": "create-column3d-chart-in-excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-column3d-chart/index.md",
       "coverage": {
@@ -3320,7 +3255,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2025-11-17-create-column3d-chart/index.md",
           "title": "Create Column3D Chart in Excel using C#",
-          "topic": "Create column3d chart in excel",
+          "topic": "Create column3d chart in Excel",
           "url": "https://blog.aspose.com/cells/create-column3d-chart-in-excel-using-csharp/"
         },
         "nodejs": {
@@ -3344,7 +3279,7 @@
     {
       "category": "Data Visualization",
       "sub_category": "Excel Charts",
-      "topic": "Create column3d100percentstacked chart in excel",
+      "topic": "Create column3d100percentstacked chart in Excel",
       "key": "create-column3d100percentstacked-chart-in-excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-column3d100percentstacked-chart/index.md",
       "coverage": {
@@ -3385,7 +3320,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2025-11-17-create-column3d100percentstacked-chart/index.md",
           "title": "Create Column3D100PercentStacked Chart in Excel using C#",
-          "topic": "Create column3d100percentstacked chart in excel",
+          "topic": "Create column3d100percentstacked chart in Excel",
           "url": "https://blog.aspose.com/cells/create-column3d100percentstacked-chart-in-excel-using-csharp/"
         },
         "nodejs": {
@@ -3409,7 +3344,7 @@
     {
       "category": "Data Visualization",
       "sub_category": "Excel Charts",
-      "topic": "Create column3dclustered chart in excel",
+      "topic": "Create column3dclustered chart in Excel",
       "key": "create-column3dclustered-chart-in-excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-column3dclustered-chart/index.md",
       "coverage": {
@@ -3450,7 +3385,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2025-11-17-create-column3dclustered-chart/index.md",
           "title": "Create Column3DClustered Chart in Excel using C#",
-          "topic": "Create column3dclustered chart in excel",
+          "topic": "Create column3dclustered chart in Excel",
           "url": "https://blog.aspose.com/cells/create-column3dclustered-chart-in-excel-using-csharp/"
         },
         "nodejs": {
@@ -3474,7 +3409,7 @@
     {
       "category": "Spreadsheet",
       "sub_category": "Charting",
-      "topic": "Create column3dstacked chart in excel",
+      "topic": "Create column3dstacked chart in Excel",
       "key": "create-column3dstacked-chart-in-excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-column3dstacked-chart/index.md",
       "coverage": {
@@ -3515,7 +3450,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2025-11-17-create-column3dstacked-chart/index.md",
           "title": "Create Column3DStacked Chart in Excel using C#",
-          "topic": "Create column3dstacked chart in excel",
+          "topic": "Create column3dstacked chart in Excel",
           "url": "https://blog.aspose.com/cells/create-column3dstacked-chart-in-excel-using-csharp/"
         },
         "nodejs": {
@@ -3539,7 +3474,7 @@
     {
       "category": "Data Visualization",
       "sub_category": "Excel Charting",
-      "topic": "Create combo chart in excel",
+      "topic": "Create combo chart in Excel",
       "key": "create-combo-chart-in-excel",
       "baseline_record_id": "blog::cells/2025-06-05-create-combo-chart-in-excel-dotnet/index.md",
       "coverage": {
@@ -3572,7 +3507,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2025-06-27-create-combo-chart-in-excel-java/index.md",
           "title": "Create Combo Chart in Excel using Java",
-          "topic": "Create combo chart in excel",
+          "topic": "Create combo chart in Excel",
           "url": "https://blog.aspose.com/cells/create-combo-chart-in-excel-using-java/"
         },
         "net": {
@@ -3580,7 +3515,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2025-06-05-create-combo-chart-in-excel-dotnet/index.md",
           "title": "Create Combo Chart in Excel using C#",
-          "topic": "Create combo chart in excel",
+          "topic": "Create combo chart in Excel",
           "url": "https://blog.aspose.com/cells/create-combo-chart-in-excel-using-csharp/"
         },
         "nodejs": {
@@ -3604,7 +3539,7 @@
     {
       "category": "Data Visualization",
       "sub_category": "Excel Charts",
-      "topic": "Create cone chart in excel",
+      "topic": "Create cone chart in Excel",
       "key": "create-cone-chart-in-excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-cone-chart/index.md",
       "coverage": {
@@ -3645,7 +3580,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2025-11-17-create-cone-chart/index.md",
           "title": "Create Cone Chart in Excel using C#",
-          "topic": "Create cone chart in excel",
+          "topic": "Create cone chart in Excel",
           "url": "https://blog.aspose.com/cells/create-cone-chart-in-excel-using-csharp/"
         },
         "nodejs": {
@@ -3669,7 +3604,7 @@
     {
       "category": "Data Visualization",
       "sub_category": "Charts",
-      "topic": "Create cone stacked chart in excel",
+      "topic": "Create cone stacked chart in Excel",
       "key": "create-cone-stacked-chart-in-excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-conestacked-chart/index.md",
       "coverage": {
@@ -3710,7 +3645,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2025-11-17-create-conestacked-chart/index.md",
           "title": "Create Cone Stacked Chart in Excel using C#",
-          "topic": "Create cone stacked chart in excel",
+          "topic": "Create cone stacked chart in Excel",
           "url": "https://blog.aspose.com/cells/create-cone-stacked-chart-in-excel-using-csharp/"
         },
         "nodejs": {
@@ -3734,7 +3669,7 @@
     {
       "category": "Data Visualization",
       "sub_category": "Excel Charts",
-      "topic": "Create cone100percentstacked chart in excel",
+      "topic": "Create cone100percentstacked chart in Excel",
       "key": "create-cone100percentstacked-chart-in-excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-cone100percentstacked-chart/index.md",
       "coverage": {
@@ -3775,7 +3710,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2025-11-17-create-cone100percentstacked-chart/index.md",
           "title": "Create Cone100PercentStacked Chart in Excel using C#",
-          "topic": "Create cone100percentstacked chart in excel",
+          "topic": "Create cone100percentstacked chart in Excel",
           "url": "https://blog.aspose.com/cells/create-cone100percentstacked-chart-in-excel-using-csharp/"
         },
         "nodejs": {
@@ -3799,7 +3734,7 @@
     {
       "category": "Data Visualization",
       "sub_category": "Excel Charts",
-      "topic": "Create conical bar stacked chart in excel",
+      "topic": "Create conical bar stacked chart in Excel",
       "key": "create-conical-bar-stacked-chart-in-excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-conicalbarstacked-chart/index.md",
       "coverage": {
@@ -3840,7 +3775,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2025-11-17-create-conicalbarstacked-chart/index.md",
           "title": "Create Conical Bar Stacked Chart in Excel using C#",
-          "topic": "Create conical bar stacked chart in excel",
+          "topic": "Create conical bar stacked chart in Excel",
           "url": "https://blog.aspose.com/cells/create-conical-bar-stacked-chart-in-excel-using-csharp/"
         },
         "nodejs": {
@@ -3864,7 +3799,7 @@
     {
       "category": "Data Visualization",
       "sub_category": "Charts",
-      "topic": "Create conicalbar 100 stacked chart in excel",
+      "topic": "Create conicalbar 100 stacked chart in Excel",
       "key": "create-conicalbar-100-stacked-chart-in-excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-conicalbar100percentstacked-chart/index.md",
       "coverage": {
@@ -3905,7 +3840,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2025-11-17-create-conicalbar100percentstacked-chart/index.md",
           "title": "Create ConicalBar 100% Stacked Chart in Excel using C#",
-          "topic": "Create conicalbar 100 stacked chart in excel",
+          "topic": "Create conicalbar 100 stacked chart in Excel",
           "url": "https://blog.aspose.com/cells/create-conicalbar-100percentstacked-chart-in-excel-using-csharp/"
         },
         "nodejs": {
@@ -3929,7 +3864,7 @@
     {
       "category": "Data Visualization",
       "sub_category": "Charts",
-      "topic": "Create conicalbar chart in excel",
+      "topic": "Create conicalbar chart in Excel",
       "key": "create-conicalbar-chart-in-excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-conicalbar-chart/index.md",
       "coverage": {
@@ -3970,7 +3905,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2025-11-17-create-conicalbar-chart/index.md",
           "title": "Create ConicalBar Chart in Excel using C#",
-          "topic": "Create conicalbar chart in excel",
+          "topic": "Create conicalbar chart in Excel",
           "url": "https://blog.aspose.com/cells/create-conicalbar-chart-in-excel-using-csharp/"
         },
         "nodejs": {
@@ -3994,7 +3929,7 @@
     {
       "category": "Charts",
       "sub_category": "3D Column Chart",
-      "topic": "Create conicalcolumn3d chart in excel",
+      "topic": "Create conicalcolumn3d chart in Excel",
       "key": "create-conicalcolumn3d-chart-in-excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-conicalcolumn3d-chart/index.md",
       "coverage": {
@@ -4035,7 +3970,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2025-11-17-create-conicalcolumn3d-chart/index.md",
           "title": "Create ConicalColumn3D Chart in Excel using C#",
-          "topic": "Create conicalcolumn3d chart in excel",
+          "topic": "Create conicalcolumn3d chart in Excel",
           "url": "https://blog.aspose.com/cells/create-conicalcolumn3d-chart-in-excel-using-csharp/"
         },
         "nodejs": {
@@ -4059,7 +3994,7 @@
     {
       "category": "Charts",
       "sub_category": "Three Dimensional Charts",
-      "topic": "Create cylinder chart in excel",
+      "topic": "Create cylinder chart in Excel",
       "key": "create-cylinder-chart-in-excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-cylinder-chart/index.md",
       "coverage": {
@@ -4100,7 +4035,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2025-11-17-create-cylinder-chart/index.md",
           "title": "Create Cylinder Chart in Excel using C#",
-          "topic": "Create cylinder chart in excel",
+          "topic": "Create cylinder chart in Excel",
           "url": "https://blog.aspose.com/cells/create-cylinder-chart-in-excel-using-csharp/"
         },
         "nodejs": {
@@ -4124,7 +4059,7 @@
     {
       "category": "Data Visualization",
       "sub_category": "Charts",
-      "topic": "Create cylinder100percentstacked chart in excel",
+      "topic": "Create cylinder100percentstacked chart in Excel",
       "key": "create-cylinder100percentstacked-chart-in-excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-cylinder100percentstacked-chart/index.md",
       "coverage": {
@@ -4165,7 +4100,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2025-11-17-create-cylinder100percentstacked-chart/index.md",
           "title": "Create Cylinder100PercentStacked Chart in Excel using C#",
-          "topic": "Create cylinder100percentstacked chart in excel",
+          "topic": "Create cylinder100percentstacked chart in Excel",
           "url": "https://blog.aspose.com/cells/create-cylinder100percentstacked-chart-in-excel-using-csharp/"
         },
         "nodejs": {
@@ -4189,7 +4124,7 @@
     {
       "category": "Spreadsheet",
       "sub_category": "Charts",
-      "topic": "Create cylinderstacked chart in excel",
+      "topic": "Create cylinderstacked chart in Excel",
       "key": "create-cylinderstacked-chart-in-excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-cylinderstacked-chart/index.md",
       "coverage": {
@@ -4230,7 +4165,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2025-11-17-create-cylinderstacked-chart/index.md",
           "title": "Create CylinderStacked Chart in Excel using C#",
-          "topic": "Create cylinderstacked chart in excel",
+          "topic": "Create cylinderstacked chart in Excel",
           "url": "https://blog.aspose.com/cells/create-cylinderstacked-chart-in-excel-using-csharp/"
         },
         "nodejs": {
@@ -4254,7 +4189,7 @@
     {
       "category": "Data Visualization",
       "sub_category": "Excel Charts",
-      "topic": "Create cylindrical bar chart in excel",
+      "topic": "Create cylindrical bar chart in Excel",
       "key": "create-cylindrical-bar-chart-in-excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-cylindricalbar-chart/index.md",
       "coverage": {
@@ -4295,7 +4230,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2025-11-17-create-cylindricalbar-chart/index.md",
           "title": "Create Cylindrical Bar Chart in Excel using C#",
-          "topic": "Create cylindrical bar chart in excel",
+          "topic": "Create cylindrical bar chart in Excel",
           "url": "https://blog.aspose.com/cells/create-cylindrical-bar-chart-in-excel-using-csharp/"
         },
         "nodejs": {
@@ -4319,7 +4254,7 @@
     {
       "category": "Data Visualization",
       "sub_category": "Excel Charts",
-      "topic": "Create cylindricalbar100percentstacked chart in excel",
+      "topic": "Create cylindricalbar100percentstacked chart in Excel",
       "key": "create-cylindricalbar100percentstacked-chart-in-excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-cylindricalbar100percentstacked-chart/index.md",
       "coverage": {
@@ -4360,7 +4295,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2025-11-17-create-cylindricalbar100percentstacked-chart/index.md",
           "title": "Create CylindricalBar100PercentStacked Chart in Excel using C#",
-          "topic": "Create cylindricalbar100percentstacked chart in excel",
+          "topic": "Create cylindricalbar100percentstacked chart in Excel",
           "url": "https://blog.aspose.com/cells/create-cylindricalbar100percentstacked-chart-in-excel-using-csharp/"
         },
         "nodejs": {
@@ -4384,7 +4319,7 @@
     {
       "category": "Data Visualization",
       "sub_category": "Chart Creation",
-      "topic": "Create cylindricalbarstacked chart in excel",
+      "topic": "Create cylindricalbarstacked chart in Excel",
       "key": "create-cylindricalbarstacked-chart-in-excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-cylindricalbarstacked-chart/index.md",
       "coverage": {
@@ -4425,7 +4360,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2025-11-17-create-cylindricalbarstacked-chart/index.md",
           "title": "Create CylindricalBarStacked Chart in Excel using C#",
-          "topic": "Create cylindricalbarstacked chart in excel",
+          "topic": "Create cylindricalbarstacked chart in Excel",
           "url": "https://blog.aspose.com/cells/create-cylindricalbarstacked-chart-in-excel-using-csharp/"
         },
         "nodejs": {
@@ -4449,7 +4384,7 @@
     {
       "category": "Data Visualization",
       "sub_category": "Charts",
-      "topic": "Create cylindricalcolumn3d chart in excel",
+      "topic": "Create cylindricalcolumn3d chart in Excel",
       "key": "create-cylindricalcolumn3d-chart-in-excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-cylindricalcolumn3d-chart/index.md",
       "coverage": {
@@ -4490,7 +4425,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2025-11-17-create-cylindricalcolumn3d-chart/index.md",
           "title": "Create CylindricalColumn3D Chart in Excel using C#",
-          "topic": "Create cylindricalcolumn3d chart in excel",
+          "topic": "Create cylindricalcolumn3d chart in Excel",
           "url": "https://blog.aspose.com/cells/create-cylindricalcolumn3d-chart-in-excel-using-csharp/"
         },
         "nodejs": {
@@ -4514,7 +4449,7 @@
     {
       "category": "Data Visualization",
       "sub_category": "Charts",
-      "topic": "Create doughnut chart in excel",
+      "topic": "Create doughnut chart in Excel",
       "key": "create-doughnut-chart-in-excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-doughnut-chart/index.md",
       "coverage": {
@@ -4555,7 +4490,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2025-11-17-create-doughnut-chart/index.md",
           "title": "Create Doughnut Chart in Excel using C#",
-          "topic": "Create doughnut chart in excel",
+          "topic": "Create doughnut chart in Excel",
           "url": "https://blog.aspose.com/cells/create-doughnut-chart-in-excel-using-csharp/"
         },
         "nodejs": {
@@ -4579,7 +4514,7 @@
     {
       "category": "Data Visualization",
       "sub_category": "Excel Charts",
-      "topic": "Create doughnutexploded chart in excel",
+      "topic": "Create doughnutexploded chart in Excel",
       "key": "create-doughnutexploded-chart-in-excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-doughnutexploded-chart/index.md",
       "coverage": {
@@ -4620,7 +4555,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2025-11-17-create-doughnutexploded-chart/index.md",
           "title": "Create DoughnutExploded Chart in Excel using C#",
-          "topic": "Create doughnutexploded chart in excel",
+          "topic": "Create doughnutexploded chart in Excel",
           "url": "https://blog.aspose.com/cells/create-doughnutexploded-chart-in-excel-using-csharp/"
         },
         "nodejs": {
@@ -4644,7 +4579,7 @@
     {
       "category": "Excel",
       "sub_category": "Dropdown List",
-      "topic": "Create dropdown list in excel",
+      "topic": "Create dropdown list in Excel",
       "key": "create-dropdown-list-in-excel",
       "baseline_record_id": "blog::cells/2025-09-16-create-dropdown-list-in-excel-using-python/index.md",
       "coverage": {
@@ -4701,15 +4636,145 @@
           "score": 1.0,
           "record_id": "blog::cells/2025-09-16-create-dropdown-list-in-excel-using-python/index.md",
           "title": "How to Create a Dropdown List in Excel using Python",
-          "topic": "Create dropdown list in excel",
+          "topic": "Create dropdown list in Excel",
           "url": "https://blog.aspose.com/cells/create-dropdown-list-in-excel-using-python/"
+        }
+      }
+    },
+    {
+      "category": "Spreadsheets",
+      "sub_category": "File Generation",
+      "topic": "Create Excel XLS without ms office",
+      "key": "create-excel-xls-without-ms-office",
+      "baseline_record_id": "blog::cells/2020-01-21-create-excel-xls-xlsx-programmatically-in-csharp-net/index.md",
+      "coverage": {
+        "android_via_java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "cpp": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::cells/2020-10-13-create-excel-xlsx-xls-using-java-without-ms-office/index.md",
+          "title": "Create Excel XLS Files in Java Without MS Office",
+          "topic": "Create Excel XLS without MS office",
+          "url": "https://blog.aspose.com/cells/create-excel-xlsx-xls-using-java-without-ms-office/"
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::cells/2020-01-21-create-excel-xls-xlsx-programmatically-in-csharp-net/index.md",
+          "title": "Create Excel XLS Files in C# without MS Office",
+          "topic": "Create Excel XLS without MS office",
+          "url": "https://blog.aspose.com/cells/create-excel-xls-xlsx-programmatically-in-csharp-net/"
+        },
+        "nodejs": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Office",
+      "sub_category": "Excel",
+      "topic": "Create Excel XLSX XLS",
+      "key": "create-excel-xlsx-xls",
+      "baseline_record_id": "blog::cells/2020-08-05-create-excel-files-in-node.js/index.md",
+      "coverage": {
+        "android_via_java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "cpp": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "nodejs": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::cells/2020-08-05-create-excel-files-in-node.js/index.md",
+          "title": "Create Excel XLSX/XLS File in Node.js - A Complete Guide",
+          "topic": "Create Excel XLSX XLS complete guide",
+          "url": "https://blog.aspose.com/cells/create-excel-files-in-node.js/"
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
         }
       }
     },
     {
       "category": "Data Visualization",
       "sub_category": "Funnel Chart",
-      "topic": "Create funnel chart in excel",
+      "topic": "Create funnel chart in Excel",
       "key": "create-funnel-chart-in-excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-funnel-chart/index.md",
       "coverage": {
@@ -4750,7 +4815,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2025-11-17-create-funnel-chart/index.md",
           "title": "Create Funnel Chart in Excel using C#",
-          "topic": "Create funnel chart in excel",
+          "topic": "Create funnel chart in Excel",
           "url": "https://blog.aspose.com/cells/create-funnel-chart-in-excel-using-csharp/"
         },
         "nodejs": {
@@ -4774,7 +4839,7 @@
     {
       "category": "Data Visualization",
       "sub_category": "Gantt Chart",
-      "topic": "Create gantt chart in excel",
+      "topic": "Create gantt chart in Excel",
       "key": "create-gantt-chart-in-excel",
       "baseline_record_id": "blog::cells/2025-04-15-create-gantt-chart-in-excel-using-csharp/index.md",
       "coverage": {
@@ -4815,7 +4880,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2025-04-15-create-gantt-chart-in-excel-using-csharp/index.md",
           "title": "Create Gantt Chart in Excel using C#",
-          "topic": "Create gantt chart in excel",
+          "topic": "Create gantt chart in Excel",
           "url": "https://blog.aspose.com/cells/create-gantt-chart-in-excel-using-csharp/"
         },
         "nodejs": {
@@ -4831,7 +4896,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2025-07-14-create-gantt-chart-in-excel-using-python/index.md",
           "title": "Create Gantt Chart in Excel using Python",
-          "topic": "Create gantt chart in excel",
+          "topic": "Create gantt chart in Excel",
           "url": "https://blog.aspose.com/cells/create-gantt-chart-in-excel-using-python/"
         }
       }
@@ -4839,7 +4904,7 @@
     {
       "category": "Data Visualization",
       "sub_category": "Histogram",
-      "topic": "Create histogram chart in excel",
+      "topic": "Create histogram chart in Excel",
       "key": "create-histogram-chart-in-excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-histogram-chart/index.md",
       "coverage": {
@@ -4880,7 +4945,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2025-11-17-create-histogram-chart/index.md",
           "title": "Create Histogram Chart in Excel using C#",
-          "topic": "Create histogram chart in excel",
+          "topic": "Create histogram chart in Excel",
           "url": "https://blog.aspose.com/cells/create-histogram-chart-in-excel-using-csharp/"
         },
         "nodejs": {
@@ -4904,7 +4969,7 @@
     {
       "category": "Spreadsheets",
       "sub_category": "Charts",
-      "topic": "Create line chart in excel",
+      "topic": "Create line chart in Excel",
       "key": "create-line-chart-in-excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-line-chart/index.md",
       "coverage": {
@@ -4945,7 +5010,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2025-11-17-create-line-chart/index.md",
           "title": "Create Line Chart in Excel using C#",
-          "topic": "Create line chart in excel",
+          "topic": "Create line chart in Excel",
           "url": "https://blog.aspose.com/cells/create-line-chart-in-excel-using-csharp/"
         },
         "nodejs": {
@@ -4969,7 +5034,7 @@
     {
       "category": "Data Visualization",
       "sub_category": "Stacked Line Charts",
-      "topic": "Create line100percentstacked chart in excel",
+      "topic": "Create line100percentstacked chart in Excel",
       "key": "create-line100percentstacked-chart-in-excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-line100percentstacked-chart/index.md",
       "coverage": {
@@ -5010,7 +5075,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2025-11-17-create-line100percentstacked-chart/index.md",
           "title": "Create Line100PercentStacked Chart in Excel using C#",
-          "topic": "Create line100percentstacked chart in excel",
+          "topic": "Create line100percentstacked chart in Excel",
           "url": "https://blog.aspose.com/cells/create-line100percentstacked-chart-in-excel-using-csharp/"
         },
         "nodejs": {
@@ -5034,7 +5099,7 @@
     {
       "category": "Charts",
       "sub_category": "Excel Chart Creation",
-      "topic": "Create line100percentstackedwithdatamarkers chart in excel",
+      "topic": "Create line100percentstackedwithdatamarkers chart in Excel",
       "key": "create-line100percentstackedwithdatamarkers-chart-in-excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-line100percentstackedwithdatamarkers-chart/index.md",
       "coverage": {
@@ -5075,7 +5140,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2025-11-17-create-line100percentstackedwithdatamarkers-chart/index.md",
           "title": "Create Line100PercentStackedWithDataMarkers Chart in Excel using C#",
-          "topic": "Create line100percentstackedwithdatamarkers chart in excel",
+          "topic": "Create line100percentstackedwithdatamarkers chart in Excel",
           "url": "https://blog.aspose.com/cells/create-line100percentstackedwithdatamarkers-chart-using-csharp/"
         },
         "nodejs": {
@@ -5099,7 +5164,7 @@
     {
       "category": "Data Visualization",
       "sub_category": "3D Charts",
-      "topic": "Create line3d chart in excel",
+      "topic": "Create line3d chart in Excel",
       "key": "create-line3d-chart-in-excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-line3d-chart/index.md",
       "coverage": {
@@ -5140,7 +5205,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2025-11-17-create-line3d-chart/index.md",
           "title": "Create Line3D Chart in Excel using C#",
-          "topic": "Create line3d chart in excel",
+          "topic": "Create line3d chart in Excel",
           "url": "https://blog.aspose.com/cells/create-line3d-chart-in-excel-using-csharp/"
         },
         "nodejs": {
@@ -5164,7 +5229,7 @@
     {
       "category": "Data Visualization",
       "sub_category": "Charts",
-      "topic": "Create linestacked chart in excel",
+      "topic": "Create linestacked chart in Excel",
       "key": "create-linestacked-chart-in-excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-linestacked-chart/index.md",
       "coverage": {
@@ -5205,7 +5270,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2025-11-17-create-linestacked-chart/index.md",
           "title": "Create LineStacked Chart in Excel using C#",
-          "topic": "Create linestacked chart in excel",
+          "topic": "Create linestacked chart in Excel",
           "url": "https://blog.aspose.com/cells/create-linestacked-chart-in-excel-using-csharp/"
         },
         "nodejs": {
@@ -5229,7 +5294,7 @@
     {
       "category": "Data Visualization",
       "sub_category": "Charts",
-      "topic": "Create linestackedwithdatamarkers chart in excel",
+      "topic": "Create linestackedwithdatamarkers chart in Excel",
       "key": "create-linestackedwithdatamarkers-chart-in-excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-linestackedwithdatamarkers-chart/index.md",
       "coverage": {
@@ -5270,7 +5335,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2025-11-17-create-linestackedwithdatamarkers-chart/index.md",
           "title": "Create LineStackedWithDataMarkers Chart in Excel using C#",
-          "topic": "Create linestackedwithdatamarkers chart in excel",
+          "topic": "Create linestackedwithdatamarkers chart in Excel",
           "url": "https://blog.aspose.com/cells/create-linestackedwithdatamarkers-chart-in-excel-using-csharp/"
         },
         "nodejs": {
@@ -5294,7 +5359,7 @@
     {
       "category": "Data Visualization",
       "sub_category": "Line Charts",
-      "topic": "Create linewithdatamarkers chart in excel",
+      "topic": "Create linewithdatamarkers chart in Excel",
       "key": "create-linewithdatamarkers-chart-in-excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-linewithdatamarkers-chart/index.md",
       "coverage": {
@@ -5335,7 +5400,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2025-11-17-create-linewithdatamarkers-chart/index.md",
           "title": "Create LineWithDataMarkers Chart in Excel using C#",
-          "topic": "Create linewithdatamarkers chart in excel",
+          "topic": "Create linewithdatamarkers chart in Excel",
           "url": "https://blog.aspose.com/cells/create-linewithdatamarkers-chart-in-excel-using-csharp/"
         },
         "nodejs": {
@@ -5359,8 +5424,8 @@
     {
       "category": "Spreadsheet",
       "sub_category": "Timeline",
-      "topic": "Create manipulate and render timelines in ms excel using Aspose.Cells",
-      "key": "create-manipulate-and-render-timelines-in-ms-excel-using-aspose-cells",
+      "topic": "Create manipulate and render timelines in ms Excel",
+      "key": "create-manipulate-and-render-timelines-in-ms-excel",
       "baseline_record_id": "blog::cells/2025-06-06-create-manipulate-and-render-timelines-in-ms-excel-files/index.md",
       "coverage": {
         "android_via_java": {
@@ -5400,7 +5465,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2025-06-06-create-manipulate-and-render-timelines-in-ms-excel-files/index.md",
           "title": "Create, manipulate and render Timelines in MS Excel files using Aspose.Cells for .NET",
-          "topic": "Create manipulate and render timelines in MS excel using aspose cells",
+          "topic": "Create manipulate and render timelines in MS Excel using aspose cells",
           "url": "https://blog.aspose.com/cells/create-manipulate-and-render-timelines-using-csharp/"
         },
         "nodejs": {
@@ -5424,8 +5489,8 @@
     {
       "category": "Spreadsheets",
       "sub_category": "Creating Excel Files",
-      "topic": "Create ms excel excel",
-      "key": "create-ms-excel-excel",
+      "topic": "Create ms Excel",
+      "key": "create-ms-excel",
       "baseline_record_id": "blog::cells/2020-08-19-create-excel-xls-xlsx-using-python-excel-api/index.md",
       "coverage": {
         "android_via_java": {
@@ -5481,16 +5546,16 @@
           "score": 1.0,
           "record_id": "blog::cells/2020-08-19-create-excel-xls-xlsx-using-python-excel-api/index.md",
           "title": "Create MS Excel Files using Python - Python Excel API",
-          "topic": "Create MS excel excel API",
+          "topic": "Create MS Excel Excel API",
           "url": "https://blog.aspose.com/cells/create-excel-xls-xlsx-using-python-excel-api/"
         }
       }
     },
     {
-      "category": "Spreadsheet",
-      "sub_category": "Excel File Generation",
-      "topic": "Create ms excel spreadsheets without ms office comprehensive guide",
-      "key": "create-ms-excel-spreadsheets-without-ms-office-comprehensive-guide",
+      "category": "Development",
+      "sub_category": "Spreadsheets",
+      "topic": "Create ms Excel spreadsheets without ms office",
+      "key": "create-ms-excel-spreadsheets-without-ms-office",
       "baseline_record_id": "blog::cells/2020-05-15-create-ms-excel-spreadsheets-xls-xlsx-in-cpp-without-ms-office/index.md",
       "coverage": {
         "android_via_java": {
@@ -5506,8 +5571,8 @@
           "score": 1.0,
           "record_id": "blog::cells/2020-05-15-create-ms-excel-spreadsheets-xls-xlsx-in-cpp-without-ms-office/index.md",
           "title": "Create MS Excel Spreadsheets in C++ without MS Office - A Comprehensive Guide",
-          "topic": "Create MS excel spreadsheets without MS office comprehensive guide",
-          "url": "https://blog.aspose.com/cells/create-ms-excel-spreadsheets-xls-xlsx-in-cpp-without-ms-office/"
+          "topic": "Create MS Excel spreadsheets without MS office comprehensive guide",
+          "url": "aspose.com/cells/create-ms-excel-spreadsheets-xls-xlsx-in-cpp-without-ms-office/"
         },
         "general": {
           "matched": false,
@@ -5554,7 +5619,7 @@
     {
       "category": "Spreadsheets",
       "sub_category": "Excel File Creation",
-      "topic": "Create or edit excel on linux",
+      "topic": "Create or edit Excel on linux",
       "key": "create-or-edit-excel-on-linux",
       "baseline_record_id": "blog::cells/2021-10-08-create-excel-files-on-linux/index.md",
       "coverage": {
@@ -5587,7 +5652,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2021-10-08-create-excel-files-on-linux/index.md",
           "title": "Create or Edit Excel Files on Linux using Java",
-          "topic": "Create or edit excel on linux",
+          "topic": "Create or edit Excel on linux",
           "url": "https://blog.aspose.com/cells/create-excel-files-on-linux/"
         },
         "net": {
@@ -5595,7 +5660,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2021-10-20-create-or-edit-excel-files-on-linux/index.md",
           "title": "Create or Edit Excel Files on Linux using .NET",
-          "topic": "Create or edit excel on linux",
+          "topic": "Create or edit Excel on linux",
           "url": "https://blog.aspose.com/cells/create-or-edit-excel-files-on-linux/"
         },
         "nodejs": {
@@ -5619,7 +5684,7 @@
     {
       "category": "Data Visualization",
       "sub_category": "Excel Charts",
-      "topic": "Create paretoline chart in excel",
+      "topic": "Create paretoline chart in Excel",
       "key": "create-paretoline-chart-in-excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-paretoline-chart/index.md",
       "coverage": {
@@ -5660,7 +5725,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2025-11-17-create-paretoline-chart/index.md",
           "title": "Create ParetoLine Chart in Excel using C#",
-          "topic": "Create paretoline chart in excel",
+          "topic": "Create paretoline chart in Excel",
           "url": "https://blog.aspose.com/cells/create-partoinline-chart-in-excel-using-csharp/"
         },
         "nodejs": {
@@ -5684,7 +5749,7 @@
     {
       "category": "Data Visualization",
       "sub_category": "Charts",
-      "topic": "Create pie chart in excel",
+      "topic": "Create pie chart in Excel",
       "key": "create-pie-chart-in-excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-pie-chart/index.md",
       "coverage": {
@@ -5725,7 +5790,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2025-11-17-create-pie-chart/index.md",
           "title": "Create Pie Chart in Excel using C#",
-          "topic": "Create pie chart in excel",
+          "topic": "Create pie chart in Excel",
           "url": "https://blog.aspose.com/cells/create-pie-chart-in-excel-using-csharp/"
         },
         "nodejs": {
@@ -5749,7 +5814,7 @@
     {
       "category": "Data Visualization",
       "sub_category": "Excel Charts",
-      "topic": "Create pie of pie chart in excel",
+      "topic": "Create pie of pie chart in Excel",
       "key": "create-pie-of-pie-chart-in-excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-piepie-chart/index.md",
       "coverage": {
@@ -5790,7 +5855,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2025-11-17-create-piepie-chart/index.md",
           "title": "Create Pie of Pie Chart in Excel using C#",
-          "topic": "Create pie of pie chart in excel",
+          "topic": "Create pie of pie chart in Excel",
           "url": "https://blog.aspose.com/cells/create-pie-of-pie-chart-in-excel-using-csharp/"
         },
         "nodejs": {
@@ -5814,7 +5879,7 @@
     {
       "category": "Data Visualization",
       "sub_category": "Pie Charts",
-      "topic": "Create pie3d chart in excel",
+      "topic": "Create pie3d chart in Excel",
       "key": "create-pie3d-chart-in-excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-pie3d-chart/index.md",
       "coverage": {
@@ -5855,7 +5920,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2025-11-17-create-pie3d-chart/index.md",
           "title": "Create Pie3D Chart in Excel using C#",
-          "topic": "Create pie3d chart in excel",
+          "topic": "Create pie3d chart in Excel",
           "url": "https://blog.aspose.com/cells/create-pie3d-chart-in-excel-using-csharp/"
         },
         "nodejs": {
@@ -5879,7 +5944,7 @@
     {
       "category": "Data Visualization",
       "sub_category": "Charts and Graphs",
-      "topic": "Create pie3dexploded chart in excel",
+      "topic": "Create pie3dexploded chart in Excel",
       "key": "create-pie3dexploded-chart-in-excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-pie3dexploded-chart/index.md",
       "coverage": {
@@ -5920,7 +5985,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2025-11-17-create-pie3dexploded-chart/index.md",
           "title": "Create Pie3DExploded Chart in Excel using C#",
-          "topic": "Create pie3dexploded chart in excel",
+          "topic": "Create pie3dexploded chart in Excel",
           "url": "https://blog.aspose.com/cells/create-pie3dexploded-chart-in-excel-using-csharp/"
         },
         "nodejs": {
@@ -5944,7 +6009,7 @@
     {
       "category": "Data Visualization",
       "sub_category": "Charts",
-      "topic": "Create piebar chart in excel",
+      "topic": "Create piebar chart in Excel",
       "key": "create-piebar-chart-in-excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-piebar-chart/index.md",
       "coverage": {
@@ -5985,7 +6050,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2025-11-17-create-piebar-chart/index.md",
           "title": "Create PieBar Chart in Excel using C#",
-          "topic": "Create piebar chart in excel",
+          "topic": "Create piebar chart in Excel",
           "url": "https://blog.aspose.com/cells/create-piebar-chart-in-excel-using-csharp/"
         },
         "nodejs": {
@@ -6009,7 +6074,7 @@
     {
       "category": "Data Visualization",
       "sub_category": "Charts",
-      "topic": "Create pieexploded chart in excel",
+      "topic": "Create pieexploded chart in Excel",
       "key": "create-pieexploded-chart-in-excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-pieexploded-chart/index.md",
       "coverage": {
@@ -6050,7 +6115,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2025-11-17-create-pieexploded-chart/index.md",
           "title": "Create PieExploded Chart in Excel using C#",
-          "topic": "Create pieexploded chart in excel",
+          "topic": "Create pieexploded chart in Excel",
           "url": "https://blog.aspose.com/cells/create-pieexploded-chart-in-excel-using-csharp/"
         },
         "nodejs": {
@@ -6074,7 +6139,7 @@
     {
       "category": "Office",
       "sub_category": "Pivot Tables",
-      "topic": "Create pivot tables in excel",
+      "topic": "Create pivot tables in Excel",
       "key": "create-pivot-tables-in-excel",
       "baseline_record_id": "blog::cells/2020-01-10-create-pivot-tables-in-excel-sort-hide-pivot-table-data-programmatically/index.md",
       "coverage": {
@@ -6107,15 +6172,15 @@
           "score": 1.0,
           "record_id": "blog::cells/2021-04-26-create-pivot-tables-in-excel-using-java/index.md",
           "title": "Create Pivot Tables in Excel using Java",
-          "topic": "Create pivot tables in excel",
-          "url": "https://blog.aspose.com/cells/create-pivot-tables-in-excel-using-java/"
+          "topic": "Create pivot tables in Excel",
+          "url": "aspose.com/cells/create-pivot-tables-in-excel-using-java/"
         },
         "net": {
           "matched": true,
           "score": 1.0,
           "record_id": "blog::cells/2020-01-10-create-pivot-tables-in-excel-sort-hide-pivot-table-data-programmatically/index.md",
           "title": "Create Pivot Tables in Excel using C# .NET",
-          "topic": "Create pivot tables in excel",
+          "topic": "Create pivot tables in Excel",
           "url": "https://blog.aspose.com/cells/create-pivot-tables-in-excel-sort-hide-pivot-table-data-programmatically/"
         },
         "nodejs": {
@@ -6131,7 +6196,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2022-08-15-create-pivot-tables-in-excel-in-python/index.md",
           "title": "Create Pivot Tables in Excel using Python",
-          "topic": "Create pivot tables in excel",
+          "topic": "Create pivot tables in Excel",
           "url": "https://blog.aspose.com/cells/create-pivot-tables-in-excel-using-python/"
         }
       }
@@ -6139,7 +6204,7 @@
     {
       "category": "Data Visualization",
       "sub_category": "Excel Charts",
-      "topic": "Create pyramid bar chart in excel",
+      "topic": "Create pyramid bar chart in Excel",
       "key": "create-pyramid-bar-chart-in-excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-pyramidbar-chart/index.md",
       "coverage": {
@@ -6180,7 +6245,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2025-11-17-create-pyramidbar-chart/index.md",
           "title": "Create Pyramid Bar Chart in Excel using C#",
-          "topic": "Create pyramid bar chart in excel",
+          "topic": "Create pyramid bar chart in Excel",
           "url": "https://blog.aspose.com/cells/create-pyramid-bar-chart-in-excel-using-csharp/"
         },
         "nodejs": {
@@ -6204,7 +6269,7 @@
     {
       "category": "Data Visualization",
       "sub_category": "Excel Charts",
-      "topic": "Create pyramid bar stacked chart in excel",
+      "topic": "Create pyramid bar stacked chart in Excel",
       "key": "create-pyramid-bar-stacked-chart-in-excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-pyramidbarstacked-chart/index.md",
       "coverage": {
@@ -6245,7 +6310,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2025-11-17-create-pyramidbarstacked-chart/index.md",
           "title": "Create Pyramid Bar Stacked Chart in Excel using C#",
-          "topic": "Create pyramid bar stacked chart in excel",
+          "topic": "Create pyramid bar stacked chart in Excel",
           "url": "https://blog.aspose.com/cells/create-pyramid-bar-stacked-chart-in-excel-using-csharp/"
         },
         "nodejs": {
@@ -6269,7 +6334,7 @@
     {
       "category": "Data Visualization",
       "sub_category": "Excel Charts",
-      "topic": "Create pyramid chart in excel",
+      "topic": "Create pyramid chart in Excel",
       "key": "create-pyramid-chart-in-excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-pyramid-chart/index.md",
       "coverage": {
@@ -6310,7 +6375,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2025-11-17-create-pyramid-chart/index.md",
           "title": "Create Pyramid Chart in Excel using C#",
-          "topic": "Create pyramid chart in excel",
+          "topic": "Create pyramid chart in Excel",
           "url": "https://blog.aspose.com/cells/create-pyramid-chart-in-excel-using-csharp/"
         },
         "nodejs": {
@@ -6334,7 +6399,7 @@
     {
       "category": "Data Visualization",
       "sub_category": "Excel Charts",
-      "topic": "Create pyramid stacked chart in excel",
+      "topic": "Create pyramid stacked chart in Excel",
       "key": "create-pyramid-stacked-chart-in-excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-pyramidstacked-chart/index.md",
       "coverage": {
@@ -6375,7 +6440,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2025-11-17-create-pyramidstacked-chart/index.md",
           "title": "Create Pyramid Stacked Chart in Excel using C#",
-          "topic": "Create pyramid stacked chart in excel",
+          "topic": "Create pyramid stacked chart in Excel",
           "url": "https://blog.aspose.com/cells/create-pyramid-stacked-chart-in-excel-using-csharp/"
         },
         "nodejs": {
@@ -6399,7 +6464,7 @@
     {
       "category": "Data Visualization",
       "sub_category": "Excel Charts",
-      "topic": "Create pyramid100percentstacked chart in excel",
+      "topic": "Create pyramid100percentstacked chart in Excel",
       "key": "create-pyramid100percentstacked-chart-in-excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-pyramid100percentstacked-chart/index.md",
       "coverage": {
@@ -6440,7 +6505,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2025-11-17-create-pyramid100percentstacked-chart/index.md",
           "title": "Create Pyramid100PercentStacked Chart in Excel using C#",
-          "topic": "Create pyramid100percentstacked chart in excel",
+          "topic": "Create pyramid100percentstacked chart in Excel",
           "url": "https://blog.aspose.com/cells/create-pyramid100percentstacked-chart-in-excel-using-csharp/"
         },
         "nodejs": {
@@ -6464,7 +6529,7 @@
     {
       "category": "Data Visualization",
       "sub_category": "Excel Chart",
-      "topic": "Create pyramidbar100percentstacked chart in excel",
+      "topic": "Create pyramidbar100percentstacked chart in Excel",
       "key": "create-pyramidbar100percentstacked-chart-in-excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-pyramidbar100percentstacked-chart/index.md",
       "coverage": {
@@ -6505,7 +6570,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2025-11-17-create-pyramidbar100percentstacked-chart/index.md",
           "title": "Create PyramidBar100PercentStacked Chart in Excel using C#",
-          "topic": "Create pyramidbar100percentstacked chart in excel",
+          "topic": "Create pyramidbar100percentstacked chart in Excel",
           "url": "https://blog.aspose.com/cells/create-pyramidbar100percentstacked-chart-in-excel-using-csharp/"
         },
         "nodejs": {
@@ -6529,7 +6594,7 @@
     {
       "category": "Spreadsheet",
       "sub_category": "Charts",
-      "topic": "Create pyramidcolumn3d chart in excel",
+      "topic": "Create pyramidcolumn3d chart in Excel",
       "key": "create-pyramidcolumn3d-chart-in-excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-pyramidcolumn3d-chart/index.md",
       "coverage": {
@@ -6570,7 +6635,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2025-11-17-create-pyramidcolumn3d-chart/index.md",
           "title": "Create PyramidColumn3D Chart in Excel using C#",
-          "topic": "Create pyramidcolumn3d chart in excel",
+          "topic": "Create pyramidcolumn3d chart in Excel",
           "url": "https://blog.aspose.com/cells/create-pyramidcolumn3d-chart-in-excel-using-csharp/"
         },
         "nodejs": {
@@ -6594,7 +6659,7 @@
     {
       "category": "Data Visualization",
       "sub_category": "Radar Chart",
-      "topic": "Create radar chart in excel",
+      "topic": "Create radar chart in Excel",
       "key": "create-radar-chart-in-excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-radar-chart/index.md",
       "coverage": {
@@ -6635,7 +6700,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2025-11-17-create-radar-chart/index.md",
           "title": "Create Radar Chart in Excel using C#",
-          "topic": "Create radar chart in excel",
+          "topic": "Create radar chart in Excel",
           "url": "https://blog.aspose.com/cells/create-radar-chart-in-excel-using-csharp/"
         },
         "nodejs": {
@@ -6659,7 +6724,7 @@
     {
       "category": "Data Visualization",
       "sub_category": "Radar chart",
-      "topic": "Create radarfilled chart in excel",
+      "topic": "Create radarfilled chart in Excel",
       "key": "create-radarfilled-chart-in-excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-radarfilled-chart/index.md",
       "coverage": {
@@ -6700,7 +6765,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2025-11-17-create-radarfilled-chart/index.md",
           "title": "Create RadarFilled Chart in Excel using C#",
-          "topic": "Create radarfilled chart in excel",
+          "topic": "Create radarfilled chart in Excel",
           "url": "https://blog.aspose.com/cells/create-radarfilled-chart-in-excel-using-csharp/"
         },
         "nodejs": {
@@ -6724,7 +6789,7 @@
     {
       "category": "Data Visualization",
       "sub_category": "Charts",
-      "topic": "Create radarwithdatamarkers chart in excel",
+      "topic": "Create radarwithdatamarkers chart in Excel",
       "key": "create-radarwithdatamarkers-chart-in-excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-radarwithdatamarkers-chart/index.md",
       "coverage": {
@@ -6765,7 +6830,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2025-11-17-create-radarwithdatamarkers-chart/index.md",
           "title": "Create RadarWithDataMarkers Chart in Excel using C#",
-          "topic": "Create radarwithdatamarkers chart in excel",
+          "topic": "Create radarwithdatamarkers chart in Excel",
           "url": "https://blog.aspose.com/cells/create-radarwithdatamarkers-chart-in-excel-using-csharp/"
         },
         "nodejs": {
@@ -6789,7 +6854,7 @@
     {
       "category": "Data Management",
       "sub_category": "Excel Integration",
-      "topic": "Create read and edit excel spreadsheets in mvc",
+      "topic": "Create read and edit Excel spreadsheets in mvc",
       "key": "create-read-and-edit-excel-spreadsheets-in-mvc",
       "baseline_record_id": "blog::cells/2021-08-25-create-read-edit-excel-spreadsheet-in-asp-net-mvc/index.md",
       "coverage": {
@@ -6830,7 +6895,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2021-08-25-create-read-edit-excel-spreadsheet-in-asp-net-mvc/index.md",
           "title": "Create, Read, and Edit Excel Spreadsheets in ASP.NET MVC",
-          "topic": "Create read and edit excel spreadsheets in MVC",
+          "topic": "Create read and edit Excel spreadsheets in MVC",
           "url": "https://blog.aspose.com/cells/create-read-edit-excel-spreadsheet-in-asp-net-mvc/"
         },
         "nodejs": {
@@ -6854,7 +6919,7 @@
     {
       "category": "Data Visualization",
       "sub_category": "Charts",
-      "topic": "Create scatter chart in excel",
+      "topic": "Create scatter chart in Excel",
       "key": "create-scatter-chart-in-excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-scatter-chart/index.md",
       "coverage": {
@@ -6895,7 +6960,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2025-11-17-create-scatter-chart/index.md",
           "title": "Create Scatter Chart in Excel using C#",
-          "topic": "Create scatter chart in excel",
+          "topic": "Create scatter chart in Excel",
           "url": "https://blog.aspose.com/cells/create-scatter-chart-in-excel-using-csharp/"
         },
         "nodejs": {
@@ -6919,7 +6984,7 @@
     {
       "category": "Spreadsheet",
       "sub_category": "Chart Creation",
-      "topic": "Create scatterconnectedbycurveswithdatamarker chart in excel",
+      "topic": "Create scatterconnectedbycurveswithdatamarker chart in Excel",
       "key": "create-scatterconnectedbycurveswithdatamarker-chart-in-excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-scatterconnectedbycurveswithdatamarker-chart/index.md",
       "coverage": {
@@ -6960,7 +7025,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2025-11-17-create-scatterconnectedbycurveswithdatamarker-chart/index.md",
           "title": "Create ScatterConnectedByCurvesWithDataMarker Chart in Excel using C#",
-          "topic": "Create scatterconnectedbycurveswithdatamarker chart in excel",
+          "topic": "Create scatterconnectedbycurveswithdatamarker chart in Excel",
           "url": "https://blog.aspose.com/cells/create-scatterconnectedbycurveswithdatamarker-chart-using-csharp/"
         },
         "nodejs": {
@@ -6984,7 +7049,7 @@
     {
       "category": "Spreadsheets",
       "sub_category": "Charts",
-      "topic": "Create scatterconnectedbycurveswithoutdatamarker chart in excel",
+      "topic": "Create scatterconnectedbycurveswithoutdatamarker chart in Excel",
       "key": "create-scatterconnectedbycurveswithoutdatamarker-chart-in-excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-scatterconnectedbycurveswithoutdatamarker-chart/index.md",
       "coverage": {
@@ -7025,7 +7090,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2025-11-17-create-scatterconnectedbycurveswithoutdatamarker-chart/index.md",
           "title": "Create ScatterConnectedByCurvesWithoutDataMarker Chart in Excel using C#",
-          "topic": "Create scatterconnectedbycurveswithoutdatamarker chart in excel",
+          "topic": "Create scatterconnectedbycurveswithoutdatamarker chart in Excel",
           "url": "https://blog.aspose.com/cells/create-scatterconnectedbycurveswithoutdatamarker-chart-using-csharp/"
         },
         "nodejs": {
@@ -7049,7 +7114,7 @@
     {
       "category": "Data Visualization",
       "sub_category": "Scatter Chart",
-      "topic": "Create scatterconnectedbylineswithdatamarker chart in excel",
+      "topic": "Create scatterconnectedbylineswithdatamarker chart in Excel",
       "key": "create-scatterconnectedbylineswithdatamarker-chart-in-excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-scatterconnectedbylineswithdatamarker-chart/index.md",
       "coverage": {
@@ -7090,7 +7155,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2025-11-17-create-scatterconnectedbylineswithdatamarker-chart/index.md",
           "title": "Create ScatterConnectedByLinesWithDataMarker Chart in Excel using C#",
-          "topic": "Create scatterconnectedbylineswithdatamarker chart in excel",
+          "topic": "Create scatterconnectedbylineswithdatamarker chart in Excel",
           "url": "https://blog.aspose.com/cells/create-scatterconnectedbylineswithdatamarker-chart-using-csharp/"
         },
         "nodejs": {
@@ -7114,7 +7179,7 @@
     {
       "category": "Data Visualization",
       "sub_category": "Charts",
-      "topic": "Create scatterconnectedbylineswithoutdatamarker chart in excel",
+      "topic": "Create scatterconnectedbylineswithoutdatamarker chart in Excel",
       "key": "create-scatterconnectedbylineswithoutdatamarker-chart-in-excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-scatterconnectedbylineswithoutdatamarker-chart/index.md",
       "coverage": {
@@ -7155,7 +7220,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2025-11-17-create-scatterconnectedbylineswithoutdatamarker-chart/index.md",
           "title": "Create ScatterConnectedByLinesWithoutDataMarker Chart in Excel using C#",
-          "topic": "Create scatterconnectedbylineswithoutdatamarker chart in excel",
+          "topic": "Create scatterconnectedbylineswithoutdatamarker chart in Excel",
           "url": "https://blog.aspose.com/cells/create-scatterconnectedbylineswithoutdatamarker-chart-in-excel-using-csharp/"
         },
         "nodejs": {
@@ -7179,7 +7244,7 @@
     {
       "category": "Office",
       "sub_category": "Excel",
-      "topic": "Create sparkline charts in excel",
+      "topic": "Create sparkline charts in Excel",
       "key": "create-sparkline-charts-in-excel",
       "baseline_record_id": "blog::cells/2024-10-15-create-sparkline-in-excel-using-python/index.md",
       "coverage": {
@@ -7236,7 +7301,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2024-10-15-create-sparkline-in-excel-using-python/index.md",
           "title": "Create Sparkline Charts in Excel using Python",
-          "topic": "Create sparkline charts in excel",
+          "topic": "Create sparkline charts in Excel",
           "url": "https://blog.aspose.com/cells/create-sparkline-charts-in-excel-using-python/"
         }
       }
@@ -7244,7 +7309,7 @@
     {
       "category": "Data Visualization",
       "sub_category": "Sparklines",
-      "topic": "Create sparklines in excel",
+      "topic": "Create sparklines in Excel",
       "key": "create-sparklines-in-excel",
       "baseline_record_id": "blog::cells/2024-09-25-create-sparklines-in-excel-using-csharp/index.md",
       "coverage": {
@@ -7285,7 +7350,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2024-09-25-create-sparklines-in-excel-using-csharp/index.md",
           "title": "Create Sparklines in Excel using C#",
-          "topic": "Create sparklines in excel",
+          "topic": "Create sparklines in Excel",
           "url": "https://blog.aspose.com/cells/create-sparklines-in-excel-using-csharp/"
         },
         "nodejs": {
@@ -7309,7 +7374,7 @@
     {
       "category": "Data Visualization",
       "sub_category": "Financial Charts",
-      "topic": "Create stock open high low close chart in excel",
+      "topic": "Create stock open high low close chart in Excel",
       "key": "create-stock-open-high-low-close-chart-in-excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-stockopenhighlowclose-chart/index.md",
       "coverage": {
@@ -7350,7 +7415,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2025-11-17-create-stockopenhighlowclose-chart/index.md",
           "title": "Create Stock Open‑High‑Low‑Close Chart in Excel using C#",
-          "topic": "Create stock open high low close chart in excel",
+          "topic": "Create stock open high low close chart in Excel",
           "url": "https://blog.aspose.com/cells/create-stock-open-high-low-close-chart-in-excel-using-csharp/"
         },
         "nodejs": {
@@ -7374,7 +7439,7 @@
     {
       "category": "Data Visualization",
       "sub_category": "Charts",
-      "topic": "Create stockhighlowclose chart in excel",
+      "topic": "Create stockhighlowclose chart in Excel",
       "key": "create-stockhighlowclose-chart-in-excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-stockhighlowclose-chart/index.md",
       "coverage": {
@@ -7415,7 +7480,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2025-11-17-create-stockhighlowclose-chart/index.md",
           "title": "Create StockHighLowClose Chart in Excel using C#",
-          "topic": "Create stockhighlowclose chart in excel",
+          "topic": "Create stockhighlowclose chart in Excel",
           "url": "https://blog.aspose.com/cells/create-stockhighlowclose-chart-in-excel-using-csharp/"
         },
         "nodejs": {
@@ -7439,7 +7504,7 @@
     {
       "category": "Data Visualization",
       "sub_category": "Charts",
-      "topic": "Create stockvolumehighlowclose chart in excel",
+      "topic": "Create stockvolumehighlowclose chart in Excel",
       "key": "create-stockvolumehighlowclose-chart-in-excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-stockvolumehighlowclose-chart/index.md",
       "coverage": {
@@ -7480,7 +7545,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2025-11-17-create-stockvolumehighlowclose-chart/index.md",
           "title": "Create StockVolumeHighLowClose Chart in Excel using C#",
-          "topic": "Create stockvolumehighlowclose chart in excel",
+          "topic": "Create stockvolumehighlowclose chart in Excel",
           "url": "https://blog.aspose.com/cells/create-stockvolumehighlowclose-chart-in-excel-using-csharp/"
         },
         "nodejs": {
@@ -7504,7 +7569,7 @@
     {
       "category": "Data Visualization",
       "sub_category": "Financial Charts",
-      "topic": "Create stockvolumeopenhighlowclose chart in excel",
+      "topic": "Create stockvolumeopenhighlowclose chart in Excel",
       "key": "create-stockvolumeopenhighlowclose-chart-in-excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-stockvolumeopenhighlowclose-chart/index.md",
       "coverage": {
@@ -7545,7 +7610,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2025-11-17-create-stockvolumeopenhighlowclose-chart/index.md",
           "title": "Create StockVolumeOpenHighLowClose Chart in Excel using C#",
-          "topic": "Create stockvolumeopenhighlowclose chart in excel",
+          "topic": "Create stockvolumeopenhighlowclose chart in Excel",
           "url": "https://blog.aspose.com/cells/create-stockvolumeopenhighlowclose-chart-in-excel-using-csharp/"
         },
         "nodejs": {
@@ -7569,7 +7634,7 @@
     {
       "category": "Data Visualization",
       "sub_category": "Sunburst Chart",
-      "topic": "Create sunburst chart in excel",
+      "topic": "Create sunburst chart in Excel",
       "key": "create-sunburst-chart-in-excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-sunburst-chart/index.md",
       "coverage": {
@@ -7610,7 +7675,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2025-11-17-create-sunburst-chart/index.md",
           "title": "Create Sunburst Chart in Excel using C#",
-          "topic": "Create sunburst chart in excel",
+          "topic": "Create sunburst chart in Excel",
           "url": "https://blog.aspose.com/cells/create-sunburst-chart-in-excel-using-csharp/"
         },
         "nodejs": {
@@ -7634,7 +7699,7 @@
     {
       "category": "Charts",
       "sub_category": "3D Surface Chart",
-      "topic": "Create surface3d chart in excel",
+      "topic": "Create surface3d chart in Excel",
       "key": "create-surface3d-chart-in-excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-surface3d-chart/index.md",
       "coverage": {
@@ -7675,7 +7740,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2025-11-17-create-surface3d-chart/index.md",
           "title": "Create Surface3D Chart in Excel using C#",
-          "topic": "Create surface3d chart in excel",
+          "topic": "Create surface3d chart in Excel",
           "url": "https://blog.aspose.com/cells/create-surface3d-chart-in-excel-using-csharp/"
         },
         "nodejs": {
@@ -7699,7 +7764,7 @@
     {
       "category": "Data Visualization",
       "sub_category": "Surface Contour Chart",
-      "topic": "Create surfacecontour chart in excel",
+      "topic": "Create surfacecontour chart in Excel",
       "key": "create-surfacecontour-chart-in-excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-surfacecontour-chart/index.md",
       "coverage": {
@@ -7740,7 +7805,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2025-11-17-create-surfacecontour-chart/index.md",
           "title": "Create SurfaceContour Chart in Excel using C#",
-          "topic": "Create surfacecontour chart in excel",
+          "topic": "Create surfacecontour chart in Excel",
           "url": "https://blog.aspose.com/cells/create-surfacecontour-chart-in-excel-using-csharp/"
         },
         "nodejs": {
@@ -7764,7 +7829,7 @@
     {
       "category": "Data Visualization",
       "sub_category": "3D Surface Charts",
-      "topic": "Create surfacecontourwireframe chart in excel",
+      "topic": "Create surfacecontourwireframe chart in Excel",
       "key": "create-surfacecontourwireframe-chart-in-excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-surfacecontourwireframe-chart/index.md",
       "coverage": {
@@ -7805,7 +7870,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2025-11-17-create-surfacecontourwireframe-chart/index.md",
           "title": "Create SurfaceContourWireframe Chart in Excel using C#",
-          "topic": "Create surfacecontourwireframe chart in excel",
+          "topic": "Create surfacecontourwireframe chart in Excel",
           "url": "https://blog.aspose.com/cells/create-surfacecontourwireframe-chart-using-csharp/"
         },
         "nodejs": {
@@ -7829,7 +7894,7 @@
     {
       "category": "Data Visualization",
       "sub_category": "3D Charts",
-      "topic": "Create surfacewireframe3d chart in excel",
+      "topic": "Create surfacewireframe3d chart in Excel",
       "key": "create-surfacewireframe3d-chart-in-excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-surfacewireframe3d-chart/index.md",
       "coverage": {
@@ -7870,7 +7935,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2025-11-17-create-surfacewireframe3d-chart/index.md",
           "title": "Create SurfaceWireframe3D Chart in Excel using C#",
-          "topic": "Create surfacewireframe3d chart in excel",
+          "topic": "Create surfacewireframe3d chart in Excel",
           "url": "https://blog.aspose.com/cells/create-surfacewireframe3d-chart-in-excel-using-csharp/"
         },
         "nodejs": {
@@ -7894,7 +7959,7 @@
     {
       "category": "Data Visualization",
       "sub_category": "Charts",
-      "topic": "Create tornado charts in excel",
+      "topic": "Create tornado charts in Excel",
       "key": "create-tornado-charts-in-excel",
       "baseline_record_id": "blog::cells/2024-04-19-tornado-charts-in-excel-using-csharp/index.md",
       "coverage": {
@@ -7935,7 +8000,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2024-04-19-tornado-charts-in-excel-using-csharp/index.md",
           "title": "Create Tornado Charts in Excel using C#",
-          "topic": "Create tornado charts in excel",
+          "topic": "Create tornado charts in Excel",
           "url": "https://blog.aspose.com/cells/tornado-charts-in-excel-using-csharp/"
         },
         "nodejs": {
@@ -7951,7 +8016,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2024-07-08-create-tornado-charts-in-excel-using-python/index.md",
           "title": "Create Tornado Charts in Excel using Python",
-          "topic": "Create tornado charts in excel",
+          "topic": "Create tornado charts in Excel",
           "url": "https://blog.aspose.com/cells/create-tornado-charts-in-excel-using-python/"
         }
       }
@@ -7959,7 +8024,7 @@
     {
       "category": "Data Visualization",
       "sub_category": "Charts",
-      "topic": "Create treemap chart in excel",
+      "topic": "Create treemap chart in Excel",
       "key": "create-treemap-chart-in-excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-treemap-chart/index.md",
       "coverage": {
@@ -8000,7 +8065,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2025-11-17-create-treemap-chart/index.md",
           "title": "Create Treemap Chart in Excel using C#",
-          "topic": "Create treemap chart in excel",
+          "topic": "Create treemap chart in Excel",
           "url": "https://blog.aspose.com/cells/create-treemap-chart-in-excel-using-csharp/"
         },
         "nodejs": {
@@ -8024,7 +8089,7 @@
     {
       "category": "Data Visualization",
       "sub_category": "Excel Charts",
-      "topic": "Create waterfall chart in excel",
+      "topic": "Create waterfall chart in Excel",
       "key": "create-waterfall-chart-in-excel",
       "baseline_record_id": "blog::cells/2025-11-17-create-waterfall-chart/index.md",
       "coverage": {
@@ -8065,7 +8130,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2025-11-17-create-waterfall-chart/index.md",
           "title": "Create Waterfall Chart in Excel using C#",
-          "topic": "Create waterfall chart in excel",
+          "topic": "Create waterfall chart in Excel",
           "url": "https://blog.aspose.com/cells/create-waterfall-chart-in-excel-using-csharp/"
         },
         "nodejs": {
@@ -8088,18 +8153,18 @@
     },
     {
       "category": "Spreadsheets",
-      "sub_category": "File Generation",
+      "sub_category": "Excel File Creation and Editing",
       "topic": "Create XLSX",
       "key": "create-xlsx",
-      "baseline_record_id": "blog::cells/2020-01-21-create-excel-xls-xlsx-programmatically-in-csharp-net/index.md",
+      "baseline_record_id": "blog::cells/2021-06-18-create-excel-file-in-android-programmatically/index.md",
       "coverage": {
         "android_via_java": {
           "matched": true,
           "score": 1.0,
           "record_id": "blog::cells/2021-06-18-create-excel-file-in-android-programmatically/index.md",
           "title": "Create Excel File in Android Programmatically",
-          "topic": "Create excel",
-          "url": "https://blog.aspose.com/cells/create-excel-file-in-android-programmatically/"
+          "topic": "Create Excel",
+          "url": "aspose.com/cells/create-excel-file-in-android-programmatically/"
         },
         "cpp": {
           "matched": false,
@@ -8118,35 +8183,35 @@
           "url": null
         },
         "java": {
-          "matched": true,
-          "score": 1.0,
-          "record_id": "blog::cells/2020-10-13-create-excel-xlsx-xls-using-java-without-ms-office/index.md",
-          "title": "Create Excel XLS Files in Java Without MS Office",
-          "topic": "Create excel XLS without MS office",
-          "url": "https://blog.aspose.com/cells/create-excel-xlsx-xls-using-java-without-ms-office/"
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
         },
         "net": {
-          "matched": true,
-          "score": 1.0,
-          "record_id": "blog::cells/2020-01-21-create-excel-xls-xlsx-programmatically-in-csharp-net/index.md",
-          "title": "Create Excel XLS Files in C# without MS Office",
-          "topic": "Create excel XLS without MS office",
-          "url": "https://blog.aspose.com/cells/create-excel-xls-xlsx-programmatically-in-csharp-net/"
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
         },
         "nodejs": {
-          "matched": true,
-          "score": 1.0,
-          "record_id": "blog::cells/2020-08-05-create-excel-files-in-node.js/index.md",
-          "title": "Create Excel XLSX/XLS File in Node.js - A Complete Guide",
-          "topic": "Create excel XLSX XLS complete guide",
-          "url": "https://blog.aspose.com/cells/create-excel-files-in-node.js/"
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
         },
         "python": {
           "matched": true,
           "score": 1.0,
           "record_id": "blog::cells/2023-12-05-create-excel-xls-xlsx-files/index.md",
           "title": "Create Excel Files in C#, Java, Python, C++, PHP, and Node.js",
-          "topic": "Create excel",
+          "topic": "Create Excel",
           "url": "https://blog.aspose.com/cells/programmatically-create-excel-files/"
         }
       }
@@ -8196,7 +8261,7 @@
           "record_id": "blog::cells/2020-11-24-convert-csv-json-charp-vb-net/index.md",
           "title": "Convert JSON to CSV and CSV to JSON using C# or VB.NET",
           "topic": "JSON to CSV",
-          "url": "https://blog.aspose.com/cells/convert-csv-json-charp-vb-net/"
+          "url": "aspose.com/cells/convert-csv-json-charp-vb-net/"
         },
         "nodejs": {
           "matched": false,
@@ -8412,8 +8477,8 @@
       }
     },
     {
-      "category": "File Conversion",
-      "sub_category": "Spreadsheet Conversion",
+      "category": "Data Conversion",
+      "sub_category": "File Format Conversion",
       "topic": "CSV to XLSX",
       "key": "csv-to-xlsx",
       "baseline_record_id": "blog::cells/2020-09-10-convert-csv-excel-java/index.md",
@@ -8431,7 +8496,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2021-03-25-convert-excel-to-csv-and-csv-to-excel-using-cpp/index.md",
           "title": "Convert Excel to CSV and CSV to Excel using C++",
-          "topic": "Excel to CSV and CSV to excel",
+          "topic": "Excel to CSV and CSV to Excel",
           "url": "https://blog.aspose.com/cells/convert-excel-to-csv-and-csv-to-excel-using-cpp/"
         },
         "general": {
@@ -8439,7 +8504,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2023-02-02-csv-to-excel-online-free/index.md",
           "title": "Convert CSV to Excel Online - Free Converter",
-          "topic": "CSV to excel",
+          "topic": "CSV to Excel",
           "url": "https://blog.aspose.com/cells/convert-csv-to-excel-online/"
         },
         "java": {
@@ -8447,23 +8512,23 @@
           "score": 1.0,
           "record_id": "blog::cells/2020-09-10-convert-csv-excel-java/index.md",
           "title": "Convert CSV to Excel in Java",
-          "topic": "CSV to excel",
-          "url": "https://blog.aspose.com/cells/convert-csv-excel-java/"
+          "topic": "CSV to Excel",
+          "url": "aspose.com/cells/convert-csv-excel-java/"
         },
         "net": {
           "matched": true,
           "score": 1.0,
           "record_id": "blog::cells/2020-11-17-csv-excel-csharp-vb-net/index.md",
           "title": "Convert CSV to Excel XLS in C# .NET",
-          "topic": "CSV to excel XLS",
-          "url": "https://blog.aspose.com/cells/csv-excel-csharp-vb-net/"
+          "topic": "CSV to Excel XLS",
+          "url": "aspose.com/cells/csv-excel-csharp-vb-net/"
         },
         "nodejs": {
           "matched": true,
           "score": 1.0,
           "record_id": "blog::cells/2021-04-28-convert-csv-to-excel-or-excel-to-csv-in-nodejs/index.md",
           "title": "Convert CSV to Excel or Excel to CSV in Node.js",
-          "topic": "CSV to excel or excel to CSV",
+          "topic": "CSV to Excel or Excel to CSV",
           "url": "https://blog.aspose.com/cells/convert-csv-to-excel-or-excel-to-csv-in-nodejs/"
         },
         "python": {
@@ -8471,7 +8536,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2021-05-17-convert-csv-to-excel-in-python/index.md",
           "title": "Convert CSV to Excel in Python",
-          "topic": "CSV to excel",
+          "topic": "CSV to Excel",
           "url": "https://blog.aspose.com/cells/convert-csv-to-excel-in-python/"
         }
       }
@@ -8544,7 +8609,7 @@
     {
       "category": "Office",
       "sub_category": "Excel",
-      "topic": "Customize globalization SETTINGS in excel",
+      "topic": "Customize globalization SETTINGS in Excel",
       "key": "customize-globalization-settings-in-excel",
       "baseline_record_id": "blog::cells/2025-06-20-customize-globalization-settings-in-excel-dotnet/index.md",
       "coverage": {
@@ -8577,7 +8642,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2025-06-27-customize-globalization-settings-in-excel-java/index.md",
           "title": "Customize Globalization Settings in Excel using Java",
-          "topic": "Customize globalization settings in excel",
+          "topic": "Customize globalization settings in Excel",
           "url": "https://blog.aspose.com/cells/customize-globalization-settings-in-excel-using-java/"
         },
         "net": {
@@ -8585,7 +8650,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2025-06-20-customize-globalization-settings-in-excel-dotnet/index.md",
           "title": "Customize Globalization Settings in Excel using C#",
-          "topic": "Customize globalization settings in excel",
+          "topic": "Customize globalization settings in Excel",
           "url": "https://blog.aspose.com/cells/customize-globalization-settings-in-excel-using-csharp/"
         },
         "nodejs": {
@@ -8609,7 +8674,7 @@
     {
       "category": "Spreadsheet",
       "sub_category": "Data Validation",
-      "topic": "Data validation in excel",
+      "topic": "Data validation in Excel",
       "key": "data-validation-in-excel",
       "baseline_record_id": "blog::cells/2025-04-23-data-validation-in-excel-using-python/index.md",
       "coverage": {
@@ -8666,7 +8731,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2025-04-23-data-validation-in-excel-using-python/index.md",
           "title": "Data Validation in Excel Using Python",
-          "topic": "Data validation in excel",
+          "topic": "Data validation in Excel",
           "url": "https://blog.aspose.com/cells/data-validation-in-excel-using-python/"
         }
       }
@@ -8674,7 +8739,7 @@
     {
       "category": "Data Processing",
       "sub_category": "Excel Data Cleaning",
-      "topic": "Delete blank rows and columns in excel",
+      "topic": "Delete blank rows and columns in Excel",
       "key": "delete-blank-rows-and-columns-in-excel",
       "baseline_record_id": "blog::cells/2024-01-15-delete-blank-rows-and-columns-in-excel-using-python/index.md",
       "coverage": {
@@ -8715,7 +8780,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2024-11-01-delete-blank-rows-and-columns-in-excel-using-csharp/index.md",
           "title": "Delete Blank Rows and Columns in Excel using C#",
-          "topic": "Delete blank rows and columns in excel",
+          "topic": "Delete blank rows and columns in Excel",
           "url": "https://blog.aspose.com/cells/delete-blank-rows-and-columns-in-excel-using-csharp/"
         },
         "nodejs": {
@@ -8731,7 +8796,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2024-01-15-delete-blank-rows-and-columns-in-excel-using-python/index.md",
           "title": "Delete Blank Rows and Columns in Excel using Python",
-          "topic": "Delete blank rows and columns in excel",
+          "topic": "Delete blank rows and columns in Excel",
           "url": "https://blog.aspose.com/cells/delete-blank-rows-and-columns-in-excel-using-python/"
         }
       }
@@ -8739,7 +8804,7 @@
     {
       "category": "Data Processing",
       "sub_category": "Duplicate Removal",
-      "topic": "Delete duplicate rows in excel",
+      "topic": "Delete duplicate rows in Excel",
       "key": "delete-duplicate-rows-in-excel",
       "baseline_record_id": "blog::cells/2025-04-11-delete-duplicate-rows-in-excel-using-python/index.md",
       "coverage": {
@@ -8796,7 +8861,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2025-04-11-delete-duplicate-rows-in-excel-using-python/index.md",
           "title": "Delete Duplicate Rows in Excel using Python",
-          "topic": "Delete duplicate rows in excel",
+          "topic": "Delete duplicate rows in Excel",
           "url": "https://blog.aspose.com/cells/delete-duplicate-rows-in-excel-using-python/"
         }
       }
@@ -8804,7 +8869,7 @@
     {
       "category": "Data Processing",
       "sub_category": "Pivot Table Operations",
-      "topic": "Delete pivot table from excel sheet",
+      "topic": "Delete pivot table from Excel sheet",
       "key": "delete-pivot-table-from-excel-sheet",
       "baseline_record_id": "blog::cells/2025-11-12-delete-pivot-table-from-excel-in-python/index.md",
       "coverage": {
@@ -8861,7 +8926,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2025-11-12-delete-pivot-table-from-excel-in-python/index.md",
           "title": "How to Delete Pivot Table from Excel Sheet in Python",
-          "topic": "Delete pivot table from excel sheet",
+          "topic": "Delete pivot table from Excel sheet",
           "url": "https://blog.aspose.com/cells/delete-pivot-table-from-excel-in-python/"
         }
       }
@@ -8869,7 +8934,7 @@
     {
       "category": "Spreadsheet",
       "sub_category": "Compatibility",
-      "topic": "Disable compatibility checker in excel",
+      "topic": "Disable compatibility checker in Excel",
       "key": "disable-compatibility-checker-in-excel",
       "baseline_record_id": "blog::cells/2021-10-10-disable-compatibility-checker-in-excel-csharp/index.md",
       "coverage": {
@@ -8894,7 +8959,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2021-10-10-disable-compatibility-checker-in-excel-csharp/index.md",
           "title": "Disable Compatibility Checker in Excel Files using C#",
-          "topic": "Disable compatibility checker in excel",
+          "topic": "Disable compatibility checker in Excel",
           "url": "https://blog.aspose.com/cells/disable-compatibility-checker-in-excel-csharp/"
         },
         "java": {
@@ -8902,7 +8967,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2021-11-08-disable-excel-compatibility-checker-in-java/index.md",
           "title": "Disable Compatibility Checker in Excel Files using Java",
-          "topic": "Disable compatibility checker in excel",
+          "topic": "Disable compatibility checker in Excel",
           "url": "https://blog.aspose.com/cells/disable-excel-compatibility-checker-in-java/"
         },
         "net": {
@@ -8926,16 +8991,16 @@
           "score": 1.0,
           "record_id": "blog::cells/2021-12-08-disable-excel-compatibility-checker-in-python/index.md",
           "title": "Disable Compatibility Checker in Excel in Python",
-          "topic": "Disable compatibility checker in excel",
+          "topic": "Disable compatibility checker in Excel",
           "url": "https://blog.aspose.com/cells/disable-excel-compatibility-checker-in-python/"
         }
       }
     },
     {
-      "category": "Spreadsheet",
-      "sub_category": "Encryption",
-      "topic": "Encrypt and decrypt excel",
-      "key": "encrypt-and-decrypt-excel",
+      "category": "File Management",
+      "sub_category": "Excel",
+      "topic": "Encrypt or decrypt Excel",
+      "key": "encrypt-or-decrypt-excel",
       "baseline_record_id": "blog::cells/2021-01-14-encrypt-and-decrypt-excel-files-using-csharp/index.md",
       "coverage": {
         "android_via_java": {
@@ -8967,7 +9032,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2021-02-02-encrypt-and-decrypt-excel-files-using-java/index.md",
           "title": "Encrypt and Decrypt Excel Files using Java",
-          "topic": "Encrypt and decrypt excel",
+          "topic": "Encrypt and decrypt Excel",
           "url": "https://blog.aspose.com/cells/encrypt-and-decrypt-excel-files-using-java/"
         },
         "net": {
@@ -8975,89 +9040,24 @@
           "score": 1.0,
           "record_id": "blog::cells/2021-01-14-encrypt-and-decrypt-excel-files-using-csharp/index.md",
           "title": "Encrypt and Decrypt Excel Files using C#",
-          "topic": "Encrypt and decrypt excel",
-          "url": "https://blog.aspose.com/cells/encrypt-and-decrypt-excel-files-using-csharp/"
-        },
-        "nodejs": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "python": {
-          "matched": true,
-          "score": 1.0,
-          "record_id": "blog::cells/2021-06-01-encrypt-and-decrypt-excel-files-in-python/index.md",
-          "title": "Encrypt and Decrypt Excel Files in Python",
-          "topic": "Encrypt and decrypt excel",
-          "url": "https://blog.aspose.com/cells/encrypt-and-decrypt-excel-files-in-python/"
-        }
-      }
-    },
-    {
-      "category": "Spreadsheet",
-      "sub_category": "Encryption",
-      "topic": "Encrypt or decrypt excel",
-      "key": "encrypt-or-decrypt-excel",
-      "baseline_record_id": "blog::cells/2021-10-14-encrypt-or-decrypt-excel-files-in-node-js/index.md",
-      "coverage": {
-        "android_via_java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "cpp": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "general": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "net": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
+          "topic": "Encrypt and decrypt Excel",
+          "url": "aspose.com/cells/encrypt-and-decrypt-excel-files-using-csharp/"
         },
         "nodejs": {
           "matched": true,
           "score": 1.0,
           "record_id": "blog::cells/2021-10-14-encrypt-or-decrypt-excel-files-in-node-js/index.md",
           "title": "Encrypt or Decrypt Excel Files in Node.js",
-          "topic": "Encrypt or decrypt excel",
+          "topic": "Encrypt or decrypt Excel",
           "url": "https://blog.aspose.com/cells/encrypt-or-decrypt-excel-files-in-node-js/"
         },
         "python": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::cells/2021-06-01-encrypt-and-decrypt-excel-files-in-python/index.md",
+          "title": "Encrypt and Decrypt Excel Files in Python",
+          "topic": "Encrypt and decrypt Excel",
+          "url": "https://blog.aspose.com/cells/encrypt-and-decrypt-excel-files-in-python/"
         }
       }
     },
@@ -9128,7 +9128,7 @@
     },
     {
       "category": "Data Integration",
-      "sub_category": "Excel To DataTable",
+      "sub_category": "Excel to DataTable",
       "topic": "Excel data to datatables",
       "key": "excel-data-to-datatables",
       "baseline_record_id": "blog::cells/2021-01-01-export-data-from-excel-to-datatables-in-csharp/index.md",
@@ -9171,7 +9171,7 @@
           "record_id": "blog::cells/2021-01-01-export-data-from-excel-to-datatables-in-csharp/index.md",
           "title": "Convert Excel Data to DataTables in C#",
           "topic": "Excel data to datatables",
-          "url": "https://blog.aspose.com/cells/export-data-from-excel-to-datatables-in-csharp/"
+          "url": "aspose.com/cells/export-data-from-excel-to-datatables-in-csharp/"
         },
         "nodejs": {
           "matched": false,
@@ -9259,7 +9259,7 @@
     {
       "category": "Office",
       "sub_category": "Spreadsheet Editing",
-      "topic": "Excel editor edit excel",
+      "topic": "Excel editor edit Excel",
       "key": "excel-editor-edit-excel",
       "baseline_record_id": "blog::cells/2023-11-28-online-excel-editor/index.md",
       "coverage": {
@@ -9268,7 +9268,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2023-11-28-online-excel-editor/index.md",
           "title": "Online Excel Editor - Edit Excel Files for Free",
-          "topic": "Excel editor edit excel",
+          "topic": "Excel editor edit Excel",
           "url": "https://blog.aspose.com/cells/edit-excel-files-online/"
         },
         "cpp": {
@@ -9324,8 +9324,8 @@
     {
       "category": "Data Conversion",
       "sub_category": "Excel to List",
-      "topic": "Excel range to list using Aspose.Cells",
-      "key": "excel-range-to-list-using-aspose-cells",
+      "topic": "Excel range to list",
+      "key": "excel-range-to-list",
       "baseline_record_id": "blog::cells/2025-09-14-convert-range-of-excel-to-list-in-python/index.md",
       "coverage": {
         "android_via_java": {
@@ -9517,11 +9517,11 @@
       }
     },
     {
-      "category": "File Conversion",
+      "category": "File Format Conversion",
       "sub_category": "Spreadsheet to Image",
       "topic": "Excel to image",
       "key": "excel-to-image",
-      "baseline_record_id": "blog::cells/2021-03-10-convert-excel-files-to-image-in-java/index.md",
+      "baseline_record_id": "blog::cells/2021-01-28-convert-excel-files-to-images-using-cpp/index.md",
       "coverage": {
         "android_via_java": {
           "matched": false,
@@ -9532,12 +9532,12 @@
           "url": null
         },
         "cpp": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::cells/2021-01-28-convert-excel-files-to-images-using-cpp/index.md",
+          "title": "Convert Excel Files to Images using C++",
+          "topic": "Excel to images",
+          "url": "https://blog.aspose.com/cells/convert-excel-files-to-images-using-cpp/"
         },
         "general": {
           "matched": false,
@@ -9582,75 +9582,10 @@
       }
     },
     {
-      "category": "File Format Conversion",
-      "sub_category": "Spreadsheet to Image",
-      "topic": "Excel to images",
-      "key": "excel-to-images",
-      "baseline_record_id": "blog::cells/2021-01-28-convert-excel-files-to-images-using-cpp/index.md",
-      "coverage": {
-        "android_via_java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "cpp": {
-          "matched": true,
-          "score": 1.0,
-          "record_id": "blog::cells/2021-01-28-convert-excel-files-to-images-using-cpp/index.md",
-          "title": "Convert Excel Files to Images using C++",
-          "topic": "Excel to images",
-          "url": "https://blog.aspose.com/cells/convert-excel-files-to-images-using-cpp/"
-        },
-        "general": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "java": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "net": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "nodejs": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        },
-        "python": {
-          "matched": false,
-          "score": 0.0,
-          "record_id": null,
-          "title": null,
-          "topic": null,
-          "url": null
-        }
-      }
-    },
-    {
       "category": "Data Conversion",
       "sub_category": "Excel to NumPy",
-      "topic": "Excel to numpy with Aspose.Cells",
-      "key": "excel-to-numpy-with-aspose-cells",
+      "topic": "Excel to numpy",
+      "key": "excel-to-numpy",
       "baseline_record_id": "blog::cells/2025-08-20-convert-excel-to-numpy/index.md",
       "coverage": {
         "android_via_java": {
@@ -9907,9 +9842,9 @@
       }
     },
     {
-      "category": "Web Development",
-      "sub_category": "File Viewer",
-      "topic": "Excel viewer view excel in mvc",
+      "category": "Development",
+      "sub_category": "Web Development",
+      "topic": "Excel viewer view Excel in mvc",
       "key": "excel-viewer-view-excel-in-mvc",
       "baseline_record_id": "blog::cells/2020-01-31-view-excel-files-in-asp-net-mvc-csharp-excel-viewer/index.md",
       "coverage": {
@@ -9950,8 +9885,8 @@
           "score": 1.0,
           "record_id": "blog::cells/2020-01-31-view-excel-files-in-asp-net-mvc-csharp-excel-viewer/index.md",
           "title": "ASP.NET Excel Viewer - View Excel Files in ASP.NET MVC using C#",
-          "topic": "Excel viewer view excel in MVC",
-          "url": "https://blog.aspose.com/cells/view-excel-files-in-asp-net-mvc-csharp-excel-viewer/"
+          "topic": "Excel viewer view Excel in MVC",
+          "url": "aspose.com/cells/view-excel-files-in-asp-net-mvc-csharp-excel-viewer/"
         },
         "nodejs": {
           "matched": false,
@@ -10038,9 +9973,9 @@
     },
     {
       "category": "Conversion",
-      "sub_category": "Excel To Image",
-      "topic": "Excel XLSX or XLS to images",
-      "key": "excel-xlsx-or-xls-to-images",
+      "sub_category": "Spreadsheet to Image",
+      "topic": "Excel XLSX or XLS to image",
+      "key": "excel-xlsx-or-xls-to-image",
       "baseline_record_id": "blog::cells/2021-01-01-convert-excel-files-to-images-in-csharp/index.md",
       "coverage": {
         "android_via_java": {
@@ -10081,7 +10016,7 @@
           "record_id": "blog::cells/2021-01-01-convert-excel-files-to-images-in-csharp/index.md",
           "title": "Convert Excel XLSX or XLS to Images using C#",
           "topic": "Excel XLSX or XLS to images",
-          "url": "https://blog.aspose.com/cells/convert-excel-files-to-images-in-csharp/"
+          "url": "aspose.com/cells/convert-excel-files-to-images-in-csharp/"
         },
         "nodejs": {
           "matched": false,
@@ -10104,7 +10039,7 @@
     {
       "category": "Data Processing",
       "sub_category": "Filtering",
-      "topic": "Filter blank and non blank cells in excel",
+      "topic": "Filter blank and non blank cells in Excel",
       "key": "filter-blank-and-non-blank-cells-in-excel",
       "baseline_record_id": "blog::cells/2025-04-28-filter-blank-cells-in-excel-using-csharp/index.md",
       "coverage": {
@@ -10145,7 +10080,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2025-04-28-filter-blank-cells-in-excel-using-csharp/index.md",
           "title": "Filter Blank and Non-Blank Cells in Excel using C#",
-          "topic": "Filter blank and non blank cells in excel",
+          "topic": "Filter blank and non blank cells in Excel",
           "url": "https://blog.aspose.com/cells/filter-blank-cells-in-excel-using-csharp/"
         },
         "nodejs": {
@@ -10169,7 +10104,7 @@
     {
       "category": "Data Manipulation",
       "sub_category": "Find and Replace",
-      "topic": "Find and replace text in excel",
+      "topic": "Find and replace text in Excel",
       "key": "find-and-replace-text-in-excel",
       "baseline_record_id": "blog::cells/2021-06-03-find-and-replace-text-in-excel-using-python/index.md",
       "coverage": {
@@ -10226,15 +10161,15 @@
           "score": 1.0,
           "record_id": "blog::cells/2021-06-03-find-and-replace-text-in-excel-using-python/index.md",
           "title": "Find and Replace Text in Excel using Python",
-          "topic": "Find and replace text in excel",
+          "topic": "Find and replace text in Excel",
           "url": "https://blog.aspose.com/cells/find-and-replace-text-in-excel-using-python/"
         }
       }
     },
     {
-      "category": "Spreadsheet",
+      "category": "Spreadsheets",
       "sub_category": "Find and Replace",
-      "topic": "Find and replace text in excel spreadsheets",
+      "topic": "Find and replace text in Excel spreadsheets",
       "key": "find-and-replace-text-in-excel-spreadsheets",
       "baseline_record_id": "blog::cells/2020-12-08-find-and-replace-text-in-spreadsheets-using-java/index.md",
       "coverage": {
@@ -10251,7 +10186,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2021-02-11-find-and-replace-text-in-excel-spreadsheets-using-cpp/index.md",
           "title": "Find and Replace Text in Excel Spreadsheets using C++",
-          "topic": "Find and replace text in excel spreadsheets",
+          "topic": "Find and replace text in Excel spreadsheets",
           "url": "https://blog.aspose.com/cells/find-and-replace-text-in-excel-spreadsheets-using-cpp/"
         },
         "general": {
@@ -10267,8 +10202,8 @@
           "score": 1.0,
           "record_id": "blog::cells/2020-12-08-find-and-replace-text-in-spreadsheets-using-java/index.md",
           "title": "Find and Replace Text in Excel Spreadsheets using Java",
-          "topic": "Find and replace text in excel spreadsheets",
-          "url": "https://blog.aspose.com/cells/find-and-replace-text-in-spreadsheets-using-java/"
+          "topic": "Find and replace text in Excel spreadsheets",
+          "url": "aspose.com/cells/find-and-replace-text-in-spreadsheets-using-java/"
         },
         "net": {
           "matched": false,
@@ -10297,9 +10232,9 @@
       }
     },
     {
-      "category": "Office",
-      "sub_category": "Excel",
-      "topic": "Find and replace text in excel XLS XLSX",
+      "category": "Spreadsheet",
+      "sub_category": "Find and Replace",
+      "topic": "Find and replace text in Excel XLS XLSX",
       "key": "find-and-replace-text-in-excel-xls-xlsx",
       "baseline_record_id": "blog::cells/2020-02-15-find-and-replace-text-in-excel-xls-xlsx-in-csharp-net/index.md",
       "coverage": {
@@ -10340,8 +10275,8 @@
           "score": 1.0,
           "record_id": "blog::cells/2020-02-15-find-and-replace-text-in-excel-xls-xlsx-in-csharp-net/index.md",
           "title": "Find and Replace Text in Excel XLS XLSX using C#",
-          "topic": "Find and replace text in excel XLS XLSX",
-          "url": "https://blog.aspose.com/cells/find-and-replace-text-in-excel-xls-xlsx-in-csharp-net/"
+          "topic": "Find and replace text in Excel XLS XLSX",
+          "url": "aspose.com/cells/find-and-replace-text-in-excel-xls-xlsx-in-csharp-net/"
         },
         "nodejs": {
           "matched": false,
@@ -10364,7 +10299,7 @@
     {
       "category": "Spreadsheet",
       "sub_category": "Image Manipulation",
-      "topic": "FIT image to CELL width and height",
+      "topic": "Fit image to cell width and height",
       "key": "fit-image-to-cell-width-and-height",
       "baseline_record_id": "blog::cells/2025-10-24-fit-image-to-cell-width-and-height-in-excel-dotnet/index.md",
       "coverage": {
@@ -10429,7 +10364,7 @@
     {
       "category": "Spreadsheet",
       "sub_category": "Barcode Generation",
-      "topic": "Generate barcode in excel",
+      "topic": "Generate barcode in Excel",
       "key": "generate-barcode-in-excel",
       "baseline_record_id": "blog::cells/2022-05-26-generate-barcode-in-excel-using-csharp/index.md",
       "coverage": {
@@ -10470,7 +10405,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2022-05-26-generate-barcode-in-excel-using-csharp/index.md",
           "title": "Generate Barcode in Excel using C#",
-          "topic": "Generate barcode in excel",
+          "topic": "Generate barcode in Excel",
           "url": "https://blog.aspose.com/cells/generate-barcode-in-excel-using-csharp/"
         },
         "nodejs": {
@@ -10494,7 +10429,7 @@
     {
       "category": "Spreadsheet",
       "sub_category": "File Information",
-      "topic": "Get maximum number of rows in excel sheets",
+      "topic": "Get maximum number of rows in Excel sheets",
       "key": "get-maximum-number-of-rows-in-excel-sheets",
       "baseline_record_id": "blog::cells/2022-12-16-get-max-rows-columns-in-excel-java/index.md",
       "coverage": {
@@ -10527,7 +10462,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2022-12-16-get-max-rows-columns-in-excel-java/index.md",
           "title": "Get Maximum Number of Rows in Excel Sheets in Java",
-          "topic": "Get maximum number of rows in excel sheets",
+          "topic": "Get maximum number of rows in Excel sheets",
           "url": "https://blog.aspose.com/cells/get-max-rows-in-excel-java/"
         },
         "net": {
@@ -10681,7 +10616,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2025-03-14-convert-html-to-excel-online/index.md",
           "title": "Convert HTML to Excel Online",
-          "topic": "HTML to excel",
+          "topic": "HTML to Excel",
           "url": "https://blog.aspose.com/cells/convert-html-to-excel-online/"
         }
       }
@@ -10689,7 +10624,7 @@
     {
       "category": "Spreadsheets",
       "sub_category": "Row and Column Manipulation",
-      "topic": "Insert and delete rows and columns in excel",
+      "topic": "Insert and delete rows and columns in Excel",
       "key": "insert-and-delete-rows-and-columns-in-excel",
       "baseline_record_id": "blog::cells/2021-04-13-insert-and-delete-rows-and-columns-in-excel-using-python/index.md",
       "coverage": {
@@ -10722,7 +10657,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2022-12-08-insert-delete-rows-columns-in-excel-java/index.md",
           "title": "Insert and Delete Rows and Columns in Excel in Java",
-          "topic": "Insert and delete rows and columns in excel",
+          "topic": "Insert and delete rows and columns in Excel",
           "url": "https://blog.aspose.com/cells/insert-delete-rows-columns-in-excel-java/"
         },
         "net": {
@@ -10746,7 +10681,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2021-04-13-insert-and-delete-rows-and-columns-in-excel-using-python/index.md",
           "title": "How to Insert and Delete Rows and Columns in Excel in Python",
-          "topic": "Insert and delete rows and columns in excel",
+          "topic": "Insert and delete rows and columns in Excel",
           "url": "https://blog.aspose.com/cells/insert-and-delete-rows-and-columns-in-excel-using-python/"
         }
       }
@@ -10754,7 +10689,7 @@
     {
       "category": "Spreadsheet",
       "sub_category": "Row Manipulation",
-      "topic": "Insert and delete rows in excel",
+      "topic": "Insert and delete rows in Excel",
       "key": "insert-and-delete-rows-in-excel",
       "baseline_record_id": "blog::cells/2022-10-14-insert-delete-rows-in-excel-java/index.md",
       "coverage": {
@@ -10787,7 +10722,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2022-10-14-insert-delete-rows-in-excel-java/index.md",
           "title": "Insert and Delete Rows in Excel Files using Java",
-          "topic": "Insert and delete rows in excel",
+          "topic": "Insert and delete rows in Excel",
           "url": "https://blog.aspose.com/cells/insert-delete-rows-in-excel-java/"
         },
         "net": {
@@ -10884,7 +10819,7 @@
     {
       "category": "Spreadsheet",
       "sub_category": "Image Insertion",
-      "topic": "Insert image in excel",
+      "topic": "Insert image in Excel",
       "key": "insert-image-in-excel",
       "baseline_record_id": "blog::cells/2024-12-06-insert-image-in-excel-using-python/index.md",
       "coverage": {
@@ -10941,7 +10876,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2024-12-06-insert-image-in-excel-using-python/index.md",
           "title": "Insert Image in Excel using Python",
-          "topic": "Insert image in excel",
+          "topic": "Insert image in Excel",
           "url": "https://blog.aspose.com/cells/insert-image-in-excel-using-python/"
         }
       }
@@ -10949,7 +10884,7 @@
     {
       "category": "Spreadsheet",
       "sub_category": "Row and Column Operations",
-      "topic": "Inserting and deleting rows and columns in excel",
+      "topic": "Inserting and deleting rows and columns in Excel",
       "key": "inserting-and-deleting-rows-and-columns-in-excel",
       "baseline_record_id": "blog::cells/2021-04-23-inserting-and-deleting-rows-and-columns-in-excel-using-cpp/index.md",
       "coverage": {
@@ -10966,7 +10901,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2021-04-23-inserting-and-deleting-rows-and-columns-in-excel-using-cpp/index.md",
           "title": "Inserting and Deleting Rows and Columns in Excel using C++",
-          "topic": "Inserting and deleting rows and columns in excel",
+          "topic": "Inserting and deleting rows and columns in Excel",
           "url": "https://blog.aspose.com/cells/inserting-and-deleting-rows-and-columns-in-excel-using-cpp/"
         },
         "general": {
@@ -11078,7 +11013,7 @@
     },
     {
       "category": "Data Conversion",
-      "sub_category": "File Format Conversion",
+      "sub_category": "JSON and CSV Conversion",
       "topic": "JSON to CSV",
       "key": "json-to-csv",
       "baseline_record_id": "blog::cells/2020-11-24-convert-csv-json-charp-vb-net/index.md",
@@ -11121,7 +11056,7 @@
           "record_id": "blog::cells/2020-11-24-convert-csv-json-charp-vb-net/index.md",
           "title": "Convert JSON to CSV and CSV to JSON using C# or VB.NET",
           "topic": "JSON to CSV",
-          "url": "https://blog.aspose.com/cells/convert-csv-json-charp-vb-net/"
+          "url": "aspose.com/cells/convert-csv-json-charp-vb-net/"
         },
         "nodejs": {
           "matched": true,
@@ -11337,7 +11272,7 @@
       }
     },
     {
-      "category": "Conversion",
+      "category": "Data Conversion",
       "sub_category": "JSON to PDF",
       "topic": "JSON to PDF",
       "key": "json-to-pdf",
@@ -11373,7 +11308,7 @@
           "record_id": "blog::cells/2021-05-22-convert-json-to-pdf-using-java/index.md",
           "title": "Convert JSON to PDF in Java: A Comprehensive Guide",
           "topic": "JSON to PDF",
-          "url": "https://blog.aspose.com/cells/convert-json-to-pdf-using-java/"
+          "url": "aspose.com/cells/convert-json-to-pdf-using-java/"
         },
         "net": {
           "matched": true,
@@ -11494,7 +11429,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2023-01-25-convert-json-to-excel-online-free/index.md",
           "title": "Convert JSON to Excel Online - Free Converter",
-          "topic": "JSON to excel",
+          "topic": "JSON to Excel",
           "url": "https://blog.aspose.com/cells/convert-json-to-excel-online-free/"
         },
         "java": {
@@ -11502,7 +11437,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2021-09-25-import-data-from-json-to-excel-on-linux-java/index.md",
           "title": "Import Data from JSON to Excel on Linux",
-          "topic": "Import data from JSON to excel on linux",
+          "topic": "Import data from JSON to Excel on linux",
           "url": "https://blog.aspose.com/cells/import-data-from-json-to-excel-on-linux-java/"
         },
         "net": {
@@ -11510,7 +11445,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2020-04-03-import-data-from-json-to-excel-in-csharp-asp.net/index.md",
           "title": "Import Data from JSON to Excel Worksheet in C# .NET",
-          "topic": "Import data from JSON to excel worksheet",
+          "topic": "Import data from JSON to Excel worksheet",
           "url": "https://blog.aspose.com/cells/import-data-from-json-to-excel-in-csharp-asp.net/"
         },
         "nodejs": {
@@ -11518,7 +11453,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2021-09-01-convert-json-to-excel-in-nodejs/index.md",
           "title": "Convert JSON to Excel in Node.js",
-          "topic": "JSON to excel",
+          "topic": "JSON to Excel",
           "url": "https://blog.aspose.com/cells/convert-json-to-excel-in-nodejs/"
         },
         "python": {
@@ -11526,7 +11461,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2021-10-01-convert-json-to-excel-in-python/index.md",
           "title": "Convert JSON to Excel in Python",
-          "topic": "JSON to excel",
+          "topic": "JSON to Excel",
           "url": "https://blog.aspose.com/cells/convert-json-to-excel-in-python/"
         }
       }
@@ -11534,7 +11469,7 @@
     {
       "category": "Spreadsheet",
       "sub_category": "Cell Protection",
-      "topic": "LOCK cells in excel",
+      "topic": "LOCK cells in Excel",
       "key": "lock-cells-in-excel",
       "baseline_record_id": "blog::cells/2025-01-23-how-to-lock-cells-in-excel-using-csharp/index.md",
       "coverage": {
@@ -11575,7 +11510,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2025-01-23-how-to-lock-cells-in-excel-using-csharp/index.md",
           "title": "How to Lock Cells in Excel using C#",
-          "topic": "Lock cells in excel",
+          "topic": "Lock cells in Excel",
           "url": "https://blog.aspose.com/cells/how-to-lock-cells-in-excel-using-csharp/"
         },
         "nodejs": {
@@ -11599,7 +11534,7 @@
     {
       "category": "Office",
       "sub_category": "Mail Merge",
-      "topic": "Mail merge from excel",
+      "topic": "Mail merge from Excel",
       "key": "mail-merge-from-excel",
       "baseline_record_id": "blog::cells/2025-06-03-mail-merge-from-excel-in-csharp/index.md",
       "coverage": {
@@ -11640,7 +11575,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2025-06-03-mail-merge-from-excel-in-csharp/index.md",
           "title": "Mail Merge from Excel in C#",
-          "topic": "Mail merge from excel",
+          "topic": "Mail merge from Excel",
           "url": "https://blog.aspose.com/cells/mail-merge-from-excel-in-csharp/"
         },
         "nodejs": {
@@ -11664,7 +11599,7 @@
     {
       "category": "Office Automation",
       "sub_category": "Mail Merge",
-      "topic": "Mail merge using excel",
+      "topic": "Mail merge using Excel",
       "key": "mail-merge-using-excel",
       "baseline_record_id": "blog::cells/2025-06-10-mail-merge-using-excel-in-python/index.md",
       "coverage": {
@@ -11721,7 +11656,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2025-06-10-mail-merge-using-excel-in-python/index.md",
           "title": "Mail Merge using Excel in Python",
-          "topic": "Mail merge using excel",
+          "topic": "Mail merge using Excel",
           "url": "https://blog.aspose.com/cells/mail-merge-using-excel-in-python/"
         }
       }
@@ -11729,7 +11664,7 @@
     {
       "category": "Spreadsheets",
       "sub_category": "Cell Merging",
-      "topic": "Merge and unmerge cells in excel",
+      "topic": "Merge and unmerge cells in Excel",
       "key": "merge-and-unmerge-cells-in-excel",
       "baseline_record_id": "blog::cells/2025-01-29-merge-cells-in-excel-using-python/index.md",
       "coverage": {
@@ -11786,7 +11721,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2025-01-29-merge-cells-in-excel-using-python/index.md",
           "title": "Merge and Unmerge Cells in Excel using Python",
-          "topic": "Merge and unmerge cells in excel",
+          "topic": "Merge and unmerge cells in Excel",
           "url": "https://blog.aspose.com/cells/merge-cells-in-excel-using-python/"
         }
       }
@@ -11794,7 +11729,7 @@
     {
       "category": "Spreadsheets",
       "sub_category": "Merge Files",
-      "topic": "Merge excel",
+      "topic": "Merge Excel",
       "key": "merge-excel",
       "baseline_record_id": "blog::cells/2023-02-15-merge-excel-xls-online-free/index.md",
       "coverage": {
@@ -11819,7 +11754,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2023-02-15-merge-excel-xls-online-free/index.md",
           "title": "Merge Excel Files - Free Online Tool",
-          "topic": "Merge excel",
+          "topic": "Merge Excel",
           "url": "https://blog.aspose.com/cells/merge-excel-xls-online/"
         },
         "java": {
@@ -11859,7 +11794,7 @@
     {
       "category": "Office",
       "sub_category": "Excel",
-      "topic": "Merge multiple excel",
+      "topic": "Merge multiple Excel",
       "key": "merge-multiple-excel",
       "baseline_record_id": "blog::cells/2023-08-22-merge-excel-files-csharp/index.md",
       "coverage": {
@@ -11892,7 +11827,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2023-10-12-merge-excel-files-java/index.md",
           "title": "Merge Multiple Excel Files in Java",
-          "topic": "Merge multiple excel",
+          "topic": "Merge multiple Excel",
           "url": "https://blog.aspose.com/cells/merge-excel-files-java/"
         },
         "net": {
@@ -11900,7 +11835,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2023-08-22-merge-excel-files-csharp/index.md",
           "title": "Merge Multiple Excel Files in C#",
-          "topic": "Merge multiple excel",
+          "topic": "Merge multiple Excel",
           "url": "https://blog.aspose.com/cells/merge-excel-files-csharp/"
         },
         "nodejs": {
@@ -11924,7 +11859,7 @@
     {
       "category": "Office",
       "sub_category": "Excel",
-      "topic": "Merge or unmerge cells in excel worksheet",
+      "topic": "Merge or unmerge cells in Excel worksheet",
       "key": "merge-or-unmerge-cells-in-excel-worksheet",
       "baseline_record_id": "blog::cells/2020-06-24-merge-unmerge-cells-excel-csharp/index.md",
       "coverage": {
@@ -11941,7 +11876,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2021-05-25-merge-or-unmerge-cells-in-an-excel-worksheet-using-cpp/index.md",
           "title": "Merge or Unmerge Cells in an Excel Worksheet using C++",
-          "topic": "Merge or unmerge cells in excel worksheet",
+          "topic": "Merge or unmerge cells in Excel worksheet",
           "url": "https://blog.aspose.com/cells/merge-or-unmerge-cells-in-an-excel-worksheet-using-cpp/"
         },
         "general": {
@@ -11965,7 +11900,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2020-06-24-merge-unmerge-cells-excel-csharp/index.md",
           "title": "Merge or Unmerge Cells in Excel Worksheet with C#",
-          "topic": "Merge or unmerge cells in excel worksheet",
+          "topic": "Merge or unmerge cells in Excel worksheet",
           "url": "https://blog.aspose.com/cells/merge-unmerge-cells-excel-csharp/"
         },
         "nodejs": {
@@ -11989,7 +11924,7 @@
     {
       "category": "Conversion",
       "sub_category": "Unit Conversion",
-      "topic": "ML to oz unit",
+      "topic": "ML to OZ unit",
       "key": "ml-to-oz-unit",
       "baseline_record_id": "blog::cells/2025-01-09-convert-ml-to-oz-online/index.md",
       "coverage": {
@@ -12030,7 +11965,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2025-01-09-convert-ml-to-oz-online/index.md",
           "title": "Convert ml to oz - Free Unit Converter",
-          "topic": "Ml to oz unit",
+          "topic": "ML to OZ unit",
           "url": "https://blog.aspose.com/cells/convert-ml-to-oz-online/"
         },
         "nodejs": {
@@ -12054,8 +11989,8 @@
     {
       "category": "Data Conversion",
       "sub_category": "NumPy to Excel",
-      "topic": "Numpy to excel with Aspose.Cells",
-      "key": "numpy-to-excel-with-aspose-cells",
+      "topic": "Numpy to Excel",
+      "key": "numpy-to-excel",
       "baseline_record_id": "blog::cells/2025-08-25-convert-numpy-to-excel/index.md",
       "coverage": {
         "android_via_java": {
@@ -12111,7 +12046,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2025-08-25-convert-numpy-to-excel/index.md",
           "title": "Convert NumPy to Excel with Aspose.Cells for Python",
-          "topic": "Numpy to excel with aspose cells",
+          "topic": "Numpy to Excel with aspose cells",
           "url": "https://blog.aspose.com/cells/convert-numpy-to-excel/"
         }
       }
@@ -12119,7 +12054,7 @@
     {
       "category": "Productivity",
       "sub_category": "Spreadsheet Viewer",
-      "topic": "Open excel view XLS or XLSX",
+      "topic": "Open Excel view XLS or XLSX",
       "key": "open-excel-view-xls-or-xlsx",
       "baseline_record_id": "blog::cells/2025-01-06-open-excel-file-online/index.md",
       "coverage": {
@@ -12144,7 +12079,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2025-01-06-open-excel-file-online/index.md",
           "title": "Open Excel File Online - View XLS or XLSX Files",
-          "topic": "Open excel view XLS or XLSX",
+          "topic": "Open Excel view XLS or XLSX",
           "url": "https://blog.aspose.com/cells/open-excel-file-online/"
         },
         "java": {
@@ -12184,7 +12119,7 @@
     {
       "category": "Data Processing",
       "sub_category": "Export To Excel",
-      "topic": "Pandas dataframe to excel",
+      "topic": "Pandas dataframe to Excel",
       "key": "pandas-dataframe-to-excel",
       "baseline_record_id": "blog::cells/2025-09-03-convert-pandas-dataframe-to-excel/index.md",
       "coverage": {
@@ -12241,7 +12176,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2025-09-03-convert-pandas-dataframe-to-excel/index.md",
           "title": "Convert Pandas DataFrame to Excel in Python",
-          "topic": "Pandas dataframe to excel",
+          "topic": "Pandas dataframe to Excel",
           "url": "https://blog.aspose.com/cells/convert-pandas-dataframe-to-excel/"
         }
       }
@@ -12249,7 +12184,7 @@
     {
       "category": "Spreadsheet",
       "sub_category": "Security",
-      "topic": "Password protect and unprotect excel",
+      "topic": "Password protect and unprotect Excel",
       "key": "password-protect-and-unprotect-excel",
       "baseline_record_id": "blog::cells/2022-08-17-protect-unprotect-excel-files-in-python/index.md",
       "coverage": {
@@ -12306,7 +12241,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2022-08-17-protect-unprotect-excel-files-in-python/index.md",
           "title": "Password-Protect and Unprotect Excel Files in Python",
-          "topic": "Password protect and unprotect excel",
+          "topic": "Password protect and unprotect Excel",
           "url": "https://blog.aspose.com/cells/protect-unprotect-excel-files-in-python/"
         }
       }
@@ -12314,8 +12249,8 @@
     {
       "category": "Security",
       "sub_category": "Password Protection",
-      "topic": "Password protect excel and with code",
-      "key": "password-protect-excel-and-with-code",
+      "topic": "Password protect Excel and",
+      "key": "password-protect-excel-and",
       "baseline_record_id": "blog::cells/2025-03-26-password-protect-excel-files/index.md",
       "coverage": {
         "android_via_java": {
@@ -12371,7 +12306,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2025-03-26-password-protect-excel-files/index.md",
           "title": "How to Password Protect Excel Files Online & with Code",
-          "topic": "Password protect excel and with code",
+          "topic": "Password protect Excel and with code",
           "url": "https://blog.aspose.com/cells/password-protect-excel-files/"
         }
       }
@@ -12379,8 +12314,8 @@
     {
       "category": "Spreadsheet",
       "sub_category": "Excel Processing",
-      "topic": "Process excel using Aspose.Cells spreadsheet automation tutorial",
-      "key": "process-excel-using-aspose-cells-spreadsheet-automation-tutorial",
+      "topic": "Process Excel spreadsheet automation",
+      "key": "process-excel-spreadsheet-automation",
       "baseline_record_id": "blog::cells/2025-04-24-process-excel-files-in-go-using-aspose.cells-api-spreadsheet-automation-tutorial/index.md",
       "coverage": {
         "android_via_java": {
@@ -12396,7 +12331,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2025-04-24-process-excel-files-in-go-using-aspose.cells-api-spreadsheet-automation-tutorial/index.md",
           "title": "Process Excel Files in Go (Golang) Using Aspose.Cells API – Spreadsheet Automation Tutorial",
-          "topic": "Process excel using aspose cells API spreadsheet automation tutorial",
+          "topic": "Process Excel using aspose cells API spreadsheet automation tutorial",
           "url": "https://blog.aspose.com/cells/process-excel-files-in-go(golang)-using-aspose.cells-api–spreadsheet-automation-tutorial/"
         },
         "general": {
@@ -12444,7 +12379,7 @@
     {
       "category": "Office",
       "sub_category": "Cell Protection",
-      "topic": "Protect and unprotect cells in excel",
+      "topic": "Protect and unprotect cells in Excel",
       "key": "protect-and-unprotect-cells-in-excel",
       "baseline_record_id": "blog::cells/2025-02-11-protect-and-unprotect-cells-in-excel-using-python/index.md",
       "coverage": {
@@ -12501,7 +12436,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2025-02-11-protect-and-unprotect-cells-in-excel-using-python/index.md",
           "title": "Protect and Unprotect Cells in Excel using Python",
-          "topic": "Protect and unprotect cells in excel",
+          "topic": "Protect and unprotect cells in Excel",
           "url": "https://blog.aspose.com/cells/protect-and-unprotect-cells-in-excel-using-python/"
         }
       }
@@ -12509,7 +12444,7 @@
     {
       "category": "Spreadsheet",
       "sub_category": "Protection",
-      "topic": "Protect and unprotect excel",
+      "topic": "Protect and unprotect Excel",
       "key": "protect-and-unprotect-excel",
       "baseline_record_id": "blog::cells/2020-12-14-protect-or-unprotect-excel-files-using-csharp/index.md",
       "coverage": {
@@ -12526,7 +12461,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2021-02-14-protect-and-unprotect-excel-files-using-cpp/index.md",
           "title": "Protect and Unprotect Excel Files using C++",
-          "topic": "Protect and unprotect excel",
+          "topic": "Protect and unprotect Excel",
           "url": "https://blog.aspose.com/cells/protect-and-unprotect-excel-files-using-cpp/"
         },
         "general": {
@@ -12542,7 +12477,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2021-01-11-Protect-Unprotect-Excel-Files-in-Java/index.md",
           "title": "Protect and Unprotect Excel Files in Java",
-          "topic": "Protect and unprotect excel",
+          "topic": "Protect and unprotect Excel",
           "url": "https://blog.aspose.com/cells/Protect-Unprotect-Excel-Files-in-Java/"
         },
         "net": {
@@ -12550,7 +12485,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2020-12-14-protect-or-unprotect-excel-files-using-csharp/index.md",
           "title": "Protect and Unprotect Excel Files using C#",
-          "topic": "Protect and unprotect excel",
+          "topic": "Protect and unprotect Excel",
           "url": "https://blog.aspose.com/cells/protect-or-unprotect-excel-files-using-csharp/"
         },
         "nodejs": {
@@ -12574,7 +12509,7 @@
     {
       "category": "Spreadsheet",
       "sub_category": "VBA Security",
-      "topic": "Protect vba macros in excel",
+      "topic": "Protect vba macros in Excel",
       "key": "protect-vba-macros-in-excel",
       "baseline_record_id": "blog::cells/2021-04-06-protect-vba-macros-in-excel-using-csharp/index.md",
       "coverage": {
@@ -12615,7 +12550,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2021-04-06-protect-vba-macros-in-excel-using-csharp/index.md",
           "title": "Protect VBA Macros in Excel using C#",
-          "topic": "Protect VBA macros in excel",
+          "topic": "Protect VBA macros in Excel",
           "url": "https://blog.aspose.com/cells/protect-vba-macros-in-excel-using-csharp/"
         },
         "nodejs": {
@@ -12639,7 +12574,7 @@
     {
       "category": "Spreadsheet",
       "sub_category": "Threaded Comments",
-      "topic": "Read add and edit threaded comments in excel",
+      "topic": "Read add and edit threaded comments in Excel",
       "key": "read-add-and-edit-threaded-comments-in-excel",
       "baseline_record_id": "blog::cells/2024-02-01-threaded-comments-in-excel-using-python/index.md",
       "coverage": {
@@ -12680,7 +12615,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2024-05-20-threaded-comments-in-excel-using-csharp/index.md",
           "title": "Read, Add, and Edit Threaded Comments in Excel using C#",
-          "topic": "Read add and edit threaded comments in excel",
+          "topic": "Read add and edit threaded comments in Excel",
           "url": "https://blog.aspose.com/cells/threaded-comments-in-excel-using-csharp/"
         },
         "nodejs": {
@@ -12696,7 +12631,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2024-02-01-threaded-comments-in-excel-using-python/index.md",
           "title": "Read, Add, and Edit Threaded Comments in Excel using Python",
-          "topic": "Read add and edit threaded comments in excel",
+          "topic": "Read add and edit threaded comments in Excel",
           "url": "https://blog.aspose.com/cells/threaded-comments-in-excel-using-python/"
         }
       }
@@ -12737,7 +12672,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2021-11-10-how-to-read-excel-files-in-java/index.md",
           "title": "How to Read Excel Files in Java",
-          "topic": "Read excel",
+          "topic": "Read Excel",
           "url": "https://blog.aspose.com/cells/how-to-read-excel-files-in-java/"
         },
         "net": {
@@ -12745,7 +12680,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2021-10-10-how-to-read-excel-files-in-csharp/index.md",
           "title": "How to Read Excel Files in C#",
-          "topic": "Read excel",
+          "topic": "Read Excel",
           "url": "https://blog.aspose.com/cells/how-to-read-excel-files-in-csharp/"
         },
         "nodejs": {
@@ -12761,7 +12696,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2021-12-09-read-excel-files-using-python/index.md",
           "title": "Read Excel File in Python",
-          "topic": "Read excel",
+          "topic": "Read Excel",
           "url": "https://blog.aspose.com/cells/read-excel-files-using-python/"
         }
       }
@@ -12769,7 +12704,7 @@
     {
       "category": "Productivity",
       "sub_category": "File Repair",
-      "topic": "Repair excel",
+      "topic": "Repair Excel",
       "key": "repair-excel",
       "baseline_record_id": "blog::cells/2023-11-27-repair-excel-files-online-free/index.md",
       "coverage": {
@@ -12778,7 +12713,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2023-11-27-repair-excel-files-online-free/index.md",
           "title": "Repair Excel Files Online and Free",
-          "topic": "Repair excel",
+          "topic": "Repair Excel",
           "url": "https://blog.aspose.com/cells/repair-excel-files-online/"
         },
         "cpp": {
@@ -12834,7 +12769,7 @@
     {
       "category": "Email",
       "sub_category": "Embedding Content",
-      "topic": "Send excel data in email body",
+      "topic": "Send Excel data in email body",
       "key": "send-excel-data-in-email-body",
       "baseline_record_id": "blog::cells/2022-05-11-send-excel-data-in-email-body-using-csharp-net/index.md",
       "coverage": {
@@ -12875,7 +12810,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2022-05-11-send-excel-data-in-email-body-using-csharp-net/index.md",
           "title": "Send Excel Data in Email Body using C# .NET",
-          "topic": "Send excel data in email body",
+          "topic": "Send Excel data in email body",
           "url": "https://blog.aspose.com/cells/send-excel-data-in-email-body-using-csharp-net/"
         },
         "nodejs": {
@@ -12899,7 +12834,7 @@
     {
       "category": "Data Management",
       "sub_category": "Spreadsheet Tools",
-      "topic": "Split excel worksheets into",
+      "topic": "Split Excel worksheets into",
       "key": "split-excel-worksheets-into",
       "baseline_record_id": "blog::cells/2023-12-04-split-excel-files-online/index.md",
       "coverage": {
@@ -12924,7 +12859,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2023-12-04-split-excel-files-online/index.md",
           "title": "Split Excel Worksheets into Files",
-          "topic": "Split excel worksheets into",
+          "topic": "Split Excel worksheets into",
           "url": "https://blog.aspose.com/cells/split-excel-files-online/"
         },
         "java": {
@@ -12962,9 +12897,9 @@
       }
     },
     {
-      "category": "Spreadsheet",
-      "sub_category": "Text to Columns",
-      "topic": "Split text into columns in excel",
+      "category": "Spreadsheets",
+      "sub_category": "Text To Columns",
+      "topic": "Split text into columns in Excel",
       "key": "split-text-into-columns-in-excel",
       "baseline_record_id": "blog::cells/2021-05-24-split-text-into-columns-in-excel-files-using-cpp/index.md",
       "coverage": {
@@ -12981,8 +12916,8 @@
           "score": 1.0,
           "record_id": "blog::cells/2021-05-24-split-text-into-columns-in-excel-files-using-cpp/index.md",
           "title": "Split Text into Columns in Excel Files using C++",
-          "topic": "Split text into columns in excel",
-          "url": "https://blog.aspose.com/cells/split-text-into-columns-in-excel-files-using-cpp/"
+          "topic": "Split text into columns in Excel",
+          "url": "aspose.com/cells/split-text-into-columns-in-excel-files-using-cpp/"
         },
         "general": {
           "matched": false,
@@ -13029,7 +12964,7 @@
     {
       "category": "Spreadsheets",
       "sub_category": "Data Transformation",
-      "topic": "Split text to columns in excel",
+      "topic": "Split text to columns in Excel",
       "key": "split-text-to-columns-in-excel",
       "baseline_record_id": "blog::cells/2021-04-24-split-text-to-columns-in-excel-using-csharp/index.md",
       "coverage": {
@@ -13062,7 +12997,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2021-05-25-split-text-to-columns-in-excel-using-java/index.md",
           "title": "Split Text to Columns in Excel using Java",
-          "topic": "Split text to columns in excel",
+          "topic": "Split text to columns in Excel",
           "url": "https://blog.aspose.com/cells/split-text-to-columns-in-excel-using-java/"
         },
         "net": {
@@ -13070,7 +13005,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2021-04-24-split-text-to-columns-in-excel-using-csharp/index.md",
           "title": "Split Text to Columns in Excel using C#",
-          "topic": "Split text to columns in excel",
+          "topic": "Split text to columns in Excel",
           "url": "https://blog.aspose.com/cells/split-text-to-columns-in-excel-using-csharp/"
         },
         "nodejs": {
@@ -13094,7 +13029,7 @@
     {
       "category": "Data Processing",
       "sub_category": "Text To Columns",
-      "topic": "Split text to multiple columns in excel",
+      "topic": "Split text to multiple columns in Excel",
       "key": "split-text-to-multiple-columns-in-excel",
       "baseline_record_id": "blog::cells/2021-06-24-split-text-to-column-in-excel-using-python/index.md",
       "coverage": {
@@ -13151,7 +13086,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2021-06-24-split-text-to-column-in-excel-using-python/index.md",
           "title": "Split Text to Multiple Columns in Excel using Python",
-          "topic": "Split text to multiple columns in excel",
+          "topic": "Split text to multiple columns in Excel",
           "url": "https://blog.aspose.com/cells/split-text-to-column-in-excel-using-python/"
         }
       }
@@ -13159,7 +13094,7 @@
     {
       "category": "Data Conversion",
       "sub_category": "Text to Number in Excel",
-      "topic": "Text to number in excel",
+      "topic": "Text to number in Excel",
       "key": "text-to-number-in-excel",
       "baseline_record_id": "blog::cells/2024-10-24-convert-text-to-number-in-excel-using-csharp/index.md",
       "coverage": {
@@ -13200,7 +13135,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2024-10-24-convert-text-to-number-in-excel-using-csharp/index.md",
           "title": "Convert Text to Number in Excel using C#",
-          "topic": "Text to number in excel",
+          "topic": "Text to number in Excel",
           "url": "https://blog.aspose.com/cells/convert-text-to-number-in-excel-using-csharp/"
         },
         "nodejs": {
@@ -13476,7 +13411,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2023-01-31-txt-to-xls-online-free/index.md",
           "title": "Convert TXT to Excel XLS Online - Free Converter",
-          "topic": "TXT to excel XLS",
+          "topic": "TXT to Excel XLS",
           "url": "https://blog.aspose.com/cells/convert-txt-to-xls/"
         }
       }
@@ -13549,7 +13484,7 @@
     {
       "category": "Spreadsheet",
       "sub_category": "Password Removal",
-      "topic": "Unlock excel sheets excel password remover",
+      "topic": "Unlock Excel sheets Excel password remover",
       "key": "unlock-excel-sheets-excel-password-remover",
       "baseline_record_id": "blog::cells/2025-03-24-online-excel-password-remover/index.md",
       "coverage": {
@@ -13574,7 +13509,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2025-03-24-online-excel-password-remover/index.md",
           "title": "Unlock Excel Sheets with Online Excel Password Remover",
-          "topic": "Unlock excel sheets excel password remover",
+          "topic": "Unlock Excel sheets Excel password remover",
           "url": "https://blog.aspose.com/cells/online-excel-password-remover/"
         },
         "java": {
@@ -13614,7 +13549,7 @@
     {
       "category": "Data",
       "sub_category": "Excel Integration",
-      "topic": "Use excel",
+      "topic": "Use Excel",
       "key": "use-excel",
       "baseline_record_id": "blog::cells/2024-07-30-use-excel-in-python/index.md",
       "coverage": {
@@ -13671,7 +13606,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2024-07-30-use-excel-in-python/index.md",
           "title": "How to Use Excel in Python",
-          "topic": "Use excel",
+          "topic": "Use Excel",
           "url": "https://blog.aspose.com/cells/use-excel-in-python/"
         }
       }
@@ -13679,8 +13614,8 @@
     {
       "category": "File Formats",
       "sub_category": "Spreadsheet Metadata",
-      "topic": "View edit and remove excel metadata complete guide",
-      "key": "view-edit-and-remove-excel-metadata-complete-guide",
+      "topic": "View edit and remove Excel metadata",
+      "key": "view-edit-and-remove-excel-metadata",
       "baseline_record_id": "blog::cells/2025-04-03-view-and-edit-excel-metadata/index.md",
       "coverage": {
         "android_via_java": {
@@ -13704,7 +13639,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2025-04-03-view-and-edit-excel-metadata/index.md",
           "title": "How to View, Edit & Remove Excel Metadata: A Complete Guide",
-          "topic": "View edit and remove excel metadata complete guide",
+          "topic": "View edit and remove Excel metadata complete guide",
           "url": "https://blog.aspose.com/cells/view-and-edit-excel-metadata/"
         },
         "java": {
@@ -13744,7 +13679,7 @@
     {
       "category": "Spreadsheets",
       "sub_category": "Pivot Tables",
-      "topic": "Working with pivot tables in excel",
+      "topic": "Working with pivot tables in Excel",
       "key": "working-with-pivot-tables-in-excel",
       "baseline_record_id": "blog::cells/2021-06-10-working-with-pivot-tables-in-excel-files-using-cpp/index.md",
       "coverage": {
@@ -13761,7 +13696,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2021-06-10-working-with-pivot-tables-in-excel-files-using-cpp/index.md",
           "title": "Working With Pivot Tables in Excel Files using C++",
-          "topic": "Working with pivot tables in excel",
+          "topic": "Working with pivot tables in Excel",
           "url": "https://blog.aspose.com/cells/working-with-pivot-tables-in-excel-files-using-cpp/"
         },
         "general": {
@@ -13937,8 +13872,8 @@
       }
     },
     {
-      "category": "Conversion",
-      "sub_category": "Spreadsheet to Html",
+      "category": "Data Conversion",
+      "sub_category": "Excel To HTML",
       "topic": "XLS to HTML",
       "key": "xls-to-html",
       "baseline_record_id": "blog::cells/2020-08-21-convert-ms-excel-files-to-html-using-python/index.md",
@@ -13997,7 +13932,7 @@
           "record_id": "blog::cells/2020-08-21-convert-ms-excel-files-to-html-using-python/index.md",
           "title": "Convert Excel XLS to HTML using Python",
           "topic": "XLS to HTML",
-          "url": "https://blog.aspose.com/cells/convert-ms-excel-files-to-html-using-python/"
+          "url": "aspose.com/cells/convert-ms-excel-files-to-html-using-python/"
         }
       }
     },
@@ -14216,7 +14151,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2021-03-25-convert-excel-to-csv-and-csv-to-excel-using-cpp/index.md",
           "title": "Convert Excel to CSV and CSV to Excel using C++",
-          "topic": "Excel to CSV and CSV to excel",
+          "topic": "Excel to CSV and CSV to Excel",
           "url": "https://blog.aspose.com/cells/convert-excel-to-csv-and-csv-to-excel-using-cpp/"
         },
         "general": {
@@ -14240,7 +14175,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2021-10-21-csv-to-excel-or-excel-to-csv-on-linux/index.md",
           "title": "Convert CSV to Excel or Excel to CSV on Linux using .NET",
-          "topic": "CSV to excel or excel to CSV on linux",
+          "topic": "CSV to Excel or Excel to CSV on linux",
           "url": "https://blog.aspose.com/cells/csv-to-excel-or-excel-to-csv-on-linux/"
         },
         "nodejs": {
@@ -14248,7 +14183,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2021-04-28-convert-csv-to-excel-or-excel-to-csv-in-nodejs/index.md",
           "title": "Convert CSV to Excel or Excel to CSV in Node.js",
-          "topic": "CSV to excel or excel to CSV",
+          "topic": "CSV to Excel or Excel to CSV",
           "url": "https://blog.aspose.com/cells/convert-csv-to-excel-or-excel-to-csv-in-nodejs/"
         },
         "python": {
@@ -14263,7 +14198,7 @@
     },
     {
       "category": "Conversion",
-      "sub_category": "Spreadsheet to Document",
+      "sub_category": "Spreadsheet To Word",
       "topic": "XLSX to DOCX",
       "key": "xlsx-to-docx",
       "baseline_record_id": "blog::cells/2020-10-15-convert-excel-xlsx-to-docx-using-csharp/index.md",
@@ -14306,7 +14241,7 @@
           "record_id": "blog::cells/2020-10-15-convert-excel-xlsx-to-docx-using-csharp/index.md",
           "title": "Convert MS Excel XLSX Files to DOCX using C#",
           "topic": "XLSX to DOCX",
-          "url": "https://blog.aspose.com/cells/convert-excel-xlsx-to-docx-using-csharp/"
+          "url": "aspose.com/cells/convert-excel-xlsx-to-docx-using-csharp/"
         },
         "nodejs": {
           "matched": false,
@@ -14327,8 +14262,8 @@
       }
     },
     {
-      "category": "Conversion",
-      "sub_category": "Excel To Html",
+      "category": "Data Conversion",
+      "sub_category": "Spreadsheet to HTML",
       "topic": "XLSX to HTML",
       "key": "xlsx-to-html",
       "baseline_record_id": "blog::cells/2020-10-07-convert-excel-xls-xlsx-to-html-csharp/index.md",
@@ -14355,7 +14290,7 @@
           "record_id": "blog::cells/2021-05-25-convert-excel-to-html-in-php/index.md",
           "title": "Convert Excel Files to HTML in PHP",
           "topic": "Excel to HTML",
-          "url": "https://blog.aspose.com/cells/convert-excel-to-html-in-php/"
+          "url": "aspose.com/cells/convert-excel-to-html-in-php/"
         },
         "java": {
           "matched": true,
@@ -14371,7 +14306,7 @@
           "record_id": "blog::cells/2020-10-07-convert-excel-xls-xlsx-to-html-csharp/index.md",
           "title": "Convert Excel XLS/XLSX to HTML using C#",
           "topic": "XLSX to HTML",
-          "url": "https://blog.aspose.com/cells/convert-excel-xls-xlsx-to-html-csharp/"
+          "url": "aspose.com/cells/convert-excel-xls-xlsx-to-html-csharp/"
         },
         "nodejs": {
           "matched": true,
@@ -14522,8 +14457,8 @@
       }
     },
     {
-      "category": "Document Conversion",
-      "sub_category": "Excel to PDF",
+      "category": "File Conversion",
+      "sub_category": "Excel To PDF",
       "topic": "XLSX to PDF",
       "key": "xlsx-to-pdf",
       "baseline_record_id": "blog::cells/2020-08-12-convert-excel-to-pdf-using-java/index.md",
@@ -14534,7 +14469,7 @@
           "record_id": "blog::cells/2021-04-21-convert-excel-files-to-pdf-in-android/index.md",
           "title": "Convert Excel Files to PDF in Android",
           "topic": "Excel to PDF",
-          "url": "https://blog.aspose.com/cells/convert-excel-files-to-pdf-in-android/"
+          "url": "aspose.com/cells/convert-excel-files-to-pdf-in-android/"
         },
         "cpp": {
           "matched": true,
@@ -14558,7 +14493,7 @@
           "record_id": "blog::cells/2020-08-12-convert-excel-to-pdf-using-java/index.md",
           "title": "Convert Excel Files to PDF using Java",
           "topic": "Excel to PDF",
-          "url": "https://blog.aspose.com/cells/convert-excel-to-pdf-using-java/"
+          "url": "aspose.com/cells/convert-excel-to-pdf-using-java/"
         },
         "net": {
           "matched": true,
@@ -14574,7 +14509,7 @@
           "record_id": "blog::cells/2021-03-05-convert-excel-xlsx-xls-to-pdf-in-node-js/index.md",
           "title": "Convert Excel Files to PDF in Node.js",
           "topic": "Excel to PDF",
-          "url": "https://blog.aspose.com/cells/convert-excel-xlsx-xls-to-pdf-in-node-js/"
+          "url": "aspose.com/cells/convert-excel-xlsx-xls-to-pdf-in-node-js/"
         },
         "python": {
           "matched": true,
@@ -14939,7 +14874,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2023-02-06-xml-to-excel-online-free/index.md",
           "title": "Convert XML to Excel Online - Free Converter",
-          "topic": "XML to excel",
+          "topic": "XML to Excel",
           "url": "https://blog.aspose.com/cells/convert-xml-to-excel-online/"
         },
         "java": {
@@ -14947,7 +14882,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2023-08-23-convert-xml-to-excel-in-java/index.md",
           "title": "Convert XML to Excel using Java",
-          "topic": "XML to excel",
+          "topic": "XML to Excel",
           "url": "https://blog.aspose.com/cells/convert-xml-to-excel-in-java/"
         },
         "net": {
@@ -14955,7 +14890,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2022-06-17-convert-xml-to-excel-using-csharp/index.md",
           "title": "Convert XML to Excel using C#",
-          "topic": "XML to excel",
+          "topic": "XML to Excel",
           "url": "https://blog.aspose.com/cells/convert-xml-to-excel-using-csharp/"
         },
         "nodejs": {
@@ -14971,7 +14906,7 @@
           "score": 1.0,
           "record_id": "blog::cells/2024-03-15-convert-xml-to-excel-in-python/index.md",
           "title": "Convert XML to Excel in Python",
-          "topic": "XML to excel",
+          "topic": "XML to Excel",
           "url": "https://blog.aspose.com/cells/convert-xml-to-excel-in-python/"
         }
       }
