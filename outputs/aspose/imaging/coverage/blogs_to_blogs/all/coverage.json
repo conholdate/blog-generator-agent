@@ -1,0 +1,2858 @@
+{
+  "case": "blogs_to_blogs",
+  "brand_key": "aspose",
+  "product_key": "imaging",
+  "baseline_platform": "all",
+  "platforms": [
+    "general",
+    "java",
+    "net",
+    "python"
+  ],
+  "meta": {
+    "matching_mode": "key_exact",
+    "total_input_records": 184,
+    "records_after_filters": 91,
+    "excluded_release_update_records": 49,
+    "excluded_old_or_undated_records": 44,
+    "baseline_records": 91,
+    "total_cells": 276,
+    "matched_cells": 91,
+    "missing_cells": 185,
+    "match_rate": 0.32971014492753625,
+    "skipped_empty_keys": 0
+  },
+  "rows": [
+    {
+      "category": "Imaging",
+      "sub_category": "Watermark",
+      "topic": "Add watermark to image",
+      "key": "add-watermark-to-image",
+      "baseline_record_id": "blog::imaging/2021-01-27-add-watermark-to-images-using-java/index.md",
+      "coverage": {
+        "general": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::imaging/2021-03-08-add-watermark-to-images-in-csharp/index.md",
+          "title": "Add Watermark to Images using C#",
+          "topic": "Add watermark to images",
+          "url": "aspose.com/imaging/add-watermark-to-images-in-csharp/"
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::imaging/2021-01-27-add-watermark-to-images-using-java/index.md",
+          "title": "Add Watermark to Images using Java",
+          "topic": "Add watermark to images",
+          "url": "aspose.com/imaging/add-watermark-to-images-using-java/"
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::imaging/2023-07-06-add-watermark-to-images-in-python/index.md",
+          "title": "Add Watermark to Images in Python",
+          "topic": "Add watermark to images",
+          "url": "aspose.com/imaging/add-watermark-to-images-in-python/"
+        }
+      }
+    },
+    {
+      "category": "Image Processing",
+      "sub_category": "Enhancement",
+      "topic": "Adjust image contrast brightness and gamma",
+      "key": "adjust-image-contrast-brightness-and-gamma",
+      "baseline_record_id": "blog::imaging/2021-11-27-adjust-image-contrast-brightness-gamma-in-java/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::imaging/2021-11-27-adjust-image-contrast-brightness-gamma-in-java/index.md",
+          "title": "Adjust Image Contrast, Brightness, and Gamma in Java",
+          "topic": "Adjust image contrast brightness and gamma",
+          "url": "aspose.com/imaging/adjust-image-contrast-brightness-gamma-in-java/"
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::imaging/2021-12-24-adjust-image-contrast-brightness-gamma-csharp/index.md",
+          "title": "Adjust Image Contrast, Brightness, and Gamma in C#",
+          "topic": "Adjust image contrast brightness and gamma",
+          "url": "aspose.com/imaging/adjust-image-contrast-brightness-gamma-csharp/"
+        },
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::imaging/2023-07-12-adjust-image-contrast-brightness-gamma-python/index.md",
+          "title": "Adjust Image Contrast, Brightness, and Gamma in Python",
+          "topic": "Adjust image contrast brightness and gamma",
+          "url": "aspose.com/imaging/adjust-image-contrast-brightness-gamma-python/"
+        }
+      }
+    },
+    {
+      "category": "Imaging",
+      "sub_category": "Image Editing",
+      "topic": "Apply blur effect to image",
+      "key": "apply-blur-effect-to-image",
+      "baseline_record_id": "blog::imaging/2023-07-14-blur-images-in-python/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::imaging/2023-07-14-blur-images-in-python/index.md",
+          "title": "Apply Blur Effect to Images in Python",
+          "topic": "Apply blur effect to images",
+          "url": "aspose.com/imaging/blur-images-in-python/"
+        }
+      }
+    },
+    {
+      "category": "Imaging",
+      "sub_category": "Image Filtering",
+      "topic": "Apply median and wiener filters to image",
+      "key": "apply-median-and-wiener-filters-to-image",
+      "baseline_record_id": "blog::imaging/2022-11-03-apply-median-wiener-filter-to-images-in-java/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::imaging/2022-11-03-apply-median-wiener-filter-to-images-in-java/index.md",
+          "title": "Apply Median and Wiener Filters to Images in Java",
+          "topic": "Apply median and wiener filters to images",
+          "url": "aspose.com/imaging/apply-median-wiener-filter-to-images-in-java/"
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::imaging/2022-11-10-apply-median-wiener-filter-to-images-in-csharp/index.md",
+          "title": "Apply Median and Wiener Filters to Images in C#",
+          "topic": "Apply median and wiener filters to images",
+          "url": "aspose.com/imaging/apply-median-wiener-filter-to-images-in-csharp/"
+        },
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::imaging/2023-07-17-apply-median-wiener-filter-to-images-in-python/index.md",
+          "title": "Apply Median and Wiener Filters to Images in Python",
+          "topic": "Apply median and wiener filters to images",
+          "url": "aspose.com/imaging/apply-median-wiener-filter-to-images-in-python/"
+        }
+      }
+    },
+    {
+      "category": "Imaging",
+      "sub_category": "Blur Effect",
+      "topic": "Blur images",
+      "key": "blur-images",
+      "baseline_record_id": "blog::imaging/2022-10-31-blur-images-in-java/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::imaging/2022-10-31-blur-images-in-java/index.md",
+          "title": "Blur Images Programmatically in Java",
+          "topic": "Blur images",
+          "url": "aspose.com/imaging/blur-images-in-java/"
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::imaging/2022-11-01-blur-images-in-csharp/index.md",
+          "title": "Blur Images Programmatically in C#",
+          "topic": "Blur images",
+          "url": "aspose.com/imaging/blur-images-in-csharp/"
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Imaging",
+      "sub_category": "Image to PDF Conversion",
+      "topic": "BMP to PDF",
+      "key": "bmp-to-pdf",
+      "baseline_record_id": "blog::imaging/2024-12-18-python-api-to-convert-bmp-to-pdf-programmatically/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::imaging/2024-12-18-python-api-to-convert-bmp-to-pdf-programmatically/index.md",
+          "title": "Python API to Convert BMP to PDF Programmatically",
+          "topic": "API to convert BMP to PDF",
+          "url": "aspose.com/imaging/python-api-to-convert-bmp-to-pdf-programmatically/"
+        }
+      }
+    },
+    {
+      "category": "Imaging",
+      "sub_category": "SVG Resizing",
+      "topic": "Build SVG image resizer",
+      "key": "build-svg-image-resizer",
+      "baseline_record_id": "blog::imaging/2025-06-11-build-an-svg-image-resizer/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::imaging/2025-06-11-build-an-svg-image-resizer/index.md",
+          "title": "Build an SVG Image Resizer with Aspose.Imaging for Java",
+          "topic": "Build SVG image resizer with aspose imaging",
+          "url": "aspose.com/imaging/build-an-svg-image-resizer/"
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Imaging",
+      "sub_category": "File Conversion",
+      "topic": "CDR to PDF",
+      "key": "cdr-to-pdf",
+      "baseline_record_id": "blog::imaging/2025-03-06-convert-coreldraw-file-to-pdf/index.md",
+      "coverage": {
+        "general": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::imaging/2025-03-06-convert-coreldraw-file-to-pdf/index.md",
+          "title": "Convert CorelDRAW File to PDF - Online Tool",
+          "topic": "Coreldraw to PDF",
+          "url": "aspose.com/imaging/convert-coreldraw-file-to-pdf/"
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::imaging/2026-08-21-convert-cdr-to-pdf-in-csharp/index.md",
+          "title": "Convert CDR to PDF in C#",
+          "topic": "CDR to PDF",
+          "url": "aspose.com/imaging/convert-cdr-to-pdf-in-csharp/"
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Imaging",
+      "sub_category": "Vector to Raster Conversion",
+      "topic": "CDR to PNG",
+      "key": "cdr-to-png",
+      "baseline_record_id": "blog::imaging/2025-07-30-convert-cdr-to-png-in-net/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::imaging/2025-07-30-convert-cdr-to-png-in-net/index.md",
+          "title": "Convert CDR to PNG in .NET using Aspose.Imaging",
+          "topic": "CDR to PNG using aspose imaging",
+          "url": "aspose.com/imaging/convert-cdr-to-png-in-net/"
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Imaging",
+      "sub_category": "File Format Conversion",
+      "topic": "CDR to PSD",
+      "key": "cdr-to-psd",
+      "baseline_record_id": "blog::imaging/2024-08-08-convert-cdr-to-psd-in-csharp/index.md",
+      "coverage": {
+        "general": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::imaging/2025-03-05-online-cdr-to-psd-converter/index.md",
+          "title": "Online CDR to PSD Converter",
+          "topic": "CDR to PSD",
+          "url": "aspose.com/imaging/online-cdr-to-psd-converter/"
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::imaging/2024-08-08-convert-cdr-to-psd-in-csharp/index.md",
+          "title": "Convert CDR to PSD in C#",
+          "topic": "CDR to PSD",
+          "url": "aspose.com/imaging/convert-cdr-to-psd-in-csharp/"
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Imaging",
+      "sub_category": "File Format Conversion",
+      "topic": "CMX to PDF",
+      "key": "cmx-to-pdf",
+      "baseline_record_id": "blog::imaging/2025-06-03-convert-cmx-to-pdf-in-java/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::imaging/2025-06-03-convert-cmx-to-pdf-in-java/index.md",
+          "title": "Convert CMX to PDF in Java using Aspose.Imaging",
+          "topic": "CMX to PDF using aspose imaging",
+          "url": "aspose.com/imaging/convert-cmx-to-pdf-in-java/"
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Image Processing",
+      "sub_category": "File Format Conversion",
+      "topic": "CMX to PNG",
+      "key": "cmx-to-png",
+      "baseline_record_id": "blog::imaging/2025-06-09-cmx-to-png-using-java/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::imaging/2025-06-09-cmx-to-png-using-java/index.md",
+          "title": "CMX to PNG using Aspose.Imaging for Java",
+          "topic": "CMX to PNG using aspose imaging",
+          "url": "aspose.com/imaging/cmx-to-png-using-java/"
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::imaging/2025-07-29-convert-cmx-to-png-in-csharp/index.md",
+          "title": "Convert CMX to PNG in C# Programmatically",
+          "topic": "CMX to PNG",
+          "url": "aspose.com/imaging/convert-cmx-to-png-in-csharp/"
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Imaging",
+      "sub_category": "Compression",
+      "topic": "Compress images",
+      "key": "compress-images",
+      "baseline_record_id": "blog::imaging/2023-07-07-compress-images-in-python/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::imaging/2023-07-07-compress-images-in-python/index.md",
+          "title": "Compress Images in Python",
+          "topic": "Compress images",
+          "url": "aspose.com/imaging/compress-images-in-python/"
+        }
+      }
+    },
+    {
+      "category": "Imaging",
+      "sub_category": "Image Compression",
+      "topic": "Compress PNG JPEG and TIFF images",
+      "key": "compress-png-jpeg-and-tiff-images",
+      "baseline_record_id": "blog::imaging/2020-11-27-compress-png-jpeg-and-tiff-images-using-csharp/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::imaging/2021-02-26-compress-png-jpeg-tiff-images-in-java/index.md",
+          "title": "Compress PNG, JPEG, and TIFF Images in Java",
+          "topic": "Compress PNG JPEG and TIFF images",
+          "url": "aspose.com/imaging/compress-png-jpeg-tiff-images-in-java/"
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::imaging/2020-11-27-compress-png-jpeg-and-tiff-images-using-csharp/index.md",
+          "title": "Compress PNG, JPEG, and TIFF Images using C#",
+          "topic": "Compress PNG JPEG and TIFF images",
+          "url": "aspose.com/imaging/compress-png-jpeg-and-tiff-images-using-csharp/"
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Imaging",
+      "sub_category": "Vector Image Conversion",
+      "topic": "Convert EMF WMF and SVG images",
+      "key": "convert-emf-wmf-and-svg-images",
+      "baseline_record_id": "blog::imaging/2020-06-03-convert-emf-wmf-svg-csharp/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::imaging/2020-06-03-convert-emf-wmf-svg-csharp/index.md",
+          "title": "Convert EMF, WMF and SVG Images Programmatically using C#",
+          "topic": "Convert EMF WMF and SVG images",
+          "url": "aspose.com/imaging/convert-emf-wmf-svg-csharp/"
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Image Processing",
+      "sub_category": "Image Conversion",
+      "topic": "Convert HEIC images",
+      "key": "convert-heic-images",
+      "baseline_record_id": "blog::imaging/2024-06-14-convert-from-heic-in-csharp/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::imaging/2024-06-14-convert-from-heic-in-csharp/index.md",
+          "title": "Convert HEIC images in C# .NET",
+          "topic": "Convert HEIC images",
+          "url": "aspose.com/imaging/convert-from-heic-in-c-sharp/"
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Imaging",
+      "sub_category": "In-Memory Processing",
+      "topic": "Create and edit raster images in memory",
+      "key": "create-and-edit-raster-images-in-memory",
+      "baseline_record_id": "blog::imaging/2026-08-25-create-edit-raster-images-memory-in-csharp/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::imaging/2026-08-25-create-edit-raster-images-memory-in-csharp/index.md",
+          "title": "Create and Edit Raster Images In-Memory in C#",
+          "topic": "Create and edit raster images in memory",
+          "url": "aspose.com/imaging/create-edit-raster-images-memory-in-csharp/"
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Imaging",
+      "sub_category": "Animated PNG",
+      "topic": "Create animated PNG images",
+      "key": "create-animated-png-images",
+      "baseline_record_id": "blog::imaging/2020-07-02-create-animated-png-using-csharp-or-vb.net/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::imaging/2020-07-02-create-animated-png-using-csharp-or-vb.net/index.md",
+          "title": "Create Animated PNG Images using C# or VB.NET",
+          "topic": "Create animated PNG images",
+          "url": "aspose.com/imaging/create-animated-png-using-csharp-or-vb.net/"
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Image Processing",
+      "sub_category": "Clipping Path",
+      "topic": "Create clipping path in TIFF images",
+      "key": "create-clipping-path-in-tiff-images",
+      "baseline_record_id": "blog::imaging/2020-08-31-create-clipping-path-in-tiff-images-using-csharp/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::imaging/2020-08-31-create-clipping-path-in-tiff-images-using-csharp/index.md",
+          "title": "Create Clipping Path in TIFF Images using C#",
+          "topic": "Create clipping path in TIFF images",
+          "url": "aspose.com/imaging/create-clipping-path-in-tiff-images-using-csharp/"
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Imaging",
+      "sub_category": "Image Cropping",
+      "topic": "Crop images",
+      "key": "crop-images",
+      "baseline_record_id": "blog::imaging/2022-09-19-crop-images-in-java/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::imaging/2022-09-19-crop-images-in-java/index.md",
+          "title": "Crop Images Programmatically in Java",
+          "topic": "Crop images",
+          "url": "aspose.com/imaging/crop-images-in-java/"
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::imaging/2022-09-20-crop-images-in-csharp/index.md",
+          "title": "Crop Images Programmatically in C#",
+          "topic": "Crop images",
+          "url": "aspose.com/imaging/crop-images-in-csharp/"
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Imaging",
+      "sub_category": "Cropping",
+      "topic": "Crop images applications",
+      "key": "crop-images-applications",
+      "baseline_record_id": "blog::imaging/2023-11-23-crop-images-in-python/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::imaging/2023-11-23-crop-images-in-python/index.md",
+          "title": "Crop Images in Python Applications",
+          "topic": "Crop images applications",
+          "url": "aspose.com/imaging/crop-images-in-python/"
+        }
+      }
+    },
+    {
+      "category": "Imaging",
+      "sub_category": "Image Cropping",
+      "topic": "Crop SVG image crop images",
+      "key": "crop-svg-image-crop-images",
+      "baseline_record_id": "blog::imaging/2024-03-13-crop-svg-image-in-csharp-crop-images-online/index.md",
+      "coverage": {
+        "general": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::imaging/2024-03-13-crop-svg-image-in-csharp-crop-images-online/index.md",
+          "title": "Crop SVG Image in C# - Crop Images Online",
+          "topic": "Crop SVG image crop images",
+          "url": "aspose.com/imaging/crop-svg-image-in-csharp-crop-images-online"
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Imaging",
+      "sub_category": "File Conversion",
+      "topic": "DICOM to JPG",
+      "key": "dicom-to-jpg",
+      "baseline_record_id": "blog::imaging/2020-04-01-convert-dicom-to-jpeg-gif-png-bmp-images-in-csharp-net/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::imaging/2020-11-20-convert-dicom-to-jpeg-gif-png-bmp-images-in-java/index.md",
+          "title": "Convert DICOM to JPG, GIF, PNG, BMP and PDF in Java",
+          "topic": "DICOM to JPG GIF PNG BMP and PDF",
+          "url": "aspose.com/imaging/convert-dicom-to-jpeg-gif-png-bmp-images-in-java/"
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::imaging/2020-04-01-convert-dicom-to-jpeg-gif-png-bmp-images-in-csharp-net/index.md",
+          "title": "C# Convert DICOM to JPEG, GIF, PNG, and BMP Images",
+          "topic": "DICOM to JPEG GIF PNG and BMP images",
+          "url": "aspose.com/imaging/convert-dicom-to-jpeg-gif-png-bmp-images-in-csharp-net/"
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Imaging",
+      "sub_category": "Format Conversion",
+      "topic": "DICOM to PNG",
+      "key": "dicom-to-png",
+      "baseline_record_id": "blog::imaging/2024-10-21-convert-dicom-to-png-in-python/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::imaging/2024-10-21-convert-dicom-to-png-in-python/index.md",
+          "title": "Convert DICOM to PNG in Python",
+          "topic": "DICOM to PNG",
+          "url": "aspose.com/imaging/convert-dicom-to-png-in-python/"
+        }
+      }
+    },
+    {
+      "category": "Imaging",
+      "sub_category": "Drawing Shapes",
+      "topic": "Draw shapes in lines arcs ellipses and rectangles",
+      "key": "draw-shapes-in-lines-arcs-ellipses-and-rectangles",
+      "baseline_record_id": "blog::imaging/2022-11-11-draw-shapes-in-java/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::imaging/2022-11-11-draw-shapes-in-java/index.md",
+          "title": "Draw Shapes in Java: Lines, Arcs, Ellipses, and Rectangles",
+          "topic": "Draw shapes in lines arcs ellipses and rectangles",
+          "url": "aspose.com/imaging/draw-shapes-in-java/"
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::imaging/2022-12-05-draw-shapes-in-csharp/index.md",
+          "title": "Draw Shapes in C#: Lines, Arcs, Ellipses, and Rectangles",
+          "topic": "Draw shapes in lines arcs ellipses and rectangles",
+          "url": "aspose.com/imaging/draw-shapes-in-csharp/"
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Imaging",
+      "sub_category": "Drawing and Graphics",
+      "topic": "Drawing draw graphics on images",
+      "key": "drawing-draw-graphics-on-images",
+      "baseline_record_id": "blog::imaging/2023-12-21-csharp-net-drawing-library/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::imaging/2023-12-21-csharp-net-drawing-library/index.md",
+          "title": "C# .NET Drawing API - Draw Graphics on Images",
+          "topic": "Drawing API draw graphics on images",
+          "url": "aspose.com/imaging/net-drawing-library/"
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Imaging",
+      "sub_category": "File Format Conversion",
+      "topic": "EPS to PNG",
+      "key": "eps-to-png",
+      "baseline_record_id": "blog::imaging/2020-09-21-convert-eps-to-png-or-pdf-using-csharp/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::imaging/2020-09-21-convert-eps-to-png-or-pdf-using-csharp/index.md",
+          "title": "Convert EPS to PNG or PDF using C#",
+          "topic": "EPS to PNG or PDF",
+          "url": "aspose.com/imaging/convert-eps-to-png-or-pdf-using-csharp/"
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Imaging",
+      "sub_category": "Multipage Image Export",
+      "topic": "Export PAGES in multipage TIFF GIF and other formats",
+      "key": "export-pages-in-multipage-tiff-gif-and-other",
+      "baseline_record_id": "blog::imaging/2020-03-03-access-and-export-pages-in-multipage-images-in-csharp-java/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::imaging/2020-03-03-access-and-export-pages-in-multipage-images-in-csharp-java/index.md",
+          "title": "Export Pages in Multipage TIFF, GIF, and Other Formats using C# and Java",
+          "topic": "Export pages in multipage TIFF GIF and other formats",
+          "url": "aspose.com/imaging/access-and-export-pages-in-multipage-images-in-csharp-java/"
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Image Processing",
+      "sub_category": "Flip And Rotate",
+      "topic": "Flip images",
+      "key": "flip-images",
+      "baseline_record_id": "blog::imaging/2021-11-21-rotate-and-flip-images-in-java/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::imaging/2021-11-21-rotate-and-flip-images-in-java/index.md",
+          "title": "Flip Images Programmatically in Java",
+          "topic": "Flip images",
+          "url": "aspose.com/imaging/flip-images-in-java/"
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::imaging/2021-12-21-rotate-and-flip-images-in-csharp/index.md",
+          "title": "Flip Images Programmatically in C# .NET",
+          "topic": "Flip images",
+          "url": "aspose.com/imaging/flip-images-in-csharp/"
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Imaging",
+      "sub_category": "Canvas Export",
+      "topic": "Generate html5 canvas",
+      "key": "generate-html5-canvas",
+      "baseline_record_id": "blog::imaging/2020-06-01-generate-html5-canvas-programmatically-using-csharp-vb.net/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::imaging/2020-06-01-generate-html5-canvas-programmatically-using-csharp-vb.net/index.md",
+          "title": "Generate HTML5 Canvas Programmatically using C#",
+          "topic": "Generate HTML5 canvas",
+          "url": "aspose.com/imaging/generate-html5-canvas-programmatically-using-csharp-vb.net/"
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Imaging",
+      "sub_category": "Image Conversion",
+      "topic": "GIF images to PDF",
+      "key": "gif-images-to-pdf",
+      "baseline_record_id": "blog::imaging/2021-02-09-convert-gif-images-to-pdf-using-java/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::imaging/2021-02-09-convert-gif-images-to-pdf-using-java/index.md",
+          "title": "Convert GIF Images to PDF using Java",
+          "topic": "GIF images to PDF",
+          "url": "aspose.com/imaging/convert-gif-images-to-pdf-using-java/"
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::imaging/2021-03-09-convert-gif-images-to-pdf-in-csharp/index.md",
+          "title": "Convert GIF Images to PDF in C#",
+          "topic": "GIF images to PDF",
+          "url": "aspose.com/imaging/convert-gif-images-to-pdf-in-csharp/"
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Imaging",
+      "sub_category": "Format Conversion",
+      "topic": "GIF images to PNG JPEG BMP or TIFF",
+      "key": "gif-images-to-png-jpeg-bmp-or-tiff",
+      "baseline_record_id": "blog::imaging/2021-03-25-convert-gif-to-png-jpeg-bmp-or-tiff-using-java/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::imaging/2021-03-25-convert-gif-to-png-jpeg-bmp-or-tiff-using-java/index.md",
+          "title": "Convert GIF Images to PNG, JPEG, BMP, or TIFF using Java",
+          "topic": "GIF images to PNG JPEG BMP or TIFF",
+          "url": "aspose.com/imaging/convert-gif-to-png-jpeg-bmp-or-tiff-using-java/"
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Imaging",
+      "sub_category": "Image Format Conversion",
+      "topic": "GIF images to TIFF PDF PNG JPG or BMP",
+      "key": "gif-images-to-tiff-pdf-png-jpg-or-bmp",
+      "baseline_record_id": "blog::imaging/2020-06-10-convert-gif-images-to-tiff-pdf-png-jpg-or-bmp-using-csharp/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::imaging/2020-06-10-convert-gif-images-to-tiff-pdf-png-jpg-or-bmp-using-csharp/index.md",
+          "title": "Convert GIF Images to TIFF, PDF, PNG, JPG, or BMP using C#",
+          "topic": "GIF images to TIFF PDF PNG JPG or BMP",
+          "url": "aspose.com/imaging/convert-gif-images-to-tiff-pdf-png-jpg-or-bmp-using-csharp/"
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Imaging",
+      "sub_category": "Conversion",
+      "topic": "GIF to JPG",
+      "key": "gif-to-jpg",
+      "baseline_record_id": "blog::imaging/2024-10-22-convert-gif-to-jpeg-in-python-programmatically/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::imaging/2024-10-22-convert-gif-to-jpeg-in-python-programmatically/index.md",
+          "title": "Convert GIF to JPEG in Python Programmatically",
+          "topic": "GIF to JPEG",
+          "url": "aspose.com/imaging/convert-gif-to-jpeg-in-python-programmatically/"
+        }
+      }
+    },
+    {
+      "category": "Image Processing",
+      "sub_category": "Format Conversion",
+      "topic": "GIF to PNG",
+      "key": "gif-to-png",
+      "baseline_record_id": "blog::imaging/2024-12-17-convert-gif-to-png-in-python-image-manipulation-service/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::imaging/2024-12-17-convert-gif-to-png-in-python-image-manipulation-service/index.md",
+          "title": "Convert GIF to PNG in Python - Image Manipulation Service",
+          "topic": "GIF to PNG",
+          "url": "aspose.com/imaging/convert-gif-to-png-in-python-image-manipulation-service/"
+        }
+      }
+    },
+    {
+      "category": "Development",
+      "sub_category": "Imaging",
+      "topic": "Image processing for linux",
+      "key": "image-processing-for-linux",
+      "baseline_record_id": "blog::imaging/2023-07-05-image-processing-library-for-linux/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::imaging/2023-07-05-image-processing-library-for-linux/index.md",
+          "title": "Ultimate Image Processing Library for Linux",
+          "topic": "Image processing library for linux",
+          "url": "aspose.com/imaging/image-processing-library-for-linux/"
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Imaging",
+      "sub_category": "Image Resizing",
+      "topic": "Image resizer resize images",
+      "key": "image-resizer-resize-images",
+      "baseline_record_id": "blog::imaging/2023-03-02-resize-image-online-free/index.md",
+      "coverage": {
+        "general": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::imaging/2023-03-02-resize-image-online-free/index.md",
+          "title": "Free Image Resizer - Resize Images Online",
+          "topic": "Image resizer resize images",
+          "url": "aspose.com/imaging/resize-image-online/"
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Imaging",
+      "sub_category": "Grayscale Conversion",
+      "topic": "Image to grayscale",
+      "key": "image-to-grayscale",
+      "baseline_record_id": "blog::imaging/2021-05-03-convert-images-to-grayscale-in-csharp/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::imaging/2021-05-03-convert-images-to-grayscale-in-csharp/index.md",
+          "title": "Convert Images to Grayscale in C#",
+          "topic": "Images to grayscale",
+          "url": "aspose.com/imaging/convert-images-to-grayscale-in-csharp/"
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Imaging",
+      "sub_category": "PDF Conversion",
+      "topic": "Image to PDF",
+      "key": "image-to-pdf",
+      "baseline_record_id": "blog::imaging/2023-07-10-convert-image-to-pdf-python/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::imaging/2023-07-10-convert-image-to-pdf-python/index.md",
+          "title": "Convert Image to PDF in Python",
+          "topic": "Image to PDF",
+          "url": "aspose.com/imaging/convert-image-to-pdf-python/"
+        }
+      }
+    },
+    {
+      "category": "Imaging",
+      "sub_category": "SVG Manipulation",
+      "topic": "Iterating over SVG elements",
+      "key": "iterating-over-svg-elements",
+      "baseline_record_id": "blog::imaging/2026-08-27-iterating-over-svg-elements-net/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::imaging/2026-08-27-iterating-over-svg-elements-net/index.md",
+          "title": "Iterating Over SVG Elements in C# with Aspose.Imaging",
+          "topic": "Iterating over SVG elements with aspose imaging",
+          "url": "aspose.com/imaging/iterating-over-svg-elements-in-csharp/"
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Imaging",
+      "sub_category": "Format Conversion",
+      "topic": "JPG images to PNG",
+      "key": "jpg-images-to-png",
+      "baseline_record_id": "blog::imaging/2021-11-01-convert-jpg-to-png-in-java/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::imaging/2021-11-01-convert-jpg-to-png-in-java/index.md",
+          "title": "Convert JPG Images to PNG in Java",
+          "topic": "JPG images to PNG",
+          "url": "aspose.com/imaging/convert-jpg-to-png-in-java/"
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::imaging/2021-11-15-convert-jpg-to-png-in-csharp/index.md",
+          "title": "Convert JPG Images to PNG in C#",
+          "topic": "JPG images to PNG",
+          "url": "aspose.com/imaging/convert-jpg-to-png-in-csharp/"
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Imaging",
+      "sub_category": "Jpg Merge",
+      "topic": "JPG to JPG",
+      "key": "jpg-to-jpg",
+      "baseline_record_id": "blog::imaging/2023-02-21-merge-jpg-to-jpg-online-free/index.md",
+      "coverage": {
+        "general": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::imaging/2023-02-21-merge-jpg-to-jpg-online-free/index.md",
+          "title": "Merge JPG to JPG - Online & Free",
+          "topic": "JPG to JPG",
+          "url": "aspose.com/imaging/merge-jpg-to-jpg-online/"
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Imaging",
+      "sub_category": "Image Format Conversion",
+      "topic": "JPG to TGA",
+      "key": "jpg-to-tga",
+      "baseline_record_id": "blog::imaging/2020-10-11-convert-png-jpg-to-tga-manipulaute-csharp/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::imaging/2020-10-11-convert-png-jpg-to-tga-manipulaute-csharp/index.md",
+          "title": "Convert PNG, JPG to TGA or Manipulate TGA using C#",
+          "topic": "PNG JPG to TGA or manipulate TGA",
+          "url": "aspose.com/imaging/convert-png-jpg-to-tga-manipulaute-csharp/"
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Imaging",
+      "sub_category": "Selection Tools",
+      "topic": "Magic wand",
+      "key": "magic-wand",
+      "baseline_record_id": "blog::imaging/2023-11-17-magic-wand-tool-python/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::imaging/2023-11-20-magic-wand-tool-java/index.md",
+          "title": "Magic Wand Tool for Java",
+          "topic": "Magic wand",
+          "url": "aspose.com/imaging/java-magic-wand-tool/"
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::imaging/2023-11-17-magic-wand-tool-python/index.md",
+          "title": "Magic Wand Tool for Python",
+          "topic": "Magic wand",
+          "url": "aspose.com/imaging/python-magic-wand-tool/"
+        }
+      }
+    },
+    {
+      "category": "Imaging",
+      "sub_category": "Image Processing",
+      "topic": "Merge JPG images",
+      "key": "merge-jpg-images",
+      "baseline_record_id": "blog::imaging/2025-06-02-merge-jpg-images-in-java/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::imaging/2025-06-02-merge-jpg-images-in-java/index.md",
+          "title": "Merge JPG Images in C# Programmatically",
+          "topic": "Merge JPG images",
+          "url": "aspose.com/imaging/merge-jpg-images-in-csharp/"
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Imaging",
+      "sub_category": "Image Merging",
+      "topic": "Merge multiple images",
+      "key": "merge-multiple-images",
+      "baseline_record_id": "blog::imaging/2022-09-16-merge-multiple-images-in-java/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::imaging/2022-09-16-merge-multiple-images-in-java/index.md",
+          "title": "Merge Multiple Images Programmatically in Java",
+          "topic": "Merge multiple images",
+          "url": "aspose.com/imaging/merge-multiple-images-in-java/"
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::imaging/2023-07-04-merge-multiple-images-in-python/index.md",
+          "title": "Merge Multiple Images in Python",
+          "topic": "Merge multiple images",
+          "url": "aspose.com/imaging/merge-multiple-images-in-python/"
+        }
+      }
+    },
+    {
+      "category": "Imaging",
+      "sub_category": "Combine Images",
+      "topic": "Merge or combine images",
+      "key": "merge-or-combine-images",
+      "baseline_record_id": "blog::imaging/2021-08-09-merge-multiple-images-using-csharp/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::imaging/2021-08-09-merge-multiple-images-using-csharp/index.md",
+          "title": "Merge or Combine Images Programmatically using C#",
+          "topic": "Merge or combine images",
+          "url": "aspose.com/imaging/merge-multiple-images-using-csharp/"
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Imaging",
+      "sub_category": "Pixel Manipulation",
+      "topic": "Modify pixel colors of image",
+      "key": "modify-pixel-colors-of-image",
+      "baseline_record_id": "blog::imaging/2023-07-11-change-rgb-values-of-pixel-python/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::imaging/2023-07-11-change-rgb-values-of-pixel-python/index.md",
+          "title": "Modify Pixel Colors of an Image in Python",
+          "topic": "Modify pixel colors of image",
+          "url": "aspose.com/imaging/change-pixel-color-of-image-python/"
+        }
+      }
+    },
+    {
+      "category": "Imaging",
+      "sub_category": "Image Resizing",
+      "topic": "Picture resizer",
+      "key": "picture-resizer",
+      "baseline_record_id": "blog::imaging/2023-11-15-resize-pictures-online/index.md",
+      "coverage": {
+        "general": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::imaging/2023-11-15-resize-pictures-online/index.md",
+          "title": "Free Online Picture Resizer",
+          "topic": "Picture resizer",
+          "url": "aspose.com/imaging/online-picture-resizer/"
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Imaging",
+      "sub_category": "Image Conversion",
+      "topic": "PNG images to JPG",
+      "key": "png-images-to-jpg",
+      "baseline_record_id": "blog::imaging/2021-11-15-convert-png-to-jpg-in-java/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::imaging/2021-11-15-convert-png-to-jpg-in-java/index.md",
+          "title": "Convert PNG Images to JPG in Java",
+          "topic": "PNG images to JPG",
+          "url": "aspose.com/imaging/convert-png-to-jpg-in-java/"
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::imaging/2021-12-14-convert-png-to-jpg-in-csharp/index.md",
+          "title": "Convert PNG Images to JPG in C#",
+          "topic": "PNG images to JPG",
+          "url": "aspose.com/imaging/convert-png-to-jpg-in-csharp/"
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Image Processing",
+      "sub_category": "Format Conversion",
+      "topic": "PNG to GIF",
+      "key": "png-to-gif",
+      "baseline_record_id": "blog::imaging/2024-08-13-convert-png-to-gif-in-csharp/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::imaging/2024-08-13-convert-png-to-gif-in-csharp/index.md",
+          "title": "Convert PNG to GIF in C# Programmatically",
+          "topic": "PNG to GIF",
+          "url": "aspose.com/imaging/convert-png-to-gif-in-csharp/"
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Imaging",
+      "sub_category": "Format Conversion",
+      "topic": "PNG to JPG",
+      "key": "png-to-jpg",
+      "baseline_record_id": "blog::imaging/2024-08-06-convert-png-to-jpeg-in-csharp-programmatically/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::imaging/2024-08-06-convert-png-to-jpeg-in-csharp-programmatically/index.md",
+          "title": "Convert PNG to JPEG in C# Programmatically",
+          "topic": "PNG to JPEG",
+          "url": "aspose.com/imaging/convert-png-to-jpeg-in-csharp-programmatically/"
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Imaging",
+      "sub_category": "File Conversion",
+      "topic": "PNG to PDF",
+      "key": "png-to-pdf",
+      "baseline_record_id": "blog::imaging/2025-05-30-convert-png-to-pdf/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::imaging/2025-05-30-convert-png-to-pdf/index.md",
+          "title": "Convert PNG to PDF using Aspose.Imaging for Java",
+          "topic": "PNG to PDF",
+          "url": "aspose.com/imaging/convert-png-to-pdf/"
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Imaging",
+      "sub_category": "File Conversion",
+      "topic": "PNG to PSD",
+      "key": "png-to-psd",
+      "baseline_record_id": "blog::imaging/2024-04-24-convert-png-to-photoshop-file-in-java-png-to-psd-converter/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::imaging/2024-04-24-convert-png-to-photoshop-file-in-java-png-to-psd-converter/index.md",
+          "title": "Convert PNG to Photoshop File in Java - PNG to PSD Converter",
+          "topic": "PNG to photoshop PNG to PSD",
+          "url": "aspose.com/imaging/convert-png-to-photoshop-file-in-java-png-to-psd-converter/"
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Development",
+      "sub_category": "Libraries",
+      "topic": "Powerful image processing",
+      "key": "powerful-image-processing",
+      "baseline_record_id": "blog::imaging/2023-08-30-dotnet-image-processing-api/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::imaging/2023-08-30-dotnet-image-processing-api/index.md",
+          "title": "A Powerful C# .NET Image Processing API",
+          "topic": "Powerful image processing API",
+          "url": "aspose.com/imaging/dotnet-image-processing-api/"
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Imaging",
+      "sub_category": "Image Conversion",
+      "topic": "Raster image to SVG",
+      "key": "raster-image-to-svg",
+      "baseline_record_id": "blog::imaging/2023-08-17-convert-image-to-svg-in-python/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::imaging/2023-08-17-convert-image-to-svg-in-python/index.md",
+          "title": "Convert Raster Image to SVG in Python",
+          "topic": "Raster image to SVG",
+          "url": "aspose.com/imaging/image-to-svg-in-python/"
+        }
+      }
+    },
+    {
+      "category": "Imaging",
+      "sub_category": "Image Compression",
+      "topic": "Reduce size of JPEG size reducer",
+      "key": "reduce-size-of-jpeg-size-reducer",
+      "baseline_record_id": "blog::imaging/2024-03-15-reduce-the-size-of-a-jpeg-in-csharp-online-jpeg-size-reducer/index.md",
+      "coverage": {
+        "general": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::imaging/2024-03-15-reduce-the-size-of-a-jpeg-in-csharp-online-jpeg-size-reducer/index.md",
+          "title": "Reduce the Size of a JPEG in C# - Online JPEG Size Reducer",
+          "topic": "Reduce size of JPEG JPEG size reducer",
+          "url": "aspose.com/imaging/reduce-the-size-of-a-jpeg-in-csharp-online-jpeg-size-reducer"
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Imaging",
+      "sub_category": "SVG Optimization",
+      "topic": "Reduce SVG size image resize",
+      "key": "reduce-svg-size-image-resize",
+      "baseline_record_id": "blog::imaging/2024-05-29-reduce-svg-file-size-in-csharp/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::imaging/2024-05-29-reduce-svg-file-size-in-csharp/index.md",
+          "title": "Reduce SVG File Size in C# - Image Resize API",
+          "topic": "Reduce SVG size image resize API",
+          "url": "aspose.com/imaging/reduce-svg-file-size-in-csharp/"
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Imaging",
+      "sub_category": "Background removal",
+      "topic": "Remove background from images",
+      "key": "remove-background-from-images",
+      "baseline_record_id": "blog::imaging/2023-11-21-remove-image-background-csharp/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::imaging/2023-11-21-remove-image-background-csharp/index.md",
+          "title": "Remove Background from Images in C#",
+          "topic": "Remove background from images",
+          "url": "aspose.com/imaging/remove-image-background-csharp/"
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Imaging",
+      "sub_category": "Image Resizing",
+      "topic": "Resize images",
+      "key": "resize-images",
+      "baseline_record_id": "blog::imaging/2021-11-22-resize-images-in-java/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::imaging/2021-11-22-resize-images-in-java/index.md",
+          "title": "Resize Images Programmatically in Java",
+          "topic": "Resize images",
+          "url": "aspose.com/imaging/resize-images-in-java/"
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::imaging/2021-12-20-resize-images-in-csharp/index.md",
+          "title": "Resize Images Programmatically in C# .NET",
+          "topic": "Resize images",
+          "url": "aspose.com/imaging/resize-images-in-csharp/"
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Imaging",
+      "sub_category": "Image Resizing",
+      "topic": "Resize JPG images",
+      "key": "resize-jpg-images",
+      "baseline_record_id": "blog::imaging/2024-01-01-resize-jpg-images-in-python/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::imaging/2024-01-01-resize-jpg-images-in-python/index.md",
+          "title": "Resize JPG Images in Python",
+          "topic": "Resize JPG images",
+          "url": "aspose.com/imaging/resize-jpg-images-in-python/"
+        }
+      }
+    },
+    {
+      "category": "Imaging",
+      "sub_category": "Grayscale Conversion",
+      "topic": "Rgb image to grayscale",
+      "key": "rgb-image-to-grayscale",
+      "baseline_record_id": "blog::imaging/2021-08-06-convert-rgb-images-to-grayscale-in-java/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::imaging/2021-08-06-convert-rgb-images-to-grayscale-in-java/index.md",
+          "title": "Convert RGB Image to Grayscale in Java",
+          "topic": "RGB image to grayscale",
+          "url": "aspose.com/imaging/convert-rgb-images-to-grayscale-in-java/"
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Imaging",
+      "sub_category": "Image Manipulation",
+      "topic": "Rotate images",
+      "key": "rotate-images",
+      "baseline_record_id": "blog::imaging/2022-09-13-rotate-images-in-csharp/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::imaging/2022-09-14-rotate-images-in-java/index.md",
+          "title": "Rotate Images Programmatically in Java",
+          "topic": "Rotate images",
+          "url": "aspose.com/imaging/rotate-images-in-java/"
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::imaging/2022-09-13-rotate-images-in-csharp/index.md",
+          "title": "Rotate Images Programmatically in C# .NET",
+          "topic": "Rotate images",
+          "url": "aspose.com/imaging/rotate-images-in-csharp/"
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Image Processing",
+      "sub_category": "Format Conversion",
+      "topic": "SVG to EMF",
+      "key": "svg-to-emf",
+      "baseline_record_id": "blog::imaging/2025-08-01-convert-svg-to-emf-in-csharp/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::imaging/2025-08-01-convert-svg-to-emf-in-csharp/index.md",
+          "title": "Convert SVG to EMF in C# - Image Processing SDK",
+          "topic": "SVG to EMF",
+          "url": "aspose.com/imaging/convert-svg-to-emf-in-csharp/"
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Imaging",
+      "sub_category": "File Conversion",
+      "topic": "SVG to PNG",
+      "key": "svg-to-png",
+      "baseline_record_id": "blog::imaging/2024-12-19-convert-svg-to-png-in-python-programmatically/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::imaging/2024-12-19-convert-svg-to-png-in-python-programmatically/index.md",
+          "title": "Convert SVG to PNG in Python Programmatically",
+          "topic": "SVG to PNG",
+          "url": "aspose.com/imaging/convert-svg-to-png-in-python/"
+        }
+      }
+    },
+    {
+      "category": "Imaging",
+      "sub_category": "Image Conversion",
+      "topic": "SVG to TIF",
+      "key": "svg-to-tif",
+      "baseline_record_id": "blog::imaging/2024-01-19-convert-svg-to-tiff-in-python-vector-to-raster-converter/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::imaging/2024-01-19-convert-svg-to-tiff-in-python-vector-to-raster-converter/index.md",
+          "title": "Convert SVG to TIFF in Python - Vector to Raster Converter",
+          "topic": "SVG to TIFF",
+          "url": "aspose.com/imaging/convert-svg-to-tiff-in-python-vector-to-raster-converter"
+        }
+      }
+    },
+    {
+      "category": "Imaging",
+      "sub_category": "File Format Conversion",
+      "topic": "TIF to PSD",
+      "key": "tif-to-psd",
+      "baseline_record_id": "blog::imaging/2024-05-15-convert-tiff-to-psd-in-java/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::imaging/2024-05-15-convert-tiff-to-psd-in-java/index.md",
+          "title": "Convert TIFF to PSD in Java",
+          "topic": "TIFF to PSD",
+          "url": "aspose.com/imaging/convert-tiff-to-psd-in-java/"
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Imaging",
+      "sub_category": "Format Conversion",
+      "topic": "WEBP to TIF",
+      "key": "webp-to-tif",
+      "baseline_record_id": "blog::imaging/2026-08-24-convert-webp-to-tiff-in-csharp/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::imaging/2026-08-24-convert-webp-to-tiff-in-csharp/index.md",
+          "title": "Convert WebP to TIFF in C# Using Aspose.Imaging",
+          "topic": "Webp to TIFF using aspose imaging",
+          "url": "aspose.com/imaging/convert-webp-to-tiff-in-csharp/"
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Imaging",
+      "sub_category": "File Format Conversion",
+      "topic": "WMF to SVG",
+      "key": "wmf-to-svg",
+      "baseline_record_id": "blog::imaging/2021-01-29-convert-emf-wmf-to-svg-csharp/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::imaging/2021-01-29-convert-emf-wmf-to-svg-csharp/index.md",
+          "title": "Convert EMF or WMF to SVG Programmatically using C#",
+          "topic": "WMF to SVG",
+          "url": "aspose.com/imaging/convert-emf-wmf-to-svg-csharp/"
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    }
+  ],
+  "brand_name": "Aspose",
+  "product_name": "Aspose.Imaging"
+}
