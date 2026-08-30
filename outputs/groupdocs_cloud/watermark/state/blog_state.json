@@ -1,0 +1,19 @@
+{
+  "repo_head": "f3c728664b69871cf73d5f28eb283c34109d253a",
+  "file_fingerprints": {
+    "watermark/2020-02-06-watermark-cloud-api-and-sdks-to-secure-documents/index.md": "d7c01af67d63da7d02156f430a2996ddd714e7a4ac078c8a6deec623f00b6354",
+    "watermark/2021-02-09-find-and-replace-watermark-using-rest-api/index.md": "353ad413e39c74cb9a2586d38e60530252d683c31e5bada303b51bc66e5ca04d",
+    "watermark/2021-04-30-add-watermark-to-images-using-java/index.md": "f642db045b351aa2f8b3e3c2fb41519f4c9f507d3c3dff2df5bcf1e6cca49e91",
+    "watermark/2021-07-23-add-watermark-to-word-documents-using-rest-api-in-csharp/index.md": "1fc725ec712205488b798fa3133f4afeb333d90b98c3a76ed37583634a37cbb9",
+    "watermark/2023-08-08-add-overlay-text-on-a-gif-using-rest-api-in-csharp/index.md": "29c5293080cb0c65a3b7168daf61280b4378c27317d0873a126e8c7e865d5336",
+    "watermark/2023-08-23-how-to-add-watermark-in-excel-file-using-java/index.md": "904834b9a56d0e8a2eede8875cc408f94b77358977bd978da2f821af8bdb9f80",
+    "watermark/2023-11-29-add-watermark-to-png-in-java-watermark-generator/index.md": "90ce66a8f3e1eb9b1d565b7aba51cc1e23e19f6bef253fe412ae7b62d692fdb6",
+    "watermark/2024-01-02-add-watermark-to-word-in-java-watermark-creator/index.md": "00e6782cf726af9dabde6566c2844e219cd2fd47c79926831e6d709995856811",
+    "watermark/2025-10-24-image-watermark-word-in-csharp/index.md": "6c3b59e20b0ab7d902f65a24b546c273c74a63423716256c180df87f4b170f87",
+    "watermark/2025-10-24-watermark-pdf-with-text-in-csharp/index.md": "3d5cefba4ff1a21dcd5fc0e09964fd87d4b6bfd2c4ab375f0925f55c048a4277",
+    "watermark/2025-10-29-add-image-watermark-to-pdf-csharp/index.md": "d6b6d291a910e4fb19e2524b6f4b5ec067be7e96166337fd3cd0e247c054a2fd",
+    "watermark/2025-10-30-remove-watermark-from-pdf-csharp/index.md": "2842808ac0006f06a01aee9f88cbe14e95b41d1924f39c09f4b53e0474f85e61",
+    "watermark/2026-01-09-watermark-ppt-with-text-in-csharp/index.md": "5a40caf230950e12adad3e15cd9ccf87eeb8a85c6031de442b827b5222e4c011",
+    "watermark/2026-01-13-add-image-watermark-to-ppt-csharp/index.md": "8e61ee9b9ab3632ebed0139fc88e88740818278900af956082d17a1f859ef36e"
+  }
+}

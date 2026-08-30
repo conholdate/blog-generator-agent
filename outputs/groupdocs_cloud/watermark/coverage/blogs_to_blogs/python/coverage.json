@@ -1,0 +1,28 @@
+{
+  "case": "blogs_to_blogs",
+  "brand_key": "groupdocs_cloud",
+  "product_key": "watermark",
+  "baseline_platform": "python",
+  "platforms": [
+    "python",
+    "general",
+    "java",
+    "net"
+  ],
+  "meta": {
+    "matching_mode": "key_exact",
+    "total_input_records": 14,
+    "records_after_filters": 14,
+    "excluded_release_update_records": 0,
+    "excluded_old_or_undated_records": 0,
+    "baseline_records": 0,
+    "total_cells": 0,
+    "matched_cells": 0,
+    "missing_cells": 0,
+    "match_rate": 0.0,
+    "skipped_empty_keys": 0
+  },
+  "rows": [],
+  "brand_name": "GroupDocs.Cloud",
+  "product_name": "GroupDocs.Watermark"
+}

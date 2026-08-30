@@ -1,0 +1,2242 @@
+{
+  "case": "blogs_to_blogs",
+  "brand_key": "aspose_cloud",
+  "product_key": "3d",
+  "baseline_platform": "python",
+  "platforms": [
+    "python",
+    "general",
+    "go_via_cpp",
+    "java",
+    "net",
+    "nodejs",
+    "php"
+  ],
+  "meta": {
+    "matching_mode": "key_exact",
+    "total_input_records": 936,
+    "records_after_filters": 397,
+    "excluded_release_update_records": 158,
+    "excluded_old_or_undated_records": 381,
+    "baseline_records": 37,
+    "total_cells": 238,
+    "matched_cells": 92,
+    "missing_cells": 146,
+    "match_rate": 0.3865546218487395,
+    "skipped_empty_keys": 0
+  },
+  "rows": [
+    {
+      "category": "Conversion",
+      "sub_category": "3D File Formats",
+      "topic": "3D to PDF",
+      "key": "3d-to-pdf",
+      "baseline_record_id": "blog::Aspose.Cloud/3d/2022-02-10-convert-glb-to-pdf-using-python.-convert-fbx-to-pdf-using-python/index.md",
+      "coverage": {
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::Aspose.Cloud/3d/2022-02-10-convert-glb-to-pdf-using-python.-convert-fbx-to-pdf-using-python/index.md",
+          "title": "Convert 3D to PDF, GLB to PDF, FBX to PDF, FBX to STL, PDF 3D",
+          "topic": "3D to PDF GLB to PDF FBX to PDF FBX to STL PDF 3D",
+          "url": "aspose.cloud/3d/convert-glb-to-pdf-using-python.-convert-fbx-to-pdf-using-python/"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "go_via_cpp": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::Aspose.Cloud/cells/2026-08-19-3d-to-pdf-conversion-in-java-step-by-step-guide-for-developers/index.md",
+          "title": "3D to PDF Conversion in Java: Step-by-Step Guide for Developers",
+          "topic": "3D to PDF conversion in step by step guide for developers",
+          "url": "aspose.cloud/cells/3d-to-pdf-conversion-in-java-step-by-step-guide-for-developers/"
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "nodejs": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "php": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Presentation",
+      "sub_category": "PowerPoint",
+      "topic": "Add speaker notes to powerpoint via rest",
+      "key": "add-speaker-notes-to-powerpoint-via-rest",
+      "baseline_record_id": "blog::Aspose.Cloud/barcode/2026-05-27-add-speaker-notes-to-powerpoint-via-rest-in-python/index.md",
+      "coverage": {
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::Aspose.Cloud/barcode/2026-05-27-add-speaker-notes-to-powerpoint-via-rest-in-python/index.md",
+          "title": "Add Speaker Notes to PowerPoint via Rest in Python",
+          "topic": "Add speaker notes to powerpoint via REST",
+          "url": "aspose.cloud/barcode/add-speaker-notes-to-powerpoint-via-rest-in-python/"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "go_via_cpp": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "nodejs": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "php": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "PDF",
+      "sub_category": "Display Properties",
+      "topic": "Control PDF display properties",
+      "key": "control-pdf-display-properties",
+      "baseline_record_id": "blog::Aspose.Cloud/pdf/2021-12-29-control-pdf-display-properties-using-python/index.md",
+      "coverage": {
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::Aspose.Cloud/pdf/2021-12-29-control-pdf-display-properties-using-python/index.md",
+          "title": "Control PDF Display Properties using Python",
+          "topic": "Control PDF display properties",
+          "url": "aspose.cloud/pdf/control-pdf-display-properties-using-python/"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "go_via_cpp": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "nodejs": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "php": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Office",
+      "sub_category": "Spreadsheet",
+      "topic": "Create edit or convert Excel",
+      "key": "create-edit-or-convert-excel",
+      "baseline_record_id": "blog::Aspose.Cloud/cells/2020-02-05-create-edit-or-convert-excel-files-without-using-ms-excel/index.md",
+      "coverage": {
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::Aspose.Cloud/cells/2020-02-05-create-edit-or-convert-excel-files-without-using-ms-excel/index.md",
+          "title": "Create, Edit or Convert Excel Files with Aspose.Cells Cloud API",
+          "topic": "Create edit or convert Excel with aspose cells cloud API",
+          "url": "aspose.cloud/cells/create-edit-or-convert-excel-files-without-using-ms-excel/"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "go_via_cpp": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "nodejs": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "php": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Email",
+      "sub_category": "EML Creation",
+      "topic": "Create EML",
+      "key": "create-eml",
+      "baseline_record_id": "blog::Aspose.Cloud/email/2026-04-09-create-eml-file-in-python-programmatically/index.md",
+      "coverage": {
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::Aspose.Cloud/email/2026-04-09-create-eml-file-in-python-programmatically/index.md",
+          "title": "Create EML File in Python Programmatically",
+          "topic": "Create EML",
+          "url": "aspose.cloud/email/create-eml-file-in-python-programmatically/"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "go_via_cpp": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "nodejs": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "php": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "File Format Conversion",
+      "sub_category": "CSV to HTML",
+      "topic": "CSV to HTML",
+      "key": "csv-to-html",
+      "baseline_record_id": "blog::Aspose.Cloud/barcode/2026-05-23-step-by-step-guide-for-csv-to-html-conversion-in-python/index.md",
+      "coverage": {
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::Aspose.Cloud/barcode/2026-05-23-step-by-step-guide-for-csv-to-html-conversion-in-python/index.md",
+          "title": "STEP-by-STEP Guide for CSV to HTML Conversion in Python",
+          "topic": "CSV to HTML",
+          "url": "aspose.cloud/barcode/step-by-step-guide-for-csv-to-html-conversion-in-python/"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "go_via_cpp": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::Aspose.Cloud/barcode/2026-06-15-csv-to-html-conversion-in-java-step-by-step-code-guide/index.md",
+          "title": "CSV to HTML Conversion in Java: STEP-by-STEP Code Guide",
+          "topic": "CSV to HTML",
+          "url": "aspose.cloud/barcode/csv-to-html-conversion-in-java-step-by-step-code-guide/"
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::Aspose.Cloud/cells/2023-12-12-convert-csv-to-html-in-csharp/index.md",
+          "title": "Seamless Data Transformation: How to Convert CSV to HTML Using .NET REST API",
+          "topic": "Seamless data transformation how to convert CSV to HTML REST API",
+          "url": "aspose.cloud/cells/convert-csv-to-html-with-dotnet-cloud-sdk/"
+        },
+        "nodejs": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::Aspose.Cloud/html/2026-07-08-csv-to-html-conversion-tutorial-in-nodejs-a-complete-guide/index.md",
+          "title": "CSV to HTML Conversion Tutorial in Node.JS: A Complete Guide",
+          "topic": "CSV to HTML",
+          "url": "aspose.cloud/html/csv-to-html-conversion-tutorial-in-nodejs-a-complete-guide/"
+        },
+        "php": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Data Conversion",
+      "sub_category": "Csv To Json",
+      "topic": "CSV to JSON",
+      "key": "csv-to-json",
+      "baseline_record_id": "blog::Aspose.Cloud/barcode/2026-05-30-master-csv-to-json-conversion-in-python/index.md",
+      "coverage": {
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::Aspose.Cloud/barcode/2026-05-30-master-csv-to-json-conversion-in-python/index.md",
+          "title": "Master CSV to JSON Conversion in Python",
+          "topic": "CSV to JSON",
+          "url": "aspose.cloud/barcode/master-csv-to-json-conversion-in-python/"
+        },
+        "general": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::Aspose.Cloud/cells/2025-06-04-convert-csv-to-json-in-nodejs/index.md",
+          "title": "Convert CSV to JSON Using Node.js Cloud API | Export CSV to JSON Online",
+          "topic": "CSV to JSON",
+          "url": "aspose.cloud/cells/convert-csv-to-json-with-nodejs/"
+        },
+        "go_via_cpp": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::Aspose.Cloud/barcode/2026-06-24-csv-to-json-conversion-in-java/index.md",
+          "title": "CSV to JSON Conversion in Java",
+          "topic": "CSV to JSON",
+          "url": "aspose.cloud/barcode/csv-to-json-conversion-in-java/"
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::Aspose.Cloud/cells/2023-12-15-convert-csv-to-json-in-csharp/index.md",
+          "title": "Easy CSV to JSON Conversion with .NET REST API",
+          "topic": "CSV to JSON",
+          "url": "aspose.cloud/cells/convert-csv-to-json-with-dotnet-cloud-sdk/"
+        },
+        "nodejs": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::Aspose.Cloud/barcode/2026-07-22-csv-to-json-tutorial-in-nodejs-a-quick/index.md",
+          "title": "CSV to JSON Tutorial in Node.JS: a Quick",
+          "topic": "CSV to JSON",
+          "url": "aspose.cloud/barcode/csv-to-json-tutorial-in-nodejs-a-quick/"
+        },
+        "php": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Data Conversion",
+      "sub_category": "File Format Conversion",
+      "topic": "CSV to TXT",
+      "key": "csv-to-txt",
+      "baseline_record_id": "blog::Aspose.Cloud/html/2026-07-20-csv-to-txt-conversion-tutorial-in-python/index.md",
+      "coverage": {
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::Aspose.Cloud/html/2026-07-20-csv-to-txt-conversion-tutorial-in-python/index.md",
+          "title": "CSV to TXT Conversion Tutorial in Python",
+          "topic": "CSV to TXT",
+          "url": "aspose.cloud/html/csv-to-txt-conversion-tutorial-in-python/"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "go_via_cpp": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::Aspose.Cloud/html/2026-06-26-csv-to-txt-conversion-guide-in-java/index.md",
+          "title": "CSV to TXT Conversion Guide in Java",
+          "topic": "CSV to TXT",
+          "url": "aspose.cloud/html/csv-to-txt-conversion-guide-in-java/"
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::Aspose.Cloud/cells/2023-12-22-convert-csv-to-txt-in-csharp/index.md",
+          "title": "How to Convert CSV to Text File with .NET REST API",
+          "topic": "CSV to text REST API",
+          "url": "aspose.cloud/cells/convert-csv-to-txt-with-dotnet-cloud-sdk/"
+        },
+        "nodejs": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "php": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Document Conversion",
+      "sub_category": "Word to Html",
+      "topic": "DOCX to HTML",
+      "key": "docx-to-html",
+      "baseline_record_id": "blog::Aspose.Cloud/words/2022-02-21-convert-word-to-html-using-python/index.md",
+      "coverage": {
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::Aspose.Cloud/words/2022-02-21-convert-word-to-html-using-python/index.md",
+          "title": "Word to HTML Python. DOC to HTML. Word to Web. MS Word to HTML",
+          "topic": "Word to HTML DOC to HTML word to web MS word to HTML",
+          "url": "aspose.cloud/words/convert-word-to-html-using-python/"
+        },
+        "general": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::Aspose.Cloud/words/2022-03-28-how-to-convert-word-to-html-with-file-conversion-api-in-ruby/index.md",
+          "title": "Convert Word to HTML in Ruby. Word to HTML Document. DOC to HTML",
+          "topic": "Word to HTML in word to HTML document DOC to HTML",
+          "url": "aspose.cloud/words/how-to-convert-word-to-html-with-file-conversion-api-in-ruby/"
+        },
+        "go_via_cpp": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::Aspose.Cloud/words/2020-02-28-convert-word-to-html/index.md",
+          "title": "Convert Word to HTML and Vice Versa using REST APIs",
+          "topic": "Word to HTML and vice versa using REST apis",
+          "url": "aspose.cloud/words/convert-word-to-html/"
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::Aspose.Cloud/words/2023-01-03-convert-word-to-html-in-java/index.md",
+          "title": "Convert Word (DOC/DOCX) to HTML using Java",
+          "topic": "DOCX to HTML",
+          "url": "aspose.cloud/words/convert-word-to-html-in-java/"
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::Aspose.Cloud/words/2023-04-06-convert-word-to-html-in-csharp/index.md",
+          "title": "Convert Word (DOC/DOCX) to HTML using .NET REST API",
+          "topic": "DOCX to HTML",
+          "url": "aspose.cloud/words/word-to-html-in-csharp/"
+        },
+        "nodejs": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::Aspose.Cloud/words/2025-04-30-convert-word-to-html-in-nodejs/index.md",
+          "title": "Convert Word to HTML using Node.js | DOCX to HTML REST API",
+          "topic": "Word to HTML DOCX to HTML REST API",
+          "url": "aspose.cloud/words/convert-word-to-html-in-nodejs/"
+        },
+        "php": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::Aspose.Cloud/barcode/2026-07-24-docx-to-html-conversion-in-php-high-fidelity-tutorial/index.md",
+          "title": "DOCX to HTML Conversion in PHP: High Fidelity Tutorial",
+          "topic": "DOCX to HTML",
+          "url": "aspose.cloud/html/docx-to-html-conversion-in-php-high-fidelity-tutorial/"
+        }
+      }
+    },
+    {
+      "category": "Conversion",
+      "sub_category": "Word to JPG",
+      "topic": "DOCX to JPG",
+      "key": "docx-to-jpg",
+      "baseline_record_id": "blog::Aspose.Cloud/words/2021-11-13-convert-word-to-jpeg-in-python/index.md",
+      "coverage": {
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::Aspose.Cloud/words/2021-11-13-convert-word-to-jpeg-in-python/index.md",
+          "title": "Make Impressive Word to JPG Converter using Python Cloud SDK",
+          "topic": "Make impressive word to JPG converter cloud SDK",
+          "url": "aspose.cloud/words/convert-word-to-jpeg-in-python/"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "go_via_cpp": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::Aspose.Cloud/words/2022-12-29-convert-word-to-jpg-in-java/index.md",
+          "title": "Convert Word (DOC, DOCX) to JPG using Java",
+          "topic": "DOCX to JPG",
+          "url": "aspose.cloud/words/convert-word-to-jpg-in-java/"
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::Aspose.Cloud/words/2021-08-24-convert-word-to-jpg-in-csharp/index.md",
+          "title": "Convert Word to JPG in C#",
+          "topic": "Word to JPG",
+          "url": "aspose.cloud/words/convert-word-to-jpg-in-csharp/"
+        },
+        "nodejs": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::Aspose.Cloud/words/2025-05-14-convert-word-to-jpg-in-nodejs/index.md",
+          "title": "Convert Word to JPEG using Node.js | DOCX to JPG Image Export",
+          "topic": "Word to JPEG DOCX to JPG image export",
+          "url": "aspose.cloud/words/convert-word-to-jpg-in-nodejs/"
+        },
+        "php": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Document Conversion",
+      "sub_category": "Word to PDF",
+      "topic": "DOCX to PDF",
+      "key": "docx-to-pdf",
+      "baseline_record_id": "blog::Aspose.Cloud/words/2021-07-12-doc-to-pdf-in-python/index.md",
+      "coverage": {
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::Aspose.Cloud/words/2021-07-12-doc-to-pdf-in-python/index.md",
+          "title": "Convert Word to PDF in Python - DOC to PDF Converter",
+          "topic": "Word to PDF DOC to PDF",
+          "url": "aspose.cloud/words/doc-to-pdf-in-python/"
+        },
+        "general": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::Aspose.Cloud/words/2021-07-06-convert-doc-to-pdf-in-java/index.md",
+          "title": "Online Word to PDF Converter in Java - DOC to PDF",
+          "topic": "Word to PDF converter DOC to PDF",
+          "url": "aspose.cloud/words/convert-doc-to-pdf-in-java/"
+        },
+        "go_via_cpp": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::Aspose.Cloud/total/2021-11-08-automate-document-conversion-using-zapier/index.md",
+          "title": "Word to PDF Converter  | DOC to PDF | DOCX to PDF | Zapier",
+          "topic": "Word to PDF converter DOC to PDF DOCX to PDF zapier",
+          "url": "aspose.cloud/total/automate-document-conversion-using-zapier/"
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::Aspose.Cloud/cells/2026-08-24-convert-docx-to-pdf-in-java/index.md",
+          "title": "Convert DOCX to PDF in Java",
+          "topic": "DOCX to PDF",
+          "url": "aspose.cloud/cells/convert-docx-to-pdf-in-java/"
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::Aspose.Cloud/words/2021-08-23-word-to-pdf-convert-word-to-pdf-in-csharp/index.md",
+          "title": "Convert Word to PDF in C# - DOC to PDF Converter in C#",
+          "topic": "Word to PDF DOC to PDF",
+          "url": "aspose.cloud/words/word-to-pdf-convert-word-to-pdf-in-csharp/"
+        },
+        "nodejs": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "php": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Document Conversion",
+      "sub_category": "Word to Image",
+      "topic": "DOCX to PNG",
+      "key": "docx-to-png",
+      "baseline_record_id": "blog::Aspose.Cloud/words/2022-04-26-convert-word-to-png-online-using-python-word-doc-to-png/index.md",
+      "coverage": {
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::Aspose.Cloud/words/2022-04-26-convert-word-to-png-online-using-python-word-doc-to-png/index.md",
+          "title": "Convert DOC and DOCX to PNG Images using Python Cloud SDK",
+          "topic": "DOCX to PNG",
+          "url": "aspose.cloud/words/convert-word-to-png-online-using-python-word-doc-to-png/"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "go_via_cpp": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "nodejs": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "php": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Cloud Integration",
+      "sub_category": "Email Sending",
+      "topic": "Email sending in heroku",
+      "key": "email-sending-in-heroku",
+      "baseline_record_id": "blog::Aspose.Cloud/email/2022-03-16-email-sending-using-aspose.email-cloud-in-heroku-php-app-2/index.md",
+      "coverage": {
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::Aspose.Cloud/email/2022-03-16-email-sending-using-aspose.email-cloud-in-heroku-php-app-2/index.md",
+          "title": "Email Sending using Aspose.Email Cloud in Heroku PHP App",
+          "topic": "Email sending using aspose email cloud in heroku",
+          "url": "aspose.cloud/email/email-sending-using-aspose.email-cloud-in-heroku-php-app-2/"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "go_via_cpp": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "nodejs": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "php": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Email",
+      "sub_category": "Conversion",
+      "topic": "EML to HTML",
+      "key": "eml-to-html",
+      "baseline_record_id": "blog::Aspose.Cloud/email/2026-04-23-convert-eml-to-html-in-python/index.md",
+      "coverage": {
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::Aspose.Cloud/email/2026-04-23-convert-eml-to-html-in-python/index.md",
+          "title": "Convert EML to HTML in Python",
+          "topic": "EML to HTML",
+          "url": "aspose.cloud/email/convert-eml-to-html-in-python/"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "go_via_cpp": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "nodejs": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "php": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Email",
+      "sub_category": "File Format Conversion",
+      "topic": "EML to MSG",
+      "key": "eml-to-msg",
+      "baseline_record_id": "blog::Aspose.Cloud/email/2026-04-14-convert-eml-to-msg-in-python/index.md",
+      "coverage": {
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::Aspose.Cloud/email/2026-04-14-convert-eml-to-msg-in-python/index.md",
+          "title": "Convert EML to MSG in Python",
+          "topic": "EML to MSG",
+          "url": "aspose.cloud/email/convert-eml-to-msg-in-python/"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "go_via_cpp": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::Aspose.Cloud/email/2021-10-20-convert-eml-to-msg-in-csharp/index.md",
+          "title": "EML to MSG - Convert EML to MSG in C#",
+          "topic": "EML to MSG convert EML to MSG",
+          "url": "aspose.cloud/email/convert-eml-to-msg-in-csharp/"
+        },
+        "nodejs": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "php": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "PDF",
+      "sub_category": "Encryption",
+      "topic": "Encrypt and password protect PDF rest",
+      "key": "encrypt-and-password-protect-pdf-rest",
+      "baseline_record_id": "blog::Aspose.Cloud/pdf/2021-12-05-encrypt-pdf-using-python/index.md",
+      "coverage": {
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::Aspose.Cloud/pdf/2021-12-05-encrypt-pdf-using-python/index.md",
+          "title": "How to Encrypt and Password Protect PDF using Python REST API",
+          "topic": "Encrypt and password protect PDF REST API",
+          "url": "aspose.cloud/pdf/encrypt-pdf-using-python/"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "go_via_cpp": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "nodejs": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "php": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Document Processing",
+      "sub_category": "PDF Text Extraction",
+      "topic": "Extract text from PDF rest",
+      "key": "extract-text-from-pdf-rest",
+      "baseline_record_id": "blog::Aspose.Cloud/pdf/2021-12-12-extract-text-from-pdf-in-python/index.md",
+      "coverage": {
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::Aspose.Cloud/pdf/2021-12-12-extract-text-from-pdf-in-python/index.md",
+          "title": "Extract Text from PDF using Python REST API",
+          "topic": "Extract text from PDF REST API",
+          "url": "aspose.cloud/pdf/extract-text-from-pdf-in-python/"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "go_via_cpp": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::Aspose.Cloud/pdf/2023-08-01-extract-text-from-pdf-with-csharp/index.md",
+          "title": "Extract Text from PDF using .NET REST API",
+          "topic": "Extract text from PDF REST API",
+          "url": "aspose.cloud/pdf/extract-text-from-pdf-using-dotnet-rest-api/"
+        },
+        "nodejs": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "php": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "3D",
+      "sub_category": "File Conversion",
+      "topic": "GLB to FBX",
+      "key": "glb-to-fbx",
+      "baseline_record_id": "blog::Aspose.Cloud/3d/2021-11-15-how-to-install-glb-to-fbx-python-library-in-your-project/index.md",
+      "coverage": {
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::Aspose.Cloud/3d/2021-11-15-how-to-install-glb-to-fbx-python-library-in-your-project/index.md",
+          "title": "How To Install GLB To FBX Conversion API in Python Project",
+          "topic": "GLB to FBX",
+          "url": "aspose.cloud/3d/how-to-install-glb-to-fbx-python-library-in-your-project/"
+        },
+        "general": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::Aspose.Cloud/3d/2024-10-09-glb-to-fbx-in-java/index.md",
+          "title": "Convert GLB to FBX Online with Textures | GLB to FBX Conversion Guide",
+          "topic": "GLB to FBX",
+          "url": "aspose.cloud/3d/glb-to-fbx-in-java"
+        },
+        "go_via_cpp": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::Aspose.Cloud/3d/2020-07-22-glb-to-fbx-conversion-using-cloud-apis/index.md",
+          "title": "GLB to FBX conversion using REST API",
+          "topic": "GLB to FBX",
+          "url": "aspose.cloud/3d/glb-to-fbx-conversion-using-cloud-apis/"
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::Aspose.Cloud/3d/2024-09-13-glb-to-fbx-in-csharp/index.md",
+          "title": "Convert GLB to FBX using C# .NET - Convert Binary glTF to Autodesk FBX",
+          "topic": "GLB to FBX",
+          "url": "aspose.cloud/3d/glb-to-fbx-in-csharp"
+        },
+        "nodejs": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::Aspose.Cloud/3d/2021-07-25-glb-to-fbx-in-node.js/index.md",
+          "title": "Convert GLB to FBX in Node.js - Easy and Simple Conversion",
+          "topic": "GLB to FBX",
+          "url": "aspose.cloud/3d/glb-to-fbx-in-node.js/"
+        },
+        "php": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Conversion",
+      "sub_category": "Image Conversion",
+      "topic": "HTML to JPG",
+      "key": "html-to-jpg",
+      "baseline_record_id": "blog::Aspose.Cloud/barcode/2026-07-31-complete-html-to-jpg-conversion-tutorial-in-python/index.md",
+      "coverage": {
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::Aspose.Cloud/barcode/2026-07-31-complete-html-to-jpg-conversion-tutorial-in-python/index.md",
+          "title": "Complete HTML to JPG Conversion Tutorial in Python",
+          "topic": "HTML to JPG",
+          "url": "aspose.cloud/html/complete-html-to-jpg-conversion-tutorial-in-python/"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "go_via_cpp": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::Aspose.Cloud/html/2024-07-05-convert-html-to-jpeg-in-csharp/index.md",
+          "title": "Convert HTML to JPG in C# .NET - HTML to JPG Converter",
+          "topic": "HTML to JPG",
+          "url": "aspose.cloud/html/convert-html-to-jpg-in-csharp/"
+        },
+        "nodejs": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "php": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Conversion",
+      "sub_category": "HTML to PDF",
+      "topic": "HTML to PDF",
+      "key": "html-to-pdf",
+      "baseline_record_id": "blog::Aspose.Cloud/html/2020-01-31-convert-html-files-to-pdf-with-aspose.html-cloud-api/index.md",
+      "coverage": {
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::Aspose.Cloud/html/2020-01-31-convert-html-files-to-pdf-with-aspose.html-cloud-api/index.md",
+          "title": "Convert HTML files to PDF with Aspose.HTML Cloud API",
+          "topic": "HTML to PDF",
+          "url": "aspose.cloud/html/convert-html-files-to-pdf-with-aspose.html-cloud-api/"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "go_via_cpp": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::Aspose.Cloud/html/2021-04-13-how-to-convert-html-to-pdf-using-java-rest-api/index.md",
+          "title": "Convert HTML to PDF in Java",
+          "topic": "HTML to PDF",
+          "url": "aspose.cloud/html/how-to-convert-html-to-pdf-using-java-rest-api/"
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::Aspose.Cloud/html/2025-07-29-convert-html-to-pdf-with-csharp/index.md",
+          "title": "Convert HTML to PDF using .NET SDK | Aspose.HTML Cloud API",
+          "topic": "HTML to PDF",
+          "url": "aspose.cloud/html/convert-html-to-pdf-using-csharp/"
+        },
+        "nodejs": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::Aspose.Cloud/pdf/2022-03-17-html-to-pdf-converter-aspose.pdf-file-format-converter/index.md",
+          "title": "HTML To PDF Converter - convert html to pdf in Node.js",
+          "topic": "HTML to PDF",
+          "url": "aspose.cloud/pdf/html-to-pdf-converter-aspose.pdf-file-format-converter/"
+        },
+        "php": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Pdf",
+      "sub_category": "Xml To Pdf",
+      "topic": "Import XML data to PDF rest",
+      "key": "import-xml-data-to-pdf-rest",
+      "baseline_record_id": "blog::Aspose.Cloud/pdf/2022-01-04-import-xml-data-to-pdf-form-using-python/index.md",
+      "coverage": {
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::Aspose.Cloud/pdf/2022-01-04-import-xml-data-to-pdf-form-using-python/index.md",
+          "title": "Import XML Data to PDF using Python REST API",
+          "topic": "Import XML data to PDF REST API",
+          "url": "aspose.cloud/pdf/import-xml-data-to-pdf-form-using-python/"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "go_via_cpp": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "nodejs": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "php": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "File Conversion",
+      "sub_category": "Image to PDF",
+      "topic": "JPG to PDF",
+      "key": "jpg-to-pdf",
+      "baseline_record_id": "blog::Aspose.Cloud/pdf/2021-12-06-convert-jpg-to-pdf-in-python/index.md",
+      "coverage": {
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::Aspose.Cloud/pdf/2021-12-06-convert-jpg-to-pdf-in-python/index.md",
+          "title": "Convert JPG to PDF in Python",
+          "topic": "JPG to PDF",
+          "url": "aspose.cloud/pdf/convert-jpg-to-pdf-in-python/"
+        },
+        "general": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::Aspose.Cloud/pdf/2022-07-28-convert-jpg-to-pdf-in-java/index.md",
+          "title": "Convert JPG to PDF, Image to PDF, jğeg to PDF online in Java",
+          "topic": "JPG to PDF",
+          "url": "aspose.cloud/pdf/convert-jpg-to-pdf-in-java/"
+        },
+        "go_via_cpp": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::Aspose.Cloud/pdf/2025-07-11-convert-jpg-to-pdf-csharp/index.md",
+          "title": "Convert JPG to PDF in C# | JPG to PDF using .NET REST API",
+          "topic": "JPG to PDF",
+          "url": "aspose.cloud/pdf/convert-jpg-to-pdf-using-csharp/"
+        },
+        "nodejs": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::Aspose.Cloud/pdf/2025-04-15-convert-jpg-to-pdf-nodejs/index.md",
+          "title": "Convert JPG to PDF in Node.js | Image to PDF API",
+          "topic": "JPG to PDF",
+          "url": "aspose.cloud/pdf/convert-jpg-to-pdf-with-nodejs/"
+        },
+        "php": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Data Conversion",
+      "sub_category": "Json To Xlsx",
+      "topic": "JSON to XLSX",
+      "key": "json-to-xlsx",
+      "baseline_record_id": "blog::Aspose.Cloud/barcode/2026-08-05-step-by-step-json-to-xlsx-conversion-guide-in-python/index.md",
+      "coverage": {
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::Aspose.Cloud/barcode/2026-08-05-step-by-step-json-to-xlsx-conversion-guide-in-python/index.md",
+          "title": "Step-by-Step JSON to XLSX Conversion Guide in Python",
+          "topic": "JSON to XLSX",
+          "url": "aspose.cloud/barcode/step-by-step-json-to-xlsx-conversion-guide-in-python/"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "go_via_cpp": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::Aspose.Cloud/cells/2024-01-03-convert-json-to-xls-in-csharp/index.md",
+          "title": "Unlock Effortless JSON to Excel Conversion using .NET Cloud SDK",
+          "topic": "Unlock effortless JSON to Excel conversion cloud SDK",
+          "url": "aspose.cloud/cells/convert-json-to-xls-with-dotnet-cloud-sdk/"
+        },
+        "nodejs": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "php": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Document Conversion",
+      "sub_category": "Presentation Formats",
+      "topic": "Microsoft powerpoint PPTX to opendocument",
+      "key": "microsoft-powerpoint-pptx-to-opendocument",
+      "baseline_record_id": "blog::Aspose.Cloud/slides/2022-02-08-convert-pptx-to-odp-using-python.-save-ppt-to-opendocument/index.md",
+      "coverage": {
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::Aspose.Cloud/slides/2022-02-08-convert-pptx-to-odp-using-python.-save-ppt-to-opendocument/index.md",
+          "title": "How to convert Microsoft PowerPoint (PPTX) to OpenDocument",
+          "topic": "Microsoft powerpoint PPTX to opendocument",
+          "url": "aspose.cloud/slides/convert-pptx-to-odp-using-python.-save-ppt-to-opendocument/"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "go_via_cpp": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "nodejs": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "php": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "File Conversion",
+      "sub_category": "Project Management",
+      "topic": "MPP to XLSX",
+      "key": "mpp-to-xlsx",
+      "baseline_record_id": "blog::Aspose.Cloud/tasks/2022-05-17-convert-microsoft-project-to-excel-in-python/index.md",
+      "coverage": {
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::Aspose.Cloud/tasks/2022-05-17-convert-microsoft-project-to-excel-in-python/index.md",
+          "title": "Convert Microsoft Project (MPP) to Excel using Python Cloud SDK",
+          "topic": "Microsoft project MPP to Excel cloud SDK",
+          "url": "aspose.cloud/tasks/convert-microsoft-project-to-excel-in-python/"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "go_via_cpp": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::Aspose.Cloud/tasks/2022-05-13-convert-mpp-file-to-excel-in-java/index.md",
+          "title": "Simplify Data Extraction by Converting MPP to Excel with Java Cloud SDK",
+          "topic": "Simplify data extraction by converting MPP to Excel cloud SDK",
+          "url": "aspose.cloud/tasks/convert-mpp-file-to-excel-in-java/"
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::Aspose.Cloud/tasks/2021-03-15-convert-mpp-to-xlsx-or-html.-manipulate-mpp-xer-or-p6xml-using-restful-c-.net-cloud-api/index.md",
+          "title": "Convert MPP to XLSX or HTML using REST API in C#",
+          "topic": "MPP to XLSX or HTML using REST API",
+          "url": "aspose.cloud/tasks/convert-mpp-to-xlsx-or-html.-manipulate-mpp-xer-or-p6xml-using-restful-c-.net-cloud-api/"
+        },
+        "nodejs": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "php": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Document Conversion",
+      "sub_category": "Pdf To Word",
+      "topic": "PDF to DOCX",
+      "key": "pdf-to-docx",
+      "baseline_record_id": "blog::Aspose.Cloud/pdf/2025-10-16-convert-pdf-to-word-csharp/index.md",
+      "coverage": {
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::Aspose.Cloud/pdf/2025-10-16-convert-pdf-to-word-csharp/index.md",
+          "title": "Effortless PDF to Word Conversion in C# | Convert PDF Documents to Editable Word Files",
+          "topic": "Effortless PDF to word conversion convert PDF documents to editable word",
+          "url": "aspose.cloud/pdf/convert-pdf-to-word-using-csharp/"
+        },
+        "general": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::Aspose.Cloud/words/2022-03-20-convert-pdf-to-word-document-aspose.words-file-conversion-api/index.md",
+          "title": "Convert PDF to Word - PDF to DOC - PDF to DOCX in Ruby - pdf2doc",
+          "topic": "PDF to word PDF to DOC PDF to DOCX pdf2doc",
+          "url": "aspose.cloud/words/convert-pdf-to-word-document-aspose.words-file-conversion-api/"
+        },
+        "go_via_cpp": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::Aspose.Cloud/pdf/2022-06-18-convert-pdf-to-word-in-java/index.md",
+          "title": "Convert PDF to Word in Java",
+          "topic": "PDF to word",
+          "url": "aspose.cloud/pdf/convert-pdf-to-word-in-java/"
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::Aspose.Cloud/pdf/2021-08-20-pdf-to-word-convert-pdf-to-word-in-csharp/index.md",
+          "title": "How to Convert PDF to Word in C# .NET",
+          "topic": "PDF to word",
+          "url": "aspose.cloud/pdf/pdf-to-word-convert-pdf-to-word-in-csharp/"
+        },
+        "nodejs": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::Aspose.Cloud/pdf/2022-03-10-pdf-to-doc-converter-aspose.pdf-cloud-sdks-for-node.js/index.md",
+          "title": "PDF To Word in Node.js. PDF to DOCX or PDF to DOC conversion",
+          "topic": "PDF to word in PDF to DOCX or PDF to DOC conversion",
+          "url": "aspose.cloud/pdf/pdf-to-doc-converter-aspose.pdf-cloud-sdks-for-node.js/"
+        },
+        "php": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Document Management",
+      "sub_category": "Conversion",
+      "topic": "PDF to JPG",
+      "key": "pdf-to-jpg",
+      "baseline_record_id": "blog::Aspose.Cloud/pdf/2021-12-18-convert-pdf-to-jpeg-in-python/index.md",
+      "coverage": {
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::Aspose.Cloud/pdf/2021-12-18-convert-pdf-to-jpeg-in-python/index.md",
+          "title": "Converting PDF to JPG using REST API with Python",
+          "topic": "PDF to JPG",
+          "url": "aspose.cloud/pdf/convert-pdf-to-jpeg-in-python/"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "go_via_cpp": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::Aspose.Cloud/pdf/2022-07-30-convert-pdf-to-jpg-in-java/index.md",
+          "title": "Convert PDF to JPG in Java",
+          "topic": "PDF to JPG",
+          "url": "aspose.cloud/pdf/convert-pdf-to-jpg-in-java/"
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::Aspose.Cloud/pdf/2025-07-17-convert-pdf-to-jpg-csharp/index.md",
+          "title": "Convert PDF to JPEG in C# | Export PDF Pages as High-Quality Images",
+          "topic": "PDF to JPEG",
+          "url": "aspose.cloud/pdf/convert-pdf-to-jpg-using-csharp/"
+        },
+        "nodejs": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::Aspose.Cloud/pdf/2025-04-04-convert-pdf-to-jpg-in-nodejs/index.md",
+          "title": "PDF to JPG - Convert PDF to JPG in Node.js",
+          "topic": "PDF to JPG",
+          "url": "aspose.cloud/pdf/convert-pdf-to-jpg-in-nodejs/"
+        },
+        "php": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Pdf",
+      "sub_category": "Conversion",
+      "topic": "PDF to PDF",
+      "key": "pdf-to-pdf",
+      "baseline_record_id": "blog::Aspose.Cloud/pdf/2021-12-10-convert-pdf-to-pdf-a-using-python/index.md",
+      "coverage": {
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::Aspose.Cloud/pdf/2021-12-10-convert-pdf-to-pdf-a-using-python/index.md",
+          "title": "Convert PDF to PDF/A using Python REST API",
+          "topic": "PDF to PDF",
+          "url": "aspose.cloud/pdf/convert-pdf-to-pdf-a-using-python/"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "go_via_cpp": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::Aspose.Cloud/pdf/2023-01-21-convert-pdf-to-pfda-in-java/index.md",
+          "title": "How to Convert PDF to PDF/A in Java",
+          "topic": "PDF to PDF",
+          "url": "aspose.cloud/pdf/convert-pdf-to-pdfa-in-java/"
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::Aspose.Cloud/pdf/2023-07-18-convert-pdf-to-pdfa-with-csharp/index.md",
+          "title": "Convert PDF to PDF/A with .NET REST API",
+          "topic": "PDF to PDF",
+          "url": "aspose.cloud/pdf/convert-pdf-to-pdfa-with-dotnet-rest-api/"
+        },
+        "nodejs": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "php": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Document Conversion",
+      "sub_category": "PDF to PowerPoint",
+      "topic": "PDF to PPT",
+      "key": "pdf-to-ppt",
+      "baseline_record_id": "blog::Aspose.Cloud/pdf/2021-12-09-convert-pdf-to-powerpoint-in-python/index.md",
+      "coverage": {
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::Aspose.Cloud/pdf/2021-12-09-convert-pdf-to-powerpoint-in-python/index.md",
+          "title": "Develop PDF to PPT Converter using Python Cloud SDK",
+          "topic": "PDF to PPT",
+          "url": "aspose.cloud/pdf/convert-pdf-to-powerpoint-in-python/"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "go_via_cpp": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::Aspose.Cloud/slides/2022-05-26-convert-pdf-to-ppt-using-java/index.md",
+          "title": "Convert PDF to PowerPoint (PPT) Presentation with Java REST API",
+          "topic": "PDF to powerpoint PPT presentation REST API",
+          "url": "aspose.cloud/slides/convert-pdf-to-ppt-using-java/"
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::Aspose.Cloud/slides/2023-05-08-convert-pdf-to-powerpoint-in-csharp/index.md",
+          "title": "Convert PDF to PowerPoint Slides with .NET Cloud SDK",
+          "topic": "PDF to powerpoint slides cloud SDK",
+          "url": "aspose.cloud/slides/convert-pdf-to-ppt-in-csharp/"
+        },
+        "nodejs": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::Aspose.Cloud/pdf/2022-04-06-how-to-convert-pdf-to-ppt-in-cloud-using-node.js/index.md",
+          "title": "PDF To PPT in Node.js. PDF to PowerPoint. PDF to PPTX",
+          "topic": "PDF to PPT",
+          "url": "aspose.cloud/pdf/how-to-convert-pdf-to-ppt-in-cloud-using-node.js/"
+        },
+        "php": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Project Management",
+      "sub_category": "API Integration",
+      "topic": "Project management using rest for ms project primavera p6",
+      "key": "project-management-using-rest-for-ms-project-primavera-p6",
+      "baseline_record_id": "blog::Aspose.Cloud/tasks/2021-01-18-project-management-using-golang-rest-api/index.md",
+      "coverage": {
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::Aspose.Cloud/tasks/2021-01-18-project-management-using-golang-rest-api/index.md",
+          "title": "Project Management using Golang, REST API for MS Project, Primavera P6 files",
+          "topic": "Project management using REST API for MS project primavera P6",
+          "url": "aspose.cloud/tasks/project-management-using-golang-rest-api-for-ms-project-primavera-p6/"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "go_via_cpp": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "nodejs": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "php": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Imaging",
+      "sub_category": "Image Analysis",
+      "topic": "Reverse image search and image deskewing",
+      "key": "reverse-image-search-and-image-deskewing",
+      "baseline_record_id": "blog::Aspose.Cloud/imaging/2020-02-20-reverse-search-and-image-deskewing-with-aspose.imaging-cloud-api/index.md",
+      "coverage": {
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::Aspose.Cloud/imaging/2020-02-20-reverse-search-and-image-deskewing-with-aspose.imaging-cloud-api/index.md",
+          "title": "Reverse Image Search and Image Deskewing with Aspose.Imaging Cloud",
+          "topic": "Reverse image search and image deskewing with aspose imaging cloud",
+          "url": "aspose.cloud/imaging/reverse-search-and-image-deskewing-with-aspose.imaging-cloud-api/"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "go_via_cpp": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "nodejs": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "php": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Data Conversion",
+      "sub_category": "Excel to CSV",
+      "topic": "XLSM to CSV",
+      "key": "xlsm-to-csv",
+      "baseline_record_id": "blog::Aspose.Cloud/cells/2022-05-23-convert-xlsm-to-csv-using-python/index.md",
+      "coverage": {
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::Aspose.Cloud/cells/2022-05-23-convert-xlsm-to-csv-using-python/index.md",
+          "title": "Convert XLSM to CSV using Python Cloud SDK - Convert Excel to CSV",
+          "topic": "XLSM to CSV",
+          "url": "aspose.cloud/cells/convert-xlsm-to-csv-using-python/"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "go_via_cpp": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::Aspose.Cloud/cells/2021-10-12-convert-xlsm-to-csv-in-csharp/index.md",
+          "title": "Convert XLSM to CSV in C#",
+          "topic": "XLSM to CSV",
+          "url": "aspose.cloud/cells/convert-xlsm-to-csv-in-csharp/"
+        },
+        "nodejs": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::Aspose.Cloud/cells/2025-05-02-convert-xlsm-to-csv-with-nodejs/index.md",
+          "title": "Convert XLSM to CSV using Node.js | Excel Macro to CSV Conversion",
+          "topic": "XLSM to CSV",
+          "url": "aspose.cloud/cells/convert-xlsm-to-csv-in-nodejs/"
+        },
+        "php": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "File Conversion",
+      "sub_category": "Spreadsheet to CSV",
+      "topic": "XLSX to CSV",
+      "key": "xlsx-to-csv",
+      "baseline_record_id": "blog::Aspose.Cloud/cells/2022-01-26-convert-excel-to-csv-using-python/index.md",
+      "coverage": {
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::Aspose.Cloud/cells/2022-01-26-convert-excel-to-csv-using-python/index.md",
+          "title": "Convert Excel to CSV in Python | ODS to CSV | XLSX to CSV",
+          "topic": "Excel to CSV ODS to CSV XLSX to CSV",
+          "url": "aspose.cloud/cells/convert-excel-to-csv-using-python/"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "go_via_cpp": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::Aspose.Cloud/cells/2022-08-30-convert-excel-to-csv-in-java/index.md",
+          "title": "Convert Excel to CSV with Ease Using Java Cloud SDK",
+          "topic": "Excel to CSV with ease cloud SDK",
+          "url": "aspose.cloud/cells/convert-excel-to-csv-in-java/"
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::Aspose.Cloud/cells/2024-01-25-convert-excel-to-csv-in-csharp/index.md",
+          "title": "Convert Excel (XLS, XLSX) to CSV in C# .NET",
+          "topic": "XLSX to CSV",
+          "url": "aspose.cloud/cells/convert-excel-to-csv-in-csharp"
+        },
+        "nodejs": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "php": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "File Conversion",
+      "sub_category": "Spreadsheet to PDF",
+      "topic": "XLSX to PDF",
+      "key": "xlsx-to-pdf",
+      "baseline_record_id": "blog::Aspose.Cloud/cells/2022-03-06-convert-excel-to-pdf-in-python/index.md",
+      "coverage": {
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::Aspose.Cloud/cells/2022-03-06-convert-excel-to-pdf-in-python/index.md",
+          "title": "Excel to PDF Converter in Python. XLS to PDF, XLSX to PDF",
+          "topic": "Excel to PDF converter in XLS to PDF XLSX to PDF",
+          "url": "aspose.cloud/cells/convert-excel-to-pdf-in-python/"
+        },
+        "general": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::Aspose.Cloud/cells/2025-05-22-convert-excel-to-pdf-in-nodejs/index.md",
+          "title": "Convert Excel to PDF in Node.js | Export XLSX to PDF Online with REST API",
+          "topic": "Excel to PDF export XLSX to PDF with REST API",
+          "url": "aspose.cloud/cells/convert-excel-to-pdf-in-nodejs/"
+        },
+        "go_via_cpp": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::Aspose.Cloud/cells/2021-03-02-how-to-convert-xlsx-to-pdf-xps-tiff-and-html-using-restful-java-cloud-sdk/index.md",
+          "title": "Convert XLSX to PDF, XPS, TIFF, and HTML with REST Java API",
+          "topic": "XLSX to PDF",
+          "url": "aspose.cloud/cells/how-to-convert-xlsx-to-pdf-xps-tiff-and-html-using-restful-java-cloud-sdk/"
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::Aspose.Cloud/cells/2021-10-24-convert-excel-to-pdf-in-csharp/index.md",
+          "title": "Convert Excel to PDF in C#",
+          "topic": "Excel to PDF",
+          "url": "aspose.cloud/cells/convert-excel-to-pdf-in-csharp/"
+        },
+        "nodejs": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "php": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    }
+  ],
+  "brand_name": "Aspose.Cloud",
+  "product_name": "Aspose.3D"
+}

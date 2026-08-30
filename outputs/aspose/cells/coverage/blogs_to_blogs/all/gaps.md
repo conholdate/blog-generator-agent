@@ -6,8 +6,8 @@
 
 | 🧩 Metric | Value | Status |
 | --- | --- | --- |
-| **Total Canonical Topics** | **230** | — |
-| **Topics with Gaps** | **229** | ⚠️ |
+| **Total Canonical Topics** | **229** | — |
+| **Topics with Gaps** | **228** | ⚠️ |
 | **Fully Covered Topics** | 1 | ✅ |
 | **Excluded (Release / Updates)** | 0 | ℹ️ |
 | **Baseline Scope** | ALL | — |
@@ -30,20 +30,20 @@
 
 | Platform | # Covered | # Missing | Coverage |
 | --- | --- | --- | --- |
-| **ANDROID_VIA_JAVA** | 5 | 225 | 🔴 Weak (2.2%) |
-| **CPP** | 19 | 211 | 🔴 Weak (8.3%) |
-| **GENERAL** | 19 | 211 | 🔴 Weak (8.3%) |
-| **JAVA** | 50 | 180 | 🔴 Weak (21.7%) |
-| **NET** | 149 | 81 | 🟡 Moderate (64.8%) |
-| **NODEJS** | 9 | 221 | 🔴 Weak (3.9%) |
-| **PYTHON** | 69 | 161 | 🔴 Weak (30.0%) |
+| **ANDROID_VIA_JAVA** | 5 | 224 | 🔴 Weak (2.2%) |
+| **CPP** | 19 | 210 | 🔴 Weak (8.3%) |
+| **GENERAL** | 19 | 210 | 🔴 Weak (8.3%) |
+| **JAVA** | 50 | 179 | 🔴 Weak (21.8%) |
+| **NET** | 149 | 80 | 🟡 Moderate (65.1%) |
+| **NODEJS** | 9 | 220 | 🔴 Weak (3.9%) |
+| **PYTHON** | 69 | 160 | 🔴 Weak (30.1%) |
 
 ---
 
 ### 🔎 Executive Insights
 
 - **99.6%** of canonical topics are missing on at least one platform (after exclusions).
-- Highest gap density: **ANDROID_VIA_JAVA** (225 missing), **NODEJS** (221 missing), **CPP** (211 missing).
+- Highest gap density: **ANDROID_VIA_JAVA** (224 missing), **NODEJS** (220 missing), **CPP** (210 missing).
 - Gaps are concentrated in **8** major category/subcategory clusters (see Section 4).
 - Release notes, product updates, and version announcements are intentionally excluded from this report.
 
@@ -53,21 +53,21 @@
 
 | # | Cluster | Representative topic | Missing platforms (high-impact) | Suggested new titles (examples) |
 | --- | --- | --- | --- | --- |
-| 1 | **Data Visualization / Charts** | Create area3dstacked chart in excel | ANDROID_VIA_JAVA, CPP, GENERAL, JAVA, NODEJS, PYTHON | Create area3dstacked chart in excel — ANDROID_VIA_JAVA; Create area3dstacked chart in excel — CPP; Create area3dstacked chart in excel — GENERAL |
-| 2 | **Data Visualization / Charts** | Create bar stacked chart in excel | ANDROID_VIA_JAVA, CPP, GENERAL, JAVA, NODEJS, PYTHON | Create bar stacked chart in excel — ANDROID_VIA_JAVA; Create bar stacked chart in excel — CPP; Create bar stacked chart in excel — GENERAL |
-| 3 | **Data Visualization / Excel Charts** | Create area3d100percentstacked chart in excel | ANDROID_VIA_JAVA, CPP, GENERAL, JAVA, NODEJS, PYTHON | Create area3d100percentstacked chart in excel — ANDROID_VIA_JAVA; Create area3d100percentstacked chart in excel — CPP; Create area3d100percentstacked chart in excel — GENERAL |
-| 4 | **Data Visualization / Excel Charts** | Create bubble3d chart in excel | ANDROID_VIA_JAVA, CPP, GENERAL, JAVA, NODEJS, PYTHON | Create bubble3d chart in excel — ANDROID_VIA_JAVA; Create bubble3d chart in excel — CPP; Create bubble3d chart in excel — GENERAL |
-| 5 | **Office / Excel** | Add or remove autofilter in excel | ANDROID_VIA_JAVA, GENERAL, JAVA, NET, NODEJS, PYTHON | Add or remove autofilter in excel — ANDROID_VIA_JAVA; Add or remove autofilter in excel — GENERAL; Add or remove autofilter in excel — JAVA |
-| 6 | **Office / Excel** | Autofit excel rows and columns | ANDROID_VIA_JAVA, CPP, GENERAL, NET, NODEJS, PYTHON | Autofit excel rows and columns — ANDROID_VIA_JAVA; Autofit excel rows and columns — CPP; Autofit excel rows and columns — GENERAL |
+| 1 | **Data Visualization / Charts** | Create area3dstacked chart in Excel | ANDROID_VIA_JAVA, CPP, GENERAL, JAVA, NODEJS, PYTHON | Create area3dstacked chart in Excel — ANDROID_VIA_JAVA; Create area3dstacked chart in Excel — CPP; Create area3dstacked chart in Excel — GENERAL |
+| 2 | **Data Visualization / Charts** | Create bar stacked chart in Excel | ANDROID_VIA_JAVA, CPP, GENERAL, JAVA, NODEJS, PYTHON | Create bar stacked chart in Excel — ANDROID_VIA_JAVA; Create bar stacked chart in Excel — CPP; Create bar stacked chart in Excel — GENERAL |
+| 3 | **Data Visualization / Excel Charts** | Create area3d100percentstacked chart in Excel | ANDROID_VIA_JAVA, CPP, GENERAL, JAVA, NODEJS, PYTHON | Create area3d100percentstacked chart in Excel — ANDROID_VIA_JAVA; Create area3d100percentstacked chart in Excel — CPP; Create area3d100percentstacked chart in Excel — GENERAL |
+| 4 | **Data Visualization / Excel Charts** | Create bubble3d chart in Excel | ANDROID_VIA_JAVA, CPP, GENERAL, JAVA, NODEJS, PYTHON | Create bubble3d chart in Excel — ANDROID_VIA_JAVA; Create bubble3d chart in Excel — CPP; Create bubble3d chart in Excel — GENERAL |
+| 5 | **Office / Excel** | Create and protect shared Excel workbook | ANDROID_VIA_JAVA, CPP, GENERAL, JAVA, NODEJS, PYTHON | Create and protect shared Excel workbook — ANDROID_VIA_JAVA; Create and protect shared Excel workbook — CPP; Create and protect shared Excel workbook — GENERAL |
+| 6 | **Office / Excel** | Create Excel XLSX XLS | ANDROID_VIA_JAVA, CPP, GENERAL, JAVA, NET, PYTHON | Create Excel XLSX XLS — ANDROID_VIA_JAVA; Create Excel XLSX XLS — CPP; Create Excel XLSX XLS — GENERAL |
 | 7 | **Data Conversion / File Format Conversion** | CSV to TXT | ANDROID_VIA_JAVA, CPP, GENERAL, JAVA, NET, NODEJS | CSV to TXT — ANDROID_VIA_JAVA; CSV to TXT — CPP; CSV to TXT — GENERAL |
 | 8 | **Data Conversion / File Format Conversion** | XML to CSV | ANDROID_VIA_JAVA, CPP, JAVA, NET, NODEJS, PYTHON | XML to CSV — ANDROID_VIA_JAVA; XML to CSV — CPP; XML to CSV — JAVA |
-| 9 | **Spreadsheet / Charts** | Create area stacked chart in excel | ANDROID_VIA_JAVA, CPP, GENERAL, JAVA, NODEJS, PYTHON | Create area stacked chart in excel — ANDROID_VIA_JAVA; Create area stacked chart in excel — CPP; Create area stacked chart in excel — GENERAL |
-| 10 | **Spreadsheet / Charts** | Create cylinderstacked chart in excel | ANDROID_VIA_JAVA, CPP, GENERAL, JAVA, NODEJS, PYTHON | Create cylinderstacked chart in excel — ANDROID_VIA_JAVA; Create cylinderstacked chart in excel — CPP; Create cylinderstacked chart in excel — GENERAL |
-| 11 | **File Conversion / Spreadsheet to Image** | Excel to image | ANDROID_VIA_JAVA, CPP, GENERAL, NET, NODEJS, PYTHON | Excel to image — ANDROID_VIA_JAVA; Excel to image — CPP; Excel to image — GENERAL |
-| 12 | **File Conversion / Spreadsheet to Image** | XLSX to JPG | ANDROID_VIA_JAVA, CPP, GENERAL, JAVA, NET, NODEJS | XLSX to JPG — ANDROID_VIA_JAVA; XLSX to JPG — CPP; XLSX to JPG — GENERAL |
-| 13 | **Office / Spreadsheet Editing** | Add or delete rows and columns in excel | ANDROID_VIA_JAVA, CPP, GENERAL, JAVA, NODEJS, PYTHON | Add or delete rows and columns in excel — ANDROID_VIA_JAVA; Add or delete rows and columns in excel — CPP; Add or delete rows and columns in excel — GENERAL |
-| 14 | **Office / Spreadsheet Editing** | Excel editor edit excel | CPP, GENERAL, JAVA, NET, NODEJS, PYTHON | Excel editor edit excel — CPP; Excel editor edit excel — GENERAL; Excel editor edit excel — JAVA |
-| 15 | **Spreadsheet / Image Insertion** | Add photo to excel | ANDROID_VIA_JAVA, CPP, GENERAL, NET, NODEJS, PYTHON | Add photo to excel — ANDROID_VIA_JAVA; Add photo to excel — CPP; Add photo to excel — GENERAL |
+| 9 | **Spreadsheet / Charts** | Create area stacked chart in Excel | ANDROID_VIA_JAVA, CPP, GENERAL, JAVA, NODEJS, PYTHON | Create area stacked chart in Excel — ANDROID_VIA_JAVA; Create area stacked chart in Excel — CPP; Create area stacked chart in Excel — GENERAL |
+| 10 | **Spreadsheet / Charts** | Create cylinderstacked chart in Excel | ANDROID_VIA_JAVA, CPP, GENERAL, JAVA, NODEJS, PYTHON | Create cylinderstacked chart in Excel — ANDROID_VIA_JAVA; Create cylinderstacked chart in Excel — CPP; Create cylinderstacked chart in Excel — GENERAL |
+| 11 | **Office / Spreadsheet Editing** | Add or delete rows and columns in Excel | ANDROID_VIA_JAVA, CPP, GENERAL, JAVA, NODEJS, PYTHON | Add or delete rows and columns in Excel — ANDROID_VIA_JAVA; Add or delete rows and columns in Excel — CPP; Add or delete rows and columns in Excel — GENERAL |
+| 12 | **Office / Spreadsheet Editing** | Excel editor edit Excel | CPP, GENERAL, JAVA, NET, NODEJS, PYTHON | Excel editor edit Excel — CPP; Excel editor edit Excel — GENERAL; Excel editor edit Excel — JAVA |
+| 13 | **Spreadsheet / Image Insertion** | Add photo to Excel | ANDROID_VIA_JAVA, CPP, GENERAL, NET, NODEJS, PYTHON | Add photo to Excel — ANDROID_VIA_JAVA; Add photo to Excel — CPP; Add photo to Excel — GENERAL |
+| 14 | **Spreadsheet / Image Insertion** | Insert image in Excel | ANDROID_VIA_JAVA, CPP, GENERAL, JAVA, NET, NODEJS | Insert image in Excel — ANDROID_VIA_JAVA; Insert image in Excel — CPP; Insert image in Excel — GENERAL |
+| 15 | **Spreadsheets / Charts** | Create line chart in Excel | ANDROID_VIA_JAVA, CPP, GENERAL, JAVA, NODEJS, PYTHON | Create line chart in Excel — ANDROID_VIA_JAVA; Create line chart in Excel — CPP; Create line chart in Excel — GENERAL |
 
 *These recommendations are derived from topics missing across the largest number of platforms and clustered by category/subcategory.*
 
@@ -77,13 +77,13 @@
 
 | Platform | # topics covered | % of baseline rows | # topics missing |
 | --- | --- | --- | --- |
-| **ANDROID_VIA_JAVA** | 5 | 2.2% | 225 |
-| **CPP** | 19 | 8.3% | 211 |
-| **GENERAL** | 19 | 8.3% | 211 |
-| **JAVA** | 50 | 21.7% | 180 |
-| **NET** | 149 | 64.8% | 81 |
-| **NODEJS** | 9 | 3.9% | 221 |
-| **PYTHON** | 69 | 30.0% | 161 |
+| **ANDROID_VIA_JAVA** | 5 | 2.2% | 224 |
+| **CPP** | 19 | 8.3% | 210 |
+| **GENERAL** | 19 | 8.3% | 210 |
+| **JAVA** | 50 | 21.8% | 179 |
+| **NET** | 149 | 65.1% | 80 |
+| **NODEJS** | 9 | 3.9% | 220 |
+| **PYTHON** | 69 | 30.1% | 160 |
 
 **Takeaway:** Focus first on platforms with the highest missing counts and lowest coverage percentage; port high-impact topics from the best-covered platform first.
 
@@ -95,16 +95,16 @@
 | --- | --- | --- | --- |
 | **Data Visualization / Charts** | 26 | 153 | ANDROID_VIA_JAVA, GENERAL, NODEJS, CPP |
 | **Data Visualization / Excel Charts** | 19 | 114 | ANDROID_VIA_JAVA, CPP, GENERAL, JAVA |
-| **Office / Excel** | 9 | 48 | ANDROID_VIA_JAVA, GENERAL, NODEJS, PYTHON |
-| **Data Conversion / File Format Conversion** | 5 | 20 | ANDROID_VIA_JAVA, CPP, NODEJS, GENERAL |
+| **Office / Excel** | 8 | 40 | ANDROID_VIA_JAVA, GENERAL, NODEJS, CPP |
+| **Data Conversion / File Format Conversion** | 5 | 18 | ANDROID_VIA_JAVA, CPP, NODEJS, GENERAL |
 | **Spreadsheet / Charts** | 3 | 18 | ANDROID_VIA_JAVA, CPP, GENERAL, JAVA |
-| **File Conversion / Spreadsheet to Image** | 3 | 17 | ANDROID_VIA_JAVA, CPP, GENERAL, NODEJS |
 | **Office / Spreadsheet Editing** | 2 | 12 | CPP, GENERAL, JAVA, NODEJS |
 | **Spreadsheet / Image Insertion** | 2 | 12 | ANDROID_VIA_JAVA, CPP, GENERAL, NET |
 | **Spreadsheets / Charts** | 2 | 12 | ANDROID_VIA_JAVA, CPP, GENERAL, JAVA |
 | **Data Visualization / 3D Charts** | 2 | 12 | ANDROID_VIA_JAVA, CPP, GENERAL, JAVA |
 | **Data Visualization / Financial Charts** | 2 | 12 | ANDROID_VIA_JAVA, CPP, GENERAL, JAVA |
-| **Spreadsheet / Encryption** | 2 | 10 | ANDROID_VIA_JAVA, CPP, GENERAL, NODEJS |
+| **File Conversion / Spreadsheet to Image** | 2 | 11 | ANDROID_VIA_JAVA, CPP, GENERAL, NODEJS |
+| **Spreadsheet / Pivot Table** | 1 | 6 | ANDROID_VIA_JAVA, CPP, GENERAL, JAVA |
 
 ---
 

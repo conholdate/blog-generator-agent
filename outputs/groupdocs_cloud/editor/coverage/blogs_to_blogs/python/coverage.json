@@ -1,0 +1,316 @@
+{
+  "case": "blogs_to_blogs",
+  "brand_key": "groupdocs_cloud",
+  "product_key": "editor",
+  "baseline_platform": "python",
+  "platforms": [
+    "python",
+    "general",
+    "java",
+    "net",
+    "nodejs",
+    "php"
+  ],
+  "meta": {
+    "matching_mode": "key_exact",
+    "total_input_records": 14,
+    "records_after_filters": 14,
+    "excluded_release_update_records": 0,
+    "excluded_old_or_undated_records": 0,
+    "baseline_records": 5,
+    "total_cells": 30,
+    "matched_cells": 6,
+    "missing_cells": 24,
+    "match_rate": 0.2,
+    "skipped_empty_keys": 0
+  },
+  "rows": [
+    {
+      "category": "Document Editing",
+      "sub_category": "Excel",
+      "topic": "Edit Excel sheet using rest",
+      "key": "edit-excel-sheet-using-rest",
+      "baseline_record_id": "blog::editor/2021-12-23-edit-excel-sheet-using-rest-api-in-python/index.md",
+      "coverage": {
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::editor/2021-12-23-edit-excel-sheet-using-rest-api-in-python/index.md",
+          "title": "Edit Excel Sheet using REST API in Python",
+          "topic": "Edit Excel sheet using REST API",
+          "url": "groupdocs.cloud/editor/edit-excel-sheet-using-rest-api-in-python/"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "nodejs": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "php": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Document Editing",
+      "sub_category": "PowerPoint",
+      "topic": "Edit powerpoint presentations",
+      "key": "edit-powerpoint-presentations",
+      "baseline_record_id": "blog::editor/2021-05-07-edit-powerpoint-presentations-using-python/index.md",
+      "coverage": {
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::editor/2021-05-07-edit-powerpoint-presentations-using-python/index.md",
+          "title": "Edit PowerPoint Presentations using Python",
+          "topic": "Edit powerpoint presentations",
+          "url": "groupdocs.cloud/editor/edit-powerpoint-presentations-using-python/"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "nodejs": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "php": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Document Management",
+      "sub_category": "Text Editing",
+      "topic": "Edit text via editor rest",
+      "key": "edit-text-via-editor-rest",
+      "baseline_record_id": "blog::editor/2023-09-13-edit-text-file-with-python-via-rest-api/index.md",
+      "coverage": {
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::editor/2023-09-13-edit-text-file-with-python-via-rest-api/index.md",
+          "title": "Edit Text Files with Python via an Editor REST API",
+          "topic": "Edit text via editor REST API",
+          "url": "groupdocs.cloud/editor/edit-text-file-with-python-via-rest-api/"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "nodejs": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "php": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Editor",
+      "sub_category": "Word Processing",
+      "topic": "Edit word documents using rest",
+      "key": "edit-word-documents-using-rest",
+      "baseline_record_id": "blog::editor/2021-11-19-edit-word-documents-using-rest-api-in-python/index.md",
+      "coverage": {
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::editor/2021-11-19-edit-word-documents-using-rest-api-in-python/index.md",
+          "title": "Edit Word Documents using REST API in Python",
+          "topic": "Edit word documents using REST API",
+          "url": "groupdocs.cloud/editor/edit-word-documents-using-rest-api-in-python/"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "nodejs": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::editor/2021-07-28-edit-word-documents-using-rest-api-in-node.js/index.md",
+          "title": "Edit Word Documents using REST API in Node.js",
+          "topic": "Edit word documents using REST API",
+          "url": "groupdocs.cloud/editor/edit-word-documents-using-rest-api-in-node.js/"
+        },
+        "php": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Document Editing",
+      "sub_category": "Word and Excel via API",
+      "topic": "Edit word or Excel documents using rest",
+      "key": "edit-word-or-excel-documents-using-rest",
+      "baseline_record_id": "blog::editor/2021-02-12-edit-word-or-excel-documents-using-rest-api/index.md",
+      "coverage": {
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::editor/2021-02-12-edit-word-or-excel-documents-using-rest-api/index.md",
+          "title": "Edit Word or Excel Documents using REST API",
+          "topic": "Edit word or Excel documents using REST API",
+          "url": "groupdocs.cloud/editor/edit-word-or-excel-documents-using-rest-api/"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "nodejs": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "php": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    }
+  ],
+  "brand_name": "GroupDocs.Cloud",
+  "product_name": "GroupDocs.Editor"
+}

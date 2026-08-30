@@ -1,0 +1,226 @@
+{
+  "case": "blogs_to_blogs",
+  "brand_key": "groupdocs_cloud",
+  "product_key": "watermark",
+  "baseline_platform": "net",
+  "platforms": [
+    "net",
+    "general",
+    "java"
+  ],
+  "meta": {
+    "matching_mode": "key_exact",
+    "total_input_records": 14,
+    "records_after_filters": 14,
+    "excluded_release_update_records": 0,
+    "excluded_old_or_undated_records": 0,
+    "baseline_records": 6,
+    "total_cells": 18,
+    "matched_cells": 6,
+    "missing_cells": 12,
+    "match_rate": 0.3333333333333333,
+    "skipped_empty_keys": 0
+  },
+  "rows": [
+    {
+      "category": "Document Processing",
+      "sub_category": "Watermarking",
+      "topic": "Add image watermark to PDF how to add watermark to PDF documents",
+      "key": "add-image-watermark-to-pdf-how-to-add-watermark-to-pdf-documents",
+      "baseline_record_id": "blog::watermark/2025-10-29-add-image-watermark-to-pdf-csharp/index.md",
+      "coverage": {
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::watermark/2025-10-29-add-image-watermark-to-pdf-csharp/index.md",
+          "title": "Add Image Watermark to PDF | How to Add Watermark to PDF Documents Using .NET",
+          "topic": "Add image watermark to PDF how to add watermark to PDF documents",
+          "url": "groupdocs.cloud/watermark/insert-watermark-to-pdf-in-csharp/"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Watermarking",
+      "sub_category": "PowerPoint",
+      "topic": "Add image watermark to powerpoint presentation rest",
+      "key": "add-image-watermark-to-powerpoint-presentation-rest",
+      "baseline_record_id": "blog::watermark/2026-01-13-add-image-watermark-to-ppt-csharp/index.md",
+      "coverage": {
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::watermark/2026-01-13-add-image-watermark-to-ppt-csharp/index.md",
+          "title": "Add Image Watermark to PowerPoint Presentation using .NET REST API",
+          "topic": "Add image watermark to powerpoint presentation REST API",
+          "url": "groupdocs.cloud/watermark/image-watermark-ppt-csharp/"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Watermarking",
+      "sub_category": "GIF Watermarking",
+      "topic": "Add overlay text on GIF using rest",
+      "key": "add-overlay-text-on-gif-using-rest",
+      "baseline_record_id": "blog::watermark/2023-08-08-add-overlay-text-on-a-gif-using-rest-api-in-csharp/index.md",
+      "coverage": {
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::watermark/2023-08-08-add-overlay-text-on-a-gif-using-rest-api-in-csharp/index.md",
+          "title": "Add Overlay Text on a GIF using REST API in C#",
+          "topic": "Add overlay text on GIF using REST API",
+          "url": "groupdocs.cloud/watermark/add-overlay-text-on-a-gif-using-rest-api-in-csharp/"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Document Processing",
+      "sub_category": "Watermark",
+      "topic": "Add text watermark to PDF insert watermark into PDF rest",
+      "key": "add-text-watermark-to-pdf-insert-watermark-into-pdf-rest",
+      "baseline_record_id": "blog::watermark/2025-10-24-watermark-pdf-with-text-in-csharp/index.md",
+      "coverage": {
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::watermark/2025-10-24-watermark-pdf-with-text-in-csharp/index.md",
+          "title": "Add Text Watermark to PDF in C# | Insert Watermark into PDF using .NET REST API",
+          "topic": "Add text watermark to PDF insert watermark into PDF REST API",
+          "url": "groupdocs.cloud/watermark/add-text-watermark-to-pdf-using-csharp/"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Document Processing",
+      "sub_category": "Watermarking",
+      "topic": "Add watermark in powerpoint presentation watermark powerpoint",
+      "key": "add-watermark-in-powerpoint-presentation-watermark-powerpoint",
+      "baseline_record_id": "blog::watermark/2026-01-09-watermark-ppt-with-text-in-csharp/index.md",
+      "coverage": {
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::watermark/2026-01-09-watermark-ppt-with-text-in-csharp/index.md",
+          "title": "Add Watermark in PowerPoint Presentation in C# | Watermark PowerPoint",
+          "topic": "Add watermark in powerpoint presentation watermark powerpoint",
+          "url": "groupdocs.cloud/watermark/add-text-watermark-to-ppt-with-csharp/"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Document Processing",
+      "sub_category": "Watermark Removal",
+      "topic": "Remove image watermark from PDF delete PDF watermark",
+      "key": "remove-image-watermark-from-pdf-delete-pdf-watermark",
+      "baseline_record_id": "blog::watermark/2025-10-30-remove-watermark-from-pdf-csharp/index.md",
+      "coverage": {
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::watermark/2025-10-30-remove-watermark-from-pdf-csharp/index.md",
+          "title": "Remove Image Watermark from PDF in C# | Delete PDF Watermark",
+          "topic": "Remove image watermark from PDF delete PDF watermark",
+          "url": "groupdocs.cloud/watermark/remove-image-watermark-from-pdf-in-csharp/"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    }
+  ],
+  "brand_name": "GroupDocs.Cloud",
+  "product_name": "GroupDocs.Watermark"
+}
