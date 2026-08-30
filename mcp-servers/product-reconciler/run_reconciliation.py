@@ -24,37 +24,69 @@ load_dotenv()
 from reconciler.run import reconcile  # noqa: E402
 
 
+def _cell(value) -> str:
+    """Markdown-table-safe rendering of one cell: escape pipes (they'd
+    otherwise split the row) and turn real newlines into <br> so a
+    multi-line value (e.g. Java's <repository>/<dependency> XML install
+    block) stays inside its row instead of breaking the table."""
+    text = "" if value is None else str(value)
+    return text.replace("|", "\\|").replace("\n", "<br>")
+
+
+def _table(headers: list, rows: list) -> str:
+    if not rows:
+        return "_(none)_\n"
+    out = ["| " + " | ".join(headers) + " |", "|" + "|".join("---" for _ in headers) + "|"]
+    for row in rows:
+        out.append("| " + " | ".join(_cell(c) for c in row) + " |")
+    return "\n".join(out) + "\n"
+
+
 def format_report(report: dict) -> str:
-    lines = []
-    lines.append(f"Brand: {report.get('brand', 'unknown')}")
-    lines.append(f"Mode: {report.get('mode', 'unknown')}")
-    lines.append("")
+    brand = report.get("brand", "unknown")
+    mode = report.get("mode", "unknown")
+    new_products = report["new_products"]
+    new_platforms = report["new_platforms"]
+    fixed_fields = report["fixed_fields"]
+    potential_removals = report["potential_removals"]
+    unresolved = report["unresolved"]
 
-    lines.append(f"## New products ({len(report['new_products'])})")
-    for item in report["new_products"]:
-        missing = f" (missing: {', '.join(item['missing_fields'])})" if item["missing_fields"] else ""
-        lines.append(f"- {item['product']}{missing}")
-    lines.append("")
+    lines = [f"### Reconciliation Report — {brand} ({mode})", ""]
 
-    lines.append(f"## New platforms ({len(report['new_platforms'])})")
-    for item in report["new_platforms"]:
-        missing = f" (missing: {', '.join(item['missing_fields'])})" if item["missing_fields"] else ""
-        lines.append(f"- {item['product']}{missing}")
-    lines.append("")
+    lines.append(_table(
+        ["New products", "New platforms", "Fixed fields", "Potential removals", "Unresolved"],
+        [[len(new_products), len(new_platforms), len(fixed_fields), len(potential_removals), len(unresolved)]],
+    ))
 
-    lines.append(f"## Fixed fields ({len(report['fixed_fields'])})")
-    for line in report["fixed_fields"]:
-        lines.append(f"- {line}")
-    lines.append("")
+    lines.append(f"#### New products ({len(new_products)})")
+    lines.append(_table(
+        ["Product", "Platform", "Missing fields"],
+        [[i["product"], i["platform"], ", ".join(i["missing_fields"]) or "—"] for i in new_products],
+    ))
 
-    lines.append(f"## Potential removals — flagged only, not deleted ({len(report['potential_removals'])})")
-    for line in report["potential_removals"]:
-        lines.append(f"- {line}")
-    lines.append("")
+    lines.append(f"#### New platforms ({len(new_platforms)})")
+    lines.append(_table(
+        ["Product", "Platform", "Missing fields"],
+        [[i["product"], i["platform"], ", ".join(i["missing_fields"]) or "—"] for i in new_platforms],
+    ))
 
-    lines.append(f"## Unresolved — needs a human ({len(report['unresolved'])})")
-    for line in report["unresolved"]:
-        lines.append(f"- {line}")
+    lines.append(f"#### Fixed fields ({len(fixed_fields)})")
+    lines.append(_table(
+        ["Product", "Field", "Old value", "New value"],
+        [[fx["product"], fx["field"], fx["old_value"], fx["new_value"]] for fx in fixed_fields],
+    ))
+
+    lines.append(f"#### Potential removals — flagged only, not deleted ({len(potential_removals)})")
+    lines.append(_table(
+        ["Product", "Platform"],
+        [[r["product"], r["platform"]] for r in potential_removals],
+    ))
+
+    lines.append(f"#### Unresolved — needs a human ({len(unresolved)})")
+    lines.append(_table(
+        ["Platform", "Reason"],
+        [[u["platform"], u["reason"]] for u in unresolved],
+    ))
 
     return "\n".join(lines)
 

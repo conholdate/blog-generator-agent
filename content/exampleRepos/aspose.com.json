@@ -1,0 +1,292 @@
+[
+  {
+    "brand": "aspose.com",
+    "urlPrefix": "cells",
+    "product": "Aspose.Cells for .NET",
+    "platform": ".NET",
+    "repository": "aspose-cells/agentic-net-examples",
+    "branch": "main",
+    "status": "verified",
+    "last_verified": "2026-08-28"
+  },
+  {
+    "brand": "aspose.com",
+    "urlPrefix": "omr",
+    "product": "Aspose.OMR for .NET",
+    "platform": ".NET",
+    "repository": null,
+    "branch": "main",
+    "status": "not_found",
+    "last_verified": "2026-08-28"
+  },
+  {
+    "brand": "aspose.com",
+    "urlPrefix": "psd",
+    "product": "Aspose.PSD for .NET",
+    "platform": ".NET",
+    "repository": null,
+    "branch": "main",
+    "status": "not_found",
+    "last_verified": "2026-08-28"
+  },
+  {
+    "brand": "aspose.com",
+    "urlPrefix": "page",
+    "product": "Aspose.Page for .NET",
+    "platform": ".NET",
+    "repository": null,
+    "branch": "main",
+    "status": "not_found",
+    "last_verified": "2026-08-28"
+  },
+  {
+    "brand": "aspose.com",
+    "urlPrefix": "zip",
+    "product": "Aspose.ZIP for .NET",
+    "platform": ".NET",
+    "repository": null,
+    "branch": "main",
+    "status": "not_found",
+    "last_verified": "2026-08-28"
+  },
+  {
+    "brand": "aspose.com",
+    "urlPrefix": "gis",
+    "product": "Aspose.GIS for .NET",
+    "platform": ".NET",
+    "repository": null,
+    "branch": "main",
+    "status": "not_found",
+    "last_verified": "2026-08-28"
+  },
+  {
+    "brand": "aspose.com",
+    "urlPrefix": "html",
+    "product": "Aspose.HTML for .NET",
+    "platform": ".NET",
+    "repository": "aspose-html/agentic-net-examples",
+    "branch": "main",
+    "status": "verified",
+    "last_verified": "2026-08-28"
+  },
+  {
+    "brand": "aspose.com",
+    "urlPrefix": "3d",
+    "product": "Aspose.3D for .NET",
+    "platform": ".NET",
+    "repository": null,
+    "branch": "main",
+    "status": "not_found",
+    "last_verified": "2026-08-28"
+  },
+  {
+    "brand": "aspose.com",
+    "urlPrefix": "cad",
+    "product": "Aspose.CAD for .NET",
+    "platform": ".NET",
+    "repository": null,
+    "branch": "main",
+    "status": "not_found",
+    "last_verified": "2026-08-28"
+  },
+  {
+    "brand": "aspose.com",
+    "urlPrefix": "barcode",
+    "product": "Aspose.BarCode for .NET",
+    "platform": ".NET",
+    "repository": "aspose-barcode/agentic-net-examples",
+    "branch": "main",
+    "status": "verified",
+    "last_verified": "2026-08-28"
+  },
+  {
+    "brand": "aspose.com",
+    "urlPrefix": "imaging",
+    "product": "Aspose.Imaging for .NET",
+    "platform": ".NET",
+    "repository": "aspose-imaging/agentic-net-examples",
+    "branch": "main",
+    "status": "verified",
+    "last_verified": "2026-08-28"
+  },
+  {
+    "brand": "aspose.com",
+    "urlPrefix": "slides",
+    "product": "Aspose.Slides for .NET",
+    "platform": ".NET",
+    "repository": "aspose-slides/agentic-net-examples",
+    "branch": "main",
+    "status": "verified",
+    "last_verified": "2026-08-28"
+  },
+  {
+    "brand": "aspose.com",
+    "urlPrefix": "slides",
+    "product": "Aspose.Slides for .NET Core",
+    "platform": ".NET",
+    "repository": "aspose-slides/agentic-net-examples",
+    "branch": "main",
+    "status": "verified",
+    "last_verified": "2026-08-28"
+  },
+  {
+    "brand": "aspose.com",
+    "urlPrefix": "email",
+    "product": "Aspose.Email for .NET",
+    "platform": ".NET",
+    "repository": "aspose-email/agentic-net-examples",
+    "branch": "main",
+    "status": "verified",
+    "last_verified": "2026-08-28"
+  },
+  {
+    "brand": "aspose.com",
+    "urlPrefix": "words",
+    "product": "Aspose.Words for .NET",
+    "platform": ".NET",
+    "repository": "aspose-words/agentic-net-examples",
+    "branch": "main",
+    "status": "verified",
+    "last_verified": "2026-08-28"
+  },
+  {
+    "brand": "aspose.com",
+    "urlPrefix": "tex",
+    "product": "Aspose.TeX for .NET",
+    "platform": ".NET",
+    "repository": null,
+    "branch": "main",
+    "status": "not_found",
+    "last_verified": "2026-08-28"
+  },
+  {
+    "brand": "aspose.com",
+    "urlPrefix": "finance",
+    "product": "Aspose.Finance for .NET",
+    "platform": ".NET",
+    "repository": null,
+    "branch": "main",
+    "status": "not_found",
+    "last_verified": "2026-08-28"
+  },
+  {
+    "brand": "aspose.com",
+    "urlPrefix": "total",
+    "product": "Aspose.Total for .NET",
+    "platform": ".NET",
+    "repository": null,
+    "branch": "main",
+    "status": "not_found",
+    "last_verified": "2026-08-28"
+  },
+  {
+    "brand": "aspose.com",
+    "urlPrefix": "pdf",
+    "product": "Aspose.PDF for .NET",
+    "platform": ".NET",
+    "repository": "aspose-pdf/agentic-net-examples",
+    "branch": "main",
+    "status": "verified",
+    "last_verified": "2026-08-28"
+  },
+  {
+    "brand": "aspose.com",
+    "urlPrefix": "diagram",
+    "product": "Aspose.Diagram for .NET",
+    "platform": ".NET",
+    "repository": "aspose-diagram/agentic-net-examples",
+    "branch": "main",
+    "status": "verified",
+    "last_verified": "2026-08-28"
+  },
+  {
+    "brand": "aspose.com",
+    "urlPrefix": "tasks",
+    "product": "Aspose.Tasks for .NET",
+    "platform": ".NET",
+    "repository": null,
+    "branch": "main",
+    "status": "not_found",
+    "last_verified": "2026-08-28"
+  },
+  {
+    "brand": "aspose.com",
+    "urlPrefix": "ocr",
+    "product": "Aspose.OCR for .NET",
+    "platform": ".NET",
+    "repository": null,
+    "branch": "main",
+    "status": "not_found",
+    "last_verified": "2026-08-28"
+  },
+  {
+    "brand": "aspose.com",
+    "urlPrefix": "note",
+    "product": "Aspose.Note for .NET",
+    "platform": ".NET",
+    "repository": null,
+    "branch": "main",
+    "status": "not_found",
+    "last_verified": "2026-08-28"
+  },
+  {
+    "brand": "aspose.com",
+    "urlPrefix": "pub",
+    "product": "Aspose.PUB for .NET",
+    "platform": ".NET",
+    "repository": null,
+    "branch": "main",
+    "status": "not_found",
+    "last_verified": "2026-08-28"
+  },
+  {
+    "brand": "aspose.com",
+    "urlPrefix": "svg",
+    "product": "Aspose.SVG for .NET",
+    "platform": ".NET",
+    "repository": null,
+    "branch": "main",
+    "status": "not_found",
+    "last_verified": "2026-08-28"
+  },
+  {
+    "brand": "aspose.com",
+    "urlPrefix": "drawing",
+    "product": "Aspose.Drawing for .NET",
+    "platform": ".NET",
+    "repository": null,
+    "branch": "main",
+    "status": "not_found",
+    "last_verified": "2026-08-28"
+  },
+  {
+    "brand": "aspose.com",
+    "urlPrefix": "font",
+    "product": "Aspose.Font for .NET",
+    "platform": ".NET",
+    "repository": null,
+    "branch": "main",
+    "status": "not_found",
+    "last_verified": "2026-08-28"
+  },
+  {
+    "brand": "aspose.com",
+    "urlPrefix": "medical",
+    "product": "Aspose.Medical for .NET",
+    "platform": ".NET",
+    "repository": null,
+    "branch": "main",
+    "status": "not_found",
+    "last_verified": "2026-08-28"
+  },
+  {
+    "brand": "aspose.com",
+    "urlPrefix": "llm",
+    "product": "Aspose.LLM for .NET",
+    "platform": ".NET",
+    "repository": null,
+    "branch": "main",
+    "status": "not_found",
+    "last_verified": "2026-08-28"
+  }
+]

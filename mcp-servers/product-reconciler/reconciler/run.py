@@ -40,25 +40,33 @@ def reconcile(brand: str, token: str, dry_run: bool = False) -> dict:
         "new_platforms": [],
         "fixed_fields": [],
         "unresolved": [],
-        "potential_removals": [f"{p.url_prefix}/{p.platform_key}" for p in diff.potential_removals],
+        "potential_removals": [
+            {
+                "product": (stored_by_pair.get(p) or {}).get("ProductName", "(unknown)"),
+                "platform": f"{p.url_prefix}/{p.platform_key}",
+            }
+            for p in diff.potential_removals
+        ],
     }
 
     new_entries = []
     for pair in diff.new_products + diff.new_platforms:
         result = derive_full_entry(client, pair.url_prefix, pair.platform_key, config)
         bucket = "new_products" if pair in diff.new_products else "new_platforms"
+        platform = f"{pair.url_prefix}/{pair.platform_key}"
         if not result.values.get("ProductName"):
-            report["unresolved"].append(f"{pair.url_prefix}/{pair.platform_key}: {result.notes.get('ProductName')}")
+            report["unresolved"].append({"platform": platform, "reason": result.notes.get("ProductName")})
             continue
         if "ProductURL" in result.unverified:
             # Exists in the source repo, but the live page 404s — likely
             # committed ahead of an actual deploy. Don't add a product
             # whose own primary link is dead; wait for it to go live.
-            report["unresolved"].append(f"{pair.url_prefix}/{pair.platform_key}: {result.notes.get('ProductURL')}")
+            report["unresolved"].append({"platform": platform, "reason": result.notes.get("ProductURL")})
             continue
         new_entries.append(result.values)
         report[bucket].append({
             "product": result.values["ProductName"],
+            "platform": platform,
             "missing_fields": result.unverified,
         })
 
@@ -86,7 +94,12 @@ def reconcile(brand: str, token: str, dry_run: bool = False) -> dict:
             })
 
     report["fixed_fields"] = [
-        f"{fx['ProductName']}.{fx['field']}: {fx['old_value']!r} -> {fx['value']!r}"
+        {
+            "product": fx["ProductName"],
+            "field": fx["field"],
+            "old_value": fx["old_value"],
+            "new_value": fx["value"],
+        }
         for fx in field_fixes
     ]
 

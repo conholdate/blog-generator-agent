@@ -1,0 +1,329 @@
+[
+  {
+    "topic": "Create HTML Page using Without BROWSER in C#",
+    "truth": [
+      "working_with_html_documents/create_empty_html_document_add_paragraph_element_save_html.cs"
+    ],
+    "note": "corrected - LLM pick was actually valid, ground truth was wrong"
+  },
+  {
+    "topic": "Create web scraper",
+    "truth": [
+      "data_extraction/load_html_document_from_remote_url_and_extract_all_hyperlink_urls_with_css_selector.cs",
+      "data_extraction/parse_html_string_collect_text_all_paragraph_elements_using_xpath.cs"
+    ],
+    "note": "no dedicated 'scraper' tool but data_extraction category covers scraping-style content extraction; many valid"
+  },
+  {
+    "topic": "DOWNLOAD images from websites",
+    "truth": [
+      "extract_images_from_website/add_retry_logic_transient_network_failures_downloading_images_icons.cs",
+      "extract_images_from_website/apply_naming_pattern_prefixes_saved_files_source_domain_name.cs",
+      "extract_images_from_website/download_image_data_asynchronously_httpclient_each_resolved_url_resource.cs"
+    ],
+    "note": "many valid in this category"
+  },
+  {
+    "topic": "EPUB to BMP",
+    "truth": [
+      "epub_converter/convert_epub_document_to_bmp_format_using_default_image_options.cs"
+    ],
+    "note": "many valid alternatives in epub_converter"
+  },
+  {
+    "topic": "EPUB to PDF",
+    "truth": [
+      "epub_converter/convert_epub_file_to_pdf_using_static_converter_convert_epub_method_with_default_options.cs",
+      "epub_converter/convert_epub_file_to_pdf_ensure_output_directory_exists_before_writing.cs"
+    ],
+    "note": "many valid"
+  },
+  {
+    "topic": "EPUB to PNG",
+    "truth": [
+      "epub_converter/convert_epub_to_png_using_default_rendering.cs"
+    ],
+    "note": "many valid alternatives"
+  },
+  {
+    "topic": "How to Edit HTML Aspose.HTML in C# Guide",
+    "truth": [
+      "working_with_html_documents/load_html_file_change_heading_colors_using_internal_css_rules_then_save_document.cs"
+    ],
+    "note": "corrected - LLM pick was actually valid, ground truth was wrong"
+  },
+  {
+    "topic": "Extract Text from HTML in C#",
+    "truth": [
+      "data_extraction/parse_html_string_collect_text_all_paragraph_elements_using_xpath.cs",
+      "data_extraction/retrieve_inner_text_of_first_paragraph_inside_div_with_specific_class_using_xpath.cs",
+      "html_navigation/convert_html_document_to_plain_text_preserving_line_breaks_for_readability.cs"
+    ],
+    "note": "many valid"
+  },
+  {
+    "topic": "For manipulating dom",
+    "truth": [
+      "data_extraction/traverse_dom_find_first_body_child_element_output_tag_name.cs",
+      "data_extraction/filter_dom_nodes_include_only_elements_with_data_id_attribute_using_custom_nodefilter.cs",
+      "data_extraction/save_remote_html_page_to_disk_after_modifying_title_element_using_dom_manipulation.cs",
+      "working_with_html_documents/load_html_document_replace_all_anchor_href_attributes_with_absolute_urls_save_changes.cs"
+    ]
+  },
+  {
+    "topic": "HTML tables to PDF",
+    "truth": [
+      "fine_tuning_converters/convert_html_file_to_pdf_set_background_color_light_blue_branding.cs"
+    ],
+    "note": "weak - no table-specific PDF example found, using generic HTML-to-PDF as a loose stand-in since tables are ordinary HTML content"
+  },
+  {
+    "topic": "HTML to BMP Conversion Tutorial in C#: Sample Code",
+    "truth": [
+      "html_converter/convert_html_strings_to_bmp_images_using_image_save_options_converter.cs",
+      "html_converter/one_line_static_html_to_bmp_conversion_using_converter_converthtml_specifying_output_path.cs"
+    ],
+    "note": "many valid"
+  },
+  {
+    "topic": "HTML to DOCX",
+    "truth": [
+      "html_converter/convert_html_string_to_docx_embed_custom_css_styles.cs",
+      "fine_tuning_converters/convert_html_to_docx_preserving_table_structures_default_options.cs"
+    ],
+    "note": "many valid"
+  },
+  {
+    "topic": "HTML to GIF Command Line in C#: Complete Developer Tutorial",
+    "truth": [
+      "html_converter/convert_html_file_to_gif_image_using_default_settings_single_method_call.cs"
+    ],
+    "note": "many valid"
+  },
+  {
+    "topic": "How to Execute the HTML to MD Conversion Tutorial in C#",
+    "truth": [
+      "html_converter/convert_html_to_markdown_using_file_path_input_and_default_options_save_to_specified_md_file.cs",
+      "html_navigation/transform_html_into_markdown_using_builtin_efficient_conversion_routine.cs",
+      "html_converter/convert_html_string_to_markdown_string_using_converter_converthtml_method.cs"
+    ]
+  },
+  {
+    "topic": "HTML to MHTML",
+    "truth": [
+      "html_converter/convert_html_to_mhtml_default_options_static_method.cs",
+      "html_converter/convert_html_sources_to_mhtml_outputs_using_mhtmlsaveoptions_foreach_loop.cs"
+    ],
+    "note": "many valid"
+  },
+  {
+    "topic": "Convert HTML to PNG in C#",
+    "truth": [
+      "html_converter/convert_html_to_png_after_injecting_custom_javascript_modifies_dom_dynamic_content.cs",
+      "html_converter/convert_html_file_to_png_image_using_default_conversion_settings_and_file_path.cs"
+    ],
+    "note": "likely more generic default HTML-to-PNG files also exist in html_converter, accept any genuine html-to-png conversion file in that category"
+  },
+  {
+    "topic": "HTML to TIF",
+    "truth": [
+      "html_converter/convert_html_file_to_tiff_image_using_default_settings_and_save_to_specified_output_file.cs"
+    ],
+    "note": "many valid"
+  },
+  {
+    "topic": "Convert HTML to TXT in C#",
+    "truth": [
+      "html_navigation/convert_html_document_to_plain_text_preserving_line_breaks_for_readability.cs"
+    ]
+  },
+  {
+    "topic": "HTML to XPS",
+    "truth": [
+      "html_converter/asynchronous_html_to_xps_conversion_using_async_task_methods_avoid_blocking_main_thread.cs",
+      "fine_tuning_converters/render_html_document_to_xps_landscape_orientation_pageorientation.cs",
+      "html_converter/convert_html_file_to_xps_document_using_converter_converthtml_with_new_xpssaveoptions.cs"
+    ],
+    "note": "many valid"
+  },
+  {
+    "topic": "HTML Webpage to Word DOCX DOC Conversion Using C#: Tutorial",
+    "truth": [
+      "html_converter/convert_html_string_to_docx_embed_custom_css_styles.cs",
+      "fine_tuning_converters/convert_html_to_docx_preserving_table_structures_default_options.cs",
+      "html_converter/convert_html_to_docx_default_docsaveoptions_one_line_converter.cs"
+    ],
+    "note": "same target capability as 'HTML to DOCX' topic"
+  },
+  {
+    "topic": "Step-by-Step Guide to Iframe Generator Create Iframe in C#",
+    "truth": null,
+    "note": "only related file extracts video URLs FROM existing iframes, does not generate/create one - wrong direction"
+  },
+  {
+    "topic": "How to Convert MAKE Table HTML Table Generator in C#",
+    "truth": null,
+    "note": "no dedicated HTML table generator tool found; existing table-related files operate on tables already inside a document, not generate a standalone table"
+  },
+  {
+    "topic": "MD to DOCX",
+    "truth": [
+      "markdown_converter/batch_conversion_markdown_files_to_docx_individual_docsaveoptions_per_file.cs",
+      "markdown_converter/convert_markdown_to_docx_with_page_size_and_orientation_using_docsaveoptions_pagesetup.cs"
+    ],
+    "note": "many valid"
+  },
+  {
+    "topic": "Generate PDF from Markdown in C#",
+    "truth": [
+      "markdown_converter/apply_custom_pdf_metadata_author_title_using_pdfsaveoptions_before_conversion.cs",
+      "markdown_converter/batch_conversion_of_all_markdown_files_in_folder_to_pdf_using_foreach_loop.cs"
+    ],
+    "note": "many valid"
+  },
+  {
+    "topic": "How to Convert MD to PNG in C#",
+    "truth": [
+      "markdown_converter/create_png_image_from_markdown_using_imagesaveoptions_default_compression.cs",
+      "markdown_converter/load_markdown_string_convert_to_png_image_with_custom_dpi_using_imagesaveoptions.cs",
+      "markdown_converter/convert_markdown_to_png_transparent_background_configure_imagesaveoptions.cs"
+    ],
+    "note": "many valid"
+  },
+  {
+    "topic": "MHTML to DOCX Conversion in C#: a Complete Tutorial",
+    "truth": [
+      "mhtml_converter/create_docsaveoptions_instance_set_compatibility_mode_before_converting_mhtml_to_docx.cs"
+    ],
+    "note": "many valid"
+  },
+  {
+    "topic": "MHTML to XPS Conversion in C#: Complete Developer Tutorial",
+    "truth": [
+      "mhtml_converter/convert_mhtml_file_to_xps_format_custom_page_dimensions_xpssaveoptions.cs"
+    ],
+    "note": "many valid"
+  },
+  {
+    "topic": "Step-by-Step Markdown to Image Conversion Tutorial in C#",
+    "truth": [
+      "markdown_converter/create_png_image_from_markdown_using_imagesaveoptions_default_compression.cs",
+      "markdown_converter/batch_convert_all_markdown_files_in_folder_to_jpeg_images_uniform_quality_level.cs",
+      "markdown_converter/convert_markdown_to_png_transparent_background_configure_imagesaveoptions.cs"
+    ],
+    "note": "generic 'image' - accept any markdown-to-image-format file (png/bmp/gif/jpeg/tiff)"
+  },
+  {
+    "topic": "Merge HTML template with XML or JSON",
+    "truth": [
+      "working_with_html_templates/combine_xml_data_inline_expressions_product_catalog_html_page.cs",
+      "working_with_html_templates/control_css_class_attribute_binding_value_json_data_source.cs",
+      "working_with_html_templates/create_reusable_html_email_template_populate_user_data_from_xml.cs"
+    ],
+    "note": "many valid in working_with_html_templates"
+  },
+  {
+    "topic": "Random Color Generator Open Source Alternative in C#",
+    "truth": null,
+    "note": "not a real Aspose.HTML capability, no matching file at all - genuinely out of scope"
+  },
+  {
+    "topic": "SVG to BMP Conversion Tutorial in C#",
+    "truth": [
+      "svg_converter/convert_single_svg_file_to_bmp_using_one_line_converter_convertsvg.cs",
+      "svg_converter/batch_convert_svg_folder_to_bmp_using_loop_converter.cs"
+    ],
+    "note": "many valid"
+  },
+  {
+    "topic": "Convert SVG to DOCX in C#",
+    "truth": [
+      "svg_converter/convert_svg_document_to_docx_with_new_docsaveoptions_instance.cs",
+      "svg_converter/batch_convert_svg_documents_to_docx_with_page_size_and_margins.cs"
+    ],
+    "note": "many valid"
+  },
+  {
+    "topic": "Convert SVG to JPG in C#",
+    "truth": [
+      "svg_converter/batch_conversion_folder_svg_to_jpeg_uniform_quality.cs",
+      "svg_converter/benchmark_conversion_time_svg_to_jpeg_different_jpeg_quality_settings_find_optimal_performance.cs"
+    ],
+    "note": "many valid"
+  },
+  {
+    "topic": "Convert SVG to PDF in C#",
+    "truth": [
+      "svg_converter/create_pdfsaveoptions_custom_page_width_height_pdf_conversion.cs",
+      "svg_converter/create_console_application_reads_svg_paths_from_text_file_and_converts_to_pdf.cs",
+      "fine_tuning_converters/convert_svg_file_pdf_automatically_adjust_page_size_widest_element_using_adjusttowidestpage.cs"
+    ],
+    "note": "many valid"
+  },
+  {
+    "topic": "SVG to TIF",
+    "truth": [
+      "svg_converter/apply_lzw_compression_image_save_options_converting_svg_to_tiff.cs",
+      "svg_converter/batch_convert_svg_files_to_tiff_configuring_compression_differently_per_output_file.cs",
+      "svg_converter/convert_svg_to_tiff_image_save_options_compression_lzw.cs"
+    ],
+    "note": "many valid"
+  },
+  {
+    "topic": "Step-by-Step Guide to SVG to XPS Conversion in C#",
+    "truth": [
+      "svg_converter/apply_xpssaveoptions_set_compression_level_page_size_svg_to_xps_conversion.cs",
+      "svg_converter/console_application_reads_svg_file_paths_from_text_file_converts_to_xps.cs",
+      "svg_converter/convert_svg_to_xps_using_one_line_static_method.cs"
+    ],
+    "note": "many valid"
+  },
+  {
+    "topic": "Save webpage as PDF",
+    "truth": [
+      "website_to_html/convert_website_pages_to_html_simultaneously_generate_pdf_snapshots_for_archival.cs",
+      "html_converter/batch_process_json_array_urls_convert_each_to_pdf_store_results_cloud_storage.cs"
+    ]
+  },
+  {
+    "topic": "Use CSS selector in HTML",
+    "truth": [
+      "data_extraction/use_css_selectors_find_all_bold_text_elements_replace_inner_html_uppercase_text.cs",
+      "data_extraction/use_document_queryselectorall_with_css_selector_to_obtain_all_list_items_inside_ordered_lists.cs",
+      "data_extraction/use_css_selectors_find_all_elements_class_highlight_change_background_color.cs"
+    ],
+    "note": "many valid"
+  },
+  {
+    "topic": "Use Xpath to Select Nodes-a Complete Tutorial in C#",
+    "truth": [
+      "data_extraction/select_nodes_using_xpath_to_retrieve_all_table_rows_in_html_table.cs",
+      "data_extraction/parse_html_string_collect_text_all_paragraph_elements_using_xpath.cs",
+      "data_extraction/use_xpath_select_table_cells_containing_numeric_values_and_calculate_sum_programmatically.cs",
+      "working_with_html_documents/use_xpath_to_select_paragraph_nodes_containing_example_and_highlight_them.cs"
+    ],
+    "note": "many valid"
+  },
+  {
+    "topic": "WEBSITE downloader DOWNLOAD from URL",
+    "truth": [
+      "save_file_from_url/create_console_application_accepts_url_argument_saves_downloaded_file_current_directory.cs",
+      "save_file_from_url/create_helper_method_accepts_url_destination_path_performs_download_save_logic.cs",
+      "data_extraction/save_website_preserving_original_folder_structure_using_html_save_options.cs"
+    ],
+    "note": "many valid in save_file_from_url"
+  },
+  {
+    "topic": "Webpage to PDF with C#: Integration and Processing Guide",
+    "truth": [
+      "website_to_html/convert_website_pages_to_html_simultaneously_generate_pdf_snapshots_for_archival.cs",
+      "html_converter/batch_process_json_array_urls_convert_each_to_pdf_store_results_cloud_storage.cs"
+    ],
+    "note": "duplicate of 'Save webpage as PDF' topic"
+  },
+  {
+    "topic": "XML sitemap validator validate sitemap XML",
+    "truth": null,
+    "note": "only a sitemap GENERATOR exists (website_to_html/generate_sitemap_xml_file_alongside_html_output_to_map_converted_pages.cs), not a validator - different function, wrong direction"
+  }
+]
