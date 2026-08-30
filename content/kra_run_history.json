@@ -25,7 +25,7 @@
     "aspose|aspose.html|java": 1,
     "aspose|aspose.html|python": 1,
     "aspose|aspose.html|net": 1,
-    "conholdate|conholdate.total|java": 5,
+    "conholdate|conholdate.total|java": 0,
     "aspose.cloud|aspose.cells|net": 0,
     "aspose.cloud|aspose.cells|java": 2,
     "aspose.cloud|aspose.cells|php": 0,
@@ -120,7 +120,8 @@
     "Convert Excel to Image in Java",
     "Add Text to PDF Tutorial Example in Java",
     "Add Text to PDF in Java",
-    "Create Charts in Java"
+    "Create Charts in Java",
+    "Create Charts in Word Documents using Java: Best Practices"
   ],
   "aspose.cloud|aspose.cells|net": [
     "A Guide to Heroku Email Sending Best Practices in C#",
