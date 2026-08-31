@@ -34,6 +34,7 @@ def _print_report(result: dict) -> None:
         print(f"\nNO MATCH — {result['reason']}")
         if result.get("pick"):
             print(f"(LLM stage 1 pick: {result['pick'].get('raw_file')})")
+        print(f"\nTime taken: {result.get('elapsed_seconds', '?')}s")
         return
 
     print(f"\nRepo: {result['repo']}")
@@ -45,6 +46,7 @@ def _print_report(result: dict) -> None:
     selected = result["selected"]
     print(f"\nSELECTED\n{selected['source']['category']}/{selected['source']['file']}")
     print(f"\nCONFIDENCE: {result['confidence']}")
+    print(f"\nTime taken: {result.get('elapsed_seconds', '?')}s")
     print(f"\nLanguage: {selected['language']}")
     print(f"\nCODE:\n{selected['code']}")
 

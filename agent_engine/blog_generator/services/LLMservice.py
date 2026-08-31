@@ -9,6 +9,7 @@ from config import settings
 from typing import Optional, Dict, Any, List, Tuple
 import asyncio
 import logging
+import sys
 
 logger = logging.getLogger(__name__)
 

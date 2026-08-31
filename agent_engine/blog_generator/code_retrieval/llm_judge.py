@@ -13,10 +13,12 @@ understands things a bag-of-words formula structurally can't: direction
 is actually on-topic, and a genuine "none of these fit" judgment instead of
 a numeric threshold.
 """
+import asyncio
 import difflib
 import re
 import sys
 import os
+import time
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 from services.LLMservice import llm_service  # noqa: E402
@@ -26,6 +28,30 @@ _REASON_RE = re.compile(r"REASON:\s*(.+)", re.IGNORECASE)
 _VERIFIED_RE = re.compile(r"VERIFIED:\s*(YES|NO)", re.IGNORECASE)
 
 CLOSE_MATCH_CUTOFF = 0.9  # conservative - a near-miss typo/misremembering, not a different file
+
+MAX_LLM_RETRIES = 3
+_EMPTY_USAGE = {"input_tokens": 0, "output_tokens": 0, "total_tokens": 0}
+
+
+async def _complete_with_retry(prompt: str, temperature: float, max_tokens: int, label: str):
+    """Retries a flaky call with exponential backoff - the same pattern
+    utils/code_snippet.py already uses for its own LLM calls. Confirmed a raw
+    openai.APITimeoutError otherwise crashes the whole retrieval attempt with
+    an unhandled exception - retrieval failure must never abort the run the
+    way LLM-generation failure does, per this project's own founding
+    principle, so a call that keeps failing degrades to "no result" instead
+    of propagating."""
+    last_error = None
+    for attempt in range(1, MAX_LLM_RETRIES + 1):
+        try:
+            return await llm_service.complete(prompt=prompt, temperature=temperature, max_tokens=max_tokens)
+        except Exception as e:
+            last_error = str(e)
+            print(f"⚠️ {label} attempt {attempt}/{MAX_LLM_RETRIES} failed: {last_error}", flush=True)
+            if attempt < MAX_LLM_RETRIES:
+                await asyncio.sleep(2 ** attempt)
+    print(f"❌ {label} failed after {MAX_LLM_RETRIES} attempts. Last error: {last_error}", flush=True)
+    return None, {**_EMPTY_USAGE, "error": last_error}
 
 
 def _closest_match(raw_file: str, paths: list[str]) -> str | None:
@@ -103,14 +129,26 @@ async def pick_file(topic: str, primary_keyword: str, platform: str, product_nam
     rather than pre-filtering candidates with a separate (unverified) scoring
     step. Each chunk's winner, if any, goes to one final tie-break call."""
     if len(paths) <= CHUNK_SIZE:
-        return await _pick_from_list(topic, primary_keyword, platform, product_name, paths)
+        print(f"🔎 Stage 1: asking the LLM to pick from {len(paths)} files...", flush=True)
+        start = time.monotonic()
+        result = await _pick_from_list(topic, primary_keyword, platform, product_name, paths)
+        print(f"🔎 Stage 1 done in {time.monotonic() - start:.1f}s", flush=True)
+        return result
 
     chunks = [paths[i:i + CHUNK_SIZE] for i in range(0, len(paths), CHUNK_SIZE)]
+    print(f"🔎 Stage 1: {len(paths)} files is too many for one call - "
+          f"splitting into {len(chunks)} chunks of ≤{CHUNK_SIZE}...", flush=True)
     chunk_picks = []
-    for chunk in chunks:
+    for i, chunk in enumerate(chunks, 1):
+        print(f"   chunk {i}/{len(chunks)} ({len(chunk)} files)...", flush=True)
+        chunk_start = time.monotonic()
         result = await _pick_from_list(topic, primary_keyword, platform, product_name, chunk)
+        elapsed = time.monotonic() - chunk_start
         if result["file"]:
+            print(f"   chunk {i}/{len(chunks)} candidate: {result['file']} ({elapsed:.1f}s)", flush=True)
             chunk_picks.append(result)
+        else:
+            print(f"   chunk {i}/{len(chunks)}: no candidate ({elapsed:.1f}s)", flush=True)
 
     if not chunk_picks:
         return {"file": None, "raw_file": None, "reason": "no candidate found in any chunk of the file list",
@@ -118,9 +156,13 @@ async def pick_file(topic: str, primary_keyword: str, platform: str, product_nam
     if len(chunk_picks) == 1:
         return chunk_picks[0]
 
-    return await _pick_from_list(
+    print(f"🔎 Stage 1: tie-break among {len(chunk_picks)} chunk winners...", flush=True)
+    tie_break_start = time.monotonic()
+    result = await _pick_from_list(
         topic, primary_keyword, platform, product_name, [p["file"] for p in chunk_picks]
     )
+    print(f"🔎 Tie-break done in {time.monotonic() - tie_break_start:.1f}s", flush=True)
+    return result
 
 
 async def _pick_from_list(topic: str, primary_keyword: str, platform: str, product_name: str, paths: list[str]) -> dict:
@@ -139,7 +181,12 @@ async def _pick_from_list(topic: str, primary_keyword: str, platform: str, produ
     # to 73%, because greedy decoding pushed the model toward answering NONE
     # far more often even when a real match existed. The non-determinism is
     # real and unresolved, but costs less accuracy than "fixing" it did here.
-    text, usage = await llm_service.complete(prompt=prompt, temperature=0.1, max_tokens=6000)
+    text, usage = await _complete_with_retry(prompt, temperature=0.1, max_tokens=6000, label="Stage 1 pick")
+
+    if text is None:
+        return {"file": None, "raw_file": None,
+                "reason": f"LLM call failed after {MAX_LLM_RETRIES} attempts: {usage.get('error')}",
+                "token_usage": usage}
 
     file_match = _FILE_RE.search(text or "")
     reason_match = _REASON_RE.search(text or "")
@@ -155,14 +202,23 @@ async def _pick_from_list(topic: str, primary_keyword: str, platform: str, produ
 
 
 async def verify_file(topic: str, primary_keyword: str, platform: str, path: str, content: str) -> dict:
+    print(f"✅ Stage 2: verifying {path}...", flush=True)
+    start = time.monotonic()
     prompt = _build_verify_prompt(topic, primary_keyword, platform, path, content)
     # temperature=0.1 - see pick_file's comment; reverted from 0 for the same
     # measured reason (recall regression without a real precision gain).
-    text, usage = await llm_service.complete(prompt=prompt, temperature=0.1, max_tokens=2000)
+    text, usage = await _complete_with_retry(prompt, temperature=0.1, max_tokens=2000, label="Stage 2 verify")
+
+    if text is None:
+        print(f"✅ Stage 2 failed after {time.monotonic() - start:.1f}s", flush=True)
+        return {"verified": False,
+                "reason": f"LLM call failed after {MAX_LLM_RETRIES} attempts: {usage.get('error')}",
+                "token_usage": usage}
 
     verified_match = _VERIFIED_RE.search(text or "")
     reason_match = _REASON_RE.search(text or "")
     verified = bool(verified_match) and verified_match.group(1).upper() == "YES"
     reason = reason_match.group(1).strip() if reason_match else (text or "").strip()
 
+    print(f"✅ Stage 2 done in {time.monotonic() - start:.1f}s", flush=True)
     return {"verified": verified, "reason": reason, "token_usage": usage}

@@ -7,6 +7,8 @@ Kept as a separate module from retrieval.py (the keyword-scoring version)
 rather than replacing it, so both can be measured against the same 53-topic
 ground truth and compared directly.
 """
+import time
+
 from . import registry
 from .github_client import GitHubClient
 from .llm_judge import pick_file, verify_file
@@ -14,9 +16,15 @@ from .llm_judge import pick_file, verify_file
 LANGUAGE_BY_EXTENSION = {".cs": "csharp"}
 
 
-def _no_match(base: dict, reason: str) -> dict:
-    return {**base, "repo": None, "pick": None, "verification": None, "selected": None,
-            "confidence": "NO_MATCH", "reason": reason}
+def _finish(result: dict, start: float) -> dict:
+    elapsed = time.monotonic() - start
+    print(f"⏱️  Total time: {elapsed:.1f}s", flush=True)
+    return {**result, "elapsed_seconds": round(elapsed, 1)}
+
+
+def _no_match(base: dict, reason: str, start: float) -> dict:
+    return _finish({**base, "repo": None, "pick": None, "verification": None, "selected": None,
+                     "confidence": "NO_MATCH", "reason": reason}, start)
 
 
 async def retrieve_example_llm(
@@ -28,6 +36,7 @@ async def retrieve_example_llm(
     outline: list[str] | None = None,
     token: str = "",
 ) -> dict:
+    start = time.monotonic()
     base = {
         "input": {
             "brand": brand, "product": product_name, "platform": platform,
@@ -39,34 +48,37 @@ async def retrieve_example_llm(
     if repo_ref is None:
         known = registry.known_products(brand, platform)
         hint = f" Known {platform} products: {', '.join(known)}" if known else ""
-        return _no_match(base, f"no verified repo registered for '{product_name}' / '{platform}'.{hint}")
+        return _no_match(base, f"no verified repo registered for '{product_name}' / '{platform}'.{hint}", start)
+    print(f"📦 Repo: {repo_ref.repository}", flush=True)
 
     client = GitHubClient(token=token)
+    print("📥 Fetching repo file tree...", flush=True)
     paths = client.get_tree(repo_ref.repository, ref=repo_ref.branch)
     if not paths:
-        return _no_match(base, f"could not fetch repo file tree: {client.last_error}")
+        return _no_match(base, f"could not fetch repo file tree: {client.last_error}", start)
 
     cs_paths = [p for p in paths if p.endswith(".cs")]
     if not cs_paths:
-        return _no_match(base, "no .cs example files found in this repo's tree")
+        return _no_match(base, "no .cs example files found in this repo's tree", start)
+    print(f"📥 {len(cs_paths)} .cs files found", flush=True)
 
     pick = await pick_file(topic, primary_keyword, platform, product_name, cs_paths)
     if not pick["file"]:
-        return {**base, "repo": repo_ref.repository, "pick": pick, "verification": None,
-                "selected": None, "confidence": "NO_MATCH",
-                "reason": f"LLM found no matching file: {pick['reason']}"}
+        return _finish({**base, "repo": repo_ref.repository, "pick": pick, "verification": None,
+                         "selected": None, "confidence": "NO_MATCH",
+                         "reason": f"LLM found no matching file: {pick['reason']}"}, start)
 
     content = client.get_small_file(repo_ref.repository, pick["file"], ref=repo_ref.branch)
     if content is None:
-        return {**base, "repo": repo_ref.repository, "pick": pick, "verification": None,
-                "selected": None, "confidence": "NO_MATCH",
-                "reason": f"could not fetch picked file content: {client.last_error}"}
+        return _finish({**base, "repo": repo_ref.repository, "pick": pick, "verification": None,
+                         "selected": None, "confidence": "NO_MATCH",
+                         "reason": f"could not fetch picked file content: {client.last_error}"}, start)
 
     verification = await verify_file(topic, primary_keyword, platform, pick["file"], content)
     if not verification["verified"]:
-        return {**base, "repo": repo_ref.repository, "pick": pick, "verification": verification,
-                "selected": None, "confidence": "NO_MATCH",
-                "reason": f"LLM rejected its own pick on verification: {verification['reason']}"}
+        return _finish({**base, "repo": repo_ref.repository, "pick": pick, "verification": verification,
+                         "selected": None, "confidence": "NO_MATCH",
+                         "reason": f"LLM rejected its own pick on verification: {verification['reason']}"}, start)
 
     category, _, filename = pick["file"].rpartition("/")
     ext = "." + filename.rsplit(".", 1)[-1]
@@ -79,11 +91,11 @@ async def retrieve_example_llm(
         },
     }
 
-    return {
+    return _finish({
         **base,
         "repo": repo_ref.repository,
         "pick": pick,
         "verification": verification,
         "selected": selected,
         "confidence": "LLM_VERIFIED",
-    }
+    }, start)
