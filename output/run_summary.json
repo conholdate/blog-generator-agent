@@ -1,0 +1,14 @@
+{
+  "source_url": "https://releases.aspose.com/tasks/net/release-notes/2026/aspose-tasks-for-net-26-8-release-notes/",
+  "source_type": "release-notes",
+  "publication_readiness": "draft_ready",
+  "blocker_reason": null,
+  "topics_generated": [
+    "Add progress notification API when loading Project from MPP format"
+  ],
+  "rejected_sections": [
+    "All Changes",
+    "Public API and Backwards Incompatible Changes",
+    "Public API and Backwards Incompatible Changes (duplicate)"
+  ]
+}
