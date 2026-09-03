@@ -1,0 +1,101 @@
+{
+  "topic": "Monitoring Project Load Progress with Aspose.Tasks for .NET: A Practical Guide",
+  "primary_source_url": "https://releases.aspose.com/tasks/net/release-notes/2026/aspose-tasks-for-net-26-8-release-notes/",
+  "source_title": "Aspose.Tasks for .NET 26.8 Release Notes",
+  "sdk_version": "Aspose.Tasks for .NET 26.8 Release Notes",
+  "main_problem_solved": "Introduces IProgressNotificationCallback and LoadOptions.ProjectLoadingCallback to receive progress updates while loading MPP or XER projects.",
+  "platform": {
+    "platform_key": "net",
+    "platform_name": ".NET",
+    "language": "C#",
+    "language_tag": "csharp",
+    "package_manager": "NuGet",
+    "install_command": "Install-Package Aspose.Tasks",
+    "product_key": "tasks",
+    "product_display": "Tasks",
+    "product_page_url": "https://products.aspose.com/tasks/net/",
+    "docs_url": "https://docs.aspose.com/tasks/net/",
+    "api_reference_url": "https://reference.aspose.com/tasks/net/",
+    "free_apps_url": "https://products.aspose.app/tasks/family",
+    "license_url": "https://purchase.aspose.com/temporary-license/",
+    "forum_url": "https://forum.aspose.com/c/tasks/"
+  },
+  "source_type": "release_notes",
+  "keyword_analysis": {
+    "title": "",
+    "angle": "",
+    "outline": [],
+    "target_persona": "",
+    "primary_keyword": "Monitoring Project Load Progress in .NET: A Practical Guide",
+    "supporting_keywords": [
+      "Monitor project load progress in .NET",
+      "Track task load progress in .NET",
+      "How to monitor project load progress programmatically in .NET"
+    ],
+    "keyword_groups": {
+      "core_seo_keywords": [
+        "Monitoring Project Load Progress in .NET: A Practical Guide"
+      ],
+      "long_tail_keywords": [
+        "How to monitor project load progress programmatically in .NET"
+      ],
+      "context_keywords": [
+        "Monitor project load progress in .NET",
+        "Track task load progress in .NET"
+      ]
+    },
+    "editorial_notes": []
+  },
+  "key_steps": [],
+  "code_snippets": [
+    "var lo = new LoadOptions();\nvar callback = new TestProgressNotificationCallback();\nlo.ProjectLoadingCallback = callback;\nProject project = new Project(\"test.mpp\", lo);\n\ninternal sealed class TestProgressNotificationCallback : IProgressNotificationCallback\n{\n    public void Notify(ProgressNotificationArgs args)\n    {\n        Console.WriteLine(\"Total: {0}%\", args.EstimatedTotalProgress);\n    }\n}"
+  ],
+  "limitations": [],
+  "warnings": [
+    "Code sample has not been executed in a sandbox, but it was matched verbatim against the product team's own release notes page; note it as reproduced from the official release notes and untested, not as unverified."
+  ],
+  "related_concepts": [
+    "LoadOptions",
+    "Project",
+    "TestProgressNotificationCallback",
+    "ProgressNotificationArgs",
+    "IProgressNotificationCallback.Notify",
+    "LoadOptions.ProjectLoadingCallback.set",
+    "Project.Project(string, LoadOptions)"
+  ],
+  "facts_confirmed_from_source": [
+    "Heading: Add progress notification API when loading Project from MPP format",
+    "Introduces IProgressNotificationCallback and LoadOptions.ProjectLoadingCallback to receive progress updates while loading MPP or XER projects.",
+    "API used: Aspose.Tasks.LoadOptions",
+    "API used: Aspose.Tasks.Project",
+    "API used: Aspose.Tasks.IProgressNotificationCallback",
+    "API used: Aspose.Tasks.ProgressNotificationArgs"
+  ],
+  "facts_needing_verification": [],
+  "suggested_article_outline": [
+    "Introduction",
+    "Why this feature matters",
+    "Brief introduction of the API (install + product/docs links)",
+    "Step-by-step tutorial with a code example",
+    "Get a Free License",
+    "Free Additional Resources",
+    "Conclusion",
+    "FAQs",
+    "See Also (only if related post URLs are supplied)"
+  ],
+  "code_verification": {
+    "language": "C#",
+    "tested": false,
+    "source_verified": true,
+    "syntax_valid": true,
+    "package_name": null,
+    "package_version": null,
+    "os": null,
+    "input_file_used": null,
+    "output_file_generated": null,
+    "errors": [],
+    "notes": "Code sample matches a block scraped verbatim from the product team's release notes page. Static syntax check passed (balanced brackets/quotes). Sandboxed execution against the real Aspose SDK is not attempted: these samples reference proprietary licensed assemblies, external input files, and sometimes network services (e.g. a timestamp authority URL) that only exist in the product team's own test environment."
+  },
+  "prerequisites": [],
+  "doc_topics": []
+}
