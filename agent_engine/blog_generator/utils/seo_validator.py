@@ -20,14 +20,18 @@ def validate_seo_content(markdown_string, targets):
     primary_kw = targets.get("primary_keyword", "").lower()
 
     # --- RULE 1: seoTitle (40-60 chars + Keyword) ---
+    # Soft check: the seoTitle is taken verbatim from the topics sheet and is
+    # not rewritten downstream, so an off-spec title (too short, keyword phrased
+    # differently) must not sink an otherwise-good post. Worth 10, not 20 - the
+    # freed 10 points sit on required_sections (RULE 4) instead.
     seo_title = fm.get("seoTitle", "")
     seo_len = len(seo_title)
     has_kw_in_seo = primary_kw in seo_title.lower()
-    
-    title_score = 20
+
+    title_score = 10
     if not (40 <= seo_len <= 60) or not has_kw_in_seo:
         title_score = 0
-        deductions += 20
+        deductions += 10
         msg = f"Length: {seo_len}, Keyword: {'Found' if has_kw_in_seo else 'Missing'}"
     else:
         msg = "Perfect"
@@ -61,14 +65,15 @@ def validate_seo_content(markdown_string, targets):
     has_faq = bool(re.search(r'^#+\s*(FAQ|Frequently Asked Questions)', content_body, re.MULTILINE | re.IGNORECASE))
     has_read_more = bool(re.search(r'^#+\s*Read More', content_body, re.MULTILINE | re.IGNORECASE))
     
-    sec_score = 15
+    # Worth 25 (15 base + 10 shifted from the softened seoTitle check in RULE 1).
+    sec_score = 25
     sec_msgs = []
     if not has_faq: sec_msgs.append("Missing FAQ")
     if not has_read_more: sec_msgs.append("Missing Read More")
-    
+
     if sec_msgs:
         sec_score = 0
-        deductions += 15
+        deductions += 25
         msg = " | ".join(sec_msgs)
     else:
         msg = "Both sections found"
