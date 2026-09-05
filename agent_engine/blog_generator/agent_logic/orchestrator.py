@@ -8,13 +8,100 @@ from tools.mcp_tools import generate_markdown_file, fetch_category_related_artic
 from utils import prompts
 from utils.seo_validator import validate_seo_content, validate_and_fix_meta_description, validate_and_fix_seo_title
 from utils.file_format_mappings import FILE_FORMAT_MAPPINGS, BASE_URL
-from utils.helpers import mark_topic_as_generated, prepare_context, get_productInfo, get_topic_by_index, inject_file_format_links, slugify, normalize_case_preserve_formats_in_keywords, clean_ai_generated_markdown, validate_markdown_links, capitalize_file_formats_for_title, setup_logger, generate_tags_with_llm, save_blog_metadata_to_sheet, extract_blog_metadata, get_topic_from_sheet, get_next_tab, extract_product_names, get_recent_layouts, convert_sheet_row_to_file_format, update_last_processed_product
+from utils.helpers import mark_topic_as_generated, prepare_context, get_productInfo, get_topic_by_index, inject_file_format_links, slugify, normalize_case_preserve_formats_in_keywords, clean_ai_generated_markdown, strip_pre_frontmatter_preamble, validate_markdown_links, capitalize_file_formats_for_title, setup_logger, generate_tags_with_llm, save_blog_metadata_to_sheet, extract_blog_metadata, get_topic_from_sheet, get_next_tab, extract_product_names, get_recent_layouts, convert_sheet_row_to_file_format, update_last_processed_product
 from utils.layouts import select_layout
-from utils.code_snippet import generate_code_snippet
+from utils.code_source import get_code_snippet
 from utils.metricsRecorder import MetricsRecorder
 from services.LLMservice import llm_service
 import json
 import os
+import re
+
+# Max number of times the blog-writer agent is asked to fix a failing SEO
+# audit before the run is skipped. Each attempt is a full re-generation, so
+# this is deliberately small.
+MAX_SEO_REVISIONS = 2
+
+
+def build_seo_revision_brief(report: dict, targets: dict) -> str:
+    """
+    Turn a failing SEO audit report into a targeted revision instruction block
+    for the blog-writer agent. Only checks that actually failed produce
+    guidance. The seoTitle check is intentionally excluded - it is soft-scored
+    and the title is taken verbatim from the topics sheet, so it can never on
+    its own push the score below the pass threshold.
+
+    Returns an empty string when nothing actionable remains, in which case the
+    caller should stop retrying.
+    """
+    details = report.get("details", {})
+    primary_kw = targets.get("primary_keyword", "")
+    min_kw = targets.get("target_keyword_count", 5)
+    fixes = []
+
+    kw = details.get("keyword_density", {})
+    if kw.get("score", 1) == 0:
+        found = re.search(r"Found (\d+)", kw.get("msg", ""))
+        n = int(found.group(1)) if found else 0
+        need = max(min_kw - n, 1)
+        fixes.append(
+            f'KEYWORD DENSITY: The exact phrase "{primary_kw}" currently appears '
+            f'{n} time(s) in the body but MUST appear at least {min_kw} times. '
+            f'Add {need} more occurrence(s) of the exact phrase "{primary_kw}" '
+            f'(verbatim, not a paraphrase), distributed naturally - e.g. one in the '
+            f'introduction, one in a middle body section, one in the conclusion, and '
+            f'one inside an FAQ question or answer. Do not bold or italicize them and '
+            f'do not stack them all in one section.'
+        )
+
+    sec = details.get("required_sections", {})
+    if sec.get("score", 1) == 0:
+        msg = sec.get("msg", "")
+        if "FAQ" in msg:
+            fixes.append('REQUIRED SECTION: Add a "## FAQ" section with at least 3 question/answer pairs near the end of the post.')
+        if "Read More" in msg:
+            fixes.append('REQUIRED SECTION: Add a "## Read More" section listing 3-5 relative links to related articles.')
+
+    code = details.get("code_wrapper", {})
+    if code.get("score", 1) == 0:
+        fixes.append(
+            'CODE WRAPPER: Wrap the single complete, runnable code example exactly once '
+            'with "<!--[COMPLETE_CODE_SNIPPET_START]-->" on the line before the opening '
+            'code fence and "<!--[COMPLETE_CODE_SNIPPET_END]-->" on the line after the '
+            'closing code fence.'
+        )
+
+    wc = details.get("word_count", {})
+    if wc.get("score", 1) == 0:
+        m = re.search(r"Min: (\d+)", wc.get("msg", ""))
+        floor = m.group(1) if m else str(targets.get("min_words", 900))
+        fixes.append(
+            f'WORD COUNT: The post is below the minimum. Expand the body with genuinely '
+            f'useful detail (deeper code explanation, prerequisites, caveats, richer FAQ '
+            f'answers) until it is at least {floor} words. Do not pad with filler.'
+        )
+
+    meta = details.get("meta_description", {})
+    if meta.get("score", 1) == 0:
+        fixes.append(
+            'META DESCRIPTION: Rewrite the frontmatter description to be between 140 and '
+            '160 characters, counting every character including spaces.'
+        )
+
+    if not fixes:
+        return ""
+
+    numbered = "\n".join(f"{i}. {f}" for i, f in enumerate(fixes, 1))
+    return (
+        "===============================================================================\n"
+        "SEO REVISION REQUIRED - FIX THE FOLLOWING BEFORE RETURNING\n"
+        "===============================================================================\n"
+        "The previous draft failed the SEO audit. Produce a corrected version of the "
+        "SAME post that keeps all existing structure, headings, links and code, and "
+        "changes ONLY what is needed to resolve these issues:\n\n"
+        f"{numbered}\n\n"
+        "Return the COMPLETE corrected post (frontmatter + body). Do not add commentary."
+    )
 
 class BlogOrchestrator: 
     def __init__(self, brand="aspose.com", agent_owner="Muhammad Mustafa", run_env=None):
@@ -209,15 +296,19 @@ class BlogOrchestrator:
             print(f"📐 Skeleton: {' -> '.join(layout_choice.skeleton())}", flush=True)
             # ─────────────────────────────────────────────────────────────────
 
-            # ── Code snippet generation: single source-of-truth code, up to  ──
-            # ── 3 retries. The whole post is built around this snippet, so  ──
-            # ── a total failure here aborts the run rather than falling     ──
-            # ── back to the writer inventing code inline.                   ──
-            print("💻 Generating source-of-truth code snippet...", flush=True)
-            generated_code = await generate_code_snippet(
+            # ── Code snippet: single source-of-truth code. Tries a verified  ──
+            # ── example from the product's Example-Agent repo first, then   ──
+            # ── falls back to LLM generation (no repo / no verified match / ──
+            # ── retrieval error). The whole post is built around this       ──
+            # ── snippet, so a total failure - retrieval AND generation -    ──
+            # ── aborts the run rather than letting the writer invent code.  ──
+            print("💻 Obtaining source-of-truth code snippet...", flush=True)
+            generated_code = await get_code_snippet(
+                brand=self.brand,
                 topic=post_topic,
                 primary_keyword=f_keywords[0],
                 platform=platform,
+                product_name=product_name,
                 context=context,
                 outline=blog_outline,
                 is_cloud=isCloud,
@@ -225,7 +316,7 @@ class BlogOrchestrator:
                 metrics=self.metrics,
             )
             if not generated_code:
-                message = "Code snippet generation failed after 3 attempts. Aborting blog generation."
+                message = "Code snippet retrieval and generation both failed. Aborting blog generation."
                 print(f"❌ {message}", flush=True)
                 self.metrics.record_failure(message)
                 self.metrics.end_job()
@@ -285,31 +376,73 @@ class BlogOrchestrator:
             # ─────────────────────────────────────────────────────────────────
             # ════════════════════════════════════════════════════════════════════
 
-            # Validate and fix if needed
-            fixed_content, was_fixed = await validate_and_fix_meta_description(result.final_output, metrics=self.metrics)
-            print(f"[METRICS DEBUG] After meta_description => api_call_count: {self.metrics.api_call_count}, token_usage: {self.metrics.token_usage['total_tokens']}", flush=True)
-            
-            if was_fixed:
-                print(f"✅ Meta description was corrected and is now valid (140-160 chars)", flush=True)
-                result.final_output = fixed_content
-            else:
-                print(f"✅ Meta description is already valid", flush=True)
-            
-            print(f"Meta description check done")
-            result.final_output = clean_ai_generated_markdown(result.final_output)
-            print(f"clean_ai_generated_markdown done ")
-            
-            result.final_output = validate_markdown_links(result.final_output)
-            print(f"validate_markdown_links done ")
-            print(f" Content Generated, Performing SEO Audit Now --", flush=True)
-
             targets = {
                 "primary_keyword": f_keywords[0],
                 "target_keyword_count": 5,
                 "min_words": settings.NUMBER_OF_BLOG_WORDS
             }
-            report = validate_seo_content(result.final_output, targets)
-            print(f" Audit completed -- {report}", flush=True)
+
+            async def finalize_and_audit(content: str):
+                """Strip any pre-frontmatter preamble, fix the meta description,
+                clean up the markdown, then run the SEO audit."""
+                content = strip_pre_frontmatter_preamble(content)
+                fixed, was_fixed = await validate_and_fix_meta_description(content, metrics=self.metrics)
+                if was_fixed:
+                    print(f"✅ Meta description was corrected and is now valid (140-160 chars)", flush=True)
+                    content = fixed
+                content = clean_ai_generated_markdown(content)
+                content = validate_markdown_links(content)
+                return content, validate_seo_content(content, targets)
+
+            # Validate and fix if needed
+            result.final_output, report = await finalize_and_audit(result.final_output)
+            print(f"[METRICS DEBUG] After meta_description => api_call_count: {self.metrics.api_call_count}, token_usage: {self.metrics.token_usage['total_tokens']}", flush=True)
+            print(f" Content Generated, SEO Audit completed -- {report}", flush=True)
+
+            # ── Bounded SEO revision loop ────────────────────────────────────
+            # When the audit reports REVISION_NEEDED, feed the failed checks
+            # back to the writer as targeted fix instructions and regenerate,
+            # up to MAX_SEO_REVISIONS times, before giving up on the run.
+            revision_attempt = 0
+            while report.get("status") != "PASS" and revision_attempt < MAX_SEO_REVISIONS:
+                revision_brief = build_seo_revision_brief(report, targets)
+                if not revision_brief:
+                    print("ℹ️  No actionable SEO fixes to feed back; stopping revision loop.", flush=True)
+                    break
+
+                revision_attempt += 1
+                print(
+                    f"🔁 SEO audit {report.get('status')} (score={report.get('score')}). "
+                    f"Revision attempt {revision_attempt}/{MAX_SEO_REVISIONS}...",
+                    flush=True,
+                )
+
+                revision_context = (
+                    "Below is the current blog post draft. Revise it per the SEO "
+                    "revision requirements in your instructions and return the "
+                    "COMPLETE corrected post (frontmatter + body) with nothing else.\n\n"
+                    f"{result.final_output}"
+                )
+                rev_result = await llm_service.run_agent(
+                    instructions=instructions + "\n\n" + revision_brief,
+                    context=revision_context,
+                    agent_name="blog-writer-revision",
+                    temperature=0.4,
+                    max_turns=10,
+                    max_tokens=16000,
+                )
+                if not rev_result or not rev_result.final_output:
+                    print("⚠️  Revision returned empty output; keeping previous draft.", flush=True)
+                    break
+
+                self.metrics.record_llm_usage(
+                    input_tokens=rev_result.token_usage["input_tokens"],
+                    output_tokens=rev_result.token_usage["output_tokens"],
+                    caller="blog-writer-revision",
+                )
+                result.final_output, report = await finalize_and_audit(rev_result.final_output)
+                print(f" Re-audit after revision {revision_attempt} -- {report}", flush=True)
+            # ────────────────────────────────────────────────────────────────
 
             if report.get("status") != "PASS":
                 # Content failed its own SEO audit (e.g. too short, missing
@@ -318,11 +451,16 @@ class BlogOrchestrator:
                 # which previously crashed downstream with a raw KeyError on
                 # blog_post_metadata["summary"] instead of just skipping this
                 # run, same as the empty-LLM-output case above.
-                print(f"⚠️  SEO audit did not pass (status={report.get('status')}, score={report.get('score')}). Skipping this run.", flush=True)
+                print(
+                    f"⚠️  SEO audit did not pass after {revision_attempt} revision attempt(s) "
+                    f"(status={report.get('status')}, score={report.get('score')}). Skipping this run.",
+                    flush=True,
+                )
                 return {
                     "status": "skipped",
                     "message": f"SEO audit failed: {report.get('status')}",
                     "report": report,
+                    "revision_attempts": revision_attempt,
                 }
 
             blog_post_metadata = extract_blog_metadata(result.final_output)
@@ -532,13 +670,16 @@ class BlogOrchestrator:
             print(f"📐 Layout: {layout_choice.name} (reason: {layout_choice.reason})", flush=True)
             print(f"📐 Skeleton: {' -> '.join(layout_choice.skeleton())}", flush=True)
 
-            # ── Code snippet generation: same source-of-truth step and     ──
-            # ── abort-on-total-failure contract as the automated flow.     ──
-            print("💻 Generating source-of-truth code snippet...", flush=True)
-            generated_code = await generate_code_snippet(
+            # ── Code snippet: verified repo example first, LLM generation   ──
+            # ── as fallback - same source-of-truth step and abort-on-      ──
+            # ── total-failure contract as the automated flow.              ──
+            print("💻 Obtaining source-of-truth code snippet...", flush=True)
+            generated_code = await get_code_snippet(
+                brand=self.brand,
                 topic=post_topic,
                 primary_keyword=f_keywords[0],
                 platform=platform,
+                product_name=product_name,
                 context=context,
                 outline=blog_outline,
                 is_cloud=isCloud,
@@ -546,7 +687,7 @@ class BlogOrchestrator:
                 metrics=self.metrics,
             )
             if not generated_code:
-                message = "Code snippet generation failed after 3 attempts. Aborting blog generation."
+                message = "Code snippet retrieval and generation both failed. Aborting blog generation."
                 print(f"❌ {message}", flush=True)
                 self.metrics.record_failure(message)
                 self.metrics.end_job()
@@ -597,6 +738,8 @@ class BlogOrchestrator:
                 output_tokens=result.token_usage["output_tokens"],
                 caller="blog-writer-agent"
             )
+
+            result.final_output = strip_pre_frontmatter_preamble(result.final_output)
 
             fixed_content, was_fixed = await validate_and_fix_meta_description(result.final_output, metrics=self.metrics)
             if was_fixed:

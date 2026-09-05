@@ -1050,8 +1050,10 @@ The SECONDARY keywords are all remaining keywords in the list: {secondary_keywor
 
 **MANDATORY PRIMARY KEYWORD PLACEMENT (STRICTLY ENFORCED):**
 
-The primary keyword MUST appear AT LEAST 3-5 times across the blog body content,
-EXCLUDING frontmatter fields. Occurrences must be distributed across specific sections:
+The EXACT primary keyword phrase MUST appear AT LEAST 5 times across the blog
+body content (verbatim, not paraphrased). This is a hard requirement - a draft
+with fewer than 5 occurrences fails the SEO audit. Occurrences must be
+distributed across specific sections, NOT stacked in one place:
 
 | # | Location | Requirement |
 |---|----------|-------------|
@@ -1059,12 +1061,13 @@ EXCLUDING frontmatter fields. Occurrences must be distributed across specific se
 | 2 | Middle of the blog body | Primary keyword MUST appear at least once within the middle body sections |
 | 3 | Conclusion section | Primary keyword MUST appear at least once in the Conclusion |
 | 4 | FAQs section | Primary keyword MUST appear at least once in the FAQs |
-| 5 | Optional additional occurrence | A 5th occurrence anywhere else is encouraged |
+| 5 | One more body location | A 5th occurrence MUST appear somewhere else in the body (a step description, a section intro, etc.) |
 
 **PRIMARY KEYWORD DENSITY RULE:**
-- Target density: 1% of total blog word count
-- Formula: (Total Word Count / 100) = Target minimum occurrences
-- NEVER pad keyword usage artificially
+- Minimum: 5 verbatim occurrences of the primary keyword phrase in the body
+- Also target ~1% density: (Total Word Count / 100) = additional occurrences if the post is long
+- NEVER pad keyword usage artificially or force it awkwardly - reword the
+  surrounding sentence so the exact phrase reads naturally
 
 **PLACEMENT RULES:**
 - NEVER surround the primary keyword with asterisks, bold, or italics
@@ -1179,7 +1182,8 @@ Before finalizing, verify:
 - PRIMARY KEYWORD - Occurrence 2: present in the middle body sections?
 - PRIMARY KEYWORD - Occurrence 3: present in the Conclusion section?
 - PRIMARY KEYWORD - Occurrence 4: present in at least one FAQ question or answer?
-- PRIMARY KEYWORD - Total body occurrences (excluding frontmatter): at least 3, ideally 4-5?
+- PRIMARY KEYWORD - Occurrence 5: present in one more distinct body location?
+- PRIMARY KEYWORD - Total verbatim body occurrences (excluding frontmatter): AT LEAST 5? (hard SEO-audit requirement)
 - LONG-TAIL KEYWORDS: At least 2-3 phrases from the long-tail list used naturally in the body?
 - SEMANTIC KEYWORDS: Most semantic/LSI terms appear at least once naturally in the body?
 - FINAL LINK SCAN: Have you checked every single link follows [text](url) with no space between ] and (?

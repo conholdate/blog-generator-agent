@@ -1491,6 +1491,75 @@ def remove_all_fancy_punctuation_with_tracking(content: str) -> tuple[str, dict,
     return cleaned_content, stats, all_replacements
 
 
+_FRONTMATTER_DELIM_RE = re.compile(r'^-{3}\s*$')
+_FENCE_LINE_RE = re.compile(r'^```')
+_YAML_KEY_RE = re.compile(r'^[A-Za-z_][\w-]*\s*:\s')
+
+
+def strip_pre_frontmatter_preamble(content: str, verbose: bool = True) -> str:
+    """
+    Drop anything the writer LLM printed before the Hugo frontmatter block -
+    e.g. a leaked internal "**Heading Plan**" scratchpad from the prompt's
+    STEP 0 heading-scan instruction. Hugo frontmatter MUST start on the
+    file's first non-blank line; any preamble ahead of the opening ``---``
+    breaks frontmatter parsing for the whole post (Hugo fails the build or
+    renders the raw text, and this pipeline's own SEO audit/metadata
+    extraction silently sees an empty frontmatter dict too).
+
+    Conservative by design - only strips when it can confirm a real
+    frontmatter block exists: an opening ``---``, a matching closing ``---``
+    within a couple hundred lines, a ``title:`` line plus at least one more
+    ``key: value`` line between them, and no code fence in the discarded
+    preamble (a ``---`` inside a code sample must never be mistaken for
+    frontmatter). Returns the content unchanged whenever any of that
+    doesn't hold, rather than guessing and risking real content loss.
+    """
+    lines = content.splitlines()
+
+    first_nonblank = next((i for i, ln in enumerate(lines) if ln.strip()), None)
+    if first_nonblank is None:
+        return content
+    if _FRONTMATTER_DELIM_RE.match(lines[first_nonblank].strip()):
+        return content  # already starts with frontmatter - nothing to do
+
+    open_idx = None
+    for i in range(first_nonblank, min(len(lines), first_nonblank + 120)):
+        if _FRONTMATTER_DELIM_RE.match(lines[i].strip()):
+            open_idx = i
+            break
+    if open_idx is None:
+        return content
+
+    preamble = lines[first_nonblank:open_idx]
+    if any(_FENCE_LINE_RE.match(ln.strip()) for ln in preamble):
+        return content  # a code fence before "---" - could be a real code sample, don't touch
+
+    close_idx = None
+    for i in range(open_idx + 1, min(len(lines), open_idx + 200)):
+        if _FRONTMATTER_DELIM_RE.match(lines[i].strip()):
+            close_idx = i
+            break
+    if close_idx is None:
+        return content
+
+    body_between = [ln.strip() for ln in lines[open_idx + 1:close_idx]]
+    has_title = any(re.match(r'^title\s*:\s', ln) for ln in body_between)
+    key_count = sum(1 for ln in body_between if _YAML_KEY_RE.match(ln))
+    if not has_title or key_count < 2:
+        return content  # doesn't look like real frontmatter - bail rather than guess
+
+    if verbose and preamble:
+        dropped = "\n".join(preamble).strip()
+        print(
+            f"⚠️  Dropped {len(preamble)} line(s) the writer printed before the frontmatter "
+            f"(leaked internal text ahead of the '---' block):",
+            file=sys.stderr,
+        )
+        print(f"   {dropped[:200]}{'...' if len(dropped) > 200 else ''}", file=sys.stderr)
+
+    return "\n".join(lines[open_idx:])
+
+
 def clean_ai_generated_markdown(content: str, verbose: bool = True) -> str:
     """
     Main function to clean AI-generated markdown content.
