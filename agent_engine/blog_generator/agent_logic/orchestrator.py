@@ -8,9 +8,9 @@ from tools.mcp_tools import generate_markdown_file, fetch_category_related_artic
 from utils import prompts
 from utils.seo_validator import validate_seo_content, validate_and_fix_meta_description, validate_and_fix_seo_title
 from utils.file_format_mappings import FILE_FORMAT_MAPPINGS, BASE_URL
-from utils.helpers import mark_topic_as_generated, prepare_context, get_productInfo, get_topic_by_index, inject_file_format_links, slugify, normalize_case_preserve_formats_in_keywords, clean_ai_generated_markdown, validate_markdown_links, capitalize_file_formats_for_title, setup_logger, generate_tags_with_llm, save_blog_metadata_to_sheet, extract_blog_metadata, get_topic_from_sheet, get_next_tab, extract_product_names, get_recent_layouts, convert_sheet_row_to_file_format, update_last_processed_product
+from utils.helpers import mark_topic_as_generated, prepare_context, get_productInfo, get_topic_by_index, inject_file_format_links, slugify, normalize_case_preserve_formats_in_keywords, clean_ai_generated_markdown, strip_pre_frontmatter_preamble, validate_markdown_links, capitalize_file_formats_for_title, setup_logger, generate_tags_with_llm, save_blog_metadata_to_sheet, extract_blog_metadata, get_topic_from_sheet, get_next_tab, extract_product_names, get_recent_layouts, convert_sheet_row_to_file_format, update_last_processed_product
 from utils.layouts import select_layout
-from utils.code_snippet import generate_code_snippet
+from utils.code_source import get_code_snippet
 from utils.metricsRecorder import MetricsRecorder
 from services.LLMservice import llm_service
 import json
@@ -296,15 +296,19 @@ class BlogOrchestrator:
             print(f"📐 Skeleton: {' -> '.join(layout_choice.skeleton())}", flush=True)
             # ─────────────────────────────────────────────────────────────────
 
-            # ── Code snippet generation: single source-of-truth code, up to  ──
-            # ── 3 retries. The whole post is built around this snippet, so  ──
-            # ── a total failure here aborts the run rather than falling     ──
-            # ── back to the writer inventing code inline.                   ──
-            print("💻 Generating source-of-truth code snippet...", flush=True)
-            generated_code = await generate_code_snippet(
+            # ── Code snippet: single source-of-truth code. Tries a verified  ──
+            # ── example from the product's Example-Agent repo first, then   ──
+            # ── falls back to LLM generation (no repo / no verified match / ──
+            # ── retrieval error). The whole post is built around this       ──
+            # ── snippet, so a total failure - retrieval AND generation -    ──
+            # ── aborts the run rather than letting the writer invent code.  ──
+            print("💻 Obtaining source-of-truth code snippet...", flush=True)
+            generated_code = await get_code_snippet(
+                brand=self.brand,
                 topic=post_topic,
                 primary_keyword=f_keywords[0],
                 platform=platform,
+                product_name=product_name,
                 context=context,
                 outline=blog_outline,
                 is_cloud=isCloud,
@@ -312,7 +316,7 @@ class BlogOrchestrator:
                 metrics=self.metrics,
             )
             if not generated_code:
-                message = "Code snippet generation failed after 3 attempts. Aborting blog generation."
+                message = "Code snippet retrieval and generation both failed. Aborting blog generation."
                 print(f"❌ {message}", flush=True)
                 self.metrics.record_failure(message)
                 self.metrics.end_job()
@@ -379,7 +383,9 @@ class BlogOrchestrator:
             }
 
             async def finalize_and_audit(content: str):
-                """Run meta-description fix + markdown cleanup, then SEO audit."""
+                """Strip any pre-frontmatter preamble, fix the meta description,
+                clean up the markdown, then run the SEO audit."""
+                content = strip_pre_frontmatter_preamble(content)
                 fixed, was_fixed = await validate_and_fix_meta_description(content, metrics=self.metrics)
                 if was_fixed:
                     print(f"✅ Meta description was corrected and is now valid (140-160 chars)", flush=True)
@@ -664,13 +670,16 @@ class BlogOrchestrator:
             print(f"📐 Layout: {layout_choice.name} (reason: {layout_choice.reason})", flush=True)
             print(f"📐 Skeleton: {' -> '.join(layout_choice.skeleton())}", flush=True)
 
-            # ── Code snippet generation: same source-of-truth step and     ──
-            # ── abort-on-total-failure contract as the automated flow.     ──
-            print("💻 Generating source-of-truth code snippet...", flush=True)
-            generated_code = await generate_code_snippet(
+            # ── Code snippet: verified repo example first, LLM generation   ──
+            # ── as fallback - same source-of-truth step and abort-on-      ──
+            # ── total-failure contract as the automated flow.              ──
+            print("💻 Obtaining source-of-truth code snippet...", flush=True)
+            generated_code = await get_code_snippet(
+                brand=self.brand,
                 topic=post_topic,
                 primary_keyword=f_keywords[0],
                 platform=platform,
+                product_name=product_name,
                 context=context,
                 outline=blog_outline,
                 is_cloud=isCloud,
@@ -678,7 +687,7 @@ class BlogOrchestrator:
                 metrics=self.metrics,
             )
             if not generated_code:
-                message = "Code snippet generation failed after 3 attempts. Aborting blog generation."
+                message = "Code snippet retrieval and generation both failed. Aborting blog generation."
                 print(f"❌ {message}", flush=True)
                 self.metrics.record_failure(message)
                 self.metrics.end_job()
@@ -729,6 +738,8 @@ class BlogOrchestrator:
                 output_tokens=result.token_usage["output_tokens"],
                 caller="blog-writer-agent"
             )
+
+            result.final_output = strip_pre_frontmatter_preamble(result.final_output)
 
             fixed_content, was_fixed = await validate_and_fix_meta_description(result.final_output, metrics=self.metrics)
             if was_fixed:

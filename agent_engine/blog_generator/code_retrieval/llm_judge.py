@@ -14,7 +14,6 @@ is actually on-topic, and a genuine "none of these fit" judgment instead of
 a numeric threshold.
 """
 import asyncio
-import difflib
 import re
 import sys
 import os
@@ -23,11 +22,9 @@ import time
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 from services.LLMservice import llm_service  # noqa: E402
 
-_FILE_RE = re.compile(r"FILE:\s*(.+)", re.IGNORECASE)
+_INDEX_RE = re.compile(r"FILE_INDEX:\s*[\[\*`]*\s*(\d+|NONE)", re.IGNORECASE)
 _REASON_RE = re.compile(r"REASON:\s*(.+)", re.IGNORECASE)
 _VERIFIED_RE = re.compile(r"VERIFIED:\s*(YES|NO)", re.IGNORECASE)
-
-CLOSE_MATCH_CUTOFF = 0.9  # conservative - a near-miss typo/misremembering, not a different file
 
 MAX_LLM_RETRIES = 3
 _EMPTY_USAGE = {"input_tokens": 0, "output_tokens": 0, "total_tokens": 0}
@@ -54,29 +51,28 @@ async def _complete_with_retry(prompt: str, temperature: float, max_tokens: int,
     return None, {**_EMPTY_USAGE, "error": last_error}
 
 
-def _closest_match(raw_file: str, paths: list[str]) -> str | None:
-    """Confirmed real case: the LLM correctly identified and described a file
-    but misremembered its exact name by one word out of a ~1,800-file list
-    it was reading from, not writing itself - exact string matching silently
-    turned a correct pick into a false NO_MATCH. A high cutoff keeps this
-    from ever accepting a genuinely different file, only a near-identical
-    misremembering of the real one."""
-    matches = difflib.get_close_matches(raw_file, paths, n=1, cutoff=CLOSE_MATCH_CUTOFF)
-    return matches[0] if matches else None
-
-
-def _build_pick_prompt(topic: str, primary_keyword: str, platform: str, product_name: str, paths: list[str]) -> str:
+def _build_pick_prompt(topic: str, primary_keyword: str, platform: str, product_name: str,
+                       paths: list[str], feedback: str | None = None) -> str:
     keyword_line = f"\nPrimary keyword: {primary_keyword}" if primary_keyword else ""
-    file_list = "\n".join(paths)
+    # Number every file. The model answers with an index, never a typed path -
+    # copying an exact path out of a list of hundreds is where it used to
+    # hallucinate a plausible-but-nonexistent name (e.g. "...docx-default.cs"
+    # blended from a real "...doc-default.cs" plus the "-docx-" pattern), which
+    # a fuzzy string match then silently snapped onto a genuinely different
+    # file. An integer either indexes a real file or it doesn't.
+    file_list = "\n".join(f"[{i}] {p}" for i, p in enumerate(paths))
+    feedback_block = f"\n{feedback}\n" if feedback else ""
     return f"""You are selecting the single best-matching {platform} code example file for a blog post, from a real repository of {product_name} code examples.
 
 Topic: {topic}{keyword_line}
-
-Below is the complete list of available example files (relative paths, category/filename.cs - the filename itself describes what the example does). Pick the ONE file that most directly and specifically addresses the topic.
+{feedback_block}
+Below is the complete list of available example files, each with an index in brackets (relative paths, category/filename.cs - the filename itself describes what the example does). Pick the ONE file that most directly and specifically addresses the topic.
 
 Judge carefully:
 - Pay close attention to DIRECTION - "convert A to B" is NOT satisfied by a file that converts B to A.
+- Pay close attention to FILE FORMAT - "doc" and "docx" are different formats, and so are "xls"/"xlsx" and "ppt"/"pptx" (an old binary format vs a modern one, produced by different code). If the topic asks for one and an example for that exact format is in the list, pick it; only fall back to the other variant if no exact-format example exists.
 - Pay close attention to WHAT is being acted on - a file about a chart, shape, or image is not the same as one about the whole document/presentation, unless the topic is specifically about that narrower thing.
+- Prefer the most FOCUSED example - one that does exactly what the topic asks and nothing more. When several files perform the topic's task, one that also does extra unrelated work (e.g. also zips the result, also uploads it, also converts it onward to a third format, also extracts images) is a weaker pick than one that just does the task. Choose a combined/extra-steps example only if no focused one exists.
 - A file with generic-sounding words in common with the topic is not automatically a match - judge the actual described action, not just word overlap.
 - If NONE of the files genuinely address this topic, say NONE. It is much better to say NONE than to force a weak or tangential match.
 
@@ -84,7 +80,7 @@ Files:
 {file_list}
 
 Respond in exactly this format and nothing else:
-FILE: <exact path copied from the list above, or NONE>
+FILE_INDEX: <the bracketed number of your chosen file, or NONE>
 REASON: <one sentence explaining your choice>"""
 
 
@@ -107,7 +103,7 @@ Judge the code's real behavior against the topic - not against the file's own he
 
 Do NOT judge whether the code is correct, whether it compiles, whether it calls the SDK's API "properly," or whether it would work as written - that is explicitly out of scope here and none of this repo's files have been executed to confirm. Your only job is topical relevance: does this code's evident intent and operation - reading it as any developer would - address what the topic is asking for. If it clearly attempts the right operation (e.g. calling a converter method with the right source and target format), that is a match even if you're not certain the exact API call is used with textbook precision.
 
-If the topic names multiple near-synonymous variants of the same underlying thing (e.g. "PPT/PPTX", "JPG/JPEG"), treat an example handling any one of them as satisfying all of them - these SDKs load/save format variants through the same API, so a file hardcoding one variant's extension in a path string is not a real capability gap. Only reject on this basis if there's a genuine, substantive difference the topic specifically calls out (e.g. two formats that require different conversion logic, not just a different file extension).
+If the topic names two interchangeable spellings of ONE format (e.g. "JPG/JPEG"), an example handling either satisfies it - that is a naming difference, not a format difference. But "doc" vs "docx", "xls" vs "xlsx", and "ppt" vs "pptx" are DIFFERENT formats produced by different code paths - an example that outputs one does NOT satisfy a topic asking for the other. When the topic asks for a specific one of these, reject an example for the other variant.
 
 Respond in exactly this format and nothing else:
 VERIFIED: <YES or NO>
@@ -123,15 +119,26 @@ REASON: <one sentence explaining your judgment>"""
 CHUNK_SIZE = 1500
 
 
-async def pick_file(topic: str, primary_keyword: str, platform: str, product_name: str, paths: list[str]) -> dict:
+async def pick_file(topic: str, primary_keyword: str, platform: str, product_name: str, paths: list[str],
+                    exclude: set[str] | None = None, feedback: str | None = None) -> dict:
     """Chunks the file list when it's too large for one call - every file
     still gets read by the LLM, just across multiple calls instead of one,
     rather than pre-filtering candidates with a separate (unverified) scoring
-    step. Each chunk's winner, if any, goes to one final tie-break call."""
+    step. Each chunk's winner, if any, goes to one final tie-break call.
+
+    `exclude` drops files already tried and rejected on a re-pick;
+    `feedback` is a note (why the last pick failed) passed to the LLM so the
+    retry is an informed second opinion, not a blind repeat."""
+    if exclude:
+        paths = [p for p in paths if p not in exclude]
+    if not paths:
+        return {"file": None, "raw_file": None, "reason": "no candidate files left after excluding rejected picks",
+                "token_usage": {"input_tokens": 0, "output_tokens": 0, "total_tokens": 0}}
+
     if len(paths) <= CHUNK_SIZE:
         print(f"🔎 Stage 1: asking the LLM to pick from {len(paths)} files...", flush=True)
         start = time.monotonic()
-        result = await _pick_from_list(topic, primary_keyword, platform, product_name, paths)
+        result = await _pick_from_list(topic, primary_keyword, platform, product_name, paths, feedback)
         print(f"🔎 Stage 1 done in {time.monotonic() - start:.1f}s", flush=True)
         return result
 
@@ -142,7 +149,7 @@ async def pick_file(topic: str, primary_keyword: str, platform: str, product_nam
     for i, chunk in enumerate(chunks, 1):
         print(f"   chunk {i}/{len(chunks)} ({len(chunk)} files)...", flush=True)
         chunk_start = time.monotonic()
-        result = await _pick_from_list(topic, primary_keyword, platform, product_name, chunk)
+        result = await _pick_from_list(topic, primary_keyword, platform, product_name, chunk, feedback)
         elapsed = time.monotonic() - chunk_start
         if result["file"]:
             print(f"   chunk {i}/{len(chunks)} candidate: {result['file']} ({elapsed:.1f}s)", flush=True)
@@ -159,18 +166,19 @@ async def pick_file(topic: str, primary_keyword: str, platform: str, product_nam
     print(f"🔎 Stage 1: tie-break among {len(chunk_picks)} chunk winners...", flush=True)
     tie_break_start = time.monotonic()
     result = await _pick_from_list(
-        topic, primary_keyword, platform, product_name, [p["file"] for p in chunk_picks]
+        topic, primary_keyword, platform, product_name, [p["file"] for p in chunk_picks], feedback
     )
     print(f"🔎 Tie-break done in {time.monotonic() - tie_break_start:.1f}s", flush=True)
     return result
 
 
-async def _pick_from_list(topic: str, primary_keyword: str, platform: str, product_name: str, paths: list[str]) -> dict:
-    prompt = _build_pick_prompt(topic, primary_keyword, platform, product_name, paths)
+async def _pick_from_list(topic: str, primary_keyword: str, platform: str, product_name: str,
+                          paths: list[str], feedback: str | None = None) -> dict:
+    prompt = _build_pick_prompt(topic, primary_keyword, platform, product_name, paths, feedback)
     # gpt-oss (this deployment's model) is a reasoning model that thinks out
     # loud before answering - confirmed against a real repo (~2,300 candidate
     # files) that a small max_tokens truncates it mid-reasoning, before it
-    # reaches the FILE:/REASON: lines. That happened to still land on the
+    # reaches the FILE_INDEX:/REASON: lines. That happened to still land on the
     # right answer once (truncation occurred after ruling out the wrong
     # candidates) but is not reliable - a real match found later in its
     # reasoning would get cut off before being reported.
@@ -188,17 +196,28 @@ async def _pick_from_list(topic: str, primary_keyword: str, platform: str, produ
                 "reason": f"LLM call failed after {MAX_LLM_RETRIES} attempts: {usage.get('error')}",
                 "token_usage": usage}
 
-    file_match = _FILE_RE.search(text or "")
+    index_match = _INDEX_RE.search(text or "")
     reason_match = _REASON_RE.search(text or "")
-    raw_file = file_match.group(1).strip() if file_match else None
+    raw_answer = index_match.group(1).strip() if index_match else None
     reason = reason_match.group(1).strip() if reason_match else (text or "").strip()
 
     picked = None
-    if raw_file and raw_file.upper() != "NONE":
-        cleaned = raw_file.strip("`\"'")
-        picked = cleaned if cleaned in paths else _closest_match(cleaned, paths)
+    if raw_answer and raw_answer.upper() != "NONE":
+        idx = int(raw_answer)
+        if 0 <= idx < len(paths):
+            picked = paths[idx]
+        else:
+            reason = f"model returned out-of-range index {idx} (list has {len(paths)} files); treating as no match"
+    elif raw_answer is None:
+        # No parseable FILE_INDEX line - fall back to an exact path match only
+        # (never fuzzy): a reasoning model occasionally echoes the path instead.
+        for p in paths:
+            if p in (text or ""):
+                picked = p
+                break
 
-    return {"file": picked, "raw_file": raw_file, "reason": reason, "token_usage": usage}
+    return {"file": picked, "raw_file": raw_answer if raw_answer is not None else (text or "").strip()[:200],
+            "reason": reason, "token_usage": usage}
 
 
 async def verify_file(topic: str, primary_keyword: str, platform: str, path: str, content: str) -> dict:

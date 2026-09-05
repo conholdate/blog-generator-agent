@@ -15,6 +15,12 @@ from .llm_judge import pick_file, verify_file
 
 LANGUAGE_BY_EXTENSION = {".cs": "csharp"}
 
+# A Stage 1 pick that fails Stage 2 (or whose content can't be fetched) is not
+# the end - the file is excluded and the LLM is asked again, told why the last
+# pick was wrong. Capped so a topic with genuinely no good example still
+# terminates in an honest NO_MATCH rather than looping.
+MAX_PICK_ATTEMPTS = 3
+
 
 def _finish(result: dict, start: float) -> dict:
     elapsed = time.monotonic() - start
@@ -62,24 +68,48 @@ async def retrieve_example_llm(
         return _no_match(base, "no .cs example files found in this repo's tree", start)
     print(f"📥 {len(cs_paths)} .cs files found", flush=True)
 
-    pick = await pick_file(topic, primary_keyword, platform, product_name, cs_paths)
-    if not pick["file"]:
-        return _finish({**base, "repo": repo_ref.repository, "pick": pick, "verification": None,
-                         "selected": None, "confidence": "NO_MATCH",
-                         "reason": f"LLM found no matching file: {pick['reason']}"}, start)
+    excluded: set[str] = set()
+    feedback = None
+    pick = verification = None
+    verified_pick = verified_content = None
+    last_reason = None
 
-    content = client.get_small_file(repo_ref.repository, pick["file"], ref=repo_ref.branch)
-    if content is None:
-        return _finish({**base, "repo": repo_ref.repository, "pick": pick, "verification": None,
-                         "selected": None, "confidence": "NO_MATCH",
-                         "reason": f"could not fetch picked file content: {client.last_error}"}, start)
+    for attempt in range(1, MAX_PICK_ATTEMPTS + 1):
+        pick = await pick_file(topic, primary_keyword, platform, product_name, cs_paths,
+                               exclude=excluded, feedback=feedback)
+        if not pick["file"]:
+            return _finish({**base, "repo": repo_ref.repository, "pick": pick, "verification": verification,
+                             "selected": None, "confidence": "NO_MATCH",
+                             "reason": f"LLM found no matching file: {pick['reason']}"}, start)
 
-    verification = await verify_file(topic, primary_keyword, platform, pick["file"], content)
-    if not verification["verified"]:
+        content = client.get_small_file(repo_ref.repository, pick["file"], ref=repo_ref.branch)
+        if content is None:
+            last_reason = f"could not fetch '{pick['file']}': {client.last_error}"
+            print(f"↩️  {last_reason}", flush=True)
+            excluded.add(pick["file"])
+            feedback = (f"The file \"{pick['file']}\" could not be retrieved from the repo. "
+                        f"Choose a different file, or NONE.")
+            continue
+
+        verification = await verify_file(topic, primary_keyword, platform, pick["file"], content)
+        if verification["verified"]:
+            verified_pick, verified_content = pick, content
+            break
+
+        last_reason = verification["reason"]
+        excluded.add(pick["file"])
+        feedback = (f"Your previous pick \"{pick['file']}\" was rejected on verification: {last_reason} "
+                    f"Choose a different file that matches the topic more precisely, or NONE.")
+        if attempt < MAX_PICK_ATTEMPTS:
+            print(f"↩️  Re-picking ({attempt + 1}/{MAX_PICK_ATTEMPTS}) — previous pick rejected: {last_reason}",
+                  flush=True)
+
+    if verified_pick is None:
         return _finish({**base, "repo": repo_ref.repository, "pick": pick, "verification": verification,
                          "selected": None, "confidence": "NO_MATCH",
-                         "reason": f"LLM rejected its own pick on verification: {verification['reason']}"}, start)
+                         "reason": f"no verified match after {MAX_PICK_ATTEMPTS} picks; last: {last_reason}"}, start)
 
+    pick, content = verified_pick, verified_content
     category, _, filename = pick["file"].rpartition("/")
     ext = "." + filename.rsplit(".", 1)[-1]
     selected = {
