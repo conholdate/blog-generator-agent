@@ -117,7 +117,8 @@ async def retrieve_example_llm(
         "code": content,
         "source": {
             "brand": brand, "product": product_name, "platform": platform,
-            "repository": repo_ref.repository, "category": category or "(root)", "file": filename,
+            "repository": repo_ref.repository, "branch": repo_ref.branch,
+            "category": category or "(root)", "file": filename,
         },
     }
 

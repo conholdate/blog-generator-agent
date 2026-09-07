@@ -130,9 +130,12 @@ YOU MUST USE THESE EXACT TAGS:
 ```
 <!--[COMPLETE_CODE_SNIPPET_END]-->
 
-MANDATORY READER DISCLAIMER - include AFTER the complete code example:
+MANDATORY READER DISCLAIMER - include AFTER the complete code example, copied
+verbatim. If you name any specific file in the parenthetical, it MUST be a file
+name that actually appears in the code above - otherwise keep the phrasing
+generic as written below.
 
-> **Note:** This code example demonstrates the core functionality. Before using it in your project, make sure to update the file paths (`input.pdf`, `output.png`, etc.) to match your actual file locations, verify that all required dependencies are properly installed, and test thoroughly in your development environment. If you encounter any issues, please refer to the [official documentation](documentation_url) or reach out to the [support team](forums_url) for assistance.""",
+> **Note:** This code example demonstrates the core functionality. Before using it in your project, make sure to update any file paths and configuration values to match your actual environment, verify that all required dependencies are properly installed, and test thoroughly in your development environment. If you encounter any issues, please refer to the [official documentation](documentation_url) or reach out to the [support team](forums_url) for assistance.""",
 )
 
 CURL = Section(

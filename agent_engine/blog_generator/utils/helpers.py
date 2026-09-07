@@ -461,6 +461,50 @@ def generate_snippet_filename(title: str, language: str, section_heading: str, i
     
     return filename
 
+def build_repo_example_url(source: Optional[dict]) -> Optional[str]:
+    """GitHub URL for the retrieved example's category folder, or the repo root
+    when the example sits at the repo top level.
+
+    Returns None when the snippet was LLM-generated (no ``source``) or the
+    provenance lacks a repository - the caller then skips the reference line.
+    """
+    if not source:
+        return None
+    repository = (source.get("repository") or "").strip().strip("/")
+    if not repository:
+        return None
+    branch = (source.get("branch") or "main").strip() or "main"
+    category = (source.get("category") or "").strip().strip("/")
+    base = f"https://github.com/{repository}"
+    if category and category != "(root)":
+        return f"{base}/tree/{branch}/{category}"
+    return base
+
+
+def inject_repo_example_reference(content: str, generated_code: Optional[dict]) -> str:
+    """When the post's code snippet came from a verified Example-Agent repo, add
+    a one-line reference to that repo's examples right after the Complete Code
+    Example block.
+
+    No-op when the snippet was LLM-generated, when the reference is already
+    present, or when the COMPLETE_CODE_SNIPPET_END marker is missing.
+    """
+    source = (generated_code or {}).get("source")
+    url = build_repo_example_url(source)
+    if not url or url in content:
+        return content
+
+    m = re.search(r'<!--\s*\[COMPLETE_CODE_SNIPPET_END\]\s*-->', content)
+    if not m:
+        return content
+
+    reference = (
+        f"\n\nYou may find further relevant code samples in the "
+        f"[examples repository]({url}) on GitHub."
+    )
+    return content[:m.end()] + reference + content[m.end():]
+
+
 async def extract_all_complete_code_snippets(markdown_content: str, title: str = "",metrics=None) -> dict:
     """
     Extract ALL complete code snippets marked with COMPLETE_CODE_SNIPPET tags

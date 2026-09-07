@@ -132,7 +132,7 @@ async def get_code_snippet(
     or ``None`` only when BOTH retrieval and generation fail.
 
     ``source`` (present only for retrieved code) carries provenance:
-    ``{repository, category, file, brand, product, platform}``.
+    ``{repository, branch, category, file, brand, product, platform}``.
     """
     retrieved = await _try_retrieve(
         brand=brand,

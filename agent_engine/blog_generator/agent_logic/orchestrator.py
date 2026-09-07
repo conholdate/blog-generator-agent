@@ -8,7 +8,7 @@ from tools.mcp_tools import generate_markdown_file, fetch_category_related_artic
 from utils import prompts
 from utils.seo_validator import validate_seo_content, validate_and_fix_meta_description, validate_and_fix_seo_title
 from utils.file_format_mappings import FILE_FORMAT_MAPPINGS, BASE_URL
-from utils.helpers import mark_topic_as_generated, prepare_context, get_productInfo, get_topic_by_index, inject_file_format_links, slugify, normalize_case_preserve_formats_in_keywords, clean_ai_generated_markdown, strip_pre_frontmatter_preamble, validate_markdown_links, capitalize_file_formats_for_title, setup_logger, generate_tags_with_llm, save_blog_metadata_to_sheet, extract_blog_metadata, get_topic_from_sheet, get_next_tab, extract_product_names, get_recent_layouts, convert_sheet_row_to_file_format, update_last_processed_product
+from utils.helpers import mark_topic_as_generated, prepare_context, get_productInfo, get_topic_by_index, inject_file_format_links, inject_repo_example_reference, slugify, normalize_case_preserve_formats_in_keywords, clean_ai_generated_markdown, strip_pre_frontmatter_preamble, validate_markdown_links, capitalize_file_formats_for_title, setup_logger, generate_tags_with_llm, save_blog_metadata_to_sheet, extract_blog_metadata, get_topic_from_sheet, get_next_tab, extract_product_names, get_recent_layouts, convert_sheet_row_to_file_format, update_last_processed_product
 from utils.layouts import select_layout
 from utils.code_source import get_code_snippet
 from utils.metricsRecorder import MetricsRecorder
@@ -472,6 +472,10 @@ class BlogOrchestrator:
             gist_url = data.get("gist_url", "")
            
            
+            # Add a reference to the source Example-Agent repo when the code
+            # snippet was retrieved (no-op for LLM-generated snippets).
+            result.final_output = inject_repo_example_reference(result.final_output, generated_code)
+
             final_content = inject_file_format_links(result.final_output, FILE_FORMAT_MAPPINGS, BASE_URL)
             
             print(f" Generating markdown file")
@@ -763,6 +767,10 @@ class BlogOrchestrator:
             text_output = jistified.content[0].text
             data = json.loads(text_output)
             gist_url = data.get("gist_url", "")
+
+            # Add a reference to the source Example-Agent repo when the code
+            # snippet was retrieved (no-op for LLM-generated snippets).
+            result.final_output = inject_repo_example_reference(result.final_output, generated_code)
 
             final_content = inject_file_format_links(result.final_output, FILE_FORMAT_MAPPINGS, BASE_URL)
 
