@@ -505,6 +505,88 @@ def inject_repo_example_reference(content: str, generated_code: Optional[dict]) 
     return content[:m.end()] + reference + content[m.end():]
 
 
+# ── Unverified-code filter (retrieved snippets only) ──────────────────────────
+# The COMPLETE code example is a real, verified file. Every OTHER same-language
+# code block in the post is written by the LLM and can invent a non-existent API
+# (e.g. `workbook.DefaultFont = ...`). This drops any such block whose code uses
+# an identifier that never appears in the verified snippet. No-op for
+# LLM-generated snippets - there is no trusted baseline to check against.
+_IDENT_RE = re.compile(r"[A-Za-z_][A-Za-z0-9_]*")
+_STRING_LITERAL_RE = re.compile(r"\"(?:[^\"\\]|\\.)*\"|'(?:[^'\\]|\\.)*'")
+_LINE_COMMENT_RE = re.compile(r"(//|#).*$")
+_FENCE_RE = re.compile(r"(?m)^([ \t]*)```([^\n`]*)\n(.*?)^\1```[ \t]*$", re.DOTALL)
+_COMPLETE_BLOCK_RE = re.compile(
+    r"<!--\s*\[COMPLETE_CODE_SNIPPET_START\]\s*-->.*?"
+    r"<!--\s*\[COMPLETE_CODE_SNIPPET_END\]\s*-->",
+    re.DOTALL,
+)
+_EMPTY_WRAPPER_RE = re.compile(
+    r"<!--\s*\[CODE_SNIPPET_START\]\s*-->\s*<!--\s*\[CODE_SNIPPET_END\]\s*-->"
+)
+# Language keywords + throwaway identifiers that carry no API meaning.
+_CODE_STOPWORDS = {
+    "using", "namespace", "class", "struct", "interface", "enum", "public",
+    "private", "protected", "internal", "static", "void", "new", "var", "int",
+    "uint", "long", "ulong", "short", "double", "float", "decimal", "bool",
+    "string", "char", "byte", "sbyte", "object", "dynamic", "return", "if",
+    "else", "for", "foreach", "while", "do", "switch", "case", "default",
+    "break", "continue", "try", "catch", "finally", "throw", "null", "true",
+    "false", "this", "base", "const", "readonly", "async", "await", "in", "out",
+    "ref", "is", "as", "typeof", "nameof", "params", "yield", "lock", "get",
+    "set", "value", "import", "package", "from", "def", "self", "lambda", "none",
+    "and", "or", "not", "function", "let", "extends", "implements", "final",
+    "i", "j", "k", "e", "ex", "args", "arg", "ms", "fs", "sb",
+}
+
+
+def _api_tokens(text: str) -> set:
+    """Identifier tokens in ``text`` with strings, comments and keywords removed."""
+    text = _STRING_LITERAL_RE.sub("", text)
+    text = "\n".join(_LINE_COMMENT_RE.sub("", ln) for ln in text.splitlines())
+    return {t.lower() for t in _IDENT_RE.findall(text)} - _CODE_STOPWORDS
+
+
+def strip_unverified_code_blocks(content: str, generated_code: Optional[dict]) -> str:
+    """Remove same-language code blocks (other than the COMPLETE example) that
+    reference an identifier absent from the verified snippet. Retrieved snippets
+    only; returns ``content`` unchanged for generated code or on any missing input.
+    """
+    source = (generated_code or {}).get("source")
+    trusted = (generated_code or {}).get("code")
+    lang = (generated_code or {}).get("language", "").strip().lower()
+    if not source or not trusted or not lang:
+        return content
+
+    allowed = _api_tokens(trusted)
+
+    # Hide the COMPLETE block so the scan never touches it.
+    stash: list = []
+
+    def _hide(m):
+        stash.append(m.group(0))
+        return f"\x00{len(stash) - 1}\x00"
+
+    scan = _COMPLETE_BLOCK_RE.sub(_hide, content)
+
+    def _filter(m):
+        block_lang = m.group(2).strip().lower()
+        if block_lang != lang:
+            return m.group(0)
+        for raw in m.group(3).splitlines():
+            line = _LINE_COMMENT_RE.sub("", _STRING_LITERAL_RE.sub("", raw)).strip()
+            if not line or line in {"{", "}", "(", ")", "});", "};", ";"}:
+                continue
+            if _api_tokens(line) - allowed:
+                return ""  # drop the whole block - it contains unverified code
+        return m.group(0)
+
+    scan = _FENCE_RE.sub(_filter, scan)
+    scan = _EMPTY_WRAPPER_RE.sub("", scan)
+    scan = re.sub(r"\n{3,}", "\n\n", scan)
+    scan = re.sub(r"\x00(\d+)\x00", lambda m: stash[int(m.group(1))], scan)
+    return scan
+
+
 async def extract_all_complete_code_snippets(markdown_content: str, title: str = "",metrics=None) -> dict:
     """
     Extract ALL complete code snippets marked with COMPLETE_CODE_SNIPPET tags

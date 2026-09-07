@@ -332,10 +332,11 @@ CONFIGURATION = Section(
     optional_probability=0.55,
     spec="""**CONFIGURATION / OPTIONS SECTION**
 Show 2-4 useful options/parameters the reader can adjust for this task.
-Brief explanation per option, with a short code snippet where it helps
-(regular CODE_SNIPPET tags), consistent with the PROVIDED CODE block earlier
-in this prompt - do not invent a different implementation approach.
-Link API Reference for classes/properties mentioned.
+Brief explanation per option. Only include a code snippet (regular CODE_SNIPPET
+tags) for an option that is ALREADY used in the PROVIDED CODE block earlier in
+this prompt. For any other option, explain it in plain words and link the API
+Reference - do NOT write a snippet, an inline `code` span, or a parenthetical
+member name for it (see RULES FOR USING THIS CODE).
 """ + _CODE_TAG_REMINDER,
 )
 
@@ -350,7 +351,9 @@ OPTIMIZATION = Section(
     optional_probability=0.3,
     spec="""**PERFORMANCE / OPTIMIZATION SECTION**
 2-4 concrete, practical performance tips specific to this task (memory, batching,
-stream vs file, resolution/quality trade-offs). No generic advice. Code optional.""",
+stream vs file, resolution/quality trade-offs). No generic advice. Prefer prose;
+only show code that is copied from the PROVIDED CODE block, and never name a
+method/property/enum value that is not in it (see RULES FOR USING THIS CODE).""",
 )
 
 BEST_PRACTICES = Section(

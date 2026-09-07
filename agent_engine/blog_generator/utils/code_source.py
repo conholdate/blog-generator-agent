@@ -23,14 +23,15 @@ from utils.code_snippet import generate_code_snippet
 # ── Retrieved-code sanitizer ──────────────────────────────────────────────────
 # The Example-Agent repos carry machine-generated metadata inside the file's
 # leading comment block (Title / Keywords / Common Searches / Developer Intent /
-# Use Cases) and `(lifecycle rule: ...)` annotations inside inline comments -
-# scaffolding for the code-generation tooling, not for a blog reader. Strip it,
-# but NEVER touch a line of actual code: only pure `//` comment lines are ever
-# dropped or edited, and a final guard discards the whole result if the set of
-# non-comment code lines changed at all.
+# Use Cases / AI Prompts) and `(lifecycle rule: ...)` annotations inside inline
+# comments - scaffolding for the code-generation tooling, not for a blog reader.
+# `// Description:` is deliberately kept (it reads as a genuine one-line summary).
+# Strip the rest, but NEVER touch a line of actual code: only pure `//` comment
+# lines are ever dropped or edited, and a final guard discards the whole result
+# if the set of non-comment code lines changed at all.
 _COMMENT_LINE_RE = re.compile(r"^\s*//")
 _JUNK_LABEL_RE = re.compile(
-    r"^\s*//\s*(?:Title|Keywords|Common Searches|Developer Intent|Use Cases)\b\s*:",
+    r"^\s*//\s*(?:Title|Keywords|Common Searches|Developer Intent|Use Cases|AI Prompts)\b\s*:",
     re.IGNORECASE,
 )
 _DESC_RE = re.compile(r"^\s*//\s*Description\s*:\s*(.+?)\s*$", re.IGNORECASE)

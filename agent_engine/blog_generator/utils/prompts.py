@@ -287,9 +287,17 @@ RULES FOR USING THIS CODE:
    wrapped in COMPLETE_CODE_SNIPPET tags, with the mandatory intro sentence
    and disclaimer. Do not modify, shorten, rename variables, or rewrite it.
 2. Steps / Setup / Walkthrough / How the Code Works / Implementation /
-   Configuration sections: any short snippet shown MUST be excerpted
-   directly from the code above - same class/method names, same logic. Do
-   not invent alternate code that does the same thing a different way.
+   Configuration / Performance / Best Practices sections: any code you show -
+   whether a fenced snippet, an inline `code` span, or a parenthetical like
+   `(obj.Something = value)` - MUST be copied directly from the code above
+   (same class/method/property names, same logic). Do not invent alternate
+   code that does the same thing a different way.
+   You MUST NOT name a specific method, property, enum value or overload that
+   does not literally appear in the code above - not in a snippet, not inline,
+   not in prose, not in parentheses. You MAY mention a class/type name that is
+   not in the code and link its API Reference, but describe its behaviour only
+   in plain words, never with a concrete member name or assignment.
+   (Any unverified code snippet is removed automatically.)
 3. cURL Commands section: this is a SEPARATE REST API approach to the SAME
    task (same source/target file formats, same operation) - it is NOT a
    translation of the code above. Write idiomatic cURL calls for the
