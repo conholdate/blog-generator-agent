@@ -1,0 +1,72 @@
+name: Refresh Example-Repo Registry
+
+# Weekly scan of every aspose.com .NET product for a matching
+# `aspose-<slug>/agentic-net-examples` repo, refreshing
+# content/exampleRepos/aspose.com.json so the blog pipeline knows which
+# products have real code examples to retrieve.
+#
+# Runs a couple of hours after product_reconciler.yml (0 6 * * 6) so any
+# newly reconciled products are already in content/productsData.
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 8 * * 6" # Every Saturday, ~1:00 PM PKT
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+
+      - name: Install dependencies
+        run: python -m pip install --upgrade pip requests
+
+      - name: Scan for example repos
+        env:
+          REPO_PAT: ${{ secrets.REPO_PAT }}
+        run: |
+          cd agent_engine/blog_generator/code_retrieval
+          python build_registry.py aspose.com --summary-file="$GITHUB_WORKSPACE/registry_summary.md"
+
+      - name: Check for changes
+        id: diff
+        run: |
+          if git diff --quiet -- content/exampleRepos/aspose.com.json; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            echo "No registry changes this run."
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+            git diff --stat -- content/exampleRepos/aspose.com.json
+          fi
+
+      # Open a PR with the change — never pushed to main directly. A human
+      # reviews the diff and merges.
+      - name: Create Pull Request
+        if: steps.diff.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.REPO_PAT }}
+        run: |
+          git config --global user.email "action@github.com"
+          git config --global user.name "GitHub Action"
+
+          BRANCH_NAME="example-repos/aspose-com-${{ github.run_number }}"
+          git checkout -b "$BRANCH_NAME"
+          git add content/exampleRepos/aspose.com.json
+          git commit -m "Refresh example-repo registry for aspose.com [Run #${{ github.run_number }}]"
+          git push -u origin "$BRANCH_NAME"
+
+          gh pr create \
+            --title "Refresh example-repo registry for aspose.com (Run #${{ github.run_number }})" \
+            --body-file "$GITHUB_WORKSPACE/registry_summary.md" \
+            --base main \
+            --head "$BRANCH_NAME"
+
+      - name: No changes
+        if: steps.diff.outputs.changed != 'true'
+        run: echo "Registry already up to date — nothing to open a PR for."
