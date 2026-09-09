@@ -1,0 +1,337 @@
+name: Blog Request (aspose.cloud) — dashboard
+
+# Dashboard-driven blog requests for aspose.cloud only.
+#
+# This workflow is SEPARATE from aspose_cloud_agent.yml on purpose: the
+# scheduled cron and the workflow_dispatch form there are left completely
+# untouched. This file is inert until the dashboard sends a
+# `repository_dispatch` event of type `blog-request`, and it never auto-merges —
+# it opens a PR and stops for human review.
+#
+# client_payload fields: brand, product, platform, topic, outline, keywords,
+# layout, merge_with_serp, author, requested_by
+
+on:
+  repository_dispatch:
+    types: [blog-request]
+
+permissions:
+  contents: write
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    # Slice 1 handles aspose.cloud only. Requests for other brands are ignored
+    # until their own request workflows are added.
+    if: github.event.client_payload.brand == 'aspose.cloud'
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Cache pip packages
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+
+      - name: Remove any .env files that could interfere
+        run: |
+          find . -name ".env" -type f -delete
+          echo "Removed all .env files"
+
+      - name: Create Google service account key
+        run: |
+          mkdir -p keys
+          echo '${{ secrets.GOOGLE_SERVICE_ACCOUNT_KEY }}' > keys/sheet-reader-494108-bd5e61ef812c.json
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          cd agent_engine/blog_generator
+          pip install -r requirements.txt
+          cd ../../mcp-servers
+          pip install -r requirements.txt
+          cd ..
+
+      - name: Create runtime .env file with secrets
+        run: |
+          cat > .env << EOF
+          PROFESSIONALIZE_API_KEY_2=${{ secrets.PROFESSIONALIZE_API_KEY_2 }}
+          PROFESSIONALIZE_BASE_URL=${{ secrets.PROFESSIONALIZE_BASE_URL }}
+          PROFESSIONALIZE_LLM_MODEL=${{ secrets.PROFESSIONALIZE_LLM_MODEL }}
+          TOKEN_FOR_TEAM=${{ secrets.TOKEN_FOR_TEAM }}
+          METRICS_API_KEY=${{ secrets.METRICS_API_KEY }}
+          METRICS_API_URL=${{ vars.METRICS_API_URL }}
+          GOOGLE_SCRIPT_URL_FOR_TEAM=${{ vars.GOOGLE_SCRIPT_URL_FOR_TEAM }}
+          REPO_PAT=${{ secrets.GISTS_PAT_ASPOSE_CLOUD }}
+          GIST_NAME=${{ vars.ASPOSE_CLOUD_GIST }}
+          SPREADSHEET_ID_FOR_BLOGPOST_METADATA=${{ secrets.ASPOSE_CLOUD_SPREADSHEET_ID_FOR_BLOGPOST_METADATA }}
+          SPREADSHEET_ID_FOR_KEYWORDS=${{ secrets.ASPOSE_CLOUD_SPREADSHEET_ID_FOR_KEYWORDS }}
+          GOOGLE_KEY=sheet-reader-494108-bd5e61ef812c.json
+          CONSOLIDATED_SHEET_NAME_FOR_BLOGPOST_METADATA=Consolidated
+          EOF
+          echo ".env file created"
+
+      # ── Generate: always manual mode, values come from client_payload via ──
+      # ── env vars (never interpolated straight into the shell).            ──
+      - name: Generate Blog (manual mode from dashboard request)
+        id: generate_blog
+        env:
+          PRODUCT: ${{ github.event.client_payload.product }}
+          PLATFORM: ${{ github.event.client_payload.platform }}
+          TOPIC: ${{ github.event.client_payload.topic }}
+          OUTLINE: ${{ github.event.client_payload.outline }}
+          KEYWORDS: ${{ github.event.client_payload.keywords }}
+          LAYOUT: ${{ github.event.client_payload.layout }}
+          MERGE_SERP: ${{ github.event.client_payload.merge_with_serp }}
+          AUTHOR_INPUT: ${{ github.event.client_payload.author }}
+        run: |
+          cd agent_engine/blog_generator
+          echo "=== Starting blog generation (dashboard request) ==="
+
+          AUTHOR="${AUTHOR_INPUT:-Muhammad Mustafa}"
+          LAYOUT="${LAYOUT:-Auto (recommended)}"
+          MERGE_SERP="${MERGE_SERP:-false}"
+
+          if [ -z "$TOPIC" ] || [ -z "$PRODUCT" ] || [ -z "$PLATFORM" ]; then
+            echo "❌ Request requires topic, product, and platform."
+            exit 1
+          fi
+
+          echo "Brand:    aspose.cloud"
+          echo "Product:  $PRODUCT"
+          echo "Platform: $PLATFORM"
+          echo "Topic:    $TOPIC"
+          echo "Layout:   $LAYOUT"
+
+          python main.py \
+            --author "$AUTHOR" \
+            --brand "aspose.cloud" \
+            --product "$PRODUCT" \
+            --platform "$PLATFORM" \
+            --topic "$TOPIC" \
+            --outline "$OUTLINE" \
+            --keywords "$KEYWORDS" \
+            --merge-serp "$MERGE_SERP" \
+            --layout "$LAYOUT"
+
+          echo "✅ Blog generation completed"
+
+      - name: Read product name
+        id: read_product
+        run: |
+          if [ -f agent_engine/blog_generator/product_name.txt ]; then
+            PRODUCT_NAME=$(cat agent_engine/blog_generator/product_name.txt)
+            echo "product_name=$PRODUCT_NAME" >> $GITHUB_OUTPUT
+            echo "blog_generated=true" >> $GITHUB_OUTPUT
+            echo "✅ Product name: $PRODUCT_NAME"
+          else
+            echo "⚠️ product_name.txt not found — no blog was generated"
+            echo "product_name=" >> $GITHUB_OUTPUT
+            echo "blog_generated=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Find generated blog folder
+        id: find_blog
+        if: steps.read_product.outputs.blog_generated == 'true'
+        run: |
+          BRAND_DIR="content/blogPosts/aspose_cloud"
+
+          if [ ! -d "$BRAND_DIR" ]; then
+            echo "❌ Brand directory not found: $BRAND_DIR"
+            exit 1
+          fi
+
+          blog_folder=$(find "$BRAND_DIR" -mindepth 1 -maxdepth 1 -type d -name "20??-??-??-*" -mmin -15 -printf '%T@ %p\n' | sort -nr | head -1 | cut -d' ' -f2-)
+
+          if [ -z "$blog_folder" ]; then
+            echo "❌ No blog folder found with pattern YYYY-MM-DD-* in $BRAND_DIR"
+            ls -la "$BRAND_DIR" || echo "Directory is empty"
+            exit 1
+          fi
+
+          blog_folder_name=$(basename "$blog_folder")
+
+          if [ ! -f "$blog_folder/index.md" ]; then
+            echo "❌ index.md not found in $blog_folder"
+            exit 1
+          fi
+
+          echo "blog_folder_name=$blog_folder_name" >> $GITHUB_OUTPUT
+          echo "blog_folder_path=$blog_folder" >> $GITHUB_OUTPUT
+
+          echo "✅ Found: $blog_folder_name"
+          ls -la "$blog_folder"
+
+      ###################################################################
+      # Commit to THIS repository (content/blogPosts/aspose_cloud)
+      ###################################################################
+      - name: Commit generated blog to this repository
+        if: steps.read_product.outputs.blog_generated == 'true'
+        env:
+          BLOG_FOLDER_NAME: ${{ steps.find_blog.outputs.blog_folder_name }}
+          BLOG_FOLDER_PATH: ${{ steps.find_blog.outputs.blog_folder_path }}
+        run: |
+          git config --global user.email "action@github.com"
+          git config --global user.name "GitHub Action"
+
+          if [ ! -f "$BLOG_FOLDER_PATH/index.md" ]; then
+            echo "❌ index.md not found in $BLOG_FOLDER_PATH"
+            exit 1
+          fi
+
+          git add "$BLOG_FOLDER_PATH"
+
+          if git diff --staged --quiet; then
+            echo "ℹ️  No changes to commit - blog may already exist"
+          else
+            git commit -m "Add generated blog post: $BLOG_FOLDER_NAME
+
+          Path: $BLOG_FOLDER_PATH
+          Generated: $(date -u +'%Y-%m-%d %H:%M:%S UTC')
+          Dashboard request by: ${{ github.event.client_payload.requested_by }}
+          Workflow Run: ${{ github.run_number }}"
+
+            git push origin HEAD
+            echo "✅ Blog committed and pushed to this repository"
+          fi
+
+      - name: Commit logs
+        if: always()
+        run: |
+          git config --global user.email "action@github.com"
+          git config --global user.name "GitHub Action"
+          git add content/logs/logs.txt
+          git commit -m "Update logs [Run #${{ github.run_number }}]" || echo "No changes to commit"
+          git push origin HEAD || echo "Nothing to push"
+
+      - name: Upload Generated Blog as Artifact
+        if: steps.read_product.outputs.blog_generated == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: generated-blog-aspose-cloud-${{ github.run_number }}
+          path: ${{ steps.find_blog.outputs.blog_folder_path }}
+          if-no-files-found: error
+
+      ###################################################################
+      # Open a PR in aspose-cloud-blog and STOP. No auto-merge.
+      ###################################################################
+      - name: Open review PR in aspose-cloud-blog (no merge)
+        if: steps.read_product.outputs.blog_generated == 'true' && success()
+        env:
+          BLOG_FOLDER_NAME: ${{ steps.find_blog.outputs.blog_folder_name }}
+          BLOG_FOLDER_PATH: ${{ steps.find_blog.outputs.blog_folder_path }}
+          PRODUCT_NAME: ${{ steps.read_product.outputs.product_name }}
+          REQUESTED_BY: ${{ github.event.client_payload.requested_by }}
+          TOPIC: ${{ github.event.client_payload.topic }}
+          GH_TOKEN: ${{ secrets.REPO_PAT }}
+        run: |
+          git config --global user.email "action@github.com"
+          git config --global user.name "GitHub Action"
+
+          if [ -z "${{ secrets.REPO_PAT }}" ]; then
+            echo "❌ REPO_PAT is EMPTY! Fix your repo secret."
+            exit 1
+          fi
+
+          echo "Cloning aspose-cloud-blog repo..."
+          git clone https://x-access-token:${{ secrets.REPO_PAT }}@github.com/aspose-cloud/aspose-cloud-blog.git aspose-cloud-blog || {
+            echo "❌ Failed to clone repo — invalid PAT or wrong GitHub account."
+            exit 1
+          }
+
+          cd aspose-cloud-blog
+          git checkout master
+          git pull origin master
+
+          # Case-insensitive product folder: reuse if present, else lowercase.
+          EXISTING_DIR=$(find "content/Aspose.Cloud" -maxdepth 1 -type d -iname "$PRODUCT_NAME" | head -1)
+          if [ -n "$EXISTING_DIR" ]; then
+            TARGET_DIR="$EXISTING_DIR"
+          else
+            PRODUCT_NAME_LOWER=$(echo "$PRODUCT_NAME" | tr '[:upper:]' '[:lower:]')
+            TARGET_DIR="content/Aspose.Cloud/$PRODUCT_NAME_LOWER"
+            mkdir -p "$TARGET_DIR"
+          fi
+          echo "Target directory: $TARGET_DIR"
+
+          BRANCH_NAME="blog/$BLOG_FOLDER_NAME"
+
+          if git ls-remote --heads origin "$BRANCH_NAME" | grep -q "$BRANCH_NAME"; then
+            echo "⚠️  Branch $BRANCH_NAME exists remotely. Deleting..."
+            git push origin --delete "$BRANCH_NAME" || echo "Could not delete remote branch"
+          fi
+          git branch -D "$BRANCH_NAME" 2>/dev/null || true
+          git checkout -b "$BRANCH_NAME" master
+
+          WORKFLOW_DIR=$(pwd)
+          cd ..
+          REPO_ROOT=$(pwd)
+          BLOG_ABS_PATH="$REPO_ROOT/$BLOG_FOLDER_PATH"
+
+          if [ ! -d "$BLOG_ABS_PATH" ]; then
+            echo "❌ Source blog folder does not exist: $BLOG_ABS_PATH"
+            exit 1
+          fi
+
+          cd "$WORKFLOW_DIR"
+          cp -r "$BLOG_ABS_PATH" "$TARGET_DIR/" || { echo "❌ copy failed"; exit 1; }
+
+          if [ ! -d "$TARGET_DIR/$BLOG_FOLDER_NAME" ]; then
+            echo "❌ Blog folder was not copied successfully"
+            exit 1
+          fi
+
+          git add "$TARGET_DIR/$BLOG_FOLDER_NAME"
+          if git diff --staged --quiet; then
+            echo "ℹ️ No new files to commit — content may already exist"
+            exit 0
+          fi
+
+          git commit -m "Add generated blog for $PRODUCT_NAME: $BLOG_FOLDER_NAME"
+          git push -u origin "$BRANCH_NAME" --force || { echo "❌ push failed"; exit 1; }
+
+          sleep 2
+
+          PR_NUMBER=$(gh pr list --repo aspose-cloud/aspose-cloud-blog --head "$BRANCH_NAME" --json number --jq '.[0].number' 2>/dev/null || echo "")
+
+          if [ -z "$PR_NUMBER" ]; then
+            gh pr create \
+              --repo aspose-cloud/aspose-cloud-blog \
+              --base master \
+              --head "$BRANCH_NAME" \
+              --title "Add blog post: $BLOG_FOLDER_NAME" \
+              --body "$(printf '## Generated blog post (dashboard request)\n\n**Topic:** %s\n**Product:** %s\n**Path:** `%s/%s`\n**Requested by:** @%s\n**Run:** #%s\n\n---\n\nReview the rendered `index.md`, then approve + merge to publish. Comment `/revise <instruction>` support comes later.' "$TOPIC" "$PRODUCT_NAME" "$TARGET_DIR" "$BLOG_FOLDER_NAME" "$REQUESTED_BY" "${{ github.run_number }}")" \
+              || { echo "❌ Failed to create PR"; exit 1; }
+            PR_NUMBER=$(gh pr list --repo aspose-cloud/aspose-cloud-blog --head "$BRANCH_NAME" --json number --jq '.[0].number' 2>/dev/null || echo "")
+          fi
+
+          echo "PR #$PR_NUMBER"
+
+          # Best-effort: label + assign the requester (both no-op if not permitted).
+          gh label create dashboard-request --repo aspose-cloud/aspose-cloud-blog --color 1D76DB --force >/dev/null 2>&1 || true
+          gh pr edit "$PR_NUMBER" --repo aspose-cloud/aspose-cloud-blog --add-label dashboard-request >/dev/null 2>&1 || true
+          if [ -n "$REQUESTED_BY" ]; then
+            gh pr edit "$PR_NUMBER" --repo aspose-cloud/aspose-cloud-blog --add-assignee "$REQUESTED_BY" >/dev/null 2>&1 || true
+          fi
+
+          PR_URL="https://github.com/aspose-cloud/aspose-cloud-blog/pull/$PR_NUMBER"
+          {
+            echo "### 📝 Blog draft ready for review"
+            echo ""
+            echo "| | |"
+            echo "|---|---|"
+            echo "| Topic | $TOPIC |"
+            echo "| Product | $PRODUCT_NAME |"
+            echo "| Requested by | @$REQUESTED_BY |"
+            echo "| PR | $PR_URL |"
+          } >> "$GITHUB_STEP_SUMMARY"
+
+          echo "pr_url=$PR_URL" >> "$GITHUB_OUTPUT"
