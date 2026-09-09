@@ -50,7 +50,10 @@
     "aspose.cloud|aspose.cad|net": 1,
     "aspose.cloud|aspose.cad|php": 0,
     "aspose.cloud|aspose.cad|nodejs": 1,
-    "aspose.cloud|aspose.cad|java": 2
+    "aspose.cloud|aspose.cad|java": 2,
+    "groupdocs.cloud|groupdocs.parser|net": 5,
+    "groupdocs.cloud|groupdocs.parser|java": 0,
+    "groupdocs.cloud|groupdocs.parser|nodejs": 1
   },
   "aspose|aspose.html|python": [
     "How to Convert Code to Change HTML Border Color in Python",
@@ -387,5 +390,21 @@
     "Convert JPG to PDF in Java",
     "Convert JSON to XLSX in Java",
     "Implementing Reverse Image Search and Image Deskewing in Java"
+  ],
+  "groupdocs.cloud|groupdocs.parser|net": [
+    "Extract Images from PDF Documents in C#"
+  ],
+  "groupdocs.cloud|groupdocs.parser|java": [
+    "Extract Images from PDF Documents in Java",
+    "Extract Specific Data from PDF in Java",
+    "Best Practices for Extract Text from PDF in Java",
+    "Extract Text from XML using Rest in Java",
+    "Parse Documents with AI Agents using Open Source Cloud Mcp Server in Java",
+    "Step-by-Step Guide to Rest Parse Word Documents in Java"
+  ],
+  "groupdocs.cloud|groupdocs.parser|nodejs": [
+    "Extract Images from PDF Spreadsheets Presentations and Word Documents in Node.JS",
+    "Extract Text from PDF in Node.JS",
+    "Extract Text from XML using Rest in Node.JS"
   ]
 }
