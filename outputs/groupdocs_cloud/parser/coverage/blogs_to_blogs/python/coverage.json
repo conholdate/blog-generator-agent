@@ -1,0 +1,373 @@
+{
+  "case": "blogs_to_blogs",
+  "brand_key": "groupdocs_cloud",
+  "product_key": "parser",
+  "baseline_platform": "python",
+  "platforms": [
+    "python",
+    "general",
+    "java",
+    "net",
+    "nodejs"
+  ],
+  "meta": {
+    "matching_mode": "key_exact",
+    "total_input_records": 37,
+    "records_after_filters": 35,
+    "excluded_release_update_records": 0,
+    "excluded_old_or_undated_records": 2,
+    "baseline_records": 7,
+    "total_cells": 35,
+    "matched_cells": 9,
+    "missing_cells": 26,
+    "match_rate": 0.2571428571428571,
+    "skipped_empty_keys": 0
+  },
+  "rows": [
+    {
+      "category": "Document Processing",
+      "sub_category": "Image Extraction",
+      "topic": "Extract images from PDF documents",
+      "key": "extract-images-from-pdf-documents",
+      "baseline_record_id": "blog::parser/2021-03-19-extract-images-from-pdf-documents-using-python/index.md",
+      "coverage": {
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::parser/2021-03-19-extract-images-from-pdf-documents-using-python/index.md",
+          "title": "Extract Images from PDF Documents using Python",
+          "topic": "Extract images from PDF documents",
+          "url": "groupdocs.cloud/parser/extract-images-from-pdf-documents-using-python/"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "nodejs": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Document Processing",
+      "sub_category": "Image Extraction",
+      "topic": "Extract images from PDF spreadsheets presentations and word documents",
+      "key": "extract-images-from-pdf-spreadsheets-presentations-and-word-documents",
+      "baseline_record_id": "blog::parser/2020-10-25-extract-images-from-word-excel-ppt-pdf-using-python/index.md",
+      "coverage": {
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::parser/2020-10-25-extract-images-from-word-excel-ppt-pdf-using-python/index.md",
+          "title": "Extract Images from PDF, Spreadsheets, Presentations & Word Documents using Python",
+          "topic": "Extract images from PDF spreadsheets presentations and word documents",
+          "url": "groupdocs.cloud/parser/extract-images-from-word-excel-ppt-pdf-using-python/"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "nodejs": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Document Processing",
+      "sub_category": "PDF Data Extraction",
+      "topic": "Extract specific data from PDF",
+      "key": "extract-specific-data-from-pdf",
+      "baseline_record_id": "blog::parser/2021-04-28-extract-specific-data-from-pdf-using-python/index.md",
+      "coverage": {
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::parser/2021-04-28-extract-specific-data-from-pdf-using-python/index.md",
+          "title": "Extract Specific Data from PDF using Python",
+          "topic": "Extract specific data from PDF",
+          "url": "groupdocs.cloud/parser/extract-specific-data-from-pdf-using-python/"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "nodejs": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Document Processing",
+      "sub_category": "Pdf Text Extraction",
+      "topic": "Extract text from PDF",
+      "key": "extract-text-from-pdf",
+      "baseline_record_id": "blog::parser/2021-03-17-extract-text-from-pdf-using-python/index.md",
+      "coverage": {
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::parser/2021-03-17-extract-text-from-pdf-using-python/index.md",
+          "title": "Extract Text from PDF using Python",
+          "topic": "Extract text from PDF",
+          "url": "groupdocs.cloud/parser/extract-text-from-pdf-using-python/"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::parser/2025-09-23-extract-text-from-pdf-using-csharp/index.md",
+          "title": "Extract Text from PDF with C# .NET",
+          "topic": "Extract text from PDF",
+          "url": "groupdocs.cloud/parser/extract-text-from-pdf-using-csharp/"
+        },
+        "nodejs": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Document Processing",
+      "sub_category": "XML",
+      "topic": "Extract text from XML using rest",
+      "key": "extract-text-from-xml-using-rest",
+      "baseline_record_id": "blog::parser/2023-06-27-extract-text-from-xml-in-python-using-rest-api/index.md",
+      "coverage": {
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::parser/2023-06-27-extract-text-from-xml-in-python-using-rest-api/index.md",
+          "title": "Extract Text from XML in Python using REST API",
+          "topic": "Extract text from XML using REST API",
+          "url": "groupdocs.cloud/parser/extract-text-from-xml-in-python-using-rest-api/"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "nodejs": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "AI Integration",
+      "sub_category": "Document Parsing",
+      "topic": "Parse documents with AI agents using open source GroupDocs parser cloud mcp server",
+      "key": "parse-documents-with-ai-agents-using-open-source-groupdocs-parser-cloud-mcp-server",
+      "baseline_record_id": "blog::parser/2025-12-13-groupdocs-parser-mcp-server-for-ai-agents/index.md",
+      "coverage": {
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::parser/2025-12-13-groupdocs-parser-mcp-server-for-ai-agents/index.md",
+          "title": "Parse Documents with AI Agents Using the Open-Source GroupDocs.Parser Cloud MCP Server",
+          "topic": "Parse documents with AI agents using open source groupdocs parser cloud MCP server",
+          "url": "groupdocs.cloud/parser/groupdocs-parser-mcp-server-for-ai-agents/"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "nodejs": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Document Processing",
+      "sub_category": "Word Parsing",
+      "topic": "Parse word documents using rest",
+      "key": "parse-word-documents-using-rest",
+      "baseline_record_id": "blog::parser/2021-11-29-parse-word-documents-using-rest-api-in-python/index.md",
+      "coverage": {
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::parser/2021-11-29-parse-word-documents-using-rest-api-in-python/index.md",
+          "title": "Parse Word Documents using REST API in Python",
+          "topic": "Parse word documents using REST API",
+          "url": "groupdocs.cloud/parser/parse-word-documents-using-rest-api-in-python/"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "nodejs": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::parser/2021-07-16-parse-word-documents-using-rest-api-in-node-js/index.md",
+          "title": "Parse Word Documents using REST API in Node.js",
+          "topic": "Parse word documents using REST API",
+          "url": "groupdocs.cloud/parser/parse-word-documents-using-rest-api-in-node-js/"
+        }
+      }
+    }
+  ],
+  "brand_name": "GroupDocs.Cloud",
+  "product_name": "GroupDocs.Parser"
+}
