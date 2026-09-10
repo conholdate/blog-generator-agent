@@ -587,6 +587,70 @@ def strip_unverified_code_blocks(content: str, generated_code: Optional[dict]) -
     return scan
 
 
+# ── Code-snippet wrapper repair + marker stripping ───────────────────────────
+# The writer LLM frequently emits an EXTRA bare ``` line right before a
+# <!--[CODE_SNIPPET_END]--> marker (on top of the code block's own closing
+# fence). That stray fence shifts every downstream fence pairing by one, so
+# whole sections after the first snippet render as code, link injection leaks
+# into code, and the markers themselves surface. `repair_code_fences` fixes the
+# wrappers (markers kept, so the SEO audit still sees them); `strip_snippet_markers`
+# removes the now-purely-internal markers just before the file is written.
+
+# A wrapped region: START marker ... END marker (regular or COMPLETE_ variant,
+# including the alternate CODE_SNIPPET_START_COMPLETE / _END_COMPLETE spelling).
+_WRAPPED_REGION_RE = re.compile(
+    r'(?P<start><!--\s*\[(?:COMPLETE_)?CODE_SNIPPET_START(?:_COMPLETE)?\]\s*-->)'
+    r'(?P<inner>.*?)'
+    r'(?P<end><!--\s*\[(?:COMPLETE_)?CODE_SNIPPET_END(?:_COMPLETE)?\]\s*-->)',
+    re.DOTALL,
+)
+_FENCE_LINE_RE = re.compile(r'^[ \t]*```')
+_BARE_FENCE_LINE_RE = re.compile(r'^[ \t]*```[ \t]*$')
+
+# Every CODE_SNIPPET marker line, in all spellings, for final stripping.
+_SNIPPET_MARKER_LINE_RE = re.compile(
+    r'(?m)^[ \t]*<!--\s*\[(?:COMPLETE_)?CODE_SNIPPET_(?:START|END)(?:_COMPLETE)?\]\s*-->[ \t]*\n?'
+)
+
+
+def repair_code_fences(content: str) -> str:
+    """Balance the code fences inside each <!--[CODE_SNIPPET_*]--> wrapper.
+
+    If a wrapper contains an odd number of ``` lines, drop the last bare
+    (language-less) fence - that is the spurious one the writer adds before the
+    END marker. If the odd fence has a language (a genuinely unclosed block),
+    append a closing fence instead. Markers are left in place.
+    """
+    def _fix(m):
+        lines = m.group('inner').split('\n')
+        fences = [i for i, ln in enumerate(lines) if _FENCE_LINE_RE.match(ln)]
+        if len(fences) % 2 == 1:
+            for i in reversed(fences):
+                if _BARE_FENCE_LINE_RE.match(lines[i]):
+                    del lines[i]
+                    break
+            else:
+                lines.append('```')
+        inner = '\n'.join(lines)
+        if not inner.startswith('\n'):
+            inner = '\n' + inner
+        if not inner.endswith('\n'):
+            inner = inner + '\n'
+        return m.group('start') + inner + m.group('end')
+
+    return _WRAPPED_REGION_RE.sub(_fix, content)
+
+
+def strip_snippet_markers(content: str) -> str:
+    """Remove the internal <!--[CODE_SNIPPET_*]--> / <!--[COMPLETE_CODE_SNIPPET_*]-->
+    scaffolding markers from the finished post. They carry no meaning for the
+    published site and some Hugo themes surface them. Run this only AFTER every
+    step that keys off the markers (SEO audit, metadata extraction,
+    unverified-code filter, repo-example reference)."""
+    cleaned = _SNIPPET_MARKER_LINE_RE.sub('', content)
+    return re.sub(r'\n{3,}', '\n\n', cleaned)
+
+
 async def extract_all_complete_code_snippets(markdown_content: str, title: str = "",metrics=None) -> dict:
     """
     Extract ALL complete code snippets marked with COMPLETE_CODE_SNIPPET tags
@@ -946,6 +1010,34 @@ def replace_code_snippets_with_gists(markdown_content: str, snippets: dict, shor
     return updated_content
 
 
+# Genuinely common ≤3-char file formats worth auto-linking. Anything else that
+# short is skipped (see _skip_format_key).
+_COMMON_SHORT_FORMATS = {
+    "pdf", "png", "jpg", "gif", "svg", "csv", "txt", "tsv", "xml", "doc", "xls",
+    "ppt", "zip", "rar", "tar", "gz", "7z", "rtf", "odt", "ods", "odp", "mp3",
+    "mp4", "avi", "mov", "wav", "wmv", "flv", "mkv", "ogg", "aac", "mid", "eps",
+    "psd", "eml", "msg", "otf", "ttf", "ico", "bmp", "tif", "dwg", "dxf", "stl",
+    "obj", "fbx", "glb", "dae", "3ds", "3mf", "exe", "dll", "iso", "vcf", "ics",
+}
+# Longer keys that are really language names or common words, not formats.
+_FORMAT_KEY_DENYLIST = {
+    "config", "toml", "yaml", "yml", "groovy", "scala", "swift", "unity",
+    "cmake", "dart", "diff", "haml", "addin", "xcode", "nupkg", "msix", "appx",
+    "csproj", "vbproj", "vcxproj", "vcproj", "asm", "awk", "lua", "tcl", "erb",
+    "inc", "dep", "res", "rst", "cpp", "cxx", "hpp", "pdb", "php", "pas",
+}
+
+
+def _skip_format_key(key: str) -> bool:
+    """True when a FILE_FORMAT_MAPPINGS key is too collision-prone to auto-link."""
+    k = key.lower()
+    if k in _FORMAT_KEY_DENYLIST:
+        return True
+    if len(k) <= 3 and k not in _COMMON_SHORT_FORMATS:
+        return True
+    return False
+
+
 def inject_file_format_links(full_markdown, FILE_FORMAT_MAPPINGS, BASE_URL):
     # --- 1. Separate Frontmatter ---
     parts = re.split(r'^---$', full_markdown, maxsplit=2, flags=re.MULTILINE)
@@ -965,8 +1057,9 @@ def inject_file_format_links(full_markdown, FILE_FORMAT_MAPPINGS, BASE_URL):
     
     # Protect in order of specificity:
     
-    # 2a. Hide fenced code blocks (```)
-    body_protected = re.sub(r'```.*?```', hide_content, body, flags=re.DOTALL)
+    # 2a. Hide fenced code blocks (```). Line-anchored so a stray/odd fence
+    # elsewhere can't drag the match across real prose.
+    body_protected = re.sub(r'(?ms)^[ \t]*```.*?^[ \t]*```[ \t]*$', hide_content, body)
     
     # 2b. Hide inline code (`)
     body_protected = re.sub(r'`[^`]+`', hide_content, body_protected)
@@ -987,7 +1080,13 @@ def inject_file_format_links(full_markdown, FILE_FORMAT_MAPPINGS, BASE_URL):
     body_protected = re.sub(r'\([^)]*\/[^)]*\)', hide_content, body_protected)
     
     # --- 3. Inject Links into Body (ONLY standalone terms) ---
-    sorted_keys = sorted(FILE_FORMAT_MAPPINGS.keys(), key=len, reverse=True)
+    # Drop keys that collide with ordinary prose / code identifiers: any 1-3
+    # char key that isn't a genuinely common file format, plus language names
+    # and words that happen to be registered "formats" (fs, config, toml, ...).
+    sorted_keys = [
+        k for k in sorted(FILE_FORMAT_MAPPINGS.keys(), key=len, reverse=True)
+        if not _skip_format_key(k)
+    ]
     
     # STRICT pattern: Must be completely standalone
     # - Not preceded by: letters, numbers, underscore, dot, hyphen, forward slash, colon

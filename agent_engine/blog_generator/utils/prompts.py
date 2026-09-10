@@ -1014,6 +1014,14 @@ PART 5: CODE SNIPPET REQUIREMENTS (CRITICAL)
 - cURL commands in the cURL section = CODE_SNIPPET_START/END (regular tags, NOT COMPLETE_ prefix)
 - Using wrong tags makes output INVALID
 
+**FENCE RULE (do not break this):** Each wrapped snippet has EXACTLY one opening
+```` ```language ```` line and EXACTLY one closing ```` ``` ```` line. Never write
+a second ```` ``` ```` after the closing fence. The END marker
+(`<!--[CODE_SNIPPET_END]-->` / `<!--[COMPLETE_CODE_SNIPPET_END]-->`) goes on the
+line immediately after the single closing fence. If one wrapper contains two
+languages (e.g. a shell install command then code), that is two properly closed
+fenced blocks back to back - still no extra trailing fence.
+
 **ALL CODE MUST BE:**
 - Syntactically correct
 - Executable

@@ -71,12 +71,16 @@ class LayoutChoice:
 # SECTION CATALOG
 # ══════════════════════════════════════════════════════════════════════════════
 
-_CODE_TAG_REMINDER = """Code inside this section uses regular snippet tags:
+_CODE_TAG_REMINDER = """Code inside this section uses regular snippet tags.
+EXACT structure - one opening fence, one closing fence, nothing else:
 <!--[CODE_SNIPPET_START]-->
 ```language
 // code
 ```
-<!--[CODE_SNIPPET_END]-->"""
+<!--[CODE_SNIPPET_END]-->
+Do NOT add a second ``` after the closing fence. The code block's own closing
+``` is the only closing fence; the <!--[CODE_SNIPPET_END]--> marker goes on the
+very next line."""
 
 STEPS = Section(
     key="steps",
