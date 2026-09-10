@@ -2673,8 +2673,61 @@ def mark_topic_as_generated(sheet_name: str, row_number: int) -> None:
 
     status_col = [h.lower() for h in headers].index("status") + 1  # 1-based
 
+    # Mark the topic as Generated in the current worksheet.
     worksheet.update_cell(row_number, status_col, "Generated")
     print(f"✅ Row {row_number} in '{sheet_name}' marked as Generated")
+
+    # -------------------------------------------------------------------------
+    # Also mark the corresponding Java topic as YES in "All Missing Topics".
+    # Column D of the current worksheet contains the source row number from
+    # "All Missing Topics". Column H of "All Missing Topics" is JAVA.
+    # Only change JAVA from NO to YES.
+    # -------------------------------------------------------------------------
+    try:
+        source_row_value = worksheet.cell(row_number, 4).value
+
+        if not source_row_value:
+            print(
+                f"⚠️ No source row found in Column D of row {row_number}; "
+                "JAVA status was not updated"
+            )
+            return
+
+        source_row = int(float(str(source_row_value).strip()))
+
+        source_worksheet = client.open_by_key(
+            settings.SPREADSHEET_ID_FOR_KEYWORDS
+        ).worksheet("All Missing Topics")
+
+        java_cell = source_worksheet.cell(source_row, 8)
+        java_value = str(java_cell.value or "").strip()
+
+        if java_value.lower() == "no":
+            source_worksheet.update_cell(source_row, 8, "YES")
+            print(
+                f"✅ Row {source_row} in 'All Missing Topics' "
+                "JAVA changed from NO to YES"
+            )
+        else:
+            print(
+                f"ℹ️ Row {source_row} in 'All Missing Topics' "
+                f"JAVA is '{java_value}', so it was not changed"
+            )
+
+    except (ValueError, TypeError):
+        print(
+            f"⚠️ Invalid source row '{source_row_value}' in Column D "
+            f"of row {row_number}; JAVA status was not updated"
+        )
+    except gspread.exceptions.WorksheetNotFound:
+        print(
+            "❌ Worksheet 'All Missing Topics' was not found; "
+            "JAVA status was not updated"
+        )
+    except Exception as exc:
+        print(
+            f"⚠️ Could not update JAVA status for row {row_number}: {exc}"
+        )
 
 
 def save_blog_metadata_to_sheet(brand: str, url: str, title: str, author: str, gist_url: str, published_date: str, product: str = "", layout: str = "") -> None:
