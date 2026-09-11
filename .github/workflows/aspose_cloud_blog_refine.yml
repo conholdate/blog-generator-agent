@@ -115,9 +115,10 @@ jobs:
       - name: Add 'refining' label
         env:
           GH_TOKEN: ${{ secrets.REPO_PAT }}
+          BRANCH: ${{ github.event.client_payload.branch }}
         run: |
           cd aspose-cloud-blog
-          PR_NUMBER=$(gh pr list --repo aspose-cloud/aspose-cloud-blog --head "${{ github.event.client_payload.branch }}" --json number --jq '.[0].number' 2>/dev/null || echo "")
+          PR_NUMBER=$(gh pr list --repo aspose-cloud/aspose-cloud-blog --head "$BRANCH" --json number --jq '.[0].number' 2>/dev/null || echo "")
           echo "pr_number=$PR_NUMBER" >> "$GITHUB_ENV"
           if [ -n "$PR_NUMBER" ]; then
             gh label create refining --repo aspose-cloud/aspose-cloud-blog --color FBCA04 --force >/dev/null 2>&1 || true
@@ -169,6 +170,8 @@ jobs:
         if: steps.read_status.outputs.status == 'success'
         env:
           GH_TOKEN: ${{ secrets.REPO_PAT }}
+          BRANCH: ${{ github.event.client_payload.branch }}
+          INSTRUCTION: ${{ github.event.client_payload.instruction }}
         run: |
           cd aspose-cloud-blog
           git config --global user.email "action@github.com"
@@ -178,24 +181,25 @@ jobs:
             echo "ℹ️  No changes produced by the revision"
           else
             git add -A
-            git commit -m "Revise draft per request: ${{ github.event.client_payload.instruction }}"
-            git push origin "${{ github.event.client_payload.branch }}"
-            echo "✅ Pushed revision to ${{ github.event.client_payload.branch }}"
+            git commit -m "Revise draft per request: $INSTRUCTION"
+            git push origin "$BRANCH"
+            echo "✅ Pushed revision to $BRANCH"
           fi
 
       - name: Report status on PR
         if: always()
         env:
           GH_TOKEN: ${{ secrets.REPO_PAT }}
+          BRANCH: ${{ github.event.client_payload.branch }}
           STATUS: ${{ steps.read_status.outputs.status }}
           MESSAGE: ${{ steps.read_status.outputs.message }}
           INSTRUCTION: ${{ github.event.client_payload.instruction }}
         run: |
-          PR_NUMBER=$(gh pr list --repo aspose-cloud/aspose-cloud-blog --head "${{ github.event.client_payload.branch }}" --json number --jq '.[0].number' 2>/dev/null || echo "")
+          PR_NUMBER=$(gh pr list --repo aspose-cloud/aspose-cloud-blog --head "$BRANCH" --json number --jq '.[0].number' 2>/dev/null || echo "")
           gh pr edit "$PR_NUMBER" --repo aspose-cloud/aspose-cloud-blog --remove-label refining >/dev/null 2>&1 || true
 
           if [ -z "$PR_NUMBER" ]; then
-            echo "⚠️ No PR found for branch ${{ github.event.client_payload.branch }} — skipping comment"
+            echo "⚠️ No PR found for branch $BRANCH — skipping comment"
             exit 0
           fi
 
