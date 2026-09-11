@@ -965,14 +965,19 @@ class BlogOrchestrator:
 
             revise_instructions = (
                 "You are editing an existing published-quality blog post. Apply "
-                "ONLY the requested change below - do not rewrite unrelated "
-                "sections, do not change the frontmatter fields other than "
-                "what the instruction requires, do not alter code blocks unless "
-                "the instruction is specifically about the code. Preserve all "
-                "<!--more--> markers, headings structure, and markdown link "
-                "formatting exactly as they are elsewhere in the post. Return "
-                "the COMPLETE post (frontmatter + body) with nothing else - no "
-                "preamble, no explanation, no code fences wrapping the output.\n\n"
+                "the requested change below COMPLETELY and PRECISELY - if it asks "
+                "to remove, delete, or drop a section, remove that section's "
+                "heading and its entire content, don't just shorten or soften it "
+                "and don't leave any trace of it. If it asks to add, rewrite, or "
+                "move something, do exactly that, fully.\n\n"
+                "Everything NOT targeted by the instruction must stay exactly as "
+                "it is: don't rewrite other sections, don't change frontmatter "
+                "fields the instruction doesn't mention, don't alter code blocks "
+                "unless the instruction is specifically about the code, and keep "
+                "<!--more--> markers and markdown link formatting in the "
+                "untouched parts exactly as they are. Return the COMPLETE post "
+                "(frontmatter + body) with nothing else - no preamble, no "
+                "explanation, no code fences wrapping the output.\n\n"
                 f"REQUESTED CHANGE:\n{instruction}"
             )
 
