@@ -10,6 +10,11 @@ on:
   repository_dispatch:
     types: [blog-refine]
 
+# Without this, GitHub's default run title is just the workflow name, so
+# every refine run in the dashboard's "Recent runs" list looked identical -
+# no way to tell which draft it was applied to.
+run-name: "Refine ${{ github.event.client_payload.branch }}: ${{ github.event.client_payload.instruction }}"
+
 permissions:
   contents: write
 

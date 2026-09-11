@@ -15,6 +15,11 @@ on:
   repository_dispatch:
     types: [blog-request]
 
+# Without this, GitHub's default run title is just the workflow name, so
+# every request run in the dashboard's "Recent runs" list looked identical -
+# no way to tell which post it was for.
+run-name: "Request: ${{ github.event.client_payload.topic }} (${{ github.event.client_payload.product }})"
+
 permissions:
   contents: write
 
