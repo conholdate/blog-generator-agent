@@ -1,0 +1,108 @@
+{
+  "topic": "Graceful Error Handling for SRS Transformations in Aspose.GIS Shapefile Conversions",
+  "primary_source_url": "https://releases.aspose.com/gis/net/release-notes/2026/aspose-gis-for-net-26-6-release-notes/",
+  "source_title": "Aspose.GIS for .NET 26.6 Release Notes",
+  "sdk_version": "Aspose.GIS for .NET 26.6 Release Notes",
+  "main_problem_solved": "Introduces OperationErrorCollector to gather SRS transformation errors during Shapefile to KML conversion, allowing the process to continue while reporting issues.",
+  "platform": {
+    "platform_key": "net",
+    "platform_name": ".NET",
+    "language": "C#",
+    "language_tag": "csharp",
+    "package_manager": "NuGet",
+    "install_command": "Install-Package Aspose.GIS",
+    "product_key": "gis",
+    "product_display": "GIS",
+    "brand_key": "aspose",
+    "brand_name": "Aspose",
+    "product_full_name": "Aspose.GIS",
+    "product_page_url": "https://products.aspose.com/gis/net/",
+    "docs_url": "https://docs.aspose.com/gis/net/",
+    "api_reference_url": "https://reference.aspose.com/gis/net/",
+    "free_apps_url": "https://products.aspose.app/gis/family",
+    "license_url": "https://purchase.aspose.com/temporary-license/",
+    "forum_url": "https://forum.aspose.com/c/gis/",
+    "blog_domain": "https://blog.aspose.com",
+    "blog_category_url": "https://blog.aspose.com/categories/aspose.gis-product-family/"
+  },
+  "source_type": "release_notes",
+  "keyword_analysis": {
+    "title": "",
+    "angle": "",
+    "outline": [],
+    "target_persona": "",
+    "primary_keyword": "Graceful error handling for shapefile SRS conversion in .NET",
+    "supporting_keywords": [
+      "Handle SRS transformation errors in shapefile conversion .NET",
+      "Robust SRS conversion error handling in .NET for shapefiles",
+      "how to handle shapefile SRS transformation errors in .NET"
+    ],
+    "keyword_groups": {
+      "core_seo_keywords": [
+        "Graceful error handling for shapefile SRS conversion in .NET",
+        "Handle SRS transformation errors in shapefile conversion .NET"
+      ],
+      "long_tail_keywords": [
+        "how to handle shapefile SRS transformation errors in .NET"
+      ],
+      "context_keywords": [
+        "Robust SRS conversion error handling in .NET for shapefiles"
+      ]
+    },
+    "editorial_notes": []
+  },
+  "key_steps": [],
+  "code_snippets": [
+    "public void ErrorWithoutCollector()\n{\n    // Issue 2042: exception is expected behavior, when no options specified.\n    string sourcePath = Path.Combine(\n        \"shapefile\",\n        @\"issues\\shapefile18\\light-traffics.shp\");\n\n    string destinationPath = GetOutputPath(\".kml\");\n\n    bool threw = false;\n    try\n    {\n        VectorLayer.Convert(sourcePath, Drivers.Shapefile, destinationPath, Drivers.Kml);\n    }\n    catch (TransformationException)\n    {\n        threw = true;\n    }\n    catch (Exception ex)\n    {\n        throw new Exception(\"Unexpected exception type thrown\", ex);\n    }\n    if (!threw)\n        throw new Exception(\"Expected TransformationException was not thrown\");\n}\n\npublic void ErrorsAndSkipsInvalidFeatures()\n{\n    string sourcePath = Path.Combine(\n        \"shapefile\",\n        @\"issues\\shapefile18\\light-traffics.shp\");\n    string destinationPath = \"output.kml\";\n\n    var errors = new OperationErrorCollector();\n    var options = new ConversionOptions()\n    {\n        DestinationDriverOptions = new KmlOptions()\n        {\n            ErrorCollector = errors\n        },\n    };\n\n    VectorLayer.Convert(sourcePath, Drivers.Shapefile, destinationPath, Drivers.Kml, options);\n\n    if (errors.Count != 1)\n        throw new Exception($\"Expected exactly 1 error collected but got {errors.Count}\");\n\n    using (var layer = VectorLayer.Open(destinationPath, Drivers.Kml))\n    {\n        if (layer.Count < 444)\n            throw new Exception($\"Expected at least 444 features after skipping errors but got {layer.Count}\");\n    }\n}"
+  ],
+  "limitations": [],
+  "warnings": [
+    "Editorial signal for the pipeline and human reviewer only, not for the article: the code sample could not be matched verbatim to the vendor's release notes and is unverified. Keep prose about what the code does conservative, but do not add a disclaimer or provenance note to the article."
+  ],
+  "related_concepts": [
+    "VectorLayer",
+    "OperationErrorCollector",
+    "KmlOptions",
+    "ConversionOptions",
+    "VectorLayer.Convert",
+    "VectorLayer.Open"
+  ],
+  "facts_confirmed_from_source": [
+    "Heading: GISNET-2042. Add optional SRS transform error collection for invalid Shapefile conversion",
+    "Introduces OperationErrorCollector to gather SRS transformation errors during Shapefile to KML conversion, allowing the process to continue while reporting issues.",
+    "API used: Aspose.Gis.VectorLayer",
+    "API used: Aspose.Gis.Drivers",
+    "API used: Aspose.Gis.ConversionOptions",
+    "API used: Aspose.Gis.Operations.OperationErrorCollector",
+    "API used: Aspose.Gis.DriverOptions.KmlOptions",
+    "API used: Aspose.Gis.SpatialReferencing.TransformationException",
+    "API used: System.IO.Path"
+  ],
+  "facts_needing_verification": [],
+  "suggested_article_outline": [
+    "Introduction",
+    "Why this feature matters",
+    "Brief introduction of the API (install + product/docs links)",
+    "Step-by-step tutorial with a code example",
+    "Get a Free License",
+    "Free Additional Resources",
+    "Conclusion",
+    "FAQs",
+    "See Also (only if related post URLs are supplied)"
+  ],
+  "code_verification": {
+    "language": "C#",
+    "tested": false,
+    "source_verified": false,
+    "syntax_valid": true,
+    "package_name": null,
+    "package_version": null,
+    "os": null,
+    "input_file_used": null,
+    "output_file_generated": null,
+    "errors": [],
+    "notes": "Code sample could not be matched to any code block scraped from the source page; it may have been altered while the extraction step selected/transcribed it. Static syntax check passed (balanced brackets/quotes). Sandboxed execution against the real vendor SDK is not attempted: these samples reference proprietary licensed assemblies, external input files, and sometimes network services (e.g. a timestamp authority URL) that only exist in the product team's own test environment."
+  },
+  "prerequisites": [],
+  "doc_topics": []
+}

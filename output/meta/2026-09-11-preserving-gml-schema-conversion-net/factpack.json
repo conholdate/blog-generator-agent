@@ -1,0 +1,106 @@
+{
+  "topic": "Preserving GML Schema During Conversion with Aspose.GIS for .NET",
+  "primary_source_url": "https://releases.aspose.com/gis/net/release-notes/2026/aspose-gis-for-net-26-6-release-notes/",
+  "source_title": "Aspose.GIS for .NET 26.6 Release Notes",
+  "sdk_version": "Aspose.GIS for .NET 26.6 Release Notes",
+  "main_problem_solved": "Shows how to convert a GML file to another GML file with schema restoration using ConversionOptions and GmlOptions, and validates the resulting layer.",
+  "platform": {
+    "platform_key": "net",
+    "platform_name": ".NET",
+    "language": "C#",
+    "language_tag": "csharp",
+    "package_manager": "NuGet",
+    "install_command": "Install-Package Aspose.GIS",
+    "product_key": "gis",
+    "product_display": "GIS",
+    "brand_key": "aspose",
+    "brand_name": "Aspose",
+    "product_full_name": "Aspose.GIS",
+    "product_page_url": "https://products.aspose.com/gis/net/",
+    "docs_url": "https://docs.aspose.com/gis/net/",
+    "api_reference_url": "https://reference.aspose.com/gis/net/",
+    "free_apps_url": "https://products.aspose.app/gis/family",
+    "license_url": "https://purchase.aspose.com/temporary-license/",
+    "forum_url": "https://forum.aspose.com/c/gis/",
+    "blog_domain": "https://blog.aspose.com",
+    "blog_category_url": "https://blog.aspose.com/categories/aspose.gis-product-family/"
+  },
+  "source_type": "release_notes",
+  "keyword_analysis": {
+    "title": "",
+    "angle": "",
+    "outline": [],
+    "target_persona": "",
+    "primary_keyword": "Preserving GML Schema During Conversion in net",
+    "supporting_keywords": [
+      "Maintain GML schema while converting GIS data in net",
+      "GML conversion preserving schema in net",
+      "How to preserve GML schema during file conversion in net"
+    ],
+    "keyword_groups": {
+      "core_seo_keywords": [
+        "Preserving GML Schema During Conversion in net"
+      ],
+      "long_tail_keywords": [
+        "How to preserve GML schema during file conversion in net"
+      ],
+      "context_keywords": [
+        "Maintain GML schema while converting GIS data in net",
+        "GML conversion preserving schema in net"
+      ]
+    },
+    "editorial_notes": []
+  },
+  "key_steps": [],
+  "code_snippets": [
+    "ConversionOptions conversionOptions = new ConversionOptions();\nconversionOptions.SourceDriverOptions = new GmlOptions { RestoreSchema = true };\nstring sourcePath = Path.Combine(\"gml\", \"gml7.gml\");\nstring destinationPath = \"output.gml\";\nVectorLayer.Convert(sourcePath, Drivers.Gml, destinationPath, Drivers.Gml, conversionOptions);\nusing (var layer = VectorLayer.Open(destinationPath, Drivers.Gml, new GmlOptions { RestoreSchema = true }))\n{\n    if (layer.Count != 20)\n        throw new Exception($\"Expected layer count 20 but got {layer.Count}\");\n    if (layer.Attributes.Count != 2)\n        throw new Exception($\"Expected attribute count 2 but got {layer.Attributes.Count}\");\n}"
+  ],
+  "limitations": [],
+  "warnings": [
+    "Editorial signal for the pipeline and human reviewer only, not for the article: the code sample matches the vendor's own release notes verbatim but has not been executed, so it is untested. Do not describe it as tested, and do not add any provenance or verification note to the article."
+  ],
+  "related_concepts": [
+    "ConversionOptions",
+    "GmlOptions",
+    "VectorLayer",
+    "ConversionOptions.SourceDriverOptions",
+    "VectorLayer.Convert",
+    "VectorLayer.Open"
+  ],
+  "facts_confirmed_from_source": [
+    "Heading: GISNET-2051. Gml To Gml - Results Not The Same In QGIS",
+    "Shows how to convert a GML file to another GML file with schema restoration using ConversionOptions and GmlOptions, and validates the resulting layer.",
+    "API used: Aspose.Gis.VectorLayer",
+    "API used: Aspose.Gis.Drivers",
+    "API used: Aspose.Gis.ConversionOptions",
+    "API used: Aspose.Gis.DriverOptions.GmlOptions",
+    "API used: System.IO.Path"
+  ],
+  "facts_needing_verification": [],
+  "suggested_article_outline": [
+    "Introduction",
+    "Why this feature matters",
+    "Brief introduction of the API (install + product/docs links)",
+    "Step-by-step tutorial with a code example",
+    "Get a Free License",
+    "Free Additional Resources",
+    "Conclusion",
+    "FAQs",
+    "See Also (only if related post URLs are supplied)"
+  ],
+  "code_verification": {
+    "language": "C#",
+    "tested": false,
+    "source_verified": true,
+    "syntax_valid": true,
+    "package_name": null,
+    "package_version": null,
+    "os": null,
+    "input_file_used": null,
+    "output_file_generated": null,
+    "errors": [],
+    "notes": "Code sample matches a block scraped verbatim from the product team's release notes page. Static syntax check passed (balanced brackets/quotes). Sandboxed execution against the real vendor SDK is not attempted: these samples reference proprietary licensed assemblies, external input files, and sometimes network services (e.g. a timestamp authority URL) that only exist in the product team's own test environment."
+  },
+  "prerequisites": [],
+  "doc_topics": []
+}

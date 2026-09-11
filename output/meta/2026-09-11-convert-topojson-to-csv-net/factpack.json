@@ -1,0 +1,109 @@
+{
+  "topic": "Handling Nested Properties When Converting TopoJSON to CSV with Aspose.GIS",
+  "primary_source_url": "https://releases.aspose.com/gis/net/release-notes/2026/aspose-gis-for-net-26-6-release-notes/",
+  "source_title": "Aspose.GIS for .NET 26.6 Release Notes",
+  "sdk_version": "Aspose.GIS for .NET 26.6 Release Notes",
+  "main_problem_solved": "Demonstrates conversion of TopoJSON files to CSV with nested attribute handling, and optionally includes geometry in WKT format using CsvOptions.",
+  "platform": {
+    "platform_key": "net",
+    "platform_name": ".NET",
+    "language": "C#",
+    "language_tag": "csharp",
+    "package_manager": "NuGet",
+    "install_command": "Install-Package Aspose.GIS",
+    "product_key": "gis",
+    "product_display": "GIS",
+    "brand_key": "aspose",
+    "brand_name": "Aspose",
+    "product_full_name": "Aspose.GIS",
+    "product_page_url": "https://products.aspose.com/gis/net/",
+    "docs_url": "https://docs.aspose.com/gis/net/",
+    "api_reference_url": "https://reference.aspose.com/gis/net/",
+    "free_apps_url": "https://products.aspose.app/gis/family",
+    "license_url": "https://purchase.aspose.com/temporary-license/",
+    "forum_url": "https://forum.aspose.com/c/gis/",
+    "blog_domain": "https://blog.aspose.com",
+    "blog_category_url": "https://blog.aspose.com/categories/aspose.gis-product-family/"
+  },
+  "source_type": "release_notes",
+  "keyword_analysis": {
+    "title": "",
+    "angle": "",
+    "outline": [],
+    "target_persona": "",
+    "primary_keyword": "Convert TopoJSON with nested properties to CSV in .NET",
+    "supporting_keywords": [
+      "Handle nested properties converting TopoJSON to CSV in .NET",
+      "TopoJSON to CSV conversion preserving nested data in .NET",
+      "How to flatten nested TopoJSON features to CSV in .NET"
+    ],
+    "keyword_groups": {
+      "core_seo_keywords": [
+        "Convert TopoJSON with nested properties to CSV in .NET",
+        "Handle nested properties converting TopoJSON to CSV in .NET"
+      ],
+      "long_tail_keywords": [
+        "How to flatten nested TopoJSON features to CSV in .NET"
+      ],
+      "context_keywords": [
+        "TopoJSON to CSV conversion preserving nested data in .NET"
+      ]
+    },
+    "editorial_notes": []
+  },
+  "key_steps": [],
+  "code_snippets": [
+    "public void Example_Conversion()\n{\n    // nested object property test: \"prop1\": { \"this\": \"that\" }\n    string sourcePath = Path.Combine(\"topojson\", \"2041_input_topojson2.topojson\");\n    string destinationPath = \"output.csv\";\n\n    using (var layer = VectorLayer.Open(sourcePath, Drivers.TopoJson))\n    {\n        if (layer.Count != 3)\n            throw new Exception($\"Expected source layer count 3 but got {layer.Count}\");\n        if (!layer.Attributes.Any(a => a.Name == \"prop1_this\"))\n            throw new Exception(\"Expected attribute 'prop1_this' not found in source layer\");\n        if (layer[2].GetValue<string>(\"prop1_this\") != \"that\")\n            throw new Exception($\"Expected value 'that' but got '{layer[2].GetValue<string>(\"prop1_this\")}'\");\n    }\n\n    try\n    {\n        VectorLayer.Convert(sourcePath, Drivers.TopoJson, destinationPath, Drivers.Csv);\n    }\n    catch (Exception ex)\n    {\n        throw new Exception(\"Conversion threw an unexpected exception\", ex);\n    }\n\n    using (var layer = VectorLayer.Open(destinationPath, Drivers.Csv))\n    {\n        if (layer.Count != 3)\n            throw new Exception($\"Expected destination layer count 3 but got {layer.Count}\");\n        if (layer.Attributes.Count != 4)\n            throw new Exception($\"Expected attribute count 4 but got {layer.Attributes.Count}\");\n\n        var thisAttribute = layer.Attributes.FirstOrDefault(a => a.Name == \"prop1_this\");\n        if (thisAttribute == null)\n            throw new Exception(\"Attribute 'prop1_this' not found in destination layer\");\n\n        if (layer[2].GetValue<string>(\"prop1_this\") != \"that\")\n            throw new Exception($\"Expected value 'that' in destination but got '{layer[2].GetValue<string>(\"prop1_this\")}'\");\n\n        if (!layer[0].Geometry.IsEmpty)\n            throw new Exception(\"Expected geometry of feature 0 to be empty\");\n        if (!layer[1].Geometry.IsEmpty)\n            throw new Exception(\"Expected geometry of feature 1 to be empty\");\n        if (!layer[2].Geometry.IsEmpty)\n            throw new Exception(\"Expected geometry of feature 2 to be empty\");\n    }\n}\n\npublic void Example_Wkt()\n{\n    string sourcePath = Path.Combine(\"topojson\", \"2041_input_topojson2.topojson\");\n    string destinationPath = \"output.csv\";\n\n    var options = new CsvOptions()\n    {\n        ColumnWkt = \"GeometryWkt\"\n    };\n\n    using (var layer = VectorLayer.Open(sourcePath, Drivers.TopoJson))\n    {\n        // validation omitted for brevity\n    }\n\n    ConversionOptions conversionOptions = new ConversionOptions()\n    {\n        DestinationDriverOptions = options\n    };\n\n    VectorLayer.Convert(sourcePath, Drivers.TopoJson, destinationPath, Drivers.Csv, conversionOptions);\n\n    using (var layer = VectorLayer.Open(destinationPath, Drivers.Csv, options))\n    {\n        // further validation omitted for brevity\n    }\n}"
+  ],
+  "limitations": [],
+  "warnings": [
+    "Editorial signal for the pipeline and human reviewer only, not for the article: the code sample could not be matched verbatim to the vendor's release notes and is unverified. Keep prose about what the code does conservative, but do not add a disclaimer or provenance note to the article."
+  ],
+  "related_concepts": [
+    "VectorLayer",
+    "CsvOptions",
+    "ConversionOptions",
+    "VectorLayer.Open",
+    "VectorLayer.Convert",
+    "layer.Attributes.Any",
+    "layer.Attributes.FirstOrDefault",
+    "layer[2].GetValue",
+    "layer.Geometry.IsEmpty"
+  ],
+  "facts_confirmed_from_source": [
+    "Heading: GISNET-2041. Fix TopoJSON to CSV conversion with nested properties",
+    "Demonstrates conversion of TopoJSON files to CSV with nested attribute handling, and optionally includes geometry in WKT format using CsvOptions.",
+    "API used: Aspose.Gis.VectorLayer",
+    "API used: Aspose.Gis.Drivers",
+    "API used: Aspose.Gis.CsvOptions",
+    "API used: Aspose.Gis.ConversionOptions",
+    "API used: System.IO.Path"
+  ],
+  "facts_needing_verification": [],
+  "suggested_article_outline": [
+    "Introduction",
+    "Why this feature matters",
+    "Brief introduction of the API (install + product/docs links)",
+    "Step-by-step tutorial with a code example",
+    "Get a Free License",
+    "Free Additional Resources",
+    "Conclusion",
+    "FAQs",
+    "See Also (only if related post URLs are supplied)"
+  ],
+  "code_verification": {
+    "language": "C#",
+    "tested": false,
+    "source_verified": false,
+    "syntax_valid": true,
+    "package_name": null,
+    "package_version": null,
+    "os": null,
+    "input_file_used": null,
+    "output_file_generated": null,
+    "errors": [],
+    "notes": "Code sample could not be matched to any code block scraped from the source page; it may have been altered while the extraction step selected/transcribed it. Static syntax check passed (balanced brackets/quotes). Sandboxed execution against the real vendor SDK is not attempted: these samples reference proprietary licensed assemblies, external input files, and sometimes network services (e.g. a timestamp authority URL) that only exist in the product team's own test environment."
+  },
+  "prerequisites": [],
+  "doc_topics": []
+}

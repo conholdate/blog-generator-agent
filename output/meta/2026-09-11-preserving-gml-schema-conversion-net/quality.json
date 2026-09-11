@@ -1,0 +1,34 @@
+{
+  "scores": {
+    "technical_accuracy": 9,
+    "code_correctness": 7,
+    "original_value": 9,
+    "source_faithfulness": 10,
+    "seo_readiness": 6,
+    "readability": 6,
+    "duplication_risk": 5,
+    "missing_citations": false,
+    "unsupported_claims": false
+  },
+  "scorecard": {
+    "search_intent": 5,
+    "technical_accuracy": 20,
+    "original_value": 18,
+    "answer_first_structure": 10,
+    "seo_metadata": 7,
+    "internal_linking": 10,
+    "accessibility": 4,
+    "llm_clarity": 4,
+    "total": 78,
+    "critical_technical_error": false,
+    "passes": false
+  },
+  "publication_status": "ready_for_editor",
+  "reasons": [
+    "Meta description outside the 120-165 character range",
+    "A paragraph has more than 7 sentences",
+    "Focus keyword 'Preserving GML Schema During Conversion in net' does not appear in the introduction",
+    "QA scorecard 78/100 is below the 85 publish threshold",
+    "Code sample has not been executed in a sandbox (not feasible: proprietary SDK/license/input files)"
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "scores": {
+    "technical_accuracy": 9,
+    "code_correctness": 7,
+    "original_value": 10,
+    "source_faithfulness": 8,
+    "seo_readiness": 6,
+    "readability": 6,
+    "duplication_risk": 6,
+    "missing_citations": false,
+    "unsupported_claims": false
+  },
+  "scorecard": {
+    "search_intent": 5,
+    "technical_accuracy": 20,
+    "original_value": 20,
+    "answer_first_structure": 10,
+    "seo_metadata": 7,
+    "internal_linking": 10,
+    "accessibility": 4,
+    "llm_clarity": 3,
+    "total": 79,
+    "critical_technical_error": false,
+    "passes": false
+  },
+  "publication_status": "ready_for_editor",
+  "reasons": [
+    "Body word count (992) is far outside the ~2000-2400 word target",
+    "A paragraph has more than 7 sentences",
+    "Focus keyword 'From TopoJSON to GML: A Complete Conversion Guide' does not appear in the introduction",
+    "QA scorecard 79/100 is below the 85 publish threshold",
+    "Code sample has not been executed in a sandbox (not feasible: proprietary SDK/license/input files)",
+    "Body contains near-duplicate paragraphs"
+  ]
+}

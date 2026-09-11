@@ -1,14 +1,16 @@
 {
-  "source_url": "https://releases.aspose.com/tasks/net/release-notes/2026/aspose-tasks-for-net-26-8-release-notes/",
+  "source_url": "https://releases.aspose.com/gis/net/release-notes/2026/aspose-gis-for-net-26-6-release-notes/",
   "source_type": "release-notes",
   "publication_readiness": "draft_ready",
   "blocker_reason": null,
   "topics_generated": [
-    "Add progress notification API when loading Project from MPP format"
+    "GISNET-2051. Gml To Gml - Results Not The Same In QGIS",
+    "GISNET-2041. Fix TopoJSON to CSV conversion with nested properties",
+    "GISNET-2042. Add optional SRS transform error collection for invalid Shapefile conversion",
+    "GISNET-2047. TopoJson to Gml - QGIS does not see output"
   ],
   "rejected_sections": [
-    "All Changes",
-    "Public API and Backwards Incompatible Changes",
-    "Public API and Backwards Incompatible Changes (duplicate)"
+    "Full List of Issues Covering all Changes in this Release",
+    "Public API and Backward Incompatible Changes"
   ]
 }
