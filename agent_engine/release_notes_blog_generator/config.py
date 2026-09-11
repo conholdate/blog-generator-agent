@@ -1,7 +1,22 @@
 from __future__ import annotations
 
+from pathlib import Path
+
 from pydantic import AliasChoices, Field
 from pydantic_settings import BaseSettings, SettingsConfigDict
+
+from . import brands
+
+# Repo root = the directory holding agent_engine/ and configs/. Config, the
+# configs/ tree, and (by default) the output/ folder are all anchored here so
+# the tool behaves identically regardless of the current working directory —
+# running from another folder (e.g. a second, stale checkout) must not pick up
+# that folder's .env / configs / output.
+REPO_ROOT = Path(__file__).resolve().parents[2]
+
+# Load the repo-root .env, NOT ".env" relative to the CWD. A CWD .env is still
+# read as a lower-priority fallback, and real environment variables override both.
+_REPO_ROOT_ENV = str(REPO_ROOT / ".env")
 
 
 class Settings(BaseSettings):
@@ -9,7 +24,11 @@ class Settings(BaseSettings):
     # by field name; without it the validation_alias below is the *only* way
     # to set that field, so an explicit kwarg is silently ignored in favour
     # of whatever the environment happens to hold.
-    model_config = SettingsConfigDict(env_file=".env", extra="ignore", populate_by_name=True)
+    model_config = SettingsConfigDict(
+        env_file=(".env", _REPO_ROOT_ENV),  # later entry wins -> repo-root .env is authoritative
+        extra="ignore",
+        populate_by_name=True,
+    )
 
     llm_provider: str = "professionalize"  # "anthropic" | "openai" | "professionalize"
 
@@ -35,8 +54,16 @@ class Settings(BaseSettings):
     professionalize_llm_model: str = "gpt-oss"
     professionalize_embedding_model: str = "qwen3-embedding-8b"
 
+    # Per-brand / per-product YAML (configs/<brand>.yaml, configs/<brand>/<product>.yaml).
+    # Drives brand detection, cross-link URLs, blog domain, and metrics identity —
+    # see release_notes_blog_generator.brands.
+    configs_dir: str = brands.DEFAULT_CONFIGS_DIR
+
+    # Defaults to releases.<website> + docs.<website> for every brand in
+    # configs/, so any configured brand's release notes / docs pages are
+    # fetchable without an explicit ALLOWED_DOMAINS override.
     allowed_domains: list[str] = Field(
-        default_factory=lambda: ["releases.aspose.com", "docs.aspose.com"]
+        default_factory=lambda: brands.default_allowed_domains()
     )
     request_timeout_seconds: float = 20.0
     output_dir: str = "output"

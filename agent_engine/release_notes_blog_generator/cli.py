@@ -4,7 +4,7 @@ import argparse
 import sys
 from pathlib import Path
 
-from .config import Settings
+from .config import REPO_ROOT, Settings
 from .llm.factory import get_llm_client
 from .logging_config import configure_logging
 from .output.markdown_exporter import export
@@ -64,9 +64,15 @@ def main(argv: list[str] | None = None) -> int:
             print("No code-backed topics were found; nothing to generate.")
         return 0
 
+    # A relative output dir resolves against the repo root, not the current
+    # working directory, so drafts always land in one predictable place no
+    # matter where the CLI was invoked from. An absolute --output-dir/OUTPUT_DIR
+    # is honoured as-is.
     output_dir = Path(args.output_dir or settings.output_dir)
+    if not output_dir.is_absolute():
+        output_dir = REPO_ROOT / output_dir
     written = export(result, output_dir)
-    print(f"Generated {len(result.topics)} draft(s):")
+    print(f"Generated {len(result.topics)} draft(s) in {output_dir}:")
     for path in written:
         print(f"  {path}")
     return 0

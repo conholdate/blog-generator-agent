@@ -7,7 +7,7 @@ from collections.abc import Callable
 from dataclasses import dataclass, field
 from pathlib import Path
 
-from .. import metrics_api
+from .. import brands, metrics_api
 from ..config import Settings
 from ..llm.base import LLMClient
 from ..models.article import BlogPost
@@ -116,7 +116,7 @@ def run(
     page = fetcher.fetch_and_clean(url, settings)
     logger.info("Fetched %r (%d sections, %d with code samples)", page.title, len(page.sections), sum(1 for s in page.sections if s.code_blocks))
 
-    page_platform = detect_platform(page.url, page.title)
+    page_platform = detect_platform(page.url, page.title, settings.configs_dir)
     if page_platform:
         logger.info("Detected platform from URL: %s (%s)", page_platform.platform_name, page_platform.language)
     else:
@@ -179,7 +179,15 @@ def run(
                 logger.debug("[%d/%d] SEO issue: %s", index, total, issue)
 
             blog_post.quality = quality_gate.assess(blog_post, seo_issues)
-            logger.info("[%d/%d] Quality assessment: publication_status=%s", index, total, blog_post.quality.publication_status.value)
+            scorecard = blog_post.quality.scorecard
+            logger.info(
+                "[%d/%d] Quality assessment: publication_status=%s, QA scorecard=%s/100 (%s)",
+                index,
+                total,
+                blog_post.quality.publication_status.value,
+                scorecard.total if scorecard else "n/a",
+                "pass" if scorecard and scorecard.passes else "below threshold",
+            )
 
             topic_results.append(TopicResult(heading=planned.heading, blog_post=blog_post, seo_issues=seo_issues, cover_image_path=cover_image_path))
             items_succeeded += 1
@@ -191,10 +199,12 @@ def run(
             items_failed += 1
 
     run_platform = page_platform or run_platform_ctx
+    run_brand = brands.resolve_brand_for_url(url, settings.configs_dir)
     metrics_deliveries = metrics_api.send_run_metrics(
         run_id=run_id,
         platform=run_platform.platform_name if run_platform else "",
-        product=f"Aspose.{run_platform.product_display}" if run_platform and run_platform.product_display else "",
+        product=(run_platform.product_full_name if run_platform and run_platform.product_full_name else ""),
+        website=run_brand.website if run_brand else "",
         items_discovered=total,
         items_succeeded=items_succeeded,
         items_failed=items_failed,

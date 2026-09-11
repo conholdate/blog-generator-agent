@@ -35,8 +35,11 @@ def generate_cover_image(post: BlogPost, settings: Settings) -> Path | None:
         return None
 
     platform = post.fact_pack.platform
-    product_family = f"Aspose.{platform.product_display} for {platform.platform_name}" if platform.product_display else "Aspose"
-    output_path = Path(tempfile.gettempdir()) / f"aspose-blog-cover-{post.slug}.jpg"
+    if platform.product_full_name:
+        product_family = f"{platform.product_full_name} for {platform.platform_name}"
+    else:
+        product_family = platform.brand_name or "the product"
+    output_path = Path(tempfile.gettempdir()) / f"{platform.brand_key or 'blog'}-cover-{post.slug}.jpg"
 
     try:
         response = mcp_client.call_tool(

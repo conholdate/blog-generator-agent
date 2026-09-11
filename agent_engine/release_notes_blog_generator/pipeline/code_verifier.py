@@ -47,7 +47,7 @@ def verify(topic: VerifiableTopic, source_sections: list[Section]) -> CodeVerifi
         "Static syntax check passed (balanced brackets/quotes)."
         if syntax_valid
         else "Static syntax check found unbalanced brackets or quotes.",
-        "Sandboxed execution against the real Aspose SDK is not attempted: these samples "
+        "Sandboxed execution against the real vendor SDK is not attempted: these samples "
         "reference proprietary licensed assemblies, external input files, and sometimes "
         "network services (e.g. a timestamp authority URL) that only exist in the product "
         "team's own test environment.",
@@ -95,7 +95,7 @@ def verify_all(topics: list[VerifiableTopic], source_sections: list[Section]) ->
         "Static syntax check passed for every sample (balanced brackets/quotes)."
         if not unbalanced
         else f"Static syntax check found unbalanced brackets or quotes in: {', '.join(unbalanced)}.",
-        "Sandboxed execution against the real Aspose SDK is not attempted: these samples "
+        "Sandboxed execution against the real vendor SDK is not attempted: these samples "
         "reference proprietary licensed assemblies and external input files that only exist "
         "in the product team's own test environment.",
     ]

@@ -3,7 +3,7 @@ from __future__ import annotations
 import re
 
 from ..models.article import BlogPost
-from . import seo_rules
+from . import content_metrics, seo_rules
 
 _SLUG_PATTERN = re.compile(r"^/[a-z0-9]+(?:-[a-z0-9]+)*(?:/[a-z0-9]+(?:-[a-z0-9]+)*)*/$")
 
@@ -40,9 +40,11 @@ def review(post: BlogPost, cover_image_generated: bool = False) -> list[str]:
         issues.append("No SEO tags set")
     if not _SLUG_PATTERN.match(front_matter.url):
         issues.append(f"URL '{front_matter.url}' is not lowercase/hyphenated or contains dots")
-    full_url = seo_rules.BLOG_DOMAIN + front_matter.url
-    if len(full_url) > seo_rules.MAX_FULL_URL_LENGTH:
-        issues.append(f"URL '{full_url}' ({len(full_url)} chars) longer than {seo_rules.MAX_FULL_URL_LENGTH} characters")
+    blog_domain = post.fact_pack.platform.blog_domain
+    if blog_domain:
+        full_url = blog_domain + front_matter.url
+        if len(full_url) > seo_rules.MAX_FULL_URL_LENGTH:
+            issues.append(f"URL '{full_url}' ({len(full_url)} chars) longer than {seo_rules.MAX_FULL_URL_LENGTH} characters")
     if not front_matter.steps:
         issues.append("Front matter has no steps")
     if len(front_matter.faqs) < 3:
@@ -68,5 +70,29 @@ def review(post: BlogPost, cover_image_generated: bool = False) -> list[str]:
 
     if seo_rules.has_line_number_references(body):
         issues.append("Body explains code by line number (e.g. 'Line 5') instead of by symbol name")
+
+    if seo_rules.has_provenance_disclaimer(body):
+        issues.append(
+            "Body contains a code provenance / test-status disclaimer (e.g. 'reproduced verbatim', "
+            "'has not been executed in a sandbox'); a published tutorial must not carry one"
+        )
+    version_refs = seo_rules.version_references(body, post.fact_pack.sdk_version)
+    if version_refs:
+        issues.append(
+            f"Body ties the post to an SDK version / release ({', '.join(repr(r) for r in version_refs[:3])}); "
+            "write the feature as an established capability with no version framing"
+        )
+
+    # Structure signals that also feed the QA scorecard's "answer-first
+    # structure" and "accessibility & technical SEO" criteria (quality_gate).
+    if content_metrics.has_stray_h1(body):
+        issues.append("Body contains its own top-level '# ' heading; the renderer already adds the H1 from the title")
+    if content_metrics.heading_level_skip(body):
+        issues.append("Body heading outline skips a level (e.g. H2 straight to H4)")
+
+    keyword_analysis = post.fact_pack.keyword_analysis
+    primary_keyword = keyword_analysis.primary_keyword if keyword_analysis else ""
+    if primary_keyword and not content_metrics.focus_keyword_in_intro(body, primary_keyword):
+        issues.append(f"Focus keyword '{primary_keyword}' does not appear in the introduction")
 
     return issues
