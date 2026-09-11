@@ -750,24 +750,79 @@ class BlogOrchestrator:
                 caller="blog-writer-agent"
             )
 
-            result.final_output = strip_pre_frontmatter_preamble(result.final_output)
-            result.final_output = repair_code_fences(result.final_output)
-
-            fixed_content, was_fixed = await validate_and_fix_meta_description(result.final_output, metrics=self.metrics)
-            if was_fixed:
-                result.final_output = fixed_content
-
-            result.final_output = clean_ai_generated_markdown(result.final_output)
-            result.final_output = validate_markdown_links(result.final_output)
-            print(f" Content Generated, Performing SEO Audit Now --", flush=True)
-
             targets = {
                 "primary_keyword": f_keywords[0],
                 "target_keyword_count": 5,
                 "min_words": settings.NUMBER_OF_BLOG_WORDS
             }
-            report = validate_seo_content(result.final_output, targets)
-            print(f" Audit completed -- {report}", flush=True)
+
+            async def finalize_and_audit(content: str):
+                """Same pipeline as the autonomous path: strip preamble, repair
+                fences, fix meta description, clean markdown, then SEO-audit."""
+                content = strip_pre_frontmatter_preamble(content)
+                content = repair_code_fences(content)
+                fixed, was_fixed = await validate_and_fix_meta_description(content, metrics=self.metrics)
+                if was_fixed:
+                    content = fixed
+                content = clean_ai_generated_markdown(content)
+                content = validate_markdown_links(content)
+                return content, validate_seo_content(content, targets)
+
+            result.final_output, report = await finalize_and_audit(result.final_output)
+            print(f" Content Generated, SEO Audit completed -- {report}", flush=True)
+
+            # ── Bounded SEO revision loop (same shape as the autonomous path) ──
+            # Manual mode never silently skips a run - a still-failing audit
+            # after MAX_SEO_REVISIONS attempts is surfaced via blocked.txt so
+            # the requester still gets a PR, just flagged as blocked.
+            revision_attempt = 0
+            while report.get("status") != "PASS" and revision_attempt < MAX_SEO_REVISIONS:
+                revision_brief = build_seo_revision_brief(report, targets)
+                if not revision_brief:
+                    print("ℹ️  No actionable SEO fixes to feed back; stopping revision loop.", flush=True)
+                    break
+
+                revision_attempt += 1
+                print(
+                    f"🔁 SEO audit {report.get('status')} (score={report.get('score')}). "
+                    f"Revision attempt {revision_attempt}/{MAX_SEO_REVISIONS}...",
+                    flush=True,
+                )
+
+                revision_context = (
+                    "Below is the current blog post draft. Revise it per the SEO "
+                    "revision requirements in your instructions and return the "
+                    "COMPLETE corrected post (frontmatter + body) with nothing else.\n\n"
+                    f"{result.final_output}"
+                )
+                rev_result = await llm_service.run_agent(
+                    instructions=instructions + "\n\n" + revision_brief,
+                    context=revision_context,
+                    agent_name="blog-writer-revision",
+                    temperature=0.4,
+                    max_turns=10,
+                    max_tokens=16000,
+                )
+                if not rev_result or not rev_result.final_output:
+                    print("⚠️  Revision returned empty output; keeping previous draft.", flush=True)
+                    break
+
+                self.metrics.record_llm_usage(
+                    input_tokens=rev_result.token_usage["input_tokens"],
+                    output_tokens=rev_result.token_usage["output_tokens"],
+                    caller="blog-writer-revision",
+                )
+                result.final_output, report = await finalize_and_audit(rev_result.final_output)
+                print(f" Re-audit after revision {revision_attempt} -- {report}", flush=True)
+            # ────────────────────────────────────────────────────────────────
+
+            blocked_reason = None
+            if report.get("status") != "PASS":
+                blocked_reason = (
+                    f"SEO audit did not pass after {revision_attempt} revision attempt(s) "
+                    f"(status={report.get('status')}, score={report.get('score')})."
+                )
+                print(f"⚠️  {blocked_reason} Draft will still be opened for review, marked blocked.", flush=True)
 
             blog_post_metadata = extract_blog_metadata(result.final_output)
 
@@ -811,6 +866,10 @@ class BlogOrchestrator:
             with open(os.path.join(base_dir, "product_name.txt"), "w") as f:
                 f.write(product_info.get("urlPrefix", product))
 
+            if blocked_reason:
+                with open(os.path.join(base_dir, "blocked.txt"), "w") as f:
+                    f.write(blocked_reason)
+
             self.metrics.record_success(f"Blog post created: {filepath}")
             self.metrics.end_job()
 
@@ -841,7 +900,8 @@ class BlogOrchestrator:
                 "duration_ms": self.metrics.run_duration_ms,
                 "token_usage": self.metrics.token_usage["total_tokens"],
                 "api_call_count": self.metrics.api_call_count,
-                "status": "success"
+                "status": "blocked" if blocked_reason else "success",
+                "blocked_reason": blocked_reason,
             }
 
         except Exception as e:
@@ -853,6 +913,149 @@ class BlogOrchestrator:
             self.metrics.record_failure(str(e))
             self.metrics.end_job()
             self.metrics.print_summary()
+
+            return {
+                "status": "error",
+                "message": str(e),
+                "run_id": self.metrics.run_id,
+                "token_usage": self.metrics.token_usage["total_tokens"],
+                "api_call_count": self.metrics.api_call_count,
+            }
+
+    async def revise_blog_draft(self, draft_path: str, instruction: str):
+        """
+        Apply one targeted, human-instructed edit to an already-generated
+        draft in place, instead of regenerating the whole post. Used by the
+        refine flow: a reviewer reads an open PR and asks for a specific
+        change ("shorten the intro", "the licensing section is wrong").
+
+        This is deliberately a single LLM edit pass + the same deterministic
+        cleanup already used elsewhere (fence repair, meta description fix,
+        markdown cleanup, link validation) - no bounded SEO revision loop,
+        since a targeted edit isn't a fresh generation and the original
+        primary keyword isn't recoverable from the saved file alone. The SEO
+        audit still runs and is reported for visibility, but only blocks the
+        run if the audit provides an actual error, not on score alone.
+        """
+        set_tracing_disabled(disabled=True)
+        self.metrics.start_job(product="revise", platform="", website=self.brand)
+
+        base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+        def write_status(status: str, message: str = "", **extra):
+            """Deterministic exit signal for the calling workflow to read -
+            it can't rely on the return value (this runs as a CLI subprocess)
+            or on stdout parsing, and process exit code alone can't carry a
+            human-readable reason."""
+            payload = {"status": status, "message": message, **extra}
+            with open(os.path.join(base_dir, "revise_status.json"), "w") as f:
+                json.dump(payload, f)
+
+        try:
+            if not os.path.exists(draft_path):
+                message = f"Draft not found at {draft_path}"
+                print(f"❌ {message}", flush=True)
+                self.metrics.record_failure(message)
+                self.metrics.end_job()
+                write_status("error", message)
+                return {"status": "error", "message": message}
+
+            with open(draft_path, "r", encoding="utf-8") as f:
+                current_content = f.read()
+
+            revise_instructions = (
+                "You are editing an existing published-quality blog post. Apply "
+                "ONLY the requested change below - do not rewrite unrelated "
+                "sections, do not change the frontmatter fields other than "
+                "what the instruction requires, do not alter code blocks unless "
+                "the instruction is specifically about the code. Preserve all "
+                "<!--more--> markers, headings structure, and markdown link "
+                "formatting exactly as they are elsewhere in the post. Return "
+                "the COMPLETE post (frontmatter + body) with nothing else - no "
+                "preamble, no explanation, no code fences wrapping the output.\n\n"
+                f"REQUESTED CHANGE:\n{instruction}"
+            )
+
+            result = await llm_service.run_agent(
+                instructions=revise_instructions,
+                context=current_content,
+                agent_name="blog-writer-revise",
+                temperature=0.3,
+                max_turns=10,
+                max_tokens=16000,
+            )
+            if not result or not result.final_output:
+                message = "LLM returned empty output for the revision"
+                print(f"⚠️  {message}", flush=True)
+                self.metrics.record_failure(message)
+                self.metrics.end_job()
+                write_status("error", message)
+                return {"status": "error", "message": message}
+
+            self.metrics.record_llm_usage(
+                input_tokens=result.token_usage["input_tokens"],
+                output_tokens=result.token_usage["output_tokens"],
+                caller="blog-writer-revise",
+            )
+
+            revised_content = strip_pre_frontmatter_preamble(result.final_output)
+            revised_content = repair_code_fences(revised_content)
+            fixed, was_fixed = await validate_and_fix_meta_description(revised_content, metrics=self.metrics)
+            if was_fixed:
+                revised_content = fixed
+            revised_content = clean_ai_generated_markdown(revised_content)
+            revised_content = validate_markdown_links(revised_content)
+            revised_content = strip_snippet_markers(revised_content)
+
+            fm = extract_blog_metadata(revised_content)
+            primary_keyword_guess = fm.get("title", "")
+            report = validate_seo_content(
+                revised_content,
+                {"primary_keyword": primary_keyword_guess, "target_keyword_count": 5, "min_words": settings.NUMBER_OF_BLOG_WORDS},
+            )
+            print(f" Re-audit after revision (informational) -- {report}", flush=True)
+
+            blocked_reason = report.get("error")
+            if blocked_reason:
+                print(f"⚠️  Revised content failed to parse: {blocked_reason}", flush=True)
+                self.metrics.record_failure(blocked_reason)
+                self.metrics.end_job()
+                write_status("error", blocked_reason)
+                return {"status": "error", "message": blocked_reason}
+
+            with open(draft_path, "w", encoding="utf-8") as f:
+                f.write(revised_content)
+
+            self.metrics.record_success(f"Draft revised: {draft_path}")
+            self.metrics.end_job()
+            print(f"\n✅ Draft revised: {draft_path}\n", flush=True)
+
+            write_status(
+                "success",
+                f"Draft revised per: {instruction}",
+                SEO_Score=report.get("score"),
+                SEO_status=report.get("status"),
+            )
+            return {
+                "status": "success",
+                "draft_path": draft_path,
+                "instruction": instruction,
+                "SEO_Score": report.get("score"),
+                "SEO_status": report.get("status"),
+                "run_id": self.metrics.run_id,
+                "token_usage": self.metrics.token_usage["total_tokens"],
+                "api_call_count": self.metrics.api_call_count,
+            }
+
+        except Exception as e:
+            import traceback
+            print(f"\n Draft revision failed!", flush=True)
+            print(f"Error: {e}", flush=True)
+            traceback.print_exc()
+
+            self.metrics.record_failure(str(e))
+            self.metrics.end_job()
+            write_status("error", str(e))
 
             return {
                 "status": "error",

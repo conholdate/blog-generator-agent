@@ -138,6 +138,19 @@ jobs:
             echo "blog_generated=false" >> $GITHUB_OUTPUT
           fi
 
+          if [ -f agent_engine/blog_generator/blocked.txt ]; then
+            BLOCKED_REASON=$(cat agent_engine/blog_generator/blocked.txt)
+            echo "blocked=true" >> $GITHUB_OUTPUT
+            {
+              echo "blocked_reason<<EOF"
+              echo "$BLOCKED_REASON"
+              echo "EOF"
+            } >> $GITHUB_OUTPUT
+            echo "⚠️ Draft is blocked: $BLOCKED_REASON"
+          else
+            echo "blocked=false" >> $GITHUB_OUTPUT
+          fi
+
       - name: Find generated blog folder
         id: find_blog
         if: steps.read_product.outputs.blog_generated == 'true'
@@ -232,6 +245,8 @@ jobs:
           REQUESTED_BY: ${{ github.event.client_payload.requested_by }}
           TOPIC: ${{ github.event.client_payload.topic }}
           GH_TOKEN: ${{ secrets.REPO_PAT }}
+          BLOCKED: ${{ steps.read_product.outputs.blocked }}
+          BLOCKED_REASON: ${{ steps.read_product.outputs.blocked_reason }}
         run: |
           git config --global user.email "action@github.com"
           git config --global user.name "GitHub Action"
@@ -302,13 +317,24 @@ jobs:
 
           PR_NUMBER=$(gh pr list --repo aspose-cloud/aspose-cloud-blog --head "$BRANCH_NAME" --json number --jq '.[0].number' 2>/dev/null || echo "")
 
+          PR_TITLE="Add blog post: $BLOG_FOLDER_NAME"
+          if [ "$BLOCKED" = "true" ]; then
+            PR_TITLE="[BLOCKED] $PR_TITLE"
+          fi
+
+          PR_BODY=$(printf '## Generated blog post (dashboard request)\n\n**Topic:** %s\n**Product:** %s\n**Path:** `%s/%s`\n**Requested by:** @%s\n**Run:** #%s\n\n---\n\nReview the rendered `index.md`, then approve + merge to publish. Comment `/revise <instruction>` support comes later.' "$TOPIC" "$PRODUCT_NAME" "$TARGET_DIR" "$BLOG_FOLDER_NAME" "$REQUESTED_BY" "${{ github.run_number }}")
+
+          if [ "$BLOCKED" = "true" ]; then
+            PR_BODY=$(printf '⚠️ **BLOCKED — SEO audit did not pass.** Reason:\n\n> %s\n\nThis draft still needs manual fixes before it should be merged.\n\n---\n\n%s' "$BLOCKED_REASON" "$PR_BODY")
+          fi
+
           if [ -z "$PR_NUMBER" ]; then
             gh pr create \
               --repo aspose-cloud/aspose-cloud-blog \
               --base master \
               --head "$BRANCH_NAME" \
-              --title "Add blog post: $BLOG_FOLDER_NAME" \
-              --body "$(printf '## Generated blog post (dashboard request)\n\n**Topic:** %s\n**Product:** %s\n**Path:** `%s/%s`\n**Requested by:** @%s\n**Run:** #%s\n\n---\n\nReview the rendered `index.md`, then approve + merge to publish. Comment `/revise <instruction>` support comes later.' "$TOPIC" "$PRODUCT_NAME" "$TARGET_DIR" "$BLOG_FOLDER_NAME" "$REQUESTED_BY" "${{ github.run_number }}")" \
+              --title "$PR_TITLE" \
+              --body "$PR_BODY" \
               || { echo "❌ Failed to create PR"; exit 1; }
             PR_NUMBER=$(gh pr list --repo aspose-cloud/aspose-cloud-blog --head "$BRANCH_NAME" --json number --jq '.[0].number' 2>/dev/null || echo "")
           fi
@@ -318,13 +344,23 @@ jobs:
           # Best-effort: label + assign the requester (both no-op if not permitted).
           gh label create dashboard-request --repo aspose-cloud/aspose-cloud-blog --color 1D76DB --force >/dev/null 2>&1 || true
           gh pr edit "$PR_NUMBER" --repo aspose-cloud/aspose-cloud-blog --add-label dashboard-request >/dev/null 2>&1 || true
+          if [ "$BLOCKED" = "true" ]; then
+            gh label create blocked --repo aspose-cloud/aspose-cloud-blog --color D93F0B --force >/dev/null 2>&1 || true
+            gh pr edit "$PR_NUMBER" --repo aspose-cloud/aspose-cloud-blog --add-label blocked >/dev/null 2>&1 || true
+          fi
           if [ -n "$REQUESTED_BY" ]; then
             gh pr edit "$PR_NUMBER" --repo aspose-cloud/aspose-cloud-blog --add-assignee "$REQUESTED_BY" >/dev/null 2>&1 || true
           fi
 
           PR_URL="https://github.com/aspose-cloud/aspose-cloud-blog/pull/$PR_NUMBER"
           {
-            echo "### 📝 Blog draft ready for review"
+            if [ "$BLOCKED" = "true" ]; then
+              echo "### ⚠️ Blog draft BLOCKED"
+              echo ""
+              echo "Reason: $BLOCKED_REASON"
+            else
+              echo "### 📝 Blog draft ready for review"
+            fi
             echo ""
             echo "| | |"
             echo "|---|---|"

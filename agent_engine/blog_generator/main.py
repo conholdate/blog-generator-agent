@@ -21,11 +21,27 @@ def main():
     parser.add_argument("--merge-serp", type=str, default="false")
     parser.add_argument("--layout", type=str, default="")
 
+    # Revise mode: edit an already-generated draft in place instead of
+    # generating a new one. Mutually exclusive with the topic/sheet flows.
+    parser.add_argument("--revise", action="store_true")
+    parser.add_argument("--draft-path", type=str, default="")
+    parser.add_argument("--instruction", type=str, default="")
+
     args = parser.parse_args()
 
     orchestrator = BlogOrchestrator(brand=args.brand)
 
-    if args.topic.strip():
+    if args.revise:
+        if not args.draft_path.strip() or not args.instruction.strip():
+            parser.error("--draft-path and --instruction are required with --revise")
+
+        result = asyncio.run(
+            orchestrator.revise_blog_draft(
+                draft_path=args.draft_path,
+                instruction=args.instruction,
+            )
+        )
+    elif args.topic.strip():
         if not args.product.strip() or not args.platform.strip():
             parser.error("--product and --platform are required when --topic is provided")
 

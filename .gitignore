@@ -14,6 +14,8 @@ keys/
 /outputs/_repos
 outputs/aspose/tex/cache/embeddings.sqlite
 agent_engine/blog_generator/product_name.txt
+agent_engine/blog_generator/blocked.txt
+agent_engine/blog_generator/revise_status.json
 
 # Local Claude Code config
 .claude/
