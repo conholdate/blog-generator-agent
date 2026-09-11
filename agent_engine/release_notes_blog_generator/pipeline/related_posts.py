@@ -9,17 +9,16 @@ from bs4 import BeautifulSoup
 
 from ..config import Settings
 from ..models.article import BlogPost
-from . import seo_rules
 
 logger = logging.getLogger(__name__)
 
-# Aspose's own product docs/URLs are hardcoded constants throughout this
-# pipeline (see platform.py) rather than routed through settings.allowed_domains
-# — that allowlist gates the *user-supplied* release-notes URL (a security
-# control, see fetcher.py/security_gate.py), not the pipeline's own fixed,
-# non-user-controlled fetches. category_url here is built from BLOG_DOMAIN
-# (a constant) plus platform.product_key (parsed from the already-validated
-# source URL earlier in the run), never from raw user input.
+# The brand's blog/docs/product URLs are derived deterministically in
+# platform.py (from the brand config + the already-validated source URL),
+# not routed through settings.allowed_domains — that allowlist gates the
+# *user-supplied* release-notes URL (a security control, see
+# fetcher.py/security_gate.py), not the pipeline's own fixed,
+# non-user-controlled fetches. category_url here is platform.blog_category_url,
+# built from those trusted values, never from raw user input.
 _LANGUAGE_ALIASES: dict[str, list[str]] = {
     "csharp": [".net", "c#", "csharp"],
     "python": ["python"],
@@ -54,19 +53,19 @@ def find_related_posts(post: BlogPost, settings: Settings) -> list[RelatedPost]:
         return []
 
     platform = post.fact_pack.platform
-    if not platform.product_key:
+    if not platform.product_key or not platform.blog_domain or not platform.blog_category_url:
         return []
 
-    # blog.aspose.com's product-family category page, e.g.
+    # The brand blog's product-family category page, e.g.
     # https://blog.aspose.com/categories/aspose.pdf-product-family/ — NOT
     # https://blog.aspose.com/pdf/, which is a meta-refresh redirect stub
     # (no HTTP 3xx, so httpx's follow_redirects doesn't help) that resolves
-    # to this same URL. Matches the "Aspose.<product> Product Family"
+    # to this same URL. Matches the "<Brand>.<product> Product Family"
     # category string writer.py already puts in front matter.
-    category_url = f"{seo_rules.BLOG_DOMAIN}/categories/aspose.{platform.product_key}-product-family/"
+    category_url = platform.blog_category_url
 
     try:
-        candidates = _fetch_category_posts(category_url, settings)
+        candidates = _fetch_category_posts(category_url, platform.blog_domain, settings)
     except (httpx.HTTPError, OSError) as exc:
         logger.warning("Related posts skipped: could not fetch %s (%s)", category_url, exc)
         return []
@@ -75,7 +74,7 @@ def find_related_posts(post: BlogPost, settings: Settings) -> list[RelatedPost]:
         logger.info("Related posts skipped: no candidate posts found at %s", category_url)
         return []
 
-    own_url = (seo_rules.BLOG_DOMAIN + post.front_matter.url).rstrip("/")
+    own_url = (platform.blog_domain + post.front_matter.url).rstrip("/")
     language_terms = _LANGUAGE_ALIASES.get(platform.language_tag, [platform.language_tag] if platform.language_tag else [])
 
     return rank_related_posts(
@@ -124,16 +123,16 @@ def append_read_more_section(body_markdown: str, related: list[RelatedPost]) -> 
     return f"{body_markdown.rstrip()}\n\n" + "\n".join(lines) + "\n"
 
 
-def _fetch_category_posts(category_url: str, settings: Settings) -> list[RelatedPost]:
+def _fetch_category_posts(category_url: str, blog_domain: str, settings: Settings) -> list[RelatedPost]:
     with httpx.Client(follow_redirects=True, timeout=settings.request_timeout_seconds) as client:
         response = client.get(category_url, headers={"User-Agent": "release-notes-blog-generator/0.1"})
         response.raise_for_status()
-    return parse_category_posts(response.text)
+    return parse_category_posts(response.text, blog_domain)
 
 
-def parse_category_posts(html: str) -> list[RelatedPost]:
+def parse_category_posts(html: str, blog_domain: str = "") -> list[RelatedPost]:
     """Extracts post title/URL pairs from a Hugo PaperMod-theme category
-    page (blog.aspose.com's theme) — same selectors as the reference
+    page (the brand blog's theme) — same selectors as the reference
     implementation in blog-generator-agent/mcp-servers/related-topics.
     """
     soup = BeautifulSoup(html, "lxml")
@@ -145,7 +144,7 @@ def parse_category_posts(html: str) -> list[RelatedPost]:
             continue
         href = link_tag.get("href") or ""
         if href.startswith("/"):
-            href = seo_rules.BLOG_DOMAIN + href
+            href = blog_domain + href
         title = title_tag.get_text(strip=True)
         if title and href:
             posts.append(RelatedPost(title=title, url=href))

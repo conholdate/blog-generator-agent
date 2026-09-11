@@ -23,6 +23,64 @@ _PROMPT_PATH = _PROMPTS_DIR / "writer_agent.md"
 # one post covering every topic on a documentation page instead of one post
 # per release-notes feature. See prompts/docs_writer_agent.md.
 DOCS_PROMPT_PATH = _PROMPTS_DIR / "docs_writer_agent.md"
+
+# The team's "blog-writing" skill (packaged bundle, unpacked into prompts/).
+# Its SKILL.md + the two draft-time reference files are appended to whichever
+# writer brief is in use, behind a scope note that keeps this pipeline's rules
+# authoritative on any conflict. The other reference files in the bundle
+# (hugo-front-matter, pre-publish-checklist, editorial-review-prompt) cover
+# stages this pipeline owns deterministically or a review-only flow, so they
+# are deliberately not fed to the writer.
+_SKILL_DIR = _PROMPTS_DIR / "blog-writing"
+_SKILL_REFERENCE_FILES = ("structure-and-style.md", "aspose-article-brief.md")
+_SKILL_SCOPE_NOTE = """\
+================================================================================
+EDITORIAL CRAFT GUIDANCE - the team "blog-writing" skill
+================================================================================
+Everything above is authoritative and wins on any conflict. The skill below
+adds craft guidance; apply it *within* the rules and structure already given.
+
+How to read it:
+- This writer step runs once, unattended. There is no user to consult and no
+  separate outline-approval round. Treat the skill's workflow steps and briefs
+  as a description of what a finished post must satisfy, not as steps to run.
+- You still output only the JSON fields specified above. Ignore the skill's
+  "Output conventions", Hugo front matter, file/bundle layout, and cover-image
+  guidance - the pipeline assembles all of that deterministically.
+- Keep the fixed section list above exactly as specified: do not add, remove,
+  or reorder top-level sections. In particular do not add a standalone "Key
+  Takeaways" section, a dedicated CTA section, or an internal-links / "See
+  Also" section - the fact pack carries no URLs for them.
+- Your only source of truth is the supplied fact pack. Where the skill says to
+  verify against a `docs/` folder, verify against the fact pack instead, and
+  never browse or invent beyond it.
+- Keep the word-count target stated above; the skill's "shorter is fine"
+  remark does not override it.
+- The rules above forbid naming the SDK version a feature shipped in or
+  framing it as new. That wins over the skill's "date version-dependent
+  claims" / "pin versions" advice: write about the API as an established,
+  current capability with no version or release framing.
+- The rules above also forbid provenance and test-status notes in the
+  article. That wins over the skill's "verifiable evidence" framing for the
+  code sample specifically - present it as an ordinary working example.
+
+What to take from the skill:
+- Open every section with one or two sentences that directly answer its
+  heading and survive being read out of context.
+- One idea per sentence; name the subject instead of "this"/"it"/"that";
+  drop filler and qualifiers.
+- Phrase headings as the question the reader is asking - still in Title Case.
+- Add what the docs don't: real exception names, runtime behaviour and
+  gotchas, trade-offs, an explicit API-choice rationale, failure modes, a
+  plainly stated recommendation.
+- Keep terminology consistent; never repeat a keyword just to hit density.
+- Make the FAQ genuinely useful: questions phrased the way a developer would
+  ask them, each answer self-contained and answering in its first sentence,
+  none duplicating an H2.
+- Before finishing, self-check against the 100-point QA scorecard; a
+  technically wrong post fails regardless of score.
+================================================================================
+"""
 _MAX_TAGS = 10
 _MAX_COMPLETENESS_RETRIES = 1
 _MIN_SLUG_LENGTH = 15
@@ -62,7 +120,7 @@ def write_article(
     — this has been observed in practice, and without it the incomplete
     draft would ship with only an advisory note in quality.json.
     """
-    system_prompt = (prompt_path or _PROMPT_PATH).read_text(encoding="utf-8")
+    system_prompt = _build_system_prompt(prompt_path or _PROMPT_PATH)
     user_prompt = fact_pack.model_dump_json(indent=2)
     result = llm.complete_structured(system=system_prompt, user=user_prompt, schema=_WriterOutput)
 
@@ -85,6 +143,41 @@ def write_article(
             logger.warning("Writer output still incomplete after retry (%s); shipping as-is for seo_editor to flag", "; ".join(remaining))
 
     return _assemble_blog_post(result, fact_pack, settings)
+
+
+def _build_system_prompt(prompt_path: Path) -> str:
+    """Writer brief + the blog-writing skill's craft guidance.
+
+    The skill files ship inside `prompts/blog-writing/` so they travel with the
+    package wherever it is copied. If they are missing for any reason the writer
+    falls back to the base brief alone rather than failing the run.
+    """
+    base = prompt_path.read_text(encoding="utf-8")
+    skill = _load_skill_guidance()
+    return f"{base}\n\n{skill}" if skill else base
+
+
+def _load_skill_guidance() -> str | None:
+    try:
+        skill_md = _strip_front_matter(_SKILL_DIR.joinpath("SKILL.md").read_text(encoding="utf-8"))
+        references = [
+            (_SKILL_DIR / "references" / name).read_text(encoding="utf-8")
+            for name in _SKILL_REFERENCE_FILES
+        ]
+    except OSError as exc:
+        logger.warning("blog-writing skill not loaded (%s); using base writer brief only", exc)
+        return None
+    return "\n\n".join([_SKILL_SCOPE_NOTE, skill_md, *references])
+
+
+def _strip_front_matter(text: str) -> str:
+    """Drop a leading `--- ... ---` YAML block (skill-discovery metadata that
+    means nothing once the file is inlined into a prompt)."""
+    if text.startswith("---"):
+        end = text.find("\n---", 3)
+        if end != -1:
+            return text[end + len("\n---") :].lstrip("\n")
+    return text
 
 
 def _completeness_issues(body: str) -> list[str]:
@@ -110,10 +203,10 @@ def _assemble_blog_post(result: _WriterOutput, fact_pack: FactPack, settings: Se
     title = keyword_analysis.title if keyword_analysis and keyword_analysis.title else result.title
     tags = _tags_from_keyword_analysis(keyword_analysis) if keyword_analysis else _normalize_tags(result.tags)
     raw_slug = title if keyword_analysis and keyword_analysis.title else (result.slug or result.title)
-    slug = _fit_slug_to_url_budget(slugify(raw_slug), platform.product_key)
+    slug = _fit_slug_to_url_budget(slugify(raw_slug), platform.product_key, platform.blog_domain)
 
     url = f"/{platform.product_key}/{slug}/" if platform.product_key else f"/{slug}/"
-    categories = [f"Aspose.{platform.product_display} Product Family"] if platform.product_display else []
+    categories = [f"{platform.product_full_name} Product Family"] if platform.product_full_name else []
 
     front_matter = SeoFrontMatter(
         title=title,
@@ -146,14 +239,18 @@ def _assemble_blog_post(result: _WriterOutput, fact_pack: FactPack, settings: Se
     )
 
 
-def _fit_slug_to_url_budget(slug: str, product_key: str) -> str:
+def _fit_slug_to_url_budget(slug: str, product_key: str, blog_domain: str = "") -> str:
     """Deterministic safety net behind the prompt's own slug-length rule:
     the LLM doesn't always keep the URL under seo_editor's budget (e.g. a
     long feature name reproduced almost verbatim), so truncate on word
     boundaries here rather than relying purely on compliance.
+
+    `blog_domain` is the brand's published blog host; when it is unknown (the
+    fallback platform), the full-URL budget can't be enforced and only the
+    _MIN_SLUG_LENGTH floor applies.
     """
     prefix = f"/{product_key}/" if product_key else "/"
-    budget = seo_rules.MAX_FULL_URL_LENGTH - len(seo_rules.BLOG_DOMAIN) - len(prefix) - len("/")
+    budget = seo_rules.MAX_FULL_URL_LENGTH - len(blog_domain) - len(prefix) - len("/")
     budget = max(budget, _MIN_SLUG_LENGTH)
     if len(slug) <= budget:
         return slug

@@ -106,6 +106,7 @@ def send_run_metrics(
     run_id: str,
     platform: str,
     product: str,
+    website: str = "",
     items_discovered: int,
     items_succeeded: int,
     items_failed: int,
@@ -138,6 +139,10 @@ def send_run_metrics(
         "token_usage": token_usage,
         "api_calls_count": api_calls_count,
     }
+    # Only carry `website` when the caller resolved a brand for the run;
+    # otherwise normalized_metrics_payload falls back to the WEBSITE constant.
+    if website:
+        metrics["website"] = website
     if not metrics_enabled():
         if log:
             log(

@@ -39,7 +39,7 @@ def analyze_topic(topic: TitledTopic, platform: PlatformContext, settings: Setti
         logger.debug("Keyword analyzer disabled (keyword_analyzer_enabled=False)")
         return None
 
-    product = f"Aspose.{platform.product_display}" if platform.product_display else "Aspose"
+    product = platform.product_full_name or platform.brand_name or platform.product_display
     logger.info(
         "Keyword analyzer input: topic=%r product=%r platform=%r",
         topic.suggested_title, product, platform.platform_key,

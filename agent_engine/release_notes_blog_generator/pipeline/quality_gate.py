@@ -1,7 +1,12 @@
 from __future__ import annotations
 
 from ..models.article import BlogPost
-from ..models.quality import PublicationStatus, QualityAssessment, QualityScores
+from ..models.quality import (
+    QA_SCORECARD_PASS_THRESHOLD,
+    PublicationStatus,
+    QualityAssessment,
+    QualityScores,
+)
 from . import content_metrics
 
 
@@ -44,7 +49,15 @@ def assess(post: BlogPost, seo_issues: list[str]) -> QualityAssessment:
         unsupported_claims=unsupported_claims,
     )
 
+    scorecard = content_metrics.qa_scorecard(scores, body, fact_pack, len(seo_issues))
+
     reasons = list(seo_issues)
+    if scorecard.total < QA_SCORECARD_PASS_THRESHOLD:
+        reasons.append(
+            f"QA scorecard {scorecard.total}/100 is below the {QA_SCORECARD_PASS_THRESHOLD} publish threshold"
+        )
+    if scorecard.critical_technical_error:
+        reasons.append("QA scorecard: critical technical error — a technically unverified post cannot pass on SEO")
     if not verification.source_verified:
         reasons.append("Code sample could not be matched verbatim to the product team's release notes page")
     if not verification.syntax_valid:
@@ -61,9 +74,12 @@ def assess(post: BlogPost, seo_issues: list[str]) -> QualityAssessment:
         status = PublicationStatus.NEEDS_CODE_REVIEW
     elif unsupported_claims:
         status = PublicationStatus.NEEDS_FACT_CHECK
-    elif seo_issues:
+    elif seo_issues or not scorecard.passes:
+        # A sub-threshold QA scorecard is an editorial signal, handled the same
+        # way as an seo_editor finding: a human editor looks before publish,
+        # rather than the draft sitting in draft_generated as if nothing flagged.
         status = PublicationStatus.READY_FOR_EDITOR
     else:
         status = PublicationStatus.DRAFT_GENERATED
 
-    return QualityAssessment(scores=scores, publication_status=status, reasons=reasons)
+    return QualityAssessment(scores=scores, scorecard=scorecard, publication_status=status, reasons=reasons)

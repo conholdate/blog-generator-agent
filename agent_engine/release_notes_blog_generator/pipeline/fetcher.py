@@ -9,6 +9,7 @@ import httpx
 from bs4 import BeautifulSoup
 from markdownify import markdownify as html_to_markdown
 
+from .. import brands
 from ..config import Settings
 
 logger = logging.getLogger(__name__)
@@ -67,12 +68,19 @@ def fetch_and_clean(url: str, settings: Settings) -> FetchedPage:
     """
     if not url.lower().startswith("https://"):
         raise UrlNotAllowedError("Only https URLs are allowed")
-    _check_allowlist(url, settings.allowed_domains)
+    # A URL on a configured brand's own release/docs host is always allowed —
+    # matching a configs/<brand>.yaml entry is the authorization — on top of
+    # whatever ALLOWED_DOMAINS is set to. (An empty allowlist already means
+    # "allow all", so only extend a non-empty one.)
+    allowed = list(settings.allowed_domains)
+    if allowed:
+        allowed += brands.allowed_domains_for_url(url, settings.configs_dir)
+    _check_allowlist(url, allowed)
 
     with httpx.Client(follow_redirects=True, timeout=settings.request_timeout_seconds) as client:
         response = client.get(url, headers={"User-Agent": "release-notes-blog-generator/0.1"})
         response.raise_for_status()
-        _check_allowlist(str(response.url), settings.allowed_domains)
+        _check_allowlist(str(response.url), allowed)
         if str(response.url) != url:
             logger.debug("Followed redirect: %s -> %s", url, response.url)
         logger.debug("Fetched %d bytes, status %d", len(response.content), response.status_code)

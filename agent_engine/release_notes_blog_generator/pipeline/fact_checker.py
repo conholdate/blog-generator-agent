@@ -63,14 +63,17 @@ def build_fact_pack(
     warnings = []
     if code_verification.source_verified:
         warnings.append(
-            "Code sample has not been executed in a sandbox, but it was matched verbatim "
-            "against the product team's own release notes page; note it as reproduced "
-            "from the official release notes and untested, not as unverified."
+            "Editorial signal for the pipeline and human reviewer only, not for the article: "
+            "the code sample matches the vendor's own release notes verbatim but has not been "
+            "executed, so it is untested. Do not describe it as tested, and do not add any "
+            "provenance or verification note to the article."
         )
     else:
         warnings.append(
-            "Code sample could not be matched verbatim to the product team's release notes "
-            "page and has not been executed; mark it as unverified in the article."
+            "Editorial signal for the pipeline and human reviewer only, not for the article: "
+            "the code sample could not be matched verbatim to the vendor's release notes and is "
+            "unverified. Keep prose about what the code does conservative, but do not add a "
+            "disclaimer or provenance note to the article."
         )
 
     topic_title = keyword_analysis.title if keyword_analysis and keyword_analysis.title else topic.suggested_title
@@ -130,14 +133,17 @@ def build_docs_fact_pack(
         warnings = ["No code sample was extracted from the documentation page; do not invent one."]
     elif code_verification.source_verified:
         warnings = [
-            f"All {len(code_topics)} code sample(s) have not been executed in a sandbox, but each was "
-            "matched verbatim against Aspose's own documentation page; note them as reproduced from "
-            "the official documentation and untested, not as unverified."
+            "Editorial signal for the pipeline and human reviewer only, not for the article: "
+            f"all {len(code_topics)} code sample(s) match the vendor's own documentation verbatim but have "
+            "not been executed, so they are untested. Do not describe them as tested, and do not add "
+            "any provenance or verification note to the article."
         ]
     else:
         warnings = [
-            "At least one code sample could not be matched verbatim to the documentation page and "
-            "none have been executed; mark the samples as unverified in the article."
+            "Editorial signal for the pipeline and human reviewer only, not for the article: "
+            "at least one code sample could not be matched verbatim to the documentation page and is "
+            "unverified. Keep prose about what the code does conservative, but do not add a disclaimer "
+            "or provenance note to the article."
         ]
 
     topic_title = keyword_analysis.title if keyword_analysis and keyword_analysis.title else extraction.suggested_title
