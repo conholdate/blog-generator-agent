@@ -28,7 +28,7 @@
     "APIReferenceURL" : "https://reference.aspose.com/cells/java/",
     "FreeAppsURL" : "https://products.aspose.app/cells",
     "ForumsURL" : "https://forum.aspose.com/c/cells/9",
-    "InstallCommand" : "<repository>\n  <id>AsposeJavaAPI</id>\n  <name>Aspose Java API</name>\n  <url>https://repository.aspose.com/repo/</url>\n</repository>\n<dependency>\n<groupId>com.aspose</groupId>\n<artifactId>aspose-cells</artifactId>\n<version>26.8</version>\n</dependency>",
+    "InstallCommand" : "<repository>\n  <id>AsposeJavaAPI</id>\n  <name>Aspose Java API</name>\n  <url>https://repository.aspose.com/repo/</url>\n</repository>\n<dependency>\n<groupId>com.aspose</groupId>\n<artifactId>aspose-cells</artifactId>\n<version>26.9</version>\n</dependency>",
     "urlPrefix" : "cells",
     "license":"https://purchase.aspose.com/temporary-license/",
     "pricing": "https://purchase.aspose.com/pricing/cells/family/"
@@ -469,7 +469,7 @@
   "APIReferenceURL" : "https://reference.aspose.com/html/java/",
   "FreeAppsURL" : "https://products.aspose.app/html/",
   "ForumsURL" : "https://forum.aspose.com/c/html/29",
-  "InstallCommand" : "<repository>\n  <id>AsposeJavaAPI</id>\n  <name>Aspose Java API</name>\n  <url>https://repository.aspose.com/repo/</url>\n</repository>\n<dependency>\n<groupId>com.aspose</groupId>\n<artifactId>aspose-html</artifactId>\n<version>26.8</version>\n</dependency>",
+  "InstallCommand" : "<repository>\n  <id>AsposeJavaAPI</id>\n  <name>Aspose Java API</name>\n  <url>https://repository.aspose.com/repo/</url>\n</repository>\n<dependency>\n<groupId>com.aspose</groupId>\n<artifactId>aspose-html</artifactId>\n<version>26.9.1</version>\n</dependency>",
   "urlPrefix" : "html",
   "license":"https://purchase.aspose.com/temporary-license/",
   "pricing": "https://purchase.aspose.com/pricing/html/family/"
@@ -928,7 +928,7 @@
   "APIReferenceURL" : "https://reference.aspose.com/slides/java/",
   "FreeAppsURL" : "https://products.aspose.app/slides",
   "ForumsURL" : "https://forum.aspose.com/c/slides/11",
-  "InstallCommand" : "<repository>\n  <id>AsposeJavaAPI</id>\n  <name>Aspose Java API</name>\n  <url>https://repository.aspose.com/repo/</url>\n</repository>\n<dependency>\n<groupId>com.aspose</groupId>\n<artifactId>aspose-slides</artifactId>\n<version>26.8</version>\n</dependency>",
+  "InstallCommand" : "<repository>\n  <id>AsposeJavaAPI</id>\n  <name>Aspose Java API</name>\n  <url>https://repository.aspose.com/repo/</url>\n</repository>\n<dependency>\n<groupId>com.aspose</groupId>\n<artifactId>aspose-slides</artifactId>\n<version>26.9</version>\n</dependency>",
   "urlPrefix" : "slides",
   "license":"https://purchase.aspose.com/temporary-license/",
   "pricing": "https://purchase.aspose.com/pricing/slides/family/"
@@ -2204,7 +2204,7 @@
   "APIReferenceURL" : "https://reference.aspose.com/diagram/java/",
   "FreeAppsURL" : "https://products.aspose.app/diagram",
   "ForumsURL" : "https://forum.aspose.com/c/diagram/17",
-  "InstallCommand" : "<repository>\n  <id>AsposeJavaAPI</id>\n  <name>Aspose Java API</name>\n  <url>https://repository.aspose.com/repo/</url>\n</repository>\n<dependency>\n<groupId>com.aspose</groupId>\n<artifactId>aspose-diagram</artifactId>\n<version>26.8</version>\n</dependency>",
+  "InstallCommand" : "<repository>\n  <id>AsposeJavaAPI</id>\n  <name>Aspose Java API</name>\n  <url>https://repository.aspose.com/repo/</url>\n</repository>\n<dependency>\n<groupId>com.aspose</groupId>\n<artifactId>aspose-diagram</artifactId>\n<version>26.9</version>\n</dependency>",
   "urlPrefix" : "diagram",
   "license":"https://purchase.aspose.com/temporary-license/",
   "pricing": "https://purchase.aspose.com/pricing/diagram/family/"
@@ -2851,6 +2851,23 @@
   "FreeAppsURL": "https://products.aspose.app/ocr",
   "ForumsURL": "https://forum.aspose.com/c/ocr/16",
   "InstallCommand": "pip install aspose-ocr-python-cpp",
+  "urlPrefix": "ocr",
+  "license": "https://purchase.aspose.com/temporary-license/",
+  "pricing": "https://purchase.aspose.com/pricing/ocr/family/"
+},
+{
+  "ProductName": "Aspose.OCR-GPU for Java",
+  "Category": "Aspose.OCR Product Family",
+  "ProgrammingLanguage": "Java",
+  "ProductURL": "https://products.aspose.com/ocr/java/",
+  "DownloadURL": "https://releases.aspose.com/ocr/java-gpu/",
+  "ExternalDownloadURL": "https://github.com/aspose-ocr/Aspose.OCR-for-Java",
+  "DocumentationURL": "https://docs.aspose.com/ocr/java/",
+  "BlogsURL": "https://blog.aspose.com/categories/aspose.ocr-product-family/",
+  "APIReferenceURL": "https://reference.aspose.com/ocr/java/",
+  "FreeAppsURL": "https://products.aspose.app/ocr",
+  "ForumsURL": "https://forum.aspose.com/c/ocr/16",
+  "InstallCommand": "<repository>\n  <id>AsposeJavaAPI</id>\n  <name>Aspose Java API</name>\n  <url>https://repository.aspose.com/repo/</url>\n</repository>\n<dependency>\n<groupId>com.aspose</groupId>\n<artifactId>aspose-ocr-gpu</artifactId>\n<version>23.10.0</version>\n</dependency>",
   "urlPrefix": "ocr",
   "license": "https://purchase.aspose.com/temporary-license/",
   "pricing": "https://purchase.aspose.com/pricing/ocr/family/"
