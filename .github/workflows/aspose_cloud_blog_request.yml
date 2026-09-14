@@ -9,7 +9,7 @@ name: Blog Request (aspose.cloud) — dashboard
 # it opens a PR and stops for human review.
 #
 # client_payload fields: brand, product, platform, topic, outline, keywords,
-# layout, merge_with_serp, author, requested_by
+# layout, word_count, merge_with_serp, author, requested_by
 
 on:
   repository_dispatch:
@@ -95,6 +95,7 @@ jobs:
           OUTLINE: ${{ github.event.client_payload.outline }}
           KEYWORDS: ${{ github.event.client_payload.keywords }}
           LAYOUT: ${{ github.event.client_payload.layout }}
+          WORD_COUNT_INPUT: ${{ github.event.client_payload.word_count }}
           MERGE_SERP: ${{ github.event.client_payload.merge_with_serp }}
           AUTHOR_INPUT: ${{ github.event.client_payload.author }}
         run: |
@@ -104,6 +105,11 @@ jobs:
           AUTHOR="${AUTHOR_INPUT:-Muhammad Mustafa}"
           LAYOUT="${LAYOUT:-Auto (recommended)}"
           MERGE_SERP="${MERGE_SERP:-false}"
+          # Falls back to a real target rather than leaving this unset - an
+          # unset NUMBER_OF_BLOG_WORDS defaults to 0 (config.py), which used
+          # to mean every dashboard-requested post's prompt literally asked
+          # for "0 words" and the SEO audit's word-count floor did nothing.
+          WORD_COUNT="${WORD_COUNT_INPUT:-900}"
 
           if [ -z "$TOPIC" ] || [ -z "$PRODUCT" ] || [ -z "$PLATFORM" ]; then
             echo "❌ Request requires topic, product, and platform."
@@ -125,7 +131,8 @@ jobs:
             --outline "$OUTLINE" \
             --keywords "$KEYWORDS" \
             --merge-serp "$MERGE_SERP" \
-            --layout "$LAYOUT"
+            --layout "$LAYOUT" \
+            --word-count "$WORD_COUNT"
 
           echo "✅ Blog generation completed"
 

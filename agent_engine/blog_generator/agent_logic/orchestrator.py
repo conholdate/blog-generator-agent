@@ -607,6 +607,7 @@ class BlogOrchestrator:
         keywords_text: str = "",
         merge_with_serp: bool = False,
         layout_override: str = "",
+        word_count: int = 0,
     ):
         """
         Generate a blog post from a user-supplied topic/outline/keywords
@@ -615,8 +616,21 @@ class BlogOrchestrator:
         rotation pointer is untouched. This method never pushes anything to
         a downstream repo - the caller (workflow) is responsible for
         retrieving the generated folder, e.g. via an artifact upload.
+
+        word_count, when > 0, overrides settings.NUMBER_OF_BLOG_WORDS for
+        this run - both the writer prompt's target and the SEO audit's
+        min_words floor read that setting directly (utils/prompts.py,
+        validate_seo_content calls below). A per-process mutation is safe
+        here: each CLI/Action invocation of this method is its own process,
+        the same way NUMBER_OF_BLOG_WORDS is already set process-wide via
+        .env today - this just gives one specific run its own value instead
+        of whatever the environment happened to set (or didn't: the
+        dashboard-request workflow never set this at all before word_count
+        existed, so every such run's prompt literally asked for "0 words").
         """
         set_tracing_disabled(disabled=True)
+        if word_count > 0:
+            settings.NUMBER_OF_BLOG_WORDS = word_count
 
         try:
             product_info = get_productInfo(product, platform, self.products, self.brand)

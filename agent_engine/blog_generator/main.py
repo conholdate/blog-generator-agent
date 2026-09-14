@@ -20,6 +20,7 @@ def main():
     parser.add_argument("--keywords", type=str, default="")
     parser.add_argument("--merge-serp", type=str, default="false")
     parser.add_argument("--layout", type=str, default="")
+    parser.add_argument("--word-count", type=int, default=0)
 
     # Revise mode: edit an already-generated draft in place instead of
     # generating a new one. Mutually exclusive with the topic/sheet flows.
@@ -55,6 +56,7 @@ def main():
                 keywords_text=args.keywords,
                 merge_with_serp=args.merge_serp.strip().lower() == "true",
                 layout_override=args.layout,
+                word_count=args.word_count,
             )
         )
     else:
