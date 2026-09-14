@@ -1130,7 +1130,7 @@
   "APIReferenceURL": "https://reference.aspose.cloud/tasks/",
   "FreeAppsURL": "https://products.aspose.app/tasks/family/",
   "ForumsURL": "https://forum.aspose.cloud/c/tasks/16",
-  "InstallCommand": "<dependency>\n<groupId>com.aspose</groupId>\n<artifactId>aspose-tasks-cloud</artifactId>\n<version>26.7.0</version>\n</dependency>",
+  "InstallCommand": "<dependency>\n<groupId>com.aspose</groupId>\n<artifactId>aspose-tasks-cloud</artifactId>\n<version>26.9.0</version>\n</dependency>",
   "urlPrefix": "tasks",
   "license": "https://purchase.aspose.com/temporary-license/"
 },
