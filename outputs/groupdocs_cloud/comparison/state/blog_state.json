@@ -1,0 +1,25 @@
+{
+  "repo_head": "61d74058133ccf8f7c91fbb61a20f956b6fbe68b",
+  "file_fingerprints": {
+    "comparison/2014-10-01-spotlight-groupdocs-comparison-cloud-news-groupdocs-october-2014/index.md": "1e50a5bff3b27c9cb6bb0b294f47864456e6a8d54a65c21e0ea033475215636a",
+    "comparison/2016-10-01-customer-newsletter-octber-2016/index.md": "4c2677b0509b021079234a08bdd3408e69c506d435e406ffb5f25127f9758c9b",
+    "comparison/2018-01-03-next-generation-groupdocs.comparison-for-cloud-is-coming-soon/index.md": "9c11bbd1f3ca20dd58362d1111551d7b1b981c43e65c0559c75dbe05d8fb3227",
+    "comparison/2018-01-19-announcing-first-release-of-next-generation-groupdocs.comparison-for-cloud-api/index.md": "10f092bdf49a6ca1737dc2cf1532f4a7529c9964192db1c6c30623ea1c9c76a9",
+    "comparison/2018-05-21-introduction-of-php-sdk-in-next-generation-groupdocs.comparison-for-cloud-18.4/index.md": "34c05a6ba506f27b6ea634493680cae0f4b1260059ba2bdd0baddeb756ea9ab7",
+    "comparison/2019-07-08-introducing-groupdocs-comparison-cloud-19-5/index.md": "6886196d6a645e03ea4c2c2055e747a6fd0e625dcde9dbadb882a5b0bfccc956",
+    "comparison/2021-03-03-compare-word-documents-using-python/index.md": "be24fe9ecea27156f553638a4b5fe0020b5d89abee09a758134f205224990253",
+    "comparison/2021-04-09-accept-or-reject-tracked-changes-of-word-document-using-python/index.md": "d871b625a1e324989b77c561d8a6bdb565ba6c962800453e880777105071c7ca",
+    "comparison/2021-06-29-compare-pdf-files-using-rest-api-in-node-js/index.md": "05623e4f2b9abde3b7dfb03da4b196891a0be8aea7cffaf8ce9f643a0c4687de",
+    "comparison/2021-11-15-compare-word-documents-using-rest-api-in-node-js/index.md": "dfe77cbfce27d5bfa5275949c3ff8a70acef9519df8463ddb8af0eee2d3a9619",
+    "comparison/2021-12-10-compare-pdf-files-using-rest-api-in-python/index.md": "4893d33e7a2dcc8e9e689895fbf141f90a9cac3e06c2731ed57eb6943f89214e",
+    "comparison/2021-12-17-accept-or-reject-tracked-changes-in-word-using-node-js/index.md": "4e50e5ecbc929069e9b8d707f1857bb6206c1beaae8041fd9ab94a79e78ae6be",
+    "comparison/2022-01-17-compare-powerpoint-presentations-in-node-js/index.md": "4386b85e566fab99b2cb4a3b7e74ed2696f6fdf74a0296139b82974cea2454a5",
+    "comparison/2022-02-15-compare-excel-files-using-rest-api-in-python/index.md": "6f447b325b79a737fd32b17f2edbe8c983e6a49957bcf6fc266ba515b887845e",
+    "comparison/2023-09-04-compare-two-images-and-highlight-differences-using-python/index.md": "da969407cf93de7a7099f53181d278520f035e28a55eeef1fc4072a28a494ba6",
+    "comparison/2023-09-05-compare-two-excel-sheets-and-highlight-differences-using-java/index.md": "15483cf22ca9d1fefe2827cb63fcf748c28cdf9cba10f3c9c337aea34356a920",
+    "comparison/2024-07-25-compare-pdf-files-in-csharp/index.md": "438c9bb4739d131935b440e447c60840ab87b63e389a75d1741bbed7636d96a7",
+    "comparison/2025-08-20-compare-word-documents-using-csharp/index.md": "20020b553228d67dcb9b4908b9294a1d0682e104bfbc2cef4462302402c9b88f",
+    "comparison/2025-09-17-compare-powerpoint-presentations-in-csharp/index.md": "bbb8afbec7669e8ebd03b2afdd004ceb8c7721da61a7d7dcdca4888ca7d5fe44",
+    "comparison/2025-09-19-compare-excel-files-in-csharp/index.md": "cf9f2277327b34c1868ccbf92a64bc8d7ac7b1aca03217b033b2eaaaf68f2aa9"
+  }
+}

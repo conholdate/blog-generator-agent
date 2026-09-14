@@ -1,0 +1,275 @@
+{
+  "case": "blogs_to_blogs",
+  "brand_key": "groupdocs_cloud",
+  "product_key": "comparison",
+  "baseline_platform": "python",
+  "platforms": [
+    "python",
+    "general",
+    "java",
+    "net",
+    "nodejs"
+  ],
+  "meta": {
+    "matching_mode": "key_exact",
+    "total_input_records": 20,
+    "records_after_filters": 14,
+    "excluded_release_update_records": 4,
+    "excluded_old_or_undated_records": 2,
+    "baseline_records": 5,
+    "total_cells": 25,
+    "matched_cells": 6,
+    "missing_cells": 19,
+    "match_rate": 0.24,
+    "skipped_empty_keys": 0
+  },
+  "rows": [
+    {
+      "category": "Document Comparison",
+      "sub_category": "Tracked Changes",
+      "topic": "Accept or reject tracked changes of word document",
+      "key": "accept-or-reject-tracked-changes-of-word-document",
+      "baseline_record_id": "blog::comparison/2021-04-09-accept-or-reject-tracked-changes-of-word-document-using-python/index.md",
+      "coverage": {
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::comparison/2021-04-09-accept-or-reject-tracked-changes-of-word-document-using-python/index.md",
+          "title": "Accept or Reject Tracked Changes of Word Document using Python",
+          "topic": "Accept or reject tracked changes of word document",
+          "url": "groupdocs.cloud/comparison/accept-or-reject-tracked-changes-of-word-document-using-python/"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "nodejs": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Comparison",
+      "sub_category": "Spreadsheet Comparison",
+      "topic": "Compare Excel using rest",
+      "key": "compare-excel-using-rest",
+      "baseline_record_id": "blog::comparison/2022-02-15-compare-excel-files-using-rest-api-in-python/index.md",
+      "coverage": {
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::comparison/2022-02-15-compare-excel-files-using-rest-api-in-python/index.md",
+          "title": "Compare Excel Files using REST API in Python",
+          "topic": "Compare Excel using REST API",
+          "url": "groupdocs.cloud/comparison/compare-excel-files-using-rest-api-in-python/"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "nodejs": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Comparison",
+      "sub_category": "PDF",
+      "topic": "Compare PDF using rest",
+      "key": "compare-pdf-using-rest",
+      "baseline_record_id": "blog::comparison/2021-12-10-compare-pdf-files-using-rest-api-in-python/index.md",
+      "coverage": {
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::comparison/2021-12-10-compare-pdf-files-using-rest-api-in-python/index.md",
+          "title": "Compare PDF Files using REST API in Python",
+          "topic": "Compare PDF using REST API",
+          "url": "groupdocs.cloud/comparison/compare-pdf-files-using-rest-api-in-python/"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "nodejs": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::comparison/2021-06-29-compare-pdf-files-using-rest-api-in-node-js/index.md",
+          "title": "Compare PDF Files using REST API in Node.js",
+          "topic": "Compare PDF using REST API",
+          "url": "groupdocs.cloud/comparison/compare-pdf-files-using-rest-api-in-node-js/"
+        }
+      }
+    },
+    {
+      "category": "Comparison",
+      "sub_category": "Images",
+      "topic": "Compare two images and highlight differences",
+      "key": "compare-two-images-and-highlight-differences",
+      "baseline_record_id": "blog::comparison/2023-09-04-compare-two-images-and-highlight-differences-using-python/index.md",
+      "coverage": {
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::comparison/2023-09-04-compare-two-images-and-highlight-differences-using-python/index.md",
+          "title": "Compare Two Images and Highlight Differences using Python",
+          "topic": "Compare two images and highlight differences",
+          "url": "groupdocs.cloud/comparison/compare-two-images-and-highlight-differences-using-python/"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "nodejs": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Document Management",
+      "sub_category": "Comparison",
+      "topic": "Compare word documents",
+      "key": "compare-word-documents",
+      "baseline_record_id": "blog::comparison/2021-03-03-compare-word-documents-using-python/index.md",
+      "coverage": {
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::comparison/2021-03-03-compare-word-documents-using-python/index.md",
+          "title": "Compare Word Documents using Python",
+          "topic": "Compare word documents",
+          "url": "groupdocs.cloud/comparison/compare-word-documents-using-python/"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "nodejs": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    }
+  ],
+  "brand_name": "GroupDocs.Cloud",
+  "product_name": "GroupDocs.Comparison"
+}
