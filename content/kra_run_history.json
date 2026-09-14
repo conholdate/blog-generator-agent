@@ -25,7 +25,7 @@
     "aspose|aspose.html|java": 1,
     "aspose|aspose.html|python": 1,
     "aspose|aspose.html|net": 1,
-    "conholdate|conholdate.total|java": 1,
+    "conholdate|conholdate.total|java": 0,
     "aspose.cloud|aspose.cells|net": 0,
     "aspose.cloud|aspose.cells|java": 2,
     "aspose.cloud|aspose.cells|php": 0,
@@ -138,7 +138,8 @@
     "Convert Onenote to Image in Java",
     "Compare PDF and Highlight Differences in Java: Step-by-Step",
     "Create Gantt Chart in Java",
-    "Create HTML in Java: Build Reports and Email Bodies"
+    "Create HTML in Java: Build Reports and Email Bodies",
+    "Create HTML from DOCX in Java"
   ],
   "aspose.cloud|aspose.cells|net": [
     "A Guide to Heroku Email Sending Best Practices in C#",
