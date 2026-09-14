@@ -1,0 +1,177 @@
+{
+  "case": "blogs_to_blogs",
+  "brand_key": "groupdocs_cloud",
+  "product_key": "signature",
+  "baseline_platform": "python",
+  "platforms": [
+    "python",
+    "general",
+    "net",
+    "nodejs",
+    "php"
+  ],
+  "meta": {
+    "matching_mode": "key_exact",
+    "total_input_records": 20,
+    "records_after_filters": 8,
+    "excluded_release_update_records": 3,
+    "excluded_old_or_undated_records": 9,
+    "baseline_records": 3,
+    "total_cells": 15,
+    "matched_cells": 3,
+    "missing_cells": 12,
+    "match_rate": 0.2,
+    "skipped_empty_keys": 0
+  },
+  "rows": [
+    {
+      "category": "Document Management",
+      "sub_category": "Edit Signatures",
+      "topic": "Edit signatures in signed PDF",
+      "key": "edit-signatures-in-signed-pdf",
+      "baseline_record_id": "blog::signature/2021-03-10-edit-signatures-in-signed-pdf-documents-using-python/index.md",
+      "coverage": {
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::signature/2021-03-10-edit-signatures-in-signed-pdf-documents-using-python/index.md",
+          "title": "Edit Signatures in Signed PDF Documents using Python",
+          "topic": "Edit signatures in signed PDF documents",
+          "url": "groupdocs.cloud/signature/edit-signatures-in-signed-pdf-documents-using-python/"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "nodejs": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "php": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Signature",
+      "sub_category": "Remove signatures",
+      "topic": "Remove signatures from signed PDF document",
+      "key": "remove-signatures-from-signed-pdf-document",
+      "baseline_record_id": "blog::signature/2021-04-16-remove-signatures-from-signed-pdf-document-using-python/index.md",
+      "coverage": {
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::signature/2021-04-16-remove-signatures-from-signed-pdf-document-using-python/index.md",
+          "title": "Remove Signatures from Signed PDF Document using Python",
+          "topic": "Remove signatures from signed PDF document",
+          "url": "groupdocs.cloud/signature/remove-signatures-from-signed-pdf-document-using-python/"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "nodejs": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "php": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Signature",
+      "sub_category": "Pdf Qr Code Signing",
+      "topic": "Sign PDF documents with QR code",
+      "key": "sign-pdf-documents-with-qr-code",
+      "baseline_record_id": "blog::signature/2021-03-06-sign-pdf-documents-with-qr-code-using-python/index.md",
+      "coverage": {
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::signature/2021-03-06-sign-pdf-documents-with-qr-code-using-python/index.md",
+          "title": "Sign PDF Documents with QR Code using Python",
+          "topic": "Sign PDF documents with QR code",
+          "url": "groupdocs.cloud/signature/sign-pdf-documents-with-qr-code-using-python/"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "nodejs": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "php": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    }
+  ],
+  "brand_name": "GroupDocs.Cloud",
+  "product_name": "GroupDocs.Signature"
+}
