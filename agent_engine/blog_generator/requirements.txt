@@ -6,5 +6,6 @@ openai-agents==0.4.2
 bs4
 aiohttp
 python-frontmatter
+markdown-it-py==4.2.0  # section_editor.py: heading/block parsing for section-aware revise
 gspread
 google-api-python-client>=2.169,<3

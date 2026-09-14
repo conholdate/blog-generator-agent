@@ -11,6 +11,7 @@ from utils.file_format_mappings import FILE_FORMAT_MAPPINGS, BASE_URL
 from utils.helpers import mark_topic_as_generated, prepare_context, get_productInfo, get_topic_by_index, inject_file_format_links, inject_repo_example_reference, strip_unverified_code_blocks, slugify, normalize_case_preserve_formats_in_keywords, clean_ai_generated_markdown, strip_pre_frontmatter_preamble, validate_markdown_links, capitalize_file_formats_for_title, setup_logger, generate_tags_with_llm, save_blog_metadata_to_sheet, extract_blog_metadata, get_topic_from_sheet, get_next_tab, extract_product_names, get_recent_layouts, convert_sheet_row_to_file_format, update_last_processed_product, repair_code_fences, strip_snippet_markers
 from utils.layouts import select_layout
 from utils.code_source import get_code_snippet
+from utils.section_editor import classify_and_apply, SectionEditError
 from utils.metricsRecorder import MetricsRecorder
 from services.LLMservice import llm_service
 import json
@@ -927,15 +928,28 @@ class BlogOrchestrator:
         Apply one targeted, human-instructed edit to an already-generated
         draft in place, instead of regenerating the whole post. Used by the
         refine flow: a reviewer reads an open PR and asks for a specific
-        change ("shorten the intro", "the licensing section is wrong").
+        change ("shorten the intro", "remove the licensing section").
 
-        This is deliberately a single LLM edit pass + the same deterministic
-        cleanup already used elsewhere (fence repair, meta description fix,
-        markdown cleanup, link validation) - no bounded SEO revision loop,
-        since a targeted edit isn't a fresh generation and the original
-        primary keyword isn't recoverable from the saved file alone. The SEO
-        audit still runs and is reported for visibility, but only blocks the
-        run if the audit provides an actual error, not on score alone.
+        Section-aware by construction (utils/section_editor.py): the
+        instruction is classified against the draft's ACTUAL heading list
+        and frontmatter field names - never its content - into either a
+        deterministic operation (done entirely in code, the LLM never sees
+        the document) or a generative rewrite of exactly ONE section/field
+        (the LLM sees only that fragment, never the rest of the post).
+        Frontmatter, code blocks, and every untouched section are excluded
+        by construction, not by prompt instruction - the previous
+        whole-document "return the complete post, leave everything else
+        exactly as it is" approach relied entirely on the LLM honoring that
+        instruction, which already caused one real bug (a section-removal
+        request was silently ignored). An instruction that doesn't map to a
+        single section/field (spans several sections, names something that
+        doesn't exist, is too vague) is REJECTED before any edit is
+        attempted, rather than guessed at - reported back the same way an
+        error is, so the reviewer sees why in the PR comment.
+
+        The SEO audit still runs on a successful edit and is reported for
+        visibility, but only blocks the run if the audit provides an actual
+        error, not on score alone - same as before.
         """
         set_tracing_disabled(disabled=True)
         self.metrics.start_job(product="revise", platform="", website=self.brand)
@@ -963,54 +977,37 @@ class BlogOrchestrator:
             with open(draft_path, "r", encoding="utf-8") as f:
                 current_content = f.read()
 
-            revise_instructions = (
-                "You are editing an existing published-quality blog post. Apply "
-                "the requested change below COMPLETELY and PRECISELY - if it asks "
-                "to remove, delete, or drop a section, remove that section's "
-                "heading and its entire content, don't just shorten or soften it "
-                "and don't leave any trace of it. If it asks to add, rewrite, or "
-                "move something, do exactly that, fully.\n\n"
-                "Everything NOT targeted by the instruction must stay exactly as "
-                "it is: don't rewrite other sections, don't change frontmatter "
-                "fields the instruction doesn't mention, don't alter code blocks "
-                "unless the instruction is specifically about the code, and keep "
-                "<!--more--> markers and markdown link formatting in the "
-                "untouched parts exactly as they are. Return the COMPLETE post "
-                "(frontmatter + body) with nothing else - no preamble, no "
-                "explanation, no code fences wrapping the output.\n\n"
-                f"REQUESTED CHANGE:\n{instruction}"
-            )
-
-            result = await llm_service.run_agent(
-                instructions=revise_instructions,
-                context=current_content,
-                agent_name="blog-writer-revise",
-                temperature=0.3,
-                max_turns=10,
-                max_tokens=16000,
-            )
-            if not result or not result.final_output:
-                message = "LLM returned empty output for the revision"
-                print(f"⚠️  {message}", flush=True)
+            try:
+                edit_report = await classify_and_apply(current_content, instruction)
+            except SectionEditError as e:
+                # Only raised when section-aware editing isn't possible at
+                # all (no frontmatter, unparseable YAML, CRLF draft) - an
+                # unmatched/ambiguous INSTRUCTION is a normal "reject"
+                # report below, not an exception.
+                message = f"Draft could not be edited safely: {e}"
+                print(f"❌ {message}", flush=True)
                 self.metrics.record_failure(message)
                 self.metrics.end_job()
                 write_status("error", message)
                 return {"status": "error", "message": message}
 
-            self.metrics.record_llm_usage(
-                input_tokens=result.token_usage["input_tokens"],
-                output_tokens=result.token_usage["output_tokens"],
-                caller="blog-writer-revise",
-            )
+            usage = edit_report.get("token_usage") or {}
+            if usage.get("total_tokens"):
+                self.metrics.record_llm_usage(
+                    input_tokens=usage.get("input_tokens", 0),
+                    output_tokens=usage.get("output_tokens", 0),
+                    caller="blog-writer-revise",
+                )
 
-            revised_content = strip_pre_frontmatter_preamble(result.final_output)
-            revised_content = repair_code_fences(revised_content)
-            fixed, was_fixed = await validate_and_fix_meta_description(revised_content, metrics=self.metrics)
-            if was_fixed:
-                revised_content = fixed
-            revised_content = clean_ai_generated_markdown(revised_content)
-            revised_content = validate_markdown_links(revised_content)
-            revised_content = strip_snippet_markers(revised_content)
+            if edit_report["kind"] == "reject":
+                message = f"Instruction not applied: {edit_report['reason']}"
+                print(f"⚠️  {message}", flush=True)
+                self.metrics.record_failure(message)
+                self.metrics.end_job()
+                write_status("rejected", message)
+                return {"status": "rejected", "message": message, "instruction": instruction}
+
+            revised_content = edit_report["content"]
 
             fm = extract_blog_metadata(revised_content)
             primary_keyword_guess = fm.get("title", "")
@@ -1033,7 +1030,7 @@ class BlogOrchestrator:
 
             self.metrics.record_success(f"Draft revised: {draft_path}")
             self.metrics.end_job()
-            print(f"\n✅ Draft revised: {draft_path}\n", flush=True)
+            print(f"\n✅ Draft revised ({edit_report['operation']} on {edit_report['target']}): {draft_path}\n", flush=True)
 
             self.metrics.print_summary()
             print("📊 Sending metrics to Google Script... ")
@@ -1044,16 +1041,35 @@ class BlogOrchestrator:
             else:
                 print("Failed to send metrics (check logs)\n")
 
+            # Step 5 of the section-aware revise plan: a visible flag for
+            # the human reviewer when the edit touched lines outside its
+            # claimed target - not a hard gate, since section-aware diffing
+            # alone already eliminates the bug class this feature exists to
+            # close; a gate can be added later if this proves not enough.
+            outside = edit_report.get("lines_changed_outside_section")
+            status_message = f"Draft revised per: {instruction} [{edit_report['operation']} on {edit_report['target']}]"
+            if outside:
+                status_message += (
+                    f"\n\n⚠️ {outside} line(s) changed outside the target section - "
+                    "please review the diff carefully before merging."
+                )
+
             write_status(
                 "success",
-                f"Draft revised per: {instruction}",
+                status_message,
                 SEO_Score=report.get("score"),
                 SEO_status=report.get("status"),
+                operation=edit_report["operation"],
+                target=edit_report["target"],
+                lines_changed_outside_section=outside,
             )
             return {
                 "status": "success",
                 "draft_path": draft_path,
                 "instruction": instruction,
+                "operation": edit_report["operation"],
+                "target": edit_report["target"],
+                "lines_changed_outside_section": outside,
                 "SEO_Score": report.get("score"),
                 "SEO_status": report.get("status"),
                 "run_id": self.metrics.run_id,
