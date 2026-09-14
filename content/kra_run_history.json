@@ -53,7 +53,10 @@
     "aspose.cloud|aspose.cad|java": 2,
     "groupdocs.cloud|groupdocs.parser|net": 5,
     "groupdocs.cloud|groupdocs.parser|java": 0,
-    "groupdocs.cloud|groupdocs.parser|nodejs": 1
+    "groupdocs.cloud|groupdocs.parser|nodejs": 1,
+    "groupdocs.cloud|groupdocs.comparison|net": 0,
+    "groupdocs.cloud|groupdocs.comparison|java": 0,
+    "groupdocs.cloud|groupdocs.comparison|nodejs": 0
   },
   "aspose|aspose.html|python": [
     "How to Convert Code to Change HTML Border Color in Python",
@@ -406,5 +409,20 @@
     "Extract Images from PDF Spreadsheets Presentations and Word Documents in Node.JS",
     "Extract Text from PDF in Node.JS",
     "Extract Text from XML using Rest in Node.JS"
+  ],
+  "groupdocs.cloud|groupdocs.comparison|java": [
+    "Utility to Reject Tracked Changes in Java: Quick Guide",
+    "Compare PDF Through Rest in Java: Complete HTTP Tutorial",
+    "Compare Word Documents in Java: Extract Revisions Fast"
+  ],
+  "groupdocs.cloud|groupdocs.comparison|net": [
+    "Compare Excel Files via Rest in C#",
+    "Compare Two Images and Highlight Differences in C#",
+    "Compare Word Documents in C#: a Complete Tutorial"
+  ],
+  "groupdocs.cloud|groupdocs.comparison|nodejs": [
+    "How to Compare Excel Spreadsheets via Rest in Node.JS",
+    "Compare Two Images and Highlight Differences in Node.JS",
+    "How to Compare Word Documents in Node.JS"
   ]
 }
