@@ -1,0 +1,99 @@
+name: Suggest Keywords (aspose.cloud) — dashboard
+
+# Powers the "Generate keywords" button on the dashboard's New Request
+# form. Deliberately its own workflow, not folded into
+# aspose_cloud_blog_request.yml - this is a quick lookup (SerpAPI + one
+# LLM filter call, no draft, no PR, no commit), not a generation run, and
+# keeping it separate means it needs none of that workflow's secrets
+# (no Google sheets, no gist token).
+#
+# client_payload fields: brand, product, platform, topic, request_id
+#
+# Reuses the EXACT SAME pipeline create_blog_from_manual_input() already
+# calls for "merge with SERP" (BlogOrchestrator.suggest_keywords ->
+# tools.mcp_tools.fetch_keywords_auto) - no separate keyword-generation
+# logic exists here. That pipeline already falls back to LLM-generated
+# keywords on its own when SerpAPI returns nothing relevant (see
+# utils/prompts.py: keyword_filter_prompt, STEP 3).
+#
+# Result contract: the job prints exactly one line starting with
+# "KEYWORDS_RESULT_JSON:" followed by compact JSON - the dashboard fetches
+# this job's raw log via the Actions API and matches that prefix. Nothing
+# is committed or uploaded as an artifact; the log line IS the result.
+
+on:
+  repository_dispatch:
+    types: [keyword-suggest]
+
+# request_id lets the dashboard find the right run among several - a
+# plain topic-only title isn't unique enough if two requests overlap.
+run-name: "Suggest keywords: ${{ github.event.client_payload.topic }} [${{ github.event.client_payload.request_id }}]"
+
+permissions:
+  contents: read
+
+jobs:
+  suggest:
+    runs-on: ubuntu-latest
+    if: github.event.client_payload.brand == 'aspose.cloud'
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Cache pip packages
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+
+      - name: Remove any .env files that could interfere
+        run: |
+          find . -name ".env" -type f -delete
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          cd agent_engine/blog_generator
+          pip install -r requirements.txt
+          cd ../../mcp-servers
+          pip install -r requirements.txt
+
+      # Only what fetch_keywords_auto's pipeline actually needs (LLM filter
+      # call + SerpAPI) - no sheet/gist secrets, unlike the request workflow.
+      - name: Create runtime .env file with secrets
+        run: |
+          cat > .env << EOF
+          PROFESSIONALIZE_API_KEY_2=${{ secrets.PROFESSIONALIZE_API_KEY_2 }}
+          PROFESSIONALIZE_BASE_URL=${{ secrets.PROFESSIONALIZE_BASE_URL }}
+          PROFESSIONALIZE_LLM_MODEL=${{ secrets.PROFESSIONALIZE_LLM_MODEL }}
+          SERPAPI_KEY=${{ secrets.SERPAPI_KEY }}
+          EOF
+          echo ".env file created"
+
+      - name: Suggest keywords
+        env:
+          PRODUCT: ${{ github.event.client_payload.product }}
+          PLATFORM: ${{ github.event.client_payload.platform }}
+          TOPIC: ${{ github.event.client_payload.topic }}
+        run: |
+          cd agent_engine/blog_generator
+
+          if [ -z "$TOPIC" ] || [ -z "$PRODUCT" ] || [ -z "$PLATFORM" ]; then
+            echo "❌ Suggest-keywords requires topic, product, and platform."
+            exit 1
+          fi
+
+          python main.py \
+            --author "dashboard" \
+            --brand "aspose.cloud" \
+            --product "$PRODUCT" \
+            --platform "$PLATFORM" \
+            --topic "$TOPIC" \
+            --suggest-keywords

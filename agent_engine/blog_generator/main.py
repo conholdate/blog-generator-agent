@@ -1,5 +1,6 @@
 import argparse
 import asyncio
+import json
 from agent_logic.orchestrator import BlogOrchestrator
 import sys
 sys.dont_write_bytecode = True
@@ -28,9 +29,32 @@ def main():
     parser.add_argument("--draft-path", type=str, default="")
     parser.add_argument("--instruction", type=str, default="")
 
+    # Keyword-suggestion mode: look up real keywords for a topic, print them,
+    # exit - no draft is generated. Used by the dashboard's "Generate
+    # keywords" button (a separate, lightweight workflow from --topic mode).
+    parser.add_argument("--suggest-keywords", action="store_true")
+
     args = parser.parse_args()
 
     orchestrator = BlogOrchestrator(brand=args.brand)
+
+    if args.suggest_keywords:
+        if not args.topic.strip() or not args.product.strip() or not args.platform.strip():
+            parser.error("--topic, --product, and --platform are required with --suggest-keywords")
+
+        result = asyncio.run(
+            orchestrator.suggest_keywords(
+                topic=args.topic,
+                product=args.product,
+                platform=args.platform,
+            )
+        )
+        # A single, compact, clearly-marked line - the dashboard fetches
+        # this job's raw log text and matches this exact prefix. Printed
+        # in addition to (not instead of) the normal summary line below.
+        print(f"KEYWORDS_RESULT_JSON:{json.dumps(result, separators=(',', ':'))}")
+        print(f"Keyword suggestion result: {result}")
+        return
 
     if args.revise:
         if not args.draft_path.strip() or not args.instruction.strip():

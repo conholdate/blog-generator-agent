@@ -597,6 +597,30 @@ class BlogOrchestrator:
                 "api_call_count": self.metrics.api_call_count,
             }
 
+    async def suggest_keywords(self, topic: str, product: str, platform: str) -> dict:
+        """
+        Real keyword suggestions for the dashboard's "Generate keywords"
+        button - reuses the SAME SerpAPI + LLM-filter pipeline
+        create_blog_from_manual_input() already calls when "merge with SERP"
+        is checked (tools.mcp_tools.fetch_keywords_auto). Deliberately not a
+        new pipeline: that prompt (utils/prompts.py: keyword_filter_prompt)
+        already has a real SERP-empty fallback - if SerpAPI returns nothing
+        relevant, it discards the candidate list and generates 4 fresh
+        keywords from the topic/platform alone (its own STEP 3), so this
+        method doesn't need to reimplement that fallback itself.
+
+        No metrics/job tracking here on purpose - this is a quick lookup,
+        not a generation run.
+
+        Returns {"topic": ..., "keywords": [str, ...]} - fetch_keywords_auto
+        already returns a flat, sanitized list (primary+secondary+long_tail
+        merged), matching the Keywords field's own flat comma-separated
+        format, so no re-shaping is needed here.
+        """
+        product_info = get_productInfo(product, platform, self.products, self.brand)
+        keywords = await fetch_keywords_auto(topic, product_info.get("ProductName"), platform)
+        return {"topic": topic, "keywords": keywords}
+
     async def create_blog_from_manual_input(
         self,
         author: str,
