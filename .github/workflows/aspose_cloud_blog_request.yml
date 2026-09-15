@@ -9,7 +9,7 @@ name: Blog Request (aspose.cloud) — dashboard
 # it opens a PR and stops for human review.
 #
 # client_payload fields: brand, product, platform, topic, outline, keywords,
-# layout, word_count, merge_with_serp, author, requested_by
+# layout, options {word_count, merge_with_serp}, author, requested_by
 
 on:
   repository_dispatch:
@@ -95,8 +95,8 @@ jobs:
           OUTLINE: ${{ github.event.client_payload.outline }}
           KEYWORDS: ${{ github.event.client_payload.keywords }}
           LAYOUT: ${{ github.event.client_payload.layout }}
-          WORD_COUNT_INPUT: ${{ github.event.client_payload.word_count }}
-          MERGE_SERP: ${{ github.event.client_payload.merge_with_serp }}
+          WORD_COUNT_INPUT: ${{ github.event.client_payload.options.word_count }}
+          MERGE_SERP: ${{ github.event.client_payload.options.merge_with_serp }}
           AUTHOR_INPUT: ${{ github.event.client_payload.author }}
         run: |
           cd agent_engine/blog_generator
