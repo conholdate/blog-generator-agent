@@ -1,0 +1,25 @@
+{
+  "repo_head": "21ff1c226a988b12786da4ad340b4d72e5052809",
+  "file_fingerprints": {
+    "signature/2014-08-11-creating-customizing-email-notifications-groupdocs-signature-cloud-app/index.md": "369c2c8a4b4062f5634423ca21a750848c82dfc1df1c9636fc83f14aa730671f",
+    "signature/2014-08-19-working-forms-envelopes-groupdocs-signature-cloud-app/index.md": "221f62b87e0e873427573370fd6f12ee2d577c35d7d6ef5d8818ad5c6135f7a0",
+    "signature/2014-08-26-build-custom-electronic-signature-workflows-in-your-asp-net-csharp-vb-net-apps/index.md": "90be1efb163508c31e761191c3131e565a543a39f7110f3b46ddf3ed5d9baed8",
+    "signature/2018-01-05-next-generation-groupdocs.signature-cloud-coming-soon/index.md": "7a50d6a205c1f79ebdb123d2711cf3bb6b8050511cf02ea99ca9c51c65410746",
+    "signature/2018-01-22-releasing-next-generation-groupdocs.signature-for-cloud-api/index.md": "d584960cafe8754c88f058bd3c0bdbf4b55dcccc88b97d51ae99379915112700",
+    "signature/2018-06-19-groupdocs.signature-cloud-18.5/index.md": "74656583df1427f8679877cdd59f03cf56181d04d617fbbd747d4aae48253e97",
+    "signature/2018-08-27-background-brush-and-stamp-brush-style-signatures-introduced-in-groupdocs.signature-cloud-18.8/index.md": "dc6c59e85ed2679745d3cca5bef414fce20829da437c1d9926a18634e91b98a1",
+    "signature/2018-08-27-introduction-of-java-sdk-for-groupdocs.signature-cloud/index.md": "6eceb1b3a419f8326767ba5bcf3635da4cf7e9b091c1322d4515f6223121cc33",
+    "signature/2018-12-24-14009/index.md": "365da033bcc820024070e5f568df25ae6389ef6a96e3051c1c85508c2ebd6b13",
+    "signature/2019-01-06-releasing-ruby-sdk-groupdocs.signature-cloud/index.md": "d961130aa5fc36f98bd4a9030863a54f3e562cee2f8b720484b06140420bfcf5",
+    "signature/2019-06-17-all-new-groupdocs-signature-cloud-v2/index.md": "da0e9b2cfbaba78dbcf43345c4c8ead754e2c75c430316a241063d40a87d35ed",
+    "signature/2019-09-15-add-electronic-signature-to-your-documents/index.md": "5fde44d34afc75c00c1069553288ca6ccb94392dca993ea23709e38f9bb45bee",
+    "signature/2021-03-06-sign-pdf-documents-with-qr-code-using-python/index.md": "05ba218f30cd104f881ddfca0ff16d8e4c4511af0d5ffd4acfcd8f35211e7ef9",
+    "signature/2021-03-10-edit-signatures-in-signed-pdf-documents-using-python/index.md": "dc5f9474c4efd9c4555f98d2f1ce6471fba510192b1c829d93f18bcfc02769a9",
+    "signature/2021-04-16-remove-signatures-from-signed-pdf-document-using-python/index.md": "044306ccd2354704d9840d41c34d867fedf1e891529aefd6c54c93fe45d7f89e",
+    "signature/2021-07-02-sign-documents-with-digital-signatures-using-rest-api-in-node-js/index.md": "35450b370aadc93a73eab1727b5119fc60d716a7f8c75b76ee4c896c0958344c",
+    "signature/2021-12-27-sign-pdf-with-stamp-using-rest-api-in-node-js/index.md": "1ad2dc40b1b5f79f63356da5af0cab97704c400d7724e1b9a94d3e31a03ac88b",
+    "signature/2022-01-21-generate-qr-code-to-sign-pdf-using-rest-api-in-php/index.md": "ab2976c702753f432964d540a6b57640ffca56affbc81fa508bfa2d3054514c3",
+    "signature/2023-07-10-generate-qr-code-with-logo-in-csharp-using-rest-api/index.md": "2580b2fe0b8e3b0acf4f6ca0ab94b20b084d70ba0ae34ce9a06b885575c07314",
+    "signature/2023-09-14-digitally-sign-a-word-document-online/index.md": "326065bdd012143dc004790fcc626568ccfcda20c5e94b192a58013a5d36cf81"
+  }
+}

@@ -56,7 +56,10 @@
     "groupdocs.cloud|groupdocs.parser|nodejs": 1,
     "groupdocs.cloud|groupdocs.comparison|net": 0,
     "groupdocs.cloud|groupdocs.comparison|java": 0,
-    "groupdocs.cloud|groupdocs.comparison|nodejs": 0
+    "groupdocs.cloud|groupdocs.comparison|nodejs": 0,
+    "groupdocs.cloud|groupdocs.signature|net": 1,
+    "groupdocs.cloud|groupdocs.signature|php": 2,
+    "groupdocs.cloud|groupdocs.signature|nodejs": 1
   },
   "aspose|aspose.html|python": [
     "How to Convert Code to Change HTML Border Color in Python",
@@ -142,7 +145,8 @@
     "Create HTML from DOCX in Java",
     "Program to Create Multi-Page HTML in Java",
     "Create HTML Files in Java",
-    "Create Visio Diagram in Java"
+    "Create Visio Diagram in Java",
+    "Delete Blank PAGES in Java"
   ],
   "aspose.cloud|aspose.cells|net": [
     "A Guide to Heroku Email Sending Best Practices in C#",
@@ -430,5 +434,16 @@
     "How to Compare Excel Spreadsheets via Rest in Node.JS",
     "Compare Two Images and Highlight Differences in Node.JS",
     "How to Compare Word Documents in Node.JS"
+  ],
+  "groupdocs.cloud|groupdocs.signature|net": [
+    "Edit Signatures in C#",
+    "Remove Signatures from Signed PDF Document using C# Code"
+  ],
+  "groupdocs.cloud|groupdocs.signature|php": [
+    "Edit Signatures in PHP"
+  ],
+  "groupdocs.cloud|groupdocs.signature|nodejs": [
+    "Edit Signatures in Node.JS",
+    "Remove Signatures from Signed PDF Document in Node.JS"
   ]
 }
