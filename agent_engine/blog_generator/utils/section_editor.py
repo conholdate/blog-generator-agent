@@ -284,7 +284,13 @@ async def classify_instruction(instruction: str, sections: list[Section], fm_fie
     failed/unparseable call comes back as a REJECT classification so the
     caller's normal reject path handles it uniformly."""
     prompt = _build_classify_prompt(instruction, sections, fm_fields)
-    text, usage = await _complete_with_retry(prompt, temperature=0.0, max_tokens=400, label="revise-classifier")
+    # 400 was enough for the ~7-line labeled answer alone, but the
+    # self-hosted model is a reasoning model that spends tokens on hidden
+    # chain-of-thought before writing it - at 400 it sometimes hit the cap
+    # mid-thought (content: None, fell back to the incomplete reasoning
+    # trace, which never reached a KIND: line -> "could not be parsed").
+    # 1500 leaves headroom for reasoning + the answer.
+    text, usage = await _complete_with_retry(prompt, temperature=0.0, max_tokens=1500, label="revise-classifier")
     if text is None:
         return ({"kind": "reject", "operation": None, "section_index": None,
                   "field_name": None, "old_text": None, "new_text": None,
