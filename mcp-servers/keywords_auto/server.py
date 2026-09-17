@@ -38,7 +38,7 @@ mcp = FastMCP("keywords-server")
 # Define MCP Tool
 # ---------------------------------------------
 @mcp.tool()
-async def fetch_keywords(topic: str, product_name: str = None, platform: str = None) -> dict:
+async def fetch_keywords(topic: str, product_name: str = None, platform: str = None, expand: bool = False) -> dict:
     try:
         all_results = []
         serpapi = SerpAPIKeywordService(api_key=settings.SERPAPI_KEY)
@@ -52,7 +52,7 @@ async def fetch_keywords(topic: str, product_name: str = None, platform: str = N
         # Merge results
         merged = _merge_keywords(all_results)
 
-        prompt = keyword_filter_prompt(topic, product_name, merged, platform)
+        prompt = keyword_filter_prompt(topic, product_name, merged, platform, expand=expand)
 
         response_text, _usage = await llm_service.complete(prompt, max_tokens=4000)
 

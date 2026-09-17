@@ -612,13 +612,14 @@ class BlogOrchestrator:
         No metrics/job tracking here on purpose - this is a quick lookup,
         not a generation run.
 
-        Returns {"topic": ..., "keywords": [str, ...]} - fetch_keywords_auto
-        already returns a flat, sanitized list (primary+secondary+long_tail
-        merged), matching the Keywords field's own flat comma-separated
-        format, so no re-shaping is needed here.
+        Returns {"topic": ..., "keywords": {"main": [...], "long_tail": [...]}}
+        - calls fetch_keywords_auto with expand=True so the popup can offer
+        more picks (~8 main + ~4 long_tail) than the 3-4 the real generation
+        pipeline targets; main/long_tail stay separate lists so the dashboard
+        can render them as distinct sections instead of one flat list.
         """
         product_info = get_productInfo(product, platform, self.products, self.brand)
-        keywords = await fetch_keywords_auto(topic, product_info.get("ProductName"), platform)
+        keywords = await fetch_keywords_auto(topic, product_info.get("ProductName"), platform, expand=True)
         return {"topic": topic, "keywords": keywords}
 
     async def create_blog_from_manual_input(

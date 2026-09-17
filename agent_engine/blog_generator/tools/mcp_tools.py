@@ -213,8 +213,18 @@ async def generate_blog_image(product_family: str, main_Heading: str, product_la
             return result
         
 
-async def fetch_keywords_auto(topic: str, product_name: str = "", platform:str="") -> str:
-    """Fetch high-ranking SEO keywords for a topic"""
+async def fetch_keywords_auto(topic: str, product_name: str = "", platform: str = "", expand: bool = False):
+    """
+    Fetch high-ranking SEO keywords for a topic.
+
+    expand=False (default, unchanged): returns a flat sanitized list
+    (primary+secondary+long_tail merged, ~3-4 keywords) - used by the real
+    generation pipeline (create_blog_from_manual_input's merge_with_serp).
+
+    expand=True: returns {"main": [...], "long_tail": [...]} instead - the
+    two groups kept separate (~8 main, ~4 long_tail) for the dashboard's
+    "Generate keywords" popup, which shows them as distinct sections.
+    """
 
     print(f" fetch_keywords TOOL CALLED! upper")
 
@@ -223,16 +233,17 @@ async def fetch_keywords_auto(topic: str, product_name: str = "", platform:str="
             command="python",
             args=["../../mcp-servers/keywords_auto/server.py"]
         )
-        
+
         print(f" Connecting to MCP server fetch_keywords...")
-        
+
         async with stdio_client(params) as (read, write):
             async with ClientSession(read, write) as session:
                 await session.initialize()
                 result = await session.call_tool("fetch_keywords", {
                     "topic": topic,
                     "product_name": product_name,
-                    "platform": platform
+                    "platform": platform,
+                    "expand": expand
                 })
                 print(f" serp final keywords - {result.content[0]}", flush=True)
                 keywords_data = parse_keywords_response(result.content[0])
@@ -241,6 +252,12 @@ async def fetch_keywords_auto(topic: str, product_name: str = "", platform:str="
                 primary   = keywords_block.get('primary', [])
                 secondary = keywords_block.get('secondary', [])
                 long_tail = keywords_block.get('long_tail', [])
+
+                if expand:
+                    main_keywords = sanitize_keywords(primary + secondary) or [topic]
+                    long_tail_keywords = sanitize_keywords(long_tail)
+                    print(f" sanitized keywords - main={main_keywords} long_tail={long_tail_keywords}")
+                    return {"main": main_keywords, "long_tail": long_tail_keywords}
 
                 f_keywords = primary + secondary + long_tail
                 if not f_keywords:
@@ -254,12 +271,12 @@ async def fetch_keywords_auto(topic: str, product_name: str = "", platform:str="
 
                 print(f" sanitized keywords - {f_keywords}")
                 return f_keywords
-                
+
     except Exception as e:
         print(f" ERROR in fetch_keywords: {e}")
         import traceback
         traceback.print_exc()
-        return '{"error": "failed"}'
+        return {"main": [], "long_tail": []} if expand else '{"error": "failed"}'
     
 
 

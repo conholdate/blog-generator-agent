@@ -1393,14 +1393,61 @@ def build_outline_prompt(title: str, keywords: list[str]) -> str:
         Now create the outline for: **{title}**
         """
 
-def keyword_filter_prompt(TOPIC, PRODUCT_NAME, KEYWORDS, platform) -> str:
-  
+def keyword_filter_prompt(TOPIC, PRODUCT_NAME, KEYWORDS, platform, expand: bool = False) -> str:
+    """
+    expand=False (default): unchanged 3-4-total behavior, used by the real
+    generation pipeline (create_blog_from_manual_input's merge_with_serp).
+    expand=True: used only by the dashboard's "Generate keywords" button
+    (BlogOrchestrator.suggest_keywords) - targets 8 primary+secondary plus
+    4 long_tail (12 total) so the UI can offer more picks than it publishes.
+    Only the count-target text differs between the two; filtering/cleaning/
+    character-fix rules and the output format are identical either way.
+    """
+    if expand:
+        hard_rule = (
+            'Your final output MUST contain a TOTAL of 12 keywords: exactly 8 combined\n'
+            '    across primary+secondary, and exactly 4 in long_tail.\n'
+            '    Before returning, count each group separately. If primary+secondary is\n'
+            '    not exactly 8, or long_tail is not exactly 4, fix it before returning.'
+        )
+        step3_count_block = f"""       - Count how many keywords you have in primary+secondary combined, and separately in long_tail, after STEP 1 and STEP 2
+       - TARGET is exactly 8 keywords combined across primary+secondary, and exactly 4 keywords in long_tail (12 total) — always try to reach these before settling for fewer
+       - If primary+secondary count is below 8: generate additional primary/secondary keywords until you have exactly 8
+       - If long_tail count is below 4: generate additional long_tail keywords — longer, more specific, multi-word or question-style search queries — until you have exactly 4
+       - If both groups are empty and the candidate list was empty too:
+         * Ignore candidate list entirely
+         * Generate 8 fresh primary/secondary keywords and 4 fresh long_tail keywords using TOPIC="{TOPIC}", PLATFORM="{platform}"
+         * Use the topic as the primary source of intent
+         * DO NOT include "{PRODUCT_NAME}" in any generated keyword
+       - Generated keywords must be realistic search queries a developer would type
+       - No cloud/API terms for on-premises platforms; include them for cloud
+       - If primary+secondary exceeds 8: keep only the 8 most relevant, discard the rest
+       - If long_tail exceeds 4: keep only the 4 most relevant, discard the rest"""
+        verify_count = "Count total keywords one final time — primary+secondary combined must be exactly 8, long_tail must be exactly 4, fix if not"
+    else:
+        hard_rule = (
+            'Your final output MUST contain EXACTLY 3 or 4 keywords total (primary + secondary + long_tail combined).\n'
+            '    Before returning, count your keywords. If the count is less than 3, generate more. If more than 4, trim.'
+        )
+        step3_count_block = f"""       - Count how many keywords you have after STEP 1 and STEP 2
+       - TARGET is exactly 4 keywords — always try to reach 4 before settling for 3
+       - If count is 0, 1, 2, or 3: generate additional keywords until you have exactly 4
+       - If count is 0 (all keywords were irrelevant or list was empty):
+         * Ignore candidate list entirely
+         * Generate 4 fresh keywords using TOPIC="{TOPIC}", PLATFORM="{platform}"
+         * Use the topic as the primary source of intent
+         * DO NOT include "{PRODUCT_NAME}" in any generated keyword
+       - Generated keywords must be realistic search queries a developer would type
+       - No cloud/API terms for on-premises platforms; include them for cloud
+       - Place generated keywords in secondary or long_tail categories
+       - If count exceeds 4: keep only the 4 most relevant, discard the rest"""
+        verify_count = "Count total keywords one final time — must be between 3 and 4, fix if not"
+
     return f"""
     You are an expert in keyword filtering and refinement.
-    
+
     **HARD RULE — READ THIS FIRST:**
-    Your final output MUST contain EXACTLY 3 or 4 keywords total (primary + secondary + long_tail combined).
-    Before returning, count your keywords. If the count is less than 3, generate more. If more than 4, trim.
+    {hard_rule}
     This rule overrides everything else. There are NO exceptions.
 
     I have a product called {PRODUCT_NAME}, topic: {TOPIC}, platform: {platform}
@@ -1468,18 +1515,7 @@ def keyword_filter_prompt(TOPIC, PRODUCT_NAME, KEYWORDS, platform) -> str:
          * Strip any extra format names, synonyms, or alternatives not explicitly in "{TOPIC}"
 
     STEP 3 — COUNT AND TOP UP:
-       - Count how many keywords you have after STEP 1 and STEP 2
-       - TARGET is exactly 4 keywords — always try to reach 4 before settling for 3
-       - If count is 0, 1, 2, or 3: generate additional keywords until you have exactly 4
-       - If count is 0 (all keywords were irrelevant or list was empty):
-         * Ignore candidate list entirely
-         * Generate 4 fresh keywords using TOPIC="{TOPIC}", PLATFORM="{platform}"
-         * Use the topic as the primary source of intent
-         * DO NOT include "{PRODUCT_NAME}" in any generated keyword
-       - Generated keywords must be realistic search queries a developer would type
-       - No cloud/API terms for on-premises platforms; include them for cloud
-       - Place generated keywords in secondary or long_tail categories
-       - If count exceeds 4: keep only the 4 most relevant, discard the rest
+{step3_count_block}
        - **GENERATION PLATFORM RULES:**
          * ONLY use "{platform}" as the technology term in generated keywords
          * NEVER generate keywords containing: Java, C#, Node.js, Ruby, PHP, Go, Swift, Kotlin
@@ -1500,7 +1536,7 @@ def keyword_filter_prompt(TOPIC, PRODUCT_NAME, KEYWORDS, platform) -> str:
        - Remove any other Unicode that could break Hugo YAML frontmatter
 
     STEP 5 — VERIFY AND RETURN:
-       - Count total keywords one final time — must be between 3 and 4, fix if not
+       - {verify_count}
        - Confirm no keyword contains "{PRODUCT_NAME}" — if any does, strip it out
        - Confirm no keyword contains any platform term other than "{platform}"
          * Scan every keyword for: Java, .NET (if platform != .NET), C#, Node.js, Ruby, PHP, Go, Swift, Kotlin
