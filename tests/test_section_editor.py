@@ -430,5 +430,55 @@ def test_classify_and_apply_generative_rewrite_scopes_llm_and_postprocessing(mon
     assert "DWG to PNG Conversion in Python -  Steps" not in rewrite_prompt
 
 
+def test_classify_and_apply_generative_heading_rewrite_when_no_new_text_given(monkeypatch):
+    """rename_heading with KIND: GENERATIVE and NEW_TEXT: NONE - e.g. 'reword
+    this heading' without exact wording - must NOT reject; it should call
+    generate_new_heading() for the title text and splice that in, same as
+    the section-body generative path."""
+    import utils.section_editor as se
+
+    async def fake_complete(prompt, temperature=0.6, max_tokens=4000, **kwargs):
+        if "You are routing a single human edit instruction" in prompt:
+            return (
+                "KIND: GENERATIVE\nOPERATION: rename_heading\nSECTION_INDEX: 5\n"
+                "FIELD_NAME: NONE\nOLD_TEXT: NONE\nNEW_TEXT: NONE\nREASON: reword heading"
+            ), {"input_tokens": 5, "output_tokens": 5, "total_tokens": 10}
+        assert "You are proposing a NEW heading" in prompt
+        return "A Punchier Wrap-Up", {"input_tokens": 5, "output_tokens": 5, "total_tokens": 10}
+
+    monkeypatch.setattr(se.llm_service, "complete", fake_complete)
+    raw = load_fixture()
+
+    async def run():
+        return await se.classify_and_apply(raw, "make the conclusion heading punchier")
+    report = asyncio.run(run())
+
+    assert report["kind"] == "generative"
+    assert report["operation"] == "rename_heading"
+    assert "A Punchier Wrap-Up" in report["content"]
+
+
+def test_classify_and_apply_deterministic_rename_heading_still_requires_new_text(monkeypatch):
+    """The generative fallback is opt-in via KIND: GENERATIVE only - a
+    DETERMINISTIC rename_heading with no NEW_TEXT must still reject, not
+    silently fall through to an LLM call."""
+    import utils.section_editor as se
+    monkeypatch.setattr(
+        se.llm_service, "complete",
+        _mock_complete(
+            "KIND: DETERMINISTIC\nOPERATION: rename_heading\nSECTION_INDEX: 5\n"
+            "FIELD_NAME: NONE\nOLD_TEXT: NONE\nNEW_TEXT: NONE\nREASON: x"
+        ),
+    )
+    raw = load_fixture()
+
+    async def run():
+        return await se.classify_and_apply(raw, "rename the conclusion heading")
+    report = asyncio.run(run())
+
+    assert report["kind"] == "reject"
+    assert "requires NEW_TEXT" in report["reason"]
+
+
 if __name__ == "__main__":
     raise SystemExit(pytest.main([__file__, "-v"]))

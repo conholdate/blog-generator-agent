@@ -211,7 +211,7 @@ Frontmatter fields: {field_list}
 
 Operations:
 - remove_section: delete a named section entirely. Needs SECTION_INDEX.
-- rename_heading: change only a section's heading title. Needs SECTION_INDEX and NEW_TEXT (the new title).
+- rename_heading: change only a section's heading title. Needs SECTION_INDEX. If the instruction gives (or clearly implies) the exact new title, also give NEW_TEXT and set KIND: DETERMINISTIC. If the instruction asks to reword/rewrite/improve/change the heading WITHOUT giving exact new wording, set NEW_TEXT: NONE and KIND: GENERATIVE - the system will generate an appropriate new heading itself. Do NOT reject just because exact wording is missing.
 - replace_text: replace one EXACT quoted/specific piece of text with another, anywhere in the body. Needs OLD_TEXT and NEW_TEXT. Only use this when the instruction gives or clearly implies an exact string, not a vague description.
 - add_tag / remove_tag: add or remove one tag from frontmatter tags. Needs NEW_TEXT (the tag).
 - set_field: change ONE frontmatter field to an exact new value (short scalar values only - not the body, not a multi-line field). Needs FIELD_NAME and NEW_TEXT.
@@ -258,8 +258,15 @@ def _parse_classification(text: str) -> dict:
         "operation": _clean(op_m),
         "section_index": int(idx_val) if idx_val is not None and idx_val.isdigit() else None,
         "field_name": _clean(field_m),
-        "old_text": _clean(old_m, none_ok=False) if old_m else None,
-        "new_text": _clean(new_m, none_ok=False) if new_m else None,
+        # none_ok=True: the classify prompt explicitly instructs "NONE" as
+        # the sentinel for "doesn't apply" on these fields (same as
+        # SECTION_INDEX/FIELD_NAME above) - none_ok=False here was a latent
+        # bug: it left the literal string "NONE" in place instead of `None`,
+        # which is truthy, so `not cls["new_text"]` checks (the "was NEW_TEXT
+        # given?" guards used by add_tag/remove_tag/set_field/rename_heading)
+        # silently passed a real op through with the 4-character text "NONE".
+        "old_text": _clean(old_m, none_ok=True) if old_m else None,
+        "new_text": _clean(new_m, none_ok=True) if new_m else None,
         "reason": _clean(reason_m, none_ok=False) or "",
     }
 
@@ -324,8 +331,15 @@ def _validate_classification(cls: dict, sections: list[Section], fm_fields: list
     if op == "replace_text" and not cls["old_text"]:
         return "replace_text requires OLD_TEXT but none was given."
 
-    if op in ("add_tag", "remove_tag", "rename_heading", "set_field") and not cls["new_text"]:
+    if op in ("add_tag", "remove_tag", "set_field") and not cls["new_text"]:
         return f"Operation '{op}' requires NEW_TEXT but none was given."
+
+    # rename_heading is the one operation allowed to omit NEW_TEXT - but only
+    # when the classifier flagged it GENERATIVE, meaning it deliberately left
+    # the wording for the system to generate (see classify_and_apply). A
+    # DETERMINISTIC rename_heading still must supply the exact new text.
+    if op == "rename_heading" and cls["kind"] == "deterministic" and not cls["new_text"]:
+        return "rename_heading (deterministic) requires NEW_TEXT but none was given."
 
     return None
 
@@ -550,6 +564,31 @@ async def rewrite_field(lines: list[str], fm: FrontmatterBlock, field: str, inst
     return new_lines, usage
 
 
+async def generate_new_heading(section: Section, instruction: str) -> tuple[str, dict]:
+    """Used by rename_heading when the instruction asks to reword/improve a
+    heading without giving exact new wording (KIND: GENERATIVE, NEW_TEXT:
+    NONE) - a single scoped LLM call proposes the new title text, which the
+    caller then applies via the existing deterministic rename_heading()
+    splice (same "LLM proposes content, code controls where it lands"
+    split as rewrite_section/rewrite_field)."""
+    prompt = (
+        "You are proposing a NEW heading (title) for one section of an existing "
+        "published-quality blog post, per the requested change below. Return ONLY "
+        "the new heading text: one line, no leading '#', no surrounding quotes, "
+        "no markdown formatting, no explanation.\n\n"
+        f"CURRENT HEADING: {section.heading_text}\n\n"
+        f"REQUESTED CHANGE:\n{instruction}"
+    )
+    result_text, usage = await _complete_with_retry(prompt, temperature=0.4, max_tokens=300, label="revise-heading-rewrite")
+    if result_text is None:
+        raise SectionEditError(f"LLM call failed while generating a new heading: {usage.get('error', 'unknown error')}")
+
+    new_heading = result_text.strip().splitlines()[0].strip().strip("`\"'").lstrip("#").strip()
+    if not new_heading:
+        raise SectionEditError("LLM returned an empty heading.")
+    return new_heading, usage
+
+
 # ─────────────────────────────────────────────────────────────────────────
 # Diffing - a visible flag for the human reviewer (step 5), not a hard
 # gate. Reports how many lines changed OUTSIDE the range the edit claimed
@@ -636,7 +675,13 @@ async def classify_and_apply(raw: str, instruction: str) -> dict:
             protected_start, protected_end = section.line_start, section.line_end
             target_desc = f"section [{section.index}] {section.heading_text!r} (removed)"
         elif op == "rename_heading":
-            new_lines = rename_heading(lines, section, cls["new_text"])
+            if cls["new_text"]:
+                new_heading = cls["new_text"]
+            else:
+                new_heading, call_usage = await generate_new_heading(section, instruction)
+                for k in ("input_tokens", "output_tokens", "total_tokens"):
+                    usage_total[k] = usage_total.get(k, 0) + call_usage.get(k, 0)
+            new_lines = rename_heading(lines, section, new_heading)
             protected_start, protected_end = section.line_start, section.line_start + 1
             target_desc = f"heading of section [{section.index}]"
         elif op == "replace_text":
