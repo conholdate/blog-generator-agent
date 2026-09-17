@@ -173,6 +173,52 @@ def parse_sections(lines: list[str], body_start_line: int) -> list[Section]:
     return sections
 
 
+def build_post_context(fm: FrontmatterBlock, sections: list[Section], lines: list[str]) -> str:
+    """A short, READ-ONLY reference block handed to every generative rewrite
+    (rewrite_section/rewrite_field/generate_new_heading) alongside the one
+    section/field/heading they're actually allowed to touch. Those calls are
+    deliberately scoped to see nothing else in the post - which closed one
+    bug class (accidentally touching other sections) but opened another:
+    the new content has nothing to stay on-topic or on-voice with. This
+    gives just enough - title, meta description, summary, keywords, the
+    intro, and the other section headings for structural orientation - to
+    fix that, without handing over full section bodies (which would put us
+    right back to "whole document sent to the LLM").
+
+    Callers must frame this as reference-only in the prompt and make clear
+    it must never be copied or repeated into the edited output."""
+
+    def _field(name: str) -> Optional[str]:
+        val = fm.metadata.get(name)
+        if val is None:
+            return None
+        if isinstance(val, list):
+            return ", ".join(str(v) for v in val)
+        return str(val)
+
+    parts = []
+    if (title := _field("title")):
+        parts.append(f"Title: {title}")
+    if (description := _field("description")):
+        parts.append(f"Meta description: {description}")
+    if (summary := _field("summary")):
+        parts.append(f"Summary: {summary}")
+    if (tags := _field("tags") or _field("keywords")):
+        parts.append(f"Keywords/tags: {tags}")
+
+    intro = next((s for s in sections if s.level == 0), None)
+    if intro is not None:
+        intro_text = "\n".join(lines[intro.line_start:intro.line_end]).strip()
+        if intro_text:
+            parts.append(f"Intro paragraph: {intro_text}")
+
+    other_headings = [s.heading_text for s in sections if s.level > 0]
+    if other_headings:
+        parts.append("Other section headings in this post, for structural orientation only: " + " | ".join(other_headings))
+
+    return "\n".join(parts)
+
+
 # ─────────────────────────────────────────────────────────────────────────
 # Classifying the instruction - one small, tightly-scoped LLM call that
 # sees only the instruction, the heading list, and the frontmatter field
@@ -495,7 +541,7 @@ def remove_tag(lines: list[str], fm: FrontmatterBlock, tag: str) -> list[str]:
 # returned fragment only, not the whole document.
 # ─────────────────────────────────────────────────────────────────────────
 
-async def rewrite_section(lines: list[str], section: Section, instruction: str) -> tuple[list[str], dict]:
+async def rewrite_section(lines: list[str], section: Section, instruction: str, post_context: str = "") -> tuple[list[str], dict]:
     original_text = "\n".join(lines[section.line_start:section.line_end])
 
     if section.level == 0:
@@ -503,6 +549,13 @@ async def rewrite_section(lines: list[str], section: Section, instruction: str) 
     else:
         heading_line = lines[section.line_start]
         body_text = "\n".join(lines[section.line_start + 1:section.line_end])
+
+    context_block = (
+        f"POST CONTEXT (reference only, to keep your edit on-topic and consistent "
+        f"with the rest of the post's voice/terminology - do NOT copy, repeat, or "
+        f"summarize this block into your output; it is not part of the section):\n"
+        f"{post_context}\n\n"
+    ) if post_context else ""
 
     prompt = (
         "You are editing ONE section of an existing published-quality blog post. "
@@ -521,6 +574,7 @@ async def rewrite_section(lines: list[str], section: Section, instruction: str) 
         "text) just to save words. A shortened result that is over the target by "
         "a few words but keeps all links is correct; one that hits the target by "
         "dropping a link is not.\n\n"
+        f"{context_block}"
         f"REQUESTED CHANGE:\n{instruction}\n\n"
         f"SECTION BODY TO EDIT:\n{body_text}"
     )
@@ -539,7 +593,7 @@ async def rewrite_section(lines: list[str], section: Section, instruction: str) 
     return new_lines, usage
 
 
-async def rewrite_field(lines: list[str], fm: FrontmatterBlock, field: str, instruction: str) -> tuple[list[str], dict]:
+async def rewrite_field(lines: list[str], fm: FrontmatterBlock, field: str, instruction: str, post_context: str = "") -> tuple[list[str], dict]:
     i = _find_field_line(lines, fm, field)
     m = re.match(rf'^({re.escape(field)}\s*:\s*)(.*)$', lines[i], re.IGNORECASE)
     prefix, old_value = m.groups()
@@ -547,9 +601,16 @@ async def rewrite_field(lines: list[str], fm: FrontmatterBlock, field: str, inst
     if old_value.strip() in _FOLDED_SCALAR_VALUES:
         raise SectionEditError(f"Frontmatter field '{field}' is a multi-line YAML value - not supported yet.")
 
+    context_block = (
+        f"POST CONTEXT (reference only, to keep the new value on-topic and "
+        f"consistent with the rest of the post - do NOT copy or repeat this "
+        f"block, only the FIELD's value is wanted):\n{post_context}\n\n"
+    ) if post_context else ""
+
     prompt = (
         f"Rewrite this single blog frontmatter field value per the instruction below. "
         f"Return ONLY the new value as plain text, on one line, no quotes, no field name, no explanation.\n\n"
+        f"{context_block}"
         f"FIELD: {field}\nCURRENT VALUE: {old_value_clean}\nINSTRUCTION: {instruction}"
     )
     result_text, usage = await _complete_with_retry(prompt, temperature=0.3, max_tokens=300, label="revise-field-rewrite")
@@ -564,18 +625,25 @@ async def rewrite_field(lines: list[str], fm: FrontmatterBlock, field: str, inst
     return new_lines, usage
 
 
-async def generate_new_heading(section: Section, instruction: str) -> tuple[str, dict]:
+async def generate_new_heading(section: Section, instruction: str, post_context: str = "") -> tuple[str, dict]:
     """Used by rename_heading when the instruction asks to reword/improve a
     heading without giving exact new wording (KIND: GENERATIVE, NEW_TEXT:
     NONE) - a single scoped LLM call proposes the new title text, which the
     caller then applies via the existing deterministic rename_heading()
     splice (same "LLM proposes content, code controls where it lands"
     split as rewrite_section/rewrite_field)."""
+    context_block = (
+        f"POST CONTEXT (reference only, to keep the new heading on-topic and "
+        f"consistent with the rest of the post - do NOT copy or repeat this "
+        f"block, only the new heading text is wanted):\n{post_context}\n\n"
+    ) if post_context else ""
+
     prompt = (
         "You are proposing a NEW heading (title) for one section of an existing "
         "published-quality blog post, per the requested change below. Return ONLY "
         "the new heading text: one line, no leading '#', no surrounding quotes, "
         "no markdown formatting, no explanation.\n\n"
+        f"{context_block}"
         f"CURRENT HEADING: {section.heading_text}\n\n"
         f"REQUESTED CHANGE:\n{instruction}"
     )
@@ -664,6 +732,10 @@ async def classify_and_apply(raw: str, instruction: str) -> dict:
     section = next((s for s in sections if s.index == cls["section_index"]), None)
     protected_start, protected_end = 0, 0
     target_desc = ""
+    # Built once, reused by every generative call below (rewrite_section /
+    # rewrite_field / generate_new_heading) - cheap (no LLM call), and gives
+    # each of them the same read-only reference point.
+    post_context = build_post_context(fm, sections, lines)
 
     try:
         if op == "remove_section":
@@ -678,7 +750,7 @@ async def classify_and_apply(raw: str, instruction: str) -> dict:
             if cls["new_text"]:
                 new_heading = cls["new_text"]
             else:
-                new_heading, call_usage = await generate_new_heading(section, instruction)
+                new_heading, call_usage = await generate_new_heading(section, instruction, post_context)
                 for k in ("input_tokens", "output_tokens", "total_tokens"):
                     usage_total[k] = usage_total.get(k, 0) + call_usage.get(k, 0)
             new_lines = rename_heading(lines, section, new_heading)
@@ -701,13 +773,13 @@ async def classify_and_apply(raw: str, instruction: str) -> dict:
             protected_start, protected_end = fm.open_line, fm.close_line + 1
             target_desc = f"frontmatter field {cls['field_name']!r}"
         elif op == "rewrite_section" and cls["field_name"]:
-            new_lines, call_usage = await rewrite_field(lines, fm, cls["field_name"], instruction)
+            new_lines, call_usage = await rewrite_field(lines, fm, cls["field_name"], instruction, post_context)
             for k in ("input_tokens", "output_tokens", "total_tokens"):
                 usage_total[k] = usage_total.get(k, 0) + call_usage.get(k, 0)
             protected_start, protected_end = fm.open_line, fm.close_line + 1
             target_desc = f"frontmatter field {cls['field_name']!r} (rewritten)"
         elif op == "rewrite_section":
-            new_lines, call_usage = await rewrite_section(lines, section, instruction)
+            new_lines, call_usage = await rewrite_section(lines, section, instruction, post_context)
             for k in ("input_tokens", "output_tokens", "total_tokens"):
                 usage_total[k] = usage_total.get(k, 0) + call_usage.get(k, 0)
             protected_start, protected_end = section.line_start, section.line_end

@@ -27,6 +27,7 @@ if str(_BLOG_GENERATOR_DIR) not in sys.path:
 from utils.section_editor import (  # noqa: E402
     SectionEditError,
     add_tag,
+    build_post_context,
     classify_and_apply,
     count_changed_lines_outside_range,
     locate_frontmatter,
@@ -426,8 +427,14 @@ def test_classify_and_apply_generative_rewrite_scopes_llm_and_postprocessing(mon
     # The section-rewrite call's prompt contains ONLY that section's text,
     # not the whole document (e.g. it must not contain the FAQs heading).
     rewrite_prompt = captured_prompts[-1]
-    assert "FAQs" not in rewrite_prompt
-    assert "DWG to PNG Conversion in Python -  Steps" not in rewrite_prompt
+    # Other sections' HEADINGS are now intentionally included (as a short
+    # "POST CONTEXT" reference block - see build_post_context) so the
+    # rewrite stays on-topic/on-voice with the rest of the post. Their
+    # BODY content must still never reach this call - that's the actual
+    # scoping guarantee, not heading-name secrecy.
+    assert "FAQs" in rewrite_prompt  # heading name: OK, part of post context
+    assert "thread‑safe" not in rewrite_prompt  # FAQs section's own body text: not OK
+    assert "BarcodeApi" not in rewrite_prompt  # ditto
 
 
 def test_classify_and_apply_generative_heading_rewrite_when_no_new_text_given(monkeypatch):
@@ -478,6 +485,56 @@ def test_classify_and_apply_deterministic_rename_heading_still_requires_new_text
 
     assert report["kind"] == "reject"
     assert "requires NEW_TEXT" in report["reason"]
+
+
+def test_build_post_context_includes_meta_and_intro_but_not_other_bodies():
+    """build_post_context() must surface title/description/summary/tags/intro
+    and other headings (for on-topic/on-voice consistency), but never a full
+    other-section body - that would defeat the whole point of scoping."""
+    raw = load_fixture()
+    lines = raw.split("\n")
+    fm = locate_frontmatter(lines)
+    sections = parse_sections(lines, fm.body_start_line)
+
+    ctx = build_post_context(fm, sections, lines)
+
+    assert "DWG to PNG Conversion in Python" in ctx  # title
+    assert "Aspose.BarCode Cloud SDK for Python" in ctx  # from description/summary
+    assert "dwg to png" in ctx  # tags
+    assert "Working with CAD drawings" in ctx  # intro paragraph
+    assert "FAQs" in ctx  # other heading, for orientation
+    assert "thread‑safe" not in ctx  # FAQs section's own body: excluded
+    assert "BarcodeApi" not in ctx
+
+
+def test_classify_and_apply_generative_rewrite_receives_post_context(monkeypatch):
+    """End-to-end: the section-rewrite LLM call's prompt actually contains
+    the post-context block (title/description/summary), not just the raw
+    section text and instruction."""
+    import utils.section_editor as se
+
+    captured_prompts = []
+
+    async def fake_complete(prompt, temperature=0.6, max_tokens=4000, **kwargs):
+        captured_prompts.append(prompt)
+        if "You are routing a single human edit instruction" in prompt:
+            return (
+                "KIND: GENERATIVE\nOPERATION: rewrite_section\nSECTION_INDEX: 5\n"
+                "FIELD_NAME: NONE\nOLD_TEXT: NONE\nNEW_TEXT: NONE\nREASON: shorten conclusion"
+            ), {"input_tokens": 5, "output_tokens": 5, "total_tokens": 10}
+        return "A much shorter conclusion.", {"input_tokens": 5, "output_tokens": 5, "total_tokens": 10}
+
+    monkeypatch.setattr(se.llm_service, "complete", fake_complete)
+    raw = load_fixture()
+
+    async def run():
+        return await se.classify_and_apply(raw, "shorten the conclusion")
+    asyncio.run(run())
+
+    rewrite_prompt = captured_prompts[-1]
+    assert "POST CONTEXT" in rewrite_prompt
+    assert "do NOT copy" in rewrite_prompt or "do NOT copy, repeat" in rewrite_prompt
+    assert "DWG to PNG Conversion in Python" in rewrite_prompt  # title, via context
 
 
 if __name__ == "__main__":
