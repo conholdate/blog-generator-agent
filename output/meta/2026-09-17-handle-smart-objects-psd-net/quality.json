@@ -1,0 +1,32 @@
+{
+  "scores": {
+    "technical_accuracy": 9,
+    "code_correctness": 7,
+    "original_value": 10,
+    "source_faithfulness": 9,
+    "seo_readiness": 7,
+    "readability": 8,
+    "duplication_risk": 5,
+    "missing_citations": false,
+    "unsupported_claims": false
+  },
+  "scorecard": {
+    "search_intent": 10,
+    "technical_accuracy": 20,
+    "original_value": 20,
+    "answer_first_structure": 10,
+    "seo_metadata": 8,
+    "internal_linking": 10,
+    "accessibility": 4,
+    "llm_clarity": 4,
+    "total": 86,
+    "critical_technical_error": false,
+    "passes": true
+  },
+  "publication_status": "ready_for_editor",
+  "reasons": [
+    "Meta description outside the 120-165 character range",
+    "A paragraph has more than 7 sentences",
+    "Code sample has not been executed in a sandbox (not feasible: proprietary SDK/license/input files)"
+  ]
+}

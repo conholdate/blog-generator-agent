@@ -1,16 +1,23 @@
 {
-  "source_url": "https://releases.aspose.com/gis/net/release-notes/2026/aspose-gis-for-net-26-6-release-notes/",
+  "source_url": "https://releases.aspose.com/psd/net/release-notes/2026/aspose-psd-for-net-26-8-release-notes/",
   "source_type": "release-notes",
   "publication_readiness": "draft_ready",
   "blocker_reason": null,
   "topics_generated": [
-    "GISNET-2051. Gml To Gml - Results Not The Same In QGIS",
-    "GISNET-2041. Fix TopoJSON to CSV conversion with nested properties",
-    "GISNET-2042. Add optional SRS transform error collection for invalid Shapefile conversion",
-    "GISNET-2047. TopoJson to Gml - QGIS does not see output"
+    "PSDNET-125. Support of Grayscale ColorMode PSD Image saving with 32 bit per channel.",
+    "PSDNET-2810. Implement reading/writing Displace smart filter data.",
+    "PSDNET-2668. Improving Layer Effects processing according to the logic of the new Overlay Effects Blending algorithm.",
+    "PSDNET-2772. [AI Format] Implementing the Type 1 (function) Shading.",
+    "PSDNET-1472. Effect loss when working with smart objects."
   ],
   "rejected_sections": [
-    "Full List of Issues Covering all Changes in this Release",
-    "Public API and Backward Incompatible Changes"
+    "Public API Changes \u2013 Added APIs",
+    "Public API Changes \u2013 Removed APIs",
+    "PSDNET-2265. Arithmetic operation resulted in an overflow on Image.Load in file with complex smart filter Liquify.",
+    "Duplicate usage examples for PSDNET-125",
+    "Duplicate usage examples for PSDNET-2810",
+    "Duplicate usage examples for PSDNET-2668",
+    "Duplicate usage examples for PSDNET-2772",
+    "Duplicate usage examples for PSDNET-1472"
   ]
 }
