@@ -67,7 +67,9 @@
     "aspose.cloud|aspose.omr|php": 0,
     "aspose.cloud|aspose.omr|net": 0,
     "aspose.cloud|aspose.omr|java": 0,
-    "aspose.cloud|aspose.omr|nodejs": 0
+    "aspose.cloud|aspose.omr|nodejs": 0,
+    "groupdocs.cloud|groupdocs.annotation|php": 0,
+    "groupdocs.cloud|groupdocs.annotation|nodejs": 1
   },
   "aspose|aspose.html|python": [
     "How to Convert Code to Change HTML Border Color in Python",
@@ -597,5 +599,14 @@
     "Reverse Image Search and Image Deskewing in Node.JS",
     "Convert XLSX to CSV in Node.JS",
     "Convert XLSX to PDF in Node.JS"
+  ],
+  "groupdocs.cloud|groupdocs.annotation|php": [
+    "Add Sticky Notes to Word in PHP",
+    "Remove Annotations from Word Annotation Remover in PHP"
+  ],
+  "groupdocs.cloud|groupdocs.annotation|nodejs": [
+    "Remove Annotation Objects from PDF with Rest in Node.JS",
+    "Create Sticky Notes on Word PAGES in Node.JS",
+    "Quickly Remove Annotations from PDF via Rest in Node.JS"
   ]
 }
