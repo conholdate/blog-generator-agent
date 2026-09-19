@@ -27,7 +27,7 @@
   "APIReferenceURL": "https://reference.aspose.cloud/words/",
   "FreeAppsURL": "https://products.aspose.app/words/family/",
   "ForumsURL": "https://forum.aspose.cloud/c/words/17",
-  "InstallCommand": "<dependency>\n<groupId>com.aspose</groupId>\n<artifactId>aspose-words-cloud</artifactId>\n<version>26.8.0</version>\n</dependency>",
+  "InstallCommand": "<dependency>\n<groupId>com.aspose</groupId>\n<artifactId>aspose-words-cloud</artifactId>\n<version>26.9.0</version>\n</dependency>",
   "urlPrefix": "words",
   "license": "https://purchase.aspose.com/temporary-license/"
 },
@@ -874,7 +874,7 @@
   "APIReferenceURL": "https://reference.aspose.cloud/barcode/",
   "FreeAppsURL": "https://products.aspose.app/barcode/family/",
   "ForumsURL": "https://forum.aspose.cloud/c/barcode/6",
-  "InstallCommand": "<dependency>\n<groupId>com.aspose</groupId>\n<artifactId>aspose-barcode-cloud</artifactId>\n<version>26.8.0</version>\n</dependency>",
+  "InstallCommand": "<dependency>\n<groupId>com.aspose</groupId>\n<artifactId>aspose-barcode-cloud</artifactId>\n<version>26.9.0</version>\n</dependency>",
   "urlPrefix": "barcode",
   "license": "https://purchase.aspose.com/temporary-license/"
 },
