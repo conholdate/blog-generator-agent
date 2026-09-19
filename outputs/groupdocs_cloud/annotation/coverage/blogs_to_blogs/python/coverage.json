@@ -1,0 +1,193 @@
+{
+  "case": "blogs_to_blogs",
+  "brand_key": "groupdocs_cloud",
+  "product_key": "annotation",
+  "baseline_platform": "python",
+  "platforms": [
+    "python",
+    "nodejs",
+    "php",
+    "general"
+  ],
+  "meta": {
+    "matching_mode": "key_exact",
+    "total_input_records": 25,
+    "records_after_filters": 10,
+    "excluded_release_update_records": 7,
+    "excluded_old_or_undated_records": 8,
+    "baseline_records": 4,
+    "total_cells": 16,
+    "matched_cells": 6,
+    "missing_cells": 10,
+    "match_rate": 0.375,
+    "skipped_empty_keys": 0
+  },
+  "rows": [
+    {
+      "category": "Document",
+      "sub_category": "PDF Annotation",
+      "topic": "Annotate PDF documents using rest",
+      "key": "annotate-pdf-documents-using-rest",
+      "baseline_record_id": "blog::annotation/2021-06-17-annotate-pdf-documents-using-a-rest-api-in-python/index.md",
+      "coverage": {
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::annotation/2021-06-17-annotate-pdf-documents-using-a-rest-api-in-python/index.md",
+          "title": "Annotate PDF Documents using a REST API in Python",
+          "topic": "Annotate PDF documents using REST API",
+          "url": "groupdocs.cloud/annotation/annotate-pdf-documents-using-a-rest-api-in-python/"
+        },
+        "nodejs": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::annotation/2021-08-21-annotate-pdf-documents-using-a-rest-api-in-node-js/index.md",
+          "title": "Annotate PDF Documents using a REST API in Node.js",
+          "topic": "Annotate PDF documents using REST API",
+          "url": "groupdocs.cloud/annotation/annotate-pdf-documents-using-a-rest-api-in-node-js/"
+        },
+        "php": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::annotation/2022-01-11-annotate-pdf-documents-using-rest-api-in-php/index.md",
+          "title": "Annotate PDF Documents using REST API in PHP",
+          "topic": "Annotate PDF documents using REST API",
+          "url": "groupdocs.cloud/annotation/annotate-pdf-documents-using-rest-api-in-php/"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Documents",
+      "sub_category": "Annotation",
+      "topic": "Annotate word",
+      "key": "annotate-word",
+      "baseline_record_id": "blog::annotation/2021-02-23-annotate-docx-files-using-python/index.md",
+      "coverage": {
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::annotation/2021-02-23-annotate-docx-files-using-python/index.md",
+          "title": "Annotate Word Files using Python",
+          "topic": "Annotate word",
+          "url": "groupdocs.cloud/annotation/annotate-docx-files-using-python/"
+        },
+        "nodejs": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "php": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Annotation",
+      "sub_category": "Remove Annotations",
+      "topic": "Remove annotations from PDF using rest",
+      "key": "remove-annotations-from-pdf-using-rest",
+      "baseline_record_id": "blog::annotation/2021-12-13-remove-annotations-from-pdf-using-rest-api-in-python/index.md",
+      "coverage": {
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::annotation/2021-12-13-remove-annotations-from-pdf-using-rest-api-in-python/index.md",
+          "title": "Remove Annotations from PDF using REST API in Python",
+          "topic": "Remove annotations from PDF using REST API",
+          "url": "groupdocs.cloud/annotation/remove-annotations-from-pdf-using-rest-api-in-python/"
+        },
+        "nodejs": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "php": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Document Processing",
+      "sub_category": "Annotations",
+      "topic": "Remove annotations from word annotation remover",
+      "key": "remove-annotations-from-word-annotation-remover",
+      "baseline_record_id": "blog::annotation/2021-03-26-extract-or-remove-annotations-from-word-files-using-python/index.md",
+      "coverage": {
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::annotation/2021-03-26-extract-or-remove-annotations-from-word-files-using-python/index.md",
+          "title": "Remove Annotations From Word in Python - Annotation Remover",
+          "topic": "Remove annotations from word annotation remover",
+          "url": "groupdocs.cloud/annotation/extract-or-remove-annotations-from-word-files-using-python/"
+        },
+        "nodejs": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "php": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    }
+  ],
+  "brand_name": "GroupDocs.Cloud",
+  "product_name": "GroupDocs.Annotation"
+}

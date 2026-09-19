@@ -1,0 +1,30 @@
+{
+  "repo_head": "2d57f374afb75111e09879b3a90e5da36253bc55",
+  "file_fingerprints": {
+    "annotation/2013-05-20-annotate-pdf-word-and-other-files-easily-from-within-your-concrete5-sites/index.md": "ac34660bd79528c274ef9923a474efe0ee9986783b018d31b9f790439ebd6d0d",
+    "annotation/2014-08-01-focus-groupdocs-annotation-java-news-groupdocs-august-2014/index.md": "b1868ffa5b2f2430b42747594208a9f7dd2fafcc595b4f15e0eafe5f0475d7a4",
+    "annotation/2015-03-17-integrate-groupdocs-annotation-for-net-into-your-getsimple-website/index.md": "4e1fc850eae46e3d9819301b532d9142181678279379db4d13350608db65a822",
+    "annotation/2015-04-24-groupdocs-annotation-for-java-add-on-for-concrete5-is-now-available-for-download/index.md": "efd16c9ba623d58568140f7831e1e0ef67992c3c06523ebc7e5de3066f7df409",
+    "annotation/2015-05-01-groupdocs-customer-newsletter-may-2015/index.md": "18d69c71c4d0e55080e435bdd7e553595c0c174432d7ec186ff96fdd903c493c",
+    "annotation/2015-05-22-enhance-ez-publish-site-comprehensive-document-annotation-capabilities/index.md": "71aeebc4673a62a6a60833d75a128c1303ac054a1d0ccd06bb75131f5437c4ca",
+    "annotation/2015-06-01-groupdocs-customer-newsletter-june-2015/index.md": "1dc509551dc2ff20b2ddf36375f39577f1bbfaa5675b05faba6b93a16a98c25e",
+    "annotation/2015-06-16-collaboratively-annotate-50-document-types-on-your-exprressionengine-site/index.md": "9757ab7cdce7b0c52dd0fcc5773c58e715b778101843aae37ad38387417b22a8",
+    "annotation/2015-09-17-add-comprehensive-document-annotation-functionality-to-your-pimcore-website/index.md": "9939ca51920e2715bbe8ad6c143f2511d6be400498392f4630db7a98e53c29cd",
+    "annotation/2018-01-12-next-generation-groupdocs.annotation-cloud-will-available-soon/index.md": "f100f5387e32735bd0b738329a65ceb58e9e125a595bb7e8311b5610096b62b2",
+    "annotation/2018-01-19-first-public-release-next-generation-groupdocs.annotation-cloud/index.md": "c54c90f6456091abc6af75637fefdfce578a41b98d114e8eb95210b5aba9fbe5",
+    "annotation/2018-05-21-introduction-of-php-sdk-in-groupdocs.annotation-for-cloud-18.4/index.md": "ffdd8eb573a089010ac7cd50e2d3584d5a3f040c08f1322f322f3ee0a8b3f7d2",
+    "annotation/2018-12-18-groupdocs.annotation-cloud-sdks-java-ruby-now-available/index.md": "f3c73e716899740ac8a9e69837f993e756f1038046f9a5ca29ae38f06490c0bb",
+    "annotation/2019-06-24-groupdocs.annotation-cloud-19.5/index.md": "3a57b42305ebbfbd0fd7e81e7c279d050e5b0eec30b9e7988407063c1f73947e",
+    "annotation/2019-09-30-a-rest-api-solution-to-redact-pdf-text/index.md": "5a4ac001bf654577cff517ccdd723e34f034520f5834c7fb2097f8cea1cb4bc2",
+    "annotation/2021-02-23-annotate-docx-files-using-python/index.md": "fd55f3cfb85de4ad33784fc27ae259f21995c9f05014b78c44fa62073124dd4e",
+    "annotation/2021-03-26-extract-or-remove-annotations-from-word-files-using-python/index.md": "6afe559701d344449f605ec8606036f8bd56acba421eb1d8edb928664b0c4ecf",
+    "annotation/2021-06-17-annotate-pdf-documents-using-a-rest-api-in-python/index.md": "61782dfe4bdb8eba3665eb37689333ecd4a07551486ef8ba1a2cd93190ee05b3",
+    "annotation/2021-08-14-extract-or-remove-annotations-from-pdf-using-rest-api-in-node-js/index.md": "f22ebb24bd04635d1200dd36a0f3b3fc5d2ab03690d728711f5abef6ac97dafb",
+    "annotation/2021-08-21-annotate-pdf-documents-using-a-rest-api-in-node-js/index.md": "9a67b20316c5d42f8223ad06f025750a9f364b67cad2075a41bd9cdcf818b445",
+    "annotation/2021-11-24-add-annotations-in-word-documents-using-a-rest-api-in-node-js/index.md": "581508546eb50d4e0a8877ecf7d1284fba26e8d8c476337ddcb013749f2eceb6",
+    "annotation/2021-12-13-remove-annotations-from-pdf-using-rest-api-in-python/index.md": "f28bb46d59ec4e711ae09fa10e73c50f08668846395b288512dcb07384ff7007",
+    "annotation/2022-01-11-annotate-pdf-documents-using-rest-api-in-php/index.md": "517746852697eb4cc95b1411e573b8f7e05f521de60157773f2efc1732384c98",
+    "annotation/2022-02-08-highlight-text-in-pdf-using-rest-api-in-node-js/index.md": "7afec1f9bf576f9ee5b98ee3efe14dcfe6e76afd256b92c0a99e2819c34f26d4",
+    "annotation/2023-07-12-strikethrough-text-in-a-pdf-using-nodejs/index.md": "df1c966aa1e54a6023df8b7327d0108deb0eb637e47ca853441caec5153e26d9"
+  }
+}
