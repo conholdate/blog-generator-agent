@@ -1,0 +1,77 @@
+{
+  "case": "blogs_to_blogs",
+  "brand_key": "groupdocs_cloud",
+  "product_key": "assembly",
+  "baseline_platform": "python",
+  "platforms": [
+    "python",
+    "general"
+  ],
+  "meta": {
+    "matching_mode": "key_exact",
+    "total_input_records": 4,
+    "records_after_filters": 3,
+    "excluded_release_update_records": 0,
+    "excluded_old_or_undated_records": 1,
+    "baseline_records": 2,
+    "total_cells": 4,
+    "matched_cells": 2,
+    "missing_cells": 2,
+    "match_rate": 0.5,
+    "skipped_empty_keys": 0
+  },
+  "rows": [
+    {
+      "category": "Reporting",
+      "sub_category": "HTML Report Generation",
+      "topic": "Display JSON data on HTML page using rest",
+      "key": "display-json-data-on-html-page-using-rest",
+      "baseline_record_id": "blog::assembly/2023-07-25-display-json-data-in-html-with-python-using-rest-api/index.md",
+      "coverage": {
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::assembly/2023-07-25-display-json-data-in-html-with-python-using-rest-api/index.md",
+          "title": "Display JSON Data on an HTML Page in Python using REST API",
+          "topic": "Display JSON data on HTML page using REST API",
+          "url": "groupdocs.cloud/assembly/display-json-data-in-html-with-python-using-rest-api/"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Document Generation",
+      "sub_category": "Html Reports",
+      "topic": "Generate HTML report from XML data using rest",
+      "key": "generate-html-report-from-xml-data-using-rest",
+      "baseline_record_id": "blog::assembly/2023-08-04-display-xml-data-in-html-with-python-using-rest-api/index.md",
+      "coverage": {
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::assembly/2023-08-04-display-xml-data-in-html-with-python-using-rest-api/index.md",
+          "title": "Generate HTML Report from XML Data in Python using Rest API",
+          "topic": "Generate HTML report from XML data using REST API",
+          "url": "groupdocs.cloud/assembly/display-xml-data-in-html-with-python-using-rest-api/"
+        },
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    }
+  ],
+  "brand_name": "GroupDocs.Cloud",
+  "product_name": "GroupDocs.Assembly"
+}
