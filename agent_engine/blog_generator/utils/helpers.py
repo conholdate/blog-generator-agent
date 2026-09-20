@@ -2452,6 +2452,81 @@ gymwear, sweatsuit-design, streetwear-trends
     return None
 
 
+async def generate_outline_with_llm(
+    post_topic: str,
+    product_name: str,
+    platform: str,
+    keywords: list[str],
+    metrics=None,
+) -> list[str] | None:
+    """
+    Generate 6 SEO-oriented section headings for a topic - used by the
+    dashboard's "Generate outline" button (BlogOrchestrator.suggest_outline).
+    Same shape as generate_tags_with_llm just above: a quick single-shot LLM
+    helper, no MCP/external API needed (unlike keyword suggestions, which
+    need SerpAPI). Returns a list of heading strings, or None if all
+    retries fail outright.
+    """
+    from services.LLMservice import llm_service
+    from utils.prompts import outline_suggest_prompt
+    MAX_RETRIES = 3
+
+    instructions = outline_suggest_prompt(post_topic, product_name, platform, keywords)
+
+    for attempt in range(1, MAX_RETRIES + 1):
+        print(f"  [Attempt {attempt}/{MAX_RETRIES}] Generating outline for topic: '{post_topic}'...")
+
+        try:
+            result = await llm_service.run_agent(
+                instructions=instructions,
+                context="Generate 6 section headings for the blog post above.",
+                agent_name="hugo-outline-generator",
+                temperature=0.5,
+                max_turns=1
+            )
+
+            if metrics is not None:
+                metrics.record_llm_usage(
+                    input_tokens=result.token_usage["input_tokens"],
+                    output_tokens=result.token_usage["output_tokens"]
+                )
+
+            raw = result.final_output.strip().strip('"').strip("'")
+
+            if not raw:
+                print(f"  [Attempt {attempt}/{MAX_RETRIES}] LLM returned empty response")
+                if attempt == MAX_RETRIES:
+                    return None
+                continue
+
+            headings = [h.strip() for h in raw.split(",")]
+            headings = [h for h in headings if h]
+
+            if len(headings) == 6:
+                print(f"  ✅ Valid outline generated on attempt {attempt}: {headings}")
+                return headings
+            else:
+                print(f"  [Attempt {attempt}/{MAX_RETRIES}] Expected 6 headings, got {len(headings)}: {headings}")
+                if attempt == MAX_RETRIES:
+                    # A slightly-off count is still useful in a review
+                    # popup - unlike keyword-suggest, which has zero
+                    # tolerance because it feeds separate downstream
+                    # categories, an outline of 5 or 7 items is not wrong.
+                    return headings or None
+                continue
+
+        except Exception as e:
+            print(f"  [Attempt {attempt}/{MAX_RETRIES}] LLM call failed: {e}")
+            import traceback
+            traceback.print_exc()
+            if attempt == MAX_RETRIES:
+                return None
+            continue
+
+    print(f"  ❌ Could not generate outline after {MAX_RETRIES} attempts.")
+    return None
+
+
 
 
 def get_weekly_sheet_name() -> str:

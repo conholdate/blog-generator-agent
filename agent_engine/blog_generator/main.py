@@ -34,6 +34,11 @@ def main():
     # keywords" button (a separate, lightweight workflow from --topic mode).
     parser.add_argument("--suggest-keywords", action="store_true")
 
+    # Outline-suggestion mode: same shape as --suggest-keywords, for the
+    # dashboard's "Generate outline" button. Reuses --keywords so whatever
+    # the user already typed in the Keywords field informs the outline.
+    parser.add_argument("--suggest-outline", action="store_true")
+
     args = parser.parse_args()
 
     orchestrator = BlogOrchestrator(brand=args.brand)
@@ -54,6 +59,22 @@ def main():
         # in addition to (not instead of) the normal summary line below.
         print(f"KEYWORDS_RESULT_JSON:{json.dumps(result, separators=(',', ':'))}")
         print(f"Keyword suggestion result: {result}")
+        return
+
+    if args.suggest_outline:
+        if not args.topic.strip() or not args.product.strip() or not args.platform.strip():
+            parser.error("--topic, --product, and --platform are required with --suggest-outline")
+
+        result = asyncio.run(
+            orchestrator.suggest_outline(
+                topic=args.topic,
+                product=args.product,
+                platform=args.platform,
+                keywords_text=args.keywords,
+            )
+        )
+        print(f"OUTLINE_RESULT_JSON:{json.dumps(result, separators=(',', ':'))}")
+        print(f"Outline suggestion result: {result}")
         return
 
     if args.revise:

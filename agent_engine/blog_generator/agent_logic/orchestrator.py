@@ -8,7 +8,7 @@ from tools.mcp_tools import generate_markdown_file, fetch_category_related_artic
 from utils import prompts
 from utils.seo_validator import validate_seo_content, validate_and_fix_meta_description, validate_and_fix_seo_title
 from utils.file_format_mappings import FILE_FORMAT_MAPPINGS, BASE_URL
-from utils.helpers import mark_topic_as_generated, prepare_context, get_productInfo, get_topic_by_index, inject_file_format_links, inject_repo_example_reference, strip_unverified_code_blocks, slugify, normalize_case_preserve_formats_in_keywords, clean_ai_generated_markdown, strip_pre_frontmatter_preamble, validate_markdown_links, capitalize_file_formats_for_title, setup_logger, generate_tags_with_llm, save_blog_metadata_to_sheet, extract_blog_metadata, get_topic_from_sheet, get_next_tab, extract_product_names, get_recent_layouts, convert_sheet_row_to_file_format, update_last_processed_product, repair_code_fences, strip_snippet_markers
+from utils.helpers import mark_topic_as_generated, prepare_context, get_productInfo, get_topic_by_index, inject_file_format_links, inject_repo_example_reference, strip_unverified_code_blocks, slugify, normalize_case_preserve_formats_in_keywords, clean_ai_generated_markdown, strip_pre_frontmatter_preamble, validate_markdown_links, capitalize_file_formats_for_title, setup_logger, generate_tags_with_llm, generate_outline_with_llm, save_blog_metadata_to_sheet, extract_blog_metadata, get_topic_from_sheet, get_next_tab, extract_product_names, get_recent_layouts, convert_sheet_row_to_file_format, update_last_processed_product, repair_code_fences, strip_snippet_markers
 from utils.layouts import select_layout
 from utils.code_source import get_code_snippet
 from utils.section_editor import classify_and_apply, SectionEditError
@@ -621,6 +621,28 @@ class BlogOrchestrator:
         product_info = get_productInfo(product, platform, self.products, self.brand)
         keywords = await fetch_keywords_auto(topic, product_info.get("ProductName"), platform, expand=True)
         return {"topic": topic, "keywords": keywords}
+
+    async def suggest_outline(self, topic: str, product: str, platform: str, keywords_text: str = "") -> dict:
+        """
+        Real outline suggestions for the dashboard's "Generate outline"
+        button (mirrors suggest_keywords above). A single scoped LLM call
+        (utils/helpers.py: generate_outline_with_llm) proposes 6 SEO-oriented
+        section headings for the topic - incorporating whatever keywords the
+        user has already entered in the Keywords field (if any), so the
+        outline stays consistent with the post's target keywords. No
+        external API needed here (unlike keywords, which need SerpAPI).
+
+        No metrics/job tracking here on purpose - this is a quick lookup,
+        not a generation run.
+
+        Returns {"topic": ..., "outline": [str, ...]} - a flat list of
+        headings, matching the Outline field's own comma-separated format
+        (create_blog_from_manual_input splits it the same way).
+        """
+        product_info = get_productInfo(product, platform, self.products, self.brand)
+        keywords = [k.strip() for k in keywords_text.split(",") if k.strip()]
+        headings = await generate_outline_with_llm(topic, product_info.get("ProductName"), platform, keywords)
+        return {"topic": topic, "outline": headings or []}
 
     async def create_blog_from_manual_input(
         self,

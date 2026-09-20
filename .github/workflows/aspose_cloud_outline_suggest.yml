@@ -1,0 +1,94 @@
+name: Suggest Outline (aspose.cloud) — dashboard
+
+# Powers the "Generate outline" button on the dashboard's New Request
+# form. Same shape as aspose_cloud_keyword_suggest.yml (its own workflow,
+# not folded into aspose_cloud_blog_request.yml) - a quick lookup (one LLM
+# call, no draft, no PR, no commit), not a generation run. Needs even
+# fewer secrets than keyword-suggest: no SerpAPI key, no MCP server -
+# outline generation is a single direct LLM call
+# (utils/helpers.py: generate_outline_with_llm).
+#
+# client_payload fields: brand, product, platform, topic, keywords, request_id
+# (keywords is whatever the dashboard's Keywords field currently holds -
+# may be empty if the user hasn't filled or generated it yet.)
+#
+# Result contract: the job prints exactly one line starting with
+# "OUTLINE_RESULT_JSON:" followed by compact JSON - the dashboard fetches
+# this job's raw log via the Actions API and matches that prefix. Nothing
+# is committed or uploaded as an artifact; the log line IS the result.
+
+on:
+  repository_dispatch:
+    types: [outline-suggest]
+
+# request_id lets the dashboard find the right run among several - a
+# plain topic-only title isn't unique enough if two requests overlap.
+run-name: "Suggest outline: ${{ github.event.client_payload.topic }} [${{ github.event.client_payload.request_id }}]"
+
+permissions:
+  contents: read
+
+jobs:
+  suggest:
+    runs-on: ubuntu-latest
+    if: github.event.client_payload.brand == 'aspose.cloud'
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Cache pip packages
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+
+      - name: Remove any .env files that could interfere
+        run: |
+          find . -name ".env" -type f -delete
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          cd agent_engine/blog_generator
+          pip install -r requirements.txt
+
+      # Only what generate_outline_with_llm needs - no SerpAPI key, no
+      # sheet/gist secrets, unlike the request workflow.
+      - name: Create runtime .env file with secrets
+        run: |
+          cat > .env << EOF
+          PROFESSIONALIZE_API_KEY_2=${{ secrets.PROFESSIONALIZE_API_KEY_2 }}
+          PROFESSIONALIZE_BASE_URL=${{ secrets.PROFESSIONALIZE_BASE_URL }}
+          PROFESSIONALIZE_LLM_MODEL=${{ secrets.PROFESSIONALIZE_LLM_MODEL }}
+          EOF
+          echo ".env file created"
+
+      - name: Suggest outline
+        env:
+          PRODUCT: ${{ github.event.client_payload.product }}
+          PLATFORM: ${{ github.event.client_payload.platform }}
+          TOPIC: ${{ github.event.client_payload.topic }}
+          KEYWORDS: ${{ github.event.client_payload.keywords }}
+        run: |
+          cd agent_engine/blog_generator
+
+          if [ -z "$TOPIC" ] || [ -z "$PRODUCT" ] || [ -z "$PLATFORM" ]; then
+            echo "❌ Suggest-outline requires topic, product, and platform."
+            exit 1
+          fi
+
+          python main.py \
+            --author "dashboard" \
+            --brand "aspose.cloud" \
+            --product "$PRODUCT" \
+            --platform "$PLATFORM" \
+            --topic "$TOPIC" \
+            --keywords "$KEYWORDS" \
+            --suggest-outline

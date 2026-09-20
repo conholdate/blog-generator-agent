@@ -1343,55 +1343,47 @@ after it:
 
 
 
-def build_outline_prompt(title: str, keywords: list[str]) -> str:
-    keyword_list = ", ".join(keywords)
-
+def outline_suggest_prompt(topic: str, product_name: str, platform: str, keywords: list[str]) -> str:
+    """
+    Used by BlogOrchestrator.suggest_outline() (the dashboard's "Generate
+    outline" button, mirroring "Generate keywords"). Produces a FLAT list
+    of 6 top-level section headings, matching what the Outline field
+    actually parses (`outline_text.split(",")` - a comma-separated list,
+    no nested H1/H2/H3 markdown structure).
+    """
+    keywords_str = ", ".join(keywords) if keywords else "none provided"
     return f"""
-        You are an expert technical SEO content writer.
+    You are an expert technical SEO content writer, creating a blog post SECTION OUTLINE.
 
-        TASK:
-        Create a **comprehensive, SEO-optimized blog post outline** for the topic:
+    TASK:
+    Generate EXACTLY 6 section headings for a technical tutorial blog post on the
+    topic below, for product "{product_name}" on platform "{platform}".
 
-        Title: **{title}**
+    Topic: {topic}
+    Target keywords (weave these naturally into heading phrasing across the
+    outline for SEO - not every heading needs one, but the phrases should
+    appear somewhere across the outline overall): {keywords_str}
 
-        Popular Keywords: {keyword_list}
+    REQUIREMENTS:
+    - EXACTLY 6 headings, no more, no less
+    - Each heading is a short, actionable section title (e.g. "Install the SDK
+      and Configure Credentials") - not a full sentence, not a question
+    - Cover a natural tutorial flow: setup/prerequisites, core implementation
+      steps, a verification/output step, and a wrap-up - in whatever order
+      fits the topic
+    - Only reference platform "{platform}" - do not mention other
+      platforms/languages (e.g. if platform is Python, never mention Java,
+      .NET, PHP, Node.js, etc.)
+    - Do NOT number the headings, do NOT use markdown '#' symbols
+    - NO explanations, no preamble, no meta-commentary
 
-        STRICT REQUIREMENTS:
-        - Generate EXACTLY 4-6 main headings (H2 level)
-        - Each main heading MUST be a complete, actionable section title
-        - Include 2-3 subheadings (H3 level) under each main heading
-        - Headings MUST include the popular keywords naturally
-        - Outline must be detailed, hierarchical, and structured
-        - Follow proper markdown heading structure
-        - Be concise but comprehensive
-        - NO introductory text, NO explanations, NO meta-commentary
-        - NO content outside the outline structure
+    OUTPUT FORMAT:
+    Return ONLY the 6 headings as a comma-separated list on one line - no
+    numbering, no quotes, no extra text. Example:
+    Install the SDK and Configure Credentials, Load and Prepare the Input File, Convert the File Using the API, Save and Verify the Output, Handle Common Errors, Next Steps and Best Practices
 
-        OUTPUT FORMAT:
-        Return ONLY a well-formatted markdown outline with exactly 6 H2 sections.
-
-        ENFORCEMENT:
-        - STRICTLY 5-7 main H2 headings - no more, no less
-        - Each H2 must be a substantial section that can contain multiple paragraphs
-        - NO additional text before or after the outline
-        - Start immediately with H1 title
-        - End after the last H3 subheading
-
-        EXAMPLE STRUCTURE:
-        # Main Title
-
-        ## First Main Heading
-        ### First Subheading
-        ### Second Subheading
-
-        ## Second Main Heading
-        ### First Subheading
-        ### Second Subheading
-
-        [Continue with 3-5 more main headings...]
-
-        Now create the outline for: **{title}**
-        """
+    Now create the outline for: {topic}
+    """
 
 def keyword_filter_prompt(TOPIC, PRODUCT_NAME, KEYWORDS, platform, expand: bool = False) -> str:
     """
