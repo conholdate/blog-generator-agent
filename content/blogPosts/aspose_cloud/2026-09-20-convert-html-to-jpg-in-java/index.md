@@ -1,231 +1,295 @@
 ---
 title: "Convert HTML to JPG in Java"
 seoTitle: "Convert HTML to JPG in Java"
-description: "Convert HTML to JPG in Java with Aspose.HTML Cloud SDK for Python. Step-by-step code, cURL calls, and option settings guide you to fast image conversion."
-date: Sun, 20 Sep 2026 13:01:39 +0000
-lastmod: Sun, 20 Sep 2026 13:01:39 +0000
+description: "Learn how to convert HTML to JPG in Java using Aspose.OCR Cloud SDK for Java. This guide covers setup, code walkthrough, batch processing, and performance tips."
+date: Sun, 20 Sep 2026 14:02:44 +0000
+lastmod: Sun, 20 Sep 2026 14:02:44 +0000
 draft: false
-url: /html/convert-html-to-jpg-in-java/
+url: /ocr/convert-html-to-jpg-in-java/
 author: "Muhammad Mustafa"
-summary: "Learn to convert HTML to JPG in Java using Aspose.HTML Cloud SDK for Python. This guide covers installing the library, authenticating, setting image size and quality, running the Python conversion code, and executing the operation with REST API cURL commands."
-tags: ['html to jpg', 'java image conversion', 'web page screenshot']
-categories: ["Aspose.HTML Cloud Product Family"]
+summary: "This tutorial shows you how to convert HTML to JPG in Java with Aspose.OCR Cloud SDK for Java. You will learn to configure credentials, perform single and batch conversions, use the REST API via cURL, and apply optimization techniques for fast processing."
+tags: ['java html to image', 'html to jpg', 'batch image conversion']
+categories: ["Aspose.OCR Cloud Product Family"]
 showtoc: true
 cover:
    image: images/convert-html-to-jpg-in-java.jpg
    alt: "Convert HTML to JPG in Java"
    caption: "Convert HTML to JPG in Java"
 steps:
-  - "Step 1: Install Aspose.HTML Cloud SDK for Python"
-  - "Step 2: Set up client credentials"
-  - "Step 3: Prepare HTML input and conversion options"
-  - "Step 4: Call the convert_html_to_image API"
-  - "Step 5: Verify the generated JPG file"
+  - "Step 1: Install the Aspose.OCR Cloud SDK for Java"
+  - "Step 2: Configure your OCR credentials"
+  - "Step 3: Convert a single HTML file to JPG"
+  - "Step 4: Batch convert multiple HTML files"
+  - "Step 5: Optimize conversion performance"
 faqs:
-  - q: "How does convert HTML to JPG in Java work with a Python cloud library?"
-    a: "The Java application sends the HTML file to the Aspose.HTML Cloud SDK for Python via REST. The service performs the conversion and returns a JPG, allowing Java code to handle the result."
-  - q: "Can I adjust image quality when I convert HTML file to JPG using Java?"
-    a: "Yes, the ImageConvertOptions class lets you set the quality parameter. Adjust it in the request payload before calling the API."
-  - q: "Is there a step‑by‑step HTML to JPG conversion example in Java?"
-    a: "This tutorial provides a complete example, including Python code, cURL commands, and configuration tips that you can call from Java."
-  - q: "Where can I find licensing information for Aspose.HTML Cloud SDK for Python?"
-    a: "Visit the [temporary license page](https://purchase.aspose.com/temporary-license/) for evaluation or purchase a commercial license for production use."
+  - q: "How can I convert HTML to JPG in Java using Aspose?"
+    a: "Use the Aspose.OCR Cloud SDK for Java to send an HTML file to the convertDocument endpoint. The SDK handles rendering and returns JPG bytes that you can save locally."
+  - q: "What is the simplest code to convert an HTML page to JPG using Java?"
+    a: "The short example in the walkthrough creates a ConvertDocumentRequest, sets the file and outputFormat to \"jpg\", then calls ocrApi.convertDocument(request)."
+  - q: "Can I batch convert HTML files to JPG in Java?"
+    a: "Yes. The batch method walks a folder, creates a request for each .HTML file, and writes each JPG output. See the batch conversion section for full details."
+  - q: "Where can I find licensing information for Aspose.OCR Cloud SDK for Java?"
+    a: "Licensing details, pricing, and a temporary license are available on the [Aspose.OCR Cloud SDK for Java](https://products.aspose.cloud/ocr/java/) product page and the [temporary license page](https://purchase.aspose.com/temporary-license/)."
 ---
 
-Converting [HTML](https://docs.fileformat.com/web/html/) to [JPG](https://docs.fileformat.com/image/jpg/) in Java is a frequent requirement when building reporting dashboards or creating visual assets for emails. [Aspose.HTML Cloud SDK for Python](https://products.aspose.cloud/html/python/) provides a powerful cloud‑based library that lets you perform this conversion from any platform, including Java applications that call the service. In this guide you will see a step‑by‑step implementation, a full Python code sample, equivalent cURL commands, and tips for tuning conversion options to get the best JPG output.
+Converting web pages into image snapshots is a frequent need when you build reporting dashboards, email newsletters, or document archives. [Aspose.OCR Cloud SDK for Java](https://products.aspose.cloud/ocr/java/) provides a powerful cloud‑based library that lets you programmatically render [HTML](https://docs.fileformat.com/web/html/) content as high‑quality [JPG](https://docs.fileformat.com/image/jpg/) images. In this guide you will learn how to convert HTML to JPG in Java, covering single‑file conversion, batch processing, and performance best practices.
 
-## What Convert HTML to JPG in Java Demands From Your Application
+## HTML to JPG Conversion in Java - Prerequisites and Setup
 
-Developers who need to generate image previews of web pages often work with dynamic content, custom fonts, and responsive layouts. The conversion process must preserve CSS styling, handle JavaScript‑generated markup, and produce a high‑quality JPG that matches the original rendering size. Manual screenshot tools cannot be scripted reliably at scale, and client‑side rendering adds unnecessary complexity to server‑side pipelines.
+Before you start, make sure you have the following:
 
-## How Aspose.HTML Cloud SDK for Python Fits Convert HTML to JPG in Java
+- Java 8 or higher installed.
+- Maven or Gradle for dependency management.
+- An Aspose Cloud account with **APP SID** and **APP KEY** for OCR services.
+- Network access to Aspose OCR Cloud endpoints.
 
-The SDK offers a cloud API that accepts raw HTML, applies the same rendering engine used by modern browsers, and returns raster images in the desired format. It supports setting output dimensions, image quality, and background color, which are essential for consistent JPG results. The service is accessed via simple HTTP calls, so your Java code can invoke the API without embedding any native rendering engine. See the [official documentation](https://docs.aspose.cloud/html/) for details and the [API reference](https://reference.aspose.cloud/html/) for class definitions.
+Add the SDK to your project using the Maven dependency below. The same coordinates are available on the [download page](https://releases.aspose.cloud/ocr/java/).
 
-## Convert HTML to JPG in Java: Implementation
-
-### Install Aspose.HTML Cloud SDK for Python
-
-```bash
-pip install asposehtmlcloud
+```xml
+<dependency>
+    <groupId>com.aspose</groupId>
+    <artifactId>aspose-ocr-cloud</artifactId>
+    <version>25.9.0</version>
+</dependency>
 ```
 
-The install command pulls the library and its dependencies, preparing your environment for the conversion calls.
+You will also need to import the required classes and configure your credentials, as shown in the first part of the sample code.
 
-### Configure Authentication and Client
+## Convert HTML to JPG in Java - Step-by-Step Walkthrough
 
-```python
-import os
-import asposehtmlcloud
-from asposehtmlcloud.apis.html_api import HtmlApi
+### Step 1: Load the Source Document and Configure Credentials
+Create a `Configuration` object and set your **APP SID** and **APP KEY**. This prepares the library for authentication.
 
-configuration = asposehtmlcloud.Configuration()
-configuration.client_id = os.getenv('ASPOSE_CLIENT_ID')
-configuration.client_secret = os.getenv('ASPOSE_CLIENT_SECRET')
-configuration.debug = False
-
-api_instance = HtmlApi(asposehtmlcloud.ApiClient(configuration))
+```java
+Configuration config = new Configuration();
+config.setAppSid(APP_SID);
+config.setAppKey(APP_KEY);
 ```
 
-Set the `ASPOSE_CLIENT_ID` and `ASPOSE_CLIENT_SECRET` environment variables with the values obtained from your Aspose Cloud dashboard.
+### Step 2: Initialize the OCR API
+Instantiate `OcrApi` with the configuration. The API reference is available in the [official API reference](https://reference.aspose.cloud/ocr/).
 
-### Set Conversion Options and Execute
-
-```python
-from asposehtmlcloud.models import ImageConvertOptions, ConvertHtmlRequest
-
-input_html_path = 'input.html'
-output_jpg_path = 'output.jpg'
-
-with open(input_html_path, 'rb') as html_file:
-    html_content = html_file.read()
-
-convert_options = ImageConvertOptions(
-    format='jpg',
-    width=1024,
-    height=768,
-    quality=90
-)
-
-convert_request = ConvertHtmlRequest(
-    file=html_content,
-    output_path=output_jpg_path,
-    options=convert_options
-)
-
-api_instance.convert_html_to_image(convert_request)
-print(f'HTML successfully converted to JPG: {output_jpg_path}')
+```java
+OcrApi ocrApi = new OcrApi(config);
 ```
 
-The `ImageConvertOptions` object lets you control the output format, dimensions, and compression quality, which is crucial for the step‑by‑step HTML to JPG conversion example in Java.
+### Step 3: Build the Conversion Request
+Create a `ConvertDocumentRequest`, attach the HTML file, and specify **jpg** as the output format.
 
-## Java Implementation - Convert HTML to JPG in Java Complete Code Example
-
-This example demonstrates how to invoke the Aspose.HTML Cloud service from a Java environment by sending the same request payload shown above.
-
-```python
-# pip install aspose-html-cloud
-import os
-import asposehtmlcloud
-from asposehtmlcloud.apis.html_api import HtmlApi
-from asposehtmlcloud.models import ImageConvertOptions, ConvertHtmlRequest
-from asposehtmlcloud.rest import ApiException
-
-# Configure Aspose.HTML Cloud SDK with client credentials
-configuration = asposehtmlcloud.Configuration()
-configuration.client_id = os.getenv('ASPOSE_CLIENT_ID')
-configuration.client_secret = os.getenv('ASPOSE_CLIENT_SECRET')
-configuration.debug = False
-
-# Initialize the API client
-api_instance = HtmlApi(asposehtmlcloud.ApiClient(configuration))
-
-# Define input HTML and output JPG file paths
-input_html_path = 'input.html'
-output_jpg_path = 'output.jpg'
-
-# Read the HTML file content
-with open(input_html_path, 'rb') as html_file:
-    html_content = html_file.read()
-
-# Set conversion options (format, dimensions, quality)
-convert_options = ImageConvertOptions(
-    format='jpg',
-    width=1024,
-    height=768,
-    quality=90
-)
-
-# Create the conversion request
-convert_request = ConvertHtmlRequest(
-    file=html_content,
-    output_path=output_jpg_path,
-    options=convert_options
-)
-
-# Perform the conversion
-try:
-    api_instance.convert_html_to_image(convert_request)
-    print(f'HTML successfully converted to JPG: {output_jpg_path}')
-except ApiException as e:
-    print(f'Exception when calling HtmlApi->convert_html_to_image: {e}')
+```java
+ConvertDocumentRequest request = new ConvertDocumentRequest();
+request.setFile(new File(inputHtmlPath));
+request.setOutputFormat("jpg");
 ```
 
-> **Note:** This code example demonstrates the core functionality. Before using it in your project, make sure to update any file paths and configuration values to match your actual environment, verify that all required dependencies are properly installed, and test thoroughly in your development environment. If you encounter any issues, please refer to the [official documentation](https://docs.aspose.cloud/html/) or reach out to the [support team](https://forum.aspose.cloud/c/html/24) for assistance.
+### Step 4: Execute the Conversion
+Call `convertDocument` to perform the conversion. The response contains the JPG bytes.
 
-## HTML to JPG Conversion in Java via REST API using cURL
-
-You can achieve the same result without writing any code by calling the REST endpoints directly.
-
-```bash
-# 1. Obtain an access token
-curl -X POST "https://api.aspose.cloud/connect/token" \
-  -d "grant_type=client_credentials&client_id=YOUR_CLIENT_ID&client_secret=YOUR_CLIENT_SECRET" \
-  -H "Content-Type: application/x-www-form-urlencoded"
+```java
+ConvertDocumentResponse response = ocrApi.convertDocument(request);
 ```
 
-```bash
-# 2. Upload the source HTML file
-curl -X POST "https://api.aspose.cloud/v4.0/html/storage/file/upload" \
-  -H "Authorization: Bearer YOUR_ACCESS_TOKEN" \
-  -F "file=@input.html"
+### Step 5: Write the JPG Bytes to Disk
+Save the returned byte array to a file using a `FileOutputStream`.
+
+```java
+try (FileOutputStream fos = new FileOutputStream(outputJpgPath)) {
+    fos.write(response.getFileData());
+}
 ```
 
-```bash
-# 3. Request conversion to JPG
-curl -X POST "https://api.aspose.cloud/v4.0/html/convert" \
-  -H "Authorization: Bearer YOUR_ACCESS_TOKEN" \
-  -H "Content-Type: application/json" \
-  -d '{
-        "inputPath": "input.html",
-        "outputPath": "output.jpg",
-        "format": "jpg",
-        "options": {
-            "width": 1024,
-            "height": 768,
-            "quality": 90
+### Step 6 (Optional): Batch Conversion Loop
+For batch processing, iterate over all `.HTML` files in a folder, repeat steps 3‑5 for each file, and log the conversion result.
+
+```java
+for (Path htmlPath : htmlFiles) {
+    // Build request, execute conversion, write output (same as above)
+    System.out.println("Converted: " + htmlPath + " -> " + outputJpgPath);
+}
+```
+
+## Convert HTML to JPG in Java - Complete Code Example
+
+The following program demonstrates both single‑file and batch conversion using the Aspose.OCR Cloud SDK for Java.
+
+```java
+import com.aspose.ocr.cloud.ApiException;
+import com.aspose.ocr.cloud.Configuration;
+import com.aspose.ocr.cloud.api.OcrApi;
+import com.aspose.ocr.cloud.model.ConvertDocumentRequest;
+import com.aspose.ocr.cloud.model.ConvertDocumentResponse;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.nio.file.*;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+public class HtmlToJpgConverter {
+
+    // Replace with your actual Aspose OCR Cloud credentials
+    private static final String APP_SID = "YOUR_APP_SID";
+    private static final String APP_KEY = "YOUR_APP_KEY";
+
+    // Single conversion example
+    private static void convertSingleHtml(String inputHtmlPath, String outputJpgPath) throws IOException, ApiException {
+        // Prepare SDK configuration
+        Configuration config = new Configuration();
+        config.setAppSid(APP_SID);
+        config.setAppKey(APP_KEY);
+
+        // Initialize API instance
+        OcrApi ocrApi = new OcrApi(config);
+
+        // Build request
+        ConvertDocumentRequest request = new ConvertDocumentRequest();
+        request.setFile(new File(inputHtmlPath));
+        request.setOutputFormat("jpg");
+
+        // Execute conversion
+        ConvertDocumentResponse response = ocrApi.convertDocument(request);
+
+        // Write the resulting JPG bytes to file
+        try (FileOutputStream fos = new FileOutputStream(outputJpgPath)) {
+            fos.write(response.getFileData());
         }
-      }'
+    }
+
+    // Batch conversion example
+    private static void convertBatchHtml(String inputFolder, String outputFolder) throws IOException, ApiException {
+        // Prepare SDK configuration
+        Configuration config = new Configuration();
+        config.setAppSid(APP_SID);
+        config.setAppKey(APP_KEY);
+
+        // Initialize API instance
+        OcrApi ocrApi = new OcrApi(config);
+
+        // Ensure output directory exists
+        Files.createDirectories(Paths.get(outputFolder));
+
+        // Collect all .html files from the input folder
+        List<Path> htmlFiles;
+        try (Stream<Path> walk = Files.walk(Paths.get(inputFolder))) {
+            htmlFiles = walk.filter(Files::isRegularFile)
+                    .filter(p -> p.toString().toLowerCase().endsWith(".html"))
+                    .collect(Collectors.toList());
+        }
+
+        // Process each file
+        for (Path htmlPath : htmlFiles) {
+            String fileNameWithoutExt = com.google.common.io.Files.getNameWithoutExtension(htmlPath.getFileName().toString());
+            String outputJpgPath = Paths.get(outputFolder, fileNameWithoutExt + ".jpg").toString();
+
+            // Build request
+            ConvertDocumentRequest request = new ConvertDocumentRequest();
+            request.setFile(htmlPath.toFile());
+            request.setOutputFormat("jpg");
+
+            // Execute conversion
+            ConvertDocumentResponse response = ocrApi.convertDocument(request);
+
+            // Write JPG output
+            try (FileOutputStream fos = new FileOutputStream(outputJpgPath)) {
+                fos.write(response.getFileData());
+            }
+
+            System.out.println("Converted: " + htmlPath + " -> " + outputJpgPath);
+        }
+    }
+
+    public static void main(String[] args) {
+        try {
+            // Example of single file conversion
+            convertSingleHtml("sample.html", "sample.jpg");
+
+            // Example of batch conversion
+            convertBatchHtml("input_html", "output_jpg");
+        } catch (IOException | ApiException e) {
+            e.printStackTrace();
+        }
+    }
+}
 ```
+
+> **Note:** This code example demonstrates the core functionality. Before using it in your project, make sure to update any file paths and configuration values to match your actual environment, verify that all required dependencies are properly installed, and test thoroughly in your development environment. If you encounter any issues, please refer to the [official documentation](https://docs.aspose.cloud/ocr/) or reach out to the [support team](https://forum.aspose.cloud/c/ocr/12) for assistance.
+
+## HTML to JPG Conversion via REST API Using cURL
+
+If you prefer a pure REST approach, the same conversion can be performed with cURL commands. The workflow consists of authentication, file upload, conversion request, and downloading the result.
+
+### 1. Authenticate and Get Access Token
+Replace `YOUR_CLIENT_ID` and `YOUR_CLIENT_SECRET` with your credentials.
 
 ```bash
-# 4. Download the resulting JPG
-curl -X GET "https://api.aspose.cloud/v4.0/html/storage/file/output.jpg" \
-  -H "Authorization: Bearer YOUR_ACCESS_TOKEN" \
-  -o output.jpg
+curl -X POST "https://api.aspose.cloud/connect/token" \
+  -H "Content-Type: application/x-www-form-urlencoded" \
+  -d "grant_type=client_credentials&client_id=YOUR_CLIENT_ID&client_secret=YOUR_CLIENT_SECRET"
 ```
 
-For more details on request payloads and supported parameters, see the [official API documentation](https://reference.aspose.cloud/html/).
+The response contains an `access_token` you will use in subsequent calls.
 
-## Fine‑Tuning Conversion Parameters for JPG Output
+### 2. Upload the Source HTML File
+Assuming you saved the token in a variable `$TOKEN`.
 
-The `ImageConvertOptions` class provides several properties you can adjust:
+```bash
+curl -X POST "https://api.aspose.cloud/v4.0/ocr/upload" \
+  -H "Authorization: Bearer $TOKEN" \
+  -F "file=@sample.html"
+```
 
-- **format** - Must be set to `'jpg'` for [JPEG](https://docs.fileformat.com/image/jpeg/) output.
-- **width** and **height** - Define the pixel dimensions of the resulting image. Larger values increase detail but also file size.
-- **quality** - An integer from 1 to 100 that controls JPEG compression. Higher values yield better visual quality.
+The upload returns a `fileId` that identifies the stored document.
 
-You can also explore additional settings such as background color, page margins, and rendering timeout by consulting the [API reference](https://reference.aspose.cloud/html/).
+### 3. Execute the Conversion
+Request conversion to JPG.
+
+```bash
+curl -X POST "https://api.aspose.cloud/v4.0/ocr/convert?outputFormat=jpg&fileId=$FILE_ID" \
+  -H "Authorization: Bearer $TOKEN"
+```
+
+The response body contains the JPG binary data.
+
+### 4. Download the Output File
+Save the binary stream to a local file.
+
+```bash
+curl -X GET "https://api.aspose.cloud/v4.0/ocr/download?fileId=$FILE_ID&format=jpg" \
+  -H "Authorization: Bearer $TOKEN" \
+  -o sample.jpg
+```
+
+For more details on request parameters and error handling, see the [official API documentation](https://docs.aspose.cloud/ocr/).
+
+## Optimizing HTML to JPG Conversion Performance
+
+1. **Reuse the `OcrApi` instance** - Creating a new API object for each file adds overhead. Initialize it once and reuse it for batch jobs.  
+2. **Process files in parallel** - For large batches, use Java's `ExecutorService` to run conversions concurrently, keeping an eye on memory usage.  
+3. **Limit output resolution** - If you do not need high‑resolution images, request a lower DPI via additional request parameters (if supported) to reduce payload size.  
+4. **Stream instead of write‑then‑read** - When possible, pipe the response stream directly to the output file to avoid holding the entire image in memory.
 
 ## Conclusion
 
-Converting HTML to JPG in Java becomes straightforward when you leverage the Aspose.HTML Cloud SDK for Python as a backend service. The library handles rendering, styling, and image generation, allowing your Java code to focus on workflow orchestration. For production deployments you will need a commercial license; a temporary license for evaluation is available at the [temporary license page](https://purchase.aspose.com/temporary-license/). Start integrating the API today and automate your HTML‑to‑image pipelines with confidence.
+Converting HTML to JPG in Java is straightforward with the [Aspose.OCR Cloud SDK for Java](https://products.aspose.cloud/ocr/java/). By following the setup steps, using the provided code samples, or invoking the REST API with cURL, you can generate image previews for any web content quickly and reliably. Remember to obtain a proper license for production deployments; pricing details are available on the product page, and you can request a temporary license from the [temporary license page](https://purchase.aspose.com/temporary-license/). Start integrating HTML‑to‑JPG conversion today and enhance the visual experience of your applications.
 
 ## FAQs
 
-- **What is the easiest way to convert HTML to JPG in Java?**  
-  Use the Aspose.HTML Cloud SDK for Python to call the REST API from your Java code. The service returns a high‑quality JPG without requiring a local rendering engine.
+- **How do I convert HTML to JPG in Java without writing a lot of code?**  
+  Use the one‑liner shown in the walkthrough: create a `ConvertDocumentRequest`, set the file and `outputFormat` to `"jpg"`, then call `ocrApi.convertDocument(request)`. The SDK handles rendering and returns the JPG bytes.
 
-- **Can I control the output size when I convert HTML file to JPG using Java?**  
-  Yes, set the `width` and `height` properties in the `ImageConvertOptions` payload. These values are respected by the cloud converter.
+- **Can I batch convert HTML files to JPG in Java?**  
+  Yes. The `convertBatchHtml` method in the example walks a directory, creates a request for each `.HTML` file, and writes each JPG output. This approach scales well for large collections.
 
-- **Is there sample java code to convert HTML to JPG?**  
-  While the SDK itself is Python‑based, the REST endpoints can be invoked from Java using any HTTP client. The tutorial includes cURL examples that translate directly to Java `HttpURLConnection` or Apache HttpClient code.
+- **What Java code converts HTML to JPG?**  
+  The complete code example above demonstrates the exact Java code needed. It includes credential configuration, request building, execution, and file writing.
 
-- **Where can I find pricing and licensing details?**  
-  Detailed pricing is listed on the product page, and you can obtain a temporary evaluation license from the [temporary license page](https://purchase.aspose.com/temporary-license/).
+- **Is there a way to test the conversion before purchasing a license?**  
+  You can obtain a temporary license from the [temporary license page](https://purchase.aspose.com/temporary-license/) to evaluate the library without cost during development.
 
 ## Read More
-- [Convert HTML to JPG in C# .NET - HTML to JPG Converter](https://blog.aspose.cloud/html/convert-html-to-jpg-in-csharp/)
-- [Complete HTML to JPG Conversion Tutorial in Python](https://blog.aspose.cloud/html/complete-html-to-jpg-conversion-tutorial-in-python/)
-- [Complete HTML to JPG Conversion Tutorial in Python](https://blog.aspose.cloud/html/complete-html-to-jpg-conversion-tutorial-in-python/)
+
+- [Convert PDF file to images and recognize text using Aspose Cloud APIs](https://blog.aspose.cloud/pdf/convert-pdf-file-to-images-and-recognize-text-using-saaspose-apis/)
+- [Convert workbook elements to images and extract text from images using Aspose Cloud REST APIs](https://blog.aspose.cloud/cells/convert-workbook-elements-to-images-and-extract-text-from-images-using-saaspose-rest-apis/)
+- [New Release of Aspose.OCR Cloud SDK for Java - A Cloud SDK to Extract OCR or HOCR Text from Images in Java Using Powerful Aspose.OCR Cloud APIs](https://blog.aspose.cloud/total/new-release-of-aspose.ocr-cloud-sdk-for-java-a-cloud-sdk-to-extract-ocr-or-hocr-text-from-images-in-java-using-powerful-aspose.ocr-cloud-apis/)
