@@ -27,7 +27,7 @@ jobs:
     runs-on: ubuntu-latest
     # Brands enabled for dashboard requests - keep in sync with the other
     # dashboard workflows and the dashboard's lib/config.ts.
-    if: contains(fromJSON('["aspose.cloud", "groupdocs.cloud"]'), github.event.client_payload.brand)
+    if: contains(fromJSON('["aspose.cloud", "groupdocs.cloud", "aspose.com"]'), github.event.client_payload.brand)
 
     steps:
       - uses: actions/checkout@v4
