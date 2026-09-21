@@ -1,7 +1,7 @@
-name: Blog Refine (aspose.cloud) — dashboard
+name: Blog Refine — dashboard
 
 # Applies one targeted edit to an already-open dashboard-request PR in
-# aspose-cloud-blog, instead of generating a new draft. Fires on a
+# the brand's blog repo (client_payload.brand), instead of generating a new draft. Fires on a
 # `repository_dispatch` from the dashboard's "Request a revision" box.
 #
 # client_payload fields: brand, branch, instruction, requested_by
@@ -13,7 +13,7 @@ on:
 # Without this, GitHub's default run title is just the workflow name, so
 # every refine run in the dashboard's "Recent runs" list looked identical -
 # no way to tell which draft it was applied to.
-run-name: "Refine ${{ github.event.client_payload.branch }}: ${{ github.event.client_payload.instruction }}"
+run-name: "Refine ${{ github.event.client_payload.branch }} (${{ github.event.client_payload.brand }}): ${{ github.event.client_payload.instruction }}"
 
 permissions:
   contents: write
@@ -25,10 +25,17 @@ concurrency:
 jobs:
   refine:
     runs-on: ubuntu-latest
-    if: github.event.client_payload.brand == 'aspose.cloud'
+    # Brands enabled for dashboard requests - keep in sync with the other
+    # dashboard workflows and the dashboard's lib/config.ts.
+    if: contains(fromJSON('["aspose.cloud"]'), github.event.client_payload.brand)
 
     steps:
       - uses: actions/checkout@v4
+
+      - name: Resolve brand settings
+        uses: ./.github/actions/resolve-brand
+        with:
+          brand: ${{ github.event.client_payload.brand }}
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -72,17 +79,17 @@ jobs:
           METRICS_API_KEY=${{ secrets.METRICS_API_KEY }}
           METRICS_API_URL=${{ vars.METRICS_API_URL }}
           GOOGLE_SCRIPT_URL_FOR_TEAM=${{ vars.GOOGLE_SCRIPT_URL_FOR_TEAM }}
-          REPO_PAT=${{ secrets.GISTS_PAT_ASPOSE_CLOUD }}
-          GIST_NAME=${{ vars.ASPOSE_CLOUD_GIST }}
-          SPREADSHEET_ID_FOR_BLOGPOST_METADATA=${{ secrets.ASPOSE_CLOUD_SPREADSHEET_ID_FOR_BLOGPOST_METADATA }}
-          SPREADSHEET_ID_FOR_KEYWORDS=${{ secrets.ASPOSE_CLOUD_SPREADSHEET_ID_FOR_KEYWORDS }}
+          REPO_PAT=${{ secrets[format('GISTS_PAT_{0}', env.BRAND_KEY)] }}
+          GIST_NAME=${{ vars[format('{0}_GIST', env.BRAND_KEY)] }}
+          SPREADSHEET_ID_FOR_BLOGPOST_METADATA=${{ secrets[format('{0}_SPREADSHEET_ID_FOR_BLOGPOST_METADATA', env.BRAND_KEY)] }}
+          SPREADSHEET_ID_FOR_KEYWORDS=${{ secrets[format('{0}_SPREADSHEET_ID_FOR_KEYWORDS', env.BRAND_KEY)] }}
           GOOGLE_KEY=sheet-reader-494108-bd5e61ef812c.json
           CONSOLIDATED_SHEET_NAME_FOR_BLOGPOST_METADATA=Consolidated
           EOF
           echo ".env file created"
 
       ###################################################################
-      # Check out the EXISTING PR branch in aspose-cloud-blog and find
+      # Check out the EXISTING PR branch in the brand blog repo and find
       # the draft file that's already on it - no new branch, no new PR.
       ###################################################################
       - name: Check out existing draft branch
@@ -96,16 +103,17 @@ jobs:
             exit 1
           fi
 
-          echo "Cloning aspose-cloud-blog repo..."
-          git clone https://x-access-token:${{ secrets.REPO_PAT }}@github.com/aspose-cloud/aspose-cloud-blog.git aspose-cloud-blog || {
+          echo "Cloning $TARGET_REPO..."
+          git clone https://x-access-token:${{ secrets.REPO_PAT }}@github.com/$TARGET_REPO.git blog-repo || {
             echo "❌ Failed to clone repo — invalid PAT or wrong GitHub account."
             exit 1
           }
-          cd aspose-cloud-blog
+          cd blog-repo
           git fetch origin "$BRANCH"
           git checkout "$BRANCH"
 
-          FOLDER_NAME="${BRANCH#blog/}"
+          # Last path segment: the branch is blog/<folder> or blog/total/<folder> depending on brand.
+          FOLDER_NAME="${BRANCH##*/}"
           DRAFT_PATH=$(find content -type d -name "$FOLDER_NAME" -exec test -f "{}/index.md" \; -print | head -1)
 
           if [ -z "$DRAFT_PATH" ]; then
@@ -122,12 +130,12 @@ jobs:
           GH_TOKEN: ${{ secrets.REPO_PAT }}
           BRANCH: ${{ github.event.client_payload.branch }}
         run: |
-          cd aspose-cloud-blog
-          PR_NUMBER=$(gh pr list --repo aspose-cloud/aspose-cloud-blog --head "$BRANCH" --json number --jq '.[0].number' 2>/dev/null || echo "")
+          cd blog-repo
+          PR_NUMBER=$(gh pr list --repo "$TARGET_REPO" --head "$BRANCH" --json number --jq '.[0].number' 2>/dev/null || echo "")
           echo "pr_number=$PR_NUMBER" >> "$GITHUB_ENV"
           if [ -n "$PR_NUMBER" ]; then
-            gh label create refining --repo aspose-cloud/aspose-cloud-blog --color FBCA04 --force >/dev/null 2>&1 || true
-            gh pr edit "$PR_NUMBER" --repo aspose-cloud/aspose-cloud-blog --add-label refining >/dev/null 2>&1 || true
+            gh label create refining --repo "$TARGET_REPO" --color FBCA04 --force >/dev/null 2>&1 || true
+            gh pr edit "$PR_NUMBER" --repo "$TARGET_REPO" --add-label refining >/dev/null 2>&1 || true
           fi
 
       # ── Revise: single targeted edit pass, in place, on the found file ──
@@ -144,7 +152,7 @@ jobs:
 
           python main.py \
             --author "Muhammad Mustafa" \
-            --brand "aspose.cloud" \
+            --brand "$BRAND" \
             --revise \
             --draft-path "$DRAFT_PATH" \
             --instruction "$INSTRUCTION" || true
@@ -178,7 +186,7 @@ jobs:
           BRANCH: ${{ github.event.client_payload.branch }}
           INSTRUCTION: ${{ github.event.client_payload.instruction }}
         run: |
-          cd aspose-cloud-blog
+          cd blog-repo
           git config --global user.email "action@github.com"
           git config --global user.name "GitHub Action"
 
@@ -200,8 +208,8 @@ jobs:
           MESSAGE: ${{ steps.read_status.outputs.message }}
           INSTRUCTION: ${{ github.event.client_payload.instruction }}
         run: |
-          PR_NUMBER=$(gh pr list --repo aspose-cloud/aspose-cloud-blog --head "$BRANCH" --json number --jq '.[0].number' 2>/dev/null || echo "")
-          gh pr edit "$PR_NUMBER" --repo aspose-cloud/aspose-cloud-blog --remove-label refining >/dev/null 2>&1 || true
+          PR_NUMBER=$(gh pr list --repo "$TARGET_REPO" --head "$BRANCH" --json number --jq '.[0].number' 2>/dev/null || echo "")
+          gh pr edit "$PR_NUMBER" --repo "$TARGET_REPO" --remove-label refining >/dev/null 2>&1 || true
 
           if [ -z "$PR_NUMBER" ]; then
             echo "⚠️ No PR found for branch $BRANCH — skipping comment"
@@ -214,7 +222,7 @@ jobs:
             BODY=$(printf '❌ **Revision failed** for: %s\n\n%s' "$INSTRUCTION" "$MESSAGE")
           fi
 
-          gh pr comment "$PR_NUMBER" --repo aspose-cloud/aspose-cloud-blog --body "$BODY" || true
+          gh pr comment "$PR_NUMBER" --repo "$TARGET_REPO" --body "$BODY" || true
 
           {
             echo "### 🔁 Revision report"
@@ -223,7 +231,7 @@ jobs:
             echo "|---|---|"
             echo "| Status | $STATUS |"
             echo "| Instruction | $INSTRUCTION |"
-            echo "| PR | https://github.com/aspose-cloud/aspose-cloud-blog/pull/$PR_NUMBER |"
+            echo "| PR | https://github.com/$TARGET_REPO/pull/$PR_NUMBER |"
           } >> "$GITHUB_STEP_SUMMARY"
 
       - name: Fail the run if the revision failed

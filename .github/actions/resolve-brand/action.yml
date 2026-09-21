@@ -1,0 +1,70 @@
+name: Resolve brand
+description: >
+  Maps a dashboard `brand` to its per-brand publishing settings and exports
+  them as env vars (via GITHUB_ENV) for the dashboard-driven workflows
+  (blog request / refine). One place to edit when a brand's target repo,
+  branch or folder layout changes - the workflows themselves stay brand-neutral.
+
+  Values mirror the scheduled <brand>_agent.yml workflows. Which brands the
+  dashboard workflows actually accept is gated separately, by the job-level
+  `if:` allowlist in each workflow - a brand listed here is not live until it
+  is added there too.
+
+inputs:
+  brand:
+    description: Brand id as sent by the dashboard, e.g. aspose.cloud
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - name: Resolve brand settings
+      shell: bash
+      env:
+        BRAND_INPUT: ${{ inputs.brand }}
+      run: |
+        # BRAND_KEY         secret/var prefix, e.g. GISTS_PAT_<KEY>, <KEY>_GIST
+        # BRAND_DIR_NAME    generator output folder: content/blogPosts/<name>
+        # TARGET_REPO       owner/name of the brand's blog repo (PRs go here)
+        # BASE_BRANCH       that repo's default branch
+        # CONTENT_ROOT      folder in the blog repo that receives posts
+        # FOLDER_MODE       product = CONTENT_ROOT/<product>/<post>, fixed = CONTENT_ROOT/<post>
+        # BRANCH_PREFIX     PR branch is <prefix><post folder>
+        case "$BRAND_INPUT" in
+          aspose.cloud)
+            KEY=ASPOSE_CLOUD; DIR_NAME=aspose_cloud
+            REPO=aspose-cloud/aspose-cloud-blog; BASE=master
+            ROOT="content/Aspose.Cloud"; MODE=product; PREFIX="blog/" ;;
+          groupdocs.cloud)
+            KEY=GROUPDOCS_CLOUD; DIR_NAME=groupdocs_cloud
+            REPO=groupdocs-cloud/groupdocs-cloud-blog; BASE=master
+            ROOT="content/GroupDocs.Cloud"; MODE=product; PREFIX="blog/" ;;
+          aspose.com)
+            KEY=ASPOSE_COM; DIR_NAME=aspose_com
+            REPO=Aspose/aspose-blog; BASE=master
+            ROOT="content/Aspose.Blog"; MODE=product; PREFIX="blog/" ;;
+          conholdate.com)
+            KEY=CONHOLDATE_COM; DIR_NAME=conholdate_com
+            REPO=conholdate/conholdate-blog; BASE=main
+            ROOT="content/Conholdate.Total/total"; MODE=fixed; PREFIX="blog/total/" ;;
+          conholdate.cloud)
+            KEY=CONHOLDATE_CLOUD; DIR_NAME=conholdate_cloud
+            REPO=conholdate-cloud/blog.conholdate.cloud; BASE=main
+            ROOT="content/Conholdate.Total/total"; MODE=fixed; PREFIX="blog/total/" ;;
+          *)
+            echo "❌ Unsupported brand: '$BRAND_INPUT'"
+            exit 1 ;;
+        esac
+
+        {
+          echo "BRAND=$BRAND_INPUT"
+          echo "BRAND_KEY=$KEY"
+          echo "BRAND_DIR_NAME=$DIR_NAME"
+          echo "TARGET_REPO=$REPO"
+          echo "BASE_BRANCH=$BASE"
+          echo "CONTENT_ROOT=$ROOT"
+          echo "FOLDER_MODE=$MODE"
+          echo "BRANCH_PREFIX=$PREFIX"
+        } >> "$GITHUB_ENV"
+
+        echo "Brand: $BRAND_INPUT → $REPO ($BASE), $ROOT [$MODE]"

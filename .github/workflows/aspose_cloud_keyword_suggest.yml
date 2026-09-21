@@ -1,4 +1,4 @@
-name: Suggest Keywords (aspose.cloud) — dashboard
+name: Suggest Keywords — dashboard
 
 # Powers the "Generate keywords" button on the dashboard's New Request
 # form. Deliberately its own workflow, not folded into
@@ -35,7 +35,9 @@ permissions:
 jobs:
   suggest:
     runs-on: ubuntu-latest
-    if: github.event.client_payload.brand == 'aspose.cloud'
+    # Brands enabled for dashboard requests - keep in sync with the other
+    # dashboard workflows and the dashboard's lib/config.ts.
+    if: contains(fromJSON('["aspose.cloud"]'), github.event.client_payload.brand)
 
     steps:
       - uses: actions/checkout@v4
@@ -79,6 +81,7 @@ jobs:
 
       - name: Suggest keywords
         env:
+          BRAND: ${{ github.event.client_payload.brand }}
           PRODUCT: ${{ github.event.client_payload.product }}
           PLATFORM: ${{ github.event.client_payload.platform }}
           TOPIC: ${{ github.event.client_payload.topic }}
@@ -92,7 +95,7 @@ jobs:
 
           python main.py \
             --author "dashboard" \
-            --brand "aspose.cloud" \
+            --brand "$BRAND" \
             --product "$PRODUCT" \
             --platform "$PLATFORM" \
             --topic "$TOPIC" \

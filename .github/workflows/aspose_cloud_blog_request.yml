@@ -1,6 +1,9 @@
-name: Blog Request (aspose.cloud) — dashboard
+name: Blog Request — dashboard
 
-# Dashboard-driven blog requests for aspose.cloud only.
+# Dashboard-driven blog requests, one brand per run (client_payload.brand).
+# Per-brand settings (target repo, branch, folder layout, secret prefix) come
+# from .github/actions/resolve-brand; which brands are accepted is the
+# allowlist in the job-level `if:` below.
 #
 # This workflow is SEPARATE from aspose_cloud_agent.yml on purpose: the
 # scheduled cron and the workflow_dispatch form there are left completely
@@ -18,7 +21,7 @@ on:
 # Without this, GitHub's default run title is just the workflow name, so
 # every request run in the dashboard's "Recent runs" list looked identical -
 # no way to tell which post it was for.
-run-name: "Request: ${{ github.event.client_payload.topic }} (${{ github.event.client_payload.product }})"
+run-name: "Request: ${{ github.event.client_payload.topic }} (${{ github.event.client_payload.product }} · ${{ github.event.client_payload.brand }})"
 
 permissions:
   contents: write
@@ -26,12 +29,18 @@ permissions:
 jobs:
   generate:
     runs-on: ubuntu-latest
-    # Slice 1 handles aspose.cloud only. Requests for other brands are ignored
-    # until their own request workflows are added.
-    if: github.event.client_payload.brand == 'aspose.cloud'
+    # Brands enabled for dashboard requests. Anything else is ignored (skipped,
+    # not failed). To enable a brand: add it here (and to the other three
+    # dashboard workflows + the dashboard's lib/config.ts).
+    if: contains(fromJSON('["aspose.cloud"]'), github.event.client_payload.brand)
 
     steps:
       - uses: actions/checkout@v4
+
+      - name: Resolve brand settings
+        uses: ./.github/actions/resolve-brand
+        with:
+          brand: ${{ github.event.client_payload.brand }}
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -75,10 +84,10 @@ jobs:
           METRICS_API_KEY=${{ secrets.METRICS_API_KEY }}
           METRICS_API_URL=${{ vars.METRICS_API_URL }}
           GOOGLE_SCRIPT_URL_FOR_TEAM=${{ vars.GOOGLE_SCRIPT_URL_FOR_TEAM }}
-          REPO_PAT=${{ secrets.GISTS_PAT_ASPOSE_CLOUD }}
-          GIST_NAME=${{ vars.ASPOSE_CLOUD_GIST }}
-          SPREADSHEET_ID_FOR_BLOGPOST_METADATA=${{ secrets.ASPOSE_CLOUD_SPREADSHEET_ID_FOR_BLOGPOST_METADATA }}
-          SPREADSHEET_ID_FOR_KEYWORDS=${{ secrets.ASPOSE_CLOUD_SPREADSHEET_ID_FOR_KEYWORDS }}
+          REPO_PAT=${{ secrets[format('GISTS_PAT_{0}', env.BRAND_KEY)] }}
+          GIST_NAME=${{ vars[format('{0}_GIST', env.BRAND_KEY)] }}
+          SPREADSHEET_ID_FOR_BLOGPOST_METADATA=${{ secrets[format('{0}_SPREADSHEET_ID_FOR_BLOGPOST_METADATA', env.BRAND_KEY)] }}
+          SPREADSHEET_ID_FOR_KEYWORDS=${{ secrets[format('{0}_SPREADSHEET_ID_FOR_KEYWORDS', env.BRAND_KEY)] }}
           GOOGLE_KEY=sheet-reader-494108-bd5e61ef812c.json
           CONSOLIDATED_SHEET_NAME_FOR_BLOGPOST_METADATA=Consolidated
           EOF
@@ -116,7 +125,7 @@ jobs:
             exit 1
           fi
 
-          echo "Brand:    aspose.cloud"
+          echo "Brand:    $BRAND"
           echo "Product:  $PRODUCT"
           echo "Platform: $PLATFORM"
           echo "Topic:    $TOPIC"
@@ -124,7 +133,7 @@ jobs:
 
           python main.py \
             --author "$AUTHOR" \
-            --brand "aspose.cloud" \
+            --brand "$BRAND" \
             --product "$PRODUCT" \
             --platform "$PLATFORM" \
             --topic "$TOPIC" \
@@ -167,7 +176,7 @@ jobs:
         id: find_blog
         if: steps.read_product.outputs.blog_generated == 'true'
         run: |
-          BRAND_DIR="content/blogPosts/aspose_cloud"
+          BRAND_DIR="content/blogPosts/$BRAND_DIR_NAME"
 
           if [ ! -d "$BRAND_DIR" ]; then
             echo "❌ Brand directory not found: $BRAND_DIR"
@@ -196,7 +205,7 @@ jobs:
           ls -la "$blog_folder"
 
       ###################################################################
-      # Commit to THIS repository (content/blogPosts/aspose_cloud)
+      # Commit to THIS repository (content/blogPosts/<brand>)
       ###################################################################
       - name: Commit generated blog to this repository
         if: steps.read_product.outputs.blog_generated == 'true'
@@ -241,14 +250,14 @@ jobs:
         if: steps.read_product.outputs.blog_generated == 'true'
         uses: actions/upload-artifact@v4
         with:
-          name: generated-blog-aspose-cloud-${{ github.run_number }}
+          name: generated-blog-${{ env.BRAND_DIR_NAME }}-${{ github.run_number }}
           path: ${{ steps.find_blog.outputs.blog_folder_path }}
           if-no-files-found: error
 
       ###################################################################
-      # Open a PR in aspose-cloud-blog and STOP. No auto-merge.
+      # Open a PR in the brand's blog repo and STOP. No auto-merge.
       ###################################################################
-      - name: Open review PR in aspose-cloud-blog (no merge)
+      - name: Open review PR in the brand blog repo (no merge)
         if: steps.read_product.outputs.blog_generated == 'true' && success()
         env:
           BLOG_FOLDER_NAME: ${{ steps.find_blog.outputs.blog_folder_name }}
@@ -268,35 +277,41 @@ jobs:
             exit 1
           fi
 
-          echo "Cloning aspose-cloud-blog repo..."
-          git clone https://x-access-token:${{ secrets.REPO_PAT }}@github.com/aspose-cloud/aspose-cloud-blog.git aspose-cloud-blog || {
+          echo "Cloning $TARGET_REPO..."
+          git clone https://x-access-token:${{ secrets.REPO_PAT }}@github.com/$TARGET_REPO.git blog-repo || {
             echo "❌ Failed to clone repo — invalid PAT or wrong GitHub account."
             exit 1
           }
 
-          cd aspose-cloud-blog
-          git checkout master
-          git pull origin master
+          cd blog-repo
+          git checkout "$BASE_BRANCH"
+          git pull origin "$BASE_BRANCH"
 
-          # Case-insensitive product folder: reuse if present, else lowercase.
-          EXISTING_DIR=$(find "content/Aspose.Cloud" -maxdepth 1 -type d -iname "$PRODUCT_NAME" | head -1)
-          if [ -n "$EXISTING_DIR" ]; then
-            TARGET_DIR="$EXISTING_DIR"
-          else
-            PRODUCT_NAME_LOWER=$(echo "$PRODUCT_NAME" | tr '[:upper:]' '[:lower:]')
-            TARGET_DIR="content/Aspose.Cloud/$PRODUCT_NAME_LOWER"
+          if [ "$FOLDER_MODE" = "fixed" ]; then
+            # Single-product brands (Conholdate.Total): all posts share one folder.
+            TARGET_DIR="$CONTENT_ROOT"
             mkdir -p "$TARGET_DIR"
+          else
+            # Case-insensitive product folder: reuse if present, else lowercase.
+            EXISTING_DIR=$(find "$CONTENT_ROOT" -maxdepth 1 -type d -iname "$PRODUCT_NAME" | head -1)
+            if [ -n "$EXISTING_DIR" ]; then
+              TARGET_DIR="$EXISTING_DIR"
+            else
+              PRODUCT_NAME_LOWER=$(echo "$PRODUCT_NAME" | tr '[:upper:]' '[:lower:]')
+              TARGET_DIR="$CONTENT_ROOT/$PRODUCT_NAME_LOWER"
+              mkdir -p "$TARGET_DIR"
+            fi
           fi
           echo "Target directory: $TARGET_DIR"
 
-          BRANCH_NAME="blog/$BLOG_FOLDER_NAME"
+          BRANCH_NAME="${BRANCH_PREFIX}${BLOG_FOLDER_NAME}"
 
           if git ls-remote --heads origin "$BRANCH_NAME" | grep -q "$BRANCH_NAME"; then
             echo "⚠️  Branch $BRANCH_NAME exists remotely. Deleting..."
             git push origin --delete "$BRANCH_NAME" || echo "Could not delete remote branch"
           fi
           git branch -D "$BRANCH_NAME" 2>/dev/null || true
-          git checkout -b "$BRANCH_NAME" master
+          git checkout -b "$BRANCH_NAME" "$BASE_BRANCH"
 
           WORKFLOW_DIR=$(pwd)
           cd ..
@@ -327,7 +342,7 @@ jobs:
 
           sleep 2
 
-          PR_NUMBER=$(gh pr list --repo aspose-cloud/aspose-cloud-blog --head "$BRANCH_NAME" --json number --jq '.[0].number' 2>/dev/null || echo "")
+          PR_NUMBER=$(gh pr list --repo "$TARGET_REPO" --head "$BRANCH_NAME" --json number --jq '.[0].number' 2>/dev/null || echo "")
 
           PR_TITLE="Add blog post: $BLOG_FOLDER_NAME"
           if [ "$BLOCKED" = "true" ]; then
@@ -342,29 +357,29 @@ jobs:
 
           if [ -z "$PR_NUMBER" ]; then
             gh pr create \
-              --repo aspose-cloud/aspose-cloud-blog \
-              --base master \
+              --repo "$TARGET_REPO" \
+              --base "$BASE_BRANCH" \
               --head "$BRANCH_NAME" \
               --title "$PR_TITLE" \
               --body "$PR_BODY" \
               || { echo "❌ Failed to create PR"; exit 1; }
-            PR_NUMBER=$(gh pr list --repo aspose-cloud/aspose-cloud-blog --head "$BRANCH_NAME" --json number --jq '.[0].number' 2>/dev/null || echo "")
+            PR_NUMBER=$(gh pr list --repo "$TARGET_REPO" --head "$BRANCH_NAME" --json number --jq '.[0].number' 2>/dev/null || echo "")
           fi
 
           echo "PR #$PR_NUMBER"
 
           # Best-effort: label + assign the requester (both no-op if not permitted).
-          gh label create dashboard-request --repo aspose-cloud/aspose-cloud-blog --color 1D76DB --force >/dev/null 2>&1 || true
-          gh pr edit "$PR_NUMBER" --repo aspose-cloud/aspose-cloud-blog --add-label dashboard-request >/dev/null 2>&1 || true
+          gh label create dashboard-request --repo "$TARGET_REPO" --color 1D76DB --force >/dev/null 2>&1 || true
+          gh pr edit "$PR_NUMBER" --repo "$TARGET_REPO" --add-label dashboard-request >/dev/null 2>&1 || true
           if [ "$BLOCKED" = "true" ]; then
-            gh label create blocked --repo aspose-cloud/aspose-cloud-blog --color D93F0B --force >/dev/null 2>&1 || true
-            gh pr edit "$PR_NUMBER" --repo aspose-cloud/aspose-cloud-blog --add-label blocked >/dev/null 2>&1 || true
+            gh label create blocked --repo "$TARGET_REPO" --color D93F0B --force >/dev/null 2>&1 || true
+            gh pr edit "$PR_NUMBER" --repo "$TARGET_REPO" --add-label blocked >/dev/null 2>&1 || true
           fi
           if [ -n "$REQUESTED_BY" ]; then
-            gh pr edit "$PR_NUMBER" --repo aspose-cloud/aspose-cloud-blog --add-assignee "$REQUESTED_BY" >/dev/null 2>&1 || true
+            gh pr edit "$PR_NUMBER" --repo "$TARGET_REPO" --add-assignee "$REQUESTED_BY" >/dev/null 2>&1 || true
           fi
 
-          PR_URL="https://github.com/aspose-cloud/aspose-cloud-blog/pull/$PR_NUMBER"
+          PR_URL="https://github.com/$TARGET_REPO/pull/$PR_NUMBER"
           {
             if [ "$BLOCKED" = "true" ]; then
               echo "### ⚠️ Blog draft BLOCKED"
