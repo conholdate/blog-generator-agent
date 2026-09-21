@@ -69,7 +69,10 @@
     "aspose.cloud|aspose.omr|java": 0,
     "aspose.cloud|aspose.omr|nodejs": 0,
     "groupdocs.cloud|groupdocs.annotation|php": 0,
-    "groupdocs.cloud|groupdocs.annotation|nodejs": 1
+    "groupdocs.cloud|groupdocs.annotation|nodejs": 1,
+    "aspose.cloud|aspose.ocr|net": 1,
+    "aspose.cloud|aspose.ocr|java": 0,
+    "aspose.cloud|aspose.ocr|nodejs": 0
   },
   "aspose|aspose.html|python": [
     "How to Convert Code to Change HTML Border Color in Python",
@@ -608,5 +611,45 @@
     "Remove Annotation Objects from PDF with Rest in Node.JS",
     "Create Sticky Notes on Word PAGES in Node.JS",
     "Quickly Remove Annotations from PDF via Rest in Node.JS"
+  ],
+  "aspose.cloud|aspose.ocr|net": [
+    "Add Speaker Notes to Powerpoint via Rest in C#",
+    "Compare Text in C#: Best Practices and Efficient Techniques",
+    "Create EML FILE in C#",
+    "Convert DOCX to PNG in C#",
+    "EML to HTML Conversion Tutorial in C#: a Practical Guide",
+    "Heroku Email Sending Best Practices in C#: Configure Smtp",
+    "GLB to FBX Tutorial in C#: a Complete Tutorial",
+    "How to Import XML Data to PDF Rest in C#",
+    "Microsoft Powerpoint PPTX to Opendocument Conversion in C#",
+    "Export Ms Project Plans Through Rest in C#"
+  ],
+  "aspose.cloud|aspose.ocr|java": [
+    "Add Speaker Notes to Powerpoint via Rest in Java",
+    "Create Edit or Convert Excel in Java",
+    "Convert DOCX to PNG in Java",
+    "Step-by-Step EML to HTML Conversion Tutorial in Java",
+    "How to Encrypt and Password Protect PDF Rest in Java",
+    "Extract Text from PDF Rest in Java",
+    "GLB to FBX Conversion Sample in Java: a Complete Tutorial",
+    "Convert HTML to JPG in Java",
+    "Implement Reverse Image Search and Image Deskewing in Java"
+  ],
+  "aspose.cloud|aspose.ocr|nodejs": [
+    "Add Speaker Notes to Powerpoint via Rest in Node.JS",
+    "Compare Text in Node.JS: Image PDF Handwritten Support",
+    "Create Edit or Convert Excel in Node.JS",
+    "Convert DOCX to PDF in Node.JS",
+    "Convert DOCX to PNG in Node.JS",
+    "Complete EML to MSG FILE Conversion Tutorial in Node.JS",
+    "Secure Email Sending from Heroku using Tls in Node.JS",
+    "How to Encrypt and Password Protect PDF Rest in Node.JS",
+    "Extract Text from PDF Rest in Node.JS",
+    "Convert JSON to XLSX in Node.JS",
+    "Microsoft Powerpoint PPTX to Opendocument in Node.JS",
+    "Convert Image PDF to Text PDF in Node.JS",
+    "PSD to JPG Conversion in Node.JS: Step-by-Step Tutorial",
+    "Reverse Image Search and Image Deskewing in Node.JS",
+    "Convert XLSX to PDF in Node.JS: Code Samples Tips"
   ]
 }
