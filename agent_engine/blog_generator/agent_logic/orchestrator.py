@@ -1022,8 +1022,21 @@ class BlogOrchestrator:
         set_tracing_disabled(disabled=True)
         # "revise" is only a fallback label for metrics when the caller
         # couldn't recover the original product (old PR, parse failure) -
-        # never a real product name.
-        self.metrics.start_job(product=product or "revise", platform=platform, website=self.brand)
+        # never a real product name. Resolve to the FULL product name (e.g.
+        # "Conholdate.Total for .NET"), matching how a normal request
+        # records it (product_info's ProductName, not the bare family name
+        # recovered from the PR) - best-effort: an unresolvable combination
+        # falls back to the raw recovered value rather than failing the
+        # revision itself over a metrics-only concern.
+        metrics_product = product or "revise"
+        if product and platform:
+            try:
+                metrics_product = get_productInfo(product, platform, self.products, self.brand).get(
+                    "ProductName", product
+                )
+            except ValueError:
+                pass
+        self.metrics.start_job(product=metrics_product, platform=platform, website=self.brand)
 
         base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
