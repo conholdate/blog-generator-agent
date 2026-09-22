@@ -228,20 +228,29 @@ jobs:
           INSTRUCTION: ${{ github.event.client_payload.instruction }}
         run: |
           PR_NUMBER=$(gh pr list --repo "$TARGET_REPO" --head "$BRANCH" --json number --jq '.[0].number' 2>/dev/null || echo "")
-          gh pr edit "$PR_NUMBER" --repo "$TARGET_REPO" --remove-label refining >/dev/null 2>&1 || true
 
           if [ -z "$PR_NUMBER" ]; then
             echo "⚠️ No PR found for branch $BRANCH — skipping comment"
             exit 0
           fi
 
+          # Hidden marker (not rendered, but grep-able): the dashboard's only
+          # other signal that a revision finished is the 'refining' label
+          # disappearing, which happens whether the run succeeded or was
+          # rejected - it was showing "Revision applied" either way. The
+          # dashboard now reads this marker instead of assuming success.
           if [ "$STATUS" = "success" ]; then
-            BODY=$(printf '🔁 **Revised per:** %s\n\n%s' "$INSTRUCTION" "$MESSAGE")
+            BODY=$(printf '<!-- refine-result: success -->\n🔁 **Revised per:** %s\n\n%s' "$INSTRUCTION" "$MESSAGE")
           else
-            BODY=$(printf '❌ **Revision failed** for: %s\n\n%s' "$INSTRUCTION" "$MESSAGE")
+            BODY=$(printf '<!-- refine-result: failure -->\n❌ **Revision failed** for: %s\n\n%s' "$INSTRUCTION" "$MESSAGE")
           fi
 
+          # Comment BEFORE removing the label, not after: the dashboard polls
+          # until the label disappears then immediately checks for this
+          # comment, so posting it first guarantees it already exists by
+          # the time that check runs, instead of a race where it might not.
           gh pr comment "$PR_NUMBER" --repo "$TARGET_REPO" --body "$BODY" || true
+          gh pr edit "$PR_NUMBER" --repo "$TARGET_REPO" --remove-label refining >/dev/null 2>&1 || true
 
           {
             echo "### 🔁 Revision report"
