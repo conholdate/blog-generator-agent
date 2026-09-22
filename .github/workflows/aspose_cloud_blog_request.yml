@@ -32,7 +32,7 @@ jobs:
     # Brands enabled for dashboard requests. Anything else is ignored (skipped,
     # not failed). To enable a brand: add it here (and to the other three
     # dashboard workflows + the dashboard's lib/config.ts).
-    if: contains(fromJSON('["aspose.cloud", "groupdocs.cloud", "aspose.com", "conholdate.com"]'), github.event.client_payload.brand)
+    if: contains(fromJSON('["aspose.cloud", "groupdocs.cloud", "aspose.com", "conholdate.com", "conholdate.cloud"]'), github.event.client_payload.brand)
 
     steps:
       - uses: actions/checkout@v4
