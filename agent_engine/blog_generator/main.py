@@ -85,6 +85,12 @@ def main():
             orchestrator.revise_blog_draft(
                 draft_path=args.draft_path,
                 instruction=args.instruction,
+                # Optional - the refine workflow recovers these from the PR
+                # it's revising and passes them so metrics record the real
+                # product/platform instead of the "revise"/blank fallback.
+                # Blank (old PR, parse miss) reproduces today's behavior.
+                product=args.product,
+                platform=args.platform,
             )
         )
     elif args.topic.strip():

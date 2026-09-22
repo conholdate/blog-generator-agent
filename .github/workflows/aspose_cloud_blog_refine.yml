@@ -136,6 +136,20 @@ jobs:
           if [ -n "$PR_NUMBER" ]; then
             gh label create refining --repo "$TARGET_REPO" --color FBCA04 --force >/dev/null 2>&1 || true
             gh pr edit "$PR_NUMBER" --repo "$TARGET_REPO" --add-label refining >/dev/null 2>&1 || true
+
+            # Recover the original request's product/platform from the PR
+            # body's hidden markers (written by blog_request's "Open review
+            # PR" step) so this revision's metrics record the real values
+            # instead of the "revise"/blank placeholder. A PR opened before
+            # these markers existed just leaves both blank - main.py already
+            # treats blank the same as its pre-existing behavior.
+            PR_BODY_TEXT=$(gh pr view "$PR_NUMBER" --repo "$TARGET_REPO" --json body --jq '.body' 2>/dev/null || echo "")
+            REQUEST_PRODUCT=$(printf '%s' "$PR_BODY_TEXT" | grep -oE '<!-- request-product: .*-->' | sed -E 's/<!-- request-product: (.*) -->/\1/' | head -1)
+            REQUEST_PLATFORM=$(printf '%s' "$PR_BODY_TEXT" | grep -oE '<!-- request-platform: .*-->' | sed -E 's/<!-- request-platform: (.*) -->/\1/' | head -1)
+            {
+              echo "REQUEST_PRODUCT=$REQUEST_PRODUCT"
+              echo "REQUEST_PLATFORM=$REQUEST_PLATFORM"
+            } >> "$GITHUB_ENV"
           fi
 
       # ── Revise: single targeted edit pass, in place, on the found file ──
@@ -144,18 +158,23 @@ jobs:
         env:
           DRAFT_PATH: ${{ steps.checkout_draft.outputs.draft_path }}
           INSTRUCTION: ${{ github.event.client_payload.instruction }}
+          PRODUCT: ${{ env.REQUEST_PRODUCT }}
+          PLATFORM: ${{ env.REQUEST_PLATFORM }}
         run: |
           cd agent_engine/blog_generator
           echo "=== Applying revision ==="
           echo "Draft: $DRAFT_PATH"
           echo "Instruction: $INSTRUCTION"
+          echo "Product/Platform (for metrics, optional): $PRODUCT / $PLATFORM"
 
           python main.py \
             --author "Muhammad Mustafa" \
             --brand "$BRAND" \
             --revise \
             --draft-path "$DRAFT_PATH" \
-            --instruction "$INSTRUCTION" || true
+            --instruction "$INSTRUCTION" \
+            --product "$PRODUCT" \
+            --platform "$PLATFORM" || true
 
       - name: Read revision status
         id: read_status

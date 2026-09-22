@@ -984,12 +984,19 @@ class BlogOrchestrator:
                 "api_call_count": self.metrics.api_call_count,
             }
 
-    async def revise_blog_draft(self, draft_path: str, instruction: str):
+    async def revise_blog_draft(self, draft_path: str, instruction: str, product: str = "", platform: str = ""):
         """
         Apply one targeted, human-instructed edit to an already-generated
         draft in place, instead of regenerating the whole post. Used by the
         refine flow: a reviewer reads an open PR and asks for a specific
         change ("shorten the intro", "remove the licensing section").
+
+        product/platform: the ORIGINAL request's values, recovered by the
+        caller from the draft's PR (see aspose_cloud_blog_refine.yml) - this
+        function has no other way to know them, since a revise run only
+        receives a file path. Both default to "" so metrics land exactly as
+        they did before this parameter existed when the caller can't supply
+        them (e.g. a PR opened before this was added).
 
         Section-aware by construction (utils/section_editor.py): the
         instruction is classified against the draft's ACTUAL heading list
@@ -1013,7 +1020,10 @@ class BlogOrchestrator:
         error, not on score alone - same as before.
         """
         set_tracing_disabled(disabled=True)
-        self.metrics.start_job(product="revise", platform="", website=self.brand)
+        # "revise" is only a fallback label for metrics when the caller
+        # couldn't recover the original product (old PR, parse failure) -
+        # never a real product name.
+        self.metrics.start_job(product=product or "revise", platform=platform, website=self.brand)
 
         base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 

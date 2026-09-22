@@ -263,6 +263,12 @@ jobs:
           BLOG_FOLDER_NAME: ${{ steps.find_blog.outputs.blog_folder_name }}
           BLOG_FOLDER_PATH: ${{ steps.find_blog.outputs.blog_folder_path }}
           PRODUCT_NAME: ${{ steps.read_product.outputs.product_name }}
+          # The original request's own values (e.g. "Aspose.PDF", ".NET") -
+          # distinct from PRODUCT_NAME above, which is the folder-matching
+          # slug. Embedded as hidden markers in the PR body below so the
+          # refine workflow can recover them for a later revision's metrics.
+          REQUEST_PRODUCT: ${{ github.event.client_payload.product }}
+          REQUEST_PLATFORM: ${{ github.event.client_payload.platform }}
           REQUESTED_BY: ${{ github.event.client_payload.requested_by }}
           TOPIC: ${{ github.event.client_payload.topic }}
           GH_TOKEN: ${{ secrets.REPO_PAT }}
@@ -349,7 +355,13 @@ jobs:
             PR_TITLE="[BLOCKED] $PR_TITLE"
           fi
 
-          PR_BODY=$(printf '## Generated blog post (dashboard request)\n\n**Topic:** %s\n**Product:** %s\n**Path:** `%s/%s`\n**Requested by:** @%s\n**Run:** #%s\n\n---\n\nReview the rendered `index.md`, then approve + merge to publish. Comment `/revise <instruction>` support comes later.' "$TOPIC" "$PRODUCT_NAME" "$TARGET_DIR" "$BLOG_FOLDER_NAME" "$REQUESTED_BY" "${{ github.run_number }}")
+          # Hidden markers (not rendered, but grep-able) carrying the
+          # ORIGINAL request's product/platform - the refine workflow reads
+          # these back out via `gh pr view` so a later revision's metrics
+          # record the real product/platform instead of a "revise"/blank
+          # placeholder. Kept separate from the **Product:** line below,
+          # which is the folder-matching slug, not the friendly name.
+          PR_BODY=$(printf '## Generated blog post (dashboard request)\n\n<!-- request-product: %s -->\n<!-- request-platform: %s -->\n**Topic:** %s\n**Product:** %s\n**Path:** `%s/%s`\n**Requested by:** @%s\n**Run:** #%s\n\n---\n\nReview the rendered `index.md`, then approve + merge to publish. Comment `/revise <instruction>` support comes later.' "$REQUEST_PRODUCT" "$REQUEST_PLATFORM" "$TOPIC" "$PRODUCT_NAME" "$TARGET_DIR" "$BLOG_FOLDER_NAME" "$REQUESTED_BY" "${{ github.run_number }}")
 
           if [ "$BLOCKED" = "true" ]; then
             PR_BODY=$(printf '⚠️ **BLOCKED — SEO audit did not pass.** Reason:\n\n> %s\n\nThis draft still needs manual fixes before it should be merged.\n\n---\n\n%s' "$BLOCKED_REASON" "$PR_BODY")
