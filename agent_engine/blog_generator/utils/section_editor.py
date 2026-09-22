@@ -264,6 +264,8 @@ Operations:
 - rewrite_section: reword/shorten/expand/improve ONE section's content (not its heading). Needs SECTION_INDEX. If the instruction targets a frontmatter field's wording (e.g. "make the description catchier"), use FIELD_NAME instead of SECTION_INDEX.
 - REJECT: use OPERATION: NONE. Use this whenever the instruction touches more than one section/field, asks for something structural like reordering sections, is too vague to map to exactly one target, or names a section/field that doesn't appear in the lists above.
 
+When REJECTing, your REASON must end with ONE concrete example instruction that WOULD be accepted instead - naming an exact heading or field from the lists above, not a placeholder. If the instruction named several targets, pick just the first one for the example (e.g. an instruction spanning three headings: "Try instead: apply this to one heading at a time, e.g. \\"Convert the heading '<exact heading from the list>' to title case.\\""). This is guidance text shown directly to the human who wrote the instruction, not something the system parses - it must be a plain, ready-to-paste instruction they could send right back.
+
 Instruction: {instruction}
 
 Respond in EXACTLY this format and nothing else, one line per field, using NONE for anything that doesn't apply:
@@ -273,7 +275,7 @@ SECTION_INDEX: <integer from the list above, or NONE>
 FIELD_NAME: <one field name from the list above, or NONE>
 OLD_TEXT: <exact text for replace_text, or NONE>
 NEW_TEXT: <replacement text / new heading / new field value / tag name, or NONE>
-REASON: <one sentence>"""
+REASON: <one sentence explaining the decision; if REJECT, end with the concrete example described above>"""
 
 
 def _parse_classification(text: str) -> dict:
