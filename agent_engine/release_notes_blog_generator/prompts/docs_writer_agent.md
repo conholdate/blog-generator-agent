@@ -95,9 +95,12 @@ Rules:
   code blocks aren't rendered with visible line numbers on the published site,
   so a line-number citation is meaningless to the reader.
 - Keep paragraphs short (under 7 sentences).
-- Target length: 2400-3000 words — this post covers several topics, so it runs
-  longer than a single-feature tutorial. Do not pad with filler; every section
-  must carry real information about its own topic.
+- Cover every topic at whatever length its real depth requires. This post
+  spans several topics, so complete non-padded coverage typically runs
+  2400-3000 words — treat that as what thorough coverage tends to produce,
+  not a quota. Never pad with filler, and never cut a topic's explanation
+  short to stay under it; every section must carry real information about
+  its own topic.
 - Before each code sample, write one keyword-optimized sentence describing
   what it demonstrates (e.g. "The following example shows how to ... using
   {language}.").
@@ -140,27 +143,42 @@ Fields to produce:
   1. Introduction — state what the post covers and why it matters; include
      the focus keyword in the first few sentences. Do not add a "## Introduction"
      heading; write it as plain paragraphs directly under the title.
-  2. A "Why <do this>?" section motivating the use cases behind the article's
-     topics as a group.
-  3. A brief introduction to the API: what it is, the install command from
-     `platform.install_command` (skip this paragraph if it is empty), and a
-     link to `platform.product_page_url` on the API's first mention (skip if
-     empty). Follow it with the `prerequisites` if any were supplied.
-  4. One H2 section per entry in `doc_topics` (or per `keyword_analysis.outline`
+  2. "## Key Takeaways" — 3-6 bullets directly beneath the introduction, before
+     any other heading. Each bullet is one self-contained sentence that states
+     an insight spanning the article's topics (not a table-of-contents entry —
+     "question-based headings with an immediate answer are what gets a post
+     cited," not "we'll cover X and Y"). Write these once you know what the
+     post actually argues, not as a preview written before you know the content.
+  3. `## Why <do this>?` — its own H2, motivating the use cases behind the
+     article's topics as a group. Not an H3, and not folded into Key
+     Takeaways or the API introduction as a sub-section.
+  4. A second, separate H2 (its own heading, e.g. `## Getting Started with
+     <Product>` — not a continuation of the Why section) introducing the API:
+     what it is, the install command from `platform.install_command` (skip
+     this paragraph if it is empty), and a link to `platform.product_page_url`
+     on the API's first mention (skip if empty). Follow it with the
+     `prerequisites` if any were supplied.
+  5. One H2 section per entry in `doc_topics` (or per `keyword_analysis.outline`
      entry when that is non-empty), in order. Each section that has a code
      sample gets a numbered list of steps, then the code block, then an
      explanation of what the code does. Each section without a code sample gets
      genuine explanatory prose — what it means, when it applies, how it relates
      to the sections around it. Use H3 sub-sections where the source article
      nested them.
-  5. A short "## Choosing the Right Approach" section comparing the options the
+  6. A short "## Choosing the Right Approach" section comparing the options the
      article covered (only when it covered more than one code-backed topic).
-  6. "## Get a Free License" — one short paragraph linking to `platform.license_url`.
-  7. "## Free Additional Resources" — a bullet list linking to
-     `platform.docs_url`, `platform.api_reference_url`, and `platform.free_apps_url`
-     (omit any that are empty).
-  8. "## Conclusion" — summarize every topic covered and the problem solved.
-  9. "## FAQs" — restate the same faqs pairs as numbered Q/A in the body.
- 10. "## See Also" — the fact pack does not currently include URLs to other
-     blog posts, so omit this section entirely rather than inventing links
-     to tutorials that may not exist.
+  7. "## Conclusion" — summarize every topic covered and the problem solved.
+  8. "## FAQs" — restate the same faqs pairs as numbered Q/A in the body.
+  9. "## Get a Free License and Explore More" — the one commercial section in
+     the post, placed last because that is the strongest CTA slot: the reader
+     has already gotten the informational value by this point. One short
+     paragraph linking to `platform.license_url`, then a bullet list linking
+     to `platform.docs_url`, `platform.api_reference_url`, and
+     `platform.free_apps_url` (omit any empty URL, and omit the bullet list
+     entirely if all three are empty). Do not split this into two separate
+     sections and do not place any part of it earlier in the post — stacking
+     a license pitch and a resources list back-to-back mid-article reads as a
+     hard sell on what is otherwise an informational tutorial.
+ 10. No "## See Also" section — the fact pack does not currently include URLs
+     to other blog posts, so omit it rather than inventing links to tutorials
+     that may not exist.

@@ -31,6 +31,20 @@ _STOP_WORDS = {
 }
 _WORD_PATTERN = re.compile(r"[a-z0-9+#]+")
 
+# Below this, two titles only share the kind of word that's near-universal
+# within one product+language category page (the product name, "net"/"psd"/
+# etc. from the language filter above already guaranteeing every remaining
+# candidate mentions the target language) rather than a real topical link.
+# Observed real false positives this excludes: "Apply Displace Smart Filters
+# In PSD Files Net" <-> "Convert AI Type 1 Shading to PNG in C# .NET" scored
+# 1/13 ~= 0.08 (shared only "net"); "How to Save 32-Bit Grayscale PSD Image
+# in .NET" <-> "Python via .NET: Simple AI to PDF Conversion" scored 1/12
+# ~= 0.08 for the same reason. Genuinely related pairs in this same test data
+# score 0.28-0.71 (e.g. two OCR-in-.NET posts, two PDF split/merge posts) —
+# 0.2 sits well below every observed real match and well above every
+# observed false one.
+_MIN_SIMILARITY_FOR_RELATED = 0.2
+
 
 @dataclass
 class RelatedPost:
@@ -95,6 +109,16 @@ def rank_related_posts(
 ) -> list[RelatedPost]:
     """Pure ranking logic, kept separate from the network fetch so it's
     testable without hitting the live site.
+
+    Requiring only `similarity > 0` let two topically unrelated posts qualify
+    as "related" purely by sharing one boilerplate word (the language filter
+    above already guarantees every candidate mentions the target language,
+    so that word alone is nearly free to share) — see
+    _MIN_SIMILARITY_FOR_RELATED for the real false positives this excludes.
+    No candidate clearing the bar is a normal outcome, not a bug: the caller
+    (append_read_more_section) already omits the section entirely rather
+    than force-filling it with a weak match, and an absent internal link is
+    better for topical relevance than an irrelevant one.
     """
     scored: list[tuple[float, RelatedPost]] = []
     for candidate in candidates:
@@ -103,7 +127,7 @@ def rank_related_posts(
         if language_terms and not _mentions_language(candidate.title, language_terms):
             continue
         similarity = _topic_similarity(post_title, candidate.title)
-        if similarity <= 0:
+        if similarity < _MIN_SIMILARITY_FOR_RELATED:
             continue
         scored.append((similarity, candidate))
 

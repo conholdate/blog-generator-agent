@@ -21,11 +21,11 @@ _STRAY_H1_PATTERN = re.compile(r"^#\s+\S", re.MULTILINE)
 _H2_SPLIT_PATTERN = re.compile(r"^##\s+", re.MULTILINE)
 _INTRO_WORD_BUDGET = 120
 
-# The writer's fixed skeleton (Why / API intro / Get a Free License / Free
-# Additional Resources / Conclusion / FAQs + at least one tutorial H2)
-# accounts for this many headings on its own; anything beyond it reflects
-# real elaboration (a "Handling Common Scenarios" section, worked
-# sub-examples, etc.), not just filling in the template.
+# The writer's fixed skeleton (Key Takeaways / Why / Conclusion / FAQs /
+# Get a Free License and Explore More + at least one tutorial H2) accounts
+# for this many headings on its own; anything beyond it reflects real
+# elaboration (a "Handling Common Scenarios" section, worked sub-examples,
+# etc.), not just filling in the template.
 _BASELINE_HEADING_COUNT = 6
 
 

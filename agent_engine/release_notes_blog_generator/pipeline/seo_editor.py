@@ -62,8 +62,9 @@ def review(post: BlogPost, cover_image_generated: bool = False) -> list[str]:
         issues.append("Body references a gist shortcode, but this pipeline only generates inline code blocks")
 
     word_count = seo_rules.word_count(body)
-    if not (seo_rules.WORD_COUNT_RANGE[0] <= word_count <= seo_rules.WORD_COUNT_RANGE[1]):
-        issues.append(f"Body word count ({word_count}) is far outside the ~2000-2400 word target")
+    low, high = seo_rules.word_count_range(post.fact_pack.source_type)
+    if not (low <= word_count <= high):
+        issues.append(f"Body word count ({word_count}) is outside the {low}-{high} word range for this article type")
 
     if seo_rules.find_long_paragraph(body) is not None:
         issues.append(f"A paragraph has more than {seo_rules.MAX_SENTENCES_PER_PARAGRAPH} sentences")
@@ -81,6 +82,12 @@ def review(post: BlogPost, cover_image_generated: bool = False) -> list[str]:
         issues.append(
             f"Body ties the post to an SDK version / release ({', '.join(repr(r) for r in version_refs[:3])}); "
             "write the feature as an established capability with no version framing"
+        )
+    if seo_rules.has_stock_example_filename_leak(body, post.fact_pack):
+        issues.append(
+            "Body uses 'input.cdr' — the skill reference doc's own illustrative example filename — "
+            "but this article's fact pack has nothing to do with a CDR file; likely echoed from "
+            "references/aspose-article-brief.md instead of the real input for this topic"
         )
 
     # Structure signals that also feed the QA scorecard's "answer-first

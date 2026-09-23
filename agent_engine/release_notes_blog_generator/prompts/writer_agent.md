@@ -82,8 +82,11 @@ Rules:
   not a release announcement — the release itself must not be the subject of
   the post.
 - Keep paragraphs short (under 7 sentences).
-- Target length: 2000-2400 words. Do not pad with filler; keep every
-  paragraph focused and information-dense.
+- Cover the task at whatever length its real depth requires. A complete,
+  non-padded tutorial at this scope typically lands around 2000-2400 words —
+  treat that as what thorough coverage tends to produce, not a quota to hit.
+  Never pad with filler to reach it, and never cut real explanation, a
+  failure mode, or a step's rationale short to stay under it.
 - Before each code sample, write one keyword-optimized sentence describing
   what it demonstrates (e.g. "The following example shows how to ... using
   {language}.").
@@ -125,20 +128,34 @@ Fields to produce:
   1. Introduction — state what the post covers and why it matters; include
      the focus keyword in the first few sentences. Do not add a "## Introduction"
      heading; write it as plain paragraphs directly under the title.
-  2. A "Why <do this>?" section motivating the use case.
-  3. A brief introduction to the API: what it is, the install command from
-     `platform.install_command` (skip this paragraph if it is empty), and a
-     link to `platform.product_page_url` on the API's first mention (skip if
-     empty). Present it as an existing capability — no version number, no
-     "new in", no "release" framing.
-  4. One or more H2 tutorial sections, each with a numbered list of steps
+  2. "## Key Takeaways" — 3-6 bullets directly beneath the introduction, before
+     any other heading. Each bullet is one self-contained sentence that states
+     an insight (not a table-of-contents entry — "question-based headings with
+     an immediate answer are what gets a post cited," not "we'll cover X and
+     Y"). Write these once you know what the post actually argues, not as a
+     preview written before you know the content.
+  3. `## Why <do this>?` — its own H2, motivating the use case. Not an H3, and
+     not folded into Key Takeaways or the API introduction as a sub-section.
+  4. A second, separate H2 (its own heading, e.g. `## Getting Started with
+     <Product>` — not a continuation of the Why section) introducing the API:
+     what it is, the install command from `platform.install_command` (skip
+     this paragraph if it is empty), and a link to `platform.product_page_url`
+     on the API's first mention (skip if empty). Present it as an existing
+     capability — no version number, no "new in", no "release" framing.
+  5. One or more H2 tutorial sections, each with a numbered list of steps
      followed by its code example and an explanation of what the code does.
-  5. "## Get a Free License" — one short paragraph linking to `platform.license_url`.
-  6. "## Free Additional Resources" — a bullet list linking to
-     `platform.docs_url`, `platform.api_reference_url`, and `platform.free_apps_url`
-     (omit any that are empty).
-  7. "## Conclusion" — summarize what was covered and the problem solved.
-  8. "## FAQs" — restate the same faqs pairs as numbered Q/A in the body.
-  9. "## See Also" — the fact pack does not currently include URLs to other
-     blog posts, so omit this section entirely rather than inventing links
-     to tutorials that may not exist.
+  6. "## Conclusion" — summarize what was covered and the problem solved.
+  7. "## FAQs" — restate the same faqs pairs as numbered Q/A in the body.
+  8. "## Get a Free License and Explore More" — the one commercial section in
+     the post, placed last because that is the strongest CTA slot: the reader
+     has already gotten the informational value by this point. One short
+     paragraph linking to `platform.license_url`, then a bullet list linking
+     to `platform.docs_url`, `platform.api_reference_url`, and
+     `platform.free_apps_url` (omit any empty URL, and omit the bullet list
+     entirely if all three are empty). Do not split this into two separate
+     sections and do not place any part of it earlier in the post — stacking
+     a license pitch and a resources list back-to-back mid-article reads as a
+     hard sell on what is otherwise an informational tutorial.
+  9. No "## See Also" section — the fact pack does not currently include URLs
+     to other blog posts, so omit it rather than inventing links to tutorials
+     that may not exist.

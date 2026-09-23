@@ -2,15 +2,30 @@ from __future__ import annotations
 
 import re
 
+from ..models.fact_pack import SOURCE_TYPE_DOCS, SOURCE_TYPE_RELEASE_NOTES, FactPack
+
 # Professional Blogging Guide thresholds — shared by seo_editor.py (post-hoc
 # review) and writer.py (pre-flight completeness gate + deterministic slug
 # truncation), so both stages agree on exactly the same numbers.
 MAX_TITLE_LENGTH = 65
 MAX_SEO_TITLE_LENGTH = 65  # same "~60 characters, concise" guidance as title
 DESCRIPTION_RANGE = (120, 165)
-WORD_COUNT_RANGE = (1200, 3200)  # ideal is 2000-2400; this is the "flag it" band, not the target
+
+# One shared floor/ceiling used to conflate two different jobs: a
+# release-notes post covers a single feature (writer_agent.md's guidance is
+# "depth first, length follows", not a fixed target), while a docs post
+# covers every topic on a whole documentation page in one article
+# (docs_writer_agent.md targets 2400-3000 words for that reason). Sharing one
+# range flagged nearly every well-formed single-feature post as too short in
+# practice once the writer stopped padding to hit a fixed target — observed
+# real drafts: 797-1178 words for complete, non-padded release-notes
+# tutorials that covered the API, the code, pitfalls, and FAQs in full.
+WORD_COUNT_RANGE_BY_SOURCE_TYPE: dict[str, tuple[int, int]] = {
+    SOURCE_TYPE_RELEASE_NOTES: (700, 2200),  # one feature; ideal ~1200-1800
+    SOURCE_TYPE_DOCS: (1800, 3500),  # several topics; ideal ~2400-3000
+}
 MAX_SENTENCES_PER_PARAGRAPH = 7
-REQUIRED_SECTION_MARKERS = ["why", "get a free license", "conclusion", "faq"]
+REQUIRED_SECTION_MARKERS = ["key takeaways", "why", "get a free license", "conclusion", "faq"]
 
 # The guide doesn't specify a slug-only length, but URLs are always checked as
 # they'll actually appear once published, i.e. the slug appended to the blog
@@ -51,9 +66,33 @@ _VERSION_REFERENCE_PATTERN = re.compile(
     re.IGNORECASE,
 )
 
+# missing_sections() must check actual headings, not any substring anywhere in
+# the body — a stray sentence like "Why this feature matters" (no leading
+# "##") satisfies a naive body-text search for "why" without the section
+# actually existing, which shipped in a real draft (add-displace-smart-filters
+# -dotnet: the whole "## Why ..." heading was dropped, but the marker still
+# "matched" the plain-text sentence). Matching only within heading lines
+# closes that gap.
+_HEADING_LINE_PATTERN = re.compile(r"^#{1,6}[ \t]+(.+?)[ \t]*$", re.MULTILINE)
+
+# The blog-writing skill's own worked example ("Input: input.cdr / Output:
+# output.png", see references/aspose-article-brief.md §4) has been observed
+# leaking verbatim into an unrelated article's code sample (a PSD post
+# claiming its input file was "input.cdr") — the model echoing the skill
+# reference doc's illustrative filename instead of the real one in the fact
+# pack it was actually given.
+_STOCK_EXAMPLE_FILENAME_PATTERN = re.compile(r"\binput\.cdr\b", re.IGNORECASE)
+
 
 def word_count(body: str) -> int:
     return len(body.split())
+
+
+def word_count_range(source_type: str) -> tuple[int, int]:
+    """The "flag it" word-count band for this article's use case — see
+    WORD_COUNT_RANGE_BY_SOURCE_TYPE. Falls back to the release-notes (single
+    feature) range for an unrecognized source_type rather than raising."""
+    return WORD_COUNT_RANGE_BY_SOURCE_TYPE.get(source_type, WORD_COUNT_RANGE_BY_SOURCE_TYPE[SOURCE_TYPE_RELEASE_NOTES])
 
 
 def has_line_number_references(body: str) -> bool:
@@ -78,8 +117,30 @@ def version_references(body: str, sdk_version: str = "") -> list[str]:
 
 
 def missing_sections(body: str) -> list[str]:
-    body_lower = body.lower()
-    return [marker for marker in REQUIRED_SECTION_MARKERS if marker not in body_lower]
+    """A marker only counts as present when it appears in an actual heading
+    line, not anywhere in the body's prose — see _HEADING_LINE_PATTERN."""
+    headings_lower = " | ".join(m.group(1).lower() for m in _HEADING_LINE_PATTERN.finditer(body))
+    return [marker for marker in REQUIRED_SECTION_MARKERS if marker not in headings_lower]
+
+
+def has_stock_example_filename_leak(body: str, fact_pack: FactPack) -> bool:
+    """True when the body reproduces the skill reference doc's own
+    illustrative example filename verbatim while nothing in this article's
+    actual fact pack (topic, source title, code snippets, related concepts)
+    is about a CDR file — i.e. the model echoed the skill's worked example
+    instead of the real input for this topic."""
+    if not _STOCK_EXAMPLE_FILENAME_PATTERN.search(body):
+        return False
+    context = " ".join(
+        [
+            fact_pack.topic,
+            fact_pack.source_title,
+            fact_pack.main_problem_solved,
+            *fact_pack.code_snippets,
+            *fact_pack.related_concepts,
+        ]
+    )
+    return "cdr" not in context.lower()
 
 
 def find_long_paragraph(body: str) -> str | None:
