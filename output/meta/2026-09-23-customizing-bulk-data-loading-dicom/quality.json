@@ -1,0 +1,33 @@
+{
+  "scores": {
+    "technical_accuracy": 9,
+    "code_correctness": 7,
+    "original_value": 10,
+    "source_faithfulness": 10,
+    "seo_readiness": 7,
+    "readability": 6,
+    "duplication_risk": 4,
+    "missing_citations": false,
+    "unsupported_claims": false
+  },
+  "scorecard": {
+    "search_intent": 5,
+    "technical_accuracy": 20,
+    "original_value": 20,
+    "answer_first_structure": 13,
+    "seo_metadata": 8,
+    "internal_linking": 10,
+    "accessibility": 4,
+    "llm_clarity": 4,
+    "total": 84,
+    "critical_technical_error": false,
+    "passes": false
+  },
+  "publication_status": "ready_for_editor",
+  "reasons": [
+    "Meta description outside the 120-165 character range",
+    "Focus keyword 'Customizing Bulk Data Loading in DICOM Deserialization' does not appear in the introduction",
+    "QA scorecard 84/100 is below the 85 publish threshold",
+    "Code sample has not been executed in a sandbox (not feasible: proprietary SDK/license/input files)"
+  ]
+}

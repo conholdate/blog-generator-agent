@@ -1,23 +1,22 @@
 {
-  "source_url": "https://releases.aspose.com/psd/net/release-notes/2026/aspose-psd-for-net-26-8-release-notes/",
+  "source_url": "https://releases.aspose.com/medical/net/release-notes/2026/aspose-medical-for-net-26-8-release-notes/",
   "source_type": "release-notes",
   "publication_readiness": "draft_ready",
   "blocker_reason": null,
   "topics_generated": [
-    "PSDNET-125. Support of Grayscale ColorMode PSD Image saving with 32 bit per channel.",
-    "PSDNET-2810. Implement reading/writing Displace smart filter data.",
-    "PSDNET-2668. Improving Layer Effects processing according to the logic of the new Overlay Effects Blending algorithm.",
-    "PSDNET-2772. [AI Format] Implementing the Type 1 (function) Shading.",
-    "PSDNET-1472. Effect loss when working with smart objects."
+    "Streaming Datasets from a JSON Array",
+    "Pluggable BulkDataURI Loading",
+    "Asynchronous Dataset Traversal",
+    "Working with Element Data"
   ],
   "rejected_sections": [
-    "Public API Changes \u2013 Added APIs",
-    "Public API Changes \u2013 Removed APIs",
-    "PSDNET-2265. Arithmetic operation resulted in an overflow on Image.Load in file with complex smart filter Liquify.",
-    "Duplicate usage examples for PSDNET-125",
-    "Duplicate usage examples for PSDNET-2810",
-    "Duplicate usage examples for PSDNET-2668",
-    "Duplicate usage examples for PSDNET-2772",
-    "Duplicate usage examples for PSDNET-1472"
+    "Major Features",
+    "Full List of Features in this Release",
+    "Public API Overview",
+    "API Changes Summary",
+    "New Classes and Interfaces",
+    "New Members",
+    "Changed Members",
+    "Removed"
   ]
 }

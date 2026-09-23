@@ -1,0 +1,106 @@
+{
+  "topic": "High-Performance DICOM Element Access with Memory<T> in Aspose.Medical",
+  "primary_source_url": "https://releases.aspose.com/medical/net/release-notes/2026/aspose-medical-for-net-26-8-release-notes/",
+  "source_title": "Aspose.Medical for .NET 26.8 Release Notes",
+  "sdk_version": "Aspose.Medical for .NET 26.8 Release Notes",
+  "main_problem_solved": "Element data is now exposed as System.Memory<T> with indexers and CopyDataToArray for high‑performance manipulation.",
+  "platform": {
+    "platform_key": "net",
+    "platform_name": ".NET",
+    "language": "C#",
+    "language_tag": "csharp",
+    "package_manager": "NuGet",
+    "install_command": "Install-Package Aspose.Medical",
+    "product_key": "medical",
+    "product_display": "Medical",
+    "brand_key": "aspose",
+    "brand_name": "Aspose",
+    "product_full_name": "Aspose.Medical",
+    "product_page_url": "https://products.aspose.com/medical/net/",
+    "docs_url": "https://docs.aspose.com/medical/net/",
+    "api_reference_url": "https://reference.aspose.com/medical/net/",
+    "free_apps_url": "https://products.aspose.app/medical/family",
+    "license_url": "https://purchase.aspose.com/temporary-license/",
+    "forum_url": "https://forum.aspose.com/c/medical/",
+    "blog_domain": "https://blog.aspose.com",
+    "blog_category_url": "https://blog.aspose.com/categories/aspose.medical-product-family/"
+  },
+  "source_type": "release_notes",
+  "keyword_analysis": {
+    "title": "",
+    "angle": "",
+    "outline": [],
+    "target_persona": "",
+    "primary_keyword": "High-Performance DICOM Element Access with Memory<T>",
+    "supporting_keywords": [
+      "Adding, Updating, and Removing Data from DICOM Files",
+      "Fast DICOM tag reading with Memory<T> in .NET",
+      "High-performance DICOM element extraction using Memory<T> in .NET"
+    ],
+    "keyword_groups": {
+      "core_seo_keywords": [
+        "High-Performance DICOM Element Access with Memory<T>",
+        "Adding, Updating, and Removing Data from DICOM Files"
+      ],
+      "long_tail_keywords": [
+        "High-performance DICOM element extraction using Memory<T> in .NET"
+      ],
+      "context_keywords": [
+        "Fast DICOM tag reading with Memory<T> in .NET"
+      ]
+    },
+    "editorial_notes": []
+  },
+  "key_steps": [],
+  "code_snippets": [
+    "using Aspose.Medical.Dicom;\nusing Aspose.Medical.Dicom.Elements;\nusing Aspose.Medical.Dicom.Tags;\n\nDicomFile dicomFile = DicomFile.Open(\"sample.dcm\");\nDecimalString spacing = dicomFile.Dataset.Get<DecimalString>(Tag.PixelSpacing);\n\n// Indexed access, replacing spacing.Data[0]\nstring first = spacing[0];\nspacing[0] = \"0.5\";\n\n// Iterate the span, or take an independent copy\nforeach (string value in spacing.Data.Span) { }\nstring[] copy = spacing.CopyDataToArray();"
+  ],
+  "limitations": [],
+  "warnings": [
+    "Editorial signal for the pipeline and human reviewer only, not for the article: the code sample matches the vendor's own release notes verbatim but has not been executed, so it is untested. Do not describe it as tested, and do not add any provenance or verification note to the article."
+  ],
+  "related_concepts": [
+    "DicomFile",
+    "DecimalString",
+    "Tag",
+    "Open",
+    "Get",
+    "CopyDataToArray"
+  ],
+  "facts_confirmed_from_source": [
+    "Heading: Working with Element Data",
+    "Element data is now exposed as System.Memory<T> with indexers and CopyDataToArray for high‑performance manipulation.",
+    "API used: DicomFile.Open",
+    "API used: Dataset.Get",
+    "API used: DecimalString.this[int]",
+    "API used: DecimalString.Data.Span",
+    "API used: DecimalString.CopyDataToArray"
+  ],
+  "facts_needing_verification": [],
+  "suggested_article_outline": [
+    "Introduction",
+    "Key Takeaways",
+    "Why this feature matters",
+    "Brief introduction of the API (install + product/docs links)",
+    "Step-by-step tutorial with a code example",
+    "Conclusion",
+    "FAQs",
+    "Get a Free License and Explore More (one section, placed last as the strongest CTA slot)",
+    "See Also (only if related post URLs are supplied)"
+  ],
+  "code_verification": {
+    "language": "C#",
+    "tested": false,
+    "source_verified": true,
+    "syntax_valid": true,
+    "package_name": null,
+    "package_version": null,
+    "os": null,
+    "input_file_used": null,
+    "output_file_generated": null,
+    "errors": [],
+    "notes": "Code sample matches a block scraped verbatim from the product team's release notes page. Static syntax check passed (balanced brackets/quotes). Sandboxed execution against the real vendor SDK is not attempted: these samples reference proprietary licensed assemblies, external input files, and sometimes network services (e.g. a timestamp authority URL) that only exist in the product team's own test environment."
+  },
+  "prerequisites": [],
+  "doc_topics": []
+}
