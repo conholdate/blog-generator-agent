@@ -4,7 +4,8 @@ name: Blog Refine — dashboard
 # the brand's blog repo (client_payload.brand), instead of generating a new draft. Fires on a
 # `repository_dispatch` from the dashboard's "Request a revision" box.
 #
-# client_payload fields: brand, branch, instruction, requested_by
+# client_payload fields: brand, branch, instruction, requested_by, request_id
+# (the instruction itself is also stored as a queued PR comment - see refine_queue.py)
 
 on:
   repository_dispatch:
@@ -152,116 +153,37 @@ jobs:
             } >> "$GITHUB_ENV"
           fi
 
-      # ── Revise: single targeted edit pass, in place, on the found file ──
-      - name: Apply revision
-        id: apply_revision
+      ###################################################################
+      # Work through the PR's revision queue (hidden "refine-queued"
+      # comments written by the dashboard), oldest first, one independent
+      # single-target pass each, committing to the SAME branch. Runs the
+      # whole queue rather than just this dispatch's instruction because
+      # GitHub keeps only one pending run per concurrency group - a
+      # cancelled pending run would otherwise lose its instruction.
+      # See .github/scripts/refine_queue.py.
+      ###################################################################
+      - name: Process revision queue
+        if: env.pr_number != ''
         env:
+          GH_TOKEN: ${{ secrets.REPO_PAT }}
+          BRANCH: ${{ github.event.client_payload.branch }}
+          PR_NUMBER: ${{ env.pr_number }}
           DRAFT_PATH: ${{ steps.checkout_draft.outputs.draft_path }}
+          REQUEST_ID: ${{ github.event.client_payload.request_id }}
           INSTRUCTION: ${{ github.event.client_payload.instruction }}
-          PRODUCT: ${{ env.REQUEST_PRODUCT }}
-          PLATFORM: ${{ env.REQUEST_PLATFORM }}
-        run: |
-          cd agent_engine/blog_generator
-          echo "=== Applying revision ==="
-          echo "Draft: $DRAFT_PATH"
-          echo "Instruction: $INSTRUCTION"
-          echo "Product/Platform (for metrics, optional): $PRODUCT / $PLATFORM"
+        run: python .github/scripts/refine_queue.py
 
-          python main.py \
-            --author "Muhammad Mustafa" \
-            --brand "$BRAND" \
-            --revise \
-            --draft-path "$DRAFT_PATH" \
-            --instruction "$INSTRUCTION" \
-            --product "$PRODUCT" \
-            --platform "$PLATFORM" || true
-
-      - name: Read revision status
-        id: read_status
-        run: |
-          STATUS_FILE=agent_engine/blog_generator/revise_status.json
-          if [ -f "$STATUS_FILE" ]; then
-            STATUS=$(python3 -c "import json;print(json.load(open('$STATUS_FILE')).get('status',''))")
-            MESSAGE=$(python3 -c "import json;print(json.load(open('$STATUS_FILE')).get('message',''))")
-          else
-            STATUS="error"
-            MESSAGE="revise_status.json not found — the revision step did not run to completion"
-          fi
-          echo "status=$STATUS" >> $GITHUB_OUTPUT
-          {
-            echo "message<<EOF"
-            echo "$MESSAGE"
-            echo "EOF"
-          } >> $GITHUB_OUTPUT
-          echo "Revision status: $STATUS - $MESSAGE"
-
-      ###################################################################
-      # Commit the revised file back onto the SAME branch. No new PR.
-      ###################################################################
-      - name: Commit revision to existing branch
-        if: steps.read_status.outputs.status == 'success'
+      - name: Remove 'refining' label
+        if: always() && env.pr_number != ''
         env:
           GH_TOKEN: ${{ secrets.REPO_PAT }}
-          BRANCH: ${{ github.event.client_payload.branch }}
-          INSTRUCTION: ${{ github.event.client_payload.instruction }}
         run: |
-          cd blog-repo
-          git config --global user.email "action@github.com"
-          git config --global user.name "GitHub Action"
+          gh pr edit "$pr_number" --repo "$TARGET_REPO" --remove-label refining >/dev/null 2>&1 || true
 
-          if git diff --quiet; then
-            echo "ℹ️  No changes produced by the revision"
-          else
-            git add -A
-            git commit -m "Revise draft per request: $INSTRUCTION"
-            git push origin "$BRANCH"
-            echo "✅ Pushed revision to $BRANCH"
-          fi
-
-      - name: Report status on PR
-        if: always()
+      - name: Fail if the PR could not be found
+        if: env.pr_number == ''
         env:
-          GH_TOKEN: ${{ secrets.REPO_PAT }}
           BRANCH: ${{ github.event.client_payload.branch }}
-          STATUS: ${{ steps.read_status.outputs.status }}
-          MESSAGE: ${{ steps.read_status.outputs.message }}
-          INSTRUCTION: ${{ github.event.client_payload.instruction }}
         run: |
-          PR_NUMBER=$(gh pr list --repo "$TARGET_REPO" --head "$BRANCH" --json number --jq '.[0].number' 2>/dev/null || echo "")
-
-          if [ -z "$PR_NUMBER" ]; then
-            echo "⚠️ No PR found for branch $BRANCH — skipping comment"
-            exit 0
-          fi
-
-          # Hidden marker (not rendered, but grep-able): the dashboard's only
-          # other signal that a revision finished is the 'refining' label
-          # disappearing, which happens whether the run succeeded or was
-          # rejected - it was showing "Revision applied" either way. The
-          # dashboard now reads this marker instead of assuming success.
-          if [ "$STATUS" = "success" ]; then
-            BODY=$(printf '<!-- refine-result: success -->\n🔁 **Revised per:** %s\n\n%s' "$INSTRUCTION" "$MESSAGE")
-          else
-            BODY=$(printf '<!-- refine-result: failure -->\n❌ **Revision failed** for: %s\n\n%s' "$INSTRUCTION" "$MESSAGE")
-          fi
-
-          # Comment BEFORE removing the label, not after: the dashboard polls
-          # until the label disappears then immediately checks for this
-          # comment, so posting it first guarantees it already exists by
-          # the time that check runs, instead of a race where it might not.
-          gh pr comment "$PR_NUMBER" --repo "$TARGET_REPO" --body "$BODY" || true
-          gh pr edit "$PR_NUMBER" --repo "$TARGET_REPO" --remove-label refining >/dev/null 2>&1 || true
-
-          {
-            echo "### 🔁 Revision report"
-            echo ""
-            echo "| | |"
-            echo "|---|---|"
-            echo "| Status | $STATUS |"
-            echo "| Instruction | $INSTRUCTION |"
-            echo "| PR | https://github.com/$TARGET_REPO/pull/$PR_NUMBER |"
-          } >> "$GITHUB_STEP_SUMMARY"
-
-      - name: Fail the run if the revision failed
-        if: steps.read_status.outputs.status != 'success'
-        run: exit 1
+          echo "❌ No open PR found for branch $BRANCH"
+          exit 1
