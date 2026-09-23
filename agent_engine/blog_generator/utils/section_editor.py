@@ -261,7 +261,7 @@ Operations:
 - replace_text: replace one EXACT quoted/specific piece of text with another, anywhere in the body. Needs OLD_TEXT and NEW_TEXT. Only use this when the instruction gives or clearly implies an exact string, not a vague description.
 - add_tag / remove_tag: add or remove one tag from frontmatter tags. Needs NEW_TEXT (the tag).
 - set_field: change ONE frontmatter field to an exact new value (short scalar values only - not the body, not a multi-line field). Needs FIELD_NAME and NEW_TEXT.
-- rewrite_section: reword/shorten/expand/improve ONE section's content (not its heading). Needs SECTION_INDEX. If the instruction targets a frontmatter field's wording (e.g. "make the description catchier"), use FIELD_NAME instead of SECTION_INDEX.
+- rewrite_section: reword/shorten/expand/improve ONE section's content (not its heading). Also use it for an edit to a single item INSIDE one section - e.g. removing, adding or rewording one question in an FAQ section, one list item, or one paragraph - since that item is not a section of its own; set KIND: GENERATIVE with the SECTION_INDEX of the section that contains it. Do NOT reject those just because the item has no heading of its own. Needs SECTION_INDEX. If the instruction targets a frontmatter field's wording (e.g. "make the description catchier"), use FIELD_NAME instead of SECTION_INDEX.
 - REJECT: use OPERATION: NONE. Use this whenever the instruction touches more than one section/field, asks for something structural like reordering sections, is too vague to map to exactly one target, or names a section/field that doesn't appear in the lists above.
 
 When REJECTing, your REASON must end with ONE concrete example instruction that WOULD be accepted instead - naming an exact heading or field from the lists above, not a placeholder. If the instruction named several targets, pick just the first one for the example (e.g. an instruction spanning three headings: "Try instead: apply this to one heading at a time, e.g. \\"Convert the heading '<exact heading from the list>' to title case.\\""). This is guidance text shown directly to the human who wrote the instruction, not something the system parses - it must be a plain, ready-to-paste instruction they could send right back.
@@ -563,7 +563,9 @@ async def rewrite_section(lines: list[str], section: Section, instruction: str, 
         "You are editing ONE section of an existing published-quality blog post. "
         "You are shown ONLY this section's body text (its heading is handled "
         "separately and is not yours to change) - apply the requested edit to it "
-        "completely and precisely. Return ONLY the edited section body: no "
+        "completely and precisely. If the change touches only one item inside the "
+        "section (one question, list item or paragraph), change or remove just that "
+        "item and keep every other item exactly as written. Return ONLY the edited section body: no "
         "heading, no preamble, no explanation, no code fences wrapping the "
         "output, no markdown horizontal rules added at the start or end. Keep "
         "any <!--more--> marker and existing markdown link/code formatting "
