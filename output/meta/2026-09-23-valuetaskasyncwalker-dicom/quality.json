@@ -1,0 +1,30 @@
+{
+  "scores": {
+    "technical_accuracy": 9,
+    "code_correctness": 7,
+    "original_value": 7,
+    "source_faithfulness": 10,
+    "seo_readiness": 9,
+    "readability": 6,
+    "duplication_risk": 4,
+    "missing_citations": false,
+    "unsupported_claims": false
+  },
+  "scorecard": {
+    "search_intent": 10,
+    "technical_accuracy": 20,
+    "original_value": 14,
+    "answer_first_structure": 13,
+    "seo_metadata": 10,
+    "internal_linking": 10,
+    "accessibility": 5,
+    "llm_clarity": 4,
+    "total": 86,
+    "critical_technical_error": false,
+    "passes": true
+  },
+  "publication_status": "draft_generated",
+  "reasons": [
+    "Code sample has not been executed in a sandbox (not feasible: proprietary SDK/license/input files)"
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "scores": {
+    "technical_accuracy": 9,
+    "code_correctness": 7,
+    "original_value": 6,
+    "source_faithfulness": 10,
+    "seo_readiness": 9,
+    "readability": 6,
+    "duplication_risk": 3,
+    "missing_citations": false,
+    "unsupported_claims": false
+  },
+  "scorecard": {
+    "search_intent": 10,
+    "technical_accuracy": 20,
+    "original_value": 12,
+    "answer_first_structure": 13,
+    "seo_metadata": 10,
+    "internal_linking": 10,
+    "accessibility": 5,
+    "llm_clarity": 4,
+    "total": 84,
+    "critical_technical_error": false,
+    "passes": false
+  },
+  "publication_status": "ready_for_editor",
+  "reasons": [
+    "QA scorecard 84/100 is below the 85 publish threshold",
+    "Code sample has not been executed in a sandbox (not feasible: proprietary SDK/license/input files)"
+  ]
+}

@@ -47,15 +47,24 @@ How to read it:
 - You still output only the JSON fields specified above. Ignore the skill's
   "Output conventions", Hugo front matter, file/bundle layout, and cover-image
   guidance - the pipeline assembles all of that deterministically.
-- Keep the fixed section list above exactly as specified: do not add, remove,
-  or reorder top-level sections. In particular do not add a standalone "Key
-  Takeaways" section, a dedicated CTA section, or an internal-links / "See
-  Also" section - the fact pack carries no URLs for them.
+- Keep the fixed section list above exactly as specified, including where it
+  now requires "## Key Takeaways" - do not add, remove, or reorder any other
+  top-level section. There is still no dedicated CTA section or internal-links
+  / "See Also" section beyond what the fixed list already specifies - the fact
+  pack carries no URLs for one.
 - Your only source of truth is the supplied fact pack. Where the skill says to
   verify against a `docs/` folder, verify against the fact pack instead, and
-  never browse or invent beyond it.
-- Keep the word-count target stated above; the skill's "shorter is fine"
-  remark does not override it.
+  never browse or invent beyond it. This includes the skill's own illustrative
+  examples: `aspose-article-brief.md` repeats a worked example throughout
+  (CDR to PNG, `input.cdr` / `output.png`, `Image.Load`/`Image.Save`) purely to
+  show the *shape* of a brief or an input/output block. That filename and
+  those calls are almost never this article's actual input, output, or API -
+  copying them into the body instead of the real values from the fact pack in
+  front of you is a factual error, not a stylistic one. This has been observed
+  in practice (a PSD article's code sample carried a stray "Input: input.cdr"
+  comment lifted from that example).
+- The rules above already fold the skill's "word count is not a target" advice
+  in as "depth first, length follows" - follow that wording, not a fixed quota.
 - The rules above forbid naming the SDK version a feature shipped in or
   framing it as new. That wins over the skill's "date version-dependent
   claims" / "pin versions" advice: write about the API as an established,
@@ -82,7 +91,7 @@ What to take from the skill:
 ================================================================================
 """
 _MAX_TAGS = 10
-_MAX_COMPLETENESS_RETRIES = 1
+_MAX_REVISION_RETRIES = 1
 _MIN_SLUG_LENGTH = 15
 
 
@@ -112,35 +121,44 @@ def write_article(
 
     `prompt_path` selects the brief: the release-notes writer prompt by
     default, or `DOCS_PROMPT_PATH` for the docs-article use case. Everything
-    downstream of the prompt — output schema, completeness retry, front-matter
+    downstream of the prompt — output schema, revision retry, front-matter
     assembly — is shared, so both use cases produce identical draft structure.
 
-    A single completeness retry guards against the model silently stopping
-    mid-article (valid JSON, but a truncated body missing required sections)
-    — this has been observed in practice, and without it the incomplete
-    draft would ship with only an advisory note in quality.json.
+    A single revision retry guards against two observed failure modes: the
+    model silently stopping mid-article (valid JSON, but a truncated body
+    missing required sections), and the model writing a code provenance/
+    test-status disclaimer or an SDK-version/"new in" reference despite the
+    brief explicitly forbidding both — seo_rules already has the detectors
+    for these (has_provenance_disclaimer, version_references) because
+    seo_editor.py flags them post-hoc for a human editor, but a real shipped
+    draft has been observed carrying the disclaimer language anyway. Checking
+    the same regexes here, before delivery, catches it instead of only
+    logging it.
     """
     system_prompt = _build_system_prompt(prompt_path or _PROMPT_PATH)
     user_prompt = fact_pack.model_dump_json(indent=2)
     result = llm.complete_structured(system=system_prompt, user=user_prompt, schema=_WriterOutput)
 
-    for _ in range(_MAX_COMPLETENESS_RETRIES):
-        issues = _completeness_issues(result.body_markdown)
+    for _ in range(_MAX_REVISION_RETRIES):
+        issues = _brief_violations(result.body_markdown, fact_pack)
         if not issues:
             break
-        logger.warning("Writer output incomplete (%s); retrying once with a completeness reminder", "; ".join(issues))
+        logger.warning("Writer output violated the brief (%s); retrying once with a correction reminder", "; ".join(issues))
         retry_prompt = (
             f"{user_prompt}\n\n"
-            "IMPORTANT: Your previous attempt at this article stopped early and was "
-            f"incomplete ({'; '.join(issues)}). Write the complete article again from "
-            "scratch: hit the word-count target and include every required section "
-            "listed in the instructions, in full, all the way through the FAQs."
+            "IMPORTANT: Your previous attempt at this article violated the brief "
+            f"({'; '.join(issues)}). Write the complete article again from scratch, "
+            "fixing every issue listed above while still meeting every other "
+            "requirement: cover the material at full depth, include every required "
+            "section in full through the FAQs, and present the code sample as an "
+            "ordinary working example with no provenance, test-status, version, or "
+            "release commentary anywhere in the body."
         )
         result = llm.complete_structured(system=system_prompt, user=retry_prompt, schema=_WriterOutput)
     else:
-        remaining = _completeness_issues(result.body_markdown)
+        remaining = _brief_violations(result.body_markdown, fact_pack)
         if remaining:
-            logger.warning("Writer output still incomplete after retry (%s); shipping as-is for seo_editor to flag", "; ".join(remaining))
+            logger.warning("Writer output still violates the brief after retry (%s); shipping as-is for seo_editor to flag", "; ".join(remaining))
 
     return _assemble_blog_post(result, fact_pack, settings)
 
@@ -180,14 +198,35 @@ def _strip_front_matter(text: str) -> str:
     return text
 
 
-def _completeness_issues(body: str) -> list[str]:
+def _brief_violations(body: str, fact_pack: FactPack) -> list[str]:
+    """Deterministic pre-delivery gate: the completeness checks that were
+    already here, plus the two forbidden-language rules seo_rules already
+    detects for seo_editor.py's post-hoc review. Reusing the same functions
+    keeps "what the brief forbids" defined in exactly one place.
+    """
     issues: list[str] = []
     missing = seo_rules.missing_sections(body)
     if missing:
         issues.append(f"missing section(s): {', '.join(missing)}")
     count = seo_rules.word_count(body)
-    if count < seo_rules.WORD_COUNT_RANGE[0]:
-        issues.append(f"only {count} words (target ~2000-2400)")
+    low, high = seo_rules.word_count_range(fact_pack.source_type)
+    if count < low:
+        issues.append(f"only {count} words (below the {low}-{high} word range for this article type)")
+    if seo_rules.has_provenance_disclaimer(body):
+        issues.append(
+            "contains a forbidden code provenance/test-status disclaimer "
+            "(e.g. 'reproduced from the official documentation', 'has not been executed')"
+        )
+    version_refs = seo_rules.version_references(body, fact_pack.sdk_version)
+    if version_refs:
+        issues.append(
+            f"ties the post to an SDK version/release ({', '.join(repr(r) for r in version_refs[:3])})"
+        )
+    if seo_rules.has_stock_example_filename_leak(body, fact_pack):
+        issues.append(
+            "uses the skill reference doc's own illustrative example filename ('input.cdr') "
+            "instead of the real input for this topic's fact pack"
+        )
     return issues
 
 

@@ -10,14 +10,14 @@ from .fetcher import FetchedPage
 
 _INTRO_OUTLINE = [
     "Introduction",
+    "Key Takeaways",
     "Why this feature matters",
     "Brief introduction of the API (install + product/docs links)",
 ]
 _CLOSING_OUTLINE = [
-    "Get a Free License",
-    "Free Additional Resources",
     "Conclusion",
     "FAQs",
+    "Get a Free License and Explore More (one section, placed last as the strongest CTA slot)",
     "See Also (only if related post URLs are supplied)",
 ]
 _DEFAULT_TUTORIAL_STEP = "Step-by-step tutorial with a code example"
@@ -28,6 +28,7 @@ _DEFAULT_TUTORIAL_STEP = "Step-by-step tutorial with a code example"
 # no use for (see prompts/docs_writer_agent.md).
 _DOCS_INTRO_OUTLINE = [
     "Introduction",
+    "Key Takeaways",
     "Why these tasks matter",
     "Brief introduction of the API (install + product/docs links)",
     "Prerequisites (only if the documentation stated any)",
