@@ -1,0 +1,110 @@
+{
+  "topic": "Using CompareListDefinitions to Fine‑Tune Document Comparison with Aspose.Words for Python",
+  "primary_source_url": "https://releases.aspose.com/words/python/release-notes/2026/aspose-words-for-python-via-dotnet-26-9-release-notes/",
+  "source_title": "Aspose.Words for Python via .NET 26.9 Release Notes",
+  "sdk_version": "Aspose.Words for Python via .NET 26.9 Release Notes",
+  "main_problem_solved": "Introduces the compare_list_definitions property to AdvancedCompareOptions, allowing control over whether list definition content is included when comparing documents.",
+  "platform": {
+    "platform_key": "python",
+    "platform_name": "Python",
+    "language": "Python",
+    "language_tag": "python",
+    "package_manager": "pip",
+    "install_command": "pip install aspose-words",
+    "product_key": "words",
+    "product_display": "Words",
+    "brand_key": "aspose",
+    "brand_name": "Aspose",
+    "product_full_name": "Aspose.Words",
+    "product_page_url": "https://products.aspose.com/words/python-net/",
+    "docs_url": "https://docs.aspose.com/words/python-net/",
+    "api_reference_url": "https://reference.aspose.com/words/python/",
+    "free_apps_url": "https://products.aspose.app/words/family",
+    "license_url": "https://purchase.aspose.com/temporary-license/",
+    "forum_url": "https://forum.aspose.com/c/words/",
+    "blog_domain": "https://blog.aspose.com",
+    "blog_category_url": "https://blog.aspose.com/categories/aspose.words-product-family/"
+  },
+  "source_type": "release_notes",
+  "keyword_analysis": {
+    "title": "",
+    "angle": "",
+    "outline": [],
+    "target_persona": "",
+    "primary_keyword": "Fine-tune comparison using CompareListDefinitions in Python",
+    "supporting_keywords": [
+      "Customize comparison using CompareListDefinitions in Python",
+      "Use CompareListDefinitions for document comparison in Python",
+      "CompareListDefinitions for fine-tuning comparison in Python"
+    ],
+    "keyword_groups": {
+      "core_seo_keywords": [
+        "Fine-tune comparison using CompareListDefinitions in Python"
+      ],
+      "long_tail_keywords": [
+        "Use CompareListDefinitions for document comparison in Python",
+        "CompareListDefinitions for fine-tuning comparison in Python"
+      ],
+      "context_keywords": [
+        "Customize comparison using CompareListDefinitions in Python"
+      ]
+    },
+    "editorial_notes": []
+  },
+  "key_steps": [],
+  "code_snippets": [
+    "doc_a = aw.Document()\nbuilder_a = aw.DocumentBuilder(doc=doc_a)\nbuilder_a.list_format.apply_number_default()\nbuilder_a.writeln(\"Item 1\")\nbuilder_a.writeln(\"Item 2\")\nbuilder_a.list_format.remove_numbers()\n\ndoc_b = aw.Document()\nbuilder_b = aw.DocumentBuilder(doc=doc_b)\nbuilder_b.list_format.apply_bullet_default()\nbuilder_b.writeln(\"Item 1\")\nbuilder_b.writeln(\"Item 2\")\nbuilder_b.list_format.remove_numbers()\n# Compare documents with CompareListDefinitions enabled.\n\noptions = aw.comparing.CompareOptions()\noptions.advanced_options.compare_list_definitions = is_compare_list_definitions\n\ndoc_a.compare(document=doc_b, author=\"test\", date_time=datetime.datetime.now(), options=options)"
+  ],
+  "limitations": [],
+  "warnings": [
+    "Editorial signal for the pipeline and human reviewer only, not for the article: the code sample matches the vendor's own release notes verbatim but has not been executed, so it is untested. Do not describe it as tested, and do not add any provenance or verification note to the article."
+  ],
+  "related_concepts": [
+    "Document",
+    "DocumentBuilder",
+    "CompareOptions",
+    "list_format.apply_number_default",
+    "list_format.remove_numbers",
+    "writeln",
+    "compare"
+  ],
+  "facts_confirmed_from_source": [
+    "Heading: Added CompareListDefinitions options to AdvancedCompareOptions class",
+    "Introduces the compare_list_definitions property to AdvancedCompareOptions, allowing control over whether list definition content is included when comparing documents.",
+    "API used: aw.comparing.CompareOptions",
+    "API used: aw.digitalsignatures.SignOptions",
+    "API used: aw.digitalsignatures.XmlDsigLevel",
+    "API used: aw.digitalsignatures.DigitalSignatureTimestampSettings",
+    "API used: aw.digitalsignatures.CertificateHolder",
+    "API used: aw.digitalsignatures.DigitalSignatureUtil",
+    "API used: aw.Document",
+    "API used: aw.DocumentBuilder"
+  ],
+  "facts_needing_verification": [],
+  "suggested_article_outline": [
+    "Introduction",
+    "Key Takeaways",
+    "Why this feature matters",
+    "Brief introduction of the API (install + product/docs links)",
+    "Step-by-step tutorial with a code example",
+    "Conclusion",
+    "FAQs",
+    "Get a Free License and Explore More (one section, placed last as the strongest CTA slot)",
+    "See Also (only if related post URLs are supplied)"
+  ],
+  "code_verification": {
+    "language": "Python",
+    "tested": false,
+    "source_verified": true,
+    "syntax_valid": true,
+    "package_name": null,
+    "package_version": null,
+    "os": null,
+    "input_file_used": null,
+    "output_file_generated": null,
+    "errors": [],
+    "notes": "Code sample matches a block scraped verbatim from the product team's release notes page. Static syntax check passed (balanced brackets/quotes). Sandboxed execution against the real vendor SDK is not attempted: these samples reference proprietary licensed assemblies, external input files, and sometimes network services (e.g. a timestamp authority URL) that only exist in the product team's own test environment."
+  },
+  "prerequisites": [],
+  "doc_topics": []
+}

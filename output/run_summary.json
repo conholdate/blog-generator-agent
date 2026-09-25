@@ -1,22 +1,17 @@
 {
-  "source_url": "https://releases.aspose.com/medical/net/release-notes/2026/aspose-medical-for-net-26-8-release-notes/",
+  "source_url": "https://releases.aspose.com/words/python/release-notes/2026/aspose-words-for-python-via-dotnet-26-9-release-notes/",
   "source_type": "release-notes",
   "publication_readiness": "draft_ready",
   "blocker_reason": null,
   "topics_generated": [
-    "Streaming Datasets from a JSON Array",
-    "Pluggable BulkDataURI Loading",
-    "Asynchronous Dataset Traversal",
-    "Working with Element Data"
+    "Added CompareListDefinitions options to AdvancedCompareOptions class",
+    "Added TimeStamping option in DigitalSignatureUtil.Sign method"
   ],
   "rejected_sections": [
     "Major Features",
-    "Full List of Features in this Release",
-    "Public API Overview",
-    "API Changes Summary",
-    "New Classes and Interfaces",
-    "New Members",
-    "Changed Members",
-    "Removed"
+    "Full List of Issues Covering all Changes in this Release",
+    "Public API and Backward Incompatible Changes",
+    "Added CompareListDefinitions options to AdvancedCompareOptions class (duplicate)",
+    "Added TimeStamping option in DigitalSignatureUtil.Sign method (duplicate)"
   ]
 }

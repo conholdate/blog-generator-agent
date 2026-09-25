@@ -1,0 +1,107 @@
+{
+  "topic": "Adding Trusted Timestamp to Digital Signatures with Aspose.Words for Python",
+  "primary_source_url": "https://releases.aspose.com/words/python/release-notes/2026/aspose-words-for-python-via-dotnet-26-9-release-notes/",
+  "source_title": "Aspose.Words for Python via .NET 26.9 Release Notes",
+  "sdk_version": "Aspose.Words for Python via .NET 26.9 Release Notes",
+  "main_problem_solved": "Adds timestamping capabilities to digital signatures via SignOptions.xml_dsig_level and SignOptions.timestamp_settings, along with new XmlDsigLevel enum value XAdES‑T and DigitalSignatureTimestampSettings class.",
+  "platform": {
+    "platform_key": "python",
+    "platform_name": "Python",
+    "language": "Python",
+    "language_tag": "python",
+    "package_manager": "pip",
+    "install_command": "pip install aspose-words",
+    "product_key": "words",
+    "product_display": "Words",
+    "brand_key": "aspose",
+    "brand_name": "Aspose",
+    "product_full_name": "Aspose.Words",
+    "product_page_url": "https://products.aspose.com/words/python-net/",
+    "docs_url": "https://docs.aspose.com/words/python-net/",
+    "api_reference_url": "https://reference.aspose.com/words/python/",
+    "free_apps_url": "https://products.aspose.app/words/family",
+    "license_url": "https://purchase.aspose.com/temporary-license/",
+    "forum_url": "https://forum.aspose.com/c/words/",
+    "blog_domain": "https://blog.aspose.com",
+    "blog_category_url": "https://blog.aspose.com/categories/aspose.words-product-family/"
+  },
+  "source_type": "release_notes",
+  "keyword_analysis": {
+    "title": "",
+    "angle": "",
+    "outline": [],
+    "target_persona": "",
+    "primary_keyword": "add trusted timestamp to digital signature in python",
+    "supporting_keywords": [
+      "digital signature timestamping using python",
+      "how to add trusted timestamp to a signed document in python",
+      "python library for trusted timestamp in digital signatures"
+    ],
+    "keyword_groups": {
+      "core_seo_keywords": [
+        "add trusted timestamp to digital signature in python",
+        "digital signature timestamping using python"
+      ],
+      "long_tail_keywords": [
+        "python library for trusted timestamp in digital signatures"
+      ],
+      "context_keywords": [
+        "how to add trusted timestamp to a signed document in python"
+      ]
+    },
+    "editorial_notes": []
+  },
+  "key_steps": [],
+  "code_snippets": [
+    "sign_options = aw.digitalsignatures.SignOptions()\nsign_options.xml_dsig_level = aw.digitalsignatures.XmlDsigLevel.X_AD_ES_T\nsign_options.timestamp_settings = aw.digitalsignatures.DigitalSignatureTimestampSettings(server_url=\"https://freetsa.org/tsr\", user_name=\"JohnDoe\", password=\"MyPassword\")\ncert = aw.digitalsignatures.CertificateHolder.create(file_name=MY_DIR + \"morzal.pfx\", password=\"aw\")\naw.digitalsignatures.DigitalSignatureUtil.sign(src_file_name=MY_DIR + \"Digitally signed.docx\", dst_file_name=ARTIFACTS_DIR + \"DigitalSignatureUtil.Timestamped.docx\", cert_holder=cert, sign_options=sign_options)\nsigned_doc = aw.Document(file_name=ARTIFACTS_DIR + \"DigitalSignatureUtil.Timestamped.docx\")\n\nassert signed_doc.digital_signatures.count == 1 \nassert signed_doc.digital_signatures[0].is_valid\n\n# Verify timestamp settings are applied.\nassert sign_options.timestamp_settings.server_url == \"https://freetsa.org/tsr\" \nassert sign_options.timestamp_settings.user_name == \"JohnDoe\" \nassert sign_options.timestamp_settings.password == \"MyPassword\" \nassert sign_options.timestamp_settings.timeout.total_seconds() == 100.0\n\n# Test with custom timeout.\nsign_options.timestamp_settings = aw.digitalsignatures.DigitalSignatureTimestampSettings(server_url=\"https://freetsa.org/tsr\", user_name=\"JohnDoe\", password=\"MyPassword\", timeout=datetime.timedelta(minutes=30))\nassert sign_options.timestamp_settings.timeout.total_seconds() == 1800.0"
+  ],
+  "limitations": [],
+  "warnings": [
+    "Editorial signal for the pipeline and human reviewer only, not for the article: the code sample matches the vendor's own release notes verbatim but has not been executed, so it is untested. Do not describe it as tested, and do not add any provenance or verification note to the article."
+  ],
+  "related_concepts": [
+    "SignOptions",
+    "DigitalSignatureTimestampSettings",
+    "CertificateHolder",
+    "Document",
+    "create",
+    "sign"
+  ],
+  "facts_confirmed_from_source": [
+    "Heading: Added TimeStamping option in DigitalSignatureUtil.Sign method",
+    "Adds timestamping capabilities to digital signatures via SignOptions.xml_dsig_level and SignOptions.timestamp_settings, along with new XmlDsigLevel enum value XAdES‑T and DigitalSignatureTimestampSettings class.",
+    "API used: aw.digitalsignatures.SignOptions",
+    "API used: aw.digitalsignatures.XmlDsigLevel",
+    "API used: aw.digitalsignatures.DigitalSignatureTimestampSettings",
+    "API used: aw.digitalsignatures.CertificateHolder",
+    "API used: aw.digitalsignatures.DigitalSignatureUtil",
+    "API used: aw.Document"
+  ],
+  "facts_needing_verification": [],
+  "suggested_article_outline": [
+    "Introduction",
+    "Key Takeaways",
+    "Why this feature matters",
+    "Brief introduction of the API (install + product/docs links)",
+    "Step-by-step tutorial with a code example",
+    "Conclusion",
+    "FAQs",
+    "Get a Free License and Explore More (one section, placed last as the strongest CTA slot)",
+    "See Also (only if related post URLs are supplied)"
+  ],
+  "code_verification": {
+    "language": "Python",
+    "tested": false,
+    "source_verified": true,
+    "syntax_valid": false,
+    "package_name": null,
+    "package_version": null,
+    "os": null,
+    "input_file_used": null,
+    "output_file_generated": null,
+    "errors": [],
+    "notes": "Code sample matches a block scraped verbatim from the product team's release notes page. Static syntax check found unbalanced brackets or quotes. Sandboxed execution against the real vendor SDK is not attempted: these samples reference proprietary licensed assemblies, external input files, and sometimes network services (e.g. a timestamp authority URL) that only exist in the product team's own test environment."
+  },
+  "prerequisites": [],
+  "doc_topics": []
+}
