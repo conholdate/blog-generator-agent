@@ -919,11 +919,10 @@ class BlogOrchestrator:
             banner = await generate_blog_image(product_name, post_topic, "Left", banner_location)
             print(f"banner generated -- {banner}", flush=True)
 
-            # ── No sheet row exists for this run: nothing to mark as       ──
-            # ── generated, no rotation pointer to advance, no metadata     ──
-            # ── sheet write. Product name is still written out (same as    ──
-            # ── the automated flow) so a caller workflow can optionally    ──
-            # ── commit/PR the result using the same downstream steps.      ──
+            # ── No topic-sheet row exists for this run: nothing to mark as ──
+            # ── generated and no rotation pointer to advance. Product name ──
+            # ── is still written out (same as the automated flow) so a     ──
+            # ── caller workflow can commit/PR the result the same way.     ──
             base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
             with open(os.path.join(base_dir, "product_name.txt"), "w") as f:
                 f.write(product_info.get("urlPrefix", product))
@@ -931,6 +930,24 @@ class BlogOrchestrator:
             if blocked_reason:
                 with open(os.path.join(base_dir, "blocked.txt"), "w") as f:
                     f.write(blocked_reason)
+            else:
+                # Same Consolidated + weekly metadata rows the autonomous flow
+                # writes. Skipped for blocked drafts (they failed the SEO audit
+                # and are not meant to go live as-is). Non-fatal: the draft is
+                # already generated, a sheet hiccup must not fail the run.
+                try:
+                    save_blog_metadata_to_sheet(
+                        brand=self.brand,
+                        url=f'https://blog.{self.brand}{blog_post_metadata.get("url") or ""}',
+                        title=blog_post_metadata.get("title") or post_topic,
+                        author=blog_post_metadata.get("author") or author,
+                        gist_url=gist_url,
+                        published_date=blog_post_metadata.get("date") or "",
+                        product=product,
+                        layout=layout_choice.name,
+                    )
+                except Exception as sheet_err:
+                    print(f"⚠️ Could not save blog metadata to Google Sheets (non-fatal): {sheet_err}", flush=True)
 
             self.metrics.record_success(f"Blog post created: {filepath}")
             self.metrics.end_job()
