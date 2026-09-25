@@ -1,0 +1,36 @@
+{
+  "scores": {
+    "technical_accuracy": 9,
+    "code_correctness": 7,
+    "original_value": 10,
+    "source_faithfulness": 10,
+    "seo_readiness": 4,
+    "readability": 6,
+    "duplication_risk": 5,
+    "missing_citations": false,
+    "unsupported_claims": false
+  },
+  "scorecard": {
+    "search_intent": 5,
+    "technical_accuracy": 20,
+    "original_value": 20,
+    "answer_first_structure": 5,
+    "seo_metadata": 4,
+    "internal_linking": 10,
+    "accessibility": 1,
+    "llm_clarity": 4,
+    "total": 69,
+    "critical_technical_error": false,
+    "passes": false
+  },
+  "publication_status": "ready_for_editor",
+  "reasons": [
+    "SEO title longer than 65 characters",
+    "Meta description outside the 120-165 character range",
+    "Body contains its own top-level '# ' heading; the renderer already adds the H1 from the title",
+    "Body heading outline skips a level (e.g. H2 straight to H4)",
+    "Focus keyword 'Fine-tune comparison using CompareListDefinitions in Python' does not appear in the introduction",
+    "QA scorecard 69/100 is below the 85 publish threshold",
+    "Code sample has not been executed in a sandbox (not feasible: proprietary SDK/license/input files)"
+  ]
+}
