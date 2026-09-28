@@ -1,17 +1,16 @@
 {
-  "source_url": "https://releases.aspose.com/words/python/release-notes/2026/aspose-words-for-python-via-dotnet-26-9-release-notes/",
+  "source_url": "https://releases.aspose.com/pdf/net/release-notes/2026/aspose-pdf-for-net-26-9-release-notes/",
   "source_type": "release-notes",
   "publication_readiness": "draft_ready",
   "blocker_reason": null,
   "topics_generated": [
-    "Added CompareListDefinitions options to AdvancedCompareOptions class",
-    "Added TimeStamping option in DigitalSignatureUtil.Sign method"
+    "Preserve Underline and Strikeout Formatting in PDF to PPTX Conversion",
+    "Resolve Names of Embedded Files"
   ],
   "rejected_sections": [
-    "Major Features",
-    "Full List of Issues Covering all Changes in this Release",
-    "Public API and Backward Incompatible Changes",
-    "Added CompareListDefinitions options to AdvancedCompareOptions class (duplicate)",
-    "Added TimeStamping option in DigitalSignatureUtil.Sign method (duplicate)"
+    "PDF to JPEG Conversion Performance",
+    "Bug Fixing and Other Changes",
+    "Other Notable Enhancements and Features",
+    "Public API and Backward Incompatible Changes"
   ]
 }
