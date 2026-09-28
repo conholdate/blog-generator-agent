@@ -530,7 +530,10 @@ class BlogOrchestrator:
             self.log(f"product info {product_info}")
             self.log(f" File path: {filepath}")
             self.log("---Execution ended---")
-            mark_topic_as_generated(sheet_name, row_number)
+            try:
+                mark_topic_as_generated(sheet_name, row_number)
+            except Exception as mark_err:
+                print(f"⚠️ Could not mark topic as generated (non-fatal): {mark_err}", flush=True)
 
             # Advance the rotation pointer only for round-robin picks so
             # GSC-driven picks never disturb the fallback rotation's fairness.

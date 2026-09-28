@@ -1,6 +1,6 @@
 
 from datetime import datetime, timedelta
-import re, sys, os, json, logging
+import re, sys, os, json, logging, time, functools
 from tkinter.font import names
 import requests
 from typing import Dict, Any, Optional, List, Tuple
@@ -2529,6 +2529,35 @@ async def generate_outline_with_llm(
 
 
 
+def with_sheets_retry(max_attempts: int = 3, base_delay: float = 1.0):
+    """Retry a Google Sheets call on transient 5xx errors from the API.
+
+    Google's Sheets API occasionally returns a bare "Internal error
+    encountered" 500 with no further detail - a server-side blip, not
+    something wrong with our request. Only retries on 5xx; a 4xx (bad
+    auth, not found, etc.) fails immediately since retrying won't help.
+    """
+    def decorator(func):
+        @functools.wraps(func)
+        def wrapper(*args, **kwargs):
+            for attempt in range(1, max_attempts + 1):
+                try:
+                    return func(*args, **kwargs)
+                except gspread.exceptions.APIError as e:
+                    status = getattr(e, "code", None)
+                    if not isinstance(status, int) or status < 500 or attempt == max_attempts:
+                        raise
+                    delay = base_delay * (2 ** (attempt - 1))
+                    print(
+                        f"⚠️ Transient Sheets API error in {func.__name__} "
+                        f"(attempt {attempt}/{max_attempts}): {e}. Retrying in {delay:.1f}s...",
+                        flush=True,
+                    )
+                    time.sleep(delay)
+        return wrapper
+    return decorator
+
+
 def get_weekly_sheet_name() -> str:
     now = datetime.utcnow()
     # Get the Monday of the current week
@@ -2599,6 +2628,7 @@ def extract_blog_metadata(markdown_content: str) -> dict:
 ROTATION_STATE_TAB = "RotationState"
 
 
+@with_sheets_retry()
 def get_last_processed_product() -> str:
     """Round-robin pointer for fallback topic selection.
 
@@ -2637,6 +2667,7 @@ def get_last_processed_product() -> str:
     return last_row.get("Product", None)
 
 
+@with_sheets_retry()
 def update_last_processed_product(product: str) -> None:
     """Advance the round-robin pointer (RotationState tab, cell B1).
 
@@ -2703,6 +2734,7 @@ def get_next_tab() -> str:
         return None
 
 
+@with_sheets_retry()
 def get_topic_from_sheet(sheet_name: str) -> tuple[dict, int] | None:
     base_dir = get_project_root()
     key_path = os.path.join(base_dir, "keys", settings.GOOGLE_KEY)
@@ -2730,6 +2762,7 @@ def get_topic_from_sheet(sheet_name: str) -> tuple[dict, int] | None:
     return None
 
 
+@with_sheets_retry()
 def mark_topic_as_generated(sheet_name: str, row_number: int) -> None:
     base_dir = get_project_root()
     key_path = os.path.join(base_dir, "keys", settings.GOOGLE_KEY)
@@ -2805,6 +2838,7 @@ def mark_topic_as_generated(sheet_name: str, row_number: int) -> None:
         )
 
 
+@with_sheets_retry()
 def save_blog_metadata_to_sheet(brand: str, url: str, title: str, author: str, gist_url: str, published_date: str, product: str = "", layout: str = "") -> None:
     base_dir = get_project_root()
     key_path = os.path.join(base_dir, "keys", settings.GOOGLE_KEY)
@@ -2836,6 +2870,7 @@ def save_blog_metadata_to_sheet(brand: str, url: str, title: str, author: str, g
     print(f"Saved to weekly sheet '{weekly_sheet_name}': {row}")
 
 
+@with_sheets_retry()
 def get_recent_layouts(product: str, limit: int = 2) -> list[str]:
     """Return the layouts of the most recent posts for a product (newest last),
     read from the consolidated blog metadata sheet. Used by the layout selector
