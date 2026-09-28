@@ -1,0 +1,101 @@
+{
+  "topic": "Extracting Embedded Files with Resolved Names Using Aspose.PDF for .NET",
+  "primary_source_url": "https://releases.aspose.com/pdf/net/release-notes/2026/aspose-pdf-for-net-26-9-release-notes/",
+  "source_title": "Aspose.PDF for .NET 26.9",
+  "sdk_version": "Aspose.PDF for .NET 26.9",
+  "main_problem_solved": "Introduces FileSpecification.GetFileName method to retrieve an embedded file's name using Unicode name, regular file name, or collection key, with optional fallback handling.",
+  "platform": {
+    "platform_key": "net",
+    "platform_name": ".NET",
+    "language": "C#",
+    "language_tag": "csharp",
+    "package_manager": "NuGet",
+    "install_command": "Install-Package Aspose.PDF",
+    "product_key": "pdf",
+    "product_display": "PDF",
+    "brand_key": "aspose",
+    "brand_name": "Aspose",
+    "product_full_name": "Aspose.PDF",
+    "product_page_url": "https://products.aspose.com/pdf/net/",
+    "docs_url": "https://docs.aspose.com/pdf/net/",
+    "api_reference_url": "https://reference.aspose.com/pdf/net/",
+    "free_apps_url": "https://products.aspose.app/pdf/family",
+    "license_url": "https://purchase.aspose.com/temporary-license/",
+    "forum_url": "https://forum.aspose.com/c/pdf/",
+    "blog_domain": "https://blog.aspose.com",
+    "blog_category_url": "https://blog.aspose.com/categories/aspose.pdf-product-family/"
+  },
+  "source_type": "release_notes",
+  "keyword_analysis": {
+    "title": "",
+    "angle": "",
+    "outline": [],
+    "target_persona": "",
+    "primary_keyword": "Extracting Embedded Files with Resolved Names in .NET",
+    "supporting_keywords": [
+      "Extract embedded files from PDF with original names in .NET",
+      "Retrieve embedded PDF attachments preserving filenames using .NET",
+      "how to programmatically extract embedded files from a PDF preserving names in .NET"
+    ],
+    "keyword_groups": {
+      "core_seo_keywords": [
+        "Extracting Embedded Files with Resolved Names in .NET"
+      ],
+      "long_tail_keywords": [
+        "how to programmatically extract embedded files from a PDF preserving names in .NET"
+      ],
+      "context_keywords": [
+        "Extract embedded files from PDF with original names in .NET",
+        "Retrieve embedded PDF attachments preserving filenames using .NET"
+      ]
+    },
+    "editorial_notes": []
+  },
+  "key_steps": [],
+  "code_snippets": [
+    "private static void ExtractPortfolioFilesWithResolvedNames()\n{\n    // The path to the documents directory\n    var dataDir = RunExamples.GetDataDir_AsposePdf_TechnicalArticles();\n\n    // Open PDF portfolio document\n    using (var document = new Aspose.Pdf.Document(dataDir + \"PDFPortfolio.pdf\"))\n    {\n        // Extract embedded files\n        foreach (Aspose.Pdf.FileSpecification fileSpecification in document.EmbeddedFiles)\n        {\n            var fileName = System.IO.Path.GetFileName(fileSpecification.GetFileName(\"attachment.bin\"));\n            var outputPath = System.IO.Path.Combine(dataDir, fileName);\n\n            using (var output = new System.IO.FileStream(outputPath, System.IO.FileMode.Create))\n            {\n                fileSpecification.Contents.CopyTo(output);\n            }\n        }\n    }\n}"
+  ],
+  "limitations": [],
+  "warnings": [
+    "Editorial signal for the pipeline and human reviewer only, not for the article: the code sample matches the vendor's own release notes verbatim but has not been executed, so it is untested. Do not describe it as tested, and do not add any provenance or verification note to the article."
+  ],
+  "related_concepts": [
+    "Aspose.Pdf.FileSpecification",
+    "Aspose.Pdf.Document",
+    "Aspose.Pdf.FileSpecification.GetFileName",
+    "Aspose.Pdf.FileSpecification.Contents.CopyTo"
+  ],
+  "facts_confirmed_from_source": [
+    "Heading: Resolve Names of Embedded Files",
+    "Introduces FileSpecification.GetFileName method to retrieve an embedded file's name using Unicode name, regular file name, or collection key, with optional fallback handling.",
+    "API used: Aspose.Pdf.FileSpecification",
+    "API used: Aspose.Pdf.Document"
+  ],
+  "facts_needing_verification": [],
+  "suggested_article_outline": [
+    "Introduction",
+    "Key Takeaways",
+    "Why this feature matters",
+    "Brief introduction of the API (install + product/docs links)",
+    "Step-by-step tutorial with a code example",
+    "Conclusion",
+    "FAQs",
+    "Get a Free License and Explore More (one section, placed last as the strongest CTA slot)",
+    "See Also (only if related post URLs are supplied)"
+  ],
+  "code_verification": {
+    "language": "C#",
+    "tested": false,
+    "source_verified": true,
+    "syntax_valid": true,
+    "package_name": null,
+    "package_version": null,
+    "os": null,
+    "input_file_used": null,
+    "output_file_generated": null,
+    "errors": [],
+    "notes": "Code sample matches a block scraped verbatim from the product team's release notes page. Static syntax check passed (balanced brackets/quotes). Sandboxed execution against the real vendor SDK is not attempted: these samples reference proprietary licensed assemblies, external input files, and sometimes network services (e.g. a timestamp authority URL) that only exist in the product team's own test environment."
+  },
+  "prerequisites": [],
+  "doc_topics": []
+}

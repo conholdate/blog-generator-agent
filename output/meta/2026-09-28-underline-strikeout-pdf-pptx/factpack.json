@@ -1,0 +1,100 @@
+{
+  "topic": "Preserving Underline and Strikeout Formatting in PDF‑to‑PPTX Conversion with Aspose.PDF for .NET",
+  "primary_source_url": "https://releases.aspose.com/pdf/net/release-notes/2026/aspose-pdf-for-net-26-9-release-notes/",
+  "source_title": "Aspose.PDF for .NET 26.9",
+  "sdk_version": "Aspose.PDF for .NET 26.9",
+  "main_problem_solved": "Adds the RecognizeUnderlineAndStrikeout property to PptxSaveOptions, enabling underline and strikeout text to be retained as editable formatting during PDF‑to‑PPTX conversion.",
+  "platform": {
+    "platform_key": "net",
+    "platform_name": ".NET",
+    "language": "C#",
+    "language_tag": "csharp",
+    "package_manager": "NuGet",
+    "install_command": "Install-Package Aspose.PDF",
+    "product_key": "pdf",
+    "product_display": "PDF",
+    "brand_key": "aspose",
+    "brand_name": "Aspose",
+    "product_full_name": "Aspose.PDF",
+    "product_page_url": "https://products.aspose.com/pdf/net/",
+    "docs_url": "https://docs.aspose.com/pdf/net/",
+    "api_reference_url": "https://reference.aspose.com/pdf/net/",
+    "free_apps_url": "https://products.aspose.app/pdf/family",
+    "license_url": "https://purchase.aspose.com/temporary-license/",
+    "forum_url": "https://forum.aspose.com/c/pdf/",
+    "blog_domain": "https://blog.aspose.com",
+    "blog_category_url": "https://blog.aspose.com/categories/aspose.pdf-product-family/"
+  },
+  "source_type": "release_notes",
+  "keyword_analysis": {
+    "title": "",
+    "angle": "",
+    "outline": [],
+    "target_persona": "",
+    "primary_keyword": "Preserving Underline and Strikeout Formatting in PDF-to-PPTX Conversion for .NET",
+    "supporting_keywords": [
+      "Preserve underline formatting when converting PDF to PPTX in .NET",
+      "Preserve strikeout text in PDF to PPTX conversion using .NET",
+      "Convert PDF to PPTX with underline and strikeout support in .NET"
+    ],
+    "keyword_groups": {
+      "core_seo_keywords": [
+        "Preserving Underline and Strikeout Formatting in PDF-to-PPTX Conversion for .NET"
+      ],
+      "long_tail_keywords": [
+        "Convert PDF to PPTX with underline and strikeout support in .NET"
+      ],
+      "context_keywords": [
+        "Preserve underline formatting when converting PDF to PPTX in .NET",
+        "Preserve strikeout text in PDF to PPTX conversion using .NET"
+      ]
+    },
+    "editorial_notes": []
+  },
+  "key_steps": [],
+  "code_snippets": [
+    "private static void ConvertPdfToPptxWithUnderlineRecognition()\n{\n    // The path to the documents directory\n    var dataDir = RunExamples.GetDataDir_AsposePdf();\n\n    // Open PDF document\n    using (var document = new Aspose.Pdf.Document(dataDir + \"input.pdf\"))\n    {\n        // Preserve underline and strikeout as editable text formatting\n        var options = new Aspose.Pdf.PptxSaveOptions\n        {\n            RecognizeUnderlineAndStrikeout = true\n        };\n\n        // Save the file in PPTX format\n        document.Save(dataDir + \"output.pptx\", options);\n    }\n}"
+  ],
+  "limitations": [],
+  "warnings": [
+    "Editorial signal for the pipeline and human reviewer only, not for the article: the code sample matches the vendor's own release notes verbatim but has not been executed, so it is untested. Do not describe it as tested, and do not add any provenance or verification note to the article."
+  ],
+  "related_concepts": [
+    "Aspose.Pdf.PptxSaveOptions",
+    "Aspose.Pdf.Document",
+    "Aspose.Pdf.Document.Save"
+  ],
+  "facts_confirmed_from_source": [
+    "Heading: Preserve Underline and Strikeout Formatting in PDF to PPTX Conversion",
+    "Adds the RecognizeUnderlineAndStrikeout property to PptxSaveOptions, enabling underline and strikeout text to be retained as editable formatting during PDF‑to‑PPTX conversion.",
+    "API used: Aspose.Pdf.PptxSaveOptions",
+    "API used: Aspose.Pdf.Document"
+  ],
+  "facts_needing_verification": [],
+  "suggested_article_outline": [
+    "Introduction",
+    "Key Takeaways",
+    "Why this feature matters",
+    "Brief introduction of the API (install + product/docs links)",
+    "Step-by-step tutorial with a code example",
+    "Conclusion",
+    "FAQs",
+    "Get a Free License and Explore More (one section, placed last as the strongest CTA slot)",
+    "See Also (only if related post URLs are supplied)"
+  ],
+  "code_verification": {
+    "language": "C#",
+    "tested": false,
+    "source_verified": true,
+    "syntax_valid": true,
+    "package_name": null,
+    "package_version": null,
+    "os": null,
+    "input_file_used": null,
+    "output_file_generated": null,
+    "errors": [],
+    "notes": "Code sample matches a block scraped verbatim from the product team's release notes page. Static syntax check passed (balanced brackets/quotes). Sandboxed execution against the real vendor SDK is not attempted: these samples reference proprietary licensed assemblies, external input files, and sometimes network services (e.g. a timestamp authority URL) that only exist in the product team's own test environment."
+  },
+  "prerequisites": [],
+  "doc_topics": []
+}
