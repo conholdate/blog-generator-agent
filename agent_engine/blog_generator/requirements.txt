@@ -5,6 +5,7 @@ openai==2.6.1
 openai-agents==0.4.2
 bs4
 aiohttp
+requests  # helpers.py + utils/topic_index.py - was only ever present transitively before, same latent-dependency class as markdown-it-py (see that entry below)
 python-frontmatter
 markdown-it-py==4.2.0  # section_editor.py: heading/block parsing for section-aware revise
 gspread

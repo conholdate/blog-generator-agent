@@ -20,6 +20,7 @@ class Settings(BaseSettings):
     PROFESSIONALIZE_BASE_URL: str = "http://your-llm-server.com/v1"
     PROFESSIONALIZE_API_KEY_2: str = "your-api-key"
     PROFESSIONALIZE_LLM_MODEL: str = "gpt-oss"
+    PROFESSIONALIZE_EMBEDDING_MODEL: str = "qwen3-embedding-8b"
     GIST_NAME: str = "mustafabutt"
     REPO_PAT: str = ""
     # Paths

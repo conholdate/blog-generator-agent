@@ -13,6 +13,7 @@ from utils.layouts import select_layout
 from utils.code_source import get_code_snippet
 from utils.section_editor import classify_and_apply, SectionEditError
 from utils.metricsRecorder import MetricsRecorder
+from utils.topic_index import append_new_post, product_family_from_category
 from services.LLMservice import llm_service
 import json
 import os
@@ -321,6 +322,8 @@ class BlogOrchestrator:
                 print(f"❌ {message}", flush=True)
                 self.metrics.record_failure(message)
                 self.metrics.end_job()
+                await self.metrics.send_metrics_to_team()
+                await self.metrics.send_metrics_to_prod()
                 return {
                     "status": "error",
                     "message": message,
@@ -561,7 +564,16 @@ class BlogOrchestrator:
                 product=sheet_name,
                 layout=layout_choice.name
                 )
-            
+
+            append_new_post(
+                brand=self.brand,
+                product=product_family_from_category(product_info.get("Category", "")),
+                platform=product_info.get("ProgrammingLanguage", platform),
+                title=blog_post_metadata['title'],
+                url=f"{self.brand}{blog_post_metadata['url']}",
+                date=blog_post_metadata['date'],
+            )
+
             return {
                 "folder_name": folder_name,
                 "product": product_name,
@@ -589,8 +601,8 @@ class BlogOrchestrator:
             # Print and send metrics even on failure
             self.metrics.print_summary()
             print(" Sending failure metrics...")
-            # await self.metrics.send_metrics_to_team()
-            # await self.metrics.send_metrics_to_prod()
+            await self.metrics.send_metrics_to_team()
+            await self.metrics.send_metrics_to_prod()
 
             return {
                 "status": "error",
@@ -951,6 +963,15 @@ class BlogOrchestrator:
                     )
                 except Exception as sheet_err:
                     print(f"⚠️ Could not save blog metadata to Google Sheets (non-fatal): {sheet_err}", flush=True)
+
+                append_new_post(
+                    brand=self.brand,
+                    product=product,
+                    platform=product_info.get("ProgrammingLanguage", platform),
+                    title=blog_post_metadata.get("title") or post_topic,
+                    url=f"{self.brand}{blog_post_metadata.get('url') or ''}",
+                    date=blog_post_metadata.get("date") or "",
+                )
 
             self.metrics.record_success(f"Blog post created: {filepath}")
             self.metrics.end_job()
