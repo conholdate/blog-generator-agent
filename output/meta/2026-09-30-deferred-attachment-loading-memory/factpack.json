@@ -1,0 +1,107 @@
+{
+  "topic": "Optimizing Memory Usage with Deferred Attachment Loading in Aspose.Email",
+  "primary_source_url": "https://releases.aspose.com/email/net/release-notes/2026/aspose-email-for-net-26-9-release-notes/",
+  "source_title": "Aspose.Email for .NET 26.9 Release Notes",
+  "sdk_version": "Aspose.Email for .NET 26.9 Release Notes",
+  "main_problem_solved": "Adds MsgLoadOptions.DeferAttachmentContent (and DeferralThreshold) allowing MSG attachments to be loaded on demand rather than eagerly.",
+  "platform": {
+    "platform_key": "net",
+    "platform_name": ".NET",
+    "language": "C#",
+    "language_tag": "csharp",
+    "package_manager": "NuGet",
+    "install_command": "Install-Package Aspose.Email",
+    "product_key": "email",
+    "product_display": "Email",
+    "brand_key": "aspose",
+    "brand_name": "Aspose",
+    "product_full_name": "Aspose.Email",
+    "product_page_url": "https://products.aspose.com/email/net/",
+    "docs_url": "https://docs.aspose.com/email/net/",
+    "api_reference_url": "https://reference.aspose.com/email/net/",
+    "free_apps_url": "https://products.aspose.app/email/family",
+    "license_url": "https://purchase.aspose.com/temporary-license/",
+    "forum_url": "https://forum.aspose.com/c/email/",
+    "blog_domain": "https://blog.aspose.com",
+    "blog_category_url": "https://blog.aspose.com/categories/aspose.email-product-family/"
+  },
+  "source_type": "release_notes",
+  "keyword_analysis": {
+    "title": "",
+    "angle": "",
+    "outline": [],
+    "target_persona": "",
+    "primary_keyword": "Optimizing Memory Usage with Deferred Attachment Loading",
+    "supporting_keywords": [
+      "Optimize memory usage deferred attachment loading in .NET",
+      "Deferred attachment loading to cut memory use in .NET email",
+      "Load email attachments on demand to save memory in .NET"
+    ],
+    "keyword_groups": {
+      "core_seo_keywords": [
+        "Optimizing Memory Usage with Deferred Attachment Loading"
+      ],
+      "long_tail_keywords": [
+        "Load email attachments on demand to save memory in .NET"
+      ],
+      "context_keywords": [
+        "Optimize memory usage deferred attachment loading in .NET",
+        "Deferred attachment loading to cut memory use in .NET email"
+      ]
+    },
+    "editorial_notes": []
+  },
+  "key_steps": [],
+  "code_snippets": [
+    "var options = new MsgLoadOptions { DeferAttachmentContent = true };\n\n// Inspect a message without reading attachment bodies\nusing (var msg = MapiMessage.Load(@\"C:\\data\\large.msg\", options))\n{\n    Console.WriteLine($\"Subject: {msg.Subject}\");\n    Console.WriteLine($\"Recipients: {msg.Recipients.Count}\");\n    foreach (MapiAttachment attachment in msg.Attachments)\n    {\n        Console.WriteLine($\"  {attachment.LongFileName}: {attachment.ContentLength} bytes\");\n    }\n}\n\n// Extract only PDF attachments, leaving others untouched\nusing (var msg = MapiMessage.Load(@\"C:\\data\\large.msg\", options))\n{\n    foreach (MapiAttachment attachment in msg.Attachments)\n    {\n        if (!attachment.LongFileName.EndsWith(\".pdf\", StringComparison.OrdinalIgnoreCase))\n            continue;\n        using (Stream source = attachment.OpenRead())\n        using (Stream target = File.Create(Path.Combine(@\"C:\\out\", attachment.LongFileName)))\n        {\n            source.CopyTo(target);\n        }\n    }\n}\n\n// Load from a stream owned by the caller\nusing (var source = File.OpenRead(@\"C:\\data\\large.msg\"))\n{\n    var msg = MapiMessage.Load(source, options);\n    var data = msg.Attachments[0].BinaryData;\n    Console.WriteLine($\"Read {data.Length} bytes\");\n}"
+  ],
+  "limitations": [],
+  "warnings": [
+    "Editorial signal for the pipeline and human reviewer only, not for the article: the code sample could not be matched verbatim to the vendor's release notes and is unverified. Keep prose about what the code does conservative, but do not add a disclaimer or provenance note to the article."
+  ],
+  "related_concepts": [
+    "MsgLoadOptions",
+    "MapiMessage",
+    "MapiAttachment",
+    "File",
+    "Stream",
+    "Load",
+    "OpenRead"
+  ],
+  "facts_confirmed_from_source": [
+    "Heading: Deferred Attachment Content Loading",
+    "Adds MsgLoadOptions.DeferAttachmentContent (and DeferralThreshold) allowing MSG attachments to be loaded on demand rather than eagerly.",
+    "API used: Aspose.Email.MsgLoadOptions",
+    "API used: Aspose.Email.MapiMessage",
+    "API used: Aspose.Email.MapiAttachment",
+    "API used: System.IO.File",
+    "API used: System.IO.Stream"
+  ],
+  "facts_needing_verification": [],
+  "suggested_article_outline": [
+    "Introduction",
+    "Key Takeaways",
+    "Why this feature matters",
+    "Brief introduction of the API (install + product/docs links)",
+    "Step-by-step tutorial with a code example",
+    "Conclusion",
+    "FAQs",
+    "Get a Free License and Explore More (one section, placed last as the strongest CTA slot)",
+    "See Also (only if related post URLs are supplied)"
+  ],
+  "code_verification": {
+    "language": "C#",
+    "tested": false,
+    "source_verified": false,
+    "syntax_valid": true,
+    "package_name": null,
+    "package_version": null,
+    "os": null,
+    "input_file_used": null,
+    "output_file_generated": null,
+    "errors": [],
+    "notes": "Code sample could not be matched to any code block scraped from the source page; it may have been altered while the extraction step selected/transcribed it. Static syntax check passed (balanced brackets/quotes). Sandboxed execution against the real vendor SDK is not attempted: these samples reference proprietary licensed assemblies, external input files, and sometimes network services (e.g. a timestamp authority URL) that only exist in the product team's own test environment."
+  },
+  "prerequisites": [],
+  "doc_topics": []
+}

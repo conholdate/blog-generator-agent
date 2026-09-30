@@ -1,0 +1,101 @@
+{
+  "topic": "Detecting RFC Message Files Using Aspose.Email for .NET 26.9",
+  "primary_source_url": "https://releases.aspose.com/email/net/release-notes/2026/aspose-email-for-net-26-9-release-notes/",
+  "source_title": "Aspose.Email for .NET 26.9 Release Notes",
+  "sdk_version": "Aspose.Email for .NET 26.9 Release Notes",
+  "main_problem_solved": "Detects RFC message files using the new FileFormatType.RfcMessage enum value via FileFormatUtil.DetectFileFormat.",
+  "platform": {
+    "platform_key": "net",
+    "platform_name": ".NET",
+    "language": "C#",
+    "language_tag": "csharp",
+    "package_manager": "NuGet",
+    "install_command": "Install-Package Aspose.Email",
+    "product_key": "email",
+    "product_display": "Email",
+    "brand_key": "aspose",
+    "brand_name": "Aspose",
+    "product_full_name": "Aspose.Email",
+    "product_page_url": "https://products.aspose.com/email/net/",
+    "docs_url": "https://docs.aspose.com/email/net/",
+    "api_reference_url": "https://reference.aspose.com/email/net/",
+    "free_apps_url": "https://products.aspose.app/email/family",
+    "license_url": "https://purchase.aspose.com/temporary-license/",
+    "forum_url": "https://forum.aspose.com/c/email/",
+    "blog_domain": "https://blog.aspose.com",
+    "blog_category_url": "https://blog.aspose.com/categories/aspose.email-product-family/"
+  },
+  "source_type": "release_notes",
+  "keyword_analysis": {
+    "title": "",
+    "angle": "",
+    "outline": [],
+    "target_persona": "",
+    "primary_keyword": "Detecting RFC Message Files in .NET",
+    "supporting_keywords": [
+      "How to detect RFC Message Files in .NET",
+      "Read RFC Message Files programmatically in .NET",
+      "Parse RFC Message Files using .NET"
+    ],
+    "keyword_groups": {
+      "core_seo_keywords": [
+        "Detecting RFC Message Files in .NET"
+      ],
+      "long_tail_keywords": [
+        "Parse RFC Message Files using .NET"
+      ],
+      "context_keywords": [
+        "How to detect RFC Message Files in .NET",
+        "Read RFC Message Files programmatically in .NET"
+      ]
+    },
+    "editorial_notes": []
+  },
+  "key_steps": [],
+  "code_snippets": [
+    "string fileName = \"20200101065239_9738af470b0c4489aa3995522f66779a.trn\";\nFileFormatInfo fileInfo = FileFormatUtil.DetectFileFormat(fileName);\nAssert.AreEqual(FileFormatType.RfcMessage, fileInfo.FileFormatType);"
+  ],
+  "limitations": [],
+  "warnings": [
+    "Editorial signal for the pipeline and human reviewer only, not for the article: the code sample matches the vendor's own release notes verbatim but has not been executed, so it is untested. Do not describe it as tested, and do not add any provenance or verification note to the article."
+  ],
+  "related_concepts": [
+    "FileFormatUtil",
+    "FileFormatInfo",
+    "DetectFileFormat"
+  ],
+  "facts_confirmed_from_source": [
+    "Heading: Support for RFC Message file format detection",
+    "Detects RFC message files using the new FileFormatType.RfcMessage enum value via FileFormatUtil.DetectFileFormat.",
+    "API used: Aspose.Email.FileFormatUtil",
+    "API used: Aspose.Email.FileFormatInfo",
+    "API used: Aspose.Email.FileFormatType"
+  ],
+  "facts_needing_verification": [],
+  "suggested_article_outline": [
+    "Introduction",
+    "Key Takeaways",
+    "Why this feature matters",
+    "Brief introduction of the API (install + product/docs links)",
+    "Step-by-step tutorial with a code example",
+    "Conclusion",
+    "FAQs",
+    "Get a Free License and Explore More (one section, placed last as the strongest CTA slot)",
+    "See Also (only if related post URLs are supplied)"
+  ],
+  "code_verification": {
+    "language": "C#",
+    "tested": false,
+    "source_verified": true,
+    "syntax_valid": true,
+    "package_name": null,
+    "package_version": null,
+    "os": null,
+    "input_file_used": null,
+    "output_file_generated": null,
+    "errors": [],
+    "notes": "Code sample matches a block scraped verbatim from the product team's release notes page. Static syntax check passed (balanced brackets/quotes). Sandboxed execution against the real vendor SDK is not attempted: these samples reference proprietary licensed assemblies, external input files, and sometimes network services (e.g. a timestamp authority URL) that only exist in the product team's own test environment."
+  },
+  "prerequisites": [],
+  "doc_topics": []
+}
