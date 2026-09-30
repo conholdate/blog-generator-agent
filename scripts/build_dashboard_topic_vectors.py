@@ -101,13 +101,23 @@ async def run(concurrency: int, limit_buckets: Optional[int]) -> None:
 
         ok = True
         if redis_entries:
-            resp = requests.post(
-                f"{base_url}/set/topicvec:{bucket_key}",
-                headers=headers,
-                data=json.dumps(redis_entries),
-                timeout=30,
-            )
-            ok = resp.ok
+            ok = False
+            payload = json.dumps(redis_entries)
+            for attempt in range(1, 4):
+                try:
+                    resp = requests.post(
+                        f"{base_url}/set/topicvec:{bucket_key}",
+                        headers=headers,
+                        data=payload,
+                        timeout=30,
+                    )
+                    ok = resp.ok
+                    break
+                except requests.exceptions.RequestException as exc:
+                    if attempt == 3:
+                        print(f"⚠️ Redis write failed after 3 attempts for {bucket_key}: {exc}", flush=True)
+                    else:
+                        time.sleep(2 * attempt)
 
         elapsed = time.time() - start
         print(

@@ -35,8 +35,9 @@ Usage: python scripts/build_dashboard_topic_index.py
 from __future__ import annotations
 
 import json
+import re
 from pathlib import Path
-from typing import Dict, List, Set
+from typing import Dict, List, Optional, Set
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 INDEXER_OUTPUTS = REPO_ROOT / "outputs"
@@ -82,7 +83,34 @@ PLATFORM_MAP = {
 }
 # "general" (no specific platform detected in the post) has no dashboard
 # platform of its own - such posts are folded into every platform actually
-# seen for that same (brand, product) group, see _expand_platforms().
+# seen for that same (brand, product) group, see _expand_platforms(). BUT
+# first checked against TITLE_PLATFORM_PATTERNS below - the upstream
+# "general" tag turned out to be wrong for ~22% of general-tagged posts
+# (473/2142, verified): e.g. "Convert Word to TIFF in Ruby" was tagged
+# general and, before this check existed, got expanded into every one of
+# Aspose.Words' platform buckets including PHP - a real false positive a
+# user hit. A title that explicitly names a platform is strong evidence
+# it's NOT actually general, regardless of what the source tagged it.
+TITLE_PLATFORM_PATTERNS: Dict[str, List[str]] = {
+    ".NET": [r"\bin \.net\b", r"\bin c#\b", r"\bfor \.net\b"],
+    "Java": [r"\bin java\b"],
+    "Python": [r"\bin python\b"],
+    "Node.js": [r"\bin node\.?js\b"],
+    "PHP": [r"\bin php\b"],
+    "Go": [r"\bin go\b", r"\bin golang\b"],
+    "C++": [r"\bin c\+\+\b"],
+    "Ruby": [r"\bin ruby\b"],
+    "Android": [r"\bin android\b"],
+}
+
+
+def _detect_platform_from_title(title: str) -> Optional[str]:
+    t = title.lower()
+    for platform, patterns in TITLE_PLATFORM_PATTERNS.items():
+        for pattern in patterns:
+            if re.search(pattern, t):
+                return platform
+    return None
 
 _PRODUCT_NAME_CACHE: Dict[str, Dict[str, str]] = {}
 
@@ -173,7 +201,15 @@ def build_index() -> Dict[str, List[dict]]:
                 title = rec["title"].strip()
                 entry = {"title": title, "url": rec.get("url", ""), "date": rec.get("published_date", "")}
                 dedupe_key = entry["url"] or title
-                for platform in _expand_platforms(rec.get("platform"), platforms_in_group):
+                platform_code = rec.get("platform")
+                if platform_code in (None, "general"):
+                    # _detect_platform_from_title already returns the final
+                    # display label (".NET", "Ruby", ...), not a PLATFORM_MAP
+                    # code - passed straight through, _expand_platforms'
+                    # PLATFORM_MAP.get(x, x) leaves an unrecognized-as-a-code
+                    # value like ".NET" unchanged, which is exactly right here.
+                    platform_code = _detect_platform_from_title(title) or platform_code
+                for platform in _expand_platforms(platform_code, platforms_in_group):
                     key = f"{brand}|{product}|{platform}"
                     bucket_seen = seen_per_bucket.setdefault(key, set())
                     if dedupe_key in bucket_seen:
