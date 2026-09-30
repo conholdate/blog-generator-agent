@@ -1,16 +1,21 @@
 {
-  "source_url": "https://releases.aspose.com/pdf/net/release-notes/2026/aspose-pdf-for-net-26-9-release-notes/",
+  "source_url": "https://releases.aspose.com/email/net/release-notes/2026/aspose-email-for-net-26-9-release-notes/",
   "source_type": "release-notes",
   "publication_readiness": "draft_ready",
   "blocker_reason": null,
   "topics_generated": [
-    "Preserve Underline and Strikeout Formatting in PDF to PPTX Conversion",
-    "Resolve Names of Embedded Files"
+    "Support for RFC Message file format detection",
+    "TgzReader GetItemsCount method for item type quantities",
+    "Async item count methods for TgzReader",
+    "Adding Attachments from a Stream or a File",
+    "Deferred Attachment Content Loading"
   ],
   "rejected_sections": [
-    "PDF to JPEG Conversion Performance",
-    "Bug Fixing and Other Changes",
-    "Other Notable Enhancements and Features",
-    "Public API and Backward Incompatible Changes"
+    "All Changes",
+    "Support for RFC Message file format detection (duplicate)",
+    "TgzReader GetItemsCount method for item type quantities (duplicate)",
+    "Async item count methods for TgzReader (duplicate)",
+    "Adding Attachments from a Stream or a File (duplicate)",
+    "Deferred Attachment Content Loading (duplicate)"
   ]
 }

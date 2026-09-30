@@ -1,0 +1,110 @@
+{
+  "topic": "Adding Large Attachments Efficiently with Stream Support in Aspose.Email for .NET",
+  "primary_source_url": "https://releases.aspose.com/email/net/release-notes/2026/aspose-email-for-net-26-9-release-notes/",
+  "source_title": "Aspose.Email for .NET 26.9 Release Notes",
+  "sdk_version": "Aspose.Email for .NET 26.9 Release Notes",
+  "main_problem_solved": "Introduces overloads to add attachments to MapiMessage via Stream or File, with optional ownership control and on‑demand reading, reducing memory usage for large files.",
+  "platform": {
+    "platform_key": "net",
+    "platform_name": ".NET",
+    "language": "C#",
+    "language_tag": "csharp",
+    "package_manager": "NuGet",
+    "install_command": "Install-Package Aspose.Email",
+    "product_key": "email",
+    "product_display": "Email",
+    "brand_key": "aspose",
+    "brand_name": "Aspose",
+    "product_full_name": "Aspose.Email",
+    "product_page_url": "https://products.aspose.com/email/net/",
+    "docs_url": "https://docs.aspose.com/email/net/",
+    "api_reference_url": "https://reference.aspose.com/email/net/",
+    "free_apps_url": "https://products.aspose.app/email/family",
+    "license_url": "https://purchase.aspose.com/temporary-license/",
+    "forum_url": "https://forum.aspose.com/c/email/",
+    "blog_domain": "https://blog.aspose.com",
+    "blog_category_url": "https://blog.aspose.com/categories/aspose.email-product-family/"
+  },
+  "source_type": "release_notes",
+  "keyword_analysis": {
+    "title": "",
+    "angle": "",
+    "outline": [],
+    "target_persona": "",
+    "primary_keyword": "Add Large Attachments with Stream Support in .NET",
+    "supporting_keywords": [
+      "Add large email attachment using stream in .NET",
+      "Efficiently upload big attachment with MemoryStream in .NET",
+      "how to send large email attachment using stream in .NET"
+    ],
+    "keyword_groups": {
+      "core_seo_keywords": [
+        "Add Large Attachments with Stream Support in .NET"
+      ],
+      "long_tail_keywords": [
+        "how to send large email attachment using stream in .NET"
+      ],
+      "context_keywords": [
+        "Add large email attachment using stream in .NET",
+        "Efficiently upload big attachment with MemoryStream in .NET"
+      ]
+    },
+    "editorial_notes": []
+  },
+  "key_steps": [],
+  "code_snippets": [
+    "// Attach a large file without loading it fully into memory\nusing (var msg = new MapiMessage(\"from@domain.com\", \"to@domain.com\", \"Quarterly report\", \"See the archive attached.\"))\n{\n    msg.Attachments.AddFile(@\"C:\\data\\archive.zip\");\n    msg.Save(@\"C:\\out\\report.msg\");\n}\n\n// Attach from an existing stream (caller retains ownership)\nusing (var content = File.OpenRead(@\"C:\\data\\presentation.pptx\"))\n{\n    var msg = new MapiMessage(\"from@domain.com\", \"to@domain.com\", \"Slides\", \"Slides attached.\");\n    var attachment = msg.Attachments.Add(\"presentation.pptx\", content);\n    Console.WriteLine($\"Attachment size: {attachment.ContentLength} bytes\");\n    msg.Save(@\"C:\\out\\slides.msg\");\n}\n\n// Read attachment content as a stream\nvar msg = MapiMessage.Load(@\"C:\\data\\message.msg\");\nforeach (MapiAttachment attachment in msg.Attachments)\n{\n    Console.WriteLine($\"{attachment.LongFileName}: {attachment.ContentLength} bytes\");\n    using (Stream source = attachment.OpenRead())\n    using (Stream target = File.Create(Path.Combine(@\"C:\\out\", attachment.LongFileName)))\n    {\n        source.CopyTo(target);\n    }\n}"
+  ],
+  "limitations": [],
+  "warnings": [
+    "Editorial signal for the pipeline and human reviewer only, not for the article: the code sample could not be matched verbatim to the vendor's release notes and is unverified. Keep prose about what the code does conservative, but do not add a disclaimer or provenance note to the article."
+  ],
+  "related_concepts": [
+    "MapiMessage",
+    "MapiAttachmentCollection",
+    "MapiAttachment",
+    "File",
+    "Stream",
+    "AddFile",
+    "Add",
+    "Save",
+    "OpenRead",
+    "Load"
+  ],
+  "facts_confirmed_from_source": [
+    "Heading: Adding Attachments from a Stream or a File",
+    "Introduces overloads to add attachments to MapiMessage via Stream or File, with optional ownership control and on‑demand reading, reducing memory usage for large files.",
+    "API used: Aspose.Email.MapiMessage",
+    "API used: Aspose.Email.MapiAttachmentCollection",
+    "API used: Aspose.Email.MapiAttachment",
+    "API used: System.IO.File",
+    "API used: System.IO.Stream"
+  ],
+  "facts_needing_verification": [],
+  "suggested_article_outline": [
+    "Introduction",
+    "Key Takeaways",
+    "Why this feature matters",
+    "Brief introduction of the API (install + product/docs links)",
+    "Step-by-step tutorial with a code example",
+    "Conclusion",
+    "FAQs",
+    "Get a Free License and Explore More (one section, placed last as the strongest CTA slot)",
+    "See Also (only if related post URLs are supplied)"
+  ],
+  "code_verification": {
+    "language": "C#",
+    "tested": false,
+    "source_verified": false,
+    "syntax_valid": true,
+    "package_name": null,
+    "package_version": null,
+    "os": null,
+    "input_file_used": null,
+    "output_file_generated": null,
+    "errors": [],
+    "notes": "Code sample could not be matched to any code block scraped from the source page; it may have been altered while the extraction step selected/transcribed it. Static syntax check passed (balanced brackets/quotes). Sandboxed execution against the real vendor SDK is not attempted: these samples reference proprietary licensed assemblies, external input files, and sometimes network services (e.g. a timestamp authority URL) that only exist in the product team's own test environment."
+  },
+  "prerequisites": [],
+  "doc_topics": []
+}
