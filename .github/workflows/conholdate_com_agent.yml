@@ -277,13 +277,13 @@ jobs:
             echo "   Location: $BLOG_FOLDER_PATH"
           fi
 
-      - name: Commit logs
+      - name: Commit logs and topic index
         if: always()
         run: |
           git config --global user.email "action@github.com"
           git config --global user.name "GitHub Action"
-          git add content/logs/logs.txt
-          git commit -m "Update logs [Run #${{ github.run_number }}]" || echo "No changes to commit"
+          git add content/logs/logs.txt content/dashboard_topic_index.json
+          git commit -m "Update logs and topic index [Run #${{ github.run_number }}]" || echo "No changes to commit"
           git push origin HEAD
 
       - name: Upload Generated Blog as Artifact
