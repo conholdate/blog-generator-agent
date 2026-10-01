@@ -103,6 +103,32 @@ TITLE_PLATFORM_PATTERNS: Dict[str, List[str]] = {
     "Android": [r"\bin android\b"],
 }
 
+# aspose.com-specific "platform" choices that are really integration
+# targets, not programming languages (see ASPOSE_COM_PLATFORMS in
+# blog-dashboard's lib/config.ts) - the source indexer has no concept of
+# these at all, so it tags this content with whatever underlying language
+# it detects instead (e.g. a JasperReports post tagged "java", not
+# "general" - a user hit this exact case: "Import SVG in PowerPoint
+# Presentations in JasperReports" was bucketed under Java, so checking
+# platform=JasperReports found nothing). These are distinctive compound
+# terms unlikely to appear in an unrelated title, so - unlike the plain
+# language patterns above - they're checked and override UNCONDITIONALLY,
+# even when the source already gave an explicit (non-"general") platform.
+ALWAYS_OVERRIDE_PLATFORM_PATTERNS: Dict[str, List[str]] = {
+    "JasperReports": [r"\bjasperreports\b"],
+    "Reporting Services": [r"\breporting services\b"],
+    "SharePoint": [r"\bsharepoint\b"],
+}
+
+
+def _detect_integration_platform_from_title(title: str) -> Optional[str]:
+    t = title.lower()
+    for platform, patterns in ALWAYS_OVERRIDE_PLATFORM_PATTERNS.items():
+        for pattern in patterns:
+            if re.search(pattern, t):
+                return platform
+    return None
+
 
 def _detect_platform_from_title(title: str) -> Optional[str]:
     t = title.lower()
@@ -202,7 +228,13 @@ def build_index() -> Dict[str, List[dict]]:
                 entry = {"title": title, "url": rec.get("url", ""), "date": rec.get("published_date", "")}
                 dedupe_key = entry["url"] or title
                 platform_code = rec.get("platform")
-                if platform_code in (None, "general"):
+                # Checked first, unconditionally - these override even an
+                # explicit, non-"general" source platform (see
+                # ALWAYS_OVERRIDE_PLATFORM_PATTERNS above).
+                integration_platform = _detect_integration_platform_from_title(title)
+                if integration_platform:
+                    platform_code = integration_platform
+                elif platform_code in (None, "general"):
                     # _detect_platform_from_title already returns the final
                     # display label (".NET", "Ruby", ...), not a PLATFORM_MAP
                     # code - passed straight through, _expand_platforms'
