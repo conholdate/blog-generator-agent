@@ -255,6 +255,24 @@ def _resolve_platform(rec: dict, title: str) -> Optional[str]:
     return None
 
 
+# Beyond this many distinct resolved platforms for one product, an
+# unresolved ("general") post stays in a single shared "general" bucket
+# instead of fanning out to all of them. Found via Aspose.Total (a
+# bundle/announcement product, ~1,145 posts): only a handful resolved to a
+# specific platform by title, so the other ~1,135 - almost certainly
+# genuinely cross-cutting "what's new across Aspose" content, not
+# ambiguous-among-a-few-candidates - got expanded into all 10 resolved
+# platforms, ~8,000 (bucket,post) pairs from one product alone. Past this
+# threshold, "general" more likely means truly cross-platform than unknown.
+MAX_EXPANSION_PLATFORMS = 5
+
+
+def platforms_for_unresolved(platforms_in_group: List[str]) -> List[str]:
+    if not platforms_in_group or len(platforms_in_group) > MAX_EXPANSION_PLATFORMS:
+        return ["general"]
+    return platforms_in_group
+
+
 def _load_unique_records(indexer_brand: str) -> List[dict]:
     """All records for one indexer brand directory, deduped by `id` across
     however many of its per-product files happen to overlap (see module
@@ -311,7 +329,7 @@ def build_index() -> Dict[str, List[dict]]:
             seen_per_bucket: Dict[str, Set[str]] = {}
             for entry, final_platform in resolved:
                 dedupe_key = entry["url"] or entry["title"]
-                platforms = [final_platform] if final_platform else (platforms_in_group or ["general"])
+                platforms = [final_platform] if final_platform else platforms_for_unresolved(platforms_in_group)
                 for platform in platforms:
                     key = f"{brand}|{product}|{platform}"
                     bucket_seen = seen_per_bucket.setdefault(key, set())
