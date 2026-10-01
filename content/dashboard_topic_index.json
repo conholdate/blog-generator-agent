@@ -180,6 +180,16 @@
       "date": "2024-10-17",
       "title": "Convert PLY to OBJ - Efficient PLY to OBJ Converter Online",
       "url": "aspose.cloud/3d/ply-to-obj-in-java"
+    },
+    {
+      "date": "Mon, 28 Sep 2026 20:57:01 +0000",
+      "title": "Create EML in Node.JS",
+      "url": "https://blog.aspose.cloud/3d/create-eml-in-nodejs/"
+    },
+    {
+      "date": "Wed, 30 Sep 2026 13:27:44 +0000",
+      "title": "Convert DOCX to PNG in Node.JS",
+      "url": "https://blog.aspose.cloud/3d/convert-docx-to-png-in-nodejs/"
     }
   ],
   "aspose.cloud|Aspose.3D|Python": [
@@ -424,6 +434,11 @@
       "date": "Mon, 17 Aug 2026 07:55:35 +0000",
       "title": "TXT to CSV Without External Tools in PHP",
       "url": "https://blog.aspose.cloud/barcode/txt-to-csv-without-external-tools-in-php/"
+    },
+    {
+      "date": "Wed, 17 Jun 2026 11:52:52 +0000",
+      "title": "STEP-by-STEP Guide for CSV to HTML Conversion in PHP",
+      "url": "https://blog.aspose.cloud/barcode/step-by-step-guide-for-csv-to-html-conversion-in-php/"
     }
   ],
   "aspose.cloud|Aspose.BarCode|Python": [
@@ -687,6 +702,11 @@
       "date": "2026-04-24",
       "title": "Convert STL to JPG in .NET",
       "url": "aspose.cloud/cad/convert-stl-to-jpg-in-dotnet/"
+    },
+    {
+      "date": "Mon, 28 Sep 2026 15:32:27 +0000",
+      "title": "Reverse Image Search and Image Deskewing in C#",
+      "url": "https://blog.aspose.cloud/cad/reverse-image-search-and-image-deskewing-in-csharp/"
     }
   ],
   "aspose.cloud|Aspose.CAD|Java": [
@@ -1418,6 +1438,11 @@
       "date": "2025-07-18",
       "title": "Spreadsheet conversion APIs: Streamlined Document Conversion Solution | Aspose.Cells Cloud",
       "url": "aspose.cloud/cells/excel-conversion-api-low-code-document-automation"
+    },
+    {
+      "date": "Sat, 25 Apr 2026 10:45:50 +0000",
+      "title": "STEP-by-STEP Excel File Handling Add Rows in Python",
+      "url": "https://blog.aspose.cloud/cells/step-by-step-excel-file-handling-add-rows-in-python/"
     }
   ],
   "aspose.cloud|Aspose.Cells|Ruby": [
@@ -1673,6 +1698,11 @@
       "date": "2022-03-02",
       "title": "Sending Email using Heroku Node.js. Send Anonymous Email",
       "url": "aspose.cloud/email/email-sending-using-aspose.email-cloud-in-heroku-node.js-app/"
+    },
+    {
+      "date": "Wed, 23 Sep 2026 20:11:44 +0000",
+      "title": "Convert PPTX to JPG in Node.JS",
+      "url": "https://blog.aspose.cloud/email/convert-pptx-to-jpg-in-nodejs/"
     }
   ],
   "aspose.cloud|Aspose.Email|Python": [
@@ -1710,6 +1740,11 @@
       "date": "2014-02-07",
       "title": "Create, Convert, Read or Work with Email Messages in the Cloud",
       "url": "aspose.cloud/email/create-convert-read-or-work-with-email-messages-in-the-cloud/"
+    },
+    {
+      "date": "Thu, 09 Apr 2026 10:36:57 +0000",
+      "title": "Create EML File with Python in Python",
+      "url": "https://blog.aspose.cloud/email/create-eml-file-with-python-in-python/"
     }
   ],
   "aspose.cloud|Aspose.Email|Ruby": [
@@ -2937,6 +2972,13 @@
       "url": "aspose.cloud/omr/support-of-pdf-barcodes-and-qr-codes-in-template-generation-with-aspose.omr-cloud-18.6/"
     }
   ],
+  "aspose.cloud|Aspose.OMR|PHP": [
+    {
+      "date": "Wed, 23 Sep 2026 12:39:28 +0000",
+      "title": "Convert DOCX to JPG in PHP",
+      "url": "https://blog.aspose.cloud/omr/convert-docx-to-jpg-in-php/"
+    }
+  ],
   "aspose.cloud|Aspose.OMR|Python": [
     {
       "date": "2018-03-06",
@@ -3358,6 +3400,11 @@
       "date": "2021-02-01",
       "title": "Parse PDF TextBox, CheckBox, RadioButton form fields with REST API",
       "url": "https://blog.aspose.cloud/pdf/add-update-textbox-checkbox-radiobutton-combobox-fields-using-java-rest-api/"
+    },
+    {
+      "date": "Thu, 21 May 2026 14:26:17 +0000",
+      "title": "Add Animation to Powerpoint using Rest in Java",
+      "url": "https://blog.aspose.cloud/pdf/add-animation-to-powerpoint-using-rest-in-java/"
     }
   ],
   "aspose.cloud|Aspose.PDF|Node.js": [
@@ -4285,6 +4332,11 @@
       "date": "2021-06-30",
       "title": "How To Merge PPT in Cloud Using Python | Split PPT",
       "url": "https://blog.aspose.cloud/slides/how-to-merge-ppt-in-cloud-using-python-split-ppt/"
+    },
+    {
+      "date": "Fri, 25 Sep 2026 12:39:20 +0000",
+      "title": "ODS to XLSX Conversion Tutorial in Python",
+      "url": "https://blog.aspose.cloud/slides/ods-to-xlsx-conversion-tutorial-in-python/"
     }
   ],
   "aspose.cloud|Aspose.Slides|Ruby": [
@@ -8233,6 +8285,11 @@
       "date": "Wed, 18 Mar 2026 01:11:22 +0000",
       "title": "Convert 3D Scene to HTML in Java",
       "url": "https://blog.aspose.com/3d/convert-3d-scene-to-html-in-java/"
+    },
+    {
+      "date": "Wed, 18 Mar 2026 01:11:22 +0000",
+      "title": "Convert 3D Scene to HTML in Aspose.3D-Guide in Java",
+      "url": "https://blog.aspose.com/3d/convert-3d-scene-to-html-in-aspose3dguide-in-java/"
     }
   ],
   "aspose.com|Aspose.3D|Python": [
@@ -9007,6 +9064,36 @@
       "date": "2025-09-10",
       "title": "Generate Royal Mail 4-State Customer Code in C#",
       "url": "https://blog.aspose.com/barcode/generate-royal-mail-4-state-customer-code-in-csharp/"
+    },
+    {
+      "date": "Fri, 19 Jun 2026 07:23:44 +0000",
+      "title": "Generate Ean-13 Barcode in .NET",
+      "url": "https://blog.aspose.com/barcode/generate-ean-13-barcode-in-dotnet/"
+    },
+    {
+      "date": "Fri, 19 Jun 2026 10:18:52 +0000",
+      "title": "Generate High Density Data Matrix Code in .NET",
+      "url": "https://blog.aspose.com/barcode/generate-high-density-data-matrix-code-in-dotnet/"
+    },
+    {
+      "date": "Fri, 19 Jun 2026 09:45:24 +0000",
+      "title": "Generate Upc Barcode in .NET",
+      "url": "https://blog.aspose.com/barcode/generate-upc-barcode-in-dotnet/"
+    },
+    {
+      "date": "Tue, 23 Jun 2026 17:58:36 +0000",
+      "title": "Read Barcode from TIFF Image-Complete Tutorial in .NET",
+      "url": "https://blog.aspose.com/barcode/read-barcode-from-tiff-image-complete-tutorial-in-dotnet/"
+    },
+    {
+      "date": "Wed, 24 Jun 2026 05:36:37 +0000",
+      "title": "Create Micro QR Code in .NET",
+      "url": "https://blog.aspose.com/barcode/create-micro-qr-code-in-dotnet/"
+    },
+    {
+      "date": "Wed, 24 Jun 2026 06:18:25 +0000",
+      "title": "How to Programmatically Rotate Barcode Image in .NET",
+      "url": "https://blog.aspose.com/barcode/how-to-programmatically-rotate-barcode-image-in-dotnet/"
     }
   ],
   "aspose.com|Aspose.BarCode|Android": [
@@ -9570,6 +9657,11 @@
       "date": "2025-09-11",
       "title": "Automate DotCode Barcode Generation in Java",
       "url": "https://blog.aspose.com/barcode/dotcode-barcode-generation-in-java/"
+    },
+    {
+      "date": "Mon, 22 Jun 2026 11:43:57 +0000",
+      "title": "Read QR from Image in Java: a Complete Developer Guide",
+      "url": "https://blog.aspose.com/barcode/read-qr-from-image-in-java-a-complete-developer-guide/"
     }
   ],
   "aspose.com|Aspose.BarCode|Node.js": [
@@ -9716,6 +9808,46 @@
       "date": "2026-04-03",
       "title": "Generate Swiss Barcode in Python",
       "url": "https://blog.aspose.com/barcode/generate-swiss-barcode-in-python/"
+    },
+    {
+      "date": "Sat, 04 Apr 2026 07:06:26 +0000",
+      "title": "Generate Swiss QR Code in Python via .NET",
+      "url": "https://blog.aspose.com/barcode/generate-swiss-qr-code-in-python-via-dotnet/"
+    },
+    {
+      "date": "Fri, 05 Jun 2026 05:14:18 +0000",
+      "title": "Step-by-Step Guide to Read QR Code from Image in Python",
+      "url": "https://blog.aspose.com/barcode/step-by-step-guide-to-read-qr-code-from-image-in-python/"
+    },
+    {
+      "date": "Thu, 11 Jun 2026 10:56:32 +0000",
+      "title": "Generate and Read Royal Mail QR Code in Python",
+      "url": "https://blog.aspose.com/barcode/generate-and-read-royal-mail-qr-code-in-python/"
+    },
+    {
+      "date": "Fri, 12 Jun 2026 10:02:35 +0000",
+      "title": "Generate Code 39 Barcode in Python",
+      "url": "https://blog.aspose.com/barcode/generate-code-39-barcode-in-python/"
+    },
+    {
+      "date": "Mon, 15 Jun 2026 11:54:08 +0000",
+      "title": "Generate Barcode and QR Code with Logo in Python",
+      "url": "https://blog.aspose.com/barcode/generate-barcode-and-qr-code-with-logo-in-python/"
+    },
+    {
+      "date": "Thu, 18 Jun 2026 09:53:28 +0000",
+      "title": "Build Code 93 Barcode Generator in Python",
+      "url": "https://blog.aspose.com/barcode/build-code-93-barcode-generator-in-python/"
+    },
+    {
+      "date": "Fri, 19 Jun 2026 09:37:11 +0000",
+      "title": "Generate MaxiCode Barcode in Python",
+      "url": "https://blog.aspose.com/barcode/generate-maxicode-barcode-in-python/"
+    },
+    {
+      "date": "Wed, 24 Jun 2026 05:17:05 +0000",
+      "title": "Read Barcode from Multi Page TIFF Image in Python",
+      "url": "https://blog.aspose.com/barcode/read-barcode-from-multi-page-tiff-image-in-python/"
     }
   ],
   "aspose.com|Aspose.BarCode|Reporting Services": [
@@ -12426,6 +12558,11 @@
       "date": "2025-11-12",
       "title": "Create Waterfall Chart in Excel using C#",
       "url": "https://blog.aspose.com/cells/create-waterfall-chart-in-excel-using-csharp/"
+    },
+    {
+      "date": "Sat, 05 Sep 2026 11:04:34 +0000",
+      "title": "Create MS Excel Spreadsheets Without MS Office in C#",
+      "url": "https://blog.aspose.com/cells/create-ms-excel-spreadsheets-without-ms-office-in-csharp/"
     }
   ],
   "aspose.com|Aspose.Cells|Android": [
@@ -16147,6 +16284,16 @@
       "date": "2025-05-14",
       "title": "Add Text to Photo Online - Free Photo Text Editor",
       "url": "https://blog.aspose.com/drawing/add-text-to-photo-online/"
+    },
+    {
+      "date": "Fri, 22 May 2026 07:09:36 +0000",
+      "title": "How to Create and Draw on Bitmaps with Aspose.Drawing in .NET",
+      "url": "https://blog.aspose.com/drawing/how-to-create-and-draw-on-bitmaps-with-asposedrawing-in-dotnet/"
+    },
+    {
+      "date": "Mon, 25 May 2026 11:40:53 +0000",
+      "title": "Write Text on JPG Image in .NET-STEP-by-STEP Guide",
+      "url": "https://blog.aspose.com/drawing/write-text-on-jpg-image-in-dotnetstep-by-step-guide/"
     }
   ],
   "aspose.com|Aspose.Drawing|Java": [
@@ -16204,6 +16351,11 @@
       "date": "2025-07-21",
       "title": "How to Create and Draw on Bitmaps in Java with Aspose.Drawing",
       "url": "https://blog.aspose.com/drawing/create-load-fill-and-draw-bitmap-in-java/"
+    },
+    {
+      "date": "Mon, 29 Jun 2026 05:22:06 +0000",
+      "title": "TXT to JPG Conversion in Java: High Quality STEP by STEP",
+      "url": "https://blog.aspose.com/drawing/txt-to-jpg-conversion-in-java-high-quality-step-by-step/"
     }
   ],
   "aspose.com|Aspose.Email|.NET": [
@@ -18532,6 +18684,11 @@
       "date": "2026-04-28",
       "title": "How to Convert XBRL to XLSX in Python",
       "url": "https://blog.aspose.com/finance/convert-xbrl-to-xlsx-in-python/"
+    },
+    {
+      "date": "Tue, 28 Apr 2026 06:54:38 +0000",
+      "title": "How to Perform XBRL to XLSX Conversion using Python",
+      "url": "https://blog.aspose.com/finance/how-to-perform-xbrl-to-xlsx-conversion-using-python/"
     }
   ],
   "aspose.com|Aspose.Font|.NET": [
@@ -19077,6 +19234,11 @@
       "date": "2025-07-17",
       "title": "Convert GeoJSON to Raster Images in C#",
       "url": "https://blog.aspose.com/gis/convert-geojson-to-raster-images-in-csharp/"
+    },
+    {
+      "date": "Thu, 21 May 2026 08:13:31 +0000",
+      "title": "GEOJSON to Topojson Conversion in .NET: Sample Guide",
+      "url": "https://blog.aspose.com/gis/geojson-to-topojson-conversion-in-dotnet-sample-guide/"
     }
   ],
   "aspose.com|Aspose.GIS|Python": [
@@ -19129,6 +19291,36 @@
       "date": "2025-10-09",
       "title": "Convert GPX to KML in Python Programmatically",
       "url": "https://blog.aspose.com/gis/convert-gpx-to-kml-in-python/"
+    },
+    {
+      "date": "Fri, 08 May 2026 11:12:28 +0000",
+      "title": "GPX to CSV Conversion Guide using Python",
+      "url": "https://blog.aspose.com/gis/gpx-to-csv-conversion-guide-using-python/"
+    },
+    {
+      "date": "Fri, 08 May 2026 12:37:17 +0000",
+      "title": "GPX to GEOJSON Conversion Tutorial in Python",
+      "url": "https://blog.aspose.com/gis/gpx-to-geojson-conversion-tutorial-in-python/"
+    },
+    {
+      "date": "Wed, 13 May 2026 10:15:40 +0000",
+      "title": "Export Vector Layer to CSV using Python",
+      "url": "https://blog.aspose.com/gis/export-vector-layer-to-csv-using-python/"
+    },
+    {
+      "date": "Mon, 01 Jun 2026 11:22:38 +0000",
+      "title": "Convert Shapefile to JPG in Python",
+      "url": "https://blog.aspose.com/gis/convert-shapefile-to-jpg-in-python/"
+    },
+    {
+      "date": "Wed, 01 Jul 2026 06:02:26 +0000",
+      "title": "Complete Guide: Shapefile to CSV in Python",
+      "url": "https://blog.aspose.com/gis/complete-guide-shapefile-to-csv-in-python/"
+    },
+    {
+      "date": "Wed, 01 Jul 2026 05:48:15 +0000",
+      "title": "KML to GPX Conversion Tutorial in Python",
+      "url": "https://blog.aspose.com/gis/kml-to-gpx-conversion-tutorial-in-python/"
     }
   ],
   "aspose.com|Aspose.HTML|.NET": [
@@ -19526,6 +19718,11 @@
       "date": null,
       "title": "Free URL to PDF Converter",
       "url": "https://blog.aspose.com/html/free-url-to-pdf-converter/"
+    },
+    {
+      "date": "Mon, 21 Sep 2026 20:06:23 +0000",
+      "title": "HTML to BMP Conversion Tutorial in C#",
+      "url": "https://blog.aspose.com/html/html-to-bmp-conversion-tutorial-in-csharp/"
     }
   ],
   "aspose.com|Aspose.HTML|Java": [
@@ -19955,6 +20152,21 @@
       "date": "2026-02-18",
       "title": "Convert HTML Tables to PDF in Python",
       "url": "aspose.com/html/convert-html-tables-to-pdf-in-python/"
+    },
+    {
+      "date": "Thu, 23 Jul 2026 18:10:45 +0000",
+      "title": "MD to DOCX Conversion in Python",
+      "url": "https://blog.aspose.com/html/md-to-docx-conversion-in-python/"
+    },
+    {
+      "date": "Wed, 05 Aug 2026 08:27:41 +0000",
+      "title": "Convert HTML to TXT in Python",
+      "url": "https://blog.aspose.com/html/convert-html-to-txt-in-python/"
+    },
+    {
+      "date": "Wed, 05 Aug 2026 07:02:53 +0000",
+      "title": "Create Read and Edit HTML in Python",
+      "url": "https://blog.aspose.com/html/create-read-and-edit-html-in-python/"
     }
   ],
   "aspose.com|Aspose.Imaging|.NET": [
@@ -23502,6 +23714,16 @@
       "date": null,
       "title": "Convert PDF to Base64 in C# using Aspose.PDF for .NET",
       "url": "https://blog.aspose.com/pdf/convert-pdf-to-base64-in-csharp/"
+    },
+    {
+      "date": "Thu, 16 Jul 2026 08:56:02 +0000",
+      "title": "Convert EPUB to PDF in C#",
+      "url": "https://blog.aspose.com/pdf/convert-epub-to-pdf-in-csharp/"
+    },
+    {
+      "date": "Mon, 07 Sep 2026 11:21:37 +0000",
+      "title": "Compress or Optimize PDF with Same Quality in C#",
+      "url": "https://blog.aspose.com/pdf/compress-or-optimize-pdf-with-same-quality-in-csharp/"
     }
   ],
   "aspose.com|Aspose.PDF|Android": [
@@ -24570,6 +24792,11 @@
       "date": null,
       "title": "How to Remove Images from PDF using Java",
       "url": "https://blog.aspose.com/pdf/remove-images-from-pdf-using-java/"
+    },
+    {
+      "date": "Thu, 16 Jul 2026 08:31:08 +0000",
+      "title": "Convert CSV to PDF in Java",
+      "url": "https://blog.aspose.com/pdf/convert-csv-to-pdf-in-java/"
     }
   ],
   "aspose.com|Aspose.PDF|JavaScript": [
@@ -24821,6 +25048,36 @@
       "date": null,
       "title": "How to Add Pages to PDF Documents in Python",
       "url": "https://blog.aspose.com/pdf/add-pages-to-pdf-in-python/"
+    },
+    {
+      "date": "Wed, 08 Jul 2026 06:47:22 +0000",
+      "title": "Add or Remove Annotations in Python",
+      "url": "https://blog.aspose.com/pdf/add-or-remove-annotations-in-python/"
+    },
+    {
+      "date": "Wed, 08 Jul 2026 08:16:18 +0000",
+      "title": "Convert CSV Data to PDF in Python",
+      "url": "https://blog.aspose.com/pdf/convert-csv-data-to-pdf-in-python/"
+    },
+    {
+      "date": "Wed, 08 Jul 2026 09:55:45 +0000",
+      "title": "Create PDF Booklet in Python",
+      "url": "https://blog.aspose.com/pdf/create-pdf-booklet-in-python/"
+    },
+    {
+      "date": "Thu, 16 Jul 2026 08:00:07 +0000",
+      "title": "Add Barcode to PDF in Python",
+      "url": "https://blog.aspose.com/pdf/add-barcode-to-pdf-in-python/"
+    },
+    {
+      "date": "Fri, 17 Jul 2026 08:00:06 +0000",
+      "title": "Generate PDF from Images in Python",
+      "url": "https://blog.aspose.com/pdf/generate-pdf-from-images-in-python/"
+    },
+    {
+      "date": "Mon, 20 Jul 2026 08:48:14 +0000",
+      "title": "Convert PDF to DOCX in Python",
+      "url": "https://blog.aspose.com/pdf/convert-pdf-to-docx-in-python/"
     }
   ],
   "aspose.com|Aspose.PDF|Reporting Services": [
@@ -29299,6 +29556,11 @@
       "date": "2025-05-15",
       "title": "Free PPTX to EMF Converter - Online App",
       "url": "aspose.com/slides/free-pptx-to-emf-converter/"
+    },
+    {
+      "date": "Fri, 22 May 2026 05:31:09 +0000",
+      "title": "Add Insert or Draw Text on PNG JPEG TIFF Icon GIF Image Java",
+      "url": "https://blog.aspose.com/slides/add-insert-or-draw-text-on-png-jpeg-tiff-icon-gif-image-java/"
     }
   ],
   "aspose.com|Aspose.Tasks|.NET": [
@@ -41277,6 +41539,13 @@
       "url": "https://blog.aspose.com/zip/extract-specific-files-from-zip-archives-in-cSharp/"
     }
   ],
+  "conholdate.cloud|Conholdate.Total|Java": [
+    {
+      "date": "Thu, 12 Mar 2026 17:26:57 +0000",
+      "title": "Merge PDF Documents using Java Cloud API",
+      "url": "https://blog.conholdate.cloud/total/merge-pdf-documents-using-java-cloud-api/"
+    }
+  ],
   "conholdate.cloud|Conholdate.Total|Python": [
     {
       "date": "2025-07-08",
@@ -44213,6 +44482,116 @@
       "date": "2026-03-04",
       "title": "Convert PPTX to Markdown in Java | Export PowerPoint as MD",
       "url": "https://blog.conholdate.com/total/convert-pptx-to-markdown-in-java/"
+    },
+    {
+      "date": "Wed, 22 Apr 2026 07:37:33 +0000",
+      "title": "Add Barcode to PDF in Java",
+      "url": "https://blog.conholdate.com/total/add-barcode-to-pdf-in-java/"
+    },
+    {
+      "date": "Fri, 08 May 2026 19:48:35 +0000",
+      "title": "Add or Delete Pages in PDF using Java",
+      "url": "https://blog.conholdate.com/total/add-or-delete-pages-in-pdf-using-java/"
+    },
+    {
+      "date": "Fri, 05 Jun 2026 18:38:01 +0000",
+      "title": "Add Shapes to PDF in Java",
+      "url": "https://blog.conholdate.com/total/add-shapes-to-pdf-in-java/"
+    },
+    {
+      "date": "Tue, 28 Jul 2026 21:31:55 +0000",
+      "title": "Add Table of Contents to Word Document in Java",
+      "url": "https://blog.conholdate.com/total/add-table-of-contents-to-word-document-in-java/"
+    },
+    {
+      "date": "Tue, 18 Aug 2026 22:34:56 +0000",
+      "title": "Convert Image to Grayscale in Java",
+      "url": "https://blog.conholdate.com/total/convert-image-to-grayscale-in-java/"
+    },
+    {
+      "date": "Tue, 18 Aug 2026 22:30:55 +0000",
+      "title": "Convert Word to PDF in Java",
+      "url": "https://blog.conholdate.com/total/convert-word-to-pdf-in-java/"
+    },
+    {
+      "date": "Wed, 19 Aug 2026 15:15:29 +0000",
+      "title": "Convert Word to Image in Java",
+      "url": "https://blog.conholdate.com/total/convert-word-to-image-in-java/"
+    },
+    {
+      "date": "Tue, 25 Aug 2026 19:13:32 +0000",
+      "title": "Convert Excel to Image in Java",
+      "url": "https://blog.conholdate.com/total/convert-excel-to-image-in-java/"
+    },
+    {
+      "date": "Sun, 30 Aug 2026 18:53:10 +0000",
+      "title": "Add Text to PDF in Java",
+      "url": "https://blog.conholdate.com/total/add-text-to-pdf-in-java/"
+    },
+    {
+      "date": "Sun, 30 Aug 2026 20:37:37 +0000",
+      "title": "Create Charts in Word Documents using Java",
+      "url": "https://blog.conholdate.com/total/create-charts-in-word-documents-using-java/"
+    },
+    {
+      "date": "Thu, 03 Sep 2026 19:34:37 +0000",
+      "title": "Convert Onenote to Image in Java",
+      "url": "https://blog.conholdate.com/total/convert-onenote-to-image-in-java/"
+    },
+    {
+      "date": "Thu, 03 Sep 2026 13:20:14 +0000",
+      "title": "Insert Watermark in Excel using Java",
+      "url": "https://blog.conholdate.com/total/insert-watermark-in-excel-using-java/"
+    },
+    {
+      "date": "Mon, 07 Sep 2026 03:41:37 +0000",
+      "title": "Add Watermark to PDF in Java",
+      "url": "https://blog.conholdate.com/total/add-watermark-to-pdf-in-java/"
+    },
+    {
+      "date": "Mon, 14 Sep 2026 17:15:39 +0000",
+      "title": "Create Gantt Chart in Java",
+      "url": "https://blog.conholdate.com/total/create-gantt-chart-in-java/"
+    },
+    {
+      "date": "Mon, 14 Sep 2026 18:17:42 +0000",
+      "title": "Create HTML Files in Java",
+      "url": "https://blog.conholdate.com/total/create-html-files-in-java/"
+    },
+    {
+      "date": "Tue, 15 Sep 2026 05:09:24 +0000",
+      "title": "Create Visio Diagram in Java",
+      "url": "https://blog.conholdate.com/total/create-visio-diagram-in-java/"
+    },
+    {
+      "date": "Tue, 15 Sep 2026 20:32:21 +0000",
+      "title": "Excel to JSON Conversion in Java",
+      "url": "https://blog.conholdate.com/total/excel-to-json-conversion-in-java/"
+    },
+    {
+      "date": "Fri, 18 Sep 2026 20:13:45 +0000",
+      "title": "Convert FBX to OBJ in Java",
+      "url": "https://blog.conholdate.com/total/convert-fbx-to-obj-in-java/"
+    },
+    {
+      "date": "Fri, 18 Sep 2026 20:32:19 +0000",
+      "title": "Convert JPG to PNG in Java",
+      "url": "https://blog.conholdate.com/total/convert-jpg-to-png-in-java/"
+    },
+    {
+      "date": "Mon, 21 Sep 2026 12:27:01 +0000",
+      "title": "Convert JPG to TIFF in Java",
+      "url": "https://blog.conholdate.com/total/convert-jpg-to-tiff-in-java/"
+    },
+    {
+      "date": "Mon, 21 Sep 2026 12:54:33 +0000",
+      "title": "LATEX to HTML Conversion in Java",
+      "url": "https://blog.conholdate.com/total/latex-to-html-conversion-in-java/"
+    },
+    {
+      "date": "Thu, 24 Sep 2026 19:32:40 +0000",
+      "title": "MPP to PDF Conversion in Java",
+      "url": "https://blog.conholdate.com/total/mpp-to-pdf-conversion-in-java/"
     }
   ],
   "conholdate.com|Conholdate.Total|Node.js": [
@@ -45715,6 +46094,11 @@
       "date": "2025-09-19",
       "title": "Compare Excel Workbook XLS|XLSX using .NET REST API",
       "url": "groupdocs.cloud/comparison/compare-excel-files-using-csharp/"
+    },
+    {
+      "date": "Mon, 21 Sep 2026 11:32:39 +0000",
+      "title": "Compare Excel Files via REST in C#",
+      "url": "https://blog.groupdocs.cloud/comparison/compare-excel-files-via-rest-in-csharp/"
     }
   ],
   "groupdocs.cloud|GroupDocs.Comparison|Java": [
@@ -45779,6 +46163,11 @@
       "date": "2022-01-17",
       "title": "Compare PowerPoint Presentations in Node.js",
       "url": "groupdocs.cloud/comparison/compare-powerpoint-presentations-in-node-js/"
+    },
+    {
+      "date": "Fri, 18 Sep 2026 12:26:15 +0000",
+      "title": "How to Compare Word Documents in Node.JS",
+      "url": "https://blog.groupdocs.cloud/comparison/how-to-compare-word-documents-in-nodejs/"
     }
   ],
   "groupdocs.cloud|GroupDocs.Comparison|PHP": [
@@ -46429,6 +46818,31 @@
       "date": "2025-12-26",
       "title": "Convert Word to JPG in Java – DOCX to JPG using Java REST API",
       "url": "https://blog.groupdocs.cloud/conversion/convert-word-to-jpg-using-java"
+    },
+    {
+      "date": "Fri, 05 Jun 2026 18:56:32 +0000",
+      "title": "CSV to PDF Conversion in Java Programmatically",
+      "url": "https://blog.groupdocs.cloud/conversion/csv-to-pdf-conversion-in-java-programmatically/"
+    },
+    {
+      "date": "Wed, 01 Jul 2026 10:59:50 +0000",
+      "title": "Step-by-Step Tutorial - DOCX to PDF Conversion in Java",
+      "url": "https://blog.groupdocs.cloud/conversion/step-by-step-tutorial-docx-to-pdf-conversion-in-java/"
+    },
+    {
+      "date": "Fri, 17 Jul 2026 09:43:13 +0000",
+      "title": "XLSX to JPG Conversion Tutorial in Java",
+      "url": "https://blog.groupdocs.cloud/conversion/xlsx-to-jpg-conversion-tutorial-in-java/"
+    },
+    {
+      "date": "Mon, 03 Aug 2026 11:38:22 +0000",
+      "title": "HTML to XLSX Conversion in Java",
+      "url": "https://blog.groupdocs.cloud/conversion/html-to-xlsx-conversion-in-java/"
+    },
+    {
+      "date": "Wed, 12 Aug 2026 08:58:13 +0000",
+      "title": "How to Convert DOCX to MD in Java",
+      "url": "https://blog.groupdocs.cloud/conversion/how-to-convert-docx-to-md-in-java/"
     }
   ],
   "groupdocs.cloud|GroupDocs.Conversion|Node.js": [
@@ -46681,6 +47095,31 @@
       "date": "2025-06-12",
       "title": "Convert JSON to CSV Using Node.js REST API | Transform JSON to CSV Format Online",
       "url": "https://blog.groupdocs.cloud/conversion/convert-json-to-csv-with-nodejs"
+    },
+    {
+      "date": "Sat, 27 Jun 2026 11:14:27 +0000",
+      "title": "Step-by-Step CSV to PDF Conversion Example in Node.JS",
+      "url": "https://blog.groupdocs.cloud/conversion/step-by-step-csv-to-pdf-conversion-example-in-nodejs/"
+    },
+    {
+      "date": "Mon, 27 Jul 2026 10:59:23 +0000",
+      "title": "Step-by-Step HTML to DOCX Conversion Tutorial in Node.JS",
+      "url": "https://blog.groupdocs.cloud/conversion/step-by-step-html-to-docx-conversion-tutorial-in-nodejs/"
+    },
+    {
+      "date": "Mon, 03 Aug 2026 10:51:03 +0000",
+      "title": "PDF to DOCX Conversion in Node.JS",
+      "url": "https://blog.groupdocs.cloud/conversion/pdf-to-docx-conversion-in-nodejs/"
+    },
+    {
+      "date": "Fri, 07 Aug 2026 08:43:57 +0000",
+      "title": "Convert CSV to JPG in Node.JS",
+      "url": "https://blog.groupdocs.cloud/conversion/convert-csv-to-jpg-in-nodejs/"
+    },
+    {
+      "date": "Mon, 17 Aug 2026 08:29:07 +0000",
+      "title": "SVG to PNG Conversion in Node.JS",
+      "url": "https://blog.groupdocs.cloud/conversion/svg-to-png-conversion-in-nodejs/"
     }
   ],
   "groupdocs.cloud|GroupDocs.Conversion|PHP": [
@@ -46698,6 +47137,36 @@
       "date": "2022-02-12",
       "title": "Convert Excel to PDF using PHP",
       "url": "https://blog.groupdocs.cloud/conversion/convert-excel-to-pdf-using-php/"
+    },
+    {
+      "date": "Mon, 15 Jun 2026 13:44:28 +0000",
+      "title": "ODS to XLSX Conversion Example in PHP",
+      "url": "https://blog.groupdocs.cloud/conversion/ods-to-xlsx-conversion-example-in-php/"
+    },
+    {
+      "date": "Mon, 29 Jun 2026 12:20:25 +0000",
+      "title": "Step-by-Step HTML to XLSX Conversion Tutorial in PHP",
+      "url": "https://blog.groupdocs.cloud/conversion/step-by-step-html-to-xlsx-conversion-tutorial-in-php/"
+    },
+    {
+      "date": "Wed, 08 Jul 2026 10:03:36 +0000",
+      "title": "Comprehensive JSON to HTML Conversion Tutorial in PHP",
+      "url": "https://blog.groupdocs.cloud/conversion/comprehensive-json-to-html-conversion-tutorial-in-php/"
+    },
+    {
+      "date": "Fri, 10 Jul 2026 10:42:11 +0000",
+      "title": "Step-by-Step PDF to DOCX Document Conversion Tutorial in PHP",
+      "url": "https://blog.groupdocs.cloud/conversion/step-by-step-pdf-to-docx-document-conversion-tutorial-in-php/"
+    },
+    {
+      "date": "Wed, 29 Jul 2026 10:24:57 +0000",
+      "title": "PDF to PPT Conversion Example in PHP: Complete Tutorial",
+      "url": "https://blog.groupdocs.cloud/conversion/pdf-to-ppt-conversion-example-in-php-complete-tutorial/"
+    },
+    {
+      "date": "Fri, 07 Aug 2026 21:08:45 +0000",
+      "title": "DOCX to HTML in PHP: Generate HTML from DOCX Tutorial",
+      "url": "https://blog.groupdocs.cloud/conversion/docx-to-html-in-php-generate-html-from-docx-tutorial/"
     }
   ],
   "groupdocs.cloud|GroupDocs.Conversion|Python": [
@@ -46885,6 +47354,41 @@
       "date": "2023-10-18",
       "title": "Convert JPG to PDF using Image to PDF Converter",
       "url": "https://blog.groupdocs.cloud/conversion/convert-jpg-to-pdf-using-image-to-pdf-converter"
+    },
+    {
+      "date": "Wed, 15 Jul 2026 09:46:19 +0000",
+      "title": "How to DOCX to HTML Conversion in Python",
+      "url": "https://blog.groupdocs.cloud/conversion/how-to-docx-to-html-conversion-in-python/"
+    },
+    {
+      "date": "Sun, 26 Jul 2026 10:40:17 +0000",
+      "title": "How to Enable CSV to PDF Conversion on the Fly in Python",
+      "url": "https://blog.groupdocs.cloud/conversion/how-to-enable-csv-to-pdf-conversion-on-the-fly-in-python/"
+    },
+    {
+      "date": "Mon, 03 Aug 2026 11:11:03 +0000",
+      "title": "Step-by-Step PNG to PPTX Conversion Tutorial in Python",
+      "url": "https://blog.groupdocs.cloud/conversion/step-by-step-png-to-pptx-conversion-tutorial-in-python/"
+    },
+    {
+      "date": "Mon, 24 Aug 2026 08:34:15 +0000",
+      "title": "CSV to JPG Conversion in Python: Quick Guide for Developers",
+      "url": "https://blog.groupdocs.cloud/conversion/csv-to-jpg-conversion-in-python-quick-guide-for-developers/"
+    },
+    {
+      "date": "Wed, 02 Sep 2026 12:20:11 +0000",
+      "title": "PDF to DOCX Conversion Tutorial in Python: Fast Async",
+      "url": "https://blog.groupdocs.cloud/conversion/pdf-to-docx-conversion-tutorial-in-python-fast-async/"
+    },
+    {
+      "date": "Fri, 11 Sep 2026 12:23:52 +0000",
+      "title": "CSV to HTML Conversion Step-by-Step in Python",
+      "url": "https://blog.groupdocs.cloud/conversion/csv-to-html-conversion-step-by-step-in-python/"
+    },
+    {
+      "date": "Wed, 30 Sep 2026 14:19:00 +0000",
+      "title": "Step-by-Step ODS to XLSX Conversion Tutorial in Python",
+      "url": "https://blog.groupdocs.cloud/conversion/step-by-step-ods-to-xlsx-conversion-tutorial-in-python/"
     }
   ],
   "groupdocs.cloud|GroupDocs.Conversion|Ruby": [
@@ -47051,6 +47555,11 @@
       "date": "2026-03-09",
       "title": "Update PPTX File in .NET",
       "url": "groupdocs.cloud/editor/update-pptx-file-in-dotnet/"
+    },
+    {
+      "date": "Wed, 09 Sep 2026 12:31:52 +0000",
+      "title": "Edit Powerpoint Presentations in C#",
+      "url": "https://blog.groupdocs.cloud/editor/edit-powerpoint-presentations-in-csharp/"
     }
   ],
   "groupdocs.cloud|GroupDocs.Editor|Java": [
@@ -47083,6 +47592,16 @@
       "date": "2026-04-20",
       "title": "Modify TXT Files in Java",
       "url": "groupdocs.cloud/editor/modify-txt-files-in-java/"
+    },
+    {
+      "date": "Wed, 02 Sep 2026 09:14:58 +0000",
+      "title": "Edit Excel Sheet via REST in Java",
+      "url": "https://blog.groupdocs.cloud/editor/edit-excel-sheet-via-rest-in-java/"
+    },
+    {
+      "date": "Mon, 28 Sep 2026 16:09:16 +0000",
+      "title": "Edit Word Documents in Java",
+      "url": "https://blog.groupdocs.cloud/editor/edit-word-documents-in-java/"
     }
   ],
   "groupdocs.cloud|GroupDocs.Editor|Node.js": [
@@ -47328,6 +47847,21 @@
       "date": "2023-12-08",
       "title": "Combine Excel Sheets in Java - Excel Files Merger",
       "url": "groupdocs.cloud/merger/combine-excel-sheets-in-java-excel-files-merger"
+    },
+    {
+      "date": "Fri, 14 Aug 2026 08:54:46 +0000",
+      "title": "Guide to Combine and Merge Powerpoint PPT PPTX in Java",
+      "url": "https://blog.groupdocs.cloud/merger/guide-to-combine-and-merge-powerpoint-ppt-pptx-in-java/"
+    },
+    {
+      "date": "Fri, 04 Sep 2026 12:18:34 +0000",
+      "title": "Password Protect Excel via REST in Java",
+      "url": "https://blog.groupdocs.cloud/merger/password-protect-excel-via-rest-in-java/"
+    },
+    {
+      "date": "Mon, 14 Sep 2026 14:29:18 +0000",
+      "title": "How to Combine Multiple Word Documents in Java",
+      "url": "https://blog.groupdocs.cloud/merger/how-to-combine-multiple-word-documents-in-java/"
     }
   ],
   "groupdocs.cloud|GroupDocs.Merger|Node.js": [
@@ -47440,6 +47974,21 @@
       "date": "2023-12-01",
       "title": "Password-Protect PowerPoint Files in Node.js",
       "url": "groupdocs.cloud/merger/password-protect-powerpoint-files-in-nodejs"
+    },
+    {
+      "date": "Wed, 19 Aug 2026 10:37:27 +0000",
+      "title": "How to Combine Multiple Word Documents in Node.JS",
+      "url": "https://blog.groupdocs.cloud/merger/how-to-combine-multiple-word-documents-in-nodejs/"
+    },
+    {
+      "date": "Wed, 26 Aug 2026 08:28:34 +0000",
+      "title": "Convert Word Page Orientation in Node.JS",
+      "url": "https://blog.groupdocs.cloud/merger/convert-word-page-orientation-in-nodejs/"
+    },
+    {
+      "date": "Fri, 25 Sep 2026 09:41:12 +0000",
+      "title": "Split PDF into Multiple PDF in Node.JS",
+      "url": "https://blog.groupdocs.cloud/merger/split-pdf-into-multiple-pdf-in-nodejs/"
     }
   ],
   "groupdocs.cloud|GroupDocs.Merger|Python": [
@@ -47864,6 +48413,11 @@
       "date": "2025-06-27",
       "title": "Extract Images from Word in Node.js | Word Document Image Extractor",
       "url": "groupdocs.cloud/parser/extract-images-from-word-in-nodejs-image-extractor"
+    },
+    {
+      "date": "Mon, 21 Sep 2026 14:36:45 +0000",
+      "title": "Extract Text from PDF in Node.JS",
+      "url": "https://blog.groupdocs.cloud/parser/extract-text-from-pdf-in-nodejs/"
     }
   ],
   "groupdocs.cloud|GroupDocs.Parser|Python": [
@@ -47950,6 +48504,11 @@
       "date": "2023-07-10",
       "title": "Generate QR Code with Logo in C# using QR Code Generator REST API",
       "url": "groupdocs.cloud/signature/generate-qr-code-with-logo-in-csharp-using-rest-api/"
+    },
+    {
+      "date": "Wed, 16 Sep 2026 12:53:38 +0000",
+      "title": "Edit Signatures in C#",
+      "url": "https://blog.groupdocs.cloud/signature/edit-signatures-in-csharp/"
     }
   ],
   "groupdocs.cloud|GroupDocs.Signature|Java": [
@@ -48327,6 +48886,21 @@
       "date": "2024-01-02",
       "title": "Add Watermark to Word in Java - Watermark Creator",
       "url": "groupdocs.cloud/watermark/add-watermark-to-word-in-java-watermark-creator"
+    },
+    {
+      "date": "Fri, 28 Aug 2026 19:41:04 +0000",
+      "title": "Add Image Watermark to PDF Documents in Java",
+      "url": "https://blog.groupdocs.cloud/watermark/add-image-watermark-to-pdf-documents-in-java/"
+    },
+    {
+      "date": "Mon, 07 Sep 2026 13:44:25 +0000",
+      "title": "Remove Image Watermark from PDF in Java",
+      "url": "https://blog.groupdocs.cloud/watermark/remove-image-watermark-from-pdf-in-java/"
+    },
+    {
+      "date": "Wed, 23 Sep 2026 13:04:19 +0000",
+      "title": "Add Text Overlay to GIF using REST in Java",
+      "url": "https://blog.groupdocs.cloud/watermark/add-text-overlay-to-gif-using-rest-in-java/"
     }
   ]
 }
