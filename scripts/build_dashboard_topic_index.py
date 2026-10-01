@@ -26,8 +26,11 @@ Two data-quality issues found in the source JSONL and corrected here:
    different `product` values across files). `source_path` is trustworthy
    instead - the product slug is the path segment right after the brand's
    content-root prefix (stripped per SOURCE_PATH_PREFIX below).
-The record's own `platform` field IS reliable (genuine per-post
-diversity confirmed, not just echoing a query parameter).
+3. The record's own `platform` field is NOT fully reliable either (it
+   genuinely varies per post, not just echoing a query parameter - but
+   three separate real failure cases were found and fixed via explicit
+   title detection, overriding even an explicit source tag - see the
+   comment above TITLE_PLATFORM_PATTERNS for all three).
 
 Usage: python scripts/build_dashboard_topic_index.py
 """
@@ -67,12 +70,17 @@ SOURCE_PATH_PREFIX = {"aspose.cloud": "Aspose.Cloud/"}
 
 # Indexer platform code -> dashboard platform label. Kept consistent with
 # the equivalent mapping already in utils/metricsRecorder.py's start_job(),
-# not reinvented.
+# not reinvented. Audited 2026-10-01 against every brand's ACTUAL platform
+# list in blog-dashboard/lib/config.ts (ASPOSE_CLOUD_PLATFORMS,
+# GROUPDOCS_CLOUD_PLATFORMS, ASPOSE_COM_PLATFORMS, CONHOLDATE_*_PLATFORMS) -
+# javascript/swift/apex/rust were real dashboard platform options missing
+# here entirely (not even a PLATFORM_MAP code, let alone a title pattern).
 PLATFORM_MAP = {
     "net": ".NET",
     "java": "Java",
     "python": "Python",
     "nodejs": "Node.js",
+    "javascript": "JavaScript",
     "go": "Go",
     "php": "PHP",
     "android": "Android",
@@ -80,27 +88,74 @@ PLATFORM_MAP = {
     "ruby": "Ruby",
     "dart": "Dart",
     "perl": "Perl",
+    "swift": "Swift",
+    "apex": "Apex",
+    "rust": "Rust",
 }
 # "general" (no specific platform detected in the post) has no dashboard
 # platform of its own - such posts are folded into every platform actually
 # seen for that same (brand, product) group, see _expand_platforms(). BUT
-# first checked against TITLE_PLATFORM_PATTERNS below - the upstream
-# "general" tag turned out to be wrong for ~22% of general-tagged posts
-# (473/2142, verified): e.g. "Convert Word to TIFF in Ruby" was tagged
-# general and, before this check existed, got expanded into every one of
-# Aspose.Words' platform buckets including PHP - a real false positive a
-# user hit. A title that explicitly names a platform is strong evidence
-# it's NOT actually general, regardless of what the source tagged it.
+# first checked against TITLE_PLATFORM_PATTERNS below, and - unlike an
+# earlier version of this script - that check overrides an EXPLICIT
+# (non-"general") source platform too, not just "general". Started out
+# general-only, on the theory that an explicit source tag was probably
+# trustworthy; three separate, confirmed failure modes proved that wrong:
+# (1) ~22% of general-tagged posts (473/2142) had an explicit platform in
+# the title the source missed entirely (e.g. "Convert Word to TIFF in
+# Ruby" tagged general, expanded into every one of Aspose.Words' platform
+# buckets including PHP - a real false positive a user hit); (2) the
+# source has no concept at all of aspose.com-specific categories like
+# JasperReports - it tags that content with the underlying language
+# instead (a user hit this too: a JasperReports post bucketed under
+# Java); (3) titles containing "javascript" are frequently tagged plain
+# "java" by the source - almost certainly because "java" is a literal
+# substring of "javascript", a classic detection bug. A title that
+# explicitly names a platform, via one of the anchored prepositional
+# patterns below, is simply more trustworthy than this source field - so
+# it wins regardless of what the source said.
+#
+# Patterns require one of these 4 prepositions immediately before the
+# platform name - originally just "in", which turned out to be a real
+# gap: sampled every "python"-mentioning title in the corpus and only
+# 345/503 (69%) actually used "in python" - "using python" alone (120)
+# nearly matched "for"+"with" combined, and would have gone entirely
+# undetected (falling through to the "general"-expansion behavior this
+# whole mechanism exists to avoid) without this broader prepositions list.
+_PLATFORM_PREPOSITIONS = ["in", "for", "using", "with"]
+
+
+def _platform_patterns(*name_regexes: str) -> List[str]:
+    """One '\\b(in|for|using|with) <name>(?![\\w])' pattern per given
+    spelling of a platform name (e.g. both "node.js" and "nodejs"). A
+    trailing (?![\\w]) negative lookahead, NOT \\b - \\b matches a
+    transition between a word and non-word character, which silently
+    fails right after a name ending in a non-word char like "c#" or
+    "c++" followed by a space (both sides of that position are already
+    non-word, so there's no transition to match). Confirmed directly:
+    \\bin c#\\b never matched "...in c# today" at all - this exact bug
+    meant the .NET and C++ patterns had been silently non-functional
+    since they were first written, never caught because no earlier test
+    happened to use a C#/C++-titled example."""
+    prep_group = "|".join(_PLATFORM_PREPOSITIONS)
+    return [rf"\b(?:{prep_group})\s+{name}(?![\w])" for name in name_regexes]
+
+
 TITLE_PLATFORM_PATTERNS: Dict[str, List[str]] = {
-    ".NET": [r"\bin \.net\b", r"\bin c#\b", r"\bfor \.net\b"],
-    "Java": [r"\bin java\b"],
-    "Python": [r"\bin python\b"],
-    "Node.js": [r"\bin node\.?js\b"],
-    "PHP": [r"\bin php\b"],
-    "Go": [r"\bin go\b", r"\bin golang\b"],
-    "C++": [r"\bin c\+\+\b"],
-    "Ruby": [r"\bin ruby\b"],
-    "Android": [r"\bin android\b"],
+    ".NET": _platform_patterns(r"\.net") + _platform_patterns("c#"),
+    "Java": _platform_patterns("java"),
+    "Python": _platform_patterns("python"),
+    "Node.js": _platform_patterns(r"node\.?js"),
+    "JavaScript": _platform_patterns("javascript"),
+    "PHP": _platform_patterns("php"),
+    "Go": _platform_patterns("go", "golang"),
+    "C++": _platform_patterns(r"c\+\+"),
+    "Ruby": _platform_patterns("ruby"),
+    "Android": _platform_patterns("android"),
+    "Dart": _platform_patterns("dart"),
+    "Perl": _platform_patterns("perl"),
+    "Swift": _platform_patterns("swift"),
+    "Apex": _platform_patterns("apex"),
+    "Rust": _platform_patterns("rust"),
 }
 
 # aspose.com-specific "platform" choices that are really integration
@@ -110,32 +165,38 @@ TITLE_PLATFORM_PATTERNS: Dict[str, List[str]] = {
 # it detects instead (e.g. a JasperReports post tagged "java", not
 # "general" - a user hit this exact case: "Import SVG in PowerPoint
 # Presentations in JasperReports" was bucketed under Java, so checking
-# platform=JasperReports found nothing). These are distinctive compound
-# terms unlikely to appear in an unrelated title, so - unlike the plain
-# language patterns above - they're checked and override UNCONDITIONALLY,
-# even when the source already gave an explicit (non-"general") platform.
-ALWAYS_OVERRIDE_PLATFORM_PATTERNS: Dict[str, List[str]] = {
+# platform=JasperReports found nothing). Checked before
+# TITLE_PLATFORM_PATTERNS (see _detect_platform_from_title) since these
+# are more specific, distinctive compound terms.
+INTEGRATION_PLATFORM_PATTERNS: Dict[str, List[str]] = {
+    # "SQL Reporting" checked before "Reporting Services" - dict iteration
+    # order matters here, "sql reporting services" contains "reporting
+    # services" as a substring, so the more specific pattern must win.
+    "SQL Reporting": [r"\bsql reporting\b"],
     "JasperReports": [r"\bjasperreports\b"],
     "Reporting Services": [r"\breporting services\b"],
     "SharePoint": [r"\bsharepoint\b"],
+    "Xamarin": [r"\bxamarin\b"],
 }
-
-
-def _detect_integration_platform_from_title(title: str) -> Optional[str]:
-    t = title.lower()
-    for platform, patterns in ALWAYS_OVERRIDE_PLATFORM_PATTERNS.items():
-        for pattern in patterns:
-            if re.search(pattern, t):
-                return platform
-    return None
+# ".NET Core" is deliberately NOT a separate bucket here - unlike the
+# integration targets above, it's still just .NET (a runtime-version
+# distinction, not a different topic), so it's folded into ".NET" on the
+# matching side instead (blog-dashboard's lib/topic-duplicate.ts
+# normalizePlatformForBucket) - consistent with how "Python via .NET" etc.
+# already collapse to "Python" rather than getting their own bucket.
 
 
 def _detect_platform_from_title(title: str) -> Optional[str]:
+    """Checks INTEGRATION_PLATFORM_PATTERNS first (more specific compound
+    terms), then TITLE_PLATFORM_PATTERNS. Both tiers override even an
+    explicit, non-"general" source platform - see the comment above
+    TITLE_PLATFORM_PATTERNS for why that's safe and necessary."""
     t = title.lower()
-    for platform, patterns in TITLE_PLATFORM_PATTERNS.items():
-        for pattern in patterns:
-            if re.search(pattern, t):
-                return platform
+    for patterns_dict in (INTEGRATION_PLATFORM_PATTERNS, TITLE_PLATFORM_PATTERNS):
+        for platform, patterns in patterns_dict.items():
+            for pattern in patterns:
+                if re.search(pattern, t):
+                    return platform
     return None
 
 _PRODUCT_NAME_CACHE: Dict[str, Dict[str, str]] = {}
@@ -177,12 +238,21 @@ def _derive_product(brand: str, rec: dict) -> str:
     return _load_product_names(brand).get(slug, slug)
 
 
-def _expand_platforms(platform_code: str, platforms_in_group: Set[str]) -> List[str]:
-    if platform_code and platform_code != "general":
-        return [PLATFORM_MAP.get(platform_code, platform_code)]
-    if not platforms_in_group:
-        return ["general"]
-    return sorted(PLATFORM_MAP.get(p, p) for p in platforms_in_group)
+def _resolve_platform(rec: dict, title: str) -> Optional[str]:
+    """The final display platform for one record, or None if it's still
+    unresolved ("general", with no title match either) - callers expand an
+    unresolved record into every platform seen elsewhere for the same
+    product (see build_index). Title detection is checked first and wins
+    over an explicit source tag - see the comment above
+    TITLE_PLATFORM_PATTERNS for the three confirmed failure modes that
+    made the source field untrustworthy on its own."""
+    title_platform = _detect_platform_from_title(title)
+    if title_platform:
+        return title_platform
+    source_code = rec.get("platform")
+    if source_code not in (None, "general"):
+        return PLATFORM_MAP.get(source_code, source_code)
+    return None
 
 
 def _load_unique_records(indexer_brand: str) -> List[dict]:
@@ -221,27 +291,28 @@ def build_index() -> Dict[str, List[dict]]:
             by_product.setdefault(_derive_product(brand, rec), []).append(rec)
 
         for product, prod_records in by_product.items():
-            platforms_in_group = {r.get("platform") for r in prod_records if r.get("platform") not in (None, "general")}
-            seen_per_bucket: Dict[str, Set[str]] = {}
+            # Pass 1: resolve each record's final platform (title
+            # detection first, falling back to a trustworthy explicit
+            # source tag - see _resolve_platform). None means still
+            # unresolved ("general", no title match either).
+            resolved = []
             for rec in prod_records:
                 title = rec["title"].strip()
                 entry = {"title": title, "url": rec.get("url", ""), "date": rec.get("published_date", "")}
-                dedupe_key = entry["url"] or title
-                platform_code = rec.get("platform")
-                # Checked first, unconditionally - these override even an
-                # explicit, non-"general" source platform (see
-                # ALWAYS_OVERRIDE_PLATFORM_PATTERNS above).
-                integration_platform = _detect_integration_platform_from_title(title)
-                if integration_platform:
-                    platform_code = integration_platform
-                elif platform_code in (None, "general"):
-                    # _detect_platform_from_title already returns the final
-                    # display label (".NET", "Ruby", ...), not a PLATFORM_MAP
-                    # code - passed straight through, _expand_platforms'
-                    # PLATFORM_MAP.get(x, x) leaves an unrecognized-as-a-code
-                    # value like ".NET" unchanged, which is exactly right here.
-                    platform_code = _detect_platform_from_title(title) or platform_code
-                for platform in _expand_platforms(platform_code, platforms_in_group):
+                resolved.append((entry, _resolve_platform(rec, title)))
+
+            # The platforms genuinely seen for THIS product, from pass 1's
+            # results (not raw source tags) - an unresolved record folds
+            # into every one of these, not every platform the brand offers
+            # anywhere, and not into platforms that only exist because of
+            # OTHER unresolved records being folded in circularly.
+            platforms_in_group = sorted({p for _, p in resolved if p})
+
+            seen_per_bucket: Dict[str, Set[str]] = {}
+            for entry, final_platform in resolved:
+                dedupe_key = entry["url"] or entry["title"]
+                platforms = [final_platform] if final_platform else (platforms_in_group or ["general"])
+                for platform in platforms:
                     key = f"{brand}|{product}|{platform}"
                     bucket_seen = seen_per_bucket.setdefault(key, set())
                     if dedupe_key in bucket_seen:
