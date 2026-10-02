@@ -16,7 +16,7 @@ import sys
 print("MCP Server (blog-keyword-analyzer) starting...", file=sys.stderr, flush=True)
 
 from fastmcp import FastMCP
-from .runner import run as analyze_keywords_run
+from .runner import run_sync
 from .schemas import RunRequest, TopicIdea
 
 mcp = FastMCP("blog-keyword-analyzer")
@@ -80,8 +80,8 @@ async def fetch_keywords(
             topic, product_name, platform, brand
         )
 
-        # Run the keyword analysis workflow
-        run_result = await analyze_keywords_run(run_request)
+        # Run the keyword analysis workflow (run_sync is synchronous)
+        run_result, metrics = run_sync(run_request, platform=platform)
 
         if not run_result or not run_result.topics:
             logger.warning("No topics generated for %r", topic)
