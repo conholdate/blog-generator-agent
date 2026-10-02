@@ -9,6 +9,7 @@
   "rejected_sections": [
     "New Features and Enhancements",
     "Other Improvements and Changes",
-    "Presentation animations can be rendered frame by frame (duplicate)"
+    "Presentation animations can be rendered frame by frame (duplicate)",
+    "Public API Changes"
   ]
 }
