@@ -1,0 +1,34 @@
+{
+  "scores": {
+    "technical_accuracy": 9,
+    "code_correctness": 7,
+    "original_value": 6,
+    "source_faithfulness": 9,
+    "seo_readiness": 6,
+    "readability": 6,
+    "duplication_risk": 3,
+    "missing_citations": false,
+    "unsupported_claims": false
+  },
+  "scorecard": {
+    "search_intent": 5,
+    "technical_accuracy": 20,
+    "original_value": 12,
+    "answer_first_structure": 10,
+    "seo_metadata": 7,
+    "internal_linking": 10,
+    "accessibility": 1,
+    "llm_clarity": 4,
+    "total": 69,
+    "critical_technical_error": false,
+    "passes": false
+  },
+  "publication_status": "ready_for_editor",
+  "reasons": [
+    "SEO title longer than 65 characters",
+    "Body contains its own top-level '# ' heading; the renderer already adds the H1 from the title",
+    "Focus keyword 'Rendering slide animations frame-by-frame in python-net' does not appear in the introduction",
+    "QA scorecard 69/100 is below the 85 publish threshold",
+    "Code sample has not been executed in a sandbox (not feasible: proprietary SDK/license/input files)"
+  ]
+}

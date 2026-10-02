@@ -1,21 +1,15 @@
 {
-  "source_url": "https://releases.aspose.com/email/net/release-notes/2026/aspose-email-for-net-26-9-release-notes/",
+  "source_url": "https://releases.aspose.com/slides/python-net/release-notes/2026/aspose-slides-for-python-net-26-9-release-notes/",
   "source_type": "release-notes",
   "publication_readiness": "draft_ready",
   "blocker_reason": null,
   "topics_generated": [
-    "Support for RFC Message file format detection",
-    "TgzReader GetItemsCount method for item type quantities",
-    "Async item count methods for TgzReader",
-    "Adding Attachments from a Stream or a File",
-    "Deferred Attachment Content Loading"
+    "Presentation animations can be rendered frame by frame"
   ],
   "rejected_sections": [
-    "All Changes",
-    "Support for RFC Message file format detection (duplicate)",
-    "TgzReader GetItemsCount method for item type quantities (duplicate)",
-    "Async item count methods for TgzReader (duplicate)",
-    "Adding Attachments from a Stream or a File (duplicate)",
-    "Deferred Attachment Content Loading (duplicate)"
+    "New Features and Enhancements",
+    "Other Improvements and Changes",
+    "Public API Changes",
+    "Presentation animations can be rendered frame by frame (duplicate)"
   ]
 }
