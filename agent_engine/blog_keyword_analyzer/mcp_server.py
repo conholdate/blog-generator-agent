@@ -3,7 +3,9 @@ Blog Keyword Analyzer MCP Server
 Exposes the blog-keyword-analyzer agent as an MCP tool for integration with other agents.
 """
 
+import asyncio
 import logging
+from concurrent.futures import ThreadPoolExecutor
 
 # Setup logging (stderr only to keep stdout clean for JSON-RPC)
 logging.basicConfig(
@@ -18,6 +20,9 @@ print("MCP Server (blog-keyword-analyzer) starting...", file=sys.stderr, flush=T
 from fastmcp import FastMCP
 from .runner import run_sync
 from .schemas import RunRequest, TopicIdea
+
+# Thread pool for running sync code from async context
+_executor = ThreadPoolExecutor(max_workers=1, thread_name_prefix="blog-kwa")
 
 mcp = FastMCP("blog-keyword-analyzer")
 
@@ -82,12 +87,17 @@ async def fetch_keywords(
 
         # Run the keyword analysis workflow (run_sync is synchronous)
         # Pass seed_topic and empty records to skip CSV file loading
-        run_result, metrics = run_sync(
-            run_request,
-            platform=platform,
-            seed_topic=topic,
-            records=[],  # Skip file loading; use seed_topic only
-            use_content_index=False,  # Skip content index lookup
+        # Use thread pool to avoid nested event loop error in FastMCP async context
+        loop = asyncio.get_running_loop()
+        run_result, metrics = await loop.run_in_executor(
+            _executor,
+            lambda: run_sync(
+                run_request,
+                platform=platform,
+                seed_topic=topic,
+                records=[],  # Skip file loading; use seed_topic only
+                use_content_index=False,  # Skip content index lookup
+            ),
         )
 
         if not run_result or not run_result.topics:
