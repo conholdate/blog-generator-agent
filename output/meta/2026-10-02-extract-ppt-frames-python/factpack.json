@@ -1,0 +1,82 @@
+{
+  "topic": "Extracting PowerPoint Animation Frames with Aspose.Slides for Python via .NET",
+  "primary_source_url": "https://releases.aspose.com/slides/python-net/release-notes/2026/aspose-slides-for-python-net-26-9-release-notes/",
+  "source_title": "Aspose.Slides for Python via .NET 26.9 Release Notes",
+  "sdk_version": "Aspose.Slides for Python via .NET 26.9 Release Notes",
+  "main_problem_solved": "Introduces PresentationAnimationsGenerator and PresentationPlayer, enabling developers to play slide animations and capture each frame as an image, with full .NET‑style event handling available in Python.",
+  "platform": {
+    "platform_key": "python-net",
+    "platform_name": "Python",
+    "language": "Python",
+    "language_tag": "python",
+    "package_manager": "pip",
+    "install_command": "pip install aspose-slides",
+    "product_key": "slides",
+    "product_display": "Slides",
+    "brand_key": "aspose",
+    "brand_name": "Aspose",
+    "product_full_name": "Aspose.Slides",
+    "product_page_url": "https://products.aspose.com/slides/python-net/",
+    "docs_url": "https://docs.aspose.com/slides/python-net/",
+    "api_reference_url": "https://reference.aspose.com/slides/python-net/",
+    "free_apps_url": "https://products.aspose.app/slides/family",
+    "license_url": "https://purchase.aspose.com/temporary-license/",
+    "forum_url": "https://forum.aspose.com/c/slides/",
+    "blog_domain": "https://blog.aspose.com",
+    "blog_category_url": "https://blog.aspose.com/categories/aspose.slides-product-family/"
+  },
+  "source_type": "release_notes",
+  "keyword_analysis": null,
+  "key_steps": [],
+  "code_snippets": [
+    "import aspose.slides as slides\nfrom aspose.slides.animation import EffectType, EffectSubtype, EffectTriggerType\nfrom aspose.slides.export import PresentationAnimationsGenerator, PresentationPlayer\n\nFPS = 30\n\nwith slides.Presentation() as presentation:\n    slide = presentation.slides[0]\n    shape = slide.shapes.add_auto_shape(slides.ShapeType.RECTANGLE, 50, 50, 200, 100)\n    slide.timeline.main_sequence.add_effect(\n        shape, EffectType.FADE, EffectSubtype.NONE, EffectTriggerType.AFTER_PREVIOUS)\n\n    def on_frame_tick(sender, args):\n        with args.get_frame() as frame:\n            frame.save(f\"frame_{sender.frame_index:04d}.png\")\n\n    with PresentationAnimationsGenerator(presentation) as generator:\n        with PresentationPlayer(generator, FPS) as player:\n            player.frame_tick += on_frame_tick\n            generator.run(presentation.slides)\n\n# Alternative: handle frames via a lambda passed to run\nwith PresentationAnimationsGenerator(presentation) as generator:\n    generator.run(presentation.slides, FPS, lambda sender, args: print(\"Frame\", sender.frame_index))\n\n# Handling the new_animation event\n\ndef on_new_animation(animation_player):\n    print(\"Animation duration:\", animation_player.duration)\n\ngenerator.new_animation += on_new_animation"
+  ],
+  "limitations": [],
+  "warnings": [
+    "Editorial signal for the pipeline and human reviewer only, not for the article: the code sample matches the vendor's own release notes verbatim but has not been executed, so it is untested. Do not describe it as tested, and do not add any provenance or verification note to the article."
+  ],
+  "related_concepts": [
+    "Presentation",
+    "PresentationAnimationsGenerator",
+    "PresentationPlayer",
+    "add_auto_shape",
+    "add_effect",
+    "get_frame",
+    "save",
+    "run"
+  ],
+  "facts_confirmed_from_source": [
+    "Heading: Presentation animations can be rendered frame by frame",
+    "Introduces PresentationAnimationsGenerator and PresentationPlayer, enabling developers to play slide animations and capture each frame as an image, with full .NET‑style event handling available in Python.",
+    "API used: aspose.slides",
+    "API used: aspose.slides.animation",
+    "API used: aspose.slides.export"
+  ],
+  "facts_needing_verification": [],
+  "suggested_article_outline": [
+    "Introduction",
+    "Key Takeaways",
+    "Why this feature matters",
+    "Brief introduction of the API (install + product/docs links)",
+    "Step-by-step tutorial with a code example",
+    "Conclusion",
+    "FAQs",
+    "Get a Free License and Explore More (one section, placed last as the strongest CTA slot)",
+    "See Also (only if related post URLs are supplied)"
+  ],
+  "code_verification": {
+    "language": "Python",
+    "tested": false,
+    "source_verified": true,
+    "syntax_valid": true,
+    "package_name": null,
+    "package_version": null,
+    "os": null,
+    "input_file_used": null,
+    "output_file_generated": null,
+    "errors": [],
+    "notes": "Code sample matches a block scraped verbatim from the product team's release notes page. Static syntax check passed (balanced brackets/quotes). Sandboxed execution against the real vendor SDK is not attempted: these samples reference proprietary licensed assemblies, external input files, and sometimes network services (e.g. a timestamp authority URL) that only exist in the product team's own test environment."
+  },
+  "prerequisites": [],
+  "doc_topics": []
+}
