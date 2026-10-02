@@ -97,6 +97,7 @@ async def fetch_keywords(
                 seed_topic=topic,
                 records=[],  # Skip file loading; use seed_topic only
                 use_content_index=False,  # Skip content index lookup
+                source="llm",  # Use LLM for keyword generation from seed_topic
             ),
         )
 
