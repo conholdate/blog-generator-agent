@@ -67,6 +67,7 @@ jobs:
           set -euo pipefail
           cat > .env << EOF
           PROFESSIONALIZE_BASE_URL=${{ secrets.PROFESSIONALIZE_BASE_URL }}
+          PROFESSIONALIZE_API_KEY=${{ secrets.PROFESSIONALIZE_API_KEY_1 }}
           PROFESSIONALIZE_API_KEY_1=${{ secrets.PROFESSIONALIZE_API_KEY_1 }}
           PROFESSIONALIZE_API_KEY_2=${{ secrets.PROFESSIONALIZE_API_KEY_1 }}
           PROFESSIONALIZE_LLM_MODEL=${{ secrets.PROFESSIONALIZE_LLM_MODEL }}
