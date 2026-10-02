@@ -11,7 +11,9 @@ from .mcp_client import McpToolError
 
 logger = logging.getLogger(__name__)
 
-_KEYWORDS_SERVER = "keywords_auto/server.py"
+# Use blog-keyword-analyzer agent via MCP wrapper. Falls back to keywords_auto if not available.
+_KEYWORDS_SERVER = "blog-keyword-analyzer/server.py"
+_KEYWORDS_SERVER_FALLBACK = "keywords_auto/server.py"
 
 
 class TitledTopic(Protocol):
@@ -25,10 +27,9 @@ class TitledTopic(Protocol):
 
 
 def analyze_topic(topic: TitledTopic, platform: PlatformContext, settings: Settings) -> KeywordAnalysisResult | None:
-    """Calls the keywords_auto MCP server (mcp-servers/keywords_auto) over
-    stdio for SEO keyword groups — the same MCP-over-stdio convention
-    agent_engine/blog_generator uses for its own fetch_keywords_auto() call
-    (see pipeline/mcp_client.py).
+    """Calls the blog-keyword-analyzer MCP server (mcp-servers/blog-keyword-analyzer)
+    over stdio for SEO keyword groups. Falls back to keywords_auto if blog-keyword-analyzer
+    is unavailable.
 
     This is best-effort enrichment, not a pipeline requirement: any failure
     (server disabled, unreachable, timeout, empty response) returns None and
@@ -45,26 +46,15 @@ def analyze_topic(topic: TitledTopic, platform: PlatformContext, settings: Setti
         topic.suggested_title, product, platform.platform_key,
     )
 
-    try:
-        response = mcp_client.call_tool(
-            _KEYWORDS_SERVER,
-            "fetch_keywords",
-            {
-                "topic": topic.suggested_title,
-                "product_name": product,
-                "platform": platform.platform_key or "",
-            },
-            settings,
-            # keywords_auto's own config.py reads PROFESSIONALIZE_API_KEY_2, which
-            # isn't set in its .env (only _1 is) — pass our key through as a
-            # process env var, which pydantic-settings prefers over its .env file,
-            # rather than editing that repo's .env.
-            extra_env={"PROFESSIONALIZE_API_KEY_2": settings.professionalize_api_key}
-            if settings.professionalize_api_key
-            else None,
-        )
-    except (McpToolError, OSError, TimeoutError) as exc:
-        logger.warning("Keyword analyzer skipped: %s", exc)
+    # Try blog-keyword-analyzer first, fall back to keywords_auto if it fails
+    response = _call_keyword_analyzer(
+        topic.suggested_title,
+        product,
+        platform.platform_key or "",
+        settings,
+    )
+
+    if response is None:
         return None
 
     if not isinstance(response, dict) or response.get("status") == "error":
@@ -86,6 +76,50 @@ def analyze_topic(topic: TitledTopic, platform: PlatformContext, settings: Setti
         len(result.keyword_groups.long_tail_keywords),
     )
     return result
+
+
+def _call_keyword_analyzer(
+    topic: str,
+    product: str,
+    platform: str,
+    settings: Settings,
+) -> dict | None:
+    """Try blog-keyword-analyzer first, fall back to keywords_auto if it fails."""
+    try:
+        # Try the primary blog-keyword-analyzer server
+        logger.debug("Trying blog-keyword-analyzer MCP server")
+        return mcp_client.call_tool(
+            _KEYWORDS_SERVER,
+            "fetch_keywords",
+            {
+                "topic": topic,
+                "product_name": product,
+                "platform": platform,
+                "brand": "Aspose",
+            },
+            settings,
+        )
+    except (McpToolError, OSError, TimeoutError) as exc:
+        logger.warning("blog-keyword-analyzer unavailable: %s; trying fallback keywords_auto", exc)
+
+        # Fall back to keywords_auto if blog-keyword-analyzer fails
+        try:
+            return mcp_client.call_tool(
+                _KEYWORDS_SERVER_FALLBACK,
+                "fetch_keywords",
+                {
+                    "topic": topic,
+                    "product_name": product,
+                    "platform": platform,
+                },
+                settings,
+                extra_env={"PROFESSIONALIZE_API_KEY_2": settings.professionalize_api_key}
+                if settings.professionalize_api_key
+                else None,
+            )
+        except (McpToolError, OSError, TimeoutError) as exc2:
+            logger.warning("Both keyword analyzers failed: %s", exc2)
+            return None
 
 
 def _to_keyword_analysis_result(keywords: dict) -> KeywordAnalysisResult:

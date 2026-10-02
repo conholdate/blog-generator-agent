@@ -1329,6 +1329,7 @@ class KeywordResearchAgent:
         request_kwargs: Dict[str, Any] = {
             "model": self.model,
             "temperature": 0.2,
+            "max_tokens": 8192,
             "messages": [
                 {"role": "system", "content": system},
                 {"role": "user", "content": json.dumps(payload)},
