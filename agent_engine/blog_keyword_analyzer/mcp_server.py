@@ -70,7 +70,7 @@ async def fetch_keywords(
             brand=brand,
             product=product_name,
             locale="en-US",
-            file_path="",  # Empty to let importer search defaults
+            file_path="",  # Not used when records are provided
             top_clusters=3,  # Limit to top 3 clusters for faster processing
             max_rows=50000,
         )
@@ -81,7 +81,14 @@ async def fetch_keywords(
         )
 
         # Run the keyword analysis workflow (run_sync is synchronous)
-        run_result, metrics = run_sync(run_request, platform=platform)
+        # Pass seed_topic and empty records to skip CSV file loading
+        run_result, metrics = run_sync(
+            run_request,
+            platform=platform,
+            seed_topic=topic,
+            records=[],  # Skip file loading; use seed_topic only
+            use_content_index=False,  # Skip content index lookup
+        )
 
         if not run_result or not run_result.topics:
             logger.warning("No topics generated for %r", topic)
@@ -128,11 +135,17 @@ async def fetch_keywords(
             "topic_idea": topic_idea.model_dump(),  # Full analysis for advanced consumers
         }
 
-    except Exception as e:
-        logger.exception("Keyword analysis failed for topic %r: %s", topic, e)
+    except (Exception, SystemExit) as e:
+        error_msg = str(e)
+        logger.exception("Keyword analysis failed for topic %r: %s", topic, error_msg)
+
+        # SystemExit typically means missing API key or config — let consumers fall back gracefully
+        if isinstance(e, SystemExit):
+            error_msg = f"Configuration error: {error_msg}"
+
         return {
             "status": "error",
-            "error": str(e),
+            "error": error_msg,
             "topic": topic,
             "keywords": {
                 "primary": [topic],
