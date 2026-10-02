@@ -22,7 +22,13 @@ import requests
 
 from .topic_embeddings import embed_and_quantize, pack_vector
 
-REPO_ROOT = Path(__file__).resolve().parents[2]
+# parents[0]=utils, [1]=blog_generator, [2]=agent_engine, [3]=repo root.
+# Was parents[2] (resolved to .../agent_engine, one level too shallow) -
+# a real bug that silently wrote every append to
+# agent_engine/content/dashboard_topic_index.json (untracked, never
+# committed) instead of the real file, confirmed via a live CI run's
+# "Untracked files: agent_engine/content/" in its git status output.
+REPO_ROOT = Path(__file__).resolve().parents[3]
 INDEX_PATH = REPO_ROOT / "content" / "dashboard_topic_index.json"
 
 
