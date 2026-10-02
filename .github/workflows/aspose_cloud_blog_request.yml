@@ -98,6 +98,8 @@ jobs:
       - name: Generate Blog (manual mode from dashboard request)
         id: generate_blog
         env:
+          KV_REST_API_URL: ${{ secrets.KV_REST_API_URL }}
+          KV_REST_API_TOKEN: ${{ secrets.KV_REST_API_TOKEN }}
           PRODUCT: ${{ github.event.client_payload.product }}
           PLATFORM: ${{ github.event.client_payload.platform }}
           TOPIC: ${{ github.event.client_payload.topic }}

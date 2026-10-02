@@ -154,6 +154,8 @@ jobs:
       - name: Generate Blog
         id: generate_blog
         env:
+          KV_REST_API_URL: ${{ secrets.KV_REST_API_URL }}
+          KV_REST_API_TOKEN: ${{ secrets.KV_REST_API_TOKEN }}
           AUTONOMOUS: ${{ inputs.autonomous }}
           TOPIC: ${{ inputs.topic }}
           OUTLINE: ${{ inputs.outline }}
