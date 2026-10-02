@@ -570,7 +570,7 @@ class BlogOrchestrator:
                 product=product_family_from_category(product_info.get("Category", "")),
                 platform=product_info.get("ProgrammingLanguage", platform),
                 title=blog_post_metadata['title'],
-                url=f"{self.brand}{blog_post_metadata['url']}",
+                url=f"https://blog.{self.brand}{blog_post_metadata['url']}",
                 date=blog_post_metadata['date'],
             )
 
@@ -969,7 +969,7 @@ class BlogOrchestrator:
                     product=product,
                     platform=product_info.get("ProgrammingLanguage", platform),
                     title=blog_post_metadata.get("title") or post_topic,
-                    url=f"{self.brand}{blog_post_metadata.get('url') or ''}",
+                    url=f"https://blog.{self.brand}{blog_post_metadata.get('url') or ''}",
                     date=blog_post_metadata.get("date") or "",
                 )
 

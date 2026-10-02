@@ -186,6 +186,25 @@ INTEGRATION_PLATFORM_PATTERNS: Dict[str, List[str]] = {
 # already collapse to "Python" rather than getting their own bucket.
 
 
+def _normalize_url(brand: str, raw_url: str) -> str:
+    """content_indexer_agent's own `url` field is inconsistent - sometimes
+    a full URL ("https://blog.aspose.com/gis/.../"), sometimes a bare
+    "<brand>/path/" with no scheme and no "blog." subdomain. The bare form
+    redirects to the brand's marketing site (not the blog subdomain) and
+    404s there - confirmed live (a user hit exactly this, 404 on a match's
+    link). 1,824/9,654 entries (19%) had the bare form, all consistently
+    starting with "<brand>/" (verified, zero exceptions). Every other
+    writer in this pipeline (orchestrator.py's append_new_post,
+    backfill_missing_history.py, backfill_missing_products.py) already
+    constructs the full form - this is the one holdout."""
+    if not raw_url or raw_url.startswith("http"):
+        return raw_url
+    prefix = f"{brand}/"
+    if raw_url.startswith(prefix):
+        return f"https://blog.{brand}/{raw_url[len(prefix):]}"
+    return raw_url  # unexpected shape - leave untouched rather than guess
+
+
 def _detect_platform_from_title(title: str) -> Optional[str]:
     """Checks INTEGRATION_PLATFORM_PATTERNS first (more specific compound
     terms), then TITLE_PLATFORM_PATTERNS. Both tiers override even an
@@ -316,7 +335,7 @@ def build_index() -> Dict[str, List[dict]]:
             resolved = []
             for rec in prod_records:
                 title = rec["title"].strip()
-                entry = {"title": title, "url": rec.get("url", ""), "date": rec.get("published_date", "")}
+                entry = {"title": title, "url": _normalize_url(brand, rec.get("url", "")), "date": rec.get("published_date", "")}
                 resolved.append((entry, _resolve_platform(rec, title)))
 
             # The platforms genuinely seen for THIS product, from pass 1's
