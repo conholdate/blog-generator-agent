@@ -1051,7 +1051,7 @@
     "APIReferenceURL": "https://reference.groupdocs.cloud/merger/",
     "FreeAppsURL": "https://products.groupdocs.app/merger/family",
     "ForumsURL": "https://forum.groupdocs.cloud/c/merger/18",
-    "InstallCommand": "<dependency>\n<groupId>com.groupdocs</groupId>\n<artifactId>groupdocs-merger-cloud</artifactId>\n<version>25.11</version>\n</dependency>",
+    "InstallCommand": "<dependency>\n<groupId>com.groupdocs</groupId>\n<artifactId>groupdocs-merger-cloud</artifactId>\n<version>26.9</version>\n</dependency>",
     "urlPrefix": "merger",
     "license": "https://purchase.groupdocs.cloud/temporary-license/"
   },
