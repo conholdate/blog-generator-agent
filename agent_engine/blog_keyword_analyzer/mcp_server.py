@@ -5,7 +5,7 @@ Exposes the blog-keyword-analyzer agent as an MCP tool for integration with othe
 
 import asyncio
 import logging
-from concurrent.futures import ThreadPoolExecutor
+from threading import local
 
 # Setup logging (stderr only to keep stdout clean for JSON-RPC)
 logging.basicConfig(
@@ -21,14 +21,34 @@ from fastmcp import FastMCP
 from .runner import run_sync
 from .schemas import RunRequest, TopicIdea
 
-# Thread pool for running sync code from async context
-_executor = ThreadPoolExecutor(max_workers=1, thread_name_prefix="blog-kwa")
+# Thread-local storage for event loops (FastMCP runs sync tools in threads)
+_thread_local = local()
 
 mcp = FastMCP("blog-keyword-analyzer")
 
 
+def _ensure_event_loop():
+    """Ensure an event loop exists for the current thread.
+
+    When FastMCP runs sync tools, it uses a thread pool without event loops.
+    The agents SDK needs an event loop, so we create one if it doesn't exist.
+    """
+    try:
+        asyncio.get_running_loop()
+    except RuntimeError:
+        # No running loop, try to get or create one for this thread
+        try:
+            loop = asyncio.get_event_loop()
+            if loop.is_closed():
+                raise RuntimeError("Event loop is closed")
+        except RuntimeError:
+            loop = asyncio.new_event_loop()
+            asyncio.set_event_loop(loop)
+        _thread_local.loop = loop
+
+
 @mcp.tool()
-async def fetch_keywords(
+def fetch_keywords(
     topic: str,
     product_name: str = "Aspose.Cells",
     platform: str = "general",
@@ -70,6 +90,12 @@ async def fetch_keywords(
         }
     """
     try:
+        # Ensure event loop exists (FastMCP runs sync tools in threads without loops)
+        _ensure_event_loop()
+
+        # Normalize topic: replace en-dashes, em-dashes with regular hyphens for consistency
+        normalized_topic = topic.replace("‑", "-").replace("–", "-").replace("—", "-")
+
         # Build RunRequest for the workflow
         run_request = RunRequest(
             brand=brand,
@@ -81,28 +107,28 @@ async def fetch_keywords(
         )
 
         logger.debug(
-            "Analyzing keywords for topic=%r product=%r platform=%r brand=%r",
-            topic, product_name, platform, brand
+            "Analyzing keywords for topic=%r (normalized=%r) product=%r platform=%r brand=%r",
+            topic, normalized_topic, product_name, platform, brand
         )
 
         # Run the keyword analysis workflow (run_sync is synchronous)
-        # Pass seed_topic and empty records to skip CSV file loading
-        # Use thread pool to avoid nested event loop error in FastMCP async context
-        loop = asyncio.get_running_loop()
-        run_result, metrics = await loop.run_in_executor(
-            _executor,
-            lambda: run_sync(
-                run_request,
-                platform=platform,
-                seed_topic=topic,
-                records=[],  # Skip file loading; use seed_topic only
-                use_content_index=False,  # Skip content index lookup
-                source="llm",  # Use LLM for keyword generation from seed_topic
-            ),
+        # Pass normalized seed_topic and empty records to skip CSV file loading
+        run_result, metrics = run_sync(
+            run_request,
+            platform=platform,
+            seed_topic=normalized_topic,
+            records=[],  # Skip file loading; use seed_topic only
+            use_content_index=False,  # Skip content index lookup
+            source="llm",  # Use LLM for keyword generation from seed_topic
         )
 
         if not run_result or not run_result.topics:
-            logger.warning("No topics generated for %r", topic)
+            logger.warning(
+                "No topics generated for %r (clusters=%d, opportunities=%d)",
+                topic,
+                len(run_result.clusters) if run_result else 0,
+                len(run_result.keyword_opportunities) if run_result else 0,
+            )
             return {
                 "status": "error",
                 "error": "No topics generated",
