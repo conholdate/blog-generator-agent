@@ -31,9 +31,25 @@ class DiffResult:
 
 
 def pairs_from_json(products: list[dict], config: BrandConfig) -> dict[Pair, dict]:
+    """Match each stored entry back to its (url_prefix, platform_key) pair.
+
+    Parses DownloadURL, not ProductURL: fields.py's DownloadURL template
+    always uses the real platform_key directly, with no slug override
+    applied, while ProductURL can be deliberately overridden to share a
+    slug with a different, real platform in the same product family (e.g.
+    aspose.com's ocr/java-gpu, which has no standalone product page and so
+    points ProductURL at ocr/java's). Parsing ProductURL for this previously
+    collided both products onto the same Pair, which silently corrupted
+    one of them with the other's data every reconciliation run and kept
+    re-appending the other as a "new platform" forever (see
+    url_slug_overrides' and json_slug_aliases' docstrings in config.py for
+    the full history). Falls back to ProductURL only for the rare entry
+    missing DownloadURL entirely (confirmed: one on aspose.cloud).
+    """
     by_pair: dict[Pair, dict] = {}
     for p in products:
-        parts = [seg for seg in urlparse(p.get("ProductURL", "")).path.split("/") if seg]
+        url = p.get("DownloadURL") or p.get("ProductURL", "")
+        parts = [seg for seg in urlparse(url).path.split("/") if seg]
         if len(parts) < 2:
             continue
         url_prefix, raw_platform = parts[0], parts[1]

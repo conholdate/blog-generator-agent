@@ -12,11 +12,14 @@ cd "$GITHUB_REPO" || exit 1
 mkdir -p /tmp/lab-patches && rm -f /tmp/lab-patches/*.patch
 
 # Generate patches for everything since last sync, EXCLUDING this script file,
-# the logs file (handled separately below, not via patch), and audit reports
-# (generated output that diverges between independently-run clones and isn't
-# meant to be synced at all).
+# the logs file and topic index (both handled separately below, not via
+# patch - they're rewritten wholesale on every run, so patching them
+# incrementally just produces conflicts once the two repos drift), and audit
+# reports (generated output that diverges between independently-run clones
+# and isn't meant to be synced at all).
 git format-patch lab-sync..main -o /tmp/lab-patches --quiet \
-  -- . ':!sync-to-gitlab.sh' ':!content/logs/logs.txt' ':!outputs/audit/*'
+  -- . ':!sync-to-gitlab.sh' ':!content/logs/logs.txt' \
+  ':!content/dashboard_topic_index.json' ':!outputs/audit/*'
 
 if [ -z "$(ls -A /tmp/lab-patches 2>/dev/null)" ]; then
   echo "Nothing new to sync"
@@ -28,20 +31,33 @@ fi
 cd "$GITLAB_REPO" || exit 1
 
 if [ -n "$(ls -A /tmp/lab-patches 2>/dev/null)" ]; then
-  git am /tmp/lab-patches/*.patch || {
+  # --keep-cr: without it, git am's own mbox/email parsing strips \r from
+  # patch content before applying it (a standard git-am behavior, since a
+  # patch is formatted as an email body) - several workflow YAML files are
+  # CRLF, so this silently broke every patch touching them, independent of
+  # how cleanly format-patch generated the patch in the first place.
+  git am --keep-cr /tmp/lab-patches/*.patch || {
     echo "⚠️  Patch conflict — resolve the file, then: git am --continue && git push"
     echo "    (or abort with: git am --abort)"
     exit 1
   }
 fi
 
-# Always bring logs.txt to the current GitHub state directly (no patching).
-# This avoids repeated conflicts since the GitHub Action appends to it constantly.
+# Always bring logs.txt and the topic index to the current GitHub state
+# directly (no patching). This avoids repeated conflicts since the GitHub
+# Action rewrites both constantly.
 if ! cmp -s "$GITHUB_REPO/content/logs/logs.txt" "content/logs/logs.txt" 2>/dev/null; then
   cp "$GITHUB_REPO/content/logs/logs.txt" content/logs/logs.txt
   git add content/logs/logs.txt
   git commit -m "Sync logs.txt with source repo" --quiet
   echo "📝 logs.txt updated"
+fi
+
+if ! cmp -s "$GITHUB_REPO/content/dashboard_topic_index.json" "content/dashboard_topic_index.json" 2>/dev/null; then
+  cp "$GITHUB_REPO/content/dashboard_topic_index.json" content/dashboard_topic_index.json
+  git add content/dashboard_topic_index.json
+  git commit -m "Sync dashboard_topic_index.json with source repo" --quiet
+  echo "📝 dashboard_topic_index.json updated"
 fi
 
 git push
