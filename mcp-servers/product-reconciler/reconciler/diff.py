@@ -30,33 +30,92 @@ class DiffResult:
     potential_removals: list[Pair] # in the JSON but no longer on products.aspose.cloud
 
 
+def _pair_from_url(url: str, config: BrandConfig) -> Pair | None:
+    parts = [seg for seg in urlparse(url).path.split("/") if seg]
+    if len(parts) < 2:
+        return None
+    url_prefix, raw_platform = parts[0], parts[1]
+    platform_key = config.json_slug_aliases.get(
+        (url_prefix, raw_platform), normalize_platform_key(raw_platform, config)
+    )
+    return Pair(url_prefix, platform_key)
+
+
+def _candidate_pairs(entry: dict, config: BrandConfig) -> list[Pair]:
+    """Every (url_prefix, platform_key) this entry's own stored URLs
+    suggest, DownloadURL first then ProductURL, deduplicated.
+
+    DownloadURL is normally the more reliable signal — fields.py's
+    deterministic template always derives it straight from platform_key,
+    with no slug override applied — but either field can, for a product
+    that shares a page with a sibling, collide with a different, real
+    product: confirmed live twice on aspose.com. ocr/java-gpu has no
+    standalone product page, so its ProductURL points at ocr/java's
+    (DownloadURL stays correctly distinct). slides/net-core is a
+    discontinued SDK whose DownloadURL was never given its own release
+    page and still points at slides/net's (ProductURL stays correctly
+    distinct, and net-core isn't even a live platform any more). Neither
+    field is safe to trust alone; keeping both lets pairs_from_json's
+    collision resolution fall back to whichever one is actually unique
+    for this particular entry.
+    """
+    seen, candidates = set(), []
+    for field_name in ("DownloadURL", "ProductURL"):
+        pair = _pair_from_url(entry.get(field_name, ""), config)
+        if pair and pair not in seen:
+            seen.add(pair)
+            candidates.append(pair)
+    return candidates
+
+
 def pairs_from_json(products: list[dict], config: BrandConfig) -> dict[Pair, dict]:
     """Match each stored entry back to its (url_prefix, platform_key) pair.
 
-    Parses DownloadURL, not ProductURL: fields.py's DownloadURL template
-    always uses the real platform_key directly, with no slug override
-    applied, while ProductURL can be deliberately overridden to share a
-    slug with a different, real platform in the same product family (e.g.
-    aspose.com's ocr/java-gpu, which has no standalone product page and so
-    points ProductURL at ocr/java's). Parsing ProductURL for this previously
-    collided both products onto the same Pair, which silently corrupted
-    one of them with the other's data every reconciliation run and kept
-    re-appending the other as a "new platform" forever (see
-    url_slug_overrides' and json_slug_aliases' docstrings in config.py for
-    the full history). Falls back to ProductURL only for the rare entry
-    missing DownloadURL entirely (confirmed: one on aspose.cloud).
+    Two entries can legitimately propose the same first-choice pair (see
+    _candidate_pairs) when they share a URL with a sibling product.
+    Resolve that by giving the contested pair to whichever entry has no
+    other viable candidate, and letting the other fall back to its
+    alternate — which is never a guess, only ever a pair that entry's own
+    stored URL actually names. This is enough to correctly split both
+    confirmed real cases (ocr/java vs ocr/java-gpu, slides/net vs
+    slides/net-core) without needing a live network check, since in both
+    cases exactly one side of the collision has a genuinely unique
+    alternate and the other doesn't.
     """
+    entries = [(p, _candidate_pairs(p, config)) for p in products]
+
+    claimants: dict[Pair, list[int]] = {}
+    for i, (_, candidates) in enumerate(entries):
+        if candidates:
+            claimants.setdefault(candidates[0], []).append(i)
+
     by_pair: dict[Pair, dict] = {}
-    for p in products:
-        url = p.get("DownloadURL") or p.get("ProductURL", "")
-        parts = [seg for seg in urlparse(url).path.split("/") if seg]
-        if len(parts) < 2:
-            continue
-        url_prefix, raw_platform = parts[0], parts[1]
-        platform_key = config.json_slug_aliases.get(
-            (url_prefix, raw_platform), normalize_platform_key(raw_platform, config)
-        )
-        by_pair[Pair(url_prefix, platform_key)] = p
+    contested: list[int] = []
+    for pair, idxs in claimants.items():
+        if len(idxs) == 1:
+            by_pair[pair] = entries[idxs[0]][0]
+        else:
+            contested.extend(idxs)
+
+    still_contested: list[int] = []
+    for i in contested:
+        entry, candidates = entries[i]
+        for pair in candidates[1:]:
+            if pair not in by_pair:
+                by_pair[pair] = entry
+                break
+        else:
+            still_contested.append(i)
+
+    # Last resort for a pair still contested with no viable alternate on
+    # either side (not yet observed in real data): keep this function's
+    # original behavior, the last entry in the array wins, rather than
+    # dropping the pair entirely.
+    for i in still_contested:
+        entry, candidates = entries[i]
+        if candidates:
+            by_pair[candidates[0]] = entry
+
     return by_pair
 
 
