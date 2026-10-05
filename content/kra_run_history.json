@@ -25,7 +25,7 @@
     "aspose|aspose.html|java": 1,
     "aspose|aspose.html|python": 1,
     "aspose|aspose.html|net": 1,
-    "conholdate|conholdate.total|java": 1,
+    "conholdate|conholdate.total|java": 0,
     "aspose.cloud|aspose.cells|net": 0,
     "aspose.cloud|aspose.cells|java": 2,
     "aspose.cloud|aspose.cells|php": 0,
@@ -169,7 +169,8 @@
     "LaTeX to HTML Conversion Without External Tools in Java",
     "LaTeX to HTML Conversion Example in Java",
     "MPP PDF Conversion Tool in Java: Complete Tutorial",
-    "MPP to PDF Conversion in Java: Complete Tutorial"
+    "MPP to PDF Conversion in Java: Complete Tutorial",
+    "Tool for PPTX to Markdown Conversion in Java"
   ],
   "aspose.cloud|aspose.cells|net": [
     "A Guide to Heroku Email Sending Best Practices in C#",
