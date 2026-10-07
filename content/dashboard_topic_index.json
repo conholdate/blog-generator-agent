@@ -48580,6 +48580,11 @@
       "date": "2021-12-27",
       "title": "Sign PDF with Stamp using REST API in Node.js",
       "url": "https://blog.groupdocs.cloud/signature/sign-pdf-with-stamp-using-rest-api-in-node-js/"
+    },
+    {
+      "date": "Wed, 07 Oct 2026 14:49:25 +0000",
+      "title": "Remove Signatures from Signed PDF in Node.JS",
+      "url": "https://blog.groupdocs.cloud/signature/remove-signatures-from-signed-pdf-in-nodejs/"
     }
   ],
   "groupdocs.cloud|GroupDocs.Signature|PHP": [
