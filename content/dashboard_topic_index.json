@@ -546,6 +546,11 @@
       "date": "Wed, 16 Sep 2026 12:30:40 +0000",
       "title": "How to Compare Text in Python",
       "url": "https://blog.aspose.cloud/barcode/how-to-compare-text-in-python/"
+    },
+    {
+      "date": "Wed, 07 Oct 2026 14:19:52 +0000",
+      "title": "PDF to XML Conversion Tutorial in Python",
+      "url": "https://blog.aspose.cloud/barcode/pdf-to-xml-conversion-tutorial-in-python/"
     }
   ],
   "aspose.cloud|Aspose.BarCode|Ruby": [
@@ -1978,6 +1983,11 @@
       "date": "2026-09-14",
       "title": "Complete Guide to PSD to JPG Conversion in Python",
       "url": "https://blog.aspose.cloud/html/complete-guide-to-psd-to-jpg-conversion-in-python/"
+    },
+    {
+      "date": "Mon, 05 Oct 2026 15:41:33 +0000",
+      "title": "DICOM to JPG Conversion Tutorial in Python",
+      "url": "https://blog.aspose.cloud/html/dicom-to-jpg-conversion-tutorial-in-python/"
     }
   ],
   "aspose.cloud|Aspose.HTML|general": [
@@ -4344,6 +4354,11 @@
       "date": "Fri, 25 Sep 2026 12:39:20 +0000",
       "title": "ODS to XLSX Conversion Tutorial in Python",
       "url": "https://blog.aspose.cloud/slides/ods-to-xlsx-conversion-tutorial-in-python/"
+    },
+    {
+      "date": "Tue, 06 Oct 2026 07:31:20 +0000",
+      "title": "Add Header/Footer to Powerpoint Presentations in Python",
+      "url": "https://blog.aspose.cloud/slides/add-headerfooter-to-powerpoint-presentations-in-python/"
     }
   ],
   "aspose.cloud|Aspose.Slides|Ruby": [
@@ -44604,6 +44619,21 @@
       "date": "Thu, 24 Sep 2026 19:32:40 +0000",
       "title": "MPP to PDF Conversion in Java",
       "url": "https://blog.conholdate.com/total/mpp-to-pdf-conversion-in-java/"
+    },
+    {
+      "date": "Mon, 05 Oct 2026 21:51:51 +0000",
+      "title": "PPTX to MARKDOWN Conversion in Java",
+      "url": "https://blog.conholdate.com/total/pptx-to-markdown-conversion-in-java/"
+    },
+    {
+      "date": "Tue, 06 Oct 2026 09:57:21 +0000",
+      "title": "PSD to JPG Conversion in Java",
+      "url": "https://blog.conholdate.com/total/psd-to-jpg-conversion-in-java/"
+    },
+    {
+      "date": "Wed, 07 Oct 2026 17:53:30 +0000",
+      "title": "Rotate Image in Java",
+      "url": "https://blog.conholdate.com/total/rotate-image-in-java/"
     }
   ],
   "conholdate.com|Conholdate.Total|Node.js": [
@@ -45914,6 +45944,11 @@
       "date": "2023-07-12",
       "title": "Strikethrough Text in a PDF with Node.js and REST API",
       "url": "https://blog.groupdocs.cloud/annotation/strikethrough-text-in-a-pdf-using-nodejs/"
+    },
+    {
+      "date": "Mon, 05 Oct 2026 16:29:28 +0000",
+      "title": "Create Sticky Notes on Word Pages in Node.JS",
+      "url": "https://blog.groupdocs.cloud/annotation/create-sticky-notes-on-word-pages-in-nodejs/"
     }
   ],
   "groupdocs.cloud|GroupDocs.Annotation|PHP": [
@@ -48550,6 +48585,11 @@
       "date": "2021-12-27",
       "title": "Sign PDF with Stamp using REST API in Node.js",
       "url": "https://blog.groupdocs.cloud/signature/sign-pdf-with-stamp-using-rest-api-in-node-js/"
+    },
+    {
+      "date": "Wed, 07 Oct 2026 14:49:25 +0000",
+      "title": "Remove Signatures from Signed PDF in Node.JS",
+      "url": "https://blog.groupdocs.cloud/signature/remove-signatures-from-signed-pdf-in-nodejs/"
     }
   ],
   "groupdocs.cloud|GroupDocs.Signature|PHP": [
