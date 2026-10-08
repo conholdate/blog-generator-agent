@@ -99,8 +99,9 @@ def _fetch_window_rows(service, site_url: str, start: date, end: date) -> list[d
         start_row += len(batch)
 
 
-def fetch_opportunities(brand: str) -> list[Opportunity]:
-    """Top striking-distance opportunities for a brand's blog property."""
+def _fetch_recent_and_prior_rows(brand: str) -> tuple[str, list[dict], list[dict]]:
+    """Shared by fetch_opportunities and fetch_all_opportunities - same two
+    windows, same site, same pagination. Returns (site_url, recent_rows, prior_rows)."""
     creds = _credentials()
     service = build("searchconsole", "v1", credentials=creds)
     site_url = _property_url(brand)
@@ -113,7 +114,14 @@ def fetch_opportunities(brand: str) -> list[Opportunity]:
     recent_rows = _fetch_window_rows(service, site_url, recent_start, recent_end)
     prior_rows = _fetch_window_rows(service, site_url, prior_start, prior_end)
     _log(f"{site_url}: {len(recent_rows)} recent / {len(prior_rows)} prior rows")
+    return site_url, recent_rows, prior_rows
 
+
+def fetch_opportunities(brand: str) -> list[Opportunity]:
+    """Top striking-distance opportunities for a brand's blog property -
+    capped at GSC_TOP_N, the handful the autonomous topic-selector tries
+    per run."""
+    _, recent_rows, prior_rows = _fetch_recent_and_prior_rows(brand)
     return build_opportunities(
         recent_rows,
         prior_rows,
@@ -121,6 +129,23 @@ def fetch_opportunities(brand: str) -> list[Opportunity]:
         position_min=settings.GSC_POSITION_MIN,
         position_max=settings.GSC_POSITION_MAX,
         top_n=settings.GSC_TOP_N,
+    )
+
+
+def fetch_all_opportunities(brand: str, top_n: int) -> list[Opportunity]:
+    """Same windowing/ranking as fetch_opportunities, but with a
+    caller-supplied cap - for services/insights_collector.py, which wants
+    far more than the 5 the autonomous selector tries per run (every
+    striking-distance opportunity worth showing in the dashboard panel,
+    not just the ones generation will act on)."""
+    _, recent_rows, prior_rows = _fetch_recent_and_prior_rows(brand)
+    return build_opportunities(
+        recent_rows,
+        prior_rows,
+        min_impressions=settings.GSC_MIN_IMPRESSIONS,
+        position_min=settings.GSC_POSITION_MIN,
+        position_max=settings.GSC_POSITION_MAX,
+        top_n=top_n,
     )
 
 

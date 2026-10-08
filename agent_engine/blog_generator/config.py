@@ -52,6 +52,21 @@ class Settings(BaseSettings):
     GSC_MATCH_MIN_COVERAGE: float = 0.7            # keyword-token overlap to accept a topic
     GSC_SUGGESTIONS_SHEET_NAME: str = "GSC Suggestions"
 
+    # Dashboard insights snapshot (daily GA4 + GSC collection for the "New
+    # Request" form's per-bucket insights panel - see scripts/collect_dashboard_insights.py).
+    # Separate kill-switch and key from GSC_ENABLED/GOOGLE_KEY above: this
+    # pipeline is independent of autonomous topic selection and brands are
+    # onboarded one at a time as GA4 access is granted.
+    INSIGHTS_ENABLED: bool = True
+    GA4_GOOGLE_KEY: str = ""                       # service account json filename under keys/
+    GA4_WINDOW_DAYS: int = 90                      # matches GSC_* windowing above
+    GA4_MAX_OPPORTUNITIES_PER_BRAND: int = 500     # generous cap, not the GSC_TOP_N=5 autonomous-selection limit
+    # One GA4 property ID setting per onboarded brand (env var name:
+    # GA4_PROPERTY_ID_<BRAND_WITH_UNDERSCORES>). Only brands with a
+    # non-empty value here are collected - see
+    # scripts/collect_dashboard_insights.py's ONBOARDED_BRANDS.
+    GA4_PROPERTY_ID_GROUPDOCS_CLOUD: str = ""
+
     # Agent Settings
     NUMBER_OF_BLOG_WORDS: int = 0  
     ENVIRONMENT: str = ""
