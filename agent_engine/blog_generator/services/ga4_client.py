@@ -128,14 +128,19 @@ def fetch_channel_sessions(brand: str, property_id: str) -> dict[str, dict]:
     the Analytics dashboard widget. A separate, brand-level-only query
     (no pagePath dimension) from fetch_page_sessions above: channel
     breakdown is only needed as a brand-wide total, not per post, so this
-    avoids a much larger per-page-per-channel result for no actual use."""
+    avoids a much larger per-page-per-channel result for no actual use.
+
+    Uses GA4_CHANNEL_WINDOW_DAYS (a week), not GA4_WINDOW_DAYS (90 days,
+    used by fetch_page_sessions for the per-bucket insights panel) -
+    deliberately shorter so the Analytics widget reads as "this week's
+    traffic" rather than a 90-day average that barely moves day to day."""
     hostname = f"blog.{brand}"
     client = BetaAnalyticsDataClient(credentials=_credentials())
 
     recent_end = date.today()
-    recent_start = recent_end - timedelta(days=settings.GA4_WINDOW_DAYS)
+    recent_start = recent_end - timedelta(days=settings.GA4_CHANNEL_WINDOW_DAYS)
     prior_end = recent_start - timedelta(days=1)
-    prior_start = prior_end - timedelta(days=settings.GA4_WINDOW_DAYS)
+    prior_start = prior_end - timedelta(days=settings.GA4_CHANNEL_WINDOW_DAYS)
 
     recent = _fetch_window_channel_sessions(client, property_id, hostname, recent_start, recent_end)
     prior = _fetch_window_channel_sessions(client, property_id, hostname, prior_start, prior_end)

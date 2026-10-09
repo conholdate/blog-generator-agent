@@ -59,7 +59,11 @@ class Settings(BaseSettings):
     # onboarded one at a time as GA4 access is granted.
     INSIGHTS_ENABLED: bool = True
     GA4_GOOGLE_KEY: str = ""                       # service account json filename under keys/
-    GA4_WINDOW_DAYS: int = 90                      # matches GSC_* windowing above
+    GA4_WINDOW_DAYS: int = 90                      # matches GSC_* windowing above - per-bucket insights only
+    GA4_CHANNEL_WINDOW_DAYS: int = 7                # separate, shorter window for the brand-wide channel
+                                                     # breakdown (dashboard's Analytics widget) - "weekly"
+                                                     # traffic, not the 90-day window the per-bucket insights
+                                                     # panel needs for a meaningful existing-post signal
     GA4_MAX_OPPORTUNITIES_PER_BRAND: int = 500     # generous cap, not the GSC_TOP_N=5 autonomous-selection limit
     # One GA4 property ID setting per onboarded brand (env var name:
     # GA4_PROPERTY_ID_<BRAND_WITH_UNDERSCORES>). Only brands with a

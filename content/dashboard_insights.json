@@ -101,7 +101,7 @@
         "ga4": {
           "postCount": 48,
           "priorSessions": 185,
-          "sessions": 159
+          "sessions": 160
         },
         "gscOpportunities": [
           {
@@ -443,7 +443,7 @@
         "ga4": {
           "postCount": 2,
           "priorSessions": 5,
-          "sessions": 7
+          "sessions": 8
         },
         "gscOpportunities": []
       },
@@ -459,7 +459,7 @@
         "ga4": {
           "postCount": 8,
           "priorSessions": 66,
-          "sessions": 62
+          "sessions": 63
         },
         "gscOpportunities": [
           {
@@ -766,36 +766,28 @@
       }
     },
     "channels": {
-      "AI Assistant": {
-        "priorSessions": 0,
-        "sessions": 4
-      },
-      "Cross-network": {
-        "priorSessions": 0,
-        "sessions": 4
-      },
       "Direct": {
-        "priorSessions": 42225,
-        "sessions": 51453
+        "priorSessions": 4444,
+        "sessions": 2961
       },
       "Organic Search": {
-        "priorSessions": 2501,
-        "sessions": 1356
+        "priorSessions": 146,
+        "sessions": 124
       },
       "Organic Social": {
-        "priorSessions": 63,
-        "sessions": 83
+        "priorSessions": 8,
+        "sessions": 8
       },
       "Referral": {
-        "priorSessions": 82,
-        "sessions": 189
+        "priorSessions": 14,
+        "sessions": 30
       },
       "Unassigned": {
-        "priorSessions": 11743,
-        "sessions": 2461
+        "priorSessions": 117,
+        "sessions": 105
       }
     },
-    "refreshedAt": "2026-10-09T12:12:54.474382+00:00",
+    "refreshedAt": "2026-10-09T16:49:15.516848+00:00",
     "status": "ok"
   }
 }
