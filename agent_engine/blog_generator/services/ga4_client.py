@@ -95,10 +95,16 @@ def _fetch_window_sessions(
 
 
 def fetch_page_sessions(brand: str, property_id: str) -> dict[str, dict]:
-    """{full_url: {"sessions": int, "trend": str}} for one brand's blog
-    subdomain, current GA4_WINDOW_DAYS window vs. the prior one for trend -
-    same windowing shape as gsc_selector.py's opportunity fetch, so both
-    signals cover comparable timeframes."""
+    """{full_url: {"sessions": int, "priorSessions": int, "trend": str}}
+    for one brand's blog subdomain, current GA4_WINDOW_DAYS window vs. the
+    prior one for trend - same windowing shape as gsc_selector.py's
+    opportunity fetch, so both signals cover comparable timeframes.
+
+    priorSessions is returned alongside the derived trend label (not just
+    the label alone) so callers that aggregate many URLs together (e.g.
+    insights_snapshot.py's bucket/brand rollups) can sum both periods and
+    compute their own trend from the combined totals, rather than trying
+    to meaningfully combine several different per-URL trend labels."""
     hostname = f"blog.{brand}"
     client = BetaAnalyticsDataClient(credentials=_credentials())
 
@@ -125,5 +131,5 @@ def fetch_page_sessions(brand: str, property_id: str) -> dict[str, dict]:
                 trend = "declining"
             else:
                 trend = "flat"
-        result[url] = {"sessions": sessions, "trend": trend}
+        result[url] = {"sessions": sessions, "priorSessions": prior_sessions or 0, "trend": trend}
     return result

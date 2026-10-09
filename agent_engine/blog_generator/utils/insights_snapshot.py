@@ -47,12 +47,17 @@ def build_url_bucket_map(topic_index: dict, brand: str) -> dict[str, str]:
 def group_ga4_sessions_by_bucket(
     page_sessions: dict[str, dict], url_to_bucket: dict[str, str]
 ) -> tuple[dict[str, dict], int]:
-    """page_sessions: {raw_url: {"sessions": int, "trend": str}} as returned by
-    ga4_client.fetch_page_sessions (not pre-normalized - normalized here).
+    """page_sessions: {raw_url: {"sessions": int, "priorSessions": int,
+    "trend": str}} as returned by ga4_client.fetch_page_sessions (not
+    pre-normalized - normalized here).
 
-    Returns ({bucket_key: {"sessions": int, "postCount": int}}, unmatched_count).
-    Sessions are summed across every known post in a bucket; postCount is how
-    many of those posts actually had GA4 data (not just how many exist).
+    Returns ({bucket_key: {"sessions": int, "priorSessions": int,
+    "postCount": int}}, unmatched_count). Sessions are summed across every
+    known post in a bucket; postCount is how many of those posts actually
+    had GA4 data (not just how many exist). priorSessions is summed the
+    same way (not a combined trend label - see fetch_page_sessions'
+    docstring for why) so callers can derive a bucket- or brand-level
+    trend from the two real totals themselves.
     """
     grouped: dict[str, dict] = {}
     unmatched = 0
@@ -61,8 +66,9 @@ def group_ga4_sessions_by_bucket(
         if bucket_key is None:
             unmatched += 1
             continue
-        entry = grouped.setdefault(bucket_key, {"sessions": 0, "postCount": 0})
+        entry = grouped.setdefault(bucket_key, {"sessions": 0, "priorSessions": 0, "postCount": 0})
         entry["sessions"] += stats.get("sessions", 0)
+        entry["priorSessions"] += stats.get("priorSessions", 0)
         entry["postCount"] += 1
     return grouped, unmatched
 
