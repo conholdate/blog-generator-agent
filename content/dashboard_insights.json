@@ -20,6 +20,7 @@
       "groupdocs.cloud|GroupDocs.Annotation|Node.js": {
         "ga4": {
           "postCount": 6,
+          "priorSessions": 17,
           "sessions": 16
         },
         "gscOpportunities": []
@@ -35,6 +36,7 @@
       "groupdocs.cloud|GroupDocs.Annotation|Python": {
         "ga4": {
           "postCount": 10,
+          "priorSessions": 28,
           "sessions": 36
         },
         "gscOpportunities": []
@@ -42,6 +44,7 @@
       "groupdocs.cloud|GroupDocs.Assembly|Python": {
         "ga4": {
           "postCount": 3,
+          "priorSessions": 15,
           "sessions": 15
         },
         "gscOpportunities": []
@@ -49,6 +52,7 @@
       "groupdocs.cloud|GroupDocs.Classification|.NET": {
         "ga4": {
           "postCount": 6,
+          "priorSessions": 31,
           "sessions": 18
         },
         "gscOpportunities": []
@@ -56,6 +60,7 @@
       "groupdocs.cloud|GroupDocs.Comparison|.NET": {
         "ga4": {
           "postCount": 5,
+          "priorSessions": 12,
           "sessions": 19
         },
         "gscOpportunities": []
@@ -71,6 +76,7 @@
       "groupdocs.cloud|GroupDocs.Comparison|Node.js": {
         "ga4": {
           "postCount": 5,
+          "priorSessions": 9,
           "sessions": 22
         },
         "gscOpportunities": []
@@ -86,6 +92,7 @@
       "groupdocs.cloud|GroupDocs.Comparison|Python": {
         "ga4": {
           "postCount": 8,
+          "priorSessions": 30,
           "sessions": 42
         },
         "gscOpportunities": []
@@ -93,6 +100,7 @@
       "groupdocs.cloud|GroupDocs.Conversion|.NET": {
         "ga4": {
           "postCount": 48,
+          "priorSessions": 185,
           "sessions": 159
         },
         "gscOpportunities": [
@@ -165,6 +173,7 @@
       "groupdocs.cloud|GroupDocs.Conversion|Java": {
         "ga4": {
           "postCount": 61,
+          "priorSessions": 321,
           "sessions": 236
         },
         "gscOpportunities": [
@@ -197,6 +206,7 @@
       "groupdocs.cloud|GroupDocs.Conversion|Node.js": {
         "ga4": {
           "postCount": 54,
+          "priorSessions": 247,
           "sessions": 229
         },
         "gscOpportunities": [
@@ -245,6 +255,7 @@
       "groupdocs.cloud|GroupDocs.Conversion|PHP": {
         "ga4": {
           "postCount": 8,
+          "priorSessions": 21,
           "sessions": 57
         },
         "gscOpportunities": []
@@ -252,6 +263,7 @@
       "groupdocs.cloud|GroupDocs.Conversion|Python": {
         "ga4": {
           "postCount": 43,
+          "priorSessions": 173,
           "sessions": 186
         },
         "gscOpportunities": [
@@ -293,6 +305,7 @@
       "groupdocs.cloud|GroupDocs.Conversion|general": {
         "ga4": {
           "postCount": 12,
+          "priorSessions": 205,
           "sessions": 125
         },
         "gscOpportunities": [
@@ -429,6 +442,7 @@
       "groupdocs.cloud|GroupDocs.Editor|Node.js": {
         "ga4": {
           "postCount": 2,
+          "priorSessions": 5,
           "sessions": 7
         },
         "gscOpportunities": []
@@ -436,6 +450,7 @@
       "groupdocs.cloud|GroupDocs.Editor|PHP": {
         "ga4": {
           "postCount": 1,
+          "priorSessions": 2,
           "sessions": 4
         },
         "gscOpportunities": []
@@ -509,6 +524,7 @@
       "groupdocs.cloud|GroupDocs.Merger|Java": {
         "ga4": {
           "postCount": 18,
+          "priorSessions": 69,
           "sessions": 72
         },
         "gscOpportunities": []
@@ -516,6 +532,7 @@
       "groupdocs.cloud|GroupDocs.Merger|Node.js": {
         "ga4": {
           "postCount": 21,
+          "priorSessions": 97,
           "sessions": 88
         },
         "gscOpportunities": [
@@ -540,6 +557,7 @@
       "groupdocs.cloud|GroupDocs.Merger|Python": {
         "ga4": {
           "postCount": 14,
+          "priorSessions": 73,
           "sessions": 77
         },
         "gscOpportunities": [
@@ -564,6 +582,7 @@
       "groupdocs.cloud|GroupDocs.Merger|Ruby": {
         "ga4": {
           "postCount": 18,
+          "priorSessions": 72,
           "sessions": 62
         },
         "gscOpportunities": [
@@ -588,6 +607,7 @@
       "groupdocs.cloud|GroupDocs.Metadata|Java": {
         "ga4": {
           "postCount": 7,
+          "priorSessions": 51,
           "sessions": 30
         },
         "gscOpportunities": []
@@ -595,6 +615,7 @@
       "groupdocs.cloud|GroupDocs.Parser|.NET": {
         "ga4": {
           "postCount": 11,
+          "priorSessions": 19,
           "sessions": 44
         },
         "gscOpportunities": []
@@ -610,6 +631,7 @@
       "groupdocs.cloud|GroupDocs.Parser|Node.js": {
         "ga4": {
           "postCount": 12,
+          "priorSessions": 64,
           "sessions": 66
         },
         "gscOpportunities": []
@@ -617,6 +639,7 @@
       "groupdocs.cloud|GroupDocs.Parser|Python": {
         "ga4": {
           "postCount": 9,
+          "priorSessions": 47,
           "sessions": 38
         },
         "gscOpportunities": []
@@ -648,6 +671,7 @@
       "groupdocs.cloud|GroupDocs.Signature|Node.js": {
         "ga4": {
           "postCount": 2,
+          "priorSessions": 5,
           "sessions": 4
         },
         "gscOpportunities": []
@@ -703,6 +727,7 @@
       "groupdocs.cloud|GroupDocs.Viewer|PHP": {
         "ga4": {
           "postCount": 2,
+          "priorSessions": 11,
           "sessions": 3
         },
         "gscOpportunities": []
@@ -718,6 +743,7 @@
       "groupdocs.cloud|GroupDocs.Viewer|general": {
         "ga4": {
           "postCount": 20,
+          "priorSessions": 38,
           "sessions": 43
         },
         "gscOpportunities": []
@@ -725,6 +751,7 @@
       "groupdocs.cloud|GroupDocs.Watermark|.NET": {
         "ga4": {
           "postCount": 8,
+          "priorSessions": 50,
           "sessions": 61
         },
         "gscOpportunities": []
@@ -732,12 +759,43 @@
       "groupdocs.cloud|GroupDocs.Watermark|Java": {
         "ga4": {
           "postCount": 9,
+          "priorSessions": 32,
           "sessions": 39
         },
         "gscOpportunities": []
       }
     },
-    "refreshedAt": "2026-10-09T11:41:22.842159+00:00",
+    "channels": {
+      "AI Assistant": {
+        "priorSessions": 0,
+        "sessions": 4
+      },
+      "Cross-network": {
+        "priorSessions": 0,
+        "sessions": 4
+      },
+      "Direct": {
+        "priorSessions": 42225,
+        "sessions": 51453
+      },
+      "Organic Search": {
+        "priorSessions": 2501,
+        "sessions": 1356
+      },
+      "Organic Social": {
+        "priorSessions": 63,
+        "sessions": 83
+      },
+      "Referral": {
+        "priorSessions": 82,
+        "sessions": 189
+      },
+      "Unassigned": {
+        "priorSessions": 11743,
+        "sessions": 2461
+      }
+    },
+    "refreshedAt": "2026-10-09T12:12:54.474382+00:00",
     "status": "ok"
   }
 }

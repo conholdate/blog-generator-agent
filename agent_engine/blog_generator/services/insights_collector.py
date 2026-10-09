@@ -5,7 +5,9 @@ Entry point: collect_brand_insights(brand, property_id, previous_entry) ->
 one brand's entry for content/dashboard_insights.json. Combines GA4 page
 sessions (services/ga4_client.py) and GSC striking-distance opportunities
 (services/gsc_selector.py), grouped into brand|Product|Platform buckets via
-the existing topic-duplicate index (utils/insights_snapshot.py).
+the existing topic-duplicate index (utils/insights_snapshot.py), plus a
+brand-wide channel (Organic Search/Referral/Social/...) breakdown for the
+dashboard's Analytics widget.
 
 Never raises: the caller (scripts/collect_dashboard_insights.py) loops
 brands independently, and a single brand's failure must never blank out
@@ -48,6 +50,7 @@ def collect_brand_insights(brand: str, property_id: str, previous_entry: dict | 
 
         page_sessions = ga4_client.fetch_page_sessions(brand, property_id)
         ga4_by_bucket, ga4_unmatched = group_ga4_sessions_by_bucket(page_sessions, url_to_bucket)
+        channels = ga4_client.fetch_channel_sessions(brand, property_id)
 
         opportunities = gsc_selector.fetch_all_opportunities(
             brand, top_n=settings.GA4_MAX_OPPORTUNITIES_PER_BRAND
@@ -73,6 +76,7 @@ def collect_brand_insights(brand: str, property_id: str, previous_entry: dict | 
             "status": "ok",
             "refreshedAt": datetime.now(timezone.utc).isoformat(),
             "buckets": buckets,
+            "channels": channels,
         }
     except Exception as exc:
         _log(f"{brand}: collection failed ({exc!r}), keeping previous snapshot if any")
@@ -84,4 +88,5 @@ def collect_brand_insights(brand: str, property_id: str, previous_entry: dict | 
             "error": str(exc),
             "refreshedAt": None,
             "buckets": {},
+            "channels": {},
         }

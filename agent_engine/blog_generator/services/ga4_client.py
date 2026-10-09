@@ -94,6 +94,60 @@ def _fetch_window_sessions(
     return sessions_by_path
 
 
+def _fetch_window_channel_sessions(
+    client: BetaAnalyticsDataClient, property_id: str, hostname: str, start: date, end: date
+) -> dict[str, int]:
+    """{channel_group: sessions} for one window, one brand's blog subdomain
+    only - e.g. "Organic Search", "Referral", "Organic Social", "Direct".
+    Uses GA4's own sessionDefaultChannelGroup dimension rather than
+    classifying session source ourselves, so this stays consistent with
+    whatever channel definitions/rules are configured on the property
+    (including any custom channel group edits made directly in GA4, like
+    the AI-referral channel added during this project)."""
+    request = RunReportRequest(
+        property=f"properties/{property_id}",
+        dimensions=[Dimension(name="sessionDefaultChannelGroup")],
+        metrics=[Metric(name="sessions")],
+        date_ranges=[DateRange(start_date=start.isoformat(), end_date=end.isoformat())],
+        dimension_filter=FilterExpression(
+            filter=Filter(field_name="hostName", string_filter=Filter.StringFilter(value=hostname))
+        ),
+        limit=ROW_LIMIT,
+    )
+    response = client.run_report(request)
+    sessions_by_channel: dict[str, int] = {}
+    for row in response.rows:
+        channel = row.dimension_values[0].value
+        sessions_by_channel[channel] = sessions_by_channel.get(channel, 0) + int(row.metric_values[0].value)
+    return sessions_by_channel
+
+
+def fetch_channel_sessions(brand: str, property_id: str) -> dict[str, dict]:
+    """{channel_group: {"sessions": int, "priorSessions": int}} for one
+    brand's blog subdomain - the Organic/Referral/Social/... breakdown for
+    the Analytics dashboard widget. A separate, brand-level-only query
+    (no pagePath dimension) from fetch_page_sessions above: channel
+    breakdown is only needed as a brand-wide total, not per post, so this
+    avoids a much larger per-page-per-channel result for no actual use."""
+    hostname = f"blog.{brand}"
+    client = BetaAnalyticsDataClient(credentials=_credentials())
+
+    recent_end = date.today()
+    recent_start = recent_end - timedelta(days=settings.GA4_WINDOW_DAYS)
+    prior_end = recent_start - timedelta(days=1)
+    prior_start = prior_end - timedelta(days=settings.GA4_WINDOW_DAYS)
+
+    recent = _fetch_window_channel_sessions(client, property_id, hostname, recent_start, recent_end)
+    prior = _fetch_window_channel_sessions(client, property_id, hostname, prior_start, prior_end)
+    _log(f"{hostname}: {len(recent)} channels (recent) / {len(prior)} (prior)")
+
+    channels = set(recent) | set(prior)
+    return {
+        channel: {"sessions": recent.get(channel, 0), "priorSessions": prior.get(channel, 0)}
+        for channel in channels
+    }
+
+
 def fetch_page_sessions(brand: str, property_id: str) -> dict[str, dict]:
     """{full_url: {"sessions": int, "priorSessions": int, "trend": str}}
     for one brand's blog subdomain, current GA4_WINDOW_DAYS window vs. the
