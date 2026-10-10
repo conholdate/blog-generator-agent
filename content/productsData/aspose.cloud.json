@@ -187,7 +187,7 @@
   "APIReferenceURL": "https://reference.aspose.cloud/pdf/",
   "FreeAppsURL": "https://products.aspose.app/pdf/family/",
   "ForumsURL": "https://forum.aspose.cloud/c/pdf/13",
-  "InstallCommand": "<dependency>\n<groupId>com.aspose</groupId>\n<artifactId>aspose-pdf-cloud</artifactId>\n<version>26.7.0</version>\n</dependency>",
+  "InstallCommand": "<dependency>\n<groupId>com.aspose</groupId>\n<artifactId>aspose-pdf-cloud</artifactId>\n<version>26.9.0</version>\n</dependency>",
   "urlPrefix": "pdf",
   "license": "https://purchase.aspose.com/temporary-license/"
 },
