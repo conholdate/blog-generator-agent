@@ -84,10 +84,10 @@
     "urlPrefix": "cad",
     "product": "Aspose.CAD for .NET",
     "platform": ".NET",
-    "repository": null,
+    "repository": "aspose-cad/agentic-net-examples",
     "branch": "main",
-    "status": "not_found",
-    "last_verified": "2026-08-28"
+    "status": "verified",
+    "last_verified": "2026-10-10"
   },
   {
     "brand": "aspose.com",
