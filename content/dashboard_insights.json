@@ -21,7 +21,7 @@
         "ga4": {
           "postCount": 6,
           "priorSessions": 18,
-          "sessions": 16
+          "sessions": 17
         },
         "gscOpportunities": []
       },
@@ -61,7 +61,7 @@
         "ga4": {
           "postCount": 5,
           "priorSessions": 12,
-          "sessions": 19
+          "sessions": 21
         },
         "gscOpportunities": []
       },
@@ -101,28 +101,28 @@
         "ga4": {
           "postCount": 48,
           "priorSessions": 185,
-          "sessions": 159
+          "sessions": 160
         },
         "gscOpportunities": [
           {
             "clicks": 2,
-            "impressions": 101,
+            "impressions": 100,
             "keyword": "convert mpp to excel",
             "page": "https://blog.groupdocs.cloud/conversion/convert-mpp-to-excel-with-csharp/",
-            "position": 15.3,
+            "position": 15.5,
             "trend": "flat"
           },
           {
             "clicks": 2,
-            "impressions": 144,
+            "impressions": 139,
             "keyword": "rar to jpg",
             "page": "https://blog.groupdocs.cloud/conversion/convert-rar-file-to-jpg-in-csharp-rar-file-converter/",
-            "position": 16.8,
+            "position": 17.0,
             "trend": "declining"
           },
           {
             "clicks": 0,
-            "impressions": 75,
+            "impressions": 76,
             "keyword": "csv to json c#",
             "page": "https://blog.groupdocs.cloud/conversion/convert-csv-to-json-with-csharp/",
             "position": 10.4,
@@ -130,11 +130,19 @@
           },
           {
             "clicks": 0,
-            "impressions": 62,
+            "impressions": 64,
             "keyword": "convert csv to json using c#",
             "page": "https://blog.groupdocs.cloud/conversion/convert-csv-to-json-with-csharp/",
-            "position": 13.0,
+            "position": 12.9,
             "trend": "flat"
+          },
+          {
+            "clicks": 0,
+            "impressions": 54,
+            "keyword": "mpp to excel converter",
+            "page": "https://blog.groupdocs.cloud/conversion/convert-mpp-to-excel-with-csharp/",
+            "position": 9.0,
+            "trend": "declining"
           },
           {
             "clicks": 0,
@@ -146,18 +154,10 @@
           },
           {
             "clicks": 0,
-            "impressions": 51,
-            "keyword": "mpp to excel converter",
-            "page": "https://blog.groupdocs.cloud/conversion/convert-mpp-to-excel-with-csharp/",
-            "position": 9.1,
-            "trend": "declining"
-          },
-          {
-            "clicks": 0,
-            "impressions": 38,
+            "impressions": 37,
             "keyword": "how to convert mpp to excel",
             "page": "https://blog.groupdocs.cloud/conversion/convert-mpp-to-excel-with-csharp/",
-            "position": 19.4,
+            "position": 19.8,
             "trend": "declining"
           }
         ]
@@ -173,24 +173,16 @@
       "groupdocs.cloud|GroupDocs.Conversion|Java": {
         "ga4": {
           "postCount": 61,
-          "priorSessions": 325,
-          "sessions": 232
+          "priorSessions": 322,
+          "sessions": 233
         },
         "gscOpportunities": [
           {
             "clicks": 0,
-            "impressions": 73,
+            "impressions": 75,
             "keyword": "convert text to pdf in java cloud sdk",
             "page": "https://blog.groupdocs.cloud/conversion/convert-text-files-to-pdf-in-java-using-rest-api/",
-            "position": 15.3,
-            "trend": "declining"
-          },
-          {
-            "clicks": 0,
-            "impressions": 52,
-            "keyword": "xml to pdf java",
-            "page": "https://blog.groupdocs.cloud/conversion/convert-xml-to-pdf-file-in-java-using-rest-api/",
-            "position": 19.7,
+            "position": 15.2,
             "trend": "declining"
           },
           {
@@ -200,6 +192,14 @@
             "page": "https://blog.groupdocs.cloud/conversion/convert-svg-to-pdf-and-pdf-to-svg-programmatically-in-java/",
             "position": 9.1,
             "trend": "flat"
+          },
+          {
+            "clicks": 0,
+            "impressions": 50,
+            "keyword": "xml to pdf java",
+            "page": "https://blog.groupdocs.cloud/conversion/convert-xml-to-pdf-file-in-java-using-rest-api/",
+            "position": 19.8,
+            "trend": "declining"
           }
         ]
       },
@@ -207,28 +207,28 @@
         "ga4": {
           "postCount": 54,
           "priorSessions": 249,
-          "sessions": 227
+          "sessions": 226
         },
         "gscOpportunities": [
           {
             "clicks": 2,
-            "impressions": 582,
+            "impressions": 580,
             "keyword": "rar to pdf",
             "page": "https://blog.groupdocs.cloud/conversion/convert-zip-or-rar-to-pdf-using-a-file-converter/",
-            "position": 13.5,
+            "position": 13.6,
             "trend": "declining"
           },
           {
             "clicks": 6,
-            "impressions": 102,
+            "impressions": 106,
             "keyword": "zip to html",
             "page": "https://blog.groupdocs.cloud/conversion/convert-zip-to-html-in-nodejs-zip-file-converter/",
-            "position": 9.2,
+            "position": 9.1,
             "trend": "improving"
           },
           {
             "clicks": 0,
-            "impressions": 110,
+            "impressions": 109,
             "keyword": "psd to pptx games",
             "page": "https://blog.groupdocs.cloud/conversion/convert-psd-to-pptx-in-nodejs-file-format-converter/",
             "position": 16.6,
@@ -236,18 +236,18 @@
           },
           {
             "clicks": 0,
-            "impressions": 55,
+            "impressions": 54,
             "keyword": "rar to png",
             "page": "https://blog.groupdocs.cloud/conversion/convert-rar-files-to-png-in-nodejs-rar-file-converter/",
-            "position": 10.0,
+            "position": 9.9,
             "trend": "flat"
           },
           {
             "clicks": 0,
-            "impressions": 36,
+            "impressions": 37,
             "keyword": "node xls to pdf",
             "page": "https://blog.groupdocs.cloud/conversion/convert-excel-sheets-to-pdf-in-node-js/",
-            "position": 14.6,
+            "position": 14.7,
             "trend": "improving"
           }
         ]
@@ -255,8 +255,8 @@
       "groupdocs.cloud|GroupDocs.Conversion|PHP": {
         "ga4": {
           "postCount": 8,
-          "priorSessions": 21,
-          "sessions": 57
+          "priorSessions": 22,
+          "sessions": 56
         },
         "gscOpportunities": []
       },
@@ -264,7 +264,7 @@
         "ga4": {
           "postCount": 43,
           "priorSessions": 173,
-          "sessions": 187
+          "sessions": 186
         },
         "gscOpportunities": [
           {
@@ -288,16 +288,16 @@
       "groupdocs.cloud|GroupDocs.Conversion|Ruby": {
         "ga4": {
           "postCount": 16,
-          "priorSessions": 56,
-          "sessions": 50
+          "priorSessions": 55,
+          "sessions": 51
         },
         "gscOpportunities": [
           {
             "clicks": 0,
-            "impressions": 39,
+            "impressions": 41,
             "keyword": "ruby pdf form api",
             "page": "https://blog.groupdocs.cloud/conversion/convert-pdf-to-text-programmatically-using-rest-api-in-ruby/",
-            "position": 12.8,
+            "position": 13.1,
             "trend": "new"
           }
         ]
@@ -305,37 +305,37 @@
       "groupdocs.cloud|GroupDocs.Conversion|general": {
         "ga4": {
           "postCount": 12,
-          "priorSessions": 202,
+          "priorSessions": 201,
           "sessions": 125
         },
         "gscOpportunities": [
           {
-            "clicks": 28,
-            "impressions": 1183,
+            "clicks": 29,
+            "impressions": 1295,
             "keyword": "zip to jpg",
-            "page": "https://blog.groupdocs.cloud/conversion/zip-to-jpg-online/",
-            "position": 9.5,
-            "trend": "flat"
-          },
-          {
-            "clicks": 12,
-            "impressions": 699,
-            "keyword": "zip to jpg converter",
-            "page": "https://blog.groupdocs.cloud/conversion/zip-to-jpg-online/",
-            "position": 9.0,
-            "trend": "flat"
-          },
-          {
-            "clicks": 9,
-            "impressions": 587,
-            "keyword": "zip file to jpg",
             "page": "https://blog.groupdocs.cloud/conversion/zip-to-jpg-online/",
             "position": 9.4,
             "trend": "flat"
           },
           {
+            "clicks": 12,
+            "impressions": 685,
+            "keyword": "zip to jpg converter",
+            "page": "https://blog.groupdocs.cloud/conversion/zip-to-jpg-online/",
+            "position": 9.1,
+            "trend": "flat"
+          },
+          {
+            "clicks": 8,
+            "impressions": 600,
+            "keyword": "zip file to jpg",
+            "page": "https://blog.groupdocs.cloud/conversion/zip-to-jpg-online/",
+            "position": 9.5,
+            "trend": "flat"
+          },
+          {
             "clicks": 4,
-            "impressions": 167,
+            "impressions": 170,
             "keyword": "zip file convert to jpg",
             "page": "https://blog.groupdocs.cloud/conversion/zip-to-jpg-online/",
             "position": 9.2,
@@ -343,7 +343,7 @@
           },
           {
             "clicks": 1,
-            "impressions": 126,
+            "impressions": 125,
             "keyword": "zip convert to jpg",
             "page": "https://blog.groupdocs.cloud/conversion/zip-to-jpg-online/",
             "position": 9.2,
@@ -351,50 +351,50 @@
           },
           {
             "clicks": 0,
-            "impressions": 109,
+            "impressions": 111,
             "keyword": "zip to image converter",
             "page": "https://blog.groupdocs.cloud/conversion/zip-to-jpg-online/",
             "position": 9.5,
             "trend": "declining"
           },
           {
-            "clicks": 0,
-            "impressions": 100,
-            "keyword": "zip to image",
-            "page": "https://blog.groupdocs.cloud/conversion/zip-to-jpg-online/",
-            "position": 9.4,
-            "trend": "declining"
-          },
-          {
             "clicks": 3,
-            "impressions": 98,
+            "impressions": 101,
             "keyword": "convert zip to jpg",
             "page": "https://blog.groupdocs.cloud/conversion/zip-to-jpg-online/",
-            "position": 11.2,
+            "position": 11.1,
             "trend": "declining"
           },
           {
             "clicks": 0,
-            "impressions": 55,
+            "impressions": 99,
+            "keyword": "zip to image",
+            "page": "https://blog.groupdocs.cloud/conversion/zip-to-jpg-online/",
+            "position": 9.3,
+            "trend": "declining"
+          },
+          {
+            "clicks": 0,
+            "impressions": 57,
             "keyword": "ppt to text converter",
             "page": "https://blog.groupdocs.cloud/conversion/convert-ppt-to-text-online-using-powerpoint-converter/",
-            "position": 14.6,
+            "position": 14.4,
             "trend": "improving"
           },
           {
             "clicks": 0,
-            "impressions": 68,
+            "impressions": 67,
             "keyword": "convert large zip to jpg",
             "page": "https://blog.groupdocs.cloud/conversion/zip-to-jpg-online/",
             "position": 10.3,
             "trend": "declining"
           },
           {
-            "clicks": 2,
-            "impressions": 57,
+            "clicks": 1,
+            "impressions": 59,
             "keyword": "zip to jpeg",
             "page": "https://blog.groupdocs.cloud/conversion/zip-to-jpg-online/",
-            "position": 9.1,
+            "position": 9.0,
             "trend": "declining"
           },
           {
@@ -402,15 +402,15 @@
             "impressions": 44,
             "keyword": "convert zip to image",
             "page": "https://blog.groupdocs.cloud/conversion/zip-to-jpg-online/",
-            "position": 8.9,
+            "position": 9.0,
             "trend": "declining"
           },
           {
             "clicks": 1,
-            "impressions": 30,
+            "impressions": 31,
             "keyword": "convert zip file to jpg",
             "page": "https://blog.groupdocs.cloud/conversion/zip-to-jpg-online/",
-            "position": 12.9,
+            "position": 12.8,
             "trend": "declining"
           },
           {
@@ -434,7 +434,7 @@
       "groupdocs.cloud|GroupDocs.Editor|Java": {
         "ga4": {
           "postCount": 5,
-          "priorSessions": 19,
+          "priorSessions": 18,
           "sessions": 28
         },
         "gscOpportunities": []
@@ -458,17 +458,17 @@
       "groupdocs.cloud|GroupDocs.Editor|Python": {
         "ga4": {
           "postCount": 8,
-          "priorSessions": 63,
-          "sessions": 63
+          "priorSessions": 62,
+          "sessions": 64
         },
         "gscOpportunities": [
           {
             "clicks": 0,
-            "impressions": 49,
+            "impressions": 50,
             "keyword": "edit pptx online",
             "page": "https://blog.groupdocs.cloud/editor/edit-pptx-online-using-an-online-ppt-editor/",
-            "position": 18.8,
-            "trend": "flat"
+            "position": 18.6,
+            "trend": "improving"
           }
         ]
       },
@@ -481,23 +481,23 @@
         "gscOpportunities": [
           {
             "clicks": 2,
-            "impressions": 182,
+            "impressions": 186,
             "keyword": "pptx merger",
             "page": "https://blog.groupdocs.cloud/merger/merge-powerpoint-pptpptx-files-online-using-rest-api-in-csharp/",
-            "position": 15.6,
+            "position": 15.5,
             "trend": "declining"
           },
           {
             "clicks": 1,
-            "impressions": 60,
+            "impressions": 62,
             "keyword": "merge pptx files",
             "page": "https://blog.groupdocs.cloud/merger/merge-powerpoint-pptpptx-files-online-using-rest-api-in-csharp/",
-            "position": 15.8,
+            "position": 15.5,
             "trend": "improving"
           },
           {
             "clicks": 0,
-            "impressions": 50,
+            "impressions": 53,
             "keyword": "c# combine powerpoints",
             "page": "https://blog.groupdocs.cloud/merger/merge-powerpoint-pptpptx-files-online-using-rest-api-in-csharp/",
             "position": 10.7,
@@ -505,18 +505,18 @@
           },
           {
             "clicks": 0,
-            "impressions": 42,
+            "impressions": 41,
             "keyword": "merge pptx",
             "page": "https://blog.groupdocs.cloud/merger/merge-powerpoint-pptpptx-files-online-using-rest-api-in-csharp/",
-            "position": 15.8,
+            "position": 15.6,
             "trend": "improving"
           },
           {
             "clicks": 0,
-            "impressions": 39,
+            "impressions": 41,
             "keyword": "groupdocs ppt merger",
             "page": "https://blog.groupdocs.cloud/merger/merge-powerpoint-pptpptx-files-online-using-rest-api-in-csharp/",
-            "position": 9.5,
+            "position": 9.3,
             "trend": "flat"
           }
         ]
@@ -525,20 +525,20 @@
         "ga4": {
           "postCount": 18,
           "priorSessions": 68,
-          "sessions": 72
+          "sessions": 73
         },
         "gscOpportunities": []
       },
       "groupdocs.cloud|GroupDocs.Merger|Node.js": {
         "ga4": {
           "postCount": 21,
-          "priorSessions": 97,
+          "priorSessions": 96,
           "sessions": 88
         },
         "gscOpportunities": [
           {
             "clicks": 0,
-            "impressions": 59,
+            "impressions": 56,
             "keyword": "pptx splitter",
             "page": "https://blog.groupdocs.cloud/merger/split-powerpoint-ppt-or-pptx-into-multiple-files-in-node.js/",
             "position": 9.5,
@@ -557,8 +557,8 @@
       "groupdocs.cloud|GroupDocs.Merger|Python": {
         "ga4": {
           "postCount": 14,
-          "priorSessions": 74,
-          "sessions": 76
+          "priorSessions": 75,
+          "sessions": 75
         },
         "gscOpportunities": [
           {
@@ -571,11 +571,19 @@
           },
           {
             "clicks": 0,
-            "impressions": 42,
+            "impressions": 43,
             "keyword": "combine pdf python",
             "page": "https://blog.groupdocs.cloud/merger/merge-pdf-files-using-rest-api-in-python/",
-            "position": 9.5,
+            "position": 9.4,
             "trend": "new"
+          },
+          {
+            "clicks": 0,
+            "impressions": 32,
+            "keyword": "sdk for splitting pdf documents into separate pages",
+            "page": "https://blog.groupdocs.cloud/merger/split-pdf-file-into-multiple-pdf-files-using-python/",
+            "position": 13.8,
+            "trend": "improving"
           }
         ]
       },
@@ -588,7 +596,7 @@
         "gscOpportunities": [
           {
             "clicks": 0,
-            "impressions": 82,
+            "impressions": 83,
             "keyword": "pdf merge ruby",
             "page": "https://blog.groupdocs.cloud/merger/merge-and-combine-pdf-files-using-rest-api-in-ruby/",
             "position": 14.2,
@@ -631,24 +639,24 @@
       "groupdocs.cloud|GroupDocs.Parser|Node.js": {
         "ga4": {
           "postCount": 12,
-          "priorSessions": 64,
-          "sessions": 66
+          "priorSessions": 63,
+          "sessions": 67
         },
         "gscOpportunities": []
       },
       "groupdocs.cloud|GroupDocs.Parser|Python": {
         "ga4": {
           "postCount": 9,
-          "priorSessions": 47,
-          "sessions": 39
+          "priorSessions": 45,
+          "sessions": 40
         },
         "gscOpportunities": []
       },
       "groupdocs.cloud|GroupDocs.Rewriter|.NET": {
         "ga4": {
           "postCount": 2,
-          "priorSessions": 5,
-          "sessions": 8
+          "priorSessions": 6,
+          "sessions": 7
         },
         "gscOpportunities": []
       },
@@ -672,14 +680,14 @@
         "ga4": {
           "postCount": 2,
           "priorSessions": 5,
-          "sessions": 4
+          "sessions": 5
         },
         "gscOpportunities": []
       },
       "groupdocs.cloud|GroupDocs.Signature|PHP": {
         "ga4": {
           "postCount": 1,
-          "priorSessions": 4,
+          "priorSessions": 3,
           "sessions": 4
         },
         "gscOpportunities": []
@@ -728,7 +736,7 @@
         "ga4": {
           "postCount": 2,
           "priorSessions": 11,
-          "sessions": 3
+          "sessions": 4
         },
         "gscOpportunities": []
       },
@@ -751,7 +759,7 @@
       "groupdocs.cloud|GroupDocs.Watermark|.NET": {
         "ga4": {
           "postCount": 8,
-          "priorSessions": 50,
+          "priorSessions": 51,
           "sessions": 60
         },
         "gscOpportunities": []
@@ -759,35 +767,35 @@
       "groupdocs.cloud|GroupDocs.Watermark|Java": {
         "ga4": {
           "postCount": 9,
-          "priorSessions": 32,
-          "sessions": 39
+          "priorSessions": 33,
+          "sessions": 38
         },
         "gscOpportunities": []
       }
     },
     "channels": {
       "Direct": {
-        "priorSessions": 4085,
-        "sessions": 2761
+        "priorSessions": 3978,
+        "sessions": 2791
       },
       "Organic Search": {
-        "priorSessions": 135,
-        "sessions": 114
+        "priorSessions": 139,
+        "sessions": 112
       },
       "Organic Social": {
         "priorSessions": 9,
-        "sessions": 8
+        "sessions": 7
       },
       "Referral": {
-        "priorSessions": 18,
-        "sessions": 26
+        "priorSessions": 20,
+        "sessions": 23
       },
       "Unassigned": {
-        "priorSessions": 104,
-        "sessions": 78
+        "priorSessions": 102,
+        "sessions": 74
       }
     },
-    "refreshedAt": "2026-10-10T10:58:46.300624+00:00",
+    "refreshedAt": "2026-10-11T11:16:06.578753+00:00",
     "status": "ok"
   }
 }
