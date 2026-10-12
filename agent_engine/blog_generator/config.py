@@ -71,6 +71,30 @@ class Settings(BaseSettings):
     # scripts/collect_dashboard_insights.py's ONBOARDED_BRANDS.
     GA4_PROPERTY_ID_GROUPDOCS_CLOUD: str = ""
 
+    # Internal linking (post-generation step, utils/internal_linker.py):
+    # finds existing published posts in the same bucket that are topically
+    # related (not duplicates) to a freshly generated draft and weaves 2-4
+    # contextual links into its body before the file is written. Reuses the
+    # same embedding infra as the dashboard's duplicate check (topic_embeddings.py,
+    # topic_index.py's Redis vectors) - no new data source.
+    INTERNAL_LINKING_ENABLED: bool = True
+    # Below EMBEDDING_THRESHOLD (0.8, lib/topic-duplicate.ts's dashboard-side
+    # duplicate bar) so a near-duplicate post is never offered as a "related"
+    # link target; above this floor so unrelated posts in the same bucket
+    # don't get linked just for sharing a product/platform.
+    INTERNAL_LINK_MIN_SIMILARITY: float = 0.55
+    INTERNAL_LINK_MAX_SIMILARITY: float = 0.78
+    INTERNAL_LINK_MAX_COUNT: int = 4
+    # Fallback when a bucket has no Redis embedding vectors yet (not
+    # provisioned, or simply a brand-new bucket) - word-overlap (Jaccard)
+    # only, not the dashboard's combined lexicalScore; confirmed via direct
+    # testing that its levenshtein-ratio half scores totally unrelated short
+    # titles at ~0.3 from incidental character overlap. Max matches
+    # lib/topic-duplicate.ts's LEXICAL_THRESHOLD duplicate bar; the floor
+    # just filters out near-zero overlap.
+    INTERNAL_LINK_LEXICAL_MIN_SIMILARITY: float = 0.12
+    INTERNAL_LINK_LEXICAL_MAX_SIMILARITY: float = 0.5
+
     # Agent Settings
     NUMBER_OF_BLOG_WORDS: int = 0  
     ENVIRONMENT: str = ""

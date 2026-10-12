@@ -14,6 +14,7 @@ from utils.code_source import get_code_snippet
 from utils.section_editor import classify_and_apply, SectionEditError
 from utils.metricsRecorder import MetricsRecorder
 from utils.topic_index import append_new_post, product_family_from_category
+from utils.internal_linker import add_internal_links
 from services.LLMservice import llm_service
 import json
 import os
@@ -489,13 +490,24 @@ class BlogOrchestrator:
             # marker-dependent step has run.
             final_content = strip_snippet_markers(final_content)
 
+            # Best-effort: weave links to related existing posts into the body
+            # before it's written to disk. Never blocks the run - see
+            # internal_linker.py's module docstring.
+            final_content = await add_internal_links(
+                brand=self.brand,
+                product=product_family_from_category(product_info.get("Category", "")),
+                platform=product_info.get("ProgrammingLanguage", platform),
+                title=blog_post_metadata['title'],
+                content=final_content,
+            )
+
             print(f" Generating markdown file")
             file_res = await generate_markdown_file(
                 title=post_topic,
                 content=final_content,
                 brand=self.brand
             )
-         
+
             filepath = file_res.get("output", {}).get("filepath")
             folder_name = file_res.get("output", {}).get("folder_name")
             banner_location = f"../../content/blogPosts/{file_res['output']['brand_folder']}/{file_res['output']['folder_name']}/images/{slugify(post_topic)}.jpg"
@@ -919,6 +931,17 @@ class BlogOrchestrator:
             # Drop the internal <!--[CODE_SNIPPET_*]--> scaffolding now that every
             # marker-dependent step has run.
             final_content = strip_snippet_markers(final_content)
+
+            # Best-effort: weave links to related existing posts into the body
+            # before it's written to disk. Never blocks the run - see
+            # internal_linker.py's module docstring.
+            final_content = await add_internal_links(
+                brand=self.brand,
+                product=product,
+                platform=product_info.get("ProgrammingLanguage", platform),
+                title=blog_post_metadata.get("title") or post_topic,
+                content=final_content,
+            )
 
             print(f" Generating markdown file")
             file_res = await generate_markdown_file(
