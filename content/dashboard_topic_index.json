@@ -3293,6 +3293,11 @@
       "date": "2025-09-05",
       "title": "Extract Text from PDF File using C# .NET | PDF Text Extractor",
       "url": "https://blog.aspose.cloud/pdf/extract-text-from-pdf-using-csharp/"
+    },
+    {
+      "date": "Mon, 12 Oct 2026 16:36:31 +0000",
+      "title": "Extract Images from PDF in C#",
+      "url": "https://blog.aspose.cloud/pdf/extract-images-from-pdf-in-csharp/"
     }
   ],
   "aspose.cloud|Aspose.PDF|Go": [
@@ -44644,6 +44649,11 @@
       "date": "Fri, 09 Oct 2026 12:30:34 +0000",
       "title": "Split Excel Workbook in Java",
       "url": "https://blog.conholdate.com/total/split-excel-workbook-in-java/"
+    },
+    {
+      "date": "Mon, 12 Oct 2026 09:50:01 +0000",
+      "title": "STL to PDF Conversion in Java",
+      "url": "https://blog.conholdate.com/total/stl-to-pdf-conversion-in-java/"
     }
   ],
   "conholdate.com|Conholdate.Total|Node.js": [
@@ -48361,6 +48371,11 @@
       "date": "2025-11-18",
       "title": "Extract Text from HTML in C# .NET | Best HTML Text Extraction API",
       "url": "https://blog.groupdocs.cloud/parser/extract-text-from-html-using-csharp"
+    },
+    {
+      "date": "Mon, 12 Oct 2026 17:04:44 +0000",
+      "title": "Extract Images from PDF Documents in C#",
+      "url": "https://blog.groupdocs.cloud/parser/extract-images-from-pdf-documents-in-csharp/"
     }
   ],
   "groupdocs.cloud|GroupDocs.Parser|Java": [
