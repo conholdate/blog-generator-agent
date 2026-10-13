@@ -1,10 +1,19 @@
 """
 Post-generation step: finds existing published posts in the same brand/
 product/platform bucket that are topically related (not duplicate) to a
-freshly generated draft, and asks the LLM to weave a handful of contextual
-links into the draft's body - never changing anything else about it. Runs
-right before generate_markdown_file() writes the finalized content, same
-place repair_code_fences/strip_snippet_markers already run in orchestrator.py.
+freshly generated draft, and inserts a handful of contextual links into the
+draft's body - never changing anything else about it. Runs right before
+generate_markdown_file() writes the finalized content, same place
+repair_code_fences/strip_snippet_markers already run in orchestrator.py.
+
+The LLM is only asked to pick short anchor PHRASES that already exist
+verbatim in the text (see _build_anchor_prompt) - it never rewrites the
+post. The actual link insertion is a deterministic, verified string
+replacement in code (_apply_anchors), which can't corrupt or truncate
+content because it never regenerates it. An earlier version asked the LLM
+to return the whole rewritten post and validated the result with a
+length-ratio heuristic; confirmed broken on two real runs (PRs #63, #64)
+where the self-hosted model didn't reproduce the document verbatim.
 
 Reuses the exact data the dashboard's duplicate check already reads
 (content/dashboard_topic_index.json for titles/urls, Redis topicvec:* for
@@ -13,7 +22,7 @@ format append_new_post() already writes with, so a lookup here matches
 whatever prior runs appended.
 
 Best-effort throughout: any failure (missing Redis creds, embedding API
-down, LLM call failing the safety check) returns the original content
+down, no anchor surviving validation) returns the original content
 unchanged rather than blocking a run that otherwise succeeded - same
 philosophy as topic_index.py's append functions.
 """
@@ -176,59 +185,111 @@ def _find_related_posts(brand: str, product: str, platform: str, title: str) -> 
     return [entry for _, entry in scored[: settings.INTERNAL_LINK_MAX_COUNT]]
 
 
-def _build_insertion_prompt(content: str, related: List[dict]) -> str:
-    targets = "\n".join(f'- "{e["title"]}" -> {e["url"]}' for e in related)
+def _build_anchor_prompt(content: str, related: List[dict]) -> str:
+    """Asks the LLM for ANCHOR PHRASES only, never a rewrite of the post.
+
+    Earlier version asked the LLM to return the entire post body with links
+    woven in. Confirmed broken on two real runs (PRs #63, #64): the
+    self-hosted model doesn't reliably reproduce a long document verbatim -
+    once it grew the content, once it quietly dropped ~9% of it, both
+    caught by the old length-ratio safety check but with nothing usable to
+    show for the attempt. Asking for a handful of short exact phrases
+    instead keeps the LLM's job tiny (a few words per target, not 12K
+    characters) and lets the actual insertion happen in code via exact
+    string replacement - see _apply_anchors, which can't corrupt or
+    truncate the post because it never rewrites it, only slices into it."""
+    targets = "\n".join(f'{i + 1}. "{e["title"]}" -> {e["url"]}' for i, e in enumerate(related))
     return (
-        "You will insert internal links into a blog post's Markdown body. "
-        "Below is a list of existing posts to link to, each with its exact URL.\n\n"
+        "Below is a blog post body and a list of existing posts to link to from it.\n\n"
         f"{targets}\n\n"
+        "For each post above, find a SHORT phrase (3-8 words) that appears VERBATIM, "
+        "word-for-word, somewhere in the POST BODY below, and reads as a natural mention "
+        "of that post's topic - a phrase worth linking, not a generic/filler phrase.\n\n"
         "Rules:\n"
-        "1. Insert exactly one Markdown link for EACH post above, at the single most "
-        "relevant point in the text where that topic is already being discussed.\n"
-        "2. The link text must be a short, natural phrase already present in or very "
-        "close to the surrounding sentence - never invent a new sentence just to hold a link.\n"
-        "3. Use the EXACT URL given for each post. Never invent a URL or link to anything "
-        "not listed above.\n"
-        "4. Do not change any other word, heading, code block, or formatting in the post. "
-        "Do not add, remove, or reorder content beyond inserting the links.\n"
-        "5. If you cannot find a natural spot for one of the links, skip that one rather "
-        "than forcing it.\n\n"
-        "Reply with ONLY the full post body, links inserted, nothing else - no preamble, "
-        "no explanation, no surrounding markers.\n\n"
+        "- The phrase must be an EXACT substring of the post body - copy it character for "
+        "character, do not paraphrase, fix, or retype it.\n"
+        "- Never pick a phrase from a heading (a line starting with #) or from inside a "
+        "code block (between ``` fences).\n"
+        "- Never pick a phrase that's already inside a Markdown link, e.g. already between "
+        "[ and ].\n"
+        "- If you can't find a good, exact, natural phrase for one of the posts, skip it - "
+        "do not force a weak match.\n\n"
+        "Reply with ONLY one line per post you found a phrase for, in this exact format, "
+        "nothing else - no preamble, no numbering, no explanation:\n"
+        "URL | exact phrase from the text\n\n"
         "--- POST BODY START ---\n"
         f"{content}\n"
         "--- POST BODY END ---"
     )
 
 
-def _check_safety(original: str, linked: str) -> Tuple[bool, str]:
-    """Cheap sanity check, not a full diff: strip link syntax back out and
-    confirm the remaining text is close in length to the original. Guards
-    against the LLM rewriting, truncating, or padding the post instead of
-    only inserting links - on any doubt, the caller discards the result and
-    keeps the original rather than risk a silently mangled post.
+def _code_block_spans(content: str) -> List[Tuple[int, int]]:
+    return [m.span() for m in re.finditer(r"```.*?```", content, flags=re.DOTALL)]
 
-    Returns (passed, diagnostic) - the diagnostic is logged by the caller on
-    failure so a real run gives enough to debug WHY it failed, not just that
-    it did (confirmed useful after PR #63's run discarded a result with no
-    detail recorded beyond "failed the safety check")."""
-    if not linked or not linked.strip():
-        return False, "LLM returned empty content"
-    stripped = re.sub(r"\[([^\]]+)\]\([^)]+\)", r"\1", linked)
-    len_ratio = len(stripped) / max(len(original), 1)
-    if not (0.97 <= len_ratio <= 1.05):
-        return False, (
-            f"length ratio {len_ratio:.3f} outside [0.97, 1.05] "
-            f"(original {len(original)} chars, link-stripped result {len(stripped)} chars)"
-        )
-    return True, ""
+
+def _parse_anchor_lines(raw: str) -> List[Tuple[str, str]]:
+    """Each reply line -> (url, anchor). Malformed lines are skipped, not
+    fatal - a partial, well-formed response is still useful."""
+    pairs: List[Tuple[str, str]] = []
+    for line in (raw or "").splitlines():
+        line = line.strip().lstrip("-*0123456789. ").strip()
+        if " | " not in line:
+            continue
+        url_part, _, anchor_part = line.partition(" | ")
+        url = url_part.strip().strip('"')
+        anchor = anchor_part.strip().strip('"')
+        if url and anchor:
+            pairs.append((url, anchor))
+    return pairs
+
+
+def _apply_anchors(content: str, related: List[dict], anchor_lines: List[Tuple[str, str]]) -> Tuple[str, int]:
+    """Applies each (url, anchor) pair as a literal, exact string
+    replacement - never a rewrite. Every check here exists to make a bad
+    LLM pick a no-op rather than something that reaches the published post:
+    the URL must be one we actually offered (no hallucinated links), the
+    anchor must exist verbatim in the CURRENT content, must not fall inside
+    a fenced code block, and must not already be part of a Markdown link.
+    Only the first occurrence is replaced, and each application re-checks
+    against the content as modified by prior ones so two anchors can never
+    overlap or double-link the same text.
+
+    Returns (new_content, inserted_count)."""
+    valid_urls = {e["url"] for e in related if e.get("url")}
+    inserted = 0
+    for url, anchor in anchor_lines:
+        if inserted >= settings.INTERNAL_LINK_MAX_COUNT:
+            break
+        if url not in valid_urls:
+            print(f"⚠️ Internal linking: LLM proposed a URL not in the offered list, skipping ({url})", flush=True)
+            continue
+        if not (3 <= len(anchor) <= 120):
+            continue
+        idx = content.find(anchor)
+        if idx == -1:
+            print(f"ℹ️ Internal linking: anchor not found verbatim in the post, skipping ({anchor!r})", flush=True)
+            continue
+        if any(start <= idx < end for start, end in _code_block_spans(content)):
+            print(f"ℹ️ Internal linking: anchor falls inside a code block, skipping ({anchor!r})", flush=True)
+            continue
+        line_start = content.rfind("\n", 0, idx) + 1
+        if content[line_start:idx].lstrip().startswith("#"):
+            print(f"ℹ️ Internal linking: anchor falls on a heading line, skipping ({anchor!r})", flush=True)
+            continue
+        if f"[{anchor}]" in content:
+            print(f"ℹ️ Internal linking: anchor is already part of a link, skipping ({anchor!r})", flush=True)
+            continue
+        content = content[:idx] + f"[{anchor}]({url})" + content[idx + len(anchor):]
+        inserted += 1
+    return content, inserted
 
 
 async def add_internal_links(brand: str, product: str, platform: str, title: str, content: str) -> str:
     """Best-effort: returns `content` unchanged on any failure, missing
-    config, no related posts found, or a result that fails the safety
-    check - a bad outcome here must never block a run that otherwise
-    succeeded."""
+    config, no related posts found, or no anchor the LLM proposed surviving
+    validation - a bad outcome here must never block a run that otherwise
+    succeeded. See _build_anchor_prompt's docstring for why this asks the
+    LLM for short anchor phrases rather than a full rewrite."""
     if not settings.INTERNAL_LINKING_ENABLED:
         return content
 
@@ -237,23 +298,20 @@ async def add_internal_links(brand: str, product: str, platform: str, title: str
         if not related:
             return content
 
-        prompt = _build_insertion_prompt(content, related)
-        linked, _usage = await llm_service.complete(
-            prompt=prompt,
-            temperature=0.3,
-            max_tokens=max(4000, len(content)),
-        )
+        prompt = _build_anchor_prompt(content, related)
+        raw, _usage = await llm_service.complete(prompt=prompt, temperature=0.2, max_tokens=500)
 
-        passed, reason = _check_safety(content, linked)
-        if not passed:
-            print(
-                f"⚠️ Internal-linking result failed the safety check ({reason}) - "
-                "keeping original content (non-fatal)",
-                flush=True,
-            )
+        anchor_lines = _parse_anchor_lines(raw)
+        if not anchor_lines:
+            print("ℹ️ Internal linking: LLM proposed no usable anchor phrases", flush=True)
             return content
 
-        print(f"✅ Inserted internal links for up to {len(related)} related post(s)", flush=True)
+        linked, inserted = _apply_anchors(content, related, anchor_lines)
+        if inserted == 0:
+            print("ℹ️ Internal linking: no proposed anchor survived validation - keeping original content", flush=True)
+            return content
+
+        print(f"✅ Inserted {inserted} internal link(s)", flush=True)
         return linked
     except Exception as exc:
         print(f"⚠️ Could not insert internal links (non-fatal): {exc}", flush=True)
