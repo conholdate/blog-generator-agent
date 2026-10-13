@@ -240,7 +240,7 @@
         "ga4": {
           "postCount": 27,
           "priorSessions": 182,
-          "sessions": 247
+          "sessions": 249
         },
         "gscOpportunities": []
       },
@@ -674,9 +674,9 @@
       },
       "aspose.cloud|Aspose.PDF|.NET": {
         "ga4": {
-          "postCount": 53,
+          "postCount": 54,
           "priorSessions": 253,
-          "sessions": 148
+          "sessions": 149
         },
         "gscOpportunities": [
           {
@@ -1012,7 +1012,7 @@
         "ga4": {
           "postCount": 3,
           "priorSessions": 13,
-          "sessions": 14
+          "sessions": 15
         },
         "gscOpportunities": []
       },
@@ -1237,11 +1237,11 @@
       },
       "Cross-network": {
         "priorSessions": 0,
-        "sessions": 18
+        "sessions": 19
       },
       "Direct": {
         "priorSessions": 3596,
-        "sessions": 3808
+        "sessions": 3851
       },
       "Organic Search": {
         "priorSessions": 154,
@@ -1257,10 +1257,10 @@
       },
       "Unassigned": {
         "priorSessions": 171,
-        "sessions": 705
+        "sessions": 728
       }
     },
-    "refreshedAt": "2026-10-13T10:33:28.470560+00:00",
+    "refreshedAt": "2026-10-13T12:29:54.929991+00:00",
     "status": "ok"
   },
   "aspose.com": {
@@ -1269,7 +1269,7 @@
         "ga4": {
           "postCount": 26,
           "priorSessions": 223,
-          "sessions": 197
+          "sessions": 193
         },
         "gscOpportunities": [
           {
@@ -1416,7 +1416,7 @@
         "ga4": {
           "postCount": 42,
           "priorSessions": 554,
-          "sessions": 292
+          "sessions": 287
         },
         "gscOpportunities": [
           {
@@ -1618,7 +1618,7 @@
         "ga4": {
           "postCount": 31,
           "priorSessions": 269,
-          "sessions": 222
+          "sessions": 227
         },
         "gscOpportunities": [
           {
@@ -1665,9 +1665,9 @@
       },
       "aspose.com|Aspose.CAD|Python": {
         "ga4": {
-          "postCount": 20,
-          "priorSessions": 270,
-          "sessions": 304
+          "postCount": 21,
+          "priorSessions": 275,
+          "sessions": 309
         },
         "gscOpportunities": [
           {
@@ -1706,9 +1706,9 @@
       },
       "aspose.com|Aspose.Cells|.NET": {
         "ga4": {
-          "postCount": 143,
+          "postCount": 142,
           "priorSessions": 900,
-          "sessions": 1074
+          "sessions": 1069
         },
         "gscOpportunities": [
           {
@@ -1993,7 +1993,7 @@
         "ga4": {
           "postCount": 21,
           "priorSessions": 1110,
-          "sessions": 383
+          "sessions": 384
         },
         "gscOpportunities": [
           {
@@ -2187,7 +2187,7 @@
         "ga4": {
           "postCount": 25,
           "priorSessions": 1132,
-          "sessions": 729
+          "sessions": 724
         },
         "gscOpportunities": [
           {
@@ -2428,7 +2428,7 @@
         "ga4": {
           "postCount": 18,
           "priorSessions": 208,
-          "sessions": 156
+          "sessions": 161
         },
         "gscOpportunities": []
       },
@@ -2436,7 +2436,7 @@
         "ga4": {
           "postCount": 9,
           "priorSessions": 2018,
-          "sessions": 1346
+          "sessions": 1348
         },
         "gscOpportunities": [
           {
@@ -3179,9 +3179,9 @@
       },
       "aspose.com|Aspose.Email|.NET": {
         "ga4": {
-          "postCount": 54,
-          "priorSessions": 514,
-          "sessions": 347
+          "postCount": 53,
+          "priorSessions": 503,
+          "sessions": 342
         },
         "gscOpportunities": []
       },
@@ -3195,9 +3195,9 @@
       },
       "aspose.com|Aspose.Email|Java": {
         "ga4": {
-          "postCount": 35,
-          "priorSessions": 284,
-          "sessions": 251
+          "postCount": 34,
+          "priorSessions": 268,
+          "sessions": 246
         },
         "gscOpportunities": []
       },
@@ -3229,7 +3229,7 @@
         "ga4": {
           "postCount": 14,
           "priorSessions": 442,
-          "sessions": 394
+          "sessions": 395
         },
         "gscOpportunities": []
       },
@@ -3413,9 +3413,9 @@
       },
       "aspose.com|Aspose.GIS|.NET": {
         "ga4": {
-          "postCount": 22,
-          "priorSessions": 248,
-          "sessions": 217
+          "postCount": 23,
+          "priorSessions": 264,
+          "sessions": 226
         },
         "gscOpportunities": [
           {
@@ -3440,7 +3440,7 @@
         "ga4": {
           "postCount": 12,
           "priorSessions": 1854,
-          "sessions": 1223
+          "sessions": 1234
         },
         "gscOpportunities": [
           {
@@ -3625,7 +3625,7 @@
         "ga4": {
           "postCount": 28,
           "priorSessions": 245,
-          "sessions": 278
+          "sessions": 277
         },
         "gscOpportunities": [
           {
@@ -3691,7 +3691,7 @@
         "ga4": {
           "postCount": 19,
           "priorSessions": 190,
-          "sessions": 393
+          "sessions": 398
         },
         "gscOpportunities": [
           {
@@ -3740,7 +3740,7 @@
         "ga4": {
           "postCount": 47,
           "priorSessions": 343,
-          "sessions": 392
+          "sessions": 387
         },
         "gscOpportunities": [
           {
@@ -4181,9 +4181,9 @@
       },
       "aspose.com|Aspose.Note|Java": {
         "ga4": {
-          "postCount": 23,
-          "priorSessions": 302,
-          "sessions": 191
+          "postCount": 22,
+          "priorSessions": 286,
+          "sessions": 186
         },
         "gscOpportunities": [
           {
@@ -4216,7 +4216,7 @@
         "ga4": {
           "postCount": 21,
           "priorSessions": 186,
-          "sessions": 167
+          "sessions": 172
         },
         "gscOpportunities": [
           {
@@ -4247,9 +4247,9 @@
       },
       "aspose.com|Aspose.OCR|Java": {
         "ga4": {
-          "postCount": 20,
-          "priorSessions": 126,
-          "sessions": 144
+          "postCount": 19,
+          "priorSessions": 121,
+          "sessions": 134
         },
         "gscOpportunities": []
       },
@@ -4507,9 +4507,9 @@
       },
       "aspose.com|Aspose.PDF|Java": {
         "ga4": {
-          "postCount": 67,
-          "priorSessions": 439,
-          "sessions": 469
+          "postCount": 68,
+          "priorSessions": 444,
+          "sessions": 474
         },
         "gscOpportunities": [
           {
@@ -4532,9 +4532,9 @@
       },
       "aspose.com|Aspose.PDF|Python": {
         "ga4": {
-          "postCount": 31,
-          "priorSessions": 490,
-          "sessions": 454
+          "postCount": 32,
+          "priorSessions": 501,
+          "sessions": 459
         },
         "gscOpportunities": [
           {
@@ -5152,9 +5152,9 @@
       },
       "aspose.com|Aspose.Slides|.NET": {
         "ga4": {
-          "postCount": 53,
+          "postCount": 54,
           "priorSessions": 362,
-          "sessions": 371
+          "sessions": 381
         },
         "gscOpportunities": [
           {
@@ -5193,9 +5193,9 @@
       },
       "aspose.com|Aspose.Slides|Java": {
         "ga4": {
-          "postCount": 53,
-          "priorSessions": 372,
-          "sessions": 300
+          "postCount": 54,
+          "priorSessions": 377,
+          "sessions": 305
         },
         "gscOpportunities": []
       },
@@ -5362,9 +5362,9 @@
       },
       "aspose.com|Aspose.Tasks|.NET": {
         "ga4": {
-          "postCount": 23,
+          "postCount": 24,
           "priorSessions": 122,
-          "sessions": 154
+          "sessions": 159
         },
         "gscOpportunities": [
           {
@@ -5591,9 +5591,9 @@
       },
       "aspose.com|Aspose.Total|.NET": {
         "ga4": {
-          "postCount": 50,
-          "priorSessions": 193,
-          "sessions": 320
+          "postCount": 51,
+          "priorSessions": 214,
+          "sessions": 325
         },
         "gscOpportunities": [
           {
@@ -5730,8 +5730,8 @@
       },
       "aspose.com|Aspose.Words|.NET": {
         "ga4": {
-          "postCount": 87,
-          "priorSessions": 585,
+          "postCount": 88,
+          "priorSessions": 596,
           "sessions": 647
         },
         "gscOpportunities": []
@@ -5756,7 +5756,7 @@
         "ga4": {
           "postCount": 17,
           "priorSessions": 42,
-          "sessions": 90
+          "sessions": 95
         },
         "gscOpportunities": []
       },
@@ -5764,7 +5764,7 @@
         "ga4": {
           "postCount": 72,
           "priorSessions": 604,
-          "sessions": 690
+          "sessions": 685
         },
         "gscOpportunities": []
       },
@@ -5780,7 +5780,7 @@
         "ga4": {
           "postCount": 48,
           "priorSessions": 773,
-          "sessions": 519
+          "sessions": 524
         },
         "gscOpportunities": [
           {
@@ -5859,9 +5859,9 @@
       },
       "aspose.com|Aspose.Words|general": {
         "ga4": {
-          "postCount": 93,
+          "postCount": 92,
           "priorSessions": 761,
-          "sessions": 899
+          "sessions": 894
         },
         "gscOpportunities": [
           {
@@ -6353,7 +6353,7 @@
       },
       "Direct": {
         "priorSessions": 23555,
-        "sessions": 17882
+        "sessions": 18417
       },
       "Display": {
         "priorSessions": 1,
@@ -6361,15 +6361,15 @@
       },
       "Email": {
         "priorSessions": 1,
-        "sessions": 2
+        "sessions": 3
       },
       "Organic Search": {
         "priorSessions": 5030,
-        "sessions": 4098
+        "sessions": 4234
       },
       "Organic Social": {
         "priorSessions": 11,
-        "sessions": 5
+        "sessions": 6
       },
       "Paid Search": {
         "priorSessions": 0,
@@ -6377,14 +6377,14 @@
       },
       "Referral": {
         "priorSessions": 289,
-        "sessions": 301
+        "sessions": 304
       },
       "Unassigned": {
         "priorSessions": 77662,
-        "sessions": 1750
+        "sessions": 1781
       }
     },
-    "refreshedAt": "2026-10-13T10:33:55.062861+00:00",
+    "refreshedAt": "2026-10-13T12:30:19.826400+00:00",
     "status": "ok"
   },
   "conholdate.cloud": {
@@ -6428,7 +6428,7 @@
         "sessions": 1
       }
     },
-    "refreshedAt": "2026-10-13T10:34:00.252531+00:00",
+    "refreshedAt": "2026-10-13T12:30:22.099573+00:00",
     "status": "ok"
   },
   "conholdate.com": {
@@ -6574,7 +6574,7 @@
         "ga4": {
           "postCount": 187,
           "priorSessions": 773,
-          "sessions": 932
+          "sessions": 934
         },
         "gscOpportunities": [
           {
@@ -6623,7 +6623,7 @@
         "ga4": {
           "postCount": 97,
           "priorSessions": 2964,
-          "sessions": 1487
+          "sessions": 1493
         },
         "gscOpportunities": [
           {
@@ -7444,11 +7444,11 @@
       },
       "Cross-network": {
         "priorSessions": 47,
-        "sessions": 97
+        "sessions": 106
       },
       "Direct": {
         "priorSessions": 1573,
-        "sessions": 1421
+        "sessions": 1430
       },
       "Display": {
         "priorSessions": 1,
@@ -7456,7 +7456,7 @@
       },
       "Organic Search": {
         "priorSessions": 622,
-        "sessions": 574
+        "sessions": 578
       },
       "Organic Social": {
         "priorSessions": 10,
@@ -7468,10 +7468,10 @@
       },
       "Unassigned": {
         "priorSessions": 61,
-        "sessions": 301
+        "sessions": 320
       }
     },
-    "refreshedAt": "2026-10-13T10:34:32.557086+00:00",
+    "refreshedAt": "2026-10-13T12:30:29.509369+00:00",
     "status": "ok"
   },
   "groupdocs.cloud": {
@@ -7902,7 +7902,7 @@
         "ga4": {
           "postCount": 5,
           "priorSessions": 19,
-          "sessions": 29
+          "sessions": 30
         },
         "gscOpportunities": []
       },
@@ -8235,11 +8235,11 @@
     "channels": {
       "Direct": {
         "priorSessions": 3517,
-        "sessions": 3038
+        "sessions": 3067
       },
       "Organic Search": {
         "priorSessions": 126,
-        "sessions": 128
+        "sessions": 129
       },
       "Organic Social": {
         "priorSessions": 9,
@@ -8251,10 +8251,10 @@
       },
       "Unassigned": {
         "priorSessions": 101,
-        "sessions": 83
+        "sessions": 85
       }
     },
-    "refreshedAt": "2026-10-13T10:33:17.898747+00:00",
+    "refreshedAt": "2026-10-13T12:29:44.371819+00:00",
     "status": "ok"
   }
 }
