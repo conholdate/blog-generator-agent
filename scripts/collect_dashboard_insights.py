@@ -33,6 +33,9 @@ SNAPSHOT_PATH = REPO_ROOT / "content" / "dashboard_insights.json"
 ONBOARDED_BRANDS = {
     "groupdocs.cloud": settings.GA4_PROPERTY_ID_GROUPDOCS_CLOUD,
     "aspose.cloud": settings.GA4_PROPERTY_ID_ASPOSE_CLOUD,
+    "aspose.com": settings.GA4_PROPERTY_ID_ASPOSE_COM,
+    "conholdate.cloud": settings.GA4_PROPERTY_ID_CONHOLDATE_CLOUD,
+    "conholdate.com": settings.GA4_PROPERTY_ID_CONHOLDATE_COM,
 }
 
 

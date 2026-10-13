@@ -49,6 +49,9 @@ jobs:
           GA4_GOOGLE_KEY=ga4-service-account.json
           GA4_PROPERTY_ID_GROUPDOCS_CLOUD=${{ secrets.GA4_PROPERTY_ID_GROUPDOCS_CLOUD }}
           GA4_PROPERTY_ID_ASPOSE_CLOUD=${{ secrets.GA4_PROPERTY_ID_ASPOSE_CLOUD }}
+          GA4_PROPERTY_ID_ASPOSE_COM=${{ secrets.GA4_PROPERTY_ID_ASPOSE_COM }}
+          GA4_PROPERTY_ID_CONHOLDATE_CLOUD=${{ secrets.GA4_PROPERTY_ID_CONHOLDATE_CLOUD }}
+          GA4_PROPERTY_ID_CONHOLDATE_COM=${{ secrets.GA4_PROPERTY_ID_CONHOLDATE_COM }}
           EOF
           echo ".env file created"
 
