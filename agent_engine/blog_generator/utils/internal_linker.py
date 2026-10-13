@@ -197,7 +197,20 @@ def _build_anchor_prompt(content: str, related: List[dict]) -> str:
     instead keeps the LLM's job tiny (a few words per target, not 12K
     characters) and lets the actual insertion happen in code via exact
     string replacement - see _apply_anchors, which can't corrupt or
-    truncate the post because it never rewrites it, only slices into it."""
+    truncate the post because it never rewrites it, only slices into it.
+
+    The mandatory "NONE" sentinel below exists because of a THIRD real
+    failure (PR #65): with self.openai_client.chat.completions.create()
+    called directly against the real Professionalize endpoint, confirmed
+    finish_reason="stop" (not "length" - not a max_tokens problem) with
+    content=None and ~700 chars of reasoning_content, for the exact case
+    where no post actually matched. The reasoning model evidently treats
+    "nothing to say" as a valid place to stop after its reasoning trace,
+    without ever producing a final-answer turn. Giving it a mandatory
+    single-word output even for the empty case forces a real final turn -
+    confirmed fixed by 3/3 repeated direct calls after this change, for
+    both the no-match case (returns "NONE") and the real-match case
+    (returns a normal URL | phrase line)."""
     targets = "\n".join(f'{i + 1}. "{e["title"]}" -> {e["url"]}' for i, e in enumerate(related))
     return (
         "Below is a blog post body and a list of existing posts to link to from it.\n\n"
@@ -217,6 +230,9 @@ def _build_anchor_prompt(content: str, related: List[dict]) -> str:
         "Reply with ONLY one line per post you found a phrase for, in this exact format, "
         "nothing else - no preamble, no numbering, no explanation:\n"
         "URL | exact phrase from the text\n\n"
+        "You MUST end your reply with a final line even if you found a phrase for every "
+        "post above. If you found no usable phrase for ANY of the posts, your entire reply "
+        "must be exactly the single word: NONE\n\n"
         "--- POST BODY START ---\n"
         f"{content}\n"
         "--- POST BODY END ---"
@@ -303,7 +319,10 @@ async def add_internal_links(brand: str, product: str, platform: str, title: str
 
         anchor_lines = _parse_anchor_lines(raw)
         if not anchor_lines:
-            print("ℹ️ Internal linking: LLM proposed no usable anchor phrases", flush=True)
+            print(
+                f"ℹ️ Internal linking: LLM proposed no usable anchor phrases. Raw response: {raw!r}",
+                flush=True,
+            )
             return content
 
         linked, inserted = _apply_anchors(content, related, anchor_lines)
