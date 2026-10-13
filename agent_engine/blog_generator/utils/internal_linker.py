@@ -201,17 +201,27 @@ def _build_insertion_prompt(content: str, related: List[dict]) -> str:
     )
 
 
-def _looks_safe(original: str, linked: str) -> bool:
+def _check_safety(original: str, linked: str) -> Tuple[bool, str]:
     """Cheap sanity check, not a full diff: strip link syntax back out and
     confirm the remaining text is close in length to the original. Guards
     against the LLM rewriting, truncating, or padding the post instead of
     only inserting links - on any doubt, the caller discards the result and
-    keeps the original rather than risk a silently mangled post."""
+    keeps the original rather than risk a silently mangled post.
+
+    Returns (passed, diagnostic) - the diagnostic is logged by the caller on
+    failure so a real run gives enough to debug WHY it failed, not just that
+    it did (confirmed useful after PR #63's run discarded a result with no
+    detail recorded beyond "failed the safety check")."""
     if not linked or not linked.strip():
-        return False
+        return False, "LLM returned empty content"
     stripped = re.sub(r"\[([^\]]+)\]\([^)]+\)", r"\1", linked)
     len_ratio = len(stripped) / max(len(original), 1)
-    return 0.97 <= len_ratio <= 1.05
+    if not (0.97 <= len_ratio <= 1.05):
+        return False, (
+            f"length ratio {len_ratio:.3f} outside [0.97, 1.05] "
+            f"(original {len(original)} chars, link-stripped result {len(stripped)} chars)"
+        )
+    return True, ""
 
 
 async def add_internal_links(brand: str, product: str, platform: str, title: str, content: str) -> str:
@@ -234,9 +244,11 @@ async def add_internal_links(brand: str, product: str, platform: str, title: str
             max_tokens=max(4000, len(content)),
         )
 
-        if not _looks_safe(content, linked):
+        passed, reason = _check_safety(content, linked)
+        if not passed:
             print(
-                "⚠️ Internal-linking result failed the safety check - keeping original content (non-fatal)",
+                f"⚠️ Internal-linking result failed the safety check ({reason}) - "
+                "keeping original content (non-fatal)",
                 flush=True,
             )
             return content
