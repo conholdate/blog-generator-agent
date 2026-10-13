@@ -32,6 +32,7 @@ SNAPSHOT_PATH = REPO_ROOT / "content" / "dashboard_insights.json"
 # access is granted - no other code change needed.
 ONBOARDED_BRANDS = {
     "groupdocs.cloud": settings.GA4_PROPERTY_ID_GROUPDOCS_CLOUD,
+    "aspose.cloud": settings.GA4_PROPERTY_ID_ASPOSE_CLOUD,
 }
 
 

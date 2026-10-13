@@ -36,10 +36,21 @@ GSC_SCOPES = [
 EXCLUDED_KEYWORD_TABS = {"tracker", "sheet1", "template", "all missing topics"}
 
 # Translated posts live under a language prefix; generation is English-only,
-# so those pages are filtered out of the GSC query server-side.
+# so those pages are filtered out of the GSC query server-side (and, via
+# ga4_client.py's reuse of this list, out of the GA4 insights pipeline too).
+#
+# zh-tw/ka/hu/da/ro/bg/sk/bs/lt added 2026-10-13 after onboarding
+# aspose.cloud's GA4 property surfaced a real gap: these locale prefixes
+# were missing entirely, so blog.aspose.cloud/ka/tags/,
+# blog.aspose.cloud/da/cells/..., etc. were counted as real post pages -
+# confirmed live, they accounted for ~7,800 of 12,326 "pages with
+# sessions" for that one brand (63%). Checked samples under each new code
+# before adding it, and separately confirmed /total/..., /2014.../.../,
+# /2021/.../... etc. are genuine old-permalink posts, not noise - left
+# those alone.
 LANG_CODES = (
     "ar cs de el es fa fr he hi id it ja ko nl pl pt ru sv th tr uk vi "
-    "zh zh-hans zh-hant"
+    "zh zh-hans zh-hant zh-tw ka hu da ro bg sk bs lt"
 ).split()
 PAGE_LANG_FILTER_REGEX = r"^https?://[^/]+/(" + "|".join(LANG_CODES) + r")/"
 

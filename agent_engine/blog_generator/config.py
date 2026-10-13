@@ -70,6 +70,7 @@ class Settings(BaseSettings):
     # non-empty value here are collected - see
     # scripts/collect_dashboard_insights.py's ONBOARDED_BRANDS.
     GA4_PROPERTY_ID_GROUPDOCS_CLOUD: str = ""
+    GA4_PROPERTY_ID_ASPOSE_CLOUD: str = ""
 
     # Internal linking (post-generation step, utils/internal_linker.py):
     # finds existing published posts in the same bucket that are topically

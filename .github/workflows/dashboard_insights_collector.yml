@@ -48,6 +48,7 @@ jobs:
           GOOGLE_KEY=sheet-reader-494108-bd5e61ef812c.json
           GA4_GOOGLE_KEY=ga4-service-account.json
           GA4_PROPERTY_ID_GROUPDOCS_CLOUD=${{ secrets.GA4_PROPERTY_ID_GROUPDOCS_CLOUD }}
+          GA4_PROPERTY_ID_ASPOSE_CLOUD=${{ secrets.GA4_PROPERTY_ID_ASPOSE_CLOUD }}
           EOF
           echo ".env file created"
 

@@ -1,10 +1,1274 @@
 {
+  "aspose.cloud": {
+    "buckets": {
+      "aspose.cloud|Aspose.3D|.NET": {
+        "ga4": {
+          "postCount": 10,
+          "priorSessions": 46,
+          "sessions": 38
+        },
+        "gscOpportunities": [
+          {
+            "clicks": 0,
+            "impressions": 90,
+            "keyword": "fbx to obj",
+            "page": "https://blog.aspose.cloud/3d/fbx-to-obj-in-csharp/",
+            "position": 11.9,
+            "trend": "flat"
+          }
+        ]
+      },
+      "aspose.cloud|Aspose.3D|Go": {
+        "ga4": {
+          "postCount": 1,
+          "priorSessions": 7,
+          "sessions": 10
+        },
+        "gscOpportunities": []
+      },
+      "aspose.cloud|Aspose.3D|Java": {
+        "ga4": {
+          "postCount": 7,
+          "priorSessions": 38,
+          "sessions": 26
+        },
+        "gscOpportunities": []
+      },
+      "aspose.cloud|Aspose.3D|Node.js": {
+        "ga4": {
+          "postCount": 3,
+          "priorSessions": 8,
+          "sessions": 17
+        },
+        "gscOpportunities": []
+      },
+      "aspose.cloud|Aspose.3D|Python": {
+        "ga4": {
+          "postCount": 7,
+          "priorSessions": 53,
+          "sessions": 66
+        },
+        "gscOpportunities": [
+          {
+            "clicks": 1,
+            "impressions": 43,
+            "keyword": "aspose glb to fbx",
+            "page": "https://blog.aspose.cloud/3d/glb-to-fbx-in-java/",
+            "position": 8.4,
+            "trend": "declining"
+          }
+        ]
+      },
+      "aspose.cloud|Aspose.BarCode|.NET": {
+        "ga4": {
+          "postCount": 4,
+          "priorSessions": 30,
+          "sessions": 11
+        },
+        "gscOpportunities": []
+      },
+      "aspose.cloud|Aspose.BarCode|Android": {
+        "ga4": {
+          "postCount": 1,
+          "priorSessions": 7,
+          "sessions": 4
+        },
+        "gscOpportunities": []
+      },
+      "aspose.cloud|Aspose.BarCode|Java": {
+        "ga4": {
+          "postCount": 6,
+          "priorSessions": 34,
+          "sessions": 19
+        },
+        "gscOpportunities": []
+      },
+      "aspose.cloud|Aspose.BarCode|Node.js": {
+        "ga4": {
+          "postCount": 2,
+          "priorSessions": 0,
+          "sessions": 13
+        },
+        "gscOpportunities": []
+      },
+      "aspose.cloud|Aspose.BarCode|PHP": {
+        "ga4": {
+          "postCount": 4,
+          "priorSessions": 1,
+          "sessions": 21
+        },
+        "gscOpportunities": []
+      },
+      "aspose.cloud|Aspose.BarCode|Python": {
+        "ga4": {
+          "postCount": 8,
+          "priorSessions": 23,
+          "sessions": 43
+        },
+        "gscOpportunities": []
+      },
+      "aspose.cloud|Aspose.BarCode|Ruby": {
+        "ga4": {
+          "postCount": 1,
+          "priorSessions": 9,
+          "sessions": 3
+        },
+        "gscOpportunities": []
+      },
+      "aspose.cloud|Aspose.BarCode|general": {
+        "ga4": {
+          "postCount": 11,
+          "priorSessions": 65,
+          "sessions": 24
+        },
+        "gscOpportunities": []
+      },
+      "aspose.cloud|Aspose.CAD|.NET": {
+        "ga4": {
+          "postCount": 5,
+          "priorSessions": 33,
+          "sessions": 19
+        },
+        "gscOpportunities": []
+      },
+      "aspose.cloud|Aspose.CAD|Java": {
+        "ga4": {
+          "postCount": 1,
+          "priorSessions": 3,
+          "sessions": 2
+        },
+        "gscOpportunities": []
+      },
+      "aspose.cloud|Aspose.CAD|Node.js": {
+        "ga4": {
+          "postCount": 1,
+          "priorSessions": 6,
+          "sessions": 3
+        },
+        "gscOpportunities": []
+      },
+      "aspose.cloud|Aspose.Cells|.NET": {
+        "ga4": {
+          "postCount": 66,
+          "priorSessions": 353,
+          "sessions": 250
+        },
+        "gscOpportunities": [
+          {
+            "clicks": 0,
+            "impressions": 93,
+            "keyword": "csv to json c#",
+            "page": "https://blog.aspose.cloud/cells/convert-csv-to-json-in-dotnet/",
+            "position": 13.3,
+            "trend": "flat"
+          },
+          {
+            "clicks": 0,
+            "impressions": 51,
+            "keyword": "unprotect excel sheet in .net",
+            "page": "https://blog.aspose.cloud/cells/unprotect-excel-using-csharp/",
+            "position": 18.9,
+            "trend": "improving"
+          },
+          {
+            "clicks": 0,
+            "impressions": 43,
+            "keyword": "how to export excel into word using c#",
+            "page": "https://blog.aspose.cloud/cells/convert-excel-to-word-in-csharp/",
+            "position": 17.4,
+            "trend": "improving"
+          },
+          {
+            "clicks": 0,
+            "impressions": 39,
+            "keyword": "c# csv to pdf",
+            "page": "https://blog.aspose.cloud/cells/convert-csv-to-pdf-with-dotnet-rest-api/",
+            "position": 13.4,
+            "trend": "improving"
+          },
+          {
+            "clicks": 0,
+            "impressions": 43,
+            "keyword": "aspose.cells unlock",
+            "page": "https://blog.aspose.cloud/cells/unprotect-excel-using-csharp/",
+            "position": 9.1,
+            "trend": "flat"
+          },
+          {
+            "clicks": 0,
+            "impressions": 35,
+            "keyword": "xml to json c#",
+            "page": "https://blog.aspose.cloud/cells/xml-to-json-using-csharp/",
+            "position": 11.2,
+            "trend": "improving"
+          },
+          {
+            "clicks": 0,
+            "impressions": 48,
+            "keyword": "how to concatenate or merge excel files in c# combine xls",
+            "page": "https://blog.aspose.cloud/cells/combine-excel-files-using-csharp/",
+            "position": 15.0,
+            "trend": "declining"
+          },
+          {
+            "clicks": 0,
+            "impressions": 44,
+            "keyword": "excel to word converter using .net",
+            "page": "https://blog.aspose.cloud/cells/convert-excel-to-word-in-csharp/",
+            "position": 12.5,
+            "trend": "declining"
+          },
+          {
+            "clicks": 0,
+            "impressions": 33,
+            "keyword": "excel to powerpoint c# .net",
+            "page": "https://blog.aspose.cloud/cells/convert-excel-to-powerpoint-in-csharp/",
+            "position": 16.3,
+            "trend": "declining"
+          }
+        ]
+      },
+      "aspose.cloud|Aspose.Cells|Go": {
+        "ga4": {
+          "postCount": 6,
+          "priorSessions": 33,
+          "sessions": 15
+        },
+        "gscOpportunities": []
+      },
+      "aspose.cloud|Aspose.Cells|Java": {
+        "ga4": {
+          "postCount": 27,
+          "priorSessions": 182,
+          "sessions": 247
+        },
+        "gscOpportunities": []
+      },
+      "aspose.cloud|Aspose.Cells|Node.js": {
+        "ga4": {
+          "postCount": 14,
+          "priorSessions": 70,
+          "sessions": 47
+        },
+        "gscOpportunities": [
+          {
+            "clicks": 0,
+            "impressions": 33,
+            "keyword": "convert excel to pdf in npm",
+            "page": "https://blog.aspose.cloud/cells/convert-excel-to-pdf-in-nodejs/",
+            "position": 19.4,
+            "trend": "declining"
+          }
+        ]
+      },
+      "aspose.cloud|Aspose.Cells|PHP": {
+        "ga4": {
+          "postCount": 1,
+          "priorSessions": 7,
+          "sessions": 2
+        },
+        "gscOpportunities": []
+      },
+      "aspose.cloud|Aspose.Cells|Python": {
+        "ga4": {
+          "postCount": 16,
+          "priorSessions": 69,
+          "sessions": 68
+        },
+        "gscOpportunities": []
+      },
+      "aspose.cloud|Aspose.Cells|Ruby": {
+        "ga4": {
+          "postCount": 1,
+          "priorSessions": 8,
+          "sessions": 3
+        },
+        "gscOpportunities": []
+      },
+      "aspose.cloud|Aspose.Cells|general": {
+        "ga4": {
+          "postCount": 21,
+          "priorSessions": 69,
+          "sessions": 42
+        },
+        "gscOpportunities": []
+      },
+      "aspose.cloud|Aspose.Diagram|.NET": {
+        "ga4": {
+          "postCount": 3,
+          "priorSessions": 21,
+          "sessions": 10
+        },
+        "gscOpportunities": []
+      },
+      "aspose.cloud|Aspose.Diagram|Java": {
+        "ga4": {
+          "postCount": 1,
+          "priorSessions": 3,
+          "sessions": 2
+        },
+        "gscOpportunities": []
+      },
+      "aspose.cloud|Aspose.Diagram|PHP": {
+        "ga4": {
+          "postCount": 2,
+          "priorSessions": 7,
+          "sessions": 7
+        },
+        "gscOpportunities": []
+      },
+      "aspose.cloud|Aspose.Email|.NET": {
+        "ga4": {
+          "postCount": 3,
+          "priorSessions": 16,
+          "sessions": 6
+        },
+        "gscOpportunities": []
+      },
+      "aspose.cloud|Aspose.Email|Go": {
+        "ga4": {
+          "postCount": 1,
+          "priorSessions": 6,
+          "sessions": 1
+        },
+        "gscOpportunities": []
+      },
+      "aspose.cloud|Aspose.Email|Java": {
+        "ga4": {
+          "postCount": 1,
+          "priorSessions": 5,
+          "sessions": 4
+        },
+        "gscOpportunities": []
+      },
+      "aspose.cloud|Aspose.Email|Node.js": {
+        "ga4": {
+          "postCount": 2,
+          "priorSessions": 15,
+          "sessions": 11
+        },
+        "gscOpportunities": []
+      },
+      "aspose.cloud|Aspose.Email|PHP": {
+        "ga4": {
+          "postCount": 1,
+          "priorSessions": 0,
+          "sessions": 1
+        },
+        "gscOpportunities": []
+      },
+      "aspose.cloud|Aspose.Email|Python": {
+        "ga4": {
+          "postCount": 7,
+          "priorSessions": 67,
+          "sessions": 34
+        },
+        "gscOpportunities": [
+          {
+            "clicks": 0,
+            "impressions": 40,
+            "keyword": "python eml",
+            "page": "https://blog.aspose.cloud/email/create-eml-file-in-python-programmatically/",
+            "position": 10.0,
+            "trend": "declining"
+          }
+        ]
+      },
+      "aspose.cloud|Aspose.Email|Ruby": {
+        "ga4": {
+          "postCount": 1,
+          "priorSessions": 3,
+          "sessions": 2
+        },
+        "gscOpportunities": []
+      },
+      "aspose.cloud|Aspose.Email|general": {
+        "ga4": {
+          "postCount": 1,
+          "priorSessions": 10,
+          "sessions": 3
+        },
+        "gscOpportunities": []
+      },
+      "aspose.cloud|Aspose.HTML|.NET": {
+        "ga4": {
+          "postCount": 9,
+          "priorSessions": 60,
+          "sessions": 28
+        },
+        "gscOpportunities": []
+      },
+      "aspose.cloud|Aspose.HTML|Go": {
+        "ga4": {
+          "postCount": 2,
+          "priorSessions": 17,
+          "sessions": 2
+        },
+        "gscOpportunities": []
+      },
+      "aspose.cloud|Aspose.HTML|Java": {
+        "ga4": {
+          "postCount": 10,
+          "priorSessions": 69,
+          "sessions": 61
+        },
+        "gscOpportunities": []
+      },
+      "aspose.cloud|Aspose.HTML|Node.js": {
+        "ga4": {
+          "postCount": 8,
+          "priorSessions": 26,
+          "sessions": 96
+        },
+        "gscOpportunities": []
+      },
+      "aspose.cloud|Aspose.HTML|PHP": {
+        "ga4": {
+          "postCount": 4,
+          "priorSessions": 4,
+          "sessions": 26
+        },
+        "gscOpportunities": []
+      },
+      "aspose.cloud|Aspose.HTML|Python": {
+        "ga4": {
+          "postCount": 5,
+          "priorSessions": 6,
+          "sessions": 20
+        },
+        "gscOpportunities": []
+      },
+      "aspose.cloud|Aspose.HTML|general": {
+        "ga4": {
+          "postCount": 1,
+          "priorSessions": 6,
+          "sessions": 3
+        },
+        "gscOpportunities": []
+      },
+      "aspose.cloud|Aspose.Imaging|.NET": {
+        "ga4": {
+          "postCount": 15,
+          "priorSessions": 86,
+          "sessions": 49
+        },
+        "gscOpportunities": []
+      },
+      "aspose.cloud|Aspose.Imaging|Java": {
+        "ga4": {
+          "postCount": 19,
+          "priorSessions": 137,
+          "sessions": 173
+        },
+        "gscOpportunities": [
+          {
+            "clicks": 0,
+            "impressions": 251,
+            "keyword": "java resize image",
+            "page": "https://blog.aspose.cloud/imaging/resize-image-in-java/",
+            "position": 15.4,
+            "trend": "improving"
+          },
+          {
+            "clicks": 0,
+            "impressions": 236,
+            "keyword": "resize image java",
+            "page": "https://blog.aspose.cloud/imaging/resize-image-in-java/",
+            "position": 15.3,
+            "trend": "improving"
+          },
+          {
+            "clicks": 0,
+            "impressions": 194,
+            "keyword": "crop image java",
+            "page": "https://blog.aspose.cloud/imaging/crop-image-in-java/",
+            "position": 8.9,
+            "trend": "improving"
+          },
+          {
+            "clicks": 0,
+            "impressions": 156,
+            "keyword": "resize image in java",
+            "page": "https://blog.aspose.cloud/imaging/resize-image-in-java/",
+            "position": 11.9,
+            "trend": "improving"
+          },
+          {
+            "clicks": 0,
+            "impressions": 132,
+            "keyword": "dcm to jpg",
+            "page": "https://blog.aspose.cloud/imaging/convert-dcm-to-jpg-in-java/",
+            "position": 19.1,
+            "trend": "improving"
+          },
+          {
+            "clicks": 0,
+            "impressions": 75,
+            "keyword": "tiff to jpg converter",
+            "page": "https://blog.aspose.cloud/imaging/convert-tiff-to-jpg-in-java/",
+            "position": 19.5,
+            "trend": "new"
+          },
+          {
+            "clicks": 0,
+            "impressions": 57,
+            "keyword": "auto deskew",
+            "page": "https://blog.aspose.cloud/imaging/deskew-image-in-java/",
+            "position": 8.0,
+            "trend": "improving"
+          },
+          {
+            "clicks": 0,
+            "impressions": 57,
+            "keyword": "grayscale photo",
+            "page": "https://blog.aspose.cloud/imaging/grayscale-image-in-java/",
+            "position": 10.4,
+            "trend": "improving"
+          },
+          {
+            "clicks": 0,
+            "impressions": 47,
+            "keyword": "convert jpg to tiff",
+            "page": "https://blog.aspose.cloud/imaging/convert-jpg-to-tiff-in-java/",
+            "position": 19.6,
+            "trend": "new"
+          },
+          {
+            "clicks": 0,
+            "impressions": 35,
+            "keyword": "deskew image",
+            "page": "https://blog.aspose.cloud/imaging/deskew-image-in-java/",
+            "position": 11.0,
+            "trend": "improving"
+          },
+          {
+            "clicks": 0,
+            "impressions": 45,
+            "keyword": "filter grayscale",
+            "page": "https://blog.aspose.cloud/imaging/grayscale-image-in-java/",
+            "position": 12.7,
+            "trend": "declining"
+          }
+        ]
+      },
+      "aspose.cloud|Aspose.Imaging|Python": {
+        "ga4": {
+          "postCount": 19,
+          "priorSessions": 109,
+          "sessions": 55
+        },
+        "gscOpportunities": []
+      },
+      "aspose.cloud|Aspose.OCR|.NET": {
+        "ga4": {
+          "postCount": 3,
+          "priorSessions": 23,
+          "sessions": 16
+        },
+        "gscOpportunities": []
+      },
+      "aspose.cloud|Aspose.OCR|Go": {
+        "ga4": {
+          "postCount": 2,
+          "priorSessions": 15,
+          "sessions": 6
+        },
+        "gscOpportunities": []
+      },
+      "aspose.cloud|Aspose.OCR|Java": {
+        "ga4": {
+          "postCount": 3,
+          "priorSessions": 14,
+          "sessions": 14
+        },
+        "gscOpportunities": [
+          {
+            "clicks": 0,
+            "impressions": 78,
+            "keyword": "perform ocr on images using java sdk",
+            "page": "https://blog.aspose.cloud/ocr/cloud-based-optical-characters-recognition-using-java/",
+            "position": 11.2,
+            "trend": "declining"
+          }
+        ]
+      },
+      "aspose.cloud|Aspose.OCR|Node.js": {
+        "ga4": {
+          "postCount": 1,
+          "priorSessions": 0,
+          "sessions": 4
+        },
+        "gscOpportunities": []
+      },
+      "aspose.cloud|Aspose.OCR|PHP": {
+        "ga4": {
+          "postCount": 1,
+          "priorSessions": 11,
+          "sessions": 2
+        },
+        "gscOpportunities": []
+      },
+      "aspose.cloud|Aspose.OCR|Python": {
+        "ga4": {
+          "postCount": 3,
+          "priorSessions": 19,
+          "sessions": 8
+        },
+        "gscOpportunities": []
+      },
+      "aspose.cloud|Aspose.OCR|general": {
+        "ga4": {
+          "postCount": 1,
+          "priorSessions": 2,
+          "sessions": 1
+        },
+        "gscOpportunities": []
+      },
+      "aspose.cloud|Aspose.OMR|.NET": {
+        "ga4": {
+          "postCount": 1,
+          "priorSessions": 19,
+          "sessions": 4
+        },
+        "gscOpportunities": []
+      },
+      "aspose.cloud|Aspose.OMR|Go": {
+        "ga4": {
+          "postCount": 1,
+          "priorSessions": 10,
+          "sessions": 1
+        },
+        "gscOpportunities": []
+      },
+      "aspose.cloud|Aspose.OMR|Java": {
+        "ga4": {
+          "postCount": 2,
+          "priorSessions": 9,
+          "sessions": 9
+        },
+        "gscOpportunities": []
+      },
+      "aspose.cloud|Aspose.OMR|Node.js": {
+        "ga4": {
+          "postCount": 2,
+          "priorSessions": 14,
+          "sessions": 6
+        },
+        "gscOpportunities": []
+      },
+      "aspose.cloud|Aspose.OMR|PHP": {
+        "ga4": {
+          "postCount": 1,
+          "priorSessions": 0,
+          "sessions": 5
+        },
+        "gscOpportunities": []
+      },
+      "aspose.cloud|Aspose.OMR|Python": {
+        "ga4": {
+          "postCount": 2,
+          "priorSessions": 20,
+          "sessions": 4
+        },
+        "gscOpportunities": []
+      },
+      "aspose.cloud|Aspose.PDF|.NET": {
+        "ga4": {
+          "postCount": 53,
+          "priorSessions": 253,
+          "sessions": 148
+        },
+        "gscOpportunities": [
+          {
+            "clicks": 0,
+            "impressions": 82,
+            "keyword": "how to convert pdf to png with an sdk",
+            "page": "https://blog.aspose.cloud/pdf/convert-pdf-to-png-with-dotnet-rest-api/",
+            "position": 12.5,
+            "trend": "improving"
+          },
+          {
+            "clicks": 0,
+            "impressions": 53,
+            "keyword": "xps to pdf converter in .net",
+            "page": "https://blog.aspose.cloud/pdf/convert-xps-to-pdf-with-csharp/",
+            "position": 9.9,
+            "trend": "improving"
+          },
+          {
+            "clicks": 0,
+            "impressions": 55,
+            "keyword": "sdk to convert pdf files to pdf/a format",
+            "page": "https://blog.aspose.cloud/pdf/convert-pdf-to-pdfa-with-dotnet-rest-api/",
+            "position": 12.7,
+            "trend": "new"
+          },
+          {
+            "clicks": 0,
+            "impressions": 44,
+            "keyword": "epub to pdf conversion using .net rest api",
+            "page": "https://blog.aspose.cloud/pdf/convert-epub-to-pdf-with-dotnet-rest-api/",
+            "position": 9.4,
+            "trend": "flat"
+          }
+        ]
+      },
+      "aspose.cloud|Aspose.PDF|Go": {
+        "ga4": {
+          "postCount": 1,
+          "priorSessions": 2,
+          "sessions": 3
+        },
+        "gscOpportunities": []
+      },
+      "aspose.cloud|Aspose.PDF|Java": {
+        "ga4": {
+          "postCount": 22,
+          "priorSessions": 170,
+          "sessions": 91
+        },
+        "gscOpportunities": [
+          {
+            "clicks": 0,
+            "impressions": 41,
+            "keyword": "highlight text in pdf using sdk",
+            "page": "https://blog.aspose.cloud/pdf/highlight-or-strikeout-text-in-pdf-add-line-or-circle-annotations-using-java-rest-apii/",
+            "position": 13.9,
+            "trend": "new"
+          },
+          {
+            "clicks": 0,
+            "impressions": 32,
+            "keyword": "fdf pdf",
+            "page": "https://blog.aspose.cloud/pdf/convert-pdf-to-fdf-file-in-java/",
+            "position": 14.0,
+            "trend": "improving"
+          }
+        ]
+      },
+      "aspose.cloud|Aspose.PDF|Node.js": {
+        "ga4": {
+          "postCount": 14,
+          "priorSessions": 66,
+          "sessions": 37
+        },
+        "gscOpportunities": [
+          {
+            "clicks": 1,
+            "impressions": 59,
+            "keyword": "aspose pdf to excel",
+            "page": "https://blog.aspose.cloud/pdf/pdf-to-excel-using-aspose.pdf-cloud-sdks-for-node.js/",
+            "position": 10.3,
+            "trend": "flat"
+          }
+        ]
+      },
+      "aspose.cloud|Aspose.PDF|PHP": {
+        "ga4": {
+          "postCount": 8,
+          "priorSessions": 65,
+          "sessions": 16
+        },
+        "gscOpportunities": [
+          {
+            "clicks": 0,
+            "impressions": 49,
+            "keyword": "concatenate merge pdf using php cloud",
+            "page": "https://blog.aspose.cloud/pdf/merge-pdf-files-using-php-cloud-sdk/",
+            "position": 19.1,
+            "trend": "declining"
+          }
+        ]
+      },
+      "aspose.cloud|Aspose.PDF|Python": {
+        "ga4": {
+          "postCount": 39,
+          "priorSessions": 209,
+          "sessions": 132
+        },
+        "gscOpportunities": []
+      },
+      "aspose.cloud|Aspose.PDF|Ruby": {
+        "ga4": {
+          "postCount": 1,
+          "priorSessions": 7,
+          "sessions": 2
+        },
+        "gscOpportunities": []
+      },
+      "aspose.cloud|Aspose.PDF|general": {
+        "ga4": {
+          "postCount": 26,
+          "priorSessions": 145,
+          "sessions": 72
+        },
+        "gscOpportunities": [
+          {
+            "clicks": 0,
+            "impressions": 38,
+            "keyword": "c# fill pdf form fields",
+            "page": "https://blog.aspose.cloud/pdf/form-parser-form-recognizer-pdf-filling-automate-form-processing-with-rest-web-api/",
+            "position": 9.9,
+            "trend": "improving"
+          }
+        ]
+      },
+      "aspose.cloud|Aspose.Slides|.NET": {
+        "ga4": {
+          "postCount": 44,
+          "priorSessions": 258,
+          "sessions": 173
+        },
+        "gscOpportunities": [
+          {
+            "clicks": 0,
+            "impressions": 250,
+            "keyword": ".net power point to pdf conversion sdk",
+            "page": "https://blog.aspose.cloud/slides/convert-powerpoint-to-pdf-document-with-aspose-slides-cloud-sdk-for-net/",
+            "position": 10.0,
+            "trend": "improving"
+          },
+          {
+            "clicks": 0,
+            "impressions": 188,
+            "keyword": "how to build an ppt and pptx viewer",
+            "page": "https://blog.aspose.cloud/slides/develop-powerpoint-viewer-using-dotnet-cloud-sdk/",
+            "position": 16.2,
+            "trend": "improving"
+          },
+          {
+            "clicks": 0,
+            "impressions": 120,
+            "keyword": "web pptx sdk",
+            "page": "https://blog.aspose.cloud/slides/develop-powerpoint-viewer-using-dotnet-cloud-sdk/",
+            "position": 11.6,
+            "trend": "improving"
+          },
+          {
+            "clicks": 0,
+            "impressions": 111,
+            "keyword": "powerpoint to pdf sdk",
+            "page": "https://blog.aspose.cloud/slides/convert-powerpoint-to-pdf-document-with-aspose-slides-cloud-sdk-for-net/",
+            "position": 15.5,
+            "trend": "flat"
+          },
+          {
+            "clicks": 1,
+            "impressions": 101,
+            "keyword": "ppt splitter",
+            "page": "https://blog.aspose.cloud/slides/split-powerpoint-presentation-slides-using-cloud-api/",
+            "position": 10.2,
+            "trend": "flat"
+          },
+          {
+            "clicks": 0,
+            "impressions": 54,
+            "keyword": "c# convert powerpoint to jpg",
+            "page": "https://blog.aspose.cloud/slides/convert-powerpoint-to-jpg-in-csharp/",
+            "position": 11.7,
+            "trend": "improving"
+          },
+          {
+            "clicks": 0,
+            "impressions": 42,
+            "keyword": "pptx to mp4",
+            "page": "https://blog.aspose.cloud/slides/convert-ppt-to-mp4-in-csharp/",
+            "position": 18.0,
+            "trend": "improving"
+          },
+          {
+            "clicks": 0,
+            "impressions": 46,
+            "keyword": "c# powerpoint viewer",
+            "page": "https://blog.aspose.cloud/slides/develop-powerpoint-viewer-using-dotnet-cloud-sdk/",
+            "position": 10.9,
+            "trend": "flat"
+          },
+          {
+            "clicks": 0,
+            "impressions": 61,
+            "keyword": "c# split powerpoint",
+            "page": "https://blog.aspose.cloud/slides/split-powerpoint-presentation-slides-using-cloud-api/",
+            "position": 12.0,
+            "trend": "declining"
+          },
+          {
+            "clicks": 0,
+            "impressions": 34,
+            "keyword": "powerpoint to image conversion in .net maui",
+            "page": "https://blog.aspose.cloud/slides/convert-powerpoint-to-jpg-in-csharp/",
+            "position": 19.2,
+            "trend": "improving"
+          },
+          {
+            "clicks": 0,
+            "impressions": 51,
+            "keyword": ".net split powerpoint",
+            "page": "https://blog.aspose.cloud/slides/split-powerpoint-presentation-slides-using-cloud-api/",
+            "position": 16.7,
+            "trend": "declining"
+          }
+        ]
+      },
+      "aspose.cloud|Aspose.Slides|Go": {
+        "ga4": {
+          "postCount": 7,
+          "priorSessions": 33,
+          "sessions": 12
+        },
+        "gscOpportunities": []
+      },
+      "aspose.cloud|Aspose.Slides|Java": {
+        "ga4": {
+          "postCount": 9,
+          "priorSessions": 55,
+          "sessions": 41
+        },
+        "gscOpportunities": [
+          {
+            "clicks": 0,
+            "impressions": 54,
+            "keyword": "java split powerpoint",
+            "page": "https://blog.aspose.cloud/slides/split-powerpoint-slides-in-java/",
+            "position": 10.3,
+            "trend": "declining"
+          }
+        ]
+      },
+      "aspose.cloud|Aspose.Slides|Node.js": {
+        "ga4": {
+          "postCount": 3,
+          "priorSessions": 17,
+          "sessions": 6
+        },
+        "gscOpportunities": [
+          {
+            "clicks": 0,
+            "impressions": 73,
+            "keyword": "convert ppt to jpg ppt to jpeg with node.js sdk",
+            "page": "https://blog.aspose.cloud/slides/ppt-to-jpg-in-nodejs/",
+            "position": 9.9,
+            "trend": "flat"
+          }
+        ]
+      },
+      "aspose.cloud|Aspose.Slides|PHP": {
+        "ga4": {
+          "postCount": 3,
+          "priorSessions": 20,
+          "sessions": 5
+        },
+        "gscOpportunities": []
+      },
+      "aspose.cloud|Aspose.Slides|Python": {
+        "ga4": {
+          "postCount": 16,
+          "priorSessions": 78,
+          "sessions": 41
+        },
+        "gscOpportunities": []
+      },
+      "aspose.cloud|Aspose.Slides|Ruby": {
+        "ga4": {
+          "postCount": 1,
+          "priorSessions": 9,
+          "sessions": 1
+        },
+        "gscOpportunities": []
+      },
+      "aspose.cloud|Aspose.Slides|general": {
+        "ga4": {
+          "postCount": 12,
+          "priorSessions": 63,
+          "sessions": 34
+        },
+        "gscOpportunities": []
+      },
+      "aspose.cloud|Aspose.Tasks|.NET": {
+        "ga4": {
+          "postCount": 12,
+          "priorSessions": 75,
+          "sessions": 56
+        },
+        "gscOpportunities": []
+      },
+      "aspose.cloud|Aspose.Tasks|Go": {
+        "ga4": {
+          "postCount": 1,
+          "priorSessions": 9,
+          "sessions": 2
+        },
+        "gscOpportunities": []
+      },
+      "aspose.cloud|Aspose.Tasks|Java": {
+        "ga4": {
+          "postCount": 1,
+          "priorSessions": 10,
+          "sessions": 2
+        },
+        "gscOpportunities": []
+      },
+      "aspose.cloud|Aspose.Tasks|Node.js": {
+        "ga4": {
+          "postCount": 3,
+          "priorSessions": 13,
+          "sessions": 14
+        },
+        "gscOpportunities": []
+      },
+      "aspose.cloud|Aspose.Tasks|Python": {
+        "ga4": {
+          "postCount": 10,
+          "priorSessions": 60,
+          "sessions": 29
+        },
+        "gscOpportunities": []
+      },
+      "aspose.cloud|Aspose.Words|.NET": {
+        "ga4": {
+          "postCount": 49,
+          "priorSessions": 272,
+          "sessions": 148
+        },
+        "gscOpportunities": [
+          {
+            "clicks": 0,
+            "impressions": 33,
+            "keyword": "net word html conversions",
+            "page": "https://blog.aspose.cloud/words/convert-word-to-html-using-csharp/",
+            "position": 14.5,
+            "trend": "new"
+          }
+        ]
+      },
+      "aspose.cloud|Aspose.Words|Dart": {
+        "ga4": {
+          "postCount": 1,
+          "priorSessions": 9,
+          "sessions": 7
+        },
+        "gscOpportunities": []
+      },
+      "aspose.cloud|Aspose.Words|Go": {
+        "ga4": {
+          "postCount": 7,
+          "priorSessions": 51,
+          "sessions": 18
+        },
+        "gscOpportunities": []
+      },
+      "aspose.cloud|Aspose.Words|Java": {
+        "ga4": {
+          "postCount": 18,
+          "priorSessions": 112,
+          "sessions": 75
+        },
+        "gscOpportunities": []
+      },
+      "aspose.cloud|Aspose.Words|Node.js": {
+        "ga4": {
+          "postCount": 8,
+          "priorSessions": 34,
+          "sessions": 34
+        },
+        "gscOpportunities": []
+      },
+      "aspose.cloud|Aspose.Words|PHP": {
+        "ga4": {
+          "postCount": 7,
+          "priorSessions": 74,
+          "sessions": 48
+        },
+        "gscOpportunities": [
+          {
+            "clicks": 1,
+            "impressions": 127,
+            "keyword": "export wordpress posts to word",
+            "page": "https://blog.aspose.cloud/words/export-wordpress-posts-to-msword-documents/",
+            "position": 12.7,
+            "trend": "declining"
+          }
+        ]
+      },
+      "aspose.cloud|Aspose.Words|Python": {
+        "ga4": {
+          "postCount": 26,
+          "priorSessions": 185,
+          "sessions": 82
+        },
+        "gscOpportunities": [
+          {
+            "clicks": 0,
+            "impressions": 44,
+            "keyword": "word to png docx to png in python sdk",
+            "page": "https://blog.aspose.cloud/words/convert-word-to-png-online-using-python-word-doc-to-png/",
+            "position": 10.0,
+            "trend": "declining"
+          }
+        ]
+      },
+      "aspose.cloud|Aspose.Words|Ruby": {
+        "ga4": {
+          "postCount": 11,
+          "priorSessions": 65,
+          "sessions": 25
+        },
+        "gscOpportunities": [
+          {
+            "clicks": 0,
+            "impressions": 77,
+            "keyword": "ruby docx to pdf",
+            "page": "https://blog.aspose.cloud/words/best-docx-to-pdf-converter-aspose.words-cloud-sdk-for-ruby/",
+            "position": 17.4,
+            "trend": "declining"
+          }
+        ]
+      },
+      "aspose.cloud|Aspose.Words|general": {
+        "ga4": {
+          "postCount": 25,
+          "priorSessions": 150,
+          "sessions": 67
+        },
+        "gscOpportunities": []
+      },
+      "aspose.cloud|total|.NET": {
+        "ga4": {
+          "postCount": 25,
+          "priorSessions": 140,
+          "sessions": 51
+        },
+        "gscOpportunities": []
+      },
+      "aspose.cloud|total|Android": {
+        "ga4": {
+          "postCount": 18,
+          "priorSessions": 118,
+          "sessions": 40
+        },
+        "gscOpportunities": []
+      },
+      "aspose.cloud|total|Go": {
+        "ga4": {
+          "postCount": 24,
+          "priorSessions": 176,
+          "sessions": 51
+        },
+        "gscOpportunities": [
+          {
+            "clicks": 0,
+            "impressions": 322,
+            "keyword": "decrypt pdf",
+            "page": "https://blog.aspose.cloud/total/encrypt-and-decrypt-pdf-files-with-curl/",
+            "position": 16.1,
+            "trend": "declining"
+          }
+        ]
+      },
+      "aspose.cloud|total|JasperReports": {
+        "ga4": {
+          "postCount": 1,
+          "priorSessions": 1,
+          "sessions": 1
+        },
+        "gscOpportunities": []
+      },
+      "aspose.cloud|total|Java": {
+        "ga4": {
+          "postCount": 9,
+          "priorSessions": 25,
+          "sessions": 15
+        },
+        "gscOpportunities": []
+      },
+      "aspose.cloud|total|Node.js": {
+        "ga4": {
+          "postCount": 14,
+          "priorSessions": 99,
+          "sessions": 34
+        },
+        "gscOpportunities": []
+      },
+      "aspose.cloud|total|PHP": {
+        "ga4": {
+          "postCount": 27,
+          "priorSessions": 168,
+          "sessions": 55
+        },
+        "gscOpportunities": []
+      },
+      "aspose.cloud|total|Perl": {
+        "ga4": {
+          "postCount": 3,
+          "priorSessions": 23,
+          "sessions": 7
+        },
+        "gscOpportunities": []
+      },
+      "aspose.cloud|total|Python": {
+        "ga4": {
+          "postCount": 40,
+          "priorSessions": 279,
+          "sessions": 74
+        },
+        "gscOpportunities": []
+      },
+      "aspose.cloud|total|Ruby": {
+        "ga4": {
+          "postCount": 12,
+          "priorSessions": 83,
+          "sessions": 24
+        },
+        "gscOpportunities": []
+      },
+      "aspose.cloud|total|general": {
+        "ga4": {
+          "postCount": 87,
+          "priorSessions": 404,
+          "sessions": 155
+        },
+        "gscOpportunities": []
+      }
+    },
+    "channels": {
+      "AI Assistant": {
+        "priorSessions": 0,
+        "sessions": 1
+      },
+      "Cross-network": {
+        "priorSessions": 0,
+        "sessions": 18
+      },
+      "Direct": {
+        "priorSessions": 3596,
+        "sessions": 3805
+      },
+      "Organic Search": {
+        "priorSessions": 154,
+        "sessions": 85
+      },
+      "Organic Social": {
+        "priorSessions": 11,
+        "sessions": 5
+      },
+      "Referral": {
+        "priorSessions": 18,
+        "sessions": 23
+      },
+      "Unassigned": {
+        "priorSessions": 171,
+        "sessions": 702
+      }
+    },
+    "refreshedAt": "2026-10-13T10:17:30.367287+00:00",
+    "status": "ok"
+  },
   "groupdocs.cloud": {
     "buckets": {
       "groupdocs.cloud|GroupDocs.Annotation|.NET": {
         "ga4": {
           "postCount": 3,
-          "priorSessions": 8,
+          "priorSessions": 7,
           "sessions": 10
         },
         "gscOpportunities": []
@@ -12,7 +1276,7 @@
       "groupdocs.cloud|GroupDocs.Annotation|Java": {
         "ga4": {
           "postCount": 2,
-          "priorSessions": 2,
+          "priorSessions": 1,
           "sessions": 7
         },
         "gscOpportunities": []
@@ -92,7 +1356,7 @@
       "groupdocs.cloud|GroupDocs.Comparison|Python": {
         "ga4": {
           "postCount": 8,
-          "priorSessions": 30,
+          "priorSessions": 31,
           "sessions": 42
         },
         "gscOpportunities": []
@@ -100,8 +1364,8 @@
       "groupdocs.cloud|GroupDocs.Conversion|.NET": {
         "ga4": {
           "postCount": 48,
-          "priorSessions": 185,
-          "sessions": 160
+          "priorSessions": 184,
+          "sessions": 161
         },
         "gscOpportunities": [
           {
@@ -114,15 +1378,15 @@
           },
           {
             "clicks": 0,
-            "impressions": 78,
+            "impressions": 75,
             "keyword": "csv to json c#",
             "page": "https://blog.groupdocs.cloud/conversion/convert-csv-to-json-with-csharp/",
-            "position": 10.4,
+            "position": 10.6,
             "trend": "improving"
           },
           {
             "clicks": 1,
-            "impressions": 129,
+            "impressions": 128,
             "keyword": "rar to jpg",
             "page": "https://blog.groupdocs.cloud/conversion/convert-rar-file-to-jpg-in-csharp-rar-file-converter/",
             "position": 17.0,
@@ -130,7 +1394,7 @@
           },
           {
             "clicks": 0,
-            "impressions": 61,
+            "impressions": 62,
             "keyword": "convert csv to json using c#",
             "page": "https://blog.groupdocs.cloud/conversion/convert-csv-to-json-with-csharp/",
             "position": 13.0,
@@ -138,15 +1402,7 @@
           },
           {
             "clicks": 0,
-            "impressions": 34,
-            "keyword": "convert csv to json using c# and asp net",
-            "page": "https://blog.groupdocs.cloud/conversion/convert-csv-to-json-with-csharp/",
-            "position": 12.9,
-            "trend": "improving"
-          },
-          {
-            "clicks": 0,
-            "impressions": 56,
+            "impressions": 55,
             "keyword": "mpp to excel converter",
             "page": "https://blog.groupdocs.cloud/conversion/convert-mpp-to-excel-with-csharp/",
             "position": 9.0,
@@ -154,11 +1410,19 @@
           },
           {
             "clicks": 0,
+            "impressions": 32,
+            "keyword": "convert csv to json using c# and asp net",
+            "page": "https://blog.groupdocs.cloud/conversion/convert-csv-to-json-with-csharp/",
+            "position": 13.3,
+            "trend": "improving"
+          },
+          {
+            "clicks": 0,
             "impressions": 35,
             "keyword": "how to convert mpp to excel",
             "page": "https://blog.groupdocs.cloud/conversion/convert-mpp-to-excel-with-csharp/",
             "position": 18.5,
-            "trend": "flat"
+            "trend": "declining"
           }
         ]
       },
@@ -174,15 +1438,15 @@
         "ga4": {
           "postCount": 62,
           "priorSessions": 322,
-          "sessions": 237
+          "sessions": 236
         },
         "gscOpportunities": [
           {
             "clicks": 0,
-            "impressions": 76,
+            "impressions": 79,
             "keyword": "convert text to pdf in java cloud sdk",
             "page": "https://blog.groupdocs.cloud/conversion/convert-text-files-to-pdf-in-java-using-rest-api/",
-            "position": 15.1,
+            "position": 14.8,
             "trend": "declining"
           },
           {
@@ -206,29 +1470,29 @@
       "groupdocs.cloud|GroupDocs.Conversion|Node.js": {
         "ga4": {
           "postCount": 54,
-          "priorSessions": 249,
-          "sessions": 225
+          "priorSessions": 248,
+          "sessions": 227
         },
         "gscOpportunities": [
           {
             "clicks": 2,
-            "impressions": 580,
+            "impressions": 570,
             "keyword": "rar to pdf",
             "page": "https://blog.groupdocs.cloud/conversion/convert-zip-or-rar-to-pdf-using-a-file-converter/",
-            "position": 13.6,
+            "position": 13.7,
             "trend": "declining"
           },
           {
             "clicks": 6,
-            "impressions": 108,
+            "impressions": 107,
             "keyword": "zip to html",
             "page": "https://blog.groupdocs.cloud/conversion/convert-zip-to-html-in-nodejs-zip-file-converter/",
-            "position": 9.0,
+            "position": 8.3,
             "trend": "improving"
           },
           {
             "clicks": 0,
-            "impressions": 106,
+            "impressions": 104,
             "keyword": "psd to pptx games",
             "page": "https://blog.groupdocs.cloud/conversion/convert-psd-to-pptx-in-nodejs-file-format-converter/",
             "position": 16.5,
@@ -236,7 +1500,7 @@
           },
           {
             "clicks": 0,
-            "impressions": 54,
+            "impressions": 52,
             "keyword": "rar to png",
             "page": "https://blog.groupdocs.cloud/conversion/convert-rar-files-to-png-in-nodejs-rar-file-converter/",
             "position": 9.9,
@@ -264,16 +1528,16 @@
         "ga4": {
           "postCount": 43,
           "priorSessions": 172,
-          "sessions": 187
+          "sessions": 188
         },
         "gscOpportunities": [
           {
             "clicks": 0,
-            "impressions": 43,
+            "impressions": 41,
             "keyword": "svg to png python",
             "page": "https://blog.groupdocs.cloud/conversion/convert-svg-to-png-high-quality-in-python/",
-            "position": 12.2,
-            "trend": "flat"
+            "position": 10.8,
+            "trend": "improving"
           },
           {
             "clicks": 0,
@@ -305,13 +1569,13 @@
       "groupdocs.cloud|GroupDocs.Conversion|general": {
         "ga4": {
           "postCount": 12,
-          "priorSessions": 201,
-          "sessions": 123
+          "priorSessions": 200,
+          "sessions": 120
         },
         "gscOpportunities": [
           {
             "clicks": 30,
-            "impressions": 1326,
+            "impressions": 1340,
             "keyword": "zip to jpg",
             "page": "https://blog.groupdocs.cloud/conversion/zip-to-jpg-online/",
             "position": 9.3,
@@ -319,7 +1583,7 @@
           },
           {
             "clicks": 12,
-            "impressions": 669,
+            "impressions": 660,
             "keyword": "zip to jpg converter",
             "page": "https://blog.groupdocs.cloud/conversion/zip-to-jpg-online/",
             "position": 9.1,
@@ -327,7 +1591,7 @@
           },
           {
             "clicks": 8,
-            "impressions": 591,
+            "impressions": 586,
             "keyword": "zip file to jpg",
             "page": "https://blog.groupdocs.cloud/conversion/zip-to-jpg-online/",
             "position": 9.5,
@@ -343,7 +1607,15 @@
           },
           {
             "clicks": 0,
-            "impressions": 120,
+            "impressions": 119,
+            "keyword": "zip to image converter",
+            "page": "https://blog.groupdocs.cloud/conversion/zip-to-jpg-online/",
+            "position": 9.5,
+            "trend": "declining"
+          },
+          {
+            "clicks": 0,
+            "impressions": 118,
             "keyword": "zip convert to jpg",
             "page": "https://blog.groupdocs.cloud/conversion/zip-to-jpg-online/",
             "position": 9.3,
@@ -351,15 +1623,15 @@
           },
           {
             "clicks": 0,
-            "impressions": 111,
-            "keyword": "zip to image converter",
-            "page": "https://blog.groupdocs.cloud/conversion/zip-to-jpg-online/",
-            "position": 9.5,
-            "trend": "declining"
+            "impressions": 59,
+            "keyword": "ppt to text converter",
+            "page": "https://blog.groupdocs.cloud/conversion/convert-ppt-to-text-online-using-powerpoint-converter/",
+            "position": 14.3,
+            "trend": "improving"
           },
           {
             "clicks": 3,
-            "impressions": 98,
+            "impressions": 99,
             "keyword": "convert zip to jpg",
             "page": "https://blog.groupdocs.cloud/conversion/zip-to-jpg-online/",
             "position": 11.1,
@@ -374,27 +1646,19 @@
             "trend": "declining"
           },
           {
-            "clicks": 0,
-            "impressions": 57,
-            "keyword": "ppt to text converter",
-            "page": "https://blog.groupdocs.cloud/conversion/convert-ppt-to-text-online-using-powerpoint-converter/",
-            "position": 14.4,
-            "trend": "improving"
-          },
-          {
             "clicks": 1,
-            "impressions": 61,
+            "impressions": 62,
             "keyword": "zip to jpeg",
             "page": "https://blog.groupdocs.cloud/conversion/zip-to-jpg-online/",
-            "position": 9.0,
+            "position": 8.9,
             "trend": "flat"
           },
           {
             "clicks": 0,
-            "impressions": 66,
+            "impressions": 65,
             "keyword": "convert large zip to jpg",
             "page": "https://blog.groupdocs.cloud/conversion/zip-to-jpg-online/",
-            "position": 10.3,
+            "position": 10.4,
             "trend": "declining"
           },
           {
@@ -435,7 +1699,7 @@
         "ga4": {
           "postCount": 2,
           "priorSessions": 5,
-          "sessions": 9
+          "sessions": 10
         },
         "gscOpportunities": []
       },
@@ -443,7 +1707,7 @@
         "ga4": {
           "postCount": 1,
           "priorSessions": 2,
-          "sessions": 4
+          "sessions": 5
         },
         "gscOpportunities": []
       },
@@ -456,11 +1720,11 @@
         "gscOpportunities": [
           {
             "clicks": 0,
-            "impressions": 52,
+            "impressions": 55,
             "keyword": "edit pptx online",
             "page": "https://blog.groupdocs.cloud/editor/edit-pptx-online-using-an-online-ppt-editor/",
-            "position": 18.3,
-            "trend": "improving"
+            "position": 19.0,
+            "trend": "flat"
           }
         ]
       },
@@ -473,7 +1737,7 @@
         "gscOpportunities": [
           {
             "clicks": 2,
-            "impressions": 189,
+            "impressions": 190,
             "keyword": "pptx merger",
             "page": "https://blog.groupdocs.cloud/merger/merge-powerpoint-pptpptx-files-online-using-rest-api-in-csharp/",
             "position": 15.6,
@@ -481,10 +1745,10 @@
           },
           {
             "clicks": 1,
-            "impressions": 63,
+            "impressions": 62,
             "keyword": "merge pptx files",
             "page": "https://blog.groupdocs.cloud/merger/merge-powerpoint-pptpptx-files-online-using-rest-api-in-csharp/",
-            "position": 15.6,
+            "position": 15.7,
             "trend": "improving"
           },
           {
@@ -497,10 +1761,10 @@
           },
           {
             "clicks": 0,
-            "impressions": 40,
+            "impressions": 36,
             "keyword": "merge pptx",
             "page": "https://blog.groupdocs.cloud/merger/merge-powerpoint-pptpptx-files-online-using-rest-api-in-csharp/",
-            "position": 15.4,
+            "position": 15.2,
             "trend": "improving"
           },
           {
@@ -516,16 +1780,16 @@
       "groupdocs.cloud|GroupDocs.Merger|Java": {
         "ga4": {
           "postCount": 18,
-          "priorSessions": 67,
-          "sessions": 73
+          "priorSessions": 66,
+          "sessions": 74
         },
         "gscOpportunities": []
       },
       "groupdocs.cloud|GroupDocs.Merger|Node.js": {
         "ga4": {
           "postCount": 21,
-          "priorSessions": 94,
-          "sessions": 88
+          "priorSessions": 93,
+          "sessions": 89
         },
         "gscOpportunities": [
           {
@@ -549,8 +1813,8 @@
       "groupdocs.cloud|GroupDocs.Merger|Python": {
         "ga4": {
           "postCount": 14,
-          "priorSessions": 74,
-          "sessions": 77
+          "priorSessions": 75,
+          "sessions": 76
         },
         "gscOpportunities": [
           {
@@ -559,14 +1823,6 @@
             "keyword": "pdf divider sdk",
             "page": "https://blog.groupdocs.cloud/merger/split-pdf-file-into-multiple-pdf-files-using-python/",
             "position": 10.4,
-            "trend": "new"
-          },
-          {
-            "clicks": 0,
-            "impressions": 43,
-            "keyword": "combine pdf python",
-            "page": "https://blog.groupdocs.cloud/merger/merge-pdf-files-using-rest-api-in-python/",
-            "position": 9.4,
             "trend": "new"
           },
           {
@@ -582,16 +1838,16 @@
       "groupdocs.cloud|GroupDocs.Merger|Ruby": {
         "ga4": {
           "postCount": 18,
-          "priorSessions": 71,
+          "priorSessions": 70,
           "sessions": 61
         },
         "gscOpportunities": [
           {
             "clicks": 0,
-            "impressions": 83,
+            "impressions": 82,
             "keyword": "pdf merge ruby",
             "page": "https://blog.groupdocs.cloud/merger/merge-and-combine-pdf-files-using-rest-api-in-ruby/",
-            "position": 14.2,
+            "position": 14.3,
             "trend": "declining"
           }
         ]
@@ -608,7 +1864,7 @@
         "ga4": {
           "postCount": 7,
           "priorSessions": 50,
-          "sessions": 31
+          "sessions": 32
         },
         "gscOpportunities": []
       },
@@ -616,7 +1872,7 @@
         "ga4": {
           "postCount": 11,
           "priorSessions": 22,
-          "sessions": 41
+          "sessions": 42
         },
         "gscOpportunities": []
       },
@@ -624,7 +1880,7 @@
         "ga4": {
           "postCount": 5,
           "priorSessions": 15,
-          "sessions": 14
+          "sessions": 15
         },
         "gscOpportunities": []
       },
@@ -639,7 +1895,7 @@
       "groupdocs.cloud|GroupDocs.Parser|Python": {
         "ga4": {
           "postCount": 9,
-          "priorSessions": 39,
+          "priorSessions": 38,
           "sessions": 40
         },
         "gscOpportunities": []
@@ -728,7 +1984,7 @@
         "ga4": {
           "postCount": 2,
           "priorSessions": 11,
-          "sessions": 4
+          "sessions": 8
         },
         "gscOpportunities": []
       },
@@ -752,14 +2008,14 @@
         "ga4": {
           "postCount": 8,
           "priorSessions": 52,
-          "sessions": 59
+          "sessions": 60
         },
         "gscOpportunities": []
       },
       "groupdocs.cloud|GroupDocs.Watermark|Java": {
         "ga4": {
           "postCount": 9,
-          "priorSessions": 33,
+          "priorSessions": 32,
           "sessions": 38
         },
         "gscOpportunities": []
@@ -767,27 +2023,27 @@
     },
     "channels": {
       "Direct": {
-        "priorSessions": 3682,
-        "sessions": 2996
+        "priorSessions": 3517,
+        "sessions": 3038
       },
       "Organic Search": {
         "priorSessions": 126,
-        "sessions": 127
+        "sessions": 128
       },
       "Organic Social": {
         "priorSessions": 9,
         "sessions": 7
       },
       "Referral": {
-        "priorSessions": 22,
-        "sessions": 23
+        "priorSessions": 23,
+        "sessions": 21
       },
       "Unassigned": {
-        "priorSessions": 99,
-        "sessions": 76
+        "priorSessions": 101,
+        "sessions": 83
       }
     },
-    "refreshedAt": "2026-10-12T12:48:40.471179+00:00",
+    "refreshedAt": "2026-10-13T10:17:16.349294+00:00",
     "status": "ok"
   }
 }
