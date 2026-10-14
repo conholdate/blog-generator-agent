@@ -27,6 +27,7 @@ from utils.gsc_opportunities import (
     match_product_tab,
     tokenize,
 )
+from utils.topic_embeddings import cosine_similarity, embed_text
 
 GSC_SCOPES = [
     "https://www.googleapis.com/auth/webmasters.readonly",
@@ -163,17 +164,34 @@ def fetch_all_opportunities(brand: str, top_n: int) -> list[Opportunity]:
     )
 
 
-def fetch_related_queries(brand: str, keywords: list[str], top_n: int = 5) -> list[str]:
-    """Real GSC queries related to a new post's keywords, for grounding its
+# Below this, a lexically-overlapping query (2+ shared tokens) still isn't
+# necessarily ABOUT the same thing - calibrated live against real data for
+# two brands: genuine matches scored 0.84-0.92 against the post title
+# (e.g. "dwg to png" vs "DWG to PNG Conversion Tutorial in Python" ->
+# 0.911), while confirmed noise that passed the lexical filter topped out
+# at 0.74 (e.g. "convert pdf to png java" -> 0.643, "word to png docx to
+# png in python sdk" -> 0.738). Clean gap either side of 0.80.
+FAQ_QUERY_RELEVANCE_THRESHOLD = 0.80
+
+
+def fetch_related_queries(brand: str, title: str, keywords: list[str], top_n: int = 5) -> list[str]:
+    """Real GSC queries related to a new post's topic, for grounding its
     FAQ section in genuine search demand instead of LLM-invented questions -
     see prompts.get_blog_writer_prompt's faq_queries param. A lightweight,
     query-only fetch (no page dimension, no trend) since this only needs
     "what do people actually search for near this topic," not
     striking-distance ranking analysis.
 
-    Best-effort: [] on any failure, missing config, or no overlap found -
-    the caller falls back to letting the LLM invent its own FAQ questions,
-    same as it always has."""
+    Two filters, both required: lexical (2+ shared tokens with `keywords`)
+    narrows the GSC result set down cheaply, then embedding similarity
+    against `title` (>= FAQ_QUERY_RELEVANCE_THRESHOLD) confirms the
+    surviving candidates are actually ABOUT the same topic, not just
+    sharing a couple of generic words - see that constant's comment for
+    the real-data calibration behind the threshold.
+
+    Best-effort: [] on any failure, missing config, or no match surviving
+    both filters - the caller falls back to letting the LLM invent its own
+    FAQ questions, same as it always has."""
     if not settings.GSC_ENABLED:
         return []
     try:
@@ -204,7 +222,7 @@ def fetch_related_queries(brand: str, keywords: list[str], top_n: int = 5) -> li
         # just one generic word either side happens to use.
         min_overlap = min(2, len(keyword_tokens))
 
-        scored = []
+        lexical_hits = []
         for row in rows:
             query = (row.get("keys") or [""])[0].strip().lower()
             # isascii() only catches non-Latin scripts, not non-English
@@ -218,10 +236,30 @@ def fetch_related_queries(brand: str, keywords: list[str], top_n: int = 5) -> li
                 continue
             if len(set(tokenize(query)) & keyword_tokens) < min_overlap:
                 continue
-            scored.append((int(row.get("impressions", 0)), query))
+            lexical_hits.append((int(row.get("impressions", 0)), query))
 
-        scored.sort(key=lambda pair: pair[0], reverse=True)
-        return [query for _, query in scored[:top_n]]
+        if not lexical_hits:
+            return []
+
+        # Embedding pass over lexical survivors, highest-impression first,
+        # stopping once top_n relevant matches are found - confirmed live
+        # that embedding every survivor sequentially can blow well past a
+        # couple of minutes when many queries pass the lexical filter (one
+        # network round-trip each). Capping the embedding calls instead of
+        # the lexical set keeps this bounded regardless of how many
+        # queries matched, and checking highest-impression-first means the
+        # ones most worth showing get checked before the ones least likely
+        # to matter anyway.
+        lexical_hits.sort(key=lambda pair: pair[0], reverse=True)
+        title_vector = embed_text(title)
+        matches = []
+        for impressions, query in lexical_hits:
+            if len(matches) >= top_n:
+                break
+            if cosine_similarity(title_vector, embed_text(query)) >= FAQ_QUERY_RELEVANCE_THRESHOLD:
+                matches.append(query)
+
+        return matches
     except Exception as exc:
         print(f"⚠️ Could not fetch related GSC queries for FAQ grounding (non-fatal): {exc}", flush=True)
         return []

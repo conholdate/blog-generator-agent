@@ -337,7 +337,7 @@ class BlogOrchestrator:
             # Real GSC queries to ground the FAQ section in - non-fatal,
             # best-effort (see fetch_related_queries' docstring).
             from services.gsc_selector import fetch_related_queries
-            faq_queries = fetch_related_queries(self.brand, f_keywords)
+            faq_queries = fetch_related_queries(self.brand, post_topic, f_keywords)
 
             # ════════════════════════════════════════════════════════════════════
             # UPDATED: Using centralized LLM service instead of direct Agent creation
@@ -808,7 +808,7 @@ class BlogOrchestrator:
             # Real GSC queries to ground the FAQ section in - non-fatal,
             # best-effort (see fetch_related_queries' docstring).
             from services.gsc_selector import fetch_related_queries
-            faq_queries = fetch_related_queries(self.brand, f_keywords)
+            faq_queries = fetch_related_queries(self.brand, post_topic, f_keywords)
 
             instructions = prompts.get_blog_writer_prompt(
                 post_topic,
