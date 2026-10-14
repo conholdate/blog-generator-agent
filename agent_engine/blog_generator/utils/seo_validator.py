@@ -1,6 +1,24 @@
 import re
 import frontmatter
 from services.LLMservice import llm_service  # Use centralized service
+from .layouts import FAQS_HEADING_VARIANTS, READ_MORE_HEADING_VARIANTS
+
+# Built from the same variant tuples layouts.py rotates through - not a
+# separately maintained list, so a new heading variant added there is
+# automatically accepted here too, and the two can never silently drift
+# apart (confirmed this matters: varying these headings without updating
+# this check would make every post fail RULE 4 below, since it used to
+# only recognize the single fixed "## Conclusion"/"## FAQs"/"## Read More"
+# wording).
+_FAQ_HEADING_RE = re.compile(
+    r'^#+\s*(?:' + '|'.join(re.escape(h.lstrip('#').strip()) for h in FAQS_HEADING_VARIANTS) + r')',
+    re.MULTILINE | re.IGNORECASE,
+)
+_READ_MORE_HEADING_RE = re.compile(
+    r'^#+\s*(?:' + '|'.join(re.escape(h.lstrip('#').strip()) for h in READ_MORE_HEADING_VARIANTS) + r')',
+    re.MULTILINE | re.IGNORECASE,
+)
+
 
 def validate_seo_content(markdown_string, targets):
     """
@@ -62,8 +80,8 @@ def validate_seo_content(markdown_string, targets):
     report["details"]["keyword_density"] = {"score": kw_score, "msg": msg}
 
     # --- RULE 4: Required Sections (FAQ & Read More) ---
-    has_faq = bool(re.search(r'^#+\s*(FAQ|Frequently Asked Questions)', content_body, re.MULTILINE | re.IGNORECASE))
-    has_read_more = bool(re.search(r'^#+\s*Read More', content_body, re.MULTILINE | re.IGNORECASE))
+    has_faq = bool(_FAQ_HEADING_RE.search(content_body))
+    has_read_more = bool(_READ_MORE_HEADING_RE.search(content_body))
     
     # Worth 25 (15 base + 10 shifted from the softened seoTitle check in RULE 1).
     sec_score = 25

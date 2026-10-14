@@ -944,7 +944,7 @@ heading. The position labels refer to the MANDATORY CONTENT FLOW in Part 2.
 ===============================================================================
 
 ### 5. CONCLUSION (MANDATORY)
-## Conclusion
+{layout_choice.heading_hints['conclusion']}
 
 - 2-3 paragraphs summarizing key points
 - Include at least 1 contextual link
@@ -955,7 +955,7 @@ heading. The position labels refer to the MANDATORY CONTENT FLOW in Part 2.
 - NEVER mention "free" or "online tool"
 
 ### 6. FAQS (MANDATORY)
-## FAQs
+{layout_choice.heading_hints['faqs']}
 
 Requirements:
 - 3-4 questions
@@ -963,12 +963,13 @@ Requirements:
 - Include contextual links in answers
 - Use product page URL with full product name: [Product Name](url)
 - NEVER mention "free" or "online"
+- Use this EXACT heading text for this section: "{layout_choice.heading_hints['faqs']}"
 {faq_guidance}
 
 {'### 7. READ MORE (MANDATORY)' if formatted_related else '### NO READ MORE SECTION'}
-{'## Read More' if formatted_related else 'Do NOT include - no related links provided.'}
+{layout_choice.heading_hints['read_more'] if formatted_related else 'Do NOT include - no related links provided.'}
 {formatted_related if formatted_related else 'Blog MUST end after FAQs.'}
-{'Use EXACT titles and URLs provided.' if formatted_related else ''}
+{f'Use EXACT titles and URLs provided, under the EXACT heading text: "{layout_choice.heading_hints["read_more"]}"' if formatted_related else ''}
 
 ===============================================================================
 PART 3: TERMINOLOGY RULES (CRITICAL - STRICTLY ENFORCED)

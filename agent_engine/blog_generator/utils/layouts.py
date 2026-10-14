@@ -427,6 +427,43 @@ LAYOUTS_BY_NAME = {l.name: l for l in ALL_LAYOUTS}
 
 
 # ══════════════════════════════════════════════════════════════════════════════
+# CLOSING SECTION HEADING VARIANTS (Conclusion / FAQs / Read More)
+# ══════════════════════════════════════════════════════════════════════════════
+# These three always close every post (see Layout docstring), so unlike the
+# Section catalog above their heading text was hardcoded identically across
+# every single post regardless of layout - the single clearest mechanical
+# fingerprint of templated generation (confirmed live across 4 real posts
+# spanning 3 brands: same "## Conclusion"/"## FAQs"/"## Read More" text,
+# verbatim, every time). Rotated the same way Section.heading_variants
+# already rotates the middle sections.
+#
+# FAQs and Read More are constrained by utils/seo_validator.py's required-
+# sections check (RULE 4), which greps the post for these headings to
+# confirm they're actually present - seo_validator.py imports these same
+# tuples (not a separate hardcoded list) so the accepted set can never
+# silently drift from what's actually offered here. Conclusion has no such
+# check and can vary freely.
+CONCLUSION_HEADING_VARIANTS = (
+    "## Conclusion",
+    "## Wrapping Up",
+    "## Final Thoughts",
+    "## Key Takeaways",
+)
+FAQS_HEADING_VARIANTS = (
+    "## FAQs",
+    "## Frequently Asked Questions",
+    "## Common Questions",
+    "## Questions You Might Have",
+)
+READ_MORE_HEADING_VARIANTS = (
+    "## Read More",
+    "## Further Reading",
+    "## Related Articles",
+    "## Keep Exploring",
+)
+
+
+# ══════════════════════════════════════════════════════════════════════════════
 # SELECTION
 # ══════════════════════════════════════════════════════════════════════════════
 
@@ -514,6 +551,9 @@ def _resolve_choice(layout: Layout, is_cloud: bool, rng: random.Random, reason: 
             continue
         sections.append(section)
     heading_hints = {s.key: rng.choice(s.heading_variants) for s in sections}
+    heading_hints["conclusion"] = rng.choice(CONCLUSION_HEADING_VARIANTS)
+    heading_hints["faqs"] = rng.choice(FAQS_HEADING_VARIANTS)
+    heading_hints["read_more"] = rng.choice(READ_MORE_HEADING_VARIANTS)
     return LayoutChoice(layout=layout, sections=sections, heading_hints=heading_hints, reason=reason)
 
 
@@ -522,6 +562,9 @@ def default_choice(is_cloud: bool = False) -> LayoutChoice:
     (backwards-compatible behavior when no layout is selected)."""
     sections = [s for s in CLASSIC_TUTORIAL.sections if not (s.cloud_only and not is_cloud)]
     hints = {s.key: s.heading_variants[0] for s in sections}
+    hints["conclusion"] = CONCLUSION_HEADING_VARIANTS[0]
+    hints["faqs"] = FAQS_HEADING_VARIANTS[0]
+    hints["read_more"] = READ_MORE_HEADING_VARIANTS[0]
     return LayoutChoice(layout=CLASSIC_TUTORIAL, sections=sections, heading_hints=hints, reason="default (no selection)")
 
 
@@ -632,13 +675,17 @@ def _render_heading_budget(choice: LayoutChoice) -> str:
     for s in choice.sections:
         hint = choice.heading_hints.get(s.key, "")
         lines.append(f"  {s.label} heading:\n    - {_ROLE_RULES[s.heading_role]}\n    - Phrasing pattern to follow: {hint}")
-    return "**MANDATORY HEADING ASSIGNMENT (KEYWORD BUDGET FOR THIS LAYOUT):**\n\n" + "\n".join(lines) + """
+    return (
+        "**MANDATORY HEADING ASSIGNMENT (KEYWORD BUDGET FOR THIS LAYOUT):**\n\n"
+        + "\n".join(lines)
+        + f"""
 
-  Conclusion heading: ## Conclusion (fixed)
-  FAQs heading: ## FAQs (fixed)
+  Conclusion heading: {choice.heading_hints['conclusion']} (fixed)
+  FAQs heading: {choice.heading_hints['faqs']} (fixed)
 
 Every H2 must draw from a DIFFERENT part of the keyword budget. No core keyword
 phrase (3+ consecutive words) may appear in more than one heading."""
+    )
 
 
 def _render_section_specs(choice: LayoutChoice, is_cloud: bool) -> str:
