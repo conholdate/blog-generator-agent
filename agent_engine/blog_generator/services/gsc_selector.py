@@ -194,6 +194,15 @@ def fetch_related_queries(brand: str, keywords: list[str], top_n: int = 5) -> li
         keyword_tokens = {t for kw in keywords for t in tokenize(kw)}
         if not keyword_tokens:
             return []
+        # Requiring just ONE shared token is too loose - a single generic
+        # token like "png" or "conversion" matched completely unrelated
+        # queries (confirmed live for aspose.cloud: keywords
+        # ['dwg','png','python','conversion'] matched "jpg to png .net sdk"
+        # and ".net power point to pdf conversion sdk" - neither about DWG
+        # at all, sharing only "png" or "conversion"). Requiring 2+ shared
+        # tokens means the SPECIFIC format/topic pairing has to match, not
+        # just one generic word either side happens to use.
+        min_overlap = min(2, len(keyword_tokens))
 
         scored = []
         for row in rows:
@@ -207,7 +216,7 @@ def fetch_related_queries(brand: str, keywords: list[str], top_n: int = 5) -> li
             # the LLM is already told to rephrase naturally.
             if not query or not query.isascii():
                 continue
-            if not set(tokenize(query)) & keyword_tokens:
+            if len(set(tokenize(query)) & keyword_tokens) < min_overlap:
                 continue
             scored.append((int(row.get("impressions", 0)), query))
 
