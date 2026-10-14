@@ -199,6 +199,41 @@ def get_blog_writer_prompt(
     print(f"layout -- {layout_choice.name} ({layout_choice.reason})", flush=True)
     print(f"skeleton -- {layout_blocks['skeleton_summary']}", flush=True)
 
+    # Conclusion is now optional per post (see layouts.py's
+    # CONCLUSION_INCLUDE_PROBABILITY) - when skipped, the licensing
+    # requirement that otherwise lived only in the Conclusion spec below
+    # has to move somewhere that still always exists, so it migrates into
+    # the (always-mandatory) FAQs section instead of silently disappearing.
+    if layout_choice.include_conclusion:
+        conclusion_section_text = (
+            f"### 5. CONCLUSION (MANDATORY)\n"
+            f"{layout_choice.heading_hints['conclusion']}\n\n"
+            "- 2-3 paragraphs summarizing key points\n"
+            "- Include at least 1 contextual link\n"
+            "- MUST link product page URL with FULL product name: [Product Name](url)\n"
+            "- MUST mention licensing in second half or end of conclusion\n"
+            "- License mention must include BOTH pricing and temporary license\n"
+            "- Natural closing, encourage next steps\n"
+            '- NEVER mention "free" or "online tool"'
+        )
+        licensing_in_faq = ""
+    else:
+        conclusion_section_text = (
+            "### NO CONCLUSION SECTION\n"
+            "Do NOT include a Conclusion heading or section - end the body "
+            "content and go directly into FAQs."
+        )
+        licensing_in_faq = (
+            "- This post has NO Conclusion section, so licensing MUST be "
+            "covered here instead - one FAQ question/answer MUST mention "
+            "BOTH pricing and a temporary license, with a natural link."
+        )
+
+    # Read More needs BOTH a real related_links list AND the random
+    # inclusion roll (layouts.py's READ_MORE_INCLUDE_PROBABILITY) - either
+    # being false means no Read More section this post.
+    read_more_included = bool(formatted_related) and layout_choice.include_read_more
+
     # ------------------------------------------------------------------
     # Optional blocks - only rendered when the values are non-empty
     # ------------------------------------------------------------------
@@ -595,7 +630,7 @@ INVALIDATES THE ENTIRE OUTPUT.**
 CRITICAL: CONTENT BOUNDARIES (NON-NEGOTIABLE)
 ===============================================================================
 START: Blog MUST begin with frontmatter (---) - NO text before
-END: Blog MUST end after {'Read More section' if formatted_related else 'FAQs section'} - NO text after
+END: Blog MUST end after {'Read More section' if read_more_included else 'FAQs section'} - NO text after
 PROHIBITED: No introductory text, concluding remarks, author notes, meta-commentary outside structure
 
 ===============================================================================
@@ -943,16 +978,7 @@ heading. The position labels refer to the MANDATORY CONTENT FLOW in Part 2.
 
 ===============================================================================
 
-### 5. CONCLUSION (MANDATORY)
-{layout_choice.heading_hints['conclusion']}
-
-- 2-3 paragraphs summarizing key points
-- Include at least 1 contextual link
-- MUST link product page URL with FULL product name: [Product Name](url)
-- MUST mention licensing in second half or end of conclusion
-- License mention must include BOTH pricing and temporary license
-- Natural closing, encourage next steps
-- NEVER mention "free" or "online tool"
+{conclusion_section_text}
 
 ### 6. FAQS (MANDATORY)
 {layout_choice.heading_hints['faqs']}
@@ -964,12 +990,13 @@ Requirements:
 - Use product page URL with full product name: [Product Name](url)
 - NEVER mention "free" or "online"
 - Use this EXACT heading text for this section: "{layout_choice.heading_hints['faqs']}"
+{licensing_in_faq}
 {faq_guidance}
 
-{'### 7. READ MORE (MANDATORY)' if formatted_related else '### NO READ MORE SECTION'}
-{layout_choice.heading_hints['read_more'] if formatted_related else 'Do NOT include - no related links provided.'}
-{formatted_related if formatted_related else 'Blog MUST end after FAQs.'}
-{f'Use EXACT titles and URLs provided, under the EXACT heading text: "{layout_choice.heading_hints["read_more"]}"' if formatted_related else ''}
+{'### 7. READ MORE (MANDATORY)' if read_more_included else '### NO READ MORE SECTION'}
+{layout_choice.heading_hints['read_more'] if read_more_included else 'Do NOT include - either no related links are available, or this post intentionally omits Read More.'}
+{formatted_related if read_more_included else 'Blog MUST end after FAQs.'}
+{f'Use EXACT titles and URLs provided, under the EXACT heading text: "{layout_choice.heading_hints["read_more"]}"' if read_more_included else ''}
 
 ===============================================================================
 PART 3: TERMINOLOGY RULES (CRITICAL - STRICTLY ENFORCED)

@@ -8,12 +8,12 @@ from tools.mcp_tools import generate_markdown_file, fetch_category_related_artic
 from utils import prompts
 from utils.seo_validator import validate_seo_content, validate_and_fix_meta_description, validate_and_fix_seo_title
 from utils.file_format_mappings import FILE_FORMAT_MAPPINGS, BASE_URL
-from utils.helpers import mark_topic_as_generated, prepare_context, get_productInfo, get_topic_by_index, inject_file_format_links, inject_repo_example_reference, strip_unverified_code_blocks, slugify, normalize_case_preserve_formats_in_keywords, clean_ai_generated_markdown, strip_pre_frontmatter_preamble, validate_markdown_links, capitalize_file_formats_for_title, setup_logger, generate_tags_with_llm, generate_outline_with_llm, save_blog_metadata_to_sheet, extract_blog_metadata, get_topic_from_sheet, get_next_tab, extract_product_names, get_recent_layouts, convert_sheet_row_to_file_format, update_last_processed_product, repair_code_fences, strip_snippet_markers
-from utils.layouts import select_layout
+from utils.helpers import mark_topic_as_generated, prepare_context, get_productInfo, get_topic_by_index, inject_file_format_links, inject_repo_example_reference, strip_unverified_code_blocks, slugify, normalize_case_preserve_formats_in_keywords, clean_ai_generated_markdown, strip_pre_frontmatter_preamble, validate_markdown_links, capitalize_file_formats_for_title, setup_logger, generate_tags_with_llm, generate_outline_with_llm, save_blog_metadata_to_sheet, extract_blog_metadata, get_topic_from_sheet, get_next_tab, extract_product_names, get_recent_layouts, convert_sheet_row_to_file_format, update_last_processed_product, repair_code_fences, strip_snippet_markers, format_related_posts
+from utils.layouts import select_layout, HEADING_SKIP_SENTINEL
 from utils.code_source import get_code_snippet
 from utils.section_editor import classify_and_apply, SectionEditError
 from utils.metricsRecorder import MetricsRecorder
-from utils.topic_index import append_new_post, product_family_from_category
+from utils.topic_index import append_new_post, product_family_from_category, get_recent_headings, record_headings_used
 from utils.internal_linker import add_internal_links
 from services.LLMservice import llm_service
 import json
@@ -287,6 +287,12 @@ class BlogOrchestrator:
                 print(f"⚠️ Could not read recent layouts ({layout_err}), continuing without history")
                 recent_layouts = []
 
+            # Same brand|product key append_new_post below will write the
+            # resulting choice back to - must match exactly or the
+            # anti-repetition history silently never matches anything.
+            heading_product = product_family_from_category(product_info.get("Category", ""))
+            recent_headings = get_recent_headings(brand=self.brand, product=heading_product, limit=2)
+
             layout_choice = select_layout(
                 topic=post_topic,
                 angle=blog_post_angle,
@@ -294,6 +300,7 @@ class BlogOrchestrator:
                 is_cloud=isCloud,
                 recent_layouts=recent_layouts,
                 override=topics_raw_data.get("layout", ""),
+                recent_headings=recent_headings,
             )
             print(f"📐 Layout: {layout_choice.name} (reason: {layout_choice.reason})", flush=True)
             print(f"📐 Skeleton: {' -> '.join(layout_choice.skeleton())}", flush=True)
@@ -390,7 +397,12 @@ class BlogOrchestrator:
             targets = {
                 "primary_keyword": f_keywords[0],
                 "target_keyword_count": 5,
-                "min_words": settings.NUMBER_OF_BLOG_WORDS
+                "min_words": settings.NUMBER_OF_BLOG_WORDS,
+                # Tells seo_validator.py's required-sections check whether
+                # Read More was actually expected on this post, so a post
+                # that correctly omitted it (no related links, or
+                # layouts.py's random skip) isn't penalized as "missing" it.
+                "read_more_expected": bool(format_related_posts(related_links)) and layout_choice.include_read_more,
             }
 
             async def finalize_and_audit(content: str):
@@ -592,6 +604,16 @@ class BlogOrchestrator:
                 date=blog_post_metadata['date'],
             )
 
+            record_headings_used(
+                brand=self.brand,
+                product=heading_product,
+                chosen={
+                    "conclusion": layout_choice.heading_hints["conclusion"] if layout_choice.include_conclusion else HEADING_SKIP_SENTINEL,
+                    "faqs": layout_choice.heading_hints["faqs"],
+                    "read_more": layout_choice.heading_hints["read_more"] if layout_choice.include_read_more else HEADING_SKIP_SENTINEL,
+                },
+            )
+
             return {
                 "folder_name": folder_name,
                 "product": product_name,
@@ -765,6 +787,10 @@ class BlogOrchestrator:
             # ── Layout: explicit override wins outright, same mechanism as ──
             # ── the sheet-driven flow; empty/"auto" falls through to the   ──
             # ── normal signal-based weighted selection.                    ──
+            # Same brand|product key append_new_post below writes the
+            # resulting choice back to.
+            recent_headings = get_recent_headings(brand=self.brand, product=product, limit=2)
+
             layout_choice = select_layout(
                 topic=post_topic,
                 angle="",
@@ -772,6 +798,7 @@ class BlogOrchestrator:
                 is_cloud=isCloud,
                 recent_layouts=[],
                 override=layout_override,
+                recent_headings=recent_headings,
             )
             print(f"📐 Layout: {layout_choice.name} (reason: {layout_choice.reason})", flush=True)
             print(f"📐 Skeleton: {' -> '.join(layout_choice.skeleton())}", flush=True)
@@ -854,7 +881,12 @@ class BlogOrchestrator:
             targets = {
                 "primary_keyword": f_keywords[0],
                 "target_keyword_count": 5,
-                "min_words": settings.NUMBER_OF_BLOG_WORDS
+                "min_words": settings.NUMBER_OF_BLOG_WORDS,
+                # Tells seo_validator.py's required-sections check whether
+                # Read More was actually expected on this post, so a post
+                # that correctly omitted it (no related links, or
+                # layouts.py's random skip) isn't penalized as "missing" it.
+                "read_more_expected": bool(format_related_posts(related_links)) and layout_choice.include_read_more,
             }
 
             async def finalize_and_audit(content: str):
@@ -1006,6 +1038,16 @@ class BlogOrchestrator:
                     title=blog_post_metadata.get("title") or post_topic,
                     url=f"https://blog.{self.brand}{blog_post_metadata.get('url') or ''}",
                     date=blog_post_metadata.get("date") or "",
+                )
+
+                record_headings_used(
+                    brand=self.brand,
+                    product=product,
+                    chosen={
+                        "conclusion": layout_choice.heading_hints["conclusion"] if layout_choice.include_conclusion else HEADING_SKIP_SENTINEL,
+                        "faqs": layout_choice.heading_hints["faqs"],
+                        "read_more": layout_choice.heading_hints["read_more"] if layout_choice.include_read_more else HEADING_SKIP_SENTINEL,
+                    },
                 )
 
             self.metrics.record_success(f"Blog post created: {filepath}")

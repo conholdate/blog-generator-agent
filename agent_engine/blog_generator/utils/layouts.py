@@ -56,6 +56,8 @@ class LayoutChoice:
     sections: list                   # sections actually included for this post
     heading_hints: dict              # section key -> chosen heading phrasing pattern
     reason: str
+    include_conclusion: bool = True
+    include_read_more: bool = True   # also gated on related_links existing - see prompts.py
 
     @property
     def name(self) -> str:
@@ -64,7 +66,11 @@ class LayoutChoice:
     def skeleton(self) -> list:
         """Full H2-level skeleton including the fixed head/tail sections."""
         body = [s.label for s in self.sections]
-        return ["Introduction (no heading)"] + body + ["Conclusion", "FAQs", "Read More (if links provided)"]
+        tail = []
+        tail.append("Conclusion" if self.include_conclusion else "Conclusion (skipped)")
+        tail.append("FAQs")
+        tail.append("Read More (if links provided)" if self.include_read_more else "Read More (skipped)")
+        return ["Introduction (no heading)"] + body + tail
 
 
 # ══════════════════════════════════════════════════════════════════════════════
@@ -462,6 +468,32 @@ READ_MORE_HEADING_VARIANTS = (
     "## Keep Exploring",
 )
 
+# Whether to include Conclusion / Read More at all, decided independently
+# per post - not every post needs either, and always including them was
+# itself part of the same templated-structure fingerprint the heading
+# rotation above addresses. FAQs stays mandatory (seo_validator.py's RULE 4
+# hard-requires it, worth 25 points - deliberately left alone).
+#
+# Read More was already conditionally skipped when a post has no related
+# links (see prompts.py); this adds an independent random skip on top of
+# that, for variety even when links ARE available. utils/seo_validator.py's
+# required-sections check needs to know when this happens (via targets'
+# read_more_expected) so it doesn't penalize a post that correctly skipped
+# it - same reasoning as the heading-variant fix above, just for presence
+# instead of wording.
+CONCLUSION_INCLUDE_PROBABILITY = 0.8
+READ_MORE_INCLUDE_PROBABILITY = 0.8
+
+# Sentinel representing "this section was skipped", used alongside real
+# heading text in the same candidate pool/history so one anti-repetition
+# mechanism (_pick_with_history below) handles both "which wording" and
+# "included vs skipped" uniformly - excluding this value from the pool
+# when it was recently picked means "don't skip two posts in a row"
+# without a separate exclusion mechanism. utils/topic_index.py imports
+# this (not a separately hardcoded string) for its Redis history
+# read/write, so the two can never drift apart.
+HEADING_SKIP_SENTINEL = "__skipped__"
+
 
 # ══════════════════════════════════════════════════════════════════════════════
 # SELECTION
@@ -493,11 +525,17 @@ def select_layout(
     recent_layouts: Optional[list] = None,
     override: str = "",
     rng: Optional[random.Random] = None,
+    recent_headings: Optional[dict] = None,
 ) -> LayoutChoice:
     """
     Pick a layout for a topic: sheet override -> eligibility boosts ->
     recent-history exclusion -> weighted random. Then resolve optional
     sections and heading phrasing variants.
+
+    recent_headings: {"conclusion"|"faqs"|"read_more": [recent values]}
+    from utils/topic_index.py's get_recent_headings (Redis-backed) - plain
+    data in, no I/O here, matching how recent_layouts is already just a
+    list the caller fetched. None/missing means unconstrained rotation.
     """
     rng = rng or random.Random()
     recent = [(_normalize_layout_name(r)) for r in (recent_layouts or []) if r]
@@ -508,7 +546,7 @@ def select_layout(
     if override_name in LAYOUTS_BY_NAME:
         layout = LAYOUTS_BY_NAME[override_name]
         reason = f"sheet override '{override.strip()}'"
-        return _resolve_choice(layout, is_cloud, rng, reason)
+        return _resolve_choice(layout, is_cloud, rng, reason, recent_headings)
 
     # 2. Signal-based weight boosts.
     weights = {l.name: l.base_weight for l in ALL_LAYOUTS}
@@ -539,10 +577,30 @@ def select_layout(
     picked = rng.choices(names, weights=[weights[n] for n in names], k=1)[0]
     layout = LAYOUTS_BY_NAME[picked]
     reason = "; ".join(signals) if signals else "no strong signals, base weights"
-    return _resolve_choice(layout, is_cloud, rng, reason)
+    return _resolve_choice(layout, is_cloud, rng, reason, recent_headings)
 
 
-def _resolve_choice(layout: Layout, is_cloud: bool, rng: random.Random, reason: str) -> LayoutChoice:
+def _pick_with_history(pool: tuple, weights: list, recent: list, rng: random.Random) -> str:
+    """Weighted random pick from `pool`, excluding anything in `recent`
+    unless that would exclude every option - same anti-repetition pattern
+    select_layout already uses for layout names (step 3 above), reused
+    here for heading text/skip choices via recent_headings."""
+    adjusted = list(weights)
+    excluded_idx = [i for i, item in enumerate(pool) if item in recent]
+    if excluded_idx and len(excluded_idx) < len(pool):
+        for i in excluded_idx:
+            adjusted[i] = 0.0
+    return rng.choices(pool, weights=adjusted, k=1)[0]
+
+
+def _resolve_choice(
+    layout: Layout,
+    is_cloud: bool,
+    rng: random.Random,
+    reason: str,
+    recent_headings: Optional[dict] = None,
+) -> LayoutChoice:
+    recent_headings = recent_headings or {}
     sections = []
     for section in layout.sections:
         if section.cloud_only and not is_cloud:
@@ -551,10 +609,40 @@ def _resolve_choice(layout: Layout, is_cloud: bool, rng: random.Random, reason: 
             continue
         sections.append(section)
     heading_hints = {s.key: rng.choice(s.heading_variants) for s in sections}
-    heading_hints["conclusion"] = rng.choice(CONCLUSION_HEADING_VARIANTS)
-    heading_hints["faqs"] = rng.choice(FAQS_HEADING_VARIANTS)
-    heading_hints["read_more"] = rng.choice(READ_MORE_HEADING_VARIANTS)
-    return LayoutChoice(layout=layout, sections=sections, heading_hints=heading_hints, reason=reason)
+
+    heading_hints["faqs"] = _pick_with_history(
+        FAQS_HEADING_VARIANTS,
+        [1.0] * len(FAQS_HEADING_VARIANTS),
+        recent_headings.get("faqs", []),
+        rng,
+    )
+
+    conclusion_pool = CONCLUSION_HEADING_VARIANTS + (HEADING_SKIP_SENTINEL,)
+    conclusion_weights = (
+        [CONCLUSION_INCLUDE_PROBABILITY / len(CONCLUSION_HEADING_VARIANTS)] * len(CONCLUSION_HEADING_VARIANTS)
+        + [1 - CONCLUSION_INCLUDE_PROBABILITY]
+    )
+    conclusion_pick = _pick_with_history(conclusion_pool, conclusion_weights, recent_headings.get("conclusion", []), rng)
+    include_conclusion = conclusion_pick != HEADING_SKIP_SENTINEL
+    heading_hints["conclusion"] = conclusion_pick if include_conclusion else CONCLUSION_HEADING_VARIANTS[0]
+
+    read_more_pool = READ_MORE_HEADING_VARIANTS + (HEADING_SKIP_SENTINEL,)
+    read_more_weights = (
+        [READ_MORE_INCLUDE_PROBABILITY / len(READ_MORE_HEADING_VARIANTS)] * len(READ_MORE_HEADING_VARIANTS)
+        + [1 - READ_MORE_INCLUDE_PROBABILITY]
+    )
+    read_more_pick = _pick_with_history(read_more_pool, read_more_weights, recent_headings.get("read_more", []), rng)
+    include_read_more = read_more_pick != HEADING_SKIP_SENTINEL
+    heading_hints["read_more"] = read_more_pick if include_read_more else READ_MORE_HEADING_VARIANTS[0]
+
+    return LayoutChoice(
+        layout=layout,
+        sections=sections,
+        heading_hints=heading_hints,
+        reason=reason,
+        include_conclusion=include_conclusion,
+        include_read_more=include_read_more,
+    )
 
 
 def default_choice(is_cloud: bool = False) -> LayoutChoice:
@@ -578,7 +666,16 @@ def render_prompt_blocks(
     has_read_more: bool,
     outline_items: Optional[list] = None,
 ) -> dict:
-    """Render every layout-dependent prompt block for get_blog_writer_prompt."""
+    """Render every layout-dependent prompt block for get_blog_writer_prompt.
+
+    has_read_more is the caller's "are there real related links" signal;
+    folded with choice.include_read_more here (not at the call site) so
+    every downstream render function below automatically sees the correct
+    combined answer without each needing its own awareness of the random
+    skip - same reasoning choice.include_conclusion is checked directly in
+    each function instead of being threaded as yet another parameter.
+    """
+    has_read_more = has_read_more and choice.include_read_more
     return {
         "heading_plan": _render_heading_plan(choice, has_read_more),
         "required_sections": _render_required_sections(choice, has_read_more),
@@ -602,11 +699,14 @@ def _render_heading_plan(choice: LayoutChoice, has_read_more: bool) -> str:
     lines = []
     for i, s in enumerate(choice.sections, start=1):
         lines.append(f"  H2-{i}: [{s.label} heading] -> keyword role: {s.heading_role} -> core phrase: ___")
-    n = len(choice.sections)
-    lines.append(f"  H2-{n + 1}: Conclusion -> core phrase: conclusion")
-    lines.append(f"  H2-{n + 2}: FAQs -> core phrase: faqs")
+    next_h2 = len(choice.sections) + 1
+    if choice.include_conclusion:
+        lines.append(f"  H2-{next_h2}: Conclusion -> core phrase: conclusion")
+        next_h2 += 1
+    lines.append(f"  H2-{next_h2}: FAQs -> core phrase: faqs")
+    next_h2 += 1
     if has_read_more:
-        lines.append(f"  H2-{n + 3}: Read More -> core phrase: read more")
+        lines.append(f"  H2-{next_h2}: Read More -> core phrase: read more")
     return "\n".join(lines)
 
 
@@ -616,16 +716,22 @@ def _render_required_sections(choice: LayoutChoice, has_read_more: bool) -> str:
         first = " - FIRST H2, immediately after the Introduction" if i == 2 else ""
         opt = ""
         lines.append(f"{i}. {s.label} (H2 heading{first}){opt}")
-    n = len(choice.sections)
-    lines.append(f"{n + 2}. Conclusion (H2 heading)")
-    lines.append(f"{n + 3}. FAQs (H2 heading)")
+    next_num = len(choice.sections) + 2
+    if choice.include_conclusion:
+        lines.append(f"{next_num}. Conclusion (H2 heading)")
+        next_num += 1
+    lines.append(f"{next_num}. FAQs (H2 heading)")
+    next_num += 1
     if has_read_more:
-        lines.append(f"{n + 4}. Read More (H2 heading - always last)")
+        lines.append(f"{next_num}. Read More (H2 heading - always last)")
     return "\n".join(lines)
 
 
 def _render_content_flow(choice: LayoutChoice, has_read_more: bool) -> str:
-    steps = ["Introduction (no heading)"] + [s.label for s in choice.sections] + ["Conclusion", "FAQs"]
+    steps = ["Introduction (no heading)"] + [s.label for s in choice.sections]
+    if choice.include_conclusion:
+        steps.append("Conclusion")
+    steps.append("FAQs")
     if has_read_more:
         steps.append("Read More")
     flow = "\n      |\n      v\n".join(steps)
@@ -675,13 +781,16 @@ def _render_heading_budget(choice: LayoutChoice) -> str:
     for s in choice.sections:
         hint = choice.heading_hints.get(s.key, "")
         lines.append(f"  {s.label} heading:\n    - {_ROLE_RULES[s.heading_role]}\n    - Phrasing pattern to follow: {hint}")
+    tail_lines = []
+    if choice.include_conclusion:
+        tail_lines.append(f"  Conclusion heading: {choice.heading_hints['conclusion']} (fixed)")
+    tail_lines.append(f"  FAQs heading: {choice.heading_hints['faqs']} (fixed)")
     return (
         "**MANDATORY HEADING ASSIGNMENT (KEYWORD BUDGET FOR THIS LAYOUT):**\n\n"
         + "\n".join(lines)
-        + f"""
-
-  Conclusion heading: {choice.heading_hints['conclusion']} (fixed)
-  FAQs heading: {choice.heading_hints['faqs']} (fixed)
+        + "\n\n"
+        + "\n".join(tail_lines)
+        + """
 
 Every H2 must draw from a DIFFERENT part of the keyword budget. No core keyword
 phrase (3+ consecutive words) may appear in more than one heading."""

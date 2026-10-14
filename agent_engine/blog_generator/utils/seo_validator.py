@@ -82,19 +82,29 @@ def validate_seo_content(markdown_string, targets):
     # --- RULE 4: Required Sections (FAQ & Read More) ---
     has_faq = bool(_FAQ_HEADING_RE.search(content_body))
     has_read_more = bool(_READ_MORE_HEADING_RE.search(content_body))
-    
+    # Read More is now sometimes deliberately absent (no related links, or
+    # layouts.py's random READ_MORE_INCLUDE_PROBABILITY skip) - the caller
+    # says so via targets, so a post that correctly omitted it isn't
+    # penalized for "missing" something it was never supposed to have.
+    # Defaults to True (old behavior: always required) for any caller that
+    # doesn't pass this - e.g. the /revise re-audit path, which doesn't
+    # have layout context to know either way.
+    read_more_expected = targets.get("read_more_expected", True)
+
     # Worth 25 (15 base + 10 shifted from the softened seoTitle check in RULE 1).
     sec_score = 25
     sec_msgs = []
     if not has_faq: sec_msgs.append("Missing FAQ")
-    if not has_read_more: sec_msgs.append("Missing Read More")
+    if read_more_expected and not has_read_more: sec_msgs.append("Missing Read More")
 
     if sec_msgs:
         sec_score = 0
         deductions += 25
         msg = " | ".join(sec_msgs)
-    else:
+    elif read_more_expected:
         msg = "Both sections found"
+    else:
+        msg = "FAQ found (Read More intentionally omitted)"
     report["details"]["required_sections"] = {"score": sec_score, "msg": msg}
 
     # --- RULE 5: Complete Code Snippet Wrapper ---
