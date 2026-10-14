@@ -238,8 +238,8 @@ jobs:
           BLOG_FOLDER_NAME: ${{ steps.find_blog.outputs.blog_folder_name }}
           BLOG_FOLDER_PATH: ${{ steps.find_blog.outputs.blog_folder_path }}
         run: |
-          git config --global user.email "action@github.com"
-          git config --global user.name "GitHub Action"
+          git config --global user.email "farhan.raza@aspose.com"
+          git config --global user.name "Farhan Raza"
 
           echo "=== Committing blog to this repository ==="
           echo "Blog folder: $BLOG_FOLDER_PATH"
@@ -282,8 +282,8 @@ jobs:
       - name: Commit logs and topic index
         if: always()
         run: |
-          git config --global user.email "action@github.com"
-          git config --global user.name "GitHub Action"
+          git config --global user.email "farhan.raza@aspose.com"
+          git config --global user.name "Farhan Raza"
           git add content/logs/logs.txt content/dashboard_topic_index.json
           git commit -m "Update logs and topic index [Run #${{ github.run_number }}]" || echo "No changes to commit"
           git push origin HEAD
@@ -306,8 +306,8 @@ jobs:
           BLOG_FOLDER_PATH: ${{ steps.find_blog.outputs.blog_folder_path }}
           GH_TOKEN: ${{ secrets.REPO_PAT }}
         run: |
-          git config --global user.email "action@github.com"
-          git config --global user.name "GitHub Action"
+          git config --global user.email "farhan.raza@aspose.com"
+          git config --global user.name "Farhan Raza"
 
           if [ -z "${{ secrets.REPO_PAT }}" ]; then
             echo "❌ REPO_PAT is EMPTY! Fix your repo secret."
