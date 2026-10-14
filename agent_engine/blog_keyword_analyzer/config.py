@@ -39,7 +39,7 @@ class Settings(BaseSettings):
     # (see runner.main()) instead of silently using a committed credential.
     PROFESSIONALIZE_API_KEY: str = Field(
         default=UNCONFIGURED_API_KEY,
-        validation_alias=AliasChoices("PROFESSIONALIZE_API_KEY", "CUSTOM_LLM_API_KEY"),
+        validation_alias=AliasChoices("PROFESSIONALIZE_API_KEY", "PROFESSIONALIZE_API_KEY_1", "CUSTOM_LLM_API_KEY"),
     )
 
     # Standard OpenAI key (used when no custom base URL is set)

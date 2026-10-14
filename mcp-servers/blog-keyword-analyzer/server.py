@@ -12,9 +12,16 @@ import sys
 import os
 
 # Setup path to import from the base blog-keyword-analyzer repo
+# Blog Keyword Analyzer can be at either:
+#   C:\GitHub\blog-keyword-analyzer (standard)
+#   C:\GitHub\aspose\blog-keyword-analyzer (aspose fork)
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 PARENT_PATH = os.path.abspath(os.path.join(BASE_DIR, "../../"))
-BLOG_KWA_PATH = os.path.abspath(os.path.join(PARENT_PATH, "../../blog-keyword-analyzer"))
+
+# Try aspose variant first, then standard
+BLOG_KWA_PATH = os.path.abspath(os.path.join(PARENT_PATH, "../aspose", "blog-keyword-analyzer"))
+if not os.path.exists(BLOG_KWA_PATH):
+    BLOG_KWA_PATH = os.path.abspath(os.path.join(PARENT_PATH, "../../blog-keyword-analyzer"))
 
 # Add both paths for imports
 if BLOG_KWA_PATH not in sys.path:
