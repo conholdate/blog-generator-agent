@@ -1,14 +1,14 @@
 ---
 title: "Strikethrough Text in Java"
 seoTitle: "Strikethrough Text in Java"
-description: "Add strikethrough text in Java with Conholdate.Total for Java. Follow this concise tutorial for setup, code sample, performance tips, and best practices."
-date: Wed, 14 Oct 2026 16:41:08 +0000
-lastmod: Wed, 14 Oct 2026 16:41:08 +0000
+description: "Learn how to add strikethrough text in Java using Conholdate.Total for Java. This guide shows setup, a code walkthrough, key configuration and performance tips."
+date: Wed, 14 Oct 2026 17:04:45 +0000
+lastmod: Wed, 14 Oct 2026 17:04:45 +0000
 draft: false
 url: /total/strikethrough-text-in-java/
 author: "Farhan Raza"
-summary: "This guide shows Java developers how to apply strikethrough text in Java using Conholdate.Total for Java. Install the SDK, create a document, style text with strikethrough, and save as DOCX while learning performance tips, configuration options, and advice."
-tags: ['java text styling', 'strikethrough formatting', 'document formatting java']
+summary: "This tutorial teaches Java developers how to add strikethrough formatting to DOCX files using Conholdate.Total for Java. The guide covers Maven setup, a code sample that writes and detects strikethrough text, configuration options, performance tips, and a runnable example."
+tags: ['java text styling', 'strikethrough formatting', 'document processing java']
 categories: ["Conholdate.Total Product Family"]
 showtoc: true
 cover:
@@ -16,123 +16,33 @@ cover:
    alt: "Strikethrough Text in Java"
    caption: "Strikethrough Text in Java"
 steps:
-  - "Step 1: Install Conholdate.Total for Java SDK"
-  - "Step 2: Create a new Document object"
-  - "Step 3: Add a paragraph and append text"
-  - "Step 4: Apply strikethrough styling to the text"
-  - "Step 5: Save the document as DOCX"
+  - "Step 1: Add Maven dependency and import classes"
+  - "Step 2: Load or create a document"
+  - "Step 3: Write normal and strikethrough paragraphs"
+  - "Step 4: Apply conditional strikethrough based on content"
+  - "Step 5: Save the document"
 faqs:
-  - q: "How do I apply strikethrough text in Java using Conholdate.Total for Java?"
-    a: "Use the Font.setStrikeThrough(true) method on a Run object after appending the desired text. The full example in this article demonstrates the exact steps."
-  - q: "Can I use strikethrough formatting with other file formats like PDF?"
-    a: "Yes, the SDK supports multiple output formats. After applying the style, save the document as PDF or DOCX using the appropriate save method."
-  - q: "What are the best practices for strikethrough text in Java?"
-    a: "Reuse a single Document instance for multiple operations, apply styles once per Run, and dispose of resources promptly. Review the official documentation for performance tips."
-  - q: "Is there an open source alternative for strikethrough text in Java?"
-    a: "While open source libraries exist, Conholdate.Total for Java offers comprehensive support, licensing options, and dedicated assistance. Check the pricing page for details."
+  - q: "How can I apply strikethrough text in Java using Conholdate.Total?"
+    a: "Use the DocumentBuilder API to set Font.setStrikeThrough(true) before writing the text. See the full example in this guide."
+  - q: "Is there a way to automatically strike through words that contain a specific keyword?"
+    a: "Yes, iterate through Run objects, check the text, and set Font.setStrikeThrough(true) when the condition matches."
+  - q: "What file formats support strikethrough styling with Conholdate.Total for Java?"
+    a: "DOCX, DOC, RTF, and other rich‑text formats preserve strikethrough styling. Refer to the [official documentation](https://docs.conholdate.com/java/)."
+  - q: "Does applying strikethrough affect performance when processing large documents?"
+    a: "Impact is minimal; reuse the Document object and avoid redundant style changes. Performance tips are covered in the article."
 ---
 
-Adding visual cues like crossed‑out words can improve document readability, especially when indicating revisions or deprecated content. [Conholdate.Total for Java](https://products.conholdate.com/total/java/) provides a robust SDK that simplifies text styling within Word documents. In this guide you will learn how to apply strikethrough text in Java, from setting up the library to fine‑tuning performance and handling common pitfalls.
+Strikethrough formatting is often required to indicate deletions, revisions, or completed tasks within generated documents. [Conholdate.Total for Java](https://products.conholdate.com/total/java/) provides a robust SDK that lets you manipulate Word documents programmatically. In this guide you will learn how to add strikethrough text in Java, explore configuration options, see performance best practices, and run a complete example that you can adapt to your own projects.
 
-## Apply Strikethrough Text in Java in 5 Steps
+## Before You Start: Prerequisites and Installation
 
-The following steps demonstrate how to add strikethrough text in Java using Conholdate.Total for Java.
+To follow this tutorial you need:
 
-### Understanding the Document Model
+- Java 17 or newer installed on your development machine.
+- Maven 3.6+ for dependency management.
+- An IDE such as IntelliJ IDEA or Eclipse.
 
-Conholdate.Total models a Word file as a hierarchy of **Document → Section → Paragraph → Run** objects. Each *Run* represents a contiguous run of characters that share the same formatting. By manipulating the `Font` of a `Run`, you can control bold, italic, color, size, and the strike‑through flag.
-
-### Step 1: Create a New Document Instance
-
-This initializes the document object that will hold all content.  
-```java
-Document document = new Document();
-```
-
-### Step 2: Access the First Section
-
-Every Word document starts with a default section where you can add paragraphs.  
-```java
-Section section = document.getFirstSection();
-```
-
-### Step 3: Add a Paragraph to the Section
-
-Paragraphs are containers for runs of text.  
-```java
-Paragraph paragraph = section.addParagraph();
-```
-
-### Step 4: Append Text and Apply Strikethrough
-
-The `Run` object holds the text; its `Font` can be styled with `setStrikeThrough(true)`.  
-```java
-Run run = paragraph.appendText("This text is displayed with a strikethrough effect.");
-run.getFont().setStrikeThrough(true);
-```
-
-### Step 5: Save and Clean Up
-
-Persist the document as [DOCX](https://docs.fileformat.com/word-processing/docx/) and release resources.  
-```java
-document.save("output.docx");
-document.dispose();
-```
-
-### Performance Tip: Reuse Document Objects
-
-If you need to generate many documents in a loop, create a single `Document` instance and clone sections or paragraphs instead of constructing a new object each time. This reduces native memory allocations and improves overall throughput.
-
-For detailed class information, refer to the [API Reference](https://reference.conholdate.com/java/).
-
-## Full Working Example for Adding Strikethrough Formatting
-
-The following code shows a complete implementation of strikethrough text in Java with Conholdate.Total for Java.
-
-```java
-import com.groupdocs.wordprocessing.Document;
-import com.groupdocs.wordprocessing.Section;
-import com.groupdocs.wordprocessing.Paragraph;
-import com.groupdocs.wordprocessing.text.Run;
-import com.groupdocs.wordprocessing.font.Font;
-
-public class StrikethroughExample {
-    public static void main(String[] args) {
-        Document document = null;
-        try {
-            // Create a new empty document
-            document = new Document();
-
-            // Access the first (and only) section
-            Section section = document.getFirstSection();
-
-            // Add a new paragraph to the section
-            Paragraph paragraph = section.addParagraph();
-
-            // Append text that will be formatted with strikethrough
-            Run run = paragraph.appendText("This text is displayed with a strikethrough effect.");
-
-            // Apply strikethrough styling
-            Font font = run.getFont();
-            font.setStrikeThrough(true);
-
-            // Save the document to a DOCX file
-            document.save("output.docx");
-        } finally {
-            // Ensure resources are released
-            if (document != null) {
-                document.dispose();
-            }
-        }
-    }
-}
-```
-
-> **Note:** This code example demonstrates the core functionality. Before using it in your project, make sure to update any file paths and configuration values to match your actual environment, verify that all required dependencies are properly installed, and test thoroughly in your development environment. If you encounter any issues, please refer to the [official documentation](https://docs.conholdate.com/java/) or reach out to the [support team](https://forum.conholdate.com/c/total/5) for assistance.
-
-## Installing and Configuring Conholdate.Total for Java
-
-Add the Conholdate Maven repository to your `pom.xml` and include the SDK dependency. The download package is also available directly from the official site.
+Add the Conholdate Maven repository and the SDK dependency to your `pom.xml`:
 
 ```xml
 <repositories>
@@ -151,57 +61,170 @@ Add the Conholdate Maven repository to your `pom.xml` and include the SDK depend
 </dependency>
 ```
 
-You can download the latest JAR files from the [download page](https://releases.conholdate.com/total/java/). The SDK requires Java 8 or higher. After adding the dependency, refresh your Maven project so the classes become available on the classpath.
+Download the latest SDK binaries from the [download page](https://releases.conholdate.com/total/java/) if you prefer a manual setup. Once the dependency is resolved, you are ready to start coding. The next section walks through each step of adding strikethrough text in Java.
 
-## Configuring Strikethrough Styling Options
+## Step-by-Step Guide to Strikethrough Text in Java
 
-In this section we explore how to apply strikethrough text in Java with additional styling options. The SDK offers a **Java Library for Strikethrough Formatting** that lets you control several text attributes. The primary option for a strike‑through effect is `setStrikeThrough(true)` on the `Font` object, as shown in the step‑by‑step guide.
+### Step 1: Load the Source Document
 
-### Advanced Font Customization
-
-Beyond the strike‑through flag, you can adjust:
-
-- **Font size** - keep visual hierarchy consistent across headings and body text.  
-- **Font color** - a different color can highlight the struck‑through portion while preserving readability.  
-- **Bold/Italic** - combine with other styles for richer formatting, useful in revision tracking scenarios.
-
-All these properties are available on the same `Font` instance, so you only need a single call chain.
-
-### Combining Multiple Text Decorations
-
-Conholdate.Total allows you to layer decorations such as underline, double‑underline, and strike‑through simultaneously. This is especially handy when generating legal documents where deleted clauses must remain visible. Simply set the corresponding flags on the `Font` object:
+First, create a `Document` instance. If the input file exists the SDK loads it; otherwise a new empty document is created.
 
 ```java
-font.setStrikeThrough(true);
-font.setUnderline(true);
+String inputPath = "input.docx";
+Document doc;
+File inputFile = new File(inputPath);
+if (inputFile.exists()) {
+    doc = new Document(inputPath); // loads existing DOCX
+} else {
+    doc = new Document();          // creates a new blank document
+    doc.removeAllChildren();       // ensure it's empty
+}
 ```
 
-For a full list of properties, see the [official documentation](https://docs.conholdate.com/java/).
+The `Document` class is documented in the [API reference](https://reference.conholdate.com/java/).
 
-## Conclusion
+### Step 2: Write Normal Paragraph
 
-Applying strikethrough text in Java becomes straightforward with Conholdate.Total for Java. The SDK's fluent API lets you create documents, style runs, and export to DOCX with minimal code, while offering performance‑focused best practices such as reusing document objects and disposing of resources promptly. For production use, acquire a proper license; you can explore the flexible pricing options on the [pricing page](https://purchase.conholdate.com/pricing/total/family/) or obtain a temporary license for evaluation from the [temporary license page](https://purchase.conholdate.com/temporary-license/). Incorporating strikethrough formatting improves the clarity of revision histories and highlights deprecated content, making your generated documents more professional and easier to audit.
+Use `DocumentBuilder` to add a regular paragraph. This demonstrates that normal text is unaffected by strikethrough settings.
 
-## Common Questions
+```java
+DocumentBuilder builder = new DocumentBuilder(doc);
+builder.moveToDocumentEnd();
+builder.writeln("This is a normal paragraph.");
+```
 
-**How do I apply strikethrough text in Java using Conholdate.Total for Java?**  
-Use the `Font.setStrikeThrough(true)` method on a `Run` after appending the desired text. The full example in this article demonstrates the exact steps, and the same approach works for DOCX, [PDF](https://docs.fileformat.com/pdf), and other supported formats.
+### Step 3: Apply Strikethrough Formatting
 
-**Are there open source alternatives for strikethrough text in Java?**  
-Open source libraries exist, but they often lack the comprehensive document handling, OpenXML Text Styling support, and dedicated support that Conholdate.Total for Java provides. When you need reliable Word Document Formatting across many file types, the commercial SDK is usually the safer choice.
+Enable the strike‑through flag on the builder's font before writing the styled text.
 
-**What are the best practices for strikethrough text in Java?**  
-Follow these recommendations:  
-1. Reuse a single `Document` instance when processing multiple paragraphs to reduce memory churn.  
-2. Apply the strike‑through flag once per `Run` and avoid resetting it repeatedly.  
-3. Dispose of the `Document` object as soon as you finish to free native resources.  
-4. Combine strike‑through with other decorations only when necessary to keep the output clean.  
-Consult the [official documentation](https://docs.conholdate.com/java/) for additional performance recommendations.
+```java
+builder.getFont().setStrikeThrough(true);
+builder.writeln("This text is rendered with strikethrough.");
+builder.getFont().setStrikeThrough(false); // reset for subsequent text
+```
 
-**Can I combine strikethrough with other text styles?**  
-Yes, the `Font` class lets you set bold, italic, color, size, underline, and strike‑through together. This flexibility enables you to create rich Rich Text Format ([RTF](https://docs.fileformat.com/word-processing/rtf/)) or DOCX content that meets complex styling requirements.
+### Step 4: Search and Apply Conditional Strikethrough
 
-## Read More
+Iterate through all `Run` objects, find the word "strike", and apply the formatting programmatically.
+
+```java
+for (Paragraph para : (Iterable<Paragraph>) doc.getChildNodes(NodeType.PARAGRAPH, true)) {
+    for (Run run : (Iterable<Run>) para.getChildNodes(NodeType.RUN, true)) {
+        String text = run.getText();
+        if (text != null && text.toLowerCase().contains("strike")) {
+            run.getFont().setStrikeThrough(true);
+        }
+    }
+}
+```
+
+### Step 5: Save the Document
+
+Finally, write the modified document to disk in [DOCX](https://docs.fileformat.com/word-processing/docx/) format.
+
+```java
+String outputPath = "output.docx";
+doc.save(outputPath, SaveFormat.DOCX);
+```
+
+With the document saved, you can open `output.docx` to verify that the strikethrough styling appears as expected.
+
+## Full Working Example for Strikethrough Text Java Example
+
+The following code demonstrates the complete workflow for adding strikethrough text in Java using Conholdate.Total.
+
+```java
+import com.aspose.words.*;
+
+import java.io.File;
+
+public class StrikethroughExample {
+    public static void main(String[] args) {
+        String inputPath = "input.docx";
+        String outputPath = "output.docx";
+
+        Document doc = null;
+        try {
+            File inputFile = new File(inputPath);
+            if (inputFile.exists()) {
+                doc = new Document(inputPath);
+            } else {
+                doc = new Document();
+                doc.removeAllChildren();
+            }
+
+            DocumentBuilder builder = new DocumentBuilder(doc);
+            builder.moveToDocumentEnd();
+
+            builder.writeln("This is a normal paragraph.");
+
+            builder.getFont().setStrikeThrough(true);
+            builder.writeln("This text is rendered with strikethrough.");
+            builder.getFont().setStrikeThrough(false);
+
+            for (Paragraph para : (Iterable<Paragraph>) doc.getChildNodes(NodeType.PARAGRAPH, true)) {
+                for (Run run : (Iterable<Run>) para.getChildNodes(NodeType.RUN, true)) {
+                    String text = run.getText();
+                    if (text != null && text.toLowerCase().contains("strike")) {
+                        run.getFont().setStrikeThrough(true);
+                    }
+                }
+            }
+
+            doc.save(outputPath, SaveFormat.DOCX);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (doc != null) {
+                doc = null;
+            }
+        }
+    }
+}
+```
+
+> **Note:** This code example demonstrates the core functionality. Before using it in your project, make sure to update any file paths and configuration values to match your actual environment, verify that all required dependencies are properly installed, and test thoroughly in your development environment. If you encounter any issues, please refer to the [official documentation](https://docs.conholdate.com/java/) or reach out to the [support team](https://forum.conholdate.com/c/total/5) for assistance.
+
+## Fine-Tuning Strikethrough Styling Options
+
+The SDK lets you control additional font attributes such as color, size, and underline while keeping the strike‑through flag enabled. For example, you can change the color of strikethrough text:
+
+```java
+builder.getFont().setColor(java.awt.Color.RED);
+builder.getFont().setStrikeThrough(true);
+builder.writeln("Important deletion highlighted in red.");
+```
+
+If you need to apply the same style to many runs, consider creating a reusable `Font` instance and assigning it to each `Run` to avoid repetitive property setting.
+
+## Performance Considerations for Strikethrough Rendering
+
+1. **Reuse the `Document` object** - loading a document once and performing all modifications in a single session reduces I/O overhead.  
+2. **Batch style changes** - apply the strike‑through flag to a `Paragraph` or `Run` collection rather than toggling it for each character.  
+3. **Avoid unnecessary traversals** - the conditional loop that searches for the word "strike" should be executed only when you actually need dynamic styling.  
+4. **Stream output when possible** - for large documents, use `doc.save(OutputStream, SaveFormat.DOCX)` to write directly to a stream and conserve memory.
+
+These tips help keep memory usage low and execution time fast, especially when processing hundreds of documents in a batch job.
+
+## Final Thoughts
+
+Adding strikethrough text in Java is straightforward with [Conholdate.Total for Java](https://products.conholdate.com/total/java/). The SDK's fluent API lets you mix normal and styled paragraphs, apply conditional formatting, and save results in industry‑standard formats. Remember to configure your Maven dependency, reuse document objects, and apply styles efficiently to achieve optimal performance. For production deployments you will need a valid license; pricing details are available on the [pricing page](https://purchase.conholdate.com/pricing/total/family/) and a temporary license can be obtained from the [temporary license page](https://purchase.conholdate.com/temporary-license/). Happy coding!
+
+## Questions You Might Have
+
+- **How do I apply strikethrough text in Java without manually setting the flag for each run?**  
+  Use `DocumentBuilder.getFont().setStrikeThrough(true)` before writing the paragraph. The flag stays active until you reset it, allowing you to write multiple lines with the same style.
+
+- **Can I automatically strike through every occurrence of a keyword?**  
+  Yes. Iterate through each `Run` as shown in the walkthrough, check `run.getText()` for the keyword, and call `run.getFont().setStrikeThrough(true)` when a match is found.
+
+- **Which document formats preserve strikethrough when saved?**  
+  DOCX, [DOC](https://docs.fileformat.com/word-processing/doc/), [RTF](https://docs.fileformat.com/word-processing/rtf/), and other rich‑text formats retain the strike‑through attribute. Refer to the [official documentation](https://docs.conholdate.com/java/) for a full list of supported formats.
+
+- **Will applying many strikethrough styles slow down processing of large files?**  
+  The impact is minimal if you follow the performance tips: reuse the `Document` instance, batch style changes, and avoid redundant traversals. This keeps memory usage low and speeds up processing.
+
+## Related Articles
 - [Rotate Image in Java](https://blog.conholdate.com/total/rotate-image-in-java/)
 - [Add Text to PDF in Java](https://blog.conholdate.com/total/add-text-to-pdf-in-java/)
 - [Convert PDF to PNG in Java](https://blog.conholdate.com/total/convert-pdf-to-png-in-java/)
