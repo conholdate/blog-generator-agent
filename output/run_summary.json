@@ -1,14 +1,16 @@
 {
-  "source_url": "https://releases.aspose.com/slides/python-net/release-notes/2026/aspose-slides-for-python-net-26-9-release-notes/",
+  "source_url": "https://releases.aspose.com/imaging/python-net/release-notes/2026/aspose-imaging-for-python-net-26-10-release-notes/",
   "source_type": "release-notes",
   "publication_readiness": "draft_ready",
   "blocker_reason": null,
   "topics_generated": [
-    "Presentation animations can be rendered frame by frame"
+    "IMAGINGPYTHONNET-556 Add proper checking if a given TIFF file is supported (including XIF)",
+    "IMAGINGPYTHONNET-555 Improve AVIF processing performance and memory load",
+    "IMAGINGPYTHONNET-554 Fix inconsistent metadata removal from Tiff: TiffOptions expose metadata properties apart from Exif and Xmp metadata",
+    "IMAGINGPYTHONNET-553 Exception on AVIF load",
+    "IMAGINGPYTHONNET-552 Support the clipping operation in RasterImageExporter"
   ],
   "rejected_sections": [
-    "New Features and Enhancements",
-    "Other Improvements and Changes",
-    "Presentation animations can be rendered frame by frame (duplicate)"
+    "Added Method: aspose.imaging.exif.ExifData.clone() / aspose.imaging.exif.JpegExifData.clone()"
   ]
 }

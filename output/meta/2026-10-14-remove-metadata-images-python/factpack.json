@@ -1,0 +1,79 @@
+{
+  "topic": "Removing Metadata from Images with Aspose.Imaging for Python",
+  "primary_source_url": "https://releases.aspose.com/imaging/python-net/release-notes/2026/aspose-imaging-for-python-net-26-10-release-notes/",
+  "source_title": "Aspose.Imaging for Python via .NET 26.10 - Release notes",
+  "sdk_version": "Aspose.Imaging for Python via .NET 26.10 - Release notes",
+  "main_problem_solved": "Adds ability to remove all metadata from images, not just EXIF/XMP, through a new method on the Image class.",
+  "platform": {
+    "platform_key": "python-net",
+    "platform_name": "Python",
+    "language": "Python",
+    "language_tag": "python",
+    "package_manager": "pip",
+    "install_command": "pip install aspose-imaging",
+    "product_key": "imaging",
+    "product_display": "Imaging",
+    "brand_key": "aspose",
+    "brand_name": "Aspose",
+    "product_full_name": "Aspose.Imaging",
+    "product_page_url": "https://products.aspose.com/imaging/python-net/",
+    "docs_url": "https://docs.aspose.com/imaging/python-net/",
+    "api_reference_url": "https://reference.aspose.com/imaging/python-net/",
+    "free_apps_url": "https://products.aspose.app/imaging/family",
+    "license_url": "https://purchase.aspose.com/temporary-license/",
+    "forum_url": "https://forum.aspose.com/c/imaging/",
+    "blog_domain": "https://blog.aspose.com",
+    "blog_category_url": "https://blog.aspose.com/categories/aspose.imaging-product-family/"
+  },
+  "source_type": "release_notes",
+  "keyword_analysis": null,
+  "key_steps": [],
+  "code_snippets": [
+    "from aspose.imaging import Image\n\ndef remove_metadata(sourceImage, outputImage, imageOptions=None):\n    with Image.load(sourceImage) as image:\n       image.remove_metadata()\n       if imageOptions is None:\n          image.save(outputImage)\n       else:\n          image.save(outputImage, imageOptions)"
+  ],
+  "limitations": [],
+  "warnings": [
+    "Editorial signal for the pipeline and human reviewer only, not for the article: the code sample matches the vendor's own release notes verbatim but has not been executed, so it is untested. Do not describe it as tested, and do not add any provenance or verification note to the article."
+  ],
+  "related_concepts": [
+    "Image",
+    "Image.load",
+    "image.remove_metadata",
+    "image.save"
+  ],
+  "facts_confirmed_from_source": [
+    "Heading: IMAGINGPYTHONNET-554 Fix inconsistent metadata removal from Tiff: TiffOptions expose metadata properties apart from Exif and Xmp metadata",
+    "Adds ability to remove all metadata from images, not just EXIF/XMP, through a new method on the Image class.",
+    "API used: aspose.imaging.Image",
+    "API used: Image.load",
+    "API used: image.remove_metadata",
+    "API used: image.save"
+  ],
+  "facts_needing_verification": [],
+  "suggested_article_outline": [
+    "Introduction",
+    "Key Takeaways",
+    "Why this feature matters",
+    "Brief introduction of the API (install + product/docs links)",
+    "Step-by-step tutorial with a code example",
+    "Conclusion",
+    "FAQs",
+    "Get a Free License and Explore More (one section, placed last as the strongest CTA slot)",
+    "See Also (only if related post URLs are supplied)"
+  ],
+  "code_verification": {
+    "language": "Python",
+    "tested": false,
+    "source_verified": true,
+    "syntax_valid": true,
+    "package_name": null,
+    "package_version": null,
+    "os": null,
+    "input_file_used": null,
+    "output_file_generated": null,
+    "errors": [],
+    "notes": "Code sample matches a block scraped verbatim from the product team's release notes page. Static syntax check passed (balanced brackets/quotes). Sandboxed execution against the real vendor SDK is not attempted: these samples reference proprietary licensed assemblies, external input files, and sometimes network services (e.g. a timestamp authority URL) that only exist in the product team's own test environment."
+  },
+  "prerequisites": [],
+  "doc_topics": []
+}
