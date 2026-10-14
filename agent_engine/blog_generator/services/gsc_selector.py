@@ -25,6 +25,7 @@ from utils.gsc_opportunities import (
     build_opportunities,
     find_best_topic,
     match_product_tab,
+    tokenize,
 )
 
 GSC_SCOPES = [
@@ -160,6 +161,61 @@ def fetch_all_opportunities(brand: str, top_n: int) -> list[Opportunity]:
         position_max=settings.GSC_POSITION_MAX,
         top_n=top_n,
     )
+
+
+def fetch_related_queries(brand: str, keywords: list[str], top_n: int = 5) -> list[str]:
+    """Real GSC queries related to a new post's keywords, for grounding its
+    FAQ section in genuine search demand instead of LLM-invented questions -
+    see prompts.get_blog_writer_prompt's faq_queries param. A lightweight,
+    query-only fetch (no page dimension, no trend) since this only needs
+    "what do people actually search for near this topic," not
+    striking-distance ranking analysis.
+
+    Best-effort: [] on any failure, missing config, or no overlap found -
+    the caller falls back to letting the LLM invent its own FAQ questions,
+    same as it always has."""
+    if not settings.GSC_ENABLED:
+        return []
+    try:
+        creds = _credentials()
+        service = build("searchconsole", "v1", credentials=creds)
+        site_url = _property_url(brand)
+
+        end = date.today() - timedelta(days=GSC_DATA_LAG_DAYS)
+        start = end - timedelta(days=WINDOW_DAYS)
+        body = {
+            "startDate": start.isoformat(),
+            "endDate": end.isoformat(),
+            "dimensions": ["query"],
+            "rowLimit": 25000,
+        }
+        rows = service.searchanalytics().query(siteUrl=site_url, body=body).execute().get("rows", [])
+
+        keyword_tokens = {t for kw in keywords for t in tokenize(kw)}
+        if not keyword_tokens:
+            return []
+
+        scored = []
+        for row in rows:
+            query = (row.get("keys") or [""])[0].strip().lower()
+            # isascii() only catches non-Latin scripts, not non-English
+            # Latin-script queries (confirmed live: "zip ke jpg", "ubah zip
+            # ke jpg" - Indonesian - both passed this check for
+            # groupdocs.cloud). Same accepted limitation as
+            # build_opportunities' identical check; not worth a heavier
+            # language-detection pass for a handful of FAQ seed phrases
+            # the LLM is already told to rephrase naturally.
+            if not query or not query.isascii():
+                continue
+            if not set(tokenize(query)) & keyword_tokens:
+                continue
+            scored.append((int(row.get("impressions", 0)), query))
+
+        scored.sort(key=lambda pair: pair[0], reverse=True)
+        return [query for _, query in scored[:top_n]]
+    except Exception as exc:
+        print(f"⚠️ Could not fetch related GSC queries for FAQ grounding (non-fatal): {exc}", flush=True)
+        return []
 
 
 def _write_suggestions(client: gspread.Client, unmatched: list[tuple[Opportunity, str]]) -> None:

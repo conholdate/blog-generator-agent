@@ -334,6 +334,11 @@ class BlogOrchestrator:
                 }
             # ─────────────────────────────────────────────────────────────────
 
+            # Real GSC queries to ground the FAQ section in - non-fatal,
+            # best-effort (see fetch_related_queries' docstring).
+            from services.gsc_selector import fetch_related_queries
+            faq_queries = fetch_related_queries(self.brand, f_keywords)
+
             # ════════════════════════════════════════════════════════════════════
             # UPDATED: Using centralized LLM service instead of direct Agent creation
             # ════════════════════════════════════════════════════════════════════
@@ -353,7 +358,8 @@ class BlogOrchestrator:
                 isCloud,
                 allowed_products,
                 layout_choice=layout_choice,
-                generated_code=generated_code
+                generated_code=generated_code,
+                faq_queries=faq_queries
             )
         
             result = await llm_service.run_agent(
@@ -799,6 +805,11 @@ class BlogOrchestrator:
                     "api_call_count": self.metrics.api_call_count,
                 }
 
+            # Real GSC queries to ground the FAQ section in - non-fatal,
+            # best-effort (see fetch_related_queries' docstring).
+            from services.gsc_selector import fetch_related_queries
+            faq_queries = fetch_related_queries(self.brand, f_keywords)
+
             instructions = prompts.get_blog_writer_prompt(
                 post_topic,
                 f_keywords,
@@ -815,7 +826,8 @@ class BlogOrchestrator:
                 isCloud,
                 allowed_products,
                 layout_choice=layout_choice,
-                generated_code=generated_code
+                generated_code=generated_code,
+                faq_queries=faq_queries
             )
 
             result = await llm_service.run_agent(

@@ -97,13 +97,22 @@ def get_blog_writer_prompt(
     isCloud: bool = False,
     allowed_products: List[str] = [],
     layout_choice: Optional[LayoutChoice] = None,
-    generated_code: Optional[Dict[str, str]] = None
+    generated_code: Optional[Dict[str, str]] = None,
+    faq_queries: Optional[List[str]] = None
 ) -> str:
     """
     Creates a full SEO blog-writing prompt with frontmatter, layout-driven
     structure, outline coverage rules, and a final 'Read More' section using
     the provided related_links. If layout_choice is None, the classic layout
     is used (backwards-compatible default).
+
+    faq_queries: real GSC queries related to this topic (see
+    services/gsc_selector.py's fetch_related_queries), used to ground the
+    FAQ section in genuine search demand instead of letting the model
+    invent generic questions from scratch - part of differentiating posts
+    from each other now that every post otherwise shares the same
+    Conclusion/FAQs/Read More skeleton. None or empty falls back to the
+    model's own questions, same as before this param existed.
     """
     url = slugify(title)
 
@@ -118,6 +127,19 @@ def get_blog_writer_prompt(
 
     # Properly formatted Read More links (SAFE)
     formatted_related = format_related_posts(related_links)
+
+    # Real search queries to ground the FAQ section in, instead of the
+    # model inventing generic questions from scratch - see this function's
+    # faq_queries docstring.
+    faq_guidance = (
+        (
+            "- Real searches people actually use near this topic - base your questions on "
+            "these (rephrased naturally as FAQ questions), don't invent generic ones instead:\n"
+            + "\n".join(f'  - "{q}"' for q in faq_queries)
+        )
+        if faq_queries
+        else ""
+    )
 
     # Date
     current_date = datetime.utcnow().strftime("%a, %d %b %Y %H:%M:%S +0000")
@@ -941,6 +963,7 @@ Requirements:
 - Include contextual links in answers
 - Use product page URL with full product name: [Product Name](url)
 - NEVER mention "free" or "online"
+{faq_guidance}
 
 {'### 7. READ MORE (MANDATORY)' if formatted_related else '### NO READ MORE SECTION'}
 {'## Read More' if formatted_related else 'Do NOT include - no related links provided.'}
