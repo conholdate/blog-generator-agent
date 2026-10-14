@@ -10,7 +10,6 @@ This backend system generates SEO-optimized technical blog posts for supported b
 ### 1. Clone & Setup
 
 ```bash
-git clone <repo-url>
 cd blog-generator-agent
 cd scripts
 chmod +x blog-post-generation-setup.sh

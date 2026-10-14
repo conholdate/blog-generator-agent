@@ -89,13 +89,12 @@ class Settings(BaseSettings):
     # via the MCP protocol (StdioServerParameters + stdio_client + ClientSession),
     # the same calling convention agent_engine/blog_generator uses in
     # tools/mcp_tools.py to invoke its own sibling agents (banner generator,
-    # keyword fetcher, etc.). mcp_servers_dir points at an absolute path to that
-    # checkout until this repo is physically embedded under
-    # blog-generator-agents/agent_engine/ as a sibling of blog_generator, at
-    # which point it can become a relative "../../mcp-servers" path instead.
-    mcp_servers_dir: str = r"C:\GitHub\blog-generator-agents\mcp-servers"
+    # keyword fetcher, etc.). mcp_servers_dir points at the mcp-servers dir
+    # in the repo root (works whether repo is at blog-generator-agents or aspose\blog-generator-agents).
+    mcp_servers_dir: str = str(REPO_ROOT / "mcp-servers")
     mcp_python_executable: str | None = None  # defaults to sys.executable
-    mcp_call_timeout_seconds: float = 90.0
+    # Keyword analyzer can take 2-3 minutes for complex topics (clustering + LLM generation)
+    mcp_call_timeout_seconds: float = 180.0
 
     # Banner generator (mcp-servers/blog-banner-generator) — renders the post's
     # real cover image before export instead of leaving images/ empty.
