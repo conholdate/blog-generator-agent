@@ -127,7 +127,7 @@
         "ga4": {
           "postCount": 5,
           "priorSessions": 32,
-          "sessions": 19
+          "sessions": 20
         },
         "gscOpportunities": []
       },
@@ -297,7 +297,7 @@
         "ga4": {
           "postCount": 3,
           "priorSessions": 21,
-          "sessions": 10
+          "sessions": 11
         },
         "gscOpportunities": []
       },
@@ -1246,11 +1246,11 @@
       },
       "Direct": {
         "priorSessions": 3875,
-        "sessions": 3627
+        "sessions": 3666
       },
       "Organic Search": {
         "priorSessions": 108,
-        "sessions": 104
+        "sessions": 107
       },
       "Organic Social": {
         "priorSessions": 5,
@@ -1262,7 +1262,7 @@
       },
       "Unassigned": {
         "priorSessions": 190,
-        "sessions": 209
+        "sessions": 211
       }
     },
     "ctrAnomalies": [
@@ -1429,7 +1429,11 @@
         "url": "https://blog.aspose.cloud/email/email-sending-using-aspose.email-cloud-in-heroku-node.js-app/"
       }
     ],
-    "refreshedAt": "2026-10-18T16:08:37.173600+00:00",
+    "gscRawClicks": 2401,
+    "gscRawImpressions": 182285,
+    "gscRawPriorClicks": 3554,
+    "gscRawPriorImpressions": 215365,
+    "refreshedAt": "2026-10-18T20:39:29.257411+00:00",
     "risingQueries": [
       {
         "growthPercent": 4400.0,
@@ -1512,7 +1516,89 @@
         "priorImpressions": 14
       }
     ],
-    "status": "ok"
+    "status": "ok",
+    "topOpportunities": [
+      {
+        "clicks": 0,
+        "impressions": 254,
+        "keyword": "java resize image",
+        "page": "https://blog.aspose.cloud/imaging/resize-image-in-java/",
+        "position": 15.7,
+        "trend": "improving"
+      },
+      {
+        "clicks": 0,
+        "impressions": 236,
+        "keyword": "resize image java",
+        "page": "https://blog.aspose.cloud/imaging/resize-image-in-java/",
+        "position": 14.9,
+        "trend": "improving"
+      },
+      {
+        "clicks": 0,
+        "impressions": 249,
+        "keyword": ".net power point to pdf conversion sdk",
+        "page": "https://blog.aspose.cloud/slides/convert-powerpoint-to-pdf-document-with-aspose-slides-cloud-sdk-for-net/",
+        "position": 10.1,
+        "trend": "flat"
+      },
+      {
+        "clicks": 0,
+        "impressions": 208,
+        "keyword": "crop image java",
+        "page": "https://blog.aspose.cloud/imaging/crop-image-in-java/",
+        "position": 8.8,
+        "trend": "new"
+      },
+      {
+        "clicks": 0,
+        "impressions": 322,
+        "keyword": "decrypt pdf",
+        "page": "https://blog.aspose.cloud/total/encrypt-and-decrypt-pdf-files-with-curl/",
+        "position": 16.1,
+        "trend": "declining"
+      },
+      {
+        "clicks": 0,
+        "impressions": 166,
+        "keyword": "how to build an ppt and pptx viewer",
+        "page": "https://blog.aspose.cloud/slides/develop-powerpoint-viewer-using-dotnet-cloud-sdk/",
+        "position": 16.1,
+        "trend": "improving"
+      },
+      {
+        "clicks": 0,
+        "impressions": 156,
+        "keyword": "resize image in java",
+        "page": "https://blog.aspose.cloud/imaging/resize-image-in-java/",
+        "position": 11.9,
+        "trend": "improving"
+      },
+      {
+        "clicks": 1,
+        "impressions": 137,
+        "keyword": "dcm to jpg",
+        "page": "https://blog.aspose.cloud/imaging/convert-dcm-to-jpg-in-java/",
+        "position": 19.0,
+        "trend": "improving"
+      },
+      {
+        "clicks": 0,
+        "impressions": 119,
+        "keyword": "web pptx sdk",
+        "page": "https://blog.aspose.cloud/slides/develop-powerpoint-viewer-using-dotnet-cloud-sdk/",
+        "position": 11.5,
+        "trend": "improving"
+      },
+      {
+        "clicks": 0,
+        "impressions": 105,
+        "keyword": "powerpoint to pdf sdk",
+        "page": "https://blog.aspose.cloud/slides/convert-powerpoint-to-pdf-document-with-aspose-slides-cloud-sdk-for-net/",
+        "position": 15.4,
+        "trend": "flat"
+      }
+    ]
   },
   "aspose.com": {
     "buckets": {
@@ -1567,8 +1653,8 @@
       },
       "aspose.com|Aspose.3D|Python": {
         "ga4": {
-          "postCount": 23,
-          "priorSessions": 541,
+          "postCount": 22,
+          "priorSessions": 500,
           "sessions": 350
         },
         "gscOpportunities": [
@@ -1674,7 +1760,7 @@
         "ga4": {
           "postCount": 42,
           "priorSessions": 516,
-          "sessions": 290
+          "sessions": 285
         },
         "gscOpportunities": [
           {
@@ -1882,9 +1968,9 @@
       },
       "aspose.com|Aspose.CAD|.NET": {
         "ga4": {
-          "postCount": 29,
-          "priorSessions": 241,
-          "sessions": 235
+          "postCount": 28,
+          "priorSessions": 236,
+          "sessions": 230
         },
         "gscOpportunities": [
           {
@@ -1931,9 +2017,9 @@
       },
       "aspose.com|Aspose.CAD|Python": {
         "ga4": {
-          "postCount": 22,
-          "priorSessions": 284,
-          "sessions": 330
+          "postCount": 21,
+          "priorSessions": 268,
+          "sessions": 320
         },
         "gscOpportunities": [
           {
@@ -1972,9 +2058,9 @@
       },
       "aspose.com|Aspose.Cells|.NET": {
         "ga4": {
-          "postCount": 146,
-          "priorSessions": 858,
-          "sessions": 1060
+          "postCount": 147,
+          "priorSessions": 863,
+          "sessions": 1070
         },
         "gscOpportunities": [
           {
@@ -2178,7 +2264,7 @@
         "ga4": {
           "postCount": 52,
           "priorSessions": 739,
-          "sessions": 485
+          "sessions": 490
         },
         "gscOpportunities": [
           {
@@ -2348,7 +2434,7 @@
         "ga4": {
           "postCount": 42,
           "priorSessions": 163,
-          "sessions": 275
+          "sessions": 270
         },
         "gscOpportunities": [
           {
@@ -2387,8 +2473,8 @@
       },
       "aspose.com|Aspose.Diagram|Java": {
         "ga4": {
-          "postCount": 29,
-          "priorSessions": 116,
+          "postCount": 30,
+          "priorSessions": 126,
           "sessions": 235
         },
         "gscOpportunities": []
@@ -2405,7 +2491,7 @@
         "ga4": {
           "postCount": 28,
           "priorSessions": 1139,
-          "sessions": 760
+          "sessions": 755
         },
         "gscOpportunities": [
           {
@@ -2646,7 +2732,7 @@
         "ga4": {
           "postCount": 9,
           "priorSessions": 1952,
-          "sessions": 1282
+          "sessions": 1286
         },
         "gscOpportunities": [
           {
@@ -3429,9 +3515,9 @@
       },
       "aspose.com|Aspose.Email|general": {
         "ga4": {
-          "postCount": 12,
-          "priorSessions": 409,
-          "sessions": 354
+          "postCount": 13,
+          "priorSessions": 414,
+          "sessions": 355
         },
         "gscOpportunities": [
           {
@@ -3635,7 +3721,7 @@
         "ga4": {
           "postCount": 12,
           "priorSessions": 1776,
-          "sessions": 1228
+          "sessions": 1231
         },
         "gscOpportunities": [
           {
@@ -3902,7 +3988,7 @@
         "ga4": {
           "postCount": 19,
           "priorSessions": 196,
-          "sessions": 400
+          "sessions": 395
         },
         "gscOpportunities": [
           {
@@ -3943,7 +4029,7 @@
         "ga4": {
           "postCount": 46,
           "priorSessions": 312,
-          "sessions": 410
+          "sessions": 405
         },
         "gscOpportunities": [
           {
@@ -3992,7 +4078,7 @@
         "ga4": {
           "postCount": 32,
           "priorSessions": 255,
-          "sessions": 245
+          "sessions": 250
         },
         "gscOpportunities": [
           {
@@ -4443,7 +4529,7 @@
         "ga4": {
           "postCount": 23,
           "priorSessions": 177,
-          "sessions": 195
+          "sessions": 190
         },
         "gscOpportunities": [
           {
@@ -4492,7 +4578,7 @@
         "ga4": {
           "postCount": 11,
           "priorSessions": 127,
-          "sessions": 90
+          "sessions": 95
         },
         "gscOpportunities": [
           {
@@ -4525,7 +4611,7 @@
         "ga4": {
           "postCount": 6,
           "priorSessions": 218,
-          "sessions": 145
+          "sessions": 140
         },
         "gscOpportunities": [
           {
@@ -4558,7 +4644,7 @@
         "ga4": {
           "postCount": 115,
           "priorSessions": 781,
-          "sessions": 865
+          "sessions": 870
         },
         "gscOpportunities": [
           {
@@ -4758,9 +4844,9 @@
       },
       "aspose.com|Aspose.PDF|Java": {
         "ga4": {
-          "postCount": 66,
-          "priorSessions": 398,
-          "sessions": 490
+          "postCount": 65,
+          "priorSessions": 388,
+          "sessions": 485
         },
         "gscOpportunities": [
           {
@@ -4785,7 +4871,7 @@
         "ga4": {
           "postCount": 3,
           "priorSessions": 63,
-          "sessions": 55
+          "sessions": 65
         },
         "gscOpportunities": []
       },
@@ -4987,9 +5073,9 @@
       },
       "aspose.com|Aspose.PUB|Java": {
         "ga4": {
-          "postCount": 13,
-          "priorSessions": 368,
-          "sessions": 300
+          "postCount": 12,
+          "priorSessions": 352,
+          "sessions": 295
         },
         "gscOpportunities": [
           {
@@ -5306,9 +5392,9 @@
       },
       "aspose.com|Aspose.SVG|Python": {
         "ga4": {
-          "postCount": 21,
-          "priorSessions": 381,
-          "sessions": 190
+          "postCount": 20,
+          "priorSessions": 376,
+          "sessions": 185
         },
         "gscOpportunities": [
           {
@@ -5453,7 +5539,7 @@
         "ga4": {
           "postCount": 56,
           "priorSessions": 358,
-          "sessions": 405
+          "sessions": 415
         },
         "gscOpportunities": [
           {
@@ -5492,9 +5578,9 @@
       },
       "aspose.com|Aspose.Slides|Java": {
         "ga4": {
-          "postCount": 58,
+          "postCount": 59,
           "priorSessions": 368,
-          "sessions": 340
+          "sessions": 345
         },
         "gscOpportunities": []
       },
@@ -5502,7 +5588,7 @@
         "ga4": {
           "postCount": 2,
           "priorSessions": 20,
-          "sessions": 10
+          "sessions": 15
         },
         "gscOpportunities": []
       },
@@ -5518,7 +5604,7 @@
         "ga4": {
           "postCount": 27,
           "priorSessions": 458,
-          "sessions": 335
+          "sessions": 340
         },
         "gscOpportunities": []
       },
@@ -5550,7 +5636,7 @@
         "ga4": {
           "postCount": 25,
           "priorSessions": 283,
-          "sessions": 280
+          "sessions": 290
         },
         "gscOpportunities": [
           {
@@ -5680,7 +5766,7 @@
         "ga4": {
           "postCount": 23,
           "priorSessions": 160,
-          "sessions": 175
+          "sessions": 180
         },
         "gscOpportunities": []
       },
@@ -5876,7 +5962,7 @@
         "ga4": {
           "postCount": 56,
           "priorSessions": 219,
-          "sessions": 345
+          "sessions": 350
         },
         "gscOpportunities": [
           {
@@ -5909,7 +5995,7 @@
         "ga4": {
           "postCount": 31,
           "priorSessions": 116,
-          "sessions": 190
+          "sessions": 195
         },
         "gscOpportunities": [
           {
@@ -5926,7 +6012,7 @@
         "ga4": {
           "postCount": 5,
           "priorSessions": 67,
-          "sessions": 65
+          "sessions": 70
         },
         "gscOpportunities": []
       },
@@ -5948,9 +6034,9 @@
       },
       "aspose.com|Aspose.Total|general": {
         "ga4": {
-          "postCount": 100,
+          "postCount": 98,
           "priorSessions": 543,
-          "sessions": 800
+          "sessions": 795
         },
         "gscOpportunities": [
           {
@@ -6039,7 +6125,7 @@
         "ga4": {
           "postCount": 75,
           "priorSessions": 586,
-          "sessions": 754
+          "sessions": 750
         },
         "gscOpportunities": []
       },
@@ -6136,7 +6222,7 @@
         "ga4": {
           "postCount": 93,
           "priorSessions": 732,
-          "sessions": 919
+          "sessions": 910
         },
         "gscOpportunities": [
           {
@@ -6612,7 +6698,7 @@
       },
       "Direct": {
         "priorSessions": 19153,
-        "sessions": 22556
+        "sessions": 23250
       },
       "Display": {
         "priorSessions": 3,
@@ -6624,7 +6710,7 @@
       },
       "Organic Search": {
         "priorSessions": 4729,
-        "sessions": 4021
+        "sessions": 4106
       },
       "Organic Social": {
         "priorSessions": 4,
@@ -6636,11 +6722,11 @@
       },
       "Referral": {
         "priorSessions": 369,
-        "sessions": 188
+        "sessions": 191
       },
       "Unassigned": {
         "priorSessions": 4780,
-        "sessions": 1105
+        "sessions": 1127
       }
     },
     "ctrAnomalies": [
@@ -6744,9 +6830,9 @@
         "url": "https://blog.aspose.com/cells/online-excel-password-remover/"
       },
       {
-        "changePercent": -34.7,
+        "changePercent": -34.5,
         "priorSessions": 1811,
-        "sessions": 1182,
+        "sessions": 1186,
         "title": "Free Online Ruler - A Digital Solution for Accurate Measurements",
         "url": "https://blog.aspose.com/drawing/online-ruler-cm-scale/"
       },
@@ -6758,9 +6844,9 @@
         "url": "https://blog.aspose.com/barcode/step-by-step-guide-to-read-qr-code-from-image-in-python/"
       },
       {
-        "changePercent": -18.6,
+        "changePercent": -18.4,
         "priorSessions": 1226,
-        "sessions": 998,
+        "sessions": 1001,
         "title": "Convert KML to SHP Online - Free Converter",
         "url": "https://blog.aspose.com/gis/convert-kml-to-shp-online/"
       },
@@ -6786,9 +6872,9 @@
         "url": "https://blog.aspose.com/finance/xbrl-to-excel-converter/"
       },
       {
-        "changePercent": -55.9,
+        "changePercent": -58.0,
         "priorSessions": 238,
-        "sessions": 105,
+        "sessions": 100,
         "title": "Convert Image to Visio Online",
         "url": "https://blog.aspose.com/diagram/convert-image-to-visio-online/"
       },
@@ -6807,7 +6893,11 @@
         "url": "https://blog.aspose.com/ocr/find-font-from-images-online/"
       }
     ],
-    "refreshedAt": "2026-10-18T16:09:11.282352+00:00",
+    "gscRawClicks": 67326,
+    "gscRawImpressions": 3763443,
+    "gscRawPriorClicks": 113177,
+    "gscRawPriorImpressions": 4942814,
+    "refreshedAt": "2026-10-18T20:39:56.624009+00:00",
     "risingQueries": [
       {
         "growthPercent": 42100.0,
@@ -6890,7 +6980,89 @@
         "priorImpressions": 197
       }
     ],
-    "status": "ok"
+    "status": "ok",
+    "topOpportunities": [
+      {
+        "clicks": 5,
+        "impressions": 38353,
+        "keyword": "merge jpg",
+        "page": "https://blog.aspose.com/imaging/merge-jpg-to-jpg-online/",
+        "position": 9.8,
+        "trend": "improving"
+      },
+      {
+        "clicks": 292,
+        "impressions": 22364,
+        "keyword": "kml to shp",
+        "page": "https://blog.aspose.com/gis/convert-kml-to-shp-online/",
+        "position": 8.6,
+        "trend": "flat"
+      },
+      {
+        "clicks": 0,
+        "impressions": 10423,
+        "keyword": "jpg to pdf",
+        "page": "https://blog.aspose.com/pdf/convert-jpg-to-pdf-online/",
+        "position": 9.3,
+        "trend": "flat"
+      },
+      {
+        "clicks": 0,
+        "impressions": 8781,
+        "keyword": "combine jpg",
+        "page": "https://blog.aspose.com/imaging/merge-jpg-to-jpg-online/",
+        "position": 11.6,
+        "trend": "flat"
+      },
+      {
+        "clicks": 153,
+        "impressions": 6685,
+        "keyword": "convert kml to shp",
+        "page": "https://blog.aspose.com/gis/convert-kml-to-shp-online/",
+        "position": 8.2,
+        "trend": "flat"
+      },
+      {
+        "clicks": 229,
+        "impressions": 6655,
+        "keyword": "measurement tape online",
+        "page": "https://blog.aspose.com/drawing/online-ruler-cm-scale/",
+        "position": 9.2,
+        "trend": "flat"
+      },
+      {
+        "clicks": 0,
+        "impressions": 4068,
+        "keyword": "merge jpg images",
+        "page": "https://blog.aspose.com/imaging/merge-jpg-to-jpg-online/",
+        "position": 8.9,
+        "trend": "improving"
+      },
+      {
+        "clicks": 2,
+        "impressions": 3931,
+        "keyword": "hex converter",
+        "page": "https://blog.aspose.com/svg/convert-rgb-to-hex/",
+        "position": 8.3,
+        "trend": "new"
+      },
+      {
+        "clicks": 103,
+        "impressions": 4283,
+        "keyword": "rar to pdf",
+        "page": "https://blog.aspose.com/total/convert-rar-to-pdf-online/",
+        "position": 9.2,
+        "trend": "flat"
+      },
+      {
+        "clicks": 0,
+        "impressions": 3449,
+        "keyword": "xpstopdfconverter org",
+        "page": "https://blog.aspose.com/page/convert-xps-to-pdf-online/",
+        "position": 9.2,
+        "trend": "improving"
+      }
+    ]
   },
   "conholdate.cloud": {
     "buckets": {
@@ -6943,9 +7115,14 @@
         "url": "https://blog.conholdate.cloud/total/manipulate-excel-spreadsheets/"
       }
     ],
-    "refreshedAt": "2026-10-18T16:09:14.240470+00:00",
+    "gscRawClicks": 4,
+    "gscRawImpressions": 307,
+    "gscRawPriorClicks": 1,
+    "gscRawPriorImpressions": 264,
+    "refreshedAt": "2026-10-18T20:40:01.034268+00:00",
     "risingQueries": [],
-    "status": "ok"
+    "status": "ok",
+    "topOpportunities": []
   },
   "conholdate.com": {
     "buckets": {
@@ -7082,7 +7259,7 @@
         "ga4": {
           "postCount": 192,
           "priorSessions": 774,
-          "sessions": 996
+          "sessions": 997
         },
         "gscOpportunities": [
           {
@@ -7131,7 +7308,7 @@
         "ga4": {
           "postCount": 97,
           "priorSessions": 2868,
-          "sessions": 1514
+          "sessions": 1515
         },
         "gscOpportunities": [
           {
@@ -7972,7 +8149,7 @@
       },
       "Direct": {
         "priorSessions": 1749,
-        "sessions": 1278
+        "sessions": 1292
       },
       "Display": {
         "priorSessions": 1,
@@ -7980,7 +8157,7 @@
       },
       "Organic Search": {
         "priorSessions": 653,
-        "sessions": 576
+        "sessions": 583
       },
       "Organic Social": {
         "priorSessions": 8,
@@ -8152,14 +8329,18 @@
         "url": "https://blog.conholdate.com/total/convert-kml-to-shp-online/"
       },
       {
-        "changePercent": -43.1,
-        "priorSessions": 58,
-        "sessions": 33,
-        "title": "Scan Answer Sheet Online",
-        "url": "https://blog.conholdate.com/total/scan-answer-sheet-online/"
+        "changePercent": -78.1,
+        "priorSessions": 32,
+        "sessions": 7,
+        "title": "Merge Word Documents Online",
+        "url": "https://blog.conholdate.com/total/merge-word-documents/"
       }
     ],
-    "refreshedAt": "2026-10-18T16:09:22.306838+00:00",
+    "gscRawClicks": 6571,
+    "gscRawImpressions": 355435,
+    "gscRawPriorClicks": 12938,
+    "gscRawPriorImpressions": 469841,
+    "refreshedAt": "2026-10-18T20:40:07.177902+00:00",
     "risingQueries": [
       {
         "growthPercent": 1066.7,
@@ -8242,7 +8423,89 @@
         "priorImpressions": 615
       }
     ],
-    "status": "ok"
+    "status": "ok",
+    "topOpportunities": [
+      {
+        "clicks": 0,
+        "impressions": 1545,
+        "keyword": "glb to fbx",
+        "page": "https://blog.conholdate.com/total/convert-glb-to-fbx-online/",
+        "position": 14.1,
+        "trend": "flat"
+      },
+      {
+        "clicks": 25,
+        "impressions": 885,
+        "keyword": "latex viewer",
+        "page": "https://blog.conholdate.com/total/online-latex-viewer/",
+        "position": 8.8,
+        "trend": "flat"
+      },
+      {
+        "clicks": 5,
+        "impressions": 473,
+        "keyword": "visio viewer online",
+        "page": "https://blog.conholdate.com/total/online-visio-viewer/",
+        "position": 13.5,
+        "trend": "improving"
+      },
+      {
+        "clicks": 13,
+        "impressions": 707,
+        "keyword": "convert zip to jpg",
+        "page": "https://blog.conholdate.com/total/convert-zip-to-jpg-online/",
+        "position": 8.1,
+        "trend": "declining"
+      },
+      {
+        "clicks": 0,
+        "impressions": 383,
+        "keyword": "pdf to base64",
+        "page": "https://blog.conholdate.com/total/convert-pdf-to-base64-online/",
+        "position": 14.3,
+        "trend": "improving"
+      },
+      {
+        "clicks": 1,
+        "impressions": 344,
+        "keyword": "csv file compressor",
+        "page": "https://blog.conholdate.com/total/compress-csv-online/",
+        "position": 10.5,
+        "trend": "flat"
+      },
+      {
+        "clicks": 0,
+        "impressions": 232,
+        "keyword": "image compare online",
+        "page": "https://blog.conholdate.com/total/compare-images-online/",
+        "position": 14.8,
+        "trend": "improving"
+      },
+      {
+        "clicks": 1,
+        "impressions": 180,
+        "keyword": "open visio online",
+        "page": "https://blog.conholdate.com/total/online-visio-viewer/",
+        "position": 18.6,
+        "trend": "improving"
+      },
+      {
+        "clicks": 1,
+        "impressions": 213,
+        "keyword": "compress csv file size",
+        "page": "https://blog.conholdate.com/total/compress-csv-online/",
+        "position": 10.7,
+        "trend": "flat"
+      },
+      {
+        "clicks": 3,
+        "impressions": 277,
+        "keyword": "zip to image converter",
+        "page": "https://blog.conholdate.com/total/convert-zip-to-jpg-online/",
+        "position": 8.1,
+        "trend": "declining"
+      }
+    ]
   },
   "groupdocs.cloud": {
     "buckets": {
@@ -8933,7 +9196,7 @@
         "ga4": {
           "postCount": 4,
           "priorSessions": 10,
-          "sessions": 14
+          "sessions": 15
         },
         "gscOpportunities": []
       },
@@ -8981,11 +9244,11 @@
     "channels": {
       "Direct": {
         "priorSessions": 3185,
-        "sessions": 3689
+        "sessions": 3717
       },
       "Organic Search": {
         "priorSessions": 126,
-        "sessions": 123
+        "sessions": 126
       },
       "Organic Social": {
         "priorSessions": 8,
@@ -8997,7 +9260,7 @@
       },
       "Unassigned": {
         "priorSessions": 84,
-        "sessions": 96
+        "sessions": 97
       }
     },
     "ctrAnomalies": [
@@ -9164,7 +9427,11 @@
         "url": "https://blog.groupdocs.cloud/conversion/convert-html-to-word-doc-docx-programmatically-in-java/"
       }
     ],
-    "refreshedAt": "2026-10-18T16:08:24.704791+00:00",
+    "gscRawClicks": 1827,
+    "gscRawImpressions": 228905,
+    "gscRawPriorClicks": 5212,
+    "gscRawPriorImpressions": 310978,
+    "refreshedAt": "2026-10-18T20:39:17.603768+00:00",
     "risingQueries": [
       {
         "growthPercent": 875.0,
@@ -9247,6 +9514,88 @@
         "priorImpressions": 11
       }
     ],
-    "status": "ok"
+    "status": "ok",
+    "topOpportunities": [
+      {
+        "clicks": 35,
+        "impressions": 1488,
+        "keyword": "zip to jpg",
+        "page": "https://blog.groupdocs.cloud/conversion/zip-to-jpg-online/",
+        "position": 9.0,
+        "trend": "flat"
+      },
+      {
+        "clicks": 6,
+        "impressions": 576,
+        "keyword": "zip file to jpg",
+        "page": "https://blog.groupdocs.cloud/conversion/zip-to-jpg-online/",
+        "position": 9.6,
+        "trend": "flat"
+      },
+      {
+        "clicks": 11,
+        "impressions": 543,
+        "keyword": "zip to jpg converter",
+        "page": "https://blog.groupdocs.cloud/conversion/zip-to-jpg-online/",
+        "position": 9.5,
+        "trend": "declining"
+      },
+      {
+        "clicks": 2,
+        "impressions": 491,
+        "keyword": "rar to pdf",
+        "page": "https://blog.groupdocs.cloud/conversion/convert-zip-or-rar-to-pdf-using-a-file-converter/",
+        "position": 13.9,
+        "trend": "declining"
+      },
+      {
+        "clicks": 6,
+        "impressions": 114,
+        "keyword": "zip to html",
+        "page": "https://blog.groupdocs.cloud/conversion/convert-zip-to-html-in-nodejs-zip-file-converter/",
+        "position": 8.2,
+        "trend": "improving"
+      },
+      {
+        "clicks": 2,
+        "impressions": 189,
+        "keyword": "pptx merger",
+        "page": "https://blog.groupdocs.cloud/merger/merge-powerpoint-pptpptx-files-online-using-rest-api-in-csharp/",
+        "position": 15.8,
+        "trend": "declining"
+      },
+      {
+        "clicks": 4,
+        "impressions": 162,
+        "keyword": "zip file convert to jpg",
+        "page": "https://blog.groupdocs.cloud/conversion/zip-to-jpg-online/",
+        "position": 9.3,
+        "trend": "declining"
+      },
+      {
+        "clicks": 2,
+        "impressions": 104,
+        "keyword": "convert mpp to excel",
+        "page": "https://blog.groupdocs.cloud/conversion/convert-mpp-to-excel-with-csharp/",
+        "position": 15.4,
+        "trend": "flat"
+      },
+      {
+        "clicks": 0,
+        "impressions": 80,
+        "keyword": "csv to json c#",
+        "page": "https://blog.groupdocs.cloud/conversion/convert-csv-to-json-with-csharp/",
+        "position": 10.4,
+        "trend": "improving"
+      },
+      {
+        "clicks": 1,
+        "impressions": 123,
+        "keyword": "rar to jpg",
+        "page": "https://blog.groupdocs.cloud/conversion/convert-rar-file-to-jpg-in-csharp-rar-file-converter/",
+        "position": 17.3,
+        "trend": "declining"
+      }
+    ]
   }
 }
