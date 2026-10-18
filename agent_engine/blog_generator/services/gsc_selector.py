@@ -134,6 +134,55 @@ def _fetch_recent_and_prior_rows(brand: str) -> tuple[str, list[dict], list[dict
     return site_url, recent_rows, prior_rows
 
 
+def fetch_raw_totals(brand: str) -> dict:
+    """Total impressions/clicks for the property over the same two windows
+    everything else here uses, with ZERO dimensions and ZERO filters - no
+    translated-page exclusion, no position/impressions banding. This is
+    exactly the number a human sees at the top of GSC's own Performance
+    report for the same date range, so it's always 1:1 verifiable with no
+    export or spreadsheet math needed - unlike fetch_all_opportunities'
+    numbers, which are deliberately filtered and can't be reproduced that
+    way. See services/insights_collector.py for how the two are kept
+    separate on the dashboard (a raw headline stat vs. a filtered,
+    per-query opportunity list each row of which IS individually
+    searchable in the GSC UI).
+
+    Best-effort: zeros on any failure, same philosophy as the rest of this
+    module - a transient GSC error must not break collection for every
+    other signal."""
+    try:
+        creds = _credentials()
+        service = build("searchconsole", "v1", credentials=creds)
+        site_url = _property_url(brand)
+
+        recent_end = date.today() - timedelta(days=GSC_DATA_LAG_DAYS)
+        recent_start = recent_end - timedelta(days=WINDOW_DAYS)
+        prior_end = recent_start - timedelta(days=1)
+        prior_start = prior_end - timedelta(days=WINDOW_DAYS)
+
+        def _totals(start: date, end: date) -> dict:
+            body = {"startDate": start.isoformat(), "endDate": end.isoformat()}
+            rows = service.searchanalytics().query(siteUrl=site_url, body=body).execute().get("rows", [])
+            if not rows:
+                return {"impressions": 0, "clicks": 0}
+            # No dimensions requested -> exactly one row, the whole
+            # property's total for the date range (no "keys" field at all).
+            row = rows[0]
+            return {"impressions": int(row.get("impressions", 0)), "clicks": int(row.get("clicks", 0))}
+
+        recent = _totals(recent_start, recent_end)
+        prior = _totals(prior_start, prior_end)
+        return {
+            "impressions": recent["impressions"],
+            "clicks": recent["clicks"],
+            "priorImpressions": prior["impressions"],
+            "priorClicks": prior["clicks"],
+        }
+    except Exception as exc:
+        print(f"⚠️ Could not fetch raw GSC totals (non-fatal): {exc}", flush=True)
+        return {"impressions": 0, "clicks": 0, "priorImpressions": 0, "priorClicks": 0}
+
+
 def fetch_opportunities(brand: str) -> list[Opportunity]:
     """Top striking-distance opportunities for a brand's blog property -
     capped at GSC_TOP_N, the handful the autonomous topic-selector tries

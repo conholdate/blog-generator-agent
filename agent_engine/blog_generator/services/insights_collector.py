@@ -62,6 +62,28 @@ def collect_brand_insights(brand: str, property_id: str, previous_entry: dict | 
         )
         opportunities = signals["opportunities"]
         gsc_by_bucket, gsc_unmatched = group_gsc_opportunities_by_bucket(opportunities, url_to_bucket)
+        # Flat, brand-wide, already-sorted-best-first slice of the SAME
+        # opportunities (not re-filtered) for the Analytics page's signal
+        # list - each row individually searchable in the GSC UI, unlike
+        # the raw totals below which are a single aggregate number.
+        top_opportunities = [
+            {
+                "keyword": o.keyword,
+                "page": o.page,
+                "impressions": o.impressions,
+                "clicks": o.clicks,
+                "position": o.position,
+                "trend": o.trend,
+            }
+            for o in opportunities[: settings.GSC_TOP_OPPORTUNITIES_DISPLAY_N]
+        ]
+
+        # Zero-filter totals - see fetch_raw_totals' docstring for why this
+        # (not the filtered `opportunities` sum) is the dashboard's
+        # headline GSC stat: it's the only GSC number that's 1:1
+        # verifiable against GSC's own Performance Overview with no
+        # export/filtering steps.
+        raw_totals = gsc_selector.fetch_raw_totals(brand)
 
         bucket_keys = set(ga4_by_bucket) | set(gsc_by_bucket)
         buckets = {
@@ -88,6 +110,11 @@ def collect_brand_insights(brand: str, property_id: str, previous_entry: dict | 
             "decliningPosts": declining_posts,
             "ctrAnomalies": signals["ctrAnomalies"],
             "risingQueries": signals["risingQueries"],
+            "topOpportunities": top_opportunities,
+            "gscRawImpressions": raw_totals["impressions"],
+            "gscRawClicks": raw_totals["clicks"],
+            "gscRawPriorImpressions": raw_totals["priorImpressions"],
+            "gscRawPriorClicks": raw_totals["priorClicks"],
         }
     except Exception as exc:
         _log(f"{brand}: collection failed ({exc!r}), keeping previous snapshot if any")
@@ -103,4 +130,9 @@ def collect_brand_insights(brand: str, property_id: str, previous_entry: dict | 
             "decliningPosts": [],
             "ctrAnomalies": [],
             "risingQueries": [],
+            "topOpportunities": [],
+            "gscRawImpressions": 0,
+            "gscRawClicks": 0,
+            "gscRawPriorImpressions": 0,
+            "gscRawPriorClicks": 0,
         }

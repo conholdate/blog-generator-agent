@@ -75,6 +75,7 @@ class Settings(BaseSettings):
     GA4_PROPERTY_ID_CONHOLDATE_CLOUD: str = ""
     GA4_PROPERTY_ID_CONHOLDATE_COM: str = ""
     GA4_DECLINE_TOP_N: int = 10                    # individual posts shown per brand on the Analytics page
+    GSC_TOP_OPPORTUNITIES_DISPLAY_N: int = 10      # flat, brand-wide opportunity list shown on the Analytics page
 
     # Two more GSC-derived signals for the dashboard Analytics page, both
     # computed from the same two windows fetch_all_opportunities already
