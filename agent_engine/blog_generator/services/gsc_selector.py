@@ -22,7 +22,9 @@ from googleapiclient.discovery import build
 from config import settings
 from utils.gsc_opportunities import (
     Opportunity,
+    build_ctr_anomalies,
     build_opportunities,
+    build_rising_queries,
     find_best_topic,
     match_product_tab,
     tokenize,
@@ -162,6 +164,42 @@ def fetch_all_opportunities(brand: str, top_n: int) -> list[Opportunity]:
         position_max=settings.GSC_POSITION_MAX,
         top_n=top_n,
     )
+
+
+def fetch_insights_signals(brand: str, top_n_opportunities: int) -> dict:
+    """Striking-distance opportunities + CTR anomalies + rising queries for
+    the dashboard Analytics page, all derived from ONE shared GSC fetch
+    (the same two windows fetch_all_opportunities alone used to pull) -
+    see services/insights_collector.py. Three deterministic, independent
+    signals: opportunities are about RANKING higher, CTR anomalies are
+    about getting clicked more at the rank already held, rising queries
+    are about growing DEMAND for something already ranked for."""
+    _, recent_rows, prior_rows = _fetch_recent_and_prior_rows(brand)
+    opportunities = build_opportunities(
+        recent_rows,
+        prior_rows,
+        min_impressions=settings.GSC_MIN_IMPRESSIONS,
+        position_min=settings.GSC_POSITION_MIN,
+        position_max=settings.GSC_POSITION_MAX,
+        top_n=top_n_opportunities,
+    )
+    ctr_anomalies = build_ctr_anomalies(
+        recent_rows,
+        min_impressions=settings.GSC_CTR_ANOMALY_MIN_IMPRESSIONS,
+        top_n=settings.GSC_CTR_ANOMALY_TOP_N,
+    )
+    rising_queries = build_rising_queries(
+        recent_rows,
+        prior_rows,
+        min_impressions=settings.GSC_RISING_MIN_IMPRESSIONS,
+        max_position=settings.GSC_RISING_MAX_POSITION,
+        top_n=settings.GSC_RISING_TOP_N,
+    )
+    return {
+        "opportunities": opportunities,
+        "ctrAnomalies": ctr_anomalies,
+        "risingQueries": rising_queries,
+    }
 
 
 # Below this, a lexically-overlapping query (2+ shared tokens) still isn't

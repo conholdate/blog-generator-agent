@@ -24,8 +24,10 @@ from config import settings
 from services import ga4_client, gsc_selector
 from utils.insights_snapshot import (
     build_url_bucket_map,
+    build_url_title_map,
     group_ga4_sessions_by_bucket,
     group_gsc_opportunities_by_bucket,
+    top_declining_posts,
 )
 from utils.topic_index import INDEX_PATH
 
@@ -51,10 +53,14 @@ def collect_brand_insights(brand: str, property_id: str, previous_entry: dict | 
         page_sessions = ga4_client.fetch_page_sessions(brand, property_id)
         ga4_by_bucket, ga4_unmatched = group_ga4_sessions_by_bucket(page_sessions, url_to_bucket)
         channels = ga4_client.fetch_channel_sessions(brand, property_id)
-
-        opportunities = gsc_selector.fetch_all_opportunities(
-            brand, top_n=settings.GA4_MAX_OPPORTUNITIES_PER_BRAND
+        declining_posts = top_declining_posts(
+            page_sessions, build_url_title_map(topic_index, brand), settings.GA4_DECLINE_TOP_N
         )
+
+        signals = gsc_selector.fetch_insights_signals(
+            brand, top_n_opportunities=settings.GA4_MAX_OPPORTUNITIES_PER_BRAND
+        )
+        opportunities = signals["opportunities"]
         gsc_by_bucket, gsc_unmatched = group_gsc_opportunities_by_bucket(opportunities, url_to_bucket)
 
         bucket_keys = set(ga4_by_bucket) | set(gsc_by_bucket)
@@ -69,7 +75,9 @@ def collect_brand_insights(brand: str, property_id: str, previous_entry: dict | 
         _log(
             f"{brand}: {len(buckets)} buckets with data "
             f"({len(page_sessions)} GA4 pages, {ga4_unmatched} unmatched; "
-            f"{len(opportunities)} GSC opportunities, {gsc_unmatched} unmatched)"
+            f"{len(opportunities)} GSC opportunities, {gsc_unmatched} unmatched; "
+            f"{len(declining_posts)} declining posts, {len(signals['ctrAnomalies'])} CTR anomalies, "
+            f"{len(signals['risingQueries'])} rising queries)"
         )
 
         return {
@@ -77,6 +85,9 @@ def collect_brand_insights(brand: str, property_id: str, previous_entry: dict | 
             "refreshedAt": datetime.now(timezone.utc).isoformat(),
             "buckets": buckets,
             "channels": channels,
+            "decliningPosts": declining_posts,
+            "ctrAnomalies": signals["ctrAnomalies"],
+            "risingQueries": signals["risingQueries"],
         }
     except Exception as exc:
         _log(f"{brand}: collection failed ({exc!r}), keeping previous snapshot if any")
@@ -89,4 +100,7 @@ def collect_brand_insights(brand: str, property_id: str, previous_entry: dict | 
             "refreshedAt": None,
             "buckets": {},
             "channels": {},
+            "decliningPosts": [],
+            "ctrAnomalies": [],
+            "risingQueries": [],
         }

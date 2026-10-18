@@ -144,6 +144,113 @@ def build_opportunities(
     return opportunities[:top_n]
 
 
+# Rough industry-benchmark organic CTR-by-position curve - good enough to
+# flag a query getting WAY fewer clicks than its position typically earns,
+# not meant to be a precise prediction. Beyond position 20 expected CTR is
+# near-zero regardless of title quality, so there's nothing actionable to
+# flag there.
+EXPECTED_CTR_BY_POSITION = (
+    (3, 0.10),
+    (5, 0.06),
+    (10, 0.03),
+    (20, 0.015),
+)
+
+# Actual CTR must fall below HALF the expected rate for its position band
+# to count as an anomaly - a soft miss isn't worth a dashboard alert.
+CTR_ANOMALY_RATIO = 0.5
+
+# Impressions must grow at least this much between the two windows to count
+# as "rising" - anything smaller is within normal week-to-week noise.
+RISING_MIN_GROWTH_PERCENT = 30.0
+
+
+def _expected_ctr(position: float) -> Optional[float]:
+    for max_position, ctr in EXPECTED_CTR_BY_POSITION:
+        if position <= max_position:
+            return ctr
+    return None
+
+
+def build_ctr_anomalies(recent_rows: list[dict], min_impressions: int, top_n: int) -> list[dict]:
+    """Queries ranking well enough to expect real clicks but getting far
+    fewer than typical for that position - usually a title/meta-description
+    problem, not a content/ranking one, so it's a much cheaper fix than a
+    striking-distance opportunity (which is about moving UP in rank, not
+    about getting clicked more at the rank already held).
+
+    Pure aggregation over the same `recent_rows` build_opportunities already
+    receives - no additional GSC API call needed (see
+    services/gsc_selector.fetch_insights_signals).
+    """
+    stats = aggregate_queries(recent_rows)
+    anomalies = []
+    for query, s in stats.items():
+        if not query.isascii():
+            continue
+        if s["impressions"] < min_impressions:
+            continue
+        expected = _expected_ctr(s["position"])
+        if expected is None:
+            continue
+        actual_ctr = s["clicks"] / s["impressions"]
+        if actual_ctr >= expected * CTR_ANOMALY_RATIO:
+            continue
+        anomalies.append({
+            "keyword": query,
+            "page": s["page"],
+            "impressions": s["impressions"],
+            "clicks": s["clicks"],
+            "position": round(s["position"], 1),
+            "ctr": round(actual_ctr * 100, 2),
+            "expectedCtr": round(expected * 100, 2),
+        })
+    anomalies.sort(key=lambda a: a["impressions"], reverse=True)
+    return anomalies[:top_n]
+
+
+def build_rising_queries(
+    recent_rows: list[dict],
+    prior_rows: list[dict],
+    min_impressions: int,
+    max_position: float,
+    top_n: int,
+) -> list[dict]:
+    """Queries already ranking decently whose search impressions grew a lot
+    between the two windows - rising DEMAND for something already ranked
+    for, as opposed to striking-distance opportunities (an existing
+    near-miss page) or LLM-proposed topics (no ranking history at all).
+    A good signal for which existing post to expand/update first.
+
+    Same two windows build_opportunities already receives - no additional
+    GSC API call needed.
+    """
+    recent = aggregate_queries(recent_rows)
+    prior = aggregate_queries(prior_rows)
+    rising = []
+    for query, s in recent.items():
+        if not query.isascii():
+            continue
+        if s["impressions"] < min_impressions or s["position"] > max_position:
+            continue
+        prior_stats = prior.get(query)
+        if not prior_stats or prior_stats["impressions"] <= 0:
+            continue
+        growth_percent = (s["impressions"] - prior_stats["impressions"]) / prior_stats["impressions"] * 100
+        if growth_percent < RISING_MIN_GROWTH_PERCENT:
+            continue
+        rising.append({
+            "keyword": query,
+            "page": s["page"],
+            "impressions": s["impressions"],
+            "priorImpressions": prior_stats["impressions"],
+            "growthPercent": round(growth_percent, 1),
+            "position": round(s["position"], 1),
+        })
+    rising.sort(key=lambda r: r["growthPercent"], reverse=True)
+    return rising[:top_n]
+
+
 def product_slug_from_url(page_url: str) -> str:
     """First path segment of a blog URL ('https://blog.x.com/cells/foo/' -> 'cells').
 

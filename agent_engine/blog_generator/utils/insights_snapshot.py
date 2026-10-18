@@ -73,6 +73,52 @@ def group_ga4_sessions_by_bucket(
     return grouped, unmatched
 
 
+def build_url_title_map(topic_index: dict, brand: str) -> dict[str, str]:
+    """Reverse index: normalized post URL -> its title, for one brand only -
+    same walk as build_url_bucket_map, just keyed to a different value, so
+    top_declining_posts below can show a readable title instead of a bare
+    URL."""
+    url_to_title: dict[str, str] = {}
+    prefix = f"{brand}|"
+    for bucket_key, posts in topic_index.items():
+        if not bucket_key.startswith(prefix):
+            continue
+        for post in posts:
+            url = normalize_url(post.get("url", ""))
+            if url:
+                url_to_title[url] = post.get("title", "")
+    return url_to_title
+
+
+def top_declining_posts(page_sessions: dict[str, dict], url_to_title: dict[str, str], top_n: int) -> list[dict]:
+    """Individual posts whose GA4 sessions dropped between
+    ga4_client.fetch_page_sessions' two windows, ranked by raw session
+    drop (not percent - a post dropping from 4 to 1 session is 75% but
+    noise, while 400 to 300 is a smaller percent but a real, worth-fixing
+    loss). This is the page-level counterpart to the brand/bucket-level
+    "declining" trend already shown elsewhere - specific enough to say
+    WHICH post needs attention, not just that the brand overall is down.
+    """
+    candidates = []
+    for url, stats in page_sessions.items():
+        prior = stats.get("priorSessions", 0)
+        sessions = stats.get("sessions", 0)
+        if stats.get("trend") != "declining" or prior <= 0:
+            continue
+        candidates.append({
+            "url": url,
+            "title": url_to_title.get(normalize_url(url), ""),
+            "sessions": sessions,
+            "priorSessions": prior,
+            "changePercent": round((sessions - prior) / prior * 100, 1),
+            "_drop": prior - sessions,
+        })
+    candidates.sort(key=lambda c: c["_drop"], reverse=True)
+    for c in candidates:
+        del c["_drop"]
+    return candidates[:top_n]
+
+
 def group_gsc_opportunities_by_bucket(
     opportunities: list, url_to_bucket: dict[str, str]
 ) -> tuple[dict[str, list], int]:

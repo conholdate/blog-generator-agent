@@ -12,14 +12,15 @@ cd "$GITHUB_REPO" || exit 1
 mkdir -p /tmp/lab-patches && rm -f /tmp/lab-patches/*.patch
 
 # Generate patches for everything since last sync, EXCLUDING this script file,
-# the logs file and topic index (both handled separately below, not via
-# patch - they're rewritten wholesale on every run, so patching them
-# incrementally just produces conflicts once the two repos drift), and audit
-# reports (generated output that diverges between independently-run clones
-# and isn't meant to be synced at all).
+# the logs file, topic index and dashboard insights snapshot (all three
+# handled separately below, not via patch - they're rewritten wholesale on
+# every run, so patching them incrementally just produces conflicts once the
+# two repos drift), and audit reports (generated output that diverges
+# between independently-run clones and isn't meant to be synced at all).
 git format-patch lab-sync..main -o /tmp/lab-patches --quiet \
   -- . ':!sync-to-gitlab.sh' ':!content/logs/logs.txt' \
-  ':!content/dashboard_topic_index.json' ':!outputs/audit/*'
+  ':!content/dashboard_topic_index.json' ':!content/dashboard_insights.json' \
+  ':!outputs/audit/*'
 
 if [ -z "$(ls -A /tmp/lab-patches 2>/dev/null)" ]; then
   echo "Nothing new to sync"
@@ -58,6 +59,13 @@ if ! cmp -s "$GITHUB_REPO/content/dashboard_topic_index.json" "content/dashboard
   git add content/dashboard_topic_index.json
   git commit -m "Sync dashboard_topic_index.json with source repo" --quiet
   echo "📝 dashboard_topic_index.json updated"
+fi
+
+if ! cmp -s "$GITHUB_REPO/content/dashboard_insights.json" "content/dashboard_insights.json" 2>/dev/null; then
+  cp "$GITHUB_REPO/content/dashboard_insights.json" content/dashboard_insights.json
+  git add content/dashboard_insights.json
+  git commit -m "Sync dashboard_insights.json with source repo" --quiet
+  echo "📝 dashboard_insights.json updated"
 fi
 
 git push
