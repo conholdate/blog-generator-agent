@@ -818,7 +818,7 @@
         "ga4": {
           "postCount": 44,
           "priorSessions": 259,
-          "sessions": 172
+          "sessions": 173
         },
         "gscOpportunities": [
           {
@@ -1238,7 +1238,7 @@
       },
       "Direct": {
         "priorSessions": 4057,
-        "sessions": 3328
+        "sessions": 3355
       },
       "Organic Search": {
         "priorSessions": 111,
@@ -1254,7 +1254,7 @@
       },
       "Unassigned": {
         "priorSessions": 199,
-        "sessions": 194
+        "sessions": 195
       }
     },
     "ctrAnomalies": [
@@ -1425,7 +1425,7 @@
     "gscRawImpressions": 182556,
     "gscRawPriorClicks": 3529,
     "gscRawPriorImpressions": 214323,
-    "refreshedAt": "2026-10-19T10:33:30.003256+00:00",
+    "refreshedAt": "2026-10-19T12:02:43.911105+00:00",
     "risingQueries": [
       {
         "growthPercent": 4550.0,
@@ -1647,7 +1647,7 @@
         "ga4": {
           "postCount": 22,
           "priorSessions": 424,
-          "sessions": 345
+          "sessions": 335
         },
         "gscOpportunities": [
           {
@@ -1962,7 +1962,7 @@
         "ga4": {
           "postCount": 28,
           "priorSessions": 143,
-          "sessions": 220
+          "sessions": 215
         },
         "gscOpportunities": [
           {
@@ -2050,9 +2050,9 @@
       },
       "aspose.com|Aspose.Cells|.NET": {
         "ga4": {
-          "postCount": 146,
+          "postCount": 145,
           "priorSessions": 463,
-          "sessions": 1065
+          "sessions": 1060
         },
         "gscOpportunities": [
           {
@@ -2093,7 +2093,7 @@
         "ga4": {
           "postCount": 14,
           "priorSessions": 232,
-          "sessions": 200
+          "sessions": 195
         },
         "gscOpportunities": [
           {
@@ -2256,7 +2256,7 @@
         "ga4": {
           "postCount": 52,
           "priorSessions": 480,
-          "sessions": 485
+          "sessions": 480
         },
         "gscOpportunities": [
           {
@@ -2483,7 +2483,7 @@
         "ga4": {
           "postCount": 29,
           "priorSessions": 1018,
-          "sessions": 755
+          "sessions": 760
         },
         "gscOpportunities": [
           {
@@ -4511,8 +4511,8 @@
       },
       "aspose.com|Aspose.OCR|.NET": {
         "ga4": {
-          "postCount": 23,
-          "priorSessions": 112,
+          "postCount": 22,
+          "priorSessions": 102,
           "sessions": 190
         },
         "gscOpportunities": [
@@ -4626,9 +4626,9 @@
       },
       "aspose.com|Aspose.PDF|.NET": {
         "ga4": {
-          "postCount": 115,
-          "priorSessions": 648,
-          "sessions": 855
+          "postCount": 114,
+          "priorSessions": 643,
+          "sessions": 850
         },
         "gscOpportunities": [
           {
@@ -4953,7 +4953,7 @@
         "ga4": {
           "postCount": 12,
           "priorSessions": 51,
-          "sessions": 65
+          "sessions": 70
         },
         "gscOpportunities": []
       },
@@ -5369,7 +5369,7 @@
         "ga4": {
           "postCount": 21,
           "priorSessions": 139,
-          "sessions": 150
+          "sessions": 155
         },
         "gscOpportunities": [
           {
@@ -5570,9 +5570,9 @@
       },
       "aspose.com|Aspose.Slides|Java": {
         "ga4": {
-          "postCount": 58,
-          "priorSessions": 209,
-          "sessions": 340
+          "postCount": 57,
+          "priorSessions": 204,
+          "sessions": 335
         },
         "gscOpportunities": []
       },
@@ -5791,7 +5791,7 @@
         "ga4": {
           "postCount": 12,
           "priorSessions": 263,
-          "sessions": 265
+          "sessions": 270
         },
         "gscOpportunities": [
           {
@@ -5960,9 +5960,9 @@
       },
       "aspose.com|Aspose.Total|.NET": {
         "ga4": {
-          "postCount": 55,
-          "priorSessions": 173,
-          "sessions": 345
+          "postCount": 54,
+          "priorSessions": 168,
+          "sessions": 340
         },
         "gscOpportunities": [
           {
@@ -6222,7 +6222,7 @@
         "ga4": {
           "postCount": 93,
           "priorSessions": 666,
-          "sessions": 910
+          "sessions": 915
         },
         "gscOpportunities": [
           {
@@ -6377,7 +6377,7 @@
         "ga4": {
           "postCount": 22,
           "priorSessions": 574,
-          "sessions": 625
+          "sessions": 620
         },
         "gscOpportunities": [
           {
@@ -6698,7 +6698,7 @@
       },
       "Direct": {
         "priorSessions": 19806,
-        "sessions": 22203
+        "sessions": 22353
       },
       "Display": {
         "priorSessions": 2,
@@ -6710,7 +6710,7 @@
       },
       "Organic Search": {
         "priorSessions": 4722,
-        "sessions": 3901
+        "sessions": 3929
       },
       "Organic Social": {
         "priorSessions": 4,
@@ -6726,7 +6726,7 @@
       },
       "Unassigned": {
         "priorSessions": 2602,
-        "sessions": 1147
+        "sessions": 1159
       }
     },
     "ctrAnomalies": [
@@ -6872,9 +6872,9 @@
         "url": "https://blog.aspose.com/finance/xbrl-to-excel-converter/"
       },
       {
-        "changePercent": -55.9,
+        "changePercent": -53.7,
         "priorSessions": 227,
-        "sessions": 100,
+        "sessions": 105,
         "title": "Convert Image to Visio Online",
         "url": "https://blog.aspose.com/diagram/convert-image-to-visio-online/"
       },
@@ -6897,7 +6897,7 @@
     "gscRawImpressions": 3757737,
     "gscRawPriorClicks": 112529,
     "gscRawPriorImpressions": 4919669,
-    "refreshedAt": "2026-10-19T10:34:03.889326+00:00",
+    "refreshedAt": "2026-10-19T12:03:18.057460+00:00",
     "risingQueries": [
       {
         "growthPercent": 42100.0,
@@ -7119,7 +7119,7 @@
     "gscRawImpressions": 306,
     "gscRawPriorClicks": 1,
     "gscRawPriorImpressions": 267,
-    "refreshedAt": "2026-10-19T10:34:06.549218+00:00",
+    "refreshedAt": "2026-10-19T12:03:20.603303+00:00",
     "risingQueries": [],
     "status": "ok",
     "topOpportunities": []
@@ -7130,7 +7130,7 @@
         "ga4": {
           "postCount": 216,
           "priorSessions": 838,
-          "sessions": 812
+          "sessions": 814
         },
         "gscOpportunities": [
           {
@@ -7251,7 +7251,7 @@
         "ga4": {
           "postCount": 192,
           "priorSessions": 773,
-          "sessions": 999
+          "sessions": 1000
         },
         "gscOpportunities": [
           {
@@ -7300,7 +7300,7 @@
         "ga4": {
           "postCount": 97,
           "priorSessions": 2830,
-          "sessions": 1506
+          "sessions": 1507
         },
         "gscOpportunities": [
           {
@@ -8141,7 +8141,7 @@
       },
       "Direct": {
         "priorSessions": 1776,
-        "sessions": 1195
+        "sessions": 1209
       },
       "Display": {
         "priorSessions": 1,
@@ -8149,7 +8149,7 @@
       },
       "Organic Search": {
         "priorSessions": 676,
-        "sessions": 532
+        "sessions": 540
       },
       "Organic Social": {
         "priorSessions": 4,
@@ -8161,7 +8161,7 @@
       },
       "Unassigned": {
         "priorSessions": 51,
-        "sessions": 76
+        "sessions": 77
       }
     },
     "ctrAnomalies": [
@@ -8332,7 +8332,7 @@
     "gscRawImpressions": 356963,
     "gscRawPriorClicks": 12784,
     "gscRawPriorImpressions": 466813,
-    "refreshedAt": "2026-10-19T10:34:14.379106+00:00",
+    "refreshedAt": "2026-10-19T12:03:28.769126+00:00",
     "risingQueries": [
       {
         "growthPercent": 1450.0,
@@ -8691,7 +8691,7 @@
         "ga4": {
           "postCount": 54,
           "priorSessions": 237,
-          "sessions": 229
+          "sessions": 230
         },
         "gscOpportunities": [
           {
@@ -9236,11 +9236,11 @@
     "channels": {
       "Direct": {
         "priorSessions": 3221,
-        "sessions": 3490
+        "sessions": 3518
       },
       "Organic Search": {
         "priorSessions": 126,
-        "sessions": 124
+        "sessions": 125
       },
       "Organic Social": {
         "priorSessions": 7,
@@ -9423,7 +9423,7 @@
     "gscRawImpressions": 228626,
     "gscRawPriorClicks": 5155,
     "gscRawPriorImpressions": 309432,
-    "refreshedAt": "2026-10-19T10:33:19.071286+00:00",
+    "refreshedAt": "2026-10-19T12:02:34.222438+00:00",
     "risingQueries": [
       {
         "growthPercent": 875.0,
