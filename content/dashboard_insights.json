@@ -1238,11 +1238,11 @@
       },
       "Direct": {
         "priorSessions": 4057,
-        "sessions": 3355
+        "sessions": 3358
       },
       "Organic Search": {
         "priorSessions": 111,
-        "sessions": 99
+        "sessions": 100
       },
       "Organic Social": {
         "priorSessions": 5,
@@ -1425,7 +1425,7 @@
     "gscRawImpressions": 182556,
     "gscRawPriorClicks": 3529,
     "gscRawPriorImpressions": 214323,
-    "refreshedAt": "2026-10-19T12:02:43.911105+00:00",
+    "refreshedAt": "2026-10-19T12:13:29.583658+00:00",
     "risingQueries": [
       {
         "growthPercent": 4550.0,
@@ -6698,7 +6698,7 @@
       },
       "Direct": {
         "priorSessions": 19806,
-        "sessions": 22353
+        "sessions": 22392
       },
       "Display": {
         "priorSessions": 2,
@@ -6726,7 +6726,7 @@
       },
       "Unassigned": {
         "priorSessions": 2602,
-        "sessions": 1159
+        "sessions": 1162
       }
     },
     "ctrAnomalies": [
@@ -6897,7 +6897,7 @@
     "gscRawImpressions": 3757737,
     "gscRawPriorClicks": 112529,
     "gscRawPriorImpressions": 4919669,
-    "refreshedAt": "2026-10-19T12:03:18.057460+00:00",
+    "refreshedAt": "2026-10-19T12:13:50.084140+00:00",
     "risingQueries": [
       {
         "growthPercent": 42100.0,
@@ -7119,7 +7119,7 @@
     "gscRawImpressions": 306,
     "gscRawPriorClicks": 1,
     "gscRawPriorImpressions": 267,
-    "refreshedAt": "2026-10-19T12:03:20.603303+00:00",
+    "refreshedAt": "2026-10-19T12:13:53.086920+00:00",
     "risingQueries": [],
     "status": "ok",
     "topOpportunities": []
@@ -8332,7 +8332,7 @@
     "gscRawImpressions": 356963,
     "gscRawPriorClicks": 12784,
     "gscRawPriorImpressions": 466813,
-    "refreshedAt": "2026-10-19T12:03:28.769126+00:00",
+    "refreshedAt": "2026-10-19T12:14:00.655460+00:00",
     "risingQueries": [
       {
         "growthPercent": 1450.0,
@@ -9236,7 +9236,7 @@
     "channels": {
       "Direct": {
         "priorSessions": 3221,
-        "sessions": 3518
+        "sessions": 3522
       },
       "Organic Search": {
         "priorSessions": 126,
@@ -9423,7 +9423,7 @@
     "gscRawImpressions": 228626,
     "gscRawPriorClicks": 5155,
     "gscRawPriorImpressions": 309432,
-    "refreshedAt": "2026-10-19T12:02:34.222438+00:00",
+    "refreshedAt": "2026-10-19T12:13:23.050513+00:00",
     "risingQueries": [
       {
         "growthPercent": 875.0,
