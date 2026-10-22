@@ -117,9 +117,9 @@
       },
       "aspose.cloud|Aspose.BarCode|general": {
         "ga4": {
-          "postCount": 11,
-          "priorSessions": 65,
-          "sessions": 25
+          "postCount": 12,
+          "priorSessions": 71,
+          "sessions": 26
         },
         "gscOpportunities": []
       },
@@ -321,7 +321,7 @@
         "ga4": {
           "postCount": 3,
           "priorSessions": 16,
-          "sessions": 7
+          "sessions": 8
         },
         "gscOpportunities": []
       },
@@ -564,7 +564,7 @@
         "ga4": {
           "postCount": 19,
           "priorSessions": 108,
-          "sessions": 58
+          "sessions": 59
         },
         "gscOpportunities": []
       },
@@ -572,7 +572,7 @@
         "ga4": {
           "postCount": 4,
           "priorSessions": 23,
-          "sessions": 18
+          "sessions": 19
         },
         "gscOpportunities": []
       },
@@ -1230,11 +1230,11 @@
       },
       "Direct": {
         "priorSessions": 4274,
-        "sessions": 3228
+        "sessions": 3244
       },
       "Organic Search": {
         "priorSessions": 122,
-        "sessions": 81
+        "sessions": 84
       },
       "Organic Social": {
         "priorSessions": 7,
@@ -1246,7 +1246,7 @@
       },
       "Unassigned": {
         "priorSessions": 237,
-        "sessions": 132
+        "sessions": 133
       }
     },
     "ctrAnomalies": [
@@ -1417,7 +1417,7 @@
     "gscRawImpressions": 182134,
     "gscRawPriorClicks": 3410,
     "gscRawPriorImpressions": 211926,
-    "refreshedAt": "2026-10-22T08:41:50.578256+00:00",
+    "refreshedAt": "2026-10-22T09:52:52.858459+00:00",
     "risingQueries": [
       {
         "growthPercent": 4800.0,
@@ -1629,9 +1629,9 @@
       },
       "aspose.com|Aspose.3D|Java": {
         "ga4": {
-          "postCount": 17,
-          "priorSessions": 80,
-          "sessions": 115
+          "postCount": 16,
+          "priorSessions": 70,
+          "sessions": 110
         },
         "gscOpportunities": []
       },
@@ -1734,9 +1734,9 @@
       },
       "aspose.com|Aspose.BarCode|.NET": {
         "ga4": {
-          "postCount": 41,
-          "priorSessions": 428,
-          "sessions": 275
+          "postCount": 40,
+          "priorSessions": 423,
+          "sessions": 270
         },
         "gscOpportunities": [
           {
@@ -2733,7 +2733,7 @@
         "ga4": {
           "postCount": 9,
           "priorSessions": 1884,
-          "sessions": 1244
+          "sessions": 1240
         },
         "gscOpportunities": [
           {
@@ -3689,7 +3689,7 @@
         "ga4": {
           "postCount": 22,
           "priorSessions": 161,
-          "sessions": 216
+          "sessions": 217
         },
         "gscOpportunities": [
           {
@@ -3714,7 +3714,7 @@
         "ga4": {
           "postCount": 12,
           "priorSessions": 1721,
-          "sessions": 1179
+          "sessions": 1180
         },
         "gscOpportunities": [
           {
@@ -4613,7 +4613,7 @@
         "ga4": {
           "postCount": 113,
           "priorSessions": 585,
-          "sessions": 822
+          "sessions": 817
         },
         "gscOpportunities": [
           {
@@ -4805,9 +4805,9 @@
       },
       "aspose.com|Aspose.PDF|Java": {
         "ga4": {
-          "postCount": 68,
-          "priorSessions": 235,
-          "sessions": 502
+          "postCount": 69,
+          "priorSessions": 240,
+          "sessions": 507
         },
         "gscOpportunities": [
           {
@@ -5516,7 +5516,7 @@
         "ga4": {
           "postCount": 54,
           "priorSessions": 155,
-          "sessions": 402
+          "sessions": 407
         },
         "gscOpportunities": [
           {
@@ -5555,9 +5555,9 @@
       },
       "aspose.com|Aspose.Slides|Java": {
         "ga4": {
-          "postCount": 57,
+          "postCount": 58,
           "priorSessions": 180,
-          "sessions": 325
+          "sessions": 330
         },
         "gscOpportunities": []
       },
@@ -5776,7 +5776,7 @@
         "ga4": {
           "postCount": 13,
           "priorSessions": 292,
-          "sessions": 243
+          "sessions": 239
         },
         "gscOpportunities": [
           {
@@ -6011,9 +6011,9 @@
       },
       "aspose.com|Aspose.Total|general": {
         "ga4": {
-          "postCount": 90,
-          "priorSessions": 450,
-          "sessions": 759
+          "postCount": 89,
+          "priorSessions": 445,
+          "sessions": 754
         },
         "gscOpportunities": [
           {
@@ -6084,9 +6084,9 @@
       },
       "aspose.com|Aspose.Words|C++": {
         "ga4": {
-          "postCount": 14,
+          "postCount": 15,
           "priorSessions": 81,
-          "sessions": 106
+          "sessions": 111
         },
         "gscOpportunities": []
       },
@@ -6199,7 +6199,7 @@
         "ga4": {
           "postCount": 93,
           "priorSessions": 658,
-          "sessions": 917
+          "sessions": 922
         },
         "gscOpportunities": [
           {
@@ -6362,7 +6362,7 @@
         "ga4": {
           "postCount": 22,
           "priorSessions": 576,
-          "sessions": 609
+          "sessions": 605
         },
         "gscOpportunities": [
           {
@@ -6683,7 +6683,7 @@
       },
       "Direct": {
         "priorSessions": 23601,
-        "sessions": 20969
+        "sessions": 21049
       },
       "Email": {
         "priorSessions": 4,
@@ -6691,7 +6691,7 @@
       },
       "Organic Search": {
         "priorSessions": 4909,
-        "sessions": 3898
+        "sessions": 3924
       },
       "Organic Social": {
         "priorSessions": 7,
@@ -6707,7 +6707,7 @@
       },
       "Unassigned": {
         "priorSessions": 1618,
-        "sessions": 1335
+        "sessions": 1346
       }
     },
     "ctrAnomalies": [
@@ -6811,16 +6811,16 @@
         "url": "https://blog.aspose.com/cells/online-excel-password-remover/"
       },
       {
-        "changePercent": -36.0,
+        "changePercent": -36.2,
         "priorSessions": 1788,
-        "sessions": 1144,
+        "sessions": 1140,
         "title": "Free Online Ruler - A Digital Solution for Accurate Measurements",
         "url": "https://blog.aspose.com/drawing/online-ruler-cm-scale/"
       },
       {
-        "changePercent": -22.0,
+        "changePercent": -21.9,
         "priorSessions": 1230,
-        "sessions": 960,
+        "sessions": 961,
         "title": "Convert KML to SHP Online - Free Converter",
         "url": "https://blog.aspose.com/gis/convert-kml-to-shp-online/"
       },
@@ -6878,7 +6878,7 @@
     "gscRawImpressions": 3729916,
     "gscRawPriorClicks": 110311,
     "gscRawPriorImpressions": 4863823,
-    "refreshedAt": "2026-10-22T08:42:26.595131+00:00",
+    "refreshedAt": "2026-10-22T09:53:22.067518+00:00",
     "risingQueries": [
       {
         "growthPercent": 42100.0,
@@ -7075,7 +7075,7 @@
     "channels": {
       "Direct": {
         "priorSessions": 5,
-        "sessions": 42
+        "sessions": 43
       },
       "Unassigned": {
         "priorSessions": 1,
@@ -7096,7 +7096,7 @@
     "gscRawImpressions": 308,
     "gscRawPriorClicks": 1,
     "gscRawPriorImpressions": 266,
-    "refreshedAt": "2026-10-22T08:42:29.530026+00:00",
+    "refreshedAt": "2026-10-22T09:53:24.079267+00:00",
     "risingQueries": [],
     "status": "ok",
     "topOpportunities": []
@@ -7236,7 +7236,7 @@
         "ga4": {
           "postCount": 192,
           "priorSessions": 782,
-          "sessions": 1019
+          "sessions": 1020
         },
         "gscOpportunities": [
           {
@@ -7285,7 +7285,7 @@
         "ga4": {
           "postCount": 98,
           "priorSessions": 2753,
-          "sessions": 1512
+          "sessions": 1514
         },
         "gscOpportunities": [
           {
@@ -8110,7 +8110,7 @@
       },
       "Direct": {
         "priorSessions": 1707,
-        "sessions": 865
+        "sessions": 869
       },
       "Display": {
         "priorSessions": 1,
@@ -8118,7 +8118,7 @@
       },
       "Organic Search": {
         "priorSessions": 759,
-        "sessions": 517
+        "sessions": 523
       },
       "Organic Social": {
         "priorSessions": 6,
@@ -8130,7 +8130,7 @@
       },
       "Unassigned": {
         "priorSessions": 75,
-        "sessions": 59
+        "sessions": 62
       }
     },
     "ctrAnomalies": [
@@ -8234,16 +8234,16 @@
         "url": "https://blog.conholdate.com/total/unlock-powerpoint-files-online/"
       },
       {
-        "changePercent": -51.3,
+        "changePercent": -51.1,
         "priorSessions": 530,
-        "sessions": 258,
+        "sessions": 259,
         "title": "Convert ZIP to JPG Online",
         "url": "https://blog.conholdate.com/total/convert-zip-to-jpg-online/"
       },
       {
-        "changePercent": -57.7,
+        "changePercent": -57.5,
         "priorSessions": 388,
-        "sessions": 164,
+        "sessions": 165,
         "title": "Convert Image to Visio Online",
         "url": "https://blog.conholdate.com/total/convert-image-to-visio-online/"
       },
@@ -8301,7 +8301,7 @@
     "gscRawImpressions": 359866,
     "gscRawPriorClicks": 12252,
     "gscRawPriorImpressions": 458715,
-    "refreshedAt": "2026-10-22T08:42:37.807924+00:00",
+    "refreshedAt": "2026-10-22T09:53:30.759541+00:00",
     "risingQueries": [
       {
         "growthPercent": 1500.0,
@@ -8506,7 +8506,7 @@
         "ga4": {
           "postCount": 10,
           "priorSessions": 31,
-          "sessions": 35
+          "sessions": 36
         },
         "gscOpportunities": []
       },
@@ -8643,7 +8643,7 @@
         "ga4": {
           "postCount": 63,
           "priorSessions": 330,
-          "sessions": 229
+          "sessions": 230
         },
         "gscOpportunities": [
           {
@@ -9011,7 +9011,7 @@
         "ga4": {
           "postCount": 14,
           "priorSessions": 74,
-          "sessions": 79
+          "sessions": 80
         },
         "gscOpportunities": [
           {
@@ -9225,11 +9225,11 @@
       },
       "Direct": {
         "priorSessions": 3886,
-        "sessions": 2988
+        "sessions": 3019
       },
       "Organic Search": {
         "priorSessions": 149,
-        "sessions": 114
+        "sessions": 115
       },
       "Organic Social": {
         "priorSessions": 8,
@@ -9241,7 +9241,7 @@
       },
       "Unassigned": {
         "priorSessions": 92,
-        "sessions": 88
+        "sessions": 92
       }
     },
     "ctrAnomalies": [
@@ -9412,7 +9412,7 @@
     "gscRawImpressions": 226983,
     "gscRawPriorClicks": 4932,
     "gscRawPriorImpressions": 305825,
-    "refreshedAt": "2026-10-22T08:41:36.103430+00:00",
+    "refreshedAt": "2026-10-22T09:52:44.982296+00:00",
     "risingQueries": [
       {
         "growthPercent": 900.0,
