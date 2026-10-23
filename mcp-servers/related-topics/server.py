@@ -11,6 +11,7 @@ import re
 import sys
 import requests
 from collections import Counter
+from datetime import date
 import math
 
 # Initialize FastMCP server
@@ -382,6 +383,55 @@ async def fetch_article_content(url: str, timeout: int = 6) -> Optional[str]:
     return None
 
 # -------------------------
+# Publish-date gate
+# -------------------------
+# Real complaint, confirmed live: candidates here are ranked purely by
+# topic/language similarity with zero recency weighting, so a decade-old
+# post can outrank newer, equally relevant content (e.g. a 2018 release-
+# notes post got linked from a 2026 article). Requested floor: posts
+# published after December 2020.
+MIN_PUBLISH_DATE = date(2021, 1, 1)
+
+_publish_date_cache: Dict[str, Optional[date]] = {}
+
+
+async def fetch_publish_date(url: str, timeout: int = 6) -> Optional[date]:
+    """Best-effort publish date for a live post URL, from its
+    <meta property="article:published_time"> tag. Returns None (not an
+    error) if the page is unreachable or the tag is missing - callers
+    must fail OPEN on None, never exclude a candidate just because its
+    date couldn't be determined, same philosophy as the rest of this
+    server's best-effort scoring."""
+    if url in _publish_date_cache:
+        return _publish_date_cache[url]
+
+    result = None
+    try:
+        async with httpx.AsyncClient() as client:
+            response = await client.get(url, timeout=timeout, follow_redirects=True)
+            if response.status_code == 200:
+                soup = BeautifulSoup(response.text, 'html.parser')
+                meta = soup.find('meta', attrs={'property': 'article:published_time'})
+                if meta and meta.get('content'):
+                    match = re.match(r"(\d{4}-\d{2}-\d{2})", meta['content'])
+                    if match:
+                        result = date.fromisoformat(match.group(1))
+    except Exception as e:
+        print(f"[fetch_publish_date] Error for {url}: {e}", file=sys.stderr)
+
+    _publish_date_cache[url] = result
+    return result
+
+
+async def is_recent_enough(url: str) -> bool:
+    """True if published on/after MIN_PUBLISH_DATE, OR if the date
+    couldn't be determined at all (fail-open - see fetch_publish_date)."""
+    published = await fetch_publish_date(url)
+    if published is None:
+        return True
+    return published >= MIN_PUBLISH_DATE
+
+# -------------------------
 # MCP tool
 # -------------------------
 @mcp.tool()
@@ -439,6 +489,13 @@ async def get_category_related_posts(
         # Skip if topic similarity is too low
         if topic_sim < min_topic_score:
             print(f"[TIER1] Skipping '{article['title']}' - topic score too low: {topic_sim:.3f}", file=sys.stderr)
+            continue
+
+        # Skip if too old - checked only after the cheap topic-similarity
+        # filter above, so we only fetch a date for articles that already
+        # cleared that bar (bounded cost, not one fetch per scanned article).
+        if not await is_recent_enough(article['url']):
+            print(f"[TIER1] Skipping '{article['title']}' - older than {MIN_PUBLISH_DATE}", file=sys.stderr)
             continue
 
         # Detect language from metadata
@@ -562,6 +619,10 @@ async def get_category_related_posts(
         if article['topic_similarity'] < min_topic_score:
             continue
 
+        # Skip if too old - same floor as tier 1.
+        if not await is_recent_enough(article['url']):
+            continue
+
         # Try content check
         content = await fetch_article_content(article['url'])
         if content:
@@ -587,7 +648,16 @@ async def get_category_related_posts(
         
         # Get all remaining candidates (including those below min_topic_score)
         remaining_candidates = [a for a in candidates if a['url'] not in {r['url'] for r in final_results}]
-        
+
+        # Even this forced last-resort fallback still respects the date
+        # floor - returning fewer related posts is better than linking
+        # something pre-2021 just to hit required_count.
+        date_filtered = []
+        for article in remaining_candidates:
+            if await is_recent_enough(article['url']):
+                date_filtered.append(article)
+        remaining_candidates = date_filtered
+
         # Calculate composite scores for remaining articles (using metadata only to save time)
         for article in remaining_candidates:
             if 'composite_score' not in article:
