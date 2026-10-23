@@ -459,7 +459,7 @@
         "ga4": {
           "postCount": 19,
           "priorSessions": 149,
-          "sessions": 160
+          "sessions": 161
         },
         "gscOpportunities": [
           {
@@ -1222,11 +1222,11 @@
       },
       "Direct": {
         "priorSessions": 3914,
-        "sessions": 3179
+        "sessions": 3193
       },
       "Organic Search": {
         "priorSessions": 126,
-        "sessions": 97
+        "sessions": 98
       },
       "Organic Social": {
         "priorSessions": 7,
@@ -1238,7 +1238,7 @@
       },
       "Unassigned": {
         "priorSessions": 224,
-        "sessions": 134
+        "sessions": 136
       }
     },
     "ctrAnomalies": [
@@ -1409,7 +1409,7 @@
     "gscRawImpressions": 181996,
     "gscRawPriorClicks": 3390,
     "gscRawPriorImpressions": 210246,
-    "refreshedAt": "2026-10-23T09:46:34.672278+00:00",
+    "refreshedAt": "2026-10-23T11:07:27.820763+00:00",
     "risingQueries": [
       {
         "growthPercent": 5075.0,
@@ -6667,7 +6667,7 @@
       },
       "Direct": {
         "priorSessions": 24818,
-        "sessions": 19932
+        "sessions": 20003
       },
       "Email": {
         "priorSessions": 4,
@@ -6675,7 +6675,7 @@
       },
       "Organic Search": {
         "priorSessions": 4823,
-        "sessions": 3909
+        "sessions": 3951
       },
       "Organic Social": {
         "priorSessions": 8,
@@ -6687,11 +6687,11 @@
       },
       "Referral": {
         "priorSessions": 265,
-        "sessions": 176
+        "sessions": 177
       },
       "Unassigned": {
         "priorSessions": 1394,
-        "sessions": 1354
+        "sessions": 1368
       }
     },
     "ctrAnomalies": [
@@ -6862,7 +6862,7 @@
     "gscRawImpressions": 3718224,
     "gscRawPriorClicks": 109544,
     "gscRawPriorImpressions": 4835244,
-    "refreshedAt": "2026-10-23T09:47:05.594659+00:00",
+    "refreshedAt": "2026-10-23T11:07:51.664621+00:00",
     "risingQueries": [
       {
         "growthPercent": 42100.0,
@@ -7080,7 +7080,7 @@
     "gscRawImpressions": 312,
     "gscRawPriorClicks": 2,
     "gscRawPriorImpressions": 264,
-    "refreshedAt": "2026-10-23T09:47:08.244231+00:00",
+    "refreshedAt": "2026-10-23T11:07:54.630785+00:00",
     "risingQueries": [],
     "status": "ok",
     "topOpportunities": []
@@ -7091,7 +7091,7 @@
         "ga4": {
           "postCount": 215,
           "priorSessions": 838,
-          "sessions": 825
+          "sessions": 826
         },
         "gscOpportunities": [
           {
@@ -7220,7 +7220,7 @@
         "ga4": {
           "postCount": 192,
           "priorSessions": 782,
-          "sessions": 1029
+          "sessions": 1030
         },
         "gscOpportunities": [
           {
@@ -7269,7 +7269,7 @@
         "ga4": {
           "postCount": 99,
           "priorSessions": 2726,
-          "sessions": 1525
+          "sessions": 1526
         },
         "gscOpportunities": [
           {
@@ -8078,7 +8078,7 @@
       },
       "Direct": {
         "priorSessions": 1746,
-        "sessions": 754
+        "sessions": 829
       },
       "Display": {
         "priorSessions": 2,
@@ -8086,7 +8086,7 @@
       },
       "Organic Search": {
         "priorSessions": 728,
-        "sessions": 516
+        "sessions": 521
       },
       "Organic Social": {
         "priorSessions": 3,
@@ -8098,7 +8098,7 @@
       },
       "Unassigned": {
         "priorSessions": 66,
-        "sessions": 62
+        "sessions": 66
       }
     },
     "ctrAnomalies": [
@@ -8209,9 +8209,9 @@
         "url": "https://blog.conholdate.com/total/convert-zip-to-jpg-online/"
       },
       {
-        "changePercent": -55.5,
+        "changePercent": -55.2,
         "priorSessions": 384,
-        "sessions": 171,
+        "sessions": 172,
         "title": "Convert Image to Visio Online",
         "url": "https://blog.conholdate.com/total/convert-image-to-visio-online/"
       },
@@ -8269,7 +8269,7 @@
     "gscRawImpressions": 361386,
     "gscRawPriorClicks": 12067,
     "gscRawPriorImpressions": 454619,
-    "refreshedAt": "2026-10-23T09:47:15.811864+00:00",
+    "refreshedAt": "2026-10-23T11:08:05.249451+00:00",
     "risingQueries": [
       {
         "growthPercent": 1500.0,
@@ -9193,11 +9193,11 @@
       },
       "Direct": {
         "priorSessions": 3992,
-        "sessions": 2773
+        "sessions": 2790
       },
       "Organic Search": {
         "priorSessions": 141,
-        "sessions": 126
+        "sessions": 128
       },
       "Organic Social": {
         "priorSessions": 8,
@@ -9209,7 +9209,7 @@
       },
       "Unassigned": {
         "priorSessions": 95,
-        "sessions": 89
+        "sessions": 94
       }
     },
     "ctrAnomalies": [
@@ -9380,7 +9380,7 @@
     "gscRawImpressions": 226501,
     "gscRawPriorClicks": 4859,
     "gscRawPriorImpressions": 303995,
-    "refreshedAt": "2026-10-23T09:46:24.349520+00:00",
+    "refreshedAt": "2026-10-23T11:07:15.786795+00:00",
     "risingQueries": [
       {
         "growthPercent": 950.0,
