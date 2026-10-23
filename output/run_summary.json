@@ -1,16 +1,36 @@
 {
-  "source_url": "https://releases.aspose.com/imaging/python-net/release-notes/2026/aspose-imaging-for-python-net-26-10-release-notes/",
+  "source_url": "https://releases.aspose.com/medical/net/release-notes/2026/aspose-medical-for-net-26-10-release-notes/",
   "source_type": "release-notes",
   "publication_readiness": "draft_ready",
   "blocker_reason": null,
   "topics_generated": [
-    "IMAGINGPYTHONNET-556 Add proper checking if a given TIFF file is supported (including XIF)",
-    "IMAGINGPYTHONNET-555 Improve AVIF processing performance and memory load",
-    "IMAGINGPYTHONNET-554 Fix inconsistent metadata removal from Tiff: TiffOptions expose metadata properties apart from Exif and Xmp metadata",
-    "IMAGINGPYTHONNET-553 Exception on AVIF load",
-    "IMAGINGPYTHONNET-552 Support the clipping operation in RasterImageExporter"
+    "Searching for Studies (QIDO-RS)",
+    "Storing DICOM Instances (STOW-RS)",
+    "Retrieving a Study (WADO-RS)",
+    "Building a DICOMweb Server Application (Studies Service)",
+    "Building a DICOMweb Application with UPS Worklist Service",
+    "Sending a Custom DICOMweb Transaction (Low\u2011Level API)",
+    "Creating DICOMweb Content from Files and Datasets",
+    "Parsing DICOM Tags with Tag.TryParse",
+    "Deferred Value Initialization for DICOM Serialization",
+    "UPS Notification WebSocket Support"
   ],
   "rejected_sections": [
-    "Added Method: aspose.imaging.exif.ExifData.clone() / aspose.imaging.exif.JpegExifData.clone()"
+    "Major Features",
+    "Public API Overview",
+    "API Changes Summary",
+    "New Namespaces",
+    "New Classes and Types",
+    "New Interfaces",
+    "New Methods",
+    "New Properties",
+    "Removed Members",
+    "DICOMweb Client (duplicate section)",
+    "DICOMweb Server Application (duplicate section)",
+    "Low-Level DICOMweb Client Requests (duplicate section)",
+    "DICOMweb Content Helpers (duplicate section)",
+    "Tag.TryParse (duplicate section)",
+    "Deferred Value Initialization for DICOM Serialization (duplicate section)",
+    "UPS Notification WebSocket Support (duplicate section)"
   ]
 }

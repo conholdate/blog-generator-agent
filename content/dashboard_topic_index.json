@@ -190,6 +190,11 @@
       "date": "Wed, 30 Sep 2026 13:27:44 +0000",
       "title": "Convert DOCX to PNG in Node.JS",
       "url": "https://blog.aspose.cloud/3d/convert-docx-to-png-in-nodejs/"
+    },
+    {
+      "date": "Fri, 23 Oct 2026 12:30:59 +0000",
+      "title": "Convert JSON to XLSX in Node.JS",
+      "url": "https://blog.aspose.cloud/3d/convert-json-to-xlsx-in-nodejs/"
     }
   ],
   "aspose.cloud|Aspose.3D|Python": [
@@ -741,6 +746,11 @@
       "date": "2026-09-14",
       "title": "Convert HTML to JPG in Node.JS",
       "url": "https://blog.aspose.cloud/cad/convert-html-to-jpg-in-nodejs/"
+    },
+    {
+      "date": "Fri, 23 Oct 2026 07:47:37 +0000",
+      "title": "Convert MPP to XLSX in Node.JS",
+      "url": "https://blog.aspose.cloud/cad/convert-mpp-to-xlsx-in-nodejs/"
     }
   ],
   "aspose.cloud|Aspose.Cells|.NET": [
@@ -2961,6 +2971,11 @@
       "date": "2018-12-24",
       "title": "Pass Through Numeration in Multiple Answer Sheets with Aspose.OMR Cloud 18.12",
       "url": "https://blog.aspose.cloud/omr/pass-through-numeration-in-multiple-answer-sheets-with-aspose.omr-cloud-18.12/"
+    },
+    {
+      "date": "Mon, 19 Oct 2026 14:28:27 +0000",
+      "title": "Convert DOCX to PNG in C#",
+      "url": "https://blog.aspose.cloud/omr/convert-docx-to-png-in-csharp/"
     }
   ],
   "aspose.cloud|Aspose.OMR|Go": [
@@ -4384,6 +4399,11 @@
       "date": "Tue, 06 Oct 2026 07:31:20 +0000",
       "title": "Add Header/Footer to Powerpoint Presentations in Python",
       "url": "https://blog.aspose.cloud/slides/add-headerfooter-to-powerpoint-presentations-in-python/"
+    },
+    {
+      "date": "Wed, 21 Oct 2026 12:49:46 +0000",
+      "title": "Learn How to Reorder Shuffle and Reorganize PDF Pages in Python",
+      "url": "https://blog.aspose.cloud/slides/learn-how-to-reorder-shuffle-and-reorganize-pdf-pages-in-python/"
     }
   ],
   "aspose.cloud|Aspose.Slides|Ruby": [
@@ -44689,6 +44709,11 @@
       "date": "Thu, 15 Oct 2026 19:30:28 +0000",
       "title": "Convert Text to QR Code in Java",
       "url": "https://blog.conholdate.com/total/convert-text-to-qr-code-in-java/"
+    },
+    {
+      "date": "Wed, 21 Oct 2026 19:48:01 +0000",
+      "title": "Convert TIFF to JPG in Java",
+      "url": "https://blog.conholdate.com/total/convert-tiff-to-jpg-in-java/"
     }
   ],
   "conholdate.com|Conholdate.Total|Node.js": [
@@ -46004,6 +46029,11 @@
       "date": "Mon, 05 Oct 2026 16:29:28 +0000",
       "title": "Create Sticky Notes on Word Pages in Node.JS",
       "url": "https://blog.groupdocs.cloud/annotation/create-sticky-notes-on-word-pages-in-nodejs/"
+    },
+    {
+      "date": "Wed, 21 Oct 2026 13:18:44 +0000",
+      "title": "Remove Annotation Objects from PDF with REST in Node.JS",
+      "url": "https://blog.groupdocs.cloud/annotation/remove-annotation-objects-from-pdf-with-rest-in-nodejs/"
     }
   ],
   "groupdocs.cloud|GroupDocs.Annotation|PHP": [
@@ -48106,6 +48136,11 @@
       "date": "Fri, 25 Sep 2026 09:41:12 +0000",
       "title": "Split PDF into Multiple PDF in Node.JS",
       "url": "https://blog.groupdocs.cloud/merger/split-pdf-into-multiple-pdf-in-nodejs/"
+    },
+    {
+      "date": "Mon, 19 Oct 2026 15:04:19 +0000",
+      "title": "Merge PDF in Node.JS",
+      "url": "https://blog.groupdocs.cloud/merger/merge-pdf-in-nodejs/"
     }
   ],
   "groupdocs.cloud|GroupDocs.Merger|Python": [
