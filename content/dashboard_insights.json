@@ -426,7 +426,7 @@
         "ga4": {
           "postCount": 4,
           "priorSessions": 7,
-          "sessions": 26
+          "sessions": 27
         },
         "gscOpportunities": []
       },
@@ -1113,7 +1113,7 @@
         "ga4": {
           "postCount": 18,
           "priorSessions": 119,
-          "sessions": 39
+          "sessions": 40
         },
         "gscOpportunities": []
       },
@@ -1206,11 +1206,11 @@
       },
       "Direct": {
         "priorSessions": 4054,
-        "sessions": 2498
+        "sessions": 2527
       },
       "Organic Search": {
         "priorSessions": 115,
-        "sessions": 99
+        "sessions": 102
       },
       "Organic Social": {
         "priorSessions": 9,
@@ -1222,7 +1222,7 @@
       },
       "Unassigned": {
         "priorSessions": 218,
-        "sessions": 142
+        "sessions": 143
       }
     },
     "ctrAnomalies": [
@@ -1394,8 +1394,8 @@
     "gscRawPriorClicks": 3317,
     "gscRawPriorImpressions": 208107,
     "organicPriorSessions": 1624,
-    "organicSessions": 1537,
-    "refreshedAt": "2026-10-25T09:53:20.723719+00:00",
+    "organicSessions": 1540,
+    "refreshedAt": "2026-10-25T11:45:17.006917+00:00",
     "risingQueries": [
       {
         "growthPercent": 5225.0,
@@ -1617,7 +1617,7 @@
         "ga4": {
           "postCount": 23,
           "priorSessions": 426,
-          "sessions": 362
+          "sessions": 357
         },
         "gscOpportunities": [
           {
@@ -1974,7 +1974,7 @@
         "ga4": {
           "postCount": 21,
           "priorSessions": 170,
-          "sessions": 327
+          "sessions": 321
         },
         "gscOpportunities": [
           {
@@ -2143,8 +2143,8 @@
       },
       "aspose.com|Aspose.Cells|Java": {
         "ga4": {
-          "postCount": 82,
-          "priorSessions": 455,
+          "postCount": 83,
+          "priorSessions": 460,
           "sessions": 539
         },
         "gscOpportunities": [
@@ -2422,7 +2422,7 @@
         "ga4": {
           "postCount": 29,
           "priorSessions": 990,
-          "sessions": 732
+          "sessions": 738
         },
         "gscOpportunities": [
           {
@@ -2671,7 +2671,7 @@
         "ga4": {
           "postCount": 10,
           "priorSessions": 1827,
-          "sessions": 1264
+          "sessions": 1265
         },
         "gscOpportunities": [
           {
@@ -3652,7 +3652,7 @@
         "ga4": {
           "postCount": 12,
           "priorSessions": 1699,
-          "sessions": 1205
+          "sessions": 1206
         },
         "gscOpportunities": [
           {
@@ -3867,9 +3867,9 @@
       },
       "aspose.com|Aspose.HTML|.NET": {
         "ga4": {
-          "postCount": 26,
-          "priorSessions": 150,
-          "sessions": 273
+          "postCount": 27,
+          "priorSessions": 155,
+          "sessions": 278
         },
         "gscOpportunities": [
           {
@@ -4017,7 +4017,7 @@
         "ga4": {
           "postCount": 33,
           "priorSessions": 185,
-          "sessions": 249
+          "sessions": 254
         },
         "gscOpportunities": [
           {
@@ -5795,7 +5795,7 @@
         "ga4": {
           "postCount": 9,
           "priorSessions": 100,
-          "sessions": 55
+          "sessions": 50
         },
         "gscOpportunities": [
           {
@@ -6177,7 +6177,7 @@
         "ga4": {
           "postCount": 94,
           "priorSessions": 625,
-          "sessions": 955
+          "sessions": 956
         },
         "gscOpportunities": [
           {
@@ -6653,7 +6653,7 @@
       },
       "Direct": {
         "priorSessions": 26087,
-        "sessions": 17448
+        "sessions": 17587
       },
       "Display": {
         "priorSessions": 0,
@@ -6665,7 +6665,7 @@
       },
       "Organic Search": {
         "priorSessions": 4426,
-        "sessions": 3837
+        "sessions": 3877
       },
       "Organic Social": {
         "priorSessions": 8,
@@ -6681,7 +6681,7 @@
       },
       "Unassigned": {
         "priorSessions": 1216,
-        "sessions": 1582
+        "sessions": 1593
       }
     },
     "ctrAnomalies": [
@@ -6787,7 +6787,7 @@
       {
         "changePercent": -33.4,
         "priorSessions": 1726,
-        "sessions": 1149,
+        "sessions": 1150,
         "title": "Free Online Ruler - A Digital Solution for Accurate Measurements",
         "url": "https://blog.aspose.com/drawing/online-ruler-cm-scale/"
       },
@@ -6799,9 +6799,9 @@
         "url": "https://blog.aspose.com/barcode/step-by-step-guide-to-read-qr-code-from-image-in-python/"
       },
       {
-        "changePercent": -18.2,
+        "changePercent": -18.1,
         "priorSessions": 1213,
-        "sessions": 992,
+        "sessions": 993,
         "title": "Convert KML to SHP Online - Free Converter",
         "url": "https://blog.aspose.com/gis/convert-kml-to-shp-online/"
       },
@@ -6853,8 +6853,8 @@
     "gscRawPriorClicks": 108098,
     "gscRawPriorImpressions": 4782725,
     "organicPriorSessions": 81357,
-    "organicSessions": 53467,
-    "refreshedAt": "2026-10-25T09:53:42.232758+00:00",
+    "organicSessions": 53478,
+    "refreshedAt": "2026-10-25T11:45:45.010447+00:00",
     "risingQueries": [
       {
         "growthPercent": 42100.0,
@@ -7074,7 +7074,7 @@
     "gscRawPriorImpressions": 265,
     "organicPriorSessions": 4,
     "organicSessions": 3,
-    "refreshedAt": "2026-10-25T09:53:46.713467+00:00",
+    "refreshedAt": "2026-10-25T11:45:48.273154+00:00",
     "risingQueries": [],
     "status": "ok",
     "topOpportunities": []
@@ -7083,9 +7083,9 @@
     "buckets": {
       "conholdate.com|Conholdate.Total|.NET": {
         "ga4": {
-          "postCount": 215,
+          "postCount": 216,
           "priorSessions": 833,
-          "sessions": 824
+          "sessions": 825
         },
         "gscOpportunities": [
           {
@@ -7230,7 +7230,7 @@
         "ga4": {
           "postCount": 192,
           "priorSessions": 778,
-          "sessions": 1033
+          "sessions": 1034
         },
         "gscOpportunities": [
           {
@@ -8080,7 +8080,7 @@
       },
       "Direct": {
         "priorSessions": 1424,
-        "sessions": 1466
+        "sessions": 1482
       },
       "Display": {
         "priorSessions": 3,
@@ -8088,7 +8088,7 @@
       },
       "Organic Search": {
         "priorSessions": 647,
-        "sessions": 521
+        "sessions": 528
       },
       "Organic Social": {
         "priorSessions": 7,
@@ -8100,7 +8100,7 @@
       },
       "Unassigned": {
         "priorSessions": 75,
-        "sessions": 99
+        "sessions": 100
       }
     },
     "ctrAnomalies": [
@@ -8272,8 +8272,8 @@
     "gscRawPriorClicks": 11706,
     "gscRawPriorImpressions": 448334,
     "organicPriorSessions": 12170,
-    "organicSessions": 7277,
-    "refreshedAt": "2026-10-25T09:53:54.177888+00:00",
+    "organicSessions": 7287,
+    "refreshedAt": "2026-10-25T11:45:56.379585+00:00",
     "risingQueries": [
       {
         "growthPercent": 1066.7,
@@ -8648,7 +8648,7 @@
         "ga4": {
           "postCount": 55,
           "priorSessions": 238,
-          "sessions": 236
+          "sessions": 237
         },
         "gscOpportunities": [
           {
@@ -9245,11 +9245,11 @@
       },
       "Direct": {
         "priorSessions": 4099,
-        "sessions": 2826
+        "sessions": 2845
       },
       "Organic Search": {
         "priorSessions": 134,
-        "sessions": 132
+        "sessions": 133
       },
       "Organic Social": {
         "priorSessions": 1,
@@ -9261,7 +9261,7 @@
       },
       "Unassigned": {
         "priorSessions": 102,
-        "sessions": 143
+        "sessions": 145
       }
     },
     "ctrAnomalies": [
@@ -9433,8 +9433,8 @@
     "gscRawPriorClicks": 4726,
     "gscRawPriorImpressions": 300656,
     "organicPriorSessions": 2257,
-    "organicSessions": 1408,
-    "refreshedAt": "2026-10-25T09:53:08.740774+00:00",
+    "organicSessions": 1409,
+    "refreshedAt": "2026-10-25T11:45:07.046038+00:00",
     "risingQueries": [
       {
         "growthPercent": 1100.0,
