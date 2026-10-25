@@ -122,7 +122,7 @@ def _fetch_window_channel_sessions(
     return sessions_by_channel
 
 
-def fetch_channel_sessions(brand: str, property_id: str) -> dict[str, dict]:
+def fetch_channel_sessions(brand: str, property_id: str, window_days: int | None = None) -> dict[str, dict]:
     """{channel_group: {"sessions": int, "priorSessions": int}} for one
     brand's blog subdomain - the Organic/Referral/Social/... breakdown for
     the Analytics dashboard widget. A separate, brand-level-only query
@@ -130,21 +130,27 @@ def fetch_channel_sessions(brand: str, property_id: str) -> dict[str, dict]:
     breakdown is only needed as a brand-wide total, not per post, so this
     avoids a much larger per-page-per-channel result for no actual use.
 
-    Uses GA4_CHANNEL_WINDOW_DAYS (a week), not GA4_WINDOW_DAYS (90 days,
-    used by fetch_page_sessions for the per-bucket insights panel) -
-    deliberately shorter so the Analytics widget reads as "this week's
-    traffic" rather than a 90-day average that barely moves day to day."""
+    window_days defaults to GA4_CHANNEL_WINDOW_DAYS (a week) - deliberately
+    shorter than GA4_WINDOW_DAYS so the Analytics widget reads as "this
+    week's traffic" rather than a 90-day average that barely moves day to
+    day. Callers that want the Organic Search figure specifically (the
+    Analytics page's headline stat) pass GA4_WINDOW_DAYS explicitly - this
+    is the SAME hostname-filtered, zero-other-filtering query either way,
+    which is what makes it 1:1 verifiable against GA4's own UI (unlike
+    fetch_page_sessions below, which also excludes translated/non-product
+    pages and only counts known-indexed posts)."""
     hostname = f"blog.{brand}"
     client = BetaAnalyticsDataClient(credentials=_credentials())
 
+    days = window_days if window_days is not None else settings.GA4_CHANNEL_WINDOW_DAYS
     recent_end = date.today()
-    recent_start = recent_end - timedelta(days=settings.GA4_CHANNEL_WINDOW_DAYS)
+    recent_start = recent_end - timedelta(days=days)
     prior_end = recent_start - timedelta(days=1)
-    prior_start = prior_end - timedelta(days=settings.GA4_CHANNEL_WINDOW_DAYS)
+    prior_start = prior_end - timedelta(days=days)
 
     recent = _fetch_window_channel_sessions(client, property_id, hostname, recent_start, recent_end)
     prior = _fetch_window_channel_sessions(client, property_id, hostname, prior_start, prior_end)
-    _log(f"{hostname}: {len(recent)} channels (recent) / {len(prior)} (prior)")
+    _log(f"{hostname}: {len(recent)} channels (recent) / {len(prior)} (prior), window={days}d")
 
     channels = set(recent) | set(prior)
     return {

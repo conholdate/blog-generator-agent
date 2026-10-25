@@ -57,6 +57,17 @@ def collect_brand_insights(brand: str, property_id: str, previous_entry: dict | 
             page_sessions, build_url_title_map(topic_index, brand), settings.GA4_DECLINE_TOP_N
         )
 
+        # Organic Search only, same 90-day window as everything else on the
+        # Analytics page - the dashboard's headline GA4 stat. Deliberately
+        # the SAME hostname-filtered, zero-other-filtering channel query as
+        # `channels` above (just a longer window), not page_sessions - that
+        # one also excludes translated/non-product pages and only counts
+        # known-indexed posts, which makes it accurate but NOT reproducible
+        # by hand in the GA4 UI. This one is.
+        organic_90d = ga4_client.fetch_channel_sessions(
+            brand, property_id, window_days=settings.GA4_WINDOW_DAYS
+        ).get("Organic Search", {"sessions": 0, "priorSessions": 0})
+
         signals = gsc_selector.fetch_insights_signals(
             brand, top_n_opportunities=settings.GA4_MAX_OPPORTUNITIES_PER_BRAND
         )
@@ -115,6 +126,8 @@ def collect_brand_insights(brand: str, property_id: str, previous_entry: dict | 
             "gscRawClicks": raw_totals["clicks"],
             "gscRawPriorImpressions": raw_totals["priorImpressions"],
             "gscRawPriorClicks": raw_totals["priorClicks"],
+            "organicSessions": organic_90d["sessions"],
+            "organicPriorSessions": organic_90d["priorSessions"],
         }
     except Exception as exc:
         _log(f"{brand}: collection failed ({exc!r}), keeping previous snapshot if any")
@@ -135,4 +148,6 @@ def collect_brand_insights(brand: str, property_id: str, previous_entry: dict | 
             "gscRawClicks": 0,
             "gscRawPriorImpressions": 0,
             "gscRawPriorClicks": 0,
+            "organicSessions": 0,
+            "organicPriorSessions": 0,
         }
