@@ -351,7 +351,7 @@
   "APIReferenceURL" : "https://reference.aspose.com/page/java/",
   "FreeAppsURL" : "https://products.aspose.app/page",
   "ForumsURL" : "https://forum.aspose.com/c/page/39",
-  "InstallCommand" : "<repository>\n  <id>AsposeJavaAPI</id>\n  <name>Aspose Java API</name>\n  <url>https://repository.aspose.com/repo/</url>\n</repository>\n<dependency>\n<groupId>com.aspose</groupId>\n<artifactId>aspose-page</artifactId>\n<version>26.9</version>\n</dependency>",
+  "InstallCommand" : "<repository>\n  <id>AsposeJavaAPI</id>\n  <name>Aspose Java API</name>\n  <url>https://repository.aspose.com/repo/</url>\n</repository>\n<dependency>\n<groupId>com.aspose</groupId>\n<artifactId>aspose-page</artifactId>\n<version>26.10</version>\n</dependency>",
   "urlPrefix" : "page",
   "license":"https://purchase.aspose.com/temporary-license/",
   "pricing": "https://purchase.aspose.com/pricing/page/family/"
@@ -1388,7 +1388,7 @@
   "APIReferenceURL" : "https://reference.aspose.com/tex/java/",
   "FreeAppsURL" : "https://products.aspose.app/tex",
   "ForumsURL" : "https://forum.aspose.com/c/tex/47",
-  "InstallCommand" : "<repository>\n  <id>AsposeJavaAPI</id>\n  <name>Aspose Java API</name>\n  <url>https://repository.aspose.com/repo/</url>\n</repository>\n<dependency>\n<groupId>com.aspose</groupId>\n<artifactId>aspose-tex</artifactId>\n<version>26.8</version>\n</dependency>",
+  "InstallCommand" : "<repository>\n  <id>AsposeJavaAPI</id>\n  <name>Aspose Java API</name>\n  <url>https://repository.aspose.com/repo/</url>\n</repository>\n<dependency>\n<groupId>com.aspose</groupId>\n<artifactId>aspose-tex</artifactId>\n<version>26.10</version>\n</dependency>",
   "urlPrefix" : "tex",
   "license":"https://purchase.aspose.com/temporary-license/",
   "pricing": "https://purchase.aspose.com/pricing/tex/family/"
@@ -2663,7 +2663,7 @@
   "APIReferenceURL" : "https://reference.aspose.com/font/java/",
   "FreeAppsURL" : "https://products.aspose.app/font",
   "ForumsURL" : "https://forum.aspose.com/c/font/41",
-  "InstallCommand" : "<repository>\n  <id>AsposeJavaAPI</id>\n  <name>Aspose Java API</name>\n  <url>https://repository.aspose.com/repo/</url>\n</repository>\n<dependency>\n<groupId>com.aspose</groupId>\n<artifactId>aspose-font</artifactId>\n<version>26.8</version>\n</dependency>",
+  "InstallCommand" : "<repository>\n  <id>AsposeJavaAPI</id>\n  <name>Aspose Java API</name>\n  <url>https://repository.aspose.com/repo/</url>\n</repository>\n<dependency>\n<groupId>com.aspose</groupId>\n<artifactId>aspose-font</artifactId>\n<version>26.10</version>\n</dependency>",
   "urlPrefix" : "font",
   "license":"https://purchase.aspose.com/temporary-license/",
   "pricing": "https://purchase.aspose.com/pricing/font/family/"
