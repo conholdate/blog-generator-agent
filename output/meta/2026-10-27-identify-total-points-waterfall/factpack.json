@@ -1,0 +1,91 @@
+{
+  "topic": "Identifying Total Columns in Waterfall Charts with Aspose.Words",
+  "primary_source_url": "https://releases.aspose.com/words/net/release-notes/2026/aspose-words-for-net-26-10-release-notes/",
+  "source_title": "Aspose.Words for .NET 26.10 Release Notes",
+  "sdk_version": "Aspose.Words for .NET 26.10 Release Notes",
+  "main_problem_solved": "Introduces IsTotal(int) method on ChartSeries and IsTotal property on ChartDataPoint, allowing identification of total points in waterfall charts.",
+  "platform": {
+    "platform_key": "net",
+    "platform_name": ".NET",
+    "language": "C#",
+    "language_tag": "csharp",
+    "package_manager": "NuGet",
+    "install_command": "Install-Package Aspose.Words",
+    "product_key": "words",
+    "product_display": "Words",
+    "brand_key": "aspose",
+    "brand_name": "Aspose",
+    "product_full_name": "Aspose.Words",
+    "product_page_url": "https://products.aspose.com/words/net/",
+    "docs_url": "https://docs.aspose.com/words/net/",
+    "api_reference_url": "https://reference.aspose.com/words/net/",
+    "free_apps_url": "https://products.aspose.app/words/family",
+    "license_url": "https://purchase.aspose.com/temporary-license/",
+    "forum_url": "https://forum.aspose.com/c/words/",
+    "blog_domain": "https://blog.aspose.com",
+    "blog_category_url": "https://blog.aspose.com/categories/aspose.words-product-family/"
+  },
+  "source_type": "release_notes",
+  "keyword_analysis": null,
+  "key_steps": [],
+  "code_snippets": [
+    "// For complete examples and data files, please go to https://github.com/aspose-words/Aspose.Words-for-.NET.git.\nDocument doc = new Document();\nDocumentBuilder builder = new DocumentBuilder(doc);\n\n// Insert a Waterfall chart.\nShape shape = builder.InsertChart(ChartType.Waterfall, 450, 450);\nChart chart = shape.Chart;\nchart.Title.Text = \"New Zealand GDP\";\n\n// Delete default generated series.\nchart.Series.Clear();\n\n// Add a series where the start value, the subtotal and the final value are totals.\nChartSeries series = chart.Series.Add(\n    \"New Zealand GDP\",\n    new string[] { \"2018\", \"2019 growth\", \"2020 growth\", \"2020\", \"2021 growth\", \"2022 growth\", \"2022\" },\n    new double[] { 100, 0.57, -0.25, 100.32, 20.22, -2.92, 117.62 },\n    new bool[] { true, false, false, true, false, false, true });\n\n// Print the type of each data point.\nfor (int i = 0; i < series.YValues.Count; i++)\n{\n    if (series.IsTotal(i))\n        Console.WriteLine($\"Data point {i} is Subtotal\");\n    else if (series.YValues[i].DoubleValue > 0)\n        Console.WriteLine($\"Data point {i} is Increase\");\n    else\n        Console.WriteLine($\"Data point {i} is Decrease\");\n}\n\n// The same flag is available on the data point itself.\nConsole.WriteLine($\"Data point 3 is total: {series.DataPoints[3].IsTotal}\");\n\ndoc.Save(ArtifactsDir + \"Charts.ChartSeriesAndDataPointIsTotal.docx\");"
+  ],
+  "limitations": [],
+  "warnings": [
+    "Editorial signal for the pipeline and human reviewer only, not for the article: the code sample matches the vendor's own release notes verbatim but has not been executed, so it is untested. Do not describe it as tested, and do not add any provenance or verification note to the article."
+  ],
+  "related_concepts": [
+    "Document",
+    "DocumentBuilder",
+    "Shape",
+    "Chart",
+    "ChartSeries",
+    "DocumentBuilder.InsertChart",
+    "Chart.Series.Clear",
+    "Chart.Series.Add",
+    "ChartSeries.IsTotal",
+    "ChartSeries.YValues.Count",
+    "ChartSeries.YValues[i].DoubleValue",
+    "ChartSeries.DataPoints",
+    "Document.Save"
+  ],
+  "facts_confirmed_from_source": [
+    "Heading: Added ability to determine whether data point is total in waterfall chart",
+    "Introduces IsTotal(int) method on ChartSeries and IsTotal property on ChartDataPoint, allowing identification of total points in waterfall charts.",
+    "API used: Aspose.Words.Document",
+    "API used: Aspose.Words.DocumentBuilder",
+    "API used: Aspose.Words.Drawing.Charts.Shape",
+    "API used: Aspose.Words.Drawing.Charts.Chart",
+    "API used: Aspose.Words.Drawing.Charts.ChartSeries",
+    "API used: Aspose.Words.Drawing.Charts.ChartSeriesCollection",
+    "API used: Aspose.Words.Drawing.Charts.ChartDataPoint"
+  ],
+  "facts_needing_verification": [],
+  "suggested_article_outline": [
+    "Introduction",
+    "Key Takeaways",
+    "Why this feature matters",
+    "Brief introduction of the API (install + product/docs links)",
+    "Step-by-step tutorial with a code example",
+    "Conclusion",
+    "FAQs",
+    "Get a Free License and Explore More (one section, placed last as the strongest CTA slot)",
+    "See Also (only if related post URLs are supplied)"
+  ],
+  "code_verification": {
+    "language": "C#",
+    "tested": false,
+    "source_verified": true,
+    "syntax_valid": true,
+    "package_name": null,
+    "package_version": null,
+    "os": null,
+    "input_file_used": null,
+    "output_file_generated": null,
+    "errors": [],
+    "notes": "Code sample matches a block scraped verbatim from the product team's release notes page. Static syntax check passed (balanced brackets/quotes). Sandboxed execution against the real vendor SDK is not attempted: these samples reference proprietary licensed assemblies, external input files, and sometimes network services (e.g. a timestamp authority URL) that only exist in the product team's own test environment."
+  },
+  "prerequisites": [],
+  "doc_topics": []
+}
