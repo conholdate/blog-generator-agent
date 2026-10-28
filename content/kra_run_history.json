@@ -181,7 +181,8 @@
     "Convert PDF to PNG in Java",
     "Build a QR Code Generator from Unicode Text in Java",
     "Convert TIFF to JPG in Java",
-    "Convert TXT to XLSX in Java"
+    "Convert TXT to XLSX in Java",
+    "Update Excel CELL Value in Java"
   ],
   "aspose.cloud|aspose.cells|net": [
     "A Guide to Heroku Email Sending Best Practices in C#",
