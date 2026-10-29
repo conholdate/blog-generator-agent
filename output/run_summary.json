@@ -1,20 +1,18 @@
 {
-  "source_url": "https://releases.aspose.com/words/net/release-notes/2026/aspose-words-for-net-26-10-release-notes/",
+  "source_url": "https://releases.aspose.com/pdf/net/release-notes/2026/aspose-pdf-for-net-26-10-release-notes/",
   "source_type": "release-notes",
   "publication_readiness": "draft_ready",
   "blocker_reason": null,
   "topics_generated": [
-    "Integrated Aspose.LLM into Aspose.Words",
-    "Added ability to set fill and line formatting for chart plot area",
-    "Added ability to determine whether data point is total in waterfall chart"
+    "Create Searchable PDFs with OCR",
+    "Preserve Literal Special Symbols During PDF Generation"
   ],
   "rejected_sections": [
-    "Major Features",
-    "Full List of Issues Covering all Changes in this Release",
-    "Handling of spacing before paragraph in layout is aligned to the current MS Word behavior",
+    "Faster PDF to HTML Conversion on .NET 8",
+    "Other Notable Enhancements and Features",
+    "Bug Fixing and Other Changes",
     "Public API and Backward Incompatible Changes",
-    "Integrated Aspose.LLM into Aspose.Words (duplicate heading later in document)",
-    "Added ability to set fill and line formatting for chart plot area (duplicate heading later in document)",
-    "Added ability to determine whether data point is total in waterfall chart (duplicate heading later in document)"
+    "Create Searchable PDFs with OCR (duplicate section)",
+    "Preserve Literal Special Symbols During PDF Generation (duplicate section)"
   ]
 }
