@@ -891,7 +891,7 @@
     "APIReferenceURL": "https://reference.groupdocs.cloud/watermark/",
     "FreeAppsURL": "https://products.groupdocs.app/watermark/family",
     "ForumsURL": "https://forum.groupdocs.cloud/c/watermark/29",
-    "InstallCommand": "<dependency>\n<groupId>com.groupdocs</groupId>\n<artifactId>groupdocs-watermark-cloud</artifactId>\n<version>23.8</version>\n</dependency>",
+    "InstallCommand": "<dependency>\n<groupId>com.groupdocs</groupId>\n<artifactId>groupdocs-watermark-cloud</artifactId>\n<version>26.10</version>\n</dependency>",
     "urlPrefix": "watermark",
     "license": "https://purchase.groupdocs.cloud/temporary-license/"
   },

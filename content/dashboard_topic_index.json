@@ -2013,6 +2013,11 @@
       "date": "Wed, 14 Oct 2026 08:50:08 +0000",
       "title": "DWG to PNG Conversion Tutorial in Python",
       "url": "https://blog.aspose.cloud/html/dwg-to-png-conversion-tutorial-in-python/"
+    },
+    {
+      "date": "Wed, 28 Oct 2026 13:55:01 +0000",
+      "title": "Step-by-Step Guide for VSD to SVG Conversion in Python",
+      "url": "https://blog.aspose.cloud/html/step-by-step-guide-for-vsd-to-svg-conversion-in-python/"
     }
   ],
   "aspose.cloud|Aspose.HTML|general": [
@@ -44719,6 +44724,21 @@
       "date": "Wed, 21 Oct 2026 19:48:01 +0000",
       "title": "Convert TIFF to JPG in Java",
       "url": "https://blog.conholdate.com/total/convert-tiff-to-jpg-in-java/"
+    },
+    {
+      "date": "Wed, 28 Oct 2026 16:40:14 +0000",
+      "title": "Convert TXT to XLSX in Java",
+      "url": "https://blog.conholdate.com/total/convert-txt-to-xlsx-in-java/"
+    },
+    {
+      "date": "Wed, 28 Oct 2026 17:08:19 +0000",
+      "title": "Update Excel CELL Value in Java",
+      "url": "https://blog.conholdate.com/total/update-excel-cell-value-in-java/"
+    },
+    {
+      "date": "Wed, 28 Oct 2026 18:01:26 +0000",
+      "title": "Visio to SVG Conversion in Java",
+      "url": "https://blog.conholdate.com/total/visio-to-svg-conversion-in-java/"
     }
   ],
   "conholdate.com|Conholdate.Total|Node.js": [
@@ -47536,6 +47556,16 @@
       "date": "Fri, 16 Oct 2026 12:47:14 +0000",
       "title": "How to Perform HTML to PPT Conversion in Python",
       "url": "https://blog.groupdocs.cloud/conversion/how-to-perform-html-to-ppt-conversion-in-python/"
+    },
+    {
+      "date": "Wed, 28 Oct 2026 14:36:28 +0000",
+      "title": "RAR to JPG Conversion in Python: Step-by-Step Tutorial",
+      "url": "https://blog.groupdocs.cloud/conversion/rar-to-jpg-conversion-in-python-step-by-step-tutorial/"
+    },
+    {
+      "date": "Fri, 30 Oct 2026 14:39:28 +0000",
+      "title": "How to Convert Word Documents to HTML in Python",
+      "url": "https://blog.groupdocs.cloud/conversion/how-to-convert-word-documents-to-html-in-python/"
     }
   ],
   "groupdocs.cloud|GroupDocs.Conversion|Ruby": [

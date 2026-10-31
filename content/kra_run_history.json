@@ -180,7 +180,11 @@
     "Strikethrough Text Best Practices in Java",
     "Convert PDF to PNG in Java",
     "Build a QR Code Generator from Unicode Text in Java",
-    "Convert TIFF to JPG in Java"
+    "Convert TIFF to JPG in Java",
+    "Convert TXT to XLSX in Java",
+    "Update Excel CELL Value in Java",
+    "Visio to SVG Conversion in Java: Quick Guide for Developers",
+    "Visio to Word Conversion Best Practices in Java"
   ],
   "aspose.cloud|aspose.cells|net": [
     "A Guide to Heroku Email Sending Best Practices in C#",
