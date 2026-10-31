@@ -44,10 +44,10 @@
     "urlPrefix": "zip",
     "product": "Aspose.ZIP for .NET",
     "platform": ".NET",
-    "repository": null,
+    "repository": "aspose-zip/agentic-net-examples",
     "branch": "main",
-    "status": "not_found",
-    "last_verified": "2026-08-28"
+    "status": "verified",
+    "last_verified": "2026-10-31"
   },
   {
     "brand": "aspose.com",
