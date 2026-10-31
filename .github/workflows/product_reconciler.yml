@@ -91,10 +91,11 @@ jobs:
           if-no-files-found: warn
 
       ###################################################################
-      # Open a PR with whatever changed — never pushed to main directly,
-      # and never auto-merged. A human reviews every run's diff.
+      # Open a PR with whatever changed, then merge it immediately — never
+      # pushed to main directly, so the diff is still visible in history,
+      # but no human has to click merge every run.
       ###################################################################
-      - name: Create Pull Request
+      - name: Create and merge Pull Request
         if: steps.reconcile.outputs.has_changes == 'true'
         env:
           GH_TOKEN: ${{ secrets.REPO_PAT }}
@@ -111,11 +112,14 @@ jobs:
           git commit -m "Reconcile ${{ matrix.brand }} product data [Run #${{ github.run_number }}]"
           git push -u origin "$BRANCH_NAME"
 
-          gh pr create \
+          PR_URL=$(gh pr create \
             --title "Reconcile ${{ matrix.brand }} product data (Run #${{ github.run_number }})" \
             --body-file "mcp-servers/product-reconciler/reconciliation_report_${BRAND_SAFE}.md" \
             --base main \
-            --head "$BRANCH_NAME"
+            --head "$BRANCH_NAME")
+
+          echo "Opened $PR_URL"
+          gh pr merge "$PR_URL" --squash --delete-branch
 
       - name: No changes
         if: steps.reconcile.outputs.has_changes != 'true'
