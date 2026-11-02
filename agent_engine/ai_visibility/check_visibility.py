@@ -47,15 +47,15 @@ ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "../../")
 INSIGHTS_PATH = os.path.join(ROOT, "content/dashboard_insights.json")
 OUT_DIR = os.path.join(ROOT, "content/aiVisibility")
 
-# Capped deliberately - each query costs 2 SerpAPI calls, and this runs
-# weekly against a dedicated free-tier key (250 searches/month). 4 active
-# brands x 4 queries x 2 calls x ~4.3 weeks/month ~= 138/month, leaving
-# real headroom for reruns/manual checks.
-QUERIES_PER_BRAND = 4
+# Capped deliberately - each query costs 1 SerpAPI call, plus a 2nd only
+# when Google shows an AI Overview. Worst case (every query has one):
+# 4 active brands x 6 queries x 2 calls x ~4.3 weeks/month ~= 206/month,
+# still inside a dedicated free-tier key (250 searches/month).
+QUERIES_PER_BRAND = 6
 
 
 def _select_queries(brand: str, insights: dict) -> list[dict]:
-    """Top N queries for this brand, by impressions, deduped by keyword -
+    """Top N queries for this brand, by impressions, deduped by keyword and page -
     pulled from REAL GSC demand the dashboard already computed
     (topOpportunities + risingQueries), not invented."""
     brand_data = insights.get(brand) or {}
@@ -69,7 +69,20 @@ def _select_queries(brand: str, insights: dict) -> list[dict]:
         if not existing or c.get("impressions", 0) > existing.get("impressions", 0):
             by_keyword[kw] = c
     ranked = sorted(by_keyword.values(), key=lambda c: c.get("impressions", 0), reverse=True)
-    return ranked[:QUERIES_PER_BRAND]
+    # One query per post: near-duplicate keywords (e.g. "grayscale image" /
+    # "greyscale image") usually target the same page and would otherwise
+    # burn several of the few slots on one post. Keep the highest-impression
+    # query for each page so the cap covers as many distinct posts as possible.
+    seen_pages: set[str] = set()
+    selected: list[dict] = []
+    for c in ranked:
+        if c["page"] in seen_pages:
+            continue
+        seen_pages.add(c["page"])
+        selected.append(c)
+        if len(selected) == QUERIES_PER_BRAND:
+            break
+    return selected
 
 
 def _is_cited(references: list[dict], domain: str) -> tuple[bool, str | None, int | None]:
