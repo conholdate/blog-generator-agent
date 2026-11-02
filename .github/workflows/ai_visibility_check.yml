@@ -77,12 +77,19 @@ jobs:
         run: |
           BRAND_SAFE=$(echo "${{ matrix.brand }}" | tr '.' '-')
           echo "brand_safe=$BRAND_SAFE" >> "$GITHUB_OUTPUT"
-          if git diff --quiet -- "content/aiVisibility/${{ matrix.brand }}.json"; then
+          # git diff --quiet only sees changes to files Git already tracks -
+          # content/aiVisibility/<brand>.json is new for a brand's first-ever
+          # run, so that check silently missed it (confirmed live,
+          # 2026-11-02: run succeeded, wrote real data, but never opened a
+          # PR). git status --porcelain catches both a modified tracked file
+          # and a brand-new untracked one.
+          STATUS=$(git status --porcelain -- "content/aiVisibility/${{ matrix.brand }}.json")
+          if [ -z "$STATUS" ]; then
             echo "changed=false" >> "$GITHUB_OUTPUT"
             echo "No AI-visibility changes this run."
           else
             echo "changed=true" >> "$GITHUB_OUTPUT"
-            git diff --stat -- "content/aiVisibility/${{ matrix.brand }}.json"
+            echo "$STATUS"
           fi
 
       # Opens a PR with the new results, then merges it immediately - the
