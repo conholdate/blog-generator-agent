@@ -1,0 +1,117 @@
+name: AI Visibility Check
+
+# Weekly check of whether each brand is cited in Google's AI Overview for
+# its own top GSC opportunity/rising-demand queries (real search demand,
+# not invented questions) - see agent_engine/ai_visibility/check_visibility.py
+# for why this exists and how queries are picked.
+#
+# Runs after dashboard_insights_collector.yml's daily 5am UTC run, so the
+# GSC opportunity/rising-query data it reads is fresh for today.
+
+on:
+  workflow_dispatch:
+    inputs:
+      brand:
+        description: "Brand to check (manual run only)"
+        required: true
+        type: choice
+        default: "aspose.cloud"
+        options:
+          - "aspose.cloud"
+          - "aspose.com"
+          - "conholdate.com"
+          - "conholdate.cloud"
+          - "groupdocs.cloud"
+  schedule:
+    - cron: "0 9 * * 6" # Every Saturday, ~2:00 PM PKT
+
+jobs:
+  determine-brands:
+    runs-on: ubuntu-latest
+    outputs:
+      brands: ${{ steps.set.outputs.brands }}
+    steps:
+      - id: set
+        run: |
+          if [ "${{ github.event_name }}" == "workflow_dispatch" ]; then
+            echo 'brands=["${{ inputs.brand }}"]' >> "$GITHUB_OUTPUT"
+          else
+            # Only brands with real GSC opportunity/rising-query data today
+            # (confirmed live 2026-11-02) - conholdate.cloud has none yet,
+            # so a scheduled run would just burn SerpAPI quota on 0 queries.
+            SCHEDULED_BRANDS='["aspose.cloud", "aspose.com", "conholdate.com", "groupdocs.cloud"]'
+            echo "brands=$SCHEDULED_BRANDS" >> "$GITHUB_OUTPUT"
+          fi
+
+  check:
+    needs: determine-brands
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        brand: ${{ fromJSON(needs.determine-brands.outputs.brands) }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+
+      - name: Install dependencies
+        run: python -m pip install --upgrade pip requests
+
+      - name: Check AI visibility
+        env:
+          # Prefers the dedicated key; falls back to the shared one
+          # (already used by keyword research) if that's not set yet -
+          # see check_visibility.py's main().
+          SERPAPI_KEY_AI_VISIBILITY: ${{ secrets.SERPAPI_KEY_AI_VISIBILITY }}
+          SERPAPI_KEY: ${{ secrets.SERPAPI_KEY }}
+        run: |
+          cd agent_engine/ai_visibility
+          python check_visibility.py "${{ matrix.brand }}" --summary-file="$GITHUB_WORKSPACE/ai_visibility_summary.md"
+
+      - name: Check for changes
+        id: diff
+        run: |
+          BRAND_SAFE=$(echo "${{ matrix.brand }}" | tr '.' '-')
+          echo "brand_safe=$BRAND_SAFE" >> "$GITHUB_OUTPUT"
+          if git diff --quiet -- "content/aiVisibility/${{ matrix.brand }}.json"; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            echo "No AI-visibility changes this run."
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+            git diff --stat -- "content/aiVisibility/${{ matrix.brand }}.json"
+          fi
+
+      # Opens a PR with the new results, then merges it immediately - the
+      # diff is still visible in history, but a mechanical weekly log
+      # append doesn't need a human to click merge, same pattern as
+      # example_repo_registry.yml.
+      - name: Create and merge Pull Request
+        if: steps.diff.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.REPO_PAT }}
+        run: |
+          git config --global user.email "action@github.com"
+          git config --global user.name "GitHub Action"
+
+          BRANCH_NAME="ai-visibility/${{ steps.diff.outputs.brand_safe }}-${{ github.run_number }}"
+          git checkout -b "$BRANCH_NAME"
+          git add "content/aiVisibility/${{ matrix.brand }}.json"
+          git commit -m "AI visibility check for ${{ matrix.brand }} [Run #${{ github.run_number }}]"
+          git push -u origin "$BRANCH_NAME"
+
+          PR_URL=$(gh pr create \
+            --title "AI visibility check for ${{ matrix.brand }} (Run #${{ github.run_number }})" \
+            --body-file "$GITHUB_WORKSPACE/ai_visibility_summary.md" \
+            --base main \
+            --head "$BRANCH_NAME")
+
+          echo "Opened $PR_URL"
+          gh pr merge "$PR_URL" --squash --delete-branch
+
+      - name: No changes
+        if: steps.diff.outputs.changed != 'true'
+        run: echo "Nothing new for ${{ matrix.brand }} this run."
