@@ -1,0 +1,48 @@
+[
+  {
+    "date": "2026-11-02",
+    "checkedAt": "2026-11-02T16:19:56.063797+00:00",
+    "query": "grayscale image",
+    "page": "https://blog.aspose.cloud/imaging/grayscale-image-in-java/",
+    "hasOverview": false,
+    "cited": false,
+    "citedUrl": null,
+    "position": null,
+    "otherDomains": []
+  },
+  {
+    "date": "2026-11-02",
+    "checkedAt": "2026-11-02T16:19:56.063797+00:00",
+    "query": "greyscale image",
+    "page": "https://blog.aspose.cloud/imaging/grayscale-image-in-java/",
+    "hasOverview": false,
+    "cited": false,
+    "citedUrl": null,
+    "position": null,
+    "otherDomains": []
+  },
+  {
+    "date": "2026-11-02",
+    "checkedAt": "2026-11-02T16:19:56.063797+00:00",
+    "query": "decrypt pdf",
+    "page": "https://blog.aspose.cloud/total/encrypt-and-decrypt-pdf-files-with-curl/",
+    "hasOverview": false,
+    "cited": false,
+    "citedUrl": null,
+    "position": null,
+    "otherDomains": []
+  },
+  {
+    "date": "2026-11-02",
+    "checkedAt": "2026-11-02T16:19:56.063797+00:00",
+    "query": "java resize image",
+    "page": "https://blog.aspose.cloud/imaging/resize-image-in-java/",
+    "hasOverview": true,
+    "cited": false,
+    "citedUrl": null,
+    "position": null,
+    "otherDomains": [
+      "cloudinary.com"
+    ]
+  }
+]
