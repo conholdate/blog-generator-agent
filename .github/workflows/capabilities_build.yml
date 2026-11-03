@@ -1,0 +1,87 @@
+name: Refresh Product Capability Registry
+
+# Weekly refresh of content/capabilities/aspose.cloud/ - what each
+# aspose.cloud product's API can actually do, built from its public
+# Swagger spec (Aspose.Words Cloud: its official SDK). The dashboard's
+# Recommended Actions reads these files to red-tag "Create" topics the
+# selected product doesn't support. See
+# agent_engine/capabilities/build_capabilities.py for the full why.
+#
+# A product is only re-embedded when its spec content changes, so most
+# runs end in "no changes". A failed fetch keeps that product's previous
+# data - this job never wipes capabilities because the API had a bad day.
+
+on:
+  workflow_dispatch:
+    inputs:
+      force:
+        description: "Re-embed every product even if unchanged"
+        type: boolean
+        default: false
+  schedule:
+    - cron: "0 10 * * 6" # Every Saturday, ~3:00 PM PKT
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+
+      - name: Install dependencies
+        run: python -m pip install --upgrade pip requests pyyaml "openai>=1.51,<2.45" "pydantic>=2.7,<3" pydantic-settings
+
+      - name: Build capability registry
+        env:
+          PROFESSIONALIZE_BASE_URL: ${{ secrets.PROFESSIONALIZE_BASE_URL }}
+          PROFESSIONALIZE_API_KEY_2: ${{ secrets.PROFESSIONALIZE_API_KEY_2 }}
+        run: |
+          FORCE_FLAG=""
+          if [ "${{ inputs.force }}" = "true" ]; then FORCE_FLAG="--force"; fi
+          python agent_engine/capabilities/build_capabilities.py aspose.cloud $FORCE_FLAG \
+            --summary-file="$GITHUB_WORKSPACE/capabilities_summary.md"
+
+      - name: Check for changes
+        id: diff
+        run: |
+          if [ -z "$(git status --porcelain -- content/capabilities)" ]; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            echo "No capability changes this run."
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+            git status --short -- content/capabilities
+          fi
+
+      # Same PR-then-merge pattern as example_repo_registry.yml: the diff
+      # stays visible in history, but a mechanical refresh doesn't need a
+      # human to click merge every week.
+      - name: Create and merge Pull Request
+        if: steps.diff.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.REPO_PAT }}
+        run: |
+          git config --global user.email "action@github.com"
+          git config --global user.name "GitHub Action"
+
+          BRANCH_NAME="capabilities/aspose-cloud-${{ github.run_number }}"
+          git checkout -b "$BRANCH_NAME"
+          git add content/capabilities
+          git commit -m "Refresh product capability registry for aspose.cloud [Run #${{ github.run_number }}]"
+          git push -u origin "$BRANCH_NAME"
+
+          PR_URL=$(gh pr create \
+            --title "Refresh product capability registry for aspose.cloud (Run #${{ github.run_number }})" \
+            --body-file "$GITHUB_WORKSPACE/capabilities_summary.md" \
+            --base main \
+            --head "$BRANCH_NAME")
+
+          echo "Opened $PR_URL"
+          gh pr merge "$PR_URL" --squash --delete-branch
+
+      - name: No changes
+        if: steps.diff.outputs.changed != 'true'
+        run: echo "Capability registry already up to date — nothing to open a PR for."

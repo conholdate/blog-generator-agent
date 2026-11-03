@@ -25,6 +25,7 @@ import math
 import os
 import struct
 import sys
+import time
 from typing import List
 
 from openai import OpenAI
@@ -53,6 +54,28 @@ def embed_text(text: str) -> List[float]:
     live API call every time."""
     resp = _get_client().embeddings.create(model=settings.PROFESSIONALIZE_EMBEDDING_MODEL, input=text)
     return resp.data[0].embedding
+
+
+def embed_texts(texts: List[str], batch_size: int = 32, retries: int = 3) -> List[List[float]]:
+    """Raw float embeddings for many strings, batched - for bulk builders
+    (agent_engine/capabilities/build_capabilities.py embeds ~1,200 API
+    operations per run). Retries each batch with a short backoff since the
+    shared endpoint occasionally drops a request; raises if a batch still
+    fails, so the caller can keep its previous data instead of writing a
+    partial result."""
+    out: List[List[float]] = []
+    for start in range(0, len(texts), batch_size):
+        batch = texts[start:start + batch_size]
+        for attempt in range(retries + 1):
+            try:
+                resp = _get_client().embeddings.create(model=settings.PROFESSIONALIZE_EMBEDDING_MODEL, input=batch)
+                break
+            except Exception:
+                if attempt == retries:
+                    raise
+                time.sleep(3 * (attempt + 1))
+        out.extend(item.embedding for item in resp.data)
+    return out
 
 
 def quantize(vector: List[float]) -> List[int]:
