@@ -49,6 +49,7 @@ from extract import (  # noqa: E402
     features_from_words_sdk,
     formats_from_spec,
     load_known_formats,
+    operation_reference_url,
 )
 from spec_sources import BUNDLE_PRODUCTS, fetch_source  # noqa: E402
 
@@ -141,12 +142,26 @@ def build(brand: str, force: bool = False, only: set[str] | None = None) -> list
                 products[key] = prior
             continue
 
+        # Proof link per operation, shown on the dashboard next to a "create"
+        # topic: a deep link when the reference page shows this exact spec,
+        # otherwise the product's reference page.
+        features = [
+            {
+                "id": f["id"],
+                "text": f["text"],
+                "ref": operation_reference_url(src.reference_url, src.reference_spec_name, f.get("_tag", ""), f.get("_operationId", ""))
+                if src.deep_link else src.reference_url,
+            }
+            for f in features
+        ]
+
         digest = content_hash(features, formats)
         entry = {
             "displayName": cfg.get("display_name") or key,
             "alias": _display_alias(cfg.get("display_name") or key),
             "sourceKind": src.kind,
             "source": src.url,
+            "referenceUrl": src.reference_url,
             "version": src.version,
             "hash": digest,
             "featureCount": len(features),
@@ -166,7 +181,7 @@ def build(brand: str, force: bool = False, only: set[str] | None = None) -> list
             lines.append(f"- ⚠️ **{key}**: embedding failed ({str(exc)[:120]}) - kept previous data")
             continue
         entry["updatedAt"] = today
-        _write_json(file_path, {"product": key, **{k: entry[k] for k in ("displayName", "alias", "source", "version", "hash")},
+        _write_json(file_path, {"product": key, **{k: entry[k] for k in ("displayName", "alias", "source", "referenceUrl", "version", "hash")},
                                 "features": embedded})
         products[key] = entry
         note = f" - note: {src.error}" if src.error else ""

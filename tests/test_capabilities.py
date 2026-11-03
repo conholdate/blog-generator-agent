@@ -127,3 +127,56 @@ def test_real_known_formats_exclude_stopwords():
     known = load_known_formats(json.loads((ROOT / "configs" / "file_formats.json").read_text()))
     assert {"pdf", "docx", "xlsx", "pptx"} <= known
     assert not (known & STOPWORDS)
+
+
+# --- reference links (formats confirmed in a real browser 2026-11-04) ------
+
+from agent_engine.capabilities.extract import operation_reference_url  # noqa: E402
+from agent_engine.capabilities.spec_sources import parse_reference_page, url_version  # noqa: E402
+
+IMAGING_REF = "https://reference.aspose.cloud/imaging/"
+CELLS_REF = "https://reference.aspose.cloud/cells/"
+
+
+def test_deep_link_single_spec_page():
+    assert operation_reference_url(IMAGING_REF, None, "Resize", "CreateResizedImage") == \
+        "https://reference.aspose.cloud/imaging/#/Resize/CreateResizedImage"
+
+
+def test_deep_link_multi_spec_page_selects_spec():
+    assert operation_reference_url(CELLS_REF, "API v4", "Conversion", "ConvertSpreadsheet") == \
+        "https://reference.aspose.cloud/cells/?urls.primaryName=API%20v4#/Conversion/ConvertSpreadsheet"
+
+
+def test_no_tag_or_operation_id_falls_back_to_page():
+    assert operation_reference_url(IMAGING_REF, None, "", "CreateResizedImage") == IMAGING_REF
+    assert operation_reference_url("", None, "Resize", "X") == ""
+
+
+def test_spec_features_keep_tag_for_links():
+    spec = {"paths": {"/imaging/resize": {"post": {"operationId": "CreateResizedImage", "tags": ["Resize"], "summary": "Resize"}}}}
+    feat = features_from_spec(spec, "imaging")[0]
+    assert (feat["_tag"], feat["_operationId"]) == ("Resize", "CreateResizedImage")
+
+
+def test_parse_reference_page_multi_spec():
+    html = '''deepLinking: true,
+        urls: [
+          { url: "https://api.aspose.cloud/v4.0/barcode/swagger/spec", name: "Aspose.BarCode.Cloud v4.0" },
+          { url: "https://api.aspose.cloud/v3.0/barcode/swagger/spec", name: "Aspose.BarCode.Cloud v3.0" }
+        ],'''
+    page = parse_reference_page(html, "https://reference.aspose.cloud/barcode/")
+    assert page.deep_linking is True
+    assert page.specs[0] == ("https://api.aspose.cloud/v4.0/barcode/swagger/spec", "Aspose.BarCode.Cloud v4.0")
+
+
+def test_parse_reference_page_single_spec_and_no_deeplink():
+    html = 'url: "https://api.aspose.cloud/v5.1/ocr/swagger/v5/swagger.json", dom_id: "#swagger-ui"'
+    page = parse_reference_page(html, "https://reference.aspose.cloud/ocr/")
+    assert page.deep_linking is False
+    assert page.specs == [("https://api.aspose.cloud/v5.1/ocr/swagger/v5/swagger.json", None)]
+
+
+def test_url_version():
+    assert url_version("https://api.aspose.cloud/v5.1/omr/swagger.json") == "v5.1"
+    assert url_version("https://api.aspose.cloud/v4.0/cells/swagger/spec") == "v4.0"

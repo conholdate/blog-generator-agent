@@ -25,6 +25,7 @@ import hashlib
 import json
 import re
 from typing import Iterable
+from urllib.parse import quote
 
 # Common English / programming-language words that also exist as format
 # keys in configs/file_formats.json or show up as tokens in specs. Found the
@@ -81,8 +82,33 @@ def features_from_spec(spec: dict, product: str) -> list[dict]:
             seen.add(fid)
             summary = (op.get("summary") or op.get("description") or "").strip()
             text = f"{op_id}: {summary} ({method.upper()} {path})"
-            features.append({"id": fid, "text": text[:MAX_FEATURE_TEXT]})
+            tags = op.get("tags") or []
+            features.append({
+                "id": fid,
+                "text": text[:MAX_FEATURE_TEXT],
+                # Only kept to build the reference deep link (see
+                # operation_reference_url); dropped before embedding.
+                "_tag": str(tags[0]) if tags else "",
+                "_operationId": op.get("operationId") or "",
+            })
     return features
+
+
+def operation_reference_url(reference_url: str, spec_name: str | None, tag: str, operation_id: str) -> str:
+    """Link to one operation on reference.aspose.cloud (Swagger UI deep link,
+    #/<tag>/<operationId>), verified in a real browser 2026-11-04 - it opens
+    the page with that operation expanded and scrolled into view. On a
+    multi-spec page ?urls.primaryName= selects the right spec first. Without
+    a tag or operationId there's nothing to link to, so the product's
+    reference page is returned instead."""
+    if not reference_url:
+        return ""
+    base = reference_url
+    if spec_name:
+        base += f"?urls.primaryName={quote(spec_name)}"
+    if not tag or not operation_id:
+        return base
+    return f"{base}#/{quote(tag.strip())}/{quote(operation_id)}"
 
 
 def formats_from_spec(spec: dict, known_formats: set[str]) -> list[str]:
