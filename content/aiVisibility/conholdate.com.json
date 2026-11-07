@@ -1,0 +1,83 @@
+[
+  {
+    "date": "2026-11-07",
+    "checkedAt": "2026-11-07T15:24:01.465778+00:00",
+    "query": "latex viewer",
+    "page": "https://blog.conholdate.com/total/online-latex-viewer/",
+    "hasOverview": true,
+    "cited": false,
+    "citedUrl": null,
+    "position": null,
+    "otherDomains": [
+      "products.aspose.app",
+      "www.latexlive.com",
+      "www.underleaf.ai",
+      "workspace.google.com",
+      "chromewebstore.google.com",
+      "www.texifier.com",
+      "marketplace.visualstudio.com",
+      "www.reddit.com"
+    ]
+  },
+  {
+    "date": "2026-11-07",
+    "checkedAt": "2026-11-07T15:24:01.465778+00:00",
+    "query": "glb to fbx",
+    "page": "https://blog.conholdate.com/total/convert-glb-to-fbx-online/",
+    "hasOverview": false,
+    "cited": false,
+    "citedUrl": null,
+    "position": null,
+    "otherDomains": []
+  },
+  {
+    "date": "2026-11-07",
+    "checkedAt": "2026-11-07T15:24:01.465778+00:00",
+    "query": "visio viewer online",
+    "page": "https://blog.conholdate.com/total/online-visio-viewer/",
+    "hasOverview": false,
+    "cited": false,
+    "citedUrl": null,
+    "position": null,
+    "otherDomains": []
+  },
+  {
+    "date": "2026-11-07",
+    "checkedAt": "2026-11-07T15:24:01.465778+00:00",
+    "query": "pdf to base64",
+    "page": "https://blog.conholdate.com/total/convert-pdf-to-base64-online/",
+    "hasOverview": false,
+    "cited": false,
+    "citedUrl": null,
+    "position": null,
+    "otherDomains": []
+  },
+  {
+    "date": "2026-11-07",
+    "checkedAt": "2026-11-07T15:24:01.465778+00:00",
+    "query": "image compare online",
+    "page": "https://blog.conholdate.com/total/compare-images-online/",
+    "hasOverview": true,
+    "cited": true,
+    "citedUrl": "https://blog.conholdate.com/total/compare-images-online/",
+    "position": 6,
+    "otherDomains": [
+      "ybug.io",
+      "www.imgonline.com.ua",
+      "www.img2go.com",
+      "searchenginewatch.com",
+      "facepair.com"
+    ]
+  },
+  {
+    "date": "2026-11-07",
+    "checkedAt": "2026-11-07T15:24:01.465778+00:00",
+    "query": "mpp to excel",
+    "page": "https://blog.conholdate.com/total/convert-mpp-to-excel-online/",
+    "hasOverview": false,
+    "cited": false,
+    "citedUrl": null,
+    "position": null,
+    "otherDomains": []
+  }
+]
