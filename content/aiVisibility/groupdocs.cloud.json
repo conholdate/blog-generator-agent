@@ -1,0 +1,74 @@
+[
+  {
+    "date": "2026-11-07",
+    "checkedAt": "2026-11-07T15:24:01.196113+00:00",
+    "query": "zip to jpg",
+    "page": "https://blog.groupdocs.cloud/conversion/zip-to-jpg-online/",
+    "hasOverview": false,
+    "cited": false,
+    "citedUrl": null,
+    "position": null,
+    "otherDomains": []
+  },
+  {
+    "date": "2026-11-07",
+    "checkedAt": "2026-11-07T15:24:01.196113+00:00",
+    "query": "rar to pdf",
+    "page": "https://blog.groupdocs.cloud/conversion/convert-zip-or-rar-to-pdf-using-a-file-converter/",
+    "hasOverview": false,
+    "cited": false,
+    "citedUrl": null,
+    "position": null,
+    "otherDomains": []
+  },
+  {
+    "date": "2026-11-07",
+    "checkedAt": "2026-11-07T15:24:01.196113+00:00",
+    "query": "pptx merger",
+    "page": "https://blog.groupdocs.cloud/merger/merge-powerpoint-pptpptx-files-online-using-rest-api-in-csharp/",
+    "hasOverview": false,
+    "cited": false,
+    "citedUrl": null,
+    "position": null,
+    "otherDomains": []
+  },
+  {
+    "date": "2026-11-07",
+    "checkedAt": "2026-11-07T15:24:01.196113+00:00",
+    "query": "rotate pdf page node.js",
+    "page": "https://blog.groupdocs.cloud/merger/how-to-rotate-pdf-pages-using-rest-api-in-node-js/",
+    "hasOverview": true,
+    "cited": false,
+    "citedUrl": null,
+    "position": null,
+    "otherDomains": []
+  },
+  {
+    "date": "2026-11-07",
+    "checkedAt": "2026-11-07T15:24:01.196113+00:00",
+    "query": "zip to html",
+    "page": "https://blog.groupdocs.cloud/conversion/convert-zip-to-html-in-nodejs-zip-file-converter/",
+    "hasOverview": true,
+    "cited": false,
+    "citedUrl": null,
+    "position": null,
+    "otherDomains": [
+      "products.groupdocs.app",
+      "www.ezyzip.com",
+      "www.youtube.com",
+      "pages.edgeone.ai",
+      "archive.online-convert.com"
+    ]
+  },
+  {
+    "date": "2026-11-07",
+    "checkedAt": "2026-11-07T15:24:01.196113+00:00",
+    "query": "convert mpp to excel",
+    "page": "https://blog.groupdocs.cloud/conversion/convert-mpp-to-excel-with-csharp/",
+    "hasOverview": false,
+    "cited": false,
+    "citedUrl": null,
+    "position": null,
+    "otherDomains": []
+  }
+]
