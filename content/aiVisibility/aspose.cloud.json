@@ -44,5 +44,97 @@
     "otherDomains": [
       "cloudinary.com"
     ]
+  },
+  {
+    "date": "2026-11-07",
+    "checkedAt": "2026-11-07T15:24:02.409844+00:00",
+    "query": "grayscale image",
+    "page": "https://blog.aspose.cloud/imaging/grayscale-image-in-java/",
+    "hasOverview": true,
+    "cited": false,
+    "citedUrl": null,
+    "position": null,
+    "otherDomains": [
+      "www.grayscaleimage.org",
+      "www.canva.com",
+      "www.sciencedirect.com",
+      "cloudinary.com",
+      "imagen-ai.com",
+      "www.youtube.com",
+      "developer.mozilla.org",
+      "www.facebook.com"
+    ]
+  },
+  {
+    "date": "2026-11-07",
+    "checkedAt": "2026-11-07T15:24:02.409844+00:00",
+    "query": "decrypt pdf",
+    "page": "https://blog.aspose.cloud/total/encrypt-and-decrypt-pdf-files-with-curl/",
+    "hasOverview": false,
+    "cited": false,
+    "citedUrl": null,
+    "position": null,
+    "otherDomains": []
+  },
+  {
+    "date": "2026-11-07",
+    "checkedAt": "2026-11-07T15:24:02.409844+00:00",
+    "query": "java resize image",
+    "page": "https://blog.aspose.cloud/imaging/resize-image-in-java/",
+    "hasOverview": true,
+    "cited": false,
+    "citedUrl": null,
+    "position": null,
+    "otherDomains": [
+      "www.youtube.com",
+      "componenthouse.com",
+      "favr.dev",
+      "stackoverflow.com"
+    ]
+  },
+  {
+    "date": "2026-11-07",
+    "checkedAt": "2026-11-07T15:24:02.409844+00:00",
+    "query": ".net power point to pdf conversion sdk",
+    "page": "https://blog.aspose.cloud/slides/convert-powerpoint-to-pdf-document-with-aspose-slides-cloud-sdk-for-net/",
+    "hasOverview": true,
+    "cited": false,
+    "citedUrl": null,
+    "position": null,
+    "otherDomains": [
+      "www.youtube.com",
+      "help.syncfusion.com",
+      "github.com",
+      "www.convertapi.com",
+      "gist.github.com"
+    ]
+  },
+  {
+    "date": "2026-11-07",
+    "checkedAt": "2026-11-07T15:24:02.409844+00:00",
+    "query": "convert pdf to pdf/a in python rest",
+    "page": "https://blog.aspose.cloud/pdf/convert-pdf-to-pdf-a-using-python/",
+    "hasOverview": true,
+    "cited": false,
+    "citedUrl": null,
+    "position": null,
+    "otherDomains": [
+      "pdfrest.com",
+      "www.facebook.com"
+    ]
+  },
+  {
+    "date": "2026-11-07",
+    "checkedAt": "2026-11-07T15:24:02.409844+00:00",
+    "query": "crop image java",
+    "page": "https://blog.aspose.cloud/imaging/crop-image-in-java/",
+    "hasOverview": true,
+    "cited": false,
+    "citedUrl": null,
+    "position": null,
+    "otherDomains": [
+      "alvinalexander.com",
+      "stackoverflow.com"
+    ]
   }
 ]
