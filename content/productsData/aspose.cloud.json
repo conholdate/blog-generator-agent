@@ -570,7 +570,7 @@
   "APIReferenceURL": "https://reference.aspose.cloud/slides/",
   "FreeAppsURL": "https://products.aspose.app/slides/family/",
   "ForumsURL": "https://forum.aspose.cloud/c/slides/15",
-  "InstallCommand": "<dependency>\n<groupId>com.aspose</groupId>\n<artifactId>aspose-slides-cloud</artifactId>\n<version>26.6.0</version>\n</dependency>",
+  "InstallCommand": "<dependency>\n<groupId>com.aspose</groupId>\n<artifactId>aspose-slides-cloud</artifactId>\n<version>26.10.0</version>\n</dependency>",
   "urlPrefix": "slides",
   "license": "https://purchase.aspose.com/temporary-license/"
 },
