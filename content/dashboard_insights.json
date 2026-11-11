@@ -142,7 +142,7 @@
         "ga4": {
           "postCount": 68,
           "priorSessions": 307,
-          "sessions": 314
+          "sessions": 315
         },
         "gscOpportunities": [
           {
@@ -231,7 +231,7 @@
         "ga4": {
           "postCount": 27,
           "priorSessions": 182,
-          "sessions": 265
+          "sessions": 266
         },
         "gscOpportunities": []
       },
@@ -694,7 +694,7 @@
         "ga4": {
           "postCount": 23,
           "priorSessions": 137,
-          "sessions": 111
+          "sessions": 112
         },
         "gscOpportunities": [
           {
@@ -786,7 +786,7 @@
         "ga4": {
           "postCount": 26,
           "priorSessions": 105,
-          "sessions": 71
+          "sessions": 72
         },
         "gscOpportunities": []
       },
@@ -990,7 +990,7 @@
         "ga4": {
           "postCount": 3,
           "priorSessions": 11,
-          "sessions": 20
+          "sessions": 21
         },
         "gscOpportunities": []
       },
@@ -998,7 +998,7 @@
         "ga4": {
           "postCount": 8,
           "priorSessions": 43,
-          "sessions": 22
+          "sessions": 23
         },
         "gscOpportunities": []
       },
@@ -1006,7 +1006,7 @@
         "ga4": {
           "postCount": 49,
           "priorSessions": 213,
-          "sessions": 187
+          "sessions": 188
         },
         "gscOpportunities": [
           {
@@ -1171,7 +1171,7 @@
         "ga4": {
           "postCount": 26,
           "priorSessions": 108,
-          "sessions": 52
+          "sessions": 53
         },
         "gscOpportunities": []
       },
@@ -1215,11 +1215,11 @@
       },
       "Direct": {
         "priorSessions": 2857,
-        "sessions": 1731
+        "sessions": 1822
       },
       "Organic Search": {
         "priorSessions": 107,
-        "sessions": 72
+        "sessions": 76
       },
       "Organic Social": {
         "priorSessions": 10,
@@ -1227,11 +1227,11 @@
       },
       "Referral": {
         "priorSessions": 2427,
-        "sessions": 3794
+        "sessions": 3795
       },
       "Unassigned": {
         "priorSessions": 265,
-        "sessions": 266
+        "sessions": 273
       }
     },
     "ctrAnomalies": [
@@ -1403,8 +1403,8 @@
     "gscRawPriorClicks": 2699,
     "gscRawPriorImpressions": 199437,
     "organicPriorSessions": 1656,
-    "organicSessions": 1443,
-    "refreshedAt": "2026-11-11T07:22:51.126615+00:00",
+    "organicSessions": 1447,
+    "refreshedAt": "2026-11-11T12:28:41.008887+00:00",
     "risingQueries": [
       {
         "growthPercent": 7000.0,
@@ -1618,7 +1618,7 @@
         "ga4": {
           "postCount": 25,
           "priorSessions": 336,
-          "sessions": 552
+          "sessions": 546
         },
         "gscOpportunities": [
           {
@@ -1778,17 +1778,17 @@
       },
       "aspose.com|Aspose.BarCode|JasperReports": {
         "ga4": {
-          "postCount": 7,
+          "postCount": 8,
           "priorSessions": 0,
-          "sessions": 48
+          "sessions": 54
         },
         "gscOpportunities": []
       },
       "aspose.com|Aspose.BarCode|Java": {
         "ga4": {
-          "postCount": 32,
+          "postCount": 33,
           "priorSessions": 96,
-          "sessions": 330
+          "sessions": 336
         },
         "gscOpportunities": []
       },
@@ -1932,9 +1932,9 @@
       },
       "aspose.com|Aspose.CAD|.NET": {
         "ga4": {
-          "postCount": 37,
-          "priorSessions": 170,
-          "sessions": 468
+          "postCount": 36,
+          "priorSessions": 161,
+          "sessions": 456
         },
         "gscOpportunities": [
           {
@@ -1959,7 +1959,7 @@
         "ga4": {
           "postCount": 29,
           "priorSessions": 152,
-          "sessions": 414
+          "sessions": 408
         },
         "gscOpportunities": []
       },
@@ -1975,7 +1975,7 @@
         "ga4": {
           "postCount": 22,
           "priorSessions": 203,
-          "sessions": 420
+          "sessions": 427
         },
         "gscOpportunities": [
           {
@@ -2016,7 +2016,7 @@
         "ga4": {
           "postCount": 162,
           "priorSessions": 444,
-          "sessions": 1590
+          "sessions": 1584
         },
         "gscOpportunities": [
           {
@@ -2134,11 +2134,19 @@
         },
         "gscOpportunities": []
       },
+      "aspose.com|Aspose.Cells|JasperReports": {
+        "ga4": {
+          "postCount": 1,
+          "priorSessions": 5,
+          "sessions": 6
+        },
+        "gscOpportunities": []
+      },
       "aspose.com|Aspose.Cells|Java": {
         "ga4": {
-          "postCount": 93,
-          "priorSessions": 377,
-          "sessions": 870
+          "postCount": 92,
+          "priorSessions": 363,
+          "sessions": 864
         },
         "gscOpportunities": [
           {
@@ -2196,7 +2204,7 @@
         "ga4": {
           "postCount": 62,
           "priorSessions": 446,
-          "sessions": 912
+          "sessions": 918
         },
         "gscOpportunities": [
           {
@@ -2310,7 +2318,7 @@
         "ga4": {
           "postCount": 47,
           "priorSessions": 110,
-          "sessions": 468
+          "sessions": 474
         },
         "gscOpportunities": [
           {
@@ -2373,9 +2381,9 @@
       },
       "aspose.com|Aspose.Diagram|Python": {
         "ga4": {
-          "postCount": 28,
-          "priorSessions": 768,
-          "sessions": 894
+          "postCount": 29,
+          "priorSessions": 796,
+          "sessions": 916
         },
         "gscOpportunities": [
           {
@@ -2656,7 +2664,7 @@
         "ga4": {
           "postCount": 20,
           "priorSessions": 114,
-          "sessions": 282
+          "sessions": 276
         },
         "gscOpportunities": [
           {
@@ -2671,9 +2679,9 @@
       },
       "aspose.com|Aspose.Drawing|Java": {
         "ga4": {
-          "postCount": 11,
-          "priorSessions": 1755,
-          "sessions": 1167
+          "postCount": 10,
+          "priorSessions": 1750,
+          "sessions": 1170
         },
         "gscOpportunities": [
           {
@@ -3386,7 +3394,7 @@
         "ga4": {
           "postCount": 58,
           "priorSessions": 249,
-          "sessions": 618
+          "sessions": 612
         },
         "gscOpportunities": [
           {
@@ -3419,7 +3427,7 @@
         "ga4": {
           "postCount": 37,
           "priorSessions": 134,
-          "sessions": 342
+          "sessions": 336
         },
         "gscOpportunities": []
       },
@@ -3435,7 +3443,7 @@
         "ga4": {
           "postCount": 14,
           "priorSessions": 121,
-          "sessions": 168
+          "sessions": 162
         },
         "gscOpportunities": []
       },
@@ -3451,7 +3459,7 @@
         "ga4": {
           "postCount": 12,
           "priorSessions": 373,
-          "sessions": 451
+          "sessions": 452
         },
         "gscOpportunities": [
           {
@@ -3622,7 +3630,7 @@
         "ga4": {
           "postCount": 27,
           "priorSessions": 160,
-          "sessions": 384
+          "sessions": 390
         },
         "gscOpportunities": [
           {
@@ -3647,7 +3655,7 @@
         "ga4": {
           "postCount": 15,
           "priorSessions": 1467,
-          "sessions": 1306
+          "sessions": 1302
         },
         "gscOpportunities": [
           {
@@ -3904,9 +3912,9 @@
       },
       "aspose.com|Aspose.HTML|Python": {
         "ga4": {
-          "postCount": 21,
-          "priorSessions": 312,
-          "sessions": 324
+          "postCount": 20,
+          "priorSessions": 298,
+          "sessions": 318
         },
         "gscOpportunities": [
           {
@@ -3963,7 +3971,7 @@
         "ga4": {
           "postCount": 49,
           "priorSessions": 140,
-          "sessions": 558
+          "sessions": 552
         },
         "gscOpportunities": [
           {
@@ -4004,7 +4012,7 @@
         "ga4": {
           "postCount": 35,
           "priorSessions": 106,
-          "sessions": 390
+          "sessions": 384
         },
         "gscOpportunities": [
           {
@@ -4456,7 +4464,7 @@
         "ga4": {
           "postCount": 20,
           "priorSessions": 48,
-          "sessions": 156
+          "sessions": 150
         },
         "gscOpportunities": []
       },
@@ -4546,15 +4554,15 @@
         "ga4": {
           "postCount": 11,
           "priorSessions": 88,
-          "sessions": 192
+          "sessions": 198
         },
         "gscOpportunities": []
       },
       "aspose.com|Aspose.PDF|.NET": {
         "ga4": {
-          "postCount": 125,
+          "postCount": 124,
           "priorSessions": 566,
-          "sessions": 1308
+          "sessions": 1296
         },
         "gscOpportunities": [
           {
@@ -4721,9 +4729,9 @@
       },
       "aspose.com|Aspose.PDF|C++": {
         "ga4": {
-          "postCount": 20,
+          "postCount": 19,
           "priorSessions": 49,
-          "sessions": 222
+          "sessions": 210
         },
         "gscOpportunities": [
           {
@@ -4764,7 +4772,7 @@
         "ga4": {
           "postCount": 80,
           "priorSessions": 295,
-          "sessions": 762
+          "sessions": 744
         },
         "gscOpportunities": [
           {
@@ -4852,9 +4860,9 @@
       },
       "aspose.com|Aspose.PDF|general": {
         "ga4": {
-          "postCount": 19,
-          "priorSessions": 373,
-          "sessions": 264
+          "postCount": 18,
+          "priorSessions": 364,
+          "sessions": 258
         },
         "gscOpportunities": [
           {
@@ -5384,7 +5392,7 @@
         "ga4": {
           "postCount": 22,
           "priorSessions": 227,
-          "sessions": 258
+          "sessions": 264
         },
         "gscOpportunities": [
           {
@@ -5594,7 +5602,7 @@
         "ga4": {
           "postCount": 30,
           "priorSessions": 284,
-          "sessions": 504
+          "sessions": 498
         },
         "gscOpportunities": []
       },
@@ -5616,9 +5624,9 @@
       },
       "aspose.com|Aspose.Slides|SharePoint": {
         "ga4": {
-          "postCount": 1,
+          "postCount": 2,
           "priorSessions": 0,
-          "sessions": 6
+          "sessions": 12
         },
         "gscOpportunities": []
       },
@@ -5798,7 +5806,7 @@
         "ga4": {
           "postCount": 12,
           "priorSessions": 231,
-          "sessions": 228
+          "sessions": 222
         },
         "gscOpportunities": [
           {
@@ -5861,9 +5869,9 @@
       },
       "aspose.com|Aspose.TeX|Python": {
         "ga4": {
-          "postCount": 14,
-          "priorSessions": 134,
-          "sessions": 174
+          "postCount": 15,
+          "priorSessions": 139,
+          "sessions": 180
         },
         "gscOpportunities": [
           {
@@ -6083,7 +6091,7 @@
         "ga4": {
           "postCount": 99,
           "priorSessions": 387,
-          "sessions": 1050
+          "sessions": 1062
         },
         "gscOpportunities": []
       },
@@ -6099,7 +6107,7 @@
         "ga4": {
           "postCount": 17,
           "priorSessions": 61,
-          "sessions": 180
+          "sessions": 186
         },
         "gscOpportunities": []
       },
@@ -6115,7 +6123,7 @@
         "ga4": {
           "postCount": 80,
           "priorSessions": 481,
-          "sessions": 888
+          "sessions": 889
         },
         "gscOpportunities": []
       },
@@ -6194,9 +6202,9 @@
       },
       "aspose.com|Aspose.Words|Reporting Services": {
         "ga4": {
-          "postCount": 10,
-          "priorSessions": 14,
-          "sessions": 72
+          "postCount": 11,
+          "priorSessions": 19,
+          "sessions": 78
         },
         "gscOpportunities": []
       },
@@ -6210,9 +6218,9 @@
       },
       "aspose.com|Aspose.Words|SharePoint": {
         "ga4": {
-          "postCount": 6,
+          "postCount": 5,
           "priorSessions": 10,
-          "sessions": 36
+          "sessions": 30
         },
         "gscOpportunities": []
       },
@@ -6228,7 +6236,7 @@
         "ga4": {
           "postCount": 95,
           "priorSessions": 680,
-          "sessions": 1117
+          "sessions": 1112
         },
         "gscOpportunities": [
           {
@@ -6366,7 +6374,7 @@
         "ga4": {
           "postCount": 25,
           "priorSessions": 524,
-          "sessions": 702
+          "sessions": 705
         },
         "gscOpportunities": [
           {
@@ -6671,19 +6679,19 @@
     "channels": {
       "AI Assistant": {
         "priorSessions": 11,
-        "sessions": 18
+        "sessions": 19
       },
       "Cross-network": {
         "priorSessions": 3,
-        "sessions": 5
+        "sessions": 6
       },
       "Direct": {
         "priorSessions": 22087,
-        "sessions": 15530
+        "sessions": 16321
       },
       "Organic Search": {
         "priorSessions": 4260,
-        "sessions": 3418
+        "sessions": 3566
       },
       "Organic Social": {
         "priorSessions": 10,
@@ -6695,11 +6703,11 @@
       },
       "Referral": {
         "priorSessions": 25993,
-        "sessions": 32244
+        "sessions": 32247
       },
       "Unassigned": {
         "priorSessions": 3573,
-        "sessions": 3651
+        "sessions": 3852
       }
     },
     "ctrAnomalies": [
@@ -6796,9 +6804,9 @@
     ],
     "decliningPosts": [
       {
-        "changePercent": -38.1,
+        "changePercent": -37.5,
         "priorSessions": 1671,
-        "sessions": 1035,
+        "sessions": 1044,
         "title": "Free Online Ruler - A Digital Solution for Accurate Measurements",
         "url": "https://blog.aspose.com/drawing/online-ruler-cm-scale/"
       },
@@ -6871,8 +6879,8 @@
     "gscRawPriorClicks": 95755,
     "gscRawPriorImpressions": 4578384,
     "organicPriorSessions": 73463,
-    "organicSessions": 50622,
-    "refreshedAt": "2026-11-11T07:23:23.610843+00:00",
+    "organicSessions": 50802,
+    "refreshedAt": "2026-11-11T12:29:16.441422+00:00",
     "risingQueries": [
       {
         "growthPercent": 1042200.0,
@@ -7092,7 +7100,7 @@
     "gscRawPriorImpressions": 297,
     "organicPriorSessions": 3,
     "organicSessions": 5,
-    "refreshedAt": "2026-11-11T07:23:29.978923+00:00",
+    "refreshedAt": "2026-11-11T12:29:20.079857+00:00",
     "risingQueries": [],
     "status": "ok",
     "topOpportunities": []
@@ -7240,7 +7248,7 @@
         "ga4": {
           "postCount": 205,
           "priorSessions": 705,
-          "sessions": 1477
+          "sessions": 1481
         },
         "gscOpportunities": [
           {
@@ -7297,7 +7305,7 @@
         "ga4": {
           "postCount": 99,
           "priorSessions": 2302,
-          "sessions": 1575
+          "sessions": 1581
         },
         "gscOpportunities": [
           {
@@ -8194,7 +8202,7 @@
       },
       "Direct": {
         "priorSessions": 1769,
-        "sessions": 927
+        "sessions": 950
       },
       "Display": {
         "priorSessions": 4,
@@ -8202,7 +8210,7 @@
       },
       "Organic Search": {
         "priorSessions": 642,
-        "sessions": 545
+        "sessions": 573
       },
       "Organic Social": {
         "priorSessions": 8,
@@ -8214,7 +8222,7 @@
       },
       "Unassigned": {
         "priorSessions": 288,
-        "sessions": 122
+        "sessions": 125
       }
     },
     "ctrAnomalies": [
@@ -8325,16 +8333,16 @@
         "url": "https://blog.conholdate.com/total/convert-zip-to-jpg-online/"
       },
       {
-        "changePercent": -41.9,
+        "changePercent": -41.5,
         "priorSessions": 289,
-        "sessions": 168,
+        "sessions": 169,
         "title": "Convert Image to Visio Online",
         "url": "https://blog.conholdate.com/total/convert-image-to-visio-online/"
       },
       {
-        "changePercent": -36.2,
+        "changePercent": -35.9,
         "priorSessions": 309,
-        "sessions": 197,
+        "sessions": 198,
         "title": "Unlock ZIP File Online",
         "url": "https://blog.conholdate.com/total/unlock-zip-online/"
       },
@@ -8346,9 +8354,9 @@
         "url": "https://blog.conholdate.com/total/add-barcode-to-pdf-in-java/"
       },
       {
-        "changePercent": -63.2,
+        "changePercent": -57.9,
         "priorSessions": 38,
-        "sessions": 14,
+        "sessions": 16,
         "title": "Split Word Documents Online Free",
         "url": "https://blog.conholdate.com/total/split-word-files/"
       },
@@ -8386,8 +8394,8 @@
     "gscRawPriorClicks": 9056,
     "gscRawPriorImpressions": 416642,
     "organicPriorSessions": 10871,
-    "organicSessions": 7102,
-    "refreshedAt": "2026-11-11T07:23:45.908487+00:00",
+    "organicSessions": 7139,
+    "refreshedAt": "2026-11-11T12:29:30.868076+00:00",
     "risingQueries": [
       {
         "growthPercent": 3400.0,
@@ -8617,7 +8625,7 @@
         "ga4": {
           "postCount": 6,
           "priorSessions": 15,
-          "sessions": 31
+          "sessions": 32
         },
         "gscOpportunities": []
       },
@@ -8665,7 +8673,7 @@
         "ga4": {
           "postCount": 52,
           "priorSessions": 178,
-          "sessions": 295
+          "sessions": 297
         },
         "gscOpportunities": [
           {
@@ -8714,7 +8722,7 @@
         "ga4": {
           "postCount": 64,
           "priorSessions": 283,
-          "sessions": 504
+          "sessions": 506
         },
         "gscOpportunities": [
           {
@@ -8812,7 +8820,7 @@
         "ga4": {
           "postCount": 49,
           "priorSessions": 148,
-          "sessions": 318
+          "sessions": 319
         },
         "gscOpportunities": [
           {
@@ -9173,7 +9181,7 @@
         "ga4": {
           "postCount": 18,
           "priorSessions": 62,
-          "sessions": 107
+          "sessions": 108
         },
         "gscOpportunities": [
           {
@@ -9366,11 +9374,11 @@
       },
       "Direct": {
         "priorSessions": 2497,
-        "sessions": 1397
+        "sessions": 1461
       },
       "Organic Search": {
         "priorSessions": 141,
-        "sessions": 115
+        "sessions": 116
       },
       "Organic Social": {
         "priorSessions": 9,
@@ -9382,7 +9390,7 @@
       },
       "Unassigned": {
         "priorSessions": 380,
-        "sessions": 159
+        "sessions": 166
       }
     },
     "ctrAnomalies": [
@@ -9555,7 +9563,7 @@
     "gscRawPriorImpressions": 287844,
     "organicPriorSessions": 2080,
     "organicSessions": 1412,
-    "refreshedAt": "2026-11-11T07:22:07.869901+00:00",
+    "refreshedAt": "2026-11-11T12:28:28.801945+00:00",
     "risingQueries": [
       {
         "growthPercent": 875.0,
