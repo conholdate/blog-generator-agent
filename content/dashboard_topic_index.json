@@ -47767,6 +47767,11 @@
       "date": "Wed, 09 Sep 2026 12:31:52 +0000",
       "title": "Edit Powerpoint Presentations in C#",
       "url": "https://blog.groupdocs.cloud/editor/edit-powerpoint-presentations-in-csharp/"
+    },
+    {
+      "date": "Wed, 11 Nov 2026 07:40:17 +0000",
+      "title": "Integrating GroupDocs.Editor into an ASP.NET Core Web Application",
+      "url": "https://blog.groupdocs.cloud/editor/integrating-groupdocseditor-into-an-aspdotnet-core-web-application/"
     }
   ],
   "groupdocs.cloud|GroupDocs.Editor|Java": [
