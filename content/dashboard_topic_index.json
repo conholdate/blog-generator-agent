@@ -48729,6 +48729,11 @@
       "date": "Tue, 20 Nov 2025 19:21:10 +0000",
       "title": "Summarize Document Content in C# .NET | Document Summarization API",
       "url": "https://blog.groupdocs.cloud/rewriter/summarize-document-content-csharp"
+    },
+    {
+      "date": "Wed, 11 Nov 2026 19:21:49 +0000",
+      "title": "Step‑by‑Step Guide to Integrate GroupDocs.Rewriter with ASP.NET Core MVC",
+      "url": "https://blog.groupdocs.cloud/rewriter/stepbystep-guide-to-integrate-groupdocsrewriter-with-aspdotnet-core-mvc/"
     }
   ],
   "groupdocs.cloud|GroupDocs.Signature|.NET": [
