@@ -215,8 +215,8 @@
    "source": "https://api.aspose.cloud/v3.0/diagram/swagger/spec",
    "referenceUrl": "https://reference.aspose.cloud/diagram/",
    "version": "v3.0",
-   "hash": "8dc568e38102eeed",
-   "featureCount": 18,
+   "hash": "f8a16c42b5d4b82e",
+   "featureCount": 23,
    "formats": [
     "html",
     "jpg",
@@ -229,7 +229,7 @@
     "vss",
     "vst"
    ],
-   "updatedAt": "2026-11-04"
+   "updatedAt": "2026-11-07"
   },
   "email": {
    "displayName": "Aspose.Email Cloud SDK",
@@ -439,8 +439,8 @@
    "source": "https://api.aspose.cloud/v3.0/slides/swagger/spec",
    "referenceUrl": "https://reference.aspose.cloud/slides/",
    "version": "v3.0",
-   "hash": "198f617e3f1fee96",
-   "featureCount": 273,
+   "hash": "7950f5080cd825c2",
+   "featureCount": 277,
    "formats": [
     "bmp",
     "cube",
@@ -480,7 +480,7 @@
     "xml",
     "xps"
    ],
-   "updatedAt": "2026-11-04"
+   "updatedAt": "2026-11-07"
   },
   "tasks": {
    "displayName": "Aspose.Tasks Cloud SDK",

@@ -1702,6 +1702,11 @@
       "date": "2021-10-17",
       "title": "EML to MHT - Convert EML to MHT in C#",
       "url": "https://blog.aspose.cloud/email/convert-eml-to-mht-in-csharp/"
+    },
+    {
+      "date": "Wed, 11 Nov 2026 15:38:57 +0000",
+      "title": "Encrypt and decrypt S/MIME email messages in C#",
+      "url": "https://blog.aspose.cloud/email/encrypt-and-decrypt-smime-email-messages-in-csharp/"
     }
   ],
   "aspose.cloud|Aspose.Email|Go": [
@@ -4414,6 +4419,11 @@
       "date": "Wed, 21 Oct 2026 12:49:46 +0000",
       "title": "Learn How to Reorder Shuffle and Reorganize PDF Pages in Python",
       "url": "https://blog.aspose.cloud/slides/learn-how-to-reorder-shuffle-and-reorganize-pdf-pages-in-python/"
+    },
+    {
+      "date": "Fri, 06 Nov 2026 10:30:59 +0000",
+      "title": "GIF to DICOM Conversion Example in Python",
+      "url": "https://blog.aspose.cloud/slides/gif-to-dicom-conversion-example-in-python/"
     }
   ],
   "aspose.cloud|Aspose.Slides|Ruby": [
@@ -5325,6 +5335,11 @@
       "date": "2025-10-01",
       "title": "Effortless JPG to Word Conversion using .NET REST API",
       "url": "https://blog.aspose.cloud/words/jpg-to-doc-using-csharp/"
+    },
+    {
+      "date": "Wed, 11 Nov 2026 08:00:08 +0000",
+      "title": "Comparing and merging ODT files programmatically in .NET",
+      "url": "https://blog.aspose.cloud/words/comparing-and-merging-odt-files-programmatically-in-dotnet/"
     }
   ],
   "aspose.cloud|Aspose.Words|Dart": [
@@ -44759,6 +44774,11 @@
       "date": "Tue, 03 Nov 2026 17:38:26 +0000",
       "title": "Convert WEBP to JPG or PNG in Java",
       "url": "https://blog.conholdate.com/total/convert-webp-to-jpg-or-png-in-java/"
+    },
+    {
+      "date": "Wed, 11 Nov 2026 18:21:16 +0000",
+      "title": "Convert XML to PDF in Java",
+      "url": "https://blog.conholdate.com/total/convert-xml-to-pdf-in-java/"
     }
   ],
   "conholdate.com|Conholdate.Total|Node.js": [
@@ -47586,6 +47606,11 @@
       "date": "Fri, 30 Oct 2026 14:39:28 +0000",
       "title": "How to Convert Word Documents to HTML in Python",
       "url": "https://blog.groupdocs.cloud/conversion/how-to-convert-word-documents-to-html-in-python/"
+    },
+    {
+      "date": "Fri, 06 Nov 2026 10:41:40 +0000",
+      "title": "How to Convert Excel Workbook to Text in Python",
+      "url": "https://blog.groupdocs.cloud/conversion/how-to-convert-excel-workbook-to-text-in-python/"
     }
   ],
   "groupdocs.cloud|GroupDocs.Conversion|Ruby": [
@@ -47757,6 +47782,11 @@
       "date": "Wed, 09 Sep 2026 12:31:52 +0000",
       "title": "Edit Powerpoint Presentations in C#",
       "url": "https://blog.groupdocs.cloud/editor/edit-powerpoint-presentations-in-csharp/"
+    },
+    {
+      "date": "Wed, 11 Nov 2026 07:40:17 +0000",
+      "title": "Integrating GroupDocs.Editor into an ASP.NET Core Web Application",
+      "url": "https://blog.groupdocs.cloud/editor/integrating-groupdocseditor-into-an-aspdotnet-core-web-application/"
     }
   ],
   "groupdocs.cloud|GroupDocs.Editor|Java": [
@@ -48699,6 +48729,11 @@
       "date": "Tue, 20 Nov 2025 19:21:10 +0000",
       "title": "Summarize Document Content in C# .NET | Document Summarization API",
       "url": "https://blog.groupdocs.cloud/rewriter/summarize-document-content-csharp"
+    },
+    {
+      "date": "Wed, 11 Nov 2026 19:21:49 +0000",
+      "title": "Step‑by‑Step Guide to Integrate GroupDocs.Rewriter with ASP.NET Core MVC",
+      "url": "https://blog.groupdocs.cloud/rewriter/stepbystep-guide-to-integrate-groupdocsrewriter-with-aspdotnet-core-mvc/"
     }
   ],
   "groupdocs.cloud|GroupDocs.Signature|.NET": [
