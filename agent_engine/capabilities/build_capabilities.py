@@ -21,7 +21,7 @@ A product is only re-embedded and rewritten when its content hash changes,
 so most weekly runs commit nothing. A failed fetch keeps the product's
 previous file untouched - an unattended run must never wipe capabilities.
 
-Usage: python build_capabilities.py aspose.cloud [--summary-file=PATH] [--force] [--only=imaging,pdf]
+Usage: python build_capabilities.py aspose.cloud|groupdocs.cloud [--summary-file=PATH] [--force] [--only=imaging,pdf]
 Runs weekly via .github/workflows/capabilities_build.yml.
 """
 from __future__ import annotations
@@ -53,7 +53,9 @@ from extract import (  # noqa: E402
 )
 from spec_sources import BUNDLE_PRODUCTS, fetch_source  # noqa: E402
 
-SUPPORTED_BRANDS = {"aspose.cloud": "aspose_cloud"}
+# Brand -> its configs/<folder> of product YAMLs. Each needs a BRAND_SOURCES
+# entry in spec_sources.py too.
+SUPPORTED_BRANDS = {"aspose.cloud": "aspose_cloud", "groupdocs.cloud": "groupdocs_cloud"}
 # Minimum lead another product's best feature match needs over the selected
 # product's before a topic counts as "another product's area". Tuned in the
 # POC: good topics never exceeded 0.011, wrong-product ones were >= 0.061.
@@ -119,7 +121,7 @@ def build(brand: str, force: bool = False, only: set[str] | None = None) -> list
                 products[key] = prior
             continue
 
-        src = fetch_source(key, (prior or {}).get("version", ""))
+        src = fetch_source(key, (prior or {}).get("version", ""), brand)
         if src.status != "ok":
             if prior and os.path.exists(file_path):
                 products[key] = prior

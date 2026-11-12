@@ -1,0 +1,842 @@
+{
+ "brand": "groupdocs.cloud",
+ "embedding": {
+  "model": "qwen3-embedding-8b",
+  "quantizeClamp": 0.3
+ },
+ "rules": {
+  "stopwords": [
+   "a",
+   "add",
+   "all",
+   "an",
+   "and",
+   "android",
+   "any",
+   "api",
+   "app",
+   "as",
+   "at",
+   "by",
+   "c",
+   "cloud",
+   "cpp",
+   "curl",
+   "data",
+   "file",
+   "files",
+   "for",
+   "free",
+   "from",
+   "get",
+   "go",
+   "how",
+   "in",
+   "into",
+   "is",
+   "it",
+   "java",
+   "js",
+   "net",
+   "new",
+   "node",
+   "of",
+   "on",
+   "online",
+   "or",
+   "page",
+   "pages",
+   "perl",
+   "php",
+   "python",
+   "rest",
+   "ruby",
+   "sdk",
+   "set",
+   "swift",
+   "text",
+   "the",
+   "to",
+   "two",
+   "using",
+   "via",
+   "web",
+   "with",
+   "your"
+  ],
+  "genericFormats": [
+   "3d",
+   "image",
+   "images",
+   "markdown"
+  ],
+  "sharedFormatThreshold": 4,
+  "otherAreaMargin": 0.05
+ },
+ "bundles": {
+  "total": {
+   "alias": "GroupDocs.Total"
+  }
+ },
+ "products": {
+  "annotation": {
+   "displayName": "GroupDocs.Annotation Cloud SDK",
+   "alias": "GroupDocs.Annotation",
+   "sourceKind": "spec",
+   "source": "https://api.groupdocs.cloud/v2.0/annotation/swagger/spec",
+   "referenceUrl": "https://reference.groupdocs.cloud/annotation/",
+   "version": "v2.0",
+   "hash": "4c2dc6b3e397b6d1",
+   "featureCount": 8,
+   "formats": [
+    "bmp",
+    "doc",
+    "docx",
+    "dot",
+    "jpeg",
+    "jpg",
+    "pdf",
+    "png",
+    "ppt",
+    "pptx",
+    "svg",
+    "xls",
+    "xlsx"
+   ],
+   "updatedAt": "2026-11-12"
+  },
+  "assembly": {
+   "displayName": "GroupDocs.Assembly Cloud SDK",
+   "alias": "GroupDocs.Assembly",
+   "sourceKind": "spec",
+   "source": "https://api.groupdocs.cloud/v1.0/assembly/swagger/spec",
+   "referenceUrl": "https://reference.groupdocs.cloud/assembly/",
+   "version": "v1.0",
+   "hash": "f0832562ab40d22c",
+   "featureCount": 2,
+   "formats": [
+    "doc",
+    "docx",
+    "html",
+    "json",
+    "pdf",
+    "pptx",
+    "xlsx",
+    "xml"
+   ],
+   "updatedAt": "2026-11-12"
+  },
+  "comparison": {
+   "displayName": "GroupDocs.Comparison Cloud SDK",
+   "alias": "GroupDocs.Comparison",
+   "sourceKind": "spec",
+   "source": "https://api.groupdocs.cloud/v2.0/comparison/swagger/spec",
+   "referenceUrl": "https://reference.groupdocs.cloud/comparison/",
+   "version": "v2.0",
+   "hash": "50bfa952a1ce8cf9",
+   "featureCount": 9,
+   "formats": [
+    "bmp",
+    "doc",
+    "docx",
+    "jpeg",
+    "json",
+    "pdf",
+    "png",
+    "ppt",
+    "pptx",
+    "xls",
+    "xlsx"
+   ],
+   "updatedAt": "2026-11-12"
+  },
+  "conversion": {
+   "displayName": "GroupDocs.Conversion Cloud SDK",
+   "alias": "GroupDocs.Conversion",
+   "sourceKind": "spec",
+   "source": "https://api.groupdocs.cloud/v2.0/conversion/swagger/spec",
+   "referenceUrl": "https://reference.groupdocs.cloud/conversion/",
+   "version": "v2.0",
+   "hash": "954c80a0b833b962",
+   "featureCount": 9,
+   "formats": [
+    "csv",
+    "doc",
+    "docx",
+    "html",
+    "jpg",
+    "pdf",
+    "png",
+    "ppt",
+    "pptx",
+    "psd",
+    "raw",
+    "rtf",
+    "xls",
+    "xlsx",
+    "xml",
+    "xps"
+   ],
+   "updatedAt": "2026-11-12"
+  },
+  "editor": {
+   "displayName": "GroupDocs.Editor Cloud SDK",
+   "alias": "GroupDocs.Editor",
+   "sourceKind": "spec",
+   "source": "https://api.groupdocs.cloud/v1.0/editor/swagger/spec",
+   "referenceUrl": "https://reference.groupdocs.cloud/editor/",
+   "version": "v1.0",
+   "hash": "9f4798bd1f3c6894",
+   "featureCount": 4,
+   "formats": [
+    "csv",
+    "doc",
+    "docx",
+    "html",
+    "pdf",
+    "pptx",
+    "rtf",
+    "txt",
+    "xlsx",
+    "xml"
+   ],
+   "updatedAt": "2026-11-12"
+  },
+  "merger": {
+   "displayName": "GroupDocs.Merger Cloud SDK",
+   "alias": "GroupDocs.Merger",
+   "sourceKind": "spec",
+   "source": "https://api.groupdocs.cloud/v1.0/merger/swagger/spec",
+   "referenceUrl": "https://reference.groupdocs.cloud/merger/",
+   "version": "v1.0",
+   "hash": "355f924c37246f7d",
+   "featureCount": 17,
+   "formats": [
+    "bmp",
+    "doc",
+    "docx",
+    "jpeg",
+    "mix",
+    "pdf",
+    "png",
+    "ppt",
+    "pptx",
+    "ua",
+    "xls",
+    "xlsx"
+   ],
+   "updatedAt": "2026-11-12"
+  },
+  "metadata": {
+   "displayName": "GroupDocs.Metadata Cloud SDK",
+   "alias": "GroupDocs.Metadata",
+   "sourceKind": "spec",
+   "source": "https://api.groupdocs.cloud/v1.0/metadata/swagger/spec",
+   "referenceUrl": "https://reference.groupdocs.cloud/metadata/",
+   "version": "v1.0",
+   "hash": "d23a84b220d32ea8",
+   "featureCount": 6,
+   "formats": [
+    "doc",
+    "docx",
+    "email",
+    "pdf",
+    "ppt",
+    "pptx",
+    "xls",
+    "xlsx"
+   ],
+   "updatedAt": "2026-11-12"
+  },
+  "parser": {
+   "displayName": "GroupDocs.Parser Cloud SDK",
+   "alias": "GroupDocs.Parser",
+   "sourceKind": "spec",
+   "source": "https://api.groupdocs.cloud/v1.0/parser/swagger/spec",
+   "referenceUrl": "https://reference.groupdocs.cloud/parser/",
+   "version": "v1.0",
+   "hash": "b57442f2b2229915",
+   "featureCount": 11,
+   "formats": [
+    "ai",
+    "doc",
+    "docx",
+    "email",
+    "pdf",
+    "ppt",
+    "pptx",
+    "txt",
+    "url",
+    "xls",
+    "xlsx",
+    "zip"
+   ],
+   "updatedAt": "2026-11-12"
+  },
+  "rewriter": {
+   "displayName": "GroupDocs.Rewriter Cloud SDK",
+   "alias": "GroupDocs.Rewriter",
+   "sourceKind": "spec",
+   "source": "https://api.groupdocs.cloud/v2.0/rewriter/swagger/spec",
+   "referenceUrl": "https://reference.groupdocs.cloud/rewriter/",
+   "version": "v2.0",
+   "hash": "bc5714be3683eb27",
+   "featureCount": 74,
+   "formats": [
+    "aac",
+    "avi",
+    "azw3",
+    "bmp",
+    "doc",
+    "docm",
+    "docx",
+    "epub",
+    "flac",
+    "flv",
+    "gif",
+    "html",
+    "jpg",
+    "json",
+    "key",
+    "m4a",
+    "md",
+    "mkv",
+    "mobi",
+    "mov",
+    "mp3",
+    "mpg",
+    "ocr",
+    "odt",
+    "one",
+    "pdf",
+    "png",
+    "ppt",
+    "pptm",
+    "pptx",
+    "rm",
+    "rtf",
+    "sid",
+    "svg",
+    "tiff",
+    "txt",
+    "url",
+    "wav",
+    "webm",
+    "wma",
+    "wmv",
+    "xps"
+   ],
+   "updatedAt": "2026-11-12"
+  },
+  "signature": {
+   "displayName": "GroupDocs.Signature Cloud SDK",
+   "alias": "GroupDocs.Signature",
+   "sourceKind": "spec",
+   "source": "https://api.groupdocs.cloud/v2.0/signature/swagger/spec",
+   "referenceUrl": "https://reference.groupdocs.cloud/signature/",
+   "version": "v2.0",
+   "hash": "1736d271de0400ff",
+   "featureCount": 10,
+   "formats": [
+    "bmp",
+    "doc",
+    "docx",
+    "dot",
+    "html",
+    "jpeg",
+    "key",
+    "pdf",
+    "png",
+    "ppt",
+    "pptx",
+    "qr",
+    "xls",
+    "xlsx"
+   ],
+   "updatedAt": "2026-11-12"
+  },
+  "translation": {
+   "displayName": "GroupDocs.Translation Cloud SDK",
+   "alias": "GroupDocs.Translation",
+   "sourceKind": "spec",
+   "source": "https://api.groupdocs.cloud/v2.0/translation/swagger/spec",
+   "referenceUrl": "https://reference.groupdocs.cloud/translation/",
+   "version": "v2.0",
+   "hash": "9215df3e1749bc72",
+   "featureCount": 37,
+   "formats": [
+    "aac",
+    "avi",
+    "bmp",
+    "csv",
+    "doc",
+    "docm",
+    "docx",
+    "flac",
+    "flv",
+    "gif",
+    "html",
+    "jpg",
+    "json",
+    "key",
+    "m4a",
+    "md",
+    "mkv",
+    "mov",
+    "mp3",
+    "mpg",
+    "odp",
+    "ods",
+    "odt",
+    "pdf",
+    "png",
+    "ppt",
+    "pptm",
+    "pptx",
+    "rm",
+    "rtf",
+    "sid",
+    "srt",
+    "svg",
+    "tiff",
+    "tsv",
+    "txt",
+    "wav",
+    "webm",
+    "wma",
+    "wmv",
+    "xls",
+    "xlsb",
+    "xlsm",
+    "xlsx",
+    "xml",
+    "xps"
+   ],
+   "updatedAt": "2026-11-12"
+  },
+  "viewer": {
+   "displayName": "GroupDocs.Viewer Cloud SDK",
+   "alias": "GroupDocs.Viewer",
+   "sourceKind": "spec",
+   "source": "https://api.groupdocs.cloud/v2.0/viewer/swagger/spec",
+   "referenceUrl": "https://reference.groupdocs.cloud/viewer/",
+   "version": "v2.0",
+   "hash": "3639823feaf3c2b4",
+   "featureCount": 6,
+   "formats": [
+    "csv",
+    "doc",
+    "docx",
+    "dwg",
+    "dwt",
+    "epub",
+    "hh",
+    "html",
+    "jpeg",
+    "jpg",
+    "mm",
+    "oxps",
+    "pdf",
+    "png",
+    "ppt",
+    "pptx",
+    "svg",
+    "tsv",
+    "ttf",
+    "txt",
+    "xls",
+    "xlsx",
+    "xps"
+   ],
+   "updatedAt": "2026-11-12"
+  },
+  "watermark": {
+   "displayName": "GroupDocs.Watermark Cloud SDK",
+   "alias": "GroupDocs.Watermark",
+   "sourceKind": "spec",
+   "source": "https://api.groupdocs.cloud/v1.0/watermark/swagger/spec",
+   "referenceUrl": "https://reference.groupdocs.cloud/watermark/",
+   "version": "v1.0",
+   "hash": "a101c9b1fb675575",
+   "featureCount": 7,
+   "formats": [
+    "bmp",
+    "doc",
+    "docx",
+    "jpeg",
+    "pdf",
+    "png",
+    "ppt",
+    "pptx",
+    "url",
+    "xls",
+    "xlsx"
+   ],
+   "updatedAt": "2026-11-12"
+  }
+ },
+ "formatOwners": {
+  "aac": [
+   "rewriter",
+   "translation"
+  ],
+  "ai": [
+   "parser"
+  ],
+  "avi": [
+   "rewriter",
+   "translation"
+  ],
+  "azw3": [
+   "rewriter"
+  ],
+  "bmp": [
+   "annotation",
+   "comparison",
+   "merger",
+   "rewriter",
+   "signature",
+   "translation",
+   "watermark"
+  ],
+  "csv": [
+   "conversion",
+   "editor",
+   "translation",
+   "viewer"
+  ],
+  "doc": [
+   "annotation",
+   "assembly",
+   "comparison",
+   "conversion",
+   "editor",
+   "merger",
+   "metadata",
+   "parser",
+   "rewriter",
+   "signature",
+   "translation",
+   "viewer",
+   "watermark"
+  ],
+  "docm": [
+   "rewriter",
+   "translation"
+  ],
+  "docx": [
+   "annotation",
+   "assembly",
+   "comparison",
+   "conversion",
+   "editor",
+   "merger",
+   "metadata",
+   "parser",
+   "rewriter",
+   "signature",
+   "translation",
+   "viewer",
+   "watermark"
+  ],
+  "dot": [
+   "annotation",
+   "signature"
+  ],
+  "dwg": [
+   "viewer"
+  ],
+  "dwt": [
+   "viewer"
+  ],
+  "email": [
+   "metadata",
+   "parser"
+  ],
+  "epub": [
+   "rewriter",
+   "viewer"
+  ],
+  "flac": [
+   "rewriter",
+   "translation"
+  ],
+  "flv": [
+   "rewriter",
+   "translation"
+  ],
+  "gif": [
+   "rewriter",
+   "translation"
+  ],
+  "hh": [
+   "viewer"
+  ],
+  "html": [
+   "assembly",
+   "conversion",
+   "editor",
+   "rewriter",
+   "signature",
+   "translation",
+   "viewer"
+  ],
+  "jpeg": [
+   "annotation",
+   "comparison",
+   "merger",
+   "signature",
+   "viewer",
+   "watermark"
+  ],
+  "jpg": [
+   "annotation",
+   "conversion",
+   "rewriter",
+   "translation",
+   "viewer"
+  ],
+  "json": [
+   "assembly",
+   "comparison",
+   "rewriter",
+   "translation"
+  ],
+  "key": [
+   "rewriter",
+   "signature",
+   "translation"
+  ],
+  "m4a": [
+   "rewriter",
+   "translation"
+  ],
+  "md": [
+   "rewriter",
+   "translation"
+  ],
+  "mix": [
+   "merger"
+  ],
+  "mkv": [
+   "rewriter",
+   "translation"
+  ],
+  "mm": [
+   "viewer"
+  ],
+  "mobi": [
+   "rewriter"
+  ],
+  "mov": [
+   "rewriter",
+   "translation"
+  ],
+  "mp3": [
+   "rewriter",
+   "translation"
+  ],
+  "mpg": [
+   "rewriter",
+   "translation"
+  ],
+  "ocr": [
+   "rewriter"
+  ],
+  "odp": [
+   "translation"
+  ],
+  "ods": [
+   "translation"
+  ],
+  "odt": [
+   "rewriter",
+   "translation"
+  ],
+  "one": [
+   "rewriter"
+  ],
+  "oxps": [
+   "viewer"
+  ],
+  "pdf": [
+   "annotation",
+   "assembly",
+   "comparison",
+   "conversion",
+   "editor",
+   "merger",
+   "metadata",
+   "parser",
+   "rewriter",
+   "signature",
+   "translation",
+   "viewer",
+   "watermark"
+  ],
+  "png": [
+   "annotation",
+   "comparison",
+   "conversion",
+   "merger",
+   "rewriter",
+   "signature",
+   "translation",
+   "viewer",
+   "watermark"
+  ],
+  "ppt": [
+   "annotation",
+   "comparison",
+   "conversion",
+   "merger",
+   "metadata",
+   "parser",
+   "rewriter",
+   "signature",
+   "translation",
+   "viewer",
+   "watermark"
+  ],
+  "pptm": [
+   "rewriter",
+   "translation"
+  ],
+  "pptx": [
+   "annotation",
+   "assembly",
+   "comparison",
+   "conversion",
+   "editor",
+   "merger",
+   "metadata",
+   "parser",
+   "rewriter",
+   "signature",
+   "translation",
+   "viewer",
+   "watermark"
+  ],
+  "psd": [
+   "conversion"
+  ],
+  "qr": [
+   "signature"
+  ],
+  "raw": [
+   "conversion"
+  ],
+  "rm": [
+   "rewriter",
+   "translation"
+  ],
+  "rtf": [
+   "conversion",
+   "editor",
+   "rewriter",
+   "translation"
+  ],
+  "sid": [
+   "rewriter",
+   "translation"
+  ],
+  "srt": [
+   "translation"
+  ],
+  "svg": [
+   "annotation",
+   "rewriter",
+   "translation",
+   "viewer"
+  ],
+  "tiff": [
+   "rewriter",
+   "translation"
+  ],
+  "tsv": [
+   "translation",
+   "viewer"
+  ],
+  "ttf": [
+   "viewer"
+  ],
+  "txt": [
+   "editor",
+   "parser",
+   "rewriter",
+   "translation",
+   "viewer"
+  ],
+  "ua": [
+   "merger"
+  ],
+  "url": [
+   "parser",
+   "rewriter",
+   "watermark"
+  ],
+  "wav": [
+   "rewriter",
+   "translation"
+  ],
+  "webm": [
+   "rewriter",
+   "translation"
+  ],
+  "wma": [
+   "rewriter",
+   "translation"
+  ],
+  "wmv": [
+   "rewriter",
+   "translation"
+  ],
+  "xls": [
+   "annotation",
+   "comparison",
+   "conversion",
+   "merger",
+   "metadata",
+   "parser",
+   "signature",
+   "translation",
+   "viewer",
+   "watermark"
+  ],
+  "xlsb": [
+   "translation"
+  ],
+  "xlsm": [
+   "translation"
+  ],
+  "xlsx": [
+   "annotation",
+   "assembly",
+   "comparison",
+   "conversion",
+   "editor",
+   "merger",
+   "metadata",
+   "parser",
+   "signature",
+   "translation",
+   "viewer",
+   "watermark"
+  ],
+  "xml": [
+   "assembly",
+   "conversion",
+   "editor",
+   "translation"
+  ],
+  "xps": [
+   "conversion",
+   "rewriter",
+   "translation",
+   "viewer"
+  ],
+  "zip": [
+   "parser"
+  ]
+ }
+}

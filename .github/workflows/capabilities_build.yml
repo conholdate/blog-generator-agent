@@ -1,8 +1,8 @@
 name: Refresh Product Capability Registry
 
-# Weekly refresh of content/capabilities/aspose.cloud/ - what each
-# aspose.cloud product's API can actually do, built from its public
-# Swagger spec (Aspose.Words Cloud: its official SDK). The dashboard's
+# Weekly refresh of content/capabilities/<brand>/ for aspose.cloud and
+# groupdocs.cloud - what each product's API can actually do, built from its
+# public Swagger spec (Aspose.Words Cloud: its official SDK). The dashboard's
 # Recommended Actions reads these files to red-tag "Create" topics the
 # selected product doesn't support. See
 # agent_engine/capabilities/build_capabilities.py for the full why.
@@ -42,8 +42,14 @@ jobs:
         run: |
           FORCE_FLAG=""
           if [ "${{ inputs.force }}" = "true" ]; then FORCE_FLAG="--force"; fi
-          python agent_engine/capabilities/build_capabilities.py aspose.cloud $FORCE_FLAG \
-            --summary-file="$GITHUB_WORKSPACE/capabilities_summary.md"
+          : > "$GITHUB_WORKSPACE/capabilities_summary.md"
+          # One brand failing must not stop the other.
+          for BRAND in aspose.cloud groupdocs.cloud; do
+            python agent_engine/capabilities/build_capabilities.py "$BRAND" $FORCE_FLAG \
+              --summary-file="$GITHUB_WORKSPACE/summary_$BRAND.md" || echo "::warning::$BRAND build failed"
+            cat "$GITHUB_WORKSPACE/summary_$BRAND.md" >> "$GITHUB_WORKSPACE/capabilities_summary.md" 2>/dev/null || true
+            echo "" >> "$GITHUB_WORKSPACE/capabilities_summary.md"
+          done
 
       - name: Check for changes
         id: diff
@@ -67,14 +73,14 @@ jobs:
           git config --global user.email "action@github.com"
           git config --global user.name "GitHub Action"
 
-          BRANCH_NAME="capabilities/aspose-cloud-${{ github.run_number }}"
+          BRANCH_NAME="capabilities/refresh-${{ github.run_number }}"
           git checkout -b "$BRANCH_NAME"
           git add content/capabilities
-          git commit -m "Refresh product capability registry for aspose.cloud [Run #${{ github.run_number }}]"
+          git commit -m "Refresh product capability registry [Run #${{ github.run_number }}]"
           git push -u origin "$BRANCH_NAME"
 
           PR_URL=$(gh pr create \
-            --title "Refresh product capability registry for aspose.cloud (Run #${{ github.run_number }})" \
+            --title "Refresh product capability registry (Run #${{ github.run_number }})" \
             --body-file "$GITHUB_WORKSPACE/capabilities_summary.md" \
             --base main \
             --head "$BRANCH_NAME")
