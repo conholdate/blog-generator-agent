@@ -288,5 +288,15 @@
     "branch": "main",
     "status": "not_found",
     "last_verified": "2026-08-28"
+  },
+  {
+    "brand": "aspose.com",
+    "urlPrefix": "css",
+    "product": "Aspose.CSS for .NET",
+    "platform": ".NET",
+    "repository": null,
+    "branch": "main",
+    "status": "not_found",
+    "last_verified": "2026-11-14"
   }
 ]
