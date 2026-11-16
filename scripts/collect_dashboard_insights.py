@@ -26,6 +26,8 @@ from config import settings  # noqa: E402
 from services.insights_collector import collect_brand_insights  # noqa: E402
 
 SNAPSHOT_PATH = REPO_ROOT / "content" / "dashboard_insights.json"
+# Per-URL results for posts the dashboard tracks (Autopilot posts/refreshes).
+TRACKING_PATH = REPO_ROOT / "content" / "post_tracking.json"
 
 # brand -> GA4 property ID setting. Add a brand here (and its
 # GA4_PROPERTY_ID_<BRAND> setting in config.py) once its service account
@@ -62,6 +64,14 @@ def main() -> None:
     SNAPSHOT_PATH.parent.mkdir(parents=True, exist_ok=True)
     SNAPSHOT_PATH.write_text(json.dumps(snapshot, indent=2, ensure_ascii=False, sort_keys=True), encoding="utf-8")
     _log(f"wrote {SNAPSHOT_PATH} ({len(snapshot)} brand(s))")
+
+    # Separate and non-fatal: a tracking failure never affects the snapshot above.
+    try:
+        from services.post_tracker import collect_post_tracking
+
+        collect_post_tracking(ONBOARDED_BRANDS, TRACKING_PATH)
+    except Exception as e:  # noqa: BLE001
+        _log(f"post tracking failed (non-fatal): {e}")
 
 
 if __name__ == "__main__":

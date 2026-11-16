@@ -56,6 +56,10 @@ jobs:
           echo ".env file created"
 
       - name: Collect insights
+        env:
+          # Tracking list of Autopilot posts/refreshes written by the dashboard.
+          KV_REST_API_URL: ${{ secrets.KV_REST_API_URL }}
+          KV_REST_API_TOKEN: ${{ secrets.KV_REST_API_TOKEN }}
         run: python scripts/collect_dashboard_insights.py
 
       - name: Commit snapshot
@@ -63,6 +67,6 @@ jobs:
         run: |
           git config --global user.email "action@github.com"
           git config --global user.name "GitHub Action"
-          git add content/dashboard_insights.json
+          git add content/dashboard_insights.json content/post_tracking.json 2>/dev/null || git add content/dashboard_insights.json
           git commit -m "Update dashboard insights snapshot [Run #${{ github.run_number }}]" || echo "No changes to commit"
           git push origin HEAD
