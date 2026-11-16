@@ -94,7 +94,7 @@
         "ga4": {
           "postCount": 9,
           "priorSessions": 27,
-          "sessions": 80
+          "sessions": 81
         },
         "gscOpportunities": []
       },
@@ -762,7 +762,7 @@
         "ga4": {
           "postCount": 44,
           "priorSessions": 216,
-          "sessions": 220
+          "sessions": 221
         },
         "gscOpportunities": [
           {
@@ -966,7 +966,7 @@
         "ga4": {
           "postCount": 48,
           "priorSessions": 200,
-          "sessions": 186
+          "sessions": 187
         },
         "gscOpportunities": [
           {
@@ -1040,7 +1040,7 @@
         "ga4": {
           "postCount": 23,
           "priorSessions": 105,
-          "sessions": 95
+          "sessions": 96
         },
         "gscOpportunities": []
       },
@@ -1175,7 +1175,7 @@
       },
       "Direct": {
         "priorSessions": 2122,
-        "sessions": 5194
+        "sessions": 5244
       },
       "Organic Search": {
         "priorSessions": 86,
@@ -1364,7 +1364,7 @@
     "gscRawPriorImpressions": 194952,
     "organicPriorSessions": 1681,
     "organicSessions": 1424,
-    "refreshedAt": "2026-11-16T12:26:05.729911+00:00",
+    "refreshedAt": "2026-11-16T13:24:25.302389+00:00",
     "risingQueries": [
       {
         "growthPercent": 8200.0,
@@ -1748,7 +1748,7 @@
         "ga4": {
           "postCount": 33,
           "priorSessions": 105,
-          "sessions": 312
+          "sessions": 318
         },
         "gscOpportunities": []
       },
@@ -1894,7 +1894,7 @@
         "ga4": {
           "postCount": 34,
           "priorSessions": 171,
-          "sessions": 420
+          "sessions": 426
         },
         "gscOpportunities": [
           {
@@ -2090,7 +2090,7 @@
         "ga4": {
           "postCount": 94,
           "priorSessions": 344,
-          "sessions": 876
+          "sessions": 870
         },
         "gscOpportunities": [
           {
@@ -2246,7 +2246,7 @@
         "ga4": {
           "postCount": 47,
           "priorSessions": 123,
-          "sessions": 462
+          "sessions": 468
         },
         "gscOpportunities": [
           {
@@ -2617,7 +2617,7 @@
         "ga4": {
           "postCount": 7,
           "priorSessions": 1683,
-          "sessions": 1083
+          "sessions": 1077
         },
         "gscOpportunities": [
           {
@@ -3565,9 +3565,9 @@
       },
       "aspose.com|Aspose.GIS|Python": {
         "ga4": {
-          "postCount": 12,
+          "postCount": 13,
           "priorSessions": 1470,
-          "sessions": 1341
+          "sessions": 1342
         },
         "gscOpportunities": [
           {
@@ -4326,7 +4326,7 @@
         "ga4": {
           "postCount": 32,
           "priorSessions": 137,
-          "sessions": 342
+          "sessions": 336
         },
         "gscOpportunities": []
       },
@@ -4334,7 +4334,7 @@
         "ga4": {
           "postCount": 29,
           "priorSessions": 205,
-          "sessions": 378
+          "sessions": 384
         },
         "gscOpportunities": [
           {
@@ -4504,9 +4504,9 @@
       },
       "aspose.com|Aspose.PDF|.NET": {
         "ga4": {
-          "postCount": 121,
-          "priorSessions": 540,
-          "sessions": 1230
+          "postCount": 122,
+          "priorSessions": 545,
+          "sessions": 1242
         },
         "gscOpportunities": [
           {
@@ -5529,9 +5529,9 @@
       },
       "aspose.com|Aspose.Slides|Java": {
         "ga4": {
-          "postCount": 72,
+          "postCount": 71,
           "priorSessions": 213,
-          "sessions": 720
+          "sessions": 714
         },
         "gscOpportunities": []
       },
@@ -5555,7 +5555,7 @@
         "ga4": {
           "postCount": 28,
           "priorSessions": 266,
-          "sessions": 504
+          "sessions": 498
         },
         "gscOpportunities": []
       },
@@ -5969,9 +5969,9 @@
       },
       "aspose.com|Aspose.Total|general": {
         "ga4": {
-          "postCount": 82,
+          "postCount": 80,
           "priorSessions": 422,
-          "sessions": 768
+          "sessions": 756
         },
         "gscOpportunities": [
           {
@@ -6028,7 +6028,7 @@
         "ga4": {
           "postCount": 96,
           "priorSessions": 342,
-          "sessions": 1032
+          "sessions": 1038
         },
         "gscOpportunities": []
       },
@@ -6084,7 +6084,7 @@
         "ga4": {
           "postCount": 51,
           "priorSessions": 456,
-          "sessions": 888
+          "sessions": 882
         },
         "gscOpportunities": [
           {
@@ -6171,9 +6171,9 @@
       },
       "aspose.com|Aspose.Words|general": {
         "ga4": {
-          "postCount": 90,
+          "postCount": 89,
           "priorSessions": 658,
-          "sessions": 1051
+          "sessions": 1045
         },
         "gscOpportunities": [
           {
@@ -6312,7 +6312,7 @@
         "ga4": {
           "postCount": 24,
           "priorSessions": 488,
-          "sessions": 714
+          "sessions": 720
         },
         "gscOpportunities": [
           {
@@ -6633,7 +6633,7 @@
       },
       "Direct": {
         "priorSessions": 20191,
-        "sessions": 16290
+        "sessions": 16400
       },
       "Display": {
         "priorSessions": 0,
@@ -6641,7 +6641,7 @@
       },
       "Organic Search": {
         "priorSessions": 4035,
-        "sessions": 3587
+        "sessions": 3616
       },
       "Organic Social": {
         "priorSessions": 13,
@@ -6657,7 +6657,7 @@
       },
       "Unassigned": {
         "priorSessions": 4023,
-        "sessions": 4092
+        "sessions": 4109
       }
     },
     "ctrAnomalies": [
@@ -6754,9 +6754,9 @@
     ],
     "decliningPosts": [
       {
-        "changePercent": -37.8,
+        "changePercent": -38.1,
         "priorSessions": 1605,
-        "sessions": 999,
+        "sessions": 993,
         "title": "Free Online Ruler - A Digital Solution for Accurate Measurements",
         "url": "https://blog.aspose.com/drawing/online-ruler-cm-scale/"
       },
@@ -6830,7 +6830,7 @@
     "gscRawPriorImpressions": 4514165,
     "organicPriorSessions": 72465,
     "organicSessions": 50555,
-    "refreshedAt": "2026-11-16T12:26:40.560326+00:00",
+    "refreshedAt": "2026-11-16T13:24:59.338812+00:00",
     "risingQueries": [
       {
         "growthPercent": 1042200.0,
@@ -7046,7 +7046,7 @@
     "gscRawPriorImpressions": 291,
     "organicPriorSessions": 3,
     "organicSessions": 5,
-    "refreshedAt": "2026-11-16T12:26:45.315812+00:00",
+    "refreshedAt": "2026-11-16T13:25:05.695337+00:00",
     "risingQueries": [],
     "status": "ok",
     "topOpportunities": []
@@ -7259,7 +7259,7 @@
         "ga4": {
           "postCount": 97,
           "priorSessions": 2217,
-          "sessions": 1542
+          "sessions": 1543
         },
         "gscOpportunities": [
           {
@@ -8148,7 +8148,7 @@
       },
       "Direct": {
         "priorSessions": 1393,
-        "sessions": 1388
+        "sessions": 1394
       },
       "Display": {
         "priorSessions": 4,
@@ -8156,7 +8156,7 @@
       },
       "Organic Search": {
         "priorSessions": 595,
-        "sessions": 532
+        "sessions": 536
       },
       "Organic Social": {
         "priorSessions": 11,
@@ -8340,8 +8340,8 @@
     "gscRawPriorClicks": 8288,
     "gscRawPriorImpressions": 405850,
     "organicPriorSessions": 10310,
-    "organicSessions": 7026,
-    "refreshedAt": "2026-11-16T12:26:58.549371+00:00",
+    "organicSessions": 7027,
+    "refreshedAt": "2026-11-16T13:25:16.148841+00:00",
     "risingQueries": [
       {
         "growthPercent": 3700.0,
@@ -8611,7 +8611,7 @@
         "ga4": {
           "postCount": 51,
           "priorSessions": 184,
-          "sessions": 291
+          "sessions": 292
         },
         "gscOpportunities": [
           {
@@ -9341,15 +9341,15 @@
       },
       "Cross-network": {
         "priorSessions": 1,
-        "sessions": 1
+        "sessions": 0
       },
       "Direct": {
         "priorSessions": 1567,
-        "sessions": 2006
+        "sessions": 2041
       },
       "Organic Search": {
         "priorSessions": 141,
-        "sessions": 111
+        "sessions": 114
       },
       "Organic Social": {
         "priorSessions": 7,
@@ -9533,8 +9533,8 @@
     "gscRawPriorClicks": 3358,
     "gscRawPriorImpressions": 283960,
     "organicPriorSessions": 1996,
-    "organicSessions": 1435,
-    "refreshedAt": "2026-11-16T12:25:48.738744+00:00",
+    "organicSessions": 1438,
+    "refreshedAt": "2026-11-16T13:24:05.668264+00:00",
     "risingQueries": [
       {
         "growthPercent": 900.0,
