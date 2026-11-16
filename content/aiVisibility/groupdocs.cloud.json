@@ -70,5 +70,75 @@
     "citedUrl": null,
     "position": null,
     "otherDomains": []
+  },
+  {
+    "date": "2026-11-14",
+    "checkedAt": "2026-11-14T15:30:29.187500+00:00",
+    "query": "zip to jpg",
+    "page": "https://blog.groupdocs.cloud/conversion/zip-to-jpg-online/",
+    "hasOverview": false,
+    "cited": false,
+    "citedUrl": null,
+    "position": null,
+    "otherDomains": []
+  },
+  {
+    "date": "2026-11-14",
+    "checkedAt": "2026-11-14T15:30:29.187500+00:00",
+    "query": "rar to pdf",
+    "page": "https://blog.groupdocs.cloud/conversion/convert-zip-or-rar-to-pdf-using-a-file-converter/",
+    "hasOverview": false,
+    "cited": false,
+    "citedUrl": null,
+    "position": null,
+    "otherDomains": []
+  },
+  {
+    "date": "2026-11-14",
+    "checkedAt": "2026-11-14T15:30:29.187500+00:00",
+    "query": "pptx merger",
+    "page": "https://blog.groupdocs.cloud/merger/merge-powerpoint-pptpptx-files-online-using-rest-api-in-csharp/",
+    "hasOverview": false,
+    "cited": false,
+    "citedUrl": null,
+    "position": null,
+    "otherDomains": []
+  },
+  {
+    "date": "2026-11-14",
+    "checkedAt": "2026-11-14T15:30:29.187500+00:00",
+    "query": "rotate pdf page node.js",
+    "page": "https://blog.groupdocs.cloud/merger/how-to-rotate-pdf-pages-using-rest-api-in-node-js/",
+    "hasOverview": true,
+    "cited": false,
+    "citedUrl": null,
+    "position": null,
+    "otherDomains": [
+      "www.google.com"
+    ]
+  },
+  {
+    "date": "2026-11-14",
+    "checkedAt": "2026-11-14T15:30:29.187500+00:00",
+    "query": "zip to html",
+    "page": "https://blog.groupdocs.cloud/conversion/convert-zip-to-html-in-nodejs-zip-file-converter/",
+    "hasOverview": false,
+    "cited": false,
+    "citedUrl": null,
+    "position": null,
+    "otherDomains": []
+  },
+  {
+    "date": "2026-11-14",
+    "checkedAt": "2026-11-14T15:30:29.187500+00:00",
+    "query": "sdk for splitting pdf documents into separate pages",
+    "page": "https://blog.groupdocs.cloud/merger/split-pdf-into-multiple-pdf-in-nodejs/",
+    "hasOverview": true,
+    "cited": false,
+    "citedUrl": null,
+    "position": null,
+    "otherDomains": [
+      "www.google.com"
+    ]
   }
 ]
