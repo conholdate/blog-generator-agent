@@ -1,0 +1,180 @@
+{
+  "generatedAt": "2026-11-16T12:27:06+00:00",
+  "posts": {
+    "https://blog.aspose.cloud/imaging/batch-resize-images-in-java-with-asposeimaging-cloud-sdk-highperformance-bulk-processing/": {
+      "brand": "aspose.cloud",
+      "kind": "post",
+      "since": "2026-11-14",
+      "title": "Batch Resize Images in Java with Aspose.Imaging Cloud SDK - High‑Performance Bulk Processing",
+      "updatedAt": "2026-11-16T12:27:06+00:00",
+      "url": "https://blog.aspose.cloud/imaging/batch-resize-images-in-java-with-asposeimaging-cloud-sdk-highperformance-bulk-processing/",
+      "windows": {}
+    },
+    "https://blog.aspose.cloud/imaging/resize-image-in-java/": {
+      "brand": "aspose.cloud",
+      "kind": "refresh",
+      "since": "2026-11-13",
+      "title": "java resize image",
+      "updatedAt": "2026-11-16T12:27:03+00:00",
+      "url": "https://blog.aspose.cloud/imaging/resize-image-in-java/",
+      "windows": {
+        "before28": {
+          "clicks": 2,
+          "complete": true,
+          "end": "2026-11-12",
+          "impressions": 337,
+          "position": 10.3,
+          "sessions": 1,
+          "start": "2026-10-16",
+          "topQueries": [
+            {
+              "clicks": 0,
+              "impressions": 93,
+              "position": 12.0,
+              "query": "java resize image"
+            },
+            {
+              "clicks": 0,
+              "impressions": 72,
+              "position": 10.9,
+              "query": "resize image java"
+            },
+            {
+              "clicks": 0,
+              "impressions": 37,
+              "position": 8.4,
+              "query": "resize image in java"
+            },
+            {
+              "clicks": 0,
+              "impressions": 6,
+              "position": 11.7,
+              "query": "java image resize"
+            },
+            {
+              "clicks": 0,
+              "impressions": 1,
+              "position": 8,
+              "query": "image resizer api"
+            }
+          ]
+        },
+        "d7": {
+          "clicks": 0,
+          "complete": false,
+          "end": "2026-11-13",
+          "impressions": 18,
+          "position": 23.6,
+          "sessions": 1,
+          "start": "2026-11-13",
+          "topQueries": [
+            {
+              "clicks": 0,
+              "impressions": 9,
+              "position": 28.3,
+              "query": "java resize image"
+            },
+            {
+              "clicks": 0,
+              "impressions": 3,
+              "position": 38.3,
+              "query": "resize image java"
+            },
+            {
+              "clicks": 0,
+              "impressions": 2,
+              "position": 11,
+              "query": "resize image in java"
+            }
+          ]
+        }
+      }
+    },
+    "https://blog.aspose.cloud/slides/convert-powerpoint-to-pdf-document-with-aspose-slides-cloud-sdk-for-net/": {
+      "brand": "aspose.cloud",
+      "kind": "refresh",
+      "since": "2026-11-13",
+      "title": ".net power point to pdf conversion sdk",
+      "updatedAt": "2026-11-16T12:27:06+00:00",
+      "url": "https://blog.aspose.cloud/slides/convert-powerpoint-to-pdf-document-with-aspose-slides-cloud-sdk-for-net/",
+      "windows": {
+        "before28": {
+          "clicks": 0,
+          "complete": true,
+          "end": "2026-11-12",
+          "impressions": 92,
+          "position": 13.4,
+          "sessions": 0,
+          "start": "2026-10-16",
+          "topQueries": [
+            {
+              "clicks": 0,
+              "impressions": 65,
+              "position": 12.4,
+              "query": ".net power point to pdf conversion sdk"
+            },
+            {
+              "clicks": 0,
+              "impressions": 21,
+              "position": 17.4,
+              "query": "powerpoint to pdf sdk"
+            }
+          ]
+        },
+        "d7": {
+          "clicks": 0,
+          "complete": false,
+          "end": "2026-11-13",
+          "impressions": 2,
+          "position": 12.5,
+          "sessions": 4,
+          "start": "2026-11-13",
+          "topQueries": [
+            {
+              "clicks": 0,
+              "impressions": 1,
+              "position": 9,
+              "query": ".net power point to pdf conversion sdk"
+            },
+            {
+              "clicks": 0,
+              "impressions": 1,
+              "position": 16,
+              "query": "powerpoint to pdf sdk"
+            }
+          ]
+        }
+      }
+    },
+    "https://blog.aspose.cloud/total/encrypt-and-decrypt-pdf-files-with-curl/": {
+      "brand": "aspose.cloud",
+      "kind": "refresh",
+      "since": "2026-11-13",
+      "title": "decrypt pdf",
+      "updatedAt": "2026-11-16T12:27:01+00:00",
+      "url": "https://blog.aspose.cloud/total/encrypt-and-decrypt-pdf-files-with-curl/",
+      "windows": {
+        "before28": {
+          "clicks": 0,
+          "complete": true,
+          "end": "2026-11-12",
+          "impressions": 6,
+          "position": 31.3,
+          "sessions": 1,
+          "start": "2026-10-16",
+          "topQueries": []
+        },
+        "d7": {
+          "clicks": 0,
+          "complete": false,
+          "end": "2026-11-13",
+          "impressions": 1,
+          "position": 10.0,
+          "sessions": 0,
+          "start": "2026-11-13",
+          "topQueries": []
+        }
+      }
+    }
+  }
+}
