@@ -1,0 +1,78 @@
+name: Edit a blog post — dashboard
+
+# Powers the revision box on the dashboard's "Edit a blog post" page: the
+# reviewer uploads a .md file and types an instruction, exactly like
+# "Request a revision" on a draft PR - but the file isn't on any branch.
+#
+# The dashboard stores {brand, instruction, input} in Redis under
+# localedit:<request_id> and dispatches this workflow; .github/scripts/
+# local_revise.py runs the SAME editor as the refine workflow
+# (main.py --revise, section-aware) on a temp copy and writes the result
+# back to that key. Nothing is committed, no PR is touched.
+#
+# client_payload fields: brand, request_id, requested_by
+
+on:
+  repository_dispatch:
+    types: [local-revise]
+
+run-name: "Edit a blog post (${{ github.event.client_payload.brand }}) [${{ github.event.client_payload.request_id }}]"
+
+permissions:
+  contents: read
+
+jobs:
+  revise:
+    runs-on: ubuntu-latest
+    # Brands enabled for dashboard requests - keep in sync with the other
+    # dashboard workflows and the dashboard's lib/config.ts.
+    if: contains(fromJSON('["aspose.cloud", "groupdocs.cloud", "aspose.com", "conholdate.com", "conholdate.cloud"]'), github.event.client_payload.brand)
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Cache pip packages
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+
+      - name: Remove any .env files that could interfere
+        run: |
+          find . -name ".env" -type f -delete
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          cd agent_engine/blog_generator
+          pip install -r requirements.txt
+          cd ../../mcp-servers
+          pip install -r requirements.txt
+
+      # LLM + metrics only - no sheets, gists or blog-repo access needed.
+      - name: Create runtime .env file with secrets
+        run: |
+          cat > .env << EOF
+          PROFESSIONALIZE_API_KEY_2=${{ secrets.PROFESSIONALIZE_API_KEY_2 }}
+          PROFESSIONALIZE_BASE_URL=${{ secrets.PROFESSIONALIZE_BASE_URL }}
+          PROFESSIONALIZE_LLM_MODEL=${{ secrets.PROFESSIONALIZE_LLM_MODEL }}
+          TOKEN_FOR_TEAM=${{ secrets.TOKEN_FOR_TEAM }}
+          METRICS_API_KEY=${{ secrets.METRICS_API_KEY }}
+          METRICS_API_URL=${{ vars.METRICS_API_URL }}
+          GOOGLE_SCRIPT_URL_FOR_TEAM=${{ vars.GOOGLE_SCRIPT_URL_FOR_TEAM }}
+          EOF
+          echo ".env file created"
+
+      - name: Apply the revision
+        env:
+          REQUEST_ID: ${{ github.event.client_payload.request_id }}
+          KV_REST_API_URL: ${{ secrets.KV_REST_API_URL }}
+          KV_REST_API_TOKEN: ${{ secrets.KV_REST_API_TOKEN }}
+        run: python .github/scripts/local_revise.py
