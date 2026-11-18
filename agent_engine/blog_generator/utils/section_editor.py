@@ -592,8 +592,16 @@ async def rewrite_section(lines: list[str], section: Section, instruction: str, 
     cleaned = strip_snippet_markers(cleaned)
     cleaned = cleaned.strip("\n")
 
-    new_section_text = cleaned if heading_line is None else f"{heading_line}\n{cleaned}"
-    new_lines = lines[:section.line_start] + new_section_text.split("\n") + lines[section.line_end:]
+    # Keep the section's original blank lines around its body (after the
+    # heading, before the next heading). The LLM output is stripped above,
+    # so without this the new text sat flush against both headings.
+    body_lines = body_text.split("\n")
+    lead = next((i for i, ln in enumerate(body_lines) if ln.strip()), len(body_lines))
+    trail = next((i for i, ln in enumerate(reversed(body_lines)) if ln.strip()), 0) if lead < len(body_lines) else 0
+    new_body = [""] * lead + cleaned.split("\n") + [""] * trail
+
+    new_section = new_body if heading_line is None else [heading_line] + new_body
+    new_lines = lines[:section.line_start] + new_section + lines[section.line_end:]
     return new_lines, usage
 
 
