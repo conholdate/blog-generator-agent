@@ -1,10 +1,19 @@
 {
   "schema_version": 1,
-  "run_id": "c9cbbcdf-6a74-4993-a53f-5772ed93eb51",
-  "generated_at": "2026-11-20T06:38:00.218346+00:00",
+  "run_id": "b40c6678-6cec-4556-82e7-158395179ec4",
+  "generated_at": "2026-11-20T06:45:30.579566+00:00",
   "posts": {
-    "content/Aspose.Blog/svg/2026-11-17-convert-jpg-to-svg-in-python/index.md": {
-      "priority": 23,
+    "content/Aspose.Blog/svg/2026-11-18-convert-svg-text-to-path-in-python/index.md": {
+      "priority": 24,
+      "total_issues": 3,
+      "issue_types": [
+        "suggest_body_output_image",
+        "too_few_outgoing_internal_links",
+        "weak_internal_links"
+      ]
+    },
+    "content/Aspose.Blog/svg/2026-11-18-convert-svg-to-jpg-in-python/index.md": {
+      "priority": 24,
       "total_issues": 3,
       "issue_types": [
         "suggest_body_output_image",

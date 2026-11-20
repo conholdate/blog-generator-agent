@@ -1,33 +1,33 @@
-{"ts": "2026-11-20T06:35:55.555045+00:00", "level": "info", "message": "Loading blog configuration"}
-{"ts": "2026-11-20T06:35:55.628903+00:00", "level": "info", "message": "Audit output will be written to: /home/runner/work/blog-generator-agent/blog-generator-agent/outputs/audit/aspose"}
-{"ts": "2026-11-20T06:35:55.629034+00:00", "level": "info", "message": "Preparing repository source: https://github.com/Aspose/aspose-blog.git"}
-{"ts": "2026-11-20T06:35:55.629048+00:00", "level": "info", "message": "Loading policy files: 7 configured"}
-{"ts": "2026-11-20T06:35:55.647143+00:00", "level": "info", "message": "Policy files loaded: 7"}
-{"ts": "2026-11-20T06:36:45.594649+00:00", "level": "info", "message": "Repository ready: /home/runner/work/blog-generator-agent/blog-generator-agent/outputs/_repos/aspose-blog"}
-{"ts": "2026-11-20T06:36:45.594706+00:00", "level": "info", "message": "Detecting Hugo project structure"}
-{"ts": "2026-11-20T06:36:45.595291+00:00", "level": "info", "message": "Hugo config files detected: config.yml"}
-{"ts": "2026-11-20T06:36:45.595312+00:00", "level": "info", "message": "Scanning Markdown content; include translations: False; product filter: Aspose.blog/svg; post date filter: 2026-11-17"}
-{"ts": "2026-11-20T06:36:47.684530+00:00", "level": "info", "message": "Markdown scan complete: 1 files"}
-{"ts": "2026-11-20T06:36:47.684594+00:00", "level": "info", "message": "Loaded product config: Aspose.SVG"}
-{"ts": "2026-11-20T06:36:47.684629+00:00", "level": "info", "message": "Preparing SDK/API reference validation"}
-{"ts": "2026-11-20T06:36:47.684646+00:00", "level": "info", "message": "Indexing API reference repository: svg-net-api-reference"}
-{"ts": "2026-11-20T06:37:18.442212+00:00", "level": "info", "message": "API reference symbols indexed: 46219"}
-{"ts": "2026-11-20T06:37:18.442284+00:00", "level": "info", "message": "Indexing API reference repository: svg-java-api-reference"}
-{"ts": "2026-11-20T06:37:39.136735+00:00", "level": "info", "message": "API reference symbols indexed: 46219"}
-{"ts": "2026-11-20T06:37:39.136807+00:00", "level": "info", "message": "Indexing API reference repository: svg-python_net-api-reference"}
-{"ts": "2026-11-20T06:37:59.673515+00:00", "level": "info", "message": "API reference symbols indexed: 46219"}
-{"ts": "2026-11-20T06:37:59.674676+00:00", "level": "info", "message": "Checking local image and asset references"}
-{"ts": "2026-11-20T06:37:59.674777+00:00", "level": "info", "message": "Grouping translations"}
-{"ts": "2026-11-20T06:37:59.675142+00:00", "level": "info", "message": "Translation grouping complete: 1 groups"}
-{"ts": "2026-11-20T06:37:59.675156+00:00", "level": "info", "message": "Running technical Hugo SEO audit"}
-{"ts": "2026-11-20T06:37:59.718902+00:00", "level": "info", "message": "Technical audit complete: 1 issues"}
-{"ts": "2026-11-20T06:37:59.718951+00:00", "level": "info", "message": "Running internal linking audit"}
-{"ts": "2026-11-20T06:37:59.719116+00:00", "level": "info", "message": "Internal linking audit complete: 2 issues"}
-{"ts": "2026-11-20T06:37:59.719125+00:00", "level": "info", "message": "Running content and on-page SEO audits"}
-{"ts": "2026-11-20T06:38:00.212399+00:00", "level": "info", "message": "Applying policy-grounded rules"}
-{"ts": "2026-11-20T06:38:00.213918+00:00", "level": "info", "message": "Scoring complete"}
-{"ts": "2026-11-20T06:38:00.214011+00:00", "level": "info", "message": "Writing report files"}
-{"ts": "2026-11-20T06:38:00.218419+00:00", "level": "info", "message": "Sending metrics API payload"}
-{"ts": "2026-11-20T06:38:00.218575+00:00", "level": "info", "message": "Metrics API payload: {\"timestamp\":\"2026-11-20T06:38:00.218346+00:00\",\"agent_name\":\"Blog Audit Agent\",\"agent_owner\":\"Muzammil Khan\",\"job_type\":\"Blog Audit\",\"run_id\":\"c9cbbcdf-6a74-4993-a53f-5772ed93eb51\",\"status\":\"success\",\"product\":\"Aspose.SVG\",\"platform\":\"All\",\"website\":\"aspose.com\",\"website_section\":\"Blog\",\"item_name\":\"Blog Posts\",\"items_discovered\":1,\"items_failed\":0,\"items_succeeded\":1,\"run_duration_ms\":124660.0,\"token_usage\":0,\"api_calls_count\":0}"}
-{"ts": "2026-11-20T06:38:00.406385+00:00", "level": "info", "message": "Metrics API sent: delivery=success; status=200; response={\"id\":1158508,\"timestamp\":\"2026-11-20T06:38:00.218346+00:00\",\"agent_name\":\"Blog Audit Agent\",\"agent_owner\":\"Muzammil Khan\",\"job_type\":\"Blog Audit\",\"run_id\":\"c9cbbcdf-6a74-4993-a53f-5772ed93eb51\",\"status\":\"success\",\"product\":\"Aspose.SVG\",\"platform\":\"All\",\"website\":\"aspose.com\",\"website_section\":\"Blog\",\"item_name\":\"Blog Posts\",\"items_discovered\":1,\"items_failed\":0,\"items_succeeded\":1,\"run_duration_ms\":124660,\"token_usage\":0,\"api_calls_count\":0}"}
-{"ts": "2026-11-20T06:38:00.406461+00:00", "level": "info", "message": "Compared against previous run 53e6acde-0c99-400f-a5ef-85556d29feb5: 0 regressed, 0 improved, 1 new"}
+{"ts": "2026-11-20T06:42:38.737849+00:00", "level": "info", "message": "Loading blog configuration"}
+{"ts": "2026-11-20T06:42:38.849943+00:00", "level": "info", "message": "Audit output will be written to: /home/runner/work/blog-generator-agent/blog-generator-agent/outputs/audit/aspose"}
+{"ts": "2026-11-20T06:42:38.850122+00:00", "level": "info", "message": "Preparing repository source: https://github.com/Aspose/aspose-blog.git"}
+{"ts": "2026-11-20T06:42:38.850154+00:00", "level": "info", "message": "Loading policy files: 7 configured"}
+{"ts": "2026-11-20T06:42:38.879818+00:00", "level": "info", "message": "Policy files loaded: 7"}
+{"ts": "2026-11-20T06:43:31.770397+00:00", "level": "info", "message": "Repository ready: /home/runner/work/blog-generator-agent/blog-generator-agent/outputs/_repos/aspose-blog"}
+{"ts": "2026-11-20T06:43:31.770453+00:00", "level": "info", "message": "Detecting Hugo project structure"}
+{"ts": "2026-11-20T06:43:31.771172+00:00", "level": "info", "message": "Hugo config files detected: config.yml"}
+{"ts": "2026-11-20T06:43:31.771204+00:00", "level": "info", "message": "Scanning Markdown content; include translations: False; product filter: Aspose.blog/svg; post date filter: 2026-11-18"}
+{"ts": "2026-11-20T06:43:34.731877+00:00", "level": "info", "message": "Markdown scan complete: 2 files"}
+{"ts": "2026-11-20T06:43:34.731950+00:00", "level": "info", "message": "Loaded product config: Aspose.SVG"}
+{"ts": "2026-11-20T06:43:34.732010+00:00", "level": "info", "message": "Preparing SDK/API reference validation"}
+{"ts": "2026-11-20T06:43:34.732040+00:00", "level": "info", "message": "Indexing API reference repository: svg-net-api-reference"}
+{"ts": "2026-11-20T06:44:18.403376+00:00", "level": "info", "message": "API reference symbols indexed: 46219"}
+{"ts": "2026-11-20T06:44:18.403453+00:00", "level": "info", "message": "Indexing API reference repository: svg-java-api-reference"}
+{"ts": "2026-11-20T06:44:53.681270+00:00", "level": "info", "message": "API reference symbols indexed: 46219"}
+{"ts": "2026-11-20T06:44:53.681351+00:00", "level": "info", "message": "Indexing API reference repository: svg-python_net-api-reference"}
+{"ts": "2026-11-20T06:45:28.958039+00:00", "level": "info", "message": "API reference symbols indexed: 46219"}
+{"ts": "2026-11-20T06:45:28.959406+00:00", "level": "info", "message": "Checking local image and asset references"}
+{"ts": "2026-11-20T06:45:28.959543+00:00", "level": "info", "message": "Grouping translations"}
+{"ts": "2026-11-20T06:45:28.960051+00:00", "level": "info", "message": "Translation grouping complete: 2 groups"}
+{"ts": "2026-11-20T06:45:28.960074+00:00", "level": "info", "message": "Running technical Hugo SEO audit"}
+{"ts": "2026-11-20T06:45:28.985834+00:00", "level": "info", "message": "Technical audit complete: 1 issues"}
+{"ts": "2026-11-20T06:45:28.985884+00:00", "level": "info", "message": "Running internal linking audit"}
+{"ts": "2026-11-20T06:45:28.986220+00:00", "level": "info", "message": "Internal linking audit complete: 4 issues"}
+{"ts": "2026-11-20T06:45:28.986248+00:00", "level": "info", "message": "Running content and on-page SEO audits"}
+{"ts": "2026-11-20T06:45:30.569892+00:00", "level": "info", "message": "Applying policy-grounded rules"}
+{"ts": "2026-11-20T06:45:30.573885+00:00", "level": "info", "message": "Scoring complete"}
+{"ts": "2026-11-20T06:45:30.573977+00:00", "level": "info", "message": "Writing report files"}
+{"ts": "2026-11-20T06:45:30.579646+00:00", "level": "info", "message": "Sending metrics API payload"}
+{"ts": "2026-11-20T06:45:30.579830+00:00", "level": "info", "message": "Metrics API payload: {\"timestamp\":\"2026-11-20T06:45:30.579566+00:00\",\"agent_name\":\"Blog Audit Agent\",\"agent_owner\":\"Muzammil Khan\",\"job_type\":\"Blog Audit\",\"run_id\":\"b40c6678-6cec-4556-82e7-158395179ec4\",\"status\":\"success\",\"product\":\"Aspose.SVG\",\"platform\":\"All\",\"website\":\"aspose.com\",\"website_section\":\"Blog\",\"item_name\":\"Blog Posts\",\"items_discovered\":2,\"items_failed\":0,\"items_succeeded\":2,\"run_duration_ms\":171840.0,\"token_usage\":0,\"api_calls_count\":0}"}
+{"ts": "2026-11-20T06:45:30.789747+00:00", "level": "info", "message": "Metrics API sent: delivery=success; status=200; response={\"id\":1158524,\"timestamp\":\"2026-11-20T06:45:30.579566+00:00\",\"agent_name\":\"Blog Audit Agent\",\"agent_owner\":\"Muzammil Khan\",\"job_type\":\"Blog Audit\",\"run_id\":\"b40c6678-6cec-4556-82e7-158395179ec4\",\"status\":\"success\",\"product\":\"Aspose.SVG\",\"platform\":\"All\",\"website\":\"aspose.com\",\"website_section\":\"Blog\",\"item_name\":\"Blog Posts\",\"items_discovered\":2,\"items_failed\":0,\"items_succeeded\":2,\"run_duration_ms\":171840,\"token_usage\":0,\"api_calls_count\":0}"}
+{"ts": "2026-11-20T06:45:30.789832+00:00", "level": "info", "message": "Compared against previous run c9cbbcdf-6a74-4993-a53f-5772ed93eb51: 0 regressed, 0 improved, 2 new"}

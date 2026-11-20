@@ -1,9 +1,9 @@
 # Code Audit
 
 ## Summary
-- Posts scanned: 1
-- Posts with fenced code blocks: 1
-- Code blocks found: 4
+- Posts scanned: 2
+- Posts with fenced code blocks: 2
+- Code blocks found: 11
 - Code/API issues found: 0
 - SDK validation enabled: True
 
@@ -19,7 +19,8 @@ The agent validates SDK classes by indexing configured product API reference rep
 ## Per-Post Code Coverage
 | Blog Post | Title | Language | Code Blocks | Code Issues | Top Code Issues |
 | --- | --- | --- | --- | --- | --- |
-| `content/Aspose.Blog/svg/2026-11-17-convert-jpg-to-svg-in-python/index.md` | Convert JPG to SVG in Python using Aspose.SVG | en | 4 | 0 |  |
+| `content/Aspose.Blog/svg/2026-11-18-convert-svg-text-to-path-in-python/index.md` | Convert SVG Text to Path in Python | en | 5 | 0 |  |
+| `content/Aspose.Blog/svg/2026-11-18-convert-svg-to-jpg-in-python/index.md` | Convert SVG to JPG in Python using Aspose.SVG | en | 6 | 0 |  |
 
 ## Class/Member Resolution Details
 Missing or deprecated SDK classes, properties, and members are listed here with the closest existing indexed-symbol suggestions when the API reference data can support them.
