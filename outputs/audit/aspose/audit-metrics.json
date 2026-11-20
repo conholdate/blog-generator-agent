@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-11-20T06:45:30.579566+00:00",
+  "timestamp": "2026-11-20T06:54:09.050395+00:00",
   "agent_name": "Blog Audit Agent",
   "agent_owner": "Muzammil Khan",
   "job_type": "test",
-  "run_id": "b40c6678-6cec-4556-82e7-158395179ec4",
+  "run_id": "e5a2114d-4984-4b66-8820-8632fa6f44d6",
   "status": "success",
   "blog_name": "Aspose",
   "mode": "report",
@@ -14,7 +14,7 @@
   "website": "aspose.com",
   "website_section": "Blog",
   "item_name": "Blog Posts",
-  "post_date_filter": "2026-11-18",
+  "post_date_filter": "2026-11-19",
   "language_filter": [],
   "include_translations": false,
   "detailed_outputs": true,
@@ -24,8 +24,8 @@
   },
   "repository": "/home/runner/work/blog-generator-agent/blog-generator-agent/outputs/_repos/aspose-blog",
   "output_dir": "/home/runner/work/blog-generator-agent/blog-generator-agent/outputs/audit/aspose",
-  "duration_seconds": 171.84,
-  "run_duration_ms": 171840,
+  "duration_seconds": 176.65,
+  "run_duration_ms": 176650,
   "markdown_files_scanned": 2,
   "items_discovered": 2,
   "items_failed": 0,
@@ -46,7 +46,7 @@
   "developer_audience_enabled": true,
   "audience_fit_issues": 0,
   "code_api_issues": 0,
-  "code_blocks": 11,
+  "code_blocks": 15,
   "severity_counts": {
     "Critical": 0,
     "High": 0,
@@ -61,7 +61,7 @@
     "orphan_post": 2,
     "missing_robots": 1
   },
-  "average_priority_score": 24.0,
+  "average_priority_score": 23.5,
   "high_priority_posts": 0,
   "reports_written": [
     "audit-action-items.md",
@@ -86,21 +86,22 @@
       "sent": true,
       "status": "success",
       "status_code": 200,
-      "response_body": "{\n  \"id\": 1158524,\n  \"timestamp\": \"2026-11-20T06:45:30.579566+00:00\",\n  \"agent_name\": \"Blog Audit Agent\",\n  \"agent_owner\": \"Muzammil Khan\",\n  \"job_type\": \"Blog Audit\",\n  \"run_id\": \"b40c6678-6cec-4556-82e7-158395179ec4\",\n  \"status\": \"success\",\n  \"product\": \"Aspose.SVG\",\n  \"platform\": \"All\",\n  \"website\": \"aspose.com\",\n  \"website_section\": \"Blog\",\n  \"item_name\": \"Blog Posts\",\n  \"items_discovered\": 2,\n  \"items_failed\": 0,\n  \"items_succeeded\": 2,\n  \"run_duration_ms\": 171840,\n  \"token_usage\": 0,\n  \"api_calls_count\": 0\n}\n",
+      "response_body": "{\n  \"id\": 1158542,\n  \"timestamp\": \"2026-11-20T06:54:09.050395+00:00\",\n  \"agent_name\": \"Blog Audit Agent\",\n  \"agent_owner\": \"Muzammil Khan\",\n  \"job_type\": \"Blog Audit\",\n  \"run_id\": \"e5a2114d-4984-4b66-8820-8632fa6f44d6\",\n  \"status\": \"success\",\n  \"product\": \"Aspose.SVG\",\n  \"platform\": \"All\",\n  \"website\": \"aspose.com\",\n  \"website_section\": \"Blog\",\n  \"item_name\": \"Blog Posts\",\n  \"items_discovered\": 2,\n  \"items_failed\": 0,\n  \"items_succeeded\": 2,\n  \"run_duration_ms\": 176650,\n  \"token_usage\": 0,\n  \"api_calls_count\": 0\n}\n",
       "attempts": 1,
       "reason": ""
     }
   ],
   "state_diff": {
     "has_previous_run": true,
-    "previous_run_id": "c9cbbcdf-6a74-4993-a53f-5772ed93eb51",
-    "previous_generated_at": "2026-11-20T06:38:00.218346+00:00",
+    "previous_run_id": "b40c6678-6cec-4556-82e7-158395179ec4",
+    "previous_generated_at": "2026-11-20T06:45:30.579566+00:00",
     "new_posts": [
-      "content/Aspose.Blog/svg/2026-11-18-convert-svg-text-to-path-in-python/index.md",
-      "content/Aspose.Blog/svg/2026-11-18-convert-svg-to-jpg-in-python/index.md"
+      "content/Aspose.Blog/svg/2026-11-19-convert-svg-to-pdf-in-python/index.md",
+      "content/Aspose.Blog/svg/2026-11-19-convert-svg-to-png-in-python/index.md"
     ],
     "removed_posts": [
-      "content/Aspose.Blog/svg/2026-11-17-convert-jpg-to-svg-in-python/index.md"
+      "content/Aspose.Blog/svg/2026-11-18-convert-svg-text-to-path-in-python/index.md",
+      "content/Aspose.Blog/svg/2026-11-18-convert-svg-to-jpg-in-python/index.md"
     ],
     "regressed_posts": [],
     "improved_posts": [],

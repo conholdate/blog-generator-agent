@@ -1,476 +1,86 @@
 [
   {
-    "path": "/home/runner/work/blog-generator-agent/blog-generator-agent/outputs/_repos/aspose-blog/content/Aspose.Blog/svg/2026-11-18-convert-svg-text-to-path-in-python/index.md",
-    "relative_path": "content/Aspose.Blog/svg/2026-11-18-convert-svg-text-to-path-in-python/index.md",
-    "url_candidate": "/svg/convert-svg-text-to-path-in-python/",
+    "path": "/home/runner/work/blog-generator-agent/blog-generator-agent/outputs/_repos/aspose-blog/content/Aspose.Blog/svg/2026-11-19-convert-svg-to-pdf-in-python/index.md",
+    "relative_path": "content/Aspose.Blog/svg/2026-11-19-convert-svg-to-pdf-in-python/index.md",
+    "url_candidate": "/svg/convert-svg-to-pdf-in-python/",
     "language": "en",
     "front_matter_format": "yaml",
     "front_matter": {
-      "title": "Convert SVG Text to Path in Python",
-      "seoTitle": "Convert SVG Text to Path in Python | SVG Text Vectorization",
-      "description": "Learn how to convert SVG text to paths in Python with Aspose.SVG. Vectorize text so it looks the same without the font, then save or convert the SVG.",
-      "date": "Wed, 18 Nov 2026 08:00:00 +0000",
+      "title": "Convert SVG to PDF in Python using Aspose.SVG",
+      "seoTitle": "Convert SVG to PDF in Python | SVG to PDF Converter",
+      "description": "Learn how to convert SVG to PDF in Python with Aspose.SVG for Python via .NET. Set page size, background color, and PDF metadata, and batch convert folders.",
+      "date": "Thu, 19 Nov 2026 01:00:00 +0000",
       "draft": false,
-      "url": "/svg/convert-svg-text-to-path-in-python/",
+      "url": "/svg/convert-svg-to-pdf-in-python/",
       "author": "Muzammil Khan",
-      "summary": "Turn SVG text into vector outlines so it renders the same on machines that don't have the font installed. This guide explains what text-to-path conversion changes, shows the one-option Python solution with Aspose.SVG, and covers batch processing and the trade-offs to know about.",
+      "summary": "Turn SVG graphics into PDF documents from Python code. This guide shows a one-call conversion, then covers page size, background color, PDF metadata, and batch conversion of a whole folder with Aspose.SVG for Python via .NET.",
       "tags": [
-        "svg text to path",
-        "convert svg text to path",
-        "text to path python",
-        "svg text vectorization",
-        "convert text to outlines svg",
-        "svg text to outline",
-        "vectorize text svg",
-        "python svg text to path",
-        "svg font to path",
-        "text to vector svg"
+        "svg to pdf",
+        "convert svg to pdf",
+        "svg to pdf python",
+        "convert svg to pdf in python",
+        "python svg to pdf",
+        "svg to pdf converter",
+        "save svg as pdf",
+        "export svg to pdf",
+        "svg file to pdf",
+        "batch convert svg to pdf"
       ],
       "categories": [
         "Aspose.SVG Product Family"
       ],
       "showtoc": true,
       "cover": {
-        "image": "images/convert-svg-text-to-path-in-python.jpg",
-        "alt": "Convert SVG Text to Path in Python",
-        "caption": "Convert SVG Text to Path in Python using Aspose.SVG",
-        "hidden": false
-      },
-      "steps": [
-        "Install Aspose.SVG for Python using `pip install aspose-svg-net`.",
-        "Load the SVG with `svg.SVGDocument(\"input.svg\")`.",
-        "Create `SVGSaveOptions()` and set `vectorize_text = True`.",
-        "Save the document with `document.save(\"output.svg\", options)`."
-      ],
-      "faqs": [
-        {
-          "q": "Can I still edit the text after converting it to paths?",
-          "a": "No. The letters become shapes, so you can't change the wording or font. Keep the original SVG if you may need to edit the text later."
-        },
-        {
-          "q": "Which font is used for the outlines?",
-          "a": "The font that the library resolves when it loads the SVG, so the font must be available on the machine that runs the conversion. If it isn't, a fallback font is used and its outlines are saved."
-        },
-        {
-          "q": "Is the text still searchable or readable by screen readers?",
-          "a": "No. After vectorization, the text is no longer stored as characters. Add a title or aria-label to the SVG if the meaning must remain accessible."
-        }
-      ]
-    },
-    "body": "\nThis guide shows you how to convert SVG text to path in Python. You will turn every `<text>` element in an SVG into vector outlines with one save option, look at what the output contains, and process a folder of files.\n\nAn SVG `<text>` element stores characters plus a font name. Whoever opens the file needs that font to see the intended lettering. If the font is missing, the viewer substitutes another one and the design changes. Converting text to paths, also called **text vectorization** or \"converting to outlines\", replaces the characters with the shapes of the letters, so the SVG looks the same everywhere.\n\n## When to Convert SVG Text to Paths\n\nConvert text to paths when the **appearance** of the text matters more than the ability to edit it:\n\n* logos and wordmarks that use a brand font;\n* files sent to print shops, cutting machines, or laser engravers;\n* SVGs used on websites that don't load the font;\n* graphics shared with people whose systems lack the font.\n\nKeep the text as text when it needs to stay editable, translatable, selectable, or searchable.\n\n## Python Library for SVG Text Vectorization\n\nThe examples use [Aspose.SVG for Python via .NET](https://products.aspose.com/svg/python-net/). Its `SVGSaveOptions` class has a `vectorize_text` option that performs the conversion when you save. Install the package with pip:\n\n```bash\npip install aspose-svg-net\n```\n\nThe examples use this `logo.svg`:\n\n```xml\n<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"400\" height=\"300\" viewBox=\"0 0 400 300\">\n  <rect x=\"20\" y=\"20\" width=\"160\" height=\"100\" fill=\"#4A90E2\"/>\n  <circle cx=\"290\" cy=\"80\" r=\"55\" fill=\"#F5A623\"/>\n  <text x=\"200\" y=\"240\" font-family=\"Arial\" font-size=\"36\" text-anchor=\"middle\" fill=\"#2C3E50\">Aspose.SVG</text>\n</svg>\n```\n\n## Convert SVG Text to Path in Python\n\nFollow these steps to convert SVG text to paths:\n\n1. Load the SVG file into an `SVGDocument`.\n2. Create an `SVGSaveOptions` object.\n3. Set `vectorize_text` to `True`.\n4. Save the document with these options.\n\nThe following code example converts the text in `logo.svg` to paths:\n\n```python\nimport aspose.svg as svg\nfrom aspose.svg.saving import SVGSaveOptions\n\n# Load the SVG that contains text\ndocument = svg.SVGDocument(\"logo.svg\")\n\n# Enable text vectorization\noptions = SVGSaveOptions()\noptions.vectorize_text = True\n\n# Save the SVG with text converted to paths\ndocument.save(\"logo-outlined.svg\", options)\n```\n\n## What the Output Looks Like\n\nIn the saved file, the `<text>` element is gone. Each glyph is stored once as a `<path>` inside `<defs>`, and every letter in the text is drawn with a `<use>` element that references a glyph and positions it with a `transform`. A shortened excerpt:\n\n```xml\n<defs>\n  <path id=\"gl_1\" d=\"M-0.052734375,0 l9.896484,-25.769531 l3.6738281,0 ... Z\"/>\n  ...\n</defs>\n<use href=\"#gl_1\" transform=\"...\"/>\n...\n```\n\nBecause repeated letters reuse the same glyph definition, the file stays smaller than if each letter had its own full path. In the sample above, the 10 characters of \"Aspose.SVG\" become 10 `<use>` elements.\n\nThe shapes, colors, and positions of the other elements are not changed.\n\n## Convert SVG Text to Path for Many Files\n\nReuse one `SVGSaveOptions` object to process a whole folder:\n\n```python\nimport os\nimport glob\nimport aspose.svg as svg\nfrom aspose.svg.saving import SVGSaveOptions\n\ninput_dir = \"svg-files\"\noutput_dir = \"svg-outlined\"\nos.makedirs(output_dir, exist_ok=True)\n\noptions = SVGSaveOptions()\noptions.vectorize_text = True\n\nfor svg_path in glob.glob(os.path.join(input_dir, \"*.svg\")):\n    output_path = os.path.join(output_dir, os.path.basename(svg_path))\n    document = svg.SVGDocument(svg_path)\n    document.save(output_path, options)\n    print(\"Outlined:\", output_path)\n```\n\n## Things to Check Before You Vectorize Text \n\n* **Install the fonts first.** The outlines come from the font the library uses when it loads the SVG. Run the conversion on a machine that has the fonts named in the SVG; otherwise you save the outlines of a fallback font.\n* **Keep the original.** Vectorized text can't be edited as text. Store the source SVG alongside the outlined copy.\n* **Preserve meaning for accessibility.** Screen readers and search engines can no longer read the words. Add a `<title>` element or an `aria-label` to the SVG if the text carries information.\n\n## Get a Free License\n\nIn evaluation mode, Aspose.SVG inserts an evaluation notice into saved SVG files. Request a [free temporary license](https://purchase.aspose.com/temporary-license/) to produce clean output while you evaluate.\n\n## Convert Text to Vector Online\n\nTo outline a short piece of text without writing code, try the free [online Text to Vector app](https://products.aspose.app/svg/text-to-vector). Use the Python approach above when you need to process existing SVG files or run the conversion automatically.\n\n## Text to Path: Free Resources\n\n* [Aspose.SVG for Python Documentation](https://docs.aspose.com/svg/python-net/)\n* [Aspose.SVG for Python API Reference](https://reference.aspose.com/svg/python-net/)\n* [Free Online SVG Apps](https://products.aspose.app/svg/family)\n* [Aspose.SVG Blog Posts](https://blog.aspose.com/categories/aspose.svg-product-family/)\n\n## SVG Text to Path: FAQs\n\n**Q: Can I still edit the text after converting it to paths?**\n\nA: No. The letters become shapes. Keep the original SVG if you may need to change the wording.\n\n**Q: Which font is used for the outlines?**\n\nA: The font the library resolves when it loads the SVG. Make sure it is installed on the machine that runs the conversion.\n\n**Q: Is the text still searchable or readable by screen readers?**\n\nA: No. Add a `<title>` or `aria-label` if the meaning must stay accessible.\n\n## Conclusion\n\nYou've converted SVG text to path in Python by setting `vectorize_text = True` on `SVGSaveOptions`. The result looks the same on any system, at the cost of editability and searchability, so use it for final artwork rather than working files. If you plan to convert the outlined SVG to PDF or an image next, see [Convert SVG to PDF in Python](https://blog.aspose.com/svg/convert-svg-to-pdf-in-python/).\n\nQuestions? Ask on the [Aspose.SVG free support forum](https://forum.aspose.com/c/svg/42).\n\n## See Also\n\n* [Create, Edit and Read SVG Files in Python](https://blog.aspose.com/svg/create-edit-and-read-svg-files-in-python/)\n* [Convert SVG to PDF in Python](https://blog.aspose.com/svg/convert-svg-to-pdf-in-python/)\n* [Convert SVG to PNG in Python](https://blog.aspose.com/svg/convert-svg-to-png-in-python/)\n* [Optimize SVG in Python](https://blog.aspose.com/svg/optimize-svg-image-in-python/)\n* [Reduce SVG File Size in Python](https://blog.aspose.com/svg/reduce-svg-file-size-in-python/)\n* [Change SVG Fill Color in Python](https://blog.aspose.com/svg/change-svg-fill-color-in-python/)",
-    "body_line_offset": 30,
-    "title": "Convert SVG Text to Path in Python",
-    "description": "Learn how to convert SVG text to paths in Python with Aspose.SVG. Vectorize text so it looks the same without the font, then save or convert the SVG.",
-    "date": "Wed, 18 Nov 2026 08:00:00 +0000",
-    "lastmod": "",
-    "draft": false,
-    "slug": "",
-    "aliases": [],
-    "tags": [
-      "svg text to path",
-      "convert svg text to path",
-      "text to path python",
-      "svg text vectorization",
-      "convert text to outlines svg",
-      "svg text to outline",
-      "vectorize text svg",
-      "python svg text to path",
-      "svg font to path",
-      "text to vector svg"
-    ],
-    "categories": [
-      "Aspose.SVG Product Family"
-    ],
-    "keywords": [],
-    "canonical_url": "",
-    "translation_key": "",
-    "word_count": 866,
-    "character_count": 5491,
-    "headings": [
-      {
-        "level": 2,
-        "text": "When to Convert SVG Text to Paths",
-        "line": 36
-      },
-      {
-        "level": 2,
-        "text": "Python Library for SVG Text Vectorization",
-        "line": 47
-      },
-      {
-        "level": 2,
-        "text": "Convert SVG Text to Path in Python",
-        "line": 65
-      },
-      {
-        "level": 2,
-        "text": "What the Output Looks Like",
-        "line": 91
-      },
-      {
-        "level": 2,
-        "text": "Convert SVG Text to Path for Many Files",
-        "line": 108
-      },
-      {
-        "level": 2,
-        "text": "Things to Check Before You Vectorize Text",
-        "line": 132
-      },
-      {
-        "level": 2,
-        "text": "Get a Free License",
-        "line": 138
-      },
-      {
-        "level": 2,
-        "text": "Convert Text to Vector Online",
-        "line": 142
-      },
-      {
-        "level": 2,
-        "text": "Text to Path: Free Resources",
-        "line": 146
-      },
-      {
-        "level": 2,
-        "text": "SVG Text to Path: FAQs",
-        "line": 153
-      },
-      {
-        "level": 2,
-        "text": "Conclusion",
-        "line": 167
-      },
-      {
-        "level": 2,
-        "text": "See Also",
-        "line": 173
-      }
-    ],
-    "paragraphs": [
-      "This guide shows you how to convert SVG text to path in Python. You will turn every `<text>` element in an SVG into vector outlines with one save option, look at what the output contains, and process a folder of files.",
-      "An SVG `<text>` element stores characters plus a font name. Whoever opens the file needs that font to see the intended lettering. If the font is missing, the viewer substitutes another one and the design changes. Converting text to paths, also called **text vectorization** or \"converting to outlines\", replaces the characters with the shapes of the letters, so the SVG looks the same everywhere.",
-      "Convert text to paths when the **appearance** of the text matters more than the ability to edit it:",
-      "* logos and wordmarks that use a brand font;\n* files sent to print shops, cutting machines, or laser engravers;\n* SVGs used on websites that don't load the font;\n* graphics shared with people whose systems lack the font.",
-      "Keep the text as text when it needs to stay editable, translatable, selectable, or searchable.",
-      "The examples use [Aspose.SVG for Python via .NET](https://products.aspose.com/svg/python-net/). Its `SVGSaveOptions` class has a `vectorize_text` option that performs the conversion when you save. Install the package with pip:",
-      "The examples use this `logo.svg`:",
-      "Follow these steps to convert SVG text to paths:",
-      "1. Load the SVG file into an `SVGDocument`.\n2. Create an `SVGSaveOptions` object.\n3. Set `vectorize_text` to `True`.\n4. Save the document with these options.",
-      "The following code example converts the text in `logo.svg` to paths:",
-      "In the saved file, the `<text>` element is gone. Each glyph is stored once as a `<path>` inside `<defs>`, and every letter in the text is drawn with a `<use>` element that references a glyph and positions it with a `transform`. A shortened excerpt:",
-      "Because repeated letters reuse the same glyph definition, the file stays smaller than if each letter had its own full path. In the sample above, the 10 characters of \"Aspose.SVG\" become 10 `<use>` elements.",
-      "The shapes, colors, and positions of the other elements are not changed.",
-      "Reuse one `SVGSaveOptions` object to process a whole folder:",
-      "* **Install the fonts first.** The outlines come from the font the library uses when it loads the SVG. Run the conversion on a machine that has the fonts named in the SVG; otherwise you save the outlines of a fallback font.\n* **Keep the original.** Vectorized text can't be edited as text. Store the source SVG alongside the outlined copy.\n* **Preserve meaning for accessibility.** Screen readers and search engines can no longer read the words. Add a `<title>` element or an `aria-label` to the SVG if the text carries information.",
-      "In evaluation mode, Aspose.SVG inserts an evaluation notice into saved SVG files. Request a [free temporary license](https://purchase.aspose.com/temporary-license/) to produce clean output while you evaluate.",
-      "To outline a short piece of text without writing code, try the free [online Text to Vector app](https://products.aspose.app/svg/text-to-vector). Use the Python approach above when you need to process existing SVG files or run the conversion automatically.",
-      "* [Aspose.SVG for Python Documentation](https://docs.aspose.com/svg/python-net/)\n* [Aspose.SVG for Python API Reference](https://reference.aspose.com/svg/python-net/)\n* [Free Online SVG Apps](https://products.aspose.app/svg/family)\n* [Aspose.SVG Blog Posts](https://blog.aspose.com/categories/aspose.svg-product-family/)",
-      "**Q: Can I still edit the text after converting it to paths?**",
-      "A: No. The letters become shapes. Keep the original SVG if you may need to change the wording.",
-      "**Q: Which font is used for the outlines?**",
-      "A: The font the library resolves when it loads the SVG. Make sure it is installed on the machine that runs the conversion.",
-      "**Q: Is the text still searchable or readable by screen readers?**",
-      "A: No. Add a `<title>` or `aria-label` if the meaning must stay accessible.",
-      "You've converted SVG text to path in Python by setting `vectorize_text = True` on `SVGSaveOptions`. The result looks the same on any system, at the cost of editability and searchability, so use it for final artwork rather than working files. If you plan to convert the outlined SVG to PDF or an image next, see [Convert SVG to PDF in Python](https://blog.aspose.com/svg/convert-svg-to-pdf-in-python/).",
-      "Questions? Ask on the [Aspose.SVG free support forum](https://forum.aspose.com/c/svg/42).",
-      "* [Create, Edit and Read SVG Files in Python](https://blog.aspose.com/svg/create-edit-and-read-svg-files-in-python/)\n* [Convert SVG to PDF in Python](https://blog.aspose.com/svg/convert-svg-to-pdf-in-python/)\n* [Convert SVG to PNG in Python](https://blog.aspose.com/svg/convert-svg-to-png-in-python/)\n* [Optimize SVG in Python](https://blog.aspose.com/svg/optimize-svg-image-in-python/)\n* [Reduce SVG File Size in Python](https://blog.aspose.com/svg/reduce-svg-file-size-in-python/)\n* [Change SVG Fill Color in Python](https://blog.aspose.com/svg/change-svg-fill-color-in-python/)"
-    ],
-    "images": [
-      {
-        "alt": "Convert SVG Text to Path in Python",
-        "target": "images/convert-svg-text-to-path-in-python.jpg",
-        "line": 0,
-        "exists": true
-      }
-    ],
-    "links": [
-      {
-        "text": "Aspose.SVG for Python via .NET",
-        "target": "https://products.aspose.com/svg/python-net/",
-        "is_internal": false,
-        "line": 49,
-        "exists": null
-      },
-      {
-        "text": "free temporary license",
-        "target": "https://purchase.aspose.com/temporary-license/",
-        "is_internal": false,
-        "line": 140,
-        "exists": null
-      },
-      {
-        "text": "online Text to Vector app",
-        "target": "https://products.aspose.app/svg/text-to-vector",
-        "is_internal": false,
-        "line": 144,
-        "exists": null
-      },
-      {
-        "text": "Aspose.SVG for Python Documentation",
-        "target": "https://docs.aspose.com/svg/python-net/",
-        "is_internal": false,
-        "line": 148,
-        "exists": null
-      },
-      {
-        "text": "Aspose.SVG for Python API Reference",
-        "target": "https://reference.aspose.com/svg/python-net/",
-        "is_internal": false,
-        "line": 149,
-        "exists": null
-      },
-      {
-        "text": "Free Online SVG Apps",
-        "target": "https://products.aspose.app/svg/family",
-        "is_internal": false,
-        "line": 150,
-        "exists": null
-      },
-      {
-        "text": "Aspose.SVG Blog Posts",
-        "target": "https://blog.aspose.com/categories/aspose.svg-product-family/",
-        "is_internal": false,
-        "line": 151,
-        "exists": null
-      },
-      {
-        "text": "Convert SVG to PDF in Python",
-        "target": "https://blog.aspose.com/svg/convert-svg-to-pdf-in-python/",
-        "is_internal": false,
-        "line": 169,
-        "exists": null
-      },
-      {
-        "text": "Aspose.SVG free support forum",
-        "target": "https://forum.aspose.com/c/svg/42",
-        "is_internal": false,
-        "line": 171,
-        "exists": null
-      },
-      {
-        "text": "Create, Edit and Read SVG Files in Python",
-        "target": "https://blog.aspose.com/svg/create-edit-and-read-svg-files-in-python/",
-        "is_internal": false,
-        "line": 175,
-        "exists": null
-      },
-      {
-        "text": "Convert SVG to PDF in Python",
-        "target": "https://blog.aspose.com/svg/convert-svg-to-pdf-in-python/",
-        "is_internal": false,
-        "line": 176,
-        "exists": null
-      },
-      {
-        "text": "Convert SVG to PNG in Python",
-        "target": "https://blog.aspose.com/svg/convert-svg-to-png-in-python/",
-        "is_internal": false,
-        "line": 177,
-        "exists": null
-      },
-      {
-        "text": "Optimize SVG in Python",
-        "target": "https://blog.aspose.com/svg/optimize-svg-image-in-python/",
-        "is_internal": false,
-        "line": 178,
-        "exists": null
-      },
-      {
-        "text": "Reduce SVG File Size in Python",
-        "target": "https://blog.aspose.com/svg/reduce-svg-file-size-in-python/",
-        "is_internal": false,
-        "line": 179,
-        "exists": null
-      },
-      {
-        "text": "Change SVG Fill Color in Python",
-        "target": "https://blog.aspose.com/svg/change-svg-fill-color-in-python/",
-        "is_internal": false,
-        "line": 180,
-        "exists": null
-      }
-    ],
-    "code_samples": [
-      {
-        "language": "bash",
-        "code": "pip install aspose-svg-net",
-        "line": 51
-      },
-      {
-        "language": "xml",
-        "code": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"400\" height=\"300\" viewBox=\"0 0 400 300\">\n  <rect x=\"20\" y=\"20\" width=\"160\" height=\"100\" fill=\"#4A90E2\"/>\n  <circle cx=\"290\" cy=\"80\" r=\"55\" fill=\"#F5A623\"/>\n  <text x=\"200\" y=\"240\" font-family=\"Arial\" font-size=\"36\" text-anchor=\"middle\" fill=\"#2C3E50\">Aspose.SVG</text>\n</svg>",
-        "line": 57
-      },
-      {
-        "language": "python",
-        "code": "import aspose.svg as svg\nfrom aspose.svg.saving import SVGSaveOptions\n\n# Load the SVG that contains text\ndocument = svg.SVGDocument(\"logo.svg\")\n\n# Enable text vectorization\noptions = SVGSaveOptions()\noptions.vectorize_text = True\n\n# Save the SVG with text converted to paths\ndocument.save(\"logo-outlined.svg\", options)",
-        "line": 76
-      },
-      {
-        "language": "xml",
-        "code": "<defs>\n  <path id=\"gl_1\" d=\"M-0.052734375,0 l9.896484,-25.769531 l3.6738281,0 ... Z\"/>\n  ...\n</defs>\n<use href=\"#gl_1\" transform=\"...\"/>\n...",
-        "line": 95
-      },
-      {
-        "language": "python",
-        "code": "import os\nimport glob\nimport aspose.svg as svg\nfrom aspose.svg.saving import SVGSaveOptions\n\ninput_dir = \"svg-files\"\noutput_dir = \"svg-outlined\"\nos.makedirs(output_dir, exist_ok=True)\n\noptions = SVGSaveOptions()\noptions.vectorize_text = True\n\nfor svg_path in glob.glob(os.path.join(input_dir, \"*.svg\")):\n    output_path = os.path.join(output_dir, os.path.basename(svg_path))\n    document = svg.SVGDocument(svg_path)\n    document.save(output_path, options)\n    print(\"Outlined:\", output_path)",
-        "line": 112
-      }
-    ],
-    "code_blocks": 5,
-    "tables": 0,
-    "shortcodes": [],
-    "faq_like_sections": 4,
-    "schema_like_blocks": 0,
-    "issues": [
-      {
-        "file_path": "content/Aspose.Blog/svg/2026-11-18-convert-svg-text-to-path-in-python/index.md",
-        "issue_type": "suggest_body_output_image",
-        "severity": "Opportunity",
-        "explanation": "Post has a cover/front matter image but no inline body image, and the content appears to describe a visual or generated output. Policy: content-quality; rule: CQ-006.",
-        "why_it_matters": "Inline output screenshots help technical readers confirm that code produced the expected result.",
-        "recommended_fix": "Consider adding an output screenshot or result image inside the post body if it helps readers validate the tutorial result.",
-        "estimated_effort": "Low",
-        "expected_seo_impact": "Medium",
-        "line": 0,
-        "policy_id": "content-quality",
-        "rule_id": "CQ-006",
-        "evidence": "body_images=0; front_matter_images=1",
-        "intended_audiences": [
-          "Developers evaluating file-format SDKs",
-          "Technical content editors"
-        ]
-      },
-      {
-        "file_path": "content/Aspose.Blog/svg/2026-11-18-convert-svg-text-to-path-in-python/index.md",
-        "issue_type": "weak_internal_links",
-        "severity": "Medium",
-        "explanation": "Post has fewer than two internal links. Policy: internal-linking; rule: IL-001.",
-        "why_it_matters": "Internal links help users and crawlers discover related content.",
-        "recommended_fix": "Add links to related tutorials, docs, and product pages.",
-        "estimated_effort": "Low",
-        "expected_seo_impact": "Medium",
-        "line": 0,
-        "policy_id": "internal-linking",
-        "rule_id": "IL-001",
-        "evidence": "internal_links=0",
-        "intended_audiences": [
-          "Developers exploring related API workflows",
-          "Search crawlers discovering topic clusters"
-        ]
-      },
-      {
-        "file_path": "content/Aspose.Blog/svg/2026-11-18-convert-svg-text-to-path-in-python/index.md",
-        "issue_type": "too_few_outgoing_internal_links",
-        "severity": "Medium",
-        "explanation": "Post has fewer than two outgoing internal links. Policy: internal-linking; rule: IL-005.",
-        "why_it_matters": "Outgoing internal links help build product and tutorial clusters.",
-        "recommended_fix": "Add contextual links to related posts, docs, and product pages.",
-        "estimated_effort": "Low",
-        "expected_seo_impact": "Medium",
-        "line": 0,
-        "policy_id": "internal-linking",
-        "rule_id": "IL-005",
-        "evidence": "internal_links=0",
-        "intended_audiences": [
-          "Developers exploring related API workflows",
-          "Search crawlers discovering topic clusters"
-        ]
-      }
-    ],
-    "llm_suggestions": [],
-    "scores": {
-      "content_quality": 100,
-      "on_page_seo": 100,
-      "technical_seo": 85,
-      "internal_linking": 86,
-      "translation_seo": 100,
-      "organic_growth_opportunity": 52,
-      "priority": 24
-    },
-    "translation_group": "content/Aspose.Blog/svg/2026-11-18-convert-svg-text-to-path-in-python/index.md"
-  },
-  {
-    "path": "/home/runner/work/blog-generator-agent/blog-generator-agent/outputs/_repos/aspose-blog/content/Aspose.Blog/svg/2026-11-18-convert-svg-to-jpg-in-python/index.md",
-    "relative_path": "content/Aspose.Blog/svg/2026-11-18-convert-svg-to-jpg-in-python/index.md",
-    "url_candidate": "/svg/convert-svg-to-jpg-in-python/",
-    "language": "en",
-    "front_matter_format": "yaml",
-    "front_matter": {
-      "title": "Convert SVG to JPG in Python using Aspose.SVG",
-      "seoTitle": "Convert SVG to JPG in Python | SVG to JPEG Converter",
-      "description": "Learn how to convert SVG to JPG in Python with Aspose.SVG. Control image size and resolution, set the background color, and batch convert SVG files to JPEG.",
-      "date": "Wed, 18 Nov 2026 02:00:00 +0000",
-      "draft": false,
-      "url": "/svg/convert-svg-to-jpg-in-python/",
-      "author": "Muzammil Khan",
-      "summary": "Render SVG graphics as JPG images from Python code. This guide covers a basic SVG to JPEG conversion, then shows how to control the output size and resolution, choose a background color, and convert a folder of SVG files in one run.",
-      "tags": [
-        "svg to jpg",
-        "convert svg to jpg",
-        "svg to jpeg",
-        "svg to jpg python",
-        "convert svg to jpg in python",
-        "python svg to jpeg",
-        "svg to jpg converter",
-        "save svg as jpg",
-        "svg file to jpg",
-        "batch convert svg to jpg"
-      ],
-      "categories": [
-        "Aspose.SVG Product Family"
-      ],
-      "showtoc": true,
-      "cover": {
-        "image": "images/convert-svg-to-jpg-in-python.jpg",
-        "alt": "Convert SVG to JPG in Python",
-        "caption": "Convert SVG to JPG in Python using Aspose.SVG",
+        "image": "images/convert-svg-to-pdf-in-python.jpg",
+        "alt": "Convert SVG to PDF in Python",
+        "caption": "Convert SVG to PDF in Python using Aspose.SVG",
         "hidden": false
       },
       "steps": [
         "Install Aspose.SVG for Python using `pip install aspose-svg-net`.",
         "Load the SVG file with `svg.SVGDocument(\"input.svg\")`.",
-        "Create `ImageSaveOptions(ImageFormat.JPEG)`.",
-        "Set `page_setup.sizing = SizingType.FIT_CONTENT` so the image matches the drawing.",
-        "Call `Converter.convert_svg(document, options, \"output.jpg\")`."
+        "Create a `PdfSaveOptions` object and set page or background options if needed.",
+        "Call `Converter.convert_svg(document, options, \"output.pdf\")` to save the PDF."
       ],
       "faqs": [
         {
-          "q": "Why is my JPG output so large?",
-          "a": "ImageSaveOptions renders at 300 DPI on an A4 page by default. Set `page_setup.sizing` to `SizingType.FIT_CONTENT` and set the resolution to 96 DPI to get an image with the SVG's own pixel size."
+          "q": "Why is my SVG placed on an A4 page in the PDF?",
+          "a": "PdfSaveOptions uses an A4 page by default. Set `options.page_setup.sizing = SizingType.FIT_CONTENT` to make the PDF page match the size of the drawing."
         },
         {
-          "q": "What happens to transparent areas of the SVG?",
-          "a": "JPG has no transparency, so transparent areas become white. Set `background_color` on the options to use a different color, or convert to PNG if you need to keep transparency."
+          "q": "Does the PDF keep the SVG as vector graphics?",
+          "a": "Shapes, paths and text are written to the PDF as vector content, so they stay sharp when zoomed. Raster images embedded in the SVG remain raster images."
         },
         {
-          "q": "Can I convert SVG to other image formats the same way?",
-          "a": "Yes. ImageFormat also supports PNG, BMP, GIF, TIFF, and WEBP. Pass a different format to ImageSaveOptions."
+          "q": "Can I convert an SVG from a URL to PDF?",
+          "a": "Yes. Pass the URL to `SVGDocument` or directly to `Converter.convert_svg`, and the library downloads and renders the file."
+        },
+        {
+          "q": "Can I combine several SVG files into one PDF?",
+          "a": "Yes. Use `SvgRenderer` with a `PdfDevice` to render multiple SVG documents into a single multi-page PDF."
         }
       ]
     },
-    "body": "\nIn this guide, you will learn how to convert SVG to JPG in Python. You will produce a JPEG from an SVG file, get the output to the exact pixel size you want, choose a background color, and then convert a whole folder of SVG files.\n\n[JPG (JPEG)](https://docs.fileformat.com/image/jpeg/) is the format almost every tool, CMS, and email client can display. An [SVG](https://www.aspose.info/page-description-language/svg/) logo or chart often needs a JPG copy for a product listing, a social post, or a document editor that doesn't accept vector files. Since JPG is a raster format, the main decision you make during conversion is **how many pixels** the output should have.\n\n## Python Library to Convert SVG to JPG\n\nThe examples use [Aspose.SVG for Python via .NET](https://products.aspose.com/svg/python-net/). It parses and renders the SVG on its own, so no browser or external renderer is required.\n\nInstall it from PyPI:\n\n```bash\npip install aspose-svg-net\n```\n\nThe examples use the following `sample.svg` (400 × 300 pixels):\n\n```xml\n<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"400\" height=\"300\" viewBox=\"0 0 400 300\">\n  <rect x=\"20\" y=\"20\" width=\"160\" height=\"100\" fill=\"#4A90E2\" stroke=\"#1F3B63\" stroke-width=\"4\"/>\n  <circle cx=\"290\" cy=\"80\" r=\"55\" fill=\"#F5A623\" stroke=\"#8B5A00\" stroke-width=\"4\"/>\n  <line x1=\"20\" y1=\"170\" x2=\"380\" y2=\"170\" stroke=\"#333333\" stroke-width=\"3\"/>\n  <text x=\"200\" y=\"240\" font-family=\"Arial\" font-size=\"36\" text-anchor=\"middle\" fill=\"#2C3E50\">Aspose.SVG</text>\n</svg>\n```\n\n## Convert SVG to JPG in Python\n\nFollow these steps to convert an SVG file to JPG:\n\n1. Load the SVG into an `SVGDocument`.\n2. Create `ImageSaveOptions` with `ImageFormat.JPEG`.\n3. Set `page_setup.sizing` to `SizingType.FIT_CONTENT` so the image is cropped to the drawing.\n4. Call `Converter.convert_svg()`.\n\nThe following code example converts `sample.svg` to `sample.jpg`:\n\n```python\nimport aspose.svg as svg\nfrom aspose.svg.converters import Converter\nfrom aspose.svg.saving import ImageSaveOptions\nfrom aspose.svg.rendering import SizingType\nfrom aspose.svg.rendering.image import ImageFormat\n\n# Load the SVG document\ndocument = svg.SVGDocument(\"sample.svg\")\n\n# Configure JPEG output\noptions = ImageSaveOptions(ImageFormat.JPEG)\noptions.page_setup.sizing = SizingType.FIT_CONTENT\n\n# Convert SVG to JPG\nConverter.convert_svg(document, options, \"sample.jpg\")\n```\n\nThe resulting image is **1250 × 938 pixels**, not 400 × 300. The reason is the default resolution of **300 DPI**: the library treats SVG pixels as 1/96 inch and renders them at 300 DPI, so each SVG pixel becomes about 3.1 image pixels. That's handy for print, but probably larger than you need for the web.\n\nWithout the `FIT_CONTENT` line, the drawing is placed on a full A4 page (2480 × 3508 pixels at 300 DPI).\n\n## Set the JPG Size and Resolution\n\nTo control the pixel size, set the resolution. At **96 DPI**, the JPG has the same pixel size as the SVG. At 192 DPI, it is twice as large in each direction, which is a good choice for high-density screens.\n\n| Resolution | Output size for a 400 × 300 SVG |\n|---|---|\n| 96 DPI | 400 × 300 px |\n| 192 DPI | 800 × 600 px |\n| 300 DPI (default) | 1250 × 938 px |\n\nThe following code example renders the SVG at 96 DPI. Note that `Resolution.from_dots_per_inch()` expects a float:\n\n```python\nimport aspose.svg as svg\nfrom aspose.svg.converters import Converter\nfrom aspose.svg.saving import ImageSaveOptions\nfrom aspose.svg.rendering import SizingType\nfrom aspose.svg.rendering.image import ImageFormat\nfrom aspose.svg.drawing import Resolution\n\ndocument = svg.SVGDocument(\"sample.svg\")\n\noptions = ImageSaveOptions(ImageFormat.JPEG)\noptions.page_setup.sizing = SizingType.FIT_CONTENT\n# 96 DPI keeps the SVG's own pixel size\noptions.horizontal_resolution = Resolution.from_dots_per_inch(96.0)\noptions.vertical_resolution = Resolution.from_dots_per_inch(96.0)\n\nConverter.convert_svg(document, options, \"sample-96dpi.jpg\")\n```\n\n## Choose a Background Color for the JPG\n\nSVG backgrounds are transparent unless the file draws one. JPG can't store transparency, so transparent areas come out **white** by default. If your brand or page layout needs a different color, set `background_color`:\n\n```python\nimport aspose.svg as svg\nimport aspose.pydrawing as drawing\nfrom aspose.svg.converters import Converter\nfrom aspose.svg.saving import ImageSaveOptions\nfrom aspose.svg.rendering import SizingType\nfrom aspose.svg.rendering.image import ImageFormat\n\ndocument = svg.SVGDocument(\"sample.svg\")\n\noptions = ImageSaveOptions(ImageFormat.JPEG)\noptions.page_setup.sizing = SizingType.FIT_CONTENT\n# Light gray background instead of white\noptions.background_color = drawing.Color.from_argb(255, 240, 240, 240)\n\nConverter.convert_svg(document, options, \"sample-gray.jpg\")\n```\n\nIf the image must stay transparent, convert to PNG instead. See [Convert SVG to PNG in Python](https://blog.aspose.com/svg/convert-svg-to-png-in-python/).\n\n## Batch Convert SVG Files to JPG\n\nTo convert every SVG in a folder, create the options once and reuse them in a loop. `Converter.convert_svg()` accepts a file path directly:\n\n```python\nimport os\nimport glob\nfrom aspose.svg.converters import Converter\nfrom aspose.svg.saving import ImageSaveOptions\nfrom aspose.svg.rendering import SizingType\nfrom aspose.svg.rendering.image import ImageFormat\nfrom aspose.svg.drawing import Resolution\n\ninput_dir = \"svg-files\"\noutput_dir = \"jpg-files\"\nos.makedirs(output_dir, exist_ok=True)\n\noptions = ImageSaveOptions(ImageFormat.JPEG)\noptions.page_setup.sizing = SizingType.FIT_CONTENT\noptions.horizontal_resolution = Resolution.from_dots_per_inch(144.0)\noptions.vertical_resolution = Resolution.from_dots_per_inch(144.0)\n\nfor svg_path in glob.glob(os.path.join(input_dir, \"*.svg\")):\n    name = os.path.splitext(os.path.basename(svg_path))[0]\n    jpg_path = os.path.join(output_dir, name + \".jpg\")\n    Converter.convert_svg(svg_path, options, jpg_path)\n    print(\"Converted:\", jpg_path)\n```\n\n## Convert SVG to Other Image Formats\n\nThe same code works for other raster formats. `ImageFormat` supports `JPEG`, `PNG`, `BMP`, `GIF`, `TIFF`, and `WEBP`. For example, `ImageSaveOptions(ImageFormat.BMP)` produces a BMP file with the same sizing and resolution settings.\n\n## Get a Free License\n\nIn evaluation mode, Aspose.SVG adds an evaluation notice to the output. Request a [free temporary license](https://purchase.aspose.com/temporary-license/) to test conversions without this limitation.\n\n## Convert SVG to JPG Online\n\nTo convert a few files by hand, use the free [online SVG to JPG converter](https://products.aspose.app/svg/conversion/svg-to-jpg). It runs in your browser and lets you pick a page size before downloading the JPG.\n\n## SVG to JPG: Free Resources\n\n* [Aspose.SVG for Python Documentation](https://docs.aspose.com/svg/python-net/)\n* [Aspose.SVG for Python API Reference](https://reference.aspose.com/svg/python-net/)\n* [Free Online SVG Apps](https://products.aspose.app/svg/family)\n* [Aspose.SVG Blog Posts](https://blog.aspose.com/categories/aspose.svg-product-family/)\n\n## SVG to JPG in Python: FAQs\n\n**Q: Why is my JPG output so large?**\n\nA: The default is 300 DPI on an A4 page. Set `page_setup.sizing` to `SizingType.FIT_CONTENT` and the resolution to 96 DPI to match the SVG's own pixel size.\n\n**Q: What happens to transparent areas of the SVG?**\n\nA: They become white, because JPG doesn't support transparency. Set `background_color` to use another color, or convert to PNG to keep transparency.\n\n**Q: Can I convert SVG to other image formats the same way?**\n\nA: Yes. Pass `ImageFormat.PNG`, `BMP`, `GIF`, `TIFF`, or `WEBP` to `ImageSaveOptions`.\n\n## Conclusion\n\nYou now know how to convert SVG to JPG in Python, how DPI determines the size of the JPG, and how to replace the default white background. The key settings to remember are `SizingType.FIT_CONTENT` and the two resolution properties. If you need a print-ready document instead of an image, continue with [Convert SVG to PDF in Python](https://blog.aspose.com/svg/convert-svg-to-pdf-in-python/).\n\nQuestions about a specific file? Ask on the [Aspose.SVG free support forum](https://forum.aspose.com/c/svg/42).\n\n## See Also\n\n* [Convert SVG to PNG in Python](https://blog.aspose.com/svg/convert-svg-to-png-in-python/)\n* [Convert SVG to PDF in Python](https://blog.aspose.com/svg/convert-svg-to-pdf-in-python/)\n* [Convert JPG to SVG in Python](https://blog.aspose.com/svg/convert-jpg-to-svg-in-python/)\n* [Convert SVG Code to PNG in Python](https://blog.aspose.com/svg/convert-svg-code-to-png-in-python/)\n* [Change SVG Color and Background in Python](https://blog.aspose.com/svg/change-svg-color-and-background-in-python/)\n* [Reduce SVG File Size in Python](https://blog.aspose.com/svg/reduce-svg-file-size-in-python/)\n",
-    "body_line_offset": 31,
-    "title": "Convert SVG to JPG in Python using Aspose.SVG",
-    "description": "Learn how to convert SVG to JPG in Python with Aspose.SVG. Control image size and resolution, set the background color, and batch convert SVG files to JPEG.",
-    "date": "Wed, 18 Nov 2026 02:00:00 +0000",
+    "body": "\nIn this article, you will learn how to convert SVG to PDF in Python. You will start with a single function call, then control the page size, background, and document properties, and finally convert a whole folder of SVG files in one run.\n\nPDF is the format most people expect when they print, archive, or email a graphic. An [SVG](https://docs.fileformat.com/page-description-language/svg/) file is perfect for the web, but not every document workflow can open it. Converting it to [PDF](https://docs.fileformat.com/pdf/) gives you a fixed-layout file that keeps the vector shapes and text sharp at any zoom level.\n\n## Python SVG to PDF Converter Library\n\nThe examples use [Aspose.SVG for Python via .NET](https://products.aspose.com/svg/python-net/), an API for loading, editing, and rendering SVG documents. It renders the SVG itself, so you don't need a browser, Inkscape, or Cairo installed on the machine.\n\nInstall the package from PyPI:\n\n```bash\npip install aspose-svg-net\n```\n\nYou can also download it from the [releases page](https://releases.aspose.com/svg/python-net/).\n\nThe examples below use this `sample.svg` file. Save it in your project folder to follow along:\n\n```xml\n<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"400\" height=\"300\" viewBox=\"0 0 400 300\">\n  <rect x=\"20\" y=\"20\" width=\"160\" height=\"100\" fill=\"#4A90E2\" stroke=\"#1F3B63\" stroke-width=\"4\"/>\n  <circle cx=\"290\" cy=\"80\" r=\"55\" fill=\"#F5A623\" stroke=\"#8B5A00\" stroke-width=\"4\"/>\n  <line x1=\"20\" y1=\"170\" x2=\"380\" y2=\"170\" stroke=\"#333333\" stroke-width=\"3\"/>\n  <text x=\"200\" y=\"240\" font-family=\"Arial\" font-size=\"36\" text-anchor=\"middle\" fill=\"#2C3E50\">Aspose.SVG</text>\n</svg>\n```\n\n## Convert SVG to PDF in Python\n\nThe shortest route is the `Converter.convert_svg()` method. It takes the source document, a save-options object, and the output path.\n\nFollow these steps to convert an SVG file to PDF:\n\n1. Load the SVG file into an `SVGDocument`.\n2. Create a `PdfSaveOptions` object.\n3. Call `Converter.convert_svg()` with the document, the options, and the output file name.\n\nThe following code example converts `sample.svg` to `sample.pdf`:\n\n```python\nimport aspose.svg as svg\nfrom aspose.svg.converters import Converter\nfrom aspose.svg.saving import PdfSaveOptions\n\n# Load the SVG document\ndocument = svg.SVGDocument(\"sample.svg\")\n\n# Convert SVG to PDF with default options\nConverter.convert_svg(document, PdfSaveOptions(), \"sample.pdf\")\n```\n\nWith the default options, the drawing is placed on an **A4 page**. That is useful for print layouts, but if you want the PDF page to match the graphic, set the page sizing as shown in the next section.\n\n## Fit the PDF Page to the SVG and Set a Background\n\nThe `PdfSaveOptions` controls how the SVG is laid out in the PDF. The options you will use most often are:\n\n* `page_setup.sizing`: set it to `SizingType.FIT_CONTENT` to make the page the same size as the drawing.\n* `page_setup.any_page`: set an exact page size instead, for example 400 × 300 pixels.\n* `background_color`: fill transparent areas with a solid color. SVG backgrounds are transparent by default.\n* `jpeg_quality`: the JPEG compression quality for raster images embedded in the SVG.\n\nThe following code example fits the page to the drawing and adds a white background:\n\n```python\nimport aspose.svg as svg\nimport aspose.pydrawing as drawing\nfrom aspose.svg.converters import Converter\nfrom aspose.svg.saving import PdfSaveOptions\nfrom aspose.svg.rendering import SizingType\n\ndocument = svg.SVGDocument(\"sample.svg\")\n\noptions = PdfSaveOptions()\n# Make the PDF page the same size as the SVG drawing\noptions.page_setup.sizing = SizingType.FIT_CONTENT\n# Fill transparent areas with white\noptions.background_color = drawing.Color.white\n\nConverter.convert_svg(document, options, \"sample-fit.pdf\")\n```\n\nTo use a fixed page size instead, define a `Page` with a `Size` built from `Unit` values. Note that `Unit.from_pixels()` expects a float:\n\n```python\nimport aspose.svg as svg\nfrom aspose.svg.converters import Converter\nfrom aspose.svg.saving import PdfSaveOptions\nfrom aspose.svg.drawing import Page, Size, Unit\n\ndocument = svg.SVGDocument(\"sample.svg\")\n\noptions = PdfSaveOptions()\n# Use a 600 x 400 pixel page\noptions.page_setup.any_page = Page(Size(Unit.from_pixels(600.0), Unit.from_pixels(400.0)))\n\nConverter.convert_svg(document, options, \"sample-600x400.pdf\")\n```\n\n## Add a Title and Author to the PDF\n\nWhen the PDF is going into a document library or an archive, set its properties so it shows a useful title in viewers and search results. Use the `document_info` property of `PdfSaveOptions`:\n\n```python\nimport aspose.svg as svg\nfrom aspose.svg.converters import Converter\nfrom aspose.svg.saving import PdfSaveOptions\nfrom aspose.svg.rendering import SizingType\n\ndocument = svg.SVGDocument(\"sample.svg\")\n\noptions = PdfSaveOptions()\noptions.page_setup.sizing = SizingType.FIT_CONTENT\n# Set PDF document properties\noptions.document_info.title = \"Quarterly Sales Chart\"\noptions.document_info.author = \"Reporting Team\"\n\nConverter.convert_svg(document, options, \"sample-with-info.pdf\")\n```\n\n## Convert an SVG from a URL to PDF\n\n`Converter.convert_svg()` also accepts a file path or a URL as its first argument, so you don't have to create an `SVGDocument` first:\n\n```python\nfrom aspose.svg.converters import Converter\nfrom aspose.svg.saving import PdfSaveOptions\nfrom aspose.svg.rendering import SizingType\n\noptions = PdfSaveOptions()\noptions.page_setup.sizing = SizingType.FIT_CONTENT\n\n# Convert an SVG published on the web\nConverter.convert_svg(\"https://www.w3.org/Icons/SVG/svg-logo-v.svg\", options, \"svg-logo.pdf\")\n```\n\n## Batch Convert SVG Files to PDF\n\nIf you have a folder of icons, charts, or diagrams, loop over the files and reuse the same options object. Each SVG becomes its own PDF:\n\n```python\nimport os\nimport glob\nfrom aspose.svg.converters import Converter\nfrom aspose.svg.saving import PdfSaveOptions\nfrom aspose.svg.rendering import SizingType\n\ninput_dir = \"svg-files\"\noutput_dir = \"pdf-files\"\nos.makedirs(output_dir, exist_ok=True)\n\noptions = PdfSaveOptions()\noptions.page_setup.sizing = SizingType.FIT_CONTENT\n\nfor svg_path in glob.glob(os.path.join(input_dir, \"*.svg\")):\n    name = os.path.splitext(os.path.basename(svg_path))[0]\n    pdf_path = os.path.join(output_dir, name + \".pdf\")\n    Converter.convert_svg(svg_path, options, pdf_path)\n    print(\"Converted:\", pdf_path)\n```\n\nIf you want all the SVG files in **one** PDF instead, see [Merge SVG Files into PDF in Python](https://blog.aspose.com/svg/merge-svg-files-into-pdf-in-python/).\n\n## Get a Free License\n\nWithout a license, Aspose.SVG runs in evaluation mode and adds an evaluation notice to the output. Request a [free temporary license](https://purchase.aspose.com/temporary-license/) to test the conversion without these limits.\n\n## Convert SVG to PDF Online\n\nFor a one-off file, you can use the free [online SVG to PDF converter](https://products.aspose.app/svg/conversion/svg-to-pdf). Upload the SVG in your browser, choose a page size, and download the PDF. Use the Python API when you need to convert files automatically or inside your own application.\n\n## SVG to PDF: Free Resources\n\n* [Aspose.SVG for Python Documentation](https://docs.aspose.com/svg/python-net/)\n* [Aspose.SVG for Python API Reference](https://reference.aspose.com/svg/python-net/)\n* [Free Online SVG Apps](https://products.aspose.app/svg/family)\n* [Aspose.SVG Blog Posts](https://blog.aspose.com/categories/aspose.svg-product-family/)\n\n## SVG to PDF in Python: FAQs\n\n**Q: Why is my SVG placed on an A4 page in the PDF?**\n\nA: `PdfSaveOptions` uses an A4 page by default. Set `options.page_setup.sizing = SizingType.FIT_CONTENT` to make the page match the drawing.\n\n**Q: Does the PDF keep the SVG as vector graphics?**\n\nA: Shapes, paths and text are written as vector content, so they stay sharp when zoomed. Raster images embedded in the SVG remain raster images.\n\n**Q: Can I convert an SVG from a URL to PDF?**\n\nA: Yes. Pass the URL to `SVGDocument` or directly to `Converter.convert_svg()`.\n\n**Q: Can I combine several SVG files into one PDF?**\n\nA: Yes. Use `SvgRenderer` with a `PdfDevice` to render several documents into a single multi-page PDF.\n\n## Conclusion\n\nYou can now convert SVG to PDF in Python with a single `Converter.convert_svg()` call, fit the page to the drawing, add a background and document properties, and process a whole folder at once. As a next step, try rendering the same SVG to an image format: the [SVG to JPG](https://blog.aspose.com/svg/convert-svg-to-jpg-in-python/) and [SVG to PNG](https://blog.aspose.com/svg/convert-svg-to-png-in-python/) guides use the same pattern with `ImageSaveOptions`.\n\nIf you run into a file that doesn't convert as expected, post it on the [Aspose.SVG free support forum](https://forum.aspose.com/c/svg/42).\n\n## See Also\n\n* [Convert SVG to JPG in Python](https://blog.aspose.com/svg/convert-svg-to-jpg-in-python/)\n* [Convert SVG to PNG in Python](https://blog.aspose.com/svg/convert-svg-to-png-in-python/)\n* [Merge SVG Files into PDF in Python](https://blog.aspose.com/svg/merge-svg-files-into-pdf-in-python/)\n* [Convert SVG Code to PNG in Python](https://blog.aspose.com/svg/convert-svg-code-to-png-in-python/)\n* [Change SVG Fill Color in Python](https://blog.aspose.com/svg/change-svg-fill-color-in-python/)\n* [Optimize SVG in Python](https://blog.aspose.com/svg/optimize-svg-image-in-python/)\n",
+    "body_line_offset": 32,
+    "title": "Convert SVG to PDF in Python using Aspose.SVG",
+    "description": "Learn how to convert SVG to PDF in Python with Aspose.SVG for Python via .NET. Set page size, background color, and PDF metadata, and batch convert folders.",
+    "date": "Thu, 19 Nov 2026 01:00:00 +0000",
     "lastmod": "",
     "draft": false,
     "slug": "",
     "aliases": [],
     "tags": [
-      "svg to jpg",
-      "convert svg to jpg",
-      "svg to jpeg",
-      "svg to jpg python",
-      "convert svg to jpg in python",
-      "python svg to jpeg",
-      "svg to jpg converter",
-      "save svg as jpg",
-      "svg file to jpg",
-      "batch convert svg to jpg"
+      "svg to pdf",
+      "convert svg to pdf",
+      "svg to pdf python",
+      "convert svg to pdf in python",
+      "python svg to pdf",
+      "svg to pdf converter",
+      "save svg as pdf",
+      "export svg to pdf",
+      "svg file to pdf",
+      "batch convert svg to pdf"
     ],
     "categories": [
       "Aspose.SVG Product Family"
@@ -478,234 +88,252 @@
     "keywords": [],
     "canonical_url": "",
     "translation_key": "",
-    "word_count": 908,
-    "character_count": 5780,
+    "word_count": 1000,
+    "character_count": 6275,
     "headings": [
       {
         "level": 2,
-        "text": "Python Library to Convert SVG to JPG",
-        "line": 37
+        "text": "Python SVG to PDF Converter Library",
+        "line": 38
       },
       {
         "level": 2,
-        "text": "Convert SVG to JPG in Python",
-        "line": 58
+        "text": "Convert SVG to PDF in Python",
+        "line": 61
       },
       {
         "level": 2,
-        "text": "Set the JPG Size and Resolution",
-        "line": 91
+        "text": "Fit the PDF Page to the SVG and Set a Background",
+        "line": 87
       },
       {
         "level": 2,
-        "text": "Choose a Background Color for the JPG",
-        "line": 122
+        "text": "Add a Title and Author to the PDF",
+        "line": 133
       },
       {
         "level": 2,
-        "text": "Batch Convert SVG Files to JPG",
-        "line": 146
+        "text": "Convert an SVG from a URL to PDF",
+        "line": 154
       },
       {
         "level": 2,
-        "text": "Convert SVG to Other Image Formats",
-        "line": 175
+        "text": "Batch Convert SVG Files to PDF",
+        "line": 170
       },
       {
         "level": 2,
         "text": "Get a Free License",
-        "line": 179
+        "line": 197
       },
       {
         "level": 2,
-        "text": "Convert SVG to JPG Online",
-        "line": 183
+        "text": "Convert SVG to PDF Online",
+        "line": 201
       },
       {
         "level": 2,
-        "text": "SVG to JPG: Free Resources",
-        "line": 187
+        "text": "SVG to PDF: Free Resources",
+        "line": 205
       },
       {
         "level": 2,
-        "text": "SVG to JPG in Python: FAQs",
-        "line": 194
+        "text": "SVG to PDF in Python: FAQs",
+        "line": 212
       },
       {
         "level": 2,
         "text": "Conclusion",
-        "line": 208
+        "line": 230
       },
       {
         "level": 2,
         "text": "See Also",
-        "line": 214
+        "line": 236
       }
     ],
     "paragraphs": [
-      "In this guide, you will learn how to convert SVG to JPG in Python. You will produce a JPEG from an SVG file, get the output to the exact pixel size you want, choose a background color, and then convert a whole folder of SVG files.",
-      "[JPG (JPEG)](https://docs.fileformat.com/image/jpeg/) is the format almost every tool, CMS, and email client can display. An [SVG](https://www.aspose.info/page-description-language/svg/) logo or chart often needs a JPG copy for a product listing, a social post, or a document editor that doesn't accept vector files. Since JPG is a raster format, the main decision you make during conversion is **how many pixels** the output should have.",
-      "The examples use [Aspose.SVG for Python via .NET](https://products.aspose.com/svg/python-net/). It parses and renders the SVG on its own, so no browser or external renderer is required.",
-      "Install it from PyPI:",
-      "The examples use the following `sample.svg` (400 × 300 pixels):",
-      "Follow these steps to convert an SVG file to JPG:",
-      "1. Load the SVG into an `SVGDocument`.\n2. Create `ImageSaveOptions` with `ImageFormat.JPEG`.\n3. Set `page_setup.sizing` to `SizingType.FIT_CONTENT` so the image is cropped to the drawing.\n4. Call `Converter.convert_svg()`.",
-      "The following code example converts `sample.svg` to `sample.jpg`:",
-      "The resulting image is **1250 × 938 pixels**, not 400 × 300. The reason is the default resolution of **300 DPI**: the library treats SVG pixels as 1/96 inch and renders them at 300 DPI, so each SVG pixel becomes about 3.1 image pixels. That's handy for print, but probably larger than you need for the web.",
-      "Without the `FIT_CONTENT` line, the drawing is placed on a full A4 page (2480 × 3508 pixels at 300 DPI).",
-      "To control the pixel size, set the resolution. At **96 DPI**, the JPG has the same pixel size as the SVG. At 192 DPI, it is twice as large in each direction, which is a good choice for high-density screens.",
-      "| Resolution | Output size for a 400 × 300 SVG |\n|---|---|\n| 96 DPI | 400 × 300 px |\n| 192 DPI | 800 × 600 px |\n| 300 DPI (default) | 1250 × 938 px |",
-      "The following code example renders the SVG at 96 DPI. Note that `Resolution.from_dots_per_inch()` expects a float:",
-      "SVG backgrounds are transparent unless the file draws one. JPG can't store transparency, so transparent areas come out **white** by default. If your brand or page layout needs a different color, set `background_color`:",
-      "If the image must stay transparent, convert to PNG instead. See [Convert SVG to PNG in Python](https://blog.aspose.com/svg/convert-svg-to-png-in-python/).",
-      "To convert every SVG in a folder, create the options once and reuse them in a loop. `Converter.convert_svg()` accepts a file path directly:",
-      "The same code works for other raster formats. `ImageFormat` supports `JPEG`, `PNG`, `BMP`, `GIF`, `TIFF`, and `WEBP`. For example, `ImageSaveOptions(ImageFormat.BMP)` produces a BMP file with the same sizing and resolution settings.",
-      "In evaluation mode, Aspose.SVG adds an evaluation notice to the output. Request a [free temporary license](https://purchase.aspose.com/temporary-license/) to test conversions without this limitation.",
-      "To convert a few files by hand, use the free [online SVG to JPG converter](https://products.aspose.app/svg/conversion/svg-to-jpg). It runs in your browser and lets you pick a page size before downloading the JPG.",
+      "In this article, you will learn how to convert SVG to PDF in Python. You will start with a single function call, then control the page size, background, and document properties, and finally convert a whole folder of SVG files in one run.",
+      "PDF is the format most people expect when they print, archive, or email a graphic. An [SVG](https://docs.fileformat.com/page-description-language/svg/) file is perfect for the web, but not every document workflow can open it. Converting it to [PDF](https://docs.fileformat.com/pdf/) gives you a fixed-layout file that keeps the vector shapes and text sharp at any zoom level.",
+      "The examples use [Aspose.SVG for Python via .NET](https://products.aspose.com/svg/python-net/), an API for loading, editing, and rendering SVG documents. It renders the SVG itself, so you don't need a browser, Inkscape, or Cairo installed on the machine.",
+      "Install the package from PyPI:",
+      "You can also download it from the [releases page](https://releases.aspose.com/svg/python-net/).",
+      "The examples below use this `sample.svg` file. Save it in your project folder to follow along:",
+      "The shortest route is the `Converter.convert_svg()` method. It takes the source document, a save-options object, and the output path.",
+      "Follow these steps to convert an SVG file to PDF:",
+      "1. Load the SVG file into an `SVGDocument`.\n2. Create a `PdfSaveOptions` object.\n3. Call `Converter.convert_svg()` with the document, the options, and the output file name.",
+      "The following code example converts `sample.svg` to `sample.pdf`:",
+      "With the default options, the drawing is placed on an **A4 page**. That is useful for print layouts, but if you want the PDF page to match the graphic, set the page sizing as shown in the next section.",
+      "The `PdfSaveOptions` controls how the SVG is laid out in the PDF. The options you will use most often are:",
+      "* `page_setup.sizing`: set it to `SizingType.FIT_CONTENT` to make the page the same size as the drawing.\n* `page_setup.any_page`: set an exact page size instead, for example 400 × 300 pixels.\n* `background_color`: fill transparent areas with a solid color. SVG backgrounds are transparent by default.\n* `jpeg_quality`: the JPEG compression quality for raster images embedded in the SVG.",
+      "The following code example fits the page to the drawing and adds a white background:",
+      "To use a fixed page size instead, define a `Page` with a `Size` built from `Unit` values. Note that `Unit.from_pixels()` expects a float:",
+      "When the PDF is going into a document library or an archive, set its properties so it shows a useful title in viewers and search results. Use the `document_info` property of `PdfSaveOptions`:",
+      "`Converter.convert_svg()` also accepts a file path or a URL as its first argument, so you don't have to create an `SVGDocument` first:",
+      "If you have a folder of icons, charts, or diagrams, loop over the files and reuse the same options object. Each SVG becomes its own PDF:",
+      "If you want all the SVG files in **one** PDF instead, see [Merge SVG Files into PDF in Python](https://blog.aspose.com/svg/merge-svg-files-into-pdf-in-python/).",
+      "Without a license, Aspose.SVG runs in evaluation mode and adds an evaluation notice to the output. Request a [free temporary license](https://purchase.aspose.com/temporary-license/) to test the conversion without these limits.",
+      "For a one-off file, you can use the free [online SVG to PDF converter](https://products.aspose.app/svg/conversion/svg-to-pdf). Upload the SVG in your browser, choose a page size, and download the PDF. Use the Python API when you need to convert files automatically or inside your own application.",
       "* [Aspose.SVG for Python Documentation](https://docs.aspose.com/svg/python-net/)\n* [Aspose.SVG for Python API Reference](https://reference.aspose.com/svg/python-net/)\n* [Free Online SVG Apps](https://products.aspose.app/svg/family)\n* [Aspose.SVG Blog Posts](https://blog.aspose.com/categories/aspose.svg-product-family/)",
-      "**Q: Why is my JPG output so large?**",
-      "A: The default is 300 DPI on an A4 page. Set `page_setup.sizing` to `SizingType.FIT_CONTENT` and the resolution to 96 DPI to match the SVG's own pixel size.",
-      "**Q: What happens to transparent areas of the SVG?**",
-      "A: They become white, because JPG doesn't support transparency. Set `background_color` to use another color, or convert to PNG to keep transparency.",
-      "**Q: Can I convert SVG to other image formats the same way?**",
-      "A: Yes. Pass `ImageFormat.PNG`, `BMP`, `GIF`, `TIFF`, or `WEBP` to `ImageSaveOptions`.",
-      "You now know how to convert SVG to JPG in Python, how DPI determines the size of the JPG, and how to replace the default white background. The key settings to remember are `SizingType.FIT_CONTENT` and the two resolution properties. If you need a print-ready document instead of an image, continue with [Convert SVG to PDF in Python](https://blog.aspose.com/svg/convert-svg-to-pdf-in-python/).",
-      "Questions about a specific file? Ask on the [Aspose.SVG free support forum](https://forum.aspose.com/c/svg/42).",
-      "* [Convert SVG to PNG in Python](https://blog.aspose.com/svg/convert-svg-to-png-in-python/)\n* [Convert SVG to PDF in Python](https://blog.aspose.com/svg/convert-svg-to-pdf-in-python/)\n* [Convert JPG to SVG in Python](https://blog.aspose.com/svg/convert-jpg-to-svg-in-python/)\n* [Convert SVG Code to PNG in Python](https://blog.aspose.com/svg/convert-svg-code-to-png-in-python/)\n* [Change SVG Color and Background in Python](https://blog.aspose.com/svg/change-svg-color-and-background-in-python/)\n* [Reduce SVG File Size in Python](https://blog.aspose.com/svg/reduce-svg-file-size-in-python/)"
+      "**Q: Why is my SVG placed on an A4 page in the PDF?**",
+      "A: `PdfSaveOptions` uses an A4 page by default. Set `options.page_setup.sizing = SizingType.FIT_CONTENT` to make the page match the drawing.",
+      "**Q: Does the PDF keep the SVG as vector graphics?**",
+      "A: Shapes, paths and text are written as vector content, so they stay sharp when zoomed. Raster images embedded in the SVG remain raster images.",
+      "**Q: Can I convert an SVG from a URL to PDF?**",
+      "A: Yes. Pass the URL to `SVGDocument` or directly to `Converter.convert_svg()`.",
+      "**Q: Can I combine several SVG files into one PDF?**",
+      "A: Yes. Use `SvgRenderer` with a `PdfDevice` to render several documents into a single multi-page PDF.",
+      "You can now convert SVG to PDF in Python with a single `Converter.convert_svg()` call, fit the page to the drawing, add a background and document properties, and process a whole folder at once. As a next step, try rendering the same SVG to an image format: the [SVG to JPG](https://blog.aspose.com/svg/convert-svg-to-jpg-in-python/) and [SVG to PNG](https://blog.aspose.com/svg/convert-svg-to-png-in-python/) guides use the same pattern with `ImageSaveOptions`.",
+      "If you run into a file that doesn't convert as expected, post it on the [Aspose.SVG free support forum](https://forum.aspose.com/c/svg/42).",
+      "* [Convert SVG to JPG in Python](https://blog.aspose.com/svg/convert-svg-to-jpg-in-python/)\n* [Convert SVG to PNG in Python](https://blog.aspose.com/svg/convert-svg-to-png-in-python/)\n* [Merge SVG Files into PDF in Python](https://blog.aspose.com/svg/merge-svg-files-into-pdf-in-python/)\n* [Convert SVG Code to PNG in Python](https://blog.aspose.com/svg/convert-svg-code-to-png-in-python/)\n* [Change SVG Fill Color in Python](https://blog.aspose.com/svg/change-svg-fill-color-in-python/)\n* [Optimize SVG in Python](https://blog.aspose.com/svg/optimize-svg-image-in-python/)"
     ],
     "images": [
       {
-        "alt": "Convert SVG to JPG in Python",
-        "target": "images/convert-svg-to-jpg-in-python.jpg",
+        "alt": "Convert SVG to PDF in Python",
+        "target": "images/convert-svg-to-pdf-in-python.jpg",
         "line": 0,
         "exists": true
       }
     ],
     "links": [
       {
-        "text": "JPG (JPEG)",
-        "target": "https://docs.fileformat.com/image/jpeg/",
+        "text": "SVG",
+        "target": "https://docs.fileformat.com/page-description-language/svg/",
         "is_internal": false,
-        "line": 35,
+        "line": 36,
         "exists": null
       },
       {
-        "text": "SVG",
-        "target": "https://www.aspose.info/page-description-language/svg/",
+        "text": "PDF",
+        "target": "https://docs.fileformat.com/pdf/",
         "is_internal": false,
-        "line": 35,
+        "line": 36,
         "exists": null
       },
       {
         "text": "Aspose.SVG for Python via .NET",
         "target": "https://products.aspose.com/svg/python-net/",
         "is_internal": false,
-        "line": 39,
+        "line": 40,
         "exists": null
       },
       {
-        "text": "Convert SVG to PNG in Python",
-        "target": "https://blog.aspose.com/svg/convert-svg-to-png-in-python/",
+        "text": "releases page",
+        "target": "https://releases.aspose.com/svg/python-net/",
         "is_internal": false,
-        "line": 144,
+        "line": 48,
+        "exists": null
+      },
+      {
+        "text": "Merge SVG Files into PDF in Python",
+        "target": "https://blog.aspose.com/svg/merge-svg-files-into-pdf-in-python/",
+        "is_internal": false,
+        "line": 195,
         "exists": null
       },
       {
         "text": "free temporary license",
         "target": "https://purchase.aspose.com/temporary-license/",
         "is_internal": false,
-        "line": 181,
+        "line": 199,
         "exists": null
       },
       {
-        "text": "online SVG to JPG converter",
-        "target": "https://products.aspose.app/svg/conversion/svg-to-jpg",
+        "text": "online SVG to PDF converter",
+        "target": "https://products.aspose.app/svg/conversion/svg-to-pdf",
         "is_internal": false,
-        "line": 185,
+        "line": 203,
         "exists": null
       },
       {
         "text": "Aspose.SVG for Python Documentation",
         "target": "https://docs.aspose.com/svg/python-net/",
         "is_internal": false,
-        "line": 189,
+        "line": 207,
         "exists": null
       },
       {
         "text": "Aspose.SVG for Python API Reference",
         "target": "https://reference.aspose.com/svg/python-net/",
         "is_internal": false,
-        "line": 190,
+        "line": 208,
         "exists": null
       },
       {
         "text": "Free Online SVG Apps",
         "target": "https://products.aspose.app/svg/family",
         "is_internal": false,
-        "line": 191,
+        "line": 209,
         "exists": null
       },
       {
         "text": "Aspose.SVG Blog Posts",
         "target": "https://blog.aspose.com/categories/aspose.svg-product-family/",
         "is_internal": false,
-        "line": 192,
+        "line": 210,
         "exists": null
       },
       {
-        "text": "Convert SVG to PDF in Python",
-        "target": "https://blog.aspose.com/svg/convert-svg-to-pdf-in-python/",
+        "text": "SVG to JPG",
+        "target": "https://blog.aspose.com/svg/convert-svg-to-jpg-in-python/",
         "is_internal": false,
-        "line": 210,
+        "line": 232,
+        "exists": null
+      },
+      {
+        "text": "SVG to PNG",
+        "target": "https://blog.aspose.com/svg/convert-svg-to-png-in-python/",
+        "is_internal": false,
+        "line": 232,
         "exists": null
       },
       {
         "text": "Aspose.SVG free support forum",
         "target": "https://forum.aspose.com/c/svg/42",
         "is_internal": false,
-        "line": 212,
+        "line": 234,
+        "exists": null
+      },
+      {
+        "text": "Convert SVG to JPG in Python",
+        "target": "https://blog.aspose.com/svg/convert-svg-to-jpg-in-python/",
+        "is_internal": false,
+        "line": 238,
         "exists": null
       },
       {
         "text": "Convert SVG to PNG in Python",
         "target": "https://blog.aspose.com/svg/convert-svg-to-png-in-python/",
         "is_internal": false,
-        "line": 216,
+        "line": 239,
         "exists": null
       },
       {
-        "text": "Convert SVG to PDF in Python",
-        "target": "https://blog.aspose.com/svg/convert-svg-to-pdf-in-python/",
+        "text": "Merge SVG Files into PDF in Python",
+        "target": "https://blog.aspose.com/svg/merge-svg-files-into-pdf-in-python/",
         "is_internal": false,
-        "line": 217,
-        "exists": null
-      },
-      {
-        "text": "Convert JPG to SVG in Python",
-        "target": "https://blog.aspose.com/svg/convert-jpg-to-svg-in-python/",
-        "is_internal": false,
-        "line": 218,
+        "line": 240,
         "exists": null
       },
       {
         "text": "Convert SVG Code to PNG in Python",
         "target": "https://blog.aspose.com/svg/convert-svg-code-to-png-in-python/",
         "is_internal": false,
-        "line": 219,
+        "line": 241,
         "exists": null
       },
       {
-        "text": "Change SVG Color and Background in Python",
-        "target": "https://blog.aspose.com/svg/change-svg-color-and-background-in-python/",
+        "text": "Change SVG Fill Color in Python",
+        "target": "https://blog.aspose.com/svg/change-svg-fill-color-in-python/",
         "is_internal": false,
-        "line": 220,
+        "line": 242,
         "exists": null
       },
       {
-        "text": "Reduce SVG File Size in Python",
-        "target": "https://blog.aspose.com/svg/reduce-svg-file-size-in-python/",
+        "text": "Optimize SVG in Python",
+        "target": "https://blog.aspose.com/svg/optimize-svg-image-in-python/",
         "is_internal": false,
-        "line": 221,
+        "line": 243,
         "exists": null
       }
     ],
@@ -713,42 +341,52 @@
       {
         "language": "bash",
         "code": "pip install aspose-svg-net",
-        "line": 43
+        "line": 44
       },
       {
         "language": "xml",
         "code": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"400\" height=\"300\" viewBox=\"0 0 400 300\">\n  <rect x=\"20\" y=\"20\" width=\"160\" height=\"100\" fill=\"#4A90E2\" stroke=\"#1F3B63\" stroke-width=\"4\"/>\n  <circle cx=\"290\" cy=\"80\" r=\"55\" fill=\"#F5A623\" stroke=\"#8B5A00\" stroke-width=\"4\"/>\n  <line x1=\"20\" y1=\"170\" x2=\"380\" y2=\"170\" stroke=\"#333333\" stroke-width=\"3\"/>\n  <text x=\"200\" y=\"240\" font-family=\"Arial\" font-size=\"36\" text-anchor=\"middle\" fill=\"#2C3E50\">Aspose.SVG</text>\n</svg>",
-        "line": 49
+        "line": 52
       },
       {
         "language": "python",
-        "code": "import aspose.svg as svg\nfrom aspose.svg.converters import Converter\nfrom aspose.svg.saving import ImageSaveOptions\nfrom aspose.svg.rendering import SizingType\nfrom aspose.svg.rendering.image import ImageFormat\n\n# Load the SVG document\ndocument = svg.SVGDocument(\"sample.svg\")\n\n# Configure JPEG output\noptions = ImageSaveOptions(ImageFormat.JPEG)\noptions.page_setup.sizing = SizingType.FIT_CONTENT\n\n# Convert SVG to JPG\nConverter.convert_svg(document, options, \"sample.jpg\")",
-        "line": 69
+        "code": "import aspose.svg as svg\nfrom aspose.svg.converters import Converter\nfrom aspose.svg.saving import PdfSaveOptions\n\n# Load the SVG document\ndocument = svg.SVGDocument(\"sample.svg\")\n\n# Convert SVG to PDF with default options\nConverter.convert_svg(document, PdfSaveOptions(), \"sample.pdf\")",
+        "line": 73
       },
       {
         "language": "python",
-        "code": "import aspose.svg as svg\nfrom aspose.svg.converters import Converter\nfrom aspose.svg.saving import ImageSaveOptions\nfrom aspose.svg.rendering import SizingType\nfrom aspose.svg.rendering.image import ImageFormat\nfrom aspose.svg.drawing import Resolution\n\ndocument = svg.SVGDocument(\"sample.svg\")\n\noptions = ImageSaveOptions(ImageFormat.JPEG)\noptions.page_setup.sizing = SizingType.FIT_CONTENT\n# 96 DPI keeps the SVG's own pixel size\noptions.horizontal_resolution = Resolution.from_dots_per_inch(96.0)\noptions.vertical_resolution = Resolution.from_dots_per_inch(96.0)\n\nConverter.convert_svg(document, options, \"sample-96dpi.jpg\")",
-        "line": 103
+        "code": "import aspose.svg as svg\nimport aspose.pydrawing as drawing\nfrom aspose.svg.converters import Converter\nfrom aspose.svg.saving import PdfSaveOptions\nfrom aspose.svg.rendering import SizingType\n\ndocument = svg.SVGDocument(\"sample.svg\")\n\noptions = PdfSaveOptions()\n# Make the PDF page the same size as the SVG drawing\noptions.page_setup.sizing = SizingType.FIT_CONTENT\n# Fill transparent areas with white\noptions.background_color = drawing.Color.white\n\nConverter.convert_svg(document, options, \"sample-fit.pdf\")",
+        "line": 98
       },
       {
         "language": "python",
-        "code": "import aspose.svg as svg\nimport aspose.pydrawing as drawing\nfrom aspose.svg.converters import Converter\nfrom aspose.svg.saving import ImageSaveOptions\nfrom aspose.svg.rendering import SizingType\nfrom aspose.svg.rendering.image import ImageFormat\n\ndocument = svg.SVGDocument(\"sample.svg\")\n\noptions = ImageSaveOptions(ImageFormat.JPEG)\noptions.page_setup.sizing = SizingType.FIT_CONTENT\n# Light gray background instead of white\noptions.background_color = drawing.Color.from_argb(255, 240, 240, 240)\n\nConverter.convert_svg(document, options, \"sample-gray.jpg\")",
-        "line": 126
+        "code": "import aspose.svg as svg\nfrom aspose.svg.converters import Converter\nfrom aspose.svg.saving import PdfSaveOptions\nfrom aspose.svg.drawing import Page, Size, Unit\n\ndocument = svg.SVGDocument(\"sample.svg\")\n\noptions = PdfSaveOptions()\n# Use a 600 x 400 pixel page\noptions.page_setup.any_page = Page(Size(Unit.from_pixels(600.0), Unit.from_pixels(400.0)))\n\nConverter.convert_svg(document, options, \"sample-600x400.pdf\")",
+        "line": 118
       },
       {
         "language": "python",
-        "code": "import os\nimport glob\nfrom aspose.svg.converters import Converter\nfrom aspose.svg.saving import ImageSaveOptions\nfrom aspose.svg.rendering import SizingType\nfrom aspose.svg.rendering.image import ImageFormat\nfrom aspose.svg.drawing import Resolution\n\ninput_dir = \"svg-files\"\noutput_dir = \"jpg-files\"\nos.makedirs(output_dir, exist_ok=True)\n\noptions = ImageSaveOptions(ImageFormat.JPEG)\noptions.page_setup.sizing = SizingType.FIT_CONTENT\noptions.horizontal_resolution = Resolution.from_dots_per_inch(144.0)\noptions.vertical_resolution = Resolution.from_dots_per_inch(144.0)\n\nfor svg_path in glob.glob(os.path.join(input_dir, \"*.svg\")):\n    name = os.path.splitext(os.path.basename(svg_path))[0]\n    jpg_path = os.path.join(output_dir, name + \".jpg\")\n    Converter.convert_svg(svg_path, options, jpg_path)\n    print(\"Converted:\", jpg_path)",
-        "line": 150
+        "code": "import aspose.svg as svg\nfrom aspose.svg.converters import Converter\nfrom aspose.svg.saving import PdfSaveOptions\nfrom aspose.svg.rendering import SizingType\n\ndocument = svg.SVGDocument(\"sample.svg\")\n\noptions = PdfSaveOptions()\noptions.page_setup.sizing = SizingType.FIT_CONTENT\n# Set PDF document properties\noptions.document_info.title = \"Quarterly Sales Chart\"\noptions.document_info.author = \"Reporting Team\"\n\nConverter.convert_svg(document, options, \"sample-with-info.pdf\")",
+        "line": 137
+      },
+      {
+        "language": "python",
+        "code": "from aspose.svg.converters import Converter\nfrom aspose.svg.saving import PdfSaveOptions\nfrom aspose.svg.rendering import SizingType\n\noptions = PdfSaveOptions()\noptions.page_setup.sizing = SizingType.FIT_CONTENT\n\n# Convert an SVG published on the web\nConverter.convert_svg(\"https://www.w3.org/Icons/SVG/svg-logo-v.svg\", options, \"svg-logo.pdf\")",
+        "line": 158
+      },
+      {
+        "language": "python",
+        "code": "import os\nimport glob\nfrom aspose.svg.converters import Converter\nfrom aspose.svg.saving import PdfSaveOptions\nfrom aspose.svg.rendering import SizingType\n\ninput_dir = \"svg-files\"\noutput_dir = \"pdf-files\"\nos.makedirs(output_dir, exist_ok=True)\n\noptions = PdfSaveOptions()\noptions.page_setup.sizing = SizingType.FIT_CONTENT\n\nfor svg_path in glob.glob(os.path.join(input_dir, \"*.svg\")):\n    name = os.path.splitext(os.path.basename(svg_path))[0]\n    pdf_path = os.path.join(output_dir, name + \".pdf\")\n    Converter.convert_svg(svg_path, options, pdf_path)\n    print(\"Converted:\", pdf_path)",
+        "line": 174
       }
     ],
-    "code_blocks": 6,
-    "tables": 5,
+    "code_blocks": 8,
+    "tables": 0,
     "shortcodes": [],
-    "faq_like_sections": 4,
+    "faq_like_sections": 5,
     "schema_like_blocks": 0,
     "issues": [
       {
-        "file_path": "content/Aspose.Blog/svg/2026-11-18-convert-svg-to-jpg-in-python/index.md",
+        "file_path": "content/Aspose.Blog/svg/2026-11-19-convert-svg-to-pdf-in-python/index.md",
         "issue_type": "suggest_body_output_image",
         "severity": "Opportunity",
         "explanation": "Post has a cover/front matter image but no inline body image, and the content appears to describe a visual or generated output. Policy: content-quality; rule: CQ-006.",
@@ -766,7 +404,7 @@
         ]
       },
       {
-        "file_path": "content/Aspose.Blog/svg/2026-11-18-convert-svg-to-jpg-in-python/index.md",
+        "file_path": "content/Aspose.Blog/svg/2026-11-19-convert-svg-to-pdf-in-python/index.md",
         "issue_type": "weak_internal_links",
         "severity": "Medium",
         "explanation": "Post has fewer than two internal links. Policy: internal-linking; rule: IL-001.",
@@ -784,7 +422,7 @@
         ]
       },
       {
-        "file_path": "content/Aspose.Blog/svg/2026-11-18-convert-svg-to-jpg-in-python/index.md",
+        "file_path": "content/Aspose.Blog/svg/2026-11-19-convert-svg-to-pdf-in-python/index.md",
         "issue_type": "too_few_outgoing_internal_links",
         "severity": "Medium",
         "explanation": "Post has fewer than two outgoing internal links. Policy: internal-linking; rule: IL-005.",
@@ -809,9 +447,441 @@
       "technical_seo": 85,
       "internal_linking": 86,
       "translation_seo": 100,
-      "organic_growth_opportunity": 51,
+      "organic_growth_opportunity": 49,
+      "priority": 23
+    },
+    "translation_group": "content/Aspose.Blog/svg/2026-11-19-convert-svg-to-pdf-in-python/index.md"
+  },
+  {
+    "path": "/home/runner/work/blog-generator-agent/blog-generator-agent/outputs/_repos/aspose-blog/content/Aspose.Blog/svg/2026-11-19-convert-svg-to-png-in-python/index.md",
+    "relative_path": "content/Aspose.Blog/svg/2026-11-19-convert-svg-to-png-in-python/index.md",
+    "url_candidate": "/svg/convert-svg-to-png-in-python/",
+    "language": "en",
+    "front_matter_format": "yaml",
+    "front_matter": {
+      "title": "Convert SVG to PNG in Python: Files, URLs, and Batches",
+      "seoTitle": "Convert SVG to PNG in Python | SVG to PNG Converter",
+      "description": "Learn how to convert SVG to PNG in Python with Aspose.SVG. Convert SVG files and URLs, keep transparency, set the PNG size, and batch convert a folder.",
+      "date": "Thu, 19 Nov 2026 03:00:00 +0000",
+      "draft": false,
+      "url": "/svg/convert-svg-to-png-in-python/",
+      "author": "Muzammil Khan",
+      "summary": "Convert SVG files to transparent PNG images in Python. Learn how to convert a file on disk or an SVG from a URL, set the exact PNG size with DPI, add a background when you need one, and batch convert a folder of SVG files with Aspose.SVG for Python via .NET.",
+      "tags": [
+        "svg to png",
+        "convert svg to png",
+        "svg to png python",
+        "convert svg to png in python",
+        "python svg to png",
+        "svg file to png",
+        "svg url to png",
+        "batch convert svg to png",
+        "svg to transparent png",
+        "svg to png converter"
+      ],
+      "categories": [
+        "Aspose.SVG Product Family"
+      ],
+      "showtoc": true,
+      "cover": {
+        "image": "images/convert-svg-to-png-in-python.jpg",
+        "alt": "Convert SVG to PNG in Python",
+        "caption": "Convert SVG to PNG in Python using Aspose.SVG",
+        "hidden": false
+      },
+      "steps": [
+        "Install Aspose.SVG for Python using `pip install aspose-svg-net`.",
+        "Create `ImageSaveOptions()`; the default format is PNG.",
+        "Set `page_setup.sizing = SizingType.FIT_CONTENT` and the resolution you need.",
+        "Call `Converter.convert_svg(\"input.svg\", options, \"output.png\")` with a file path or URL."
+      ],
+      "faqs": [
+        {
+          "q": "Does the PNG keep the SVG's transparent background?",
+          "a": "Yes. Areas the SVG doesn't paint stay transparent in the PNG unless you set `background_color` on the save options."
+        },
+        {
+          "q": "How do I get a PNG with the same pixel size as the SVG?",
+          "a": "Set `page_setup.sizing` to `SizingType.FIT_CONTENT` and both resolutions to 96 DPI. The default is 300 DPI on an A4 page."
+        },
+        {
+          "q": "Can I convert SVG markup stored in a string?",
+          "a": "Yes. Load it with `SVGDocument(svg_string, base_uri)`. See the Convert SVG Code to PNG in Python article for details."
+        }
+      ]
+    },
+    "body": "\nThis guide shows you how to convert SVG to PNG in Python when your SVG lives in a file or at a web address. You will convert a single file, convert an SVG straight from a URL, set the PNG's pixel size, and process a whole folder in one loop.\n\n[PNG](https://docs.fileformat.com/image/png/) is the usual target when an [SVG](https://docs.fileformat.com/page-description-language/svg/) has to go somewhere that doesn't display vector graphics: a mobile app, a slide, a document, or an image pipeline. PNG supports transparency, so icons and logos keep their clear background.\n\nIf your SVG is generated as markup in a string, see [Convert SVG Code to PNG in Python](https://blog.aspose.com/svg/convert-svg-code-to-png-in-python/), which covers string input and in-memory rendering.\n\n## Python Library to Convert SVG to PNG\n\nThe examples use [Aspose.SVG for Python via .NET](https://products.aspose.com/svg/python-net/). It renders SVG without a browser or external tools. Install it with pip:\n\n```bash\npip install aspose-svg-net\n```\n\nSave this `sample.svg` (400 × 300 pixels, no background) to follow along:\n\n```xml\n<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"400\" height=\"300\" viewBox=\"0 0 400 300\">\n  <rect x=\"20\" y=\"20\" width=\"160\" height=\"100\" fill=\"#4A90E2\" stroke=\"#1F3B63\" stroke-width=\"4\"/>\n  <circle cx=\"290\" cy=\"80\" r=\"55\" fill=\"#F5A623\" stroke=\"#8B5A00\" stroke-width=\"4\"/>\n  <line x1=\"20\" y1=\"170\" x2=\"380\" y2=\"170\" stroke=\"#333333\" stroke-width=\"3\"/>\n  <text x=\"200\" y=\"240\" font-family=\"Arial\" font-size=\"36\" text-anchor=\"middle\" fill=\"#2C3E50\">Aspose.SVG</text>\n</svg>\n```\n\n## Convert an SVG File to PNG in Python\n\nFollow these steps to convert an SVG file to PNG:\n\n1. Create an `ImageSaveOptions` object. PNG is its default format.\n2. Set `page_setup.sizing` to `SizingType.FIT_CONTENT` so the PNG is cropped to the drawing.\n3. Set the horizontal and vertical resolution.\n4. Pass the SVG file path, the options, and the output path to `Converter.convert_svg()`.\n\nThe following code example converts `sample.svg` to a 400 × 300 PNG:\n\n```python\nfrom aspose.svg.converters import Converter\nfrom aspose.svg.saving import ImageSaveOptions\nfrom aspose.svg.rendering import SizingType\nfrom aspose.svg.drawing import Resolution\n\noptions = ImageSaveOptions()  # PNG by default\noptions.page_setup.sizing = SizingType.FIT_CONTENT\n# 96 DPI keeps the SVG's own pixel size\noptions.horizontal_resolution = Resolution.from_dots_per_inch(96.0)\noptions.vertical_resolution = Resolution.from_dots_per_inch(96.0)\n\nConverter.convert_svg(\"sample.svg\", options, \"sample.png\")\n```\n\nTwo defaults are worth knowing:\n\n* **Page size:** without `FIT_CONTENT`, the drawing is placed on an A4 page.\n* **Resolution:** the default is 300 DPI. With `FIT_CONTENT` but no resolution set, this 400 × 300 SVG becomes a 1250 × 938 PNG.\n\n## Set the PNG Size\n\nBecause SVG units are treated as 1/96 inch, the PNG size equals the SVG size multiplied by `DPI / 96`. To produce a 2× image for high-density screens, use 192 DPI:\n\n```python\nfrom aspose.svg.converters import Converter\nfrom aspose.svg.saving import ImageSaveOptions\nfrom aspose.svg.rendering import SizingType\nfrom aspose.svg.drawing import Resolution\n\noptions = ImageSaveOptions()\noptions.page_setup.sizing = SizingType.FIT_CONTENT\n# 192 DPI produces an 800 x 600 PNG from a 400 x 300 SVG\noptions.horizontal_resolution = Resolution.from_dots_per_inch(192.0)\noptions.vertical_resolution = Resolution.from_dots_per_inch(192.0)\n\nConverter.convert_svg(\"sample.svg\", options, \"sample@2x.png\")\n```\n\n`Resolution.from_dots_per_inch()` expects a float, so write `192.0`, not `192`.\n\n## Convert an SVG from a URL to PNG\n\nYou can pass a URL instead of a file path. The library downloads the SVG and renders it:\n\n```python\nfrom aspose.svg.converters import Converter\nfrom aspose.svg.saving import ImageSaveOptions\nfrom aspose.svg.rendering import SizingType\n\noptions = ImageSaveOptions()\noptions.page_setup.sizing = SizingType.FIT_CONTENT\n\nConverter.convert_svg(\"https://www.w3.org/Icons/SVG/svg-logo-v.svg\", options, \"svg-logo.png\")\n```\n\nIf you want to inspect or edit the SVG before rendering, load it with `svg.SVGDocument(url)` first and pass the document to `convert_svg()`.\n\n## Keep Transparency or Add a Background \n\nBy default, the PNG is transparent wherever the SVG doesn't paint anything. That's usually what you want for icons. When the image will be placed on a dark page or in a viewer that shows transparency as black, set a solid background:\n\n```python\nimport aspose.pydrawing as drawing\nfrom aspose.svg.converters import Converter\nfrom aspose.svg.saving import ImageSaveOptions\nfrom aspose.svg.rendering import SizingType\n\noptions = ImageSaveOptions()\noptions.page_setup.sizing = SizingType.FIT_CONTENT\noptions.background_color = drawing.Color.white\n\nConverter.convert_svg(\"sample.svg\", options, \"sample-white.png\")\n```\n\n## Batch Convert SVG to PNG\n\nTo convert an entire folder, reuse one options object in a loop. The example also catches errors, so one broken file doesn't stop the batch:\n\n```python\nimport os\nimport glob\nfrom aspose.svg.converters import Converter\nfrom aspose.svg.saving import ImageSaveOptions\nfrom aspose.svg.rendering import SizingType\nfrom aspose.svg.drawing import Resolution\n\ninput_dir = \"svg-files\"\noutput_dir = \"png-files\"\nos.makedirs(output_dir, exist_ok=True)\n\noptions = ImageSaveOptions()\noptions.page_setup.sizing = SizingType.FIT_CONTENT\noptions.horizontal_resolution = Resolution.from_dots_per_inch(96.0)\noptions.vertical_resolution = Resolution.from_dots_per_inch(96.0)\n\nfor svg_path in glob.glob(os.path.join(input_dir, \"*.svg\")):\n    name = os.path.splitext(os.path.basename(svg_path))[0]\n    png_path = os.path.join(output_dir, name + \".png\")\n    try:\n        Converter.convert_svg(svg_path, options, png_path)\n        print(\"Converted:\", png_path)\n    except Exception as error:\n        print(\"Failed:\", svg_path, error)\n```\n\n## Get a Free License \n\nWithout a license, Aspose.SVG works in evaluation mode and adds an evaluation notice to the output. Request a [free temporary license](https://purchase.aspose.com/temporary-license/) to remove it while you test.\n\n## Convert SVG to PNG Online\n\nFor occasional files, try the free [online SVG to PNG converter](https://products.aspose.app/svg/conversion/svg-to-png). It runs in the browser, so nothing needs to be installed.\n\n## SVG to PNG: Free Resources \n\n* [Aspose.SVG for Python Documentation](https://docs.aspose.com/svg/python-net/)\n* [Aspose.SVG for Python API Reference](https://reference.aspose.com/svg/python-net/)\n* [Free Online SVG Apps](https://products.aspose.app/svg/family)\n* [Aspose.SVG Blog Posts](https://blog.aspose.com/categories/aspose.svg-product-family/)\n\n## SVG to PNG in Python: FAQs\n\n**Q: Does the PNG keep the SVG's transparent background?**\n\nA: Yes. Unpainted areas stay transparent unless you set `background_color`.\n\n**Q: How do I get a PNG with the same pixel size as the SVG?**\n\nA: Use `SizingType.FIT_CONTENT` and set both resolutions to 96 DPI.\n\n**Q: Can I convert SVG markup stored in a string?**\n\nA: Yes. Load it with `SVGDocument(svg_string, base_uri)`. The [SVG code to PNG](https://blog.aspose.com/svg/convert-svg-code-to-png-in-python/) article covers this case.\n\n## Conclusion\n\nYou've converted SVG to PNG in Python from a file and from a URL, sized the PNG through its DPI, and set up a batch loop for a folder of files. For a print-oriented format, the next guide to read is [Convert SVG to PDF in Python](https://blog.aspose.com/svg/convert-svg-to-pdf-in-python/), which uses the same `Converter` class.\n\nIf a file renders differently than you expect, share it on the [Aspose.SVG free support forum](https://forum.aspose.com/c/svg/42).\n\n## See Also\n\n* [Convert SVG Code to PNG in Python](https://blog.aspose.com/svg/convert-svg-code-to-png-in-python/)\n* [Convert SVG to JPG in Python](https://blog.aspose.com/svg/convert-svg-to-jpg-in-python/)\n* [Convert SVG to PDF in Python](https://blog.aspose.com/svg/convert-svg-to-pdf-in-python/)\n* [Transform PNG to SVG in Python](https://blog.aspose.com/svg/transform-png-to-svg-in-python/)\n* [Optimize SVG in Python](https://blog.aspose.com/svg/optimize-svg-image-in-python/)\n* [Change SVG Fill Color in Python](https://blog.aspose.com/svg/change-svg-fill-color-in-python/)\n",
+    "body_line_offset": 30,
+    "title": "Convert SVG to PNG in Python: Files, URLs, and Batches",
+    "description": "Learn how to convert SVG to PNG in Python with Aspose.SVG. Convert SVG files and URLs, keep transparency, set the PNG size, and batch convert a folder.",
+    "date": "Thu, 19 Nov 2026 03:00:00 +0000",
+    "lastmod": "",
+    "draft": false,
+    "slug": "",
+    "aliases": [],
+    "tags": [
+      "svg to png",
+      "convert svg to png",
+      "svg to png python",
+      "convert svg to png in python",
+      "python svg to png",
+      "svg file to png",
+      "svg url to png",
+      "batch convert svg to png",
+      "svg to transparent png",
+      "svg to png converter"
+    ],
+    "categories": [
+      "Aspose.SVG Product Family"
+    ],
+    "keywords": [],
+    "canonical_url": "",
+    "translation_key": "",
+    "word_count": 829,
+    "character_count": 5227,
+    "headings": [
+      {
+        "level": 2,
+        "text": "Python Library to Convert SVG to PNG",
+        "line": 38
+      },
+      {
+        "level": 2,
+        "text": "Convert an SVG File to PNG in Python",
+        "line": 57
+      },
+      {
+        "level": 2,
+        "text": "Set the PNG Size",
+        "line": 88
+      },
+      {
+        "level": 2,
+        "text": "Convert an SVG from a URL to PNG",
+        "line": 109
+      },
+      {
+        "level": 2,
+        "text": "Keep Transparency or Add a Background",
+        "line": 126
+      },
+      {
+        "level": 2,
+        "text": "Batch Convert SVG to PNG",
+        "line": 143
+      },
+      {
+        "level": 2,
+        "text": "Get a Free License",
+        "line": 174
+      },
+      {
+        "level": 2,
+        "text": "Convert SVG to PNG Online",
+        "line": 178
+      },
+      {
+        "level": 2,
+        "text": "SVG to PNG: Free Resources",
+        "line": 182
+      },
+      {
+        "level": 2,
+        "text": "SVG to PNG in Python: FAQs",
+        "line": 189
+      },
+      {
+        "level": 2,
+        "text": "Conclusion",
+        "line": 203
+      },
+      {
+        "level": 2,
+        "text": "See Also",
+        "line": 209
+      }
+    ],
+    "paragraphs": [
+      "This guide shows you how to convert SVG to PNG in Python when your SVG lives in a file or at a web address. You will convert a single file, convert an SVG straight from a URL, set the PNG's pixel size, and process a whole folder in one loop.",
+      "[PNG](https://docs.fileformat.com/image/png/) is the usual target when an [SVG](https://docs.fileformat.com/page-description-language/svg/) has to go somewhere that doesn't display vector graphics: a mobile app, a slide, a document, or an image pipeline. PNG supports transparency, so icons and logos keep their clear background.",
+      "If your SVG is generated as markup in a string, see [Convert SVG Code to PNG in Python](https://blog.aspose.com/svg/convert-svg-code-to-png-in-python/), which covers string input and in-memory rendering.",
+      "The examples use [Aspose.SVG for Python via .NET](https://products.aspose.com/svg/python-net/). It renders SVG without a browser or external tools. Install it with pip:",
+      "Save this `sample.svg` (400 × 300 pixels, no background) to follow along:",
+      "Follow these steps to convert an SVG file to PNG:",
+      "1. Create an `ImageSaveOptions` object. PNG is its default format.\n2. Set `page_setup.sizing` to `SizingType.FIT_CONTENT` so the PNG is cropped to the drawing.\n3. Set the horizontal and vertical resolution.\n4. Pass the SVG file path, the options, and the output path to `Converter.convert_svg()`.",
+      "The following code example converts `sample.svg` to a 400 × 300 PNG:",
+      "Two defaults are worth knowing:",
+      "* **Page size:** without `FIT_CONTENT`, the drawing is placed on an A4 page.\n* **Resolution:** the default is 300 DPI. With `FIT_CONTENT` but no resolution set, this 400 × 300 SVG becomes a 1250 × 938 PNG.",
+      "Because SVG units are treated as 1/96 inch, the PNG size equals the SVG size multiplied by `DPI / 96`. To produce a 2× image for high-density screens, use 192 DPI:",
+      "`Resolution.from_dots_per_inch()` expects a float, so write `192.0`, not `192`.",
+      "You can pass a URL instead of a file path. The library downloads the SVG and renders it:",
+      "If you want to inspect or edit the SVG before rendering, load it with `svg.SVGDocument(url)` first and pass the document to `convert_svg()`.",
+      "By default, the PNG is transparent wherever the SVG doesn't paint anything. That's usually what you want for icons. When the image will be placed on a dark page or in a viewer that shows transparency as black, set a solid background:",
+      "To convert an entire folder, reuse one options object in a loop. The example also catches errors, so one broken file doesn't stop the batch:",
+      "Without a license, Aspose.SVG works in evaluation mode and adds an evaluation notice to the output. Request a [free temporary license](https://purchase.aspose.com/temporary-license/) to remove it while you test.",
+      "For occasional files, try the free [online SVG to PNG converter](https://products.aspose.app/svg/conversion/svg-to-png). It runs in the browser, so nothing needs to be installed.",
+      "* [Aspose.SVG for Python Documentation](https://docs.aspose.com/svg/python-net/)\n* [Aspose.SVG for Python API Reference](https://reference.aspose.com/svg/python-net/)\n* [Free Online SVG Apps](https://products.aspose.app/svg/family)\n* [Aspose.SVG Blog Posts](https://blog.aspose.com/categories/aspose.svg-product-family/)",
+      "**Q: Does the PNG keep the SVG's transparent background?**",
+      "A: Yes. Unpainted areas stay transparent unless you set `background_color`.",
+      "**Q: How do I get a PNG with the same pixel size as the SVG?**",
+      "A: Use `SizingType.FIT_CONTENT` and set both resolutions to 96 DPI.",
+      "**Q: Can I convert SVG markup stored in a string?**",
+      "A: Yes. Load it with `SVGDocument(svg_string, base_uri)`. The [SVG code to PNG](https://blog.aspose.com/svg/convert-svg-code-to-png-in-python/) article covers this case.",
+      "You've converted SVG to PNG in Python from a file and from a URL, sized the PNG through its DPI, and set up a batch loop for a folder of files. For a print-oriented format, the next guide to read is [Convert SVG to PDF in Python](https://blog.aspose.com/svg/convert-svg-to-pdf-in-python/), which uses the same `Converter` class.",
+      "If a file renders differently than you expect, share it on the [Aspose.SVG free support forum](https://forum.aspose.com/c/svg/42).",
+      "* [Convert SVG Code to PNG in Python](https://blog.aspose.com/svg/convert-svg-code-to-png-in-python/)\n* [Convert SVG to JPG in Python](https://blog.aspose.com/svg/convert-svg-to-jpg-in-python/)\n* [Convert SVG to PDF in Python](https://blog.aspose.com/svg/convert-svg-to-pdf-in-python/)\n* [Transform PNG to SVG in Python](https://blog.aspose.com/svg/transform-png-to-svg-in-python/)\n* [Optimize SVG in Python](https://blog.aspose.com/svg/optimize-svg-image-in-python/)\n* [Change SVG Fill Color in Python](https://blog.aspose.com/svg/change-svg-fill-color-in-python/)"
+    ],
+    "images": [
+      {
+        "alt": "Convert SVG to PNG in Python",
+        "target": "images/convert-svg-to-png-in-python.jpg",
+        "line": 0,
+        "exists": true
+      }
+    ],
+    "links": [
+      {
+        "text": "PNG",
+        "target": "https://docs.fileformat.com/image/png/",
+        "is_internal": false,
+        "line": 34,
+        "exists": null
+      },
+      {
+        "text": "SVG",
+        "target": "https://docs.fileformat.com/page-description-language/svg/",
+        "is_internal": false,
+        "line": 34,
+        "exists": null
+      },
+      {
+        "text": "Convert SVG Code to PNG in Python",
+        "target": "https://blog.aspose.com/svg/convert-svg-code-to-png-in-python/",
+        "is_internal": false,
+        "line": 36,
+        "exists": null
+      },
+      {
+        "text": "Aspose.SVG for Python via .NET",
+        "target": "https://products.aspose.com/svg/python-net/",
+        "is_internal": false,
+        "line": 40,
+        "exists": null
+      },
+      {
+        "text": "free temporary license",
+        "target": "https://purchase.aspose.com/temporary-license/",
+        "is_internal": false,
+        "line": 176,
+        "exists": null
+      },
+      {
+        "text": "online SVG to PNG converter",
+        "target": "https://products.aspose.app/svg/conversion/svg-to-png",
+        "is_internal": false,
+        "line": 180,
+        "exists": null
+      },
+      {
+        "text": "Aspose.SVG for Python Documentation",
+        "target": "https://docs.aspose.com/svg/python-net/",
+        "is_internal": false,
+        "line": 184,
+        "exists": null
+      },
+      {
+        "text": "Aspose.SVG for Python API Reference",
+        "target": "https://reference.aspose.com/svg/python-net/",
+        "is_internal": false,
+        "line": 185,
+        "exists": null
+      },
+      {
+        "text": "Free Online SVG Apps",
+        "target": "https://products.aspose.app/svg/family",
+        "is_internal": false,
+        "line": 186,
+        "exists": null
+      },
+      {
+        "text": "Aspose.SVG Blog Posts",
+        "target": "https://blog.aspose.com/categories/aspose.svg-product-family/",
+        "is_internal": false,
+        "line": 187,
+        "exists": null
+      },
+      {
+        "text": "SVG code to PNG",
+        "target": "https://blog.aspose.com/svg/convert-svg-code-to-png-in-python/",
+        "is_internal": false,
+        "line": 201,
+        "exists": null
+      },
+      {
+        "text": "Convert SVG to PDF in Python",
+        "target": "https://blog.aspose.com/svg/convert-svg-to-pdf-in-python/",
+        "is_internal": false,
+        "line": 205,
+        "exists": null
+      },
+      {
+        "text": "Aspose.SVG free support forum",
+        "target": "https://forum.aspose.com/c/svg/42",
+        "is_internal": false,
+        "line": 207,
+        "exists": null
+      },
+      {
+        "text": "Convert SVG Code to PNG in Python",
+        "target": "https://blog.aspose.com/svg/convert-svg-code-to-png-in-python/",
+        "is_internal": false,
+        "line": 211,
+        "exists": null
+      },
+      {
+        "text": "Convert SVG to JPG in Python",
+        "target": "https://blog.aspose.com/svg/convert-svg-to-jpg-in-python/",
+        "is_internal": false,
+        "line": 212,
+        "exists": null
+      },
+      {
+        "text": "Convert SVG to PDF in Python",
+        "target": "https://blog.aspose.com/svg/convert-svg-to-pdf-in-python/",
+        "is_internal": false,
+        "line": 213,
+        "exists": null
+      },
+      {
+        "text": "Transform PNG to SVG in Python",
+        "target": "https://blog.aspose.com/svg/transform-png-to-svg-in-python/",
+        "is_internal": false,
+        "line": 214,
+        "exists": null
+      },
+      {
+        "text": "Optimize SVG in Python",
+        "target": "https://blog.aspose.com/svg/optimize-svg-image-in-python/",
+        "is_internal": false,
+        "line": 215,
+        "exists": null
+      },
+      {
+        "text": "Change SVG Fill Color in Python",
+        "target": "https://blog.aspose.com/svg/change-svg-fill-color-in-python/",
+        "is_internal": false,
+        "line": 216,
+        "exists": null
+      }
+    ],
+    "code_samples": [
+      {
+        "language": "bash",
+        "code": "pip install aspose-svg-net",
+        "line": 42
+      },
+      {
+        "language": "xml",
+        "code": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"400\" height=\"300\" viewBox=\"0 0 400 300\">\n  <rect x=\"20\" y=\"20\" width=\"160\" height=\"100\" fill=\"#4A90E2\" stroke=\"#1F3B63\" stroke-width=\"4\"/>\n  <circle cx=\"290\" cy=\"80\" r=\"55\" fill=\"#F5A623\" stroke=\"#8B5A00\" stroke-width=\"4\"/>\n  <line x1=\"20\" y1=\"170\" x2=\"380\" y2=\"170\" stroke=\"#333333\" stroke-width=\"3\"/>\n  <text x=\"200\" y=\"240\" font-family=\"Arial\" font-size=\"36\" text-anchor=\"middle\" fill=\"#2C3E50\">Aspose.SVG</text>\n</svg>",
+        "line": 48
+      },
+      {
+        "language": "python",
+        "code": "from aspose.svg.converters import Converter\nfrom aspose.svg.saving import ImageSaveOptions\nfrom aspose.svg.rendering import SizingType\nfrom aspose.svg.drawing import Resolution\n\noptions = ImageSaveOptions()  # PNG by default\noptions.page_setup.sizing = SizingType.FIT_CONTENT\n# 96 DPI keeps the SVG's own pixel size\noptions.horizontal_resolution = Resolution.from_dots_per_inch(96.0)\noptions.vertical_resolution = Resolution.from_dots_per_inch(96.0)\n\nConverter.convert_svg(\"sample.svg\", options, \"sample.png\")",
+        "line": 68
+      },
+      {
+        "language": "python",
+        "code": "from aspose.svg.converters import Converter\nfrom aspose.svg.saving import ImageSaveOptions\nfrom aspose.svg.rendering import SizingType\nfrom aspose.svg.drawing import Resolution\n\noptions = ImageSaveOptions()\noptions.page_setup.sizing = SizingType.FIT_CONTENT\n# 192 DPI produces an 800 x 600 PNG from a 400 x 300 SVG\noptions.horizontal_resolution = Resolution.from_dots_per_inch(192.0)\noptions.vertical_resolution = Resolution.from_dots_per_inch(192.0)\n\nConverter.convert_svg(\"sample.svg\", options, \"sample@2x.png\")",
+        "line": 92
+      },
+      {
+        "language": "python",
+        "code": "from aspose.svg.converters import Converter\nfrom aspose.svg.saving import ImageSaveOptions\nfrom aspose.svg.rendering import SizingType\n\noptions = ImageSaveOptions()\noptions.page_setup.sizing = SizingType.FIT_CONTENT\n\nConverter.convert_svg(\"https://www.w3.org/Icons/SVG/svg-logo-v.svg\", options, \"svg-logo.png\")",
+        "line": 113
+      },
+      {
+        "language": "python",
+        "code": "import aspose.pydrawing as drawing\nfrom aspose.svg.converters import Converter\nfrom aspose.svg.saving import ImageSaveOptions\nfrom aspose.svg.rendering import SizingType\n\noptions = ImageSaveOptions()\noptions.page_setup.sizing = SizingType.FIT_CONTENT\noptions.background_color = drawing.Color.white\n\nConverter.convert_svg(\"sample.svg\", options, \"sample-white.png\")",
+        "line": 130
+      },
+      {
+        "language": "python",
+        "code": "import os\nimport glob\nfrom aspose.svg.converters import Converter\nfrom aspose.svg.saving import ImageSaveOptions\nfrom aspose.svg.rendering import SizingType\nfrom aspose.svg.drawing import Resolution\n\ninput_dir = \"svg-files\"\noutput_dir = \"png-files\"\nos.makedirs(output_dir, exist_ok=True)\n\noptions = ImageSaveOptions()\noptions.page_setup.sizing = SizingType.FIT_CONTENT\noptions.horizontal_resolution = Resolution.from_dots_per_inch(96.0)\noptions.vertical_resolution = Resolution.from_dots_per_inch(96.0)\n\nfor svg_path in glob.glob(os.path.join(input_dir, \"*.svg\")):\n    name = os.path.splitext(os.path.basename(svg_path))[0]\n    png_path = os.path.join(output_dir, name + \".png\")\n    try:\n        Converter.convert_svg(svg_path, options, png_path)\n        print(\"Converted:\", png_path)\n    except Exception as error:\n        print(\"Failed:\", svg_path, error)",
+        "line": 147
+      }
+    ],
+    "code_blocks": 7,
+    "tables": 0,
+    "shortcodes": [],
+    "faq_like_sections": 4,
+    "schema_like_blocks": 0,
+    "issues": [
+      {
+        "file_path": "content/Aspose.Blog/svg/2026-11-19-convert-svg-to-png-in-python/index.md",
+        "issue_type": "suggest_body_output_image",
+        "severity": "Opportunity",
+        "explanation": "Post has a cover/front matter image but no inline body image, and the content appears to describe a visual or generated output. Policy: content-quality; rule: CQ-006.",
+        "why_it_matters": "Inline output screenshots help technical readers confirm that code produced the expected result.",
+        "recommended_fix": "Consider adding an output screenshot or result image inside the post body if it helps readers validate the tutorial result.",
+        "estimated_effort": "Low",
+        "expected_seo_impact": "Medium",
+        "line": 0,
+        "policy_id": "content-quality",
+        "rule_id": "CQ-006",
+        "evidence": "body_images=0; front_matter_images=1",
+        "intended_audiences": [
+          "Developers evaluating file-format SDKs",
+          "Technical content editors"
+        ]
+      },
+      {
+        "file_path": "content/Aspose.Blog/svg/2026-11-19-convert-svg-to-png-in-python/index.md",
+        "issue_type": "weak_internal_links",
+        "severity": "Medium",
+        "explanation": "Post has fewer than two internal links. Policy: internal-linking; rule: IL-001.",
+        "why_it_matters": "Internal links help users and crawlers discover related content.",
+        "recommended_fix": "Add links to related tutorials, docs, and product pages.",
+        "estimated_effort": "Low",
+        "expected_seo_impact": "Medium",
+        "line": 0,
+        "policy_id": "internal-linking",
+        "rule_id": "IL-001",
+        "evidence": "internal_links=0",
+        "intended_audiences": [
+          "Developers exploring related API workflows",
+          "Search crawlers discovering topic clusters"
+        ]
+      },
+      {
+        "file_path": "content/Aspose.Blog/svg/2026-11-19-convert-svg-to-png-in-python/index.md",
+        "issue_type": "too_few_outgoing_internal_links",
+        "severity": "Medium",
+        "explanation": "Post has fewer than two outgoing internal links. Policy: internal-linking; rule: IL-005.",
+        "why_it_matters": "Outgoing internal links help build product and tutorial clusters.",
+        "recommended_fix": "Add contextual links to related posts, docs, and product pages.",
+        "estimated_effort": "Low",
+        "expected_seo_impact": "Medium",
+        "line": 0,
+        "policy_id": "internal-linking",
+        "rule_id": "IL-005",
+        "evidence": "internal_links=0",
+        "intended_audiences": [
+          "Developers exploring related API workflows",
+          "Search crawlers discovering topic clusters"
+        ]
+      }
+    ],
+    "llm_suggestions": [],
+    "scores": {
+      "content_quality": 100,
+      "on_page_seo": 100,
+      "technical_seo": 85,
+      "internal_linking": 86,
+      "translation_seo": 100,
+      "organic_growth_opportunity": 53,
       "priority": 24
     },
-    "translation_group": "content/Aspose.Blog/svg/2026-11-18-convert-svg-to-jpg-in-python/index.md"
+    "translation_group": "content/Aspose.Blog/svg/2026-11-19-convert-svg-to-png-in-python/index.md"
   }
 ]

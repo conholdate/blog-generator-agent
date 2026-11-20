@@ -45,16 +45,16 @@ The estimated overall SEO health score is 89/100. The highest-leverage work is t
 ### Top Priority Posts
 | File | Language | Priority | Issues | Top Issue | Recommended Action |
 | --- | --- | --- | --- | --- | --- |
-| `content/Aspose.Blog/svg/2026-11-18-convert-svg-text-to-path-in-python/index.md` | en | 24 | 3 | suggest_body_output_image | Consider adding an output screenshot or result image inside the post body if it helps readers validate the tutorial result. |
-| `content/Aspose.Blog/svg/2026-11-18-convert-svg-to-jpg-in-python/index.md` | en | 24 | 3 | suggest_body_output_image | Consider adding an output screenshot or result image inside the post body if it helps readers validate the tutorial result. |
+| `content/Aspose.Blog/svg/2026-11-19-convert-svg-to-png-in-python/index.md` | en | 24 | 3 | suggest_body_output_image | Consider adding an output screenshot or result image inside the post body if it helps readers validate the tutorial result. |
+| `content/Aspose.Blog/svg/2026-11-19-convert-svg-to-pdf-in-python/index.md` | en | 23 | 3 | suggest_body_output_image | Consider adding an output screenshot or result image inside the post body if it helps readers validate the tutorial result. |
 
 ## Per-Post SEO Segment Score Table
 All scanned posts are listed below, sorted by priority score. Each SEO audit segment is shown as a column for direct post-by-post comparison.
 
 | Blog Post | Title | Language | Content Quality | On-Page SEO | Technical SEO | Internal Linking | Translation SEO | Developer Audience Fit | Growth Opportunity | Priority | Issues | Top Issues |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| `content/Aspose.Blog/svg/2026-11-18-convert-svg-text-to-path-in-python/index.md` | Convert SVG Text to Path in Python | en | 100 | 100 | 85 | 86 | 100 | 100 | 52 | 24 | 3 | suggest_body_output_image; weak_internal_links; too_few_outgoing_internal_links |
-| `content/Aspose.Blog/svg/2026-11-18-convert-svg-to-jpg-in-python/index.md` | Convert SVG to JPG in Python using Aspose.SVG | en | 100 | 100 | 85 | 86 | 100 | 100 | 51 | 24 | 3 | suggest_body_output_image; weak_internal_links; too_few_outgoing_internal_links |
+| `content/Aspose.Blog/svg/2026-11-19-convert-svg-to-png-in-python/index.md` | Convert SVG to PNG in Python: Files, URLs, and Batches | en | 100 | 100 | 85 | 86 | 100 | 100 | 53 | 24 | 3 | suggest_body_output_image; weak_internal_links; too_few_outgoing_internal_links |
+| `content/Aspose.Blog/svg/2026-11-19-convert-svg-to-pdf-in-python/index.md` | Convert SVG to PDF in Python using Aspose.SVG | en | 100 | 100 | 85 | 86 | 100 | 100 | 49 | 23 | 3 | suggest_body_output_image; weak_internal_links; too_few_outgoing_internal_links |
 
 ## Content Quality Audit
 Developer and file-format processing content should satisfy a concrete task, show working code, explain setup, clarify input/output formats, and provide troubleshooting or limitations.

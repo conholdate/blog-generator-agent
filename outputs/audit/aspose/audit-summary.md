@@ -16,7 +16,7 @@ Scanned 2 Markdown files across 1 detected languages. The strongest opportunitie
 | Complete SEO | All audit areas | 2 posts, 11 total issues | 11 | Priority risk | complete-seo-audit.md |
 | Content Quality | Markdown body and structure | 0 posts under 800 words | 2 | Monitor | content-improvement-plan.md |
 | Developer Audience Fit | API/developer usefulness | 0 missing code examples | 0 | Clear | complete-seo-audit.md |
-| Code/API Audit | Code blocks and SDK/API symbols | 11 code blocks | 0 | Clear | code-audit.md |
+| Code/API Audit | Code blocks and SDK/API symbols | 15 code blocks | 0 | Clear | code-audit.md |
 | On-Page SEO | Titles, descriptions, headings, links, images | 0 description length issues | 0 | Clear | post-audit.csv |
 | Technical Hugo SEO | Config, templates, robots, canonical, hreflang, schema | 1 technical findings | 1 | Monitor | technical-seo-audit.md |
 | Internal Linking | Outgoing links, incoming links, broken local links, anchors | 4 linking findings | 4 | Monitor | internal-linking-audit.md |
@@ -75,8 +75,8 @@ Scanned 2 Markdown files across 1 detected languages. The strongest opportunitie
 ## Highest-Priority Posts
 | File | Priority | Issues | Top Issue | Recommended Action |
 | --- | --- | --- | --- | --- |
-| `content/Aspose.Blog/svg/2026-11-18-convert-svg-text-to-path-in-python/index.md` | 24 | 3 | suggest_body_output_image | Consider adding an output screenshot or result image inside the post body if it helps readers validate the tutorial result. |
-| `content/Aspose.Blog/svg/2026-11-18-convert-svg-to-jpg-in-python/index.md` | 24 | 3 | suggest_body_output_image | Consider adding an output screenshot or result image inside the post body if it helps readers validate the tutorial result. |
+| `content/Aspose.Blog/svg/2026-11-19-convert-svg-to-png-in-python/index.md` | 24 | 3 | suggest_body_output_image | Consider adding an output screenshot or result image inside the post body if it helps readers validate the tutorial result. |
+| `content/Aspose.Blog/svg/2026-11-19-convert-svg-to-pdf-in-python/index.md` | 23 | 3 | suggest_body_output_image | Consider adding an output screenshot or result image inside the post body if it helps readers validate the tutorial result. |
 
 ## Severity Summary
 | Severity | Issue Count |

@@ -7,12 +7,12 @@ Consolidated actionable backlog for Aspose. This combines post-level, technical 
 | --- | --- |
 | Blog | Aspose |
 | Product | Aspose.SVG |
-| Audit date | 2026-11-20 06:45:30 UTC |
+| Audit date | 2026-11-20 06:54:09 UTC |
 | Repository | /home/runner/work/blog-generator-agent/blog-generator-agent/outputs/_repos/aspose-blog |
 | Blog config | outputs/workflow-blog-config.yaml |
 | Mode | report |
 | Product filter | Aspose.blog/svg |
-| Post date filter | 2026-11-18 |
+| Post date filter | 2026-11-19 |
 | Language filter | All |
 | Include translations | false |
 | Detailed outputs | true |
@@ -50,25 +50,25 @@ Consolidated actionable backlog for Aspose. This combines post-level, technical 
 ## All Action Items
 Action items are grouped by affected post. The post heading carries the file path, so the tables omit the repeated file column.
 
-### Convert SVG Text to Path in Python
-File: `content/Aspose.Blog/svg/2026-11-18-convert-svg-text-to-path-in-python/index.md`
+### Convert SVG to PNG in Python: Files, URLs, and Batches
+File: `content/Aspose.Blog/svg/2026-11-19-convert-svg-to-png-in-python/index.md`
 
 | ID | Priority | Severity | Area | Issue | Line / Scope | Post Priority | Recommended Action | Effort | Impact | Source |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | AA-0001 | P2 | Medium | Internal Linking | too_few_outgoing_internal_links | Post-level | 24 | Add contextual links to related posts, docs, and product pages. | Low | Medium | internal-linking-audit.md |
 | AA-0002 | P2 | Medium | Internal Linking | weak_internal_links | Post-level | 24 | Add links to related tutorials, docs, and product pages. | Low | Medium | internal-linking-audit.md |
-| AA-0005 | P2 | Medium | Internal Linking | orphan_post | Post-level | 0 | Add links to this post from related higher-traffic posts. | Low | Medium | internal-linking-audit.md |
+| AA-0006 | P2 | Medium | Internal Linking | orphan_post | Post-level | 0 | Add links to this post from related higher-traffic posts. | Low | Medium | internal-linking-audit.md |
 | AA-0008 | P3 | Opportunity | Content Quality | suggest_body_output_image | Post-level | 24 | Consider adding an output screenshot or result image inside the post body if it helps readers validate the tutorial result. | Low | Medium | content-improvement-plan.md |
 
-### Convert SVG to JPG in Python using Aspose.SVG
-File: `content/Aspose.Blog/svg/2026-11-18-convert-svg-to-jpg-in-python/index.md`
+### Convert SVG to PDF in Python using Aspose.SVG
+File: `content/Aspose.Blog/svg/2026-11-19-convert-svg-to-pdf-in-python/index.md`
 
 | ID | Priority | Severity | Area | Issue | Line / Scope | Post Priority | Recommended Action | Effort | Impact | Source |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| AA-0003 | P2 | Medium | Internal Linking | too_few_outgoing_internal_links | Post-level | 24 | Add contextual links to related posts, docs, and product pages. | Low | Medium | internal-linking-audit.md |
-| AA-0004 | P2 | Medium | Internal Linking | weak_internal_links | Post-level | 24 | Add links to related tutorials, docs, and product pages. | Low | Medium | internal-linking-audit.md |
-| AA-0006 | P2 | Medium | Internal Linking | orphan_post | Post-level | 0 | Add links to this post from related higher-traffic posts. | Low | Medium | internal-linking-audit.md |
-| AA-0009 | P3 | Opportunity | Content Quality | suggest_body_output_image | Post-level | 24 | Consider adding an output screenshot or result image inside the post body if it helps readers validate the tutorial result. | Low | Medium | content-improvement-plan.md |
+| AA-0003 | P2 | Medium | Internal Linking | too_few_outgoing_internal_links | Post-level | 23 | Add contextual links to related posts, docs, and product pages. | Low | Medium | internal-linking-audit.md |
+| AA-0004 | P2 | Medium | Internal Linking | weak_internal_links | Post-level | 23 | Add links to related tutorials, docs, and product pages. | Low | Medium | internal-linking-audit.md |
+| AA-0005 | P2 | Medium | Internal Linking | orphan_post | Post-level | 0 | Add links to this post from related higher-traffic posts. | Low | Medium | internal-linking-audit.md |
+| AA-0009 | P3 | Opportunity | Content Quality | suggest_body_output_image | Post-level | 23 | Consider adding an output screenshot or result image inside the post body if it helps readers validate the tutorial result. | Low | Medium | content-improvement-plan.md |
 
 ### Sitewide / Technical
 Scope: `/home/runner/work/blog-generator-agent/blog-generator-agent/outputs/_repos/aspose-blog`
