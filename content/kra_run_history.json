@@ -25,7 +25,7 @@
     "aspose|aspose.html|java": 1,
     "aspose|aspose.html|python": 1,
     "aspose|aspose.html|net": 1,
-    "conholdate|conholdate.total|java": 1,
+    "conholdate|conholdate.total|java": 0,
     "aspose.cloud|aspose.cells|net": 0,
     "aspose.cloud|aspose.cells|java": 2,
     "aspose.cloud|aspose.cells|php": 0,
@@ -194,7 +194,8 @@
     "XPS to BMP Conversion Tutorial in Java",
     "XPS to DOCX Conversion Guide in Java: Code Samples",
     "XPS to JPG in Java: a Complete Guide for Developers",
-    "Step-by-Step XPS to JPG Conversion Tutorial in Java"
+    "Step-by-Step XPS to JPG Conversion Tutorial in Java",
+    "XPS to JPG in Java: Complete Developer Guide"
   ],
   "aspose.cloud|aspose.cells|net": [
     "A Guide to Heroku Email Sending Best Practices in C#",
