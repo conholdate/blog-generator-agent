@@ -138,5 +138,76 @@
     "citedUrl": null,
     "position": null,
     "otherDomains": []
+  },
+  {
+    "date": "2026-11-21",
+    "checkedAt": "2026-11-21T16:34:59.044939+00:00",
+    "query": "merge jpg",
+    "page": "https://blog.aspose.com/imaging/merge-jpg-to-jpg-online/",
+    "hasOverview": false,
+    "cited": false,
+    "citedUrl": null,
+    "position": null,
+    "otherDomains": []
+  },
+  {
+    "date": "2026-11-21",
+    "checkedAt": "2026-11-21T16:34:59.044939+00:00",
+    "query": "kml to shp",
+    "page": "https://blog.aspose.com/gis/convert-kml-to-shp-online/",
+    "hasOverview": false,
+    "cited": false,
+    "citedUrl": null,
+    "position": null,
+    "otherDomains": []
+  },
+  {
+    "date": "2026-11-21",
+    "checkedAt": "2026-11-21T16:34:59.044939+00:00",
+    "query": "jpg to pdf",
+    "page": "https://blog.aspose.com/pdf/convert-jpg-to-pdf-online/",
+    "hasOverview": false,
+    "cited": false,
+    "citedUrl": null,
+    "position": null,
+    "otherDomains": []
+  },
+  {
+    "date": "2026-11-21",
+    "checkedAt": "2026-11-21T16:34:59.044939+00:00",
+    "query": "xpstopdfconverter org",
+    "page": "https://blog.aspose.com/page/convert-xps-to-pdf-online/",
+    "hasOverview": true,
+    "cited": false,
+    "citedUrl": null,
+    "position": null,
+    "otherDomains": [
+      "xpstopdfconverter.org",
+      "xpstopdf.com",
+      "www.zamzar.com",
+      "www.google.com"
+    ]
+  },
+  {
+    "date": "2026-11-21",
+    "checkedAt": "2026-11-21T16:34:59.044939+00:00",
+    "query": "hex converter",
+    "page": "https://blog.aspose.com/svg/convert-rgb-to-hex/",
+    "hasOverview": false,
+    "cited": false,
+    "citedUrl": null,
+    "position": null,
+    "otherDomains": []
+  },
+  {
+    "date": "2026-11-21",
+    "checkedAt": "2026-11-21T16:34:59.044939+00:00",
+    "query": "psd to png",
+    "page": "https://blog.aspose.com/psd/convert-psd-to-png-in-csharp/",
+    "hasOverview": false,
+    "cited": false,
+    "citedUrl": null,
+    "position": null,
+    "otherDomains": []
   }
 ]
