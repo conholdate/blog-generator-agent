@@ -140,5 +140,81 @@
     "otherDomains": [
       "www.google.com"
     ]
+  },
+  {
+    "date": "2026-11-21",
+    "checkedAt": "2026-11-21T16:35:00.382742+00:00",
+    "query": "zip to jpg",
+    "page": "https://blog.groupdocs.cloud/conversion/zip-to-jpg-online/",
+    "hasOverview": false,
+    "cited": false,
+    "citedUrl": null,
+    "position": null,
+    "otherDomains": []
+  },
+  {
+    "date": "2026-11-21",
+    "checkedAt": "2026-11-21T16:35:00.382742+00:00",
+    "query": "xml to pdf conversion sdk",
+    "page": "https://blog.groupdocs.cloud/conversion/convert-xml-to-pdf-file-in-java-using-rest-api/",
+    "hasOverview": true,
+    "cited": false,
+    "citedUrl": null,
+    "position": null,
+    "otherDomains": [
+      "apryse.com",
+      "smbtech.au",
+      "stackoverflow.com",
+      "www.google.com"
+    ]
+  },
+  {
+    "date": "2026-11-21",
+    "checkedAt": "2026-11-21T16:35:00.382742+00:00",
+    "query": "rar to pdf",
+    "page": "https://blog.groupdocs.cloud/conversion/convert-zip-or-rar-to-pdf-using-a-file-converter/",
+    "hasOverview": true,
+    "cited": false,
+    "citedUrl": null,
+    "position": null,
+    "otherDomains": [
+      "www.facebook.com",
+      "products.groupdocs.app",
+      "www.avast.com",
+      "www.google.com"
+    ]
+  },
+  {
+    "date": "2026-11-21",
+    "checkedAt": "2026-11-21T16:35:00.382742+00:00",
+    "query": "pptx merger",
+    "page": "https://blog.groupdocs.cloud/merger/merge-powerpoint-pptpptx-files-online-using-rest-api-in-csharp/",
+    "hasOverview": false,
+    "cited": false,
+    "citedUrl": null,
+    "position": null,
+    "otherDomains": []
+  },
+  {
+    "date": "2026-11-21",
+    "checkedAt": "2026-11-21T16:35:00.382742+00:00",
+    "query": "ppt to text",
+    "page": "https://blog.groupdocs.cloud/conversion/convert-ppt-to-text-online-using-powerpoint-converter/",
+    "hasOverview": false,
+    "cited": false,
+    "citedUrl": null,
+    "position": null,
+    "otherDomains": []
+  },
+  {
+    "date": "2026-11-21",
+    "checkedAt": "2026-11-21T16:35:00.382742+00:00",
+    "query": "zip to html",
+    "page": "https://blog.groupdocs.cloud/conversion/convert-zip-to-html-in-nodejs-zip-file-converter/",
+    "hasOverview": false,
+    "cited": false,
+    "citedUrl": null,
+    "position": null,
+    "otherDomains": []
   }
 ]
