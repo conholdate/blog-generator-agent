@@ -184,8 +184,8 @@
    "source": "https://api.aspose.cloud/v4.0/cells/swagger/spec",
    "referenceUrl": "https://reference.aspose.cloud/cells/",
    "version": "v4.0",
-   "hash": "8d63374359d61bc4",
-   "featureCount": 115,
+   "hash": "2504bc1ed9b12e5e",
+   "featureCount": 120,
    "formats": [
     "ai",
     "b1",
@@ -206,7 +206,7 @@
     "xml",
     "zip"
    ],
-   "updatedAt": "2026-11-04"
+   "updatedAt": "2026-11-21"
   },
   "diagram": {
    "displayName": "Aspose.Diagram Cloud SDK",
