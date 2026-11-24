@@ -1,0 +1,391 @@
+{
+  "case": "blogs_to_blogs",
+  "brand_key": "aspose",
+  "product_key": "pub",
+  "baseline_platform": "all",
+  "platforms": [
+    "general",
+    "java",
+    "net"
+  ],
+  "meta": {
+    "matching_mode": "key_exact",
+    "total_input_records": 26,
+    "records_after_filters": 24,
+    "excluded_release_update_records": 0,
+    "excluded_old_or_undated_records": 2,
+    "baseline_records": 24,
+    "total_cells": 33,
+    "matched_cells": 23,
+    "missing_cells": 10,
+    "match_rate": 0.696969696969697,
+    "skipped_empty_keys": 0
+  },
+  "rows": [
+    {
+      "category": "Document Management",
+      "sub_category": "Publisher Viewer",
+      "topic": "Open PUB publisher viewer",
+      "key": "open-pub-publisher-viewer",
+      "baseline_record_id": "blog::pub/2023-03-01-publisher-viewer-online-open-pub-file-online/index.md",
+      "coverage": {
+        "general": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::pub/2023-03-01-publisher-viewer-online-open-pub-file-online/index.md",
+          "title": "Open PUB File Online - Free Publisher Viewer Online",
+          "topic": "Open PUB publisher viewer",
+          "url": "aspose.com/pub/publisher-viewer-online-open-pub-file-online/"
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Document Conversion",
+      "sub_category": "Publisher To Word",
+      "topic": "PUB to DOCX",
+      "key": "pub-to-docx",
+      "baseline_record_id": "blog::pub/2021-06-16-convert-pub-to-word-doc-docx-csharp/index.md",
+      "coverage": {
+        "general": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::pub/2024-02-28-convert-pub-file-to-word/index.md",
+          "title": "Convert Publisher Files to Word",
+          "topic": "Publisher to word",
+          "url": "aspose.com/pub/convert-pub-file-to-word/"
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::pub/2021-08-31-convert-pub-to-word-docx-doc-java/index.md",
+          "title": "Convert PUB to Word Document DOC or DOCX Programmatically in Java",
+          "topic": "PUB to word document DOC or DOCX",
+          "url": "aspose.com/pub/convert-pub-to-word-docx-doc-java/"
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::pub/2021-06-16-convert-pub-to-word-doc-docx-csharp/index.md",
+          "title": "Convert PUB to Word Document (DOC/DOCX) in C#",
+          "topic": "PUB to word document DOC DOCX",
+          "url": "aspose.com/pub/convert-pub-to-word-doc-docx-csharp/"
+        }
+      }
+    },
+    {
+      "category": "Document Conversion",
+      "sub_category": "Publisher to HTML",
+      "topic": "PUB to HTML",
+      "key": "pub-to-html",
+      "baseline_record_id": "blog::pub/2021-06-25-pub-to-html-xhtml/index.md",
+      "coverage": {
+        "general": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::pub/2024-03-29-convert-pub-to-html/index.md",
+          "title": "Convert Publisher to HTML",
+          "topic": "Publisher to HTML",
+          "url": "aspose.com/pub/convert-pub-to-html/"
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::pub/2021-09-24-convert-pub-to-html-webpage/index.md",
+          "title": "Convert PUB to HTML Webpage File with Java",
+          "topic": "PUB to HTML webpage",
+          "url": "aspose.com/pub/convert-pub-to-html-webpage/"
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::pub/2021-06-25-pub-to-html-xhtml/index.md",
+          "title": "Convert PUB to HTML webpage Programmatically using C#",
+          "topic": "PUB to HTML webpage",
+          "url": "aspose.com/pub/pub-to-html-xhtml/"
+        }
+      }
+    },
+    {
+      "category": "Document Conversion",
+      "sub_category": "Publisher To Image",
+      "topic": "PUB to image",
+      "key": "pub-to-image",
+      "baseline_record_id": "blog::pub/2021-05-31-convert-pub-to-image-programmatically-in-java/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::pub/2021-05-31-convert-pub-to-image-programmatically-in-java/index.md",
+          "title": "Convert PUB to Image Programmatically in Java",
+          "topic": "PUB to image",
+          "url": "aspose.com/pub/convert-pub-to-image-programmatically-in-java/"
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "File Conversion",
+      "sub_category": "Document to Image",
+      "topic": "PUB to JPG",
+      "key": "pub-to-jpg",
+      "baseline_record_id": "blog::pub/2023-06-08-convert-pub-to-jpg-online/index.md",
+      "coverage": {
+        "general": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::pub/2023-06-08-convert-pub-to-jpg-online/index.md",
+          "title": "Convert PUB to JPG File Online",
+          "topic": "PUB to JPG",
+          "url": "aspose.com/pub/publisher-pub-to-jpg-online/"
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::pub/2024-05-31-convert-pub-to-jpg-in-java/index.md",
+          "title": "Convert PUB to JPG in Java",
+          "topic": "PUB to JPG",
+          "url": "aspose.com/pub/convert-pub-to-jpg-in-java/"
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::pub/2023-09-27-convert-publisher-to-jpg-in-csharp/index.md",
+          "title": "Convert Publisher to JPG in C#",
+          "topic": "Publisher to JPG",
+          "url": "aspose.com/pub/convert-publisher-to-jpg-in-csharp/"
+        }
+      }
+    },
+    {
+      "category": "File Conversion",
+      "sub_category": "Publisher to PDF",
+      "topic": "PUB to PDF",
+      "key": "pub-to-pdf",
+      "baseline_record_id": "blog::pub/2020-07-06-convert-pub-to-pdf-cpp/index.md",
+      "coverage": {
+        "general": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::pub/2023-06-07-convert-publisher-pub-file-to-pdf-online/index.md",
+          "title": "Convert PUB to PDF File",
+          "topic": "PUB to PDF",
+          "url": "aspose.com/pub/publisher-pub-to-pdf-online/"
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::pub/2020-12-01-convert-pub-pdf-java/index.md",
+          "title": "Convert PUB to PDF in Java",
+          "topic": "PUB to PDF",
+          "url": "aspose.com/pub/convert-pub-to-pdf-in-java/"
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::pub/2020-07-06-convert-pub-to-pdf-cpp/index.md",
+          "title": "Convert PUB to PDF file Programmatically using C++",
+          "topic": "PUB to PDF",
+          "url": "aspose.com/pub/convert-pub-to-pdf-cpp/"
+        }
+      }
+    },
+    {
+      "category": "Document Conversion",
+      "sub_category": "Publisher To Image",
+      "topic": "PUB to PNG",
+      "key": "pub-to-png",
+      "baseline_record_id": "blog::pub/2021-03-23-convert-pub-to-png-jpeg-or-tif-image-csharp/index.md",
+      "coverage": {
+        "general": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::pub/2024-08-12-convert-pub-to-png-online/index.md",
+          "title": "Convert PUB to PNG Online",
+          "topic": "PUB to PNG",
+          "url": "aspose.com/pub/convert-pub-to-png-online/"
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::pub/2024-09-11-convert-publisher-to-jpg-in-java/index.md",
+          "title": "Convert Publisher to PNG in Java",
+          "topic": "Publisher to PNG",
+          "url": "aspose.com/pub/convert-publisher-to-png-in-java/"
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::pub/2021-03-23-convert-pub-to-png-jpeg-or-tif-image-csharp/index.md",
+          "title": "Convert PUB to PNG in C#",
+          "topic": "PUB to PNG",
+          "url": "aspose.com/pub/convert-pub-to-png-in-csharp/"
+        }
+      }
+    },
+    {
+      "category": "Conversion",
+      "sub_category": "Document to Presentation",
+      "topic": "PUB to PPT",
+      "key": "pub-to-ppt",
+      "baseline_record_id": "blog::pub/2021-12-11-convert-pub-to-ppt-pptx-presentation-java/index.md",
+      "coverage": {
+        "general": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::pub/2024-01-26-convert-publisher-to-powerpoint/index.md",
+          "title": "Convert Publisher to PowerPoint",
+          "topic": "Publisher to powerpoint",
+          "url": "aspose.com/pub/convert-publisher-to-powerpoint/"
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::pub/2021-12-11-convert-pub-to-ppt-pptx-presentation-java/index.md",
+          "title": "Convert PUB to PPT or PPTX in Java",
+          "topic": "PUB to PPT or PPTX",
+          "url": "aspose.com/pub/convert-pub-to-ppt-pptx-presentation-java/"
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::pub/2022-01-11-convert-pub-to-pptx-csharp/index.md",
+          "title": "Convert Publisher to PPT in C#",
+          "topic": "Publisher to PPT",
+          "url": "aspose.com/pub/convert-pub-to-pptx-csharp/"
+        }
+      }
+    },
+    {
+      "category": "Document Conversion",
+      "sub_category": "Publisher to Tiff",
+      "topic": "PUB to TIF",
+      "key": "pub-to-tif",
+      "baseline_record_id": "blog::pub/2023-11-08-convert-pub-to-tiff-in-csharp/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::pub/2023-11-08-convert-pub-to-tiff-in-csharp/index.md",
+          "title": "Convert PUB to TIFF in C#",
+          "topic": "PUB to TIFF",
+          "url": "aspose.com/pub/convert-pub-to-tiff-in-csharp/"
+        }
+      }
+    },
+    {
+      "category": "File Conversion",
+      "sub_category": "Publisher to Excel",
+      "topic": "PUB to XLSX",
+      "key": "pub-to-xlsx",
+      "baseline_record_id": "blog::pub/2024-05-03-convert-publisher-to-excel/index.md",
+      "coverage": {
+        "general": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::pub/2024-05-03-convert-publisher-to-excel/index.md",
+          "title": "Convert Publisher to Excel",
+          "topic": "Publisher to Excel",
+          "url": "aspose.com/pub/convert-publisher-to-excel/"
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "File Formats",
+      "sub_category": "Publisher",
+      "topic": "Read PUB",
+      "key": "read-pub",
+      "baseline_record_id": "blog::pub/2024-11-11-read-pub-file-using-csharp/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::pub/2024-11-11-read-pub-file-using-csharp/index.md",
+          "title": "Read PUB File using C#",
+          "topic": "Read PUB",
+          "url": "aspose.com/pub/read-pub-file-using-csharp/"
+        }
+      }
+    }
+  ],
+  "brand_name": "Aspose",
+  "product_name": "Aspose.PUB"
+}
