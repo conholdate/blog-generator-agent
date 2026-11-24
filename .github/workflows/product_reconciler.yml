@@ -100,8 +100,8 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.REPO_PAT }}
         run: |
-          git config --global user.email "action@github.com"
-          git config --global user.name "GitHub Action"
+          git config --global user.email "muhammad.mustafa@aspose.com"
+          git config --global user.name "Muhammad Mustafa"
 
           BRAND_SAFE="${{ steps.reconcile.outputs.brand_safe }}"
           BRANCH_NAME="reconcile/${BRAND_SAFE}-${{ github.run_number }}"

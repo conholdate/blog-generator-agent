@@ -55,8 +55,8 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.REPO_PAT }}
         run: |
-          git config --global user.email "action@github.com"
-          git config --global user.name "GitHub Action"
+          git config --global user.email "muhammad.mustafa@aspose.com"
+          git config --global user.name "Muhammad Mustafa"
 
           BRANCH_NAME="example-repos/aspose-com-${{ github.run_number }}"
           git checkout -b "$BRANCH_NAME"

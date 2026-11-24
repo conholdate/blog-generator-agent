@@ -131,8 +131,8 @@ def apply_item(instruction):
 
 
 def main():
-    run(["git", "config", "--global", "user.email", "action@github.com"])
-    run(["git", "config", "--global", "user.name", "GitHub Action"])
+    run(["git", "config", "--global", "user.email", "muhammad.mustafa@aspose.com"])
+    run(["git", "config", "--global", "user.name", "Muhammad Mustafa"])
 
     processed = set()
     results = []  # (ok, instruction)
