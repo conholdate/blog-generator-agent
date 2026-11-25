@@ -1,0 +1,1997 @@
+{
+  "case": "blogs_to_blogs",
+  "brand_key": "aspose",
+  "product_key": "3d",
+  "baseline_platform": "all",
+  "platforms": [
+    "general",
+    "java",
+    "net",
+    "python"
+  ],
+  "meta": {
+    "matching_mode": "key_exact",
+    "total_input_records": 138,
+    "records_after_filters": 95,
+    "excluded_release_update_records": 26,
+    "excluded_old_or_undated_records": 17,
+    "baseline_records": 95,
+    "total_cells": 192,
+    "matched_cells": 91,
+    "missing_cells": 101,
+    "match_rate": 0.4739583333333333,
+    "skipped_empty_keys": 0
+  },
+  "rows": [
+    {
+      "category": "3D",
+      "sub_category": "Html Export",
+      "topic": "3D scene to HTML",
+      "key": "3d-scene-to-html",
+      "baseline_record_id": "blog::3d/2026-03-18-convert-3d-scene-to-html-in-java/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::3d/2026-03-18-convert-3d-scene-to-html-in-java/index.md",
+          "title": "Convert 3D Scene to HTML in Java",
+          "topic": "3D scene to HTML",
+          "url": "aspose.com/3d/convert-3d-scene-to-html-in-java/"
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "3D Modeling",
+      "sub_category": "File Format Conversion",
+      "topic": "3DS to USDZ",
+      "key": "3ds-to-usdz",
+      "baseline_record_id": "blog::3d/2024-04-16-convert-3ds-to-usdz-in-csharp-using-3d-modeling-librar/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::3d/2024-04-16-convert-3ds-to-usdz-in-csharp-using-3d-modeling-librar/index.md",
+          "title": "Convert 3DS to USDZ in C#",
+          "topic": "3DS to USDZ",
+          "url": "aspose.com/3d/convert-3ds-to-usdz-in-csharp-using-3d-modeling-library/"
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "File Conversion",
+      "sub_category": "3D Model Formats",
+      "topic": "3MF to STL",
+      "key": "3mf-to-stl",
+      "baseline_record_id": "blog::3d/2023-03-31-convert-3mf-to-stl-online/index.md",
+      "coverage": {
+        "general": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::3d/2023-03-31-convert-3mf-to-stl-online/index.md",
+          "title": "Convert 3MF to STL - Free Converter Online",
+          "topic": "3MF to STL",
+          "url": "aspose.com/3d/convert-3mf-to-stl-online/"
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::3d/2025-04-29-convert-3mf-to-stl-in-java-programmatically/index.md",
+          "title": "Convert 3MF to STL in Java Programmatically",
+          "topic": "3MF to STL",
+          "url": "aspose.com/3d/convert-3mf-to-stl-in-java-programmatically/"
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::3d/2025-08-11-convert-3mf-file-to-stl-in-csharp/index.md",
+          "title": "Convert 3MF File to STL in C#",
+          "topic": "3MF to STL",
+          "url": "aspose.com/3d/convert-3mf-file-to-stl-in-csharp/"
+        },
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::3d/2026-03-19-convert-3mf-to-stl-in-python/index.md",
+          "title": "Convert 3MF to STL in Python: Complete Step-by-Step Guide",
+          "topic": "3MF to STL",
+          "url": "aspose.com/3d/convert-3mf-to-stl-in-python/"
+        }
+      }
+    },
+    {
+      "category": "Graphics",
+      "sub_category": "3d Modeling",
+      "topic": "Create 3D cylinder",
+      "key": "create-3d-cylinder",
+      "baseline_record_id": "blog::3d/2022-10-15-make-3d-cylinder-in-java/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::3d/2022-10-15-make-3d-cylinder-in-java/index.md",
+          "title": "Create 3D Cylinder in Java",
+          "topic": "Create 3D cylinder",
+          "url": "aspose.com/3d/make-cylinder-in-java/"
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::3d/2022-11-15-make-3d-cylinder-in-csharp/index.md",
+          "title": "Create a 3D Cylinder in C#",
+          "topic": "Create 3D cylinder",
+          "url": "aspose.com/3d/make-cylinder-in-csharp/"
+        },
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::3d/2026-03-25-create-3d-cylinder-in-python/index.md",
+          "title": "Create 3D Cylinder in Python: Step-by-Step Guide",
+          "topic": "Create 3D cylinder in step by step guide",
+          "url": "aspose.com/3d/create-3d-cylinder-in-python/"
+        }
+      }
+    },
+    {
+      "category": "3D Graphics",
+      "sub_category": "Scene Creation",
+      "topic": "Create 3D scene",
+      "key": "create-3d-scene",
+      "baseline_record_id": "blog::3d/2022-08-02-create-3d-scene-using-csharp/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::3d/2023-10-23-create-3d-scene-using-java/index.md",
+          "title": "Create 3D Scene in Java",
+          "topic": "Create 3D scene",
+          "url": "aspose.com/3d/create-3d-scene-using-java/"
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::3d/2022-08-02-create-3d-scene-using-csharp/index.md",
+          "title": "Create 3D Scene in C#",
+          "topic": "Create 3D scene",
+          "url": "aspose.com/3d/create-3d-scene-using-csharp/"
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "3D Modeling",
+      "sub_category": "Scene Creation",
+      "topic": "Create and read 3D model",
+      "key": "create-and-read-3d-model",
+      "baseline_record_id": "blog::3d/2023-04-12-3d-in-python/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::3d/2023-04-12-3d-in-python/index.md",
+          "title": "3D in Python - Create and Read 3D Model Scene in Python",
+          "topic": "Create and read 3D model",
+          "url": "aspose.com/3d/3d-in-python/"
+        }
+      }
+    },
+    {
+      "category": "3D Modeling",
+      "sub_category": "Mesh Conversion",
+      "topic": "Create FBX and convert cylinder to mesh",
+      "key": "create-fbx-and-convert-cylinder-to-mesh",
+      "baseline_record_id": "blog::3d/2025-02-07-create-fbx-file-convert-cylinder-to-mesh/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::3d/2025-02-07-create-fbx-file-convert-cylinder-to-mesh/index.md",
+          "title": "Create FBX File & Convert Cylinder to Mesh",
+          "topic": "Create FBX and convert cylinder to mesh",
+          "url": "aspose.com/3d/create-fbx-file-convert-cylinder-to-mesh/"
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "3D File Conversion",
+      "sub_category": "DAE to OBJ",
+      "topic": "DAE to OBJ",
+      "key": "dae-to-obj",
+      "baseline_record_id": "blog::3d/2021-09-15-convert-dae-to-obj-file/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::3d/2021-12-15-convert-dae-to-obj-java/index.md",
+          "title": "Convert DAE to OBJ File in Java",
+          "topic": "DAE to OBJ",
+          "url": "aspose.com/3d/convert-dae-to-obj-java/"
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::3d/2021-09-15-convert-dae-to-obj-file/index.md",
+          "title": "Convert DAE File to OBJ 3D Object File using C#",
+          "topic": "DAE to OBJ",
+          "url": "aspose.com/3d/convert-dae-to-obj-file/"
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "3D",
+      "sub_category": "File Conversion",
+      "topic": "DXF to FBX",
+      "key": "dxf-to-fbx",
+      "baseline_record_id": "blog::3d/2021-07-28-convert-dxf-to-fbx-or-gltf-glb-file-programmatically-in-csharp/index.md",
+      "coverage": {
+        "general": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::3d/2021-07-28-convert-dxf-to-fbx-or-gltf-glb-file-programmatically-in-csharp/index.md",
+          "title": "Convert DXF to FBX or glTF GLB file Programmatically in C#",
+          "topic": "DXF to FBX or GLTF GLB",
+          "url": "aspose.com/3d/convert-dxf-to-fbx-or-gltf-glb-file-programmatically-in-csharp/"
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "3D Graphics",
+      "sub_category": "Keyframe Animation",
+      "topic": "Evaluate keyframe animations",
+      "key": "evaluate-keyframe-animations",
+      "baseline_record_id": "blog::3d/2026-11-03-evaluate-keyframe-animations-python/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::3d/2026-11-03-evaluate-keyframe-animations-python/index.md",
+          "title": "Evaluate Keyframe Animations in Python Using Aspose.3D",
+          "topic": "Evaluate keyframe animations using aspose 3D",
+          "url": "aspose.com/3d/evaluate-keyframe-animations-python/"
+        }
+      }
+    },
+    {
+      "category": "3D Graphics",
+      "sub_category": "File Conversion",
+      "topic": "FBX to GLB",
+      "key": "fbx-to-glb",
+      "baseline_record_id": "blog::3d/2021-11-21-fbx-to-glb-java/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::3d/2021-11-21-fbx-to-glb-java/index.md",
+          "title": "Convert FBX to GLB File in Java",
+          "topic": "FBX to GLB",
+          "url": "aspose.com/3d/fbx-to-glb-java/"
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::3d/2021-12-21-convert-fbx-to-glb-csharp/index.md",
+          "title": "Convert FBX to GLB File in C#",
+          "topic": "FBX to GLB",
+          "url": "aspose.com/3d/convert-fbx-to-glb-csharp/"
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "File Conversion",
+      "sub_category": "3D Model Formats",
+      "topic": "FBX to GLTF",
+      "key": "fbx-to-gltf",
+      "baseline_record_id": "blog::3d/2021-04-06-convert-fbx-gltf-glb-csharp/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::3d/2021-04-06-convert-fbx-gltf-glb-csharp/index.md",
+          "title": "Convert FBX to glTF, GLB, or vice versa using C#",
+          "topic": "FBX to GLTF",
+          "url": "aspose.com/3d/convert-fbx-gltf-glb-csharp/"
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "File Conversion",
+      "sub_category": "3D Model Formats",
+      "topic": "FBX to OBJ",
+      "key": "fbx-to-obj",
+      "baseline_record_id": "blog::3d/2023-05-16-convert-fbx-to-obj-online/index.md",
+      "coverage": {
+        "general": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::3d/2023-05-16-convert-fbx-to-obj-online/index.md",
+          "title": "Convert FBX to OBJ File - Free Online",
+          "topic": "FBX to OBJ",
+          "url": "aspose.com/3d/convert-fbx-to-obj-online/"
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "File Formats",
+      "sub_category": "3D Model Conversion",
+      "topic": "FBX to RVM",
+      "key": "fbx-to-rvm",
+      "baseline_record_id": "blog::3d/2021-03-13-convert-fbx-rvm-csharp/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::3d/2021-10-19-convert-fbx-to-rvm-or-rvm-to-fbx-file-in-java/index.md",
+          "title": "Convert FBX to RVM or RVM to FBX File in Java",
+          "topic": "FBX to RVM or RVM to FBX",
+          "url": "aspose.com/3d/convert-fbx-to-rvm-or-rvm-to-fbx-file-in-java/"
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::3d/2021-03-13-convert-fbx-rvm-csharp/index.md",
+          "title": "Convert FBX to RVM or Vice Versa Programmatically in C#",
+          "topic": "FBX to RVM or vice versa",
+          "url": "aspose.com/3d/convert-fbx-rvm-csharp/"
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "3D File Conversion",
+      "sub_category": "Model Format Conversion",
+      "topic": "FBX to STL",
+      "key": "fbx-to-stl",
+      "baseline_record_id": "blog::3d/2022-01-11-convert-fbx-to-stl-java/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::3d/2022-01-11-convert-fbx-to-stl-java/index.md",
+          "title": "Convert FBX to STL in Java",
+          "topic": "FBX to STL",
+          "url": "aspose.com/3d/convert-fbx-to-stl-java/"
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::3d/2022-02-11-convert-fbx-to-stl-csharp/index.md",
+          "title": "Convert FBX to an STL File in C#",
+          "topic": "FBX to STL",
+          "url": "aspose.com/3d/convert-fbx-to-stl-csharp/"
+        },
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::3d/2026-03-27-convert-fbx-to-stl-in-python/index.md",
+          "title": "Convert FBX to STL in Python: Fast High-Performance Guide",
+          "topic": "FBX to STL",
+          "url": "aspose.com/3d/convert-fbx-to-stl-in-python/"
+        }
+      }
+    },
+    {
+      "category": "File Conversion",
+      "sub_category": "3D Model Formats",
+      "topic": "FBX to wavefront OBJ or PDF",
+      "key": "fbx-to-wavefront-obj-or-pdf",
+      "baseline_record_id": "blog::3d/2020-12-17-convert-fbx-to-wavefront-obj-or-pdf-csharp/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::3d/2020-12-17-convert-fbx-to-wavefront-obj-or-pdf-csharp/index.md",
+          "title": "Convert FBX to Wavefront OBJ or PDF File Programmatically using C#",
+          "topic": "FBX to wavefront OBJ or PDF",
+          "url": "aspose.com/3d/convert-fbx-to-wavefront-obj-or-pdf-csharp/"
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "File Conversion",
+      "sub_category": "3D Model Formats",
+      "topic": "GLB to FBX",
+      "key": "glb-to-fbx",
+      "baseline_record_id": "blog::3d/2021-11-20-glb-to-fbx-java/index.md",
+      "coverage": {
+        "general": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::3d/2021-12-20-glb-to-fbx-csharp/index.md",
+          "title": "Convert GLB to FBX File in C#",
+          "topic": "GLB to FBX",
+          "url": "aspose.com/3d/glb-to-fbx-csharp/"
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::3d/2021-11-20-glb-to-fbx-java/index.md",
+          "title": "Convert GLB to FBX in Java",
+          "topic": "GLB to FBX",
+          "url": "aspose.com/3d/glb-to-fbx-java/"
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::3d/2026-03-27-convert-glb-to-fbx-in-python/index.md",
+          "title": "Convert GLB to FBX in Python: Complete Developer Guide",
+          "topic": "GLB to FBX",
+          "url": "aspose.com/3d/convert-glb-to-fbx-in-python/"
+        }
+      }
+    },
+    {
+      "category": "File Conversion",
+      "sub_category": "3D Model Formats",
+      "topic": "GLB to OBJ",
+      "key": "glb-to-obj",
+      "baseline_record_id": "blog::3d/2023-01-19-glb-to-obj/index.md",
+      "coverage": {
+        "general": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::3d/2023-01-19-glb-to-obj/index.md",
+          "title": "Convert GLB To OBJ Online – Convert 3D Models for Free",
+          "topic": "GLB to OBJ",
+          "url": "aspose.com/3d/glb-to-obj/"
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::3d/2023-06-07-convert-glb-to-obj-in-java/index.md",
+          "title": "Convert GLB to OBJ in Java",
+          "topic": "GLB to OBJ",
+          "url": "aspose.com/3d/convert-glb-to-obj-in-java/"
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::3d/2023-06-06-convert-glb-to-obj-in-csharp/index.md",
+          "title": "Convert GLB to OBJ in C#",
+          "topic": "GLB to OBJ",
+          "url": "aspose.com/3d/convert-glb-to-obj-in-csharp/"
+        },
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::3d/2023-06-05-convert-glb-to-obj-in-python/index.md",
+          "title": "Convert GLB to OBJ in Python",
+          "topic": "GLB to OBJ",
+          "url": "aspose.com/3d/convert-glb-to-obj-in-python/"
+        }
+      }
+    },
+    {
+      "category": "3D",
+      "sub_category": "Image Processing",
+      "topic": "JPG image to lithophane",
+      "key": "jpg-image-to-lithophane",
+      "baseline_record_id": "blog::3d/2022-07-26-convert-jpg-image-to-lithophane-in-csharp/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::3d/2022-07-26-convert-jpg-image-to-lithophane-in-csharp/index.md",
+          "title": "Convert JPG Image to Lithophane in C#",
+          "topic": "JPG image to lithophane",
+          "url": "aspose.com/3d/convert-jpg-image-to-lithophane-csharp/"
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "File Conversion",
+      "sub_category": "Image to 3D Model",
+      "topic": "JPG to 3DS",
+      "key": "jpg-to-3ds",
+      "baseline_record_id": "blog::3d/2023-03-02-convert-jpg-to-3ds-online/index.md",
+      "coverage": {
+        "general": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::3d/2023-03-02-convert-jpg-to-3ds-online/index.md",
+          "title": "Convert JPG to 3DS File - Free Online",
+          "topic": "JPG to 3DS",
+          "url": "aspose.com/3d/convert-jpg-to-3ds-online/"
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "3D Modeling",
+      "sub_category": "Animation",
+      "topic": "Load and evaluate GLB GLTF animations",
+      "key": "load-and-evaluate-glb-gltf-animations",
+      "baseline_record_id": "blog::3d/2026-11-02-evaluate-glb-gltf-animations-python/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::3d/2026-11-02-evaluate-glb-gltf-animations-python/index.md",
+          "title": "Load and Evaluate GLB/GLTF Animations in Python",
+          "topic": "Load and evaluate GLB GLTF animations",
+          "url": "aspose.com/3d/evaluate-glb-gltf-animations-python/"
+        }
+      }
+    },
+    {
+      "category": "3D Graphics",
+      "sub_category": "File Conversion",
+      "topic": "MA to USDZ",
+      "key": "ma-to-usdz",
+      "baseline_record_id": "blog::3d/2022-09-28-convert-ma-to-usdz-in-java/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::3d/2022-09-28-convert-ma-to-usdz-in-java/index.md",
+          "title": "Convert MA to USDZ in Java",
+          "topic": "MA to USDZ",
+          "url": "aspose.com/3d/convert-ma-to-usdz-in-java/"
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::3d/2022-10-28-convert-ma-to-usdz-in-csharp/index.md",
+          "title": "Convert MA to USDZ File in C#",
+          "topic": "MA to USDZ",
+          "url": "aspose.com/3d/convert-ma-to-usdz-in-csharp/"
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Graphics",
+      "sub_category": "3D Modeling",
+      "topic": "MAKE 3D sphere seamlessly",
+      "key": "make-3d-sphere-seamlessly",
+      "baseline_record_id": "blog::3d/2025-02-06-how-to-make-3d-sphere-seamlessly/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::3d/2025-02-06-how-to-make-3d-sphere-seamlessly/index.md",
+          "title": "How to Make 3D Sphere Seamlessly",
+          "topic": "Make 3D sphere seamlessly",
+          "url": "aspose.com/3d/how-to-make-3d-sphere/"
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "File Conversion",
+      "sub_category": "3D Model Conversion",
+      "topic": "OBJ 3D object to FBX or STL",
+      "key": "obj-3d-object-to-fbx-or-stl",
+      "baseline_record_id": "blog::3d/2021-11-27-convert-obj-to-fbx-stl-java/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::3d/2021-11-27-convert-obj-to-fbx-stl-java/index.md",
+          "title": "Convert OBJ 3D Object File to FBX or STL in Java",
+          "topic": "OBJ 3D object to FBX or STL",
+          "url": "aspose.com/3d/convert-obj-to-fbx-stl-java/"
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "3D Modeling",
+      "sub_category": "File Conversion",
+      "topic": "OBJ to 3DS",
+      "key": "obj-to-3ds",
+      "baseline_record_id": "blog::3d/2022-08-01-convert-obj-to-3ds-in-java/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::3d/2022-08-01-convert-obj-to-3ds-in-java/index.md",
+          "title": "Convert OBJ to 3DS in Java",
+          "topic": "OBJ to 3DS",
+          "url": "aspose.com/3d/convert-obj-to-3ds-in-java/"
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::3d/2022-09-01-convert-obj-to-3ds-in-csharp/index.md",
+          "title": "Convert OBJ to 3DS File in C#",
+          "topic": "OBJ to 3DS",
+          "url": "aspose.com/3d/obj-to-3ds-csharp/"
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "3D Rendering",
+      "sub_category": "File Format Conversion",
+      "topic": "OBJ to AMF",
+      "key": "obj-to-amf",
+      "baseline_record_id": "blog::3d/2024-03-06-convert-obj-to-amf-in-python-using-3d-rendering-api/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::3d/2024-03-06-convert-obj-to-amf-in-python-using-3d-rendering-api/index.md",
+          "title": "Convert OBJ to AMF in Python",
+          "topic": "OBJ to AMF",
+          "url": "aspose.com/3d/convert-obj-to-amf-in-python-using-3d-rendering-api"
+        }
+      }
+    },
+    {
+      "category": "3D",
+      "sub_category": "Format Conversion",
+      "topic": "OBJ to FBX",
+      "key": "obj-to-fbx",
+      "baseline_record_id": "blog::3d/2021-09-06-convert-obj-to-stl-fbx/index.md",
+      "coverage": {
+        "general": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::3d/2023-01-17-obj-to-fbx/index.md",
+          "title": "Convert OBJ to FBX – 3D Object Converter",
+          "topic": "OBJ to FBX",
+          "url": "aspose.com/3d/obj-to-fbx/"
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::3d/2021-10-16-convert-obj-to-fbx-java/index.md",
+          "title": "Convert OBJ to FBX File in Java",
+          "topic": "OBJ to FBX",
+          "url": "aspose.com/3d/convert-obj-to-fbx-java/"
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::3d/2021-09-06-convert-obj-to-stl-fbx/index.md",
+          "title": "Convert 3D Object File OBJ to FBX or STL Format in C#",
+          "topic": "OBJ to FBX",
+          "url": "aspose.com/3d/convert-obj-to-stl-fbx/"
+        },
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::3d/2023-04-10-convert-obj-to-fbx-python/index.md",
+          "title": "Convert OBJ to FBX in Python",
+          "topic": "OBJ to FBX",
+          "url": "aspose.com/3d/convert-obj-to-fbx-in-python/"
+        }
+      }
+    },
+    {
+      "category": "File Conversion",
+      "sub_category": "3D Model Formats",
+      "topic": "OBJ to PDF",
+      "key": "obj-to-pdf",
+      "baseline_record_id": "blog::3d/2021-11-16-convert-obj-to-pdf-fbx-csharp/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::3d/2021-11-16-convert-obj-to-pdf-fbx-csharp/index.md",
+          "title": "Convert OBJ File to a PDF or FBX File in C#",
+          "topic": "OBJ to PDF",
+          "url": "aspose.com/3d/convert-obj-to-pdf-fbx-csharp/"
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "3D Graphics",
+      "sub_category": "File Conversion",
+      "topic": "OBJ to PLY",
+      "key": "obj-to-ply",
+      "baseline_record_id": "blog::3d/2024-06-21-convert-obj-to-ply-in-csharp/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::3d/2024-06-21-convert-obj-to-ply-in-csharp/index.md",
+          "title": "Convert OBJ to PLY in C# - C# 3D Graphics Library",
+          "topic": "OBJ to PLY",
+          "url": "aspose.com/3d/convert-obj-to-ply-in-csharp/"
+        },
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::3d/2024-08-15-convert-obj-to-ply-in-python/index.md",
+          "title": "Learn How to Convert OBJ to PLY in Python",
+          "topic": "Learn how to convert OBJ to PLY",
+          "url": "aspose.com/3d/convert-obj-to-ply-in-python/"
+        }
+      }
+    },
+    {
+      "category": "3D File Conversion",
+      "sub_category": "Format Conversion",
+      "topic": "OBJ to STL",
+      "key": "obj-to-stl",
+      "baseline_record_id": "blog::3d/2022-10-06-convert-obj-to-stl-in-python/index.md",
+      "coverage": {
+        "general": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::3d/2023-02-08-convert-obj-to-stl-online/index.md",
+          "title": "Convert OBJ to STL File - Free Online Converter",
+          "topic": "OBJ to STL",
+          "url": "aspose.com/3d/convert-obj-to-stl-online/"
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::3d/2023-07-27-convert-obj-to-stl-in-java/index.md",
+          "title": "Convert OBJ to STL in Java",
+          "topic": "OBJ to STL",
+          "url": "aspose.com/3d/convert-obj-to-stl-in-java/"
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::3d/2023-09-07-convert-obj-to-stl-in-csharp/index.md",
+          "title": "Convert OBJ to STL in C#",
+          "topic": "OBJ to STL",
+          "url": "aspose.com/3d/convert-obj-to-stl-in-csharp/"
+        },
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::3d/2022-10-06-convert-obj-to-stl-in-python/index.md",
+          "title": "Convert OBJ to STL in Python",
+          "topic": "OBJ to STL",
+          "url": "aspose.com/3d/convert-obj-to-stl-in-python/"
+        }
+      }
+    },
+    {
+      "category": "3D Modeling",
+      "sub_category": "File Format Conversion",
+      "topic": "OBJ to U3D",
+      "key": "obj-to-u3d",
+      "baseline_record_id": "blog::3d/2024-12-30-convert-obj-to-u3d-in-python/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::3d/2025-08-12-build-an-obj-to-u3d-converter-in-csharp/index.md",
+          "title": "Build an OBJ to U3D Converter in C# - Aspose.3D for .NET",
+          "topic": "OBJ to U3D",
+          "url": "aspose.com/3d/build-an-obj-to-u3d-converter-in-csharp/"
+        },
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::3d/2024-12-30-convert-obj-to-u3d-in-python/index.md",
+          "title": "Convert OBJ to U3D in Python",
+          "topic": "OBJ to U3D",
+          "url": "aspose.com/3d/convert-obj-to-u3d-in-python/"
+        }
+      }
+    },
+    {
+      "category": "3D",
+      "sub_category": "File Conversion",
+      "topic": "OBJ to USDZ",
+      "key": "obj-to-usdz",
+      "baseline_record_id": "blog::3d/2022-02-01-convert-obj-usdz-java/index.md",
+      "coverage": {
+        "general": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::3d/2023-03-15-convert-obj-to-usdz-online/index.md",
+          "title": "Convert OBJ to USDZ File Online - Free Converter",
+          "topic": "OBJ to USDZ",
+          "url": "aspose.com/3d/convert-obj-to-usdz-online/"
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::3d/2022-02-01-convert-obj-usdz-java/index.md",
+          "title": "Convert OBJ to USDZ in Java",
+          "topic": "OBJ to USDZ",
+          "url": "aspose.com/3d/convert-obj-usdz-java/"
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::3d/2022-03-01-convert-obj-usdz-csharp/index.md",
+          "title": "Convert OBJ to USDZ File Programmatically in C#",
+          "topic": "OBJ to USDZ",
+          "url": "aspose.com/3d/convert-obj-usdz-csharp/"
+        },
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::3d/2022-11-10-convert-obj-to-usdz-in-python/index.md",
+          "title": "Convert OBJ to USDZ in Python",
+          "topic": "OBJ to USDZ",
+          "url": "aspose.com/3d/convert-obj-to-usdz-in-python/"
+        }
+      }
+    },
+    {
+      "category": "3D Graphics",
+      "sub_category": "File Conversion",
+      "topic": "PLY to OBJ",
+      "key": "ply-to-obj",
+      "baseline_record_id": "blog::3d/2024-03-29-convert-ply-to-obj-in-csharp-using-3d-graphics-api/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::3d/2024-03-29-convert-ply-to-obj-in-csharp-using-3d-graphics-api/index.md",
+          "title": "Convert PLY to OBJ in C# using 3D Graphics API",
+          "topic": "PLY to OBJ",
+          "url": "aspose.com/3d/convert-ply-to-obj-in-csharp-using-3d-graphics-api/"
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "3D Rendering",
+      "sub_category": "File Conversion",
+      "topic": "PLY to USDZ",
+      "key": "ply-to-usdz",
+      "baseline_record_id": "blog::3d/2024-05-14-convert-ply-to-usdz-in-csharp/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::3d/2024-05-14-convert-ply-to-usdz-in-csharp/index.md",
+          "title": "Convert PLY to USDZ in C# - C# 3D Rendering Library",
+          "topic": "PLY to USDZ",
+          "url": "aspose.com/3d/convert-ply-to-usdz-in-csharp/"
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "3D",
+      "sub_category": "Image Conversion",
+      "topic": "PNG image to lithophane",
+      "key": "png-image-to-lithophane",
+      "baseline_record_id": "blog::3d/2022-07-26-convert-png-image-to-lithophane-in-csharp/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::3d/2022-07-26-convert-png-image-to-lithophane-in-csharp/index.md",
+          "title": "Convert PNG Image to Lithophane in C#",
+          "topic": "PNG image to lithophane",
+          "url": "aspose.com/3d/convert-png-image-to-lithophane-csharp/"
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "3D Rendering",
+      "sub_category": "Animation Frame Export",
+      "topic": "Render animation frames from GLB GLTF",
+      "key": "render-animation-frames-from-glb-gltf",
+      "baseline_record_id": "blog::3d/2026-11-04-render-glb-gltf-animation-frames-python/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::3d/2026-11-04-render-glb-gltf-animation-frames-python/index.md",
+          "title": "Render Animation Frames from GLB/GLTF in Python",
+          "topic": "Render animation frames from GLB GLTF",
+          "url": "aspose.com/3d/render-glb-gltf-animation-frames-python/"
+        }
+      }
+    },
+    {
+      "category": "3D",
+      "sub_category": "Model Repair",
+      "topic": "Repair 3D models",
+      "key": "repair-3d-models",
+      "baseline_record_id": "blog::3d/2024-04-17-lets-repair-3d-models-online/index.md",
+      "coverage": {
+        "general": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::3d/2024-04-17-lets-repair-3d-models-online/index.md",
+          "title": "Let's Repair 3D Models Online - Free Software",
+          "topic": "Repair 3D models",
+          "url": "aspose.com/3d/lets-repair-3d-models-online/"
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "3D Modeling",
+      "sub_category": "Mesh Operations",
+      "topic": "Split or merge 3D mesh in 3D",
+      "key": "split-or-merge-3d-mesh-in-3d",
+      "baseline_record_id": "blog::3d/2021-08-13-split-merge-3d-mesh-csharp/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::3d/2021-08-13-split-merge-3d-mesh-csharp/index.md",
+          "title": "Split or Merge 3D Mesh in 3D File Programmatically in C#",
+          "topic": "Split or merge 3D mesh in 3D",
+          "url": "aspose.com/3d/split-merge-3d-mesh-csharp/"
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "3D File Conversion",
+      "sub_category": "Model Format Conversion",
+      "topic": "STL to FBX",
+      "key": "stl-to-fbx",
+      "baseline_record_id": "blog::3d/2021-07-06-convert-stl-to-fbx-gltf-glb-programmatically-java/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::3d/2021-07-06-convert-stl-to-fbx-gltf-glb-programmatically-java/index.md",
+          "title": "Convert STL to FBX or glTF GLB Programmatically using Java",
+          "topic": "STL to FBX",
+          "url": "aspose.com/3d/convert-stl-to-fbx-gltf-glb-programmatically-java/"
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::3d/2021-11-02-convert-stl-to-fbx-glb-gltf-csharp/index.md",
+          "title": "Convert STL to FBX or glTF GLB using C#",
+          "topic": "STL to FBX",
+          "url": "aspose.com/3d/convert-stl-to-fbx-glb-gltf-csharp/"
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "3D",
+      "sub_category": "File Conversion",
+      "topic": "STL to OBJ",
+      "key": "stl-to-obj",
+      "baseline_record_id": "blog::3d/2021-09-20-convert-stl-to-obj/index.md",
+      "coverage": {
+        "general": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::3d/2023-02-08-convert-stl-to-obj-online/index.md",
+          "title": "Convert STL to OBJ Online - Free Converter",
+          "topic": "STL to OBJ",
+          "url": "aspose.com/3d/convert-stl-to-obj-online/"
+        },
+        "java": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::3d/2021-09-20-convert-stl-to-obj/index.md",
+          "title": "Convert STL to OBJ Wavefront 3D Object File using C#",
+          "topic": "STL to OBJ",
+          "url": "aspose.com/3d/convert-stl-to-obj/"
+        },
+        "python": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::3d/2023-05-24-convert-stl-to-obj-python/index.md",
+          "title": "Convert STL to OBJ in Python",
+          "topic": "STL to OBJ",
+          "url": "aspose.com/3d/convert-stl-to-obj-in-python/"
+        }
+      }
+    },
+    {
+      "category": "3D Graphics",
+      "sub_category": "File Conversion",
+      "topic": "STL to USDZ",
+      "key": "stl-to-usdz",
+      "baseline_record_id": "blog::3d/2022-03-28-convert-stl-to-usdz-csharp/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::3d/2022-04-27-convert-stl-to-usdz-java/index.md",
+          "title": "Convert STL to USDZ File in Java",
+          "topic": "STL to USDZ",
+          "url": "aspose.com/3d/convert-stl-to-usdz-java/"
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::3d/2022-03-28-convert-stl-to-usdz-csharp/index.md",
+          "title": "Convert STL to USDZ in C#",
+          "topic": "STL to USDZ",
+          "url": "aspose.com/3d/convert-stl-to-usdz-csharp/"
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "3D Conversion",
+      "sub_category": "File Format Conversion",
+      "topic": "USDZ to 3DS",
+      "key": "usdz-to-3ds",
+      "baseline_record_id": "blog::3d/2022-07-30-convert-usd-usdz-to-3ds-in-java/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::3d/2022-07-30-convert-usd-usdz-to-3ds-in-java/index.md",
+          "title": "Convert USD or USDZ to 3DS in Java",
+          "topic": "USDZ to 3DS",
+          "url": "aspose.com/3d/convert-usd-usdz-to-3ds-java/"
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::3d/2022-08-30-convert-usd-usdz-to-3ds-in-csharp/index.md",
+          "title": "Convert USD or USDZ to 3DS File in C#",
+          "topic": "USDZ to 3DS",
+          "url": "aspose.com/3d/usd-usdz-to-3ds-csharp/"
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "3D Graphics",
+      "sub_category": "File Conversion",
+      "topic": "USDZ to FBX",
+      "key": "usdz-to-fbx",
+      "baseline_record_id": "blog::3d/2022-03-12-convert-usdz-to-fbx-java/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::3d/2022-03-12-convert-usdz-to-fbx-java/index.md",
+          "title": "Convert USDZ to FBX in Java",
+          "topic": "USDZ to FBX",
+          "url": "aspose.com/3d/convert-usdz-to-fbx-java/"
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::3d/2022-04-12-convert-usdz-to-fbx-csharp/index.md",
+          "title": "Convert USDZ to FBX in C#",
+          "topic": "USDZ to FBX",
+          "url": "aspose.com/3d/convert-usdz-to-fbx-csharp/"
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "3D",
+      "sub_category": "File Conversion",
+      "topic": "USDZ to GLB",
+      "key": "usdz-to-glb",
+      "baseline_record_id": "blog::3d/2022-06-19-convert-usdz-to-glb-in-java/index.md",
+      "coverage": {
+        "general": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::3d/2023-02-17-convert-usdz-to-glb-online/index.md",
+          "title": "Convert USDZ to GLB File - Online for Free",
+          "topic": "USDZ to GLB",
+          "url": "aspose.com/3d/convert-usdz-to-glb-online/"
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::3d/2022-06-19-convert-usdz-to-glb-in-java/index.md",
+          "title": "Convert USDZ to GLB in Java",
+          "topic": "USDZ to GLB",
+          "url": "aspose.com/3d/convert-usdz-to-glb-java/"
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::3d/2022-07-19-convert-usdz-to-glb-in-csharp/index.md",
+          "title": "Convert USDZ to GLB or GLTF File in C#",
+          "topic": "USDZ to GLB",
+          "url": "aspose.com/3d/usdz-to-glb-csharp/"
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "Conversion",
+      "sub_category": "UsdZ to Html",
+      "topic": "USDZ to HTML",
+      "key": "usdz-to-html",
+      "baseline_record_id": "blog::3d/2022-05-23-convert-usdz-to-html-java/index.md",
+      "coverage": {
+        "general": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::3d/2023-02-20-convert-usdz-to-html-online/index.md",
+          "title": "Convert USDZ to HTML File - Free Online",
+          "topic": "USDZ to HTML",
+          "url": "aspose.com/3d/convert-usdz-to-html-online/"
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::3d/2022-05-23-convert-usdz-to-html-java/index.md",
+          "title": "Convert USDZ to HTML in Java",
+          "topic": "USDZ to HTML",
+          "url": "aspose.com/3d/convert-usdz-html-java/"
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::3d/2022-06-23-convert-usdz-to-html-csharp/index.md",
+          "title": "Convert USDZ to HTML in C#",
+          "topic": "USDZ to HTML",
+          "url": "aspose.com/3d/convert-usdz-to-html-csharp/"
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "3D",
+      "sub_category": "File Conversion",
+      "topic": "USDZ to OBJ",
+      "key": "usdz-to-obj",
+      "baseline_record_id": "blog::3d/2022-01-17-convert-usdz-obj-java/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::3d/2022-01-17-convert-usdz-obj-java/index.md",
+          "title": "Convert USDZ to OBJ File in Java",
+          "topic": "USDZ to OBJ",
+          "url": "aspose.com/3d/convert-usdz-obj-java/"
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::3d/2022-02-18-convert-usdz-obj-csharp/index.md",
+          "title": "Convert USDZ to OBJ File in C#",
+          "topic": "USDZ to OBJ",
+          "url": "aspose.com/3d/convert-usdz-obj-csharp/"
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "File Conversion",
+      "sub_category": "3D to PDF",
+      "topic": "USDZ to PDF",
+      "key": "usdz-to-pdf",
+      "baseline_record_id": "blog::3d/2022-04-11-convert-usdz-pdf-java/index.md",
+      "coverage": {
+        "general": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::3d/2022-04-11-convert-usdz-pdf-java/index.md",
+          "title": "Convert USDZ to PDF in Java",
+          "topic": "USDZ to PDF",
+          "url": "aspose.com/3d/convert-usdz-pdf-java/"
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::3d/2022-05-11-convert-usdz-to-pdf-csharp/index.md",
+          "title": "Convert USDZ to PDF in C#",
+          "topic": "USDZ to PDF",
+          "url": "aspose.com/3d/convert-usdz-to-pdf-csharp/"
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    },
+    {
+      "category": "3D Modeling",
+      "sub_category": "File Conversion",
+      "topic": "USDZ to STL",
+      "key": "usdz-to-stl",
+      "baseline_record_id": "blog::3d/2022-02-28-usdz-to-stl-java/index.md",
+      "coverage": {
+        "general": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::3d/2025-04-30-convert-usdz-to-stl-online/index.md",
+          "title": "Convert USDZ to STL Online - Free Application",
+          "topic": "USDZ to STL",
+          "url": "aspose.com/3d/convert-usdz-to-stl-online/"
+        },
+        "java": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::3d/2022-02-28-usdz-to-stl-java/index.md",
+          "title": "Convert USDZ to STL Programmatically in Java",
+          "topic": "USDZ to STL",
+          "url": "aspose.com/3d/usdz-to-stl-java/"
+        },
+        "net": {
+          "matched": true,
+          "score": 1.0,
+          "record_id": "blog::3d/2022-03-27-usdz-to-stl-csharp/index.md",
+          "title": "Convert USDZ to STL File in C#",
+          "topic": "USDZ to STL",
+          "url": "aspose.com/3d/usdz-to-stl-csharp/"
+        },
+        "python": {
+          "matched": false,
+          "score": 0.0,
+          "record_id": null,
+          "title": null,
+          "topic": null,
+          "url": null
+        }
+      }
+    }
+  ],
+  "brand_name": "Aspose",
+  "product_name": "Aspose.3D"
+}
