@@ -1158,7 +1158,7 @@
       },
       "Direct": {
         "priorSessions": 5989,
-        "sessions": 2019
+        "sessions": 2022
       },
       "Organic Search": {
         "priorSessions": 97,
@@ -1347,7 +1347,7 @@
     "gscRawPriorImpressions": 187371,
     "organicPriorSessions": 1653,
     "organicSessions": 1416,
-    "refreshedAt": "2026-11-25T15:20:02.260656+00:00",
+    "refreshedAt": "2026-11-25T15:59:31.927881+00:00",
     "risingQueries": [
       {
         "growthPercent": 3600.0,
@@ -6622,7 +6622,7 @@
       },
       "Direct": {
         "priorSessions": 19667,
-        "sessions": 13452
+        "sessions": 13463
       },
       "Display": {
         "priorSessions": 1,
@@ -6630,7 +6630,7 @@
       },
       "Organic Search": {
         "priorSessions": 4052,
-        "sessions": 3638
+        "sessions": 3646
       },
       "Organic Social": {
         "priorSessions": 9,
@@ -6646,7 +6646,7 @@
       },
       "Unassigned": {
         "priorSessions": 4483,
-        "sessions": 2075
+        "sessions": 2079
       }
     },
     "ctrAnomalies": [
@@ -6819,7 +6819,7 @@
     "gscRawPriorImpressions": 4397080,
     "organicPriorSessions": 69219,
     "organicSessions": 49910,
-    "refreshedAt": "2026-11-25T15:20:33.189059+00:00",
+    "refreshedAt": "2026-11-25T16:00:19.124444+00:00",
     "risingQueries": [
       {
         "growthPercent": 1042200.0,
@@ -7035,7 +7035,7 @@
     "gscRawPriorImpressions": 277,
     "organicPriorSessions": 3,
     "organicSessions": 6,
-    "refreshedAt": "2026-11-25T15:20:38.199944+00:00",
+    "refreshedAt": "2026-11-25T16:00:23.633688+00:00",
     "risingQueries": [],
     "status": "ok",
     "topOpportunities": []
@@ -8201,7 +8201,7 @@
       },
       "Organic Search": {
         "priorSessions": 580,
-        "sessions": 557
+        "sessions": 558
       },
       "Organic Social": {
         "priorSessions": 11,
@@ -8389,8 +8389,8 @@
     "gscRawPriorClicks": 7076,
     "gscRawPriorImpressions": 386479,
     "organicPriorSessions": 9386,
-    "organicSessions": 7203,
-    "refreshedAt": "2026-11-25T15:20:47.227785+00:00",
+    "organicSessions": 7204,
+    "refreshedAt": "2026-11-25T16:00:31.674218+00:00",
     "risingQueries": [
       {
         "growthPercent": 4200.0,
@@ -8839,7 +8839,7 @@
         "ga4": {
           "postCount": 49,
           "priorSessions": 148,
-          "sessions": 317
+          "sessions": 318
         },
         "gscOpportunities": [
           {
@@ -9068,7 +9068,7 @@
         "ga4": {
           "postCount": 8,
           "priorSessions": 27,
-          "sessions": 59
+          "sessions": 60
         },
         "gscOpportunities": [
           {
@@ -9450,11 +9450,11 @@
     "channels": {
       "Direct": {
         "priorSessions": 3154,
-        "sessions": 1649
+        "sessions": 1651
       },
       "Organic Search": {
         "priorSessions": 136,
-        "sessions": 181
+        "sessions": 182
       },
       "Organic Social": {
         "priorSessions": 13,
@@ -9638,8 +9638,8 @@
     "gscRawPriorClicks": 2602,
     "gscRawPriorImpressions": 274891,
     "organicPriorSessions": 1860,
-    "organicSessions": 1530,
-    "refreshedAt": "2026-11-25T15:19:51.776507+00:00",
+    "organicSessions": 1531,
+    "refreshedAt": "2026-11-25T15:59:24.551949+00:00",
     "risingQueries": [
       {
         "growthPercent": 5400.0,
