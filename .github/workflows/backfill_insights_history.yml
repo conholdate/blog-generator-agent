@@ -1,0 +1,85 @@
+name: Backfill Analytics History (GA4 + GSC)
+
+# One-off / on-demand: rebuilds the dashboard's daily trend history for past
+# days (see scripts/backfill_insights_history.py). Safe to re-run - days
+# already filled are skipped.
+on:
+  workflow_dispatch:
+    inputs:
+      start:
+        description: "First day to backfill (YYYY-MM-DD)"
+        default: "2026-01-01"
+        required: true
+      end:
+        description: "Last day to backfill (YYYY-MM-DD) - the day before daily snapshots began"
+        default: "2026-10-24"
+        required: true
+      brands:
+        description: "Comma-separated brands (empty = all)"
+        default: ""
+        required: false
+
+jobs:
+  backfill:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Cache pip packages
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('agent_engine/blog_generator/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+
+      - name: Remove any .env files that could interfere
+        run: find . -name ".env" -type f -delete
+
+      - name: Create Google service account keys
+        run: |
+          mkdir -p keys
+          echo '${{ secrets.GOOGLE_SERVICE_ACCOUNT_KEY }}' > keys/sheet-reader-494108-bd5e61ef812c.json
+          echo '${{ secrets.GA4_SERVICE_ACCOUNT_KEY }}' > keys/ga4-service-account.json
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          cd agent_engine/blog_generator
+          pip install -r requirements.txt
+
+      - name: Create runtime .env file with secrets
+        run: |
+          cat > .env << EOF
+          GOOGLE_KEY=sheet-reader-494108-bd5e61ef812c.json
+          GA4_GOOGLE_KEY=ga4-service-account.json
+          GA4_PROPERTY_ID_GROUPDOCS_CLOUD=${{ secrets.GA4_PROPERTY_ID_GROUPDOCS_CLOUD }}
+          GA4_PROPERTY_ID_ASPOSE_CLOUD=${{ secrets.GA4_PROPERTY_ID_ASPOSE_CLOUD }}
+          GA4_PROPERTY_ID_ASPOSE_COM=${{ secrets.GA4_PROPERTY_ID_ASPOSE_COM }}
+          GA4_PROPERTY_ID_CONHOLDATE_CLOUD=${{ secrets.GA4_PROPERTY_ID_CONHOLDATE_CLOUD }}
+          GA4_PROPERTY_ID_CONHOLDATE_COM=${{ secrets.GA4_PROPERTY_ID_CONHOLDATE_COM }}
+          EOF
+
+      - name: Backfill
+        run: |
+          python scripts/backfill_insights_history.py \
+            --start "${{ inputs.start }}" \
+            --end "${{ inputs.end }}" \
+            --brands "${{ inputs.brands }}"
+
+      - name: Commit backfill
+        if: always()
+        run: |
+          git config --global user.email "muhammad.mustafa@aspose.com"
+          git config --global user.name "Muhammad Mustafa"
+          git add content/insights_history_backfill.json
+          git commit -m "Backfill analytics history ${{ inputs.start }}..${{ inputs.end }} [Run #${{ github.run_number }}]" || echo "No changes to commit"
+          git pull --rebase origin main
+          git push origin HEAD
