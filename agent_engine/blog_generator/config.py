@@ -74,16 +74,16 @@ class Settings(BaseSettings):
     GA4_PROPERTY_ID_ASPOSE_COM: str = ""
     GA4_PROPERTY_ID_CONHOLDATE_CLOUD: str = ""
     GA4_PROPERTY_ID_CONHOLDATE_COM: str = ""
-    GA4_DECLINE_TOP_N: int = 10                    # individual posts shown per brand on the Analytics page
-    GSC_TOP_OPPORTUNITIES_DISPLAY_N: int = 10      # flat, brand-wide opportunity list shown on the Analytics page
+    GA4_DECLINE_TOP_N: int = 50                    # individual posts shown per brand on the Analytics page
+    GSC_TOP_OPPORTUNITIES_DISPLAY_N: int = 50      # flat, brand-wide opportunity list shown on the Analytics page
 
     # Two more GSC-derived signals for the dashboard Analytics page, both
     # computed from the same two windows fetch_all_opportunities already
     # pulls (see services/gsc_selector.fetch_insights_signals) - no extra
     # API calls beyond what striking-distance opportunities already cost.
-    GSC_CTR_ANOMALY_TOP_N: int = 10
+    GSC_CTR_ANOMALY_TOP_N: int = 50
     GSC_CTR_ANOMALY_MIN_IMPRESSIONS: int = 50      # higher floor than GSC_MIN_IMPRESSIONS - CTR ratios are noisy at low volume
-    GSC_RISING_TOP_N: int = 10
+    GSC_RISING_TOP_N: int = 50
     GSC_RISING_MIN_IMPRESSIONS: int = 20
     GSC_RISING_MAX_POSITION: float = 15.0          # already ranking decently - this is a demand signal, not a ranking one
     GSC_RISING_MIN_GROWTH_PERCENT: float = 30.0
