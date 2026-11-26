@@ -771,7 +771,7 @@
         "ga4": {
           "postCount": 43,
           "priorSessions": 196,
-          "sessions": 211
+          "sessions": 212
         },
         "gscOpportunities": [
           {
@@ -1130,7 +1130,7 @@
         "ga4": {
           "postCount": 18,
           "priorSessions": 62,
-          "sessions": 34
+          "sessions": 35
         },
         "gscOpportunities": []
       },
@@ -1166,11 +1166,11 @@
       },
       "Direct": {
         "priorSessions": 5917,
-        "sessions": 1693
+        "sessions": 1719
       },
       "Organic Search": {
         "priorSessions": 105,
-        "sessions": 114
+        "sessions": 117
       },
       "Organic Social": {
         "priorSessions": 6,
@@ -1182,7 +1182,7 @@
       },
       "Unassigned": {
         "priorSessions": 584,
-        "sessions": 83
+        "sessions": 86
       }
     },
     "ctrAnomalies": [
@@ -1695,13 +1695,6 @@
         "url": "https://blog.aspose.cloud/slides/split-powerpoint-slides-in-java/"
       },
       {
-        "changePercent": -60.0,
-        "priorSessions": 15,
-        "sessions": 6,
-        "title": "Convert PowerPoint PPT to MP4 Video | PPTX to MP4 Conversion Guide",
-        "url": "https://blog.aspose.cloud/slides/convert-ppt-to-mp4-in-csharp/"
-      },
-      {
         "changePercent": -75.0,
         "priorSessions": 12,
         "sessions": 3,
@@ -1714,6 +1707,13 @@
         "sessions": 8,
         "title": "Convert JPG to PDF, Image to PDF, jğeg to PDF online in Java",
         "url": "https://blog.aspose.cloud/pdf/convert-jpg-to-pdf-in-java/"
+      },
+      {
+        "changePercent": -53.3,
+        "priorSessions": 15,
+        "sessions": 7,
+        "title": "Convert PowerPoint PPT to MP4 Video | PPTX to MP4 Conversion Guide",
+        "url": "https://blog.aspose.cloud/slides/convert-ppt-to-mp4-in-csharp/"
       },
       {
         "changePercent": -53.3,
@@ -1994,8 +1994,8 @@
     "gscRawPriorClicks": 2335,
     "gscRawPriorImpressions": 186575,
     "organicPriorSessions": 1651,
-    "organicSessions": 1404,
-    "refreshedAt": "2026-11-26T11:14:07.637148+00:00",
+    "organicSessions": 1408,
+    "refreshedAt": "2026-11-26T14:46:34.827312+00:00",
     "risingQueries": [
       {
         "growthPercent": 3800.0,
@@ -2753,7 +2753,7 @@
         "ga4": {
           "postCount": 23,
           "priorSessions": 381,
-          "sessions": 458
+          "sessions": 463
         },
         "gscOpportunities": [
           {
@@ -3126,7 +3126,7 @@
         "ga4": {
           "postCount": 28,
           "priorSessions": 113,
-          "sessions": 409
+          "sessions": 403
         },
         "gscOpportunities": []
       },
@@ -3175,7 +3175,7 @@
         "ga4": {
           "postCount": 154,
           "priorSessions": 477,
-          "sessions": 1535
+          "sessions": 1530
         },
         "gscOpportunities": [
           {
@@ -3298,7 +3298,7 @@
         "ga4": {
           "postCount": 61,
           "priorSessions": 458,
-          "sessions": 889
+          "sessions": 895
         },
         "gscOpportunities": [
           {
@@ -3345,9 +3345,9 @@
       },
       "aspose.com|Aspose.Cells|general": {
         "ga4": {
-          "postCount": 21,
+          "postCount": 22,
           "priorSessions": 659,
-          "sessions": 338
+          "sessions": 344
         },
         "gscOpportunities": [
           {
@@ -4497,7 +4497,7 @@
         "ga4": {
           "postCount": 13,
           "priorSessions": 409,
-          "sessions": 567
+          "sessions": 568
         },
         "gscOpportunities": [
           {
@@ -4717,7 +4717,7 @@
         "ga4": {
           "postCount": 13,
           "priorSessions": 1419,
-          "sessions": 1281
+          "sessions": 1270
         },
         "gscOpportunities": [
           {
@@ -4910,7 +4910,7 @@
         "ga4": {
           "postCount": 35,
           "priorSessions": 198,
-          "sessions": 314
+          "sessions": 308
         },
         "gscOpportunities": [
           {
@@ -5023,9 +5023,9 @@
       },
       "aspose.com|Aspose.Imaging|.NET": {
         "ga4": {
-          "postCount": 51,
+          "postCount": 52,
           "priorSessions": 174,
-          "sessions": 575
+          "sessions": 581
         },
         "gscOpportunities": [
           {
@@ -5056,9 +5056,9 @@
       },
       "aspose.com|Aspose.Imaging|Java": {
         "ga4": {
-          "postCount": 29,
-          "priorSessions": 132,
-          "sessions": 328
+          "postCount": 30,
+          "priorSessions": 137,
+          "sessions": 334
         },
         "gscOpportunities": [
           {
@@ -5810,7 +5810,7 @@
         "ga4": {
           "postCount": 23,
           "priorSessions": 49,
-          "sessions": 242
+          "sessions": 236
         },
         "gscOpportunities": [
           {
@@ -6754,7 +6754,7 @@
         "ga4": {
           "postCount": 29,
           "priorSessions": 242,
-          "sessions": 501
+          "sessions": 506
         },
         "gscOpportunities": []
       },
@@ -6784,9 +6784,9 @@
       },
       "aspose.com|Aspose.Slides|general": {
         "ga4": {
-          "postCount": 27,
+          "postCount": 28,
           "priorSessions": 160,
-          "sessions": 345
+          "sessions": 351
         },
         "gscOpportunities": [
           {
@@ -6933,7 +6933,7 @@
         "ga4": {
           "postCount": 16,
           "priorSessions": 126,
-          "sessions": 296
+          "sessions": 302
         },
         "gscOpportunities": [
           {
@@ -7096,7 +7096,7 @@
         "ga4": {
           "postCount": 42,
           "priorSessions": 114,
-          "sessions": 305
+          "sessions": 299
         },
         "gscOpportunities": [
           {
@@ -7135,9 +7135,9 @@
       },
       "aspose.com|Aspose.Total|Java": {
         "ga4": {
-          "postCount": 41,
+          "postCount": 40,
           "priorSessions": 74,
-          "sessions": 293
+          "sessions": 287
         },
         "gscOpportunities": [
           {
@@ -7226,7 +7226,7 @@
       "aspose.com|Aspose.Words|.NET": {
         "ga4": {
           "postCount": 100,
-          "priorSessions": 343,
+          "priorSessions": 352,
           "sessions": 1054
         },
         "gscOpportunities": []
@@ -7259,7 +7259,7 @@
         "ga4": {
           "postCount": 80,
           "priorSessions": 447,
-          "sessions": 845
+          "sessions": 850
         },
         "gscOpportunities": []
       },
@@ -7364,7 +7364,7 @@
         "ga4": {
           "postCount": 89,
           "priorSessions": 569,
-          "sessions": 1068
+          "sessions": 1073
         },
         "gscOpportunities": [
           {
@@ -7487,7 +7487,7 @@
         "ga4": {
           "postCount": 25,
           "priorSessions": 548,
-          "sessions": 707
+          "sessions": 713
         },
         "gscOpportunities": [
           {
@@ -7816,7 +7816,7 @@
       },
       "Direct": {
         "priorSessions": 20155,
-        "sessions": 12808
+        "sessions": 12934
       },
       "Display": {
         "priorSessions": 1,
@@ -7824,7 +7824,7 @@
       },
       "Organic Search": {
         "priorSessions": 4085,
-        "sessions": 3478
+        "sessions": 3580
       },
       "Organic Social": {
         "priorSessions": 10,
@@ -7836,11 +7836,11 @@
       },
       "Referral": {
         "priorSessions": 2590,
-        "sessions": 249
+        "sessions": 251
       },
       "Unassigned": {
         "priorSessions": 4288,
-        "sessions": 2016
+        "sessions": 2055
       }
     },
     "ctrAnomalies": [
@@ -8388,18 +8388,18 @@
         "url": "https://blog.aspose.com/pdf/convert-pdf-to-docx-in-python/"
       },
       {
-        "changePercent": -65.7,
-        "priorSessions": 102,
-        "sessions": 35,
-        "title": "Let's Repair 3D Models Online - Free Software",
-        "url": "https://blog.aspose.com/3d/lets-repair-3d-models-online/"
-      },
-      {
         "changePercent": -79.5,
         "priorSessions": 83,
         "sessions": 17,
         "title": "Convert PDF to Excel Online",
         "url": "https://blog.aspose.com/pdf/convert-pdf-to-excel-online/"
+      },
+      {
+        "changePercent": -60.8,
+        "priorSessions": 102,
+        "sessions": 40,
+        "title": "Let's Repair 3D Models Online - Free Software",
+        "url": "https://blog.aspose.com/3d/lets-repair-3d-models-online/"
       },
       {
         "changePercent": -62.4,
@@ -8465,6 +8465,13 @@
         "url": "https://blog.aspose.com/words/smartart-rendering-and-tightthrough-wrapping-support-in-aspose.words-11.11.0/"
       },
       {
+        "changePercent": -14.5,
+        "priorSessions": 283,
+        "sessions": 242,
+        "title": "",
+        "url": "https://blog.aspose.com/archives/"
+      },
+      {
         "changePercent": -76.5,
         "priorSessions": 51,
         "sessions": 12,
@@ -8477,13 +8484,6 @@
         "sessions": 29,
         "title": "Convert Visio to Word File - Free Online Converter",
         "url": "https://blog.aspose.com/diagram/convert-visio-to-word-online/"
-      },
-      {
-        "changePercent": -12.4,
-        "priorSessions": 283,
-        "sessions": 248,
-        "title": "",
-        "url": "https://blog.aspose.com/archives/"
       },
       {
         "changePercent": -24.3,
@@ -8652,8 +8652,8 @@
     "gscRawPriorClicks": 85378,
     "gscRawPriorImpressions": 4382587,
     "organicPriorSessions": 69010,
-    "organicSessions": 49555,
-    "refreshedAt": "2026-11-26T11:14:58.434222+00:00",
+    "organicSessions": 49781,
+    "refreshedAt": "2026-11-26T14:47:19.965404+00:00",
     "risingQueries": [
       {
         "growthPercent": 1042200.0,
@@ -9509,7 +9509,7 @@
     "gscRawPriorImpressions": 286,
     "organicPriorSessions": 3,
     "organicSessions": 6,
-    "refreshedAt": "2026-11-26T11:15:02.280108+00:00",
+    "refreshedAt": "2026-11-26T14:47:25.077047+00:00",
     "risingQueries": [],
     "status": "ok",
     "topOpportunities": []
@@ -9705,7 +9705,7 @@
         "ga4": {
           "postCount": 207,
           "priorSessions": 792,
-          "sessions": 1361
+          "sessions": 1362
         },
         "gscOpportunities": [
           {
@@ -9770,7 +9770,7 @@
         "ga4": {
           "postCount": 97,
           "priorSessions": 1997,
-          "sessions": 1546
+          "sessions": 1549
         },
         "gscOpportunities": [
           {
@@ -10667,7 +10667,7 @@
       },
       "Direct": {
         "priorSessions": 1500,
-        "sessions": 663
+        "sessions": 694
       },
       "Display": {
         "priorSessions": 6,
@@ -10675,7 +10675,7 @@
       },
       "Organic Search": {
         "priorSessions": 562,
-        "sessions": 543
+        "sessions": 558
       },
       "Organic Social": {
         "priorSessions": 15,
@@ -10691,7 +10691,7 @@
       },
       "Unassigned": {
         "priorSessions": 76,
-        "sessions": 36
+        "sessions": 37
       }
     },
     "ctrAnomalies": [
@@ -11162,9 +11162,9 @@
         "url": "https://blog.conholdate.com/total/convert-zip-to-jpg-online/"
       },
       {
-        "changePercent": -37.3,
+        "changePercent": -36.5,
         "priorSessions": 255,
-        "sessions": 160,
+        "sessions": 162,
         "title": "Convert Image to Visio Online",
         "url": "https://blog.conholdate.com/total/convert-image-to-visio-online/"
       },
@@ -11503,8 +11503,8 @@
     "gscRawPriorClicks": 7003,
     "gscRawPriorImpressions": 385062,
     "organicPriorSessions": 9290,
-    "organicSessions": 7167,
-    "refreshedAt": "2026-11-26T11:15:10.201590+00:00",
+    "organicSessions": 7181,
+    "refreshedAt": "2026-11-26T14:47:33.745291+00:00",
     "risingQueries": [
       {
         "growthPercent": 4200.0,
@@ -12414,7 +12414,7 @@
         "ga4": {
           "postCount": 52,
           "priorSessions": 180,
-          "sessions": 298
+          "sessions": 299
         },
         "gscOpportunities": [
           {
@@ -12593,7 +12593,7 @@
         "ga4": {
           "postCount": 49,
           "priorSessions": 150,
-          "sessions": 322
+          "sessions": 323
         },
         "gscOpportunities": [
           {
@@ -12969,7 +12969,7 @@
         "ga4": {
           "postCount": 14,
           "priorSessions": 71,
-          "sessions": 120
+          "sessions": 121
         },
         "gscOpportunities": [
           {
@@ -13035,7 +13035,7 @@
         "ga4": {
           "postCount": 7,
           "priorSessions": 36,
-          "sessions": 67
+          "sessions": 69
         },
         "gscOpportunities": []
       },
@@ -13204,15 +13204,15 @@
     "channels": {
       "Direct": {
         "priorSessions": 3095,
-        "sessions": 1441
+        "sessions": 1463
       },
       "Organic Search": {
         "priorSessions": 144,
-        "sessions": 180
+        "sessions": 187
       },
       "Organic Social": {
         "priorSessions": 10,
-        "sessions": 17
+        "sessions": 18
       },
       "Referral": {
         "priorSessions": 154,
@@ -13220,7 +13220,7 @@
       },
       "Unassigned": {
         "priorSessions": 188,
-        "sessions": 63
+        "sessions": 64
       }
     },
     "ctrAnomalies": [
@@ -13618,13 +13618,6 @@
         "url": "https://blog.groupdocs.cloud/conversion/convert-pdf-to-text-format-online-using-node.js/"
       },
       {
-        "changePercent": -57.1,
-        "priorSessions": 7,
-        "sessions": 3,
-        "title": "Change Page Orientation in Word Documents using Python",
-        "url": "https://blog.groupdocs.cloud/merger/change-page-orientation-in-word-documents-using-python/"
-      },
-      {
         "changePercent": -66.7,
         "priorSessions": 6,
         "sessions": 2,
@@ -13700,6 +13693,13 @@
         "sessions": 4,
         "title": "Edit Word Documents using REST API in Node.js",
         "url": "https://blog.groupdocs.cloud/editor/edit-word-documents-using-rest-api-in-node.js/"
+      },
+      {
+        "changePercent": -42.9,
+        "priorSessions": 7,
+        "sessions": 4,
+        "title": "Change Page Orientation in Word Documents using Python",
+        "url": "https://blog.groupdocs.cloud/merger/change-page-orientation-in-word-documents-using-python/"
       },
       {
         "changePercent": -50.0,
@@ -13861,8 +13861,8 @@
     "gscRawPriorClicks": 2540,
     "gscRawPriorImpressions": 273552,
     "organicPriorSessions": 1843,
-    "organicSessions": 1530,
-    "refreshedAt": "2026-11-26T11:13:58.342639+00:00",
+    "organicSessions": 1537,
+    "refreshedAt": "2026-11-26T14:46:22.926070+00:00",
     "risingQueries": [
       {
         "growthPercent": 5600.0,

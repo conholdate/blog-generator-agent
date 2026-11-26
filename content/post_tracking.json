@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-11-26T11:15:18+00:00",
+  "generatedAt": "2026-11-26T14:47:41+00:00",
   "posts": {
     "https://blog.aspose.cloud/barcode/decode-barcodes-from-pdf-documents-with-asposebarcode-cloud-sdk-in-python/": {
       "brand": "aspose.cloud",
       "kind": "post",
       "since": "2026-11-21",
       "title": "Decode Barcodes from PDF Documents with Aspose.BarCode Cloud SDK in Python",
-      "updatedAt": "2026-11-26T11:15:14+00:00",
+      "updatedAt": "2026-11-26T14:47:35+00:00",
       "url": "https://blog.aspose.cloud/barcode/decode-barcodes-from-pdf-documents-with-asposebarcode-cloud-sdk-in-python/",
       "windows": {
         "d7": {
@@ -26,7 +26,7 @@
       "kind": "post",
       "since": "2026-11-19",
       "title": "Generate Custom QR Codes with Aspose.BarCode Cloud SDK in Python",
-      "updatedAt": "2026-11-26T11:15:15+00:00",
+      "updatedAt": "2026-11-26T14:47:35+00:00",
       "url": "https://blog.aspose.cloud/barcode/generate-custom-qr-codes-with-asposebarcode-cloud-sdk-in-python/",
       "windows": {
         "d7": {
@@ -46,7 +46,7 @@
       "kind": "post",
       "since": "2026-11-25",
       "title": "Export Excel Data to Word Documents Using Aspose.Cells Cloud SDK for .NET",
-      "updatedAt": "2026-11-26T11:15:15+00:00",
+      "updatedAt": "2026-11-26T14:47:37+00:00",
       "url": "https://blog.aspose.cloud/cells/export-excel-data-to-word-documents-using-asposecells-cloud-sdk-for-dotnet/",
       "windows": {}
     },
@@ -55,7 +55,7 @@
       "kind": "post",
       "since": "2026-11-17",
       "title": "How to Unlock (Unprotect) Protected Excel Worksheets Using Aspose.Cells Cloud SDK for .NET",
-      "updatedAt": "2026-11-26T11:15:16+00:00",
+      "updatedAt": "2026-11-26T14:47:36+00:00",
       "url": "https://blog.aspose.cloud/cells/how-to-unlock-unprotect-protected-excel-worksheets-using-asposecells-cloud-sdk-for-dotnet/",
       "windows": {
         "d30": {
@@ -111,7 +111,7 @@
       "kind": "post",
       "since": "2026-11-26",
       "title": "Add Text and Image Watermarks to Photos in Java with Aspose.Imaging Cloud SDK",
-      "updatedAt": "2026-11-26T11:15:16+00:00",
+      "updatedAt": "2026-11-26T14:47:36+00:00",
       "url": "https://blog.aspose.cloud/imaging/add-text-and-image-watermarks-to-photos-in-java-with-asposeimaging-cloud-sdk/",
       "windows": {}
     },
@@ -120,7 +120,7 @@
       "kind": "post",
       "since": "2026-11-14",
       "title": "Batch Resize Images in Java with Aspose.Imaging Cloud SDK - High‑Performance Bulk Processing",
-      "updatedAt": "2026-11-26T11:15:18+00:00",
+      "updatedAt": "2026-11-26T14:47:38+00:00",
       "url": "https://blog.aspose.cloud/imaging/batch-resize-images-in-java-with-asposeimaging-cloud-sdk-highperformance-bulk-processing/",
       "windows": {
         "d30": {
@@ -157,7 +157,7 @@
       "kind": "refresh",
       "since": "2026-11-21",
       "title": "crop image java",
-      "updatedAt": "2026-11-26T11:15:11+00:00",
+      "updatedAt": "2026-11-26T14:47:39+00:00",
       "url": "https://blog.aspose.cloud/imaging/crop-image-in-java/",
       "windows": {
         "before28": {
@@ -213,7 +213,7 @@
       "kind": "refresh",
       "since": "2026-11-13",
       "title": "java resize image",
-      "updatedAt": "2026-11-26T11:15:12+00:00",
+      "updatedAt": "2026-11-26T14:47:40+00:00",
       "url": "https://blog.aspose.cloud/imaging/resize-image-in-java/",
       "windows": {
         "before28": {
@@ -340,7 +340,7 @@
       "kind": "refresh",
       "since": "2026-11-25",
       "title": "convert pdf to pdf/a in python rest",
-      "updatedAt": "2026-11-26T11:15:18+00:00",
+      "updatedAt": "2026-11-26T14:47:36+00:00",
       "url": "https://blog.aspose.cloud/pdf/convert-pdf-to-pdf-a-using-python/",
       "windows": {
         "before28": {
@@ -373,7 +373,7 @@
       "kind": "refresh",
       "since": "2026-11-13",
       "title": ".net power point to pdf conversion sdk",
-      "updatedAt": "2026-11-26T11:15:13+00:00",
+      "updatedAt": "2026-11-26T14:47:37+00:00",
       "url": "https://blog.aspose.cloud/slides/convert-powerpoint-to-pdf-document-with-aspose-slides-cloud-sdk-for-net/",
       "windows": {
         "before28": {
@@ -464,7 +464,7 @@
       "kind": "refresh",
       "since": "2026-11-13",
       "title": "decrypt pdf",
-      "updatedAt": "2026-11-26T11:15:13+00:00",
+      "updatedAt": "2026-11-26T14:47:41+00:00",
       "url": "https://blog.aspose.cloud/total/encrypt-and-decrypt-pdf-files-with-curl/",
       "windows": {
         "before28": {
