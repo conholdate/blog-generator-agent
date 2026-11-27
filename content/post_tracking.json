@@ -1,18 +1,18 @@
 {
-  "generatedAt": "2026-11-26T14:47:41+00:00",
+  "generatedAt": "2026-11-27T14:46:01+00:00",
   "posts": {
     "https://blog.aspose.cloud/barcode/decode-barcodes-from-pdf-documents-with-asposebarcode-cloud-sdk-in-python/": {
       "brand": "aspose.cloud",
       "kind": "post",
       "since": "2026-11-21",
       "title": "Decode Barcodes from PDF Documents with Aspose.BarCode Cloud SDK in Python",
-      "updatedAt": "2026-11-26T14:47:35+00:00",
+      "updatedAt": "2026-11-27T14:46:00+00:00",
       "url": "https://blog.aspose.cloud/barcode/decode-barcodes-from-pdf-documents-with-asposebarcode-cloud-sdk-in-python/",
       "windows": {
         "d7": {
           "clicks": 0,
           "complete": false,
-          "end": "2026-11-23",
+          "end": "2026-11-24",
           "impressions": 0,
           "position": null,
           "sessions": 4,
@@ -26,13 +26,13 @@
       "kind": "post",
       "since": "2026-11-19",
       "title": "Generate Custom QR Codes with Aspose.BarCode Cloud SDK in Python",
-      "updatedAt": "2026-11-26T14:47:35+00:00",
+      "updatedAt": "2026-11-27T14:46:01+00:00",
       "url": "https://blog.aspose.cloud/barcode/generate-custom-qr-codes-with-asposebarcode-cloud-sdk-in-python/",
       "windows": {
         "d7": {
           "clicks": 0,
           "complete": false,
-          "end": "2026-11-23",
+          "end": "2026-11-24",
           "impressions": 0,
           "position": null,
           "sessions": 2,
@@ -46,7 +46,7 @@
       "kind": "post",
       "since": "2026-11-25",
       "title": "Export Excel Data to Word Documents Using Aspose.Cells Cloud SDK for .NET",
-      "updatedAt": "2026-11-26T14:47:37+00:00",
+      "updatedAt": "2026-11-27T14:45:57+00:00",
       "url": "https://blog.aspose.cloud/cells/export-excel-data-to-word-documents-using-asposecells-cloud-sdk-for-dotnet/",
       "windows": {}
     },
@@ -55,15 +55,15 @@
       "kind": "post",
       "since": "2026-11-17",
       "title": "How to Unlock (Unprotect) Protected Excel Worksheets Using Aspose.Cells Cloud SDK for .NET",
-      "updatedAt": "2026-11-26T14:47:36+00:00",
+      "updatedAt": "2026-11-27T14:45:58+00:00",
       "url": "https://blog.aspose.cloud/cells/how-to-unlock-unprotect-protected-excel-worksheets-using-asposecells-cloud-sdk-for-dotnet/",
       "windows": {
         "d30": {
           "clicks": 0,
           "complete": false,
-          "end": "2026-11-23",
-          "impressions": 4,
-          "position": 7.2,
+          "end": "2026-11-24",
+          "impressions": 5,
+          "position": 7.8,
           "sessions": 2,
           "start": "2026-11-17",
           "topQueries": [
@@ -111,7 +111,7 @@
       "kind": "post",
       "since": "2026-11-26",
       "title": "Add Text and Image Watermarks to Photos in Java with Aspose.Imaging Cloud SDK",
-      "updatedAt": "2026-11-26T14:47:36+00:00",
+      "updatedAt": "2026-11-27T14:46:01+00:00",
       "url": "https://blog.aspose.cloud/imaging/add-text-and-image-watermarks-to-photos-in-java-with-asposeimaging-cloud-sdk/",
       "windows": {}
     },
@@ -120,13 +120,13 @@
       "kind": "post",
       "since": "2026-11-14",
       "title": "Batch Resize Images in Java with Aspose.Imaging Cloud SDK - High‑Performance Bulk Processing",
-      "updatedAt": "2026-11-26T14:47:38+00:00",
+      "updatedAt": "2026-11-27T14:45:55+00:00",
       "url": "https://blog.aspose.cloud/imaging/batch-resize-images-in-java-with-asposeimaging-cloud-sdk-highperformance-bulk-processing/",
       "windows": {
         "d30": {
           "clicks": 0,
           "complete": false,
-          "end": "2026-11-23",
+          "end": "2026-11-24",
           "impressions": 2,
           "position": 11.0,
           "sessions": 5,
@@ -157,7 +157,7 @@
       "kind": "refresh",
       "since": "2026-11-21",
       "title": "crop image java",
-      "updatedAt": "2026-11-26T14:47:39+00:00",
+      "updatedAt": "2026-11-27T14:45:59+00:00",
       "url": "https://blog.aspose.cloud/imaging/crop-image-in-java/",
       "windows": {
         "before28": {
@@ -192,16 +192,16 @@
         "d7": {
           "clicks": 0,
           "complete": false,
-          "end": "2026-11-23",
-          "impressions": 5,
-          "position": 7.0,
+          "end": "2026-11-24",
+          "impressions": 8,
+          "position": 8.0,
           "sessions": 0,
           "start": "2026-11-21",
           "topQueries": [
             {
               "clicks": 0,
-              "impressions": 2,
-              "position": 9,
+              "impressions": 4,
+              "position": 9.2,
               "query": "crop image java"
             }
           ]
@@ -213,7 +213,7 @@
       "kind": "refresh",
       "since": "2026-11-13",
       "title": "java resize image",
-      "updatedAt": "2026-11-26T14:47:40+00:00",
+      "updatedAt": "2026-11-27T14:45:56+00:00",
       "url": "https://blog.aspose.cloud/imaging/resize-image-in-java/",
       "windows": {
         "before28": {
@@ -260,28 +260,28 @@
         "d30": {
           "clicks": 0,
           "complete": false,
-          "end": "2026-11-23",
-          "impressions": 133,
+          "end": "2026-11-24",
+          "impressions": 142,
           "position": 14.5,
           "sessions": 1,
           "start": "2026-11-13",
           "topQueries": [
             {
               "clicks": 0,
-              "impressions": 44,
-              "position": 20,
+              "impressions": 45,
+              "position": 20.2,
               "query": "java resize image"
             },
             {
               "clicks": 0,
-              "impressions": 22,
-              "position": 17.8,
+              "impressions": 23,
+              "position": 18.3,
               "query": "resize image java"
             },
             {
               "clicks": 0,
-              "impressions": 11,
-              "position": 12.7,
+              "impressions": 12,
+              "position": 14.2,
               "query": "resize image in java"
             },
             {
@@ -340,7 +340,7 @@
       "kind": "refresh",
       "since": "2026-11-25",
       "title": "convert pdf to pdf/a in python rest",
-      "updatedAt": "2026-11-26T14:47:36+00:00",
+      "updatedAt": "2026-11-27T14:45:59+00:00",
       "url": "https://blog.aspose.cloud/pdf/convert-pdf-to-pdf-a-using-python/",
       "windows": {
         "before28": {
@@ -373,7 +373,7 @@
       "kind": "refresh",
       "since": "2026-11-13",
       "title": ".net power point to pdf conversion sdk",
-      "updatedAt": "2026-11-26T14:47:37+00:00",
+      "updatedAt": "2026-11-27T14:45:59+00:00",
       "url": "https://blog.aspose.cloud/slides/convert-powerpoint-to-pdf-document-with-aspose-slides-cloud-sdk-for-net/",
       "windows": {
         "before28": {
@@ -402,22 +402,22 @@
         "d30": {
           "clicks": 0,
           "complete": false,
-          "end": "2026-11-23",
-          "impressions": 44,
-          "position": 9.3,
-          "sessions": 4,
+          "end": "2026-11-24",
+          "impressions": 46,
+          "position": 9.2,
+          "sessions": 5,
           "start": "2026-11-13",
           "topQueries": [
             {
               "clicks": 0,
-              "impressions": 20,
-              "position": 7,
+              "impressions": 21,
+              "position": 6.8,
               "query": "which sdks convert powerpoint presentations to pdf?"
             },
             {
               "clicks": 0,
-              "impressions": 18,
-              "position": 10.1,
+              "impressions": 19,
+              "position": 10.2,
               "query": ".net power point to pdf conversion sdk"
             },
             {
@@ -464,7 +464,7 @@
       "kind": "refresh",
       "since": "2026-11-13",
       "title": "decrypt pdf",
-      "updatedAt": "2026-11-26T14:47:41+00:00",
+      "updatedAt": "2026-11-27T14:45:57+00:00",
       "url": "https://blog.aspose.cloud/total/encrypt-and-decrypt-pdf-files-with-curl/",
       "windows": {
         "before28": {
@@ -480,9 +480,9 @@
         "d30": {
           "clicks": 0,
           "complete": false,
-          "end": "2026-11-23",
-          "impressions": 1,
-          "position": 10.0,
+          "end": "2026-11-24",
+          "impressions": 4,
+          "position": 37.5,
           "sessions": 3,
           "start": "2026-11-13",
           "topQueries": []
